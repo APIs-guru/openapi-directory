@@ -3802,7 +3802,7 @@ components:
             $ref: "#/components/schemas/FacetOptions"
           type: array
         pageSize:
-          description: Maximum number of search results to return in one page. Valid values are between 1 and 100, inclusive. Default value is 10.
+          description: Maximum number of search results to return in one page. Valid values are between 1 and 100, inclusive. Default value is 10. Minimum value is 50 when results beyond 2000 are requested.
           format: int32
           type: integer
         query:

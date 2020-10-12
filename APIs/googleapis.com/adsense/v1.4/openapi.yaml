@@ -191,6 +191,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Tag partner to include in the ad code snippet.
+          in: query
+          name: tagPartner
+          schema:
+            type: string
       responses:
         "200":
           content:

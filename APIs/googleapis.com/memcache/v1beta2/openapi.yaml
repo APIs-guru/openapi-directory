@@ -614,7 +614,7 @@ components:
         maintenanceSchedules:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule"
-          description: The MaintenanceSchedule contains the scheduling information of published maintenance schedule.
+          description: The MaintenanceSchedule contains the scheduling information of published maintenance schedule with same key as software_versions.
           type: object
         maintenanceSettings:
           $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings"

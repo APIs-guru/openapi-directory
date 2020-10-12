@@ -817,6 +817,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: 'The filter expression used to filter documents returned by the list method. The expression has the following syntax: [AND ] ... The following fields and operators are supported: * knowledge_types with has(:) operator * display_name with has(:) operator * state with equals(=) operator Examples: * "knowledge_types:FAQ" matches documents with FAQ knowledge type. * "display_name:customer" matches documents whose display name contains "customer". * "state=ACTIVE" matches documents with ACTIVE state. * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents. For more information about filtering, see [API Filtering](https://aip.dev/160).'
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: The maximum number of items to return in a single page. By default 10 and at most 100.
           in: query
           name: pageSize
@@ -1473,6 +1478,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: 'The filter expression used to filter knowledge bases returned by the list method. The expression has the following syntax: [AND ] ... The following fields and operators are supported: * display_name with has(:) operator * language_code with equals(=) operator Examples: * ''language_code=en-us'' matches knowledge bases with en-us language code. * ''display_name:articles'' matches knowledge bases whose display name contains "articles". * ''display_name:"Best Articles"'' matches knowledge bases whose display name contains "Best Articles". * ''language_code=en-gb AND display_name=articles'' matches all knowledge bases whose display name contains "articles" and whose language code is "en-gb". Note: An empty filter string (i.e. "") is a no-op and will result in no filtering. For more information about filtering, see [API Filtering](https://aip.dev/160).'
+          in: query
+          name: filter
+          schema:
+            type: string
         - description: The maximum number of items to return in a single page. By default 10 and at most 100.
           in: query
           name: pageSize
@@ -2097,6 +2107,15 @@ components:
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in `ExportAgentRequest`.
           type: string
+      type: object
+    GoogleCloudDialogflowV2ImportDocumentsResponse:
+      description: Response message for Documents.ImportDocuments.
+      properties:
+        warnings:
+          description: Includes details about skipped documents or any other warnings.
+          items:
+            $ref: '#/components/schemas/GoogleRpcStatus'
+          type: array
       type: object
     GoogleCloudDialogflowV2Intent:
       description: 'An intent categorizes an end-user''s intention for one conversation turn. For each agent, you define many intents, where your combined intents can handle a complete conversation. When an end-user writes or says something, referred to as an end-user expression or end-user input, Dialogflow matches the end-user input to the best intent in your agent. Matching an intent is also known as intent classification. For more information, see the [intent guide](https://cloud.google.com/dialogflow/docs/intents-overview).'
@@ -2825,7 +2844,7 @@ components:
           type: number
       type: object
     GoogleCloudDialogflowV2SentimentAnalysisResult:
-      description: 'The result of sentiment analysis. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user''s attitude as positive, negative, or neutral. For Participants.AnalyzeContent, it needs to be configured in DetectIntentRequest.query_params. For Participants.StreamingAnalyzeContent, it needs to be configured in StreamingDetectIntentRequest.query_params. And for Participants.AnalyzeContent and Participants.StreamingAnalyzeContent, it needs to be configured in ConversationProfile.human_agent_assistant_config'
+      description: 'The result of sentiment analysis. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user''s attitude as positive, negative, or neutral. For Participants.DetectIntent, it needs to be configured in DetectIntentRequest.query_params. For Participants.StreamingDetectIntent, it needs to be configured in StreamingDetectIntentRequest.query_params. And for Participants.AnalyzeContent and Participants.StreamingAnalyzeContent, it needs to be configured in ConversationProfile.human_agent_assistant_config'
       properties:
         queryTextSentiment:
           $ref: '#/components/schemas/GoogleCloudDialogflowV2Sentiment'
@@ -3425,6 +3444,15 @@ components:
         agentUri:
           description: 'The URI to a Google Cloud Storage file containing the agent to import. Note: The URI must start with "gs://".'
           type: string
+      type: object
+    GoogleCloudDialogflowV2beta1ImportDocumentsResponse:
+      description: Response message for Documents.ImportDocuments.
+      properties:
+        warnings:
+          description: Includes details about skipped documents or any other warnings.
+          items:
+            $ref: '#/components/schemas/GoogleRpcStatus'
+          type: array
       type: object
     GoogleCloudDialogflowV2beta1InputAudioConfig:
       description: Instructs the speech recognizer on how to process the audio content.
@@ -4628,7 +4656,7 @@ components:
           type: boolean
       type: object
     GoogleCloudDialogflowV2beta1SentimentAnalysisResult:
-      description: 'The result of sentiment analysis. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user''s attitude as positive, negative, or neutral. For Participants.AnalyzeContent, it needs to be configured in DetectIntentRequest.query_params. For Participants.StreamingAnalyzeContent, it needs to be configured in StreamingDetectIntentRequest.query_params. And for Participants.AnalyzeContent and Participants.StreamingAnalyzeContent, it needs to be configured in ConversationProfile.human_agent_assistant_config'
+      description: 'The result of sentiment analysis. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user''s attitude as positive, negative, or neutral. For Participants.DetectIntent, it needs to be configured in DetectIntentRequest.query_params. For Participants.StreamingDetectIntent, it needs to be configured in StreamingDetectIntentRequest.query_params. And for Participants.AnalyzeContent and Participants.StreamingAnalyzeContent, it needs to be configured in ConversationProfile.human_agent_assistant_config'
       properties:
         queryTextSentiment:
           $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1Sentiment'
@@ -4850,13 +4878,6 @@ components:
           type: array
         source:
           description: 'Optional. A custom field used to identify the webhook source. Arbitrary strings are supported. When provided, Dialogflow uses this field to populate QueryResult.webhook_source sent to the integration or API caller.'
-          type: string
-      type: object
-    GoogleCloudDialogflowV3alpha1CreateVersionOperationMetadata:
-      description: Metadata associated with the long running operation for Versions.CreateVersion.
-      properties:
-        version:
-          description: 'Name of the created version. Format: `projects//locations//agents//flows//versions/`.'
           type: string
       type: object
     GoogleCloudDialogflowV3alpha1ExportAgentResponse:

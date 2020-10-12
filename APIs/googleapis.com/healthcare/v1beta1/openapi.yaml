@@ -36,90 +36,6 @@ externalDocs:
 tags:
   - name: projects
 paths:
-  "/v1beta1/{annotationStore}:export":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Export Annotations from the Annotation store. If the request is successful, a detailed response is returned of type ExportAnnotationsResponse, contained in the response field when the operation finishes. The metadata field type is OperationMetadata. Errors are logged to Cloud Logging (see [Viewing logs](/healthcare/docs/how-tos/logging)).
-      operationId: healthcare.projects.locations.datasets.annotationStores.export
-      parameters:
-        - description: The name of the Annotation store to export annotations to, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          in: path
-          name: annotationStore
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ExportAnnotationsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{annotationStore}:import":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Import Annotations to the Annotation store by loading data from the specified sources. If the request is successful, a detailed response is returned as of type ImportAnnotationsResponse, contained in the response field when the operation finishes. The metadata field type is OperationMetadata. Errors are logged to Cloud Logging (see [Viewing logs](/healthcare/docs/how-tos/logging)).
-      operationId: healthcare.projects.locations.datasets.annotationStores.import
-      parameters:
-        - description: The name of the Annotation store to which the server imports annotations, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          in: path
-          name: annotationStore
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/ImportAnnotationsRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
   "/v1beta1/{consentStore}:checkDataAccess":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -232,48 +148,6 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/QueryAccessibleDataRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{evalStore}:evaluate":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Evaluate an Annotation store against a ground truth Annotation store. When the operation finishes successfully, a detailed response is returned of type EvaluateAnnotationStoreResponse, contained in the response. The metadata field type is OperationMetadata. Errors are logged to Cloud Logging (see [Viewing logs](/healthcare/docs/how-tos/logging)).
-      operationId: healthcare.projects.locations.datasets.annotationStores.evaluate
-      parameters:
-        - description: The Annotation store to compare against `golden_store`, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          in: path
-          name: evalStore
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/EvaluateAnnotationStoreRequest"
       responses:
         "200":
           content:
@@ -941,6 +815,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:evaluate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Evaluate an Annotation store against a ground truth Annotation store. When the operation finishes successfully, a detailed response is returned of type EvaluateAnnotationStoreResponse, contained in the response. The metadata field type is OperationMetadata. Errors are logged to Cloud Logging (see [Viewing logs](/healthcare/docs/how-tos/logging)).
+      operationId: healthcare.projects.locations.datasets.annotationStores.evaluate
+      parameters:
+        - description: The Annotation store to compare against `golden_store`, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvaluateAnnotationStoreRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1beta1/{name}:export":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -955,7 +871,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: " Export resources from the FHIR store to the specified destination. This method returns an Operation that can be used to track the status of the export by calling GetOperation. Immediate fatal errors appear in the error field, errors are also logged to Cloud Logging (see [Viewing logs](/healthcare/docs/how-tos/logging)). Otherwise, when the operation finishes, a detailed response of type ExportResourcesResponse is returned in the response field. The metadata field type for this operation is OperationMetadata."
+      description: Export resources from the FHIR store to the specified destination. This method returns an Operation that can be used to track the status of the export by calling GetOperation. Immediate fatal errors appear in the error field, errors are also logged to Cloud Logging (see [Viewing error logs in Cloud Logging](/healthcare/docs/how-tos/logging)). Otherwise, when the operation finishes, a detailed response of type ExportResourcesResponse is returned in the response field. The metadata field type for this operation is OperationMetadata.
       operationId: healthcare.projects.locations.datasets.fhirStores.export
       parameters:
         - description: The name of the FHIR store to export resource from, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/fhirStores/{fhir_store_id}`.
@@ -1601,7 +1517,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Restricts the consents returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings The fields available for filtering are: - user_id - consent_artifact - state - state_change_time"
+        - description: "Restricts the consents returned to those matching a filter. Syntax: https://cloud.google.com/appengine/docs/standard/python/search/query_strings The fields available for filtering are: - user_id - consent_artifact - state - revision_create_time"
           in: query
           name: filter
           schema:
@@ -3380,26 +3296,6 @@ components:
           $ref: "#/components/schemas/DicomFilterConfig"
           description: Filter configuration.
       type: object
-    DeidentifyErrorDetails:
-      description: Deprecated. Contains the status of the Deidentify operation.
-      properties:
-        failureResourceCount:
-          description: Number of resources that failed to process.
-          format: int64
-          type: string
-        failureStoreCount:
-          description: Number of stores that failed to process.
-          format: int64
-          type: string
-        successResourceCount:
-          description: Number of resources successfully processed.
-          format: int64
-          type: string
-        successStoreCount:
-          description: Number of stores successfully processed.
-          format: int64
-          type: string
-      type: object
     DeidentifyFhirStoreRequest:
       description: Creates a new FHIR store with sensitive information de-identified.
       properties:
@@ -3415,19 +3311,7 @@ components:
       type: object
     DeidentifySummary:
       description: Contains a detailed summary of the Deidentify operation.
-      properties:
-        failureResourceCount:
-          description: "Number of resources that failed to process. The failures might be caused by: * Invalid user input data * Transient errors that could be skipped"
-          format: int64
-          type: string
-        successResourceCount:
-          description: Number of resources successfully processed.
-          format: int64
-          type: string
-        successStoreCount:
-          description: Number of stores successfully processed.
-          format: int64
-          type: string
+      properties: {}
       type: object
     Detail:
       description: Contains multiple sensitive information findings for each resource slice.
@@ -3521,27 +3405,10 @@ components:
           type: string
         infoTypeConfig:
           $ref: "#/components/schemas/InfoTypeConfig"
-        name:
-          description: The Annotation store to compare against `golden_store`, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          type: string
       type: object
     EvaluateAnnotationStoreResponse:
       description: Response for successful Annotation store evaluation operations. This structure is included in the response upon operation completion.
-      properties:
-        evalStore:
-          description: The evaluated Annotation store, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          type: string
-        goldenCount:
-          description: The number of Annotations in the ground truth Annotation store successfully processed.
-          format: int64
-          type: string
-        goldenStore:
-          description: The ground truth Annotation store, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          type: string
-        matchedCount:
-          description: The number of Annotations in the eval store that match with corresponding annotations in the ground truth Annotation store. Two matched annotations both annotate the same resource defined in AnnotationSource.
-          format: int64
-          type: string
+      properties: {}
       type: object
     EvaluateUserConsentsRequest:
       description: Evaluate an end user's Consents for all matching User data mappings.
@@ -3589,21 +3456,6 @@ components:
             $ref: "#/components/schemas/Result"
           type: array
       type: object
-    ExportAnnotationsErrorDetails:
-      description: Deprecated. Response for failed annotation export operations. This structure is included in error details upon operation completion.
-      properties:
-        annotationStore:
-          description: The annotation_store used for the export operation, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          type: string
-        errorCount:
-          description: The number of annotations that had error.
-          format: int64
-          type: string
-        successCount:
-          description: The number of annotations successfully exported.
-          format: int64
-          type: string
-      type: object
     ExportAnnotationsRequest:
       description: Request to export Annotations. The export operation is not atomic. If a failure occurs, any annotations already exported are not removed.
       properties:
@@ -3613,20 +3465,10 @@ components:
         gcsDestination:
           $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1AnnotationGcsDestination"
           description: The Cloud Storage destination, which requires the `roles/storage.objectAdmin` Cloud IAM role.
-        name:
-          description: The name of the Annotation store to export annotations to, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          type: string
       type: object
     ExportAnnotationsResponse:
       description: Response for successful annotation export operations. This structure is included in response upon operation completion.
-      properties:
-        annotationStore:
-          description: The annotation_store used for the export operation, in the format of `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          type: string
-        successCount:
-          description: The total number of annotations successfully exported.
-          format: int64
-          type: string
+      properties: {}
       type: object
     ExportDicomDataRequest:
       description: Exports data from the specified DICOM store. If a given resource, such as a DICOM object with the same SOPInstance UID, already exists in the output, it is overwritten with the version in the source dataset. Exported DICOM data persists when the DICOM store from which it was exported is deleted.
@@ -3643,13 +3485,13 @@ components:
       properties: {}
       type: object
     ExportResourcesRequest:
-      description: " Request to export resources."
+      description: Request to export resources.
       properties:
         bigqueryDestination:
           $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1FhirBigQueryDestination"
           description: "The BigQuery output destination. The BigQuery location requires two IAM roles: `roles/bigquery.dataEditor` and `roles/bigquery.jobUser`. The output is one BigQuery table per resource type."
         gcsDestination:
-          $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1FhirRestGcsDestination"
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1FhirGcsDestination"
           description: The Cloud Storage output destination. The Cloud Storage location requires the `roles/storage.objectAdmin` Cloud IAM role. The exported outputs are organized by FHIR resource types. The server creates one object per resource type. Each object contains newline delimited JSON, and each line is a FHIR resource.
       type: object
     Expr:
@@ -3799,7 +3641,7 @@ components:
       description: The BigQuery table for export.
       properties:
         force:
-          description: If the destination table already exists and this flag is `TRUE`, the table is overwritten by the contents of the input store. If the flag is not set and the destination table already exists, the export call returns an error.
+          description: Use `write_disposition` instead. If `write_disposition` is specified, this parameter is ignored. force=false is equivalent to write_disposition=WRITE_EMPTY and force=true is equivalent to write_disposition=WRITE_TRUNCATE.
           type: boolean
         schemaType:
           description: Specifies the schema format to export.
@@ -3809,6 +3651,14 @@ components:
           type: string
         tableUri:
           description: BigQuery URI to a table, up to 2000 characters long, must be of the form bq://projectId.bqDatasetId.tableId.
+          type: string
+        writeDisposition:
+          description: Determines whether existing tables in the destination dataset are overwritten or appended to. If a write_disposition is specified, the `force` parameter is ignored.
+          enum:
+            - WRITE_DISPOSITION_UNSPECIFIED
+            - WRITE_EMPTY
+            - WRITE_TRUNCATE
+            - WRITE_APPEND
           type: string
       type: object
     GoogleCloudHealthcareV1beta1AnnotationGcsDestination:
@@ -3846,32 +3696,28 @@ components:
       type: object
     GoogleCloudHealthcareV1beta1DeidentifyDeidentifyDicomStoreSummary:
       description: Contains a summary of the DeidentifyDicomStore operation.
-      properties:
-        failureResourceCount:
-          description: Number of objects that processing failed for.
-          format: int64
-          type: string
-        successResourceCount:
-          description: Number of objects successfully processed.
-          format: int64
-          type: string
+      properties: {}
       type: object
     GoogleCloudHealthcareV1beta1DeidentifyDeidentifyFhirStoreSummary:
       description: Contains a summary of the DeidentifyFhirStore operation.
-      properties:
-        successResourceCount:
-          description: Number of resources successfully processed.
-          format: int64
-          type: string
+      properties: {}
       type: object
     GoogleCloudHealthcareV1beta1DicomBigQueryDestination:
       description: The BigQuery table where the server writes output.
       properties:
         force:
-          description: If the destination table already exists and this flag is `TRUE`, the table is overwritten by the contents of the DICOM store. If the flag is not set and the destination table already exists, the export call returns an error.
+          description: Use `write_disposition` instead. If `write_disposition` is specified, this parameter is ignored. force=false is equivalent to write_disposition=WRITE_EMPTY and force=true is equivalent to write_disposition=WRITE_TRUNCATE.
           type: boolean
         tableUri:
           description: BigQuery URI to a table, up to 2000 characters long, in the format `bq://projectId.bqDatasetId.tableId`
+          type: string
+        writeDisposition:
+          description: Determines whether the existing table in the destination is to be overwritten or appended to. If a write_disposition is specified, the `force` parameter is ignored.
+          enum:
+            - WRITE_DISPOSITION_UNSPECIFIED
+            - WRITE_EMPTY
+            - WRITE_TRUNCATE
+            - WRITE_APPEND
           type: string
       type: object
     GoogleCloudHealthcareV1beta1DicomGcsDestination:
@@ -3905,11 +3751,41 @@ components:
           description: BigQuery URI to an existing dataset, up to 2000 characters long, in the format `bq://projectId.bqDatasetId`.
           type: string
         force:
-          description: If this flag is `TRUE`, all tables will be deleted from the dataset before the new exported tables are written. If the flag is not set and the destination dataset contains tables, the export call returns an error. This option is not used for the streaming export.
+          description: Use `write_disposition` instead. If `write_disposition` is specified, this parameter is ignored. force=false is equivalent to write_disposition=WRITE_EMPTY and force=true is equivalent to write_disposition=WRITE_TRUNCATE.
           type: boolean
         schemaConfig:
           $ref: "#/components/schemas/SchemaConfig"
           description: The configuration for the exported BigQuery schema.
+        writeDisposition:
+          description: Determines whether existing tables in the destination dataset are overwritten or appended to. If a write_disposition is specified, the `force` parameter is ignored.
+          enum:
+            - WRITE_DISPOSITION_UNSPECIFIED
+            - WRITE_EMPTY
+            - WRITE_TRUNCATE
+            - WRITE_APPEND
+          type: string
+      type: object
+    GoogleCloudHealthcareV1beta1FhirExportResourcesResponse:
+      description: Response when all resources export successfully. This structure is included in the response to describe the detailed outcome after the operation finishes successfully.
+      properties: {}
+      type: object
+    GoogleCloudHealthcareV1beta1FhirGcsDestination:
+      description: The configuration for exporting to Cloud Storage.
+      properties:
+        uriPrefix:
+          description: URI for a Cloud Storage directory where result files should be written (in the format `gs://{bucket-id}/{path/to/destination/dir}`). If there is no trailing slash, the service appends one when composing the object path. The Cloud Storage bucket referenced in `uri_prefix` must exist or an error occurs.
+          type: string
+      type: object
+    GoogleCloudHealthcareV1beta1FhirGcsSource:
+      description: Specifies the configuration for importing data from Cloud Storage.
+      properties:
+        uri:
+          description: "Points to a Cloud Storage URI containing file(s) to import. The URI must be in the following format: `gs://{bucket_id}/{object_id}`. The URI can include wildcards in `object_id` and thus identify multiple files. Supported wildcards: * `*` to match 0 or more non-separator characters * `**` to match 0 or more characters (including separators). Must be used at the end of a path and with no other wildcards in the path. Can also be used with a file extension (such as .ndjson), which imports all files with the extension in the specified directory and its sub-directories. For example, `gs://my-bucket/my-directory/**.ndjson` imports all files with `.ndjson` extensions in `my-directory/` and its sub-directories. * `?` to match 1 character Files matching the wildcard are expected to contain content only, no metadata."
+          type: string
+      type: object
+    GoogleCloudHealthcareV1beta1FhirImportResourcesResponse:
+      description: Final response of importing resources. This structure is included in the response to describe the detailed outcome after the operation finishes successfully.
+      properties: {}
       type: object
     GoogleCloudHealthcareV1beta1FhirRestExportResourcesErrorDetails:
       description: " Response when errors occur while exporting resources. This structure is included in the error details to describe the detailed outcome. It is only included when the operation finishes with errors."
@@ -3939,20 +3815,6 @@ components:
         resourceCount:
           description: The total number of resources exported from the requested FHIR store.
           format: int64
-          type: string
-      type: object
-    GoogleCloudHealthcareV1beta1FhirRestGcsDestination:
-      description: " The configuration for exporting to Cloud Storage."
-      properties:
-        uriPrefix:
-          description: URI for a Cloud Storage directory where result files should be written (in the format `gs://{bucket-id}/{path/to/destination/dir}`). If there is no trailing slash, the service appends one when composing the object path. The user is responsible for creating the Cloud Storage bucket referenced in `uri_prefix`.
-          type: string
-      type: object
-    GoogleCloudHealthcareV1beta1FhirRestGcsSource:
-      description: " Specifies the configuration for importing data from Cloud Storage."
-      properties:
-        uri:
-          description: "Points to a Cloud Storage URI containing file(s) to import. The URI must be in the following format: `gs://{bucket_id}/{object_id}`. The URI can include wildcards in `object_id` and thus identify multiple files. Supported wildcards: * `*` to match 0 or more non-separator characters * `**` to match 0 or more characters (including separators). Must be used at the end of a path and with no other wildcards in the path. Can also be used with a file extension (such as .ndjson), which imports all files with the extension in the specified directory and its sub-directories. For example, `gs://my-bucket/my-directory/**.ndjson` imports all files with `.ndjson` extensions in `my-directory/` and its sub-directories. * `?` to match 1 character Files matching the wildcard are expected to contain content only, no metadata."
           type: string
       type: object
     GoogleCloudHealthcareV1beta1FhirRestImportResourcesErrorDetails:
@@ -4111,40 +3973,15 @@ components:
             - REDACT_NO_TEXT
           type: string
       type: object
-    ImportAnnotationsErrorDetails:
-      description: Deprecated. Final response of importing Annotations in partial or total failure case. This structure is included in the error details. It is only included when the operation finishes.
-      properties:
-        annotationStore:
-          description: The annotation_store that the annotations were imported to. The name is in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          type: string
-        errorCount:
-          description: The number of annotations that had errors.
-          format: int64
-          type: string
-        successCount:
-          description: The number of annotations that have been imported.
-          format: int64
-          type: string
-      type: object
     ImportAnnotationsRequest:
       description: Request to import Annotations. The Annotations to be imported must have client-supplied resource names which indicate the annotation resource. The import operation is not atomic. If a failure occurs, any annotations already imported are not removed.
       properties:
         gcsSource:
           $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1AnnotationGcsSource"
-        name:
-          description: The name of the Annotation store to which the server imports annotations, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          type: string
       type: object
     ImportAnnotationsResponse:
       description: Final response of importing Annotations in successful case. This structure is included in the response. It is only included when the operation finishes.
-      properties:
-        annotationStore:
-          description: The annotation_store that the annotations were imported to, in the format `projects/{project_id}/locations/{location_id}/datasets/{dataset_id}/annotationStores/{annotation_store_id}`.
-          type: string
-        successCount:
-          description: The number of the input annotations. All input have been imported successfully.
-          format: int64
-          type: string
+      properties: {}
       type: object
     ImportDicomDataErrorDetails:
       description: Deprecated. Error details are in [Cloud Logging](/healthcare/docs/how-tos/logging). Returns the errors encountered during DICOM store import.
@@ -4178,7 +4015,7 @@ components:
       properties: {}
       type: object
     ImportResourcesRequest:
-      description: " Request to import resources."
+      description: Request to import resources.
       properties:
         contentStructure:
           description: The content structure in the source location. If not specified, the server treats the input source files as BUNDLE.
@@ -4190,8 +4027,8 @@ components:
             - RESOURCE_PRETTY
           type: string
         gcsSource:
-          $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1FhirRestGcsSource"
-          description: Cloud Storage source data location and import configuration. The Cloud Storage location requires the `roles/storage.objectViewer` Cloud IAM role. Each Cloud Storage object should be a text file that contains the format specified in ContentStructure.
+          $ref: "#/components/schemas/GoogleCloudHealthcareV1beta1FhirGcsSource"
+          description: Cloud Storage source data location and import configuration. The Cloud Storage location requires the `roles/storage.objectViewer` Cloud IAM role. The Healthcare Service Agent Each Cloud Storage object should be a text file that contains the format specified in ContentStructure.
       type: object
     InfoTypeConfig:
       description: Specifies how to use infoTypes for evaluation. For example, a user might only want to evaluate `PERSON`, `LOCATION`, and `AGE`.

@@ -2140,6 +2140,44 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+  "/{merchantId}/orderreturns/createOrderReturn":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Create return in your Merchant Center account.
+      operationId: content.orderreturns.createorderreturn
+      parameters:
+        - description: The ID of the account that manages the order. This cannot be a multi-client account.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderreturnsCreateOrderReturnRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderreturnsCreateOrderReturnResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - orderreturns
   "/{merchantId}/orderreturns/{returnId}":
     get:
       description: Retrieves an order return from your Merchant Center account.
@@ -8030,6 +8068,54 @@ components:
           default: content#orderreturnsAcknowledgeResponse
           description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderreturnsAcknowledgeResponse".'
           type: string
+      type: object
+    OrderreturnsCreateOrderReturnRequest:
+      properties:
+        lineItems:
+          description: The list of line items to return.
+          items:
+            $ref: "#/components/schemas/OrderreturnsLineItem"
+          type: array
+        operationId:
+          description: The ID of the operation. Unique across all operations for a given order.
+          type: string
+        orderId:
+          description: The ID of the order.
+          type: string
+        returnMethodType:
+          description: The way of the package being returned.
+          type: string
+      type: object
+    OrderreturnsCreateOrderReturnResponse:
+      properties:
+        executionStatus:
+          description: >-
+            The status of the execution.
+
+
+            Acceptable values are:  
+
+            - "`duplicate`" 
+
+            - "`executed`"
+          type: string
+        kind:
+          default: content#orderreturnsCreateOrderReturnResponse
+          description: 'Identifies what kind of resource this is. Value: the fixed string "content#orderreturnsCreateOrderReturnResponse".'
+          type: string
+        orderReturn:
+          $ref: "#/components/schemas/MerchantOrderReturn"
+          description: Created order return.
+      type: object
+    OrderreturnsLineItem:
+      properties:
+        lineItemId:
+          description: The ID of the line item. This value is assigned by Google when an order is created.
+          type: string
+        quantity:
+          description: The quantity of this line item.
+          format: uint32
+          type: integer
       type: object
     OrderreturnsListResponse:
       properties:

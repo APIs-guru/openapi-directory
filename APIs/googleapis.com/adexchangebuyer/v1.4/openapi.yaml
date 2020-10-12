@@ -3153,6 +3153,8 @@ components:
           description: The long value to exclude/include.
           format: int64
           type: string
+        requestPlatformTargetingValue:
+          $ref: "#/components/schemas/TargetingValueRequestPlatformTargeting"
         stringValue:
           description: The string value to exclude/include.
           type: string
@@ -3219,6 +3221,13 @@ components:
     TargetingValueDemogGenderCriteria:
       properties:
         demogGenderCriteriaIds:
+          items:
+            type: string
+          type: array
+      type: object
+    TargetingValueRequestPlatformTargeting:
+      properties:
+        requestPlatforms:
           items:
             type: string
           type: array

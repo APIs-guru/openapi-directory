@@ -30,6 +30,7 @@ externalDocs:
 tags:
   - name: hybrid
   - name: organizations
+  - name: projects
 paths:
   /v1/organizations:
     parameters:
@@ -116,10 +117,10 @@ paths:
         - organizations
   "/v1/{name}":
     delete:
-      description: Deletes a shared flow and all associated policies, resources, and revisions. You must undeploy the shared flow before deleting it.
-      operationId: apigee.organizations.sharedflows.revisions.delete
+      description: Deletes a category from the portal.
+      operationId: apigee.organizations.sites.apicategories.delete
       parameters:
-        - description: "Required. The name of the shared flow revision to delete. Must be of the form: `organizations/{organization_id}/sharedflows/{shared_flow_id}/revisions/{revision_id}`"
+        - description: "Required. Name of the category. Use the following structure in your request: `organizations/{org}/sites/{site}/apicategories/{apicategory}`"
           in: path
           name: name
           required: true
@@ -130,7 +131,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudApigeeV1SharedFlowRevision"
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiResponseWrapper"
           description: Successful response
       security:
         - Oauth2:
@@ -140,10 +141,10 @@ paths:
       tags:
         - organizations
     get:
-      description: Gets a revision of a shared flow. If `format=bundle` is passed, it instead outputs a shared flow revision as a ZIP-formatted bundle of code and config files.
-      operationId: apigee.organizations.sharedflows.revisions.get
+      description: Gets a category on the portal.
+      operationId: apigee.organizations.sites.apicategories.get
       parameters:
-        - description: "Required. The name of the shared flow revision to get. Must be of the form: `organizations/{organization_id}/sharedflows/{shared_flow_id}/revisions/{revision_id}`"
+        - description: "Required. Name of the category. Use the following structure in your request: `organizations/{org}/sites/{site}/apicategories/{apicategory}`"
           in: path
           name: name
           required: true
@@ -153,6 +154,10 @@ paths:
           in: query
           name: format
           schema:
+            enum:
+              - INGRESS_CONFIG_VIEW_UNSPECIFIED
+              - BASIC
+              - FULL
             type: string
         - description: If customers want to query custom aggregate tables, then this parameter can be used to specify the table name. If this parameter is skipped, then Edge Query will try to retrieve the data from fact tables which will be expensive.
           in: query
@@ -229,7 +234,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleApiHttpBody"
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
           description: Successful response
       security:
         - Oauth2:
@@ -251,10 +256,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates the debug mask singleton resource for an environment.
-      operationId: apigee.organizations.environments.updateDebugmask
+      description: Updates a category on the portal.
+      operationId: apigee.organizations.sites.apicategories.patch
       parameters:
-        - description: Name of the debug mask.
+        - description: "Required. Name of the category. Use the following structure in your request: `organizations/{org}/sites/{site}/apicategories/{apicategory}`"
           in: path
           name: name
           required: true
@@ -274,13 +279,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/GoogleCloudApigeeV1DebugMask"
+              $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GoogleCloudApigeeV1DebugMask"
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
           description: Successful response
       security:
         - Oauth2:
@@ -1105,6 +1110,72 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleCloudApigeeV1Export"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{parent}/apicategories":
+    get:
+      description: Lists the categories on the portal.
+      operationId: apigee.organizations.sites.apicategories.list
+      parameters:
+        - description: "Required. Name of the portal. Use the following structure in your request: `organizations/{org}/sites/{site}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ListApiCategoriesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new category on the portal.
+      operationId: apigee.organizations.sites.apicategories.create
+      parameters:
+        - description: "Required. Name of the portal. Use the following structure in your request: `organizations/{org}/sites/{site}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategory"
           description: Successful response
       security:
         - Oauth2:
@@ -2805,6 +2876,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{project}:provisionOrganization":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Provisions a new Apigee organization with a functioning runtime. This is the standard way to create trial organizations for a free Apigee trial.
+      operationId: apigee.projects.provisionOrganization
+      parameters:
+        - description: Required. Name of the GCP project with which to associate the Apigee organization.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1ProvisionOrganizationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the IAM policy on an environment. For more information, see [Manage users, roles, and permissions using the API](https://cloud.google.com/apigee/docs/api-platform/system-administration/manage-users-roles). You must have the `apigee.environments.getIamPolicy` permission to call this API.
@@ -3092,6 +3205,42 @@ components:
             - KEY_CERT
           type: string
       type: object
+    GoogleCloudApigeeV1ApiCategory:
+      description: the Api category resource wrapped with response status, error_code etc.
+      properties:
+        data:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
+          description: Details of category.
+        errorCode:
+          description: ID that can be used to find errors in the log files.
+          type: string
+        message:
+          description: Description of the operation.
+          type: string
+        requestId:
+          description: ID that can be used to find request details in the log files.
+          type: string
+        status:
+          description: Status of the operation.
+          type: string
+      type: object
+    GoogleCloudApigeeV1ApiCategoryData:
+      description: the Api category resource.
+      properties:
+        id:
+          description: ID of the category (a UUID).
+          type: string
+        name:
+          description: Name of the category.
+          type: string
+        siteId:
+          description: Name of the portal.
+          type: string
+        updateTime:
+          description: Time the category was last modified in milliseconds since epoch.
+          format: int64
+          type: string
+      type: object
     GoogleCloudApigeeV1ApiProduct:
       properties:
         apiResources:
@@ -3271,6 +3420,21 @@ components:
           type: array
         type:
           description: Type. Set to `Application`. Maintained for compatibility with the Apigee Edge API.
+          type: string
+      type: object
+    GoogleCloudApigeeV1ApiResponseWrapper:
+      properties:
+        errorCode:
+          description: ID that can be used to find errors in the log files.
+          type: string
+        message:
+          description: Description of the operation.
+          type: string
+        requestId:
+          description: ID that can be used to find request details in the log files.
+          type: string
+        status:
+          description: Status of the operation.
           type: string
       type: object
     GoogleCloudApigeeV1App:
@@ -4379,6 +4543,15 @@ components:
           description: Output only. Port number of the exposed Apigee endpoint.
           readOnly: true
           type: string
+        state:
+          description: Output only. State of the instance. Values other than ACTIVE means the resource is not ready to use.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - ACTIVE
+            - DELETING
+          readOnly: true
+          type: string
       type: object
     GoogleCloudApigeeV1InstanceAttachment:
       description: InstanceAttachment represents the installation of an environment onto an instance.
@@ -4482,6 +4655,27 @@ components:
           type: array
         name:
           description: "Resource name in the following format: `organizations/{org}/environments/{env}/keystores/{keystore}`"
+          type: string
+      type: object
+    GoogleCloudApigeeV1ListApiCategoriesResponse:
+      description: the response for ListApiCategoriesRequest.
+      properties:
+        data:
+          description: Details of categories.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1ApiCategoryData"
+          type: array
+        errorCode:
+          description: ID that can be used to find errors in the log files.
+          type: string
+        message:
+          description: Description of the operation.
+          type: string
+        requestId:
+          description: ID that can be used to find request details in the log files.
+          type: string
+        status:
+          description: Status of the operation.
           type: string
       type: object
     GoogleCloudApigeeV1ListApiProductsResponse:
@@ -4929,6 +5123,19 @@ components:
           description: The property value
           type: string
       type: object
+    GoogleCloudApigeeV1ProvisionOrganizationRequest:
+      description: Request for ProvisionOrganization.
+      properties:
+        analyticsRegion:
+          description: Primary Cloud Platform region for analytics data storage. For valid values, see [Create an organization](https://docs.apigee.com/hybrid/latest/precog-provision). Defaults to us-west1.
+          type: string
+        authorizedNetwork:
+          description: Name of the customer project's VPC network. If provided, the network needs to be peered through Service Networking. If none is provided, the organization will have access only to the public internet.
+          type: string
+        runtimeLocation:
+          description: Cloud Platform location for the runtime instance. Defaults to us-west1-a.
+          type: string
+      type: object
     GoogleCloudApigeeV1Query:
       properties:
         csvDelimiter:
@@ -5188,8 +5395,19 @@ components:
         basepath:
           description: URI path prefix used to route to the specified environment. May contain one or more wildcards. For example, path segments consisting of a single `*` character will match any string.
           type: string
+        envGroupRevision:
+          description: The env group config revision_id when this rule was added or last updated. This value is set when the rule is created and will only update if the the environment_id changes. It is used to determine if the runtime is up to date with respect to this rule. This field is omitted from the IngressConfig unless the GetDeployedIngressConfig API is called with debug=true.
+          format: int64
+          type: string
         environment:
           description: "Name of an environment bound to the environment group in the following format: `organizations/{org}/environments/{env}`."
+          type: string
+        receiver:
+          description: "The resource name of the proxy revision that is receiving this basepath in the following format: `organizations/{org}/apis/{api}/revisions/{rev}`. This field is omitted from the IngressConfig unless the GetDeployedIngressConfig API is called with debug=true."
+          type: string
+        updateTime:
+          description: The unix timestamp when this rule was updated. This is updated whenever env_group_revision is updated. This field is omitted from the IngressConfig unless the GetDeployedIngressConfig API is called with debug=true.
+          format: google-datetime
           type: string
       type: object
     GoogleCloudApigeeV1RuntimeTraceConfig:
@@ -5546,7 +5764,7 @@ components:
           $ref: "#/components/schemas/GoogleCloudApigeeV1TlsInfoCommonName"
           description: The TLS Common Name of the certificate.
         enabled:
-          description: Required. Enables one-way TLS.
+          description: Required. Enables TLS. If false, neither one-way nor two-way TLS will be enabled.
           type: boolean
         ignoreValidationErrors:
           description: If true, Edge ignores TLS certificate errors. Valid when configuring TLS for target servers and target endpoints, and when configuring virtual hosts that use 2-way TLS. When used with a target endpoint/target server, if the backend system uses SNI and returns a cert with a subject Distinguished Name (DN) that does not match the hostname, there is no way to ignore the error and the connection fails.

@@ -35022,6 +35022,72 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
+    patch:
+      description: "Update the specified disk with the data included in the request. Update is performed only on selected fields included as part of update-mask. Only the following fields can be modified: user_license."
+      operationId: compute.disks.update
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: The name of the zone for this request.
+          in: path
+          name: zone
+          required: true
+          schema:
+            type: string
+        - description: The disk name for this request.
+          in: path
+          name: disk
+          required: true
+          schema:
+            type: string
+        - description: The set of field mask paths.
+          explode: true
+          in: query
+          name: paths
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Disk"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - disks
   "/projects/{project}/zones/{zone}/disks/{disk}/addResourcePolicies":
     parameters:
       - $ref: "#/components/parameters/alt"
@@ -39206,7 +39272,7 @@ paths:
       - $ref: "#/components/parameters/userIp"
   "/projects/{project}/zones/{zone}/instances/{instance}/referrers":
     get:
-      description: Retrieves a list of resources that refer to the VM instance specified in the request. For example, if the VM instance is part of a managed instance group, the referrers list includes the managed instance group. For more information, read Viewing Referrers to VM Instances.
+      description: Retrieves a list of resources that refer to the VM instance specified in the request. For example, if the VM instance is part of a managed or unmanaged instance group, the referrers list includes the instance group. For more information, read Viewing referrers to VM instances.
       operationId: compute.instances.listReferrers
       parameters:
         - description: Project ID for this request.
@@ -45285,6 +45351,11 @@ components:
             - PERSISTENT
             - SCRATCH
           type: string
+        userLicenses:
+          description: "[Output Only] A list of user provided licenses. It represents a list of URLs to the license resource. Unlike regular licenses, user provided licenses can be modified after the disk is created."
+          items:
+            type: string
+          type: array
       type: object
     AttachedDiskInitializeParams:
       description: >-
@@ -45926,7 +45997,11 @@ components:
       description: CPU utilization policy.
       properties:
         predictiveMethod:
-          description: "Indicates which method of prediction is used for CPU utilization metric, if any. Current set of possible values: * NONE: No predictions are made based on the scaling metric when calculating the number of VM instances. * OPTIMIZE_AVAILABILITY: Standard predictive autoscaling predicts the future values of the scaling metric and then scales a MIG to ensure that new VM instances are ready in time to cover the predicted peak. New values might be added in the future. Some of the values might not be available in all API versions."
+          description: >-
+            Indicates whether predictive autoscaling based on CPU metric is enabled. Valid values are:
+
+
+            * NONE (default). No predictive method is used. The autoscaler scales the group to meet current demand based on real-time metrics. * OPTIMIZE_AVAILABILITY. Predictive autoscaling improves availability by monitoring daily and weekly load patterns and scaling out ahead of anticipated demand.
           enum:
             - NONE
             - OPTIMIZE_AVAILABILITY
@@ -45994,7 +46069,7 @@ components:
             The target value of the metric that autoscaler should maintain. This must be a positive value. A utilization metric scales number of virtual machines handling requests to increase or decrease proportionally to the metric.
 
 
-            For example, a good metric to use as a utilization_target is compute.googleapis.com/instance/network/received_bytes_count. The autoscaler will work to keep this value constant for each of the instances.
+            For example, a good metric to use as a utilization_target is https://www.googleapis.com/compute/v1/instance/network/received_bytes_count. The autoscaler will work to keep this value constant for each of the instances.
           format: double
           type: number
         utilizationTargetType:
@@ -46241,6 +46316,17 @@ components:
             $ref: "#/components/schemas/BackendBucketCdnPolicyBypassCacheOnRequestHeader"
           type: array
         cacheMode:
+          description: >-
+            Specifies the cache setting for all responses from this backend. The possible values are:
+
+
+            USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server.
+
+
+            FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content.
+
+
+            CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
           enum:
             - CACHE_ALL_STATIC
             - FORCE_CACHE_ALL
@@ -46737,6 +46823,17 @@ components:
           $ref: "#/components/schemas/CacheKeyPolicy"
           description: The CacheKeyPolicy for this CdnPolicy.
         cacheMode:
+          description: >-
+            Specifies the cache setting for all responses from this backend. The possible values are:
+
+
+            USE_ORIGIN_HEADERS Requires the origin to set valid caching headers to cache content. Responses without these headers will not be cached at Google's edge, and will require a full trip to the origin on every request, potentially impacting performance and increasing load on the origin server.
+
+
+            FORCE_CACHE_ALL Cache all content, ignoring any "private", "no-store" or "no-cache" directives in Cache-Control response headers. Warning: this may result in Cloud CDN caching private, per-user (user identifiable) content.
+
+
+            CACHE_ALL_STATIC Automatically cache static content, including common image formats, media (video and audio), and web assets (JavaScript and CSS). Requests and responses that are marked as uncacheable, as well as dynamic content (including HTML), will not be cached.
           enum:
             - CACHE_ALL_STATIC
             - FORCE_CACHE_ALL
@@ -48137,6 +48234,14 @@ components:
         type:
           description: "URL of the disk type resource describing which disk type to use to create the disk. Provide this when creating the disk. For example: projects/project/zones/zone/diskTypes/pd-standard  or pd-ssd"
           type: string
+        userLicenses:
+          description: >-
+            A list of publicly visible user-licenses. Unlike regular licenses, user provided licenses can be modified after the disk is created. This includes a list of URLs to the license resource. For example, to provide a debian license:
+
+            https://www.googleapis.com/compute/v1/projects/debian-cloud/global/licenses/debian-9-stretch
+          items:
+            type: string
+          type: array
         users:
           description: "[Output Only] Links to the users of the disk (attached instances) in form: projects/project/zones/zone/instances/instance"
           items:
@@ -49762,7 +49867,7 @@ components:
             If the network specified is in auto subnet mode, this field is optional. However, if the network is in custom subnet mode, a subnetwork must be specified.
           type: string
         target:
-          description: The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For INTERNAL_SELF_MANAGED load balancing, only targetHttpProxy and targetGrpcProxy are valid, not targetHttpsProxy.
+          description: The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
           type: string
       type: object
     ForwardingRuleAggregatedList:
@@ -52206,7 +52311,7 @@ components:
           description: "[Output Only] Whether a VM has been restricted for start because Compute Engine has detected suspicious activity."
           type: boolean
         status:
-          description: "[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED."
+          description: "[Output Only] The status of the instance. One of the following values: PROVISIONING, STAGING, RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. For more information about the status of the instance, see  Instance life cycle."
           enum:
             - DEPROVISIONING
             - PROVISIONING
@@ -57455,7 +57560,7 @@ components:
     NodeGroupAutoscalingPolicy:
       properties:
         maxNodes:
-          description: The maximum number of nodes that the group should have.
+          description: The maximum number of nodes that the group should have. Must be set if autoscaling is enabled. Maximum value allowed is 100.
           format: int32
           type: integer
         minNodes:
@@ -61856,7 +61961,7 @@ components:
           format: int32
           type: integer
         onPolicySwitch:
-          description: Specifies the behavior to apply to existing, scheduled snapshots snapshots if the policy is changed.
+          description: "TODO(b/165626794): Remove this field Specifies the behavior to apply to existing, scheduled snapshots snapshots if the policy is changed."
           enum:
             - DO_NOT_RETROACTIVELY_APPLY
             - RETROACTIVELY_APPLY
@@ -62416,6 +62521,9 @@ components:
         peerIpAddress:
           description: IP address of the BGP interface outside Google Cloud Platform. Only IPv4 is supported.
           type: string
+        routerApplianceInstance:
+          description: URI of the VM instance that is used as third party router appliances such as Next Gen Firewalls, Virtual Routers, SD-WAN. The VM instance must live in zones contained in the same region as this Cloud Router. The VM instance is the peer side of the BGP session.
+          type: string
       type: object
     RouterBgpPeerBfd:
       properties:
@@ -62507,6 +62615,16 @@ components:
         name:
           description: Name of this interface entry. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        privateIpAddress:
+          description: The regional private internal IP address that will be used to establish BGP session to a VM instance, which is used as third party router appliances such as Next Gen Firewalls, Virtual Routers, SD-WAN.
+          type: string
+        redundantInterface:
+          description: Name of the interface that will be redundant with the current interface you are creating. The redundantInterface must belong to the same Cloud Router as the interface here. To establish the BGP session to SD-WAN VM, you must create two BGP peers, and the two BGP peers need to be attached to two separate interfaces that are redundant with each other. The redundant_interface must be 1-63 characters long, and comply with RFC1035. Specifically, the redundant_interface must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+          type: string
+        subnetwork:
+          description: The URL of the subnetwork resource this interface belongs to, it must be in the same region as the router. When you establish a BGP session to a VM instance using this interface, the VM instance must belong to the same subnetwork as the subnetwork specified here.
           type: string
       type: object
     RouterList:
@@ -63928,7 +64046,7 @@ components:
           description: "[Output Only] Set to true if snapshots are automatically created by applying resource policy on the target disk."
           type: boolean
         chainName:
-          description: Chain name should conform to RFC1035.
+          description: Creates the new snapshot in the snapshot chain labeled with the specified name. The chain name must be 1-63 characters long and comply with RFC1035. This is an uncommon option only for advanced service owners who needs to create separate snapshot chains, for example, for chargeback tracking. When you describe your snapshot resource, this field is visible only if it has a non-empty value.
           type: string
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
@@ -65737,6 +65855,14 @@ components:
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
+        httpFilters:
+          description: >-
+            URLs to networkservices.HttpFilter resources enabled for xDS clients using this configuration. For example, https://networkservices.googleapis.com/beta/projects/project/locations/locationhttpFilters/httpFilter Only filters that handle outbound connection and stream events may be specified. These filters work in conjunction with a default set of HTTP filters that may already be configured by Traffic Director. Traffic Director will determine the final location of these filters within xDS configuration based on the name of the HTTP filter. If Traffic Director positions multiple filters at the same location, those filters will be in the same order as specified in this list.
+
+            httpFilters only applies for loadbalancers with loadBalancingScheme set to INTERNAL_SELF_MANAGED. See ForwardingRule for more details.
+          items:
+            type: string
+          type: array
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
           format: uint64

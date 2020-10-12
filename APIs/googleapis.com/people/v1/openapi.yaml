@@ -720,7 +720,7 @@ paths:
           name: requestMask.includeField
           schema:
             type: string
-        - description: Optional. Whether the response should include `next_sync_token`, which can be used to get all changes since the last request. For subsequent sync requests use the `sync_token` param instead. Initial sync requests that specify `request_sync_token` have an additional rate limit.
+        - description: Optional. Whether the response should include `next_sync_token` on the last page, which can be used to get all changes since the last request. For subsequent sync requests use the `sync_token` param instead. Initial sync requests that specify `request_sync_token` have an additional rate limit.
           in: query
           name: requestSyncToken
           schema:
@@ -1584,7 +1584,7 @@ components:
           description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages.
           type: string
         nextSyncToken:
-          description: A token, which can be sent as `sync_token` to retrieve changes since the last request. Request must set `request_sync_token` to return the sync token.
+          description: A token, which can be sent as `sync_token` to retrieve changes since the last request. Request must set `request_sync_token` to return the sync token. When the response is paginated, only the last page will contain `nextSyncToken`.
           type: string
         totalItems:
           description: The total number of items in the list without pagination.
@@ -2392,7 +2392,7 @@ components:
           $ref: "#/components/schemas/FieldMetadata"
           description: Metadata about the URL.
         type:
-          description: "The type of the URL. The type can be custom or one of these predefined values: * `home` * `work` * `blog` * `profile` * `homePage` * `ftp` * `reservations` * `appInstallPage`: website for a Google+ application. * `other`"
+          description: "The type of the URL. The type can be custom or one of these predefined values: * `home` * `work` * `blog` * `profile` * `homePage` * `ftp` * `reservations` * `appInstallPage`: website for a Currents application. * `other`"
           type: string
         value:
           description: The URL.

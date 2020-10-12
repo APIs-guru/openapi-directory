@@ -2380,7 +2380,7 @@ components:
       description: Node Group Affinity for clusters using sole-tenant node groups.
       properties:
         nodeGroupUri:
-          description: Optional. The name of a single node group (https://cloud.google.com/compute/docs/reference/rest/v1/nodeGroups) a cluster will be created on.
+          description: Required. The name of a single node group (https://cloud.google.com/compute/docs/reference/rest/v1/nodeGroups) a cluster will be created on.
           type: string
       type: object
     NodeInitializationAction:

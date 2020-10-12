@@ -27,6 +27,7 @@ info:
 externalDocs:
   url: https://developers.google.com/analytics/trusted-testing/analytics-data/
 tags:
+  - name: properties
   - name: v1alpha
 paths:
   /v1alpha/universalMetadata:
@@ -51,6 +52,47 @@ paths:
             - https://www.googleapis.com/auth/analytics.readonly
       tags:
         - v1alpha
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{name}":
+    get:
+      description: Returns metadata for dimensions and metrics available in reporting methods. Used to explore the dimensions and metrics. In this method, a Google Analytics App + Web Property Identifier is specified in the request, and the metadata response includes Custom dimensions and metrics as well as Universal metadata. For example if a custom metric with parameter name `levels_unlocked` is registered to a property, the Metadata response will contain `customEvent:levels_unlocked`. Universal metadata are dimensions and metrics applicable to any property such as `country` and `totalUsers`.
+      operationId: analyticsdata.properties.getMetadata
+      parameters:
+        - description: "Required. The resource name of the metadata to retrieve. This name field is specified in the URL path and not URL parameters. Property is a numeric Google Analytics App + Web Property identifier. Example: properties/1234/metadata"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Metadata"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -570,6 +612,23 @@ components:
             type: string
           type: array
       type: object
+    Metadata:
+      description: The dimensions and metrics currently accepted in reporting methods.
+      properties:
+        dimensions:
+          description: The dimensions descriptions.
+          items:
+            $ref: "#/components/schemas/DimensionMetadata"
+          type: array
+        metrics:
+          description: The metric descriptions.
+          items:
+            $ref: "#/components/schemas/MetricMetadata"
+          type: array
+        name:
+          description: Resource name of this metadata.
+          type: string
+      type: object
     Metric:
       description: The quantitative measurements of a report. For example, the metric eventCount is the total number of events. Requests are allowed up to 10 metrics.
       properties:
@@ -596,7 +655,15 @@ components:
             - TYPE_INTEGER
             - TYPE_FLOAT
             - TYPE_SECONDS
+            - TYPE_MILLISECONDS
+            - TYPE_MINUTES
+            - TYPE_HOURS
+            - TYPE_STANDARD
             - TYPE_CURRENCY
+            - TYPE_FEET
+            - TYPE_MILES
+            - TYPE_METERS
+            - TYPE_KILOMETERS
           type: string
       type: object
     MetricMetadata:
@@ -623,7 +690,15 @@ components:
             - TYPE_INTEGER
             - TYPE_FLOAT
             - TYPE_SECONDS
+            - TYPE_MILLISECONDS
+            - TYPE_MINUTES
+            - TYPE_HOURS
+            - TYPE_STANDARD
             - TYPE_CURRENCY
+            - TYPE_FEET
+            - TYPE_MILES
+            - TYPE_METERS
+            - TYPE_KILOMETERS
           type: string
         uiName:
           description: This metric's name within the Google Analytics user interface. For example, `Event count`.

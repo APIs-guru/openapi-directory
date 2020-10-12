@@ -421,10 +421,12 @@ components:
               - LABEL_DETECTION
               - SHOT_CHANGE_DETECTION
               - EXPLICIT_CONTENT_DETECTION
+              - FACE_DETECTION
               - SPEECH_TRANSCRIPTION
               - TEXT_DETECTION
               - OBJECT_TRACKING
               - LOGO_RECOGNITION
+              - PERSON_DETECTION
             type: string
           type: array
         inputContent:
@@ -530,6 +532,64 @@ components:
           description: Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
           format: google-duration
           type: string
+      type: object
+    GoogleCloudVideointelligenceV1_FaceAnnotation:
+      description: Deprecated. No effect.
+      properties:
+        frames:
+          description: All video frames where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_FaceFrame"
+          type: array
+        segments:
+          description: All video segments where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_FaceSegment"
+          type: array
+        thumbnail:
+          description: Thumbnail of a representative face view (in JPEG format).
+          format: byte
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1_FaceDetectionAnnotation:
+      description: Face detection annotation.
+      properties:
+        version:
+          description: Feature version.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1_FaceDetectionConfig:
+      description: Config for FACE_DETECTION.
+      properties:
+        includeAttributes:
+          description: Whether to enable face attributes detection, such as glasses, dark_glasses, mouth_open etc. Ignored if 'include_bounding_boxes' is set to false.
+          type: boolean
+        includeBoundingBoxes:
+          description: Whether bounding boxes are included in the face annotation output.
+          type: boolean
+        model:
+          description: 'Model to use for face detection. Supported values: "builtin/stable" (the default if unset) and "builtin/latest".'
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1_FaceFrame:
+      description: Deprecated. No effect.
+      properties:
+        normalizedBoundingBoxes:
+          description: Normalized Bounding boxes in a frame. There can be more than one boxes if the same face is detected in multiple locations within the current frame.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_NormalizedBoundingBox"
+          type: array
+        timeOffset:
+          description: Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1_FaceSegment:
+      description: Video segment level annotation results for face detection.
+      properties:
+        segment:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_VideoSegment"
+          description: Video segment where a face was detected.
       type: object
     GoogleCloudVideointelligenceV1_LabelAnnotation:
       description: Label annotation.
@@ -706,6 +766,31 @@ components:
           description: The timestamp of the frame in microseconds.
           format: google-duration
           type: string
+      type: object
+    GoogleCloudVideointelligenceV1_PersonDetectionAnnotation:
+      description: Person detection annotation per video.
+      properties:
+        tracks:
+          description: The detected tracks of a person.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_Track"
+          type: array
+        version:
+          description: Feature version.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1_PersonDetectionConfig:
+      description: Config for PERSON_DETECTION.
+      properties:
+        includeAttributes:
+          description: Whether to enable person attributes detection, such as cloth color (black, blue, etc), type (coat, dress, etc), pattern (plain, floral, etc), hair, etc. Ignored if 'include_bounding_boxes' is set to false.
+          type: boolean
+        includeBoundingBoxes:
+          description: Whether bounding boxes are included in the person detection annotation output.
+          type: boolean
+        includePoseLandmarks:
+          description: Whether to enable pose landmarks detection. Ignored if 'include_bounding_boxes' is set to false.
+          type: boolean
       type: object
     GoogleCloudVideointelligenceV1_ShotChangeDetectionConfig:
       description: Config for SHOT_CHANGE_DETECTION.
@@ -898,10 +983,12 @@ components:
             - LABEL_DETECTION
             - SHOT_CHANGE_DETECTION
             - EXPLICIT_CONTENT_DETECTION
+            - FACE_DETECTION
             - SPEECH_TRANSCRIPTION
             - TEXT_DETECTION
             - OBJECT_TRACKING
             - LOGO_RECOGNITION
+            - PERSON_DETECTION
           type: string
         inputUri:
           description: Video file location in [Cloud Storage](https://cloud.google.com/storage/).
@@ -931,6 +1018,16 @@ components:
         explicitAnnotation:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_ExplicitContentAnnotation"
           description: Explicit content annotation.
+        faceAnnotations:
+          description: Deprecated. Please use `face_detection_annotations` instead.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_FaceAnnotation"
+          type: array
+        faceDetectionAnnotations:
+          description: Face detection annotations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_FaceDetectionAnnotation"
+          type: array
         frameLabelAnnotations:
           description: Label annotations on frame level. There is exactly one element for each unique label.
           items:
@@ -948,6 +1045,11 @@ components:
           description: Annotations for list of objects detected and tracked in video.
           items:
             $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_ObjectTrackingAnnotation"
+          type: array
+        personDetectionAnnotations:
+          description: Person detection annotations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_PersonDetectionAnnotation"
           type: array
         segment:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_VideoSegment"
@@ -994,12 +1096,18 @@ components:
         explicitContentDetectionConfig:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_ExplicitContentDetectionConfig"
           description: Config for EXPLICIT_CONTENT_DETECTION.
+        faceDetectionConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_FaceDetectionConfig"
+          description: Config for FACE_DETECTION.
         labelDetectionConfig:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_LabelDetectionConfig"
           description: Config for LABEL_DETECTION.
         objectTrackingConfig:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_ObjectTrackingConfig"
           description: Config for OBJECT_TRACKING.
+        personDetectionConfig:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_PersonDetectionConfig"
+          description: Config for PERSON_DETECTION.
         segments:
           description: Video segments to annotate. The segments may overlap and are not required to be contiguous or span the whole video. If unspecified, each video is treated as a single segment.
           items:
@@ -1140,6 +1248,51 @@ components:
           description: Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
           format: google-duration
           type: string
+      type: object
+    GoogleCloudVideointelligenceV1beta2_FaceAnnotation:
+      description: Deprecated. No effect.
+      properties:
+        frames:
+          description: All video frames where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_FaceFrame"
+          type: array
+        segments:
+          description: All video segments where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_FaceSegment"
+          type: array
+        thumbnail:
+          description: Thumbnail of a representative face view (in JPEG format).
+          format: byte
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1beta2_FaceDetectionAnnotation:
+      description: Face detection annotation.
+      properties:
+        version:
+          description: Feature version.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1beta2_FaceFrame:
+      description: Deprecated. No effect.
+      properties:
+        normalizedBoundingBoxes:
+          description: Normalized Bounding boxes in a frame. There can be more than one boxes if the same face is detected in multiple locations within the current frame.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_NormalizedBoundingBox"
+          type: array
+        timeOffset:
+          description: Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1beta2_FaceSegment:
+      description: Video segment level annotation results for face detection.
+      properties:
+        segment:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_VideoSegment"
+          description: Video segment where a face was detected.
       type: object
     GoogleCloudVideointelligenceV1beta2_LabelAnnotation:
       description: Label annotation.
@@ -1284,6 +1437,18 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleCloudVideointelligenceV1beta2_PersonDetectionAnnotation:
+      description: Person detection annotation per video.
+      properties:
+        tracks:
+          description: The detected tracks of a person.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_Track"
+          type: array
+        version:
+          description: Feature version.
+          type: string
+      type: object
     GoogleCloudVideointelligenceV1beta2_SpeechRecognitionAlternative:
       description: Alternative hypotheses (a.k.a. n-best list).
       properties:
@@ -1409,10 +1574,12 @@ components:
             - LABEL_DETECTION
             - SHOT_CHANGE_DETECTION
             - EXPLICIT_CONTENT_DETECTION
+            - FACE_DETECTION
             - SPEECH_TRANSCRIPTION
             - TEXT_DETECTION
             - OBJECT_TRACKING
             - LOGO_RECOGNITION
+            - PERSON_DETECTION
           type: string
         inputUri:
           description: Video file location in [Cloud Storage](https://cloud.google.com/storage/).
@@ -1442,6 +1609,16 @@ components:
         explicitAnnotation:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_ExplicitContentAnnotation"
           description: Explicit content annotation.
+        faceAnnotations:
+          description: Deprecated. Please use `face_detection_annotations` instead.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_FaceAnnotation"
+          type: array
+        faceDetectionAnnotations:
+          description: Face detection annotations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_FaceDetectionAnnotation"
+          type: array
         frameLabelAnnotations:
           description: Label annotations on frame level. There is exactly one element for each unique label.
           items:
@@ -1459,6 +1636,11 @@ components:
           description: Annotations for list of objects detected and tracked in video.
           items:
             $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_ObjectTrackingAnnotation"
+          type: array
+        personDetectionAnnotations:
+          description: Person detection annotations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_PersonDetectionAnnotation"
           type: array
         segment:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_VideoSegment"
@@ -1625,6 +1807,51 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation:
+      description: Deprecated. No effect.
+      properties:
+        frames:
+          description: All video frames where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_FaceFrame"
+          type: array
+        segments:
+          description: All video segments where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_FaceSegment"
+          type: array
+        thumbnail:
+          description: Thumbnail of a representative face view (in JPEG format).
+          format: byte
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p1beta1_FaceDetectionAnnotation:
+      description: Face detection annotation.
+      properties:
+        version:
+          description: Feature version.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p1beta1_FaceFrame:
+      description: Deprecated. No effect.
+      properties:
+        normalizedBoundingBoxes:
+          description: Normalized Bounding boxes in a frame. There can be more than one boxes if the same face is detected in multiple locations within the current frame.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_NormalizedBoundingBox"
+          type: array
+        timeOffset:
+          description: Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p1beta1_FaceSegment:
+      description: Video segment level annotation results for face detection.
+      properties:
+        segment:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_VideoSegment"
+          description: Video segment where a face was detected.
+      type: object
     GoogleCloudVideointelligenceV1p1beta1_LabelAnnotation:
       description: Label annotation.
       properties:
@@ -1768,6 +1995,18 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p1beta1_PersonDetectionAnnotation:
+      description: Person detection annotation per video.
+      properties:
+        tracks:
+          description: The detected tracks of a person.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_Track"
+          type: array
+        version:
+          description: Feature version.
+          type: string
+      type: object
     GoogleCloudVideointelligenceV1p1beta1_SpeechRecognitionAlternative:
       description: Alternative hypotheses (a.k.a. n-best list).
       properties:
@@ -1893,10 +2132,12 @@ components:
             - LABEL_DETECTION
             - SHOT_CHANGE_DETECTION
             - EXPLICIT_CONTENT_DETECTION
+            - FACE_DETECTION
             - SPEECH_TRANSCRIPTION
             - TEXT_DETECTION
             - OBJECT_TRACKING
             - LOGO_RECOGNITION
+            - PERSON_DETECTION
           type: string
         inputUri:
           description: Video file location in [Cloud Storage](https://cloud.google.com/storage/).
@@ -1926,6 +2167,16 @@ components:
         explicitAnnotation:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_ExplicitContentAnnotation"
           description: Explicit content annotation.
+        faceAnnotations:
+          description: Deprecated. Please use `face_detection_annotations` instead.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_FaceAnnotation"
+          type: array
+        faceDetectionAnnotations:
+          description: Face detection annotations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_FaceDetectionAnnotation"
+          type: array
         frameLabelAnnotations:
           description: Label annotations on frame level. There is exactly one element for each unique label.
           items:
@@ -1943,6 +2194,11 @@ components:
           description: Annotations for list of objects detected and tracked in video.
           items:
             $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_ObjectTrackingAnnotation"
+          type: array
+        personDetectionAnnotations:
+          description: Person detection annotations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_PersonDetectionAnnotation"
           type: array
         segment:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_VideoSegment"
@@ -2109,6 +2365,51 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation:
+      description: Deprecated. No effect.
+      properties:
+        frames:
+          description: All video frames where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_FaceFrame"
+          type: array
+        segments:
+          description: All video segments where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_FaceSegment"
+          type: array
+        thumbnail:
+          description: Thumbnail of a representative face view (in JPEG format).
+          format: byte
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_FaceDetectionAnnotation:
+      description: Face detection annotation.
+      properties:
+        version:
+          description: Feature version.
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_FaceFrame:
+      description: Deprecated. No effect.
+      properties:
+        normalizedBoundingBoxes:
+          description: Normalized Bounding boxes in a frame. There can be more than one boxes if the same face is detected in multiple locations within the current frame.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_NormalizedBoundingBox"
+          type: array
+        timeOffset:
+          description: Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p2beta1_FaceSegment:
+      description: Video segment level annotation results for face detection.
+      properties:
+        segment:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoSegment"
+          description: Video segment where a face was detected.
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_LabelAnnotation:
       description: Label annotation.
       properties:
@@ -2252,6 +2553,18 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p2beta1_PersonDetectionAnnotation:
+      description: Person detection annotation per video.
+      properties:
+        tracks:
+          description: The detected tracks of a person.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_Track"
+          type: array
+        version:
+          description: Feature version.
+          type: string
+      type: object
     GoogleCloudVideointelligenceV1p2beta1_SpeechRecognitionAlternative:
       description: Alternative hypotheses (a.k.a. n-best list).
       properties:
@@ -2377,10 +2690,12 @@ components:
             - LABEL_DETECTION
             - SHOT_CHANGE_DETECTION
             - EXPLICIT_CONTENT_DETECTION
+            - FACE_DETECTION
             - SPEECH_TRANSCRIPTION
             - TEXT_DETECTION
             - OBJECT_TRACKING
             - LOGO_RECOGNITION
+            - PERSON_DETECTION
           type: string
         inputUri:
           description: Video file location in [Cloud Storage](https://cloud.google.com/storage/).
@@ -2410,6 +2725,16 @@ components:
         explicitAnnotation:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_ExplicitContentAnnotation"
           description: Explicit content annotation.
+        faceAnnotations:
+          description: Deprecated. Please use `face_detection_annotations` instead.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_FaceAnnotation"
+          type: array
+        faceDetectionAnnotations:
+          description: Face detection annotations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_FaceDetectionAnnotation"
+          type: array
         frameLabelAnnotations:
           description: Label annotations on frame level. There is exactly one element for each unique label.
           items:
@@ -2427,6 +2752,11 @@ components:
           description: Annotations for list of objects detected and tracked in video.
           items:
             $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_ObjectTrackingAnnotation"
+          type: array
+        personDetectionAnnotations:
+          description: Person detection annotations.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_PersonDetectionAnnotation"
           type: array
         segment:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_VideoSegment"
@@ -2630,21 +2960,50 @@ components:
           format: google-duration
           type: string
       type: object
+    GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation:
+      description: Deprecated. No effect.
+      properties:
+        frames:
+          description: All video frames where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_FaceFrame"
+          type: array
+        segments:
+          description: All video segments where a face was detected.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_FaceSegment"
+          type: array
+        thumbnail:
+          description: Thumbnail of a representative face view (in JPEG format).
+          format: byte
+          type: string
+      type: object
     GoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation:
       description: Face detection annotation.
       properties:
-        thumbnail:
-          description: The thumbnail of a person's face.
-          format: byte
-          type: string
-        tracks:
-          description: The face tracks with attributes.
-          items:
-            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_Track"
-          type: array
         version:
           description: Feature version.
           type: string
+      type: object
+    GoogleCloudVideointelligenceV1p3beta1_FaceFrame:
+      description: Deprecated. No effect.
+      properties:
+        normalizedBoundingBoxes:
+          description: Normalized Bounding boxes in a frame. There can be more than one boxes if the same face is detected in multiple locations within the current frame.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_NormalizedBoundingBox"
+          type: array
+        timeOffset:
+          description: Time-offset, relative to the beginning of the video, corresponding to the video frame for this location.
+          format: google-duration
+          type: string
+      type: object
+    GoogleCloudVideointelligenceV1p3beta1_FaceSegment:
+      description: Video segment level annotation results for face detection.
+      properties:
+        segment:
+          $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_VideoSegment"
+          description: Video segment where a face was detected.
       type: object
     GoogleCloudVideointelligenceV1p3beta1_LabelAnnotation:
       description: Label annotation.
@@ -2857,11 +3216,15 @@ components:
           description: If set, returns a google.rpc.Status message that specifies the error for the operation.
       type: object
     GoogleCloudVideointelligenceV1p3beta1_StreamingVideoAnnotationResults:
-      description: Streaming annotation results corresponding to a portion of the video that is currently being processed.
+      description: Streaming annotation results corresponding to a portion of the video that is currently being processed. Only ONE type of annotation will be specified in the response.
       properties:
         explicitAnnotation:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation"
           description: Explicit content annotation results.
+        frameTimestamp:
+          description: Timestamp of the processed frame in microseconds.
+          format: google-duration
+          type: string
         labelAnnotations:
           description: Label annotation results.
           items:
@@ -3011,6 +3374,11 @@ components:
         explicitAnnotation:
           $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_ExplicitContentAnnotation"
           description: Explicit content annotation.
+        faceAnnotations:
+          description: Deprecated. Please use `face_detection_annotations` instead.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_FaceAnnotation"
+          type: array
         faceDetectionAnnotations:
           description: Face detection annotations.
           items:

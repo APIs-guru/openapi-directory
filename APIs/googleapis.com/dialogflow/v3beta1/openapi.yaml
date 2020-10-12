@@ -258,7 +258,7 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
     post:
-      description: Exports the specified agent to a ZIP file.
+      description: Exports the specified agent to a binary file.
       operationId: dialogflow.projects.locations.agents.export
       parameters:
         - description: 'Required. The name of the agent to export. Format: `projects//locations//agents/`.'
@@ -401,7 +401,7 @@ paths:
       - $ref: '#/components/parameters/upload_protocol'
       - $ref: '#/components/parameters/uploadType'
     post:
-      description: 'Restores the specified agent from a ZIP file. Note that all existing intents, intent routes, entity types, pages and webhooks in the agent will be deleted.'
+      description: 'Restores the specified agent from a bianry file. Replaces the current agent with a new one. Note that all existing resources in agent (e.g. intents, entity types, flows) will be removed.'
       operationId: dialogflow.projects.locations.agents.restore
       parameters:
         - description: 'Required. The name of the agent to restore into. Format: `projects//locations//agents/`.'
@@ -1306,7 +1306,7 @@ paths:
       description: 'Processes a natural language query and returns structured, actionable data as a result. This method is not idempotent, because it may cause session entity types to be updated, which in turn might affect results of future queries.'
       operationId: dialogflow.projects.locations.agents.sessions.detectIntent
       parameters:
-        - description: 'Required. The name of the session this query is sent to. Format: `projects//locations//agents//sessions/` or `projects//locations//agents//environments//sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. It''s up to the API caller to choose an appropriate `Session ID`. It can be a random number or some type of session identifiers (preferably hashed). The length of the `Session ID` must not exceed 36 characters.'
+        - description: 'Required. The name of the session this query is sent to. Format: `projects//locations//agents//sessions/` or `projects//locations//agents//environments//sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. It''s up to the API caller to choose an appropriate `Session ID`. It can be a random number or some type of session identifiers (preferably hashed). The length of the `Session ID` must not exceed 36 characters. For more information, see the [sessions guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).'
           in: path
           name: session
           required: true
@@ -1352,7 +1352,7 @@ paths:
       description: 'Fulfills a matched intent returned by MatchIntent. Must be called after MatchIntent, with input from MatchIntentResponse. Otherwise, the behavior is undefined.'
       operationId: dialogflow.projects.locations.agents.sessions.fulfillIntent
       parameters:
-        - description: 'Required. The name of the session this query is sent to. Format: `projects//locations//agents//sessions/` or `projects//locations//agents//environments//sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. It''s up to the API caller to choose an appropriate `Session ID`. It can be a random number or some type of session identifiers (preferably hashed). The length of the `Session ID` must not exceed 36 characters.'
+        - description: 'Required. The name of the session this query is sent to. Format: `projects//locations//agents//sessions/` or `projects//locations//agents//environments//sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. It''s up to the API caller to choose an appropriate `Session ID`. It can be a random number or some type of session identifiers (preferably hashed). The length of the `Session ID` must not exceed 36 characters. For more information, see the [sessions guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).'
           in: path
           name: session
           required: true
@@ -1398,7 +1398,7 @@ paths:
       description: 'Returns preliminary intent match results, doesn''t change the session status.'
       operationId: dialogflow.projects.locations.agents.sessions.matchIntent
       parameters:
-        - description: 'Required. The name of the session this query is sent to. Format: `projects//locations//agents//sessions/` or `projects//locations//agents//environments//sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. It''s up to the API caller to choose an appropriate `Session ID`. It can be a random number or some type of session identifiers (preferably hashed). The length of the `Session ID` must not exceed 36 characters.'
+        - description: 'Required. The name of the session this query is sent to. Format: `projects//locations//agents//sessions/` or `projects//locations//agents//environments//sessions/`. If `Environment ID` is not specified, we assume default ''draft'' environment. It''s up to the API caller to choose an appropriate `Session ID`. It can be a random number or some type of session identifiers (preferably hashed). The length of the `Session ID` must not exceed 36 characters. For more information, see the [sessions guide](https://cloud.google.com/dialogflow/cx/docs/concept/session).'
           in: path
           name: session
           required: true
@@ -2202,6 +2202,9 @@ components:
         transcript:
           description: 'If natural language speech audio was provided as input, this field will contain the trascript for the audio.'
           type: string
+        triggerEvent:
+          description: 'If an event was provided as input, this field will contain a copy of the event name.'
+          type: string
         triggerIntent:
           description: 'If an intent was provided as input, this field will contain a copy of the intent identifier.'
           type: string
@@ -2323,7 +2326,7 @@ components:
           description: Optional for both WebhookRequest and WebhookResponse. The value of the parameter. This field can be set by the webhook to change the parameter value.
       type: object
     GoogleCloudDialogflowCxV3beta1QueryInput:
-      description: 'Represents the query input. It can contain either: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger.'
+      description: 'Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. '
       properties:
         audio:
           $ref: '#/components/schemas/GoogleCloudDialogflowCxV3beta1AudioInput'
@@ -2999,6 +3002,15 @@ components:
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in `ExportAgentRequest`.
           type: string
+      type: object
+    GoogleCloudDialogflowV2ImportDocumentsResponse:
+      description: Response message for Documents.ImportDocuments.
+      properties:
+        warnings:
+          description: Includes details about skipped documents or any other warnings.
+          items:
+            $ref: '#/components/schemas/GoogleRpcStatus'
+          type: array
       type: object
     GoogleCloudDialogflowV2Intent:
       description: 'An intent categorizes an end-user''s intention for one conversation turn. For each agent, you define many intents, where your combined intents can handle a complete conversation. When an end-user writes or says something, referred to as an end-user expression or end-user input, Dialogflow matches the end-user input to the best intent in your agent. Matching an intent is also known as intent classification. For more information, see the [intent guide](https://cloud.google.com/dialogflow/docs/intents-overview).'
@@ -3727,7 +3739,7 @@ components:
           type: number
       type: object
     GoogleCloudDialogflowV2SentimentAnalysisResult:
-      description: 'The result of sentiment analysis. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user''s attitude as positive, negative, or neutral. For Participants.AnalyzeContent, it needs to be configured in DetectIntentRequest.query_params. For Participants.StreamingAnalyzeContent, it needs to be configured in StreamingDetectIntentRequest.query_params. And for Participants.AnalyzeContent and Participants.StreamingAnalyzeContent, it needs to be configured in ConversationProfile.human_agent_assistant_config'
+      description: 'The result of sentiment analysis. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user''s attitude as positive, negative, or neutral. For Participants.DetectIntent, it needs to be configured in DetectIntentRequest.query_params. For Participants.StreamingDetectIntent, it needs to be configured in StreamingDetectIntentRequest.query_params. And for Participants.AnalyzeContent and Participants.StreamingAnalyzeContent, it needs to be configured in ConversationProfile.human_agent_assistant_config'
       properties:
         queryTextSentiment:
           $ref: '#/components/schemas/GoogleCloudDialogflowV2Sentiment'
@@ -3962,6 +3974,15 @@ components:
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in `ExportAgentRequest`.
           type: string
+      type: object
+    GoogleCloudDialogflowV2beta1ImportDocumentsResponse:
+      description: Response message for Documents.ImportDocuments.
+      properties:
+        warnings:
+          description: Includes details about skipped documents or any other warnings.
+          items:
+            $ref: '#/components/schemas/GoogleRpcStatus'
+          type: array
       type: object
     GoogleCloudDialogflowV2beta1Intent:
       description: 'An intent categorizes an end-user''s intention for one conversation turn. For each agent, you define many intents, where your combined intents can handle a complete conversation. When an end-user writes or says something, referred to as an end-user expression or end-user input, Dialogflow matches the end-user input to the best intent in your agent. Matching an intent is also known as intent classification. For more information, see the [intent guide](https://cloud.google.com/dialogflow/docs/intents-overview).'
@@ -4894,7 +4915,7 @@ components:
           type: number
       type: object
     GoogleCloudDialogflowV2beta1SentimentAnalysisResult:
-      description: 'The result of sentiment analysis. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user''s attitude as positive, negative, or neutral. For Participants.AnalyzeContent, it needs to be configured in DetectIntentRequest.query_params. For Participants.StreamingAnalyzeContent, it needs to be configured in StreamingDetectIntentRequest.query_params. And for Participants.AnalyzeContent and Participants.StreamingAnalyzeContent, it needs to be configured in ConversationProfile.human_agent_assistant_config'
+      description: 'The result of sentiment analysis. Sentiment analysis inspects user input and identifies the prevailing subjective opinion, especially to determine a user''s attitude as positive, negative, or neutral. For Participants.DetectIntent, it needs to be configured in DetectIntentRequest.query_params. For Participants.StreamingDetectIntent, it needs to be configured in StreamingDetectIntentRequest.query_params. And for Participants.AnalyzeContent and Participants.StreamingAnalyzeContent, it needs to be configured in ConversationProfile.human_agent_assistant_config'
       properties:
         queryTextSentiment:
           $ref: '#/components/schemas/GoogleCloudDialogflowV2beta1Sentiment'
@@ -5010,13 +5031,6 @@ components:
           type: array
         source:
           description: 'Optional. A custom field used to identify the webhook source. Arbitrary strings are supported. When provided, Dialogflow uses this field to populate QueryResult.webhook_source sent to the integration or API caller.'
-          type: string
-      type: object
-    GoogleCloudDialogflowV3alpha1CreateVersionOperationMetadata:
-      description: Metadata associated with the long running operation for Versions.CreateVersion.
-      properties:
-        version:
-          description: 'Name of the created version. Format: `projects//locations//agents//flows//versions/`.'
           type: string
       type: object
     GoogleCloudDialogflowV3alpha1ExportAgentResponse:

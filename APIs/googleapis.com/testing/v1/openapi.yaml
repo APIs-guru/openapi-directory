@@ -887,6 +887,19 @@ components:
             $ref: "#/components/schemas/XcodeVersion"
           type: array
       type: object
+    IosDeviceFile:
+      description: A file or directory to install on the device before the test starts.
+      properties:
+        bundleId:
+          description: The bundle id of the app where this file lives. iOS apps sandbox their own filesystem, so app files must specify which app installed on the device.
+          type: string
+        content:
+          $ref: "#/components/schemas/FileReference"
+          description: The source file
+        devicePath:
+          description: Location of the file on the device, inside the app's sandboxed filesystem
+          type: string
+      type: object
     IosDeviceList:
       description: A list of iOS device configurations in which the test is to be executed.
       properties:
@@ -982,6 +995,16 @@ components:
         networkProfile:
           description: The network traffic profile used for running the test. Available network profiles can be queried by using the NETWORK_CONFIGURATION environment type when calling TestEnvironmentDiscoveryService.GetTestEnvironmentCatalog.
           type: string
+        pullDirectories:
+          description: List of directories on the device to upload to Cloud Storage at the end of the test. Directories should either be in a shared directory (e.g. /private/var/mobile/Media) or within an accessible directory inside the app's filesystem (e.g. /Documents) by specifying the bundle id.
+          items:
+            $ref: "#/components/schemas/IosDeviceFile"
+          type: array
+        pushFiles:
+          description: List of files to push to the device before starting the test.
+          items:
+            $ref: "#/components/schemas/IosDeviceFile"
+          type: array
       type: object
     IosVersion:
       description: An iOS version.

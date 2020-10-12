@@ -148,7 +148,7 @@ paths:
       description: Gets a transfer job.
       operationId: storagetransfer.transferJobs.get
       parameters:
-        - description: '" Required. The job to get.'
+        - description: Required. " The job to get.
           in: path
           name: jobName
           required: true
@@ -289,6 +289,11 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelOperationRequest"
       responses:
         "200":
           content:
@@ -478,7 +483,7 @@ components:
       properties:
         awsAccessKey:
           $ref: "#/components/schemas/AwsAccessKey"
-          description: Required. AWS access key used to sign the API requests to the AWS S3 bucket. Permissions on the bucket must be granted to the access ID of the AWS access key.
+          description: Required. Input only. AWS access key used to sign the API requests to the AWS S3 bucket. Permissions on the bucket must be granted to the access ID of the AWS access key.
         bucketName:
           description: Required. S3 Bucket name (see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/dev/create-bucket-get-location-example.html)).
           type: string
@@ -488,7 +493,7 @@ components:
       properties:
         azureCredentials:
           $ref: "#/components/schemas/AzureCredentials"
-          description: Required. Credentials used to authenticate API requests to Azure.
+          description: Required. Input only. Credentials used to authenticate API requests to Azure.
         container:
           description: Required. The container to transfer from the Azure Storage account.
           type: string
@@ -502,6 +507,10 @@ components:
         sasToken:
           description: Required. Azure shared access signature. (see [Grant limited access to Azure Storage resources using shared access signatures (SAS)](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview)).
           type: string
+      type: object
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
       type: object
     Date:
       description: "Represents a whole or partial calendar date, e.g. a birthday. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the Proleptic Gregorian Calendar. This can represent: * A full date, with non-zero year, month and day values * A month and day value, with a zero year, e.g. an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, e.g. a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
@@ -824,10 +833,12 @@ components:
         creationTime:
           description: Output only. The time that the transfer job was created.
           format: google-datetime
+          readOnly: true
           type: string
         deletionTime:
           description: Output only. The time that the transfer job was deleted.
           format: google-datetime
+          readOnly: true
           type: string
         description:
           description: A description provided by the user for the job. Its max length is 1024 bytes when Unicode-encoded.
@@ -835,6 +846,7 @@ components:
         lastModificationTime:
           description: Output only. The time that the transfer job was last modified.
           format: google-datetime
+          readOnly: true
           type: string
         name:
           description: 'A unique name (within the transfer project) assigned when the job is created. If this field is empty in a CreateTransferJobRequest, Storage Transfer Service will assign a unique name. Otherwise, the specified name is used as the unique name for this job. If the specified name is in use by a job, the creation request fails with an ALREADY_EXISTS error. This name must start with `"transferJobs/"` prefix and end with a letter or a number, and should be no more than 128 characters. Example: `"transferJobs/[A-Za-z0-9-._~]*[A-Za-z0-9]$"` Invalid job names will fail with an INVALID_ARGUMENT error.'
@@ -942,7 +954,7 @@ components:
           description: Only objects that satisfy these object conditions are included in the set of data source and data sink objects. Object conditions based on objects' "last modification time" do not exclude objects in a data sink.
         transferOptions:
           $ref: "#/components/schemas/TransferOptions"
-          description: If the option delete_objects_unique_in_sink is `true`, object conditions based on objects' "last modification time" are ignored and do not exclude objects in a data source or a data sink.
+          description: If the option delete_objects_unique_in_sink is `true` and time-based object conditions such as 'last modification time' are specified, the request fails with an INVALID_ARGUMENT error.
       type: object
     UpdateTransferJobRequest:
       description: Request passed to UpdateTransferJob.

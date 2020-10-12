@@ -812,6 +812,9 @@ components:
         dockerCacheHit:
           description: Indicates whether we are using a cached Docker image (true) or had to pull the Docker image (false) for this command.
           type: boolean
+        dockerImageName:
+          description: Docker Image name.
+          type: string
         inputCacheMiss:
           description: The input cache miss ratio.
           format: float

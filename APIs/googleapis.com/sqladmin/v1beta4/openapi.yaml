@@ -2358,6 +2358,9 @@ components:
     BackupConfiguration:
       description: Database instance backup configuration.
       properties:
+        backupRetentionSettings:
+          $ref: "#/components/schemas/BackupRetentionSettings"
+          description: Backup retention settings.
         binaryLogEnabled:
           description: (MySQL only) Whether binary log is enabled. If backup configuration is disabled, binarylog must be disabled as well.
           type: boolean
@@ -2378,6 +2381,24 @@ components:
           type: boolean
         startTime:
           description: Start time for the daily backup configuration in UTC timezone in the 24 hour format - *HH:MM*.
+          type: string
+        transactionLogRetentionDays:
+          description: The number of days of transaction logs we retain for point in time restore, from 1-7.
+          format: int32
+          type: integer
+      type: object
+    BackupRetentionSettings:
+      description: We currently only support backup retention by specifying the number of backups we will retain.
+      properties:
+        retainedBackups:
+          description: Depending on the value of retention_unit, this is used to determine if a backup needs to be deleted. If retention_unit is 'COUNT', we will retain this many backups.
+          format: int32
+          type: integer
+        retentionUnit:
+          description: The unit that 'retained_backups' represents.
+          enum:
+            - RETENTION_UNIT_UNSPECIFIED
+            - COUNT
           type: string
       type: object
     BackupRun:
@@ -2581,6 +2602,7 @@ components:
             - POSTGRES_10
             - POSTGRES_12
             - MYSQL_8_0
+            - POSTGRES_13
           type: string
         diskEncryptionConfiguration:
           $ref: "#/components/schemas/DiskEncryptionConfiguration"
@@ -2669,7 +2691,7 @@ components:
           $ref: "#/components/schemas/Settings"
           description: The user settings.
         state:
-          description: "The current serving state of the Cloud SQL instance. This can be one of the following. *RUNNABLE*: The instance is running, or is ready to run when accessed. *SUSPENDED*: The instance is not available, for example due to problems with billing. *PENDING_CREATE*: The instance is being created. *MAINTENANCE*: The instance is down for maintenance. *FAILED*: The instance creation failed. *UNKNOWN_STATE*: The state of the instance is unknown."
+          description: "The current serving state of the Cloud SQL instance. This can be one of the following. *SQL_INSTANCE_STATE_UNSPECIFIED*: The state of the instance is unknown. *RUNNABLE*: The instance has been stopped by owner. It is not currently running, but it's ready to be restarted. *SUSPENDED*: The instance is not available, for example due to problems with billing. for example due to problems with billing. *PENDING_DELETE*: The instance is being deleted. *PENDING_CREATE*: The instance is being created. *MAINTENANCE*: The instance is down for maintenance. *FAILED*: The instance creation failed."
           enum:
             - SQL_INSTANCE_STATE_UNSPECIFIED
             - RUNNABLE
@@ -2880,6 +2902,7 @@ components:
               - POSTGRES_10
               - POSTGRES_12
               - MYSQL_8_0
+              - POSTGRES_13
             type: string
           type: array
         inBeta:
