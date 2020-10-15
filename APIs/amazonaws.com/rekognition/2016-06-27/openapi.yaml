@@ -1512,6 +1512,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=RekognitionService.DetectProtectiveEquipment:
+    post:
+      operationId: DetectProtectiveEquipment
+      description: '<p>Detects Personal Protective Equipment (PPE) worn by people detected in an image. Amazon Rekognition can detect the following types of PPE.</p> <ul> <li> <p>Face cover</p> </li> <li> <p>Hand cover</p> </li> <li> <p>Head cover</p> </li> </ul> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. The image must be either a PNG or JPG formatted file. </p> <p> <code>DetectProtectiveEquipment</code> detects PPE worn by up to 15 persons detected in an image.</p> <p>For each person detected in the image the API returns an array of body parts (face, head, left-hand, right-hand). For each body part, an array of detected items of PPE is returned, including an indicator of whether or not the PPE covers the body part. The API returns the confidence it has in each detection (person, PPE, body part and body part coverage). It also returns a bounding box (<a>BoundingBox</a>) for each detected person and each detected item of PPE. </p> <p>You can optionally request a summary of detected PPE items with the <code>SummarizationAttributes</code> input parameter. The summary provides the following information. </p> <ul> <li> <p>The persons detected as wearing all of the types of PPE that you specify.</p> </li> <li> <p>The persons detected as not wearing all of the types PPE that you specify.</p> </li> <li> <p>The persons detected where PPE adornment could not be determined. </p> </li> </ul> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectProtectiveEquipment</code> action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectProtectiveEquipmentResponse'
+        '480':
+          description: InvalidS3ObjectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidS3ObjectException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ImageTooLargeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageTooLargeException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '487':
+          description: InvalidImageFormatException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidImageFormatException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectProtectiveEquipmentRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - RekognitionService.DetectProtectiveEquipment
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=RekognitionService.DetectText:
     post:
       operationId: DetectText
@@ -2423,6 +2504,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidImageFormatException'
+        '489':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
       requestBody:
         required: true
         content:
@@ -4586,6 +4673,35 @@ components:
             - $ref: '#/components/schemas/HumanLoopConfig'
             - description: 'Sets up the configuration for human evaluation, including the FlowDefinition the image will be sent to.'
     HumanLoopQuotaExceededException: {}
+    DetectProtectiveEquipmentResponse:
+      type: object
+      properties:
+        ProtectiveEquipmentModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The version number of the PPE detection model used to detect PPE in the image.
+        Persons:
+          allOf:
+            - $ref: '#/components/schemas/ProtectiveEquipmentPersons'
+            - description: An array of persons detected in the image (including persons not wearing PPE).
+        Summary:
+          allOf:
+            - $ref: '#/components/schemas/ProtectiveEquipmentSummary'
+            - description: Summary information for the types of PPE specified in the <code>SummarizationAttributes</code> input parameter.
+    DetectProtectiveEquipmentRequest:
+      type: object
+      required:
+        - Image
+      title: DetectProtectiveEquipmentRequest
+      properties:
+        Image:
+          allOf:
+            - $ref: '#/components/schemas/Image'
+            - description: 'The image in which you want to detect PPE on detected persons. The image can be passed as image bytes or you can reference an image stored in an Amazon S3 bucket. '
+        SummarizationAttributes:
+          allOf:
+            - $ref: '#/components/schemas/ProtectiveEquipmentSummarizationAttributes'
+            - description: An array of PPE types that you want to summarize.
     DetectTextResponse:
       type: object
       properties:
@@ -5129,6 +5245,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/QualityFilter'
             - description: '<p>A filter that specifies a quality bar for how much filtering is done to identify faces. Filtered faces aren''t indexed. If you specify <code>AUTO</code>, Amazon Rekognition chooses the quality bar. If you specify <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>, filtering removes all faces that don’t meet the chosen quality bar. The default value is <code>AUTO</code>. The quality bar is based on a variety of common use cases. Low-quality detections can occur for a number of reasons. Some examples are an object that''s misidentified as a face, a face that''s too blurry, or a face with a pose that''s too extreme to use. If you specify <code>NONE</code>, no filtering is performed. </p> <p>To use quality filtering, the collection you are using must be associated with version 3 of the face model or higher.</p>'
+    ServiceQuotaExceededException: {}
     ListCollectionsResponse:
       type: object
       example:
@@ -5880,6 +5997,33 @@ components:
             - $ref: '#/components/schemas/Percent'
             - description: Level of confidence in the determination.
       description: 'Indicates whether or not the face has a beard, and the confidence level in the determination.'
+    BodyPart:
+      type: string
+      enum:
+        - FACE
+        - HEAD
+        - LEFT_HAND
+        - RIGHT_HAND
+    ProtectiveEquipmentBodyPart:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/BodyPart'
+            - description: The detected body part.
+        Confidence:
+          allOf:
+            - $ref: '#/components/schemas/Percent'
+            - description: 'The confidence that Amazon Rekognition has in the detection accuracy of the detected body part. '
+        EquipmentDetections:
+          allOf:
+            - $ref: '#/components/schemas/EquipmentDetections'
+            - description: An array of Personal Protective Equipment items detected around a body part.
+      description: 'Information about a body part detected by <a>DetectProtectiveEquipment</a> that contains PPE. An array of <code>ProtectiveEquipmentBodyPart</code> objects is returned for each person detected by <code>DetectProtectiveEquipment</code>. '
+    BodyParts:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtectiveEquipmentBodyPart'
     Float:
       type: number
       format: float
@@ -5902,7 +6046,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Float'
             - description: Top coordinate of the bounding box as a ratio of overall image height.
-      description: '<p>Identifies the bounding box around the label, face, or text. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>'
+      description: '<p>Identifies the bounding box around the label, face, text or personal protective equipment. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>'
     BoundingBoxHeight:
       type: number
       format: float
@@ -6243,6 +6387,18 @@ components:
       enum:
         - NAME
         - TIMESTAMP
+    CoversBodyPart:
+      type: object
+      properties:
+        Confidence:
+          allOf:
+            - $ref: '#/components/schemas/Percent'
+            - description: The confidence that Amazon Rekognition has in the value of <code>Value</code>.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'True if the PPE covers the corresponding body part, otherwise false.'
+      description: 'Information about an item of Personal Protective Equipment covering a corresponding body part. For more information, see <a>DetectProtectiveEquipment</a>.'
     ProjectName:
       type: string
       pattern: '[a-zA-Z0-9_.\-]+'
@@ -6474,6 +6630,41 @@ components:
             - $ref: '#/components/schemas/HumanLoopActivationConditionsEvaluationResults'
             - description: 'Shows the result of condition evaluations, including those conditions which activated a human review.'
       description: 'Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the input did not trigger human review.'
+    ProtectiveEquipmentSummarizationAttributes:
+      type: object
+      required:
+        - MinConfidence
+        - RequiredEquipmentTypes
+      properties:
+        MinConfidence:
+          allOf:
+            - $ref: '#/components/schemas/Percent'
+            - description: '<p>The minimum confidence level for which you want summary information. The confidence level applies to person detection, body part detection, equipment detection, and body part coverage. Amazon Rekognition doesn''t return summary information with a confidence than this specified value. There isn''t a default value.</p> <p>Specify a <code>MinConfidence</code> value that is between 50-100% as <code>DetectProtectiveEquipment</code> returns predictions only where the detection confidence is between 50% - 100%. If you specify a value that is less than 50%, the results are the same specifying a value of 50%.</p> <p> </p>'
+        RequiredEquipmentTypes:
+          allOf:
+            - $ref: '#/components/schemas/ProtectiveEquipmentTypes'
+            - description: 'An array of personal protective equipment types for which you want summary information. If a person is detected wearing a required requipment type, the person''s ID is added to the <code>PersonsWithRequiredEquipment</code> array field returned in <a>ProtectiveEquipmentSummary</a> by <code>DetectProtectiveEquipment</code>. '
+      description: 'Specifies summary attributes to return from a call to <a>DetectProtectiveEquipment</a>. You can specify which types of PPE to summarize. You can also specify a minimum confidence value for detections. Summary information is returned in the <code>Summary</code> (<a>ProtectiveEquipmentSummary</a>) field of the response from <code>DetectProtectiveEquipment</code>. The summary includes which persons in an image were detected wearing the requested types of person protective equipment (PPE), which persons were detected as not wearing PPE, and the persons in which a determination could not be made. For more information, see <a>ProtectiveEquipmentSummary</a>.'
+    ProtectiveEquipmentPersons:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtectiveEquipmentPerson'
+    ProtectiveEquipmentSummary:
+      type: object
+      properties:
+        PersonsWithRequiredEquipment:
+          allOf:
+            - $ref: '#/components/schemas/ProtectiveEquipmentPersonIds'
+            - description: 'An array of IDs for persons who are wearing detected personal protective equipment. '
+        PersonsWithoutRequiredEquipment:
+          allOf:
+            - $ref: '#/components/schemas/ProtectiveEquipmentPersonIds'
+            - description: 'An array of IDs for persons who are not wearing all of the types of PPE specified in the RequiredEquipmentTypes field of the detected personal protective equipment. '
+        PersonsIndeterminate:
+          allOf:
+            - $ref: '#/components/schemas/ProtectiveEquipmentPersonIds'
+            - description: 'An array of IDs for persons where it was not possible to determine if they are wearing personal protective equipment. '
+      description: '<p>Summary information for required items of personal protective equipment (PPE) detected on persons by a call to <a>DetectProtectiveEquipment</a>. You specify the required type of PPE in the <code>SummarizationAttributes</code> (<a>ProtectiveEquipmentSummarizationAttributes</a>) input parameter. The summary includes which persons were detected wearing the required personal protective equipment (<code>PersonsWithRequiredEquipment</code>), which persons were detected as not wearing the required PPE (<code>PersonsWithoutRequiredEquipment</code>), and the persons in which a determination could not be made (<code>PersonsIndeterminate</code>).</p> <p>To get a total for each category, use the size of the field array. For example, to find out how many people were detected as wearing the specified PPE, use the size of the <code>PersonsWithRequiredEquipment</code> array. If you want to find out more about a person, such as the location (<a>BoundingBox</a>) of the person on the image, use the person ID in each array element. Each person ID matches the ID field of a <a>ProtectiveEquipmentPerson</a> object returned in the <code>Persons</code> array by <code>DetectProtectiveEquipment</code>.</p>'
     DetectionFilter:
       type: object
       properties:
@@ -6538,6 +6729,36 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Emotion'
+    ProtectiveEquipmentType:
+      type: string
+      enum:
+        - FACE_COVER
+        - HAND_COVER
+        - HEAD_COVER
+    EquipmentDetection:
+      type: object
+      properties:
+        BoundingBox:
+          allOf:
+            - $ref: '#/components/schemas/BoundingBox'
+            - description: A bounding box surrounding the item of detected PPE.
+        Confidence:
+          allOf:
+            - $ref: '#/components/schemas/Percent'
+            - description: The confidence that Amazon Rekognition has that the bounding box (<code>BoundingBox</code>) contains an item of PPE.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ProtectiveEquipmentType'
+            - description: The type of detected PPE.
+        CoversBodyPart:
+          allOf:
+            - $ref: '#/components/schemas/CoversBodyPart'
+            - description: Information about the body part covered by the detected PPE.
+      description: 'Information about an item of Personal Protective Equipment (PPE) detected by <a>DetectProtectiveEquipment</a>. For more information, see <a>DetectProtectiveEquipment</a>.'
+    EquipmentDetections:
+      type: array
+      items:
+        $ref: '#/components/schemas/EquipmentDetection'
     Summary:
       type: object
       properties:
@@ -7238,6 +7459,34 @@ components:
             - $ref: '#/components/schemas/GroundTruthManifest'
             - description: The location of the summary manifest. The summary manifest provides aggregate data validation results for the training and test datasets.
       description: The description of a version of a model.
+    ProtectiveEquipmentPerson:
+      type: object
+      properties:
+        BodyParts:
+          allOf:
+            - $ref: '#/components/schemas/BodyParts'
+            - description: 'An array of body parts detected on a person''s body (including body parts without PPE). '
+        BoundingBox:
+          allOf:
+            - $ref: '#/components/schemas/BoundingBox'
+            - description: A bounding box around the detected person.
+        Confidence:
+          allOf:
+            - $ref: '#/components/schemas/Percent'
+            - description: The confidence that Amazon Rekognition has that the bounding box contains a person.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/UInteger'
+            - description: The identifier for the detected person. The identifier is only unique for a single call to <code>DetectProtectiveEquipment</code>.
+      description: A person detected by a call to <a>DetectProtectiveEquipment</a>. The API returns all persons detected in the input image in an array of <code>ProtectiveEquipmentPerson</code> objects.
+    ProtectiveEquipmentPersonIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/UInteger'
+    ProtectiveEquipmentTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProtectiveEquipmentType'
     Reason:
       type: string
       enum:

@@ -120,6 +120,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSBudgetServiceGateway.CreateBudgetAction:
+    post:
+      operationId: CreateBudgetAction
+      description: ' Creates a budget action. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBudgetActionResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '482':
+          description: CreationLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreationLimitExceededException'
+        '483':
+          description: DuplicateRecordException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateRecordException'
+        '484':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBudgetActionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSBudgetServiceGateway.CreateBudgetAction
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSBudgetServiceGateway.CreateNotification:
     post:
       operationId: CreateNotification
@@ -315,6 +384,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSBudgetServiceGateway.DeleteBudgetAction:
+    post:
+      operationId: DeleteBudgetAction
+      description: ' Deletes a budget action. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteBudgetActionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceLockedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLockedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteBudgetActionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSBudgetServiceGateway.DeleteBudgetAction
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSBudgetServiceGateway.DeleteNotification:
     post:
       operationId: DeleteNotification
@@ -478,6 +610,282 @@ paths:
             type: string
             enum:
               - AWSBudgetServiceGateway.DescribeBudget
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetAction:
+    post:
+      operationId: DescribeBudgetAction
+      description: ' Describes a budget action detail. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBudgetActionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBudgetActionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSBudgetServiceGateway.DescribeBudgetAction
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetActionHistories:
+    post:
+      operationId: DescribeBudgetActionHistories
+      description: ' Describes a budget action history detail. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBudgetActionHistoriesResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBudgetActionHistoriesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSBudgetServiceGateway.DescribeBudgetActionHistories
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetActionsForAccount:
+    post:
+      operationId: DescribeBudgetActionsForAccount
+      description: ' Describes all of the budget actions for an account. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBudgetActionsForAccountResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBudgetActionsForAccountRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSBudgetServiceGateway.DescribeBudgetActionsForAccount
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSBudgetServiceGateway.DescribeBudgetActionsForBudget:
+    post:
+      operationId: DescribeBudgetActionsForBudget
+      description: ' Describes all of the budget actions for a budget. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBudgetActionsForBudgetResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBudgetActionsForBudgetRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSBudgetServiceGateway.DescribeBudgetActionsForBudget
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -810,6 +1218,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSBudgetServiceGateway.ExecuteBudgetAction:
+    post:
+      operationId: ExecuteBudgetAction
+      description: ' Executes a budget action. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteBudgetActionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceLockedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLockedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteBudgetActionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSBudgetServiceGateway.ExecuteBudgetAction
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSBudgetServiceGateway.UpdateBudget:
     post:
       operationId: UpdateBudget
@@ -859,6 +1330,69 @@ paths:
             type: string
             enum:
               - AWSBudgetServiceGateway.UpdateBudget
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSBudgetServiceGateway.UpdateBudgetAction:
+    post:
+      operationId: UpdateBudgetAction
+      description: ' Updates a budget action. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBudgetActionResponse'
+        '480':
+          description: InternalErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalErrorException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceLockedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLockedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBudgetActionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSBudgetServiceGateway.UpdateBudgetAction
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1074,6 +1608,60 @@ components:
     CreationLimitExceededException: {}
     DuplicateRecordException: {}
     AccessDeniedException: {}
+    CreateBudgetActionResponse:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - ActionId
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        ActionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: ' A system-generated universally unique identifier (UUID) for the action. '
+    CreateBudgetActionRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - NotificationType
+        - ActionType
+        - ActionThreshold
+        - Definition
+        - ExecutionRoleArn
+        - ApprovalModel
+        - Subscribers
+      title: CreateBudgetActionRequest
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        NotificationType:
+          $ref: '#/components/schemas/NotificationType'
+        ActionType:
+          allOf:
+            - $ref: '#/components/schemas/ActionType'
+            - description: ' The type of action. This defines the type of tasks that can be carried out by this action. This field also determines the format for definition. '
+        ActionThreshold:
+          $ref: '#/components/schemas/ActionThreshold'
+        Definition:
+          $ref: '#/components/schemas/Definition'
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: ' The role passed for action execution and reversion. Roles and actions must be in the same account. '
+        ApprovalModel:
+          allOf:
+            - $ref: '#/components/schemas/ApprovalModel'
+            - description: ' This specifies if the action needs manual or automatic approval. '
+        Subscribers:
+          $ref: '#/components/schemas/Subscribers'
+    NotFoundException: {}
     CreateNotificationResponse:
       type: object
       properties: {}
@@ -1104,7 +1692,6 @@ components:
             - $ref: '#/components/schemas/Subscribers'
             - description: A list of subscribers that you want to associate with the notification. Each notification can have one SNS subscriber and up to 10 email subscribers.
       description: ' Request of CreateNotification '
-    NotFoundException: {}
     CreateSubscriberResponse:
       type: object
       properties: {}
@@ -1155,6 +1742,36 @@ components:
             - $ref: '#/components/schemas/BudgetName'
             - description: The name of the budget that you want to delete.
       description: ' Request of DeleteBudget '
+    DeleteBudgetActionResponse:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - Action
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        Action:
+          $ref: '#/components/schemas/Action'
+    DeleteBudgetActionRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - ActionId
+      title: DeleteBudgetActionRequest
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        ActionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: ' A system-generated universally unique identifier (UUID) for the action. '
+    ResourceLockedException: {}
     DeleteNotificationResponse:
       type: object
       properties: {}
@@ -1234,6 +1851,120 @@ components:
             - $ref: '#/components/schemas/BudgetName'
             - description: The name of the budget that you want a description of.
       description: ' Request of DescribeBudget '
+    DescribeBudgetActionResponse:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - Action
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: ' A budget action resource. '
+    DescribeBudgetActionRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - ActionId
+      title: DescribeBudgetActionRequest
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        ActionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: ' A system-generated universally unique identifier (UUID) for the action. '
+    DescribeBudgetActionHistoriesResponse:
+      type: object
+      required:
+        - ActionHistories
+      properties:
+        ActionHistories:
+          allOf:
+            - $ref: '#/components/schemas/ActionHistories'
+            - description: ' The historical record of the budget action resource. '
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+    DescribeBudgetActionHistoriesRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - ActionId
+      title: DescribeBudgetActionHistoriesRequest
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        ActionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: ' A system-generated universally unique identifier (UUID) for the action. '
+        TimePeriod:
+          $ref: '#/components/schemas/TimePeriod'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+    InvalidNextTokenException: {}
+    DescribeBudgetActionsForAccountResponse:
+      type: object
+      required:
+        - Actions
+      properties:
+        Actions:
+          allOf:
+            - $ref: '#/components/schemas/Actions'
+            - description: ' A list of the budget action resources information. '
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+    DescribeBudgetActionsForAccountRequest:
+      type: object
+      required:
+        - AccountId
+      title: DescribeBudgetActionsForAccountRequest
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+    DescribeBudgetActionsForBudgetResponse:
+      type: object
+      required:
+        - Actions
+      properties:
+        Actions:
+          allOf:
+            - $ref: '#/components/schemas/Actions'
+            - description: ' A list of the budget action resources information. '
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
+    DescribeBudgetActionsForBudgetRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+      title: DescribeBudgetActionsForBudgetRequest
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        MaxResults:
+          $ref: '#/components/schemas/MaxResults'
+        NextToken:
+          $ref: '#/components/schemas/GenericString'
     DescribeBudgetPerformanceHistoryResponse:
       type: object
       properties:
@@ -1262,7 +1993,6 @@ components:
           $ref: '#/components/schemas/MaxResults'
         NextToken:
           $ref: '#/components/schemas/GenericString'
-    InvalidNextTokenException: {}
     ExpiredNextTokenException: {}
     DescribeBudgetsResponse:
       type: object
@@ -1372,6 +2102,47 @@ components:
             - $ref: '#/components/schemas/GenericString'
             - description: The pagination token that you include in your request to indicate the next set of results that you want to retrieve.
       description: ' Request of DescribeSubscribersForNotification '
+    ExecuteBudgetActionResponse:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - ActionId
+        - ExecutionType
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        ActionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: ' A system-generated universally unique identifier (UUID) for the action. '
+        ExecutionType:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionType'
+            - description: ' The type of execution. '
+    ExecuteBudgetActionRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - ActionId
+        - ExecutionType
+      title: ExecuteBudgetActionRequest
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        ActionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: ' A system-generated universally unique identifier (UUID) for the action. '
+        ExecutionType:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionType'
+            - description: ' The type of execution. '
     UpdateBudgetResponse:
       type: object
       properties: {}
@@ -1392,6 +2163,58 @@ components:
             - $ref: '#/components/schemas/Budget'
             - description: The budget that you want to update your budget to.
       description: ' Request of UpdateBudget '
+    UpdateBudgetActionResponse:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - OldAction
+        - NewAction
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        OldAction:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: ' The previous action resource information. '
+        NewAction:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: ' The updated action resource information. '
+    UpdateBudgetActionRequest:
+      type: object
+      required:
+        - AccountId
+        - BudgetName
+        - ActionId
+      title: UpdateBudgetActionRequest
+      properties:
+        AccountId:
+          $ref: '#/components/schemas/AccountId'
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        ActionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: ' A system-generated universally unique identifier (UUID) for the action. '
+        NotificationType:
+          $ref: '#/components/schemas/NotificationType'
+        ActionThreshold:
+          $ref: '#/components/schemas/ActionThreshold'
+        Definition:
+          $ref: '#/components/schemas/Definition'
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: ' The role passed for action execution and reversion. Roles and actions must be in the same account. '
+        ApprovalModel:
+          allOf:
+            - $ref: '#/components/schemas/ApprovalModel'
+            - description: ' This specifies if the action needs manual or automatic approval. '
+        Subscribers:
+          $ref: '#/components/schemas/Subscribers'
     UpdateNotificationResponse:
       type: object
       properties: {}
@@ -1463,12 +2286,218 @@ components:
       description: The account ID of the user. It should be a 12-digit number.
       minLength: 12
       maxLength: 12
+    ActionId:
+      type: string
+      pattern: '^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$'
+      minLength: 36
+      maxLength: 36
     BudgetName:
       type: string
       pattern: '[^:\\]+'
       description: ' A string that represents the budget name. The ":" and "\" characters aren''t allowed.'
       minLength: 1
       maxLength: 100
+    NotificationType:
+      type: string
+      enum:
+        - ACTUAL
+        - FORECASTED
+      description: ' The type of a notification. It must be ACTUAL or FORECASTED.'
+    ActionType:
+      type: string
+      enum:
+        - APPLY_IAM_POLICY
+        - APPLY_SCP_POLICY
+        - RUN_SSM_DOCUMENTS
+    ActionThreshold:
+      type: object
+      required:
+        - ActionThresholdValue
+        - ActionThresholdType
+      properties:
+        ActionThresholdValue:
+          $ref: '#/components/schemas/NotificationThreshold'
+        ActionThresholdType:
+          $ref: '#/components/schemas/ThresholdType'
+      description: ' The trigger threshold of the action. '
+    Definition:
+      type: object
+      properties:
+        IamActionDefinition:
+          allOf:
+            - $ref: '#/components/schemas/IamActionDefinition'
+            - description: ' The AWS Identity and Access Management (IAM) action definition details. '
+        ScpActionDefinition:
+          allOf:
+            - $ref: '#/components/schemas/ScpActionDefinition'
+            - description: ' The service control policies (SCPs) action definition details. '
+        SsmActionDefinition:
+          allOf:
+            - $ref: '#/components/schemas/SsmActionDefinition'
+            - description: ' The AWS Systems Manager (SSM) action definition details. '
+      description: ' Specifies all of the type-specific parameters. '
+    RoleArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|us-iso-east-1|us-isob-east-1):iam::\d{12}:role(\u002F[\u0021-\u007F]+\u002F|\u002F)[\w+=,.@-]+$'
+      minLength: 32
+      maxLength: 618
+    ApprovalModel:
+      type: string
+      enum:
+        - AUTOMATIC
+        - MANUAL
+    ActionStatus:
+      type: string
+      enum:
+        - STANDBY
+        - PENDING
+        - EXECUTION_IN_PROGRESS
+        - EXECUTION_SUCCESS
+        - EXECUTION_FAILURE
+        - REVERSE_IN_PROGRESS
+        - REVERSE_SUCCESS
+        - REVERSE_FAILURE
+        - RESET_IN_PROGRESS
+        - RESET_FAILURE
+    Subscribers:
+      type: array
+      description: ' A list of subscribers.'
+      items:
+        $ref: '#/components/schemas/Subscriber'
+      minItems: 1
+      maxItems: 11
+    Action:
+      type: object
+      required:
+        - ActionId
+        - BudgetName
+        - NotificationType
+        - ActionType
+        - ActionThreshold
+        - Definition
+        - ExecutionRoleArn
+        - ApprovalModel
+        - Status
+        - Subscribers
+      properties:
+        ActionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: ' A system-generated universally unique identifier (UUID) for the action. '
+        BudgetName:
+          $ref: '#/components/schemas/BudgetName'
+        NotificationType:
+          $ref: '#/components/schemas/NotificationType'
+        ActionType:
+          allOf:
+            - $ref: '#/components/schemas/ActionType'
+            - description: ' The type of action. This defines the type of tasks that can be carried out by this action. This field also determines the format for definition. '
+        ActionThreshold:
+          allOf:
+            - $ref: '#/components/schemas/ActionThreshold'
+            - description: ' The trigger threshold of the action. '
+        Definition:
+          allOf:
+            - $ref: '#/components/schemas/Definition'
+            - description: ' Where you specify all of the type-specific parameters. '
+        ExecutionRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: ' The role passed for action execution and reversion. Roles and actions must be in the same account. '
+        ApprovalModel:
+          allOf:
+            - $ref: '#/components/schemas/ApprovalModel'
+            - description: ' This specifies if the action needs manual or automatic approval. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ActionStatus'
+            - description: ' The status of action. '
+        Subscribers:
+          $ref: '#/components/schemas/Subscribers'
+      description: ' A budget action resource. '
+    ActionHistory:
+      type: object
+      required:
+        - Timestamp
+        - Status
+        - EventType
+        - ActionHistoryDetails
+      properties:
+        Timestamp:
+          $ref: '#/components/schemas/GenericTimestamp'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ActionStatus'
+            - description: ' The status of action at the time of the event. '
+        EventType:
+          allOf:
+            - $ref: '#/components/schemas/EventType'
+            - description: ' This distinguishes between whether the events are triggered by the user or generated by the system. '
+        ActionHistoryDetails:
+          allOf:
+            - $ref: '#/components/schemas/ActionHistoryDetails'
+            - description: ' The description of details of the event. '
+      description: ' The historical records for a budget action. '
+    ActionHistories:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActionHistory'
+      minItems: 0
+      maxItems: 100
+    GenericTimestamp:
+      type: string
+      description: ' A generic time stamp. In Java, it is transformed to a <code>Date</code> object.'
+      format: date-time
+    EventType:
+      type: string
+      enum:
+        - SYSTEM
+        - CREATE_ACTION
+        - DELETE_ACTION
+        - UPDATE_ACTION
+        - EXECUTE_ACTION
+    ActionHistoryDetails:
+      type: object
+      required:
+        - Message
+        - Action
+      properties:
+        Message:
+          $ref: '#/components/schemas/GenericString'
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/Action'
+            - description: ' The budget action resource. '
+      description: ' The description of details of the event. '
+    GenericString:
+      type: string
+      pattern: .*
+      description: ' A generic string.'
+      minLength: 0
+      maxLength: 2147483647
+    ActionSubType:
+      type: string
+      enum:
+        - STOP_EC2_INSTANCES
+        - STOP_RDS_INSTANCES
+    NotificationThreshold:
+      type: number
+      description: ' The threshold of a notification.'
+      format: double
+      minimum: 0
+      maximum: 40000000000
+    ThresholdType:
+      type: string
+      enum:
+        - PERCENTAGE
+        - ABSOLUTE_VALUE
+      description: ' The type of threshold for a notification.'
+    Actions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Action'
+      minItems: 0
+      maxItems: 100
     Spend:
       type: object
       required:
@@ -1585,10 +2614,6 @@ components:
         - SAVINGS_PLANS_UTILIZATION
         - SAVINGS_PLANS_COVERAGE
       description: '<p> The type of a budget. It must be one of the following types: </p> <p> <code>COST</code>, <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>SAVINGS_PLANS_UTILIZATION</code>, or <code>SAVINGS_PLANS_COVERAGE</code>.</p>'
-    GenericTimestamp:
-      type: string
-      description: ' A generic time stamp. In Java, it is transformed to a <code>Date</code> object.'
-      format: date-time
     Budget:
       type: object
       required:
@@ -1731,13 +2756,6 @@ components:
             - $ref: '#/components/schemas/NotificationState'
             - description: 'Whether this notification is in alarm. If a budget notification is in the <code>ALARM</code> state, you have passed the set threshold for the budget.'
       description: '<p>A notification that is associated with a budget. A budget can have up to ten notifications. </p> <p>Each notification must have at least one subscriber. A notification can have one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.</p> <p>For example, if you have a budget for 200 dollars and you want to be notified when you go over 160 dollars, create a notification with the following parameters:</p> <ul> <li> <p>A notificationType of <code>ACTUAL</code> </p> </li> <li> <p>A <code>thresholdType</code> of <code>PERCENTAGE</code> </p> </li> <li> <p>A <code>comparisonOperator</code> of <code>GREATER_THAN</code> </p> </li> <li> <p>A notification <code>threshold</code> of <code>80</code> </p> </li> </ul>'
-    Subscribers:
-      type: array
-      description: ' A list of subscribers.'
-      items:
-        $ref: '#/components/schemas/Subscriber'
-      minItems: 1
-      maxItems: 11
     Subscriber:
       type: object
       required:
@@ -1753,40 +2771,119 @@ components:
             - $ref: '#/components/schemas/SubscriberAddress'
             - description: '<p>The address that AWS sends budget notifications to, either an SNS topic or an email.</p> <p>When you create a subscriber, the value of <code>Address</code> can''t contain line breaks.</p>'
       description: '<p>The subscriber to a budget notification. The subscriber consists of a subscription type and either an Amazon SNS topic or an email address.</p> <p>For example, an email subscriber would have the following parameters:</p> <ul> <li> <p>A <code>subscriptionType</code> of <code>EMAIL</code> </p> </li> <li> <p>An <code>address</code> of <code>example@example.com</code> </p> </li> </ul>'
+    IamActionDefinition:
+      type: object
+      required:
+        - PolicyArn
+      properties:
+        PolicyArn:
+          allOf:
+            - $ref: '#/components/schemas/PolicyArn'
+            - description: ' The Amazon Resource Name (ARN) of the policy to be attached. '
+        Roles:
+          allOf:
+            - $ref: '#/components/schemas/Roles'
+            - description: ' A list of roles to be attached. There must be at least one role. '
+        Groups:
+          allOf:
+            - $ref: '#/components/schemas/Groups'
+            - description: ' A list of groups to be attached. There must be at least one group. '
+        Users:
+          allOf:
+            - $ref: '#/components/schemas/Users'
+            - description: ' A list of users to be attached. There must be at least one user. '
+      description: ' The AWS Identity and Access Management (IAM) action definition details. '
+    ScpActionDefinition:
+      type: object
+      required:
+        - PolicyId
+        - TargetIds
+      properties:
+        PolicyId:
+          allOf:
+            - $ref: '#/components/schemas/PolicyId'
+            - description: ' The policy ID attached. '
+        TargetIds:
+          allOf:
+            - $ref: '#/components/schemas/TargetIds'
+            - description: ' A list of target IDs. '
+      description: ' The service control policies (SCP) action definition details. '
+    SsmActionDefinition:
+      type: object
+      required:
+        - ActionSubType
+        - Region
+        - InstanceIds
+      properties:
+        ActionSubType:
+          allOf:
+            - $ref: '#/components/schemas/ActionSubType'
+            - description: ' The action subType. '
+        Region:
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: ' The Region to run the SSM document. '
+        InstanceIds:
+          allOf:
+            - $ref: '#/components/schemas/InstanceIds'
+            - description: ' The EC2 and RDS instance IDs. '
+      description: ' The AWS Systems Manager (SSM) action definition details. '
     MaxResults:
       type: integer
       description: ' An integer that represents how many entries a paginated response contains. The maximum is 100.'
       minimum: 1
       maximum: 100
-    GenericString:
-      type: string
-      pattern: .*
-      description: ' A generic string.'
-      minLength: 0
-      maxLength: 2147483647
     Notifications:
       type: array
       description: ' A list of notifications.'
       items:
         $ref: '#/components/schemas/Notification'
-    NotificationType:
+    ExecutionType:
       type: string
       enum:
-        - ACTUAL
-        - FORECASTED
-      description: ' The type of a notification. It must be ACTUAL or FORECASTED.'
-    NotificationThreshold:
-      type: number
-      description: ' The threshold of a notification. It must be a number between 0 and 1,000,000,000.'
-      format: double
-      minimum: 0
-      maximum: 40000000000
-    ThresholdType:
+        - APPROVE_BUDGET_ACTION
+        - RETRY_BUDGET_ACTION
+        - REVERSE_BUDGET_ACTION
+        - RESET_BUDGET_ACTION
+    Group:
       type: string
-      enum:
-        - PERCENTAGE
-        - ABSOLUTE_VALUE
-      description: ' The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.'
+      pattern: '^([\u0021-\u007F]+\u002F)?[\w+=,.@-]+$'
+      minLength: 1
+      maxLength: 640
+    Groups:
+      type: array
+      items:
+        $ref: '#/components/schemas/Group'
+      minItems: 1
+      maxItems: 100
+    PolicyArn:
+      type: string
+      pattern: '^arn:(aws|aws-cn|aws-us-gov|us-iso-east-1|us-isob-east-1):iam::(\d{12}|aws):policy(\u002F[\u0021-\u007F]+\u002F|\u002F)[\w+=,.@-]+$'
+      minLength: 25
+      maxLength: 684
+    Roles:
+      type: array
+      items:
+        $ref: '#/components/schemas/Role'
+      minItems: 1
+      maxItems: 100
+    Users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+      minItems: 1
+      maxItems: 100
+    InstanceId:
+      type: string
+      pattern: '^i-(\w{8}|\w{17})$|^[a-zA-Z]([\w-]{0,61}\w)?$'
+      minLength: 1
+      maxLength: 63
+    InstanceIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceId'
+      minItems: 1
+      maxItems: 100
     NotificationState:
       type: string
       enum:
@@ -1813,6 +2910,27 @@ components:
       description: ' A string that represents a numeric value.'
       minLength: 1
       maxLength: 2147483647
+    PolicyId:
+      type: string
+      pattern: '^p-[0-9a-zA-Z_]{8,128}$'
+      minLength: 10
+      maxLength: 130
+    Region:
+      type: string
+      pattern: '^\w{2}-\w+(-\w+)?-\d$'
+      minLength: 9
+      maxLength: 20
+    Role:
+      type: string
+      pattern: '^([\u0021-\u007F]+\u002F)?[\w+=,.@-]+$'
+      minLength: 1
+      maxLength: 576
+    TargetIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/TargetId'
+      minItems: 1
+      maxItems: 100
     UnitValue:
       type: string
       pattern: .*
@@ -1832,5 +2950,15 @@ components:
       minLength: 1
       maxLength: 2147483647
       format: password
+    TargetId:
+      type: string
+      pattern: '^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$)|(\d{12})'
+      minLength: 12
+      maxLength: 68
+    User:
+      type: string
+      pattern: '^([\u0021-\u007F]+\u002F)?[\w+=,.@-]+$'
+      minLength: 1
+      maxLength: 576
 security:
   - hmac: []

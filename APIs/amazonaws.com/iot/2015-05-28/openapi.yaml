@@ -1699,6 +1699,7 @@ paths:
                 authorizerFunctionArn:
                   description: The ARN of the authorizer's Lambda function.
                   type: string
+                  maxLength: 2048
                 tokenKeyName:
                   description: The name of the token key used to extract the token from the HTTP headers.
                   type: string
@@ -1922,6 +1923,7 @@ paths:
                 authorizerFunctionArn:
                   description: The ARN of the authorizer's Lambda function.
                   type: string
+                  maxLength: 2048
                 tokenKeyName:
                   description: 'The key used to extract the token from the HTTP headers. '
                   type: string
@@ -2301,6 +2303,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: isAscendingOrder
           in: query
           required: false
@@ -2633,7 +2636,7 @@ paths:
                 validationCertificateArn:
                   description: The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. This value is not required for AWS-managed domains.
                   type: string
-                  pattern: 'arn:aws:acm:[a-z]{2}-(gov-)?[a-z]{4,9}-\d{1}:\d{12}:certificate/?[a-zA-Z0-9/-]+'
+                  pattern: 'arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\d{1}:\d{12}:certificate/[a-zA-Z0-9/-]+'
                   minLength: 1
                   maxLength: 2048
                 authorizerConfig:
@@ -5438,7 +5441,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AlertTarget'
                 additionalMetricsToRetain:
-                  description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>'
+                  description: '<p> <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>'
                   type: array
                   items:
                     $ref: '#/components/schemas/BehaviorMetric'
@@ -5634,7 +5637,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AlertTarget'
                 additionalMetricsToRetain:
-                  description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>'
+                  description: '<p> <i>Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>'
                   type: array
                   items:
                     $ref: '#/components/schemas/BehaviorMetric'
@@ -6805,7 +6808,7 @@ paths:
                     sql:
                       allOf:
                         - $ref: '#/components/schemas/SQL'
-                        - description: 'The SQL statement used to query the topic. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
+                        - description: 'The SQL statement used to query the topic. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
                     description:
                       allOf:
                         - $ref: '#/components/schemas/Description'
@@ -6992,7 +6995,7 @@ paths:
                     sql:
                       allOf:
                         - $ref: '#/components/schemas/SQL'
-                        - description: 'The SQL statement used to query the topic. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
+                        - description: 'The SQL statement used to query the topic. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
                     description:
                       allOf:
                         - $ref: '#/components/schemas/Description'
@@ -8070,6 +8073,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '485':
+          description: ConflictingResourceUpdateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingResourceUpdateException'
+        '486':
           description: UnauthorizedException
           content:
             application/json:
@@ -8274,6 +8283,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnauthorizedException'
         '485':
+          description: ConflictingResourceUpdateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingResourceUpdateException'
+        '486':
           description: DeleteConflictException
           content:
             application/json:
@@ -10328,6 +10343,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: pageSize
           in: query
           required: false
@@ -10893,6 +10909,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: isAscendingOrder
           in: query
           required: false
@@ -11040,6 +11057,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: isAscendingOrder
           in: query
           required: false
@@ -11120,6 +11138,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: isAscendingOrder
           in: query
           required: false
@@ -11235,6 +11254,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: pageSize
           in: query
           required: false
@@ -11782,6 +11802,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: isAscendingOrder
           in: query
           required: false
@@ -11845,6 +11866,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: pageSize
           in: query
           required: false
@@ -11932,6 +11954,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: pageSize
           in: query
           required: false
@@ -12016,6 +12039,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: pageSize
           in: query
           required: false
@@ -12171,6 +12195,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: isAscendingOrder
           in: query
           required: false
@@ -12570,6 +12595,7 @@ paths:
           schema:
             type: string
             pattern: '[A-Za-z0-9+/]+={0,2}'
+            maxLength: 1024
         - name: pageSize
           in: query
           required: false
@@ -15483,7 +15509,7 @@ components:
             - description: The ARN of the domain configuration.
     AcmCertificateArn:
       type: string
-      pattern: 'arn:aws:acm:[a-z]{2}-(gov-)?[a-z]{4,9}-\d{1}:\d{12}:certificate/?[a-zA-Z0-9/-]+'
+      pattern: 'arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\d{1}:\d{12}:certificate/[a-zA-Z0-9/-]+'
       minLength: 1
       maxLength: 2048
     AuthorizerName:
@@ -15575,11 +15601,11 @@ components:
         incrementFactor:
           allOf:
             - $ref: '#/components/schemas/IncrementFactor'
-            - description: The exponential factor to increase the rate of rollout for a job.
+            - description: '<p>The exponential factor to increase the rate of rollout for a job.</p> <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>'
         rateIncreaseCriteria:
           allOf:
             - $ref: '#/components/schemas/RateIncreaseCriteria'
-            - description: '<p>The criteria to initiate the increase in rate of rollout for a job.</p> <p>AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).</p>'
+            - description: The criteria to initiate the increase in rate of rollout for a job.
       description: Allows you to create an exponential rate of rollout for a job.
     AbortCriteriaList:
       type: array
@@ -16463,6 +16489,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DomainType'
             - description: The type of the domain.
+        lastStatusChangeDate:
+          allOf:
+            - $ref: '#/components/schemas/DateType'
+            - description: The date and time the domain configuration's status was last changed.
     DescribeEndpointResponse:
       type: object
       properties:
@@ -16677,7 +16707,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainList'
             - deprecated: true
-              description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>DescribeSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</p>Use additionalMetricsToRetainV2.'
+              description: '<p> <i>Please use <a>DescribeSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>Use additionalMetricsToRetainV2.'
         additionalMetricsToRetainV2:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
@@ -18019,7 +18049,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainList'
             - deprecated: true
-              description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>UpdateSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</p>Use additionalMetricsToRetainV2.'
+              description: '<p> <i>Please use <a>UpdateSecurityProfileResponse$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>Use additionalMetricsToRetainV2.'
         additionalMetricsToRetainV2:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
@@ -19408,6 +19438,7 @@ components:
         $ref: '#/components/schemas/AuthResult'
     AuthorizerArn:
       type: string
+      maxLength: 2048
     AuthorizerConfig:
       type: object
       properties:
@@ -19422,6 +19453,7 @@ components:
       description: An object that specifies the authorization service for a domain.
     AuthorizerFunctionArn:
       type: string
+      maxLength: 2048
     TokenKeyName:
       type: string
       pattern: '[a-zA-Z0-9_-]+'
@@ -20857,7 +20889,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainList'
             - deprecated: true
-              description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>Use additionalMetricsToRetainV2.'
+              description: '<p> <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>Use additionalMetricsToRetainV2.'
         additionalMetricsToRetainV2:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
@@ -21033,7 +21065,7 @@ components:
         sql:
           allOf:
             - $ref: '#/components/schemas/SQL'
-            - description: 'The SQL statement used to query the topic. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
+            - description: 'The SQL statement used to query the topic. For more information, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.'
         description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -22664,6 +22696,7 @@ components:
     Marker:
       type: string
       pattern: '[A-Za-z0-9+/]+={0,2}'
+      maxLength: 1024
     PageSize:
       type: integer
       minimum: 1
@@ -23553,6 +23586,7 @@ components:
       type: string
     Resource:
       type: string
+      maxLength: 2048
     ResourceLogicalId:
       type: string
     S3Bucket:
@@ -24489,7 +24523,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainList'
             - deprecated: true
-              description: '<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p> <p> <b>Note:</b> This API field is deprecated. Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</p>Use additionalMetricsToRetainV2.'
+              description: '<p> <i>Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>Use additionalMetricsToRetainV2.'
         additionalMetricsToRetainV2:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'

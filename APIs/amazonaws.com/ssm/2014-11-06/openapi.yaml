@@ -4254,7 +4254,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.GetParameterHistory:
     post:
       operationId: GetParameterHistory
-      description: Query a list of all parameters used by the AWS account.
+      description: Retrieves the history of all changes to a parameter.
       responses:
         '200':
           description: Success
@@ -9933,7 +9933,7 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/PSParameterName'
-            - description: The name of a parameter you want to query.
+            - description: The name of the parameter for which you want to review history.
         WithDecryption:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -14721,7 +14721,7 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/PatchId'
-            - description: The ID of the patch (this is different than the Microsoft Knowledge Base ID).
+            - description: <p>The ID of the patch. Applies to Windows patches only.</p> <note> <p>This ID is not the same as the Microsoft Knowledge Base ID.</p> </note>
         ReleaseDate:
           allOf:
             - $ref: '#/components/schemas/DateTime'
@@ -14745,31 +14745,71 @@ components:
         ProductFamily:
           allOf:
             - $ref: '#/components/schemas/PatchProductFamily'
-            - description: 'The product family the patch is applicable for (for example, Windows).'
+            - description: 'The product family the patch is applicable for. For example, <code>Windows</code> or <code>Amazon Linux 2</code>.'
         Product:
           allOf:
             - $ref: '#/components/schemas/PatchProduct'
-            - description: 'The specific product the patch is applicable for (for example, WindowsServer2016).'
+            - description: 'The specific product the patch is applicable for. For example, <code>WindowsServer2016</code> or <code>AmazonLinux2018.03</code>.'
         Classification:
           allOf:
             - $ref: '#/components/schemas/PatchClassification'
-            - description: 'The classification of the patch (for example, SecurityUpdates, Updates, CriticalUpdates).'
+            - description: 'The classification of the patch. For example, <code>SecurityUpdates</code>, <code>Updates</code>, or <code>CriticalUpdates</code>.'
         MsrcSeverity:
           allOf:
             - $ref: '#/components/schemas/PatchMsrcSeverity'
-            - description: 'The severity of the patch (for example Critical, Important, Moderate).'
+            - description: 'The severity of the patch, such as <code>Critical</code>, <code>Important</code>, or <code>Moderate</code>. Applies to Windows patches only.'
         KbNumber:
           allOf:
             - $ref: '#/components/schemas/PatchKbNumber'
-            - description: The Microsoft Knowledge Base ID of the patch.
+            - description: The Microsoft Knowledge Base ID of the patch. Applies to Windows patches only.
         MsrcNumber:
           allOf:
             - $ref: '#/components/schemas/PatchMsrcNumber'
-            - description: The ID of the MSRC bulletin the patch is related to.
+            - description: 'The ID of the Microsoft Security Response Center (MSRC) bulletin the patch is related to. For example, <code>MS14-045</code>. Applies to Windows patches only.'
         Language:
           allOf:
             - $ref: '#/components/schemas/PatchLanguage'
             - description: The language of the patch if it's language-specific.
+        AdvisoryIds:
+          allOf:
+            - $ref: '#/components/schemas/PatchAdvisoryIdList'
+            - description: 'The Advisory ID of the patch. For example, <code>RHSA-2020:3779</code>. Applies to Linux-based instances only.'
+        BugzillaIds:
+          allOf:
+            - $ref: '#/components/schemas/PatchBugzillaIdList'
+            - description: 'The Bugzilla ID of the patch. For example, <code>1600646</code>. Applies to Linux-based instances only.'
+        CVEIds:
+          allOf:
+            - $ref: '#/components/schemas/PatchCVEIdList'
+            - description: 'The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, <code>CVE-1999-0067</code>. Applies to Linux-based instances only.'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/PatchName'
+            - description: The name of the patch. Applies to Linux-based instances only.
+        Epoch:
+          allOf:
+            - $ref: '#/components/schemas/PatchEpoch'
+            - description: 'The epoch of the patch. For example in <code>pkg-example-EE-20180914-2.2.amzn1.noarch</code>, the epoch value is <code>20180914-2</code>. Applies to Linux-based instances only.'
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/PatchVersion'
+            - description: 'The version number of the patch. For example, in <code>example-pkg-1.710.10-2.7.abcd.x86_64</code>, the version number is indicated by <code>-1</code>. Applies to Linux-based instances only.'
+        Release:
+          allOf:
+            - $ref: '#/components/schemas/PatchRelease'
+            - description: 'The particular release of a patch. For example, in <code>pkg-example-EE-20180914-2.2.amzn1.noarch</code>, the release is <code>2.amaz1</code>. Applies to Linux-based instances only.'
+        Arch:
+          allOf:
+            - $ref: '#/components/schemas/PatchArch'
+            - description: 'The architecture of the patch. For example, in <code>example-pkg-0.710.10-2.7.abcd.x86_64</code>, the architecture is indicated by <code>x86_64</code>. Applies to Linux-based instances only.'
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/PatchSeverity'
+            - description: 'The severity level of the patch. For example, <code>CRITICAL</code> or <code>MODERATE</code>.'
+        Repository:
+          allOf:
+            - $ref: '#/components/schemas/PatchRepository'
+            - description: 'The source patch repository for the operating system and version, such as <code>trusty-security</code> for Ubuntu Server 14.04 LTE and <code>focal-security</code> for Ubuntu Server 20.04 LTE. Applies to Linux-based instances only.'
       description: Represents metadata about a patch.
     PatchStatus:
       type: object
@@ -17000,6 +17040,34 @@ components:
       type: string
     PatchLanguage:
       type: string
+    PatchAdvisoryIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PatchAdvisoryId'
+    PatchBugzillaIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PatchBugzillaId'
+    PatchCVEIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PatchCVEId'
+    PatchName:
+      type: string
+    PatchEpoch:
+      type: integer
+    PatchVersion:
+      type: string
+    PatchRelease:
+      type: string
+    PatchArch:
+      type: string
+    PatchSeverity:
+      type: string
+    PatchRepository:
+      type: string
+    PatchAdvisoryId:
+      type: string
     PatchBaselineIdentity:
       type: object
       properties:
@@ -17024,7 +17092,9 @@ components:
             - $ref: '#/components/schemas/DefaultBaseline'
             - description: 'Whether this is the default baseline. Note that Systems Manager supports creating multiple default patch baselines. For example, you can create a default patch baseline for each operating system.'
       description: Defines the basic information about a patch baseline.
-    PatchSeverity:
+    PatchBugzillaId:
+      type: string
+    PatchCVEId:
       type: string
     PatchComplianceDataState:
       type: string
@@ -17081,15 +17151,25 @@ components:
     PatchFilterKey:
       type: string
       enum:
+        - ARCH
+        - ADVISORY_ID
+        - BUGZILLA_ID
         - PATCH_SET
         - PRODUCT
         - PRODUCT_FAMILY
         - CLASSIFICATION
+        - CVE_ID
+        - EPOCH
         - MSRC_SEVERITY
+        - NAME
         - PATCH_ID
         - SECTION
         - PRIORITY
+        - REPOSITORY
+        - RELEASE
         - SEVERITY
+        - SECURITY
+        - VERSION
     PatchFilterValueList:
       type: array
       items:

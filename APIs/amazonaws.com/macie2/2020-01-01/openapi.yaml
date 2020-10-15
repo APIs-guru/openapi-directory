@@ -1199,7 +1199,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetCustomDataIdentifier
-      description: Retrieves information about the criteria and other settings for a custom data identifier.
+      description: Retrieves the criteria and other settings for a custom data identifier.
       responses:
         '200':
           description: Success
@@ -1326,7 +1326,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetFindingsFilter
-      description: Retrieves information about the criteria and other settings for a findings filter.
+      description: Retrieves the criteria and other settings for a findings filter.
       responses:
         '200':
           description: Success
@@ -1782,7 +1782,7 @@ paths:
   '/jobs/{jobId}':
     get:
       operationId: DescribeClassificationJob
-      description: Retrieves information about the status and settings for a classification job.
+      description: Retrieves the status and settings for a classification job.
       responses:
         '200':
           description: Success
@@ -1849,7 +1849,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     patch:
       operationId: UpdateClassificationJob
-      description: Cancels a classification job.
+      description: Changes the status of a classification job.
       responses:
         '200':
           description: Success
@@ -1924,10 +1924,11 @@ paths:
                     - CANCELLED
                     - COMPLETE
                     - IDLE
+                    - USER_PAUSED
   /admin/configuration:
     get:
       operationId: DescribeOrganizationConfiguration
-      description: Retrieves information about the Amazon Macie configuration settings for an AWS organization.
+      description: Retrieves the Amazon Macie configuration settings for an AWS organization.
       responses:
         '200':
           description: Success
@@ -2191,7 +2192,7 @@ paths:
                     - ENABLED
     get:
       operationId: GetMacieSession
-      description: Retrieves information about the current status and configuration settings for an Amazon Macie account.
+      description: Retrieves the current status and configuration settings for an Amazon Macie account.
       responses:
         '200':
           description: Success
@@ -2933,7 +2934,7 @@ paths:
                         - $ref: '#/components/schemas/Criterion'
                         - description: 'A condition that specifies the property, operator, and value to use to filter the results.'
                 groupBy:
-                  description: '<p>The finding property to use to group the query results. Valid values are:</p> <ul><li><p>classificationDetails.jobId - The unique identifier for the classification job that produced the finding.</p></li> <li><p>resourcesAffected.s3Bucket.name - The name of the S3 bucket that the finding applies to.</p></li> <li><p>severity.description - The severity of the finding, such as High or Medium.</p></li> <li><p>type - The type of finding, such as Policy:IAMUser/S3BucketPublic and SensitiveData:S3Object/Personal.</p></li></ul>'
+                  description: '<p>The finding property to use to group the query results. Valid values are:</p> <ul><li><p>classificationDetails.jobId - The unique identifier for the classification job that produced the finding.</p></li> <li><p>resourcesAffected.s3Bucket.name - The name of the S3 bucket that the finding applies to.</p></li> <li><p>severity.description - The severity level of the finding, such as High or Medium.</p></li> <li><p>type - The type of finding, such as Policy:IAMUser/S3BucketPublic and SensitiveData:S3Object/Personal.</p></li></ul>'
                   type: string
                   enum:
                     - resourcesAffected.s3Bucket.name
@@ -2966,7 +2967,7 @@ paths:
   /findings/describe:
     post:
       operationId: GetFindings
-      description: Retrieves information about one or more findings.
+      description: Retrieves the details of one or more findings.
       responses:
         '200':
           description: Success
@@ -3027,12 +3028,12 @@ paths:
                 - findingIds
               properties:
                 findingIds:
-                  description: An array of strings that lists the unique identifiers for the findings to retrieve information about.
+                  description: An array of strings that lists the unique identifiers for the findings to retrieve.
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
                 sortCriteria:
-                  description: Specifies criteria for sorting the results of a request for information about findings.
+                  description: Specifies criteria for sorting the results of a request for findings.
                   type: object
                   properties:
                     attributeName:
@@ -3627,7 +3628,7 @@ paths:
                   description: The nextToken string that specifies which page of results to return in a paginated response.
                   type: string
                 sortCriteria:
-                  description: Specifies criteria for sorting the results of a request for information about findings.
+                  description: Specifies criteria for sorting the results of a request for findings.
                   type: object
                   properties:
                     attributeName:
@@ -4012,7 +4013,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobScopingBlock'
             - description: The property- or tag-based conditions that determine which objects to include in the analysis.
-      description: Specifies one or more property- and tag-based conditions that refine the scope of a classification job. These conditions define criteria that determine which objects a job analyzes.
+      description: Specifies one or more property- and tag-based conditions that refine the scope of a classification job. These conditions define criteria that determine which objects a job analyzes. Exclude conditions take precedence over include conditions.
     DailySchedule:
       type: object
       properties: {}
@@ -4023,7 +4024,7 @@ components:
         dayOfMonth:
           allOf:
             - $ref: '#/components/schemas/__integer'
-            - description: The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 30.
+            - description: '<p>The numeric day of the month when Amazon Macie runs the job. This value can be an integer from 1 through 31.</p> <p>If this value exceeds the number of days in a certain month, Macie runs the job on the last day of that month. For example, if this value is 31 and a month has only 30 days, Macie runs the job on day 30 of that month.</p>'
       description: Specifies a monthly recurrence pattern for running a classification job.
     WeeklySchedule:
       type: object
@@ -4086,7 +4087,7 @@ components:
         - 'Policy:IAMUser/S3BucketReplicatedExternally'
         - 'Policy:IAMUser/S3BucketEncryptionDisabled'
         - 'Policy:IAMUser/S3BlockPublicAccessDisabled'
-      description: 'The type of finding. Valid values are:'
+      description: 'The type of finding. For details about each type, see <a href="https://docs.aws.amazon.com/macie/latest/user/findings-types.html">Types of Amazon Macie findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:'
     DeclineInvitationsResponse:
       type: object
       properties:
@@ -4192,11 +4193,11 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
+            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job, or you paused the job and didn''t resume it within 30 days of pausing it.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing all the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you don''t resume the job within 30 days of pausing it, the job will expire and be cancelled.</p></li></ul>'
         jobType:
           allOf:
             - $ref: '#/components/schemas/JobType'
-            - description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.</p></li></ul>'
+            - description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job runs only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.</p></li></ul>'
         lastRunTime:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -4220,11 +4221,15 @@ components:
         statistics:
           allOf:
             - $ref: '#/components/schemas/Statistics'
-            - description: The number of times that the job has run and processing statistics for the job's most recent run.
+            - description: The number of times that the job has run and processing statistics for the job's current run.
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
-            - description: A map of key-value pairs that identifies the tags (keys and values) that are associated with the classification job.
+            - description: A map of key-value pairs that specifies which tags (keys and values) are associated with the classification job.
+        userPausedDetails:
+          allOf:
+            - $ref: '#/components/schemas/UserPausedDetails'
+            - description: 'If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job will expire and be cancelled if it isn''t resumed. This value is present only if the value for jobStatus is USER_PAUSED.'
     DescribeOrganizationConfigurationResponse:
       type: object
       properties:
@@ -4276,11 +4281,11 @@ components:
         classifiableObjectCount:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.
+            - description: The total number of objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.
         classifiableSizeInBytes:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: 'The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported file or storage format and storage class.'
+            - description: 'The total storage size, in bytes, of all the objects that Amazon Macie can analyze in the buckets. These objects use a supported storage class and have a file name extension for a supported file or storage format.'
         lastUpdated:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -4300,11 +4305,11 @@ components:
         unclassifiableObjectCount:
           allOf:
             - $ref: '#/components/schemas/ObjectLevelStatistics'
-            - description: The total number of objects that Amazon Macie can't analyze in the buckets. These objects use an unsupported file or storage format or storage class.
+            - description: The total number of objects that Amazon Macie can't analyze in the buckets. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
         unclassifiableObjectSizeInBytes:
           allOf:
             - $ref: '#/components/schemas/ObjectLevelStatistics'
-            - description: 'The total storage size, in bytes, of all the objects that Amazon Macie can''t analyze in the buckets. These objects use an unsupported file or storage format or storage class.'
+            - description: 'The total storage size, in bytes, of all the objects that Amazon Macie can''t analyze in the buckets. These objects don''t use a supported storage class or don''t have a file name extension for a supported file or storage format.'
     GetClassificationExportConfigurationResponse:
       type: object
       properties:
@@ -4916,6 +4921,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__long'
             - description: The total number of buckets that allow the general public to have write access to the bucket.
+        unknown:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: The total number of buckets that Amazon Macie wasn't able to evaluate permissions settings for. Macie can't determine whether these buckets are publicly accessible.
       description: Provides information about the number of S3 buckets that are publicly accessible based on a combination of permissions settings for each bucket.
     BucketCountByEncryptionType:
       type: object
@@ -4947,7 +4956,11 @@ components:
         notShared:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of buckets that aren't shared with any other AWS accounts.
+            - description: The total number of buckets that aren't shared with other AWS accounts.
+        unknown:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other AWS accounts.
       description: Provides information about the number of S3 buckets that are shared with other AWS accounts.
     BucketCriteria:
       type: object
@@ -5047,7 +5060,7 @@ components:
         fileType:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format.
+            - description: The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects don't have a file name extension for a supported file or storage format.
         storageClass:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -5055,7 +5068,7 @@ components:
         total:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported file or storage format or storage class.
+            - description: The total storage size (in bytes) or number of objects that Amazon Macie can't analyze because the objects use an unsupported storage class or don't have a file name extension for a supported file or storage format.
       description: 'Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can''t analyze in one or more S3 buckets. In a BucketMetadata object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for all the buckets in the query results.'
     BucketMetadata:
       type: object
@@ -5079,11 +5092,11 @@ components:
         classifiableObjectCount:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.
+            - description: The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.
         classifiableSizeInBytes:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: 'The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported file or storage format and storage class.'
+            - description: 'The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.'
         lastUpdated:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -5111,7 +5124,7 @@ components:
         sharedAccess:
           allOf:
             - $ref: '#/components/schemas/SharedAccess'
-            - description: ' <p>Specifies whether the bucket is shared with another AWS account. Possible values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn’t part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that''s part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn''t shared with other AWS accounts.</p></li> <li><p>UNKNOWN - Amazon Macie wasn''t able to evaluate the shared access settings for the bucket.</p></li></ul>'
+            - description: ' <p>Specifies whether the bucket is shared with another AWS account. Possible values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn''t part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that''s part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn''t shared with other AWS accounts.</p></li> <li><p>UNKNOWN - Amazon Macie wasn''t able to evaluate the shared access settings for the bucket.</p></li></ul>'
         sizeInBytes:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -5127,11 +5140,11 @@ components:
         unclassifiableObjectCount:
           allOf:
             - $ref: '#/components/schemas/ObjectLevelStatistics'
-            - description: The total number of objects that Amazon Macie can't analyze in the bucket. These objects use an unsupported file or storage format or storage class.
+            - description: The total number of objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.
         unclassifiableObjectSizeInBytes:
           allOf:
             - $ref: '#/components/schemas/ObjectLevelStatistics'
-            - description: 'The total storage size, in bytes, of the objects that Amazon Macie can''t analyze in the bucket. These objects use an unsupported file or storage format or storage class.'
+            - description: 'The total storage size, in bytes, of the objects that Amazon Macie can''t analyze in the bucket. These objects don''t use a supported storage class or don''t have a file name extension for a supported file or storage format.'
         versioning:
           allOf:
             - $ref: '#/components/schemas/__boolean'
@@ -5167,21 +5180,50 @@ components:
             - $ref: '#/components/schemas/OrderBy'
             - description: 'The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
       description: Specifies criteria for sorting the results of a query for information about S3 buckets.
+    Cell:
+      type: object
+      properties:
+        cellReference:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This value is null for CSV and TSV files.'
+        column:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: 'The column number of the column that contains the data. For a Microsoft Excel workbook, this value correlates to the alphabetical character(s) for a column identifier. For example, 1 for column A, 2 for column B, and so on.'
+        columnName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: 'The name of the column that contains the data, if available.'
+        row:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: The row number of the row that contains the data.
+      description: 'Specifies the location of an occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file.'
+    Cells:
+      type: array
+      description: 'Specifies the location of occurrences of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file.'
+      items:
+        $ref: '#/components/schemas/Cell'
     ClassificationResult:
       type: object
       properties:
+        additionalOccurrences:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: <p>Specifies whether Amazon Macie detected additional occurrences of sensitive data in the S3 object. A finding includes location data for a maximum of 15 occurrences of sensitive data.</p> <p>This value can help you to determine whether to investigate additional occurrences of sensitive data in an object. You can do this by referring to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation).</p>
         customDataIdentifiers:
           allOf:
             - $ref: '#/components/schemas/CustomDataIdentifiers'
-            - description: 'The number of occurrences of the data that produced the finding, and the custom data identifiers that detected the data.'
+            - description: The custom data identifiers that detected the sensitive data and the number of occurrences of the data that they detected.
         mimeType:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The type of content, expressed as a MIME type, that the finding applies to. For example, application/gzip, for a GNU Gzip compressed archive file, or application/pdf, for an Adobe PDF file.'
+            - description: 'The type of content, as a MIME type, that the finding applies to. For example, application/gzip, for a GNU Gzip compressed archive file, or application/pdf, for an Adobe Portable Document Format file.'
         sensitiveData:
           allOf:
             - $ref: '#/components/schemas/SensitiveData'
-            - description: The category and number of occurrences of the sensitive data that produced the finding.
+            - description: 'The category, types, and number of occurrences of the sensitive data that produced the finding.'
         sizeClassified:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -5190,14 +5232,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClassificationResultStatus'
             - description: The status of the finding.
-      description: 'Provides detailed information about a sensitive data finding, including the types and number of occurrences of the sensitive data that was found.'
+      description: 'Provides the details of a sensitive data finding, including the types, number of occurrences, and locations of the sensitive data that was detected.'
     ClassificationDetails:
       type: object
       properties:
         detailedResultsLocation:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The path to the folder or file (in Amazon S3) that contains the corresponding sensitive data discovery results for the finding. If a finding applies to a large archive or compressed file, this is a path to a folder. Otherwise, this is a path to a file.'
+            - description: 'The path to the folder or file (in Amazon S3) that contains the corresponding sensitive data discovery result for the finding. If a finding applies to a large archive or compressed file, this value is the path to a folder. Otherwise, this value is the path to a file.'
         jobArn:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5242,7 +5284,7 @@ components:
         code:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: ' <p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to.</p></li> <li><p>PARTIAL - Macie was able to analyze only a subset of the data in the object that the finding applies to. For example, the object is a compressed or archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn''t able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that''s in an unsupported format.</p></li></ul>'
+            - description: ' <p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to.</p></li> <li><p>PARTIAL - Macie was able to analyze only a subset of the data in the object that the finding applies to. For example, the object is a compressed or archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn''t able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that uses an unsupported format.</p></li></ul>'
         reason:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5333,7 +5375,7 @@ components:
         scheduleFrequency:
           allOf:
             - $ref: '#/components/schemas/JobScheduleFrequency'
-            - description: 'The recurrence pattern for running the job. To run the job only once, don''t specify a value for this property and set the value of the jobType property to ONE_TIME.'
+            - description: 'The recurrence pattern for running the job. To run the job only once, don''t specify a value for this property and set the value for the jobType property to ONE_TIME.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -5534,6 +5576,30 @@ components:
       description: 'Provides information about custom data identifiers that produced a sensitive data finding, and the number of occurrences of the data that each identifier detected.'
       items:
         $ref: '#/components/schemas/CustomDetection'
+    Occurrences:
+      type: object
+      properties:
+        cells:
+          allOf:
+            - $ref: '#/components/schemas/Cells'
+            - description: 'An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. Each object specifies the cell that contains the data. This value is null for all other types of files.'
+        lineRanges:
+          allOf:
+            - $ref: '#/components/schemas/Ranges'
+            - description: '<p>An array of objects, one for each occurrence of sensitive data in an Apache Avro object container, Microsoft Word document, or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: full names and addresses in a Microsoft Excel workbook, CSV file, or TSV file; data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.</p>'
+        offsetRanges:
+          allOf:
+            - $ref: '#/components/schemas/Ranges'
+            - description: '<p>An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the start of the file.</p> <p>This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.</p>'
+        pages:
+          allOf:
+            - $ref: '#/components/schemas/Pages'
+            - description: 'An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. Each object specifies the page that contains the data, and the position of the data on that page. This value is null for all other types of files.'
+        records:
+          allOf:
+            - $ref: '#/components/schemas/Records'
+            - description: 'An array of objects, one for each occurrence of sensitive data in an Apache Parquet file. Each object specifies the row that contains the data. This value is null for all other types of files.'
+      description: Provides the location of 1-15 occurrences of sensitive data that was detected by managed data identifiers or a custom data identifier and produced a sensitive data finding.
     CustomDetection:
       type: object
       properties:
@@ -5544,12 +5610,16 @@ components:
         count:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of occurrences of the data that the custom data identifier detected for the finding.
+            - description: The total number of occurrences of the sensitive data that the custom data identifier detected.
         name:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The name of the custom data identifier.
-      description: 'Provides information about a custom data identifier that produced a sensitive data finding, and the number of occurrences of the data that it detected for the finding.'
+        occurrences:
+          allOf:
+            - $ref: '#/components/schemas/Occurrences'
+            - description: The location of 1-15 occurrences of the sensitive data that the custom data identifier detected. A finding includes location data for a maximum of 15 occurrences of sensitive data.
+      description: 'Provides information about a custom data identifier that produced a sensitive data finding, and the sensitive data that it detected for the finding.'
     DayOfWeek:
       type: string
       enum:
@@ -5576,12 +5646,16 @@ components:
         count:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of occurrences of the type of data that was detected.
+            - description: The total number of occurrences of the type of sensitive data that was detected.
+        occurrences:
+          allOf:
+            - $ref: '#/components/schemas/Occurrences'
+            - description: The location of 1-15 occurrences of the sensitive data that was detected. A finding includes location data for a maximum of 15 occurrences of sensitive data.
         type:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The type of data that was detected. For example, AWS_CREDENTIALS, PHONE_NUMBER, or ADDRESS.'
-      description: Provides information about sensitive data that was detected by managed data identifiers and produced a sensitive data finding.
+            - description: 'The type of sensitive data that was detected. For example, AWS_CREDENTIALS, PHONE_NUMBER, or ADDRESS.'
+      description: Provides information about a type of sensitive data that was detected by managed data identifiers and produced a sensitive data finding.
     DefaultDetections:
       type: array
       description: 'Provides information about sensitive data that was detected by managed data identifiers and produced a sensitive data finding, and the number of occurrences of each type of sensitive data that was detected.'
@@ -5645,6 +5719,7 @@ components:
         - CANCELLED
         - COMPLETE
         - IDLE
+        - USER_PAUSED
       description: 'The current status of a classification job. Possible values are:'
     Statistics:
       type: object
@@ -5658,6 +5733,22 @@ components:
             - $ref: '#/components/schemas/__double'
             - description: The number of times that the job has run.
       description: Provides processing statistics for a classification job.
+    UserPausedDetails:
+      type: object
+      properties:
+        jobExpiresAt:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - description: 'The date and time, in UTC and extended ISO 8601 format, when the job will expire and be cancelled if you don''t resume it first. If you don''t resume a job within 30 days of pausing it, the job expires and Amazon Macie cancels it.'
+        jobImminentExpirationHealthEventArn:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to notify you of the job's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.
+        jobPausedAt:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - description: 'The date and time, in UTC and extended ISO 8601 format, when you paused the job.'
+      description: Provides information about when a classification job was paused and when it will expire and be cancelled if it isn't resumed. This object is present only if a job's current status (jobStatus) is USER_PAUSED.
     DescribeOrganizationConfigurationRequest:
       type: object
       title: DescribeOrganizationConfigurationRequest
@@ -5736,7 +5827,7 @@ components:
         - AES256
         - 'aws:kms'
         - UNKNOWN
-      description: 'The type of server-side encryption that''s used to encrypt objects in the S3 bucket. Valid values are:'
+      description: 'The type of server-side encryption that''s used to encrypt an S3 object or objects in an S3 bucket. Valid values are:'
     ErrorCode:
       type: string
       enum:
@@ -5803,12 +5894,12 @@ components:
         description:
           allOf:
             - $ref: '#/components/schemas/SeverityDescription'
-            - description: 'The textual representation of the severity value, such as Low or High.'
+            - description: 'The qualitative representation of the finding''s severity, ranging from Low (least severe) to High (most severe).'
         score:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: 'The numeric score for the severity value, ranging from 0 (least severe) to 4 (most severe).'
-      description: Provides the numeric score and textual representation of a severity value.
+            - description: 'The numerical representation of the finding''s severity, ranging from 1 (least severe) to 3 (most severe).'
+      description: Provides the numerical and qualitative representations of a finding's severity.
     Finding:
       type: object
       properties:
@@ -5831,7 +5922,7 @@ components:
         count:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of occurrences of this finding.
+            - description: The total number of occurrences of the finding.
         createdAt:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -5871,7 +5962,7 @@ components:
         severity:
           allOf:
             - $ref: '#/components/schemas/Severity'
-            - description: The severity of the finding.
+            - description: The severity level and score for the finding.
         title:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5883,8 +5974,8 @@ components:
         updatedAt:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
-            - description: 'The date and time, in UTC and extended ISO 8601 format, when the finding was last updated. For sensitive data findings, this value is the same as the value for the createdAt property. Sensitive data findings aren''t updated.'
-      description: Provides information about a finding.
+            - description: 'The date and time, in UTC and extended ISO 8601 format, when the finding was last updated. For sensitive data findings, this value is the same as the value for the createdAt property. All sensitive data findings are considered new (unique) because they derive from individual classification jobs.'
+      description: Provides the details of a finding.
     FindingActionType:
       type: string
       enum:
@@ -6046,7 +6137,7 @@ components:
         groupBy:
           allOf:
             - $ref: '#/components/schemas/GroupBy'
-            - description: '<p>The finding property to use to group the query results. Valid values are:</p> <ul><li><p>classificationDetails.jobId - The unique identifier for the classification job that produced the finding.</p></li> <li><p>resourcesAffected.s3Bucket.name - The name of the S3 bucket that the finding applies to.</p></li> <li><p>severity.description - The severity of the finding, such as High or Medium.</p></li> <li><p>type - The type of finding, such as Policy:IAMUser/S3BucketPublic and SensitiveData:S3Object/Personal.</p></li></ul>'
+            - description: '<p>The finding property to use to group the query results. Valid values are:</p> <ul><li><p>classificationDetails.jobId - The unique identifier for the classification job that produced the finding.</p></li> <li><p>resourcesAffected.s3Bucket.name - The name of the S3 bucket that the finding applies to.</p></li> <li><p>severity.description - The severity level of the finding, such as High or Medium.</p></li> <li><p>type - The type of finding, such as Policy:IAMUser/S3BucketPublic and SensitiveData:S3Object/Personal.</p></li></ul>'
         size:
           allOf:
             - $ref: '#/components/schemas/__integer'
@@ -6074,7 +6165,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OrderBy'
             - description: 'The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.'
-      description: Specifies criteria for sorting the results of a request for information about findings.
+      description: Specifies criteria for sorting the results of a request for findings.
     GetFindingsRequest:
       type: object
       required:
@@ -6084,7 +6175,7 @@ components:
         findingIds:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: An array of strings that lists the unique identifiers for the findings to retrieve information about.
+            - description: An array of strings that lists the unique identifiers for the findings to retrieve.
         sortCriteria:
           allOf:
             - $ref: '#/components/schemas/SortCriteria'
@@ -6295,15 +6386,15 @@ components:
         comparator:
           allOf:
             - $ref: '#/components/schemas/JobComparator'
-            - description: The operator to use in the condition.
+            - description: '<p>The operator to use in the condition. Valid operators for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - EQ (equals) or NE (not equals)</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS</p></li> <li><p>OBJECT_SIZE - Any operator except CONTAINS</p></li> <li><p>TAG - EQ (equals) or NE (not equals)</p></li></ul>'
         key:
           allOf:
             - $ref: '#/components/schemas/ScopeFilterKey'
-            - description: The property to use in the condition.
+            - description: The object property to use in the condition.
         values:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: An array that lists one or more values to use in the condition.
+            - description: '<p>An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value. Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: doc, docx, pdf</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z</p></li> <li><p>OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object.</p></li> <li><p>TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object, instead of a SimpleScopeTerm object, to define a tag-based condition for the job.</p></li></ul>'
       description: Specifies a property-based condition that determines whether an object is included or excluded from a classification job.
     TagScopeTerm:
       type: object
@@ -6311,7 +6402,7 @@ components:
         comparator:
           allOf:
             - $ref: '#/components/schemas/JobComparator'
-            - description: The operator to use in the condition.
+            - description: The operator to use in the condition. Valid operators are EQ (equals) or NE (not equals).
         key:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6319,7 +6410,7 @@ components:
         tagValues:
           allOf:
             - $ref: '#/components/schemas/__listOfTagValuePair'
-            - description: The tag key and value pairs to use in the condition.
+            - description: The tag keys or tag key and value pairs to use in the condition.
         target:
           allOf:
             - $ref: '#/components/schemas/TagTarget'
@@ -6335,7 +6426,7 @@ components:
         tagScopeTerm:
           allOf:
             - $ref: '#/components/schemas/TagScopeTerm'
-            - description: A tag-based condition that defines the operator and a tag key or tag keys and values for including or excluding an object from the job.
+            - description: A tag-based condition that defines the operator and tag keys or tag key and value pairs for including or excluding an object from the job.
       description: Specifies a property- or tag-based condition that defines criteria for including or excluding objects from a classification job.
     __listOfJobScopeTerm:
       type: array
@@ -6348,7 +6439,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__listOfJobScopeTerm'
             - description: 'An array of conditions, one for each condition that determines which objects to include or exclude from the job.'
-      description: Specifies one or more property- and tag-based conditions that define criteria for including or excluding objects from a classification job.
+      description: 'Specifies one or more property- and tag-based conditions that define criteria for including or excluding objects from a classification job. If you specify more than one condition, Amazon Macie uses an AND operator to join the conditions.'
     JobSummary:
       type: object
       properties:
@@ -6367,15 +6458,19 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job. A job might also be cancelled if ownership of an S3 bucket changed while the job was running, and that change affected the job''s access to the bucket.</p></li> <li><p>COMPLETE - Amazon Macie finished processing all the data specified for the job.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to jobs that occur only once.</p></li> <li><p>PAUSED - Amazon Macie started the job, but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - The job is in progress.</p></li></ul>'
+            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job, or you paused the job and didn''t resume it within 30 days of pausing it.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing all the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you don''t resume the job within 30 days of pausing it, the job will expire and be cancelled.</p></li></ul>'
         jobType:
           allOf:
             - $ref: '#/components/schemas/JobType'
-            - description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job ran or will run only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis.</p></li></ul>'
+            - description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job runs only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis.</p></li></ul>'
         name:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The custom name of the job.
+        userPausedDetails:
+          allOf:
+            - $ref: '#/components/schemas/UserPausedDetails'
+            - description: 'If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job will expire and be cancelled if it isn''t resumed. This value is present only if the value for jobStatus is USER_PAUSED.'
       description: 'Provides information about a classification job, including the current status of the job.'
     KeyValuePair:
       type: object
@@ -6578,6 +6673,53 @@ components:
             - $ref: '#/components/schemas/__timestampIso8601'
             - description: 'The date and time, in UTC and extended ISO 8601 format, of the most recent change to the status of the relationship between the account and the master account.'
       description: Provides information about an account that's associated with an Amazon Macie master account.
+    Ranges:
+      type: array
+      description: 'Provides details about the location of occurrences of sensitive data in an Adobe Portable Document Format file, Apache Avro object container, Microsoft Word document, or non-binary text file.'
+      items:
+        $ref: '#/components/schemas/Range'
+    Pages:
+      type: array
+      description: Specifies the location of occurrences of sensitive data in an Adobe Portable Document Format file.
+      items:
+        $ref: '#/components/schemas/Page'
+    Records:
+      type: array
+      description: Specifies the location of occurrences of sensitive data in an Apache Parquet file.
+      items:
+        $ref: '#/components/schemas/Record'
+    Range:
+      type: object
+      properties:
+        end:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: '<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the end of the file.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the end of the file.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the end of the page.</p></li></ul>'
+        start:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: '<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the start of the file.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the start of the file.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the start of the page.</p></li></ul>'
+        startColumn:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: 'The column number for the column that contains the data, if the file contains structured data.'
+      description: 'Provides details about the location of an occurrence of sensitive data in an Adobe Portable Document Format file, Apache Avro object container, Microsoft Word document, or non-binary text file.'
+    Page:
+      type: object
+      properties:
+        lineRange:
+          allOf:
+            - $ref: '#/components/schemas/Range'
+            - description: 'The line that contains the data, and the position of the data on that line.'
+        offsetRange:
+          allOf:
+            - $ref: '#/components/schemas/Range'
+            - description: 'The position of the data on the page, relative to the start and end of the page.'
+        pageNumber:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: The page number of the page that contains the data.
+      description: Specifies the location of an occurrence of sensitive data in an Adobe Portable Document Format file.
     PutClassificationExportConfigurationRequest:
       type: object
       required:
@@ -6588,6 +6730,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClassificationExportConfiguration'
             - description: 'The location to store data classification results in, and the encryption settings to use when storing results in that location.'
+    Record:
+      type: object
+      properties:
+        recordIndex:
+          allOf:
+            - $ref: '#/components/schemas/__long'
+            - description: 'The row index, starting from 0, for the row that contains the data.'
+      description: Specifies the location of an occurrence of sensitive data in an Apache Parquet file.
     S3Bucket:
       type: object
       properties:
@@ -6602,7 +6752,7 @@ components:
         defaultServerSideEncryption:
           allOf:
             - $ref: '#/components/schemas/ServerSideEncryption'
-            - description: The server-side encryption settings for the bucket.
+            - description: The type of server-side encryption that's used by default to encrypt objects in the bucket.
         name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6654,7 +6804,7 @@ components:
         serverSideEncryption:
           allOf:
             - $ref: '#/components/schemas/ServerSideEncryption'
-            - description: The server-side encryption settings for the object.
+            - description: The type of server-side encryption that's used for the object.
         size:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -6683,7 +6833,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__string'
             - description: The unique identifier for the AWS Key Management Service (AWS KMS) master key that's used to encrypt the bucket or object. This value is null if AWS KMS isn't used to encrypt the bucket or object.
-      description: Provides information about the server-side encryption settings for an S3 bucket or object.
+      description: Provides information about the server-side encryption settings for an S3 bucket or S3 object.
     S3BucketOwner:
       type: object
       properties:
@@ -6718,7 +6868,7 @@ components:
         - DEEP_ARCHIVE
         - ONEZONE_IA
         - GLACIER
-      description: 'The storage class of the S3 bucket or object. Possible values are:'
+      description: 'The storage class of the S3 object. Possible values are:'
     ScopeFilterKey:
       type: string
       enum:
@@ -6734,16 +6884,16 @@ components:
         category:
           allOf:
             - $ref: '#/components/schemas/SensitiveDataItemCategory'
-            - description: 'The category of sensitive data that was detected. For example: FINANCIAL_INFORMATION, for financial information such as credit card numbers; PERSONAL_INFORMATION, for personally identifiable information such as full names and mailing addresses; or, CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.'
+            - description: 'The category of sensitive data that was detected. For example: FINANCIAL_INFORMATION, for financial information such as credit card numbers; PERSONAL_INFORMATION, for personally identifiable information, such as full names and mailing addresses, or personal health information; or, CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.'
         detections:
           allOf:
             - $ref: '#/components/schemas/DefaultDetections'
-            - description: 'An array of objects, one for each type of sensitive data that was detected. Each object reports the number of occurrences of a specific type of sensitive data that was detected.'
+            - description: 'An array of objects, one for each type of sensitive data that was detected. Each object reports the number of occurrences of a specific type of sensitive data that was detected, and the location of up to 15 of those occurrences.'
         totalCount:
           allOf:
             - $ref: '#/components/schemas/__long'
             - description: The total number of occurrences of the sensitive data that was detected.
-      description: 'Provides information about the category, type, and number of occurrences of sensitive data that produced a finding.'
+      description: 'Provides information about the category, types, and occurrences of sensitive data that produced a sensitive data finding.'
     SensitiveDataItemCategory:
       type: string
       enum:
@@ -6814,7 +6964,7 @@ components:
         - Low
         - Medium
         - High
-      description: 'The textual representation of the finding''s severity. Possible values are:'
+      description: 'The qualitative representation of the finding''s severity. Possible values are:'
     TagResourceRequest:
       type: object
       required:
@@ -6844,8 +6994,8 @@ components:
         value:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The tag value, associated with the specified tag key, to use in the condition.'
-      description: 'Specifies a tag key and value, as a pair, to use in a tag-based condition for a classification job.'
+            - description: 'The tag value, associated with the specified tag key (key), to use in the condition. To specify only a tag key for a condition, specify the tag key for the key property and set this value to an empty string.'
+      description: Specifies a tag key or tag key and value pair to use in a tag-based condition for a classification job.
     TestCustomDataIdentifierRequest:
       type: object
       required:
@@ -6902,7 +7052,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: 'The status to change the job''s status to. The only supported value is CANCELLED, which cancels the job completely.'
+            - description: '<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. You can''t resume a job after you cancel it. This value is valid only if the job''s current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job''s current status is USER_PAUSED. If you specify this value, Amazon Macie immediately resumes the job.</p></li> <li><p>USER_PAUSED - Pauses the job. This value is valid only if the job''s current status is IDLE or RUNNING. If you specify this value and the job is currently running, Macie immediately stops running the job.</p> <p>To resume a job after you pause it, change the job''s status to RUNNING. If you don''t resume a job within 30 days of pausing it, the job expires and Macie cancels it. You can''t resume a job after it''s cancelled.</p></li></ul>'
     UpdateFindingsFilterRequest:
       type: object
       title: UpdateFindingsFilterRequest

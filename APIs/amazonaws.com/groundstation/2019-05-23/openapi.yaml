@@ -1921,6 +1921,7 @@ components:
       enum:
         - AVAILABLE
         - AWS_CANCELLED
+        - AWS_FAILED
         - CANCELLED
         - CANCELLING
         - COMPLETED
@@ -2389,6 +2390,10 @@ components:
       properties:
         destination:
           $ref: '#/components/schemas/Destination'
+        errorMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Error message for a dataflow.
         source:
           $ref: '#/components/schemas/Source'
       description: Information about a dataflow edge used in a contact.

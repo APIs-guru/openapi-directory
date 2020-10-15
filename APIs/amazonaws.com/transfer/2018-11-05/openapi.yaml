@@ -1001,7 +1001,7 @@ paths:
   /#X-Amz-Target=TransferService.StopServer:
     post:
       operationId: StopServer
-      description: '<p>Changes the state of a file transfer protocol-enabled server from <code>ONLINE</code> to <code>OFFLINE</code>. An <code>OFFLINE</code> server cannot accept and process file transfer jobs. Information tied to your server, such as server and user properties, are not affected by stopping your server. Stopping the server will not reduce or impact your file transfer protocol endpoint billing.</p> <p>The state of <code>STOPPING</code> indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>STOP_FAILED</code> can indicate an error condition.</p> <p>No response is returned from this call.</p>'
+      description: '<p>Changes the state of a file transfer protocol-enabled server from <code>ONLINE</code> to <code>OFFLINE</code>. An <code>OFFLINE</code> server cannot accept and process file transfer jobs. Information tied to your server, such as server and user properties, are not affected by stopping your server.</p> <note> <p>Stopping the server will not reduce or impact your file transfer protocol endpoint billing; you must delete the server to stop being billed.</p> </note> <p>The state of <code>STOPPING</code> indicates that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>STOP_FAILED</code> can indicate an error condition.</p> <p>No response is returned from this call.</p>'
       responses:
         '200':
           description: Success
@@ -1424,7 +1424,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: The service-assigned ID of the file transfer protocol-enabled server that is created.
+            - description: The service-assigned ID of the server that is created.
     CreateServerRequest:
       type: object
       title: CreateServerRequest
@@ -1436,11 +1436,11 @@ components:
         EndpointDetails:
           allOf:
             - $ref: '#/components/schemas/EndpointDetails'
-            - description: 'The virtual private cloud (VPC) endpoint settings that are configured for your file transfer protocol-enabled server. When you host your endpoint within your VPC, you can make it accessible only to resources within your VPC, or you can attach Elastic IPs and make it accessible to clients over the internet. Your VPC''s default security groups are automatically assigned to your endpoint.'
+            - description: 'The virtual private cloud (VPC) endpoint settings that are configured for your server. When you host your endpoint within your VPC, you can make it accessible only to resources within your VPC, or you can attach Elastic IPs and make it accessible to clients over the internet. Your VPC''s default security groups are automatically assigned to your endpoint.'
         EndpointType:
           allOf:
             - $ref: '#/components/schemas/EndpointType'
-            - description: '<p>The type of VPC endpoint that you want your file transfer protocol-enabled server to connect to. You can choose to connect to the public internet or a VPC endpoint. With a VPC endpoint, you can restrict access to your server and resources only within your VPC.</p> <note> <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server''s endpoint and use VPC security groups to restrict traffic by the client''s public IP address. This is not possible with <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p> </note>'
+            - description: '<p>The type of VPC endpoint that you want your server to connect to. You can choose to connect to the public internet or a VPC endpoint. With a VPC endpoint, you can restrict access to your server and resources only within your VPC.</p> <note> <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server''s endpoint and use VPC security groups to restrict traffic by the client''s public IP address. This is not possible with <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p> </note>'
         HostKey:
           allOf:
             - $ref: '#/components/schemas/HostKey'
@@ -1452,7 +1452,7 @@ components:
         IdentityProviderType:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderType'
-            - description: 'Specifies the mode of authentication for a file transfer protocol-enabled server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the AWS Transfer Family service. Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call for authentication using the <code>IdentityProviderDetails</code> parameter.'
+            - description: 'Specifies the mode of authentication for a server. The default value is <code>SERVICE_MANAGED</code>, which allows you to store and access user credentials within the AWS Transfer Family service. Use the <code>API_GATEWAY</code> value to integrate with an identity provider of your choosing. The <code>API_GATEWAY</code> setting requires you to provide an API Gateway endpoint URL to call for authentication using the <code>IdentityProviderDetails</code> parameter.'
         LoggingRole:
           allOf:
             - $ref: '#/components/schemas/Role'
@@ -1460,7 +1460,7 @@ components:
         Protocols:
           allOf:
             - $ref: '#/components/schemas/Protocols'
-            - description: '<p>Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server''s endpoint. The available protocols are:</p> <ul> <li> <p> <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH</p> </li> <li> <p> <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS encryption</p> </li> <li> <p> <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p> </li> </ul> <note> <p>If you select <code>FTPS</code>, you must choose a certificate stored in AWS Certificate Manager (ACM) which will be used to identify your file transfer protocol-enabled server when clients connect to it over FTPS.</p> <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the <code>EndpointType</code> must be <code>VPC</code> and the <code>IdentityProviderType</code> must be <code>API_GATEWAY</code>.</p> <p>If <code>Protocol</code> includes <code>FTP</code>, then <code>AddressAllocationIds</code> cannot be associated.</p> <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code> can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to <code>SERVICE_MANAGED</code>.</p> </note>'
+            - description: '<p>Specifies the file transfer protocol or protocols over which your file transfer protocol client can connect to your server''s endpoint. The available protocols are:</p> <ul> <li> <p> <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over SSH</p> </li> <li> <p> <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS encryption</p> </li> <li> <p> <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p> </li> </ul> <note> <p>If you select <code>FTPS</code>, you must choose a certificate stored in AWS Certificate Manager (ACM) which will be used to identify your server when clients connect to it over FTPS.</p> <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the <code>EndpointType</code> must be <code>VPC</code> and the <code>IdentityProviderType</code> must be <code>API_GATEWAY</code>.</p> <p>If <code>Protocol</code> includes <code>FTP</code>, then <code>AddressAllocationIds</code> cannot be associated.</p> <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code> can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to <code>SERVICE_MANAGED</code>.</p> </note>'
         SecurityPolicyName:
           allOf:
             - $ref: '#/components/schemas/SecurityPolicyName'
@@ -1468,7 +1468,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs that can be used to group and search for file transfer protocol-enabled servers.
+            - description: Key-value pairs that can be used to group and search for servers.
     AccessDeniedException: {}
     ServiceUnavailableException: {}
     InternalServiceError: {}
@@ -1484,11 +1484,11 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: The ID of the file transfer protocol-enabled server that the user is attached to.
+            - description: The ID of the server that the user is attached to.
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: A unique string that identifies a user account associated with a file transfer protocol-enabled server.
+            - description: A unique string that identifies a user account associated with a server.
     CreateUserRequest:
       type: object
       required:
@@ -1500,11 +1500,11 @@ components:
         HomeDirectory:
           allOf:
             - $ref: '#/components/schemas/HomeDirectory'
-            - description: <p>The landing directory (folder) for a user when they log in to the file transfer protocol-enabled server using the client.</p> <p>An example is <i> <code>your-Amazon-S3-bucket-name&gt;/home/username</code> </i>.</p>
+            - description: <p>The landing directory (folder) for a user when they log in to the server using the client.</p> <p>An example is <i> <code>your-Amazon-S3-bucket-name&gt;/home/username</code> </i>.</p>
         HomeDirectoryType:
           allOf:
             - $ref: '#/components/schemas/HomeDirectoryType'
-            - description: 'The type of landing directory (folder) you want your users'' home directory to be when they log into the file transfer protocol-enabled server. If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon S3 paths visible to your users.'
+            - description: 'The type of landing directory (folder) you want your users'' home directory to be when they log into the server. If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon S3 paths visible to your users.'
         HomeDirectoryMappings:
           allOf:
             - $ref: '#/components/schemas/HomeDirectoryMappings'
@@ -1516,15 +1516,15 @@ components:
         Role:
           allOf:
             - $ref: '#/components/schemas/Role'
-            - description: The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the file transfer protocol-enabled server to access your resources when servicing your users' transfer requests.
+            - description: The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the server to access your resources when servicing your users' transfer requests.
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server instance. This is the specific server that you added your user to.
+            - description: A system-assigned unique identifier for a server instance. This is the specific server that you added your user to.
         SshPublicKeyBody:
           allOf:
             - $ref: '#/components/schemas/SshPublicKeyBody'
-            - description: The public portion of the Secure Shell (SSH) key used to authenticate the user to the file transfer protocol-enabled server.
+            - description: The public portion of the Secure Shell (SSH) key used to authenticate the user to the server.
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -1532,7 +1532,7 @@ components:
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: 'A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore ''_'', hyphen ''-'', period ''.'', and at sign ''@''. The user name can''t start with a hyphen, period, and at sign.'
+            - description: 'A unique string that identifies a user and is associated with a as specified by the <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore ''_'', hyphen ''-'', period ''.'', and at sign ''@''. The user name can''t start with a hyphen, period, or at sign.'
     ResourceNotFoundException: {}
     DeleteServerRequest:
       type: object
@@ -1543,7 +1543,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A unique system-assigned identifier for a file transfer protocol-enabled server instance.
+            - description: A unique system-assigned identifier for a server instance.
     DeleteSshPublicKeyRequest:
       type: object
       required:
@@ -1574,11 +1574,11 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server instance that has the user assigned to it.
+            - description: A system-assigned unique identifier for a server instance that has the user assigned to it.
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: A unique string that identifies a user that is being deleted from a file transfer protocol-enabled server.
+            - description: A unique string that identifies a user that is being deleted from a server.
     DescribeSecurityPolicyResponse:
       type: object
       required:
@@ -1606,7 +1606,7 @@ components:
         Server:
           allOf:
             - $ref: '#/components/schemas/DescribedServer'
-            - description: An array containing the properties of a file transfer protocol-enabled server with the <code>ServerID</code> you specified.
+            - description: An array containing the properties of a server with the <code>ServerID</code> you specified.
     DescribeServerRequest:
       type: object
       required:
@@ -1616,7 +1616,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server.
+            - description: A system-assigned unique identifier for a server.
     DescribeUserResponse:
       type: object
       required:
@@ -1626,7 +1626,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server that has this user assigned.
+            - description: A system-assigned unique identifier for a server that has this user assigned.
         User:
           allOf:
             - $ref: '#/components/schemas/DescribedUser'
@@ -1641,11 +1641,11 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server that has this user assigned.
+            - description: A system-assigned unique identifier for a server that has this user assigned.
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: The name of the user assigned to one or more file transfer protocol-enabled servers. User names are part of the sign-in credentials to use the AWS Transfer Family service and perform file transfer tasks.
+            - description: The name of the user assigned to one or more servers. User names are part of the sign-in credentials to use the AWS Transfer Family service and perform file transfer tasks.
     ImportSshPublicKeyResponse:
       type: object
       required:
@@ -1656,7 +1656,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server.
+            - description: A system-assigned unique identifier for a server.
         SshPublicKeyId:
           allOf:
             - $ref: '#/components/schemas/SshPublicKeyId'
@@ -1665,7 +1665,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserName'
             - description: A user name assigned to the <code>ServerID</code> value that you specified.
-      description: 'Identifies the user, the file transfer protocol-enabled server they belong to, and the identifier of the SSH public key associated with that user. A user can have more than one key on each server that they are associated with.'
+      description: 'Identifies the user, the server they belong to, and the identifier of the SSH public key associated with that user. A user can have more than one key on each server that they are associated with.'
     ImportSshPublicKeyRequest:
       type: object
       required:
@@ -1677,7 +1677,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server.
+            - description: A system-assigned unique identifier for a server.
         SshPublicKeyBody:
           allOf:
             - $ref: '#/components/schemas/SshPublicKeyBody'
@@ -1685,7 +1685,7 @@ components:
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: The name of the user account that is assigned to one or more file transfer protocol-enabled servers.
+            - description: The name of the user account that is assigned to one or more servers.
     ListSecurityPoliciesResponse:
       type: object
       required:
@@ -1720,11 +1720,11 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'When you can get additional results from the <code>ListServers</code> operation, a <code>NextToken</code> parameter is returned in the output. In a following command, you can pass in the <code>NextToken</code> parameter to continue listing additional file transfer protocol-enabled servers.'
+            - description: 'When you can get additional results from the <code>ListServers</code> operation, a <code>NextToken</code> parameter is returned in the output. In a following command, you can pass in the <code>NextToken</code> parameter to continue listing additional servers.'
         Servers:
           allOf:
             - $ref: '#/components/schemas/ListedServers'
-            - description: An array of file transfer protocol-enabled servers that were listed.
+            - description: An array of servers that were listed.
     ListServersRequest:
       type: object
       title: ListServersRequest
@@ -1732,11 +1732,11 @@ components:
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
-            - description: Specifies the number of file transfer protocol-enabled servers to return as a response to the <code>ListServers</code> query.
+            - description: Specifies the number of servers to return as a response to the <code>ListServers</code> query.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'When additional results are obtained from the <code>ListServers</code> command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional file transfer protocol-enabled servers.'
+            - description: 'When additional results are obtained from the <code>ListServers</code> command, a <code>NextToken</code> parameter is returned in the output. You can then pass the <code>NextToken</code> parameter in a subsequent command to continue listing additional servers.'
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -1783,7 +1783,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server that the users are assigned to.
+            - description: A system-assigned unique identifier for a server that the users are assigned to.
         Users:
           allOf:
             - $ref: '#/components/schemas/ListedUsers'
@@ -1805,7 +1805,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server that has users assigned to it.
+            - description: A system-assigned unique identifier for a server that has users assigned to it.
     StartServerRequest:
       type: object
       required:
@@ -1815,7 +1815,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server that you start.
+            - description: A system-assigned unique identifier for a server that you start.
     StopServerRequest:
       type: object
       required:
@@ -1825,7 +1825,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server that you stopped.
+            - description: A system-assigned unique identifier for a server that you stopped.
     TagResourceRequest:
       type: object
       required:
@@ -1873,7 +1873,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned identifier for a specific file transfer protocol-enabled server. That server's user authentication method is tested with a user name and password.
+            - description: A system-assigned identifier for a specific server. That server's user authentication method is tested with a user name and password.
         ServerProtocol:
           allOf:
             - $ref: '#/components/schemas/Protocol'
@@ -1913,7 +1913,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server that the user account is assigned to.
+            - description: A system-assigned unique identifier for a server that the user account is assigned to.
     UpdateServerRequest:
       type: object
       required:
@@ -1927,15 +1927,15 @@ components:
         EndpointDetails:
           allOf:
             - $ref: '#/components/schemas/EndpointDetails'
-            - description: 'The virtual private cloud (VPC) endpoint settings that are configured for your file transfer protocol-enabled server. With a VPC endpoint, you can restrict access to your server to resources only within your VPC. To control incoming internet traffic, you will need to associate one or more Elastic IP addresses with your server''s endpoint.'
+            - description: 'The virtual private cloud (VPC) endpoint settings that are configured for your server. With a VPC endpoint, you can restrict access to your server to resources only within your VPC. To control incoming internet traffic, you will need to associate one or more Elastic IP addresses with your server''s endpoint.'
         EndpointType:
           allOf:
             - $ref: '#/components/schemas/EndpointType'
-            - description: '<p>The type of endpoint that you want your file transfer protocol-enabled server to connect to. You can choose to connect to the public internet or a VPC endpoint. With a VPC endpoint, you can restrict access to your server and resources only within your VPC.</p> <note> <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server''s endpoint and use VPC security groups to restrict traffic by the client''s public IP address. This is not possible with <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p> </note>'
+            - description: '<p>The type of endpoint that you want your server to connect to. You can choose to connect to the public internet or a VPC endpoint. With a VPC endpoint, you can restrict access to your server and resources only within your VPC.</p> <note> <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With this endpoint type, you have the option to directly associate up to three Elastic IPv4 addresses (BYO IP included) with your server''s endpoint and use VPC security groups to restrict traffic by the client''s public IP address. This is not possible with <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p> </note>'
         HostKey:
           allOf:
             - $ref: '#/components/schemas/HostKey'
-            - description: '<p>The RSA private key as generated by <code>ssh-keygen -N "" -m PEM -f my-new-server-key</code>.</p> <important> <p>If you aren''t planning to migrate existing users from an existing file transfer protocol-enabled server to a new server, don''t update the host key. Accidentally changing a server''s host key can be disruptive.</p> </important> <p>For more information, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key">Change the host key for your SFTP-enabled server</a> in the <i>AWS Transfer Family User Guide</i>.</p>'
+            - description: '<p>The RSA private key as generated by <code>ssh-keygen -N "" -m PEM -f my-new-server-key</code>.</p> <important> <p>If you aren''t planning to migrate existing users from an existing server to a new server, don''t update the host key. Accidentally changing a server''s host key can be disruptive.</p> </important> <p>For more information, see <a href="https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key">Change the host key for your SFTP-enabled server</a> in the <i>AWS Transfer Family User Guide</i>.</p>'
         IdentityProviderDetails:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderDetails'
@@ -1955,7 +1955,7 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
+            - description: A system-assigned unique identifier for a server instance that the user account is assigned to.
     ConflictException: {}
     UpdateUserResponse:
       type: object
@@ -1966,12 +1966,12 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
+            - description: A system-assigned unique identifier for a server instance that the user account is assigned to.
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: The unique identifier for a user that is assigned to a file transfer protocol-enabled server instance that was specified in the request.
-      description: ' <code>UpdateUserResponse</code> returns the user name and file transfer protocol-enabled server identifier for the request to update a user''s properties.'
+            - description: The unique identifier for a user that is assigned to a server instance that was specified in the request.
+      description: ' <code>UpdateUserResponse</code> returns the user name and identifier for the request to update a user''s properties.'
     UpdateUserRequest:
       type: object
       required:
@@ -1982,11 +1982,11 @@ components:
         HomeDirectory:
           allOf:
             - $ref: '#/components/schemas/HomeDirectory'
-            - description: <p>Specifies the landing directory (folder) for a user when they log in to the file transfer protocol-enabled server using their file transfer protocol client.</p> <p>An example is <code>your-Amazon-S3-bucket-name&gt;/home/username</code>.</p>
+            - description: <p>Specifies the landing directory (folder) for a user when they log in to the server using their file transfer protocol client.</p> <p>An example is <code>your-Amazon-S3-bucket-name&gt;/home/username</code>.</p>
         HomeDirectoryType:
           allOf:
             - $ref: '#/components/schemas/HomeDirectoryType'
-            - description: 'The type of landing directory (folder) you want your users'' home directory to be when they log into the file transfer protocol-enabled server. If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon S3 paths visible to your users.'
+            - description: 'The type of landing directory (folder) you want your users'' home directory to be when they log into the server. If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket paths as is in their file transfer protocol clients. If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon S3 paths visible to your users.'
         HomeDirectoryMappings:
           allOf:
             - $ref: '#/components/schemas/HomeDirectoryMappings'
@@ -1998,15 +1998,15 @@ components:
         Role:
           allOf:
             - $ref: '#/components/schemas/Role'
-            - description: The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the file transfer protocol-enabled server to access your resources when servicing your users' transfer requests.
+            - description: The IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the server to access your resources when servicing your users' transfer requests.
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: A system-assigned unique identifier for a file transfer protocol-enabled server instance that the user account is assigned to.
+            - description: A system-assigned unique identifier for a server instance that the user account is assigned to.
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: 'A unique string that identifies a user and is associated with a file transfer protocol-enabled server as specified by the <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore ''_'', hyphen ''-'', period ''.'', and at sign ''@''. The user name can''t start with a hyphen, period, and at sign.'
+            - description: 'A unique string that identifies a user and is associated with a server as specified by the <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore ''_'', hyphen ''-'', period ''.'', and at sign ''@''. The user name can''t start with a hyphen, period, or at sign.'
     AddressAllocationId:
       type: string
     AddressAllocationIds:
@@ -2027,19 +2027,23 @@ components:
         AddressAllocationIds:
           allOf:
             - $ref: '#/components/schemas/AddressAllocationIds'
-            - description: <p>A list of address allocation IDs that are required to attach an Elastic IP address to your file transfer protocol-enabled server's endpoint. This is only valid in the <code>UpdateServer</code> API.</p> <note> <p>This property can only be use when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
+            - description: <p>A list of address allocation IDs that are required to attach an Elastic IP address to your server's endpoint.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code> and it is only valid in the <code>UpdateServer</code> API.</p> </note>
         SubnetIds:
           allOf:
             - $ref: '#/components/schemas/SubnetIds'
-            - description: <p>A list of subnet IDs that are required to host your file transfer protocol-enabled server endpoint in your VPC.</p> <note> <p>This property can only be used when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
+            - description: <p>A list of subnet IDs that are required to host your server endpoint in your VPC.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
         VpcEndpointId:
           allOf:
             - $ref: '#/components/schemas/VpcEndpointId'
-            - description: <p>The ID of the VPC endpoint.</p> <note> <p>This property can only be used when <code>EndpointType</code> is set to <code>VPC_ENDPOINT</code>.</p> </note>
+            - description: <p>The ID of the VPC endpoint.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC_ENDPOINT</code>.</p> </note>
         VpcId:
           allOf:
             - $ref: '#/components/schemas/VpcId'
-            - description: <p>The VPC ID of the VPC in which a file transfer protocol-enabled server's endpoint will be hosted.</p> <note> <p>This property can only be used when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
+            - description: <p>The VPC ID of the VPC in which a server's endpoint will be hosted.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
+        SecurityGroupIds:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupIds'
+            - description: <p>A list of security groups IDs that are available to attach to your server's endpoint.</p> <note> <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>.</p> <p>You can only edit the <code>SecurityGroupIds</code> property in the <code>UpdateServer</code> API and only if you are changing the <code>EndpointType</code> from <code>PUBLIC</code> or <code>VPC_ENDPOINT</code> to <code>VPC</code>.</p> </note>
       description: 'The virtual private cloud (VPC) endpoint settings that are configured for your file transfer protocol-enabled server. With a VPC endpoint, you can restrict access to your server and resources only within your VPC. To control incoming internet traffic, invoke the <code>UpdateServer</code> API and attach an Elastic IP to your server''s endpoint.'
     EndpointType:
       type: string
@@ -2168,7 +2172,7 @@ components:
         Arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: Specifies the unique Amazon Resource Name (ARN) of the file transfer protocol-enabled server.
+            - description: Specifies the unique Amazon Resource Name (ARN) of the server.
         Certificate:
           allOf:
             - $ref: '#/components/schemas/Certificate'
@@ -2176,11 +2180,11 @@ components:
         EndpointDetails:
           allOf:
             - $ref: '#/components/schemas/EndpointDetails'
-            - description: Specifies the virtual private cloud (VPC) endpoint settings that you configured for your file transfer protocol-enabled server.
+            - description: Specifies the virtual private cloud (VPC) endpoint settings that you configured for your server.
         EndpointType:
           allOf:
             - $ref: '#/components/schemas/EndpointType'
-            - description: 'Defines the type of endpoint that your file transfer protocol-enabled server is connected to. If your server is connected to a VPC endpoint, your server isn''t accessible over the public internet.'
+            - description: 'Defines the type of endpoint that your server is connected to. If your server is connected to a VPC endpoint, your server isn''t accessible over the public internet.'
         HostKeyFingerprint:
           allOf:
             - $ref: '#/components/schemas/HostKeyFingerprint'
@@ -2188,15 +2192,15 @@ components:
         IdentityProviderDetails:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderDetails'
-            - description: Specifies information to call a customer-supplied authentication API. This field is not populated when the <code>IdentityProviderType</code> of a file transfer protocol-enabled server is <code>SERVICE_MANAGED</code>.
+            - description: Specifies information to call a customer-supplied authentication API. This field is not populated when the <code>IdentityProviderType</code> of a server is <code>SERVICE_MANAGED</code>.
         IdentityProviderType:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderType'
-            - description: Specifies the mode of authentication method enabled for this service. A value of <code>SERVICE_MANAGED</code> means that you are using this file transfer protocol-enabled server to store and access user credentials within the service. A value of <code>API_GATEWAY</code> indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.
+            - description: Specifies the mode of authentication method enabled for this service. A value of <code>SERVICE_MANAGED</code> means that you are using this server to store and access user credentials within the service. A value of <code>API_GATEWAY</code> indicates that you have integrated an API Gateway endpoint that will be invoked for authenticating your user into the service.
         LoggingRole:
           allOf:
             - $ref: '#/components/schemas/Role'
-            - description: 'Specifies the AWS Identity and Access Management (IAM) role that allows a file transfer protocol-enabled server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be viewed in your CloudWatch logs.'
+            - description: 'Specifies the AWS Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user activity can be viewed in your CloudWatch logs.'
         Protocols:
           allOf:
             - $ref: '#/components/schemas/Protocols'
@@ -2208,19 +2212,19 @@ components:
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: Specifies the unique system-assigned identifier for a file transfer protocol-enabled server that you instantiate.
+            - description: Specifies the unique system-assigned identifier for a server that you instantiate.
         State:
           allOf:
             - $ref: '#/components/schemas/State'
-            - description: '<p>Specifies the condition of a file transfer protocol-enabled server for the server that was described. A value of <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>'
+            - description: '<p>Specifies the condition of a server for the server that was described. A value of <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: Specifies the key-value pairs that you can use to search for and group file transfer protocol-enabled servers that were assigned to the server that was described.
+            - description: Specifies the key-value pairs that you can use to search for and group servers that were assigned to the server that was described.
         UserCount:
           allOf:
             - $ref: '#/components/schemas/UserCount'
-            - description: Specifies the number of users that are assigned to a file transfer protocol-enabled server you specified with the <code>ServerId</code>.
+            - description: Specifies the number of users that are assigned to a server you specified with the <code>ServerId</code>.
       description: Describes the properties of a file transfer protocol-enabled server that was specified.
     DescribedUser:
       type: object
@@ -2250,7 +2254,7 @@ components:
         Role:
           allOf:
             - $ref: '#/components/schemas/Role'
-            - description: Specifies the IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows a file transfer protocol-enabled server to access your resources when servicing your users' transfer requests.
+            - description: Specifies the IAM role that controls your users' access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows a server to access your resources when servicing your users' transfer requests.
         SshPublicKeys:
           allOf:
             - $ref: '#/components/schemas/SshPublicKeys'
@@ -2262,7 +2266,7 @@ components:
         UserName:
           allOf:
             - $ref: '#/components/schemas/UserName'
-            - description: Specifies the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your file transfer protocol-enabled server.
+            - description: Specifies the name of the user that was requested to be described. User names are used for authentication purposes. This is the string that will be used by your user when they log in to your server.
       description: Describes the properties of a user that was specified.
     Fips:
       type: boolean
@@ -2300,6 +2304,10 @@ components:
       maxLength: 22
     VpcId:
       type: string
+    SecurityGroupIds:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupId'
     MapEntry:
       type: string
       pattern: ^/.*
@@ -2354,31 +2362,31 @@ components:
         Arn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: Specifies the unique Amazon Resource Name (ARN) for a file transfer protocol-enabled server to be listed.
+            - description: Specifies the unique Amazon Resource Name (ARN) for a server to be listed.
         IdentityProviderType:
           allOf:
             - $ref: '#/components/schemas/IdentityProviderType'
-            - description: 'Specifies the authentication method used to validate a user for a file transfer protocol-enabled server that was specified. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include <code>SERVICE_MANAGED</code> or <code>API_GATEWAY</code>.'
+            - description: 'Specifies the authentication method used to validate a user for a server that was specified. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include <code>SERVICE_MANAGED</code> or <code>API_GATEWAY</code>.'
         EndpointType:
           allOf:
             - $ref: '#/components/schemas/EndpointType'
-            - description: 'Specifies the type of VPC endpoint that your file transfer protocol-enabled server is connected to. If your server is connected to a VPC endpoint, your server isn''t accessible over the public internet.'
+            - description: 'Specifies the type of VPC endpoint that your server is connected to. If your server is connected to a VPC endpoint, your server isn''t accessible over the public internet.'
         LoggingRole:
           allOf:
             - $ref: '#/components/schemas/Role'
-            - description: Specifies the AWS Identity and Access Management (IAM) role that allows a file transfer protocol-enabled server to turn on Amazon CloudWatch logging.
+            - description: Specifies the AWS Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging.
         ServerId:
           allOf:
             - $ref: '#/components/schemas/ServerId'
-            - description: Specifies the unique system assigned identifier for a file transfer protocol-enabled servers that were listed.
+            - description: Specifies the unique system assigned identifier for the servers that were listed.
         State:
           allOf:
             - $ref: '#/components/schemas/State'
-            - description: '<p>Specifies the condition of a file transfer protocol-enabled server for the server that was described. A value of <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>'
+            - description: '<p>Specifies the condition of a server for the server that was described. A value of <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file transfer operations.</p> <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is in an intermediate state, either not fully able to respond, or not fully offline. The values of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error condition.</p>'
         UserCount:
           allOf:
             - $ref: '#/components/schemas/UserCount'
-            - description: Specifies the number of users that are assigned to a file transfer protocol-enabled server you specified with the <code>ServerId</code>.
+            - description: Specifies the number of users that are assigned to a server you specified with the <code>ServerId</code>.
       description: Returns properties of a file transfer protocol-enabled server that was specified.
     SshPublicKeyCount:
       type: integer
@@ -2426,6 +2434,11 @@ components:
         - FTPS
     Response:
       type: string
+    SecurityGroupId:
+      type: string
+      pattern: '^sg-[0-9a-f]{8,17}$'
+      minLength: 11
+      maxLength: 20
     SecurityPolicyOption:
       type: string
       maxLength: 50

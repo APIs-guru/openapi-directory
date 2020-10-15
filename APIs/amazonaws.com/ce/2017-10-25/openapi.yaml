@@ -1953,7 +1953,7 @@ components:
         GroupBy:
           allOf:
             - $ref: '#/components/schemas/GroupDefinitions'
-            - description: 'You can group Amazon Web Services costs using up to two different groups: either dimensions, tag keys, or both.'
+            - description: 'You can group Amazon Web Services costs using up to two different groups: <code>DIMENSION</code>, <code>TAG</code>, <code>COST_CATEGORY</code>.'
         NextPageToken:
           allOf:
             - $ref: '#/components/schemas/NextPageToken'
@@ -4637,7 +4637,7 @@ components:
       description: 'A single daily or monthly Savings Plans utilization rate, and details for your account. A master account in an organization have access to member accounts. You can use <code>GetDimensionValues</code> to determine the possible dimension values. '
     SubscriberAddress:
       type: string
-      pattern: '(^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+$)'
+      pattern: '(^[a-zA-Z0-9.!#$%&''*+=?^_‘{|}~-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$)|(^arn:(aws[a-zA-Z-]*):sns:[a-zA-Z0-9-]+:[0-9]{12}:[a-zA-Z0-9_-]+$)'
       minLength: 6
       maxLength: 302
     SubscriberType:

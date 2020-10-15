@@ -483,6 +483,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.CreateOrganization:
+    post:
+      operationId: CreateOrganization
+      description: '<p>Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html">Adding an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p> <p>You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> and <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html">Choosing the default domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p> <p>Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don''t associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOrganizationResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: DirectoryInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryInUseException'
+        '482':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: NameAvailabilityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NameAvailabilityException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrganizationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.CreateOrganization
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=WorkMailService.CreateResource:
     post:
       operationId: CreateResource
@@ -883,6 +946,57 @@ paths:
             type: string
             enum:
               - WorkMailService.DeleteMailboxPermissions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=WorkMailService.DeleteOrganization:
+    post:
+      operationId: DeleteOrganization
+      description: 'Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html">Removing an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOrganizationResponse'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: OrganizationNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationNotFoundException'
+        '482':
+          description: OrganizationStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteOrganizationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - WorkMailService.DeleteOrganization
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3369,6 +3483,44 @@ components:
             - description: The name of the group.
     NameAvailabilityException: {}
     ReservedNameException: {}
+    CreateOrganizationResponse:
+      type: object
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The organization ID.
+    CreateOrganizationRequest:
+      type: object
+      required:
+        - Alias
+      title: CreateOrganizationRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The AWS Directory Service directory ID.
+        Alias:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationName'
+            - description: The organization alias.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyClientToken'
+            - description: The idempotency token associated with the request.
+        Domains:
+          allOf:
+            - $ref: '#/components/schemas/Domains'
+            - description: The email domains to associate with the organization.
+        KmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyArn'
+            - description: The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.
+        EnableInteroperability:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'When <code>true</code>, allows organization interoperability between Amazon WorkMail and Microsoft Exchange. Can only be set to <code>true</code> if an AD Connector directory ID is included in the request.'
+    DirectoryInUseException: {}
     CreateResourceResponse:
       type: object
       properties:
@@ -3506,11 +3658,41 @@ components:
         EntityId:
           allOf:
             - $ref: '#/components/schemas/WorkMailIdentifier'
-            - description: The identifier of the member (user or group)that owns the mailbox.
+            - description: The identifier of the member (user or group) that owns the mailbox.
         GranteeId:
           allOf:
             - $ref: '#/components/schemas/WorkMailIdentifier'
             - description: The identifier of the member (user or group) for which to delete granted permissions.
+    DeleteOrganizationResponse:
+      type: object
+      properties:
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The organization ID.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The state of the organization.
+    DeleteOrganizationRequest:
+      type: object
+      required:
+        - OrganizationId
+        - DeleteDirectory
+      title: DeleteOrganizationRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyClientToken'
+            - description: The idempotency token associated with the request.
+        OrganizationId:
+          allOf:
+            - $ref: '#/components/schemas/OrganizationId'
+            - description: The organization ID.
+        DeleteDirectory:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'If true, deletes the AWS Directory Service directory associated with the organization.'
     DeleteResourceResponse:
       type: object
       properties: {}
@@ -4709,7 +4891,7 @@ components:
       maxItems: 10
     EmailAddress:
       type: string
-      pattern: '[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+      pattern: '[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\.[a-zA-Z-]{2,}'
       minLength: 1
       maxLength: 254
     Aliases:
@@ -4723,9 +4905,13 @@ components:
     OrganizationId:
       type: string
       pattern: '^m-[0-9a-f]{32}$'
+      minLength: 34
+      maxLength: 34
     ResourceId:
       type: string
       pattern: '^r-[0-9a-f]{32}$'
+      minLength: 34
+      maxLength: 34
     WorkMailIdentifier:
       type: string
       minLength: 12
@@ -4763,9 +4949,30 @@ components:
       pattern: '[\u0020-\u00FF]+'
       minLength: 1
       maxLength: 256
+    DirectoryId:
+      type: string
+      pattern: '^d-[0-9a-f]{10}$'
+      minLength: 12
+      maxLength: 12
+    OrganizationName:
+      type: string
+      pattern: '^(?!d-)([\da-zA-Z]+)([-][\da-zA-Z]+)*'
+      minLength: 1
+      maxLength: 62
+    Domains:
+      type: array
+      items:
+        $ref: '#/components/schemas/Domain'
+      minItems: 0
+      maxItems: 5
+    KmsKeyArn:
+      type: string
+      pattern: 'arn:aws:kms:[a-z0-9-]*:[a-z0-9-]+:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}'
+      minLength: 20
+      maxLength: 2048
     ResourceName:
       type: string
-      pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
+      pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9-]{2,})?'
       minLength: 1
       maxLength: 20
     ResourceType:
@@ -4775,7 +4982,7 @@ components:
         - EQUIPMENT
     UserName:
       type: string
-      pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9]{2,})?'
+      pattern: '[\w\-.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z0-9-]{2,})?'
       minLength: 1
       maxLength: 64
     String:
@@ -4826,11 +5033,6 @@ components:
       type: string
       minLength: 20
       maxLength: 2048
-    KmsKeyArn:
-      type: string
-      pattern: 'arn:aws:kms:[a-z0-9-]*:[a-z0-9-]+:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}'
-      minLength: 20
-      maxLength: 2048
     S3BucketName:
       type: string
       pattern: '[A-Za-z0-9.-]+'
@@ -4857,17 +5059,34 @@ components:
       pattern: '[\S\s]*'
       minLength: 1
       maxLength: 1024
-    OrganizationName:
-      type: string
-      pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
-      minLength: 1
-      maxLength: 62
     UserRole:
       type: string
       enum:
         - USER
         - RESOURCE
         - SYSTEM_USER
+    DomainName:
+      type: string
+      pattern: '[a-zA-Z0-9.-]+\.[a-zA-Z-]{2,}'
+      minLength: 3
+      maxLength: 255
+    HostedZoneId:
+      type: string
+      pattern: '[\S\s]*'
+      minLength: 1
+      maxLength: 32
+    Domain:
+      type: object
+      properties:
+        DomainName:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The fully qualified domain name.
+        HostedZoneId:
+          allOf:
+            - $ref: '#/components/schemas/HostedZoneId'
+            - description: The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.
+      description: '<p>The domain to associate with an Amazon WorkMail organization.</p> <p>When you configure a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are added to the organization when you create it. For more information, see <a href="https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html">Adding a domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>'
     FolderName:
       type: string
       enum:
@@ -5004,6 +5223,7 @@ components:
         $ref: '#/components/schemas/MailboxExportJob'
     NextToken:
       type: string
+      pattern: '[\S\s]*|[a-zA-Z0-9/+=]{1,1024}'
       minLength: 1
       maxLength: 1024
     MaxResults:
@@ -5079,6 +5299,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OrganizationName'
             - description: The alias associated with the organization.
+        DefaultMailDomain:
+          allOf:
+            - $ref: '#/components/schemas/DomainName'
+            - description: The default email domain associated with the organization.
         ErrorMessage:
           allOf:
             - $ref: '#/components/schemas/String'

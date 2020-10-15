@@ -114,6 +114,75 @@ servers:
     description: The Access Analyzer endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /archive-rule:
+    put:
+      operationId: ApplyArchiveRule
+      description: Retroactively applies the archive rule to existing findings that meet the archive rule criteria.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - analyzerArn
+                - ruleName
+              properties:
+                analyzerArn:
+                  description: The Amazon resource name (ARN) of the analyzer.
+                  type: string
+                  pattern: '^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$'
+                clientToken:
+                  description: A client token.
+                  type: string
+                ruleName:
+                  description: The name of the rule to apply.
+                  type: string
+                  pattern: '^[A-Za-z][A-Za-z0-9_.-]*$'
+                  minLength: 1
+                  maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /analyzer:
     put:
       operationId: CreateAnalyzer
@@ -264,7 +333,7 @@ paths:
   '/analyzer/{analyzerName}/archive-rule':
     put:
       operationId: CreateArchiveRule
-      description: Creates an archive rule for the specified analyzer. Archive rules automatically archive findings that meet the criteria you define when you create the rule.
+      description: Creates an archive rule for the specified analyzer. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.
       responses:
         '200':
           description: Success
@@ -924,12 +993,12 @@ paths:
                   description: The type of resource.
                   type: string
                   enum:
+                    - 'AWS::S3::Bucket'
                     - 'AWS::IAM::Role'
-                    - 'AWS::KMS::Key'
+                    - 'AWS::SQS::Queue'
                     - 'AWS::Lambda::Function'
                     - 'AWS::Lambda::LayerVersion'
-                    - 'AWS::S3::Bucket'
-                    - 'AWS::SQS::Queue'
+                    - 'AWS::KMS::Key'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1402,6 +1471,11 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    InternalServerException: {}
+    ThrottlingException: {}
+    AccessDeniedException: {}
     CreateAnalyzerResponse:
       type: object
       properties:
@@ -1428,11 +1502,7 @@ components:
     String:
       type: string
     ConflictException: {}
-    ValidationException: {}
-    InternalServerException: {}
     ServiceQuotaExceededException: {}
-    ThrottlingException: {}
-    AccessDeniedException: {}
     Criterion:
       type: object
       properties:
@@ -1453,7 +1523,6 @@ components:
             - $ref: '#/components/schemas/ValueList'
             - description: A "not equals" operator to match for the filter used to create the rule.
       description: The criteria to use in the filter that defines the archive rule.
-    ResourceNotFoundException: {}
     GetAnalyzedResourceResponse:
       type: object
       properties:
@@ -1582,12 +1651,12 @@ components:
     ResourceType:
       type: string
       enum:
+        - 'AWS::S3::Bucket'
         - 'AWS::IAM::Role'
-        - 'AWS::KMS::Key'
+        - 'AWS::SQS::Queue'
         - 'AWS::Lambda::Function'
         - 'AWS::Lambda::LayerVersion'
-        - 'AWS::S3::Bucket'
-        - 'AWS::SQS::Queue'
+        - 'AWS::KMS::Key'
     SharedViaList:
       type: array
       items:
@@ -1762,6 +1831,26 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AnalyzerSummary'
+    ApplyArchiveRuleRequest:
+      type: object
+      required:
+        - analyzerArn
+        - ruleName
+      title: ApplyArchiveRuleRequest
+      properties:
+        analyzerArn:
+          allOf:
+            - $ref: '#/components/schemas/AnalyzerArn'
+            - description: The Amazon resource name (ARN) of the analyzer.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A client token.
+        ruleName:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the rule to apply.
+      description: Retroactively applies an archive rule.
     FilterCriteriaMap:
       type: object
       additionalProperties:
@@ -1959,8 +2048,8 @@ components:
     FindingSourceType:
       type: string
       enum:
-        - BUCKET_ACL
         - POLICY
+        - BUCKET_ACL
         - S3_ACCESS_POINT
     FindingSource:
       type: object

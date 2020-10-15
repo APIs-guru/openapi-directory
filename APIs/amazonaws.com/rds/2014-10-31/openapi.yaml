@@ -1535,7 +1535,7 @@ paths:
     get:
       x-aws-operation-name: CopyDBSnapshot
       operationId: GET_CopyDBSnapshot
-      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the <code>available</code> or <code>storage-optimization</code> state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the <code>available</code> state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -1653,7 +1653,7 @@ paths:
     post:
       x-aws-operation-name: CopyDBSnapshot
       operationId: POST_CopyDBSnapshot
-      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the <code>available</code> or <code>storage-optimization</code> state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      description: '<p>Copies the specified DB snapshot. The source DB snapshot must be in the <code>available</code> state.</p> <p>You can copy a snapshot from one AWS Region to another. In that case, the AWS Region where you call the <code>CopyDBSnapshot</code> action is the destination AWS Region for the DB snapshot copy. </p> <p>For more information about copying snapshots, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopyDBSnapshot">Copying a DB Snapshot</a> in the <i>Amazon RDS User Guide.</i> </p>'
       responses:
         '200':
           description: Success
@@ -2255,7 +2255,7 @@ paths:
         - name: EngineMode
           in: query
           required: false
-          description: '<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p> <note> <p> <code>global</code> engine mode only applies for global database clusters created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions, the clusters in a global database use <code>provisioned</code> engine mode. </p> </note> <p>Limitations and requirements apply to some DB engine modes. For more information, see the following sections in the <i>Amazon Aurora User Guide</i>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations"> Limitations of Aurora Serverless</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations"> Limitations of Parallel Query</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations"> Requirements for Aurora Global Databases</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations"> Limitations of Multi-Master Clusters</a> </p> </li> </ul>'
+          description: '<p>The DB engine mode of the DB cluster, either <code>provisioned</code> <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p> <p>The <code>parallelquery</code> engine mode isn''t required for Aurora MySQL version 1.23 and higher 1.x versions, and version 2.09 and higher 2.x versions.</p> <p>The <code>global</code> engine mode isn''t required for Aurora MySQL version 1.22 and higher 1.x versions, and <code>global</code> engine mode isn''t required for any 2.x versions.</p> <p>The <code>multimaster</code> engine mode only applies for DB clusters created with Aurora MySQL version 5.6.10a.</p> <p>For Aurora PostgreSQL, the <code>global</code> engine mode isn''t required, and both the <code>parallelquery</code> and the <code>multimaster</code> engine modes currently aren''t supported.</p> <p>Limitations and requirements apply to some DB engine modes. For more information, see the following sections in the <i>Amazon Aurora User Guide</i>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations"> Limitations of Aurora Serverless</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations"> Limitations of Parallel Query</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations"> Limitations of Aurora Global Databases</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations"> Limitations of Multi-Master Clusters</a> </p> </li> </ul>'
           schema:
             type: string
         - name: ScalingConfiguration
@@ -4482,7 +4482,7 @@ paths:
     get:
       x-aws-operation-name: CreateDBSnapshot
       operationId: GET_CreateDBSnapshot
-      description: Creates a DBSnapshot. The source DBInstance must be in "available" state.
+      description: Creates a snapshot of a DB instance. The source DB instance must be in the <code>available</code> or <code>storage-optimization</code>state.
       responses:
         '200':
           description: Success
@@ -4564,7 +4564,7 @@ paths:
     post:
       x-aws-operation-name: CreateDBSnapshot
       operationId: POST_CreateDBSnapshot
-      description: Creates a DBSnapshot. The source DBInstance must be in "available" state.
+      description: Creates a snapshot of a DB instance. The source DB instance must be in the <code>available</code> or <code>storage-optimization</code>state.
       responses:
         '200':
           description: Success
@@ -17193,7 +17193,7 @@ paths:
         - name: EngineMode
           in: query
           required: false
-          description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.'
+          description: '<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html"> CreateDBCluster</a>.</p>'
           schema:
             type: string
         - name: ScalingConfiguration
@@ -22591,6 +22591,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.'
+        TagList:
+          $ref: '#/components/schemas/TagList'
       description: <p>Contains the details for an Amazon RDS DB cluster snapshot </p> <p>This data type is used as a response element in the <code>DescribeDBClusterSnapshots</code> action. </p>
     CopyDBParameterGroupMessage:
       type: object
@@ -22788,6 +22790,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an AWS Region.'
+        TagList:
+          $ref: '#/components/schemas/TagList'
       description: <p>Contains the details of an Amazon RDS DB snapshot. </p> <p>This data type is used as a response element in the <code>DescribeDBSnapshots</code> action. </p>
     CopyOptionGroupMessage:
       type: object
@@ -23062,7 +23066,7 @@ components:
         EngineMode:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p> <note> <p> <code>global</code> engine mode only applies for global database clusters created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions, the clusters in a global database use <code>provisioned</code> engine mode. </p> </note> <p>Limitations and requirements apply to some DB engine modes. For more information, see the following sections in the <i>Amazon Aurora User Guide</i>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations"> Limitations of Aurora Serverless</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations"> Limitations of Parallel Query</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations"> Requirements for Aurora Global Databases</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations"> Limitations of Multi-Master Clusters</a> </p> </li> </ul>'
+            - description: '<p>The DB engine mode of the DB cluster, either <code>provisioned</code> <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p> <p>The <code>parallelquery</code> engine mode isn''t required for Aurora MySQL version 1.23 and higher 1.x versions, and version 2.09 and higher 2.x versions.</p> <p>The <code>global</code> engine mode isn''t required for Aurora MySQL version 1.22 and higher 1.x versions, and <code>global</code> engine mode isn''t required for any 2.x versions.</p> <p>The <code>multimaster</code> engine mode only applies for DB clusters created with Aurora MySQL version 5.6.10a.</p> <p>For Aurora PostgreSQL, the <code>global</code> engine mode isn''t required, and both the <code>parallelquery</code> and the <code>multimaster</code> engine modes currently aren''t supported.</p> <p>Limitations and requirements apply to some DB engine modes. For more information, see the following sections in the <i>Amazon Aurora User Guide</i>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations"> Limitations of Aurora Serverless</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-mysql-parallel-query.html#aurora-mysql-parallel-query-limitations"> Limitations of Parallel Query</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html#aurora-global-database.limitations"> Limitations of Aurora Global Databases</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-multi-master.html#aurora-multi-master-limitations"> Limitations of Multi-Master Clusters</a> </p> </li> </ul>'
         ScalingConfiguration:
           allOf:
             - $ref: '#/components/schemas/ScalingConfiguration'
@@ -23295,7 +23299,7 @@ components:
         EngineMode:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p> <note> <p> <code>global</code> engine mode only applies for global database clusters created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions, the clusters in a global database use <code>provisioned</code> engine mode. To check if a DB cluster is part of a global database, use <code>DescribeGlobalClusters</code> instead of checking the <code>EngineMode</code> return value from <code>DescribeDBClusters</code>. </p> </note>'
+            - description: '<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html"> CreateDBCluster</a>.</p>'
         ScalingConfigurationInfo:
           $ref: '#/components/schemas/ScalingConfigurationInfo'
         DeletionProtection:
@@ -23334,6 +23338,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/DomainMembershipList'
             - description: The Active Directory Domain membership records associated with the DB cluster.
+        TagList:
+          $ref: '#/components/schemas/TagList'
         GlobalWriteForwardingStatus:
           allOf:
             - $ref: '#/components/schemas/WriteForwardingStatus'
@@ -23955,6 +23961,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
             - description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+        TagList:
+          $ref: '#/components/schemas/TagList'
       description: <p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <code>DescribeDBInstances</code> action. </p>
     CreateDBParameterGroupMessage:
       type: object
@@ -24670,7 +24678,7 @@ components:
         SupportedEngineModes:
           allOf:
             - $ref: '#/components/schemas/EngineModeList'
-            - description: '<p>A list of the supported DB engine modes.</p> <note> <p> <code>global</code> engine mode only applies for global database clusters created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions, the clusters in a global database use <code>provisioned</code> engine mode. </p> </note>'
+            - description: A list of the supported DB engine modes.
         SupportedFeatureNames:
           allOf:
             - $ref: '#/components/schemas/FeatureNameList'
@@ -27746,7 +27754,7 @@ components:
         SupportedEngineModes:
           allOf:
             - $ref: '#/components/schemas/EngineModeList'
-            - description: '<p>A list of the supported DB engine modes.</p> <note> <p> <code>global</code> engine mode only applies for global database clusters created with Aurora MySQL version 5.6.10a. For higher Aurora MySQL versions, the clusters in a global database use <code>provisioned</code> engine mode. </p> </note>'
+            - description: A list of the supported DB engine modes.
         SupportsStorageAutoscaling:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -28416,7 +28424,7 @@ components:
         EngineMode:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.'
+            - description: '<p>The DB engine mode of the DB cluster, either <code>provisioned</code>, <code>serverless</code>, <code>parallelquery</code>, <code>global</code>, or <code>multimaster</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_CreateDBCluster.html"> CreateDBCluster</a>.</p>'
         ScalingConfiguration:
           allOf:
             - $ref: '#/components/schemas/ScalingConfiguration'
