@@ -114,6 +114,87 @@ servers:
     description: The MediaLive endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/prod/inputDevices/{inputDeviceId}/accept':
+    post:
+      operationId: AcceptInputDeviceTransfer
+      description: Accept an incoming input device transfer. The ownership of the device will transfer to your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptInputDeviceTransferResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '488':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: inputDeviceId
+          in: path
+          required: true
+          description: 'The unique ID of the input device to accept. For example, hd-123456789abcdef.'
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /prod/batch/delete:
     post:
       operationId: BatchDelete
@@ -629,6 +710,87 @@ paths:
             type: string
           description: Pagination token
           required: false
+  '/prod/inputDevices/{inputDeviceId}/cancel':
+    post:
+      operationId: CancelInputDeviceTransfer
+      description: Cancel an input device transfer that you have requested.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelInputDeviceTransferResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '488':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: inputDeviceId
+          in: path
+          required: true
+          description: 'The unique ID of the input device to cancel. For example, hd-123456789abcdef.'
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /prod/channels:
     post:
       operationId: CreateChannel
@@ -3626,6 +3788,103 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /prod/inputDeviceTransfers#transferType:
+    get:
+      operationId: ListInputDeviceTransfers
+      description: List input devices that are currently being transferred. List input devices that you are transferring from your AWS account or input devices that another AWS account is transferring to you.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInputDeviceTransfersResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '485':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '486':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: integer
+            description: Placeholder documentation for MaxResults
+            minimum: 1
+            maximum: 1000
+        - name: nextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+        - name: transferType
+          in: query
+          required: true
+          description: ''
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /prod/inputDevices:
     get:
       operationId: ListInputDevices
@@ -4115,6 +4374,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/prod/inputDevices/{inputDeviceId}/reject':
+    post:
+      operationId: RejectInputDeviceTransfer
+      description: Reject the transfer of the specified input device to your AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RejectInputDeviceTransferResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '488':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: inputDeviceId
+          in: path
+          required: true
+          description: 'The unique ID of the input device to reject. For example, hd-123456789abcdef.'
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/prod/channels/{channelId}/start':
     post:
       operationId: StartChannel
@@ -4415,6 +4755,100 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/prod/inputDevices/{inputDeviceId}/transfer':
+    post:
+      operationId: TransferInputDevice
+      description: 'Start an input device transfer to another AWS account. After you make the request, the other account must accept or reject the transfer.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferInputDeviceResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: UnprocessableEntityException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnprocessableEntityException'
+        '482':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+        '483':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '484':
+          description: BadGatewayException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadGatewayException'
+        '485':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '486':
+          description: GatewayTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GatewayTimeoutException'
+        '487':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '488':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: inputDeviceId
+          in: path
+          required: true
+          description: 'The unique ID of this input device. For example, hd-123456789abcdef.'
+          schema:
+            type: string
+            description: Placeholder documentation for __string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                targetCustomerId:
+                  description: Placeholder documentation for __string
+                  type: string
+                transferMessage:
+                  description: Placeholder documentation for __string
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/prod/channels/{channelId}/channelClass':
     put:
       operationId: UpdateChannelClass
@@ -4568,6 +5002,19 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AcceptInputDeviceTransferResponse:
+      type: object
+      properties: {}
+      description: Placeholder documentation for AcceptInputDeviceTransferResponse
+    BadRequestException: {}
+    UnprocessableEntityException: {}
+    InternalServerErrorException: {}
+    ForbiddenException: {}
+    BadGatewayException: {}
+    NotFoundException: {}
+    GatewayTimeoutException: {}
+    TooManyRequestsException: {}
+    ConflictException: {}
     BatchDeleteResponse:
       type: object
       properties:
@@ -4587,14 +5034,6 @@ components:
     __string:
       type: string
       description: Placeholder documentation for __string
-    BadRequestException: {}
-    InternalServerErrorException: {}
-    ForbiddenException: {}
-    BadGatewayException: {}
-    NotFoundException: {}
-    GatewayTimeoutException: {}
-    TooManyRequestsException: {}
-    ConflictException: {}
     BatchStartResponse:
       type: object
       properties:
@@ -4653,7 +5092,10 @@ components:
       description: Placeholder documentation for __listOf__string
       items:
         $ref: '#/components/schemas/__string'
-    UnprocessableEntityException: {}
+    CancelInputDeviceTransferResponse:
+      type: object
+      properties: {}
+      description: Placeholder documentation for CancelInputDeviceTransferResponse
     CreateChannelResponse:
       type: object
       properties:
@@ -6043,6 +6485,22 @@ components:
             - xml:
                 name: nextToken
       description: Placeholder documentation for ListChannelsResponse
+    ListInputDeviceTransfersResponse:
+      type: object
+      properties:
+        InputDeviceTransfers:
+          allOf:
+            - $ref: '#/components/schemas/__listOfTransferringInputDeviceSummary'
+            - xml:
+                name: inputDeviceTransfers
+              description: The list of devices that you are transferring or are being transferred to you.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: nextToken
+              description: A token to get additional list results.
+      description: Placeholder documentation for ListInputDeviceTransfersResponse
     ListInputDevicesResponse:
       type: object
       properties:
@@ -6170,6 +6628,10 @@ components:
             - xml:
                 name: reservation
       description: Placeholder documentation for PurchaseOfferingResponse
+    RejectInputDeviceTransferResponse:
+      type: object
+      properties: {}
+      description: Placeholder documentation for RejectInputDeviceTransferResponse
     StartChannelResponse:
       type: object
       properties:
@@ -6500,6 +6962,10 @@ components:
                 name: tags
               description: A collection of key-value pairs.
       description: Placeholder documentation for StopMultiplexResponse
+    TransferInputDeviceResponse:
+      type: object
+      properties: {}
+      description: Placeholder documentation for TransferInputDeviceResponse
     UpdateChannelResponse:
       type: object
       properties:
@@ -6851,6 +7317,11 @@ components:
                 name: metadataControl
               description: 'When set to "followInput", encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used.'
       description: Ac3 Settings
+    AcceptInputDeviceTransferRequest:
+      type: object
+      title: AcceptInputDeviceTransferRequest
+      properties: {}
+      description: Placeholder documentation for AcceptInputDeviceTransferRequest
     AfdSignaling:
       type: string
       enum:
@@ -8306,6 +8777,11 @@ components:
                 name: yPosition
               description: 'Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  All burn-in and DVB-Sub font settings must match.'
       description: Burn In Destination Settings
+    CancelInputDeviceTransferRequest:
+      type: object
+      title: CancelInputDeviceTransferRequest
+      properties: {}
+      description: Placeholder documentation for CancelInputDeviceTransferRequest
     CaptionDestinationSettings:
       type: object
       properties:
@@ -12688,6 +13164,12 @@ components:
                 name: type
               description: The type of the input device.
       description: Details of the input device.
+    InputDeviceTransferType:
+      type: string
+      enum:
+        - OUTGOING
+        - INCOMING
+      description: 'The type of device transfer. INCOMING for an input device that is being transferred to you, OUTGOING for an input device that you are transferring to another AWS account.'
     InputFilter:
       type: string
       enum:
@@ -12904,6 +13386,16 @@ components:
       description: Placeholder documentation for __listOfChannelSummary
       items:
         $ref: '#/components/schemas/ChannelSummary'
+    ListInputDeviceTransfersRequest:
+      type: object
+      title: ListInputDeviceTransfersRequest
+      properties: {}
+      description: Placeholder documentation for ListInputDeviceTransfersRequest
+    __listOfTransferringInputDeviceSummary:
+      type: array
+      description: Placeholder documentation for __listOfTransferringInputDeviceSummary
+      items:
+        $ref: '#/components/schemas/TransferringInputDeviceSummary'
     ListInputDevicesRequest:
       type: object
       title: ListInputDevicesRequest
@@ -14490,6 +14982,11 @@ components:
                 name: usagePrice
               description: 'Recurring usage charge for each reserved resource, e.g. ''157.0'''
       description: Reserved resources available to use
+    RejectInputDeviceTransferRequest:
+      type: object
+      title: RejectInputDeviceTransferRequest
+      properties: {}
+      description: Placeholder documentation for RejectInputDeviceTransferRequest
     __listOfAudioChannelMapping:
       type: array
       description: Placeholder documentation for __listOfAudioChannelMapping
@@ -15088,6 +15585,51 @@ components:
       description: Placeholder documentation for __integerMin1Max1000000
       minimum: 1
       maximum: 1000000
+    TransferInputDeviceRequest:
+      type: object
+      title: TransferInputDeviceRequest
+      properties:
+        TargetCustomerId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: targetCustomerId
+              description: The AWS account ID (12 digits) for the recipient of the device transfer.
+        TransferMessage:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: transferMessage
+              description: An optional message for the recipient. Maximum 280 characters.
+      description: A request to transfer an input device.
+    TransferringInputDeviceSummary:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: id
+              description: The unique ID of the input device.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: message
+              description: The optional message that the sender has attached to the transfer.
+        TargetCustomerId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: targetCustomerId
+              description: The AWS account ID for the recipient of the input device transfer.
+        TransferType:
+          allOf:
+            - $ref: '#/components/schemas/InputDeviceTransferType'
+            - xml:
+                name: transferType
+              description: The type (direction) of the input device transfer.
+      description: Details about the input device that is being transferred.
     TtmlDestinationStyleControl:
       type: string
       enum:
