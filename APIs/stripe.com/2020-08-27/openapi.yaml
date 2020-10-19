@@ -350,6 +350,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    bancontact_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     card_issuing:
                       properties:
                         requested:
@@ -368,7 +374,25 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    eps_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     fpx_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    giropay_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    ideal_payments:
                       properties:
                         requested:
                           type: boolean
@@ -387,6 +411,18 @@ paths:
                       title: capability_param
                       type: object
                     oxxo_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    p24_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    sofort_payments:
                       properties:
                         requested:
                           type: boolean
@@ -3482,6 +3518,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    bancontact_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     card_issuing:
                       properties:
                         requested:
@@ -3500,7 +3542,25 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    eps_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     fpx_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    giropay_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    ideal_payments:
                       properties:
                         requested:
                           type: boolean
@@ -3519,6 +3579,18 @@ paths:
                       title: capability_param
                       type: object
                     oxxo_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    p24_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    sofort_payments:
                       properties:
                         requested:
                           type: boolean
@@ -4251,6 +4323,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    bancontact_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     card_issuing:
                       properties:
                         requested:
@@ -4269,7 +4347,25 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    eps_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     fpx_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    giropay_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    ideal_payments:
                       properties:
                         requested:
                           type: boolean
@@ -4288,6 +4384,18 @@ paths:
                       title: capability_param
                       type: object
                     oxxo_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    p24_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    sofort_payments:
                       properties:
                         requested:
                           type: boolean
@@ -10143,6 +10251,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              discounts:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -10221,6 +10332,19 @@ paths:
 
                     complete, use the `customer` field.
                   type: string
+                discounts:
+                  description: The coupon or promotion code to apply to this session. Currently, only up to one may be specified.
+                  items:
+                    properties:
+                      coupon:
+                        maxLength: 5000
+                        type: string
+                      promotion_code:
+                        maxLength: 5000
+                        type: string
+                    title: discount_params
+                    type: object
+                  type: array
                 expand:
                   description: Specifies which fields in the response should be expanded.
                   items:
@@ -30179,6 +30303,61 @@ paths:
               schema:
                 $ref: "#/components/schemas/error"
           description: Error response.
+  "/v1/payouts/{payout}/reverse":
+    post:
+      description: >-
+        <p>Reverses a payout by debiting the destination bank account. Only payouts for connected accounts to US bank accounts may be reversed at this time. If the payout is in the <code>pending</code> status, <code>/v1/payouts/:id/cancel</code> should be used instead.</p>
+
+
+        <p>By requesting a reversal via <code>/v1/payouts/:id/reverse</code>, you confirm that the authorized signatory of the selected bank account has authorized the debit on the bank account and that no other authorization is required.</p>
+      operationId: PostPayoutsPayoutReverse
+      parameters:
+        - in: path
+          name: payout
+          required: true
+          schema:
+            maxLength: 5000
+            type: string
+          style: simple
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            encoding:
+              expand:
+                explode: true
+                style: deepObject
+              metadata:
+                explode: true
+                style: deepObject
+            schema:
+              additionalProperties: false
+              properties:
+                expand:
+                  description: Specifies which fields in the response should be expanded.
+                  items:
+                    maxLength: 5000
+                    type: string
+                  type: array
+                metadata:
+                  additionalProperties:
+                    type: string
+                  description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+                  type: object
+              type: object
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/payout"
+          description: Successful response.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/error"
+          description: Error response.
   /v1/plans:
     get:
       description: <p>Returns a list of your plans.</p>
@@ -42292,6 +42471,7 @@ paths:
                       - review.opened
                       - setup_intent.canceled
                       - setup_intent.created
+                      - setup_intent.requires_action
                       - setup_intent.setup_failed
                       - setup_intent.succeeded
                       - sigma.scheduled_query_run.created
@@ -42610,6 +42790,7 @@ paths:
                       - review.opened
                       - setup_intent.canceled
                       - setup_intent.created
+                      - setup_intent.requires_action
                       - setup_intent.setup_failed
                       - setup_intent.succeeded
                       - sigma.scheduled_query_run.created
@@ -42930,6 +43111,13 @@ components:
             - inactive
             - pending
           type: string
+        bancontact_payments:
+          description: The status of the Bancontact payments capability of the account, or whether the account can directly process Bancontact charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
         card_issuing:
           description: The status of the card issuing capability of the account, or whether you can use Issuing to distribute funds on cards
           enum:
@@ -42951,8 +43139,29 @@ components:
             - inactive
             - pending
           type: string
+        eps_payments:
+          description: The status of the EPS payments capability of the account, or whether the account can directly process EPS charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
         fpx_payments:
           description: The status of the FPX payments capability of the account, or whether the account can directly process FPX charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
+        giropay_payments:
+          description: The status of the giropay payments capability of the account, or whether the account can directly process giropay charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
+        ideal_payments:
+          description: The status of the iDEAL payments capability of the account, or whether the account can directly process iDEAL charges.
           enum:
             - active
             - inactive
@@ -42974,6 +43183,20 @@ components:
           type: string
         oxxo_payments:
           description: The status of the OXXO payments capability of the account, or whether the account can directly process OXXO charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
+        p24_payments:
+          description: The status of the P24 payments capability of the account, or whether the account can directly process P24 charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
+        sofort_payments:
+          description: The status of the Sofort payments capability of the account, or whether the account can directly process Sofort charges.
           enum:
             - active
             - inactive
@@ -55939,6 +56162,26 @@ components:
           enum:
             - payout
           type: string
+        original_payout:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/payout"
+          description: If the payout reverses another, this is the ID of the original payout.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/payout"
+        reversed_by:
+          anyOf:
+            - maxLength: 5000
+              type: string
+            - $ref: "#/components/schemas/payout"
+          description: If the payout was reversed, this is the ID of the payout that reverses this payout.
+          nullable: true
+          x-expansionResources:
+            oneOf:
+              - $ref: "#/components/schemas/payout"
         source_type:
           description: The source balance this payout came from. One of `card`, `fpx`, or `bank_account`.
           maxLength: 5000
@@ -55977,6 +56220,8 @@ components:
         - balance_transaction
         - destination
         - failure_balance_transaction
+        - original_payout
+        - reversed_by
       x-resourceId: payout
     period:
       description: ""

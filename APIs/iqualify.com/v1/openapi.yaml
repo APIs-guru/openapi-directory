@@ -2934,6 +2934,11 @@ components:
       value:
         details: Text pattern must be a minimum of 3 characters in length.
         name: TextPatternError
+    UserDoesNotHaveBadgeError:
+      summary: The specified user does not have a badge in the specified offering
+      value:
+        details: The user A has not been awarded a badge in the offering B.
+        name: UserDoesNotHaveBadgeError
     UserNotInOfferingError:
       summary: Specified user is not in the offering.
       value:
@@ -4206,6 +4211,17 @@ components:
         quizTitle:
           type: string
       title: QuizMark
+      type: object
+    RevokedResponse:
+      properties:
+        badgeId:
+          type: string
+        badgeUrl:
+          type: string
+        revocationReason:
+          type: string
+        revoked:
+          type: boolean
       type: object
     SocialNotesResponse:
       properties:

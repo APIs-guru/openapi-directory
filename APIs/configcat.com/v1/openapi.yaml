@@ -127,6 +127,14 @@ tags:
       <a href="https://configcat.com/docs/main-concepts/#setting" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Settings.
     name: Feature Flags & Settings
   - description: >-
+      With these endpoints you can get useful information about your Organizations.
+
+      This also can be used to manage your [Products](#tag/Products).
+
+
+      <a href="https://configcat.com/docs/organization/" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the Organizations.
+    name: Organizations
+  - description: >-
       With these endpoints you can get useful information about your Products.
 
       This also can be used to manage [Environments](#tag/Environments) and [Configs](#tag/Configs) through this API.
@@ -150,11 +158,118 @@ tags:
 
       <a href="https://configcat.com/docs/main-concepts/#environment" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Environments.
     name: Environments
+  - description: With these endpoints you can manage your Tags.
+    name: Tags
   - description: Access audit log entries.
     name: Audit logs
   - description: Information about the current user.
     name: Me
 paths:
+  "/v1/configs/{configId}":
+    delete:
+      description: This endpoint removes a Config identified by the `configId` parameter.
+      operationId: delete-config
+      parameters:
+        - description: The identifier of the Config.
+          in: path
+          name: configId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Delete Config
+      tags:
+        - Configs
+    get:
+      description: >-
+        This endpoint returns the metadata of a Config
+
+        identified by the `configId`.
+      operationId: get-config
+      parameters:
+        - description: The identifier of the Config.
+          in: path
+          name: configId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ConfigModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfigModel"
+          description: When everything is ok, the config data returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Get Config
+      tags:
+        - Configs
+    put:
+      description: This endpoint updates a Config identified by the `configId` parameter.
+      operationId: update-config
+      parameters:
+        - description: The identifier of the Config.
+          in: path
+          name: configId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateConfigRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateConfigRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateConfigRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ConfigModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfigModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Update Config
+      tags:
+        - Configs
   "/v1/configs/{configId}/settings":
     get:
       description: >-
@@ -176,7 +291,7 @@ paths:
             application/hal+json:
               schema:
                 items:
-                  $ref: "#/components/schemas/SettingModel"
+                  $ref: "#/components/schemas/SettingModel-haljson"
                 type: array
             application/json:
               schema:
@@ -229,7 +344,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/SettingModel"
+                $ref: "#/components/schemas/SettingModel-haljson"
             application/json:
               schema:
                 $ref: "#/components/schemas/SettingModel"
@@ -246,11 +361,71 @@ paths:
       tags:
         - Feature Flags & Settings
   "/v1/environments/{environmentId}":
+    delete:
+      description: This endpoint removes an Environment identified by the `environmentId` parameter.
+      operationId: delete-environment
+      parameters:
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Delete Environment
+      tags:
+        - Environments
+    get:
+      description: >-
+        This endpoint returns the metadata of an Environment 
+
+        identified by the `environmentId`.
+      operationId: get-environment
+      parameters:
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EnvironmentModel"
+          description: When everything is ok, the environment data returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Get Environment
+      tags:
+        - Environments
     put:
       description: This endpoint updates an Environment identified by the `environmentId` parameter.
       operationId: update-environment
       parameters:
-        - description: The identifier of the Product.
+        - description: The identifier of the Environment.
           in: path
           name: environmentId
           required: true
@@ -274,7 +449,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/EnvironmentModel"
+                $ref: "#/components/schemas/EnvironmentModel-haljson"
             application/json:
               schema:
                 $ref: "#/components/schemas/EnvironmentModel"
@@ -990,6 +1165,79 @@ paths:
       summary: Get authenticated user details
       tags:
         - Me
+  /v1/organizations:
+    get:
+      description: This endpoint returns the list of the Organizations that belongs to the user.
+      operationId: get-organizations
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/OrganizationModel-haljson"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/OrganizationModel"
+                type: array
+          description: ""
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: List Organizations
+      tags:
+        - Organizations
+  "/v1/organizations/{organizationId}/products":
+    post:
+      description: >-
+        This endpoint creates a new Product in a specified Organization 
+
+        identified by the `organizationId` parameter, which can be obtained from the [List Organizations](#operation/get-organizations) endpoint.
+      operationId: create-product
+      parameters:
+        - description: The identifier of the Organization.
+          in: path
+          name: organizationId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateProductRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateProductRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateProductRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ProductModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductModel"
+          description: When the creation was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Create Product
+      tags:
+        - Products
   /v1/products:
     get:
       description: This endpoint returns the list of the Products that belongs to the user.
@@ -1013,6 +1261,111 @@ paths:
         "429":
           description: Too many requests. In case of the request rate exceeds the rate limits.
       summary: List Products
+      tags:
+        - Products
+  "/v1/products/{productId}":
+    delete:
+      description: This endpoint removes a Product identified by the `productId` parameter.
+      operationId: delete-product
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Delete Product
+      tags:
+        - Products
+    get:
+      description: >-
+        This endpoint returns the metadata of a Product 
+
+        identified by the `productId`.
+      operationId: get-product
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ProductModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductModel"
+          description: When everything is ok, the product data returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Get Product
+      tags:
+        - Products
+    put:
+      description: This endpoint updates a Product identified by the `productId` parameter.
+      operationId: update-product
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateProductRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProductRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateProductRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ProductModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Update Product
       tags:
         - Products
   "/v1/products/{productId}/auditlogs":
@@ -1130,6 +1483,53 @@ paths:
       summary: List Configs
       tags:
         - Configs
+    post:
+      description: >-
+        This endpoint creates a new Config in a specified Product 
+
+        identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      operationId: create-config
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateConfigRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateConfigRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateConfigRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/ConfigModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfigModel"
+          description: When the creation was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Create Config
+      tags:
+        - Configs
   "/v1/products/{productId}/environments":
     get:
       description: >-
@@ -1151,7 +1551,7 @@ paths:
             application/hal+json:
               schema:
                 items:
-                  $ref: "#/components/schemas/EnvironmentModel"
+                  $ref: "#/components/schemas/EnvironmentModel-haljson"
                 type: array
             application/json:
               schema:
@@ -1197,15 +1597,15 @@ paths:
               $ref: "#/components/schemas/CreateEnvironmentModel"
         required: true
       responses:
-        "200":
+        "201":
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/EnvironmentModel"
+                $ref: "#/components/schemas/EnvironmentModel-haljson"
             application/json:
               schema:
                 $ref: "#/components/schemas/EnvironmentModel"
-          description: ""
+          description: When the creation was successful.
         "400":
           description: Bad request.
         "401":
@@ -1217,6 +1617,89 @@ paths:
       summary: Create Environment
       tags:
         - Environments
+  "/v1/products/{productId}/tags":
+    get:
+      description: >-
+        This endpoint returns the list of the Tags in a 
+
+        specified Product, identified by the `productId` parameter.
+      operationId: get-tags
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TagModel-haljson"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/TagModel"
+                type: array
+          description: ""
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: List Tags
+      tags:
+        - Tags
+    post:
+      description: >-
+        This endpoint creates a new Tag in a specified Product 
+
+        identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      operationId: create-tag
+      parameters:
+        - description: The identifier of the Organization.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateTagModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTagModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateTagModel"
+        required: true
+      responses:
+        "201":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/TagModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TagModel"
+          description: When the creation was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Create Tag
+      tags:
+        - Tags
   "/v1/settings/{settingId}":
     delete:
       description: >-
@@ -1265,7 +1748,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/SettingModel"
+                $ref: "#/components/schemas/SettingModel-haljson"
             application/json:
               schema:
                 $ref: "#/components/schemas/SettingModel"
@@ -1288,7 +1771,9 @@ paths:
         with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Config.
 
 
-        Only the `name` and `hint` attributes are modifiable by this endpoint.
+        Only the `name`, `hint` and `tags` attributes are modifiable by this endpoint.
+
+        The `tags` attribute is a simple collection of the [tag IDs](#operation/get-tags) attached to the given setting.
 
 
         The advantage of using JSON Patch is that you can describe individual update operations on a resource
@@ -1305,12 +1790,19 @@ paths:
         	"key": "myAwesomeFeature",
         	"name": "Tihs is a naem with soem typos.",
         	"hint": "This Flag controls my awesome feature.",
-        	"settingType": "boolean"
+        	"settingType": "boolean",
+        	"tags": [
+        		{
+        			"tagId": 0,
+        			"name": "sample tag",
+        			"color": "whale"
+        		}
+        	]
         }
 
         ```
 
-        If we send an update request body as below:
+        If we send an update request body as below (it changes the name and adds the already existing tag with the id 2):
 
         ```
 
@@ -1319,12 +1811,17 @@ paths:
         		"op": "replace",
         		"path": "/name",
         		"value": "This is the name without typos."
+        	},
+        	{
+        		"op": "add",
+        		"path": "/tags/-",
+        		"value": 2
         	}
         ]
 
         ```
 
-        Only the name is going to be updated and all the other attributes are remaining unchanged.
+        Only the `name` and `tags` are going to be updated and all the other attributes are remaining unchanged.
 
         So we get a response like this:
 
@@ -1335,7 +1832,19 @@ paths:
         	"key": "myAwesomeFeature",
         	"name": "This is the name without typos.",
         	"hint": "This Flag controls my awesome feature.",
-        	"settingType": "boolean"
+        	"settingType": "boolean",
+        	"tags": [
+        		{
+        			"tagId": 0,
+        			"name": "sample tag",
+        			"color": "whale"
+        		},
+        		{
+        			"tagId": 2,
+        			"name": "another tag",
+        			"color": "koala"
+        		}
+        	]
         }
 
         ```
@@ -1376,7 +1885,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/SettingModel"
+                $ref: "#/components/schemas/SettingModel-haljson"
             application/json:
               schema:
                 $ref: "#/components/schemas/SettingModel"
@@ -1917,6 +2426,111 @@ paths:
       summary: Replace value
       tags:
         - Feature Flag & Setting values using SDK Key
+  "/v1/tags/{tagId}":
+    delete:
+      description: This endpoint removes a Tag identified by the `tagId` parameter.
+      operationId: delete-tag
+      parameters:
+        - description: The identifier of the Tag.
+          in: path
+          name: tagId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Delete Tag
+      tags:
+        - Tags
+    get:
+      description: >-
+        This endpoint returns the metadata of a Tag 
+
+        identified by the `tagId`.
+      operationId: get-tag
+      parameters:
+        - description: The identifier of the Tag.
+          in: path
+          name: tagId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/TagModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TagModel"
+          description: When everything is ok, the tag data returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Get Tag
+      tags:
+        - Tags
+    put:
+      description: This endpoint updates a Tag identified by the `tagId` parameter.
+      operationId: update-tag
+      parameters:
+        - description: The identifier of the Tag.
+          in: path
+          name: tagId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateTagModel"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTagModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTagModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/TagModel-haljson"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TagModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Update Tag
+      tags:
+        - Tags
 components:
   schemas:
     AddOrUpdateIntegrationLinkModel:
@@ -2027,11 +2641,55 @@ components:
         name:
           nullable: true
           type: string
+        product:
+          $ref: "#/components/schemas/ProductModel"
       type: object
     ConfigModel-haljson:
       properties:
+        _embedded:
+          properties:
+            product:
+              properties:
+                _embedded:
+                  properties:
+                    organization:
+                      properties:
+                        _links:
+                          properties:
+                            products:
+                              type: string
+                          type: object
+                        name:
+                          nullable: true
+                          type: string
+                        organizationId:
+                          format: uuid
+                          type: string
+                      type: object
+                  type: object
+                _links:
+                  properties:
+                    configs:
+                      type: string
+                    environments:
+                      type: string
+                    self:
+                      type: string
+                    tags:
+                      type: string
+                  type: object
+                name:
+                  nullable: true
+                  type: string
+                productId:
+                  format: uuid
+                  type: string
+              type: object
+          type: object
         _links:
           properties:
+            self:
+              type: string
             settings:
               type: string
           type: object
@@ -2042,11 +2700,31 @@ components:
           nullable: true
           type: string
       type: object
+    CreateConfigRequest:
+      additionalProperties: false
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+        - name
+      type: object
     CreateEnvironmentModel:
       additionalProperties: false
       properties:
         name:
           maxLength: 255
+          minLength: 0
+          type: string
+      required:
+        - name
+      type: object
+    CreateProductRequest:
+      additionalProperties: false
+      properties:
+        name:
+          maxLength: 1000
           minLength: 0
           type: string
       required:
@@ -2074,10 +2752,32 @@ components:
           type: string
         settingType:
           $ref: "#/components/schemas/SettingType"
+        tags:
+          description: The IDs of the tags which are attached to the setting.
+          items:
+            format: int64
+            type: integer
+          nullable: true
+          type: array
       required:
         - key
         - name
         - settingType
+      type: object
+    CreateTagModel:
+      additionalProperties: false
+      properties:
+        color:
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+        - name
       type: object
     DeleteIntegrationLinkModel:
       additionalProperties: false
@@ -2088,6 +2788,62 @@ components:
     EnvironmentModel:
       additionalProperties: false
       properties:
+        environmentId:
+          format: uuid
+          type: string
+        name:
+          nullable: true
+          type: string
+        product:
+          $ref: "#/components/schemas/ProductModel"
+      type: object
+    EnvironmentModel-haljson:
+      properties:
+        _embedded:
+          properties:
+            product:
+              properties:
+                _embedded:
+                  properties:
+                    organization:
+                      properties:
+                        _links:
+                          properties:
+                            products:
+                              type: string
+                          type: object
+                        name:
+                          nullable: true
+                          type: string
+                        organizationId:
+                          format: uuid
+                          type: string
+                      type: object
+                  type: object
+                _links:
+                  properties:
+                    configs:
+                      type: string
+                    environments:
+                      type: string
+                    self:
+                      type: string
+                    tags:
+                      type: string
+                  type: object
+                name:
+                  nullable: true
+                  type: string
+                productId:
+                  format: uuid
+                  type: string
+              type: object
+          type: object
+        _links:
+          properties:
+            self:
+              type: string
+          type: object
         environmentId:
           format: uuid
           type: string
@@ -2184,6 +2940,20 @@ components:
           format: uuid
           type: string
       type: object
+    OrganizationModel-haljson:
+      properties:
+        _links:
+          properties:
+            products:
+              type: string
+          type: object
+        name:
+          nullable: true
+          type: string
+        organizationId:
+          format: uuid
+          type: string
+      type: object
     ProductModel:
       additionalProperties: false
       properties:
@@ -2201,8 +2971,12 @@ components:
         _embedded:
           properties:
             organization:
-              additionalProperties: false
               properties:
+                _links:
+                  properties:
+                    products:
+                      type: string
+                  type: object
                 name:
                   nullable: true
                   type: string
@@ -2216,6 +2990,10 @@ components:
             configs:
               type: string
             environments:
+              type: string
+            self:
+              type: string
+            tags:
               type: string
           type: object
         name:
@@ -2335,31 +3113,154 @@ components:
       properties:
         configId:
           format: uuid
+          readOnly: true
           type: string
         configName:
           nullable: true
+          readOnly: true
           type: string
         expirationWarningAt:
           format: date-time
           nullable: true
+          readOnly: true
           type: string
         hint:
           nullable: true
+          readOnly: true
           type: string
         key:
           nullable: true
+          readOnly: true
           type: string
         name:
           nullable: true
+          readOnly: true
           type: string
         ownerUserEmail:
           nullable: true
+          readOnly: true
           type: string
         ownerUserFullName:
           nullable: true
+          readOnly: true
           type: string
         settingId:
           format: int32
+          readOnly: true
+          type: integer
+        settingType:
+          $ref: "#/components/schemas/SettingType"
+        tags:
+          items:
+            $ref: "#/components/schemas/TagModel"
+          nullable: true
+          type: array
+      type: object
+    SettingModel-haljson:
+      properties:
+        _embedded:
+          properties:
+            tags:
+              items:
+                properties:
+                  _embedded:
+                    properties:
+                      product:
+                        properties:
+                          _embedded:
+                            properties:
+                              organization:
+                                properties:
+                                  _links:
+                                    properties:
+                                      products:
+                                        type: string
+                                    type: object
+                                  name:
+                                    nullable: true
+                                    type: string
+                                  organizationId:
+                                    format: uuid
+                                    type: string
+                                type: object
+                            type: object
+                          _links:
+                            properties:
+                              configs:
+                                type: string
+                              environments:
+                                type: string
+                              self:
+                                type: string
+                              tags:
+                                type: string
+                            type: object
+                          name:
+                            nullable: true
+                            type: string
+                          productId:
+                            format: uuid
+                            type: string
+                        type: object
+                    type: object
+                  _links:
+                    properties:
+                      self:
+                        type: string
+                    type: object
+                  color:
+                    nullable: true
+                    type: string
+                  name:
+                    nullable: true
+                    type: string
+                  tagId:
+                    format: int64
+                    type: integer
+                type: object
+              type: array
+          type: object
+        _links:
+          properties:
+            self:
+              type: string
+          type: object
+        configId:
+          format: uuid
+          readOnly: true
+          type: string
+        configName:
+          nullable: true
+          readOnly: true
+          type: string
+        expirationWarningAt:
+          format: date-time
+          nullable: true
+          readOnly: true
+          type: string
+        hint:
+          nullable: true
+          readOnly: true
+          type: string
+        key:
+          nullable: true
+          readOnly: true
+          type: string
+        name:
+          nullable: true
+          readOnly: true
+          type: string
+        ownerUserEmail:
+          nullable: true
+          readOnly: true
+          type: string
+        ownerUserFullName:
+          nullable: true
+          readOnly: true
+          type: string
+        settingId:
+          format: int32
+          readOnly: true
           type: integer
         settingType:
           $ref: "#/components/schemas/SettingType"
@@ -2442,8 +3343,50 @@ components:
           properties:
             config:
               properties:
+                _embedded:
+                  properties:
+                    product:
+                      properties:
+                        _embedded:
+                          properties:
+                            organization:
+                              properties:
+                                _links:
+                                  properties:
+                                    products:
+                                      type: string
+                                  type: object
+                                name:
+                                  nullable: true
+                                  type: string
+                                organizationId:
+                                  format: uuid
+                                  type: string
+                              type: object
+                          type: object
+                        _links:
+                          properties:
+                            configs:
+                              type: string
+                            environments:
+                              type: string
+                            self:
+                              type: string
+                            tags:
+                              type: string
+                          type: object
+                        name:
+                          nullable: true
+                          type: string
+                        productId:
+                          format: uuid
+                          type: string
+                      type: object
+                  type: object
                 _links:
                   properties:
+                    self:
+                      type: string
                     settings:
                       type: string
                   type: object
@@ -2455,8 +3398,52 @@ components:
                   type: string
               type: object
             environment:
-              additionalProperties: false
               properties:
+                _embedded:
+                  properties:
+                    product:
+                      properties:
+                        _embedded:
+                          properties:
+                            organization:
+                              properties:
+                                _links:
+                                  properties:
+                                    products:
+                                      type: string
+                                  type: object
+                                name:
+                                  nullable: true
+                                  type: string
+                                organizationId:
+                                  format: uuid
+                                  type: string
+                              type: object
+                          type: object
+                        _links:
+                          properties:
+                            configs:
+                              type: string
+                            environments:
+                              type: string
+                            self:
+                              type: string
+                            tags:
+                              type: string
+                          type: object
+                        name:
+                          nullable: true
+                          type: string
+                        productId:
+                          format: uuid
+                          type: string
+                      type: object
+                  type: object
+                _links:
+                  properties:
+                    self:
+                      type: string
+                  type: object
                 environmentId:
                   format: uuid
                   type: string
@@ -2580,11 +3567,101 @@ components:
           nullable: true
           type: object
       type: object
+    TagModel:
+      additionalProperties: false
+      properties:
+        color:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        product:
+          $ref: "#/components/schemas/ProductModel"
+        tagId:
+          format: int64
+          type: integer
+      type: object
+    TagModel-haljson:
+      properties:
+        _embedded:
+          properties:
+            product:
+              properties:
+                _embedded:
+                  properties:
+                    organization:
+                      properties:
+                        _links:
+                          properties:
+                            products:
+                              type: string
+                          type: object
+                        name:
+                          nullable: true
+                          type: string
+                        organizationId:
+                          format: uuid
+                          type: string
+                      type: object
+                  type: object
+                _links:
+                  properties:
+                    configs:
+                      type: string
+                    environments:
+                      type: string
+                    self:
+                      type: string
+                    tags:
+                      type: string
+                  type: object
+                name:
+                  nullable: true
+                  type: string
+                productId:
+                  format: uuid
+                  type: string
+              type: object
+          type: object
+        _links:
+          properties:
+            self:
+              type: string
+          type: object
+        color:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        tagId:
+          format: int64
+          type: integer
+      type: object
+    UpdateConfigRequest:
+      additionalProperties: false
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+      type: object
     UpdateEnvironmentModel:
       additionalProperties: false
       properties:
         name:
           maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+      type: object
+    UpdateProductRequest:
+      additionalProperties: false
+      properties:
+        name:
+          maxLength: 1000
           minLength: 0
           nullable: true
           type: string
@@ -2610,6 +3687,21 @@ components:
           nullable: true
           type: object
       type: object
+    UpdateTagModel:
+      additionalProperties: false
+      properties:
+        color:
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+      required:
+        - name
+      type: object
   securitySchemes:
     Basic:
       description: >-
@@ -2627,8 +3719,10 @@ x-tagGroups:
   - name: Feature Flag metadata
     tags:
       - Feature Flags & Settings
+      - Tags
   - name: General
     tags:
+      - Organizations
       - Products
       - Configs
       - Environments

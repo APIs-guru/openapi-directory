@@ -148,7 +148,7 @@ paths:
     post:
       description: Creates a consumer for the given tenant.
       parameters:
-        - description: The identifier for the tenant.
+        - description: The identifier for the tenant. The only supported tenants are uk, au and nz
           in: path
           name: tenant
           required: true
@@ -4315,6 +4315,28 @@ paths:
           description: Unauthorized
         "500":
           $ref: "#/components/responses/500ErrorResponse"
+        "503":
+          content:
+            application/json:
+              example:
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                description: Service Unavailable
+                properties:
+                  fault:
+                    properties:
+                      faultId:
+                        description: A value that helps identify this response back to logs, so we can easily find this specific fault
+                        type: string
+                      traceId:
+                        description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+                        type: string
+                    required:
+                      - faultId
+                    type: object
+                type: object
+          description: Service Unavailable
       summary: Get auto-completed search terms
       tags:
         - Search
@@ -4389,36 +4411,7 @@ paths:
                 faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
                 traceId: 0HLOCKDKQPKIU
               schema:
-                description: A HTTP 4xx error response
-                properties:
-                  fault:
-                    properties:
-                      errors:
-                        items:
-                          properties:
-                            description:
-                              description: Specific details about the error that may assist the you in resolving the issue
-                              type: string
-                            errorCode:
-                              description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
-                              type: string
-                            fields:
-                              description: An array of invalid query fields
-                              items:
-                                type: string
-                              type: array
-                          type: object
-                        type: array
-                      faultId:
-                        description: A value that helps identify this response back to logs, so we can easily find this specific fault
-                        type: string
-                      traceId:
-                        description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
-                        type: string
-                    required:
-                      - faultId
-                    type: object
-                type: object
+                $ref: "#/components/schemas/4XXErrorSchema"
           description: Bad Request
         "401":
           content:
@@ -4431,8 +4424,41 @@ paths:
               schema:
                 $ref: "#/components/schemas/4XXErrorSchema"
           description: Unauthorized
+        "422":
+          content:
+            application/json:
+              example:
+                errors:
+                  - errorCode: "422"
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Unprocessable Entity - search term rejected
         "500":
           $ref: "#/components/responses/500ErrorResponse"
+        "503":
+          content:
+            application/json:
+              example:
+                faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
+                traceId: 0HLOCKDKQPKIU
+              schema:
+                description: Service Unavailable
+                properties:
+                  fault:
+                    properties:
+                      faultId:
+                        description: A value that helps identify this response back to logs, so we can easily find this specific fault
+                        type: string
+                      traceId:
+                        description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+                        type: string
+                    required:
+                      - faultId
+                    type: object
+                type: object
+          description: Service Unavailable
       summary: Search restaurants
       tags:
         - Search
@@ -6415,12 +6441,9 @@ components:
           type: string
         registrationSource:
           default: Native
-          description: The registration source of the consumer
+          description: The registration source of the consumer. Australia and New Zealand only support Guest
           enum:
             - Native
-            - Facebook
-            - Google
-            - Apple
             - Guest
           type: string
       required:
@@ -8317,6 +8340,26 @@ components:
             - Unknown
           type: string
       type: object
+    CreateSupportTicketRequest:
+      description: Request containing support ticket information
+      example:
+        message: Change weekly budget
+        requestTypes:
+          - top_placement
+          - interest
+      properties:
+        message:
+          description: The message with the support details
+          type: string
+        requestTypes:
+          description: List of types ticket belongs to
+          items:
+            description: Type the ticket belongs to
+            type: string
+          maxLength: 3
+          minLength: 1
+          type: array
+      type: object
     CreateTicketModel:
       description: Information needed to create a ticket on the Just Eat Zendesk instance for a Scoober delivery support incident
       properties:
@@ -9601,6 +9644,62 @@ components:
         isRestaurantWhiteListed:
           description: We are going to use smooth 'delivery fees' feature rollout. So, in the first iteration feature will be available for a several restaurants.
           type: boolean
+      type: object
+    GetSupportRequestTypesResponse:
+      description: Array of types request belongs to
+      example:
+        - id: "1"
+          name: top placement
+          subtype:
+            - id: "11"
+              name: interest
+              subtype: []
+              value: top_placement_interest
+            - id: "12"
+              name: issue
+              subtype: []
+              value: top_placement_issue
+          value: top_placement
+        - id: "2"
+          name: menu updates
+          subtype: []
+          value: menu_updates
+      items:
+        $ref: "#/components/schemas/SupportRequestType"
+      minLength: 1
+      type: array
+    GetSupportRequestsResponse:
+      description: Response representing support requests from restaurant
+      example:
+        paging:
+          cursors:
+            after: NDMyNzQyODI3OTQw
+        requests:
+          - id: "5646645"
+            status: open
+            submittedDate: 2020-01-01T09:30:00.000Z
+            type: top_placement
+          - id: "235253"
+            status: closed
+            submittedDate: 2020-01-01T09:30:00.000Z
+            type: top_placement
+      properties:
+        paging:
+          description: Consists of pagination information
+          properties:
+            cursors:
+              description: Consists of cursors markers used in pagination
+              properties:
+                after:
+                  description: The value should be used in the query parameter named after. It is used as a cursor of the last returned record in the previous request, from which next offset going to be fetched. A missing or empty value indicates that the end of the result set has been reached
+                  type: string
+              type: object
+          type: object
+        requests:
+          description: List of restaurant support requests
+          items:
+            $ref: "#/components/schemas/SupportRequest"
+          type: array
       type: object
     GiftCardsErrorResponse:
       properties:
@@ -15505,6 +15604,44 @@ components:
             type: string
           type: array
       type: object
+    SupportRequest:
+      description: Object that represents support request
+      properties:
+        id:
+          description: The Id of the request
+          type: string
+        status:
+          description: Request status
+          enum:
+            - new
+            - open
+            - closed
+            - pending
+            - solved
+            - hold
+        submittedDate:
+          description: Request placed date
+          format: date-time
+          type: string
+        type:
+          description: Request type
+          type: string
+      type: object
+    SupportRequestType:
+      description: Object that represents type/sub-type of request
+      properties:
+        name:
+          description: Human readable name
+          type: string
+        subTypes:
+          description: Possible sub-types of request
+          items:
+            $ref: "#/components/schemas/SupportRequestType"
+          type: array
+        value:
+          description: Type value which will be used for Zendesk ticket as a tag
+          type: string
+      type: object
     SyncFlexStateType:
       description: <p>The flex state type changes according to the exponential moving average and is used as a reference to bring more couriers to suffice the demand in a given delivery zone.</p> <p>If the flex state type is "Off", it means no shifts will be offered for the delivery zone.</p> <p>If the state is "CLOSED", only scheduled shifts will be allowed for the delivery zone.</p> <p>If the state is "SEEKING", the shift offers are going to be made across the courier network in order to suffice the current demand.</p> <p>If the state is "OPEN", it means demand is high and couriers from all over the courier network are allowed to create shifts for themselves to suffice the current demand.</p> <p>If the state is "CODE_RED", it means not only can everyone create shifts for themselves for the delivery zone but also couriers from other delivery zones might reallocate to help suffice the demand of that particular delivery zone.</p>
       enum:
@@ -15657,6 +15794,46 @@ components:
         data:
           description: set of special TwiML instructions defined by Twilio that will be executed
           readOnly: true
+          type: string
+      type: object
+    TwilioDebuggingEventRequest:
+      description: Information about errors and warnings which could occur on Twilio account
+      properties:
+        accountSid:
+          description: Unique identifier of the account that generated the Debugger event
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        level:
+          description: Severity of the Debugger event. Possible values are Error and Warning
+          example: Error
+          type: string
+        parentAccountSid:
+          description: Unique identifier of the Parent Account. This parameter only exists if the above account is a sub account
+          example: ACxxxxxxxxxxxxxxxxxxxxxxxx
+          type: string
+        payload:
+          description: JSON data specific to the Debugging Event. More details - https://www.twilio.com/docs/usage/troubleshooting/debugging-event-webhooks#payload
+          example:
+            error_code: 13227
+            more_info:
+              ErrorCode: 13227
+              LogLevel: WARN
+              Msg: No International Permission.
+            resource_sid: CAxxxx
+            service_sid: SSxxxx
+            webhook: null
+          type: string
+        payloadType:
+          description: Type of the payload
+          example: application/json
+          type: string
+        sid:
+          description: Unique identifier of the Debugger event
+          example: NOxxxxx
+          type: string
+        timestamp:
+          description: Time of occurrence of the Debugger event
+          example: 2020-01-01T23:28:54.000Z
           type: string
       type: object
     TwilioIncomingMessageCallbackRequest:

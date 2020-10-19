@@ -703,12 +703,10 @@ definitions:
     type: object
   ArdefResponse:
     properties:
-      fundingSource:
+      funding_source:
         description: "<strong>Format: </strong>Fixed length, 1 AN<br><strong>Description: </strong>Funding type for a card type request submitted.<ul><li> C - Credit</li><li> D - Debit</li><li>P - Prepaid</li></ul>"
         example: C
         readOnly: true
-        type: string
-      funding_source:
         type: string
       ind_comm_level2:
         description: "<strong>Format: </strong>Fixed length, 1 AN<br><strong>Description: </strong>This field will be set to Y for Level 2 purchasing cards."
@@ -1419,6 +1417,10 @@ definitions:
         example: <Provide merchant id that links to API Key>
         format: int64
         type: integer
+      payload_google_pay:
+        description: "<strong>Format: </strong>Variable length<br><strong>Description: </strong>Google Pay payload"
+        example: xxxxxxx
+        type: string
       profile_id:
         description: "<strong>Format: </strong>Fixed length, 20 N<br><strong>Description: </strong>Explicitly identifies which Payment Gateway profile should be used for the request."
         example: "21200001000300000978"
@@ -1587,7 +1589,7 @@ definitions:
           <strong>Format: </strong>Variable length, up to 32 AN<br><strong>Description: </strong>Use to indicate which company developed the integration to Qualpay or the name of the payment solution that is connected to Qualpay.  Suggested usage is softwareABCv1.0 or companyXYZv2.0.
         example: QualpayV1.2
         type: string
-      duplicateSeconds:
+      duplicate_seconds:
         description: "<strong>Format: </strong>Variable length, up to 5 N<br><strong>Description: </strong>Duplicate transaction window in seconds. Qualpay will reject any transactions after a successful transaction within the duplicate_seconds window with a duplicate Account Number and optionally Purchase ID or, and, Merchant Reference Number. This value overrides any value set for a merchant on Qualpay Manager."
         example: 300
         format: int64
@@ -1642,6 +1644,10 @@ definitions:
         description: "<br><strong>Default: </strong>false<br><strong>Description: </strong>This field must be present and set to a value of 'true' in order for the request to allow for approval of a partial amount. This would be used to allow a merchant to accept a partial payment from pre-paid or debit cards. When only part of the requested amount is available, the response code will be 010 and the amt_tran field in the response will contain the amount that was approved. A second sale request  on a different card is needed  to capture the remaining amount. Applicable to auth and sale request types."
         example: true
         type: boolean
+      payload_google_pay:
+        description: "<strong>Format: </strong>Variable length<br><strong>Description: </strong>Google Pay payload"
+        example: xxxxxxx
+        type: string
       pg_id:
         description: "<strong>Format: </strong>Fixed length, 32 AN<br><strong>Description: </strong>PG ID of previously authorized transaction. This field is required when sending a capture, refund, or void request."
         example: d24ac6189b0b11e6966ca68d5edbef41
@@ -1849,6 +1855,10 @@ definitions:
         example: <Provide merchant id that links to API Key>
         format: int64
         type: integer
+      payload_google_pay:
+        description: "<strong>Format: </strong>Variable length<br><strong>Description: </strong>Google Pay payload"
+        example: xxxxxxx
+        type: string
       profile_id:
         description: "<strong>Format: </strong>Fixed length, 20 N<br><strong>Description: </strong>Explicitly identifies which Payment Gateway profile should be used for the request."
         example: "21200001000300000978"

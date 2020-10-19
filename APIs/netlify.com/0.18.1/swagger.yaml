@@ -1507,6 +1507,21 @@ paths:
           $ref: "#/responses/error"
       tags:
         - metadata
+  "/sites/{site_id}/rollback":
+    parameters:
+      - in: path
+        name: site_id
+        required: true
+        type: string
+    post:
+      operationId: rollbackSiteDeploy
+      responses:
+        "204":
+          description: No content
+        default:
+          $ref: "#/responses/error"
+      tags:
+        - deploy
   "/sites/{site_id}/service-instances":
     get:
       operationId: listServiceInstancesForSite

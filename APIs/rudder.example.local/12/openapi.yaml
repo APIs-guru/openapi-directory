@@ -6360,8 +6360,13 @@ components:
             - undefined
           type: string
         value:
-          description: Certificate (or public key for <6.0 agents) used by the agent
-          example: ----BEGIN CERTIFICATE---- ....
+          description: Certificate (or public key for <6.0 agents) used by the agent. Be careful write a "\n" after header line and before footer line, JSON does not keep formating in string.
+          example: >-
+            -----BEGIN CERTIFICATE-----
+
+            MIIFqDCC[...]3tALNn
+
+            -----END CERTIFICATE-----
           format: PEM
           type: string
       required:

@@ -1,41 +1,51 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.ritekit.com/'
+  - url: https://api.ritekit.com/
 info:
-  description: |-
+  description: >-
     RiteKit API is based on REST principles.
+
 
     Authentication uses standard OAuth 2.0 process
 
+
     ##Getting started
+
 
     1. Sign up for [RiteKit](https://ritekit.com/)
 
+
     1. Go to [developer dashboard](https://ritekit.com/developer/dashboard/)
+
 
     1. Click "Create a token" button to get your **Client ID** and **Client secret**
 
+
     1. When you reach your free limit of calls per month, [upgrade to paid tiers](https://ritekit.com/developer/)
+
 
     ## Options for authorizing API Calls
 
+
     #### Using Client ID directly
+
 
     You can directly connect to our API using your **client ID** by sending it as a GET query parameter. This option is simple (no need for oAuth) but it should be used only in case the Client ID is not exposed publicly.
 
+
     GET  https://api.ritekit.com/v1/stats/multiple-hashtags?tags=php&client_id=292c6912e7710c838347ae178b4a
-  title: RiteKit
+  title: RiteKit API
   version: 1.0.0
   x-apisguru-categories:
     - social
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/781729376161366016/qdUFUsCN_400x400.jpg'
+    url: https://pbs.twimg.com/profile_images/781729376161366016/qdUFUsCN_400x400.jpg
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: apiBlueprint
-      url: 'https://raw.githubusercontent.com/RiteKit/api-docs/master/apiary.apib'
+      url: https://raw.githubusercontent.com/RiteKit/api-docs/master/apiary.apib
       version: 1A
   x-providerName: ritekit.com
 tags: []
@@ -43,6 +53,7 @@ paths:
   /v1/emoji/auto-emojify:
     get:
       description: Returns text of the post with emoji added
+      operationId: Auto-Emojify
       parameters:
         - description: Text of the post
           example: Why robots may soon steal all manufacturing jobs – but it’s not all bad news
@@ -52,7 +63,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
@@ -61,7 +72,7 @@ paths:
                     code: 200
                     message: OK
                     result: true
-                    text: "Why robots may soon steal all manufacturing jobs – but it’s not all bad news \U0001F916\U0001F5DE❓"
+                    text: Why robots may soon steal all manufacturing jobs – but it’s not all bad news 🤖🗞❓
           description: OK
           headers: {}
       summary: Auto-Emojify
@@ -69,6 +80,7 @@ paths:
   /v1/emoji/suggestions:
     get:
       description: Returns list of emoji suggestions for a given text of the post
+      operationId: Emoji Suggestions
       parameters:
         - description: Text of the post
           example: Why robots may soon steal all manufacturing jobs – but it’s not all bad news
@@ -78,7 +90,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
@@ -86,8 +98,8 @@ paths:
                   value:
                     code: 200
                     emojis:
-                      - "\U0001F916"
-                      - "\U0001F5DE"
+                      - 🤖
+                      - 🗞
                       - ❓
                     message: OK
                     result: true
@@ -98,9 +110,10 @@ paths:
   /v1/images/animate:
     get:
       description: Returns URL of an animated GIF.
+      operationId: Animate Image
       parameters:
         - description: URL of the company
-          example: 'https://jpeg.org/images/jpeg-home.jpg'
+          example: https://jpeg.org/images/jpeg-home.jpg
           in: query
           name: url
           required: true
@@ -114,22 +127,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             image/gif:
               examples:
                 response:
-                  value: ''
+                  value: ""
           description: OK
           headers: {}
       summary: Animate Image
       tags: []
   /v1/images/logo:
     get:
-      description: |-
+      description: >-
         Returns a company logo based on website domain. If the logo is not in our database yet, it will be extracted from the site on the fly. White logo background is automatically removed to make the logo look better on color backgrounds.
 
+
         Note: It is not possible to access our company logo API publicly without authentication. If you wish to do so, you have to create proxy on your own server that calls our API from the server side.
+      operationId: Company Logo
       parameters:
         - description: URL of the company
           example: google.com
@@ -139,12 +154,12 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             image/png:
               examples:
                 response:
-                  value: ''
+                  value: ""
           description: OK
           headers: {}
       summary: Company Logo
@@ -152,9 +167,10 @@ paths:
   /v1/images/quote:
     get:
       description: Returns URL of an image created from text according to given style parameters
+      operationId: Text to Image
       parameters:
         - description: Text of the quote
-          example: 'If you love life, don''t waste time, for time is what life is made up of'
+          example: If you love life, don't waste time, for time is what life is made up of
           in: query
           name: quote
           required: true
@@ -168,7 +184,7 @@ paths:
           schema:
             type: string
         - description: Font size for the quote (author font size is calculated automatically)
-          example: '60'
+          example: "60"
           in: query
           name: fontSize
           required: true
@@ -182,7 +198,7 @@ paths:
           schema:
             type: string
         - description: Font color of the quote text
-          example: '#4f4f4f'
+          example: "#4f4f4f"
           in: query
           name: quoteFontColor
           required: true
@@ -196,21 +212,21 @@ paths:
           schema:
             type: string
         - description: Font color of the author
-          example: '#e5e5e5'
+          example: "#e5e5e5"
           in: query
           name: authorFontColor
           required: true
           schema:
             type: string
         - description: Enable highlight on quote text
-          example: '1'
+          example: "1"
           in: query
           name: enableHighlight
           required: true
           schema:
             type: integer
         - description: Color used for highlight
-          example: '#f0ea66'
+          example: "#f0ea66"
           in: query
           name: highlightColor
           required: true
@@ -224,7 +240,7 @@ paths:
           schema:
             type: string
         - description: Background color for solid background type
-          example: '#000000'
+          example: "#000000"
           in: query
           name: backgroundColor
           required: true
@@ -238,27 +254,27 @@ paths:
           schema:
             type: string
         - description: First color for gradient background type
-          example: '#1ee691'
+          example: "#1ee691"
           in: query
           name: gradientColor1
           required: true
           schema:
             type: string
         - description: Second color for gradient background type
-          example: '#1ddad6'
+          example: "#1ddad6"
           in: query
           name: gradientColor2
           required: true
           schema:
             type: string
         - description: URL of the brand logo
-          example: 'https://cdn.ritekit.com/assets/img/common/made-with-ritekit-white.png'
+          example: https://cdn.ritekit.com/assets/img/common/made-with-ritekit-white.png
           in: query
           name: brandLogo
           required: true
           schema:
             type: string
-        - description: 'Animation type: none, rays, glint, circle'
+        - description: "Animation type: none, rays, glint, circle"
           example: glint
           in: query
           name: animation
@@ -272,14 +288,14 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
                 response:
                   value:
                     result: true
-                    url: 'https://media.ritekit.com/media/images/82a4d5be-6981-4913-8018-94161a5e190e.jpeg'
+                    url: https://media.ritekit.com/media/images/82a4d5be-6981-4913-8018-94161a5e190e.jpeg
           description: OK
           headers: {}
       summary: Text to Image
@@ -287,8 +303,9 @@ paths:
   /v1/link/cta:
     get:
       description: Returns list of available CTA for current user. Requires each user to authenticate with RiteKit
+      operationId: List of CTAs
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
@@ -311,32 +328,33 @@ paths:
   /v1/link/short-link:
     get:
       description: Returns a shorten link with a given CTA.
+      operationId: Shorten Link
       parameters:
         - description: URL
-          example: 'https://ritekit.com'
+          example: https://ritekit.com
           in: query
           name: url
           required: true
           schema:
             type: string
         - description: cta id
-          example: '6530'
+          example: "6530"
           in: query
           name: cta
           required: true
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
                 response:
                   value:
-                    ctaId: '6530'
+                    ctaId: "6530"
                     limit:
                       remaining: 1000
-                    original: 'https://ritekit.com'
+                    original: https://ritekit.com
                     result: true
                     service: rite.ly
                     url: rite.ly/jr6e
@@ -347,23 +365,24 @@ paths:
   /v1/search/trending:
     get:
       description: Returns list of hashtags currently trending on Twitter
+      operationId: Trending Hashtags
       parameters:
         - description: Restrict results only to green hashtags. Hides overused (red) hashtags.
           in: query
           name: green
           required: false
           schema:
-            default: '1'
+            default: "1"
             type: boolean
         - description: Restrict results only to hashtags with latin characters
           in: query
           name: latin
           required: false
           schema:
-            default: '1'
+            default: "1"
             type: boolean
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
@@ -532,6 +551,7 @@ paths:
   /v1/stats/auto-hashtag:
     get:
       description: Returns auto-hashtagged text of the post.
+      operationId: Auto-Hashtag
       parameters:
         - description: Text of the post
           example: Is artificial intelligence the future of customer service?
@@ -547,7 +567,7 @@ paths:
           schema:
             default: 2
             type: integer
-        - description: 'Position of hashtags: end => at the end, auto => anywhere'
+        - description: "Position of hashtags: end => at the end, auto => anywhere"
           in: query
           name: hashtagPosition
           required: false
@@ -555,7 +575,7 @@ paths:
             default: auto
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
@@ -563,7 +583,7 @@ paths:
                   value:
                     code: 200
                     message: OK
-                    post: 'Is #ArtificialIntelligence the future of #CustomerService?'
+                    post: "Is #ArtificialIntelligence the future of #CustomerService?"
                     result: true
           description: OK
           headers: {}
@@ -572,6 +592,7 @@ paths:
   /v1/stats/hashtag-suggestions:
     get:
       description: Returns list of hashtag suggestions for a single-word topic or a shorter text up to 1000 characters. Takes into account both semantic relevancy and real-time hashtag popularity.
+      operationId: Hashtag Suggestions
       parameters:
         - description: Topic
           example: seo
@@ -581,7 +602,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
@@ -605,11 +626,12 @@ paths:
           headers: {}
       summary: Hashtag Suggestions
       tags: []
-  '/v1/stats/history/{hashtag}':
+  "/v1/stats/history/{hashtag}":
     get:
       description: Returns historical stats for a given hashtag from the last 30 days
+      operationId: Hashtag History
       parameters:
-        - description: 'Hashtag without # mark'
+        - description: "Hashtag without # mark"
           example: job
           in: path
           name: hashtag
@@ -617,7 +639,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
@@ -631,7 +653,7 @@ paths:
                       - Great
                     data:
                       - color: 3
-                        date: '2017-10-25'
+                        date: 2017-10-25
                         exposure: 160471200
                         images: 0.03
                         links: 1
@@ -640,7 +662,7 @@ paths:
                         tag: job
                         tweets: 153000
                       - color: 3
-                        date: '2017-10-26'
+                        date: 2017-10-26
                         exposure: 109069700
                         images: 0.02
                         links: 1
@@ -649,7 +671,7 @@ paths:
                         tag: job
                         tweets: 151000
                       - color: 3
-                        date: '2017-10-27'
+                        date: 2017-10-27
                         exposure: 137699400
                         images: 0.03
                         links: 1
@@ -658,7 +680,7 @@ paths:
                         tag: job
                         tweets: 148800
                       - color: 3
-                        date: '2017-10-28'
+                        date: 2017-10-28
                         exposure: 235051400
                         images: 0.03
                         links: 1
@@ -667,7 +689,7 @@ paths:
                         tag: job
                         tweets: 137300
                       - color: 3
-                        date: '2017-10-29'
+                        date: 2017-10-29
                         exposure: 121564000
                         images: 0.02
                         links: 1
@@ -676,7 +698,7 @@ paths:
                         tag: job
                         tweets: 134500
                       - color: 3
-                        date: '2017-10-30'
+                        date: 2017-10-30
                         exposure: 128854800
                         images: 0.02
                         links: 1
@@ -685,7 +707,7 @@ paths:
                         tag: job
                         tweets: 143000
                       - color: 3
-                        date: '2017-10-31'
+                        date: 2017-10-31
                         exposure: 132086500
                         images: 0.02
                         links: 1
@@ -694,7 +716,7 @@ paths:
                         tag: job
                         tweets: 140800
                       - color: 3
-                        date: '2017-11-01'
+                        date: 2017-11-01
                         exposure: 131824000
                         images: 0.02
                         links: 0.99
@@ -703,7 +725,7 @@ paths:
                         tag: job
                         tweets: 145400
                       - color: 3
-                        date: '2017-11-02'
+                        date: 2017-11-02
                         exposure: 184530800
                         images: 0.02
                         links: 1
@@ -712,7 +734,7 @@ paths:
                         tag: job
                         tweets: 155700
                       - color: 3
-                        date: '2017-11-03'
+                        date: 2017-11-03
                         exposure: 144650100
                         images: 0.02
                         links: 1
@@ -721,7 +743,7 @@ paths:
                         tag: job
                         tweets: 153100
                       - color: 3
-                        date: '2017-11-04'
+                        date: 2017-11-04
                         exposure: 109752200
                         images: 0.02
                         links: 1
@@ -730,7 +752,7 @@ paths:
                         tag: job
                         tweets: 137800
                       - color: 3
-                        date: '2017-11-05'
+                        date: 2017-11-05
                         exposure: 135693300
                         images: 0.02
                         links: 1
@@ -739,7 +761,7 @@ paths:
                         tag: job
                         tweets: 136400
                       - color: 3
-                        date: '2017-11-06'
+                        date: 2017-11-06
                         exposure: 156251100
                         images: 0.02
                         links: 1
@@ -748,7 +770,7 @@ paths:
                         tag: job
                         tweets: 151500
                       - color: 3
-                        date: '2017-11-07'
+                        date: 2017-11-07
                         exposure: 172000300
                         images: 0.02
                         links: 1
@@ -757,7 +779,7 @@ paths:
                         tag: job
                         tweets: 157300
                       - color: 3
-                        date: '2017-11-08'
+                        date: 2017-11-08
                         exposure: 179755400
                         images: 0.02
                         links: 1
@@ -766,7 +788,7 @@ paths:
                         tag: job
                         tweets: 155800
                       - color: 3
-                        date: '2017-11-09'
+                        date: 2017-11-09
                         exposure: 146006500
                         images: 0.02
                         links: 1
@@ -775,7 +797,7 @@ paths:
                         tag: job
                         tweets: 164300
                       - color: 3
-                        date: '2017-11-10'
+                        date: 2017-11-10
                         exposure: 109453700
                         images: 0.03
                         links: 1
@@ -784,7 +806,7 @@ paths:
                         tag: job
                         tweets: 153500
                       - color: 3
-                        date: '2017-11-11'
+                        date: 2017-11-11
                         exposure: 103181700
                         images: 0.01
                         links: 1
@@ -793,7 +815,7 @@ paths:
                         tag: job
                         tweets: 144800
                       - color: 3
-                        date: '2017-11-12'
+                        date: 2017-11-12
                         exposure: 67415600
                         images: 0.02
                         links: 1
@@ -802,7 +824,7 @@ paths:
                         tag: job
                         tweets: 40200
                       - color: 3
-                        date: '2017-11-13'
+                        date: 2017-11-13
                         exposure: 102777900
                         images: 0.02
                         links: 1
@@ -811,7 +833,7 @@ paths:
                         tag: job
                         tweets: 115200
                       - color: 3
-                        date: '2017-11-14'
+                        date: 2017-11-14
                         exposure: 100626300
                         images: 0.03
                         links: 1
@@ -820,7 +842,7 @@ paths:
                         tag: job
                         tweets: 120400
                       - color: 3
-                        date: '2017-11-15'
+                        date: 2017-11-15
                         exposure: 103573900
                         images: 0.03
                         links: 1
@@ -829,7 +851,7 @@ paths:
                         tag: job
                         tweets: 148200
                       - color: 3
-                        date: '2017-11-16'
+                        date: 2017-11-16
                         exposure: 104332600
                         images: 0.02
                         links: 1
@@ -838,7 +860,7 @@ paths:
                         tag: job
                         tweets: 153000
                       - color: 3
-                        date: '2017-11-17'
+                        date: 2017-11-17
                         exposure: 114890500
                         images: 0.03
                         links: 1
@@ -847,7 +869,7 @@ paths:
                         tag: job
                         tweets: 124000
                       - color: 3
-                        date: '2017-11-18'
+                        date: 2017-11-18
                         exposure: 78934500
                         images: 0.03
                         links: 1
@@ -856,7 +878,7 @@ paths:
                         tag: job
                         tweets: 116400
                       - color: 3
-                        date: '2017-11-19'
+                        date: 2017-11-19
                         exposure: 125604100
                         images: 0.03
                         links: 1
@@ -865,7 +887,7 @@ paths:
                         tag: job
                         tweets: 120400
                       - color: 3
-                        date: '2017-11-20'
+                        date: 2017-11-20
                         exposure: 157730700
                         images: 0.03
                         links: 1
@@ -874,7 +896,7 @@ paths:
                         tag: job
                         tweets: 128300
                       - color: 3
-                        date: '2017-11-21'
+                        date: 2017-11-21
                         exposure: 109622600
                         images: 0.02
                         links: 1
@@ -883,7 +905,7 @@ paths:
                         tag: job
                         tweets: 130000
                       - color: 3
-                        date: '2017-11-22'
+                        date: 2017-11-22
                         exposure: 85755200
                         images: 0.02
                         links: 1
@@ -892,7 +914,7 @@ paths:
                         tag: job
                         tweets: 111600
                       - color: 3
-                        date: '2017-11-23'
+                        date: 2017-11-23
                         exposure: 189899700
                         images: 0.03
                         links: 1
@@ -910,16 +932,20 @@ paths:
   /v1/stats/multiple-hashtags:
     get:
       description: Returns real-time stats for up to 100 hashtags (updated hourly).
+      operationId: Hashtag Stats
       parameters:
-        - description: 'Hashtag(s) without # mark'
-          example: 'jobs,hello'
+        - description: "Hashtag(s) without # mark"
+          example: jobs,hello
+          explode: false
           in: query
           name: tags
           required: true
           schema:
+            items: {}
             type: array
+          style: form
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
@@ -962,27 +988,28 @@ paths:
   /v2/instagram/hashtags-cleaner:
     get:
       description: Remove banned hashtags before posting to Instagram
+      operationId: Hashtags cleaner
       parameters:
         - description: post
-          example: '#instaphotography #instabeauty #instagirls #instanature #instagirl #photography #beauty #girls #nature #girl #sky #water #lady #ladies #woman #women #photograph #photographs #beauties #sunlight #sitting #waters #skies #sit #photographies'
+          example: "#instaphotography #instabeauty #instagirls #instanature #instagirl #photography #beauty #girls #nature #girl #sky #water #lady #ladies #woman #women #photograph #photographs #beauties #sunlight #sitting #waters #skies #sit #photographies"
           in: query
           name: post
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json; charset=utf-8:
               examples:
                 response:
                   value:
                     bannedHashtags:
-                      - '#instagirl'
-                      - '#woman'
-                      - '#women'
+                      - "#instagirl"
+                      - "#woman"
+                      - "#women"
                     message: OK
-                    post: '#instaphotography #instabeauty #instagirls #instanature #photography #beauty #girls #nature #girl #sky #water #lady #ladies #photograph #photographs #beauties #sunlight #sitting #waters #skies #sit #photographies'
+                    post: "#instaphotography #instabeauty #instagirls #instanature #photography #beauty #girls #nature #girl #sky #water #lady #ladies #photograph #photographs #beauties #sunlight #sitting #waters #skies #sit #photographies"
                     result: true
           description: OK
           headers: {}

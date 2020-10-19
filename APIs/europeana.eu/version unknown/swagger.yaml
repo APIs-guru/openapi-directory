@@ -406,6 +406,41 @@ paths:
       summary: search for records
       tags:
         - Search
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      operationId: searchRecordsPost
+      parameters:
+        - description: searchRequest
+          in: body
+          name: searchRequest
+          required: true
+          schema:
+            $ref: "#/definitions/SearchRequest"
+        - description: wskey
+          in: query
+          name: wskey
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/ModelAndView"
+        "201":
+          description: Created
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: search for records post
+      tags:
+        - Search
   /v2/translateQuery.json:
     get:
       deprecated: false
@@ -456,6 +491,14 @@ paths:
       tags:
         - Search
 definitions:
+  Hit:
+    properties:
+      fl:
+        type: string
+      selectors:
+        type: string
+    title: Hit
+    type: object
   ModelAndView:
     properties:
       empty:
@@ -540,6 +583,60 @@ definitions:
       viewName:
         type: string
     title: ModelAndView
+    type: object
+  SearchRequest:
+    properties:
+      callback:
+        type: string
+      colourPalette:
+        items:
+          type: string
+        type: array
+      cursor:
+        type: string
+      facet:
+        items:
+          type: string
+        type: array
+      hit:
+        $ref: "#/definitions/Hit"
+      landingPage:
+        type: boolean
+      media:
+        type: boolean
+      profile:
+        items:
+          type: string
+        type: array
+      qf:
+        items:
+          type: string
+        type: array
+      query:
+        type: string
+      reusability:
+        items:
+          type: string
+        type: array
+      rows:
+        format: int32
+        type: integer
+      sort:
+        items:
+          type: string
+        type: array
+      start:
+        format: int32
+        type: integer
+      textFulltext:
+        type: boolean
+      theme:
+        type: string
+      thumbnail:
+        type: boolean
+    required:
+      - query
+    title: SearchRequest
     type: object
   View:
     properties:

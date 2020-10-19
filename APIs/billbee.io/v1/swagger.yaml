@@ -1074,14 +1074,12 @@ paths:
         - application/x-www-form-urlencoded
       operationId: OrderApi_PatchOrder
       parameters:
-        - description: The Billbee internal order id of the Order
-          format: int64
+        - format: int64
           in: path
           name: id
           required: true
           type: integer
-        - description: The fields which should be updated. To see order paramaters, use /orders get call
-          in: body
+        - in: body
           name: model
           required: true
           schema:
@@ -1771,8 +1769,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: The fields which should be updated.
-          in: body
+        - in: body
           name: model
           required: true
           schema:
@@ -2600,6 +2597,7 @@ definitions:
       Email:
         type: string
       Id:
+        description: The Billbee Id of the customer
         format: int64
         type: integer
       LanguageId:
@@ -2753,6 +2751,7 @@ definitions:
       Email:
         type: string
       Id:
+        description: The Billbee Id of the customer
         format: int64
         type: integer
       LanguageId:

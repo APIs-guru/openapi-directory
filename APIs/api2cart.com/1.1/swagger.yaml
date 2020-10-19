@@ -166,17 +166,17 @@ paths:
           name: 3dcartapi_api_key
           required: false
           type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
+        - description: MWS Auth Token. Access token authorizing the app to access resources on behalf of a user
           in: query
           name: amazon_access_token
           required: false
           type: string
-        - description: Seller Id
+        - description: Amazon Seller ID
           in: query
           name: amazon_seller_id
           required: false
           type: string
-        - description: Comma separated marketplaces ids
+        - description: Amazon Marketplace IDs comma separated string
           in: query
           name: amazon_marketplaces_ids
           required: false
@@ -536,17 +536,17 @@ paths:
           name: 3dcartapi_api_key
           required: false
           type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
+        - description: MWS Auth Token. Access token authorizing the app to access resources on behalf of a user
           in: query
           name: amazon_access_token
           required: false
           type: string
-        - description: Seller Id
+        - description: Amazon Seller ID
           in: query
           name: amazon_seller_id
           required: false
           type: string
-        - description: Comma separated marketplaces ids
+        - description: Amazon Marketplace IDs comma separated string
           in: query
           name: amazon_marketplaces_ids
           required: false
@@ -5983,6 +5983,11 @@ paths:
           name: store_id
           required: false
           type: string
+        - description: Language id
+          in: query
+          name: lang_id
+          required: false
+          type: string
       produces:
         - application/json
       responses:
@@ -10807,6 +10812,8 @@ definitions:
         items:
           type: string
         type: array
+      cost_price:
+        type: number
       create_at:
         $ref: "#/definitions/A2CDateTime"
       custom_fields:
@@ -10943,6 +10950,9 @@ definitions:
       condition:
         description: The human-readable label for the condition (e.g., "New").
         type: string
+      cost_price:
+        description: Defines new product's cost price
+        type: number
       created_at:
         description: Defines the date of entity creation
         type: string

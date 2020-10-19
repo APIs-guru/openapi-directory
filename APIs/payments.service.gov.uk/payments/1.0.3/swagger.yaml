@@ -1094,7 +1094,7 @@ definitions:
         example: https://service-name.gov.uk/transactions/12345
         type: string
       settlement_summary:
-        $ref: "#/definitions/SettlementSummary"
+        $ref: "#/definitions/PaymentSettlementSummary"
       state:
         $ref: "#/definitions/PaymentState"
     type: object
@@ -1306,7 +1306,7 @@ definitions:
         readOnly: true
         type: string
       settlement_summary:
-        $ref: "#/definitions/SettlementSummary"
+        $ref: "#/definitions/PaymentSettlementSummary"
         readOnly: true
       state:
         $ref: "#/definitions/PaymentState"
@@ -1516,7 +1516,7 @@ definitions:
         readOnly: true
         type: string
       settlement_summary:
-        $ref: "#/definitions/SettlementSummary"
+        $ref: "#/definitions/PaymentSettlementSummary"
         readOnly: true
       state:
         $ref: "#/definitions/PaymentState"
@@ -1688,6 +1688,25 @@ definitions:
         format: int32
         type: integer
     type: object
+  PaymentSettlementSummary:
+    description: A structure representing information about a settlement
+    properties:
+      capture_submit_time:
+        description: Date and time capture request has been submitted. May be null if capture request was not immediately acknowledged by payment gateway.
+        example: 2016-01-21T17:15:000Z
+        readOnly: true
+        type: string
+      captured_date:
+        description: Date of the capture event.
+        example: 2016-01-21
+        readOnly: true
+        type: string
+      settled_date:
+        description: The date that the transaction was paid into the service's account.
+        example: 2016-01-21
+        readOnly: true
+        type: string
+    type: object
   PaymentState:
     description: A structure representing the current state of the payment in its lifecycle.
     properties:
@@ -1762,7 +1781,7 @@ definitions:
         readOnly: true
         type: string
       settlement_summary:
-        $ref: "#/definitions/SettlementSummary"
+        $ref: "#/definitions/RefundSettlementSummary"
         readOnly: true
       status:
         enum:
@@ -1792,7 +1811,7 @@ definitions:
         readOnly: true
         type: string
       settlement_summary:
-        $ref: "#/definitions/SettlementSummary"
+        $ref: "#/definitions/RefundSettlementSummary"
         readOnly: true
       status:
         enum:
@@ -1861,6 +1880,15 @@ definitions:
         format: int32
         type: integer
     type: object
+  RefundSettlementSummary:
+    description: A structure representing information about a settlement for refunds
+    properties:
+      settled_date:
+        description: The date that the transaction was refunded from the service's account.
+        example: 2016-01-21
+        readOnly: true
+        type: string
+    type: object
   RefundSummary:
     description: A structure representing the refunds availability
     properties:
@@ -1921,23 +1949,4 @@ definitions:
       self:
         $ref: "#/definitions/Link"
         readOnly: true
-    type: object
-  SettlementSummary:
-    description: A structure representing information about a settlement
-    properties:
-      capture_submit_time:
-        description: Date and time capture request has been submitted. May be null if capture request was not immediately acknowledged by payment gateway. Not applicable for refunds.
-        example: 2016-01-21T17:15:000Z
-        readOnly: true
-        type: string
-      captured_date:
-        description: Date of the capture event. Not applicable for refunds.
-        example: 2016-01-21
-        readOnly: true
-        type: string
-      settled_date:
-        description: The date that the transaction was settled, for example paid into or refunded from the service's account.
-        example: 2016-01-21
-        readOnly: true
-        type: string
     type: object

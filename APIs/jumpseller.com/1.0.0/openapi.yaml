@@ -910,6 +910,8 @@ paths:
           schema:
             format: int32
             type: integer
+      requestBody:
+        $ref: "#/components/requestBodies/CustomersToCustomerCategory"
       responses:
         "200":
           content:
@@ -967,12 +969,7 @@ paths:
             format: int32
             type: integer
       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CustomersToCustomerCategory"
-        description: Customer parameters.
-        required: true
+        $ref: "#/components/requestBodies/CustomersToCustomerCategory"
       responses:
         "200":
           content:
@@ -981,7 +978,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Customer"
                 type: array
-          description: OK
+          description: Array of Customers in the Customer Category
         "404":
           content:
             application/json:
@@ -3608,6 +3605,13 @@ components:
             $ref: "#/components/schemas/CustomerWithPasswordNoID"
       description: Customer parameters.
       required: true
+    CustomersToCustomerCategory:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CustomersToCustomerCategory"
+      description: Customer parameters.
+      required: true
     HookEdit:
       content:
         application/json:
@@ -4001,9 +4005,9 @@ components:
           items:
             $ref: "#/components/schemas/CustomerAdditionalField"
           type: array
-        customer_category:
+        customer_categories:
           items:
-            type: integer
+            $ref: "#/components/schemas/CustomerCategory"
           type: array
         email:
           description: Email of the Customer

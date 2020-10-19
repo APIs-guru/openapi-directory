@@ -18834,6 +18834,7 @@ paths:
         - description: The value to update the user permission in the invite.
           in: body
           name: user_invitation_permissions_data
+          required: true
           schema:
             properties:
               permissions:
@@ -18896,6 +18897,20 @@ paths:
           name: app_name
           required: true
           type: string
+          x-ms-parameter-location: method
+        - description: The role of the user to be added
+          in: body
+          name: role
+          required: false
+          schema:
+            properties:
+              role:
+                description: The role of the user to be added
+                enum:
+                  - admin
+                  - collaborator
+                  - member
+                type: string
           x-ms-parameter-location: method
         - description: The email of the user to invite
           in: path
@@ -26206,6 +26221,13 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
+        - description: allow empty body for custom http-client lib
+          in: body
+          name: empty_body
+          required: false
+          schema:
+            type: object
+          x-ms-parameter-location: method
         - description: The name of the owner (user or organization) to which the app is being transferred
           in: path
           name: destination_owner_name
@@ -26406,6 +26428,13 @@ paths:
           name: app_name
           required: true
           type: string
+          x-ms-parameter-location: method
+        - description: allow empty body for custom http-client lib
+          in: body
+          name: empty_body
+          required: false
+          schema:
+            type: object
           x-ms-parameter-location: method
       responses:
         "200":
@@ -27451,6 +27480,7 @@ paths:
         - description: The value to update the user permission for the app.
           in: body
           name: user_app_permissions_data
+          required: true
           schema:
             properties:
               permissions:
@@ -30198,8 +30228,7 @@ paths:
           x-ms-parameter-location: method
         - description: The attributes to update for the distribution group
           in: body
-          name: distribution_group
-          required: true
+          name: distribution_group_for_org
           schema:
             properties:
               is_public:
@@ -30957,6 +30986,7 @@ paths:
         - description: The email of the user whose invitation should be removed
           in: body
           name: user_email
+          required: true
           schema:
             properties:
               user_email:
@@ -31067,6 +31097,7 @@ paths:
         - description: The email of the user to invite
           in: body
           name: user_email
+          required: true
           schema:
             properties:
               role:
@@ -31252,6 +31283,13 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
+        - description: allow empty body for custom http-client lib
+          in: body
+          name: empty_body
+          required: false
+          schema:
+            type: object
+          x-ms-parameter-location: method
       responses:
         "204":
           description: Success
@@ -31359,6 +31397,7 @@ paths:
         - description: The information used to create the team
           in: body
           name: team
+          required: true
           schema:
             properties:
               description:
@@ -31557,6 +31596,7 @@ paths:
         - description: The information used to update the team
           in: body
           name: team
+          required: true
           schema:
             properties:
               display_name:
@@ -32114,6 +32154,7 @@ paths:
           x-ms-parameter-location: method
         - in: body
           name: team
+          required: true
           schema:
             properties:
               permissions:
@@ -32403,6 +32444,7 @@ paths:
         - description: The email of the user to add to the team
           in: body
           name: user_email
+          required: true
           schema:
             properties:
               user_email:
@@ -35719,6 +35761,13 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
+        - description: allow empty body for custom http-client lib
+          in: body
+          name: empty_body
+          required: false
+          schema:
+            type: object
+          x-ms-parameter-location: method
       responses:
         "204":
           description: Success
@@ -35761,6 +35810,13 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
+        - description: allow empty body for custom http-client lib
+          in: body
+          name: empty_body
+          required: false
+          schema:
+            type: object
+          x-ms-parameter-location: method
       responses:
         "204":
           description: Success
@@ -35796,7 +35852,14 @@ paths:
     post:
       description: Accepts all pending invitations to distribution groups for the specified user
       operationId: distributionGroupInvitations_acceptAll
-      parameters: []
+      parameters:
+        - description: allow empty body for custom http-client lib
+          in: body
+          name: empty_body
+          required: false
+          schema:
+            type: object
+          x-ms-parameter-location: method
       responses:
         "204":
           description: Success
@@ -35839,6 +35902,13 @@ paths:
           required: true
           type: string
           x-ms-parameter-location: method
+        - description: allow empty body for custom http-client lib
+          in: body
+          name: empty_body
+          required: false
+          schema:
+            type: object
+          x-ms-parameter-location: method
       responses:
         "204":
           description: Success
@@ -35880,6 +35950,13 @@ paths:
           name: invitation_token
           required: true
           type: string
+          x-ms-parameter-location: method
+        - description: allow empty body for custom http-client lib
+          in: body
+          name: empty_body
+          required: false
+          schema:
+            type: object
           x-ms-parameter-location: method
       responses:
         "204":
@@ -45780,14 +45857,6 @@ definitions:
       - total_user_count
       - notified_user_count
       - total_apps_count
-  DistributionGroupIdRequest:
-    properties:
-      id:
-        description: The id of the distribution group
-        format: uuid
-        type: string
-    required:
-      - id
   DistributionGroupPatchRequest:
     properties:
       is_public:
@@ -46136,13 +46205,9 @@ definitions:
       distribution_group_ids:
         description: An array of distribution group ids
         items:
-          properties:
-            id:
-              description: The id of the distribution group
-              format: uuid
-              type: string
-          required:
-            - id
+          description: The id of the distribution group
+          format: uuid
+          type: string
         type: array
     required:
       - distribution_group_ids
