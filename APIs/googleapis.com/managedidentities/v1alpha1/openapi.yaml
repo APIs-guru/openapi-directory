@@ -106,7 +106,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from Domain: * `labels` * `locations` * `authorized_networks`"
+        - description: "Mask of fields to update. At least one path must be supplied in this field. The elements of the repeated paths field may only include these fields from Domain: * `labels` * `locations` * `authorized_networks` * `audit_logs_enabled`"
           in: query
           name: updateMask
           schema:
@@ -146,11 +146,6 @@ paths:
           name: filter
           schema:
             type: string
-        - description: If true, the returned list will include locations which are not yet revealed.
-          in: query
-          name: includeUnrevealedLocations
-          schema:
-            type: boolean
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -582,6 +577,63 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1alpha1/{parent}/sqlIntegrations":
+    get:
+      description: Lists SQLIntegrations in a given domain.
+      operationId: managedidentities.projects.locations.global.domains.sqlIntegrations.list
+      parameters:
+        - description: "Required. The resource name of the SqlIntegrations using the form: `projects/{project_id}/locations/global/domains/*`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Optional. Filter specifying constraints of a list operation. For example, `SqlIntegration.name="sql"`.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return. If not specified, a default value of 1000 will be used by the service. Regardless of the page_size value, the response may include a partial list and a caller should only rely on response'ANIZATIONs next_page_token to determine if there are more instances left to be queried.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSQLIntegrationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/v1alpha1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
@@ -820,9 +872,6 @@ components:
       type: object
     Domain:
       properties:
-        auditLogsEnabled:
-          description: Optional. Configuration for audit logs. True if audit logs are enabled, else false. Default is audit logs disabled.
-          type: boolean
         authorizedNetworks:
           description: Optional. The full names of the Google Compute Engine [networks](/compute/docs/networks-and-firewalls#networks) to which the instance is connected. Network can be added using UpdateDomain later. Domain is only available on network part of authorized_networks. Caller needs to make sure that CIDR subnets do not overlap between networks, else domain creation will fail.
           items:
@@ -1012,7 +1061,7 @@ components:
         maintenanceSchedules:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule"
-          description: The MaintenanceSchedule contains the scheduling information of published maintenance schedule.
+          description: The MaintenanceSchedule contains the scheduling information of published maintenance schedule with same key as software_versions.
           type: object
         maintenanceSettings:
           $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings"
@@ -1204,6 +1253,23 @@ components:
             $ref: "#/components/schemas/Operation"
           type: array
       type: object
+    ListSQLIntegrationsResponse:
+      description: ListSQLIntegrationsResponse is the response message for ListSQLIntegrations method.
+      properties:
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
+        sqlIntegrations:
+          description: A list of SQLIntegrations of a domain.
+          items:
+            $ref: "#/components/schemas/SQLIntegration"
+          type: array
+        unreachable:
+          description: A list of locations that could not be reached.
+          items:
+            type: string
+          type: array
+      type: object
     Location:
       description: A resource that represents Google Cloud Platform location.
       properties:
@@ -1307,6 +1373,35 @@ components:
       properties:
         password:
           description: A random password. See admin for more information.
+          type: string
+      type: object
+    SQLIntegration:
+      description: Represents the SQL instance integrated with AD.
+      properties:
+        createTime:
+          description: Output only. The time the instance was created. Synthetic field is populated automatically by CCFE. go/ccfe-synthetic-field-user-guide
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: The unique name of the sql integration in the form of `projects/{project_id}/locations/global/domains/{domain_name}/sqlIntegrations/{sql_integration}`
+          type: string
+        sqlInstance:
+          description: The full resource name of an integrated sql instance
+          type: string
+        state:
+          description: Output only. The current state of the managed OU.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - DELETING
+            - READY
+          readOnly: true
+          type: string
+        updateTime:
+          description: Output only. Last update time. Synthetic field is populated automatically by CCFE.
+          format: google-datetime
+          readOnly: true
           type: string
       type: object
     SetIamPolicyRequest:

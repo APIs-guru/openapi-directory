@@ -895,6 +895,9 @@ components:
           items:
             type: string
           type: array
+        useWildcards:
+          description: Supports URI wildcards for matching multiple objects from a single URI.
+          type: boolean
       type: object
     GoogleDevtoolsArtifactregistryV1alpha1ImportArtifactsResponse:
       description: The response message from importing artifacts.
@@ -1122,9 +1125,6 @@ components:
           enum:
             - FORMAT_UNSPECIFIED
             - DOCKER
-            - MAVEN
-            - NPM
-            - APT
           type: string
         kmsKeyName:
           description: "The Cloud KMS resource name of the customer managed encryption key that’s used to encrypt the contents of the Repository. Has the form: `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`. This value may not be changed after the Repository has been created."

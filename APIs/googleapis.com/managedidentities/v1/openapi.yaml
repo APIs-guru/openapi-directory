@@ -161,11 +161,6 @@ paths:
           name: filter
           schema:
             type: string
-        - description: If true, the returned list will include locations which are not yet revealed.
-          in: query
-          name: includeUnrevealedLocations
-          schema:
-            type: boolean
         - description: The standard list page size.
           in: query
           name: pageSize
@@ -981,7 +976,7 @@ components:
         maintenanceSchedules:
           additionalProperties:
             $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSchedule"
-          description: The MaintenanceSchedule contains the scheduling information of published maintenance schedule.
+          description: The MaintenanceSchedule contains the scheduling information of published maintenance schedule with same key as software_versions.
           type: object
         maintenanceSettings:
           $ref: "#/components/schemas/GoogleCloudSaasacceleratorManagementProvidersV1MaintenanceSettings"

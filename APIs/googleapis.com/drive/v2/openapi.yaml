@@ -5568,7 +5568,7 @@ components:
               type: string
           type: object
         thumbnailLink:
-          description: A short-lived link to the file's thumbnail. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content.
+          description: A short-lived link to the file's thumbnail. Typically lasts on the order of hours. Only populated when the requesting app can access the file's content. If the file isn't shared publicly, the URL returned in Files.thumbnailLink must be fetched using a credentialed request.
           type: string
         thumbnailVersion:
           description: The thumbnail version for use in thumbnail cache invalidation.
@@ -5990,7 +5990,7 @@ components:
           description: Whether this revision is published. This is only populated and can only be modified for Google Docs.
           type: boolean
         publishedLink:
-          description: A link to the published revision.
+          description: A link to the published revision. This is only populated for Google Sites files.
           type: string
         publishedOutsideDomain:
           description: Whether this revision is published outside the domain. This is only populated and can only be modified for Google Docs.

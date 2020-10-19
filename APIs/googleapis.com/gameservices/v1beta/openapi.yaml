@@ -40,7 +40,7 @@ paths:
       description: Deletes a single game server cluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.delete
       parameters:
-        - description: "Required. The name of the game server cluster to delete. Uses the form: `projects/{project}/locations/{location}/gameServerClusters/{cluster}`."
+        - description: "Required. The name of the game server cluster to delete, in the following form: `projects/{project}/locations/{location}/gameServerClusters/{cluster}`."
           in: path
           name: name
           required: true
@@ -64,7 +64,7 @@ paths:
       description: Gets details of a single game server cluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.get
       parameters:
-        - description: "Required. The name of the game server cluster to retrieve. Uses the form: `projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}`."
+        - description: "Required. The name of the game server cluster to retrieve, in the following form: `projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}`."
           in: path
           name: name
           required: true
@@ -100,7 +100,7 @@ paths:
       description: Patches a single game server cluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.patch
       parameters:
-        - description: "Required. The resource name of the game server cluster. Uses the form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`."
+        - description: "Required. The resource name of the game server cluster, in the following form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`."
           in: path
           name: name
           required: true
@@ -244,7 +244,7 @@ paths:
       description: Gets details a single game server deployment rollout.
       operationId: gameservices.projects.locations.gameServerDeployments.getRollout
       parameters:
-        - description: "Required. The name of the game server delpoyment to retrieve. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`."
+        - description: "Required. The name of the game server delpoyment to retrieve, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`."
           in: path
           name: name
           required: true
@@ -280,7 +280,7 @@ paths:
       description: Patches a single game server deployment rollout. The method will not return an error if the update does not affect any existing realms. For example - if the default_game_server_config is changed but all existing realms use the override, that is valid. Similarly, if a non existing realm is explicitly called out in game_server_config_overrides field, that will also not result in an error.
       operationId: gameservices.projects.locations.gameServerDeployments.updateRollout
       parameters:
-        - description: "The resource name of the game server deployment rollout. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`."
+        - description: "The resource name of the game server deployment rollout, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`."
           in: path
           name: name
           required: true
@@ -327,7 +327,7 @@ paths:
       description: Previews the game server deployment rollout. This API does not mutate the rollout resource.
       operationId: gameservices.projects.locations.gameServerDeployments.previewRollout
       parameters:
-        - description: "The resource name of the game server deployment rollout. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`."
+        - description: "The resource name of the game server deployment rollout, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`."
           in: path
           name: name
           required: true
@@ -421,7 +421,7 @@ paths:
       description: Retrieves information about the current state of the game server deployment. Gathers all the Agones fleets and Agones autoscalers, including fleets running an older version of the game server deployment.
       operationId: gameservices.projects.locations.gameServerDeployments.fetchDeploymentState
       parameters:
-        - description: "Required. The name of the game server delpoyment. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`."
+        - description: "Required. The name of the game server delpoyment, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`."
           in: path
           name: name
           required: true
@@ -451,7 +451,7 @@ paths:
       description: Previews deletion of a single game server cluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.previewDelete
       parameters:
-        - description: "Required. The name of the game server cluster to delete. Uses the form: `projects/{project}/locations/{location}/gameServerClusters/{cluster}`."
+        - description: "Required. The name of the game server cluster to delete, in the following form: `projects/{project}/locations/{location}/gameServerClusters/{cluster}`."
           in: path
           name: name
           required: true
@@ -505,7 +505,7 @@ paths:
       description: Previews updating a GameServerCluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.previewUpdate
       parameters:
-        - description: "Required. The resource name of the game server cluster. Uses the form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`."
+        - description: "Required. The resource name of the game server cluster, in the following form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`."
           in: path
           name: name
           required: true
@@ -545,7 +545,7 @@ paths:
       description: Lists game server configs in a given project, location, and game server deployment.
       operationId: gameservices.projects.locations.gameServerDeployments.configs.list
       parameters:
-        - description: "Required. The parent resource name. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*`."
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*`."
           in: path
           name: parent
           required: true
@@ -601,7 +601,7 @@ paths:
       description: Creates a new game server config in a given project, location, and game server deployment. Game server configs are immutable, and are not applied until referenced in the game server deployment rollout resource.
       operationId: gameservices.projects.locations.gameServerDeployments.configs.create
       parameters:
-        - description: "Required. The parent resource name. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`."
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`."
           in: path
           name: parent
           required: true
@@ -636,7 +636,7 @@ paths:
       description: Lists game server clusters in a given project and location.
       operationId: gameservices.projects.locations.realms.gameServerClusters.list
       parameters:
-        - description: 'Required. The parent resource name. Uses the form: "projects/{project}/locations/{location}/realms/{realm}".'
+        - description: 'Required. The parent resource name, in the following form: "projects/{project}/locations/{location}/realms/{realm}".'
           in: path
           name: parent
           required: true
@@ -692,7 +692,7 @@ paths:
       description: Creates a new game server cluster in a given project and location.
       operationId: gameservices.projects.locations.realms.gameServerClusters.create
       parameters:
-        - description: "Required. The parent resource name. Uses the form: `projects/{project}/locations/{location}/realms/{realm-id}`."
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/realms/{realm-id}`."
           in: path
           name: parent
           required: true
@@ -739,7 +739,7 @@ paths:
       description: Previews creation of a new game server cluster in a given project and location.
       operationId: gameservices.projects.locations.realms.gameServerClusters.previewCreate
       parameters:
-        - description: "Required. The parent resource name. Uses the form: `projects/{project}/locations/{location}/realms/{realm}`."
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/realms/{realm}`."
           in: path
           name: parent
           required: true
@@ -779,7 +779,7 @@ paths:
       description: Lists game server deployments in a given project and location.
       operationId: gameservices.projects.locations.gameServerDeployments.list
       parameters:
-        - description: "Required. The parent resource name. Uses the form: `projects/{project}/locations/{location}`."
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`."
           in: path
           name: parent
           required: true
@@ -835,7 +835,7 @@ paths:
       description: Creates a new game server deployment in a given project and location.
       operationId: gameservices.projects.locations.gameServerDeployments.create
       parameters:
-        - description: "Required. The parent resource name. Uses the form: `projects/{project}/locations/{location}`."
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`."
           in: path
           name: parent
           required: true
@@ -870,7 +870,7 @@ paths:
       description: Lists realms in a given project and location.
       operationId: gameservices.projects.locations.realms.list
       parameters:
-        - description: "Required. The parent resource name. Uses the form: `projects/{project}/locations/{location}`."
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`."
           in: path
           name: parent
           required: true
@@ -926,7 +926,7 @@ paths:
       description: Creates a new realm in a given project and location.
       operationId: gameservices.projects.locations.realms.create
       parameters:
-        - description: "Required. The parent resource name. Uses the form: `projects/{project}/locations/{location}`."
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`."
           in: path
           name: parent
           required: true
@@ -1461,7 +1461,7 @@ components:
           description: The labels associated with this game server cluster. Each label is a key-value pair.
           type: object
         name:
-          description: "Required. The resource name of the game server cluster. Uses the form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`."
+          description: "Required. The resource name of the game server cluster, in the following form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`."
           type: string
         updateTime:
           description: Output only. The last-modified time.
@@ -1501,7 +1501,7 @@ components:
           description: The labels associated with this game server config. Each label is a key-value pair.
           type: object
         name:
-          description: "The resource name of the game server config. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`. For example, `projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config`."
+          description: "The resource name of the game server config, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`. For example, `projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config`."
           type: string
         scalingConfigs:
           description: The autoscaling settings.
@@ -1544,7 +1544,7 @@ components:
           description: The labels associated with this game server deployment. Each label is a key-value pair.
           type: object
         name:
-          description: "The resource name of the game server deployment. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment`."
+          description: "The resource name of the game server deployment, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment`."
           type: string
         updateTime:
           description: Output only. The last-modified time.
@@ -1572,7 +1572,7 @@ components:
             $ref: "#/components/schemas/GameServerConfigOverride"
           type: array
         name:
-          description: "The resource name of the game server deployment rollout. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`."
+          description: "The resource name of the game server deployment rollout, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`."
           type: string
         updateTime:
           description: Output only. The last-modified time.
@@ -1915,7 +1915,7 @@ components:
           description: The labels associated with this realm. Each label is a key-value pair.
           type: object
         name:
-          description: "The resource name of the realm. Uses the form: `projects/{project}/locations/{location}/realms/{realm}`. For example, `projects/my-project/locations/{location}/realms/my-realm`."
+          description: "The resource name of the realm, in the following form: `projects/{project}/locations/{location}/realms/{realm}`. For example, `projects/my-project/locations/{location}/realms/my-realm`."
           type: string
         timeZone:
           description: "Required. Time zone where all policies targeting this realm are evaluated. The value of this field must be from the IANA time zone database: https://www.iana.org/time-zones."

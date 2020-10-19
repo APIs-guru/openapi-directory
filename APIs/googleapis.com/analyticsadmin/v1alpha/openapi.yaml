@@ -74,7 +74,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   /v1alpha/accounts:
     get:
-      description: 'Returns all accounts accessible by the caller. Note that these accounts might not currently have App+Web properties. Soft-deleted (ie: "trashed") accounts are excluded by default. Returns an empty list if no relevant accounts are found.'
+      description: 'Returns all accounts accessible by the caller. Note that these accounts might not currently have GA4 properties. Soft-deleted (ie: "trashed") accounts are excluded by default. Returns an empty list if no relevant accounts are found.'
       operationId: analyticsadmin.accounts.list
       parameters:
         - description: The maximum number of resources to return. The service may return fewer than this value, even if there are additional pages. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)
@@ -155,7 +155,7 @@ paths:
         - accounts
   /v1alpha/properties:
     get:
-      description: 'Returns child Properties under the specified parent Account. Only "App+Web" properties will be returned. Properties will be excluded if the caller does not have access. Soft-deleted (ie: "trashed") properties are excluded by default. Returns an empty list if no relevant properties are found.'
+      description: 'Returns child Properties under the specified parent Account. Only "GA4" properties will be returned. Properties will be excluded if the caller does not have access. Soft-deleted (ie: "trashed") properties are excluded by default. Returns an empty list if no relevant properties are found.'
       operationId: analyticsadmin.properties.list
       parameters:
         - description: "Required. An expression for filtering the results of the request. Fields eligible for filtering are: `parent:`(The resource name of the parent account) or `firebase_project:`(The id or number of the linked firebase project). Some examples of filters: | Filter | Description | |-----------------------------|-------------------------------------------| | parent:accounts/123 | The account with account id: 123. | | firebase_project:project-id | The firebase project with id: project-id. | | firebase_project:123 | The firebase project with number: 123. |"
@@ -205,7 +205,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Creates an "App+Web" property with the specified location and attributes.
+      description: Creates an "GA4" property with the specified location and attributes.
       operationId: analyticsadmin.properties.create
       requestBody:
         content:
@@ -1091,7 +1091,7 @@ components:
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaAccountSummary:
-      description: A virtual resource representing an overview of an account and all its child App+Web properties.
+      description: A virtual resource representing an overview of an account and all its child GA4 properties.
       properties:
         account:
           description: 'Resource name of account referred to by this account summary Format: accounts/{account_id} Example: "accounts/1000"'
@@ -1340,7 +1340,7 @@ components:
           type: boolean
       type: object
     GoogleAnalyticsAdminV1alphaFirebaseLink:
-      description: A link between an App+Web property and a Firebase project.
+      description: A link between an GA4 property and a Firebase project.
       properties:
         createTime:
           description: Output only. Time when this FirebaseLink was originally created.
@@ -1348,7 +1348,7 @@ components:
           readOnly: true
           type: string
         maximumUserAccess:
-          description: Maximum user access to the App + Web property allowed to admins of the linked Firebase project.
+          description: Maximum user access to the GA4 property allowed to admins of the linked Firebase project.
           enum:
             - MAXIMUM_USER_ACCESS_UNSPECIFIED
             - NO_ACCESS
@@ -1372,7 +1372,7 @@ components:
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaGoogleAdsLink:
-      description: A link between an App+Web property and a Google Ads account.
+      description: A link between an GA4 property and a Google Ads account.
       properties:
         adsPersonalizationEnabled:
           description: Enable personalized advertising features with this integration. Automatically publish my Google Analytics audience lists and Google Analytics remarketing events/parameters to the linked Google Ads account. If this field is not set on create/update it will be defaulted to true.
@@ -1540,7 +1540,7 @@ components:
           type: array
       type: object
     GoogleAnalyticsAdminV1alphaProperty:
-      description: A resource message representing a Google Analytics App+Web property.
+      description: A resource message representing a Google Analytics GA4 property.
       properties:
         createTime:
           description: Output only. Time when the entity was originally created.
@@ -1605,7 +1605,7 @@ components:
           type: string
       type: object
     GoogleAnalyticsAdminV1alphaPropertySummary:
-      description: A virtual resource representing metadata for an App+Web property.
+      description: A virtual resource representing metadata for an GA4 property.
       properties:
         displayName:
           description: Display name for the property referred to in this account summary.

@@ -6440,7 +6440,7 @@ components:
       description: Local inventory resource. For accepted attribute values, see the local product inventory feed specification.
       properties:
         availability:
-          description: Availability of the product.
+          description: Availability of the product. For accepted attribute values, see the local product inventory feed specification.
           type: string
         instoreProductLocation:
           description: In-store product location.
@@ -6450,10 +6450,10 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#localInventory`"'
           type: string
         pickupMethod:
-          description: Supported pickup method for this offer. Unless the value is "not supported", this field must be submitted together with `pickupSla`.
+          description: Supported pickup method for this offer. Unless the value is "not supported", this field must be submitted together with `pickupSla`. For accepted attribute values, see the local product inventory feed specification.
           type: string
         pickupSla:
-          description: Expected date that an order will be ready for pickup relative to the order date. Must be submitted together with `pickupMethod`.
+          description: Expected date that an order will be ready for pickup relative to the order date. Must be submitted together with `pickupMethod`. For accepted attribute values, see the local product inventory feed specification.
           type: string
         price:
           $ref: "#/components/schemas/Price"

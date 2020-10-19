@@ -1060,6 +1060,48 @@ paths:
             - https://www.googleapis.com/auth/ediscovery
       tags:
         - matters
+  "/v1/matters/{matterId}:count":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Counts the artifacts within the context of a matter and returns a detailed breakdown of metrics.
+      operationId: vault.matters.count
+      parameters:
+        - description: The matter ID.
+          in: path
+          name: matterId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CountArtifactsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/ediscovery
+          Oauth2c:
+            - https://www.googleapis.com/auth/ediscovery
+      tags:
+        - matters
   "/v1/matters/{matterId}:removePermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1206,6 +1248,40 @@ paths:
           description: Successful response
       tags:
         - operations
+    get:
+      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      operationId: vault.operations.list
+      parameters:
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOperationsResponse"
+          description: Successful response
+      tags:
+        - operations
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -1218,6 +1294,43 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:cancel":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: vault.operations.cancel
+      parameters:
+        - description: The name of the operation resource to be cancelled.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CancelOperationRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          description: Successful response
+      tags:
+        - operations
 components:
   parameters:
     _.xgafv:
@@ -1294,6 +1407,34 @@ components:
       schema:
         type: string
   schemas:
+    AccountCount:
+      description: Count number for each account.
+      properties:
+        account:
+          $ref: "#/components/schemas/UserInfo"
+          description: Account owner.
+        count:
+          description: The number of artifacts found for this account.
+          format: int64
+          type: string
+      type: object
+    AccountCountError:
+      description: An error that occurred when querying a specific account
+      properties:
+        account:
+          $ref: "#/components/schemas/UserInfo"
+          description: Account owner.
+        errorType:
+          description: Account query error.
+          enum:
+            - ERROR_TYPE_UNSPECIFIED
+            - WILDCARD_TOO_BROAD
+            - TOO_MANY_TERMS
+            - LOCATION_UNAVAILABLE
+            - UNKNOWN
+            - DEADLINE_EXCEEDED
+          type: string
+      type: object
     AccountInfo:
       description: Accounts to search
       properties:
@@ -1349,6 +1490,10 @@ components:
           description: True to send notification email to the added account. False to not send notification email.
           type: boolean
       type: object
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
     CloseMatterRequest:
       description: Close a matter by ID.
       properties: {}
@@ -1401,6 +1546,52 @@ components:
         mailQuery:
           $ref: "#/components/schemas/HeldMailQuery"
           description: Details pertaining to mail holds. If set, corpus must be mail.
+      type: object
+    CountArtifactsMetadata:
+      description: Long running operation metadata for CountArtifacts.
+      properties:
+        endTime:
+          description: End time of count operation. Available when operation is done.
+          format: google-datetime
+          type: string
+        matterId:
+          description: The matter ID of the associated matter.
+          type: string
+        query:
+          $ref: "#/components/schemas/Query"
+          description: The search query from the request.
+        startTime:
+          description: Creation time of count operation.
+          format: google-datetime
+          type: string
+      type: object
+    CountArtifactsRequest:
+      description: Count artifacts request.
+      properties:
+        query:
+          $ref: "#/components/schemas/Query"
+          description: The search query.
+        view:
+          description: Specifies the granularity of the count result returned in response.
+          enum:
+            - COUNT_RESULT_VIEW_UNSPECIFIED
+            - TOTAL_COUNT
+            - ALL
+          type: string
+      type: object
+    CountArtifactsResponse:
+      description: Definition of the response for method CountArtifacts.
+      properties:
+        groupsCountResult:
+          $ref: "#/components/schemas/GroupsCountResult"
+          description: Count metrics of Groups.
+        mailCountResult:
+          $ref: "#/components/schemas/MailCountResult"
+          description: Count metrics of Mail.
+        totalCount:
+          description: Total count of artifacts. For mail and groups, artifacts refers to messages.
+          format: int64
+          type: string
       type: object
     DriveExportOptions:
       description: The options for Drive export.
@@ -1504,6 +1695,33 @@ components:
           type: string
         totalArtifactCount:
           description: The number of documents to be exported.
+          format: int64
+          type: string
+      type: object
+    GroupsCountResult:
+      description: Groups specific count metrics.
+      properties:
+        accountCountErrors:
+          description: Error occurred when querying these accounts.
+          items:
+            $ref: "#/components/schemas/AccountCountError"
+          type: array
+        accountCounts:
+          description: Subtotal count per matching account that have more than zero messages.
+          items:
+            $ref: "#/components/schemas/AccountCount"
+          type: array
+        matchingAccountsCount:
+          description: Total number of accounts that can be queried and have more than zero messages.
+          format: int64
+          type: string
+        nonQueryableAccounts:
+          description: When data scope is HELD_DATA in the request Query, these accounts in the request are not queried because they are not on hold. For other data scope, this field is not set.
+          items:
+            type: string
+          type: array
+        queriedAccountsCount:
+          description: Total number of accounts involved in this count operation.
           format: int64
           type: string
       type: object
@@ -1702,6 +1920,18 @@ components:
           description: Page token to retrieve the next page of results in the list.
           type: string
       type: object
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
+      properties:
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
     ListSavedQueriesResponse:
       description: Definition of the response for method ListSaveQuery.
       properties:
@@ -1713,6 +1943,33 @@ components:
           items:
             $ref: "#/components/schemas/SavedQuery"
           type: array
+      type: object
+    MailCountResult:
+      description: Mail specific count metrics.
+      properties:
+        accountCountErrors:
+          description: Error occurred when querying these accounts.
+          items:
+            $ref: "#/components/schemas/AccountCountError"
+          type: array
+        accountCounts:
+          description: Subtotal count per matching account that have more than zero messages.
+          items:
+            $ref: "#/components/schemas/AccountCount"
+          type: array
+        matchingAccountsCount:
+          description: Total number of accounts that can be queried and have more than zero messages.
+          format: int64
+          type: string
+        nonQueryableAccounts:
+          description: When data scope is HELD_DATA in the request Query, these accounts in the request are not queried because they are not on hold. For other data scope, this field is not set.
+          items:
+            type: string
+          type: array
+        queriedAccountsCount:
+          description: Total number of accounts involved in this count operation.
+          format: int64
+          type: string
       type: object
     MailExportOptions:
       description: The options for mail export.
@@ -1774,6 +2031,29 @@ components:
             - COLLABORATOR
             - OWNER
           type: string
+      type: object
+    Operation:
+      description: This resource represents a long-running operation that is the result of a network API call.
+      properties:
+        done:
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
+          type: boolean
+        error:
+          $ref: "#/components/schemas/Status"
+          description: The error result of the operation in case of failure or cancellation.
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+          type: object
+        name:
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
+          type: string
+        response:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
+          type: object
       type: object
     OrgUnitInfo:
       description: Org Unit to search

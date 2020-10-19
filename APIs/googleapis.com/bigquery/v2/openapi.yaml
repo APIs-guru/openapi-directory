@@ -34,6 +34,7 @@ tags:
   - name: models
   - name: projects
   - name: routines
+  - name: rowAccessPolicies
   - name: tabledata
   - name: tables
 paths:
@@ -1223,6 +1224,73 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - tabledata
+  "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/rowAccessPolicies":
+    get:
+      description: Lists all row access policies on the specified table.
+      operationId: bigquery.rowAccessPolicies.list
+      parameters:
+        - description: Required. Project ID of the row access policies to list.
+          in: path
+          name: projectId
+          required: true
+          schema:
+            type: string
+        - description: Required. Dataset ID of row access policies to list.
+          in: path
+          name: datasetId
+          required: true
+          schema:
+            type: string
+        - description: Required. Table ID of the table to list row access policies.
+          in: path
+          name: tableId
+          required: true
+          schema:
+            type: string
+        - description: The maximum number of results to return in a single response page. Leverage the page tokens to iterate through the entire collection.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token, returned by a previous call, to request the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRowAccessPoliciesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery
+        - Oauth2:
+            - https://www.googleapis.com/auth/bigquery.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/bigquery.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+      tags:
+        - rowAccessPolicies
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
   "/projects/{projectId}/jobs":
     get:
       description: Lists all jobs that you started in the specified project. Job information is available for a six month period after creation. The job list is sorted in reverse chronological order, by job creation time. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.
@@ -3598,6 +3666,18 @@ components:
             $ref: "#/components/schemas/Routine"
           type: array
       type: object
+    ListRowAccessPoliciesResponse:
+      description: Response message for the ListRowAccessPolicies method.
+      properties:
+        nextPageToken:
+          description: A token to request the next page of results.
+          type: string
+        rowAccessPolicies:
+          description: Row access policies on the requested table.
+          items:
+            $ref: "#/components/schemas/RowAccessPolicy"
+          type: array
+      type: object
     LocationMetadata:
       description: BigQuery-specific metadata about a location. This will be set on google.cloud.location.Location.metadata in Cloud Location API responses.
       properties:
@@ -4145,6 +4225,30 @@ components:
             $ref: "#/components/schemas/Entry"
           type: array
       type: object
+    RowAccessPolicy:
+      description: Represents access on a subset of rows on the specified table, defined by its filter predicate. Access to the subset of rows is controlled by its IAM policy.
+      properties:
+        creationTime:
+          description: Output only. The time when this row access policy was created, in milliseconds since the epoch.
+          format: google-datetime
+          readOnly: true
+          type: string
+        etag:
+          description: Output only. A hash of this resource.
+          readOnly: true
+          type: string
+        filterPredicate:
+          description: "Required. A SQL boolean expression that represents the rows defined by this row access policy, similar to the boolean expression in a WHERE clause of a SELECT query on a table. References to other tables, routines, and temporary functions are not supported. Examples: region=\"EU\" date_field = CAST('2019-9-27' as DATE) nullable_field is not NULL numeric_field BETWEEN 1.0 AND 5.0"
+          type: string
+        lastModifiedTime:
+          description: Output only. The time when this row access policy was last modified, in milliseconds since the epoch.
+          format: google-datetime
+          readOnly: true
+          type: string
+        rowAccessPolicyReference:
+          $ref: "#/components/schemas/RowAccessPolicyReference"
+          description: Required. Reference describing the ID of this row access policy.
+      type: object
     RowAccessPolicyReference:
       properties:
         datasetId:
@@ -4379,7 +4483,7 @@ components:
           $ref: "#/components/schemas/TimePartitioning"
           description: Time-based partitioning specification for this table. Only one of timePartitioning and rangePartitioning should be specified.
         type:
-          description: "[Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. [TrustedTester] SNAPSHOT: An immutable, read-only table that is a copy of another table. [TrustedTester] MATERIALIZED_VIEW: SQL query whose result is persisted. EXTERNAL: A table that references data stored in an external storage system, such as Google Cloud Storage. The default value is TABLE."
+          description: "[Output-only] Describes the table type. The following values are supported: TABLE: A normal BigQuery table. VIEW: A virtual table defined by a SQL query. SNAPSHOT: An immutable, read-only table that is a copy of another table. [TrustedTester] MATERIALIZED_VIEW: SQL query whose result is persisted. EXTERNAL: A table that references data stored in an external storage system, such as Google Cloud Storage. The default value is TABLE."
           type: string
         view:
           $ref: "#/components/schemas/ViewDefinition"
