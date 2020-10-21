@@ -617,6 +617,24 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
+        '529':
+          description: TooManyDistributionsAssociatedToKeyGroup
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
+        '530':
+          description: TooManyKeyGroupsAssociatedToDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
+        '531':
+          description: TrustedKeyGroupDoesNotExist
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
       parameters: []
       requestBody:
         required: true
@@ -1047,6 +1065,24 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
+        '530':
+          description: TooManyDistributionsAssociatedToKeyGroup
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
+        '531':
+          description: TooManyKeyGroupsAssociatedToDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
+        '532':
+          description: TrustedKeyGroupDoesNotExist
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
       parameters:
         - name: WithTags
           in: query
@@ -1473,6 +1509,104 @@ paths:
           description: The maximum number of invalidation batches that you want in the response body.
           schema:
             type: string
+  /2020-05-31/key-group:
+    post:
+      operationId: CreateKeyGroup2020_05_31
+      description: '<p>Creates a key group that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">CloudFront signed URLs and signed cookies</a>.</p> <p>To create a key group, you must specify at least one public key for the key group. After you create a key group, you can reference it from one or more cache behaviors. When you reference a key group in a cache behavior, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateKeyGroupResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '481':
+          description: KeyGroupAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KeyGroupAlreadyExists'
+        '482':
+          description: TooManyKeyGroups
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyKeyGroups'
+        '483':
+          description: TooManyPublicKeysInKeyGroup
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyPublicKeysInKeyGroup'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - KeyGroupConfig
+              properties:
+                KeyGroupConfig:
+                  description: '<p>A key group configuration.</p> <p>A key group contains a list of public keys that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">CloudFront signed URLs and signed cookies</a>.</p>'
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: A name to identify the key group.
+                    Items:
+                      allOf:
+                        - $ref: '#/components/schemas/PublicKeyIdList'
+                        - description: A list of the identifiers of the public keys in the key group.
+                    Comment:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: A comment to describe the key group.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListKeyGroups2020_05_31
+      description: '<p>Gets a list of key groups.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListKeyGroupsResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters:
+        - name: Marker
+          in: query
+          required: false
+          description: 'Use this field when paginating results to indicate where to begin in your list of key groups. The response includes key groups in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.'
+          schema:
+            type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: The maximum number of key groups that you want in the response.
+          schema:
+            type: string
   '/2020-05-31/distributions/{DistributionId}/monitoring-subscription':
     post:
       operationId: CreateMonitoringSubscription2020_05_31
@@ -1740,7 +1874,7 @@ paths:
   /2020-05-31/public-key:
     post:
       operationId: CreatePublicKey2020_05_31
-      description: 'Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.'
+      description: 'Uploads a public key to CloudFront that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
       responses:
         '201':
           description: Success
@@ -1777,25 +1911,25 @@ paths:
                 - PublicKeyConfig
               properties:
                 PublicKeyConfig:
-                  description: Information about a public key you add to CloudFront to use with features like field-level encryption.
+                  description: 'Configuration information about a public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
                   type: object
                   properties:
                     CallerReference:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A unique number that ensures that the request can't be replayed.
+                        - description: A string included in the request to help make sure that the request can’t be replayed.
                     Name:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: The name for a public key you add to CloudFront to use with features like field-level encryption.
+                        - description: A name to help identify the public key.
                     EncodedKey:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
+                        - description: 'The public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: An optional comment about a public key.
+                        - description: A comment to describe the public key.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1862,6 +1996,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidArgument'
+        '483':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
       parameters: []
       requestBody:
         required: true
@@ -1912,6 +2052,24 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ListRealtimeLogConfigsResult'
+        '480':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '481':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
+        '482':
+          description: NoSuchRealtimeLogConfig
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchRealtimeLogConfig'
       parameters:
         - name: MaxItems
           in: query
@@ -2785,6 +2943,165 @@ paths:
           description: Get the ID for the field-level encryption profile information.
           schema:
             type: string
+  '/2020-05-31/key-group/{Id}':
+    delete:
+      operationId: DeleteKeyGroup2020_05_31
+      description: '<p>Deletes a key group.</p> <p>You cannot delete a key group that is referenced in a cache behavior. First update your distributions to remove the key group from all cache behaviors, then delete the key group.</p> <p>To delete a key group, you must provide the key group’s identifier and version. To get these values, use <code>ListKeyGroups</code> followed by <code>GetKeyGroup</code> or <code>GetKeyGroupConfig</code>.</p>'
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidIfMatchVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidIfMatchVersion'
+        '481':
+          description: NoSuchResource
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchResource'
+        '482':
+          description: PreconditionFailed
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailed'
+        '483':
+          description: ResourceInUse
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: 'The identifier of the key group that you are deleting. To get the identifier, use <code>ListKeyGroups</code>.'
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: false
+          description: 'The version of the key group that you are deleting. The version is the key group’s <code>ETag</code> value. To get the <code>ETag</code>, use <code>GetKeyGroup</code> or <code>GetKeyGroupConfig</code>.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetKeyGroup2020_05_31
+      description: '<p>Gets a key group, including the date and time when the key group was last modified.</p> <p>To get a key group, you must provide the key group’s identifier. If the key group is referenced in a distribution’s cache behavior, you can get the key group’s identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the key group is not referenced in a cache behavior, you can get the identifier using <code>ListKeyGroups</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetKeyGroupResult'
+        '480':
+          description: NoSuchResource
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchResource'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: 'The identifier of the key group that you are getting. To get the identifier, use <code>ListKeyGroups</code>.'
+          schema:
+            type: string
+    put:
+      operationId: UpdateKeyGroup2020_05_31
+      description: '<p>Updates a key group.</p> <p>When you update a key group, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a key group:</p> <ol> <li> <p>Get the current key group with <code>GetKeyGroup</code> or <code>GetKeyGroupConfig</code>.</p> </li> <li> <p>Locally modify the fields in the key group that you want to update. For example, add or remove public key IDs.</p> </li> <li> <p>Call <code>UpdateKeyGroup</code> with the entire key group object, including the fields that you modified and those that you didn’t.</p> </li> </ol>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/UpdateKeyGroupResult'
+        '480':
+          description: InvalidIfMatchVersion
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidIfMatchVersion'
+        '481':
+          description: NoSuchResource
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchResource'
+        '482':
+          description: PreconditionFailed
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/PreconditionFailed'
+        '483':
+          description: KeyGroupAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KeyGroupAlreadyExists'
+        '484':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '485':
+          description: TooManyPublicKeysInKeyGroup
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyPublicKeysInKeyGroup'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: The identifier of the key group that you are updating.
+          schema:
+            type: string
+        - name: If-Match
+          in: header
+          required: false
+          description: The version of the key group that you are updating. The version is the key group’s <code>ETag</code> value.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - KeyGroupConfig
+              properties:
+                KeyGroupConfig:
+                  description: '<p>A key group configuration.</p> <p>A key group contains a list of public keys that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">CloudFront signed URLs and signed cookies</a>.</p>'
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: A name to identify the key group.
+                    Items:
+                      allOf:
+                        - $ref: '#/components/schemas/PublicKeyIdList'
+                        - description: A list of the identifiers of the public keys in the key group.
+                    Comment:
+                      allOf:
+                        - $ref: '#/components/schemas/string'
+                        - description: A comment to describe the key group.
   '/2020-05-31/origin-request-policy/{Id}':
     delete:
       operationId: DeleteOriginRequestPolicy2020_05_31
@@ -3060,7 +3377,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetPublicKey2020_05_31
-      description: Get the public key information.
+      description: Gets a public key.
       responses:
         '200':
           description: Success
@@ -3084,7 +3401,7 @@ paths:
         - name: Id
           in: path
           required: true
-          description: Request the ID for the public key.
+          description: The identifier of the public key you are getting.
           schema:
             type: string
   /2020-05-31/delete-realtime-log-config/:
@@ -3112,6 +3429,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidArgument'
+        '483':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
       parameters: []
       requestBody:
         required: true
@@ -3731,6 +4054,24 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/TooManyDistributionsAssociatedToOriginRequestPolicy'
+        '529':
+          description: TooManyDistributionsAssociatedToKeyGroup
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyDistributionsAssociatedToKeyGroup'
+        '530':
+          description: TooManyKeyGroupsAssociatedToDistribution
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyKeyGroupsAssociatedToDistribution'
+        '531':
+          description: TrustedKeyGroupDoesNotExist
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TrustedKeyGroupDoesNotExist'
       parameters:
         - name: Id
           in: path
@@ -4193,6 +4534,38 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2020-05-31/key-group/{Id}/config':
+    get:
+      operationId: GetKeyGroupConfig2020_05_31
+      description: '<p>Gets a key group configuration.</p> <p>To get a key group configuration, you must provide the key group’s identifier. If the key group is referenced in a distribution’s cache behavior, you can get the key group’s identifier using <code>ListDistributions</code> or <code>GetDistribution</code>. If the key group is not referenced in a cache behavior, you can get the identifier using <code>ListKeyGroups</code>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetKeyGroupConfigResult'
+        '480':
+          description: NoSuchResource
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchResource'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: 'The identifier of the key group whose configuration you are getting. To get the identifier, use <code>ListKeyGroups</code>.'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2020-05-31/origin-request-policy/{Id}/config':
     get:
       operationId: GetOriginRequestPolicyConfig2020_05_31
@@ -4234,7 +4607,7 @@ paths:
   '/2020-05-31/public-key/{Id}/config':
     get:
       operationId: GetPublicKeyConfig2020_05_31
-      description: Return public key configuration informaation
+      description: Gets a public key configuration.
       responses:
         '200':
           description: Success
@@ -4258,7 +4631,7 @@ paths:
         - name: Id
           in: path
           required: true
-          description: Request the ID for the public key configuration.
+          description: The identifier of the public key whose configuration you are getting.
           schema:
             type: string
     parameters:
@@ -4325,7 +4698,7 @@ paths:
         - name: Id
           in: path
           required: true
-          description: ID of the public key to be updated.
+          description: The identifier of the public key that you are updating.
           schema:
             type: string
         - name: If-Match
@@ -4344,25 +4717,25 @@ paths:
                 - PublicKeyConfig
               properties:
                 PublicKeyConfig:
-                  description: Information about a public key you add to CloudFront to use with features like field-level encryption.
+                  description: 'Configuration information about a public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
                   type: object
                   properties:
                     CallerReference:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: A unique number that ensures that the request can't be replayed.
+                        - description: A string included in the request to help make sure that the request can’t be replayed.
                     Name:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: The name for a public key you add to CloudFront to use with features like field-level encryption.
+                        - description: A name to help identify the public key.
                     EncodedKey:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
+                        - description: 'The public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
                     Comment:
                       allOf:
                         - $ref: '#/components/schemas/string'
-                        - description: An optional comment about a public key.
+                        - description: A comment to describe the public key.
   /2020-05-31/get-realtime-log-config/:
     post:
       operationId: GetRealtimeLogConfig2020_05_31
@@ -4386,6 +4759,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidArgument'
+        '482':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
       parameters: []
       requestBody:
         required: true
@@ -4638,6 +5017,56 @@ paths:
           in: path
           required: true
           description: The ID of the cache policy whose associated distribution IDs you want to list.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2020-05-31/distributionsByKeyGroupId/{KeyGroupId}':
+    get:
+      operationId: ListDistributionsByKeyGroup2020_05_31
+      description: '<p>Gets a list of distribution IDs for distributions that have a cache behavior that references the specified key group.</p> <p>You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the <code>NextMarker</code> value from the current response as the <code>Marker</code> value in the subsequent request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ListDistributionsByKeyGroupResult'
+        '480':
+          description: NoSuchResource
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchResource'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters:
+        - name: Marker
+          in: query
+          required: false
+          description: 'Use this field when paginating results to indicate where to begin in your list of distribution IDs. The response includes distribution IDs in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of <code>NextMarker</code> from the current page’s response.'
+          schema:
+            type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: The maximum number of distribution IDs that you want in the response.
+          schema:
+            type: string
+        - name: KeyGroupId
+          in: path
+          required: true
+          description: The ID of the key group whose associated distribution IDs you are listing.
           schema:
             type: string
     parameters:
@@ -5015,6 +5444,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidArgument'
+        '482':
+          description: AccessDenied
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AccessDenied'
       parameters: []
       requestBody:
         required: true
@@ -5219,7 +5654,6 @@ components:
       type: object
       required:
         - TargetOriginId
-        - TrustedSigners
         - ViewerProtocolPolicy
       properties:
         TargetOriginId:
@@ -5229,7 +5663,11 @@ components:
         TrustedSigners:
           allOf:
             - $ref: '#/components/schemas/TrustedSigners'
-            - description: '<p>A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content.</p> <p>If you want to require signed URLs in requests for objects in the target origin that match the <code>PathPattern</code> for this cache behavior, specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for <code>Quantity</code> and <code>Items</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content with Signed URLs and Signed Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p> <p>If you don’t want to require signed URLs in requests for objects that match <code>PathPattern</code>, specify <code>false</code> for <code>Enabled</code> and <code>0</code> for <code>Quantity</code>. Omit <code>Items</code>.</p> <p>To add, change, or remove one or more trusted signers, change <code>Enabled</code> to <code>true</code> (if it’s currently <code>false</code>), change <code>Quantity</code> as applicable, and specify all of the trusted signers that you want to include in the updated distribution.</p>'
+            - description: '<important> <p>We recommend using <code>TrustedKeyGroups</code> instead of <code>TrustedSigners</code>.</p> </important> <p>A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies.</p> <p>When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in a trusted signer’s AWS account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+        TrustedKeyGroups:
+          allOf:
+            - $ref: '#/components/schemas/TrustedKeyGroups'
+            - description: '<p>A list of key groups that CloudFront can use to validate signed URLs or signed cookies.</p> <p>When a cache behavior contains trusted key groups, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
         ViewerProtocolPolicy:
           allOf:
             - $ref: '#/components/schemas/ViewerProtocolPolicy'
@@ -5443,6 +5881,9 @@ components:
     TooManyDistributionsAssociatedToCachePolicy: {}
     NoSuchOriginRequestPolicy: {}
     TooManyDistributionsAssociatedToOriginRequestPolicy: {}
+    TooManyDistributionsAssociatedToKeyGroup: {}
+    TooManyKeyGroupsAssociatedToDistribution: {}
+    TrustedKeyGroupDoesNotExist: {}
     CreateDistributionWithTagsResult:
       type: object
       properties:
@@ -5631,6 +6072,23 @@ components:
     NoSuchDistribution: {}
     BatchTooLarge: {}
     TooManyInvalidationsInProgress: {}
+    CreateKeyGroupResult:
+      type: object
+      properties:
+        KeyGroup:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroup'
+            - description: The key group that was just created.
+    PublicKeyIdList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/string'
+          - xml:
+              name: PublicKey
+    KeyGroupAlreadyExists: {}
+    TooManyKeyGroups: {}
+    TooManyPublicKeysInKeyGroup: {}
     CreateMonitoringSubscriptionResult:
       type: object
       properties:
@@ -5704,7 +6162,7 @@ components:
         PublicKey:
           allOf:
             - $ref: '#/components/schemas/PublicKey'
-            - description: Returned when you add a public key.
+            - description: The public key.
     PublicKeyAlreadyExists: {}
     TooManyPublicKeys: {}
     CreateRealtimeLogConfigResult:
@@ -5782,16 +6240,16 @@ components:
         Enabled:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: Specifies whether you want to require viewers to use signed URLs to access the files specified by <code>PathPattern</code> and <code>TargetOriginId</code>.
+            - description: 'This field is <code>true</code> if any of the AWS accounts have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.'
         Quantity:
           allOf:
             - $ref: '#/components/schemas/integer'
-            - description: The number of trusted signers for this cache behavior.
+            - description: The number of AWS accounts in the list.
         Items:
           allOf:
             - $ref: '#/components/schemas/AwsAccountNumberList'
-            - description: ' <b>Optional</b>: A complex type that contains trusted signers for this cache behavior. If <code>Quantity</code> is <code>0</code>, you can omit <code>Items</code>.'
-      description: '<p>A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content.</p> <p>If you want to require signed URLs in requests for objects in the target origin that match the <code>PathPattern</code> for this cache behavior, specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for <code>Quantity</code> and <code>Items</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i> Amazon CloudFront Developer Guide</i>.</p> <p>If you don''t want to require signed URLs in requests for objects that match <code>PathPattern</code>, specify <code>false</code> for <code>Enabled</code> and <code>0</code> for <code>Quantity</code>. Omit <code>Items</code>.</p> <p>To add, change, or remove one or more trusted signers, change <code>Enabled</code> to <code>true</code> (if it''s currently <code>false</code>), change <code>Quantity</code> as applicable, and specify all of the trusted signers that you want to include in the updated distribution.</p> <p>For more information about updating the distribution configuration, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/DistributionConfig.html">DistributionConfig</a> in the <i>Amazon CloudFront API Reference</i>.</p>'
+            - description: A list of AWS account identifiers.
+      description: A list of AWS accounts whose public keys CloudFront can use to verify the signatures of signed URLs and signed cookies.
     StreamingDistributionAlreadyExists: {}
     TooManyStreamingDistributionCNAMEs: {}
     TooManyStreamingDistributions: {}
@@ -5854,6 +6312,8 @@ components:
     DistributionNotDisabled: {}
     FieldLevelEncryptionConfigInUse: {}
     FieldLevelEncryptionProfileInUse: {}
+    NoSuchResource: {}
+    ResourceInUse: {}
     DeleteMonitoringSubscriptionResult:
       type: object
       properties: {}
@@ -5946,6 +6406,20 @@ components:
             - description: 'The invalidation''s information. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html">Invalidation Complex Type</a>. '
       description: The returned result of the corresponding request.
     NoSuchInvalidation: {}
+    GetKeyGroupResult:
+      type: object
+      properties:
+        KeyGroup:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroup'
+            - description: The key group.
+    GetKeyGroupConfigResult:
+      type: object
+      properties:
+        KeyGroupConfig:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroupConfig'
+            - description: The key group configuration.
     GetMonitoringSubscriptionResult:
       type: object
       properties:
@@ -5973,14 +6447,14 @@ components:
         PublicKey:
           allOf:
             - $ref: '#/components/schemas/PublicKey'
-            - description: Return the public key.
+            - description: The public key.
     GetPublicKeyConfigResult:
       type: object
       properties:
         PublicKeyConfig:
           allOf:
             - $ref: '#/components/schemas/PublicKeyConfig'
-            - description: Return the result for the public key configuration.
+            - description: A public key configuration.
     GetRealtimeLogConfigResult:
       type: object
       properties:
@@ -6034,6 +6508,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/DistributionIdList'
             - description: A list of distribution IDs.
+    ListDistributionsByKeyGroupResult:
+      type: object
+      properties:
+        DistributionIdList:
+          $ref: '#/components/schemas/DistributionIdList'
     ListDistributionsByOriginRequestPolicyIdResult:
       type: object
       properties:
@@ -6076,6 +6555,13 @@ components:
             - $ref: '#/components/schemas/InvalidationList'
             - description: 'Information about invalidation batches. '
       description: 'The returned result of the corresponding request. '
+    ListKeyGroupsResult:
+      type: object
+      properties:
+        KeyGroupList:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroupList'
+            - description: A list of key groups.
     ListOriginRequestPoliciesResult:
       type: object
       properties:
@@ -6115,7 +6601,6 @@ components:
             - $ref: '#/components/schemas/Tags'
             - description: ' A complex type that contains zero or more <code>Tag</code> elements.'
       description: ' The returned result of the corresponding request.'
-    NoSuchResource: {}
     TagList:
       type: array
       items:
@@ -6168,6 +6653,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/FieldLevelEncryptionProfile'
             - description: Return the results of updating the profile.
+    UpdateKeyGroupResult:
+      type: object
+      properties:
+        KeyGroup:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroup'
+            - description: The key group that was just updated.
     UpdateOriginRequestPolicyResult:
       type: object
       properties:
@@ -6181,7 +6673,7 @@ components:
         PublicKey:
           allOf:
             - $ref: '#/components/schemas/PublicKey'
-            - description: Return the results of updating the public key.
+            - description: The public key.
     CannotChangeImmutablePublicKeyFields: {}
     UpdateRealtimeLogConfigResult:
       type: object
@@ -6200,6 +6692,32 @@ components:
       description: The returned result of the corresponding request.
     integer:
       type: integer
+    KGKeyPairIdsList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/KGKeyPairIds'
+          - xml:
+              name: KeyGroup
+    ActiveTrustedKeyGroups:
+      type: object
+      required:
+        - Enabled
+        - Quantity
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: 'This field is <code>true</code> if any of the key groups have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.'
+        Quantity:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The number of key groups in the list.
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/KGKeyPairIdsList'
+            - description: 'A list of key groups, including the identifiers of the public keys in each key group that CloudFront can use to verify the signatures of signed URLs and signed cookies.'
+      description: 'A list of key groups, and the public keys in each key group, that CloudFront can use to verify the signatures of signed URLs and signed cookies.'
     SignerList:
       type: array
       items:
@@ -6216,16 +6734,16 @@ components:
         Enabled:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: 'Enabled is <code>true</code> if any of the AWS accounts listed in the <code>TrustedSigners</code> complex type for this distribution have active CloudFront key pairs. If not, <code>Enabled</code> is <code>false</code>.'
+            - description: 'This field is <code>true</code> if any of the AWS accounts in the list have active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.'
         Quantity:
           allOf:
             - $ref: '#/components/schemas/integer'
-            - description: The number of trusted signers specified in the <code>TrustedSigners</code> complex type.
+            - description: The number of AWS accounts in the list.
         Items:
           allOf:
             - $ref: '#/components/schemas/SignerList'
-            - description: A complex type that contains one <code>Signer</code> complex type for each trusted signer that is specified in the <code>TrustedSigners</code> complex type.
-      description: '<p>A complex type that lists the AWS accounts, if any, that you included in the <code>TrustedSigners</code> complex type for this distribution. These are the accounts that you want to allow to create signed URLs for private content.</p> <p>The <code>Signer</code> complex type lists the AWS account number of the trusted signer or <code>self</code> if the signer is the AWS account that created the distribution. The <code>Signer</code> element also includes the IDs of any active CloudFront key pairs that are associated with the trusted signer''s AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can''t create signed URLs. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content through CloudFront</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+            - description: A list of AWS accounts and the identifiers of active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.
+      description: A list of AWS accounts and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.
     ICPRecordalStatus:
       type: string
       enum:
@@ -6304,6 +6822,25 @@ components:
           - $ref: '#/components/schemas/string'
           - xml:
               name: AwsAccountNumber
+    TrustedKeyGroups:
+      type: object
+      required:
+        - Enabled
+        - Quantity
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: 'This field is <code>true</code> if any of the key groups in the list have public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies. If not, this field is <code>false</code>.'
+        Quantity:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The number of key groups in the list.
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/TrustedKeyGroupIdList'
+            - description: A list of key groups identifiers.
+      description: A list of key groups whose public keys CloudFront can use to verify the signatures of signed URLs and signed cookies.
     ViewerProtocolPolicy:
       type: string
       enum:
@@ -6352,7 +6889,6 @@ components:
       required:
         - PathPattern
         - TargetOriginId
-        - TrustedSigners
         - ViewerProtocolPolicy
       properties:
         PathPattern:
@@ -6366,7 +6902,11 @@ components:
         TrustedSigners:
           allOf:
             - $ref: '#/components/schemas/TrustedSigners'
-            - description: '<p>A complex type that specifies the AWS accounts, if any, that you want to allow to create signed URLs for private content.</p> <p>If you want to require signed URLs in requests for objects in the target origin that match the <code>PathPattern</code> for this cache behavior, specify <code>true</code> for <code>Enabled</code>, and specify the applicable values for <code>Quantity</code> and <code>Items</code>. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving Private Content with Signed URLs and Signed Cookies</a> in the <i>Amazon CloudFront Developer Guide</i>. </p> <p>If you don’t want to require signed URLs in requests for objects that match <code>PathPattern</code>, specify <code>false</code> for <code>Enabled</code> and <code>0</code> for <code>Quantity</code>. Omit <code>Items</code>.</p> <p>To add, change, or remove one or more trusted signers, change <code>Enabled</code> to <code>true</code> (if it’s currently <code>false</code>), change <code>Quantity</code> as applicable, and specify all of the trusted signers that you want to include in the updated distribution.</p>'
+            - description: '<important> <p>We recommend using <code>TrustedKeyGroups</code> instead of <code>TrustedSigners</code>.</p> </important> <p>A list of AWS account IDs whose public keys CloudFront can use to validate signed URLs or signed cookies.</p> <p>When a cache behavior contains trusted signers, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with the private key of a CloudFront key pair in the trusted signer’s AWS account. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
+        TrustedKeyGroups:
+          allOf:
+            - $ref: '#/components/schemas/TrustedKeyGroups'
+            - description: '<p>A list of key groups that CloudFront can use to validate signed URLs or signed cookies.</p> <p>When a cache behavior contains trusted key groups, CloudFront requires signed URLs or signed cookies for all requests that match the cache behavior. The URLs or cookies must be signed with a private key whose corresponding public key is in the key group. The signed URL or cookie contains information about which public key CloudFront should use to verify the signature. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">Serving private content</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>'
         ViewerProtocolPolicy:
           allOf:
             - $ref: '#/components/schemas/ViewerProtocolPolicy'
@@ -6850,7 +7390,6 @@ components:
         - LastModifiedTime
         - InProgressInvalidationBatches
         - DomainName
-        - ActiveTrustedSigners
         - DistributionConfig
       properties:
         Id:
@@ -6880,7 +7419,11 @@ components:
         ActiveTrustedSigners:
           allOf:
             - $ref: '#/components/schemas/ActiveTrustedSigners'
-            - description: 'CloudFront automatically adds this element to the response only if you''ve set up the distribution to serve private content with signed URLs. The element lists the key pair IDs that CloudFront is aware of for each trusted signer. The <code>Signer</code> child element lists the AWS account number of the trusted signer (or an empty <code>Self</code> element if the signer is you). The <code>Signer</code> element also includes the IDs of any active key pairs associated with the trusted signer''s AWS account. If no <code>KeyPairId</code> element appears for a <code>Signer</code>, that signer can''t create working signed URLs.'
+            - description: <important> <p>We recommend using <code>TrustedKeyGroups</code> instead of <code>TrustedSigners</code>.</p> </important> <p>CloudFront automatically adds this field to the response if you’ve configured a cache behavior in this distribution to serve private content using trusted signers. This field contains a list of AWS account IDs and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs or signed cookies.</p>
+        ActiveTrustedKeyGroups:
+          allOf:
+            - $ref: '#/components/schemas/ActiveTrustedKeyGroups'
+            - description: CloudFront automatically adds this field to the response if you’ve configured a cache behavior in this distribution to serve private content using key groups. This field contains a list of key groups and the public keys in each key group that CloudFront can use to verify the signatures of signed URLs or signed cookies.
         DistributionConfig:
           allOf:
             - $ref: '#/components/schemas/DistributionConfig'
@@ -7081,6 +7624,57 @@ components:
             - $ref: '#/components/schemas/InvalidationBatch'
             - description: 'The current invalidation information for the batch request. '
       description: 'An invalidation. '
+    KeyGroupConfig:
+      type: object
+      required:
+        - Name
+        - Items
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A name to identify the key group.
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/PublicKeyIdList'
+            - description: A list of the identifiers of the public keys in the key group.
+        Comment:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: A comment to describe the key group.
+      description: '<p>A key group configuration.</p> <p>A key group contains a list of public keys that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">CloudFront signed URLs and signed cookies</a>.</p>'
+    CreateKeyGroupRequest:
+      type: object
+      required:
+        - KeyGroupConfig
+      title: CreateKeyGroupRequest
+      properties:
+        KeyGroupConfig:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroupConfig'
+            - description: A key group configuration.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
+    KeyGroup:
+      type: object
+      required:
+        - Id
+        - LastModifiedTime
+        - KeyGroupConfig
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The identifier for the key group.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: The date and time when the key group was last modified.
+        KeyGroupConfig:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroupConfig'
+            - description: The key group configuration.
+      description: '<p>A key group.</p> <p>A key group contains a list of public keys that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">CloudFront signed URLs and signed cookies</a>.</p>'
     MonitoringSubscription:
       type: object
       properties:
@@ -7172,20 +7766,20 @@ components:
         CallerReference:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique number that ensures that the request can't be replayed.
+            - description: A string included in the request to help make sure that the request can’t be replayed.
         Name:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: The name for a public key you add to CloudFront to use with features like field-level encryption.
+            - description: A name to help identify the public key.
         EncodedKey:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
+            - description: 'The public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: An optional comment about a public key.
-      description: Information about a public key you add to CloudFront to use with features like field-level encryption.
+            - description: A comment to describe the public key.
+      description: 'Configuration information about a public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
     CreatePublicKeyRequest:
       type: object
       required:
@@ -7195,7 +7789,7 @@ components:
         PublicKeyConfig:
           allOf:
             - $ref: '#/components/schemas/PublicKeyConfig'
-            - description: The request to add a public key to CloudFront.
+            - description: A CloudFront public key configuration.
       xml:
         namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
     PublicKey:
@@ -7208,16 +7802,16 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: A unique ID assigned to a public key you've added to CloudFront.
+            - description: The identifier of the public key.
         CreatedTime:
           allOf:
             - $ref: '#/components/schemas/timestamp'
-            - description: A time you added a public key to CloudFront.
+            - description: The date and time when the public key was uploaded.
         PublicKeyConfig:
           allOf:
             - $ref: '#/components/schemas/PublicKeyConfig'
-            - description: A complex data type for a public key you add to CloudFront to use with features like field-level encryption.
-      description: A complex data type of public keys you add to CloudFront to use with features like field-level encryption.
+            - description: 'Configuration information about a public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
+      description: 'A public key that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
     EndPointList:
       type: array
       items:
@@ -7488,6 +8082,10 @@ components:
     DeleteFieldLevelEncryptionProfileRequest:
       type: object
       title: DeleteFieldLevelEncryptionProfileRequest
+      properties: {}
+    DeleteKeyGroupRequest:
+      type: object
+      title: DeleteKeyGroupRequest
       properties: {}
     DeleteMonitoringSubscriptionRequest:
       type: object
@@ -7982,6 +8580,14 @@ components:
       title: GetInvalidationRequest
       properties: {}
       description: 'The request to get an invalidation''s information. '
+    GetKeyGroupConfigRequest:
+      type: object
+      title: GetKeyGroupConfigRequest
+      properties: {}
+    GetKeyGroupRequest:
+      type: object
+      title: GetKeyGroupRequest
+      properties: {}
     GetMonitoringSubscriptionRequest:
       type: object
       title: GetMonitoringSubscriptionRequest
@@ -8091,13 +8697,6 @@ components:
             - $ref: '#/components/schemas/string'
             - description: The status of an invalidation request.
       description: A summary of an invalidation request.
-    KeyPairIdList:
-      type: array
-      items:
-        allOf:
-          - $ref: '#/components/schemas/string'
-          - xml:
-              name: KeyPairId
     KeyPairIds:
       type: object
       required:
@@ -8106,12 +8705,69 @@ components:
         Quantity:
           allOf:
             - $ref: '#/components/schemas/integer'
-            - description: '<p>The number of active CloudFront key pairs for <code>AwsAccountNumber</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html">ActiveTrustedSigners</a>.</p>'
+            - description: The number of key pair identifiers in the list.
         Items:
           allOf:
             - $ref: '#/components/schemas/KeyPairIdList'
-            - description: '<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html">ActiveTrustedSigners</a>.</p>'
-      description: '<p>A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>. </p> <p>For more information, see <a href="https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ActiveTrustedSigners.html">ActiveTrustedSigners</a>.</p>'
+            - description: A list of CloudFront key pair identifiers.
+      description: A list of CloudFront key pair identifiers.
+    KGKeyPairIds:
+      type: object
+      properties:
+        KeyGroupId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The identifier of the key group that contains the public keys.
+        KeyPairIds:
+          $ref: '#/components/schemas/KeyPairIds'
+      description: A list of identifiers for the public keys that CloudFront can use to verify the signatures of signed URLs and signed cookies.
+    KeyGroupSummaryList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/KeyGroupSummary'
+          - xml:
+              name: KeyGroupSummary
+    KeyGroupList:
+      type: object
+      required:
+        - MaxItems
+        - Quantity
+      properties:
+        NextMarker:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the <code>Marker</code> field of a subsequent request to continue listing key groups.'
+        MaxItems:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The maximum number of key groups requested.
+        Quantity:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The number of key groups returned in the response.
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroupSummaryList'
+            - description: A list of key groups.
+      description: A list of key groups.
+    KeyGroupSummary:
+      type: object
+      required:
+        - KeyGroup
+      properties:
+        KeyGroup:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroup'
+            - description: A key group.
+      description: Contains information about a key group.
+    KeyPairIdList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/string'
+          - xml:
+              name: KeyPairId
     LambdaFunctionARN:
       type: string
     LambdaFunctionAssociation:
@@ -8152,6 +8808,10 @@ components:
     ListDistributionsByCachePolicyIdRequest:
       type: object
       title: ListDistributionsByCachePolicyIdRequest
+      properties: {}
+    ListDistributionsByKeyGroupRequest:
+      type: object
+      title: ListDistributionsByKeyGroupRequest
       properties: {}
     ListDistributionsByOriginRequestPolicyIdRequest:
       type: object
@@ -8200,6 +8860,10 @@ components:
       title: ListInvalidationsRequest
       properties: {}
       description: 'The request to list invalidations. '
+    ListKeyGroupsRequest:
+      type: object
+      title: ListKeyGroupsRequest
+      properties: {}
     OriginRequestPolicyType:
       type: string
       enum:
@@ -8249,16 +8913,16 @@ components:
         MaxItems:
           allOf:
             - $ref: '#/components/schemas/integer'
-            - description: 'The maximum number of public keys you want in the response body. '
+            - description: The maximum number of public keys you want in the response.
         Quantity:
           allOf:
             - $ref: '#/components/schemas/integer'
-            - description: The number of public keys you added to CloudFront to use with features like field-level encryption.
+            - description: The number of public keys in the list.
         Items:
           allOf:
             - $ref: '#/components/schemas/PublicKeySummaryList'
-            - description: An array of information about a public key you add to CloudFront to use with features like field-level encryption.
-      description: A list of public keys you've added to CloudFront to use with features like field-level encryption.
+            - description: A list of public keys.
+      description: 'A list of public keys that you can use with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html">signed URLs and signed cookies</a>, or with <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/field-level-encryption.html">field-level encryption</a>.'
     ListRealtimeLogConfigsRequest:
       type: object
       title: ListRealtimeLogConfigsRequest
@@ -8612,24 +9276,24 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: ' ID for public key information summary. '
+            - description: The identifier of the public key.
         Name:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: ' Name for public key information summary. '
+            - description: A name to help identify the public key.
         CreatedTime:
           allOf:
             - $ref: '#/components/schemas/timestamp'
-            - description: ' Creation time for public key information summary. '
+            - description: The date and time when the public key was uploaded.
         EncodedKey:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: ' Encoded key for public key information summary. '
+            - description: The public key.
         Comment:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: ' Comment for public key information summary. '
-      description: 'A complex data type for public key information. '
+            - description: A comment to describe the public key.
+      description: Contains information about a public key.
     QueryArgProfile:
       type: object
       required:
@@ -8701,12 +9365,12 @@ components:
         AwsAccountNumber:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>An AWS account that is included in the <code>TrustedSigners</code> complex type for this distribution. Valid values include:</p> <ul> <li> <p> <code>self</code>, which is the AWS account used to create the distribution.</p> </li> <li> <p>An AWS account number.</p> </li> </ul>'
+            - description: 'An AWS account number that contains active CloudFront key pairs that CloudFront can use to verify the signatures of signed URLs and signed cookies. If the AWS account that owns the key pairs is the same account that owns the CloudFront distribution, the value of this field is <code>self</code>.'
         KeyPairIds:
           allOf:
             - $ref: '#/components/schemas/KeyPairIds'
-            - description: 'A complex type that lists the active CloudFront key pairs, if any, that are associated with <code>AwsAccountNumber</code>.'
-      description: 'A complex type that lists the AWS accounts that were included in the <code>TrustedSigners</code> complex type, as well as their active CloudFront key pair IDs, if any. '
+            - description: A list of CloudFront key pair identifiers.
+      description: A list of AWS accounts and the active CloudFront key pairs in each account that CloudFront can use to verify the signatures of signed URLs and signed cookies.
     SslProtocol:
       type: string
       enum:
@@ -8836,6 +9500,13 @@ components:
       description: ' The request to add tags to a CloudFront resource.'
       xml:
         namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
+    TrustedKeyGroupIdList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/string'
+          - xml:
+              name: KeyGroup
     UntagResourceRequest:
       type: object
       required:
@@ -8911,6 +9582,18 @@ components:
             - description: 'Request to update a field-level encryption profile. '
       xml:
         namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
+    UpdateKeyGroupRequest:
+      type: object
+      required:
+        - KeyGroupConfig
+      title: UpdateKeyGroupRequest
+      properties:
+        KeyGroupConfig:
+          allOf:
+            - $ref: '#/components/schemas/KeyGroupConfig'
+            - description: The key group configuration.
+      xml:
+        namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
     UpdateOriginRequestPolicyRequest:
       type: object
       required:
@@ -8932,7 +9615,7 @@ components:
         PublicKeyConfig:
           allOf:
             - $ref: '#/components/schemas/PublicKeyConfig'
-            - description: Request to update public key information.
+            - description: A public key configuration.
       xml:
         namespace: 'http://cloudfront.amazonaws.com/doc/2020-05-31/'
     UpdateRealtimeLogConfigRequest:

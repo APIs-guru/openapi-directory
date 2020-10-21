@@ -8883,6 +8883,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SchemaChangePolicy'
             - description: The policy for the crawler's update and deletion behavior.
+        RecrawlPolicy:
+          allOf:
+            - $ref: '#/components/schemas/RecrawlPolicy'
+            - description: 'A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.'
         Configuration:
           allOf:
             - $ref: '#/components/schemas/CrawlerConfiguration'
@@ -11915,6 +11919,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SchemaChangePolicy'
             - description: The policy for the crawler's update and deletion behavior.
+        RecrawlPolicy:
+          allOf:
+            - $ref: '#/components/schemas/RecrawlPolicy'
+            - description: 'A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.'
         Configuration:
           allOf:
             - $ref: '#/components/schemas/CrawlerConfiguration'
@@ -13549,6 +13557,14 @@ components:
       description: Specifies data stores to crawl.
     DatabaseName:
       type: string
+    RecrawlPolicy:
+      type: object
+      properties:
+        RecrawlBehavior:
+          allOf:
+            - $ref: '#/components/schemas/RecrawlBehavior'
+            - description: <p>Specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run.</p> <p>A value of <code>CRAWL_EVERYTHING</code> specifies crawling the entire dataset again.</p> <p>A value of <code>CRAWL_NEW_FOLDERS_ONLY</code> specifies crawling only folders that were added since the last crawler run.</p>
+      description: 'When crawling an Amazon S3 data source after the first crawl is complete, specifies whether to crawl the entire dataset again or to crawl only folders that were added since the last crawler run. For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/incremental-crawls.html">Incremental Crawls in AWS Glue</a> in the developer guide.'
     SchemaChangePolicy:
       type: object
       properties:
@@ -13648,6 +13664,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClassifierNameList'
             - description: A list of UTF-8 strings that specify the custom classifiers that are associated with the crawler.
+        RecrawlPolicy:
+          allOf:
+            - $ref: '#/components/schemas/RecrawlPolicy'
+            - description: 'A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.'
         SchemaChangePolicy:
           allOf:
             - $ref: '#/components/schemas/SchemaChangePolicy'
@@ -15960,6 +15980,11 @@ components:
             - $ref: '#/components/schemas/Comparator'
             - description: The comparator used to compare this property to others.
       description: Defines a property predicate.
+    RecrawlBehavior:
+      type: string
+      enum:
+        - CRAWL_EVERYTHING
+        - CRAWL_NEW_FOLDERS_ONLY
     ResourceType:
       type: string
       enum:

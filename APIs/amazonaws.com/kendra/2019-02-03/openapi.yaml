@@ -1884,8 +1884,6 @@ components:
         - Name
         - IndexId
         - Type
-        - Configuration
-        - RoleArn
       title: CreateDataSourceRequest
       properties:
         Name:
@@ -1903,7 +1901,7 @@ components:
         Configuration:
           allOf:
             - $ref: '#/components/schemas/DataSourceConfiguration'
-            - description: The data source connector configuration information that is required to access the repository.
+            - description: '<p>The connector configuration information that is required to access the repository.</p> <p>You can''t specify the <code>Configuration</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p> <p>The <code>Configuration</code> parameter is required for all other data sources.</p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -1911,15 +1909,19 @@ components:
         Schedule:
           allOf:
             - $ref: '#/components/schemas/ScanSchedule'
-            - description: Sets the frequency that Amazon Kendra will check the documents in your repository and update the index. If you don't set a schedule Amazon Kendra will not periodically update the index. You can call the <code>StartDataSourceSyncJob</code> operation to update the index.
+            - description: '<p>Sets the frequency that Amazon Kendra will check the documents in your repository and update the index. If you don''t set a schedule Amazon Kendra will not periodically update the index. You can call the <code>StartDataSourceSyncJob</code> operation to update the index.</p> <p>You can''t specify the <code>Schedule</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p>'
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: 'The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.'
+            - description: '<p>The Amazon Resource Name (ARN) of a role with permission to access the data source. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html">IAM Roles for Amazon Kendra</a>.</p> <p>You can''t specify the <code>RoleArn</code> parameter when the <code>Type</code> parameter is set to <code>CUSTOM</code>. If you do, you receive a <code>ValidationException</code> exception.</p> <p>The <code>RoleArn</code> parameter is required for all other data sources.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of key-value pairs that identify the data source. You can use the tags to identify and organize your resources and to control access to resources.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenName'
+            - description: A token that you provide to identify the request to create a data source. Multiple calls to the <code>CreateDataSource</code> operation with the same client token will create only one data source.
     ResourceAlreadyExistException: {}
     CreateFaqResponse:
       type: object
@@ -1965,6 +1967,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FaqFileFormat'
             - description: '<p>The format of the input file. You can choose between a basic CSV format, a CSV format that includes customs attributes in a header, and a JSON format that includes custom attributes.</p> <p>The format must match the format of the file stored in the S3 bucket identified in the <code>S3Path</code> parameter.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html">Adding questions and answers</a>.</p>'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenName'
+            - description: 'A token that you provide to identify the request to create a FAQ. Multiple calls to the <code>CreateFaqRequest</code> operation with the same client token will create only one FAQ. '
     CreateIndexResponse:
       type: object
       properties:
@@ -1990,7 +1996,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: An IAM role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.
+            - description: An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.
         ServerSideEncryptionConfiguration:
           allOf:
             - $ref: '#/components/schemas/ServerSideEncryptionConfiguration'
@@ -2002,7 +2008,7 @@ components:
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientTokenName'
-            - description: A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> operation with the same client token will create only one index.”
+            - description: A token that you provide to identify the request to create an index. Multiple calls to the <code>CreateIndex</code> operation with the same client token will create only one index.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -3008,6 +3014,7 @@ components:
         - SALESFORCE
         - ONEDRIVE
         - SERVICENOW
+        - CUSTOM
     DataSourceConfiguration:
       type: object
       properties:
@@ -3039,7 +3046,7 @@ components:
     Description:
       type: string
       pattern: '^\P{C}*$'
-      minLength: 1
+      minLength: 0
       maxLength: 1000
     ScanSchedule:
       type: string
@@ -3116,10 +3123,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
             - description: A list of S3 prefixes for the documents that should be included in the index.
+        InclusionPatterns:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: '<p>A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href="https://en.wikipedia.org/wiki/Glob_(programming)">glob (programming)</a> in <i>Wikipedia</i>.</p>'
         ExclusionPatterns:
           allOf:
             - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
-            - description: '<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href="https://en.wikipedia.org/wiki/Glob_(programming)">glob (programming)</a> in <i>Wikipedia</i>.</p>'
+            - description: '<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href="https://en.wikipedia.org/wiki/Glob_(programming)">glob (programming)</a> in <i>Wikipedia</i>.</p>'
         DocumentsMetadataConfiguration:
           $ref: '#/components/schemas/DocumentsMetadataConfiguration'
         AccessControlListConfiguration:
@@ -3319,7 +3330,7 @@ components:
     DataSourceInclusionsExclusionsStringsMember:
       type: string
       minLength: 1
-      maxLength: 50
+      maxLength: 150
     DataSourceInclusionsExclusionsStrings:
       type: array
       items:
