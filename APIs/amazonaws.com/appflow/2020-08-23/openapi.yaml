@@ -337,6 +337,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/SourceConnectorProperties'
                         - description: ' Specifies the information that is required to query a particular source connector. '
+                    incrementalPullConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/IncrementalPullConfig'
+                        - description: ' Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull. '
                 destinationFlowConfigList:
                   description: ' The configuration that controls how Amazon AppFlow places data in the destination connector. '
                   type: array
@@ -1436,6 +1440,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/SourceConnectorProperties'
                         - description: ' Specifies the information that is required to query a particular source connector. '
+                    incrementalPullConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/IncrementalPullConfig'
+                        - description: ' Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull. '
                 destinationFlowConfigList:
                   description: ' The configuration that controls how Amazon AppFlow transfers data to the destination connector. '
                   type: array
@@ -1755,6 +1763,14 @@ components:
             - $ref: '#/components/schemas/ZendeskSourceProperties'
             - description: ' Specifies the information that is required for querying Zendesk. '
       description: ' Specifies the information that is required to query a particular connector. '
+    IncrementalPullConfig:
+      type: object
+      properties:
+        datetimeTypeFieldName:
+          allOf:
+            - $ref: '#/components/schemas/DatetimeTypeFieldName'
+            - description: ' A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source. '
+      description: ' Specifies the configuration used when importing incremental records from the source. '
     DestinationFlowConfig:
       type: object
       required:
@@ -1960,6 +1976,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FlowStatus'
             - description: ' Indicates the current status of the flow. '
+        executionId:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionId'
+            - description: ' Returns the internal execution ID of an on-demand flow when the flow is started. For scheduled or event-triggered flows, this value is null. '
     StopFlowResponse:
       type: object
       properties:
@@ -2106,6 +2126,12 @@ components:
       type: string
       pattern: .*
       maxLength: 512
+    ClientCredentialsArn:
+      type: string
+      pattern: 'arn:aws:secretsmanager:.*:[0-9]+:.*'
+      minLength: 20
+      maxLength: 2048
+      format: password
     ClientId:
       type: string
       pattern: \S+
@@ -2317,6 +2343,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: ' Specifies if the flow run can either insert new rows in the destination field if they do not already exist, or update them if they do. '
+        isUpdatable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: ' Specifies whether the field can be updated during an <code>UPDATE</code> or <code>UPSERT</code> write operation. '
+        supportedWriteOperations:
+          allOf:
+            - $ref: '#/components/schemas/SupportedWriteOperationList'
+            - description: ' A list of supported write operations. For each write operation listed, this field can be used in <code>idFieldNames</code> when that write operation is present as a destination option. '
       description: ' The properties that can be applied to a field when connector is being used as a destination. '
     ConnectorEntityField:
       type: object
@@ -2862,7 +2896,7 @@ components:
         clientSecret:
           allOf:
             - $ref: '#/components/schemas/ClientSecret'
-            - description: ' The client secret used by the oauth client to authenticate to the authorization server. '
+            - description: ' The client secret used by the OAuth client to authenticate to the authorization server. '
         accessToken:
           allOf:
             - $ref: '#/components/schemas/AccessToken'
@@ -2874,7 +2908,7 @@ components:
         oAuthRequest:
           allOf:
             - $ref: '#/components/schemas/ConnectorOAuthRequest'
-            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+            - description: ' The OAuth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required by Google Analytics. '
     InforNexusConnectorProfileCredentials:
       type: object
@@ -2914,7 +2948,7 @@ components:
         clientSecret:
           allOf:
             - $ref: '#/components/schemas/ClientSecret'
-            - description: ' The client secret used by the oauth client to authenticate to the authorization server. '
+            - description: ' The client secret used by the OAuth client to authenticate to the authorization server. '
         accessToken:
           allOf:
             - $ref: '#/components/schemas/AccessToken'
@@ -2922,7 +2956,7 @@ components:
         oAuthRequest:
           allOf:
             - $ref: '#/components/schemas/ConnectorOAuthRequest'
-            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+            - description: ' The OAuth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required by Marketo. '
     RedshiftConnectorProfileCredentials:
       type: object
@@ -2953,7 +2987,11 @@ components:
         oAuthRequest:
           allOf:
             - $ref: '#/components/schemas/ConnectorOAuthRequest'
-            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+            - description: ' The OAuth requirement needed to request security tokens from the connector endpoint. '
+        clientCredentialsArn:
+          allOf:
+            - $ref: '#/components/schemas/ClientCredentialsArn'
+            - description: ' The secret manager ARN, which contains the client ID and client secret of the connected app. '
       description: ' The connector-specific profile credentials required when using Salesforce. '
     ServiceNowConnectorProfileCredentials:
       type: object
@@ -2993,7 +3031,7 @@ components:
         clientSecret:
           allOf:
             - $ref: '#/components/schemas/ClientSecret'
-            - description: ' The client secret used by the oauth client to authenticate to the authorization server. '
+            - description: ' The client secret used by the OAuth client to authenticate to the authorization server. '
         accessToken:
           allOf:
             - $ref: '#/components/schemas/AccessToken'
@@ -3001,7 +3039,7 @@ components:
         oAuthRequest:
           allOf:
             - $ref: '#/components/schemas/ConnectorOAuthRequest'
-            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+            - description: ' The OAuth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required when using Slack. '
     SnowflakeConnectorProfileCredentials:
       type: object
@@ -3056,7 +3094,7 @@ components:
         clientSecret:
           allOf:
             - $ref: '#/components/schemas/ClientSecret'
-            - description: ' The client secret used by the oauth client to authenticate to the authorization server. '
+            - description: ' The client secret used by the OAuth client to authenticate to the authorization server. '
         accessToken:
           allOf:
             - $ref: '#/components/schemas/AccessToken'
@@ -3064,7 +3102,7 @@ components:
         oAuthRequest:
           allOf:
             - $ref: '#/components/schemas/ConnectorOAuthRequest'
-            - description: ' The oauth requirement needed to request security tokens from the connector endpoint. '
+            - description: ' The OAuth requirement needed to request security tokens from the connector endpoint. '
       description: ' The connector-specific profile credentials required when using Zendesk. '
     ConnectorProfileDetailList:
       type: array
@@ -3314,6 +3352,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SourceConnectorProperties'
             - description: ' Specifies the information that is required to query a particular source connector. '
+        incrementalPullConfig:
+          allOf:
+            - $ref: '#/components/schemas/IncrementalPullConfig'
+            - description: ' Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull. '
       description: ' Contains information about the configuration of the source connector used in the flow. '
     DestinationFlowConfigList:
       type: array
@@ -3411,6 +3453,10 @@ components:
             - $ref: '#/components/schemas/Object'
             - description: ' The object specified in the Datadog flow source. '
       description: ' The properties that are applied when Datadog is being used as a source. '
+    DatetimeTypeFieldName:
+      type: string
+      pattern: .*
+      maxLength: 256
     DeleteConnectorProfileRequest:
       type: object
       required:
@@ -3601,10 +3647,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/Object'
             - description: ' The object specified in the Salesforce flow destination. '
+        idFieldNames:
+          allOf:
+            - $ref: '#/components/schemas/IdFieldNameList'
+            - description: ' The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update or delete. '
         errorHandlingConfig:
           allOf:
             - $ref: '#/components/schemas/ErrorHandlingConfig'
             - description: ' The settings that determine how Amazon AppFlow handles an error when placing data in the Salesforce destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. '
+        writeOperationType:
+          allOf:
+            - $ref: '#/components/schemas/WriteOperationType'
+            - description: ' This specifies the type of write operation to be performed in Salesforce. When the value is <code>UPSERT</code>, then <code>idFieldNames</code> is required. '
       description: ' The properties that are applied when Salesforce is being used as a destination. '
     SnowflakeDestinationProperties:
       type: object
@@ -3669,6 +3723,10 @@ components:
       type: string
       pattern: .*
       maxLength: 256
+    SupportedWriteOperationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/WriteOperationType'
     DynatraceSourceProperties:
       type: object
       required:
@@ -3916,6 +3974,13 @@ components:
       type: string
       pattern: \S+
       maxLength: 128
+    IdFieldNameList:
+      type: array
+      description: ' A list of field names that can be used as an ID field when performing a write operation. '
+      items:
+        $ref: '#/components/schemas/Name'
+      minItems: 0
+      maxItems: 1
     Username:
       type: string
       pattern: \S+
@@ -4076,6 +4141,13 @@ components:
             - $ref: '#/components/schemas/BucketPrefix'
             - description: ' The object key for the Amazon S3 bucket in which the source files are stored. '
       description: ' The properties that are applied when Amazon S3 is being used as the flow source. '
+    WriteOperationType:
+      type: string
+      enum:
+        - INSERT
+        - UPSERT
+        - UPDATE
+      description: ' The possible write operations in the destination connector. When this value is not provided, this defaults to the <code>INSERT</code> operation. '
     SalesforceSourceProperties:
       type: object
       required:
@@ -4109,6 +4181,7 @@ components:
         - ONCE
     Timezone:
       type: string
+      pattern: .*
       maxLength: 256
     ScheduledTriggerProperties:
       type: object
