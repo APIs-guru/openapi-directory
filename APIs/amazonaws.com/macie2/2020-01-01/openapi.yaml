@@ -1916,7 +1916,7 @@ paths:
                 - jobStatus
               properties:
                 jobStatus:
-                  description: 'The current status of a classification job. Possible values are:'
+                  description: 'The status of a classification job. Possible values are:'
                   type: string
                   enum:
                     - RUNNING
@@ -1989,7 +1989,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     patch:
       operationId: UpdateOrganizationConfiguration
-      description: Updates Amazon Macie configuration settings for an AWS organization.
+      description: Updates the Amazon Macie configuration settings for an AWS organization.
       responses:
         '200':
           description: Success
@@ -2319,7 +2319,7 @@ paths:
   /admin#adminAccountId:
     delete:
       operationId: DisableOrganizationAdminAccount
-      description: Disables an account as a delegated administrator of Amazon Macie for an AWS organization.
+      description: Disables an account as the delegated Amazon Macie administrator account for an AWS organization.
       responses:
         '200':
           description: Success
@@ -2517,7 +2517,7 @@ paths:
   /admin:
     post:
       operationId: EnableOrganizationAdminAccount
-      description: Enables an account as a delegated administrator of Amazon Macie for an AWS organization.
+      description: Designates an account as the delegated Amazon Macie administrator account for an AWS organization.
       responses:
         '200':
           description: Success
@@ -2578,7 +2578,7 @@ paths:
                 - adminAccountId
               properties:
                 adminAccountId:
-                  description: The AWS account ID for the account.
+                  description: The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.
                   type: string
                 clientToken:
                   description: 'A unique, case-sensitive token that you provide to ensure the idempotency of the request.'
@@ -2593,7 +2593,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListOrganizationAdminAccounts
-      description: Retrieves information about the account that's designated as the delegated administrator of Amazon Macie for an AWS organization.
+      description: Retrieves information about the delegated Amazon Macie administrator account for an AWS organization.
       responses:
         '200':
           description: Success
@@ -4240,7 +4240,7 @@ components:
         maxAccountLimitReached:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: Specifies whether the maximum number of Amazon Macie member accounts are already associated with the AWS organization.
+            - description: Specifies whether the maximum number of Amazon Macie member accounts are part of the AWS organization.
     DisableMacieResponse:
       type: object
       properties: {}
@@ -4617,7 +4617,7 @@ components:
         adminAccounts:
           allOf:
             - $ref: '#/components/schemas/__listOfAdminAccount'
-            - description: 'An array of objects, one for each account that''s designated as a delegated administrator of Amazon Macie for the AWS organization. Of those accounts, only one can have a status of ENABLED.'
+            - description: 'An array of objects, one for each delegated Amazon Macie administrator account for the organization. Only one of these accounts can have a status of ENABLED.'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -4768,7 +4768,7 @@ components:
       enum:
         - ENABLED
         - DISABLING_IN_PROGRESS
-      description: The current status of an account as a delegated administrator of Amazon Macie for an AWS organization.
+      description: The current status of an account as the delegated Amazon Macie administrator account for an AWS organization.
     AdminAccount:
       type: object
       properties:
@@ -4780,7 +4780,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdminStatus'
             - description: The current status of the account as a delegated administrator of Amazon Macie for the organization.
-      description: Provides information about an account that's designated as a delegated administrator of Amazon Macie for an AWS organization.
+      description: Provides information about the delegated Amazon Macie administrator account for an AWS organization.
     __timestampIso8601:
       type: string
       format: date-time
@@ -5272,7 +5272,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__long'
             - description: The total number of occurrences of the data that was detected by the custom data identifiers and produced the finding.
-      description: 'Provides information about the number of occurrences of the data that produced a sensitive data finding, and the custom data identifiers that detected the data for the finding.'
+      description: 'Provides information about custom data identifiers that produced a sensitive data finding, and the number of occurrences of the data that they detected for the finding.'
     SensitiveData:
       type: array
       description: Provides information about the category and number of occurrences of sensitive data that produced a finding.
@@ -5590,7 +5590,7 @@ components:
         offsetRanges:
           allOf:
             - $ref: '#/components/schemas/Ranges'
-            - description: '<p>An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the start of the file.</p> <p>This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.</p>'
+            - description: '<p>An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file.</p> <p>This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.</p>'
         pages:
           allOf:
             - $ref: '#/components/schemas/Pages'
@@ -5720,7 +5720,7 @@ components:
         - COMPLETE
         - IDLE
         - USER_PAUSED
-      description: 'The current status of a classification job. Possible values are:'
+      description: 'The status of a classification job. Possible values are:'
     Statistics:
       type: object
       properties:
@@ -5815,7 +5815,7 @@ components:
         adminAccountId:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: The AWS account ID for the account.
+            - description: The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6694,11 +6694,11 @@ components:
         end:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: '<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the end of the file.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the end of the file.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the end of the page.</p></li></ul>'
+            - description: '<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the end of the sensitive data.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the end of the sensitive data.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the end of the sensitive data.</p></li></ul>'
         start:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: '<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the start of the file.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the start of the file.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the start of the page.</p></li></ul>'
+            - description: '<p>Possible values are:</p> <ul><li><p>In an Occurrences.lineRanges array, the number of lines from the beginning of the file to the beginning of the sensitive data.</p></li> <li><p>In an Occurrences.offsetRanges array, the number of characters from the beginning of the file to the beginning of the sensitive data.</p></li> <li><p>In a Page object, the number of lines (lineRange) or characters (offsetRange) from the beginning of the page to the beginning of the sensitive data.</p></li></ul>'
         startColumn:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -6714,7 +6714,7 @@ components:
         offsetRange:
           allOf:
             - $ref: '#/components/schemas/Range'
-            - description: 'The position of the data on the page, relative to the start and end of the page.'
+            - description: 'The position of the data on the page, relative to the beginning of the page.'
         pageNumber:
           allOf:
             - $ref: '#/components/schemas/__long'

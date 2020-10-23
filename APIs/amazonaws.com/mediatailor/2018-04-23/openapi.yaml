@@ -344,6 +344,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/__integer'
                         - description: 'The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won''t play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.'
+                ManifestProcessingRules:
+                  description: The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
+                  type: object
+                  properties:
+                    AdMarkerPassthrough:
+                      $ref: '#/components/schemas/AdMarkerPassthrough'
                 Name:
                   description: The identifier for the playback configuration.
                   type: string
@@ -495,6 +501,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LivePreRollConfiguration'
             - description: The configuration for pre-roll ad insertion.
+        ManifestProcessingRules:
+          allOf:
+            - $ref: '#/components/schemas/ManifestProcessingRules'
+            - description: The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -591,6 +601,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LivePreRollConfiguration'
             - description: The configuration for pre-roll ad insertion.
+        ManifestProcessingRules:
+          allOf:
+            - $ref: '#/components/schemas/ManifestProcessingRules'
+            - description: The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -643,6 +657,16 @@ components:
       type: string
     __integer:
       type: integer
+    AdMarkerPassthrough:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/__boolean'
+            - description: '<p>For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin manifest to the MediaTailor personalized manifest.</p><p>No logic is applied to these ad markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled for that ad break, MediaTailor will not set the value to 0.</p>'
+      description: The configuration for Ad Marker Passthrough. Ad marker passthrough can be used to pass ad markers from the origin to the customized manifest.
+    __boolean:
+      type: boolean
     AvailSuppression:
       type: object
       properties:
@@ -735,6 +759,12 @@ components:
             - $ref: '#/components/schemas/__integer'
             - description: 'The maximum allowed duration for the pre-roll ad avail. AWS Elemental MediaTailor won''t play pre-roll ads to exceed this duration, regardless of the total duration of ads that the ADS returns.'
       description: The configuration for pre-roll ad insertion.
+    ManifestProcessingRules:
+      type: object
+      properties:
+        AdMarkerPassthrough:
+          $ref: '#/components/schemas/AdMarkerPassthrough'
+      description: The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
     __integerMin1:
       type: integer
       minimum: 1
@@ -785,6 +815,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HlsConfiguration'
             - description: 'The configuration for HLS content. '
+        ManifestProcessingRules:
+          allOf:
+            - $ref: '#/components/schemas/ManifestProcessingRules'
+            - description: The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -852,6 +886,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LivePreRollConfiguration'
             - description: The configuration for pre-roll ad insertion.
+        ManifestProcessingRules:
+          allOf:
+            - $ref: '#/components/schemas/ManifestProcessingRules'
+            - description: The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
