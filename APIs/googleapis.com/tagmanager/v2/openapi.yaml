@@ -2503,6 +2503,9 @@ components:
         name:
           description: Container version display name.
           type: string
+        numClients:
+          description: Number of clients in the container version.
+          type: string
         numCustomTemplates:
           description: Number of custom templates in the container version.
           type: string
@@ -2608,9 +2611,12 @@ components:
             - deleted
             - updated
           type: string
+        client:
+          $ref: '#/components/schemas/Client'
+          description: The client being represented by the entity.
         folder:
           $ref: '#/components/schemas/Folder'
-          description: The Folder being represented by the entity.
+          description: The folder being represented by the entity.
         tag:
           $ref: '#/components/schemas/Tag'
           description: The tag being represented by the entity.

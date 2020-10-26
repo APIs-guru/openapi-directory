@@ -114,6 +114,7 @@ paths:
         - description: The id of the book to be removed.
           in: query
           name: volumeId
+          required: true
           schema:
             type: string
       responses:
@@ -173,6 +174,7 @@ paths:
         - description: The device/version ID from which to request the data.
           in: query
           name: cpksver
+          required: true
           schema:
             type: string
       responses:
@@ -385,8 +387,19 @@ paths:
         - description: The device/version ID from which to release the restriction.
           in: query
           name: cpksver
+          required: true
           schema:
             type: string
+        - description: The volume(s) to release restrictions for.
+          explode: true
+          in: query
+          name: volumeIds
+          required: true
+          schema:
+            items:
+              type: string
+            type: array
+          style: form
         - description: ISO-639-1, ISO-3166-1 codes for message localization, i.e. en_US.
           in: query
           name: locale
@@ -397,15 +410,6 @@ paths:
           name: source
           schema:
             type: string
-        - description: The volume(s) to release restrictions for.
-          explode: true
-          in: query
-          name: volumeIds
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
       responses:
         "200":
           content:
@@ -440,6 +444,25 @@ paths:
         - description: The device/version ID from which to request the restrictions.
           in: query
           name: cpksver
+          required: true
+          schema:
+            type: string
+        - description: The client nonce value.
+          in: query
+          name: nonce
+          required: true
+          schema:
+            type: string
+        - description: String to identify the originator of this request.
+          in: query
+          name: source
+          required: true
+          schema:
+            type: string
+        - description: The volume to request concurrent/download restrictions for.
+          in: query
+          name: volumeId
+          required: true
           schema:
             type: string
         - description: The type of access license to request. If not specified, the default is BOTH.
@@ -455,21 +478,6 @@ paths:
         - description: ISO-639-1, ISO-3166-1 codes for message localization, i.e. en_US.
           in: query
           name: locale
-          schema:
-            type: string
-        - description: The client nonce value.
-          in: query
-          name: nonce
-          schema:
-            type: string
-        - description: String to identify the originator of this request.
-          in: query
-          name: source
-          schema:
-            type: string
-        - description: The volume to request concurrent/download restrictions for.
-          in: query
-          name: volumeId
           schema:
             type: string
       responses:
@@ -506,6 +514,19 @@ paths:
         - description: The device/version ID from which to release the restriction.
           in: query
           name: cpksver
+          required: true
+          schema:
+            type: string
+        - description: The client nonce value.
+          in: query
+          name: nonce
+          required: true
+          schema:
+            type: string
+        - description: String to identify the originator of this request.
+          in: query
+          name: source
+          required: true
           schema:
             type: string
         - description: List of features supported by the client, i.e., 'RENTALS'
@@ -530,21 +551,11 @@ paths:
           name: locale
           schema:
             type: string
-        - description: The client nonce value.
-          in: query
-          name: nonce
-          schema:
-            type: string
         - description: Set to true to show pre-ordered books. Defaults to false.
           in: query
           name: showPreorders
           schema:
             type: boolean
-        - description: String to identify the originator of this request.
-          in: query
-          name: source
-          schema:
-            type: string
         - description: The volume(s) to request download restrictions for.
           explode: true
           in: query
@@ -631,6 +642,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 40
+            minimum: 0
             type: integer
         - description: The value of the nextToken from the previous page.
           in: query
@@ -752,6 +765,7 @@ paths:
           explode: true
           in: query
           name: layerIds
+          required: true
           schema:
             items:
               type: string
@@ -760,6 +774,7 @@ paths:
         - description: Volume id to get the summary for.
           in: query
           name: volumeId
+          required: true
           schema:
             type: string
       responses:
@@ -953,6 +968,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: ID of volume to add.
+          in: query
+          name: volumeId
+          required: true
+          schema:
+            type: string
         - description: The reason for which the book is added to the library.
           in: query
           name: reason
@@ -966,11 +987,6 @@ paths:
         - description: String to identify the originator of this request.
           in: query
           name: source
-          schema:
-            type: string
-        - description: ID of volume to add.
-          in: query
-          name: volumeId
           schema:
             type: string
       responses:
@@ -1052,21 +1068,23 @@ paths:
           required: true
           schema:
             type: string
-        - description: String to identify the originator of this request.
-          in: query
-          name: source
-          schema:
-            type: string
         - description: ID of volume to move.
           in: query
           name: volumeId
+          required: true
           schema:
             type: string
         - description: Position on shelf to move the item (0 puts the item before the current first item, 1 puts it between the first and the second and so on.)
           in: query
           name: volumePosition
+          required: true
           schema:
             type: integer
+        - description: String to identify the originator of this request.
+          in: query
+          name: source
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1104,6 +1122,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: ID of volume to remove.
+          in: query
+          name: volumeId
+          required: true
+          schema:
+            type: string
         - description: The reason for which the book is removed from the library.
           in: query
           name: reason
@@ -1115,11 +1139,6 @@ paths:
         - description: String to identify the originator of this request.
           in: query
           name: source
-          schema:
-            type: string
-        - description: ID of volume to remove.
-          in: query
-          name: volumeId
           schema:
             type: string
       responses:
@@ -1156,6 +1175,7 @@ paths:
           in: query
           name: maxResults
           schema:
+            minimum: 0
             type: integer
         - description: Restrict information returned to a set of selected fields.
           in: query
@@ -1185,6 +1205,7 @@ paths:
           in: query
           name: startIndex
           schema:
+            minimum: 0
             type: integer
       responses:
         "200":
@@ -1282,6 +1303,18 @@ paths:
           required: true
           schema:
             type: string
+        - description: Position string for the new volume reading position.
+          in: query
+          name: position
+          required: true
+          schema:
+            type: string
+        - description: RFC 3339 UTC format timestamp associated with this reading position.
+          in: query
+          name: timestamp
+          required: true
+          schema:
+            type: string
         - description: Action that caused this reading position to be set.
           in: query
           name: action
@@ -1305,19 +1338,9 @@ paths:
           name: deviceCookie
           schema:
             type: string
-        - description: Position string for the new volume reading position.
-          in: query
-          name: position
-          schema:
-            type: string
         - description: String to identify the originator of this request.
           in: query
           name: source
-          schema:
-            type: string
-        - description: RFC 3339 UTC format timestamp associated with this reading position.
-          in: query
-          name: timestamp
           schema:
             type: string
       responses:
@@ -1339,14 +1362,15 @@ paths:
       description: Returns notification details for a given notification id.
       operationId: books.notification.get
       parameters:
-        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating notification title and body."
-          in: query
-          name: locale
-          schema:
-            type: string
         - description: String to identify the notification.
           in: query
           name: notification_id
+          required: true
+          schema:
+            type: string
+        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating notification title and body."
+          in: query
+          name: locale
           schema:
             type: string
         - description: String to identify the originator of this request.
@@ -1736,6 +1760,7 @@ paths:
           explode: true
           in: query
           name: series_id
+          required: true
           schema:
             items:
               type: string
@@ -1772,6 +1797,12 @@ paths:
       description: Returns Series membership data given the series id.
       operationId: books.series.membership.get
       parameters:
+        - description: String that identifies the series
+          in: query
+          name: series_id
+          required: true
+          schema:
+            type: string
         - description: Number of maximum results per page to be included in the response.
           in: query
           name: page_size
@@ -1780,11 +1811,6 @@ paths:
         - description: The value of the nextToken from the previous page.
           in: query
           name: page_token
-          schema:
-            type: string
-        - description: String that identifies the series
-          in: query
-          name: series_id
           schema:
             type: string
       responses:
@@ -1924,6 +1950,7 @@ paths:
           in: query
           name: maxResults
           schema:
+            minimum: 0
             type: integer
         - description: Set to true to show pre-ordered books. Defaults to false.
           in: query
@@ -1939,6 +1966,7 @@ paths:
           in: query
           name: startIndex
           schema:
+            minimum: 0
             type: integer
       responses:
         "200":
@@ -1971,6 +1999,12 @@ paths:
       description: Performs a book search.
       operationId: books.volumes.list
       parameters:
+        - description: Full-text search query string.
+          in: query
+          name: q
+          required: true
+          schema:
+            type: string
         - description: Restrict to volumes by download availability.
           in: query
           name: download
@@ -2018,6 +2052,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 40
+            minimum: 0
             type: integer
         - description: Sort search results.
           in: query
@@ -2052,11 +2088,6 @@ paths:
               - FULL
               - LITE
             type: string
-        - description: Full-text search query string.
-          in: query
-          name: q
-          schema:
-            type: string
         - description: Set to true to show books available for preorder. Defaults to false.
           in: query
           name: showPreorders
@@ -2071,6 +2102,7 @@ paths:
           in: query
           name: startIndex
           schema:
+            minimum: 0
             type: integer
       responses:
         "200":
@@ -2136,6 +2168,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 100
+            minimum: 0
             type: integer
         - description: The processing state of the user uploaded volumes to be returned. Applicable only if the UPLOADED is specified in the acquireMethod.
           explode: true
@@ -2160,6 +2194,7 @@ paths:
           in: query
           name: startIndex
           schema:
+            minimum: 0
             type: integer
       responses:
         "200":
@@ -2254,28 +2289,30 @@ paths:
       description: Rate a recommended book for the current user.
       operationId: books.volumes.recommended.rate
       parameters:
-        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations."
-          in: query
-          name: locale
-          schema:
-            type: string
         - description: Rating to be given to the volume.
           in: query
           name: rating
+          required: true
           schema:
             enum:
               - RATING_UNDEFINED
               - HAVE_IT
               - NOT_INTERESTED
             type: string
-        - description: String to identify the originator of this request.
-          in: query
-          name: source
-          schema:
-            type: string
         - description: ID of the source volume.
           in: query
           name: volumeId
+          required: true
+          schema:
+            type: string
+        - description: "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations."
+          in: query
+          name: locale
+          schema:
+            type: string
+        - description: String to identify the originator of this request.
+          in: query
+          name: source
           schema:
             type: string
       responses:
@@ -2306,6 +2343,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 40
+            minimum: 0
             type: integer
         - description: The processing state of the user uploaded volumes to be returned.
           explode: true
@@ -2330,6 +2369,7 @@ paths:
           in: query
           name: startIndex
           schema:
+            minimum: 0
             type: integer
         - description: The ids of the volumes to be returned. If not specified all that match the processingState are returned.
           explode: true
@@ -2522,6 +2562,7 @@ paths:
         - description: The content version for the requested volume.
           in: query
           name: contentVersion
+          required: true
           schema:
             type: string
         - description: The end offset to end retrieving data from.
@@ -2543,6 +2584,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 200
+            minimum: 0
             type: integer
         - description: The value of the nextToken from the previous page.
           in: query
@@ -2686,6 +2729,12 @@ paths:
           required: true
           schema:
             type: string
+        - description: The content version for the requested volume.
+          in: query
+          name: contentVersion
+          required: true
+          schema:
+            type: string
         - description: The list of Annotation Data Ids to retrieve. Pagination is ignored if this is set.
           explode: true
           in: query
@@ -2695,11 +2744,6 @@ paths:
               type: string
             type: array
           style: form
-        - description: The content version for the requested volume.
-          in: query
-          name: contentVersion
-          schema:
-            type: string
         - description: The requested pixel height for any images. If height is provided width must also be provided.
           in: query
           name: h
@@ -2714,6 +2758,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 200
+            minimum: 0
             type: integer
         - description: The value of the nextToken from the previous page.
           in: query
@@ -2724,6 +2770,7 @@ paths:
           in: query
           name: scale
           schema:
+            minimum: 0
             type: integer
         - description: String to identify the originator of this request.
           in: query
@@ -2794,16 +2841,17 @@ paths:
           required: true
           schema:
             type: string
+        - description: The content version for the volume you are trying to retrieve.
+          in: query
+          name: contentVersion
+          required: true
+          schema:
+            type: string
         - description: For the dictionary layer. Whether or not to allow web definitions.
           in: query
           name: allowWebDefinitions
           schema:
             type: boolean
-        - description: The content version for the volume you are trying to retrieve.
-          in: query
-          name: contentVersion
-          schema:
-            type: string
         - description: The requested pixel height for any images. If height is provided width must also be provided.
           in: query
           name: h
@@ -2818,6 +2866,7 @@ paths:
           in: query
           name: scale
           schema:
+            minimum: 0
             type: integer
         - description: String to identify the originator of this request.
           in: query
@@ -2875,6 +2924,8 @@ paths:
           in: query
           name: maxResults
           schema:
+            maximum: 200
+            minimum: 0
             type: integer
         - description: The value of the nextToken from the previous page.
           in: query

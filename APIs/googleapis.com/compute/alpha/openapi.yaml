@@ -38414,10 +38414,10 @@ paths:
           schema:
             type: string
         - description: >-
-            Specifies instance machine to create the instance.
+            Specifies the machine image to use to create the instance.
 
 
-            This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to an instance template:  
+            This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to a machine image:  
 
             - https://www.googleapis.com/compute/v1/projects/project/global/global/machineImages/machineImage 
 
@@ -44787,6 +44787,13 @@ components:
     AccessConfig:
       description: An access configuration attached to an instance's network interface. Only one access config per instance is supported.
       properties:
+        externalIpv6:
+          description: "[Output Only] The first IPv6 address of the external IPv6 range associated with this instance, prefix length is stored in externalIpv6PrefixLength in ipv6AccessConfig. The field is output only, an IPv6 address from a subnetwork associated with the instance will be allocated dynamically."
+          type: string
+        externalIpv6PrefixLength:
+          description: "[Output Only] The prefix length of the external IPv6 range."
+          format: int32
+          type: integer
         kind:
           default: compute#accessConfig
           description: "[Output Only] Type of the resource. Always compute#accessConfig for access configs."
@@ -44827,6 +44834,7 @@ components:
           default: ONE_TO_ONE_NAT
           description: The type of configuration. The default and only option is ONE_TO_ONE_NAT.
           enum:
+            - DIRECT_IPV6
             - ONE_TO_ONE_NAT
           type: string
       type: object
@@ -44932,7 +44940,9 @@ components:
 
             - `VPC_PEERING` for addresses that are reserved for VPC peer networks. 
 
-            - `NAT_AUTO` for addresses that are external IP addresses automatically reserved for Cloud NAT.
+            - `NAT_AUTO` for addresses that are external IP addresses automatically reserved for Cloud NAT. 
+
+            - `IPSEC_INTERCONNECT` for addresses created from a private IP range reserved for a VLAN attachment in an IPsec over Interconnect configuration. These addresses are regional resources.
           enum:
             - DNS_RESOLVER
             - GCE_ENDPOINT
@@ -45233,6 +45243,15 @@ components:
           description: Specifies the number of hours after reservation creation where instances using the reservation won't be scheduled for maintenance.
           format: int32
           type: integer
+        maintenanceInterval:
+          description: >-
+            Specifies whether this VM may be a stable fleet VM. Setting this to "Periodic" designates this VM as a Stable Fleet VM.
+
+
+            See go/stable-fleet-ug for more details.
+          enum:
+            - PERIODIC
+          type: string
         minCpuPlatform:
           description: Minimum cpu platform the reservation.
           type: string
@@ -49540,6 +49559,11 @@ components:
           items:
             type: string
           type: array
+        targetSecureLabels:
+          description: A list of secure labels that controls which instances the firewall rule applies to. If targetSecureLabel are specified, then the firewall rule applies only to instances in the VPC network that have one of those secure labels. targetSecureLabel may not be set at the same time as targetServiceAccounts. If neither targetServiceAccounts nor targetSecureLabel are specified, the firewall rule applies to all instances on the specified network. Maximum number of target label values allowed is 256.
+          items:
+            type: string
+          type: array
         targetServiceAccounts:
           description: A list of service accounts indicating the sets of instances that are applied with this rule.
           items:
@@ -49561,6 +49585,11 @@ components:
           type: array
         srcIpRanges:
           description: CIDR IP address range. Maximum number of source CIDR IP ranges allowed is 256.
+          items:
+            type: string
+          type: array
+        srcSecureLabels:
+          description: List of firewall label values, which should be matched at the source of the traffic. Maximum number of source label values allowed is 256.
           items:
             type: string
           type: array
@@ -50393,10 +50422,22 @@ components:
         * [Global](/compute/docs/reference/rest/{$api_version}/healthChecks) * [Regional](/compute/docs/reference/rest/{$api_version}/regionHealthChecks)
 
 
-        Internal HTTP(S) load balancers must use regional health checks. Internal TCP/UDP load balancers can use either regional or global health checks. All other types of GCP load balancers and managed instance group auto-healing must use global health checks. For more information, read Health Check Concepts.
+        Internal HTTP(S) load balancers must use regional health checks (`compute.v1.regionHealthChecks`).
 
 
-        To perform health checks on network load balancers, you must use either httpHealthChecks or httpsHealthChecks.
+        Traffic Director must use global health checks (`compute.v1.HealthChecks`).
+
+
+        Internal TCP/UDP load balancers can use either regional or global health checks (`compute.v1.regionHealthChecks` or `compute.v1.HealthChecks`).
+
+
+        External HTTP(S), TCP proxy, and SSL proxy load balancers as well as managed instance group auto-healing must use global health checks (`compute.v1.HealthChecks`).
+
+
+        Network load balancers must use legacy HTTP health checks (httpHealthChecks).
+
+
+        For more information, see Health checks overview.
       properties:
         checkIntervalSec:
           description: How often (in seconds) to send a health check. The default value is 5 seconds.
@@ -54594,7 +54635,12 @@ components:
             - AVAILABILITY_DOMAIN_ANY
           type: string
         encryption:
-          description: Indicates the user-supplied encryption option of this interconnect attachment.
+          description: >-
+            Indicates the user-supplied encryption option of this interconnect attachment: 
+
+            - NONE is the default value, which means that the attachment carries unencrypted traffic. VMs can send traffic to, or receive traffic from, this type of attachment. 
+
+            - IPSEC indicates that the attachment carries only traffic encrypted by an IPsec device such as an HA VPN gateway. VMs cannot directly send traffic to, or receive traffic from, such an attachment. To use IPsec over Interconnect, create the attachment using this option.
           enum:
             - IPSEC
             - NONE
@@ -56830,7 +56876,7 @@ components:
             Optional serving service.
 
 
-            The service name must be 1-63 characters long, and comply with RFC1035.
+            The service name is case-sensitive and must be 1-63 characters long.
 
 
             Example value: "default", "my-service".
@@ -56847,7 +56893,7 @@ components:
             Optional serving version.
 
 
-            The version must be 1-63 characters long, and comply with RFC1035.
+            The version name is case-sensitive and must be 1-100 characters long.
 
 
             Example value: "v1", "v2".
@@ -57190,6 +57236,15 @@ components:
           description: Fingerprint hash of contents stored in this network interface. This field will be ignored when inserting an Instance or adding a NetworkInterface. An up-to-date fingerprint must be provided in order to update the NetworkInterface, otherwise the request will fail with error 412 conditionNotMet.
           format: byte
           type: string
+        internalIpv6PrefixLength:
+          description: "[Output Only] The prefix length of the primary internal IPv6 range."
+          format: int32
+          type: integer
+        ipv6AccessConfigs:
+          description: An array of IPv6 access configurations for this interface. Currently, only one IPv6 access config, DIRECT_IPV6, is supported. If there is no ipv6AccessConfig specified, then this instance will have no external IPv6 Internet access.
+          items:
+            $ref: "#/components/schemas/AccessConfig"
+          type: array
         ipv6Address:
           description: "[Output Only] An IPv6 internal network address for this network interface."
           type: string
@@ -57216,10 +57271,28 @@ components:
         networkIP:
           description: An IPv4 internal IP address to assign to the instance for this network interface. If not specified by the user, an unused internal IP is assigned by the system.
           type: string
+        nicType:
+          description: The type of vNIC to be used on this interface. This may be gVNIC or VirtioNet.
+          enum:
+            - GVNIC
+            - UNSPECIFIED_NIC_TYPE
+            - VIRTIO_NET
+          type: string
         queueCount:
           description: "The networking queue count for the network interface. Both Rx and Tx queues will be set to this number. If it's not specified by the user, a default number of queues will be assigned. For Virtio-net, each interface will get (min(#vCPU, 32) / #vNIC) queues. For gVNIC, each interface will get (min(#vCPU / 2, 16) / #vNIC) qeueus."
           format: int32
           type: integer
+        stackType:
+          description: >-
+            The stack type for this network interface to identify whether the IPv6 feature is enabled or not. If not specified, IPV4_ONLY will be used.
+
+
+            This field can be both set at instance creation and update network interface operations.
+          enum:
+            - IPV4_IPV6
+            - IPV4_ONLY
+            - UNSPECIFIED_STACK_TYPE
+          type: string
         subnetwork:
           description: >-
             The URL of the Subnetwork resource for this instance. If the network resource is in legacy mode, do not specify this field. If the network is in auto subnet mode, specifying the subnetwork is optional. If the network is in custom subnet mode, specifying the subnetwork is required. If you specify this field, you can specify the subnetwork as a full or partial URL. For example, the following are all valid URLs:  
@@ -62280,6 +62353,9 @@ components:
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
           type: string
+        encryptedInterconnectRouter:
+          description: Field to indicate if a router is dedicated to use with encrypted Interconnect Attachment (Encrypted Interconnect feature).
+          type: boolean
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
           format: uint64
@@ -63263,6 +63339,15 @@ components:
           description: Specifies the number of hours after instance creation where the instance won't be scheduled for maintenance.
           format: int32
           type: integer
+        maintenanceInterval:
+          description: >-
+            Specifies whether this VM may be a stable fleet VM. Setting this to "Periodic" designates this VM as a Stable Fleet VM.
+
+
+            See go/stable-fleet-ug for more details.
+          enum:
+            - PERIODIC
+          type: string
         minNodeCpus:
           description: The minimum number of virtual CPUs this instance will consume when running on a sole-tenant node.
           format: int32
@@ -64913,6 +64998,9 @@ components:
         enablePrivateV6Access:
           description: Deprecated in favor of enable in PrivateIpv6GoogleAccess. Whether the VMs in this subnet can directly access Google services via internal IPv6 addresses. This field can be both set at resource creation time and updated using patch.
           type: boolean
+        externalIpv6Prefix:
+          description: "[Output Only] The range of external IPv6 addresses that are owned by this subnetwork."
+          type: string
         fingerprint:
           description: >-
             Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a Subnetwork. An up-to-date fingerprint must be provided in order to update the Subnetwork, otherwise the request will fail with error 412 conditionNotMet.
@@ -64934,6 +65022,13 @@ components:
           type: string
         ipCidrRange:
           description: The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. This may be a RFC 1918 IP range, or a privately routed, non-RFC 1918 IP range, not belonging to Google. The range can be expanded after creation using expandIpCidrRange.
+          type: string
+        ipv6AccessType:
+          description: The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack. If the ipv6_type is EXTERNAL then this subnet cannot enable direct path.
+          enum:
+            - EXTERNAL
+            - INTERNAL
+            - UNSPECIFIED_IPV6_ACCESS_TYPE
           type: string
         ipv6CidrRange:
           description: "[Output Only] The range of internal IPv6 addresses that are owned by this subnetwork."
@@ -65006,6 +65101,17 @@ components:
           type: string
         selfLinkWithId:
           description: "[Output Only] Server-defined URL for this resource with the resource id."
+          type: string
+        stackType:
+          description: >-
+            The stack type for this subnet to identify whether the IPv6 feature is enabled or not. If not specified IPV4_ONLY will be used.
+
+
+            This field can be both set at resource creation time and updated using patch.
+          enum:
+            - IPV4_IPV6
+            - IPV4_ONLY
+            - UNSPECIFIED_STACK_TYPE
           type: string
         state:
           description: "[Output Only] The state of the subnetwork, which can be one of READY or DRAINING. A subnetwork that is READY is ready to be used. The state of DRAINING is only applicable to subnetworks that have the purpose set to INTERNAL_HTTPS_LOAD_BALANCER and indicates that connections to the load balancer are being drained. A subnetwork that is draining cannot be used or modified until it reaches a status of READY."

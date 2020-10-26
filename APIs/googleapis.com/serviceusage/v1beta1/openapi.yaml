@@ -923,7 +923,7 @@ components:
       description: Authentication rules for the service. By default, if a method has any authentication requirements, every request must include a valid credential matching one of the requirements. It's an error to include more than one kind of credential in a single request. If a method doesn't have any auth requirements, request credentials will be ignored.
       properties:
         allowWithoutCredential:
-          description: If true, the service accepts API keys without any other credential.
+          description: If true, the service accepts API keys without any other credential. This flag only applies to HTTP and gRPC requests.
           type: boolean
         oauth:
           $ref: "#/components/schemas/OAuthRequirements"
@@ -1091,7 +1091,7 @@ components:
           type: string
       type: object
     Context:
-      description: '`Context` defines which contexts an API requests. Example: context: rules: - selector: "*" requested: - google.rpc.context.ProjectContext - google.rpc.context.OriginContext The above specifies that all methods in the API request `google.rpc.context.ProjectContext` and `google.rpc.context.OriginContext`. Available context types are defined in package `google.rpc.context`. This also provides mechanism to whitelist any protobuf message extension that can be sent in grpc metadata using “x-goog-ext--bin” and “x-goog-ext--jspb” format. For example, list any service specific protobuf types that can appear in grpc metadata as follows in your yaml file: Example: context: rules: - selector: "google.example.library.v1.LibraryService.CreateBook" allowed_request_extensions: - google.foo.v1.NewExtension allowed_response_extensions: - google.foo.v1.NewExtension You can also specify extension ID instead of fully qualified extension name here.'
+      description: '`Context` defines which contexts an API requests. Example: context: rules: - selector: "*" requested: - google.rpc.context.ProjectContext - google.rpc.context.OriginContext The above specifies that all methods in the API request `google.rpc.context.ProjectContext` and `google.rpc.context.OriginContext`. Available context types are defined in package `google.rpc.context`. This also provides mechanism to allowlist any protobuf message extension that can be sent in grpc metadata using “x-goog-ext--bin” and “x-goog-ext--jspb” format. For example, list any service specific protobuf types that can appear in grpc metadata as follows in your yaml file: Example: context: rules: - selector: "google.example.library.v1.LibraryService.CreateBook" allowed_request_extensions: - google.foo.v1.NewExtension allowed_response_extensions: - google.foo.v1.NewExtension You can also specify extension ID instead of fully qualified extension name here.'
       properties:
         rules:
           description: A list of RPC context rules that apply to individual API methods. **NOTE:** All service configuration rules follow "last one wins" order.
@@ -1396,7 +1396,7 @@ components:
           $ref: "#/components/schemas/Billing"
           description: Billing configuration.
         configVersion:
-          description: The semantic version of the service configuration. The config version affects the interpretation of the service configuration. For example, certain features are enabled by default for certain config versions. The latest config version is `3`.
+          description: This field is obsolete. Its value must be set to `3`.
           format: uint32
           type: integer
         context:
@@ -1479,19 +1479,6 @@ components:
         usage:
           $ref: "#/components/schemas/Usage"
           description: Configuration controlling usage of this service.
-      type: object
-    GoogleApiServiceIdentity:
-      description: 'The per-product per-project service identity for a service. Use this field to configure per-product per-project service identity. Example of a service identity configuration. usage: service_identity: - service_account_parent: "projects/123456789" display_name: "Cloud XXX Service Agent" description: "Used as the identity of Cloud XXX to access resources"'
-      properties:
-        description:
-          description: Optional. A user-specified opaque description of the service account. Must be less than or equal to 256 UTF-8 bytes.
-          type: string
-        displayName:
-          description: Optional. A user-specified name for the service account. Must be less than or equal to 100 UTF-8 bytes.
-          type: string
-        serviceAccountParent:
-          description: "A service account project that hosts the service accounts. An example name would be: `projects/123456789`"
-          type: string
       type: object
     GoogleApiServiceusageV1OperationMetadata:
       description: The operation metadata returned for the batchend services operation.
@@ -1605,9 +1592,6 @@ components:
           items:
             $ref: "#/components/schemas/HttpRule"
           type: array
-        allowHalfDuplex:
-          description: When this flag is set to true, HTTP requests will be allowed to invoke a half-duplex streaming method.
-          type: boolean
         body:
           description: "The name of the request field whose value is mapped to the HTTP request body, or `*` for mapping all request fields not captured by the path pattern to the HTTP body, or omitted for not having any HTTP request body. NOTE: the referred field must be present at the top-level of the request message type."
           type: string
@@ -2373,9 +2357,6 @@ components:
           items:
             $ref: "#/components/schemas/UsageRule"
           type: array
-        serviceIdentity:
-          $ref: "#/components/schemas/GoogleApiServiceIdentity"
-          description: The configuration of a per-product per-project service identity.
       type: object
     UsageRule:
       description: 'Usage configuration rules for the service. NOTE: Under development. Use this rule to configure unregistered calls for the service. Unregistered calls are calls that do not contain consumer project identity. (Example: calls that do not contain an API key). By default, API methods do not allow unregistered calls, and each method call must be identified by a consumer project identity. Use this rule to allow/disallow unregistered calls. Example of an API that wants to allow unregistered calls for entire service. usage: rules: - selector: "*" allow_unregistered_calls: true Example of a method that wants to allow unregistered calls. usage: rules: - selector: "google.example.library.v1.LibraryService.CreateBook" allow_unregistered_calls: true'

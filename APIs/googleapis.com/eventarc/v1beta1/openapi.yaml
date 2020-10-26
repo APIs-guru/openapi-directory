@@ -1,213 +1,48 @@
 openapi: 3.0.0
 servers:
-  - url: https://cloudresourcemanager.googleapis.com/
+  - url: https://eventarc.googleapis.com/
 info:
   contact:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Creates, reads, and updates metadata for Google Cloud Platform resource containers.
+  description: ""
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Cloud Resource Manager API
-  version: v2
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
+  title: Eventarc API
+  version: v1beta1
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
-      format: google
-      url: https://cloudresourcemanager.googleapis.com/$discovery/rest?version=v2
+    - format: google
+      url: https://eventarc.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
-  x-serviceName: cloudresourcemanager
+  x-serviceName: eventarc
 externalDocs:
-  url: https://cloud.google.com/resource-manager
+  url: https://cloud.google.com/eventarc
 tags:
-  - name: folders
-  - name: operations
+  - name: projects
 paths:
-  "/v1/{name}":
-    get:
-      description: Gets the latest state of a long-running operation. Clients can use this method to poll the operation result at intervals as recommended by the API service.
-      operationId: cloudresourcemanager.operations.get
-      parameters:
-        - description: The name of the operation resource.
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - operations
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  /v2/folders:
-    get:
-      description: Lists the Folders that are direct descendants of supplied parent resource. List provides a strongly consistent view of the Folders underneath the specified parent resource. List returns Folders sorted based upon the (ascending) lexical ordering of their display_name. The caller must have `resourcemanager.folders.list` permission on the identified parent.
-      operationId: cloudresourcemanager.folders.list
-      parameters:
-        - description: Optional. The maximum number of Folders to return in the response.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: Optional. A pagination token returned from a previous call to `ListFolders` that indicates where this listing should continue from.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-        - description: Required. The resource name of the Organization or Folder whose Folders are being listed. Must be of the form `folders/{folder_id}` or `organizations/{org_id}`. Access to this method is controlled by checking the `resourcemanager.folders.list` permission on the `parent`.
-          in: query
-          name: parent
-          schema:
-            type: string
-        - description: Optional. Controls whether Folders in the DELETE_REQUESTED state should be returned. Defaults to false.
-          in: query
-          name: showDeleted
-          schema:
-            type: boolean
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListFoldersResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - folders
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a Folder in the resource hierarchy. Returns an Operation which can be used to track the progress of the folder creation workflow. Upon success the Operation.response field will be populated with the created Folder. In order to succeed, the addition of this new Folder must not violate the Folder naming, height or fanout constraints. + The Folder's display_name must be distinct from all other Folder's that share its parent. + The addition of the Folder must not cause the active Folder hierarchy to exceed a height of 10. Note, the full active + deleted Folder hierarchy is allowed to reach a height of 20; this provides additional headroom when moving folders that contain deleted folders. + The addition of the Folder must not cause the total number of Folders under its parent to exceed 300. If the operation fails due to a folder constraint violation, some errors may be returned by the CreateFolder request, with status code FAILED_PRECONDITION and an error description. Other folder constraint violations will be communicated in the Operation, with the specific PreconditionFailure returned via the details list in the Operation.error field. The caller must have `resourcemanager.folders.create` permission on the identified parent.
-      operationId: cloudresourcemanager.folders.create
-      parameters:
-        - description: Required. The resource name of the new Folder's parent. Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
-          in: query
-          name: parent
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Folder"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Operation"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - folders
-  /v2/folders:search:
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Search for folders that match specific filter criteria. Search provides an eventually consistent view of the folders a user has access to which meet the specified filter criteria. This will only return folders on which the caller has the permission `resourcemanager.folders.get`.
-      operationId: cloudresourcemanager.folders.search
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/SearchFoldersRequest"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SearchFoldersResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - folders
-  "/v2/{name}":
+  "/v1beta1/{name}":
     delete:
-      description: Requests deletion of a Folder. The Folder is moved into the DELETE_REQUESTED state immediately, and is deleted approximately 30 days later. This method may only be called on an empty Folder in the ACTIVE state, where a Folder is empty if it doesn't contain any Folders or Projects in the ACTIVE state. The caller must have `resourcemanager.folders.delete` permission on the identified folder.
-      operationId: cloudresourcemanager.folders.delete
+      description: Delete a single trigger.
+      operationId: eventarc.projects.locations.triggers.delete
       parameters:
-        - description: Required. the resource name of the Folder to be deleted. Must be of the form `folders/{folder_id}`.
+        - description: Required. The name of the trigger to be deleted.
           in: path
           name: name
           required: true
+          schema:
+            type: string
+        - description: If provided, the trigger will only be deleted if the etag matches the current etag on the resource.
+          in: query
+          name: etag
           schema:
             type: string
       responses:
@@ -215,7 +50,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
@@ -223,12 +58,12 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - folders
+        - projects
     get:
-      description: Retrieves a Folder identified by the supplied resource name. Valid Folder resource names have the format `folders/{folder_id}` (for example, `folders/1234`). The caller must have `resourcemanager.folders.get` permission on the identified folder.
-      operationId: cloudresourcemanager.folders.get
+      description: Get a single trigger.
+      operationId: eventarc.projects.locations.triggers.get
       parameters:
-        - description: Required. The resource name of the Folder to retrieve. Must be of the form `folders/{folder_id}`.
+        - description: Required. The name of the trigger to get.
           in: path
           name: name
           required: true
@@ -239,19 +74,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Trigger"
           description: Successful response
       security:
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
-        - folders
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -265,16 +96,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: "Updates a Folder, changing its display_name. Changes to the folder display_name will be rejected if they violate either the display_name formatting rules or naming constraints described in the CreateFolder documentation. The Folder's display name must start and end with a letter or digit, may contain letters, digits, spaces, hyphens and underscores and can be no longer than 30 characters. This is captured by the regular expression: [\\p{L}\\p{N}]([\\p{L}\\p{N}_- ]{0,28}[\\p{L}\\p{N}])?. The caller must have `resourcemanager.folders.update` permission on the identified folder. If the update fails due to the unique name constraint then a PreconditionFailure explaining this violation will be returned in the Status.details field."
-      operationId: cloudresourcemanager.folders.patch
+      description: Update a single trigger.
+      operationId: eventarc.projects.locations.triggers.patch
       parameters:
-        - description: 'Output only. The resource name of the Folder. Its format is `folders/{folder_id}`, for example: "folders/1234".'
+        - description: "Required. The resource name of the trigger. Must be unique within the location on the project. Format: projects/{project}/locations/{location}/triggers/{trigger}"
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: Required. Fields to be updated. Only the `display_name` can be updated.
+        - description: The fields to be updated; only fields explicitly provided will be updated. If no field mask is provided, all provided fields in the request will be updated. To update all fields, provide a field mask of "*".
           in: query
           name: updateMask
           schema:
@@ -283,49 +114,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Folder"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Folder"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - folders
-  "/v2/{name}:move":
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Moves a Folder under a new resource parent. Returns an Operation which can be used to track the progress of the folder move workflow. Upon success the Operation.response field will be populated with the moved Folder. Upon failure, a FolderOperationError categorizing the failure cause will be returned - if the failure occurs synchronously then the FolderOperationError will be returned via the Status.details field and if it occurs asynchronously then the FolderOperation will be returned via the Operation.error field. In addition, the Operation.metadata field will be populated with a FolderOperation message as an aid to stateless clients. Folder moves will be rejected if they violate either the naming, height or fanout constraints described in the CreateFolder documentation. The caller must have `resourcemanager.folders.move` permission on the folder's current and proposed new parent.
-      operationId: cloudresourcemanager.folders.move
-      parameters:
-        - description: Required. The resource name of the Folder to move. Must be of the form folders/{folder_id}
-          in: path
-          name: name
-          required: true
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/MoveFolderRequest"
+              $ref: "#/components/schemas/Trigger"
       responses:
         "200":
           content:
@@ -339,8 +128,112 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - folders
-  "/v2/{name}:undelete":
+        - projects
+  "/v1beta1/{name}/locations":
+    get:
+      description: Lists information about the supported locations for this service.
+      operationId: eventarc.projects.locations.list
+      parameters:
+        - description: The resource that owns the locations collection, if applicable.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}/operations":
+    get:
+      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
+      operationId: eventarc.projects.locations.operations.list
+      parameters:
+        - description: The name of the operation's parent resource.
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+        - description: The standard list filter.
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: The standard list page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The standard list page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOperationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -354,10 +247,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Cancels the deletion request for a Folder. This method may only be called on a Folder in the DELETE_REQUESTED state. In order to succeed, the Folder's parent must be in the ACTIVE state. In addition, reintroducing the folder into the tree must not violate folder naming, height and fanout constraints described in the CreateFolder documentation. The caller must have `resourcemanager.folders.undelete` permission on the identified folder.
-      operationId: cloudresourcemanager.folders.undelete
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+      operationId: eventarc.projects.locations.operations.cancel
       parameters:
-        - description: Required. The resource name of the Folder to undelete. Must be of the form `folders/{folder_id}`.
+        - description: The name of the operation resource to be cancelled.
           in: path
           name: name
           required: true
@@ -367,13 +260,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UndeleteFolderRequest"
+              $ref: "#/components/schemas/CancelOperationRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Folder"
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
@@ -381,8 +274,47 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - folders
-  "/v2/{resource}:getIamPolicy":
+        - projects
+  "/v1beta1/{parent}/triggers":
+    get:
+      description: List triggers.
+      operationId: eventarc.projects.locations.triggers.list
+      parameters:
+        - description: Required. The parent collection to list triggers on.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "The sorting order of the resources returned. Value should be a comma separated list of fields. The default sorting oder is ascending. To specify descending order for a field, append a ` desc` suffix; for example: `name desc, trigger_id`."
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: "The maximum number of triggers to return on each page. Note: The service may send fewer."
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: The page token; provide the value from the `next_page_token` field in a previous `ListTriggers` call to retrieve the subsequent page. When paginating, all other parameters provided to `ListTriggers` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListTriggersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -396,8 +328,43 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Gets the access control policy for a Folder. The returned policy may be empty if no such policy or resource exists. The `resource` field should be the Folder's resource name, e.g. "folders/1234". The caller must have `resourcemanager.folders.getIamPolicy` permission on the identified folder.
-      operationId: cloudresourcemanager.folders.getIamPolicy
+      description: Create a new trigger in a particular project and location.
+      operationId: eventarc.projects.locations.triggers.create
+      parameters:
+        - description: Required. The parent collection in which to add this trigger.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The user-provided ID to be assigned to the trigger.
+          in: query
+          name: triggerId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Trigger"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1beta1/{resource}:getIamPolicy":
+    get:
+      description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
+      operationId: eventarc.projects.locations.triggers.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -405,11 +372,11 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GetIamPolicyRequest"
+        - description: Optional. The policy format version to be returned. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+          in: query
+          name: options.requestedPolicyVersion
+          schema:
+            type: integer
       responses:
         "200":
           content:
@@ -422,13 +389,21 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
-        - folders
-  "/v2/{resource}:setIamPolicy":
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{resource}:setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -442,8 +417,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Sets the access control policy on a Folder, replacing any existing policy. The `resource` field should be the Folder's resource name, e.g. "folders/1234". The caller must have `resourcemanager.folders.setIamPolicy` permission on the identified folder.
-      operationId: cloudresourcemanager.folders.setIamPolicy
+      description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+      operationId: eventarc.projects.locations.triggers.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
           in: path
@@ -469,8 +444,8 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - folders
-  "/v2/{resource}:testIamPermissions":
+        - projects
+  "/v1beta1/{resource}:testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -484,8 +459,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Returns permissions that a caller has on the specified Folder. The `resource` field should be the Folder's resource name, e.g. "folders/1234". There are no permissions required for making this API call.
-      operationId: cloudresourcemanager.folders.testIamPermissions
+      description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
+      operationId: eventarc.projects.locations.triggers.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -511,7 +486,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - folders
+        - projects
 components:
   parameters:
     _.xgafv:
@@ -620,9 +595,6 @@ components:
     Binding:
       description: Associates `members` with a `role`.
       properties:
-        bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
-          type: string
         condition:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the members in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
@@ -634,6 +606,34 @@ components:
         role:
           description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
+      type: object
+    CancelOperationRequest:
+      description: The request message for Operations.CancelOperation.
+      properties: {}
+      type: object
+    CloudRunService:
+      description: Represents a Cloud Run service destination.
+      properties:
+        path:
+          description: 'Optional. The relative path on the Cloud Run service the events should be sent to. The value must conform to the definition of URI path segment (section 3.3 of RFC2396). Examples: "/route", "route", "route/subroute".'
+          type: string
+        region:
+          description: Required. The region the Cloud Run service is deployed in.
+          type: string
+        service:
+          description: Required. The name of the Cloud run service being addressed (see https://cloud.google.com/run/docs/reference/rest/v1/namespaces.services). Only services located in the same project of the trigger object can be addressed.
+          type: string
+      type: object
+    Destination:
+      description: Represents a target of an invocation over HTTP.
+      properties:
+        cloudRunService:
+          $ref: "#/components/schemas/CloudRunService"
+          description: Cloud Run fully-managed service that receives the events. The service should be running in the same project of the trigger.
+      type: object
+    Empty:
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+      properties: {}
       type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
@@ -651,103 +651,78 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
-    Folder:
-      description: A Folder in an Organization's resource hierarchy, used to organize that Organization's resources.
+    ListLocationsResponse:
+      description: The response message for Locations.ListLocations.
       properties:
-        createTime:
-          description: Output only. Timestamp when the Folder was created. Assigned by the server.
-          format: google-datetime
-          readOnly: true
-          type: string
-        displayName:
-          description: "The folder’s display name. A folder’s display name must be unique amongst its siblings, e.g. no two folders with the same parent can share the same display name. The display name must start and end with a letter or digit, may contain letters, digits, spaces, hyphens and underscores and can be no longer than 30 characters. This is captured by the regular expression: [\\p{L}\\p{N}]([\\p{L}\\p{N}_- ]{0,28}[\\p{L}\\p{N}])?."
-          type: string
-        lifecycleState:
-          description: Output only. The lifecycle state of the folder. Updates to the lifecycle_state must be performed via DeleteFolder and UndeleteFolder.
-          enum:
-            - LIFECYCLE_STATE_UNSPECIFIED
-            - ACTIVE
-            - DELETE_REQUESTED
-          readOnly: true
-          type: string
-        name:
-          description: 'Output only. The resource name of the Folder. Its format is `folders/{folder_id}`, for example: "folders/1234".'
-          readOnly: true
-          type: string
-        parent:
-          description: Required. The Folder’s parent's resource name. Updates to the folder's parent must be performed via MoveFolder.
-          type: string
-      type: object
-    FolderOperation:
-      description: Metadata describing a long running folder operation
-      properties:
-        destinationParent:
-          description: The resource name of the folder or organization we are either creating the folder under or moving the folder to.
-          type: string
-        displayName:
-          description: The display name of the folder.
-          type: string
-        operationType:
-          description: The type of this operation.
-          enum:
-            - OPERATION_TYPE_UNSPECIFIED
-            - CREATE
-            - MOVE
-          type: string
-        sourceParent:
-          description: The resource name of the folder's parent. Only applicable when the operation_type is MOVE.
-          type: string
-      type: object
-    FolderOperationError:
-      description: A classification of the Folder Operation error.
-      properties:
-        errorMessageId:
-          description: The type of operation error experienced.
-          enum:
-            - ERROR_TYPE_UNSPECIFIED
-            - ACTIVE_FOLDER_HEIGHT_VIOLATION
-            - MAX_CHILD_FOLDERS_VIOLATION
-            - FOLDER_NAME_UNIQUENESS_VIOLATION
-            - RESOURCE_DELETED_VIOLATION
-            - PARENT_DELETED_VIOLATION
-            - CYCLE_INTRODUCED_VIOLATION
-            - FOLDER_BEING_MOVED_VIOLATION
-            - FOLDER_TO_DELETE_NON_EMPTY_VIOLATION
-            - DELETED_FOLDER_HEIGHT_VIOLATION
-          type: string
-      type: object
-    GetIamPolicyRequest:
-      description: Request message for `GetIamPolicy` method.
-      properties:
-        options:
-          $ref: "#/components/schemas/GetPolicyOptions"
-          description: "OPTIONAL: A `GetPolicyOptions` object for specifying options to `GetIamPolicy`."
-      type: object
-    GetPolicyOptions:
-      description: Encapsulates settings provided to GetIamPolicy.
-      properties:
-        requestedPolicyVersion:
-          description: Optional. The policy format version to be returned. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
-          format: int32
-          type: integer
-      type: object
-    ListFoldersResponse:
-      description: The ListFolders response message.
-      properties:
-        folders:
-          description: A possibly paginated list of Folders that are direct descendants of the specified parent resource.
+        locations:
+          description: A list of locations that matches the specified filter in the request.
           items:
-            $ref: "#/components/schemas/Folder"
+            $ref: "#/components/schemas/Location"
           type: array
         nextPageToken:
-          description: A pagination token returned from a previous call to `ListFolders` that indicates from where listing should continue.
+          description: The standard List next-page token.
           type: string
       type: object
-    MoveFolderRequest:
-      description: The MoveFolder request message.
+    ListOperationsResponse:
+      description: The response message for Operations.ListOperations.
       properties:
-        destinationParent:
-          description: Required. The resource name of the Folder or Organization to reparent the folder under. Must be of the form `folders/{folder_id}` or `organizations/{org_id}`.
+        nextPageToken:
+          description: The standard List next-page token.
+          type: string
+        operations:
+          description: A list of operations that matches the specified filter in the request.
+          items:
+            $ref: "#/components/schemas/Operation"
+          type: array
+      type: object
+    ListTriggersResponse:
+      description: The response message for the ListTriggers method.
+      properties:
+        nextPageToken:
+          description: A page token that can be sent to ListTriggers to request the next page. If this is empty, then there are no more pages.
+          type: string
+        triggers:
+          description: The requested triggers, up to the number specified in `page_size`.
+          items:
+            $ref: "#/components/schemas/Trigger"
+          type: array
+        unreachable:
+          description: Unreachable resources, if any.
+          items:
+            type: string
+          type: array
+      type: object
+    Location:
+      description: A resource that represents Google Cloud Platform location.
+      properties:
+        displayName:
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Cross-service attributes for the location. For example {"cloud.googleapis.com/region": "us-east1"}'
+          type: object
+        locationId:
+          description: 'The canonical id for this location. For example: `"us-east1"`.'
+          type: string
+        metadata:
+          additionalProperties:
+            description: Properties of the object. Contains field @type with type URL.
+          description: Service-specific metadata. For example the available capacity at the given location.
+          type: object
+        name:
+          description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
+          type: string
+      type: object
+    MatchingCriteria:
+      description: Matches events based on exact matches on the CloudEvents attributes.
+      properties:
+        attribute:
+          description: Required. The name of a CloudEvents atrribute. Currently, only a subset of attributes can be specified. All triggers MUST provide a matching criteria for attribute 'type'. Event types specify what event type has attributes are allowed based on
+          type: string
+        value:
+          description: Required. The value for the attribute
           type: string
       type: object
     Operation:
@@ -773,6 +748,40 @@ components:
           description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
+    OperationMetadata:
+      description: Represents the metadata of the long-running operation.
+      properties:
+        apiVersion:
+          description: Output only. API version used to start the operation.
+          readOnly: true
+          type: string
+        createTime:
+          description: Output only. The time the operation was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        endTime:
+          description: Output only. The time the operation finished running.
+          format: google-datetime
+          readOnly: true
+          type: string
+        requestedCancellation:
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
+          readOnly: true
+          type: boolean
+        statusMessage:
+          description: Output only. Human-readable status of the operation, if any.
+          readOnly: true
+          type: string
+        target:
+          description: Output only. Server-defined resource path for the target of the operation.
+          readOnly: true
+          type: string
+        verb:
+          description: Output only. Name of the verb executed by the operation.
+          readOnly: true
+          type: string
+      type: object
     Policy:
       description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') - etag: BwWWja0YfJA= - version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
@@ -795,44 +804,14 @@ components:
           format: int32
           type: integer
       type: object
-    ProjectCreationStatus:
-      description: A status object which is used as the `metadata` field for the Operation returned by CreateProject. It provides insight for when significant phases of Project creation have completed.
+    Pubsub:
+      description: Represents a Pub/Sub transport.
       properties:
-        createTime:
-          description: Creation time of the project creation workflow.
-          format: google-datetime
+        subscription:
+          description: The name of the Pub/Sub subscription created and managed by Eventarc system as a transport for the event delivery. The value must be in the form of `projects/{PROJECT_ID}/subscriptions/{SUBSCRIPTION_NAME}
           type: string
-        gettable:
-          description: True if the project can be retrieved using GetProject. No other operations on the project are guaranteed to work until the project creation is complete.
-          type: boolean
-        ready:
-          description: True if the project creation process is complete.
-          type: boolean
-      type: object
-    SearchFoldersRequest:
-      description: The request message for searching folders.
-      properties:
-        pageSize:
-          description: Optional. The maximum number of folders to return in the response.
-          format: int32
-          type: integer
-        pageToken:
-          description: Optional. A pagination token returned from a previous call to `SearchFolders` that indicates from where search should continue.
-          type: string
-        query:
-          description: 'Search criteria used to select the Folders to return. If no search criteria is specified then all accessible folders will be returned. Query expressions can be used to restrict results based upon displayName, lifecycleState and parent, where the operators `=`, `NOT`, `AND` and `OR` can be used along with the suffix wildcard symbol `*`. The displayName field in a query expression should use escaped quotes for values that include whitespace to prevent unexpected behavior. Some example queries are: * Query `displayName=Test*` returns Folder resources whose display name starts with "Test". * Query `lifecycleState=ACTIVE` returns Folder resources with `lifecycleState` set to `ACTIVE`. * Query `parent=folders/123` returns Folder resources that have `folders/123` as a parent resource. * Query `parent=folders/123 AND lifecycleState=ACTIVE` returns active Folder resources that have `folders/123` as a parent resource. * Query `displayName=\\"Test String\\"` returns Folder resources with display names that include both "Test" and "String".'
-          type: string
-      type: object
-    SearchFoldersResponse:
-      description: The response message for searching folders.
-      properties:
-        folders:
-          description: A possibly paginated folder search results. the specified parent resource.
-          items:
-            $ref: "#/components/schemas/Folder"
-          type: array
-        nextPageToken:
-          description: A pagination token returned from a previous call to `SearchFolders` that indicates from where searching should continue.
+        topic:
+          description: The name of the Pub/Sub topic created and managed by Eventarc system as a transport for the event delivery. The value must be in the form of `projects/{PROJECT_ID}/topics/{TOPIC_NAME}
           type: string
       type: object
     SetIamPolicyRequest:
@@ -882,9 +861,48 @@ components:
             type: string
           type: array
       type: object
-    UndeleteFolderRequest:
-      description: The UndeleteFolder request message.
-      properties: {}
+    Transport:
+      description: Represents the transport intermediaries created for the trigger in order to deliver events.
+      properties:
+        pubsub:
+          $ref: "#/components/schemas/Pubsub"
+          description: The Pub/Sub topic and subscription that maybe created by Eventarc as delivery intermediary.
+      type: object
+    Trigger:
+      description: A representation of the trigger resource.
+      properties:
+        createTime:
+          description: Output only. The creation time.
+          format: google-datetime
+          readOnly: true
+          type: string
+        destination:
+          $ref: "#/components/schemas/Destination"
+          description: Required. Destinations specify where the events will be sent to. Exactly one destination is supported at this time.
+        etag:
+          description: Output only. This checksum is computed by the server based on the value of other fields, and may be sent only on create requests to ensure the client has an up-to-date value before proceeding.
+          readOnly: true
+          type: string
+        matchingCriteria:
+          description: Required. The criteria by which events are filtered. Only events that match with this critera will be sent to the destinations.
+          items:
+            $ref: "#/components/schemas/MatchingCriteria"
+          type: array
+        name:
+          description: "Required. The resource name of the trigger. Must be unique within the location on the project. Format: projects/{project}/locations/{location}/triggers/{trigger}"
+          type: string
+        serviceAccount:
+          description: Optional. The IAM service account email associated with the trigger. The service account represents the identity of the trigger. The principal who calls this API must have `iam.serviceAccounts.actAs` permission in the service account. See https://cloud.google.com/iam/docs/understanding-service-accounts?hl=en#sa_common for more information. For Cloud Run destinations, this service account is used to generate identity tokens when invoking the service. See https://cloud.google.com/run/docs/triggering/pubsub-push#create-service-account for information on how to invoke authenticated Cloud Run services. In order to create Audit Log triggers, the service account should also have 'eventarc.events.receiveAuditLogV1Written' permission.
+          type: string
+        transport:
+          $ref: "#/components/schemas/Transport"
+          description: Output only. In order to deliver messages, Eventarc may configure other GCP products as transport intermediary. This field returns a reference to that transport intermediary. This information can be used for debugging purposes.
+          readOnly: true
+        updateTime:
+          description: Output only. The last-modified time.
+          format: google-datetime
+          readOnly: true
+          type: string
       type: object
   securitySchemes:
     Oauth2:
@@ -894,7 +912,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
-            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -903,6 +920,5 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
-            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

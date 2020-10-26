@@ -255,6 +255,9 @@ components:
           description: Unique identifier of the GLS account.
           format: int64
           type: string
+        aggregatorInfo:
+          $ref: "#/components/schemas/GoogleAdsHomeservicesLocalservicesV1AggregatorInfo"
+          description: Aggregator specific information related to the account.
         averageFiveStarRating:
           description: Average review rating score from 1-5 stars.
           format: double

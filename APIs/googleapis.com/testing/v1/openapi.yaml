@@ -86,7 +86,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. Matrices are limited to at most 200 supported executions. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed or if the matrix expands to more than 200 supported executions"
+      description: "Creates and runs a matrix of tests according to the given specifications. Unsupported environments will be returned in the state UNSUPPORTED. A test matrix is limited to use at most 2000 devices in parallel. May return any of the following canonical error codes: - PERMISSION_DENIED - if the user is not authorized to write to project - INVALID_ARGUMENT - if the request is malformed or if the matrix tries to use too many simultaneous devices."
       operationId: testing.projects.testMatrices.create
       parameters:
         - description: The GCE project under which this job will run.
@@ -517,7 +517,7 @@ components:
           type: string
       type: object
     AndroidRoboTest:
-      description: "A test of an android application that explores the application on a virtual or physical Android Device, finding culprits and crashes as it goes. Next tag: 29"
+      description: "A test of an android application that explores the application on a virtual or physical Android Device, finding culprits and crashes as it goes. Next tag: 30"
       properties:
         appApk:
           $ref: "#/components/schemas/FileReference"
@@ -710,18 +710,18 @@ components:
           type: string
       type: object
     Date:
-      description: "Represents a whole or partial calendar date, e.g. a birthday. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the Proleptic Gregorian Calendar. This can represent: * A full date, with non-zero year, month and day values * A month and day value, with a zero year, e.g. an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, e.g. a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
       properties:
         day:
-          description: Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a year by itself or a year and month where the day is not significant.
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           format: int32
           type: integer
         month:
-          description: Month of year. Must be from 1 to 12, or 0 if specifying a year without a month and day.
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           format: int32
           type: integer
         year:
-          description: Year of date. Must be from 1 to 9999, or 0 if specifying a date without a year.
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           format: int32
           type: integer
       type: object
@@ -1076,7 +1076,7 @@ components:
       description: Shards test cases into the specified groups of packages, classes, and/or methods. With manual sharding enabled, specifying test targets via environment_variables or in InstrumentationTest is invalid.
       properties:
         testTargetsForShard:
-          description: Required. Group of packages, classes, and/or test methods to be run for each shard. When any physical devices are selected, the number of test_targets_for_shard must be >= 1 and <= 50. When no physical devices are selected, the number must be >= 1 and <= 250.
+          description: Required. Group of packages, classes, and/or test methods to be run for each shard. When any physical devices are selected, the number of test_targets_for_shard must be >= 1 and <= 50. When no physical devices are selected, the number must be >= 1 and <= 500.
           items:
             $ref: "#/components/schemas/TestTargetsForShard"
           type: array
@@ -1324,6 +1324,9 @@ components:
         environmentMatrix:
           $ref: "#/components/schemas/EnvironmentMatrix"
           description: Required. The devices the tests are being executed on.
+        failFast:
+          description: If true, only a single attempt at most will be made to run each execution/shard in the matrix. Flaky test attempts are not affected. Normally, 2 or more attempts are made if a potential infrastructure issue is detected. This feature is for latency sensitive workloads. The incidence of execution failures may be significantly greater for fail-fast matrices and support is more limited because of that expectation.
+          type: boolean
         flakyTestAttempts:
           description: The number of times a TestExecution should be re-attempted if one or more of its test cases fail for any reason. The maximum number of reruns allowed is 10. Default is 0, which implies no reruns.
           format: int32
@@ -1560,7 +1563,7 @@ components:
       description: Uniformly shards test cases given a total number of shards. For Instrumentation test, it will be translated to "-e numShard" "-e shardIndex" AndroidJUnitRunner arguments. With uniform sharding enabled, specifying these sharding arguments via environment_variables is invalid.
       properties:
         numShards:
-          description: Required. Total number of shards. When any physical devices are selected, the number must be >= 1 and <= 50. When no physical devices are selected, the number must be >= 1 and <= 250.
+          description: Required. Total number of shards. When any physical devices are selected, the number must be >= 1 and <= 50. When no physical devices are selected, the number must be >= 1 and <= 500.
           format: int32
           type: integer
       type: object
