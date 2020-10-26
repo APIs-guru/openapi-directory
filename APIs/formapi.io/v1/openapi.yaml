@@ -2266,10 +2266,10 @@ paths:
                       webhook_url: null
                     - allow_additional_properties: false
                       description: null
-                      document_filename: test-document.pdf
+                      document_filename: blank_pdf.pdf
                       document_processed: true
-                      document_state: pending
-                      document_url: /uploads/test/store/templates/test/test-document.pdf
+                      document_state: processed
+                      document_url: /uploads/test/store/acc_000000000000000001/templates/tpl_000000000000000001/document/original-0000000000.pdf
                       editable_submissions: false
                       expiration_interval: days
                       expire_after: 7
@@ -2277,12 +2277,8 @@ paths:
                       id: tpl_000000000000000001
                       locked: false
                       name: Template 1
-                      page_count: 3
+                      page_count: 1
                       page_dimensions:
-                        - - 612
-                          - 792
-                        - - 792
-                          - 612
                         - - 612
                           - 792
                       parent_folder_id: null
@@ -3194,6 +3190,159 @@ paths:
       summary: Add new fields to a Template
       tags:
         - PDF
+  "/templates/{template_id}/copy":
+    post:
+      operationId: copyTemplate
+      parameters:
+        - example: tpl_000000000000000001
+          in: path
+          name: template_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              example:
+                name: Copied Template Name
+                parent_folder_id: fld_000000000000000001
+              properties:
+                name:
+                  type: string
+                parent_folder_id:
+                  type: string
+              required:
+                - parent_folder_id
+              title: copy_template_data
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    allow_additional_properties: false
+                    description: null
+                    document_filename: blank_pdf.pdf
+                    document_processed: true
+                    document_state: processed
+                    document_url: /uploads/test/store/acc_000000000000000001/templates/tpl_00000000000000new1/document/original-0000000000.pdf
+                    editable_submissions: false
+                    expiration_interval: days
+                    expire_after: 7
+                    expire_submissions: true
+                    id: tpl_00000000000000new1
+                    locked: false
+                    name: Copied Template Name
+                    page_count: 1
+                    page_dimensions:
+                      - - 612
+                        - 792
+                    parent_folder_id: fld_000000000000000001
+                    path: /Folder
+                    permanent_document_url: http://app.docspring.local/templates/tpl_00000000000000new1/original_pdf?token=123456789abcdef
+                    public_submissions: false
+                    public_web_form: false
+                    redirect_url: null
+                    slack_webhook_url: null
+                    template_type: pdf
+                    webhook_url: null
+              schema:
+                properties:
+                  allow_additional_properties:
+                    type: boolean
+                  description:
+                    nullable: true
+                    type: string
+                  document_url:
+                    nullable: true
+                    type: string
+                  editable_submissions:
+                    type: boolean
+                  expiration_interval:
+                    enum:
+                      - minutes
+                      - hours
+                      - days
+                    type: string
+                  expire_after:
+                    type: number
+                  expire_submissions:
+                    type: boolean
+                  id:
+                    type: string
+                  locked:
+                    type: boolean
+                  name:
+                    nullable: true
+                    type: string
+                  page_dimensions:
+                    items:
+                      items:
+                        type: number
+                      maxItems: 2
+                      minItems: 2
+                      type: array
+                    nullable: true
+                    type: array
+                  parent_folder_id:
+                    nullable: true
+                    type: string
+                  path:
+                    type: string
+                  permanent_document_url:
+                    nullable: true
+                    type: string
+                  public_submissions:
+                    type: boolean
+                  public_web_form:
+                    type: boolean
+                  redirect_url:
+                    nullable: true
+                    type: string
+                  slack_webhook_url:
+                    nullable: true
+                    type: string
+                  template_type:
+                    type: string
+                  webhook_url:
+                    nullable: true
+                    type: string
+                required:
+                  - id
+                  - name
+                  - description
+                  - template_type
+                  - public_web_form
+                  - public_submissions
+                  - expire_submissions
+                  - allow_additional_properties
+                  - editable_submissions
+                  - locked
+                  - webhook_url
+                  - slack_webhook_url
+                  - redirect_url
+                title: template
+                type: object
+          description: copy template success
+        "404":
+          content:
+            application/json:
+              examples:
+                response:
+                  value:
+                    error: Could not find parent folder MISSING_ID
+                    status: error
+              schema:
+                $ref: "#/components/schemas/error"
+          description: folder not found
+      security:
+        - api_token_basic: []
+      summary: Copy a Template
+      tags:
+        - PDF
   "/templates/{template_id}/move":
     post:
       operationId: moveTemplateToFolder
@@ -3213,6 +3362,8 @@ paths:
               properties:
                 parent_folder_id:
                   type: string
+              required:
+                - parent_folder_id
               title: move_template_data
               type: object
         required: true
@@ -3225,10 +3376,10 @@ paths:
                   value:
                     allow_additional_properties: false
                     description: null
-                    document_filename: test-document.pdf
+                    document_filename: blank_pdf.pdf
                     document_processed: true
-                    document_state: pending
-                    document_url: /uploads/test/store/templates/test/test-document.pdf
+                    document_state: processed
+                    document_url: /uploads/test/store/acc_000000000000000001/templates/tpl_000000000000000001/document/original-0000000000.pdf
                     editable_submissions: false
                     expiration_interval: days
                     expire_after: 7
@@ -3236,12 +3387,8 @@ paths:
                     id: tpl_000000000000000001
                     locked: false
                     name: Template 1
-                    page_count: 3
+                    page_count: 1
                     page_dimensions:
-                      - - 612
-                        - 792
-                      - - 792
-                        - 612
                       - - 612
                         - 792
                     parent_folder_id: fld_000000000000000001

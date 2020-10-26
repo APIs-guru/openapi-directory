@@ -968,7 +968,7 @@ paths:
           description: OK
       summary: Menu ingestion complete
       tags:
-        - Restaurants Webhooks
+        - Restaurant Webhooks
         - publicly-accessible
   /order-accepted:
     post:
@@ -1167,6 +1167,22 @@ paths:
       summary: Order requires delivery acceptance
       tags:
         - Order Delivery Webhooks
+        - publicly-accessible
+  /order-time-updated:
+    post:
+      description: Callback to notify recipients that there has been a change to the restaurant order times for a given day and service type
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/order-time-updated"
+        required: true
+      responses:
+        "200":
+          description: OK
+      summary: Order time updated
+      tags:
+        - Restaurant Webhooks
         - publicly-accessible
   /orders:
     post:
@@ -5478,6 +5494,19 @@ components:
             faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
             message: Unable to process the request.
           type: object
+    BasketDiscountOfferEffect:
+      allOf:
+        - $ref: "#/components/schemas/OfferEffect"
+        - additionalProperties: false
+          properties:
+            discountAmount:
+              description: The discount amount in smallest unit of relevant currency applied to order.
+              format: integer
+              type: number
+          type: object
+      example:
+        $type: BasketDiscountOfferEffect
+        discountAmount: 1001
     BasketErrorResponse:
       description: The error object returned when an operation fails
       properties:
@@ -5534,6 +5563,11 @@ components:
           format: decimal
           type: number
       type: object
+    BasketItemStateType:
+      enum:
+        - JustAdded
+        - Existing
+      type: string
     BasketLocation:
       properties:
         GeoLocation:
@@ -5618,8 +5652,7 @@ components:
             $ref: "#/components/schemas/Product"
           type: array
         Prompts:
-          items:
-            $ref: "#/components/schemas/Prompts"
+          $ref: "#/components/schemas/Prompts"
           nullable: true
           type: object
         RestaurantOffers:
@@ -5911,9 +5944,19 @@ components:
       properties:
         CategoryId:
           type: string
+        DiscountType:
+          description: The type of discount
+          type: string
         DiscountValue:
           format: decimal
           type: number
+        OfferId:
+          description: The unique identifier of underlying consumer offers, if applicable
+          nullable: true
+          type: string
+        ProductId:
+          description: The unique identifier of product qualified for discount
+          type: string
       type: object
     CategoryRequest:
       example:
@@ -6484,13 +6527,15 @@ components:
       example:
         campaignId: CheekyTuesday
         consumerSegment: All
-        description: Best Offer
         discount: 1001
-        effectType: Discount
+        offerEffects:
+          - $type: ShowNotificationEffect
+            description: Get free drink with any burger
+          - $type: OrderDiscount
+            discountPercentage: 10
         offerId: 12345sd
         offerType: Percent
         restaurantId: 1234sd
-        title: BestOffer
       properties:
         campaignId:
           description: The unique identifier of the offer campaign.
@@ -6500,17 +6545,11 @@ components:
           $ref: "#/components/schemas/ConsumerSegment"
           description: Consumer Segment to which offer applies
           nullable: true
-        description:
-          description: The description of the offer.
-          nullable: true
-          type: string
-        discount:
-          description: The discount amount in smallest unit of relevant currency
-          format: integer
-          type: number
-        effectType:
-          $ref: "#/components/schemas/ConsumerOfferEffectType"
-          description: The effect of the offer.
+        offerEffects:
+          description: A collection of offer effects
+          items:
+            $ref: "#/components/schemas/OfferEffect"
+          type: array
         offerId:
           description: The unique identifier of the offer.
           type: string
@@ -6521,15 +6560,15 @@ components:
           description: The unique identifier of the restaurant providing the offers.
           nullable: true
           type: string
-        title:
-          description: The title of the offer.
-          nullable: true
-          type: string
       title: ConsumerOffer
       type: object
     ConsumerOfferEffectType:
       enum:
-        - Discount
+        - BasketDiscountOfferEffect
+        - ItemDiscountOfferEffect
+        - ShowNotificationOfferEffect
+        - ShowPromptOfferEffect
+        - SpendMoreOfferEffect
       type: string
     ConsumerOfferNotification:
       example:
@@ -6564,15 +6603,13 @@ components:
           description: The unique identifier of the restaurant providing the offers.
           nullable: true
           type: string
-        title:
-          description: The title of the offer.
-          nullable: true
-          type: string
       title: ConsumerOfferNotification
       type: object
     ConsumerOfferType:
       enum:
         - Percent
+        - ItemDiscount
+        - DeliveryDiscount
       type: string
     ConsumerOffersBasket:
       additionalProperties: false
@@ -6589,6 +6626,7 @@ components:
       additionalProperties: false
       example:
         id: 1234c
+        itemState: JustAdded
         name: Big Burger
         price: 1222
         quantity: 1
@@ -6598,6 +6636,9 @@ components:
           description: The Id of basket item.
           nullable: true
           type: string
+        itemState:
+          $ref: "#/components/schemas/BasketItemStateType"
+          description: Describes the state of the item in respect of previous basket state.
         name:
           description: The name of basket item.
           nullable: true
@@ -6607,15 +6648,15 @@ components:
           format: integer
           nullable: true
           type: number
+        productId:
+          description: The ProductId of basket item.
+          nullable: true
+          type: string
         quantity:
           description: The quantity of basket item.
           format: int32
           nullable: true
           type: integer
-        sku:
-          description: The Sku of basket item.
-          nullable: true
-          type: string
       title: ConsumerOffersBasketItem
       type: object
     ConsumerOffersNotificationsRequest:
@@ -6661,20 +6702,25 @@ components:
       additionalProperties: false
       example:
         applicableDateTimeUtc: 2020-04-20T16:20:00.000Z
+        consumerOfferBasket:
+          basketItems:
+            - id: 1234c
+              itemState: JustAdded
+              name: Big Burger
+              price: 1222
+              quantity: 1
+              sku: BRGR123
         restaurantId: asd12345
       properties:
         applicableDateTimeUtc:
           description: >-
             Overrides the current time for determining whether offers are active.
 
-            Enables offers to be returned that have become
-
-            inactive after the order was added to a consumer's basket.
+            Enables offers to be returned that for the time in future (e.g. Pre-order)
           format: date-time
           type: string
         consumerOffersBasket:
           description: The consumer basket content
-          nullable: true
           oneOf:
             - $ref: "#/components/schemas/ConsumerOffersBasket"
         restaurantId:
@@ -6683,6 +6729,7 @@ components:
           type: string
       required:
         - restaurantId
+        - consumerOffersBasket
       title: ConsumerOffersRequest
       type: object
     ConsumerOffersResponse:
@@ -9073,6 +9120,18 @@ components:
           $ref: "#/components/schemas/VoucherType"
           description: The type of discount
       type: object
+    DiscountedItem:
+      additionalProperties: false
+      properties:
+        discountPercentage:
+          description: The discount percentage applied.
+          format: integer
+          type: number
+        productId:
+          description: The unique identifier of the discounted product item.
+          type: string
+      title: DiscountedItem
+      type: object
     DiscoveryResponse:
       example:
         searchResults:
@@ -9869,6 +9928,61 @@ components:
         id:
           description: Item identifier
           type: string
+      type: object
+    ItemDiscount:
+      additionalProperties: false
+      properties:
+        discountPercentage:
+          description: The discount percentage applied.
+          format: integer
+          type: number
+        productId:
+          description: The unique identifier of the discounted product item.
+          type: string
+      title: ItemDiscount
+      type: object
+    ItemDiscountOfferEffect:
+      allOf:
+        - $ref: "#/components/schemas/OfferEffect"
+        - additionalProperties: false
+          properties:
+            discountedItems:
+              description: A collection of discounted items to choose one
+              items:
+                $ref: "#/components/schemas/DiscountedItem"
+              type: array
+          type: object
+      example:
+        $type: ItemDiscountOfferEffect
+        discountedItems:
+          - discountPercentage: 100
+            productId: lemonade123
+          - discountPercentage: 50
+            productId: lemonade135
+    ItemDiscountPrompt:
+      additionalProperties: false
+      example:
+        description: Get free lemonade with Super Burger
+        discountPercentage: 100
+        header: Free item!
+        productId: lemonade123
+        title: Get free lemonade
+      properties:
+        description:
+          description: The description of offer to show in prompt for customer
+          type: string
+        header:
+          description: The header to show in prompt for customer
+          type: string
+        itemDiscounts:
+          description: The array of items with discounts
+          items:
+            $ref: "#/components/schemas/ItemDiscount"
+          type: array
+        title:
+          description: The title to show in prompt for customer
+          type: string
+      title: ItemDiscountPrompt
       type: object
     ItemSelectionStep:
       allOf:
@@ -12042,6 +12156,24 @@ components:
             $ref: "#/components/schemas/OfferCampaign"
           type: array
       type: object
+    OfferEffect:
+      additionalProperties: false
+      discriminator:
+        mapping:
+          BasketDiscountOfferEffect: "#/components/schemas/BasketDiscountOfferEffect"
+          ItemDiscountOfferEffect: "#/components/schemas/ItemDiscountOfferEffect"
+          ShowNotificationOfferEffect: "#/components/schemas/ShowNotificationOfferEffect"
+          ShowPromptOfferEffect: "#/components/schemas/ShowPromptOfferEffect"
+          SpendMoreOfferEffect: "#/components/schemas/SpendMoreOfferEffect"
+        propertyName: $type
+      properties:
+        $type:
+          $ref: "#/components/schemas/ConsumerOfferEffectType"
+          description: The effect of the offer.
+      required:
+        - $type
+      title: OfferEffect
+      type: object
     OfferTemplate:
       example:
         consumerSegment: All
@@ -13804,6 +13936,11 @@ components:
           items:
             $ref: "#/components/schemas/InvalidProduct"
           type: array
+        ItemDiscounts:
+          description: Collection of item discount prompts to be shown customer
+          items:
+            $ref: "#/components/schemas/ItemDiscountPrompt"
+          type: array
         Offers:
           items:
             properties:
@@ -14612,6 +14749,70 @@ components:
         restaurantId:
           description: Id of the restaurant
           type: string
+      type: object
+    RestaurantReviews:
+      example:
+        reviews:
+          - approvedRestaurantComments: Thank you very much for positive feedback
+            customerCity: London
+            customerComments: Extremely good food and service
+            customerName: Steve
+            friendlyOrderId: 123456789
+            id: uimpewidbrjyxcweiqtoe
+            rateDate: 2020-10-18T17:42:38.000Z
+            ratingAverage: 5.66
+            restaurantComments: Thank u very much for positive feedback
+          - approvedRestaurantComments: We are sorry
+            customerCity: London
+            customerComments: Coffee poured all over my food
+            customerName: Lucy
+            friendlyOrderId: 123456790
+            id: tytyhjdbrhgjfxcweigfht
+            rateDate: 2020-10-19T18:00:45.000Z
+            ratingAverage: 2.33
+            restaurantComments: We are sorry, but it is your fault
+      properties:
+        reviews:
+          description: List of restaurant reviews
+          items:
+            properties:
+              approvedRestaurantComments:
+                description: Any comments left by the restaurant in response to the review approved by a moderator
+                nullable: true
+                type: string
+              customerComments:
+                description: Any comments left by the customer in their review
+                nullable: true
+                type: string
+              customerName:
+                description: The (first) name of the customer who left the review
+                nullable: false
+                type: string
+              friendlyOrderId:
+                description: The friendly order Id the review is associated with
+                nullable: false
+                type: string
+              id:
+                description: The Id of the review
+                format: int32
+                nullable: false
+                type: string
+              rateDate:
+                description: The date and time on which the order was made
+                format: date-time
+                nullable: false
+                type: string
+              ratingAverage:
+                description: The average score left by the customer
+                format: double
+                nullable: false
+                type: number
+              restaurantComments:
+                description: Any comments left by the restaurant in response to the review
+                nullable: true
+                type: string
+            type: object
+          type: array
       type: object
     RestaurantSearchProduct:
       example:
@@ -15556,6 +15757,67 @@ components:
         - ALCOHOL_ELIGIBLE
         - UNKNOWN
       type: string
+    ShowNotificationOfferEffect:
+      allOf:
+        - $ref: "#/components/schemas/OfferEffect"
+        - additionalProperties: false
+          properties:
+            description:
+              description: Description of the offer effect
+              type: string
+          type: object
+      example:
+        $type: ShowNotificationOfferEffect
+        description: Get free drink with any burger
+    ShowPromptOfferEffect:
+      allOf:
+        - $ref: "#/components/schemas/OfferEffect"
+        - additionalProperties: false
+          properties:
+            description:
+              description: The description of offer to show in prompt for customer
+              type: string
+            header:
+              description: The header to show in prompt for customer
+              type: string
+            offerEffect:
+              $ref: "#/components/schemas/OfferEffect"
+              description: Offer effect that will be applied if prompt accepted
+            title:
+              description: The title to show in prompt for customer
+              type: string
+          type: object
+      example:
+        $type: ShowPromptOfferEffect
+        description: Get free drink with burger
+        header: Free item offer
+        offerEffect:
+          - discountedItems:
+              - discountPercentage: 100
+                productId: lemonade1112
+        title: Get free item
+    SpendMoreOfferEffect:
+      allOf:
+        - $ref: "#/components/schemas/ShowNotificationOfferEffect"
+        - additionalProperties: false
+          properties:
+            amountToSpend:
+              description: >-
+                The amount of money, in the smallest unit of relevant currency applied to order,
+
+                to be spent to get the offer.
+              format: integer
+              type: number
+            discountPercentage:
+              description: The discount percentage applied.
+              format: integer
+              type: number
+          type: object
+      example:
+        $type: SpendMoreOfferEffect
+        amountToSpend: 101
+        description: Spend 1.01$ more to get 20%
+        discountPercentage: 20
     SuggestedSearchResponse:
       example:
         suggestions:
@@ -19754,6 +20016,45 @@ components:
       required:
         - Status
         - TimeStamp
+      type: object
+    order-time-updated:
+      example:
+        dayOfWeek: Monday
+        lowerBoundMinutes: 35
+        restaurantId: "123456"
+        serviceType: Delivery
+        upperBoundMinutes: 50
+      properties:
+        dayOfWeek:
+          description: The day of the week that has been updated.
+          enum:
+            - Sunday
+            - Monday
+            - Tuesday
+            - Wednesday
+            - Thursday
+            - Friday
+            - Saturday
+          format: enum
+          type: string
+        lowerBoundMinutes:
+          description: Order time lower bound value, in minutes.
+          format: int32
+          type: integer
+        restaurantId:
+          description: The Just Eat restaurant ID
+          type: string
+        serviceType:
+          description: Service type of the order time.
+          enum:
+            - Delivery
+            - Collection
+          format: enum
+          type: string
+        upperBoundMinutes:
+          description: Order time upper bound value, in minutes.
+          format: int32
+          type: integer
       type: object
     orderScoreDetail:
       description: Details of how order score has contributed to get the segmentation status

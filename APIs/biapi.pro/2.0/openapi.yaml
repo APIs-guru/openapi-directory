@@ -4307,122 +4307,6 @@ paths:
         - Connections
         - Banks
         - Providers
-  /merchants:
-    get:
-      description: ""
-      parameters:
-        - in: query
-          name: expand
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                properties:
-                  clients:
-                    items:
-                      $ref: "#/components/schemas/Client"
-                    type: array
-                  total:
-                    description: total number of results
-                    type: number
-                required:
-                  - clients
-                type: object
-          description: clients
-      summary: List clients
-      tags:
-        - Administration
-    post:
-      description: ""
-      parameters:
-        - in: query
-          name: expand
-          required: false
-          schema:
-            type: string
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              properties:
-                iban:
-                  description: payments initiated by this merchant will be done to this IBAN
-                  type: string
-                name:
-                  description: name of merchant
-                  type: string
-                redirect_uris:
-                  description: list of allowed redirect uris
-                  type: string
-              required:
-                - name
-                - redirect_uris
-                - iban
-              type: object
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Client"
-          description: Successful POST on Client resource
-      summary: Create a merchant. Needs a user identified in bearer to be used
-      tags:
-        - Administration
-  "/merchants/{id_client}/logo":
-    delete:
-      description: ""
-      parameters:
-        - description: ""
-          in: path
-          name: id_client
-          required: true
-          schema:
-            type: integer
-        - in: query
-          name: expand
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/File"
-          description: Successful DELETE on File resource
-      summary: Delete the client logo
-      tags:
-        - Administration
-    post:
-      description: ""
-      parameters:
-        - description: ""
-          in: path
-          name: id_client
-          required: true
-          schema:
-            type: integer
-        - in: query
-          name: expand
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/File"
-          description: Successful POST on File resource
-      summary: Update the client logo
-      tags:
-        - Administration
   /monitoring:
     get:
       description: ""
@@ -8317,8 +8201,8 @@ components:
         coming: 0
         company_name: ""
         currency: ""
-        deleted: 2020-10-16 17:42:15.731779
-        disabled: 2020-10-16 17:42:15.731817
+        deleted: 2020-10-23 17:16:58.426413
+        disabled: 2020-10-23 17:16:58.426453
         display: true
         error: ""
         iban: ""
@@ -8328,10 +8212,10 @@ components:
         id_source: 0
         id_type: 0
         id_user: 0
-        last_update: 2020-10-16 17:42:15.731736
+        last_update: 2020-10-23 17:16:58.426369
         name: ""
         number: ""
-        opening_date: 2020-10-16
+        opening_date: 2020-10-23
         original_name: ""
         ownership: ""
         usage: ""
@@ -8639,7 +8523,7 @@ components:
       type: object
     Certificate:
       example:
-        created: 2020-10-16 17:42:15.633710
+        created: 2020-10-23 17:16:58.355489
         id: 0
         id_private_key_file: 0
         id_public_key_file: 0
@@ -8737,20 +8621,20 @@ components:
     Connection:
       example:
         active: true
-        created: <function datetime.now at 0x7f87ad643a60>
+        created: <function datetime.now at 0x7f87ace64598>
         id: 0
         id_connector: 0
         id_user: 0
-        last_push: 2020-10-16 17:42:15.585777
-        last_update: 2020-10-16 17:42:15.585615
-        next_try: 2020-10-16 17:42:15.585828
+        last_push: 2020-10-23 17:16:58.331580
+        last_update: 2020-10-23 17:16:58.331418
+        next_try: 2020-10-23 17:16:58.331633
       properties:
         active:
           default: true
           description: This connection is active and will be automatically synced
           type: boolean
         created:
-          default: <function datetime.now at 0x7f87ad643a60>
+          default: <function datetime.now at 0x7f87ace64598>
           description: Creation date
           format: date-time
           type: string
@@ -8792,9 +8676,9 @@ components:
         id_user: 0
         login: ""
         nb_accounts: 0
-        next_try: 2020-10-16 17:42:15.735855
+        next_try: 2020-10-23 17:16:58.430391
         session_folder_id: ""
-        start: 2020-10-16 17:42:15.736533
+        start: 2020-10-23 17:16:58.431047
         statut: 0
         timestamp: CURRENT_TIMESTAMP
         worker: ""
@@ -8861,16 +8745,16 @@ components:
       type: object
     ConnectionSource:
       example:
-        access_expire: 2020-10-16 17:42:15.714374
-        created: <function datetime.now at 0x7f87ad67e950>
-        disabled: 2020-10-16 17:42:15.714231
-        expire: 2020-10-16 17:42:15.714413
+        access_expire: 2020-10-23 17:16:58.409148
+        created: <function datetime.now at 0x7f87ace7cf28>
+        disabled: 2020-10-23 17:16:58.409002
+        expire: 2020-10-23 17:16:58.409189
         id: 0
         id_connection: 0
         id_connector_source: 0
-        last_update: 2020-10-16 17:42:15.714189
+        last_update: 2020-10-23 17:16:58.408960
         name: ""
-        next_try: 2020-10-16 17:42:15.714537
+        next_try: 2020-10-23 17:16:58.409323
         state: ""
       properties:
         access_expire:
@@ -8878,7 +8762,7 @@ components:
           format: date-time
           type: string
         created:
-          default: <function datetime.now at 0x7f87ad67e950>
+          default: <function datetime.now at 0x7f87ace7cf28>
           description: Creation date of the connection source
           format: date-time
           type: string
@@ -9033,7 +8917,7 @@ components:
     ConnectorSource:
       example:
         auth_mechanism: ""
-        disabled: 2020-10-16 17:42:15.586698
+        disabled: 2020-10-23 17:16:58.332464
         fallback: ""
         id: 0
         id_connector: 0
@@ -9113,7 +8997,7 @@ components:
     Currency:
       example:
         crypto: false
-        datetime: 2020-10-16 17:42:15.604111
+        datetime: 2020-10-23 17:16:58.337333
         id: ""
         marketcap: 0
         precision: 2
@@ -9190,8 +9074,8 @@ components:
     Document:
       example:
         currency: ""
-        date: 2020-10-16 17:42:15.656685
-        duedate: 2020-10-16
+        date: 2020-10-23 17:16:58.362187
+        duedate: 2020-10-23
         has_file_on_website: true
         id: 0
         id_category: 0
@@ -9202,7 +9086,7 @@ components:
         id_user: 0
         income: true
         issuer: ""
-        last_update: 2020-10-16 17:42:15.657613
+        last_update: 2020-10-23 17:16:58.363112
         name: ""
         number: ""
         readonly: true
@@ -9429,7 +9313,7 @@ components:
       example:
         code: ""
         code_type: ""
-        deleted: 2020-10-16 17:42:15.710910
+        deleted: 2020-10-23 17:16:58.405639
         description: ""
         diff: 0
         diff_percent: 0
@@ -9437,7 +9321,7 @@ components:
         id_account: 0
         id_security: 0
         label: ""
-        last_update: 2020-10-16 17:42:15.710867
+        last_update: 2020-10-23 17:16:58.405596
         original_currency: ""
         original_diff: 0
         original_unitprice: 0
@@ -9445,13 +9329,13 @@ components:
         original_valuation: 0
         portfolio_share: 0
         prev_diff: 0
-        prev_vdate: 2020-10-16
+        prev_vdate: 2020-10-23
         quantity: 0
         source: ""
         unitprice: 0
         unitvalue: 0
         valuation: 0
-        vdate: 2020-10-16
+        vdate: 2020-10-23
       properties:
         code:
           description: Investment code
@@ -9562,7 +9446,7 @@ components:
         original_currency: ""
         original_unitvalue: 0
         unitvalue: 0
-        vdate: 2020-10-16
+        vdate: 2020-10-23
       properties:
         id:
           description: ID of the value
@@ -9638,14 +9522,14 @@ components:
       example:
         amount: 0
         code: ""
-        created: 2020-10-16 17:42:15.708241
-        date: 2020-10-16
-        deleted: 2020-10-16 17:42:15.708284
-        execution_date: 2020-10-16
+        created: 2020-10-23 17:16:58.403039
+        date: 2020-10-23
+        deleted: 2020-10-23 17:16:58.403081
+        execution_date: 2020-10-23
         id: 0
         id_account: 0
         label: ""
-        last_update: 2020-10-16 17:42:15.708179
+        last_update: 2020-10-23 17:16:58.402980
         ordervalue: 0
         payment_method: ""
         quantity: 0
@@ -9653,7 +9537,7 @@ components:
         stock_market: ""
         unitprice: 0
         unitvalue: 0
-        validity_date: 2020-10-16
+        validity_date: 2020-10-23
         webid: ""
       properties:
         amount:
@@ -9749,50 +9633,13 @@ components:
         - id
         - redirect_uri
       type: object
-    Order:
-      example:
-        error_message: ""
-        id: 0
-        id_merchant: 0
-        id_transfer: 0
-        opt_out_cause: ""
-        refund_value: 0
-        state: ""
-      properties:
-        error_message:
-          description: more information on the state if something went wrong during the order
-          type: string
-        id:
-          description: ID of the order
-          type: integer
-        id_merchant:
-          description: id of the merchant who initiated the order
-          type: integer
-        id_transfer:
-          description: id of the transfer used to pay this the order
-          type: integer
-        opt_out_cause:
-          description: set by the webview, indicates at which step of the payment the user has left the order
-          type: string
-        refund_value:
-          description: Amount refunded
-          format: float
-          type: number
-        state:
-          description: State of the order (result of the recipient adding and the transfer execution)
-          type: string
-      required:
-        - id
-        - id_merchant
-        - id_transfer
-      type: object
     Payment:
       example:
         client_redirect_uri: ""
         error_code: ""
         error_description: ""
         id: 0
-        register_date: 2020-10-16 17:42:15.626767
+        register_date: 2020-10-23 17:16:58.347104
         state: ""
         validate_uri: ""
       properties:
@@ -9858,14 +9705,14 @@ components:
       type: object
     Pocket:
       example:
-        availability_date: 2020-10-16
+        availability_date: 2020-10-23
         condition: inconnu
-        deleted: 2020-10-16 17:42:15.684962
+        deleted: 2020-10-23 17:16:58.378156
         id: 0
         id_account: 0
         id_investment: 0
         label: ""
-        last_update: 2020-10-16 17:42:15.684914
+        last_update: 2020-10-23 17:16:58.378109
         quantity: 0
         value: 0
       properties:
@@ -10022,18 +9869,18 @@ components:
         bank_name: ""
         category: ""
         currency: ""
-        deleted: 2020-10-16 17:42:15.711846
-        enabled_at: 2020-10-16 17:42:15.711923
+        deleted: 2020-10-23 17:16:58.406604
+        enabled_at: 2020-10-23 17:16:58.406684
         error: ""
-        expire: 2020-10-16 17:42:15.711885
+        expire: 2020-10-23 17:16:58.406646
         iban: ""
         id: 0
         id_account: 0
         id_target_account: 0
         label: ""
-        last_update: 2020-10-16 17:42:15.711766
+        last_update: 2020-10-23 17:16:58.406519
         state: ""
-        time_scraped: 2020-10-16 17:42:15.711807
+        time_scraped: 2020-10-23 17:16:58.406560
         webid: ""
       properties:
         add_verified:
@@ -10146,7 +9993,7 @@ components:
         code: ""
         id: 0
         id_type: 0
-        last_update: 2020-10-16 17:42:15.613337
+        last_update: 2020-10-23 17:16:58.345969
         name: ""
       properties:
         code:
@@ -10171,19 +10018,19 @@ components:
       type: object
     Subscription:
       example:
-        deleted: 2020-10-16 17:42:15.726953
-        disabled: 2020-10-16 17:42:15.726997
+        deleted: 2020-10-23 17:16:58.421346
+        disabled: 2020-10-23 17:16:58.421391
         error: ""
         id: 0
         id_connection: 0
         id_source: 0
         id_user: 0
         label: ""
-        last_update: 2020-10-16 17:42:15.726906
+        last_update: 2020-10-23 17:16:58.421299
         number: ""
-        renewdate: 2020-10-16
+        renewdate: 2020-10-23
         subscriber: ""
-        validity: 2020-10-16
+        validity: 2020-10-23
       properties:
         deleted:
           description: This subscription is not found on the website anymore
@@ -10278,8 +10125,8 @@ components:
       type: object
     TermsOfService:
       example:
-        created: 2020-10-16 17:42:15.579287
-        deleted: 2020-10-16 17:42:15.579334
+        created: 2020-10-23 17:16:58.321813
+        deleted: 2020-10-23 17:16:58.321877
         id: 0
         version: ""
       properties:
@@ -10301,8 +10148,8 @@ components:
     Transaction:
       example:
         active: true
-        application_date: 2020-10-16
-        bdate: 2020-10-16
+        application_date: 2020-10-23
+        bdate: 2020-10-23
         card: ""
         coming: false
         comment: ""
@@ -10310,23 +10157,23 @@ components:
         commission_currency: ""
         counterparty: ""
         country: ""
-        date: 2020-10-16
-        date_scraped: 2020-10-16 17:42:15.681410
-        deleted: 2020-10-16 17:42:15.682523
+        date: 2020-10-23
+        date_scraped: 2020-10-23 17:16:58.374718
+        deleted: 2020-10-23 17:16:58.375761
         gross_value: 0
         id: 0
         id_account: 0
         id_category: 0
         id_cluster: 0
-        last_update: 2020-10-16 17:42:15.682483
+        last_update: 2020-10-23 17:16:58.375719
         nature: inconnu
         original_currency: ""
         original_gross_value: 0
         original_value: 0
-        rdate: 2020-10-16
+        rdate: 2020-10-23
         state: new
         value: 0
-        vdate: 2020-10-16
+        vdate: 2020-10-23
         webid: ""
         wording: ""
       properties:
@@ -10489,7 +10336,7 @@ components:
         id_category: 0
         mean_amount: 0
         median_increment: 0
-        next_date: 2020-10-16
+        next_date: 2020-10-23
         wording: ""
       properties:
         created_by:
@@ -10531,7 +10378,7 @@ components:
         beneficiary_type: recipient
         currency: ""
         error: ""
-        exec_date: 2020-10-16
+        exec_date: 2020-10-23
         fees: 0
         id: 0
         id_account: 0
@@ -10540,7 +10387,7 @@ components:
         id_user: 0
         label: ""
         recipient_iban: ""
-        register_date: 2020-10-16 17:42:15.574197
+        register_date: 2020-10-23 17:16:58.379516
         state: ""
         validate_mechanism: ""
         webid: ""
@@ -10764,14 +10611,14 @@ components:
       type: object
     Webhook:
       example:
-        created: 2020-10-16 17:42:15.607639
-        deleted: 2020-10-16 17:42:15.607739
+        created: 2020-10-23 17:16:58.340833
+        deleted: 2020-10-23 17:16:58.340935
         id: 0
         id_auth: 0
         id_event: 0
         id_service: 0
         id_user: 0
-        updated: 2020-10-16 17:42:15.607694
+        updated: 2020-10-23 17:16:58.340892
         url: ""
       properties:
         add_to_data:
@@ -10814,14 +10661,14 @@ components:
       type: object
     WebhookData:
       example:
-        created: 2020-10-16 17:42:15.609479
+        created: 2020-10-23 17:16:58.342703
         id: 0
         id_resource: 0
         id_service: 0
         id_user: 0
         id_webhook: 0
         mimetype: ""
-        success: 2020-10-16 17:42:15.609527
+        success: 2020-10-23 17:16:58.342752
       properties:
         created:
           description: Timestamp when the hook data was generated
@@ -10862,10 +10709,10 @@ components:
         id_service: 0
         id_user: 0
         id_webhook_data: 0
-        next_try: 2020-10-16 17:42:15.610381
+        next_try: 2020-10-23 17:16:58.343574
         response_code: 0
-        response_date: 2020-10-16 17:42:15.610043
-        timestamp: 2020-10-16 17:42:15.610001
+        response_date: 2020-10-23 17:16:58.343228
+        timestamp: 2020-10-23 17:16:58.343188
       properties:
         id:
           description: ID of the log

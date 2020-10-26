@@ -46,369 +46,15 @@ paths:
   /account.cart.add.json:
     post:
       consumes:
-        - application/x-www-form-urlencoded
+        - application/json
       description: Add store to the account
       operationId: AccountCartAdd
       parameters:
-        - description: Store’s identifier which you can get from cart_list method
-          enum:
-            - 3DCartApi
-            - AceShop
-            - Amazon
-            - AspDotNetStorefront
-            - BigcommerceApi
-            - Creloaded
-            - Cscart
-            - Cubecart
-            - Demandware
-            - EBay
-            - Ecwid
-            - Etsy
-            - Gambio
-            - Interspire
-            - JooCart
-            - Magento1212
-            - MijoShop
-            - Neto
-            - Opencart14
-            - LightSpeed
-            - Oscmax2
-            - Oscommerce22ms2
-            - Oxid
-            - Pinnacle
-            - Prestashop
-            - SSPremium
-            - Shopify
-            - Squarespace
-            - Shopware
-            - Tomatocart
-            - Ubercart
-            - Virtuemart
-            - Volusion
-            - WPecommerce
-            - Walmart
-            - WebAsyst
-            - Woocommerce
-            - Xcart
-            - Xtcommerce
-            - XtcommerceVeyton
-            - Zencart137
-          in: query
-          name: cart_id
+        - in: body
+          name: body
           required: true
-          type: string
-        - description: A web address of a store that you would like to connect to API2Cart
-          in: query
-          name: store_url
-          required: true
-          type: string
-        - description: This parameter allows to set up store with custom bridge url (also you must use store_root parameter if a bridge folder is not in the root folder of the store)
-          in: query
-          name: bridge_url
-          required: false
-          type: string
-        - description: Absolute path to the store root directory (used with "bridge_url" parameter)
-          in: query
-          name: store_root
-          required: false
-          type: string
-        - description: Set this parameter if bridge is already uploaded to store
-          in: query
-          name: store_key
-          required: false
-          type: string
-        - default: false
-          description: Specify if api2cart should validate cart version
-          in: query
-          name: validate_version
-          required: false
-          type: boolean
-        - default: true
-          description: Enables or disables cart's verification
-          in: query
-          name: verify
-          required: false
-          type: boolean
-        - description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
-          in: query
-          name: db_tables_prefix
-          required: false
-          type: string
-        - description: FTP connection host
-          in: query
-          name: ftp_host
-          required: false
-          type: string
-        - description: FTP User
-          in: query
-          name: ftp_user
-          required: false
-          type: string
-        - description: FTP Password
-          in: query
-          name: ftp_password
-          required: false
-          type: string
-        - default: 21
-          description: FTP Port
-          in: query
-          name: ftp_port
-          required: false
-          type: integer
-        - default: /
-          description: FTP Store dir
-          in: query
-          name: ftp_store_dir
-          required: false
-          type: string
-        - description: 3DCart API Key
-          in: query
-          name: 3dcartapi_api_key
-          required: false
-          type: string
-        - description: MWS Auth Token. Access token authorizing the app to access resources on behalf of a user
-          in: query
-          name: amazon_access_token
-          required: false
-          type: string
-        - description: Amazon Seller ID
-          in: query
-          name: amazon_seller_id
-          required: false
-          type: string
-        - description: Amazon Marketplace IDs comma separated string
-          in: query
-          name: amazon_marketplaces_ids
-          required: false
-          type: string
-        - description: Amazon Secret Key
-          in: query
-          name: amazon_secret_key
-          required: false
-          type: string
-        - description: Amazon Secret Key Id
-          in: query
-          name: amazon_access_key_id
-          required: false
-          type: string
-        - description: It's a AspDotNetStorefront account for which API is available
-          in: query
-          name: aspdotnetstorefront_api_user
-          required: false
-          type: string
-        - description: AspDotNetStorefront API Password
-          in: query
-          name: aspdotnetstorefront_api_pass
-          required: false
-          type: string
-        - description: It's a BigCommerce account for which API is enabled
-          in: query
-          name: bigcommerceapi_admin_account
-          required: false
-          type: string
-        - description: BigCommerce API URL
-          in: query
-          name: bigcommerceapi_api_path
-          required: false
-          type: string
-        - description: Bigcommerce API Key
-          in: query
-          name: bigcommerceapi_api_key
-          required: false
-          type: string
-        - description: Client ID of the requesting app
-          in: query
-          name: bigcommerceapi_client_id
-          required: false
-          type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
-          in: query
-          name: bigcommerceapi_access_token
-          required: false
-          type: string
-        - description: API Path section unique to the store
-          in: query
-          name: bigcommerceapi_context
-          required: false
-          type: string
-        - description: Demandware client id
-          in: query
-          name: demandware_client_id
-          required: false
-          type: string
-        - description: Demandware api password
-          in: query
-          name: demandware_api_password
-          required: false
-          type: string
-        - description: Demandware user name
-          in: query
-          name: demandware_user_name
-          required: false
-          type: string
-        - description: Demandware user password
-          in: query
-          name: demandware_user_password
-          required: false
-          type: string
-        - default: production
-          description: Demandware environment
-          in: query
-          name: demandware_env_type
-          required: false
-          type: string
-        - description: Application ID (AppID).
-          in: query
-          name: ebay_client_id
-          required: false
-          type: string
-        - description: Shared Secret from eBay application
-          in: query
-          name: ebay_client_secret
-          required: false
-          type: string
-        - description: The RuName value that eBay assigns to your application.
-          in: query
-          name: ebay_runame
-          required: false
-          type: string
-        - description: Used to authenticate API requests.
-          in: query
-          name: ebay_access_token
-          required: false
-          type: string
-        - description: Used to renew the access token.
-          in: query
-          name: ebay_refresh_token
-          required: false
-          type: string
-        - default: production
-          description: eBay environment
-          in: query
-          name: ebay_environment
-          required: false
-          type: string
-        - default: 0
-          description: eBay global ID
-          in: query
-          name: ebay_site_id
-          required: false
-          type: integer
-        - description: Walmart client ID
-          in: query
-          name: walmart_client_id
-          required: false
-          type: string
-        - description: Walmart client secret
-          in: query
-          name: walmart_client_secret
-          required: false
-          type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
-          in: query
-          name: ecwid_acess_token
-          required: false
-          type: string
-        - description: Store Id
-          in: query
-          name: ecwid_store_id
-          required: false
-          type: string
-        - description: LightSpeed api key
-          in: query
-          name: lightspeed_api_key
-          required: false
-          type: string
-        - description: LightSpeed api secret
-          in: query
-          name: lightspeed_api_secret
-          required: false
-          type: string
-        - description: Etsy keystring
-          in: query
-          name: etsy_keystring
-          required: false
-          type: string
-        - description: Etsy shared secret
-          in: query
-          name: etsy_shared_secret
-          required: false
-          type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
-          in: query
-          name: etsy_access_token
-          required: false
-          type: string
-        - description: Secret token authorizing the app to access resources on behalf of a user
-          in: query
-          name: etsy_token_secret
-          required: false
-          type: string
-        - description: Neto API Key
-          in: query
-          name: neto_api_key
-          required: false
-          type: string
-        - description: Neto User Name
-          in: query
-          name: neto_api_username
-          required: false
-          type: string
-        - description: Shopify API Key
-          in: query
-          name: shopify_api_key
-          required: false
-          type: string
-        - description: Shopify API Password
-          in: query
-          name: shopify_api_password
-          required: false
-          type: string
-        - description: Shared secret
-          in: query
-          name: shopify_shared_secret
-          required: false
-          type: string
-        - description: Access token authorizing the app to access resources on behalf of a user
-          in: query
-          name: shopify_access_token
-          required: false
-          type: string
-        - description: It's a Volusion account for which API is enabled
-          in: query
-          name: volusion_login
-          required: false
-          type: string
-        - description: Volusion API Password
-          in: query
-          name: volusion_password
-          required: false
-          type: string
-        - description: Omni Commerce Connector Client ID
-          in: query
-          name: hybris_client_id
-          required: false
-          type: string
-        - description: Omni Commerce Connector Client Secret
-          in: query
-          name: hybris_client_secret
-          required: false
-          type: string
-        - description: User Name
-          in: query
-          name: hybris_username
-          required: false
-          type: string
-        - description: User password
-          in: query
-          name: hybris_password
-          required: false
-          type: string
-        - description: Squarespace API Key
-          in: query
-          name: squarespace_api_key
-          required: false
-          type: string
+          schema:
+            $ref: "#/definitions/AccountCartAdd"
       produces:
         - application/json
       responses:
@@ -2493,14 +2139,12 @@ paths:
           name: ftp_password
           required: false
           type: string
-        - default: 21
-          description: FTP Port
+        - description: FTP Port
           in: query
           name: ftp_port
           required: false
           type: integer
-        - default: /
-          description: FTP Store dir
+        - description: FTP Store dir
           in: query
           name: ftp_store_dir
           required: false
@@ -8733,6 +8377,245 @@ definitions:
       value:
         type: string
     type: object
+  AccountCartAdd:
+    properties:
+      3dcartapi_api_key:
+        description: 3DCart API Key
+        type: string
+      amazon_access_key_id:
+        description: Amazon Secret Key Id
+        type: string
+      amazon_access_token:
+        description: MWS Auth Token. Access token authorizing the app to access resources on behalf of a user
+        type: string
+      amazon_marketplaces_ids:
+        description: Amazon Marketplace IDs comma separated string
+        type: string
+      amazon_secret_key:
+        description: Amazon Secret Key
+        type: string
+      amazon_seller_id:
+        description: Amazon Seller ID
+        type: string
+      aspdotnetstorefront_api_pass:
+        description: AspDotNetStorefront API Password
+        type: string
+      aspdotnetstorefront_api_user:
+        description: It's a AspDotNetStorefront account for which API is available
+        type: string
+      bigcommerceapi_access_token:
+        description: Access token authorizing the app to access resources on behalf of a user
+        type: string
+      bigcommerceapi_admin_account:
+        description: It's a BigCommerce account for which API is enabled
+        type: string
+      bigcommerceapi_api_key:
+        description: Bigcommerce API Key
+        type: string
+      bigcommerceapi_api_path:
+        description: BigCommerce API URL
+        type: string
+      bigcommerceapi_client_id:
+        description: Client ID of the requesting app
+        type: string
+      bigcommerceapi_context:
+        description: API Path section unique to the store
+        type: string
+      bridge_url:
+        description: This parameter allows to set up store with custom bridge url (also you must use store_root parameter if a bridge folder is not in the root folder of the store)
+        type: string
+      cart_id:
+        description: Store’s identifier which you can get from cart_list method
+        enum:
+          - 3DCartApi
+          - AceShop
+          - Amazon
+          - AspDotNetStorefront
+          - BigcommerceApi
+          - Creloaded
+          - Cscart
+          - Cubecart
+          - Demandware
+          - EBay
+          - Ecwid
+          - Etsy
+          - Gambio
+          - Interspire
+          - JooCart
+          - Magento1212
+          - MijoShop
+          - Neto
+          - Opencart14
+          - LightSpeed
+          - Oscmax2
+          - Oscommerce22ms2
+          - Oxid
+          - Pinnacle
+          - Prestashop
+          - SSPremium
+          - Shopify
+          - Squarespace
+          - Shopware
+          - Tomatocart
+          - Ubercart
+          - Virtuemart
+          - Volusion
+          - WPecommerce
+          - Walmart
+          - WebAsyst
+          - Woocommerce
+          - Xcart
+          - Xtcommerce
+          - XtcommerceVeyton
+          - Zencart137
+        type: string
+      db_tables_prefix:
+        description: This parameter is deprecated for this method. Please, use this parameter in method account.config.update
+        type: string
+      demandware_api_password:
+        description: Demandware api password
+        type: string
+      demandware_client_id:
+        description: Demandware client id
+        type: string
+      demandware_env_type:
+        default: production
+        description: Demandware environment
+        type: string
+      demandware_user_name:
+        description: Demandware user name
+        type: string
+      demandware_user_password:
+        description: Demandware user password
+        type: string
+      ebay_access_token:
+        description: Used to authenticate API requests.
+        type: string
+      ebay_client_id:
+        description: Application ID (AppID).
+        type: string
+      ebay_client_secret:
+        description: Shared Secret from eBay application
+        type: string
+      ebay_environment:
+        default: production
+        description: eBay environment
+        type: string
+      ebay_refresh_token:
+        description: Used to renew the access token.
+        type: string
+      ebay_runame:
+        description: The RuName value that eBay assigns to your application.
+        type: string
+      ebay_site_id:
+        default: 0
+        description: eBay global ID
+        type: integer
+      ecwid_acess_token:
+        description: Access token authorizing the app to access resources on behalf of a user
+        type: string
+      ecwid_store_id:
+        description: Store Id
+        type: string
+      etsy_access_token:
+        description: Access token authorizing the app to access resources on behalf of a user
+        type: string
+      etsy_keystring:
+        description: Etsy keystring
+        type: string
+      etsy_shared_secret:
+        description: Etsy shared secret
+        type: string
+      etsy_token_secret:
+        description: Secret token authorizing the app to access resources on behalf of a user
+        type: string
+      ftp_host:
+        description: FTP connection host
+        type: string
+      ftp_password:
+        description: FTP Password
+        type: string
+      ftp_port:
+        description: FTP Port
+        type: integer
+      ftp_store_dir:
+        description: FTP Store dir
+        type: string
+      ftp_user:
+        description: FTP User
+        type: string
+      hybris_client_id:
+        description: Omni Commerce Connector Client ID
+        type: string
+      hybris_client_secret:
+        description: Omni Commerce Connector Client Secret
+        type: string
+      hybris_password:
+        description: User password
+        type: string
+      hybris_username:
+        description: User Name
+        type: string
+      lightspeed_api_key:
+        description: LightSpeed api key
+        type: string
+      lightspeed_api_secret:
+        description: LightSpeed api secret
+        type: string
+      neto_api_key:
+        description: Neto API Key
+        type: string
+      neto_api_username:
+        description: Neto User Name
+        type: string
+      shopify_access_token:
+        description: Access token authorizing the app to access resources on behalf of a user
+        type: string
+      shopify_api_key:
+        description: Shopify API Key
+        type: string
+      shopify_api_password:
+        description: Shopify API Password
+        type: string
+      shopify_shared_secret:
+        description: Shared secret
+        type: string
+      squarespace_api_key:
+        description: Squarespace API Key
+        type: string
+      store_key:
+        description: Set this parameter if bridge is already uploaded to store
+        type: string
+      store_root:
+        description: Absolute path to the store root directory (used with "bridge_url" parameter)
+        type: string
+      store_url:
+        description: A web address of a store that you would like to connect to API2Cart
+        type: string
+      validate_version:
+        default: false
+        description: Specify if api2cart should validate cart version
+        type: boolean
+      verify:
+        default: true
+        description: Enables or disables cart's verification
+        type: boolean
+      volusion_login:
+        description: It's a Volusion account for which API is enabled
+        type: string
+      volusion_password:
+        description: Volusion API Password
+        type: string
+      walmart_client_id:
+        description: Walmart client ID
+        type: string
+      walmart_client_secret:
+        description: Walmart client secret
+        type: string
+    required:
+      - cart_id
+      - store_url
+    type: object
   BaseCustomer:
     properties:
       additional_fields:
@@ -11016,6 +10899,9 @@ definitions:
       name:
         description: Defines product's name that has to be added
         type: string
+      old_price:
+        description: Defines product's old price
+        type: number
       ordered_count:
         default: 0
         description: Defines how many times the product was ordered

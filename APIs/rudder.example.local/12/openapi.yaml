@@ -7457,12 +7457,12 @@ components:
             type: string
           type: array
         lastInventoryDate:
-          description: Date and time of the latest generated inventory, if one is available (node time)
+          description: 'Date and time of the latest generated inventory, if one is available (node time). Up to API v11, format was: "YYYY-MM-dd HH:mm"'
           example: 2020-02-29T10:11:32Z
           format: date
           type: string
         lastRunDate:
-          description: Date and time of the latest run, if one is available (node time)
+          description: 'Date and time of the latest run, if one is available (node time). Up to API v11, format was: "YYYY-MM-dd HH:mm"'
           example: 2020-02-29T14:48:28Z
           format: date
           type: string

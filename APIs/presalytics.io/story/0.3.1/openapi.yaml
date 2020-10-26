@@ -446,6 +446,7 @@ paths:
         - $ref: "#/components/parameters/include_relationships"
         - $ref: "#/components/parameters/include_outline"
         - $ref: "#/components/parameters/full"
+        - $ref: "#/components/parameters/refresh_cache"
       responses:
         "200":
           $ref: "#/components/responses/story"
@@ -779,6 +780,25 @@ paths:
         - Story
       x-operationName: update
   "/{id}/file/{ooxml_automation_id}":
+    delete:
+      description: Deletes a subdcoument of this story (e.g., .pptx, .docx, .xlsx)
+      operationId: story_id_file_ooxmlautomationid_delete
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/ooxml_automation_id"
+      responses:
+        "204":
+          $ref: "#/components/responses/success_response_no_content"
+        "400":
+          $ref: "#/components/responses/badrequest"
+        "401":
+          $ref: "#/components/responses/unauthorized"
+        "404":
+          $ref: "#/components/responses/notfound"
+      summary: "Story: Delete Subdocument"
+      tags:
+        - Story
+      x-operationName: download
     get:
       description: Redtreives updated story as open office xml file (e.g., .pptx, .docx, .xlsx)
       operationId: story_id_file_ooxmlautomationid_get
@@ -1118,6 +1138,13 @@ components:
       required: true
       schema:
         type: string
+    refresh_cache:
+      description: Force the api reload the `Story full` object
+      in: query
+      name: refresh_cache
+      required: false
+      schema:
+        type: boolean
     replace_existing:
       description: Indicates whether a put or post method would replace the existing contents
       in: query
@@ -1323,10 +1350,10 @@ components:
             - create
             - fire
             - change
+            - delete
           type: string
         action_params:
-          additionalProperties:
-            type: string
+          additionalProperties: true
           type: object
         name:
           nullable: true
@@ -1482,16 +1509,22 @@ components:
         - $ref: "#/components/schemas/base_model"
         - properties:
             active:
+              nullable: true
               type: boolean
+              x-nullable: true
             email:
               type: string
             lead_id:
               format: int32
+              nullable: true
               type: integer
+              x-nullable: true
             name:
               type: string
             permission_type:
               $ref: "#/components/schemas/permission_type"
+              nullable: true
+              x-nullable: true
             permission_type_id:
               format: uuid
               type: string

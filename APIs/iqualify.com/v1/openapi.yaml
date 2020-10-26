@@ -538,7 +538,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/OfferingResponse"
+                  $ref: "#/components/schemas/OfferingMetadataResponse"
                 title: Offerings
                 type: array
           description: all offerings (current, past and future ones)
@@ -597,7 +597,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/OfferingResponse"
+                  $ref: "#/components/schemas/OfferingMetadataResponse"
                 title: Offerings
                 type: array
           description: current offerings
@@ -617,7 +617,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/OfferingResponse"
+                  $ref: "#/components/schemas/OfferingMetadataResponse"
                 title: Offerings
                 type: array
           description: future offerings
@@ -675,7 +675,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: "#/components/schemas/OfferingResponse"
+                  $ref: "#/components/schemas/OfferingMetadataResponse"
                 title: Offerings
                 type: array
           description: past offerings
@@ -4338,6 +4338,9 @@ components:
       allOf:
         - $ref: "#/components/schemas/Badge"
       properties:
+        awardedAt:
+          format: date-time
+          type: string
         offeringId:
           type: string
       type: object

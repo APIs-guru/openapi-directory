@@ -4,111 +4,91 @@ servers:
 info:
   contact:
     email: help@beezup.com
-  description: "# The REST API of BeezUP system\r
+  description: >-
+    # The REST API of BeezUP system
 
-    ## Overview\r
+    ## Overview
 
-    The REST APIs provide programmatic access to read and write BeezUP data. \r
+    The REST APIs provide programmatic access to read and write BeezUP data. 
 
-    Basically, with this API you will be able to do everything like you were with your browser on https://go.beezup.com !\r
+    Basically, with this API you will be able to do everything like you were with your browser on https://go.beezup.com !
 
-    \r
 
-    The main features are:\r
+    The main features are:
 
-    - Register and manage your account\r
+    - Register and manage your account
 
-    - Create and manage and share your stores with your friends/co-workers.\r
+    - Create and manage and share your stores with your friends/co-workers.
 
-    - Import your product catalog and schedule the auto importation\r
+    - Import your product catalog and schedule the auto importation
 
-    - Search the channels your want to use\r
+    - Search the channels your want to use
 
-    - Configure your channels for your catalogs to export your product information:\r
+    - Configure your channels for your catalogs to export your product information:
+        - cost and general settings
+        - category and columns mappings
+        - your will be able to create and manage your custom column
+        - put in place exlusion filters based on simple conditions on your product data
+        - override product values
+        - get product vision for a channel catalog scope
+    - Analyze and optimize your performance of your catalogs on all yours channels with different type of reportings by day, channel, category and by product.
 
-    \    - cost and general settings\r
+    - Automatize your optimisation by using rules!
 
-    \    - category and columns mappings\r
+    - And of course... Manage your orders harvested from all your marketplaces:
+        - Synchronize your orders in an uniformized way
+        - Get the available actions and update the order status
+    - ...and more!
 
-    \    - your will be able to create and manage your custom column\r
 
-    \    - put in place exlusion filters based on simple conditions on your product data\r
+    ## Authentication credentials
 
-    \    - override product values\r
+    The public API with the base path **/v2/public** have been put in place to give you an entry point to our system for the user registration, login and lost password. The public API does not require any credentials.
 
-    \    - get product vision for a channel catalog scope\r
+    We give you the some public list of values and public channels for our public commercial web site [www.beezup.com](http://www.beezup.com).
 
-    - Analyze and optimize your performance of your catalogs on all yours channels with different type of reportings by day, channel, category and by product.\r
 
-    - Automatize your optimisation by using rules!\r
+    The user API with the base path **/v2/user** requires a token which is available on this page:
 
-    - And of course... Manage your orders harvested from all your marketplaces:\r
+    https://go.beezup.com/Account/MyAccount
 
-    \    - Synchronize your orders in an uniformized way\r
 
-    \    - Get the available actions and update the order status\r
+    ## Things to keep in mind
 
-    - ...and more!\r
+    ### API Rate Limits
 
-    \r
+    - The BeezUP REST API is limited to 100 calls/minute.
 
-    ## Authentication credentials\r
 
-    The public API with the base path **/v2/public** have been put in place to give you an entry point to our system for the user registration, login and lost password. The public API does not require any credentials.\r
+    ### Media type
 
-    We give you the some public list of values and public channels for our public commercial web site [www.beezup.com](http://www.beezup.com).\r
+    The default media type for requests and responses is application/json. Where noted, some operations support other content types. If no additional content type is mentioned for a specific operation, then the media type is application/json.
 
-    \r
 
-    The user API with the base path **/v2/user** requires a token which is available on this page:\r
+    ### Required content type
 
-    https://go.beezup.com/Account/MyAccount\r
+    The required and default encoding for the request and responses is UTF8.
 
-    \r
 
-    ## Things to keep in mind\r
+    ### Required date time format
 
-    ### API Rate Limits\r
+    All our date time are formatted in ISO 8601 format: 2014-06-24T16:25:00Z.
 
-    - The BeezUP REST API is limited to 100 calls/minute.\r
 
-    \r
+    ### Base URL
 
-    ### Media type\r
+    The Base URL of the BeezUP API Order Management REST API conforms to the following template.
 
-    The default media type for requests and responses is application/json. Where noted, some operations support other content types. If no additional content type is mentioned for a specific operation, then the media type is application/json.\r
 
-    \r
+    https://api.beezup.com
 
-    ### Required content type\r
 
-    The required and default encoding for the request and responses is UTF8.\r
+    All URLs returned by the BeezUP API are relative to this base URL, and all requests to the REST API must use this base URL template.
 
-    \r
 
-    ### Required date time format\r
+    You can test our API on https://api-docs.beezup.com/swagger-ui\\
 
-    All our date time are formatted in ISO 8601 format: 2014-06-24T16:25:00Z.\r
-
-    \r
-
-    ### Base URL\r
-
-    The Base URL of the BeezUP API Order Management REST API conforms to the following template.\r
-
-    \r
-
-    https://api.beezup.com\r
-
-    \r
-
-    All URLs returned by the BeezUP API are relative to this base URL, and all requests to the REST API must use this base URL template.\r
-
-    \r
-
-    You can test our API on https://api-docs.beezup.com/swagger-ui\\\\\r
-
-    You can contact us on [gitter, #BeezUP/API](https://gitter.im/BeezUP/API)"
+    You can contact us on [gitter, #BeezUP/API](https://gitter.im/BeezUP/API)
   license:
     name: BeezUP
     url: https://www.beezup.com/

@@ -72,6 +72,8 @@ tags:
     x-box-tag: file_versions
   - name: Files
     x-box-tag: files
+  - name: Folder Locks
+    x-box-tag: folder_locks
   - name: Folders
     x-box-tag: folders
   - name: Group memberships
@@ -84,7 +86,7 @@ tags:
     x-box-tag: legal_hold_policies
   - name: Legal hold policy assignments
     x-box-tag: legal_hold_policy_assignments
-  - name: Metadata cascade policies (Beta)
+  - name: Metadata cascade policies
     x-box-tag: metadata_cascade_policies
   - name: Metadata instances (Files)
     x-box-tag: file_metadata
@@ -7610,6 +7612,242 @@ paths:
       tags:
         - Watermarks (Files)
       x-box-tag: file_watermarks
+  /folder_locks:
+    get:
+      description: Retrieves folder lock details for a given folder.
+      operationId: get_folder_locks
+      parameters:
+        - description: >-
+            The unique identifier that represent a folder.
+
+
+            The ID for any folder can be determined
+
+            by visiting this folder in the web application
+
+            and copying the ID from the URL. For example,
+
+            for the URL `https://*.app.box.com/folder/123`
+
+            the `folder_id` is `123`.
+
+
+            The root folder of a Box account is
+
+            always represented by the ID `0`.
+          example: "12345"
+          in: query
+          name: folder_id
+          required: true
+          schema:
+            nullable: false
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FolderLocks"
+          description: >-
+            Returns details for all folder locks applied to the folder, including the
+
+            lock type and user that applied the lock.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned when the access token provided in the `Authorization` header
+
+            is not recognized or not provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returned if the folder is not found, or the user does not
+
+            have access to the folder.
+        "405":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: Returned if the `folder_id` is not in a recognized format.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: List folder locks on folder
+      tags:
+        - Folder Locks
+      x-box-enable-explorer: true
+      x-box-sanitized: true
+      x-box-tag: folder_locks
+    post:
+      description: >-
+        Creates a folder lock on a folder, preventing it from being moved and/or
+
+        deleted.
+      operationId: post_folder_locks
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                folder:
+                  description: The folder to apply the lock to.
+                  properties:
+                    id:
+                      description: The ID of the folder.
+                      example: "1234567890"
+                      type: string
+                    type:
+                      description: >-
+                        The content type the lock is being applied to. Only `folder`
+
+                        is supported.
+                      example: folder
+                      type: string
+                  required:
+                    - type
+                    - id
+                  type: object
+                locked_operations:
+                  description: >-
+                    The operations to lock on the folder. If `locked_operations` is
+
+                    included in the request, both `move` and `delete` must also be
+
+                    included and both set to `true`.
+                  properties:
+                    delete:
+                      description: Whether deleting the folder should be locked.
+                      example: true
+                      type: boolean
+                    move:
+                      description: Whether moving the folder should be locked.
+                      example: true
+                      type: boolean
+                  required:
+                    - move
+                    - delete
+                  type: object
+              required:
+                - folder
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FolderLock"
+          description: >-
+            Returns the instance of the folder lock that was applied to the folder,
+
+            including the user that applied the lock and the operations set.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the request body is not valid.
+
+
+            * `schema_validation_failed` - The request body contains a value for
+
+            a field that either does not exist, or for which the value or type does
+
+            not match the expected field type. An example might be an unknown option
+
+            for an `enum` or `multiSelect` field.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error when the folder could not be found.
+
+
+            * `not_found` - The folder could not be found, or the user does not have
+
+            access to the folder.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Create folder lock on folder
+      tags:
+        - Folder Locks
+      x-box-enable-explorer: true
+      x-box-sanitized: true
+      x-box-tag: folder_locks
+  "/folder_locks/{folder_lock_id}":
+    delete:
+      description: Deletes a folder lock on a given folder.
+      operationId: delete_folder_locks_id
+      parameters:
+        - description: The ID of the folder lock.
+          example: "12345"
+          in: path
+          name: folder_lock_id
+          required: true
+          schema:
+            nullable: false
+            type: string
+      responses:
+        "204":
+          description: Returns an empty response when the folder lock is successfully deleted.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error if the user does not have the required
+
+            access to perform the action.
+
+
+            * `access_denied_insufficient_permissions`: Returned when the
+              user does not have access to the folder.
+
+            * `insufficient_scope`: Returned an error if the application
+              does not have the right scope to delete folders. Make sure
+              your application has been configured to read and write all files
+              and folders stored in Box.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: >-
+            Returns an error if the folder could not be found,
+
+            or the authenticated user does not have access to the folder.
+
+
+            * `not_found` when the authenticated user does not have access
+              to the folder.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ClientError"
+          description: An unexpected client error.
+      summary: Delete folder lock
+      tags:
+        - Folder Locks
+      x-box-sanitized: true
+      x-box-tag: folder_locks
   /folders:
     post:
       description: Creates a new empty folder within the specified parent folder.
@@ -8080,7 +8318,8 @@ paths:
 
 
             * `access_denied_insufficient_permissions`: Returned when the
-              user does not have access to the folder.
+              user does not have access to the folder, or when a folder lock has been
+              applied to the folder to prevent deletion.
 
             * `insufficient_scope`: Returned an error if the application
               does not have the right scope to delete folders. Make sure
@@ -8857,7 +9096,7 @@ paths:
           description: >-
             Returns an error if some of the parameters are missing or
 
-            not valid.
+            not valid, or if a folder lock is preventing a move operation.
 
 
             * `bad_request` when a parameter is missing or incorrect. This error also
@@ -8879,7 +9118,9 @@ paths:
 
 
             * `access_denied_insufficient_permissions`: Returned when the
-              user does not have access to the folder or parent folder.
+              user does not have access to the folder or parent folder, or if the
+              folder is being moved and a folder lock has been applied to prevent
+              such operations.
 
             * `insufficient_scope`: Returned an error if the application
               does not have the right scope to update folders. Make sure
@@ -9606,11 +9847,6 @@ paths:
             for the URL `https://*.app.box.com/folder/123`
 
             the `folder_id` is `123`.
-
-
-            The root folder of a Box account is
-
-            always represented by the ID `0`.
           example: "12345"
           in: path
           name: folder_id
@@ -13452,7 +13688,7 @@ paths:
           description: An unexpected client error.
       summary: List metadata cascade policies
       tags:
-        - Metadata cascade policies (Beta)
+        - Metadata cascade policies
       x-box-sanitized: true
       x-box-tag: metadata_cascade_policies
     post:
@@ -13600,7 +13836,7 @@ paths:
           description: An unexpected client error.
       summary: Create metadata cascade policy
       tags:
-        - Metadata cascade policies (Beta)
+        - Metadata cascade policies
       x-box-sanitized: true
       x-box-tag: metadata_cascade_policies
   "/metadata_cascade_policies/{metadata_cascade_policy_id}":
@@ -13644,7 +13880,7 @@ paths:
           description: An unexpected client error.
       summary: Remove metadata cascade policy
       tags:
-        - Metadata cascade policies (Beta)
+        - Metadata cascade policies
       x-box-sanitized: true
       x-box-tag: metadata_cascade_policies
     get:
@@ -13688,7 +13924,7 @@ paths:
           description: An unexpected client error.
       summary: Get metadata cascade policy
       tags:
-        - Metadata cascade policies (Beta)
+        - Metadata cascade policies
       x-box-sanitized: true
       x-box-tag: metadata_cascade_policies
   "/metadata_cascade_policies/{metadata_cascade_policy_id}/apply":
@@ -13772,7 +14008,7 @@ paths:
           description: An unexpected client error.
       summary: Force-apply metadata cascade policy to folder
       tags:
-        - Metadata cascade policies (Beta)
+        - Metadata cascade policies
       x-box-sanitized: true
       x-box-tag: metadata_cascade_policies
   /metadata_queries/execute_read:
@@ -18438,6 +18674,7 @@ paths:
 
                     indicate unlimited storage.
                   example: 11345156112
+                  format: int64
                   type: integer
                 status:
                   description: The user's account status
@@ -18758,6 +18995,7 @@ paths:
 
                     and make them a free user
                   example: null
+                  nullable: true
                   type: string
                 is_exempt_from_device_limits:
                   description: Whether to exempt the user from enterprise device limits
@@ -18847,6 +19085,7 @@ paths:
 
                     indicate unlimited storage.
                   example: 11345156112
+                  format: int64
                   type: integer
                 status:
                   description: The user's account status
@@ -19064,9 +19303,9 @@ paths:
   "/users/{user_id}/folders/0":
     put:
       description: >-
-        Move all of the items owned by a user into a
+        Move all of the items (files, folders and workflows) owned by a user into
 
-        new folder in another user’s account.
+        another user's account
 
 
         Only the root folder (`0`) can be transferred.
@@ -19100,6 +19339,16 @@ paths:
         To make this API call your application will need to have the "Read and write
 
         all files and folders stored in Box" scope enabled.
+
+
+        Please make sure the destination user has access to `Relay` or `Relay Lite`,
+
+        and has access to the files and folders involved in the workflows being
+
+        transferred.
+
+
+        Admins will receive an email when the operation is completed.
       operationId: put_users_id_folders_0
       parameters:
         - description: The ID of the user.
@@ -24396,6 +24645,98 @@ components:
       type: object
       x-box-resource-id: folder--mini
       x-box-variant: mini
+    FolderLock:
+      description: >-
+        Folder locks define access restrictions placed by folder owners
+
+        to prevent specific folders from being moved or deleted.
+      properties:
+        created_at:
+          description: When the folder lock object was created.
+          example: 2020-09-14T23:12:53Z
+          format: date-time
+          type: string
+        created_by:
+          allOf:
+            - $ref: "#/components/schemas/User--Base"
+            - description: The user or group that created the lock.
+        folder:
+          allOf:
+            - $ref: "#/components/schemas/Folder--Mini"
+            - description: The folder that the lock applies to.
+        id:
+          description: The unique identifier for this folder lock.
+          example: "12345678"
+          type: string
+        lock_type:
+          description: The lock type, always `freeze`.
+          example: freeze
+          type: string
+        locked_operations:
+          description: >
+            The operations that have been locked. Currently the `move`
+
+            and `delete` operations cannot be locked separately, and both need to be
+
+            set to `true`.
+          properties:
+            delete:
+              description: Whether deleting the folder is restricted.
+              example: true
+              nullable: false
+              type: boolean
+            move:
+              description: Whether moving the folder is restricted.
+              example: true
+              nullable: false
+              type: boolean
+          type: object
+        type:
+          description: The object type, always `folder_lock`.
+          example: folder_lock
+          type: string
+      title: Folder Lock
+      type: object
+      x-box-resource-id: folder_lock
+      x-box-tag: folder_locks
+    FolderLocks:
+      allOf:
+        - description: >-
+            The part of an API response that describes marker
+
+            based pagination
+          properties:
+            limit:
+              description: >-
+                The limit that was used for these entries. This will be the same as the
+
+                `limit` query parameter unless that value exceeded the maximum value
+
+                allowed. The maximum value varies by API.
+              example: 1000
+              format: int64
+              type: integer
+            next_marker:
+              description: The marker for the start of the next page of results.
+              example: 3000
+              format: int64
+              type: integer
+            prev_marker:
+              description: The marker for the start of the previous page of results.
+              example: 1000
+              format: int64
+              type: integer
+          type: object
+        - properties:
+            entries:
+              items:
+                $ref: "#/components/schemas/FolderLock"
+              type: array
+      description: A list of folder locks
+      title: Folder Locks
+      type: object
+      x-box-resource-id: folder_locks
+      x-box-tag: folder_locks
     Group:
       allOf:
         - $ref: "#/components/schemas/Group--Mini"
@@ -28701,6 +29042,7 @@ components:
             max_upload_size:
               description: The maximum individual file size in bytes the user can have
               example: 2147483648
+              format: int64
               type: integer
             modified_at:
               description: When the user object was last modified
@@ -28735,10 +29077,12 @@ components:
             space_amount:
               description: The user’s total available space amount in bytes
               example: 11345156112
+              format: int64
               type: integer
             space_used:
               description: The amount of space in use by the user
               example: 1237009912
+              format: int64
               type: integer
             status:
               description: The user's account status

@@ -422,6 +422,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    sepa_debit_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     sofort_payments:
                       properties:
                         requested:
@@ -3590,6 +3596,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    sepa_debit_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     sofort_payments:
                       properties:
                         requested:
@@ -4390,6 +4402,12 @@ paths:
                       title: capability_param
                       type: object
                     p24_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
+                    sepa_debit_payments:
                       properties:
                         requested:
                           type: boolean
@@ -10491,7 +10509,7 @@ paths:
                   description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                   type: object
                 mode:
-                  description: The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. Required when using prices or `setup` mode. Pass `subscription` if Checkout session includes at least one recurring item.
+                  description: The mode of the Checkout Session. Required when using prices or `setup` mode. Pass `subscription` if Checkout session includes at least one recurring item.
                   enum:
                     - payment
                     - setup
@@ -10901,9 +10919,6 @@ paths:
                   properties:
                     application_fee_percent:
                       type: number
-                    coupon:
-                      maxLength: 5000
-                      type: string
                     default_tax_rates:
                       items:
                         maxLength: 5000
@@ -10988,7 +11003,7 @@ paths:
           name: session
           required: true
           schema:
-            maxLength: 64
+            maxLength: 66
             type: string
           style: simple
       requestBody:
@@ -12757,6 +12772,7 @@ paths:
                           - id_npwp
                           - in_gst
                           - jp_cn
+                          - jp_rn
                           - kr_brn
                           - li_uid
                           - mx_rfc
@@ -12766,6 +12782,7 @@ paths:
                           - no_vat
                           - nz_gst
                           - ru_inn
+                          - ru_kpp
                           - sa_vat
                           - sg_gst
                           - sg_uen
@@ -15406,6 +15423,15 @@ paths:
                         type: object
                       quantity:
                         type: integer
+                      tax_rates:
+                        anyOf:
+                          - items:
+                              maxLength: 5000
+                              type: string
+                            type: array
+                          - enum:
+                              - ""
+                            type: string
                     title: add_invoice_item_entry
                     type: object
                   type: array
@@ -15849,6 +15875,15 @@ paths:
                         type: object
                       quantity:
                         type: integer
+                      tax_rates:
+                        anyOf:
+                          - items:
+                              maxLength: 5000
+                              type: string
+                            type: array
+                          - enum:
+                              - ""
+                            type: string
                     title: add_invoice_item_entry
                     type: object
                   type: array
@@ -16351,7 +16386,7 @@ paths:
                     type: string
                   type: array
                 type:
-                  description: Type of the tax ID, one of `ae_trn`, `au_abn`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `hk_br`, `id_npwp`, `in_gst`, `jp_cn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or `za_vat`
+                  description: Type of the tax ID, one of `ae_trn`, `au_abn`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `hk_br`, `id_npwp`, `in_gst`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or `za_vat`
                   enum:
                     - ae_trn
                     - au_abn
@@ -16367,6 +16402,7 @@ paths:
                     - id_npwp
                     - in_gst
                     - jp_cn
+                    - jp_rn
                     - kr_brn
                     - li_uid
                     - mx_rfc
@@ -16376,6 +16412,7 @@ paths:
                     - no_vat
                     - nz_gst
                     - ru_inn
+                    - ru_kpp
                     - sa_vat
                     - sg_gst
                     - sg_uen
@@ -27640,7 +27677,36 @@ paths:
                       title: param
                       type: object
                     p24:
-                      properties: {}
+                      properties:
+                        bank:
+                          enum:
+                            - alior_bank
+                            - bank_millennium
+                            - bank_nowy_bfg_sa
+                            - bank_pekao_sa
+                            - banki_spbdzielcze
+                            - blik
+                            - bnp_paribas
+                            - boz
+                            - citi_handlowy
+                            - credit_agricole
+                            - envelobank
+                            - etransfer_pocztowy24
+                            - getin_bank
+                            - ideabank
+                            - ing
+                            - inteligo
+                            - mbank_mtransfer
+                            - nest_przelew
+                            - noble_pay
+                            - pbac_z_ipko
+                            - plus_bank
+                            - santander_przelew24
+                            - tmobile_usbugi_bankowe
+                            - toyota_bank
+                            - volkswagen_bank
+                          maxLength: 5000
+                          type: string
                       title: param
                       type: object
                     sepa_debit:
@@ -28229,7 +28295,36 @@ paths:
                       title: param
                       type: object
                     p24:
-                      properties: {}
+                      properties:
+                        bank:
+                          enum:
+                            - alior_bank
+                            - bank_millennium
+                            - bank_nowy_bfg_sa
+                            - bank_pekao_sa
+                            - banki_spbdzielcze
+                            - blik
+                            - bnp_paribas
+                            - boz
+                            - citi_handlowy
+                            - credit_agricole
+                            - envelobank
+                            - etransfer_pocztowy24
+                            - getin_bank
+                            - ideabank
+                            - ing
+                            - inteligo
+                            - mbank_mtransfer
+                            - nest_przelew
+                            - noble_pay
+                            - pbac_z_ipko
+                            - plus_bank
+                            - santander_przelew24
+                            - tmobile_usbugi_bankowe
+                            - toyota_bank
+                            - volkswagen_bank
+                          maxLength: 5000
+                          type: string
                       title: param
                       type: object
                     sepa_debit:
@@ -28968,7 +29063,36 @@ paths:
                       title: param
                       type: object
                     p24:
-                      properties: {}
+                      properties:
+                        bank:
+                          enum:
+                            - alior_bank
+                            - bank_millennium
+                            - bank_nowy_bfg_sa
+                            - bank_pekao_sa
+                            - banki_spbdzielcze
+                            - blik
+                            - bnp_paribas
+                            - boz
+                            - citi_handlowy
+                            - credit_agricole
+                            - envelobank
+                            - etransfer_pocztowy24
+                            - getin_bank
+                            - ideabank
+                            - ing
+                            - inteligo
+                            - mbank_mtransfer
+                            - nest_przelew
+                            - noble_pay
+                            - pbac_z_ipko
+                            - plus_bank
+                            - santander_przelew24
+                            - tmobile_usbugi_bankowe
+                            - toyota_bank
+                            - volkswagen_bank
+                          maxLength: 5000
+                          type: string
                       title: param
                       type: object
                     sepa_debit:
@@ -29603,7 +29727,36 @@ paths:
                   type: object
                 p24:
                   description: If this is a `p24` PaymentMethod, this hash contains details about the P24 payment method.
-                  properties: {}
+                  properties:
+                    bank:
+                      enum:
+                        - alior_bank
+                        - bank_millennium
+                        - bank_nowy_bfg_sa
+                        - bank_pekao_sa
+                        - banki_spbdzielcze
+                        - blik
+                        - bnp_paribas
+                        - boz
+                        - citi_handlowy
+                        - credit_agricole
+                        - envelobank
+                        - etransfer_pocztowy24
+                        - getin_bank
+                        - ideabank
+                        - ing
+                        - inteligo
+                        - mbank_mtransfer
+                        - nest_przelew
+                        - noble_pay
+                        - pbac_z_ipko
+                        - plus_bank
+                        - santander_przelew24
+                        - tmobile_usbugi_bankowe
+                        - toyota_bank
+                        - volkswagen_bank
+                      maxLength: 5000
+                      type: string
                   title: param
                   type: object
                 payment_method:
@@ -37883,6 +38036,15 @@ paths:
                               type: object
                             quantity:
                               type: integer
+                            tax_rates:
+                              anyOf:
+                                - items:
+                                    maxLength: 5000
+                                    type: string
+                                  type: array
+                                - enum:
+                                    - ""
+                                  type: string
                           title: add_invoice_item_entry
                           type: object
                         type: array
@@ -38227,6 +38389,15 @@ paths:
                               type: object
                             quantity:
                               type: integer
+                            tax_rates:
+                              anyOf:
+                                - items:
+                                    maxLength: 5000
+                                    type: string
+                                  type: array
+                                - enum:
+                                    - ""
+                                  type: string
                           title: add_invoice_item_entry
                           type: object
                         type: array
@@ -38753,6 +38924,15 @@ paths:
                         type: object
                       quantity:
                         type: integer
+                      tax_rates:
+                        anyOf:
+                          - items:
+                              maxLength: 5000
+                              type: string
+                            type: array
+                          - enum:
+                              - ""
+                            type: string
                     title: add_invoice_item_entry
                     type: object
                   type: array
@@ -39181,6 +39361,15 @@ paths:
                         type: object
                       quantity:
                         type: integer
+                      tax_rates:
+                        anyOf:
+                          - items:
+                              maxLength: 5000
+                              type: string
+                            type: array
+                          - enum:
+                              - ""
+                            type: string
                     title: add_invoice_item_entry
                     type: object
                   type: array
@@ -43195,6 +43384,13 @@ components:
             - inactive
             - pending
           type: string
+        sepa_debit_payments:
+          description: The status of the SEPA Direct Debits payments capability of the account, or whether the account can directly process SEPA Direct Debits charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
         sofort_payments:
           description: The status of the Sofort payments capability of the account, or whether the account can directly process Sofort charges.
           enum:
@@ -44753,7 +44949,7 @@ components:
           description: Four-digit number representing the card's expiration year.
           type: integer
         fingerprint:
-          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number,for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
+          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
           maxLength: 5000
           nullable: true
           type: string
@@ -45429,7 +45625,7 @@ components:
           nullable: true
           type: object
         mode:
-          description: The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`.
+          description: The mode of the Checkout Session.
           enum:
             - payment
             - setup
@@ -48928,7 +49124,7 @@ components:
       description: ""
       properties:
         type:
-          description: The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, or `unknown`
+          description: The type of the tax ID, one of `eu_vat`, `br_cnpj`, `br_cpf`, `nz_gst`, `au_abn`, `in_gst`, `no_vat`, `za_vat`, `ch_vat`, `mx_rfc`, `sg_uen`, `ru_inn`, `ru_kpp`, `ca_bn`, `hk_br`, `es_cif`, `tw_vat`, `th_vat`, `jp_cn`, `jp_rn`, `li_uid`, `my_itn`, `us_ein`, `kr_brn`, `ca_qst`, `my_sst`, `sg_gst`, `ae_trn`, `cl_tin`, `sa_vat`, `id_npwp`, `my_frp`, or `unknown`
           enum:
             - ae_trn
             - au_abn
@@ -48944,6 +49140,7 @@ components:
             - id_npwp
             - in_gst
             - jp_cn
+            - jp_rn
             - kr_brn
             - li_uid
             - mx_rfc
@@ -48953,6 +49150,7 @@ components:
             - no_vat
             - nz_gst
             - ru_inn
+            - ru_kpp
             - sa_vat
             - sg_gst
             - sg_uen
@@ -54201,7 +54399,7 @@ components:
           description: Four-digit number representing the card's expiration year.
           type: integer
         fingerprint:
-          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number,for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
+          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
           maxLength: 5000
           nullable: true
           type: string
@@ -54700,7 +54898,7 @@ components:
           description: Four-digit number representing the card's expiration year.
           type: integer
         fingerprint:
-          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number,for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
+          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
           maxLength: 5000
           nullable: true
           type: string
@@ -54837,7 +55035,7 @@ components:
           description: Four-digit number representing the card's expiration year.
           type: integer
         fingerprint:
-          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number,for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
+          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
           maxLength: 5000
           nullable: true
           type: string
@@ -55248,7 +55446,7 @@ components:
           description: Four-digit number representing the card's expiration year.
           type: integer
         fingerprint:
-          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number,for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
+          description: Uniquely identifies this particular card number. You can use this attribute to check whether two customers who’ve signed up with you are using the same card number, for example. For payment methods that tokenize card information (Apple Pay, Google Pay), the tokenized number might be provided instead of the underlying card number.
           maxLength: 5000
           nullable: true
           type: string
@@ -55699,7 +55897,37 @@ components:
       x-expandableFields: []
     payment_method_p24:
       description: ""
-      properties: {}
+      properties:
+        bank:
+          description: The customer's bank, if provided.
+          enum:
+            - alior_bank
+            - bank_millennium
+            - bank_nowy_bfg_sa
+            - bank_pekao_sa
+            - banki_spbdzielcze
+            - blik
+            - bnp_paribas
+            - boz
+            - citi_handlowy
+            - credit_agricole
+            - envelobank
+            - etransfer_pocztowy24
+            - getin_bank
+            - ideabank
+            - ing
+            - inteligo
+            - mbank_mtransfer
+            - nest_przelew
+            - noble_pay
+            - pbac_z_ipko
+            - plus_bank
+            - santander_przelew24
+            - tmobile_usbugi_bankowe
+            - toyota_bank
+            - volkswagen_bank
+          nullable: true
+          type: string
       title: payment_method_p24
       type: object
       x-expandableFields: []
@@ -60419,12 +60647,19 @@ components:
           description: The quantity of the invoice item.
           nullable: true
           type: integer
+        tax_rates:
+          description: The tax rates which apply to the item. When set, the `default_tax_rates` do not apply to this item.
+          items:
+            $ref: "#/components/schemas/tax_rate"
+          nullable: true
+          type: array
       required:
         - price
       title: SubscriptionScheduleAddInvoiceItem
       type: object
       x-expandableFields:
         - price
+        - tax_rates
     subscription_schedule_configuration_item:
       description: A phase item describes the price and quantity of a phase.
       properties:
@@ -60794,7 +61029,7 @@ components:
             - tax_id
           type: string
         type:
-          description: Type of the tax ID, one of `ae_trn`, `au_abn`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `hk_br`, `id_npwp`, `in_gst`, `jp_cn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or `za_vat`. Note that some legacy tax IDs have type `unknown`
+          description: Type of the tax ID, one of `ae_trn`, `au_abn`, `br_cnpj`, `br_cpf`, `ca_bn`, `ca_qst`, `ch_vat`, `cl_tin`, `es_cif`, `eu_vat`, `hk_br`, `id_npwp`, `in_gst`, `jp_cn`, `jp_rn`, `kr_brn`, `li_uid`, `mx_rfc`, `my_frp`, `my_itn`, `my_sst`, `no_vat`, `nz_gst`, `ru_inn`, `ru_kpp`, `sa_vat`, `sg_gst`, `sg_uen`, `th_vat`, `tw_vat`, `us_ein`, or `za_vat`. Note that some legacy tax IDs have type `unknown`
           enum:
             - ae_trn
             - au_abn
@@ -60810,6 +61045,7 @@ components:
             - id_npwp
             - in_gst
             - jp_cn
+            - jp_rn
             - kr_brn
             - li_uid
             - mx_rfc
@@ -60819,6 +61055,7 @@ components:
             - no_vat
             - nz_gst
             - ru_inn
+            - ru_kpp
             - sa_vat
             - sg_gst
             - sg_uen

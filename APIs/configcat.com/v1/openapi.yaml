@@ -158,7 +158,7 @@ tags:
 
       <a href="https://configcat.com/docs/main-concepts/#environment" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Environments.
     name: Environments
-  - description: With these endpoints you can manage your Tags.
+  - description: With these endpoints you can manage Tags. Tags are stored under a Product. You can  and add a Tag to a Feature Flag or Setting using the [Update Flag](#operation/update-setting) endpoint.
     name: Tags
   - description: Access audit log entries.
     name: Audit logs
@@ -2428,7 +2428,7 @@ paths:
         - Feature Flag & Setting values using SDK Key
   "/v1/tags/{tagId}":
     delete:
-      description: This endpoint removes a Tag identified by the `tagId` parameter.
+      description: This endpoint deletes a Tag identified by the `tagId` parameter. To remove a Tag from a Feature Flag or Setting use the [Update Flag](#operation/update-setting) endpoint.
       operationId: delete-tag
       parameters:
         - description: The identifier of the Tag.

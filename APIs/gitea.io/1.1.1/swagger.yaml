@@ -546,7 +546,7 @@ responses:
   parameterBodies:
     description: parameterBodies
     schema:
-      $ref: "#/definitions/MigrateRepoOptions"
+      $ref: "#/definitions/PullReviewRequestOptions"
   redirect:
     description: APIRedirect is a redirect response
   string:
@@ -5351,6 +5351,79 @@ paths:
         "409":
           $ref: "#/responses/error"
       summary: Merge a pull request
+      tags:
+        - repository
+  "/repos/{owner}/{repo}/pulls/{index}/requested_reviewers":
+    delete:
+      operationId: repoDeletePullReviewRequests
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the pull request
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PullReviewRequestOptions"
+      produces:
+        - application/json
+      responses:
+        "204":
+          $ref: "#/responses/empty"
+        "404":
+          $ref: "#/responses/notFound"
+        "422":
+          $ref: "#/responses/validationError"
+      summary: cancel review requests for a pull request
+      tags:
+        - repository
+    post:
+      operationId: repoCreatePullReviewRequests
+      parameters:
+        - description: owner of the repo
+          in: path
+          name: owner
+          required: true
+          type: string
+        - description: name of the repo
+          in: path
+          name: repo
+          required: true
+          type: string
+        - description: index of the pull request
+          format: int64
+          in: path
+          name: index
+          required: true
+          type: integer
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PullReviewRequestOptions"
+      produces:
+        - application/json
+      responses:
+        "201":
+          $ref: "#/responses/PullReviewList"
+        "404":
+          $ref: "#/responses/notFound"
+        "422":
+          $ref: "#/responses/validationError"
+      summary: create review requests for a pull request
       tags:
         - repository
   "/repos/{owner}/{repo}/pulls/{index}/reviews":
@@ -10613,6 +10686,8 @@ definitions:
         format: date-time
         type: string
         x-go-name: Submitted
+      team:
+        $ref: "#/definitions/Team"
       user:
         $ref: "#/definitions/User"
     type: object
@@ -10667,6 +10742,21 @@ definitions:
         x-go-name: Updated
       user:
         $ref: "#/definitions/User"
+    type: object
+    x-go-package: code.gitea.io/gitea/modules/structs
+  PullReviewRequestOptions:
+    description: PullReviewRequestOptions are options to add or remove pull review requests
+    properties:
+      reviewers:
+        items:
+          type: string
+        type: array
+        x-go-name: Reviewers
+      team_reviewers:
+        items:
+          type: string
+        type: array
+        x-go-name: TeamReviewers
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   Reaction:
