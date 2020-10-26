@@ -165,6 +165,12 @@ paths:
           description: 'The Amazon Resource Name (ARN) of the IAM role to associate with the Neptune DB cluster, for example <code>arn:aws:iam::123456789012:role/NeptuneAccessRole</code>.'
           schema:
             type: string
+        - name: FeatureName
+          in: query
+          required: false
+          description: 'The name of the feature for the Neptune DB cluster that the IAM role is to be associated with. For the list of supported feature names, see <a>DBEngineVersion</a>.'
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -1158,7 +1164,7 @@ paths:
         - name: EngineVersion
           in: query
           required: false
-          description: '<p>The version number of the database engine to use. Currently, setting this parameter has no effect.</p> <p>Example: <code>1.0.1</code> </p>'
+          description: '<p>The version number of the database engine to use for the new DB cluster.</p> <p>Example: <code>1.0.2.1</code> </p>'
           schema:
             type: string
         - name: Port
@@ -1235,7 +1241,7 @@ paths:
         - name: EnableIAMDatabaseAuthentication
           in: query
           required: false
-          description: '<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>'
+          description: Not supported by Neptune.
           schema:
             type: boolean
         - name: EnableCloudwatchLogsExports
@@ -1388,6 +1394,189 @@ paths:
             type: string
             enum:
               - CreateDBCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=CreateDBClusterEndpoint:
+    get:
+      x-aws-operation-name: CreateDBClusterEndpoint
+      operationId: GET_CreateDBClusterEndpoint
+      description: Creates a new custom endpoint and associates it with an Amazon Neptune DB cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateDBClusterEndpointOutput'
+        '480':
+          description: DBClusterEndpointQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointQuotaExceededFault'
+        '481':
+          description: DBClusterEndpointAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointAlreadyExistsFault'
+        '482':
+          description: DBClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterNotFoundFault'
+        '483':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+        '484':
+          description: DBInstanceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '485':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: query
+          required: true
+          description: The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+          schema:
+            type: string
+        - name: DBClusterEndpointIdentifier
+          in: query
+          required: true
+          description: The identifier to use for the new endpoint. This parameter is stored as a lowercase string.
+          schema:
+            type: string
+        - name: EndpointType
+          in: query
+          required: true
+          description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
+          schema:
+            type: string
+        - name: StaticMembers
+          in: query
+          required: false
+          description: List of DB instance identifiers that are part of the custom endpoint group.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: ExcludedMembers
+          in: query
+          required: false
+          description: List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: Tags
+          in: query
+          required: false
+          description: The tags to be assigned to the Amazon Neptune resource.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Tag'
+                - xml:
+                    name: Tag
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateDBClusterEndpoint
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateDBClusterEndpoint
+      operationId: POST_CreateDBClusterEndpoint
+      description: Creates a new custom endpoint and associates it with an Amazon Neptune DB cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateDBClusterEndpointOutput'
+        '480':
+          description: DBClusterEndpointQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointQuotaExceededFault'
+        '481':
+          description: DBClusterEndpointAlreadyExistsFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointAlreadyExistsFault'
+        '482':
+          description: DBClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterNotFoundFault'
+        '483':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+        '484':
+          description: DBInstanceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '485':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateDBClusterEndpointMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateDBClusterEndpoint
         - name: Version
           in: query
           required: true
@@ -2850,6 +3039,114 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=DeleteDBClusterEndpoint:
+    get:
+      x-aws-operation-name: DeleteDBClusterEndpoint
+      operationId: GET_DeleteDBClusterEndpoint
+      description: Deletes a custom endpoint and removes it from an Amazon Neptune DB cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteDBClusterEndpointOutput'
+        '480':
+          description: InvalidDBClusterEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterEndpointStateFault'
+        '481':
+          description: DBClusterEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointNotFoundFault'
+        '482':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+      parameters:
+        - name: DBClusterEndpointIdentifier
+          in: query
+          required: true
+          description: The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteDBClusterEndpoint
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteDBClusterEndpoint
+      operationId: POST_DeleteDBClusterEndpoint
+      description: Deletes a custom endpoint and removes it from an Amazon Neptune DB cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteDBClusterEndpointOutput'
+        '480':
+          description: InvalidDBClusterEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterEndpointStateFault'
+        '481':
+          description: DBClusterEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointNotFoundFault'
+        '482':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteDBClusterEndpointMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteDBClusterEndpoint
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=DeleteDBClusterParameterGroup:
     get:
       x-aws-operation-name: DeleteDBClusterParameterGroup
@@ -3455,6 +3752,131 @@ paths:
             type: string
             enum:
               - DeleteEventSubscription
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=DescribeDBClusterEndpoints:
+    get:
+      x-aws-operation-name: DescribeDBClusterEndpoints
+      operationId: GET_DescribeDBClusterEndpoints
+      description: <p>Returns information about endpoints for an Amazon Neptune DB cluster.</p> <note> <p>This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointMessage'
+        '480':
+          description: DBClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterNotFoundFault'
+      parameters:
+        - name: DBClusterIdentifier
+          in: query
+          required: false
+          description: The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+          schema:
+            type: string
+        - name: DBClusterEndpointIdentifier
+          in: query
+          required: false
+          description: The identifier of the endpoint to describe. This parameter is stored as a lowercase string.
+          schema:
+            type: string
+        - name: Filters
+          in: query
+          required: false
+          description: 'A set of name-value pairs that define which endpoints to include in the output. The filters are specified as name-value pairs, in the format <code>Name=<i>endpoint_type</i>,Values=<i>endpoint_type1</i>,<i>endpoint_type2</i>,...</code>. <code>Name</code> can be one of: <code>db-cluster-endpoint-type</code>, <code>db-cluster-endpoint-custom-type</code>, <code>db-cluster-endpoint-id</code>, <code>db-cluster-endpoint-status</code>. <code>Values</code> for the <code> db-cluster-endpoint-type</code> filter can be one or more of: <code>reader</code>, <code>writer</code>, <code>custom</code>. <code>Values</code> for the <code>db-cluster-endpoint-custom-type</code> filter can be one or more of: <code>reader</code>, <code>any</code>. <code>Values</code> for the <code>db-cluster-endpoint-status</code> filter can be one or more of: <code>available</code>, <code>creating</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. '
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: MaxRecords
+          in: query
+          required: false
+          description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+          schema:
+            type: integer
+        - name: Marker
+          in: query
+          required: false
+          description: ' An optional pagination token provided by a previous <code>DescribeDBClusterEndpoints</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDBClusterEndpoints
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeDBClusterEndpoints
+      operationId: POST_DescribeDBClusterEndpoints
+      description: <p>Returns information about endpoints for an Amazon Neptune DB cluster.</p> <note> <p>This operation can also return information for Amazon RDS clusters and Amazon DocDB clusters.</p> </note>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointMessage'
+        '480':
+          description: DBClusterNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterNotFoundFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeDBClusterEndpointsMessage'
+      parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeDBClusterEndpoints
         - name: Version
           in: query
           required: true
@@ -5920,7 +6342,7 @@ paths:
         - name: EngineVersion
           in: query
           required: false
-          description: '<p>The version number of the database engine. Currently, setting this parameter has no effect. To upgrade your database engine to the most recent release, use the <a>ApplyPendingMaintenanceAction</a> API.</p> <p>For a list of valid engine versions, see <a>CreateDBInstance</a>, or call <a>DescribeDBEngineVersions</a>.</p>'
+          description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to true.</p> <p>For a list of valid engine versions, see <a href="https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html">Engine Releases for Amazon Neptune</a>, or call <a href="https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions">DescribeDBEngineVersions</a>.</p>'
           schema:
             type: string
         - name: DeletionProtection
@@ -6041,6 +6463,160 @@ paths:
             type: string
             enum:
               - ModifyDBCluster
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+  /#Action=ModifyDBClusterEndpoint:
+    get:
+      x-aws-operation-name: ModifyDBClusterEndpoint
+      operationId: GET_ModifyDBClusterEndpoint
+      description: Modifies the properties of an endpoint in an Amazon Neptune DB cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyDBClusterEndpointOutput'
+        '480':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+        '481':
+          description: InvalidDBClusterEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterEndpointStateFault'
+        '482':
+          description: DBClusterEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointNotFoundFault'
+        '483':
+          description: DBInstanceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '484':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+      parameters:
+        - name: DBClusterEndpointIdentifier
+          in: query
+          required: true
+          description: The identifier of the endpoint to modify. This parameter is stored as a lowercase string.
+          schema:
+            type: string
+        - name: EndpointType
+          in: query
+          required: false
+          description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
+          schema:
+            type: string
+        - name: StaticMembers
+          in: query
+          required: false
+          description: List of DB instance identifiers that are part of the custom endpoint group.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: ExcludedMembers
+          in: query
+          required: false
+          description: List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyDBClusterEndpoint
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: ModifyDBClusterEndpoint
+      operationId: POST_ModifyDBClusterEndpoint
+      description: Modifies the properties of an endpoint in an Amazon Neptune DB cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ModifyDBClusterEndpointOutput'
+        '480':
+          description: InvalidDBClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterStateFault'
+        '481':
+          description: InvalidDBClusterEndpointStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBClusterEndpointStateFault'
+        '482':
+          description: DBClusterEndpointNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBClusterEndpointNotFoundFault'
+        '483':
+          description: DBInstanceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '484':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/ModifyDBClusterEndpointMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - ModifyDBClusterEndpoint
         - name: Version
           in: query
           required: true
@@ -7455,6 +8031,12 @@ paths:
           in: query
           required: true
           description: 'The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB cluster, for example <code>arn:aws:iam::123456789012:role/NeptuneAccessRole</code>.'
+          schema:
+            type: string
+        - name: FeatureName
+          in: query
+          required: false
+          description: 'The name of the feature for the DB cluster that the IAM role is to be disassociated from. For the list of supported feature names, see <a>DBEngineVersion</a>.'
           schema:
             type: string
         - name: Action
@@ -9068,6 +9650,52 @@ components:
     InvalidDBInstanceStateFault: {}
     DBClusterParameterGroupNotFoundFault: {}
     DBSubnetGroupDoesNotCoverEnoughAZs: {}
+    CreateDBClusterEndpointOutput:
+      type: object
+      properties:
+        DBClusterEndpointIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterEndpointResourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.
+        Endpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DNS address of the endpoint.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. The <code>inactive</code> state applies to an endpoint that cannot be used for a certain kind of cluster, such as a <code>writer</code> endpoint for a read-only secondary cluster in a global database.'
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.'
+        CustomEndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
+        StaticMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that are part of the custom endpoint group.
+        ExcludedMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+        DBClusterEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the endpoint.
+      description: '<p>This data type represents the information you need to connect to an Amazon Neptune DB cluster. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <code>CreateDBClusterEndpoint</code> </p> </li> <li> <p> <code>DescribeDBClusterEndpoints</code> </p> </li> <li> <p> <code>ModifyDBClusterEndpoint</code> </p> </li> <li> <p> <code>DeleteDBClusterEndpoint</code> </p> </li> </ul> <p>For the data structure that represents Amazon Neptune DB instance endpoints, see <code>Endpoint</code>.</p>'
+    DBClusterEndpointQuotaExceededFault: {}
+    DBClusterEndpointAlreadyExistsFault: {}
     CreateDBClusterParameterGroupResult:
       type: object
       properties:
@@ -9121,6 +9749,52 @@ components:
       properties:
         DBCluster:
           $ref: '#/components/schemas/DBCluster'
+    DeleteDBClusterEndpointOutput:
+      type: object
+      properties:
+        DBClusterEndpointIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterEndpointResourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.
+        Endpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DNS address of the endpoint.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. The <code>inactive</code> state applies to an endpoint that cannot be used for a certain kind of cluster, such as a <code>writer</code> endpoint for a read-only secondary cluster in a global database.'
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.'
+        CustomEndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
+        StaticMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that are part of the custom endpoint group.
+        ExcludedMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+        DBClusterEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the endpoint.
+      description: '<p>This data type represents the information you need to connect to an Amazon Neptune DB cluster. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <code>CreateDBClusterEndpoint</code> </p> </li> <li> <p> <code>DescribeDBClusterEndpoints</code> </p> </li> <li> <p> <code>ModifyDBClusterEndpoint</code> </p> </li> <li> <p> <code>DeleteDBClusterEndpoint</code> </p> </li> </ul> <p>For the data structure that represents Amazon RDS DB instance endpoints, see <code>Endpoint</code>.</p>'
+    InvalidDBClusterEndpointStateFault: {}
+    DBClusterEndpointNotFoundFault: {}
     InvalidDBParameterGroupStateFault: {}
     DeleteDBClusterSnapshotResult:
       type: object
@@ -9140,17 +9814,17 @@ components:
         EventSubscription:
           $ref: '#/components/schemas/EventSubscription'
     InvalidEventSubscriptionStateFault: {}
-    DBClusterParameterGroupsMessage:
+    DBClusterEndpointMessage:
       type: object
       properties:
         Marker:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' An optional pagination token provided by a previous <code>DescribeDBClusterParameterGroups</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
-        DBClusterParameterGroups:
+            - description: ' An optional pagination token provided by a previous <code>DescribeDBClusterEndpoints</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
+        DBClusterEndpoints:
           allOf:
-            - $ref: '#/components/schemas/DBClusterParameterGroupList'
-            - description: A list of DB cluster parameter groups.
+            - $ref: '#/components/schemas/DBClusterEndpointList'
+            - description: Contains the details of the endpoints associated with the cluster and matching any filter conditions.
     Filter:
       type: object
       required:
@@ -9166,6 +9840,17 @@ components:
             - $ref: '#/components/schemas/FilterValueList'
             - description: This parameter is not currently supported.
       description: This type is not currently supported.
+    DBClusterParameterGroupsMessage:
+      type: object
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' An optional pagination token provided by a previous <code>DescribeDBClusterParameterGroups</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.'
+        DBClusterParameterGroups:
+          allOf:
+            - $ref: '#/components/schemas/DBClusterParameterGroupList'
+            - description: A list of DB cluster parameter groups.
     DBClusterParameterGroupDetails:
       type: object
       properties:
@@ -9347,6 +10032,50 @@ components:
       items:
         $ref: '#/components/schemas/String'
     InvalidDBSecurityGroupStateFault: {}
+    ModifyDBClusterEndpointOutput:
+      type: object
+      properties:
+        DBClusterEndpointIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterEndpointResourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.
+        Endpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DNS address of the endpoint.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. The <code>inactive</code> state applies to an endpoint that cannot be used for a certain kind of cluster, such as a <code>writer</code> endpoint for a read-only secondary cluster in a global database.'
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.'
+        CustomEndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
+        StaticMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that are part of the custom endpoint group.
+        ExcludedMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+        DBClusterEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the endpoint.
+      description: '<p>This data type represents the information you need to connect to an Amazon Aurora DB cluster. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <code>CreateDBClusterEndpoint</code> </p> </li> <li> <p> <code>DescribeDBClusterEndpoints</code> </p> </li> <li> <p> <code>ModifyDBClusterEndpoint</code> </p> </li> <li> <p> <code>DeleteDBClusterEndpoint</code> </p> </li> </ul> <p>For the data structure that represents Amazon RDS DB instance endpoints, see <code>Endpoint</code>.</p>'
     DBClusterParameterGroupNameMessage:
       type: object
       properties:
@@ -9483,6 +10212,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The Amazon Resource Name (ARN) of the IAM role to associate with the Neptune DB cluster, for example <code>arn:aws:iam::123456789012:role/NeptuneAccessRole</code>.'
+        FeatureName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the feature for the Neptune DB cluster that the IAM role is to be associated with. For the list of supported feature names, see <a>DBEngineVersion</a>.'
     AddSourceIdentifierToSubscriptionMessage:
       type: object
       required:
@@ -9861,6 +10594,42 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) for the DB parameter group.
       description: <p>Contains the details of an Amazon Neptune DB parameter group.</p> <p>This data type is used as a response element in the <a>DescribeDBParameterGroups</a> action.</p>
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    CreateDBClusterEndpointMessage:
+      type: object
+      required:
+        - DBClusterIdentifier
+        - DBClusterEndpointIdentifier
+        - EndpointType
+      title: CreateDBClusterEndpointMessage
+      properties:
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterEndpointIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier to use for the new endpoint. This parameter is stored as a lowercase string.
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
+        StaticMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that are part of the custom endpoint group.
+        ExcludedMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to be assigned to the Amazon Neptune resource.
     IntegerOptional:
       type: integer
     VpcSecurityGroupIdList:
@@ -9916,7 +10685,7 @@ components:
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The version number of the database engine to use. Currently, setting this parameter has no effect.</p> <p>Example: <code>1.0.1</code> </p>'
+            - description: '<p>The version number of the database engine to use for the new DB cluster.</p> <p>Example: <code>1.0.2.1</code> </p>'
         Port:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -9964,7 +10733,7 @@ components:
         EnableIAMDatabaseAuthentication:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: '<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>'
+            - description: Not supported by Neptune.
         EnableCloudwatchLogsExports:
           allOf:
             - $ref: '#/components/schemas/LogTypeList'
@@ -10743,6 +11512,57 @@ components:
           - $ref: '#/components/schemas/DBClusterRole'
           - xml:
               name: DBClusterRole
+    DBClusterEndpoint:
+      type: object
+      properties:
+        DBClusterEndpointIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterEndpointResourceIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique system-generated identifier for an endpoint. It remains the same for the whole life of the endpoint.
+        Endpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DNS address of the endpoint.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. The <code>inactive</code> state applies to an endpoint that cannot be used for a certain kind of cluster, such as a <code>writer</code> endpoint for a read-only secondary cluster in a global database.'
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>CUSTOM</code>.'
+        CustomEndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type associated with a custom endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
+        StaticMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that are part of the custom endpoint group.
+        ExcludedMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
+        DBClusterEndpointArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the endpoint.
+      description: '<p>This data type represents the information you need to connect to an Amazon Neptune DB cluster. This data type is used as a response element in the following actions:</p> <ul> <li> <p> <code>CreateDBClusterEndpoint</code> </p> </li> <li> <p> <code>DescribeDBClusterEndpoints</code> </p> </li> <li> <p> <code>ModifyDBClusterEndpoint</code> </p> </li> <li> <p> <code>DeleteDBClusterEndpoint</code> </p> </li> </ul> <p>For the data structure that represents Amazon Neptune DB instance endpoints, see <code>Endpoint</code>.</p>'
+    DBClusterEndpointList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/DBClusterEndpoint'
+          - xml:
+              name: DBClusterEndpointList
     DBClusterList:
       type: array
       items:
@@ -10807,6 +11627,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB cluster.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other AWS services on your behalf.</p> </li> </ul>'
+        FeatureName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see <a>DBEngineVersion</a>. '
       description: Describes an AWS Identity and Access Management (IAM) role that is associated with a DB cluster.
     Integer:
       type: integer
@@ -10943,7 +11767,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
-      description: Specifies a connection endpoint.
+      description: '<p>Specifies a connection endpoint.</p> <p>For the data structure that represents Amazon Neptune DB cluster endpoints, see <code>DBClusterEndpoint</code>.</p>'
     DBSecurityGroupMembershipList:
       type: array
       items:
@@ -11125,6 +11949,16 @@ components:
           - $ref: '#/components/schemas/DBSubnetGroup'
           - xml:
               name: DBSubnetGroup
+    DeleteDBClusterEndpointMessage:
+      type: object
+      required:
+        - DBClusterEndpointIdentifier
+      title: DeleteDBClusterEndpointMessage
+      properties:
+        DBClusterEndpointIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier associated with the custom endpoint. This parameter is stored as a lowercase string.
     DeleteDBClusterMessage:
       type: object
       required:
@@ -11218,6 +12052,30 @@ components:
           - $ref: '#/components/schemas/Filter'
           - xml:
               name: Filter
+    DescribeDBClusterEndpointsMessage:
+      type: object
+      title: DescribeDBClusterEndpointsMessage
+      properties:
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DB cluster identifier of the DB cluster associated with the endpoint. This parameter is stored as a lowercase string.
+        DBClusterEndpointIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the endpoint to describe. This parameter is stored as a lowercase string.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: 'A set of name-value pairs that define which endpoints to include in the output. The filters are specified as name-value pairs, in the format <code>Name=<i>endpoint_type</i>,Values=<i>endpoint_type1</i>,<i>endpoint_type2</i>,...</code>. <code>Name</code> can be one of: <code>db-cluster-endpoint-type</code>, <code>db-cluster-endpoint-custom-type</code>, <code>db-cluster-endpoint-id</code>, <code>db-cluster-endpoint-status</code>. <code>Values</code> for the <code> db-cluster-endpoint-type</code> filter can be one or more of: <code>reader</code>, <code>writer</code>, <code>custom</code>. <code>Values</code> for the <code>db-cluster-endpoint-custom-type</code> filter can be one or more of: <code>reader</code>, <code>any</code>. <code>Values</code> for the <code>db-cluster-endpoint-status</code> filter can be one or more of: <code>available</code>, <code>creating</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. '
+        MaxRecords:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: '<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so you can retrieve the remaining results. </p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' An optional pagination token provided by a previous <code>DescribeDBClusterEndpoints</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>. '
     DescribeDBClusterParameterGroupsMessage:
       type: object
       title: DescribeDBClusterParameterGroupsMessage
@@ -11816,6 +12674,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterList'
             - description: This parameter is not currently supported.
+    ModifyDBClusterEndpointMessage:
+      type: object
+      required:
+        - DBClusterEndpointIdentifier
+      title: ModifyDBClusterEndpointMessage
+      properties:
+        DBClusterEndpointIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier of the endpoint to modify. This parameter is stored as a lowercase string.
+        EndpointType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The type of the endpoint. One of: <code>READER</code>, <code>WRITER</code>, <code>ANY</code>.'
+        StaticMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that are part of the custom endpoint group.
+        ExcludedMembers:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: List of DB instance identifiers that aren't part of the custom endpoint group. All other eligible instances are reachable through the custom endpoint. Only relevant if the list of static members is empty.
     ModifyDBClusterMessage:
       type: object
       required:
@@ -11877,7 +12757,7 @@ components:
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The version number of the database engine. Currently, setting this parameter has no effect. To upgrade your database engine to the most recent release, use the <a>ApplyPendingMaintenanceAction</a> API.</p> <p>For a list of valid engine versions, see <a>CreateDBInstance</a>, or call <a>DescribeDBEngineVersions</a>.</p>'
+            - description: '<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to true.</p> <p>For a list of valid engine versions, see <a href="https://docs.aws.amazon.com/neptune/latest/userguide/engine-releases.html">Engine Releases for Amazon Neptune</a>, or call <a href="https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions">DescribeDBEngineVersions</a>.</p>'
         DeletionProtection:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -12354,6 +13234,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB cluster, for example <code>arn:aws:iam::123456789012:role/NeptuneAccessRole</code>.'
+        FeatureName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The name of the feature for the DB cluster that the IAM role is to be disassociated from. For the list of supported feature names, see <a>DBEngineVersion</a>.'
     RemoveSourceIdentifierFromSubscriptionMessage:
       type: object
       required:

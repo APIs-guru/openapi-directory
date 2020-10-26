@@ -270,6 +270,45 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateAppImageConfig:
+    post:
+      operationId: CreateAppImageConfig
+      description: Creates a configuration for running an Amazon SageMaker image as a KernelGateway app.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAppImageConfigResponse'
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAppImageConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateAppImageConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.CreateAutoMLJob:
     post:
       operationId: CreateAutoMLJob
@@ -396,7 +435,7 @@ paths:
   /#X-Amz-Target=SageMaker.CreateDomain:
     post:
       operationId: CreateDomain
-      description: '<p>Creates a <code>Domain</code> used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.</p> <p>When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.</p> <p> <b>VPC configuration</b> </p> <p>All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the <code>AppNetworkAccessType</code> parameter. <code>AppNetworkAccessType</code> corresponds to the network access type that you choose when you onboard to Studio. The following options are available:</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway.</p> <p>When internet access is disabled, you won''t be able to train or host models unless your VPC has an interface endpoint (PrivateLink) or a NAT gateway and your security groups allow outbound connections.</p> </li> </ul> <p> <b> <code>VpcOnly</code> network access type</b> </p> <p>When you choose <code>VpcOnly</code>, you must specify the following:</p> <ul> <li> <p>Security group inbound and outbound rules to allow NFS traffic over TCP on port 2049 between the domain and the EFS volume</p> </li> <li> <p>Security group inbound and outbound rules to allow traffic between the JupyterServer app and the KernelGateway apps</p> </li> <li> <p>Interface endpoints to access the SageMaker API and SageMaker runtime</p> </li> </ul> <p>For more information, see:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html">Security groups for your VPC</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Scenario2.html">VPC with public and private subnets (NAT)</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/interface-vpc-endpoint.html">Connect to SageMaker through a VPC interface endpoint</a> </p> </li> </ul>'
+      description: '<p>Creates a <code>Domain</code> used by Amazon SageMaker Studio. A domain consists of an associated Amazon Elastic File System (EFS) volume, a list of authorized users, and a variety of security, application, policy, and Amazon Virtual Private Cloud (VPC) configurations. An AWS account is limited to one domain per region. Users within a domain can share notebook files and other artifacts with each other.</p> <p>When a domain is created, an EFS volume is created for use by all of the users within the domain. Each user receives a private home directory within the EFS volume for notebooks, Git repositories, and data files.</p> <p> <b>VPC configuration</b> </p> <p>All SageMaker Studio traffic between the domain and the EFS volume is through the specified VPC and subnets. For other Studio traffic, you can specify the <code>AppNetworkAccessType</code> parameter. <code>AppNetworkAccessType</code> corresponds to the network access type that you choose when you onboard to Studio. The following options are available:</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic goes through a VPC managed by Amazon SageMaker, which allows internet access. This is the default value.</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets. Internet access is disabled by default. To allow internet access, you must specify a NAT gateway.</p> <p>When internet access is disabled, you won''t be able to run a Studio notebook or to train or host models unless your VPC has an interface endpoint to the SageMaker API and runtime or a NAT gateway and your security groups allow outbound connections.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html">Connect SageMaker Studio Notebooks to Resources in a VPC</a>.</p>'
       responses:
         '200':
           description: Success
@@ -690,6 +729,102 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateImage:
+    post:
+      operationId: CreateImage
+      description: Creates a SageMaker <code>Image</code>. A SageMaker image represents a set of container images. Each of these container images is represented by a SageMaker <code>ImageVersion</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateImageResponse'
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+        '481':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateImage
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateImageVersion:
+    post:
+      operationId: CreateImageVersion
+      description: Creates a version of the SageMaker image specified by <code>ImageName</code>. The version represents the Amazon Container Registry (ECR) container image specified by <code>BaseImage</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateImageVersionResponse'
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+        '481':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+        '482':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImageVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateImageVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.CreateLabelingJob:
     post:
       operationId: CreateLabelingJob
@@ -785,6 +920,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CreateModelPackageOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
       requestBody:
         required: true
         content:
@@ -1432,6 +1579,41 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeleteAppImageConfig:
+    post:
+      operationId: DeleteAppImageConfig
+      description: Deletes an AppImageConfig.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteAppImageConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeleteAppImageConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.DeleteCodeRepository:
     post:
       operationId: DeleteCodeRepository
@@ -1683,6 +1865,96 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeleteImage:
+    post:
+      operationId: DeleteImage
+      description: Deletes a SageMaker image and all versions of the image. The container images aren't deleted.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteImageResponse'
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+        '481':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteImageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeleteImage
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeleteImageVersion:
+    post:
+      operationId: DeleteImageVersion
+      description: Deletes a version of a SageMaker image. The container image the version represents isn't deleted.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteImageVersionResponse'
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+        '481':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteImageVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeleteImageVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.DeleteModel:
     post:
       operationId: DeleteModel
@@ -1719,6 +1991,12 @@ paths:
       responses:
         '200':
           description: Success
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -2130,6 +2408,45 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeAppImageConfig:
+    post:
+      operationId: DescribeAppImageConfig
+      description: Describes an AppImageConfig.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAppImageConfigResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeAppImageConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeAppImageConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.DescribeAutoMLJob:
     post:
       operationId: DescribeAutoMLJob
@@ -2494,6 +2811,84 @@ paths:
             type: string
             enum:
               - SageMaker.DescribeHyperParameterTuningJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeImage:
+    post:
+      operationId: DescribeImage
+      description: Describes a SageMaker image.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeImageResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeImageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeImage
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeImageVersion:
+    post:
+      operationId: DescribeImageVersion
+      description: Describes a version of a SageMaker image.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeImageVersionResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeImageVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeImageVersion
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3162,6 +3557,39 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListAppImageConfigs:
+    post:
+      operationId: ListAppImageConfigs
+      description: 'Lists the AppImageConfigs in your account and their properties. The list can be filtered by creation time or modified time, and whether the AppImageConfig name contains a specified string.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAppImageConfigsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListAppImageConfigsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListAppImageConfigs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.ListApps:
     post:
       operationId: ListApps
@@ -3700,6 +4128,102 @@ paths:
             type: string
             enum:
               - SageMaker.ListHyperParameterTuningJobs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListImageVersions:
+    post:
+      operationId: ListImageVersions
+      description: Lists the versions of a specified image and their properties. The list can be filtered by creation time or modified time.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImageVersionsResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListImageVersionsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListImageVersions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListImages:
+    post:
+      operationId: ListImages
+      description: 'Lists the images in your account and their properties. The list can be filtered by creation time or modified time, and whether the image name contains a specified string.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListImagesResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListImagesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListImages
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5050,6 +5574,45 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.UpdateAppImageConfig:
+    post:
+      operationId: UpdateAppImageConfig
+      description: Updates the properties of an AppImageConfig.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateAppImageConfigResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAppImageConfigRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.UpdateAppImageConfig
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.UpdateCodeRepository:
     post:
       operationId: UpdateCodeRepository
@@ -5249,6 +5812,51 @@ paths:
             type: string
             enum:
               - SageMaker.UpdateExperiment
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.UpdateImage:
+    post:
+      operationId: UpdateImage
+      description: 'Updates the properties of a SageMaker image. To change the image''s tags, use the <a>AddTags</a> and <a>DeleteTags</a> APIs.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateImageResponse'
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+        '481':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateImageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.UpdateImage
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5741,7 +6349,7 @@ components:
         AppArn:
           allOf:
             - $ref: '#/components/schemas/AppArn'
-            - description: The App's Amazon Resource Name (ARN).
+            - description: The Amazon Resource Name (ARN) of the app.
     CreateAppRequest:
       type: object
       required:
@@ -5776,6 +6384,31 @@ components:
             - $ref: '#/components/schemas/ResourceSpec'
             - description: The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
     ResourceInUse: {}
+    CreateAppImageConfigResponse:
+      type: object
+      properties:
+        AppImageConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigArn'
+            - description: The Amazon Resource Name (ARN) of the AppImageConfig.
+    CreateAppImageConfigRequest:
+      type: object
+      required:
+        - AppImageConfigName
+      title: CreateAppImageConfigRequest
+      properties:
+        AppImageConfigName:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigName'
+            - description: The name of the AppImageConfig. Must be unique to your account.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags to apply to the AppImageConfig.
+        KernelGatewayImageConfig:
+          allOf:
+            - $ref: '#/components/schemas/KernelGatewayImageConfig'
+            - description: The KernelGatewayImageConfig.
     CreateAutoMLJobResponse:
       type: object
       required:
@@ -5893,6 +6526,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StoppingCondition'
             - description: 'Specifies a limit to how long a model compilation job can run. When the job reaches the time limit, Amazon SageMaker ends the compilation job. Use this API to cap model training costs.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'An array of key-value pairs that you want to use to organize and track your AWS resource costs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>. '
     CreateDomainResponse:
       type: object
       properties:
@@ -5938,14 +6575,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: Tags to associated with the Domain. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the <a>Search</a> API.
-        HomeEfsFileSystemKmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyId'
-            - description: The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.
         AppNetworkAccessType:
           allOf:
             - $ref: '#/components/schemas/AppNetworkAccessType'
             - description: '<p>Specifies the VPC used for non-EFS traffic. The default value is <code>PublicInternetOnly</code>.</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets</p> </li> </ul>'
+        HomeEfsFileSystemKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: The AWS Key Management Service (KMS) encryption key ID. Encryption with a customer master key (CMK) is not supported.
     CreateEndpointOutput:
       type: object
       required:
@@ -5965,7 +6602,7 @@ components:
         EndpointName:
           allOf:
             - $ref: '#/components/schemas/EndpointName'
-            - description: The name of the endpoint. The name must be unique within an AWS Region in your AWS account.
+            - description: 'The name of the endpoint.The name must be unique within an AWS Region in your AWS account. The name is case-insensitive in <code>CreateEndpoint</code>, but the case is preserved and must be matched in .'
         EndpointConfigName:
           allOf:
             - $ref: '#/components/schemas/EndpointConfigName'
@@ -6128,7 +6765,7 @@ components:
         HyperParameterTuningJobName:
           allOf:
             - $ref: '#/components/schemas/HyperParameterTuningJobName'
-            - description: 'The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. The name must have { } to { } characters. Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.'
+            - description: 'The name of the tuning job. This name is the prefix for the names of all training jobs that this tuning job launches. The name must be unique within the same AWS account and AWS Region. The name must have 1 to 32 characters. Valid characters are a-z, A-Z, 0-9, and : + = @ _ % - (hyphen). The name is not case sensitive.'
         HyperParameterTuningJobConfig:
           allOf:
             - $ref: '#/components/schemas/HyperParameterTuningJobConfig'
@@ -6149,6 +6786,67 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: '<p>An array of key-value pairs. You can use tags to categorize your AWS resources in different ways, for example, by purpose, owner, or environment. For more information, see <a href="https://aws.amazon.com/answers/account-management/aws-tagging-strategies/">AWS Tagging Strategies</a>.</p> <p>Tags that you specify for the tuning job are also added to all training jobs that the tuning job launches.</p>'
+    CreateImageResponse:
+      type: object
+      properties:
+        ImageArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageArn'
+            - description: The Amazon Resource Name (ARN) of the image.
+    CreateImageRequest:
+      type: object
+      required:
+        - ImageName
+        - RoleArn
+      title: CreateImageRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ImageDescription'
+            - description: The description of the image.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/ImageDisplayName'
+            - description: 'The display name of the image. When the image is added to a domain, <code>DisplayName</code> must be unique to the domain.'
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the image. Must be unique to your account.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags to apply to the image.
+    CreateImageVersionResponse:
+      type: object
+      properties:
+        ImageVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionArn'
+            - description: The Amazon Resource Name (ARN) of the image version.
+    CreateImageVersionRequest:
+      type: object
+      required:
+        - BaseImage
+        - ClientToken
+        - ImageName
+      title: CreateImageVersionRequest
+      properties:
+        BaseImage:
+          allOf:
+            - $ref: '#/components/schemas/ImageBaseImage'
+            - description: '<p>The registry path of the container image to use as the starting point for this version. The path is an Amazon Container Registry (ECR) URI in the following format:</p> <p> <code>&lt;acct-id&gt;.dkr.ecr.&lt;region&gt;.amazonaws.com/&lt;repo-name[:tag] or [@digest]&gt;</code> </p>'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique ID. If not specified, the AWS CLI and AWS SDKs, such as the SDK for Python (Boto3), add a unique value to the call.'
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The <code>ImageName</code> of the <code>Image</code> to create a version of.
     CreateLabelingJobResponse:
       type: object
       required:
@@ -6192,7 +6890,7 @@ components:
         LabelCategoryConfigS3Uri:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
-            - description: '<p>The S3 URL of the file that defines the categories used to label the data objects.</p> <p>For 3D point cloud task types, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html">Create a Labeling Category Configuration File for 3D Point Cloud Labeling Jobs</a>. </p> <p>For all other <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task types</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html">custom tasks</a>, your label category configuration file must be a JSON file in the following format. Identify the labels you want to use by replacing <code>label_1</code>, <code>label_2</code>,<code>...</code>,<code>label_n</code> with your label categories.</p> <p> <code>{</code> </p> <p> <code> "document-version": "2018-11-28"</code> </p> <p> <code> "labels": [</code> </p> <p> <code> {</code> </p> <p> <code> "label": "<i>label_1</i>"</code> </p> <p> <code> },</code> </p> <p> <code> {</code> </p> <p> <code> "label": "<i>label_2</i>"</code> </p> <p> <code> },</code> </p> <p> <code> ...</code> </p> <p> <code> {</code> </p> <p> <code> "label": "<i>label_n</i>"</code> </p> <p> <code> }</code> </p> <p> <code> ]</code> </p> <p> <code>}</code> </p>'
+            - description: '<p>The S3 URI of the file that defines the categories used to label the data objects.</p> <p>For 3D point cloud task types, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html">Create a Labeling Category Configuration File for 3D Point Cloud Labeling Jobs</a>. </p> <p>For all other <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html">built-in task types</a> and <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/sms-custom-templates.html">custom tasks</a>, your label category configuration file must be a JSON file in the following format. Identify the labels you want to use by replacing <code>label_1</code>, <code>label_2</code>,<code>...</code>,<code>label_n</code> with your label categories.</p> <p> <code>{</code> </p> <p> <code> "document-version": "2018-11-28"</code> </p> <p> <code> "labels": [</code> </p> <p> <code> {</code> </p> <p> <code> "label": "<i>label_1</i>"</code> </p> <p> <code> },</code> </p> <p> <code> {</code> </p> <p> <code> "label": "<i>label_2</i>"</code> </p> <p> <code> },</code> </p> <p> <code> ...</code> </p> <p> <code> {</code> </p> <p> <code> "label": "<i>label_n</i>"</code> </p> <p> <code> }</code> </p> <p> <code> ]</code> </p> <p> <code>}</code> </p>'
         StoppingConditions:
           allOf:
             - $ref: '#/components/schemas/LabelingJobStoppingConditions'
@@ -6264,8 +6962,6 @@ components:
             - description: The Amazon Resource Name (ARN) of the new model package.
     CreateModelPackageInput:
       type: object
-      required:
-        - ModelPackageName
       title: CreateModelPackageInput
       properties:
         ModelPackageName:
@@ -6292,6 +6988,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CertifyForMarketplace'
             - description: Whether to certify the model package for listing on AWS Marketplace.
+    ConflictException: {}
     CreateMonitoringScheduleResponse:
       type: object
       required:
@@ -6902,6 +7599,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppName'
             - description: The name of the app.
+    DeleteAppImageConfigRequest:
+      type: object
+      required:
+        - AppImageConfigName
+      title: DeleteAppImageConfigRequest
+      properties:
+        AppImageConfigName:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigName'
+            - description: The name of the AppImageConfig to delete.
     DeleteCodeRepositoryInput:
       type: object
       required:
@@ -6989,6 +7696,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/HumanTaskUiName'
             - description: The name of the human task user interface (work task template) you want to delete.
+    DeleteImageResponse:
+      type: object
+      properties: {}
+    DeleteImageRequest:
+      type: object
+      required:
+        - ImageName
+      title: DeleteImageRequest
+      properties:
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the image to delete.
+    DeleteImageVersionResponse:
+      type: object
+      properties: {}
+    DeleteImageVersionRequest:
+      type: object
+      required:
+        - ImageName
+        - Version
+      title: DeleteImageVersionRequest
+      properties:
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the image.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionNumber'
+            - description: The version to delete.
     DeleteModelInput:
       type: object
       required:
@@ -7007,7 +7745,7 @@ components:
       properties:
         ModelPackageName:
           allOf:
-            - $ref: '#/components/schemas/EntityName'
+            - $ref: '#/components/schemas/VersionedArnOrName'
             - description: 'The name of the model package. The name must have 1 to 63 characters. Valid characters are a-z, A-Z, 0-9, and - (hyphen).'
     DeleteMonitoringScheduleRequest:
       type: object
@@ -7208,7 +7946,7 @@ components:
         AppArn:
           allOf:
             - $ref: '#/components/schemas/AppArn'
-            - description: The app's Amazon Resource Name (ARN).
+            - description: The Amazon Resource Name (ARN) of the app.
         AppType:
           allOf:
             - $ref: '#/components/schemas/AppType'
@@ -7274,6 +8012,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/AppName'
             - description: The name of the app.
+    DescribeAppImageConfigResponse:
+      type: object
+      properties:
+        AppImageConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigArn'
+            - description: The Amazon Resource Name (ARN) of the AppImageConfig.
+        AppImageConfigName:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigName'
+            - description: The name of the AppImageConfig.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the AppImageConfig was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the AppImageConfig was last modified.
+        KernelGatewayImageConfig:
+          allOf:
+            - $ref: '#/components/schemas/KernelGatewayImageConfig'
+            - description: The KernelGateway app.
+    DescribeAppImageConfigRequest:
+      type: object
+      required:
+        - AppImageConfigName
+      title: DescribeAppImageConfigRequest
+      properties:
+        AppImageConfigName:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigName'
+            - description: The name of the AppImageConfig to describe.
     DescribeAutoMLJobResponse:
       type: object
       required:
@@ -7531,6 +8302,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserSettings'
             - description: 'Settings which are applied to all UserProfile in this domain, if settings are not explicitly specified in a given UserProfile. '
+        AppNetworkAccessType:
+          allOf:
+            - $ref: '#/components/schemas/AppNetworkAccessType'
+            - description: '<p>Specifies the VPC used for non-EFS traffic. The default value is <code>PublicInternetOnly</code>.</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets</p> </li> </ul>'
         HomeEfsFileSystemKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
@@ -7547,10 +8322,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcId'
             - description: The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
-        AppNetworkAccessType:
-          allOf:
-            - $ref: '#/components/schemas/AppNetworkAccessType'
-            - description: '<p>Specifies the VPC used for non-EFS traffic. The default value is <code>PublicInternetOnly</code>.</p> <ul> <li> <p> <code>PublicInternetOnly</code> - Non-EFS traffic is through a VPC managed by Amazon SageMaker, which allows direct internet access</p> </li> <li> <p> <code>VpcOnly</code> - All Studio traffic is through the specified VPC and subnets</p> </li> </ul>'
     DescribeDomainRequest:
       type: object
       required:
@@ -7882,6 +8653,108 @@ components:
           allOf:
             - $ref: '#/components/schemas/HyperParameterTuningJobName'
             - description: The name of the tuning job.
+    DescribeImageResponse:
+      type: object
+      properties:
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the image was created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ImageDescription'
+            - description: The description of the image.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/ImageDisplayName'
+            - description: The name of the image as displayed.
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: 'When a create, update, or delete operation fails, the reason for the failure.'
+        ImageArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageArn'
+            - description: The Amazon Resource Name (ARN) of the image.
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the image.
+        ImageStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageStatus'
+            - description: The status of the image.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the image was last modified.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the IAM role that enables Amazon SageMaker to perform tasks on your behalf.
+    DescribeImageRequest:
+      type: object
+      required:
+        - ImageName
+      title: DescribeImageRequest
+      properties:
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the image to describe.
+    DescribeImageVersionResponse:
+      type: object
+      properties:
+        BaseImage:
+          allOf:
+            - $ref: '#/components/schemas/ImageBaseImage'
+            - description: The registry path of the container image on which this image version is based.
+        ContainerImage:
+          allOf:
+            - $ref: '#/components/schemas/ImageContainerImage'
+            - description: The registry path of the container image that contains this image version.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the version was created.
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: 'When a create or delete operation fails, the reason for the failure.'
+        ImageArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageArn'
+            - description: The Amazon Resource Name (ARN) of the image the version is based on.
+        ImageVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionArn'
+            - description: The ARN of the version.
+        ImageVersionStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionStatus'
+            - description: The status of the version.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the version was last modified.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionNumber'
+            - description: The version number.
+    DescribeImageVersionRequest:
+      type: object
+      required:
+        - ImageName
+      title: DescribeImageVersionRequest
+      properties:
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the image.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionNumber'
+            - description: 'The version of the image. If not specified, the latest version is described.'
     DescribeLabelingJobResponse:
       type: object
       required:
@@ -8086,7 +8959,7 @@ components:
       properties:
         ModelPackageName:
           allOf:
-            - $ref: '#/components/schemas/ArnOrName'
+            - $ref: '#/components/schemas/VersionedArnOrName'
             - description: The name of the model package to describe.
     DescribeMonitoringScheduleResponse:
       type: object
@@ -8959,6 +9832,57 @@ components:
           allOf:
             - $ref: '#/components/schemas/SortOrder'
             - description: The sort order for the results. The default is <code>Ascending</code>.
+    ListAppImageConfigsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token for getting the next set of AppImageConfigs, if there are any.'
+        AppImageConfigs:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigList'
+            - description: A list of AppImageConfigs and their properties.
+    ListAppImageConfigsRequest:
+      type: object
+      title: ListAppImageConfigsRequest
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of AppImageConfigs to return in the response. The default value is 10. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous call to <code>ListImages</code> didn''t return the full set of AppImageConfigs, the call returns a token for getting the next set of AppImageConfigs.'
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigName'
+            - description: A filter that returns only AppImageConfigs whose name contains the specified string.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only AppImageConfigs created on or before the specified time.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only AppImageConfigs created on or after the specified time.
+        ModifiedTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only AppImageConfigs modified on or before the specified time.
+        ModifiedTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only AppImageConfigs modified on or after the specified time.
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigSortKey'
+            - description: The property used to sort results. The default value is <code>CreationTime</code>.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: The sort order. The default value is <code>Descending</code>.
     ListAppsResponse:
       type: object
       properties:
@@ -9507,6 +10431,110 @@ components:
           allOf:
             - $ref: '#/components/schemas/HyperParameterTuningJobStatus'
             - description: A filter that returns only tuning jobs with the specified status.
+    ListImageVersionsResponse:
+      type: object
+      properties:
+        ImageVersions:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersions'
+            - description: A list of versions and their properties.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token for getting the next set of versions, if there are any.'
+    ListImageVersionsRequest:
+      type: object
+      required:
+        - ImageName
+      title: ListImageVersionsRequest
+      properties:
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only versions created on or after the specified time.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only versions created on or before the specified time.
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the image to list the versions of.
+        LastModifiedTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only versions modified on or after the specified time.
+        LastModifiedTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only versions modified on or before the specified time.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of versions to return in the response. The default value is 10. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous call to <code>ListImageVersions</code> didn''t return the full set of versions, the call returns a token for getting the next set of versions.'
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionSortBy'
+            - description: The property used to sort results. The default value is <code>CREATION_TIME</code>.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionSortOrder'
+            - description: The sort order. The default value is <code>DESCENDING</code>.
+    ListImagesResponse:
+      type: object
+      properties:
+        Images:
+          allOf:
+            - $ref: '#/components/schemas/Images'
+            - description: A list of images and their properties.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token for getting the next set of images, if there are any.'
+    ListImagesRequest:
+      type: object
+      title: ListImagesRequest
+      properties:
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only images created on or after the specified time.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only images created on or before the specified time.
+        LastModifiedTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only images modified on or after the specified time.
+        LastModifiedTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only images modified on or before the specified time.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: 'The maximum number of images to return in the response. The default value is 10. '
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/ImageNameContains'
+            - description: A filter that returns only images whose name contains the specified string.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous call to <code>ListImages</code> didn''t return the full set of images, the call returns a token for getting the next set of images.'
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/ImageSortBy'
+            - description: The property used to sort results. The default value is <code>CREATION_TIME</code>.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/ImageSortOrder'
+            - description: The sort order. The default value is <code>DESCENDING</code>.
     ListLabelingJobsResponse:
       type: object
       properties:
@@ -10622,6 +11650,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/TransformJobName'
             - description: The name of the transform job to stop.
+    UpdateAppImageConfigResponse:
+      type: object
+      properties:
+        AppImageConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigArn'
+            - description: The Amazon Resource Name (ARN) for the AppImageConfig.
+    UpdateAppImageConfigRequest:
+      type: object
+      required:
+        - AppImageConfigName
+      title: UpdateAppImageConfigRequest
+      properties:
+        AppImageConfigName:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigName'
+            - description: The name of the AppImageConfig to update.
+        KernelGatewayImageConfig:
+          allOf:
+            - $ref: '#/components/schemas/KernelGatewayImageConfig'
+            - description: The new KernelGateway app to run on the image.
     UpdateCodeRepositoryOutput:
       type: object
       required:
@@ -10747,7 +11796,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentDescription'
             - description: The description of the experiment.
-    ConflictException: {}
+    UpdateImageResponse:
+      type: object
+      properties:
+        ImageArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageArn'
+            - description: The Amazon Resource Name (ARN) of the image.
+    UpdateImageRequest:
+      type: object
+      required:
+        - ImageName
+      title: UpdateImageRequest
+      properties:
+        DeleteProperties:
+          allOf:
+            - $ref: '#/components/schemas/ImageDeletePropertyList'
+            - description: A list of properties to delete. Only the <code>Description</code> and <code>DisplayName</code> properties can be deleted.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ImageDescription'
+            - description: The new description for the image.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/ImageDisplayName'
+            - description: The new display name for the image.
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the image to update.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The new Amazon Resource Name (ARN) for the IAM role that enables Amazon SageMaker to perform tasks on your behalf.
     UpdateMonitoringScheduleResponse:
       type: object
       required:
@@ -11383,7 +12464,66 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreationTime'
             - description: The creation time.
-      description: The app's details.
+      description: Details about an Amazon SageMaker app.
+    AppImageConfigArn:
+      type: string
+      pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:app-image-config/.*'
+      maxLength: 256
+    AppImageConfigName:
+      type: string
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
+      maxLength: 63
+    Timestamp:
+      type: string
+      format: date-time
+    KernelGatewayImageConfig:
+      type: object
+      required:
+        - KernelSpecs
+      properties:
+        KernelSpecs:
+          allOf:
+            - $ref: '#/components/schemas/KernelSpecs'
+            - description: 'Defines how a kernel is started and the arguments, environment variables, and metadata that are available to the kernel.'
+        FileSystemConfig:
+          allOf:
+            - $ref: '#/components/schemas/FileSystemConfig'
+            - description: The file system configuration.
+      description: The configuration for an Amazon SageMaker KernelGateway app.
+    AppImageConfigDetails:
+      type: object
+      properties:
+        AppImageConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigArn'
+            - description: The Amazon Resource Name (ARN) of the AppImageConfig.
+        AppImageConfigName:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigName'
+            - description: The name of the AppImageConfig.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the AppImageConfig was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the AppImageConfig was last modified.
+        KernelGatewayImageConfig:
+          allOf:
+            - $ref: '#/components/schemas/KernelGatewayImageConfig'
+            - description: The KernelGateway app.
+      description: The configuration for running an Amazon SageMaker image as a KernelGateway app.
+    AppImageConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AppImageConfigDetails'
+    AppImageConfigSortKey:
+      type: string
+      enum:
+        - CreationTime
+        - LastModifiedTime
+        - Name
     AppInstanceType:
       type: string
       enum:
@@ -11475,7 +12615,7 @@ components:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
       minLength: 1
-      maxLength: 82
+      maxLength: 120
     TrialComponentArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:experiment-trial-component/.*'
@@ -11545,9 +12685,6 @@ components:
       items:
         $ref: '#/components/schemas/AutoMLContainerDefinition'
       maxItems: 5
-    Timestamp:
-      type: string
-      format: date-time
     AutoMLFailureReason:
       type: string
       maxLength: 1024
@@ -12248,6 +13385,11 @@ components:
       minLength: 1
       maxLength: 64
       format: password
+    ClientToken:
+      type: string
+      pattern: '^[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 36
     CodeRepositoryArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:code-repository/.*'
@@ -12525,8 +13667,8 @@ components:
         - NVIDIA
     CompilerOptions:
       type: string
-      pattern: '^\{.+\}$'
-      minLength: 7
+      pattern: .*
+      minLength: 3
       maxLength: 1024
     ConfigKey:
       type: string
@@ -12556,6 +13698,11 @@ components:
       enum:
         - SingleModel
         - MultiModel
+    VersionedArnOrName:
+      type: string
+      pattern: '(arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:[a-z\-]*\/)?([a-zA-Z0-9]([a-zA-Z0-9-]){0,62})(?<!-)(\/[0-9]{1,5})?$'
+      minLength: 1
+      maxLength: 176
     ContainerDefinition:
       type: object
       properties:
@@ -12585,7 +13732,7 @@ components:
             - description: 'The environment variables to set in the Docker container. Each key and value in the <code>Environment</code> string to string map can have length of up to 1024. We support up to 16 entries in the map. '
         ModelPackageName:
           allOf:
-            - $ref: '#/components/schemas/ArnOrName'
+            - $ref: '#/components/schemas/VersionedArnOrName'
             - description: The name or Amazon Resource Name (ARN) of the model package to use to create the model.
       description: 'Describes the container, as part of model definition.'
     ContainerDefinitionList:
@@ -12739,12 +13886,16 @@ components:
         SageMakerImageArn:
           allOf:
             - $ref: '#/components/schemas/ImageArn'
-            - description: The Amazon Resource Name (ARN) of the SageMaker image created on the instance.
+            - description: The ARN of the SageMaker image that the image version belongs to.
+        SageMakerImageVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionArn'
+            - description: The ARN of the image version created on the instance.
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/AppInstanceType'
-            - description: The instance type.
-      description: The instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance. The ARN is stored as metadata in SageMaker Studio notebooks.
+            - description: The instance type that the image version runs on.
+      description: 'Specifies the ARN''s of a SageMaker image and SageMaker image version, and the instance type that the version runs on.'
     ProblemType:
       type: string
       enum:
@@ -12793,7 +13944,7 @@ components:
         CompilerOptions:
           allOf:
             - $ref: '#/components/schemas/CompilerOptions'
-            - description: '<p>Specifies additional parameters for compiler options in JSON format. The compiler options are <code>TargetPlatform</code> specific. It is required for NVIDIA accelerators and highly recommended for CPU compilations. For any other cases, it is optional to specify <code>CompilerOptions.</code> </p> <ul> <li> <p> <code>CPU</code>: Compilation for CPU supports the following compiler options.</p> <ul> <li> <p> <code>mcpu</code>: CPU micro-architecture. For example, <code>{''mcpu'': ''skylake-avx512''}</code> </p> </li> <li> <p> <code>mattr</code>: CPU flags. For example, <code>{''mattr'': [''+neon'', ''+vfpv4'']}</code> </p> </li> </ul> </li> <li> <p> <code>ARM</code>: Details of ARM CPU compilations.</p> <ul> <li> <p> <code>NEON</code>: NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors.</p> <p>For example, add <code>{''mattr'': [''+neon'']}</code> to the compiler options if compiling for ARM 32-bit platform with the NEON support.</p> </li> </ul> </li> <li> <p> <code>NVIDIA</code>: Compilation for NVIDIA GPU supports the following compiler options.</p> <ul> <li> <p> <code>gpu_code</code>: Specifies the targeted architecture.</p> </li> <li> <p> <code>trt-ver</code>: Specifies the TensorRT versions in x.y.z. format.</p> </li> <li> <p> <code>cuda-ver</code>: Specifies the CUDA version in x.y format.</p> </li> </ul> <p>For example, <code>{''gpu-code'': ''sm_72'', ''trt-ver'': ''6.0.1'', ''cuda-ver'': ''10.1''}</code> </p> </li> <li> <p> <code>ANDROID</code>: Compilation for the Android OS supports the following compiler options:</p> <ul> <li> <p> <code>ANDROID_PLATFORM</code>: Specifies the Android API levels. Available levels range from 21 to 29. For example, <code>{''ANDROID_PLATFORM'': 28}</code>.</p> </li> <li> <p> <code>mattr</code>: Add <code>{''mattr'': [''+neon'']}</code> to compiler options if compiling for ARM 32-bit platform with NEON support.</p> </li> </ul> </li> <li> <p> <code>CoreML</code>: Compilation for the CoreML <a>OutputConfig$TargetDevice</a> supports the following compiler options:</p> <ul> <li> <p> <code>class_labels</code>: Specifies the classification labels file name inside input tar.gz file. For example, <code>{"class_labels": "imagenet_labels_1000.txt"}</code>. Labels inside the txt file should be separated by newlines.</p> </li> </ul> </li> </ul>'
+            - description: '<p>Specifies additional parameters for compiler options in JSON format. The compiler options are <code>TargetPlatform</code> specific. It is required for NVIDIA accelerators and highly recommended for CPU compilations. For any other cases, it is optional to specify <code>CompilerOptions.</code> </p> <ul> <li> <p> <code>CPU</code>: Compilation for CPU supports the following compiler options.</p> <ul> <li> <p> <code>mcpu</code>: CPU micro-architecture. For example, <code>{''mcpu'': ''skylake-avx512''}</code> </p> </li> <li> <p> <code>mattr</code>: CPU flags. For example, <code>{''mattr'': [''+neon'', ''+vfpv4'']}</code> </p> </li> </ul> </li> <li> <p> <code>ARM</code>: Details of ARM CPU compilations.</p> <ul> <li> <p> <code>NEON</code>: NEON is an implementation of the Advanced SIMD extension used in ARMv7 processors.</p> <p>For example, add <code>{''mattr'': [''+neon'']}</code> to the compiler options if compiling for ARM 32-bit platform with the NEON support.</p> </li> </ul> </li> <li> <p> <code>NVIDIA</code>: Compilation for NVIDIA GPU supports the following compiler options.</p> <ul> <li> <p> <code>gpu_code</code>: Specifies the targeted architecture.</p> </li> <li> <p> <code>trt-ver</code>: Specifies the TensorRT versions in x.y.z. format.</p> </li> <li> <p> <code>cuda-ver</code>: Specifies the CUDA version in x.y format.</p> </li> </ul> <p>For example, <code>{''gpu-code'': ''sm_72'', ''trt-ver'': ''6.0.1'', ''cuda-ver'': ''10.1''}</code> </p> </li> <li> <p> <code>ANDROID</code>: Compilation for the Android OS supports the following compiler options:</p> <ul> <li> <p> <code>ANDROID_PLATFORM</code>: Specifies the Android API levels. Available levels range from 21 to 29. For example, <code>{''ANDROID_PLATFORM'': 28}</code>.</p> </li> <li> <p> <code>mattr</code>: Add <code>{''mattr'': [''+neon'']}</code> to compiler options if compiling for ARM 32-bit platform with NEON support.</p> </li> </ul> </li> <li> <p> <code>INFERENTIA</code>: Compilation for target ml_inf1 uses compiler options passed in as a JSON string. For example, <code>"CompilerOptions": "\"--verbose 1 --num-neuroncores 2 -O2\""</code>. </p> <p>For information about supported compiler options, see <a href="https://github.com/aws/aws-neuron-sdk/blob/master/docs/neuron-cc/command-line-reference.md"> Neuron Compiler CLI</a>. </p> </li> <li> <p> <code>CoreML</code>: Compilation for the CoreML <a>OutputConfig$TargetDevice</a> supports the following compiler options:</p> <ul> <li> <p> <code>class_labels</code>: Specifies the classification labels file name inside input tar.gz file. For example, <code>{"class_labels": "imagenet_labels_1000.txt"}</code>. Labels inside the txt file should be separated by newlines.</p> </li> </ul> </li> </ul>'
       description: 'Contains information about the output location for the compiled model and the target device that the model runs on. <code>TargetDevice</code> and <code>TargetPlatform</code> are mutually exclusive, so you need to choose one between the two to specify your target device or platform. If you cannot find your device you want to use from the <code>TargetDevice</code> list, use <code>TargetPlatform</code> to describe the platform of your edge device and <code>CompilerOptions</code> if there are specific settings that are required or recommended to use for particular TargetPlatform.'
     StoppingCondition:
       type: object
@@ -12821,7 +13972,7 @@ components:
         SecurityGroups:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupIds'
-            - description: The security groups.
+            - description: <p>The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.</p> <p>Optional when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to <code>PublicInternetOnly</code>.</p> <p>Required when the <code>CreateDomain.AppNetworkAccessType</code> parameter is set to <code>VpcOnly</code>.</p>
         SharingSettings:
           allOf:
             - $ref: '#/components/schemas/SharingSettings'
@@ -13150,6 +14301,34 @@ components:
     HyperParameterTuningJobArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:hyper-parameter-tuning-job/.*'
+      maxLength: 256
+    ImageDescription:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 512
+    ImageDisplayName:
+      type: string
+      pattern: ^\S(.*\S)?$
+      minLength: 1
+      maxLength: 128
+    ImageName:
+      type: string
+      pattern: '^[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$'
+      minLength: 1
+      maxLength: 63
+    ImageArn:
+      type: string
+      pattern: '^arn:aws(-[\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$'
+      maxLength: 256
+    ImageBaseImage:
+      type: string
+      pattern: .*
+      minLength: 1
+      maxLength: 255
+    ImageVersionArn:
+      type: string
+      pattern: '^arn:aws(-[\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$'
       maxLength: 256
     LabelingJobName:
       type: string
@@ -13539,7 +14718,7 @@ components:
       minProperties: 0
       maxProperties: 100
       additionalProperties:
-        $ref: '#/components/schemas/ParameterValue'
+        $ref: '#/components/schemas/HyperParameterValue'
     InputDataConfig:
       type: array
       items:
@@ -13870,6 +15049,33 @@ components:
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*\/[a-zA-Z0-9](-*[a-zA-Z0-9.])*'
       minLength: 1
       maxLength: 256
+    ImageVersionNumber:
+      type: integer
+      minimum: 0
+    CustomImage:
+      type: object
+      required:
+        - ImageName
+        - AppImageConfigName
+      properties:
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the CustomImage. Must be unique to your account.
+        ImageVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionNumber'
+            - description: The version number of the CustomImage.
+        AppImageConfigName:
+          allOf:
+            - $ref: '#/components/schemas/AppImageConfigName'
+            - description: The name of the AppImageConfig.
+      description: A custom image.
+    CustomImages:
+      type: array
+      items:
+        $ref: '#/components/schemas/CustomImage'
+      maxItems: 30
     EnableCapture:
       type: boolean
     SamplingPercentage:
@@ -14111,6 +15317,14 @@ components:
         $ref: '#/components/schemas/DebugRuleEvaluationStatus'
       minItems: 0
       maxItems: 20
+    DefaultGid:
+      type: integer
+      minimum: 0
+      maximum: 65535
+    DefaultUid:
+      type: integer
+      minimum: 0
+      maximum: 65535
     RetentionPolicy:
       type: object
       properties:
@@ -14186,6 +15400,9 @@ components:
         - Failed
         - InService
         - Pending
+        - Updating
+        - Update_Failed
+        - Delete_Failed
     ProductionVariantSummaryList:
       type: array
       items:
@@ -14362,6 +15579,28 @@ components:
             - $ref: '#/components/schemas/ObjectiveStatus'
             - description: '<p>The status of the objective metric for the training job:</p> <ul> <li> <p>Succeeded: The final objective metric for the training job was evaluated by the hyperparameter tuning job and used in the hyperparameter tuning process.</p> </li> </ul> <ul> <li> <p>Pending: The training job is in progress and evaluation of its final objective metric is pending.</p> </li> </ul> <ul> <li> <p>Failed: The final objective metric for the training job was not evaluated, and was not used in the hyperparameter tuning process. This typically occurs when the training job failed or did not emit an objective metric.</p> </li> </ul>'
       description: Specifies summary information about a training job.
+    ImageStatus:
+      type: string
+      enum:
+        - CREATING
+        - CREATED
+        - CREATE_FAILED
+        - UPDATING
+        - UPDATE_FAILED
+        - DELETING
+        - DELETE_FAILED
+    ImageContainerImage:
+      type: string
+      minLength: 1
+      maxLength: 255
+    ImageVersionStatus:
+      type: string
+      enum:
+        - CREATING
+        - CREATED
+        - CREATE_FAILED
+        - DELETING
+        - DELETE_FAILED
     LabelingJobStatus:
       type: string
       enum:
@@ -14623,6 +15862,9 @@ components:
         - Failed
         - InService
         - Pending
+        - Updating
+        - Update_Failed
+        - Delete_Failed
     Workforce:
       type: object
       required:
@@ -15015,6 +16257,26 @@ components:
       enum:
         - rw
         - ro
+    MountPath:
+      type: string
+      pattern: ^\/.*
+      maxLength: 1024
+    FileSystemConfig:
+      type: object
+      properties:
+        MountPath:
+          allOf:
+            - $ref: '#/components/schemas/MountPath'
+            - description: 'The path within the image to mount the user''s EFS home directory. The directory should be empty. If not specified, defaults to <i>/home/sagemaker-user</i>.'
+        DefaultUid:
+          allOf:
+            - $ref: '#/components/schemas/DefaultUid'
+            - description: 'The default POSIX user ID. If not specified, defaults to <code>1000</code>.'
+        DefaultGid:
+          allOf:
+            - $ref: '#/components/schemas/DefaultGid'
+            - description: 'The default POSIX group ID. If not specified, defaults to <code>100</code>.'
+      description: The Amazon Elastic File System (EFS) storage configuration for an image.
     FileSystemId:
       type: string
       pattern: .*
@@ -15198,6 +16460,7 @@ components:
         - PYTORCH
         - XGBOOST
         - TFLITE
+        - DARKNET
     ResourceType:
       type: string
       enum:
@@ -15355,6 +16618,10 @@ components:
             - $ref: '#/components/schemas/MetricDefinitionList'
             - description: An array of <a>MetricDefinition</a> objects that specify the metrics that the algorithm emits.
       description: Specifies which training algorithm to use for training jobs that a hyperparameter tuning job launches and the metrics to monitor.
+    HyperParameterKey:
+      type: string
+      pattern: .*
+      maxLength: 256
     ParameterName:
       type: string
       pattern: '[\p{L}\p{M}\p{Z}\p{S}\p{N}\p{P}]*'
@@ -15382,6 +16649,10 @@ components:
             - $ref: '#/components/schemas/CategoricalParameterRangeSpecification'
             - description: A <code>CategoricalParameterRangeSpecification</code> object that defines the possible values for a categorical hyperparameter.
       description: 'Defines the possible values for categorical, continuous, and integer hyperparameters to be used by an algorithm.'
+    HyperParameterValue:
+      type: string
+      pattern: .*
+      maxLength: 2500
     HyperParameterSpecification:
       type: object
       required:
@@ -15414,7 +16685,7 @@ components:
             - description: Indicates whether this hyperparameter is required.
         DefaultValue:
           allOf:
-            - $ref: '#/components/schemas/ParameterValue'
+            - $ref: '#/components/schemas/HyperParameterValue'
             - description: 'The default value for this hyperparameter. If a default value is specified, a hyperparameter cannot be required.'
       description: Defines a hyperparameter to be used by an algorithm.
     HyperParameterSpecifications:
@@ -15576,19 +16847,140 @@ components:
       enum:
         - IdenticalDataAndAlgorithm
         - TransferLearning
-    ImageArn:
-      type: string
-      pattern: '^arn:aws(-[\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$'
-      maxLength: 256
+    Image:
+      type: object
+      required:
+        - CreationTime
+        - ImageArn
+        - ImageName
+        - ImageStatus
+        - LastModifiedTime
+      properties:
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the image was created.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ImageDescription'
+            - description: The description of the image.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/ImageDisplayName'
+            - description: The name of the image as displayed.
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: 'When a create, update, or delete operation fails, the reason for the failure.'
+        ImageArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageArn'
+            - description: The Amazon Resource Name (ARN) of the image.
+        ImageName:
+          allOf:
+            - $ref: '#/components/schemas/ImageName'
+            - description: The name of the image.
+        ImageStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageStatus'
+            - description: The status of the image.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the image was last modified.
+      description: A SageMaker image. A SageMaker image represents a set of container images that are derived from a common base container image. Each of these container images is represented by a SageMaker <code>ImageVersion</code>.
     RepositoryAccessMode:
       type: string
       enum:
         - Platform
         - Vpc
+    ImageDeleteProperty:
+      type: string
+      pattern: (^DisplayName$)|(^Description$)
+      minLength: 1
+      maxLength: 11
+    ImageDeletePropertyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageDeleteProperty'
+      maxItems: 2
     ImageDigest:
       type: string
       pattern: '^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$'
       maxLength: 72
+    ImageNameContains:
+      type: string
+      pattern: '^[a-zA-Z0-9\-.]+$'
+      maxLength: 63
+    ImageSortBy:
+      type: string
+      enum:
+        - CREATION_TIME
+        - LAST_MODIFIED_TIME
+        - IMAGE_NAME
+    ImageSortOrder:
+      type: string
+      enum:
+        - ASCENDING
+        - DESCENDING
+    ImageVersion:
+      type: object
+      required:
+        - CreationTime
+        - ImageArn
+        - ImageVersionArn
+        - ImageVersionStatus
+        - LastModifiedTime
+        - Version
+      properties:
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the version was created.
+        FailureReason:
+          allOf:
+            - $ref: '#/components/schemas/FailureReason'
+            - description: 'When a create or delete operation fails, the reason for the failure.'
+        ImageArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageArn'
+            - description: The Amazon Resource Name (ARN) of the image the version is based on.
+        ImageVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionArn'
+            - description: The ARN of the version.
+        ImageVersionStatus:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionStatus'
+            - description: The status of the version.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the version was last modified.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/ImageVersionNumber'
+            - description: The version number.
+      description: A version of a SageMaker <code>Image</code>. A version represents an existing container image.
+    ImageVersionSortBy:
+      type: string
+      enum:
+        - CREATION_TIME
+        - LAST_MODIFIED_TIME
+        - VERSION
+    ImageVersionSortOrder:
+      type: string
+      enum:
+        - ASCENDING
+        - DESCENDING
+    ImageVersions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ImageVersion'
+    Images:
+      type: array
+      items:
+        $ref: '#/components/schemas/Image'
     ModelPackageContainerDefinitionList:
       type: array
       items:
@@ -15679,14 +17071,44 @@ components:
             - $ref: '#/components/schemas/ResourceSpec'
             - description: The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
       description: Jupyter server's app settings.
+    KernelDisplayName:
+      type: string
+      maxLength: 1024
     KernelGatewayAppSettings:
       type: object
       properties:
         DefaultResourceSpec:
           allOf:
             - $ref: '#/components/schemas/ResourceSpec'
-            - description: The default instance type and the Amazon Resource Name (ARN) of the SageMaker image created on the instance.
-      description: The kernel gateway app settings.
+            - description: The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.
+        CustomImages:
+          allOf:
+            - $ref: '#/components/schemas/CustomImages'
+            - description: A list of custom images that are configured to run as a KernelGateway app.
+      description: The KernelGateway app settings.
+    KernelSpecs:
+      type: array
+      items:
+        $ref: '#/components/schemas/KernelSpec'
+      minItems: 1
+      maxItems: 1
+    KernelName:
+      type: string
+      maxLength: 1024
+    KernelSpec:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/KernelName'
+            - description: The name of the kernel. Must be unique to your account.
+        DisplayName:
+          allOf:
+            - $ref: '#/components/schemas/KernelDisplayName'
+            - description: The display name of the kernel.
+      description: 'Defines how a kernel is started and the arguments, environment variables, and metadata that are available to the kernel.'
     LabelCounter:
       type: integer
       minimum: 0
@@ -15796,7 +17218,7 @@ components:
         $ref: '#/components/schemas/LabelingJobForWorkteamSummary'
     SnsTopicArn:
       type: string
-      pattern: 'arn:aws[a-z\-]*:sns:[a-z0-9\-]*:[0-9]{12}:[a-zA-Z0-9_.-]*'
+      pattern: 'arn:aws[a-z\-]*:sns:[a-z0-9\-]*:[0-9]{12}:[a-zA-Z0-9_.-]+'
       maxLength: 2048
     MaxHumanLabeledObjectCount:
       type: integer
@@ -16090,7 +17512,7 @@ components:
       minimum: 1
     MediaType:
       type: string
-      pattern: '^[\w]+\/[\w+]+$'
+      pattern: '^[-\w]+\/[-\w+]+$'
       maxLength: 64
     OidcMemberDefinition:
       type: object
@@ -17251,6 +18673,7 @@ components:
         - ml.p3.8xlarge
         - ml.p3.16xlarge
         - ml.p3dn.24xlarge
+        - ml.p4d.24xlarge
         - ml.c5.xlarge
         - ml.c5.2xlarge
         - ml.c5.4xlarge
