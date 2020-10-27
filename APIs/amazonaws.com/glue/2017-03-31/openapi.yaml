@@ -1902,7 +1902,7 @@ paths:
   /#X-Amz-Target=AWSGlue.DeleteColumnStatisticsForPartition:
     post:
       operationId: DeleteColumnStatisticsForPartition
-      description: Delete the partition column statistics of a column.
+      description: <p>Delete the partition column statistics of a column.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>DeletePartition</code>.</p>
       responses:
         '200':
           description: Success
@@ -1965,7 +1965,7 @@ paths:
   /#X-Amz-Target=AWSGlue.DeleteColumnStatisticsForTable:
     post:
       operationId: DeleteColumnStatisticsForTable
-      description: Retrieves table statistics of columns.
+      description: <p>Retrieves table statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>DeleteTable</code>.</p>
       responses:
         '200':
           description: Success
@@ -2955,7 +2955,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetColumnStatisticsForPartition:
     post:
       operationId: GetColumnStatisticsForPartition
-      description: Retrieves partition statistics of columns.
+      description: <p>Retrieves partition statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>GetPartition</code>.</p>
       responses:
         '200':
           description: Success
@@ -3018,7 +3018,7 @@ paths:
   /#X-Amz-Target=AWSGlue.GetColumnStatisticsForTable:
     post:
       operationId: GetColumnStatisticsForTable
-      description: Retrieves table statistics of columns.
+      description: <p>Retrieves table statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>GetTable</code>.</p>
       responses:
         '200':
           description: Success
@@ -7470,7 +7470,7 @@ paths:
   /#X-Amz-Target=AWSGlue.UpdateColumnStatisticsForPartition:
     post:
       operationId: UpdateColumnStatisticsForPartition
-      description: Creates or updates partition statistics of columns.
+      description: <p>Creates or updates partition statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>UpdatePartition</code>.</p>
       responses:
         '200':
           description: Success
@@ -7533,7 +7533,7 @@ paths:
   /#X-Amz-Target=AWSGlue.UpdateColumnStatisticsForTable:
     post:
       operationId: UpdateColumnStatisticsForTable
-      description: Creates or updates table statistics of columns.
+      description: <p>Creates or updates table statistics of columns.</p> <p>The Identity and Access Management (IAM) permission required for this operation is <code>UpdateTable</code>.</p>
       responses:
         '200':
           description: Success
@@ -9221,6 +9221,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: 'The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in AWS Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">AWS Tags in AWS Glue</a> in the developer guide.'
+        TransformEncryption:
+          allOf:
+            - $ref: '#/components/schemas/TransformEncryption'
+            - description: The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.
     CreatePartitionResponse:
       type: object
       properties: {}
@@ -10433,6 +10437,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
             - description: The maximum number of times to retry a task for this transform after a task run fails.
+        TransformEncryption:
+          allOf:
+            - $ref: '#/components/schemas/TransformEncryption'
+            - description: The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.
     GetMLTransformRequest:
       type: object
       required:
@@ -12559,16 +12567,16 @@ components:
         MaximumLength:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Maximum length of the column.
+            - description: The size of the longest bit sequence in the column.
         AverageLength:
           allOf:
             - $ref: '#/components/schemas/NonNegativeDouble'
-            - description: Average length of the column.
+            - description: The average bit sequence length in the column.
         NumberOfNulls:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of nulls.
-      description: Defines a binary column statistics data.
+            - description: The number of null values in the column.
+      description: Defines column statistics supported for bit sequence data values.
     Blob:
       type: string
     Boolean:
@@ -12583,16 +12591,16 @@ components:
         NumberOfTrues:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of true value.
+            - description: The number of true values in the column.
         NumberOfFalses:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of false value.
+            - description: The number of false values in the column.
         NumberOfNulls:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of nulls.
-      description: Defines a boolean column statistics.
+            - description: The number of null values in the column.
+      description: Defines column statistics supported for Boolean data columns.
     BooleanNullable:
       type: boolean
     BooleanValue:
@@ -12995,12 +13003,12 @@ components:
         ColumnName:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: The name of the column.
+            - description: The name of the column that failed.
         Error:
           allOf:
             - $ref: '#/components/schemas/ErrorDetail'
-            - description: The error message occurred during operation.
-      description: Defines a column containing error.
+            - description: An error message with the reason for the failure of an operation.
+      description: Encapsulates a column name that failed and the reason for failure.
     ColumnErrors:
       type: array
       items:
@@ -13027,36 +13035,36 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/ColumnStatisticsType'
-            - description: The name of the column.
+            - description: The type of column statistics data.
         BooleanColumnStatisticsData:
           allOf:
             - $ref: '#/components/schemas/BooleanColumnStatisticsData'
-            - description: Boolean Column Statistics Data.
+            - description: Boolean column statistics data.
         DateColumnStatisticsData:
           allOf:
             - $ref: '#/components/schemas/DateColumnStatisticsData'
-            - description: Date Column Statistics Data.
+            - description: Date column statistics data.
         DecimalColumnStatisticsData:
           allOf:
             - $ref: '#/components/schemas/DecimalColumnStatisticsData'
-            - description: Decimal Column Statistics Data.
+            - description: Decimal column statistics data.
         DoubleColumnStatisticsData:
           allOf:
             - $ref: '#/components/schemas/DoubleColumnStatisticsData'
-            - description: Double Column Statistics Data.
+            - description: Double column statistics data.
         LongColumnStatisticsData:
           allOf:
             - $ref: '#/components/schemas/LongColumnStatisticsData'
-            - description: Long Column Statistics Data.
+            - description: Long column statistics data.
         StringColumnStatisticsData:
           allOf:
             - $ref: '#/components/schemas/StringColumnStatisticsData'
-            - description: String Column Statistics Data.
+            - description: String column statistics data.
         BinaryColumnStatisticsData:
           allOf:
             - $ref: '#/components/schemas/BinaryColumnStatisticsData'
-            - description: Binary Column Statistics Data.
-      description: Defines a column statistics data.
+            - description: Binary column statistics data.
+      description: Contains the individual types of column statistics data. Only one data object should be set and indicated by the <code>Type</code> attribute.
     ColumnStatistics:
       type: object
       required:
@@ -13068,20 +13076,20 @@ components:
         ColumnName:
           allOf:
             - $ref: '#/components/schemas/NameString'
-            - description: The name of the column.
+            - description: Name of column which statistics belong to.
         ColumnType:
           allOf:
             - $ref: '#/components/schemas/TypeString'
-            - description: The type of the column.
+            - description: The data type of the column.
         AnalyzedTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: The analyzed time of the column statistics.
+            - description: The timestamp of when column statistics were generated.
         StatisticsData:
           allOf:
             - $ref: '#/components/schemas/ColumnStatisticsData'
-            - description: The statistics of the column.
-      description: Defines a column statistics.
+            - description: A <code>ColumnStatisticData</code> object that contains the statistics data values.
+      description: Represents the generated column-level statistics for a table or partition.
     ColumnStatisticsType:
       type: string
       enum:
@@ -13101,20 +13109,20 @@ components:
         MinimumValue:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Minimum value of the column.
+            - description: The lowest value in the column.
         MaximumValue:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
-            - description: Maximum value of the column.
+            - description: The highest value in the column.
         NumberOfNulls:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of nulls.
+            - description: The number of null values in the column.
         NumberOfDistinctValues:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of distinct values.
-      description: Defines a date column statistics data.
+            - description: The number of distinct values in a column.
+      description: Defines column statistics supported for timestamp data columns.
     DecimalColumnStatisticsData:
       type: object
       required:
@@ -13124,20 +13132,20 @@ components:
         MinimumValue:
           allOf:
             - $ref: '#/components/schemas/DecimalNumber'
-            - description: Minimum value of the column.
+            - description: The lowest value in the column.
         MaximumValue:
           allOf:
             - $ref: '#/components/schemas/DecimalNumber'
-            - description: Maximum value of the column.
+            - description: The highest value in the column.
         NumberOfNulls:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of nulls.
+            - description: The number of null values in the column.
         NumberOfDistinctValues:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of distinct values.
-      description: Defines a decimal column statistics data.
+            - description: The number of distinct values in a column.
+      description: Defines column statistics supported for fixed-point number data columns.
     DoubleColumnStatisticsData:
       type: object
       required:
@@ -13147,20 +13155,20 @@ components:
         MinimumValue:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: Minimum value of the column.
+            - description: The lowest value in the column.
         MaximumValue:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: Maximum value of the column.
+            - description: The highest value in the column.
         NumberOfNulls:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of nulls.
+            - description: The number of null values in the column.
         NumberOfDistinctValues:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of distinct values.
-      description: Defines a double column statistics data.
+            - description: The number of distinct values in a column.
+      description: Defines column statistics supported for floating-point number data columns.
     LongColumnStatisticsData:
       type: object
       required:
@@ -13170,20 +13178,20 @@ components:
         MinimumValue:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: Minimum value of the column.
+            - description: The lowest value in the column.
         MaximumValue:
           allOf:
             - $ref: '#/components/schemas/Long'
-            - description: Maximum value of the column.
+            - description: The highest value in the column.
         NumberOfNulls:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of nulls.
+            - description: The number of null values in the column.
         NumberOfDistinctValues:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of distinct values.
-      description: Defines a long column statistics data.
+            - description: The number of distinct values in a column.
+      description: Defines column statistics supported for integer data columns.
     StringColumnStatisticsData:
       type: object
       required:
@@ -13195,32 +13203,32 @@ components:
         MaximumLength:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Maximum value of the column.
+            - description: The size of the longest string in the column.
         AverageLength:
           allOf:
             - $ref: '#/components/schemas/NonNegativeDouble'
-            - description: Average value of the column.
+            - description: The average string length in the column.
         NumberOfNulls:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of nulls.
+            - description: The number of null values in the column.
         NumberOfDistinctValues:
           allOf:
             - $ref: '#/components/schemas/NonNegativeLong'
-            - description: Number of distinct values.
-      description: Defines a string column statistics data.
+            - description: The number of distinct values in a column.
+      description: Defines column statistics supported for character sequence data values.
     ColumnStatisticsError:
       type: object
       properties:
         ColumnStatistics:
           allOf:
             - $ref: '#/components/schemas/ColumnStatistics'
-            - description: The ColumnStatistics of the column.
+            - description: The <code>ColumnStatistics</code> of the column.
         Error:
           allOf:
             - $ref: '#/components/schemas/ErrorDetail'
-            - description: The error message occurred during operation.
-      description: Defines a column containing error.
+            - description: An error message with the reason for the failure of an operation.
+      description: Encapsulates a <code>ColumnStatistics</code> object that failed and the reason for failure.
     ColumnStatisticsErrors:
       type: array
       items:
@@ -14022,12 +14030,24 @@ components:
         TransformType:
           allOf:
             - $ref: '#/components/schemas/TransformType'
-            - description: '<p>The type of machine learning transform.</p> <p>For information about the types of machine learning transforms, see <a href="http://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html">Creating Machine Learning Transforms</a>.</p>'
+            - description: '<p>The type of machine learning transform.</p> <p>For information about the types of machine learning transforms, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job-machine-learning-transform.html">Creating Machine Learning Transforms</a>.</p>'
         FindMatchesParameters:
           allOf:
             - $ref: '#/components/schemas/FindMatchesParameters'
             - description: The parameters for the find matches algorithm.
       description: The algorithm-specific parameters that are associated with the machine learning transform.
+    TransformEncryption:
+      type: object
+      properties:
+        MlUserDataEncryption:
+          allOf:
+            - $ref: '#/components/schemas/MLUserDataEncryption'
+            - description: An <code>MLUserDataEncryption</code> object containing the encryption mode and customer-provided KMS key ID.
+        TaskRunSecurityConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the security configuration.
+      description: '<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p> <p>Additionally, imported labels and trained transforms can now be encrypted using a customer provided KMS key.</p>'
     DagNodes:
       type: array
       items:
@@ -15685,7 +15705,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/NullableInteger'
             - description: The maximum number of times to retry after an <code>MLTaskRun</code> of the machine learning transform fails.
+        TransformEncryption:
+          allOf:
+            - $ref: '#/components/schemas/TransformEncryption'
+            - description: The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.
       description: A structure for a machine learning transform.
+    MLUserDataEncryptionModeString:
+      type: string
+      enum:
+        - DISABLED
+        - SSE-KMS
+    MLUserDataEncryption:
+      type: object
+      required:
+        - MlUserDataEncryptionMode
+      properties:
+        MlUserDataEncryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/MLUserDataEncryptionModeString'
+            - description: '<p>The encryption mode applied to user data. Valid values are:</p> <ul> <li> <p>DISABLED: encryption is disabled</p> </li> <li> <p>SSEKMS: use of server-side encryption with AWS Key Management Service (SSE-KMS) for user data stored in Amazon S3.</p> </li> </ul>'
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The ID for the customer-provided KMS key.
+      description: The encryption-at-rest settings of the transform that apply to accessing user data.
     TableName:
       type: string
     SchemaPathString:
