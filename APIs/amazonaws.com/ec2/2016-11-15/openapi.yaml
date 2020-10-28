@@ -1398,6 +1398,94 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=AssociateEnclaveCertificateIamRole:
+    get:
+      x-aws-operation-name: AssociateEnclaveCertificateIamRole
+      operationId: GET_AssociateEnclaveCertificateIamRole
+      description: '<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">AWS Certificate Manager for Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted private key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS key that has an attached attestation-based key policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS key, you must grant it permission to call <code>kms:Decrypt</code> on AWS KMS key returned by the command. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy"> Grant the role permission to access the certificate and encryption key</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AssociateEnclaveCertificateIamRoleResult'
+      parameters:
+        - name: CertificateArn
+          in: query
+          required: false
+          description: The ARN of the ACM certificate with which to associate the IAM role.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1283
+        - name: RoleArn
+          in: query
+          required: false
+          description: The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1283
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AssociateEnclaveCertificateIamRole
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: AssociateEnclaveCertificateIamRole
+      operationId: POST_AssociateEnclaveCertificateIamRole
+      description: '<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. This enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html">AWS Certificate Manager for Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted private key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate is encrypted with an AWS-managed KMS key that has an attached attestation-based key policy.</p> <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> on the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS key, you must grant it permission to call <code>kms:Decrypt</code> on AWS KMS key returned by the command. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy"> Grant the role permission to access the certificate and encryption key</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AssociateEnclaveCertificateIamRoleResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AssociateEnclaveCertificateIamRoleRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AssociateEnclaveCertificateIamRole
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=AssociateIamInstanceProfile:
     get:
       x-aws-operation-name: AssociateIamInstanceProfile
@@ -5983,6 +6071,10 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/LaunchTemplateInstanceMetadataOptionsRequest'
                   - description: 'The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+              EnclaveOptions:
+                allOf:
+                  - $ref: '#/components/schemas/LaunchTemplateEnclaveOptionsRequest'
+                  - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
             description: The information to include in the launch template.
         - name: TagSpecification
           in: query
@@ -6228,6 +6320,10 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/LaunchTemplateInstanceMetadataOptionsRequest'
                   - description: 'The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+              EnclaveOptions:
+                allOf:
+                  - $ref: '#/components/schemas/LaunchTemplateEnclaveOptionsRequest'
+                  - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
             description: The information to include in the launch template.
         - name: Action
           in: query
@@ -19039,6 +19135,7 @@ paths:
               - ebsOptimized
               - sriovNetSupport
               - enaSupport
+              - enclaveOptions
         - name: DryRun
           in: query
           required: false
@@ -29090,6 +29187,94 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=DisassociateEnclaveCertificateIamRole:
+    get:
+      x-aws-operation-name: DisassociateEnclaveCertificateIamRole
+      operationId: GET_DisassociateEnclaveCertificateIamRole
+      description: 'Disassociates an IAM role from an AWS Certificate Manager (ACM) certificate. Disassociating an IAM role from an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and encrypted private key from the Amazon S3 bucket. It also revokes the IAM role''s permission to use the AWS Key Management Service (KMS) key used to encrypt the private key. This effectively revokes the role''s permission to use the certificate. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DisassociateEnclaveCertificateIamRoleResult'
+      parameters:
+        - name: CertificateArn
+          in: query
+          required: false
+          description: The ARN of the ACM certificate from which to disassociate the IAM role.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1283
+        - name: RoleArn
+          in: query
+          required: false
+          description: The ARN of the IAM role to disassociate.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1283
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DisassociateEnclaveCertificateIamRole
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DisassociateEnclaveCertificateIamRole
+      operationId: POST_DisassociateEnclaveCertificateIamRole
+      description: 'Disassociates an IAM role from an AWS Certificate Manager (ACM) certificate. Disassociating an IAM role from an ACM certificate removes the Amazon S3 object that contains the certificate, certificate chain, and encrypted private key from the Amazon S3 bucket. It also revokes the IAM role''s permission to use the AWS Key Management Service (KMS) key used to encrypt the private key. This effectively revokes the role''s permission to use the certificate. '
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DisassociateEnclaveCertificateIamRoleResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DisassociateEnclaveCertificateIamRoleRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DisassociateEnclaveCertificateIamRole
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=DisassociateIamInstanceProfile:
     get:
       x-aws-operation-name: DisassociateIamInstanceProfile
@@ -30480,6 +30665,86 @@ paths:
             type: string
             enum:
               - ExportTransitGatewayRoutes
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=GetAssociatedEnclaveCertificateIamRoles:
+    get:
+      x-aws-operation-name: GetAssociatedEnclaveCertificateIamRoles
+      operationId: GET_GetAssociatedEnclaveCertificateIamRoles
+      description: 'Returns the IAM roles that are associated with the specified AWS Certificate Manager (ACM) certificate. It also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored, and the ARN of the AWS Key Management Service (KMS) key that''s used to encrypt the private key.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetAssociatedEnclaveCertificateIamRolesResult'
+      parameters:
+        - name: CertificateArn
+          in: query
+          required: false
+          description: 'The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon S3 object information.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1283
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetAssociatedEnclaveCertificateIamRoles
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: GetAssociatedEnclaveCertificateIamRoles
+      operationId: POST_GetAssociatedEnclaveCertificateIamRoles
+      description: 'Returns the IAM roles that are associated with the specified AWS Certificate Manager (ACM) certificate. It also returns the name of the Amazon S3 bucket and the Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored, and the ARN of the AWS Key Management Service (KMS) key that''s used to encrypt the private key.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetAssociatedEnclaveCertificateIamRolesResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/GetAssociatedEnclaveCertificateIamRolesRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - GetAssociatedEnclaveCertificateIamRoles
         - name: Version
           in: query
           required: true
@@ -34472,6 +34737,7 @@ paths:
               - ebsOptimized
               - sriovNetSupport
               - enaSupport
+              - enclaveOptions
         - name: BlockDeviceMapping
           in: query
           required: false
@@ -41189,6 +41455,7 @@ paths:
               - ebsOptimized
               - sriovNetSupport
               - enaSupport
+              - enclaveOptions
         - name: DryRun
           in: query
           required: false
@@ -42658,7 +42925,7 @@ paths:
         - name: HibernationOptions
           in: query
           required: false
-          description: 'Indicates whether an instance is enabled for hibernation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate your instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+          description: '<p>Indicates whether an instance is enabled for hibernation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate your instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable hibernation and AWS Nitro Enclaves on the same instance.</p>'
           schema:
             type: object
             properties:
@@ -42698,6 +42965,18 @@ paths:
                   - $ref: '#/components/schemas/InstanceMetadataEndpointState'
                   - description: '<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p> <note> <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata.</p> </note>'
             description: The metadata options for the instance.
+        - name: EnclaveOptions
+          in: query
+          required: false
+          description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+          schema:
+            type: object
+            properties:
+              Enabled:
+                allOf:
+                  - $ref: '#/components/schemas/Boolean'
+                  - description: 'To enable the instance for AWS Nitro Enclaves, set this parameter to <code>true</code>.'
+            description: 'Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
         - name: Action
           in: query
           required: true
@@ -44526,6 +44805,27 @@ components:
             - xml:
                 name: status
               description: The current state of the target network association.
+    AssociateEnclaveCertificateIamRoleResult:
+      type: object
+      properties:
+        CertificateS3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: certificateS3BucketName
+              description: The name of the Amazon S3 bucket to which the certificate was uploaded.
+        CertificateS3ObjectKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: certificateS3ObjectKey
+              description: 'The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored. The object key is formatted as follows: <code>certificate_arn</code>/<code>role_arn</code>.'
+        EncryptionKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: encryptionKmsKeyId
+              description: The ID of the AWS Key Management Service (KMS) key used to encrypt the private key of the certificate.
     AssociateIamInstanceProfileResult:
       type: object
       example:
@@ -45861,6 +46161,14 @@ components:
             - $ref: '#/components/schemas/LaunchTemplateInstanceMetadataEndpointState'
             - description: '<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p> <note> <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata. </p> </note>'
       description: 'The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+    LaunchTemplateEnclaveOptionsRequest:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'To enable the instance for AWS Nitro Enclaves, set this parameter to <code>true</code>.'
+      description: 'Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
     CreateLaunchTemplateVersionResult:
       type: object
       example:
@@ -47806,6 +48114,12 @@ components:
             - xml:
                 name: enaSupport
               description: Indicates whether enhanced networking with ENA is enabled.
+        EnclaveOptions:
+          allOf:
+            - $ref: '#/components/schemas/EnclaveOptions'
+            - xml:
+                name: enclaveOptions
+              description: 'To enable the instance for AWS Nitro Enclaves, set this parameter to <code>true</code>; otherwise, set it to <code>false</code>.'
         EbsOptimized:
           allOf:
             - $ref: '#/components/schemas/AttributeBooleanValue'
@@ -49588,6 +49902,15 @@ components:
             - xml:
                 name: status
               description: The current state of the target network association.
+    DisassociateEnclaveCertificateIamRoleResult:
+      type: object
+      properties:
+        Return:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: return
+              description: 'Returns <code>true</code> if the request succeeds; otherwise, it returns an error.'
     DisassociateIamInstanceProfileResult:
       type: object
       example:
@@ -49806,6 +50129,15 @@ components:
             - xml:
                 name: s3Location
               description: 'The URL of the exported file in Amazon S3. For example, s3://<i>bucket_name</i>/VPCTransitGateway/TransitGatewayRouteTables/<i>file_name</i>.'
+    GetAssociatedEnclaveCertificateIamRolesResult:
+      type: object
+      properties:
+        AssociatedRoles:
+          allOf:
+            - $ref: '#/components/schemas/AssociatedRolesList'
+            - xml:
+                name: associatedRoleSet
+              description: Information about the associated IAM roles.
     GetAssociatedIpv6PoolCidrsResult:
       type: object
       properties:
@@ -52952,6 +53284,26 @@ components:
             - xml:
                 name: dryRun
               description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    ResourceArn:
+      type: string
+      minLength: 1
+      maxLength: 1283
+    AssociateEnclaveCertificateIamRoleRequest:
+      type: object
+      title: AssociateEnclaveCertificateIamRoleRequest
+      properties:
+        CertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of the ACM certificate with which to associate the IAM role.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     AssociateIamInstanceProfileRequest:
       type: object
       required:
@@ -53289,6 +53641,41 @@ components:
       type: string
       enum:
         - vpc
+    AssociatedRole:
+      type: object
+      properties:
+        AssociatedRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - xml:
+                name: associatedRoleArn
+              description: The ARN of the associated IAM role.
+        CertificateS3BucketName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: certificateS3BucketName
+              description: The name of the Amazon S3 bucket in which the Amazon S3 object is stored.
+        CertificateS3ObjectKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: certificateS3ObjectKey
+              description: 'The key of the Amazon S3 object ey where the certificate, certificate chain, and encrypted private key bundle is stored. The object key is formated as follows: <code>certificate_arn</code>/<code>role_arn</code>. '
+        EncryptionKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: encryptionKmsKeyId
+              description: The ID of the KMS key used to encrypt the private key.
+      description: Information about the associated IAM roles.
+    AssociatedRolesList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/AssociatedRole'
+          - xml:
+              name: item
     AssociatedTargetNetwork:
       type: object
       properties:
@@ -55360,10 +55747,6 @@ components:
           - $ref: '#/components/schemas/CoipAddressUsage'
           - xml:
               name: item
-    ResourceArn:
-      type: string
-      minLength: 1
-      maxLength: 1283
     CoipPool:
       type: object
       properties:
@@ -57153,6 +57536,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LaunchTemplateInstanceMetadataOptionsRequest'
             - description: 'The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+        EnclaveOptions:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateEnclaveOptionsRequest'
+            - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       description: The information to include in the launch template.
     CreateLaunchTemplateRequest:
       type: object
@@ -63112,6 +63499,7 @@ components:
         - ebsOptimized
         - sriovNetSupport
         - enaSupport
+        - enclaveOptions
     DescribeInstanceAttributeRequest:
       type: object
       required:
@@ -66800,6 +67188,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    DisassociateEnclaveCertificateIamRoleRequest:
+      type: object
+      title: DisassociateEnclaveCertificateIamRoleRequest
+      properties:
+        CertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of the ACM certificate from which to disassociate the IAM role.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of the IAM role to disassociate.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     DisassociateIamInstanceProfileRequest:
       type: object
       required:
@@ -67635,6 +68039,24 @@ components:
             - xml:
                 name: vpcId
               description: The ID of the VPC.
+    EnclaveOptions:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: enabled
+              description: 'If this parameter is set to <code>true</code>, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.'
+      description: Indicates whether the instance is enabled for AWS Nitro Enclaves.
+    EnclaveOptionsRequest:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'To enable the instance for AWS Nitro Enclaves, set this parameter to <code>true</code>.'
+      description: 'Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
     EphemeralNvmeSupport:
       type: string
       enum:
@@ -68655,6 +69077,18 @@ components:
       description: Describes the FPGAs for the instance type.
     FreeTierEligibleFlag:
       type: boolean
+    GetAssociatedEnclaveCertificateIamRolesRequest:
+      type: object
+      title: GetAssociatedEnclaveCertificateIamRolesRequest
+      properties:
+        CertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: 'The ARN of the ACM certificate for which to view the associated IAM roles, encryption keys, and Amazon S3 object information.'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     GetAssociatedIpv6PoolCidrsRequest:
       type: object
       required:
@@ -69064,6 +69498,12 @@ components:
             - xml:
                 name: metadataOptions
               description: 'The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+        EnclaveOptions:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTemplateEnclaveOptions'
+            - xml:
+                name: enclaveOptions
+              description: Indicates whether the instance is enabled for AWS Nitro Enclaves.
       description: 'The information for a launch template. '
     GetManagedPrefixListAssociationsMaxResults:
       type: integer
@@ -71163,6 +71603,12 @@ components:
             - xml:
                 name: metadataOptions
               description: The metadata options for the instance.
+        EnclaveOptions:
+          allOf:
+            - $ref: '#/components/schemas/EnclaveOptions'
+            - xml:
+                name: enclaveOptions
+              description: Indicates whether the instance is enabled for AWS Nitro Enclaves.
       description: Describes an instance.
     InstanceBlockDeviceMapping:
       type: object
@@ -72722,6 +73168,16 @@ components:
           - $ref: '#/components/schemas/LaunchTemplateElasticInferenceAcceleratorResponse'
           - xml:
               name: item
+    LaunchTemplateEnclaveOptions:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: enabled
+              description: 'If this parameter is set to <code>true</code>, the instance is enabled for AWS Nitro Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.'
+      description: Indicates whether the instance is enabled for AWS Nitro Enclaves.
     LaunchTemplateErrorCode:
       type: string
       enum:
@@ -78571,7 +79027,7 @@ components:
         HibernationOptions:
           allOf:
             - $ref: '#/components/schemas/HibernationOptionsRequest'
-            - description: 'Indicates whether an instance is enabled for hibernation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate your instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+            - description: '<p>Indicates whether an instance is enabled for hibernation. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html">Hibernate your instance</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable hibernation and AWS Nitro Enclaves on the same instance.</p>'
         LicenseSpecifications:
           allOf:
             - $ref: '#/components/schemas/LicenseSpecificationListRequest'
@@ -78582,6 +79038,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceMetadataOptionsRequest'
             - description: 'The metadata options for the instance. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html">Instance metadata and user data</a>.'
+        EnclaveOptions:
+          allOf:
+            - $ref: '#/components/schemas/EnclaveOptionsRequest'
+            - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
     ScheduledInstancesLaunchSpecification:
       type: object
       required:
