@@ -3657,7 +3657,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.UpdateNFSFileShare:
     post:
       operationId: UpdateNFSFileShare
-      description: '<p>Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share setting:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways.</p> </note>'
+      description: '<p>Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <p>Updates the following file share settings:</p> <ul> <li> <p>Default storage class for your S3 bucket</p> </li> <li> <p>Metadata defaults for your S3 bucket</p> </li> <li> <p>Allowed NFS clients for your file share</p> </li> <li> <p>Squash settings</p> </li> <li> <p>Write status of your file share</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -3702,7 +3702,7 @@ paths:
   /#X-Amz-Target=StorageGateway_20130630.UpdateSMBFileShare:
     post:
       operationId: UpdateSMBFileShare
-      description: '<p>Updates a Server Message Block (SMB) file share.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.</p> </note> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
+      description: '<p>Updates a Server Message Block (SMB) file share. This operation is only supported for file gateways.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null.</p> </note> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html">Activating and deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>File gateways don''t support creating hard or symbolic links on a file share.</p> </important>'
       responses:
         '200':
           description: Success
@@ -3736,6 +3736,51 @@ paths:
             type: string
             enum:
               - StorageGateway_20130630.UpdateSMBFileShare
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StorageGateway_20130630.UpdateSMBFileShareVisibility:
+    post:
+      operationId: UpdateSMBFileShareVisibility
+      description: Controls whether the shares on a gateway are visible in a net view or browse list.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSMBFileShareVisibilityOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSMBFileShareVisibilityInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.UpdateSMBFileShareVisibility
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4333,6 +4378,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
             - description: Refresh cache information.
+        NotificationPolicy:
+          allOf:
+            - $ref: '#/components/schemas/NotificationPolicy'
+            - description: The notification policy of the file share.
       description: CreateNFSFileShareInput
     CreateSMBFileShareOutput:
       type: object
@@ -4399,6 +4448,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: '<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+        AccessBasedEnumeration:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The files and folders on this share will only be visible to users with read access.
         AdminUserList:
           allOf:
             - $ref: '#/components/schemas/FileShareUserList'
@@ -4435,6 +4488,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
             - description: Refresh cache information.
+        NotificationPolicy:
+          allOf:
+            - $ref: '#/components/schemas/NotificationPolicy'
+            - description: The notification policy of the file share.
       description: CreateSMBFileShareInput
     CreateSnapshotOutput:
       type: object
@@ -5287,6 +5344,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SMBSecurityStrategy'
             - description: '<p>The type of security strategy that was specified for file gateway.</p> <ul> <li> <p> <code>ClientSpecified</code>: If you use this option, requests are established based on what is negotiated by the client. This option is recommended when you want to maximize compatibility across different clients in your environment.</p> </li> <li> <p> <code>MandatorySigning</code>: If you use this option, file gateway only allows connections from SMBv2 or SMBv3 clients that have signing enabled. This option works with SMB clients on Microsoft Windows Vista, Windows Server 2008 or newer.</p> </li> <li> <p> <code>MandatoryEncryption</code>: If you use this option, file gateway only allows connections from SMBv3 clients that have encryption enabled. This option is highly recommended for environments that handle sensitive data. This option works with SMB clients on Microsoft Windows 8, Windows Server 2012 or newer.</p> </li> </ul>'
+        FileSharesVisible:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The shares on this gateway appear when listing shares.
     DescribeSMBSettingsInput:
       type: object
       required:
@@ -6463,6 +6524,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
             - description: Refresh cache information.
+        NotificationPolicy:
+          allOf:
+            - $ref: '#/components/schemas/NotificationPolicy'
+            - description: The notification policy of the file share.
       description: UpdateNFSFileShareInput
     UpdateSMBFileShareOutput:
       type: object
@@ -6514,6 +6579,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: '<p>Set this value to <code>true</code> to enable access control list (ACL) on the SMB file share. Set it to <code>false</code> to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>'
+        AccessBasedEnumeration:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The files and folders on this share will only be visible to users with read access.
         AdminUserList:
           allOf:
             - $ref: '#/components/schemas/FileShareUserList'
@@ -6542,7 +6611,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
             - description: Refresh cache information.
+        NotificationPolicy:
+          allOf:
+            - $ref: '#/components/schemas/NotificationPolicy'
+            - description: The notification policy of the file share.
       description: UpdateSMBFileShareInput
+    UpdateSMBFileShareVisibilityOutput:
+      type: object
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+    UpdateSMBFileShareVisibilityInput:
+      type: object
+      required:
+        - GatewayARN
+        - FileSharesVisible
+      title: UpdateSMBFileShareVisibilityInput
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+        FileSharesVisible:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: The shares on this gateway appear when listing shares.
     UpdateSMBSecurityStrategyOutput:
       type: object
       properties:
@@ -7035,6 +7126,11 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    NotificationPolicy:
+      type: string
+      pattern: '^\{[\w\s:\{\}\[\]"]*}$'
+      minLength: 2
+      maxLength: 100
     FileShareARN:
       type: string
       description: The Amazon Resource Name (ARN) of the file share.
@@ -7543,6 +7639,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
             - description: Refresh cache information.
+        NotificationPolicy:
+          allOf:
+            - $ref: '#/components/schemas/NotificationPolicy'
+            - description: The notification policy of the file share.
       description: 'The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.'
     NotificationId:
       type: string
@@ -7633,6 +7733,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: '<p>If this value is set to <code>true</code>, it indicates that access control list (ACL) is enabled on the SMB file share. If it is set to <code>false</code>, it indicates that file and directory permissions are mapped to the POSIX permission.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html">Using Microsoft Windows ACLs to control access to an SMB file share</a> in the <i>AWS Storage Gateway User Guide</i>.</p>'
+        AccessBasedEnumeration:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether <code>AccessBasedEnumeration</code> is enabled.
         AdminUserList:
           allOf:
             - $ref: '#/components/schemas/FileShareUserList'
@@ -7667,6 +7771,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CacheAttributes'
             - description: Refresh cache information.
+        NotificationPolicy:
+          allOf:
+            - $ref: '#/components/schemas/NotificationPolicy'
+            - description: The notification policy of the file share.
       description: 'The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported for file gateways.'
     SMBGuestPassword:
       type: string

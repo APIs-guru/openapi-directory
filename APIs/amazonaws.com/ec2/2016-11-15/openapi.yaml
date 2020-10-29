@@ -4352,6 +4352,15 @@ paths:
           description: 'The ID of the VPC to associate with the Client VPN endpoint. If no security group IDs are specified in the request, the default security group for the VPC is applied.'
           schema:
             type: string
+        - name: SelfServicePortal
+          in: query
+          required: false
+          description: '<p>Specify whether to enable the self-service portal for the Client VPN endpoint.</p> <p>Default Value: <code>enabled</code> </p>'
+          schema:
+            type: string
+            enum:
+              - enabled
+              - disabled
         - name: Action
           in: query
           required: true
@@ -9456,6 +9465,10 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/Ipv6SupportValue'
                   - description: Enable or disable IPv6 support. The default is <code>enable</code>.
+              ApplianceModeSupport:
+                allOf:
+                  - $ref: '#/components/schemas/ApplianceModeSupportValue'
+                  - description: 'Enable or disable support for appliance mode. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. The default is <code>disable</code>.'
             description: Describes the options for a VPC attachment.
         - name: TagSpecifications
           in: query
@@ -33782,6 +33795,15 @@ paths:
           description: The ID of the VPC to associate with the Client VPN endpoint.
           schema:
             type: string
+        - name: SelfServicePortal
+          in: query
+          required: false
+          description: Specify whether to enable the self-service portal for the Client VPN endpoint.
+          schema:
+            type: string
+            enum:
+              - enabled
+              - disabled
         - name: Action
           in: query
           required: true
@@ -36875,6 +36897,10 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/Ipv6SupportValue'
                   - description: Enable or disable IPv6 support. The default is <code>enable</code>.
+              ApplianceModeSupport:
+                allOf:
+                  - $ref: '#/components/schemas/ApplianceModeSupportValue'
+                  - description: 'Enable or disable support for appliance mode. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. The default is <code>disable</code>.'
             description: Describes the options for a VPC attachment.
         - name: DryRun
           in: query
@@ -46768,6 +46794,11 @@ components:
       enum:
         - enable
         - disable
+    ApplianceModeSupportValue:
+      type: string
+      enum:
+        - enable
+        - disable
     Volume:
       type: object
       example:
@@ -55287,7 +55318,13 @@ components:
             - xml:
                 name: samlProviderArn
               description: The Amazon Resource Name (ARN) of the IAM SAML identity provider.
-      description: Describes the IAM SAML identity provider used for federated authentication.
+        SelfServiceSamlProviderArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: selfServiceSamlProviderArn
+              description: The Amazon Resource Name (ARN) of the IAM SAML identity provider for the self-service portal.
+      description: Describes the IAM SAML identity providers used for federated authentication.
     ClientVpnAuthentication:
       type: object
       properties:
@@ -55315,7 +55352,7 @@ components:
             - xml:
                 name: federatedAuthentication
               description: 'Information about the IAM SAML identity provider, if applicable.'
-      description: 'Describes the authentication methods used by a Client VPN endpoint. For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication">Authentication</a> in the <i>AWS Client VPN Administrator Guide</i>.'
+      description: 'Describes the authentication methods used by a Client VPN endpoint. For more information, see <a href="https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html">Authentication</a> in the <i>AWS Client VPN Administrator Guide</i>.'
     ClientVpnAuthenticationList:
       type: array
       items:
@@ -55338,6 +55375,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) of the IAM SAML identity provider.
+        SelfServiceSAMLProviderArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM SAML identity provider for the self-service portal.
       description: The IAM SAML identity provider used for federated authentication.
     ClientVpnAuthenticationRequestList:
       type: array
@@ -55621,6 +55662,12 @@ components:
             - xml:
                 name: vpcId
               description: The ID of the VPC.
+        SelfServicePortalUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: selfServicePortalUrl
+              description: The URL of the self-service portal.
       description: Describes a Client VPN endpoint.
     ClientVpnEndpointIdList:
       type: array
@@ -56291,6 +56338,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.'
+    SelfServicePortal:
+      type: string
+      enum:
+        - enabled
+        - disabled
     CreateClientVpnEndpointRequest:
       type: object
       required:
@@ -56362,6 +56414,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcId'
             - description: 'The ID of the VPC to associate with the Client VPN endpoint. If no security group IDs are specified in the request, the default security group for the VPC is applied.'
+        SelfServicePortal:
+          allOf:
+            - $ref: '#/components/schemas/SelfServicePortal'
+            - description: '<p>Specify whether to enable the self-service portal for the Client VPN endpoint.</p> <p>Default Value: <code>enabled</code> </p>'
     CreateClientVpnRouteRequest:
       type: object
       required:
@@ -59854,6 +59910,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Ipv6SupportValue'
             - description: Enable or disable IPv6 support. The default is <code>enable</code>.
+        ApplianceModeSupport:
+          allOf:
+            - $ref: '#/components/schemas/ApplianceModeSupportValue'
+            - description: 'Enable or disable support for appliance mode. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. The default is <code>disable</code>.'
       description: Describes the options for a VPC attachment.
     CreateTransitGatewayVpcAttachmentRequest:
       type: object
@@ -74165,6 +74225,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcId'
             - description: The ID of the VPC to associate with the Client VPN endpoint.
+        SelfServicePortal:
+          allOf:
+            - $ref: '#/components/schemas/SelfServicePortal'
+            - description: Specify whether to enable the self-service portal for the Client VPN endpoint.
     ModifyDefaultCreditSpecificationRequest:
       type: object
       required:
@@ -75177,6 +75241,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Ipv6SupportValue'
             - description: Enable or disable IPv6 support. The default is <code>enable</code>.
+        ApplianceModeSupport:
+          allOf:
+            - $ref: '#/components/schemas/ApplianceModeSupportValue'
+            - description: 'Enable or disable support for appliance mode. If enabled, a traffic flow between a source and destination uses the same Availability Zone for the VPC attachment for the lifetime of that flow. The default is <code>disable</code>.'
       description: Describes the options for a VPC attachment.
     ModifyTransitGatewayVpcAttachmentRequest:
       type: object
@@ -81020,6 +81088,12 @@ components:
             - xml:
                 name: ipv6Support
               description: Indicates whether IPv6 support is disabled.
+        ApplianceModeSupport:
+          allOf:
+            - $ref: '#/components/schemas/ApplianceModeSupportValue'
+            - xml:
+                name: applianceModeSupport
+              description: Indicates whether appliance mode support is enabled.
       description: Describes the VPC attachment options.
     TunnelOption:
       type: object

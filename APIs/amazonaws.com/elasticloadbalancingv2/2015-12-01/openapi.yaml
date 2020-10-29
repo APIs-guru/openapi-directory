@@ -532,7 +532,7 @@ paths:
         - name: DefaultActions
           in: query
           required: true
-          description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+          description: The actions for the default rule.
           schema:
             type: array
             items:
@@ -1123,7 +1123,7 @@ paths:
         - name: Conditions
           in: query
           required: true
-          description: 'The conditions. Each rule can optionally include up to one of each of the following conditions: <code>http-request-method</code>, <code>host-header</code>, <code>path-pattern</code>, and <code>source-ip</code>. Each rule can also optionally include one or more of each of the following conditions: <code>http-header</code> and <code>query-string</code>.'
+          description: The conditions.
           schema:
             type: array
             items:
@@ -1139,7 +1139,7 @@ paths:
         - name: Actions
           in: query
           required: true
-          description: '<p>The actions. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>, and it must be the last action to be performed.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+          description: The actions.
           schema:
             type: array
             items:
@@ -1352,6 +1352,12 @@ paths:
               - TLS
               - UDP
               - TCP_UDP
+        - name: ProtocolVersion
+          in: query
+          required: false
+          description: '[HTTP/HTTPS protocol] The protocol version. Specify <code>GRPC</code> to send requests to targets using gRPC. Specify <code>HTTP2</code> to send requests to targets using HTTP/2. The default is <code>HTTP1</code>, which sends requests to targets using HTTP/1.1.'
+          schema:
+            type: string
         - name: Port
           in: query
           required: false
@@ -1394,7 +1400,7 @@ paths:
         - name: HealthCheckPath
           in: query
           required: false
-          description: '[HTTP/HTTPS health checks] The ping path that is the destination on the targets for health checks. The default is /.'
+          description: '<p>[HTTP/HTTPS health checks] The destination for health checks on the targets.</p> <p>[HTTP1 or HTTP2 protocol version] The ping path. The default is /.</p> <p>[GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.</p>'
           schema:
             type: string
             minLength: 1
@@ -1434,17 +1440,19 @@ paths:
         - name: Matcher
           in: query
           required: false
-          description: '[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.'
+          description: '[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.'
           schema:
             type: object
-            required:
-              - HttpCode
             properties:
               HttpCode:
                 allOf:
                   - $ref: '#/components/schemas/HttpCode'
-                  - description: '<p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200–399.</p>'
-            description: Information to use when checking for a successful response from a target.
+                  - description: '<p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is "200–399".</p>'
+              GrpcCode:
+                allOf:
+                  - $ref: '#/components/schemas/GrpcCode'
+                  - description: 'You can specify values between 0 and 99. You can specify multiple values (for example, "0,1") or a range of values (for example, "0-5"). The default value is 12.'
+            description: 'The codes to use when checking for a successful response from a target. If the protocol version is gRPC, these are gRPC codes. Otherwise, these are HTTP codes.'
         - name: TargetType
           in: query
           required: false
@@ -3372,7 +3380,7 @@ paths:
         - name: DefaultActions
           in: query
           required: false
-          description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+          description: The actions for the default rule.
           schema:
             type: array
             items:
@@ -3733,7 +3741,7 @@ paths:
         - name: Conditions
           in: query
           required: false
-          description: 'The conditions. Each rule can include zero or one of the following conditions: <code>http-request-method</code>, <code>host-header</code>, <code>path-pattern</code>, and <code>source-ip</code>, and zero or more of the following conditions: <code>http-header</code> and <code>query-string</code>.'
+          description: The conditions.
           schema:
             type: array
             items:
@@ -3741,7 +3749,7 @@ paths:
         - name: Actions
           in: query
           required: false
-          description: '<p>The actions. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>, and it must be the last action to be performed.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+          description: The actions.
           schema:
             type: array
             items:
@@ -3918,7 +3926,7 @@ paths:
         - name: HealthCheckPath
           in: query
           required: false
-          description: '[HTTP/HTTPS health checks] The ping path that is the destination for the health check request.'
+          description: '<p>[HTTP/HTTPS health checks] The destination for health checks on the targets.</p> <p>[HTTP1 or HTTP2 protocol version] The ping path. The default is /.</p> <p>[GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.</p>'
           schema:
             type: string
             minLength: 1
@@ -3932,7 +3940,7 @@ paths:
         - name: HealthCheckIntervalSeconds
           in: query
           required: false
-          description: '<p>The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.</p> <p>With Network Load Balancers, you can''t modify this setting.</p>'
+          description: '<p>The approximate amount of time, in seconds, between health checks of an individual target. For HTTP and HTTPS health checks, the range is 5 to 300 seconds. For TPC health checks, the supported values are 10 or 30 seconds.</p> <p>With Network Load Balancers, you can''t modify this setting.</p>'
           schema:
             type: integer
             minimum: 5
@@ -3956,7 +3964,7 @@ paths:
         - name: UnhealthyThresholdCount
           in: query
           required: false
-          description: 'The number of consecutive health check failures required before considering the target unhealthy. For Network Load Balancers, this value must be the same as the healthy threshold count.'
+          description: 'The number of consecutive health check failures required before considering the target unhealthy. For target groups with a protocol of TCP or TLS, this value must be the same as the healthy threshold count.'
           schema:
             type: integer
             minimum: 2
@@ -3964,17 +3972,19 @@ paths:
         - name: Matcher
           in: query
           required: false
-          description: '<p>[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target. The possible values are from 200 to 499. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"). The default is 200.</p> <p>With Network Load Balancers, you can''t modify this setting.</p>'
+          description: '<p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.</p> <p>With Network Load Balancers, you can''t modify this setting.</p>'
           schema:
             type: object
-            required:
-              - HttpCode
             properties:
               HttpCode:
                 allOf:
                   - $ref: '#/components/schemas/HttpCode'
-                  - description: '<p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200–399.</p>'
-            description: Information to use when checking for a successful response from a target.
+                  - description: '<p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is "200–399".</p>'
+              GrpcCode:
+                allOf:
+                  - $ref: '#/components/schemas/GrpcCode'
+                  - description: 'You can specify values between 0 and 99. You can specify multiple values (for example, "0,1") or a range of values (for example, "0-5"). The default value is 12.'
+            description: 'The codes to use when checking for a successful response from a target. If the protocol version is gRPC, these are gRPC codes. Otherwise, these are HTTP codes.'
         - name: Action
           in: query
           required: true
@@ -4190,7 +4200,7 @@ paths:
         - name: Targets
           in: query
           required: true
-          description: '<p>The targets.</p> <p>To register a target by instance ID, specify the instance ID. To register a target by IP address, specify the IP address. To register a Lambda function, specify the ARN of the Lambda function.</p>'
+          description: The targets.
           schema:
             type: array
             items:
@@ -5329,6 +5339,8 @@ components:
             - description: Information about the target group.
     HttpCode:
       type: string
+    GrpcCode:
+      type: string
     DuplicateTargetGroupNameException: {}
     DeleteListenerOutput:
       type: object
@@ -6213,7 +6225,7 @@ components:
         DefaultActions:
           allOf:
             - $ref: '#/components/schemas/Actions'
-            - description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+            - description: The actions for the default rule.
         AlpnPolicy:
           allOf:
             - $ref: '#/components/schemas/AlpnPolicyName'
@@ -6327,7 +6339,7 @@ components:
         Conditions:
           allOf:
             - $ref: '#/components/schemas/RuleConditionList'
-            - description: 'The conditions. Each rule can optionally include up to one of each of the following conditions: <code>http-request-method</code>, <code>host-header</code>, <code>path-pattern</code>, and <code>source-ip</code>. Each rule can also optionally include one or more of each of the following conditions: <code>http-header</code> and <code>query-string</code>.'
+            - description: The conditions.
         Priority:
           allOf:
             - $ref: '#/components/schemas/RulePriority'
@@ -6335,7 +6347,7 @@ components:
         Actions:
           allOf:
             - $ref: '#/components/schemas/Actions'
-            - description: '<p>The actions. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>, and it must be the last action to be performed.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+            - description: The actions.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -6344,6 +6356,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Rule'
+    ProtocolVersion:
+      type: string
     VpcId:
       type: string
     HealthCheckPort:
@@ -6368,14 +6382,16 @@ components:
       maximum: 10
     Matcher:
       type: object
-      required:
-        - HttpCode
       properties:
         HttpCode:
           allOf:
             - $ref: '#/components/schemas/HttpCode'
-            - description: '<p>The HTTP codes.</p> <p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is 200–399.</p>'
-      description: Information to use when checking for a successful response from a target.
+            - description: '<p>For Application Load Balancers, you can specify values between 200 and 499, and the default value is 200. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299").</p> <p>For Network Load Balancers, this is "200–399".</p>'
+        GrpcCode:
+          allOf:
+            - $ref: '#/components/schemas/GrpcCode'
+            - description: 'You can specify values between 0 and 99. You can specify multiple values (for example, "0,1") or a range of values (for example, "0-5"). The default value is 12.'
+      description: 'The codes to use when checking for a successful response from a target. If the protocol version is gRPC, these are gRPC codes. Otherwise, these are HTTP codes.'
     TargetTypeEnum:
       type: string
       enum:
@@ -6396,6 +6412,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProtocolEnum'
             - description: 'The protocol to use for routing traffic to the targets. For Application Load Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported protocols are TCP, TLS, UDP, or TCP_UDP. A TCP_UDP listener must be associated with a TCP_UDP target group. If the target is a Lambda function, this parameter does not apply.'
+        ProtocolVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolVersion'
+            - description: '[HTTP/HTTPS protocol] The protocol version. Specify <code>GRPC</code> to send requests to targets using gRPC. Specify <code>HTTP2</code> to send requests to targets using HTTP/2. The default is <code>HTTP1</code>, which sends requests to targets using HTTP/1.1.'
         Port:
           allOf:
             - $ref: '#/components/schemas/Port'
@@ -6419,7 +6439,7 @@ components:
         HealthCheckPath:
           allOf:
             - $ref: '#/components/schemas/Path'
-            - description: '[HTTP/HTTPS health checks] The ping path that is the destination on the targets for health checks. The default is /.'
+            - description: '<p>[HTTP/HTTPS health checks] The destination for health checks on the targets.</p> <p>[HTTP1 or HTTP2 protocol version] The ping path. The default is /.</p> <p>[GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.</p>'
         HealthCheckIntervalSeconds:
           allOf:
             - $ref: '#/components/schemas/HealthCheckIntervalSeconds'
@@ -6439,7 +6459,7 @@ components:
         Matcher:
           allOf:
             - $ref: '#/components/schemas/Matcher'
-            - description: '[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target.'
+            - description: '[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.'
         TargetType:
           allOf:
             - $ref: '#/components/schemas/TargetTypeEnum'
@@ -7001,7 +7021,7 @@ components:
         DefaultActions:
           allOf:
             - $ref: '#/components/schemas/Actions'
-            - description: '<p>The actions for the default rule. The rule must include one forward action or one or more fixed-response actions.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+            - description: The actions for the default rule.
         AlpnPolicy:
           allOf:
             - $ref: '#/components/schemas/AlpnPolicyName'
@@ -7034,11 +7054,11 @@ components:
         Conditions:
           allOf:
             - $ref: '#/components/schemas/RuleConditionList'
-            - description: 'The conditions. Each rule can include zero or one of the following conditions: <code>http-request-method</code>, <code>host-header</code>, <code>path-pattern</code>, and <code>source-ip</code>, and zero or more of the following conditions: <code>http-header</code> and <code>query-string</code>.'
+            - description: The conditions.
         Actions:
           allOf:
             - $ref: '#/components/schemas/Actions'
-            - description: '<p>The actions. Each rule must include exactly one of the following types of actions: <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>, and it must be the last action to be performed.</p> <p>If the action type is <code>forward</code>, you specify one or more target groups. The protocol of the target group must be HTTP or HTTPS for an Application Load Balancer. The protocol of the target group must be TCP, TLS, UDP, or TCP_UDP for a Network Load Balancer.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-oidc</code>, you authenticate users through an identity provider that is OpenID Connect (OIDC) compliant.</p> <p>[HTTPS listeners] If the action type is <code>authenticate-cognito</code>, you authenticate users through the user pools supported by Amazon Cognito.</p> <p>[Application Load Balancer] If the action type is <code>redirect</code>, you redirect specified client requests from one URL to another.</p> <p>[Application Load Balancer] If the action type is <code>fixed-response</code>, you drop specified client requests and return a custom HTTP response.</p>'
+            - description: The actions.
     ModifyTargetGroupAttributesInput:
       type: object
       required:
@@ -7075,7 +7095,7 @@ components:
         HealthCheckPath:
           allOf:
             - $ref: '#/components/schemas/Path'
-            - description: '[HTTP/HTTPS health checks] The ping path that is the destination for the health check request.'
+            - description: '<p>[HTTP/HTTPS health checks] The destination for health checks on the targets.</p> <p>[HTTP1 or HTTP2 protocol version] The ping path. The default is /.</p> <p>[GRPC protocol version] The path of a custom health check method with the format /package.service/method. The default is /AWS.ALB/healthcheck.</p>'
         HealthCheckEnabled:
           allOf:
             - $ref: '#/components/schemas/HealthCheckEnabled'
@@ -7083,7 +7103,7 @@ components:
         HealthCheckIntervalSeconds:
           allOf:
             - $ref: '#/components/schemas/HealthCheckIntervalSeconds'
-            - description: '<p>The approximate amount of time, in seconds, between health checks of an individual target. For Application Load Balancers, the range is 5 to 300 seconds. For Network Load Balancers, the supported values are 10 or 30 seconds.</p> <p>With Network Load Balancers, you can''t modify this setting.</p>'
+            - description: '<p>The approximate amount of time, in seconds, between health checks of an individual target. For HTTP and HTTPS health checks, the range is 5 to 300 seconds. For TPC health checks, the supported values are 10 or 30 seconds.</p> <p>With Network Load Balancers, you can''t modify this setting.</p>'
         HealthCheckTimeoutSeconds:
           allOf:
             - $ref: '#/components/schemas/HealthCheckTimeoutSeconds'
@@ -7095,11 +7115,11 @@ components:
         UnhealthyThresholdCount:
           allOf:
             - $ref: '#/components/schemas/HealthCheckThresholdCount'
-            - description: 'The number of consecutive health check failures required before considering the target unhealthy. For Network Load Balancers, this value must be the same as the healthy threshold count.'
+            - description: 'The number of consecutive health check failures required before considering the target unhealthy. For target groups with a protocol of TCP or TLS, this value must be the same as the healthy threshold count.'
         Matcher:
           allOf:
             - $ref: '#/components/schemas/Matcher'
-            - description: '<p>[HTTP/HTTPS health checks] The HTTP codes to use when checking for a successful response from a target. The possible values are from 200 to 499. You can specify multiple values (for example, "200,202") or a range of values (for example, "200-299"). The default is 200.</p> <p>With Network Load Balancers, you can''t modify this setting.</p>'
+            - description: '<p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful response from a target.</p> <p>With Network Load Balancers, you can''t modify this setting.</p>'
     PathPatternConditionConfig:
       type: object
       properties:
@@ -7168,7 +7188,7 @@ components:
         Targets:
           allOf:
             - $ref: '#/components/schemas/TargetDescriptions'
-            - description: '<p>The targets.</p> <p>To register a target by instance ID, specify the instance ID. To register a target by IP address, specify the IP address. To register a Lambda function, specify the ARN of the Lambda function.</p>'
+            - description: The targets.
     RemoveListenerCertificatesInput:
       type: object
       required:
@@ -7394,11 +7414,11 @@ components:
         HealthCheckPath:
           allOf:
             - $ref: '#/components/schemas/Path'
-            - description: The destination for the health check request.
+            - description: The destination for health checks on the targets.
         Matcher:
           allOf:
             - $ref: '#/components/schemas/Matcher'
-            - description: The HTTP codes to use when checking for a successful response from a target.
+            - description: The HTTP or gRPC codes to use when checking for a successful response from a target.
         LoadBalancerArns:
           allOf:
             - $ref: '#/components/schemas/LoadBalancerArns'
@@ -7407,6 +7427,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TargetTypeEnum'
             - description: The type of target that you must specify when registering targets with this target group. The possible values are <code>instance</code> (targets are specified by instance ID) or <code>ip</code> (targets are specified by IP address).
+        ProtocolVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolVersion'
+            - description: '[HTTP/HTTPS protocol] The protocol version. The possible values are <code>GRPC</code>, <code>HTTP1</code>, and <code>HTTP2</code>.'
       description: Information about a target group.
     TargetGroupAttributeKey:
       type: string
