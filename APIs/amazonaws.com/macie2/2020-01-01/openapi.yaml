@@ -5521,6 +5521,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - description: An equal to condition to apply to a specified property value for findings.
+        eqExactMatch:
+          allOf:
+            - $ref: '#/components/schemas/__listOf__string'
+            - description: '<p>A condition that requires an array field on a finding to exactly match the specified property values. You can use this operator with the following properties:</p><ul><li><p>customDataIdentifiers.detections.arn</p></li><li><p>customDataIdentifiers.detections.name</p></li><li><p>resourcesAffected.s3Bucket.tags.key</p></li><li><p>resourcesAffected.s3Bucket.tags.value</p></li><li><p>resourcesAffected.s3Object.tags.key</p></li><li><p>resourcesAffected.s3Object.tags.value</p></li><li><p>sensitiveData.category</p></li><li><p>sensitiveData.detections.type</p></li></ul>'
         gt:
           allOf:
             - $ref: '#/components/schemas/__long'

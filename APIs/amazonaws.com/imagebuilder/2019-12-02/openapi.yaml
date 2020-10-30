@@ -2287,7 +2287,7 @@ paths:
                   description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
                   type: string
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 65535
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2392,7 +2392,7 @@ paths:
                   description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
                   type: string
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 65535
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2490,7 +2490,7 @@ paths:
                   description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
                   type: string
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 65535
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2594,7 +2594,7 @@ paths:
                   description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
                   type: string
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 65535
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2704,7 +2704,7 @@ paths:
                   description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
                   type: string
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 65535
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2802,7 +2802,7 @@ paths:
                   description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
                   type: string
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 65535
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2907,7 +2907,7 @@ paths:
                   description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
                   type: string
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 65535
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3012,7 +3012,7 @@ paths:
                   description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
                   type: string
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 65535
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3110,7 +3110,7 @@ paths:
                   description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
                   type: string
                   minLength: 1
-                  maxLength: 1024
+                  maxLength: 65535
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4456,7 +4456,7 @@ components:
             - description: 'The list of component summaries for the specified semantic version. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
     InvalidPaginationTokenException: {}
     ListComponentsResponse:
@@ -4472,7 +4472,7 @@ components:
             - description: 'The list of component semantic versions. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
     Filter:
       type: object
@@ -4499,7 +4499,7 @@ components:
             - description: 'The list of distributions. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
     ListImageBuildVersionsResponse:
       type: object
@@ -4514,7 +4514,7 @@ components:
             - description: 'The list of image build versions. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
     ListImagePipelineImagesResponse:
       type: object
@@ -4529,7 +4529,7 @@ components:
             - description: 'The list of images built by this pipeline. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
     ListImagePipelinesResponse:
       type: object
@@ -4544,7 +4544,7 @@ components:
             - description: 'The list of image pipelines. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
     ListImageRecipesResponse:
       type: object
@@ -4559,7 +4559,7 @@ components:
             - description: 'The list of image pipelines. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
     ListImagesResponse:
       type: object
@@ -4574,7 +4574,7 @@ components:
             - description: 'The list of image semantic versions. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects. '
     ListInfrastructureConfigurationsResponse:
       type: object
@@ -4589,7 +4589,7 @@ components:
             - description: 'The list of infrastructure configurations. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'The next token used for paginated responses. When this is not empty, there are additional elements that the service has not included in this request. Use this token with the next request to retrieve additional objects.'
     ListTagsForResourceResponse:
       type: object
@@ -4712,7 +4712,7 @@ components:
       items:
         $ref: '#/components/schemas/AccountId'
       minItems: 1
-      maxItems: 50
+      maxItems: 1536
     ImageState:
       type: object
       properties:
@@ -4743,7 +4743,7 @@ components:
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The description of the EC2 AMI. '
+            - description: The description of the EC2 AMI. Minimum and maximum length are in characters.
         state:
           $ref: '#/components/schemas/ImageState'
         accountId:
@@ -4784,7 +4784,7 @@ components:
         description:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: 'The description of the distribution configuration. '
+            - description: The description of the distribution configuration. Minimum and maximum length are in characters.
         targetAccountIds:
           allOf:
             - $ref: '#/components/schemas/AccountList'
@@ -6115,6 +6115,10 @@ components:
       type: integer
       minimum: 1
       maximum: 25
+    PaginationToken:
+      type: string
+      minLength: 1
+      maxLength: 65535
     ListComponentBuildVersionsRequest:
       type: object
       required:
@@ -6131,7 +6135,7 @@ components:
             - description: 'The maximum items to return in a request. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     Ownership:
       type: string
@@ -6157,7 +6161,7 @@ components:
             - description: 'The maximum items to return in a request. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     ListDistributionConfigurationsRequest:
       type: object
@@ -6173,7 +6177,7 @@ components:
             - description: 'The maximum items to return in a request. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     ListImageBuildVersionsRequest:
       type: object
@@ -6195,7 +6199,7 @@ components:
             - description: 'The maximum items to return in a request. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     ListImagePipelineImagesRequest:
       type: object
@@ -6217,7 +6221,7 @@ components:
             - description: 'The maximum items to return in a request. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     ListImagePipelinesRequest:
       type: object
@@ -6233,7 +6237,7 @@ components:
             - description: 'The maximum items to return in a request. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     ListImageRecipesRequest:
       type: object
@@ -6253,7 +6257,7 @@ components:
             - description: 'The maximum items to return in a request. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     ListImagesRequest:
       type: object
@@ -6273,7 +6277,7 @@ components:
             - description: 'The maximum items to return in a request. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     ListInfrastructureConfigurationsRequest:
       type: object
@@ -6289,7 +6293,7 @@ components:
             - description: 'The maximum items to return in a request. '
         nextToken:
           allOf:
-            - $ref: '#/components/schemas/NonEmptyString'
+            - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
     ListTagsForResourceRequest:
       type: object

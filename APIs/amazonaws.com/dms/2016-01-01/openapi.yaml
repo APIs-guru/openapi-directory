@@ -3252,6 +3252,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'A friendly name for the resource identifier at the end of the <code>EndpointArn</code> response parameter that is returned in the created <code>Endpoint</code> object. The value for this parameter can have up to 31 characters. It can contain only ASCII letters, digits, and hyphen (''-''). Also, it can''t end with a hyphen or contain two consecutive hyphens, and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this value might result in the <code>EndpointArn</code> value <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don''t specify a <code>ResourceIdentifier</code> value, AWS DMS generates a default identifier value for the end of <code>EndpointArn</code>.'
+        DocDbSettings:
+          $ref: '#/components/schemas/DocDbSettings'
       description: <p/>
     KMSKeyNotAccessibleFault: {}
     ResourceAlreadyExistsFault: {}
@@ -4632,6 +4634,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IBMDb2Settings'
             - description: 'Settings in JSON format for the source IBM Db2 LUW endpoint. For information about other available settings, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib">Extra connection attributes when using Db2 LUW as a source for AWS DMS</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        DocDbSettings:
+          allOf:
+            - $ref: '#/components/schemas/DocDbSettings'
+            - description: 'Settings in JSON format for the source DocumentDB endpoint. For more information about the available settings, see the configuration properties section in <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html"> Using DocumentDB as a Target for AWS Database Migration Service</a> in the <i>AWS Database Migration Service User Guide.</i> '
       description: <p/>
     ModifyEventSubscriptionResponse:
       type: object
@@ -5452,7 +5458,7 @@ components:
         DatePartitionEnabled:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: 'When set to <code>true</code>, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is <code>false</code>. For more information about date-based folder partitoning, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib">Using date-based folder partitioning</a> '
+            - description: 'When set to <code>true</code>, this parameter partitions S3 bucket folders based on transaction commit dates. The default value is <code>false</code>. For more information about date-based folder partitoning, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.DatePartitioning">Using date-based folder partitioning</a>.'
         DatePartitionSequence:
           allOf:
             - $ref: '#/components/schemas/DatePartitionSequenceValue'
@@ -6112,6 +6118,46 @@ components:
             - $ref: '#/components/schemas/String'
             - description: Endpoint connection user name.
       description: Provides information that defines an IBM Db2 LUW endpoint.
+    DocDbSettings:
+      type: object
+      properties:
+        Username:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The user name you use to access the DocumentDB source endpoint. '
+        Password:
+          allOf:
+            - $ref: '#/components/schemas/SecretString'
+            - description: ' The password for the user account you use to access the DocumentDB source endpoint. '
+        ServerName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The name of the server on the DocumentDB source endpoint. '
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: ' The port value for the DocumentDB source endpoint. '
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The database name on the DocumentDB source endpoint. '
+        NestingLevel:
+          allOf:
+            - $ref: '#/components/schemas/NestingLevelValue'
+            - description: <p> Specifies either document or table mode. </p> <p>Default value is <code>"none"</code>. Specify <code>"none"</code> to use document mode. Specify <code>"one"</code> to use table mode.</p>
+        ExtractDocId:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: <p> Specifies the document ID. Use this setting when <code>NestingLevel</code> is set to <code>"none"</code>. </p> <p>Default value is <code>"false"</code>. </p>
+        DocsToInvestigate:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: <p> Indicates the number of documents to preview to determine the document organization. Use this setting when <code>NestingLevel</code> is set to <code>"one"</code>. </p> <p>Must be a positive value greater than <code>0</code>. Default value is <code>1000</code>.</p>
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
+      description: Provides information that defines a DocumentDB endpoint.
     Endpoint:
       type: object
       properties:
@@ -6243,6 +6289,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/IBMDb2Settings'
             - description: 'The settings for the IBM Db2 LUW source endpoint. For more information, see the <code>IBMDb2Settings</code> structure. '
+        DocDbSettings:
+          $ref: '#/components/schemas/DocDbSettings'
       description: '<p>Describes an endpoint of a database instance in response to operations such as the following:</p> <ul> <li> <p> <code>CreateEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpointTypes</code> </p> </li> <li> <p> <code>ModifyEndpoint</code> </p> </li> </ul>'
     EventCategoriesList:
       type: array
@@ -6624,6 +6672,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TableStatistics'
+    NestingLevelValue:
+      type: string
+      enum:
+        - none
+        - one
     EncodingTypeValue:
       type: string
       enum:
@@ -6715,11 +6768,6 @@ components:
         - rely-on-sql-server-replication-agent
         - exclusive-automatic-truncation
         - shared-automatic-truncation
-    NestingLevelValue:
-      type: string
-      enum:
-        - none
-        - one
     TargetDbType:
       type: string
       enum:

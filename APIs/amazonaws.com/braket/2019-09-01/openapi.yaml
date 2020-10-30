@@ -112,6 +112,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Braket endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   '/quantum-task/{quantumTaskArn}/cancel':
     put:
@@ -285,6 +286,11 @@ paths:
                   description: The number of shots to use for the task.
                   type: integer
                   minimum: 0
+                tags:
+                  description: Tags to be added to the quantum task you're creating.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -409,6 +415,99 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Shows the tags associated with this resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Specify the <code>resourceArn</code> for the resource whose tags to display.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Add a tag to the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Specify the <code>resourceArn</code> of the resource to which a tag will be added.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tags
+              properties:
+                tags:
+                  description: Specify the tags to add to the resource.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/String'
   /devices:
     post:
       operationId: SearchDevices
@@ -569,6 +668,58 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{resourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Remove tags from a resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: Specify the <code>resourceArn</code> for the resource from which to remove the tags.
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: pecify the keys for the tags to remove from the resource.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -650,6 +801,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/QuantumTaskArn'
             - description: The ARN of the task created by the request.
+    String:
+      type: string
     DeviceOfflineException: {}
     ServiceQuotaExceededException: {}
     GetDeviceResponse:
@@ -738,6 +891,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/QuantumTaskStatus'
             - description: The status of the task.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The tags that belong to this task.
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: 'Displays the key, value pairs of tags associated with this resource.'
     SearchDevicesResponse:
       type: object
       required:
@@ -759,11 +923,11 @@ components:
       properties:
         name:
           allOf:
-            - $ref: '#/components/schemas/SearchDevicesFilternameString'
+            - $ref: '#/components/schemas/SearchDevicesFilterNameString'
             - description: The name to use to filter results.
         values:
           allOf:
-            - $ref: '#/components/schemas/SearchDevicesFiltervaluesString256List'
+            - $ref: '#/components/schemas/SearchDevicesFilterValuesList'
             - description: The values to use to filter results.
       description: The filter to use for searching devices.
     SearchQuantumTasksResponse:
@@ -796,9 +960,15 @@ components:
             - description: An operator to use in the filter.
         values:
           allOf:
-            - $ref: '#/components/schemas/SearchQuantumTasksFiltervaluesString256List'
+            - $ref: '#/components/schemas/SearchQuantumTasksFilterValuesList'
             - description: The values to use for the filter.
       description: A filter to use to search for tasks.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
     String64:
       type: string
       minLength: 1
@@ -820,29 +990,33 @@ components:
     CancellationStatus:
       type: string
       enum:
-        - CANCELLED
         - CANCELLING
+        - CANCELLED
     JsonValue:
       type: string
     DeviceArn:
       type: string
       minLength: 1
       maxLength: 256
-    CreateQuantumTaskRequestdeviceParametersJsonValue:
+    CreateQuantumTaskRequestDeviceParametersString:
       type: string
       minLength: 1
       maxLength: 2048
-    CreateQuantumTaskRequestoutputS3BucketString:
+    CreateQuantumTaskRequestOutputS3BucketString:
       type: string
       minLength: 3
       maxLength: 63
-    CreateQuantumTaskRequestoutputS3KeyPrefixString:
+    CreateQuantumTaskRequestOutputS3KeyPrefixString:
       type: string
       minLength: 1
       maxLength: 1024
-    CreateQuantumTaskRequestshotsLong:
+    CreateQuantumTaskRequestShotsLong:
       type: integer
       minimum: 0
+    TagsMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
     CreateQuantumTaskRequest:
       type: object
       required:
@@ -868,27 +1042,29 @@ components:
             - description: The ARN of the device to run the task on.
         deviceParameters:
           allOf:
-            - $ref: '#/components/schemas/CreateQuantumTaskRequestdeviceParametersJsonValue'
+            - $ref: '#/components/schemas/CreateQuantumTaskRequestDeviceParametersString'
             - description: The parameters for the device to run the task on.
         outputS3Bucket:
           allOf:
-            - $ref: '#/components/schemas/CreateQuantumTaskRequestoutputS3BucketString'
+            - $ref: '#/components/schemas/CreateQuantumTaskRequestOutputS3BucketString'
             - description: The S3 bucket to store task result files in.
         outputS3KeyPrefix:
           allOf:
-            - $ref: '#/components/schemas/CreateQuantumTaskRequestoutputS3KeyPrefixString'
+            - $ref: '#/components/schemas/CreateQuantumTaskRequestOutputS3KeyPrefixString'
             - description: The key prefix for the location in the S3 bucket to store task results in.
         shots:
           allOf:
-            - $ref: '#/components/schemas/CreateQuantumTaskRequestshotsLong'
+            - $ref: '#/components/schemas/CreateQuantumTaskRequestShotsLong'
             - description: The number of shots to use for the task.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Tags to be added to the quantum task you're creating.
     DeviceStatus:
       type: string
       enum:
-        - OFFLINE
         - ONLINE
-    String:
-      type: string
+        - OFFLINE
     DeviceType:
       type: string
       enum:
@@ -944,13 +1120,17 @@ components:
     QuantumTaskStatus:
       type: string
       enum:
-        - CANCELLED
-        - CANCELLING
-        - COMPLETED
         - CREATED
-        - FAILED
         - QUEUED
         - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLING
+        - CANCELLED
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     QuantumTaskSummary:
       type: object
       required:
@@ -994,16 +1174,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/QuantumTaskStatus'
             - description: The status of the task.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: 'Displays the key, value pairs of tags associated with this quantum task.'
       description: Includes information about a quantum task.
     QuantumTaskSummaryList:
       type: array
       items:
         $ref: '#/components/schemas/QuantumTaskSummary'
-    SearchDevicesFilternameString:
+    SearchDevicesFilterNameString:
       type: string
       minLength: 1
       maxLength: 64
-    SearchDevicesFiltervaluesString256List:
+    SearchDevicesFilterValuesList:
       type: array
       items:
         $ref: '#/components/schemas/String256'
@@ -1013,13 +1197,13 @@ components:
       type: string
       minLength: 1
       maxLength: 256
-    SearchDevicesRequestfiltersSearchDevicesFilterList:
+    SearchDevicesRequestFiltersList:
       type: array
       items:
         $ref: '#/components/schemas/SearchDevicesFilter'
       minItems: 0
       maxItems: 10
-    SearchDevicesRequestmaxResultsInteger:
+    SearchDevicesRequestMaxResultsInteger:
       type: integer
       minimum: 1
       maximum: 100
@@ -1031,11 +1215,11 @@ components:
       properties:
         filters:
           allOf:
-            - $ref: '#/components/schemas/SearchDevicesRequestfiltersSearchDevicesFilterList'
+            - $ref: '#/components/schemas/SearchDevicesRequestFiltersList'
             - description: The filter values to use to search for a device.
         maxResults:
           allOf:
-            - $ref: '#/components/schemas/SearchDevicesRequestmaxResultsInteger'
+            - $ref: '#/components/schemas/SearchDevicesRequestMaxResultsInteger'
             - description: The maximum number of results to return in the response.
         nextToken:
           allOf:
@@ -1044,25 +1228,25 @@ components:
     SearchQuantumTasksFilterOperator:
       type: string
       enum:
-        - BETWEEN
+        - LT
+        - LTE
         - EQUAL
         - GT
         - GTE
-        - LT
-        - LTE
-    SearchQuantumTasksFiltervaluesString256List:
+        - BETWEEN
+    SearchQuantumTasksFilterValuesList:
       type: array
       items:
         $ref: '#/components/schemas/String256'
       minItems: 1
       maxItems: 10
-    SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList:
+    SearchQuantumTasksRequestFiltersList:
       type: array
       items:
         $ref: '#/components/schemas/SearchQuantumTasksFilter'
       minItems: 0
       maxItems: 10
-    SearchQuantumTasksRequestmaxResultsInteger:
+    SearchQuantumTasksRequestMaxResultsInteger:
       type: integer
       minimum: 1
       maximum: 100
@@ -1074,15 +1258,33 @@ components:
       properties:
         filters:
           allOf:
-            - $ref: '#/components/schemas/SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList'
+            - $ref: '#/components/schemas/SearchQuantumTasksRequestFiltersList'
             - description: Array of <code>SearchQuantumTasksFilter</code> objects.
         maxResults:
           allOf:
-            - $ref: '#/components/schemas/SearchQuantumTasksRequestmaxResultsInteger'
+            - $ref: '#/components/schemas/SearchQuantumTasksRequestMaxResultsInteger'
             - description: Maximum number of results to return in the response.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A token used for pagination of results returned in the response. Use the token returned from the previous request continue results where the previous request ended.
+    TagKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    TagResourceRequest:
+      type: object
+      required:
+        - tags
+      title: TagResourceRequest
+      properties:
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: Specify the tags to add to the resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
 security:
   - hmac: []
