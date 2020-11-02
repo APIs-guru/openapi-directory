@@ -549,6 +549,31 @@ paths:
                 type: array
           description: ""
       summary: Player Details by Team
+  "/{format}/Referees":
+    get:
+      description: Returns full list of NFL Referees
+      operationId: Referees
+      parameters:
+        - description: Desired response format. Valid entries are <code>XML</code> or <code>JSON</code>.
+          in: path
+          name: format
+          required: true
+          schema:
+            default: XML
+            enum:
+              - XML
+              - JSON
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Referee"
+                type: array
+          description: ""
+      summary: Referees
   "/{format}/Rookies/{season}":
     get:
       operationId: PlayerDetailsByRookieDraftYear
@@ -2597,6 +2622,26 @@ components:
         WindSpeed:
           nullable: true
           type: integer
+    Referee:
+      properties:
+        College:
+          nullable: true
+          type: string
+        Experience:
+          nullable: false
+          type: integer
+        Name:
+          nullable: true
+          type: string
+        Number:
+          nullable: false
+          type: integer
+        Position:
+          nullable: true
+          type: string
+        RefereeID:
+          nullable: false
+          type: integer
     Schedule:
       properties:
         AwayTeam:
@@ -2867,6 +2912,9 @@ components:
         RedZone:
           nullable: true
           type: string
+        RefereeID:
+          nullable: true
+          type: integer
         ScoreID:
           nullable: false
           type: integer

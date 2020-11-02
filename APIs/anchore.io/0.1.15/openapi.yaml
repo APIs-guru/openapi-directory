@@ -5017,6 +5017,9 @@ components:
     WhitelistItem:
       description: Identifies a specific gate and trigger match from a policy against an image and indicates it should be ignored in final policy decisions
       properties:
+        expires_on:
+          format: date-time
+          type: string
         gate:
           type: string
         id:

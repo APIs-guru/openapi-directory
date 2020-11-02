@@ -27782,6 +27782,9 @@ paths:
                     card:
                       anyOf:
                         - properties:
+                            cvc_token:
+                              maxLength: 5000
+                              type: string
                             installments:
                               properties:
                                 enabled:
@@ -27842,6 +27845,14 @@ paths:
                         - properties:
                             expires_after_days:
                               type: integer
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    p24:
+                      anyOf:
+                        - properties: {}
                           title: payment_method_options_param
                           type: object
                         - enum:
@@ -28400,6 +28411,9 @@ paths:
                     card:
                       anyOf:
                         - properties:
+                            cvc_token:
+                              maxLength: 5000
+                              type: string
                             installments:
                               properties:
                                 enabled:
@@ -28460,6 +28474,14 @@ paths:
                         - properties:
                             expires_after_days:
                               type: integer
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    p24:
+                      anyOf:
+                        - properties: {}
                           title: payment_method_options_param
                           type: object
                         - enum:
@@ -29168,6 +29190,9 @@ paths:
                     card:
                       anyOf:
                         - properties:
+                            cvc_token:
+                              maxLength: 5000
+                              type: string
                             installments:
                               properties:
                                 enabled:
@@ -29228,6 +29253,14 @@ paths:
                         - properties:
                             expires_after_days:
                               type: integer
+                          title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    p24:
+                      anyOf:
+                        - properties: {}
                           title: payment_method_options_param
                           type: object
                         - enum:
@@ -35919,7 +35952,9 @@ paths:
                         - limited
                         - out_of_stock
                       type: string
-                  title: inventory_specs
+                  required:
+                    - type
+                  title: inventory_create_specs
                   type: object
                 metadata:
                   additionalProperties:
@@ -40698,6 +40733,9 @@ paths:
               card:
                 explode: true
                 style: deepObject
+              cvc_update:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -41108,6 +41146,16 @@ paths:
                   description: The customer (owned by the application's account) for which to create a token. This can be used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see [Cloning Saved Payment Methods](https://stripe.com/docs/connect/cloning-saved-payment-methods).
                   maxLength: 5000
                   type: string
+                cvc_update:
+                  description: The updated CVC value this token will represent.
+                  properties:
+                    cvc:
+                      maxLength: 5000
+                      type: string
+                  required:
+                    - cvc
+                  title: cvc_params
+                  type: object
                 expand:
                   description: Specifies which fields in the response should be expanded.
                   items:
@@ -54156,6 +54204,8 @@ components:
           $ref: "#/components/schemas/payment_intent_payment_method_options_card"
         oxxo:
           $ref: "#/components/schemas/payment_method_options_oxxo"
+        p24:
+          $ref: "#/components/schemas/payment_method_options_p24"
         sofort:
           $ref: "#/components/schemas/payment_method_options_sofort"
       title: PaymentIntentPaymentMethodOptions
@@ -54165,6 +54215,7 @@ components:
         - bancontact
         - card
         - oxxo
+        - p24
         - sofort
     payment_intent_payment_method_options_card:
       description: ""
@@ -55470,6 +55521,13 @@ components:
           maxLength: 5000
           nullable: true
           type: string
+        preferred_locales:
+          description: EMV tag 5F2D. Preferred languages specified by the integrated circuit chip.
+          items:
+            maxLength: 5000
+            type: string
+          nullable: true
+          type: array
         read_method:
           description: How card details were read in this transaction.
           enum:
@@ -55869,6 +55927,12 @@ components:
       required:
         - expires_after_days
       title: payment_method_options_oxxo
+      type: object
+      x-expandableFields: []
+    payment_method_options_p24:
+      description: ""
+      properties: {}
+      title: payment_method_options_p24
       type: object
       x-expandableFields: []
     payment_method_options_sofort:
@@ -60154,7 +60218,7 @@ components:
           description: If the subscription has been canceled with the `at_period_end` flag set to `true`, `cancel_at_period_end` on the subscription will be true. You can use this attribute to determine whether a subscription that has a status of active is scheduled to be canceled at the end of the current period.
           type: boolean
         canceled_at:
-          description: If the subscription has been canceled, the date of that cancellation. If the subscription was canceled with `cancel_at_period_end`, `canceled_at` will still reflect the date of the initial cancellation request, not the end of the subscription period when the subscription is automatically moved to a canceled state.
+          description: If the subscription has been canceled, the date of that cancellation. If the subscription was canceled with `cancel_at_period_end`, `canceled_at` will reflect the time of the most recent update request, not the end of the subscription period when the subscription is automatically moved to a canceled state.
           format: unix-time
           nullable: true
           type: integer

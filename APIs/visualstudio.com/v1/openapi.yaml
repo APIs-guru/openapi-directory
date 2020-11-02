@@ -3028,7 +3028,7 @@ components:
           $ref: "#/components/schemas/SecretScope"
         secretName:
           nullable: true
-          pattern: ^(?!CLOUDENV.*$)(?!CODESPACE.*$)[a-zA-Z_][a-zA-Z0-9_]{0,199}$
+          pattern: ^(?!CLOUDENV.*$)[a-zA-Z_][a-zA-Z0-9_]{0,199}$
           type: string
         type:
           $ref: "#/components/schemas/SecretType"
@@ -3080,7 +3080,7 @@ components:
           $ref: "#/components/schemas/SecretScope"
         secretName:
           nullable: true
-          pattern: ^(?!CLOUDENV.*$)(?!CODESPACE.*$)[a-zA-Z_][a-zA-Z0-9_]{0,199}$
+          pattern: ^(?!CLOUDENV.*$)[a-zA-Z_][a-zA-Z0-9_]{0,199}$
           type: string
         value:
           maxLength: 1024
@@ -3093,7 +3093,6 @@ components:
       properties:
         name:
           nullable: true
-          pattern: ^(?!CLOUDENV.*$)(?!CODESPACE.*$)[a-zA-Z_][a-zA-Z0-9_]{0,199}$
           type: string
         type:
           $ref: "#/components/schemas/SecretType"
@@ -3129,6 +3128,7 @@ components:
     SecretType:
       enum:
         - 1 (EnvironmentVariable)
+        - 2 (ContainerRegistry)
       format: int32
       type: integer
     SeedInfoBody:

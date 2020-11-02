@@ -3282,7 +3282,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Containing a partner issued API key e.g. JE-API-KEY ABCDE123456789
+        - description: Containing a partner issued API key e.g. Bearer ABCDE123456789
           in: header
           name: Authorization
           required: true
@@ -3311,7 +3311,7 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
-      x-status: Draft
+      x-status: Stable
     put:
       operationId: putMenuForIngestion
       parameters:
@@ -4081,7 +4081,7 @@ paths:
               - Delivery
               - Collection
             type: string
-        - description: OAuth2 token issued for logged in restaurant
+        - description: OAuth2 token issued for logged in restaurant OR API token for third party, in the format Bearer {api_key}
           in: header
           name: Authorization
           required: true
@@ -4110,6 +4110,8 @@ paths:
           description: Bad Request
         "401":
           $ref: "#/components/responses/401UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/403ForbiddenResponse"
         "500":
           content:
             application/json:
@@ -5044,12 +5046,11 @@ components:
           nullable: true
           type: string
         consumerId:
-          description: Active Offers for Consumer Id
-          format: int32
+          description: Global Consumer Id
           nullable: true
-          type: integer
+          type: string
         restaurantIds:
-          description: Active Offers for RestaurantIds
+          description: The identifiers of the restaurants. Allows offers to be returned for many restaurants.
           items:
             type: string
           minItems: 1
@@ -6718,6 +6719,10 @@ components:
 
             Enables offers to be returned that for the time in future (e.g. Pre-order)
           format: date-time
+          type: string
+        consumerId:
+          description: Global Consumer Id
+          nullable: true
           type: string
         consumerOffersBasket:
           description: The consumer basket content
@@ -9931,11 +9936,28 @@ components:
       type: object
     ItemDiscount:
       additionalProperties: false
+      example:
+        discountPercentage: 100
+        modifiersGroups:
+          - minimumChoices: 1
+            modifierGroupId: modifier111
+            modifiers:
+              - maximumAdditionalModifiers: 0
+                modifierId: NoSugar11
+                quantity: 1
+                totalPrice: 0
+        productId: Lemonade1234
       properties:
         discountPercentage:
           description: The discount percentage applied.
           format: integer
           type: number
+        modifierGroups:
+          description: The collection of preselected modifier groups for the item.
+          items:
+            $ref: "#/components/schemas/ModifierGroup"
+          nullable: true
+          type: array
         productId:
           description: The unique identifier of the discounted product item.
           type: string
@@ -9963,9 +9985,18 @@ components:
       additionalProperties: false
       example:
         description: Get free lemonade with Super Burger
-        discountPercentage: 100
         header: Free item!
-        productId: lemonade123
+        itemDiscounts:
+          - discountPercentage: 100
+            modifiersGroups:
+              - minimumChoices: 1
+                modifierGroupId: modifier111
+                modifiers:
+                  - maximumAdditionalModifiers: 0
+                    modifierId: NoSugar11
+                    quantity: 1
+                    totalPrice: 0
+            productId: Lemonade1234
         title: Get free lemonade
       properties:
         description:
@@ -12253,18 +12284,22 @@ components:
           - "333"
       properties:
         modifierIds:
-          description: Modifier identifiers.
+          description: Modifier identifiers. Maximum sum of 25 Variation and Modifier IDs.
           items:
             type: string
+          maxItems: 25
+          minItems: 0
           type: array
         nextAvailableAt:
           description: Time when items will be brought back online.
           format: date-time
           type: string
         variationIds:
-          description: Variation identifiers.
+          description: Variation identifiers. Maximum sum of 25 Variation and Modifier IDs.
           items:
             type: string
+          maxItems: 25
+          minItems: 0
           type: array
       type: object
     OfflineItemsResponse:
@@ -12355,14 +12390,18 @@ components:
           - "333"
       properties:
         modifierIds:
-          description: Modifier identifiers.
+          description: Modifier identifiers. Maximum sum of 25 Variation and Modifier IDs.
           items:
             type: string
+          maxItems: 25
+          minItems: 0
           type: array
         variationIds:
-          description: Variation identifiers.
+          description: Variation identifiers. Maximum sum of 25 Variation and Modifier IDs.
           items:
             type: string
+          maxItems: 25
+          minItems: 0
           type: array
       type: object
     OptimizelyData:
@@ -14754,7 +14793,6 @@ components:
       example:
         reviews:
           - approvedRestaurantComments: Thank you very much for positive feedback
-            customerCity: London
             customerComments: Extremely good food and service
             customerName: Steve
             friendlyOrderId: 123456789
@@ -14763,7 +14801,6 @@ components:
             ratingAverage: 5.66
             restaurantComments: Thank u very much for positive feedback
           - approvedRestaurantComments: We are sorry
-            customerCity: London
             customerComments: Coffee poured all over my food
             customerName: Lucy
             friendlyOrderId: 123456790
@@ -14813,6 +14850,74 @@ components:
                 type: string
             type: object
           type: array
+      type: object
+    RestaurantReviewsRatingBreakdown:
+      properties:
+        badRatingsCount:
+          description: The count of bad (1,2 stars) ratings across all reviews
+          format: int32
+          nullable: false
+          type: integer
+        goodRatingsCount:
+          description: The count of good (5,6 stars) ratings across all reviews
+          format: int32
+          nullable: false
+          type: integer
+        neutralRatingsCount:
+          description: The count of neutral (3,4 stars) ratings across all reviews
+          format: int32
+          nullable: false
+          type: integer
+      type: object
+    RestaurantReviewsSummary:
+      example:
+        ratingAverage: 4.7
+        ratingsBreakdown:
+          delivery:
+            badRatingsCount: 10
+            goodRatingsCount: 46
+            neutralRatingsCount: 10
+          overall:
+            badRatingsCount: 8
+            goodRatingsCount: 44
+            neutralRatingsCount: 14
+          quality:
+            badRatingsCount: 10
+            goodRatingsCount: 44
+            neutralRatingsCount: 12
+          service:
+            badRatingsCount: 15
+            goodRatingsCount: 45
+            neutralRatingsCount: 6
+        reviewsCount: 66
+      properties:
+        ratingAverage:
+          description: The average score of all reviews
+          format: double
+          nullable: false
+          type: number
+        ratingsBreakdown:
+          description: The breakdown of good/neutral/bad reviews for different types of ratings
+          nullable: false
+          properties:
+            delivery:
+              $ref: "#/components/schemas/RestaurantReviewsRatingBreakdown"
+              description: The breakdown of good/neutral/bad delivery experience ratings across all reviews
+            overall:
+              $ref: "#/components/schemas/RestaurantReviewsRatingBreakdown"
+              description: The breakdown of good/neutral/bad overall experience ratings across all reviews
+            quality:
+              $ref: "#/components/schemas/RestaurantReviewsRatingBreakdown"
+              description: The breakdown of good/neutral/bad quality experience ratings across all reviews
+            service:
+              $ref: "#/components/schemas/RestaurantReviewsRatingBreakdown"
+              description: The breakdown of good/neutral/bad service experience ratings across all reviews
+          type: object
+        reviewsCount:
+          description: The count of all reviews
+          format: int32
+          nullable: false
+          type: integer
       type: object
     RestaurantSearchProduct:
       example:
@@ -17370,6 +17475,8 @@ components:
         Customer:
           Id: 12345
           Name: Bruce Wayne
+          PreviousRestaurantOrderCount: 5
+          PreviousTotalOrderCount: 83
         CustomerNotes:
           noteForDelivery: delivery note
           noteForRestaurant: restaurant note
@@ -17464,6 +17571,12 @@ components:
               type: number
             Name:
               type: string
+            PreviousRestaurantOrderCount:
+              description: The customer's previous total number of orders made to this restaurant
+              type: number
+            PreviousTotalOrderCount:
+              description: The customer's previous total number of orders made to all restaurants
+              type: number
           type: object
         CustomerNotes:
           additionalProperties:

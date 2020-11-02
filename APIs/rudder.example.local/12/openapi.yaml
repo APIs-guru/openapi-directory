@@ -3366,7 +3366,7 @@ paths:
             requests.get(url, params=params, headers=headers, verify=False)
   /nodes/applyPolicy:
     post:
-      description: This API allows to trigger an agent run on the target node. Response contains a json stating if agent could be started on each node, but not if the run went fine and do not display any output from it. You can see the result of the run in Rudder web interface or in the each agent logs.
+      description: This API allows to trigger an agent run on all nodes. Response contains a json stating if agent could be started on each node, but not if the run went fine and do not display any output from it. You can see the result of the run in Rudder web interface or in the each agent logs.
       operationId: applyPolicyAllNodes
       responses:
         "200":
@@ -3409,7 +3409,7 @@ paths:
                   - data
                 type: object
           description: Result
-      summary: Trigger a agent runs
+      summary: Trigger an agent run on all nodes
       tags:
         - Nodes
       x-code-samples:

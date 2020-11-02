@@ -6196,6 +6196,8 @@ paths:
             properties:
               result:
                 properties:
+                  id:
+                    type: string
                   image_path:
                     type: string
                 type: object
@@ -7841,6 +7843,11 @@ paths:
           name: special_price
           required: false
           type: number
+        - description: Defines new product's cost price
+          in: query
+          name: cost_price
+          required: false
+          type: number
         - description: Defines the date of special price creation
           in: query
           name: sprice_create
@@ -7912,6 +7919,11 @@ paths:
           name: weight
           required: false
           type: number
+        - description: A barcode is a unique code composed of numbers used as a product identifier.
+          in: query
+          name: barcode
+          required: false
+          type: string
         - default: true
           description: Is reindex required
           in: query
@@ -7924,6 +7936,13 @@ paths:
           name: taxable
           required: false
           type: boolean
+        - description: Defines variant's options list
+          in: query
+          items:
+            type: string
+          name: options
+          required: false
+          type: array
       produces:
         - application/json
       responses:
@@ -9067,6 +9086,8 @@ definitions:
               type: string
           type: object
         type: array
+      cost_price:
+        type: number
       created_time:
         $ref: "#/definitions/A2CDateTime"
       custom_fields:
@@ -10251,6 +10272,9 @@ definitions:
       total_price:
         description: Defines order's total price
         type: number
+      transaction_id:
+        description: Payment transaction id
+        type: string
     required:
       - order_status
       - customer_email
@@ -11137,6 +11161,9 @@ definitions:
         default: true
         description: Is cache clear required
         type: boolean
+      cost_price:
+        description: Defines new product's cost price
+        type: number
       created_at:
         description: Defines the date of entity creation
         type: string

@@ -9372,25 +9372,26 @@ definitions:
   Duration:
     description: "~"
     properties:
-      nano:
-        description: "~"
-        format: int32
-        type: integer
-      negative:
-        description: "~"
-        type: boolean
-      seconds:
+      millis:
         description: "~"
         format: int64
         type: integer
-      units:
+      standardDays:
         description: "~"
-        items:
-          $ref: "#/definitions/TemporalUnit"
-        type: array
-      zero:
+        format: int64
+        type: integer
+      standardHours:
         description: "~"
-        type: boolean
+        format: int64
+        type: integer
+      standardMinutes:
+        description: "~"
+        format: int64
+        type: integer
+      standardSeconds:
+        description: "~"
+        format: int64
+        type: integer
     type: object
   ErrorResponse:
     description: Error response containing error info

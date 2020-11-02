@@ -15,7 +15,7 @@ info:
 
     ```text
 
-    https://api.jumpseller.com/v1/path.json?login=XXXXXX&authtoken=storetoken`  
+    https://api.jumpseller.com/v1/path.json?login=XXXXXX&authtoken=storetoken  
 
     ```
 
@@ -1455,7 +1455,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: "#/definitions/OrderEdit"
+            $ref: "#/definitions/OrderCreate"
       responses:
         "200":
           description: OK
@@ -1554,6 +1554,7 @@ paths:
       tags:
         - Orders
     put:
+      description: Only `status`, `shipment_status`, `tracking_number`, `tracking_company`, `additional_information` and `additional_fields` are available for update.
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
@@ -1787,15 +1788,40 @@ paths:
         - Products
   /products/search.json:
     get:
+      description: >-
+        Endpoint example: 
+
+
+        ```text
+
+        https://api.jumpseller.com/v1/products/search.json?login=XXXXXX&authtoken=XXXXX&query=test&fields=name,description 
+
+        ```
       parameters:
         - $ref: "#/parameters/LoginParam"
         - $ref: "#/parameters/AuthtokenParam"
         - $ref: "#/parameters/LocaleParam"
-        - description: Query for the Product
+        - description: Text to query for the Product
           format: string
           in: query
           name: query
           required: true
+          type: string
+        - description: Comma separated values of the fields to query for the Product
+          enum:
+            - sku
+            - barcode
+            - brand
+            - name
+            - description
+            - variants
+            - option_name
+            - custom_fields
+            - custom_fields_selects
+          format: string
+          in: query
+          name: fields
+          required: false
           type: string
       responses:
         "200":
@@ -3179,10 +3205,7 @@ definitions:
         description: City of the Customer's Billing Address
         type: string
       country:
-        description: Country of the Customer's Billing Address (ISO 3166-1 alpha-2)
-        type: string
-      country_code:
-        description: Country code of the Customer's Billing Address
+        description: Country code of the Customer's Billing Address (ISO 3166-1 alpha-2)
         type: string
       municipality:
         description: Municipality of the Customer's Billing Address
@@ -3194,10 +3217,7 @@ definitions:
         description: Postal code of the Customer's Billing Address
         type: string
       region:
-        description: Region of the Customer's Billing Address (Use the FIPS standard - http://www.geonames.org/countries/)
-        type: string
-      region_code:
-        description: Region code of the Customer's Billing Address
+        description: Region code of the Customer's Billing Address (Use the FIPS standard - http://www.geonames.org/countries/)
         type: string
       surname:
         description: Surname of the Customer's Billing Address
@@ -3288,6 +3308,7 @@ definitions:
           - select
           - input
           - checkbox
+          - date
         type: string
     type: object
   CheckoutCustomFieldFields:
@@ -3664,6 +3685,9 @@ definitions:
         description: Unique identifier of the Hook
         format: int32
         type: integer
+      name:
+        description: Hook name
+        type: string
       url:
         description: Hook URL to be notified
         type: string
@@ -3735,12 +3759,24 @@ definitions:
       order:
         $ref: "#/definitions/OrderFields"
     type: object
-  OrderEdit:
+  OrderAdditionalFields:
+    description: Additional field of an order
+    properties:
+      label:
+        description: Label of the additional field
+        format: string
+        type: string
+      value:
+        description: Value of the additional field
+        format: string
+        type: string
+    type: object
+  OrderCreate:
     properties:
       order:
-        $ref: "#/definitions/OrderEditFields"
+        $ref: "#/definitions/OrderCreateFields"
     type: object
-  OrderEditFields:
+  OrderCreateFields:
     properties:
       additional_information:
         description: Additional information for the given Order
@@ -3777,8 +3813,50 @@ definitions:
       tracking_number:
         description: Shipping Tracking Number used for the given Order
         type: string
+  OrderEdit:
+    properties:
+      order:
+        $ref: "#/definitions/OrderEditFields"
+    type: object
+  OrderEditFields:
+    properties:
+      additional_fields:
+        description: Array of additional fields for the given Order
+        items:
+          $ref: "#/definitions/OrderAdditionalFields"
+        type: array
+      additional_information:
+        description: Additional information for the given Order
+        type: string
+      shipment_status:
+        description: Status of the Order Shipping
+        enum:
+          - requested
+          - in_transit
+          - delivered
+          - failed
+        type: string
+      status:
+        description: Status of the Order
+        enum:
+          - Abandoned
+          - Canceled
+          - Pending Payment
+          - Paid
+        type: string
+      tracking_company:
+        description: Shipping Company used for the given Order
+        type: string
+      tracking_number:
+        description: Shipping Tracking Number used for the given Order
+        type: string
   OrderFields:
     properties:
+      additional_fields:
+        description: Array of additional fields for the given Order
+        items:
+          $ref: "#/definitions/OrderAdditionalFields"
+        type: array
       additional_information:
         description: Additional information for the given Order
         type: string
@@ -4544,10 +4622,7 @@ definitions:
         description: City of the Customer's Shipping Address
         type: string
       country:
-        description: Country of the Customer's Shipping Address (ISO 3166-1 alpha-2)
-        type: string
-      country_code:
-        description: Country code of the Customer's Shipping Address
+        description: Country code of the Customer's Shipping Address (ISO 3166-1 alpha-2)
         type: string
       municipality:
         description: Municipality of the Customer's Shipping Address
@@ -4559,10 +4634,7 @@ definitions:
         description: Postal code of the Customer's Shipping Address
         type: string
       region:
-        description: Region of the Customer's Shipping Address (Use the FIPS standard - http://www.geonames.org/countries/)
-        type: string
-      region_code:
-        description: Region code of the Customer's Shipping Address
+        description: Region code of the Customer's Shipping Address (Use the FIPS standard - http://www.geonames.org/countries/)
         type: string
       surname:
         description: Surname of the Customer's Shipping Address
