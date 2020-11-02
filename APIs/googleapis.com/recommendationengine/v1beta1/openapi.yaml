@@ -1467,6 +1467,10 @@ components:
             $ref: "#/components/schemas/GoogleCloudRecommendationengineV1beta1UserEvent"
           type: array
       type: object
+    GoogleCloudRecommendationengineV1beta1RejoinUserEventsMetadata:
+      description: Metadata for RejoinUserEvents method.
+      properties: {}
+      type: object
     GoogleCloudRecommendationengineV1beta1RejoinUserEventsRequest:
       description: Request message for CatalogRejoin method.
       properties:
@@ -1476,6 +1480,14 @@ components:
             - USER_EVENT_REJOIN_SCOPE_UNSPECIFIED
             - JOINED_EVENTS
             - UNJOINED_EVENTS
+          type: string
+      type: object
+    GoogleCloudRecommendationengineV1beta1RejoinUserEventsResponse:
+      description: Response message for RejoinUserEvents method.
+      properties:
+        rejoinedUserEventsCount:
+          description: Number of user events that were joined with latest catalog items.
+          format: int64
           type: string
       type: object
     GoogleCloudRecommendationengineV1beta1UserEvent:

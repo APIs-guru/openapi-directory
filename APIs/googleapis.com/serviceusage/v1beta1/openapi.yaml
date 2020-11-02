@@ -547,6 +547,52 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1beta1/{parent}/consumerQuotaMetrics:importAdminOverrides":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Create or update multiple admin overrides atomically, all on the same consumer, but on many different metrics or limits. The name field in the quota override message should not be set.
+      operationId: serviceusage.services.consumerQuotaMetrics.importAdminOverrides
+      parameters:
+        - description: "The resource name of the consumer. An example name would be: `projects/123/services/compute.googleapis.com`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportAdminOverridesRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/service.management
+          Oauth2c:
+            - https://www.googleapis.com/auth/service.management
+      tags:
+        - services
   "/v1beta1/{parent}/consumerQuotaMetrics:importConsumerOverrides":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1619,6 +1665,16 @@ components:
         selector:
           description: Selects a method to which this rule applies. Refer to selector for syntax details.
           type: string
+      type: object
+    ImportAdminOverridesRequest:
+      description: Request message for ImportAdminOverrides
+      properties:
+        force:
+          description: Whether to force the creation of the quota overrides. If creating an override would cause the effective quota for the consumer to decrease by more than 10 percent, the call is rejected, as a safety measure to avoid accidentally decreasing quota too quickly. Setting the force parameter to true ignores this restriction.
+          type: boolean
+        inlineSource:
+          $ref: "#/components/schemas/OverrideInlineSource"
+          description: The import data is specified in the request message itself
       type: object
     ImportAdminOverridesResponse:
       description: Response message for ImportAdminOverrides

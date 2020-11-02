@@ -962,7 +962,7 @@ components:
       description: The request message for synchronous translation.
       properties:
         contents:
-          description: Required. The content of the input in string format. We recommend the total content be less than 30k codepoints. Use BatchTranslateText for larger text.
+          description: Required. The content of the input in string format. We recommend the total content be less than 30k codepoints. The max length of this field is 1024. Use BatchTranslateText for larger text.
           items:
             type: string
           type: array

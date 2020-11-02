@@ -69,7 +69,7 @@ paths:
       description: Returns metadata for dimensions and metrics available in reporting methods. Used to explore the dimensions and metrics. In this method, a Google Analytics GA4 Property Identifier is specified in the request, and the metadata response includes Custom dimensions and metrics as well as Universal metadata. For example if a custom metric with parameter name `levels_unlocked` is registered to a property, the Metadata response will contain `customEvent:levels_unlocked`. Universal metadata are dimensions and metrics applicable to any property such as `country` and `totalUsers`.
       operationId: analyticsdata.properties.getMetadata
       parameters:
-        - description: "Required. The resource name of the metadata to retrieve. This name field is specified in the URL path and not URL parameters. Property is a numeric Google Analytics GA4 Property identifier. Example: properties/1234/metadata"
+        - description: "Required. The resource name of the metadata to retrieve. This name field is specified in the URL path and not URL parameters. Property is a numeric Google Analytics GA4 Property identifier. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id). Example: properties/1234/metadata"
           in: path
           name: name
           required: true
@@ -477,13 +477,13 @@ components:
           type: string
       type: object
     Dimension:
-      description: Dimensions are attributes of your data. For example, the dimension City indicates the city, for example, "Paris" or "New York", from which an event originates. Requests are allowed up to 8 dimensions.
+      description: Dimensions are attributes of your data. For example, the dimension city indicates the city from which an event originates. Dimension values in report responses are strings; for example, city could be "Paris" or "New York". Requests are allowed up to 8 dimensions.
       properties:
         dimensionExpression:
           $ref: "#/components/schemas/DimensionExpression"
           description: 'One dimension can be the result of an expression of multiple dimensions. For example, dimension "country, city": concatenate(country, ", ", city).'
         name:
-          description: The name of the dimension.
+          description: The name of the dimension. See the [API Dimensions](https://developers.google.com/analytics/trusted-testing/analytics-data/api-schema#dimensions) for the list of dimension names. If `dimensionExpression` is specified, `name` can be any string that you would like. For example if a `dimensionExpression` concatenates `country` and `city`, you could call that dimension `countryAndCity`. Dimensions are referenced by `name` in `dimensionFilter`, `orderBys`, `dimensionExpression`, and `pivots`.
           type: string
       type: object
     DimensionExpression:
@@ -550,7 +550,7 @@ components:
       description: The unique identifier of the property whose events are tracked.
       properties:
         propertyId:
-          description: A Google Analytics GA4 property id.
+          description: A Google Analytics GA4 property id. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id).
           type: string
       type: object
     Filter:
@@ -630,16 +630,16 @@ components:
           type: string
       type: object
     Metric:
-      description: The quantitative measurements of a report. For example, the metric eventCount is the total number of events. Requests are allowed up to 10 metrics.
+      description: The quantitative measurements of a report. For example, the metric `eventCount` is the total number of events. Requests are allowed up to 10 metrics.
       properties:
         expression:
-          description: A mathematical expression for derived metrics. For example, the metric Event count per user is eventCount/totalUsers.
+          description: A mathematical expression for derived metrics. For example, the metric Event count per user is `eventCount/totalUsers`.
           type: string
         invisible:
-          description: Indicates if a metric is invisible. If a metric is invisible, the metric is not in the response, but can be used in filters, order_bys or being referred to in a metric expression.
+          description: Indicates if a metric is invisible in the report response. If a metric is invisible, the metric will not produce a column in the response, but can be used in `metricFilter`, `orderBys`, or a metric `expression`.
           type: boolean
         name:
-          description: The name of the metric.
+          description: The name of the metric. See the [API Metrics](https://developers.google.com/analytics/trusted-testing/analytics-data/api-schema#metrics) for the list of metric names. If `expression` is specified, `name` can be any string that you would like. For example if `expression` is `screenPageViews/sessions`, you could call that metric's name = `viewsPerSession`. Metrics are referenced by `name` in `metricFilter`, `orderBys`, and metric `expression`.
           type: string
       type: object
     MetricHeader:

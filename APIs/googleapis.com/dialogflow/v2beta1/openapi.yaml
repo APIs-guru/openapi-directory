@@ -5020,9 +5020,28 @@ components:
           description: 'Optional. A custom field used to identify the webhook source. Arbitrary strings are supported. When provided, Dialogflow uses this field to populate QueryResult.webhook_source sent to the integration or API caller.'
           type: string
       type: object
-    GoogleCloudDialogflowV3alpha1RunTestCaseMetadata:
-      description: Metadata returned for the TestCases.RunTestCase long running operation.
-      properties: {}
+    GoogleCloudKnowledgeV1alpha1OperationMetadata:
+      description: 'Metadata in google::longrunning::Operation.'
+      properties:
+        errorCode:
+          description: The error codes from Manifold endpoints' last failures.
+          items:
+            format: int32
+            type: integer
+          type: array
+        message:
+          description: The failure messages from Manifold endpoints' last failures.
+          items:
+            type: string
+          type: array
+        state:
+          description: Required. The current state of this operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - RUNNING
+            - DONE
+          type: string
       type: object
     GoogleLongrunningListOperationsResponse:
       description: The response message for Operations.ListOperations.

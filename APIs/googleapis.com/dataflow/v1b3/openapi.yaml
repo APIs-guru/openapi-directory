@@ -3383,6 +3383,9 @@ components:
     ContainerSpec:
       description: Container Spec.
       properties:
+        defaultEnvironment:
+          $ref: "#/components/schemas/FlexTemplateRuntimeEnvironment"
+          description: Default runtime environment for the job.
         image:
           description: Name of the docker container image. E.g., gcr.io/project/some-image
           type: string
@@ -3832,6 +3835,11 @@ components:
           description: Output sources for this stage.
           items:
             $ref: "#/components/schemas/StageSource"
+          type: array
+        prerequisiteStage:
+          description: Other stages that must complete before this stage can run.
+          items:
+            type: string
           type: array
       type: object
     FailedLocation:

@@ -13611,7 +13611,11 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Initiates a cache invalidation operation, invalidating the specified path, scoped to the specified UrlMap.
+      description: >-
+        Initiates a cache invalidation operation, invalidating the specified path, scoped to the specified UrlMap.
+
+
+        For more information, see [Invalidating cached content](/cdn/docs/invalidating-cached-content).
       operationId: compute.urlMaps.invalidateCache
       parameters:
         - description: Project ID for this request.
@@ -34139,6 +34143,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -34211,6 +34216,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -34269,6 +34275,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -34434,7 +34441,7 @@ components:
 
             - `NAT_AUTO` for addresses that are external IP addresses automatically reserved for Cloud NAT. 
 
-            - `IPSEC_INTERCONNECT` for addresses created from a private IP range reserved for a VLAN attachment in an IPsec over Interconnect configuration. These addresses are regional resources.
+            - `IPSEC_INTERCONNECT` for addresses created from a private IP range that are reserved for a VLAN attachment in an IPsec encrypted Interconnect configuration. These addresses are regional resources.
           enum:
             - DNS_RESOLVER
             - GCE_ENDPOINT
@@ -34504,6 +34511,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -34576,6 +34584,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -34634,6 +34643,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -35120,6 +35130,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -35192,6 +35203,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -35311,6 +35323,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -35407,6 +35420,29 @@ components:
     AutoscalingPolicyCustomMetricUtilization:
       description: Custom utilization metric policy.
       properties:
+        filter:
+          description: >-
+            A filter string, compatible with a Stackdriver Monitoring filter string for TimeSeries.list API call. This filter is used to select a specific TimeSeries for the purpose of autoscaling and to determine whether the metric is exporting per-instance or per-group data.
+
+
+            For the filter to be valid for autoscaling purposes, the following rules apply:  
+
+            - You can only use the AND operator for joining selectors. 
+
+            - You can only use direct equality comparison operator (=) without any functions for each selector. 
+
+            - You can specify the metric in both the filter string and in the metric field. However, if specified in both places, the metric must be identical. 
+
+            - The monitored resource type determines what kind of values are expected for the metric. If it is a gce_instance, the autoscaler expects the metric to include a separate TimeSeries for each instance in a group. In such a case, you cannot filter on resource labels.
+
+            If the resource type is any other value, the autoscaler expects this metric to contain values that apply to the entire autoscaled instance group and resource label filtering can be performed to point autoscaler at the correct TimeSeries to scale upon. This is called a per-group metric for the purpose of autoscaling.
+
+
+            If not specified, the type defaults to gce_instance.  
+
+
+            You should provide a filter that is selective enough to pick just one TimeSeries for the autoscaled group or for each of the instances (if you are using gce_instance resource type). If multiple TimeSeries are returned upon the query execution, the autoscaler will sum their respective values to obtain its scaling value.
+          type: string
         metric:
           description: >-
             The identifier (type) of the Stackdriver Monitoring metric. The metric cannot have negative values.
@@ -35414,6 +35450,17 @@ components:
 
             The metric must have a value type of INT64 or DOUBLE.
           type: string
+        singleInstanceAssignment:
+          description: >-
+            If scaling is based on a per-group metric value that represents the total amount of work to be done or resource usage, set this value to an amount assigned for a single instance of the scaled group. Autoscaler will keep the number of instances proportional to the value of this metric, the metric itself should not change value due to group resizing.
+
+
+            A good metric to use with the target is for example pubsub.googleapis.com/subscription/num_undelivered_messages or a custom metric exporting the total number of requests coming to your instances.
+
+
+            A bad example would be a metric exporting an average or median latency, since this value can't include a chunk assignable to a single instance, it could be better used with utilization_target instead.
+          format: double
+          type: number
         utilizationTarget:
           description: >-
             The target value of the metric that autoscaler should maintain. This must be a positive value. A utilization metric scales number of virtual machines handling requests to increase or decrease proportionally to the metric.
@@ -35662,6 +35709,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -35919,6 +35967,14 @@ components:
         securityPolicy:
           description: "[Output Only] The resource URL for the security policy associated with this backend service."
           type: string
+        securitySettings:
+          $ref: "#/components/schemas/SecuritySettings"
+          description: >-
+            This field specifies the security policy that applies to this backend service. This field is applicable to either:  
+
+            - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. 
+
+            - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
           type: string
@@ -35992,6 +36048,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -36135,6 +36192,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -36209,6 +36267,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -36477,6 +36536,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -36549,6 +36609,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -36607,6 +36668,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -37064,6 +37126,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -37171,6 +37234,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -37328,6 +37392,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -37400,6 +37465,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -37458,6 +37524,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -37539,6 +37606,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -37666,6 +37734,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -37855,6 +37924,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -38066,6 +38136,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -38172,6 +38243,9 @@ components:
 
 
             Must be set to `0.0.0.0` when the target is targetGrpcProxy that has validateForProxyless field set to true.
+
+
+            For Private Service Connect forwarding rules that forward traffic to Google APIs, IP address must be provided.
           type: string
         IPProtocol:
           description: >-
@@ -38294,6 +38368,9 @@ components:
 
 
             For internal load balancing, this field identifies the network that the load balanced IP should belong to for this Forwarding Rule. If this field is not specified, the default network will be used.
+
+
+            For Private Service Connect forwarding rules that forward traffic to Google APIs, a network must be provided.
           type: string
         networkTier:
           description: >-
@@ -38380,7 +38457,16 @@ components:
             If the network specified is in auto subnet mode, this field is optional. However, if the network is in custom subnet mode, a subnetwork must be specified.
           type: string
         target:
-          description: The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
+          description: >-
+            The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications).
+
+
+            For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle. Currently, the supported Google API bundles include:
+
+             
+            - vpc-sc - GCP APIs that support VPC Service Controls. For more information about which APIs support VPC Service Controls, refer to VPC-SC supported products and limitations.  
+
+            - all-apis - All GCP APIs. For more information about which APIs are supported with this bundle, refer to Private Google Access-specific domains and VIPs.
           type: string
       type: object
     ForwardingRuleAggregatedList:
@@ -38423,6 +38509,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -38495,6 +38582,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -38558,6 +38646,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -38922,6 +39011,9 @@ components:
           default: compute#healthCheck
           description: Type of the resource.
           type: string
+        logConfig:
+          $ref: "#/components/schemas/HealthCheckLogConfig"
+          description: Configure logging on this health check.
         name:
           description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
@@ -38991,6 +39083,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -39027,6 +39120,13 @@ components:
               description: "[Output Only] A human-readable description of the warning code."
               type: string
           type: object
+      type: object
+    HealthCheckLogConfig:
+      description: Configuration of logging on a health check. If logging is enabled, logs will be exported to Stackdriver.
+      properties:
+        enable:
+          description: Indicates whether or not to export logs. This is false by default, which means no health check logging will be done.
+          type: boolean
       type: object
     HealthCheckReference:
       description: >-
@@ -39150,6 +39250,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -39227,6 +39328,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -39285,6 +39387,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -39631,6 +39734,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -40061,6 +40165,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -40316,6 +40421,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -40588,6 +40694,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -40741,6 +40848,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -40813,6 +40921,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41035,6 +41144,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41118,6 +41228,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41272,6 +41383,9 @@ components:
     InstanceGroupManagersApplyUpdatesRequest:
       description: InstanceGroupManagers.applyUpdatesToInstances
       properties:
+        allInstances:
+          description: Flag to update all instances instead of specified list of ?instances?. If the flag is set to true then the instances may not be specified in the request.
+          type: boolean
         instances:
           description: The list of URLs of one or more instances for which you want to apply updates. Each URL can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
           items:
@@ -41384,6 +41498,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41459,6 +41574,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41565,6 +41681,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41640,6 +41757,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41724,6 +41842,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -41796,6 +41915,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42053,6 +42173,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42152,6 +42273,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42596,6 +42718,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42668,6 +42791,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42747,6 +42871,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -42928,6 +43053,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43087,6 +43213,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43359,6 +43486,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43592,6 +43720,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43664,6 +43793,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -43722,6 +43852,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44170,6 +44301,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44336,6 +44468,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44429,6 +44562,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44487,6 +44621,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44622,6 +44757,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44835,6 +44971,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -44926,6 +45063,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45047,6 +45185,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45105,6 +45244,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45263,6 +45403,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45335,6 +45476,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45402,6 +45544,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45529,6 +45672,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45601,6 +45745,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45659,6 +45804,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45788,6 +45934,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -45953,6 +46100,7 @@ components:
                   - EXTERNAL_API_WARNING
                   - FIELD_VALUE_OVERRIDEN
                   - INJECTED_KERNELS_DEPRECATED
+                  - LARGE_DEPLOYMENT_WARNING
                   - MISSING_TYPE_DEPENDENCY
                   - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                   - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46034,6 +46182,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46106,6 +46255,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46164,6 +46314,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46350,6 +46501,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46444,6 +46596,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -46558,6 +46711,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47166,6 +47320,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47237,6 +47392,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47332,6 +47488,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47413,6 +47570,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47479,6 +47637,9 @@ components:
     RegionInstanceGroupManagersApplyUpdatesRequest:
       description: RegionInstanceGroupManagers.applyUpdatesToInstances
       properties:
+        allInstances:
+          description: Flag to update all instances instead of specified list of ?instances?. If the flag is set to true then the instances may not be specified in the request.
+          type: boolean
         instances:
           description: The list of URLs of one or more instances for which you want to apply updates. Each URL can be a full URL or a partial URL, such as zones/[ZONE]/instances/[INSTANCE_NAME].
           items:
@@ -47571,6 +47732,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47679,6 +47841,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47776,6 +47939,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -47968,6 +48132,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48039,6 +48204,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48104,6 +48270,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48188,6 +48355,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48239,7 +48407,7 @@ components:
           type: string
         groupPlacementPolicy:
           $ref: "#/components/schemas/ResourcePolicyGroupPlacementPolicy"
-          description: Resource policy for instacnes for placement configuration.
+          description: Resource policy for instances for placement configuration.
         id:
           description: "[Output Only] The unique identifier for the resource. This identifier is defined by the server."
           format: uint64
@@ -48312,6 +48480,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48431,6 +48600,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48509,6 +48679,9 @@ components:
     ResourcePolicySnapshotSchedulePolicySnapshotProperties:
       description: Specified snapshot properties for scheduled snapshots created by this policy.
       properties:
+        chainName:
+          description: Chain name that the snapshot is created in.
+          type: string
         guestFlush:
           description: Indication to perform a 'guest aware' snapshot.
           type: boolean
@@ -48589,7 +48762,9 @@ components:
           type: string
         nextHopIlb:
           description: >-
-            The URL to a forwarding rule of type loadBalancingScheme=INTERNAL that should handle matching packets. You can only specify the forwarding rule as a partial or full URL. For example, the following are all valid URLs:  
+            The URL to a forwarding rule of type loadBalancingScheme=INTERNAL that should handle matching packets or the IP address of the forwarding Rule. For example, the following are all valid URLs:  
+
+            - 10.128.0.56 
 
             - https://www.googleapis.com/compute/v1/projects/project/regions/region/forwardingRules/forwardingRule 
 
@@ -48640,6 +48815,7 @@ components:
                   - EXTERNAL_API_WARNING
                   - FIELD_VALUE_OVERRIDEN
                   - INJECTED_KERNELS_DEPRECATED
+                  - LARGE_DEPLOYMENT_WARNING
                   - MISSING_TYPE_DEPENDENCY
                   - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                   - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48713,6 +48889,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -48854,6 +49031,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49038,6 +49216,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49328,6 +49507,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49518,10 +49698,10 @@ components:
       type: object
     SecurityPolicy:
       description: >-
-        Represents a Cloud Armor Security Policy resource.
+        Represents a Google Cloud Armor security policy resource.
 
 
-        Only external backend services that use load balancers can reference a Security Policy. For more information, read  Cloud Armor Security Policy Concepts. (== resource_for {$api_version}.securityPolicies ==)
+        Only external backend services that use load balancers can reference a security policy. For more information, see  Google Cloud Armor security policy overview. (== resource_for {$api_version}.securityPolicies ==)
       properties:
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
@@ -49589,6 +49769,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -49674,6 +49855,32 @@ components:
       properties:
         srcIpRanges:
           description: CIDR IP address range. Maximum number of src_ip_ranges allowed is 10.
+          items:
+            type: string
+          type: array
+      type: object
+    SecuritySettings:
+      description: The authentication and authorization settings for a BackendService.
+      properties:
+        clientTlsPolicy:
+          description: >-
+            Optional. A URL referring to a networksecurity.ClientTlsPolicy resource that describes how clients should authenticate with this service's backends.
+
+            clientTlsPolicy only applies to a global BackendService with the loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+
+            If left blank, communications are not encrypted.
+
+            Note: This field currently has no impact.
+          type: string
+        subjectAltNames:
+          description: >-
+            Optional. A list of Subject Alternative Names (SANs) that the client verifies during a mutual TLS handshake with an server/endpoint for this BackendService. When the server presents its X.509 certificate to the client, the client inspects the certificate's subjectAltName field. If the field contains one of the specified values, the communication continues. Otherwise, it fails. This additional check enables the client to verify that the server is authorized to run the requested service.
+
+            Note that the contents of the server certificate's subjectAltName field are configured by the Public Key Infrastructure which provisions server identities.
+
+            Only applies to a global BackendService with loadBalancingScheme set to INTERNAL_SELF_MANAGED. Only applies when BackendService has an attached clientTlsPolicy with clientCertificate (mTLS mode).
+
+            Note: This field currently has no impact.
           items:
             type: string
           type: array
@@ -49786,6 +49993,9 @@ components:
         autoCreated:
           description: "[Output Only] Set to true if snapshots are automatically created by applying resource policy on the target disk."
           type: boolean
+        chainName:
+          description: Creates the new snapshot in the snapshot chain labeled with the specified name. The chain name must be 1-63 characters long and comply with RFC1035. This is an uncommon option only for advanced service owners who needs to create separate snapshot chains, for example, for chargeback tracking. When you describe your snapshot resource, this field is visible only if it has a non-empty value.
+          type: string
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
@@ -49921,6 +50131,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50084,6 +50295,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50156,6 +50368,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50256,6 +50469,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50327,6 +50541,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50373,10 +50588,10 @@ components:
       type: object
     SslPolicy:
       description: >-
-        Represents a Cloud Armor Security Policy resource.
+        Represents a Google Cloud Armor security policy resource.
 
 
-        Only external backend services used by HTTP or HTTPS load balancers can reference a Security Policy. For more information, read read  Cloud Armor Security Policy Concepts. (== resource_for {$api_version}.sslPolicies ==)
+        Only external backend services used by HTTP or HTTPS load balancers can reference a security policy. For more information, see  Google Cloud Armor security policy overview. (== resource_for {$api_version}.sslPolicies ==)
       properties:
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
@@ -50450,6 +50665,7 @@ components:
                   - EXTERNAL_API_WARNING
                   - FIELD_VALUE_OVERRIDEN
                   - INJECTED_KERNELS_DEPRECATED
+                  - LARGE_DEPLOYMENT_WARNING
                   - MISSING_TYPE_DEPENDENCY
                   - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                   - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50653,6 +50869,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50725,6 +50942,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -50835,6 +51053,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51010,6 +51229,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51068,6 +51288,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51146,6 +51367,16 @@ components:
           description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
+        proxyBind:
+          description: >-
+            This field only applies when the forwarding rule that references this target proxy has a loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+
+
+            When this field is set to true, Envoy proxies set up inbound traffic interception and bind to the IP address and port specified in the forwarding rule. This is generally useful when using Traffic Director to configure Envoy as a gateway or middle proxy (in other words, not a sidecar proxy). The Envoy proxy listens for inbound requests and handles requests when it receives them.
+
+
+            The default is false.
+          type: boolean
         region:
           description: "[Output Only] URL of the region where the regional Target HTTP Proxy resides. This field is not applicable to global Target HTTP Proxies."
           type: string
@@ -51218,6 +51449,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51276,6 +51508,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51350,6 +51583,16 @@ components:
 
         Forwarding rules reference a target HTTPS proxy, and the target proxy then references a URL map. For more information, read Using Target Proxies and  Forwarding rule concepts. (== resource_for {$api_version}.targetHttpsProxies ==) (== resource_for {$api_version}.regionTargetHttpsProxies ==)
       properties:
+        authorizationPolicy:
+          description: >-
+            Optional. A URL referring to a networksecurity.AuthorizationPolicy resource that describes how the proxy should authorize inbound traffic. If left blank, access will not be restricted by an authorization policy.
+
+            Refer to the AuthorizationPolicy resource for additional details.
+
+            authorizationPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+
+            Note: This field currently has no impact.
+          type: string
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."
           type: string
@@ -51368,6 +51611,16 @@ components:
           description: Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
           pattern: "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
           type: string
+        proxyBind:
+          description: >-
+            This field only applies when the forwarding rule that references this target proxy has a loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+
+
+            When this field is set to true, Envoy proxies set up inbound traffic interception and bind to the IP address and port specified in the forwarding rule. This is generally useful when using Traffic Director to configure Envoy as a gateway or middle proxy (in other words, not a sidecar proxy). The Envoy proxy listens for inbound requests and handles requests when it receives them.
+
+
+            The default is false.
+          type: boolean
         quicOverride:
           description: >-
             Specifies the QUIC override policy for this TargetHttpsProxy resource. This setting determines whether the load balancer attempts to negotiate QUIC with clients. You can specify NONE, ENABLE, or DISABLE.  
@@ -51391,6 +51644,16 @@ components:
           type: string
         selfLink:
           description: "[Output Only] Server-defined URL for the resource."
+          type: string
+        serverTlsPolicy:
+          description: >-
+            Optional. A URL referring to a networksecurity.ServerTlsPolicy resource that describes how the proxy should authenticate inbound traffic.
+
+            serverTlsPolicy only applies to a global TargetHttpsProxy attached to globalForwardingRules with the loadBalancingScheme set to INTERNAL_SELF_MANAGED.
+
+            If left blank, communications are not encrypted.
+
+            Note: This field currently has no impact.
           type: string
         sslCertificates:
           description: URLs to SslCertificate resources that are used to authenticate connections between users and the load balancer. At least one SSL certificate must be specified. Currently, you may specify up to 15 SSL certificates.
@@ -51451,6 +51714,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51523,6 +51787,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51647,6 +51912,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51719,6 +51985,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51777,6 +52044,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -51823,7 +52091,7 @@ components:
       properties:
         backupPool:
           description: >-
-            This field is applicable only when the containing target pool is serving a forwarding rule as the primary pool, and its failoverRatio field is properly set to a value between [0, 1].
+            The server-defined URL for the resource. This field is applicable only when the containing target pool is serving a forwarding rule as the primary pool, and its failoverRatio field is properly set to a value between [0, 1].
 
 
             backupPool and failoverRatio together define the fallback behavior of the primary target pool: if the ratio of the healthy instances in the primary pool is at or below failoverRatio, traffic arriving at the load-balanced IP will be directed to the backup pool.
@@ -51935,6 +52203,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52018,6 +52287,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52122,6 +52392,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52268,6 +52539,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52393,6 +52665,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52523,6 +52796,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52595,6 +52869,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52653,6 +52928,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52871,6 +53147,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -52990,6 +53267,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53048,6 +53326,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53174,6 +53453,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53295,6 +53575,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53425,6 +53706,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53497,6 +53779,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53627,6 +53910,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53833,6 +54117,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53905,6 +54190,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -53963,6 +54249,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -54082,6 +54369,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD
@@ -54212,6 +54500,7 @@ components:
                 - EXTERNAL_API_WARNING
                 - FIELD_VALUE_OVERRIDEN
                 - INJECTED_KERNELS_DEPRECATED
+                - LARGE_DEPLOYMENT_WARNING
                 - MISSING_TYPE_DEPENDENCY
                 - NEXT_HOP_ADDRESS_NOT_ASSIGNED
                 - NEXT_HOP_CANNOT_IP_FORWARD

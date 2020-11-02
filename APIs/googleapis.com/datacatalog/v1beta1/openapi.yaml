@@ -1527,6 +1527,14 @@ components:
     GoogleCloudDatacatalogV1beta1SerializedTaxonomy:
       description: Message capturing a taxonomy and its policy tag hierarchy as a nested proto. Used for taxonomy import/export and mutation.
       properties:
+        activatedPolicyTypes:
+          description: A list of policy types that are activated for a taxonomy.
+          items:
+            enum:
+              - POLICY_TYPE_UNSPECIFIED
+              - FINE_GRAINED_ACCESS_CONTROL
+            type: string
+          type: array
         description:
           description: Description of the serialized taxonomy. The length of the description is limited to 2000 bytes when encoded in UTF-8. If not set, defaults to an empty description.
           type: string
@@ -1641,6 +1649,9 @@ components:
     GoogleCloudDatacatalogV1beta1TagTemplateField:
       description: The template for an individual field within a tag template.
       properties:
+        description:
+          description: The description for this field. Defaults to an empty string.
+          type: string
         displayName:
           description: The display name for this field. Defaults to an empty string.
           type: string
@@ -1680,6 +1691,15 @@ components:
           description: 'Output only. Resource name of this taxonomy, whose format is: "projects/{project_number}/locations/{location_id}/taxonomies/{id}".'
           readOnly: true
           type: string
+        policyTagCount:
+          description: Output only. Number of policy tags contained in this taxonomy.
+          format: int32
+          readOnly: true
+          type: integer
+        taxonomyTimestamps:
+          $ref: "#/components/schemas/GoogleCloudDatacatalogV1beta1SystemTimestamps"
+          description: Output only. Timestamps about this taxonomy. Only create_time and update_time are used.
+          readOnly: true
       type: object
     GoogleCloudDatacatalogV1beta1ViewSpec:
       description: Table view specification.

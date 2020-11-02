@@ -238,7 +238,7 @@ paths:
               type: string
             type: array
           style: form
-        - description: Optional. A mask of what source types to return. Defaults to ReadSourceType.CONTACT and ReadSourceType.PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -340,7 +340,7 @@ paths:
           name: personFields
           schema:
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to ReadSourceType.CONTACT and ReadSourceType.PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -580,7 +580,7 @@ paths:
           name: requestMask.includeField
           schema:
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to ReadSourceType.PROFILE and ReadSourceType.CONTACT if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_PROFILE and READ_SOURCE_TYPE_CONTACT if not set.
           explode: true
           in: query
           name: sources
@@ -735,7 +735,7 @@ paths:
               - FIRST_NAME_ASCENDING
               - LAST_NAME_ASCENDING
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to ReadSourceType.CONTACT and ReadSourceType.PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -925,7 +925,7 @@ paths:
           name: personFields
           schema:
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to ReadSourceType.CONTACT and ReadSourceType.PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -993,7 +993,7 @@ paths:
           name: personFields
           schema:
             type: string
-        - description: Optional. A mask of what source types to return. Defaults to ReadSourceType.CONTACT and ReadSourceType.PROFILE if not set.
+        - description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           explode: true
           in: query
           name: sources
@@ -1373,7 +1373,7 @@ components:
           format: google-fieldmask
           type: string
         sources:
-          description: Optional. A mask of what source types to return. Defaults to ReadSourceType.CONTACT and ReadSourceType.PROFILE if not set.
+          description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           items:
             enum:
               - READ_SOURCE_TYPE_UNSPECIFIED
@@ -2364,7 +2364,7 @@ components:
           format: byte
           type: string
         sources:
-          description: Optional. A mask of what source types to return. Defaults to ReadSourceType.CONTACT and ReadSourceType.PROFILE if not set.
+          description: Optional. A mask of what source types to return. Defaults to READ_SOURCE_TYPE_CONTACT and READ_SOURCE_TYPE_PROFILE if not set.
           items:
             enum:
               - READ_SOURCE_TYPE_UNSPECIFIED

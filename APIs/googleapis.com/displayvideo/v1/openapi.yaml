@@ -1256,7 +1256,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Allows filtering by line item properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND` or `OR` logical operators. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator used on `flight.dateRange.endDate` must be LESS THAN (<). * The operator used on `warningMessages` must be `HAS (:)`. * The operators used on all other fields must be `EQUALS (=)`. * Supported fields: - `campaignId` - `displayName` - `insertionOrderId` - `entityStatus` - `lineItemId` - `lineItemType` - `flight.dateRange.endDate` (input formatted as YYYY-MM-DD) - `warningMessages` Examples: * All line items under an insertion order: `insertionOrderId="1234"` * All `ENTITY_STATUS_ACTIVE` or `ENTITY_STATUS_PAUSED` and `LINE_ITEM_TYPE_DISPLAY_DEFAULT` line items under an advertiser: `(entityStatus="ENTITY_STATUS_ACTIVE" OR entityStatus="ENTITY_STATUS_PAUSED") AND lineItemType="LINE_ITEM_TYPE_DISPLAY_DEFAULT"` * All line items whose flight dates end before March 28, 2019: `flight.dateRange.endDate<"2019-03-28"` * All line items that have `NO_VALID_CREATIVE` in `warningMessages`: `warningMessages:"NO_VALID_CREATIVE"` The length of this field should be no more than 500 characters.'
+        - description: 'Allows filtering by line item properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND` or `OR` logical operators. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator used on `flight.dateRange.endDate` must be LESS THAN (<). * The operator used on `warningMessages` must be `HAS (:)`. * The operators used on all other fields must be `EQUALS (=)`. * Supported fields: - `campaignId` - `displayName` - `insertionOrderId` - `entityStatus` - `lineItemId` - `lineItemType` - `flight.dateRange.endDate` (input formatted as YYYY-MM-DD) - `warningMessages` - `flight.triggerId` Examples: * All line items under an insertion order: `insertionOrderId="1234"` * All `ENTITY_STATUS_ACTIVE` or `ENTITY_STATUS_PAUSED` and `LINE_ITEM_TYPE_DISPLAY_DEFAULT` line items under an advertiser: `(entityStatus="ENTITY_STATUS_ACTIVE" OR entityStatus="ENTITY_STATUS_PAUSED") AND lineItemType="LINE_ITEM_TYPE_DISPLAY_DEFAULT"` * All line items whose flight dates end before March 28, 2019: `flight.dateRange.endDate<"2019-03-28"` * All line items that have `NO_VALID_CREATIVE` in `warningMessages`: `warningMessages:"NO_VALID_CREATIVE"` The length of this field should be no more than 500 characters.'
           in: query
           name: filter
           schema:
@@ -2244,6 +2244,271 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BulkEditAssignedLocationsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+  "/v1/advertisers/{advertiserId}/manualTriggers":
+    get:
+      description: Lists manual triggers that are accessible to the current user for a given advertiser id. The order is defined by the order_by parameter. A single advertiser_id is required.
+      operationId: displayvideo.advertisers.manualTriggers.list
+      parameters:
+        - description: Required. The ID of the advertiser that the fetched manual triggers belong to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: 'Allows filtering by manual trigger properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND` or `OR` logical operators. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `EQUALS (=)`. * Supported fields: - `displayName` - `state` Examples: * All active manual triggers under an advertiser: `state="ACTIVE"` The length of this field should be no more than 500 characters.'
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'Field by which to sort the list. Acceptable values are: * `displayName` (default) * `state` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. For example, `displayName desc`.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `ListManualTriggers` method. If not specified, the first page of results will be returned.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListManualTriggersResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a new manual trigger. Returns the newly created manual trigger if successful.
+      operationId: displayvideo.advertisers.manualTriggers.create
+      parameters:
+        - description: Required. Immutable. The unique ID of the advertiser that the manual trigger belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ManualTrigger"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManualTrigger"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+  "/v1/advertisers/{advertiserId}/manualTriggers/{triggerId}":
+    get:
+      description: Gets a manual trigger.
+      operationId: displayvideo.advertisers.manualTriggers.get
+      parameters:
+        - description: Required. The ID of the advertiser this manual trigger belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the manual trigger to fetch.
+          in: path
+          name: triggerId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManualTrigger"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    patch:
+      description: Updates a manual trigger. Returns the updated manual trigger if successful.
+      operationId: displayvideo.advertisers.manualTriggers.patch
+      parameters:
+        - description: Required. Immutable. The unique ID of the advertiser that the manual trigger belongs to.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Output only. The unique ID of the manual trigger.
+          in: path
+          name: triggerId
+          required: true
+          schema:
+            type: string
+        - description: Required. The mask to control which fields to update.
+          in: query
+          name: updateMask
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ManualTrigger"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManualTrigger"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+  "/v1/advertisers/{advertiserId}/manualTriggers/{triggerId}:activate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Activates a manual trigger. Each activation of the manual trigger must be at least 5 minutes apart, otherwise an error will be returned.
+      operationId: displayvideo.advertisers.manualTriggers.activate
+      parameters:
+        - description: Required. The ID of the advertiser that the manual trigger belongs.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the manual trigger to activate.
+          in: path
+          name: triggerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActivateManualTriggerRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManualTrigger"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - advertisers
+  "/v1/advertisers/{advertiserId}/manualTriggers/{triggerId}:deactivate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Deactivates a manual trigger.
+      operationId: displayvideo.advertisers.manualTriggers.deactivate
+      parameters:
+        - description: Required. The ID of the advertiser that the manual trigger belongs.
+          in: path
+          name: advertiserId
+          required: true
+          schema:
+            type: string
+        - description: Required. The ID of the manual trigger to deactivate.
+          in: path
+          name: triggerId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeactivateManualTriggerRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ManualTrigger"
           description: Successful response
       security:
         - Oauth2:
@@ -5415,6 +5680,10 @@ components:
       schema:
         type: string
   schemas:
+    ActivateManualTriggerRequest:
+      description: Request message for ManualTriggerService.ActivateManualTrigger.
+      properties: {}
+      type: object
     ActiveViewVideoViewabilityMetricConfig:
       description: Configuration for custom Active View video viewability metrics.
       properties:
@@ -7127,6 +7396,10 @@ components:
             - TIME_ZONE_RESOLUTION_ADVERTISER
           type: string
       type: object
+    DeactivateManualTriggerRequest:
+      description: Request message for ManualTriggerService.DeactivateManualTrigger.
+      properties: {}
+      type: object
     DeleteAssignedTargetingOptionsRequest:
       description: A request listing which assigned targeting options of a given targeting type should be deleted.
       properties:
@@ -7298,6 +7571,10 @@ components:
         brandSafetyCategories:
           $ref: "#/components/schemas/DoubleVerifyBrandSafetyCategories"
           description: DV Brand Safety Controls.
+        customSegmentId:
+          description: 'The custom segment ID provided by DoubleVerify. The ID must start with "51" and consist of eight digits. Custom segment id cannot be specified along with any of the following fields: * brand_safety_categories * avoided_age_ratings * app_star_rating * fraud_invalid_traffic'
+          format: int64
+          type: string
         displayViewability:
           $ref: "#/components/schemas/DoubleVerifyDisplayViewability"
           description: Display viewability settings (applicable to display line items only).
@@ -8319,6 +8596,12 @@ components:
     IntegralAdScience:
       description: Details of Integral Ad Science settings.
       properties:
+        customSegmentId:
+          description: The custom segment ID provided by Integral Ad Science. The ID must be between `1000001` and `1999999`, inclusive.
+          items:
+            format: int64
+            type: string
+          type: array
         displayViewability:
           description: Display Viewability section (applicable to display line items only).
           enum:
@@ -8773,6 +9056,9 @@ components:
         partnerRevenueModel:
           $ref: "#/components/schemas/PartnerRevenueModel"
           description: Required. The partner revenue model setting of the line item.
+        targetingExpansion:
+          $ref: "#/components/schemas/TargetingExpansionConfig"
+          description: The targeting expansion settings of the line item.
         updateTime:
           description: Output only. The timestamp when the line item was last updated. Assigned by the system.
           format: google-datetime
@@ -8839,6 +9125,11 @@ components:
             - LINE_ITEM_FLIGHT_DATE_TYPE_UNSPECIFIED
             - LINE_ITEM_FLIGHT_DATE_TYPE_INHERITED
             - LINE_ITEM_FLIGHT_DATE_TYPE_CUSTOM
+            - LINE_ITEM_FLIGHT_DATE_TYPE_TRIGGER
+          type: string
+        triggerId:
+          description: The ID of the manual trigger associated with the line item. * Required when flight_date_type is `LINE_ITEM_FLIGHT_DATE_TYPE_TRIGGER`. Must not be set otherwise. * A line item's flight dates are inherited from its parent insertion order. * Active line items will spend when the selected trigger is activated within the parent insertion order's flight dates.
+          format: int64
           type: string
       type: object
     ListAdvertiserAssignedTargetingOptionsResponse:
@@ -9044,6 +9335,17 @@ components:
           description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListLocationLists` method to retrieve the next page of results.
           type: string
       type: object
+    ListManualTriggersResponse:
+      properties:
+        manualTriggers:
+          description: The list of manual triggers. This list will be absent if empty.
+          items:
+            $ref: "#/components/schemas/ManualTrigger"
+          type: array
+        nextPageToken:
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `ListManualTriggers` method to retrieve the next page of results.
+          type: string
+      type: object
     ListNegativeKeywordListsResponse:
       description: Response message for NegativeKeywordListService.ListNegativeKeywordLists.
       properties:
@@ -9163,6 +9465,43 @@ components:
           description: Lookback window, in days, from the last time a given user viewed one of your ads.
           format: int32
           type: integer
+      type: object
+    ManualTrigger:
+      description: A single manual trigger in Display & Video 360 (DV360).
+      properties:
+        activationDurationMinutes:
+          description: Required. The maximum duration of each activation in minutes. Must be between 1 and 360 inclusive. After this duration, the trigger will be automatically deactivated.
+          format: int64
+          type: string
+        advertiserId:
+          description: Required. Immutable. The unique ID of the advertiser that the manual trigger belongs to.
+          format: int64
+          type: string
+        displayName:
+          description: Required. The display name of the manual trigger. Must be UTF-8 encoded with a maximum size of 240 bytes.
+          type: string
+        latestActivationTime:
+          description: Output only. The timestamp of the trigger's latest activation.
+          format: google-datetime
+          readOnly: true
+          type: string
+        name:
+          description: Output only. The resource name of the manual trigger.
+          readOnly: true
+          type: string
+        state:
+          description: Output only. The state of the manual trigger. Will be set to the `INACTIVE` state upon creation.
+          enum:
+            - STATE_UNSPECIFIED
+            - INACTIVE
+            - ACTIVE
+          readOnly: true
+          type: string
+        triggerId:
+          description: Output only. The unique ID of the manual trigger.
+          format: int64
+          readOnly: true
+          type: string
       type: object
     MaximizeSpendBidStrategy:
       description: A strategy that automatically adjusts the bid to optimize a specified performance goal while spending the full budget.
@@ -9905,6 +10244,24 @@ components:
         displayName:
           description: Output only. The display name of the sub-exchange.
           readOnly: true
+          type: string
+      type: object
+    TargetingExpansionConfig:
+      description: Settings that control the targeting expansion of the line item. Targeting expansion allows the line item to reach a larger audience based on the original audience list and the targeting expansion level.
+      properties:
+        excludeFirstPartyAudience:
+          description: Required. Whether to exclude first party audiences from targeting. Similar audiences of the excluded first party lists will not be excluded. Only applicable when a first-party audience is positively targeted (directly or included in a combined audience), otherwise this selection will be ignored.
+          type: boolean
+        targetingExpansionLevel:
+          description: Required. Magnitude of expansion for applicable targeting under this line item.
+          enum:
+            - TARGETING_EXPANSION_LEVEL_UNSPECIFIED
+            - NO_EXPANSION
+            - LEAST_EXPANSION
+            - SOME_EXPANSION
+            - BALANCED_EXPANSION
+            - MORE_EXPANSION
+            - MOST_EXPANSION
           type: string
       type: object
     TargetingOption:

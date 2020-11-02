@@ -1724,6 +1724,7 @@ paths:
         - description: The email of the Google My Business account.
           in: query
           name: gmbEmail
+          required: true
           schema:
             type: string
       responses:
@@ -1818,24 +1819,28 @@ paths:
           required: true
           schema:
             type: string
-        - description: The email of the inventory verification contact.
-          in: query
-          name: contactEmail
-          schema:
-            type: string
-        - description: The name of the inventory verification contact.
-          in: query
-          name: contactName
-          schema:
-            type: string
         - description: The country for which inventory verification is requested.
           in: query
           name: country
+          required: true
           schema:
             type: string
         - description: The language for which inventory verification is requested.
           in: query
           name: language
+          required: true
+          schema:
+            type: string
+        - description: The name of the inventory verification contact.
+          in: query
+          name: contactName
+          required: true
+          schema:
+            type: string
+        - description: The email of the inventory verification contact.
+          in: query
+          name: contactEmail
+          required: true
           schema:
             type: string
       responses:
@@ -1884,6 +1889,7 @@ paths:
         - description: The country for which the POS data provider is selected.
           in: query
           name: country
+          required: true
           schema:
             type: string
         - description: The ID of POS data provider.
