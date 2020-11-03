@@ -2235,6 +2235,12 @@ paths:
           description: The ID of the network interface.
           schema:
             type: string
+        - name: NetworkCardIndex
+          in: query
+          required: false
+          description: The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.
+          schema:
+            type: integer
         - name: Action
           in: query
           required: true
@@ -6083,7 +6089,7 @@ paths:
               EnclaveOptions:
                 allOf:
                   - $ref: '#/components/schemas/LaunchTemplateEnclaveOptionsRequest'
-                  - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+                  - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance.</p>'
             description: The information to include in the launch template.
         - name: TagSpecification
           in: query
@@ -6332,7 +6338,7 @@ paths:
               EnclaveOptions:
                 allOf:
                   - $ref: '#/components/schemas/LaunchTemplateEnclaveOptionsRequest'
-                  - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+                  - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance.</p>'
             description: The information to include in the launch template.
         - name: Action
           in: query
@@ -23149,6 +23155,7 @@ paths:
               - p3.8xlarge
               - p3.16xlarge
               - p3dn.24xlarge
+              - p4d.24xlarge
               - d2.xlarge
               - d2.2xlarge
               - d2.4xlarge
@@ -42487,6 +42494,7 @@ paths:
               - p3.8xlarge
               - p3.16xlarge
               - p3dn.24xlarge
+              - p4d.24xlarge
               - d2.xlarge
               - d2.2xlarge
               - d2.4xlarge
@@ -44960,6 +44968,12 @@ components:
             - xml:
                 name: attachmentId
               description: The ID of the network interface attachment.
+        NetworkCardIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: networkCardIndex
+              description: The index of the network card.
       description: Contains the output of AttachNetworkInterface.
     VolumeAttachment:
       type: object
@@ -45905,6 +45919,7 @@ components:
         - p3.8xlarge
         - p3.16xlarge
         - p3dn.24xlarge
+        - p4d.24xlarge
         - d2.xlarge
         - d2.2xlarge
         - d2.4xlarge
@@ -46194,7 +46209,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'To enable the instance for AWS Nitro Enclaves, set this parameter to <code>true</code>.'
-      description: 'Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      description: 'Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.'
     CreateLaunchTemplateVersionResult:
       type: object
       example:
@@ -52094,7 +52109,11 @@ components:
         InterfaceType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html">Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p> <p>Valid values: <code>interface</code> | <code>efa</code> </p>'
+            - description: '<p>The type of network interface.</p> <p>To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html">Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p> <p>Valid values: <code>interface</code> | <code>efa</code> </p>'
+        NetworkCardIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.
       description: Describes a network interface.
     ElasticGpuSpecification:
       type: object
@@ -53841,6 +53860,10 @@ components:
             - xml:
                 name: networkInterfaceId
               description: The ID of the network interface.
+        NetworkCardIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.
       description: Contains the parameters for AttachNetworkInterface.
     AttachVolumeRequest:
       type: object
@@ -57595,7 +57618,7 @@ components:
         EnclaveOptions:
           allOf:
             - $ref: '#/components/schemas/LaunchTemplateEnclaveOptionsRequest'
-            - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+            - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance.</p>'
       description: The information to include in the launch template.
     CreateLaunchTemplateRequest:
       type: object
@@ -64539,6 +64562,12 @@ components:
             - xml:
                 name: deviceIndex
               description: The device index of the network interface attachment on the instance.
+        NetworkCardIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: networkCardIndex
+              description: The index of the network card.
         InstanceId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -71894,6 +71923,12 @@ components:
             - xml:
                 name: status
               description: The attachment state.
+        NetworkCardIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: networkCardIndex
+              description: The index of the network card.
       description: Describes a network interface attachment.
     InstancePrivateIpAddressList:
       type: array
@@ -73477,6 +73512,12 @@ components:
             - xml:
                 name: subnetId
               description: The ID of the subnet for the network interface.
+        NetworkCardIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: networkCardIndex
+              description: The index of the network card.
       description: Describes a network interface.
     LaunchTemplateInstanceNetworkInterfaceSpecificationList:
       type: array
@@ -73546,6 +73587,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SubnetId'
             - description: The ID of the subnet for the network interface.
+        NetworkCardIndex:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.
       description: The parameters for a network interface.
     LaunchTemplateLicenseConfiguration:
       type: object
@@ -76102,7 +76147,7 @@ components:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: publicIp
-              description: The address of the Elastic IP address or Carrier IP address bound to the network interface.
+              description: The address of the Elastic IP address bound to the network interface.
         CustomerOwnedIp:
           allOf:
             - $ref: '#/components/schemas/String'
