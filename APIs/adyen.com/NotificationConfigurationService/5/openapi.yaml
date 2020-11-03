@@ -1,12 +1,11 @@
 openapi: 3.0.3
 servers:
-  - url: 'https://cal-test.adyen.com/cal/services/Notification/v1'
+  - url: 'https://cal-test.adyen.com/cal/services/Notification/v5'
 info:
   contact:
     email: support@adyen.com
     name: Adyen Support
     url: 'https://support.adyen.com/'
-    x-twitter: Adyen
   description: |-
     The Notification Configuration API provides endpoints for setting up and testing notifications that inform you of events on your platform, for example when a KYC check or a payout has been completed.
 
@@ -27,21 +26,14 @@ info:
 
     For example:
     ```
-    https://cal-test.adyen.com/cal/services/Notification/v1/createNotificationConfiguration
+    https://cal-test.adyen.com/cal/services/Notification/v5/createNotificationConfiguration
     ```
   termsOfService: 'https://www.adyen.com/legal/terms-and-conditions'
   title: 'Adyen for Platforms: Notification Configuration API'
-  version: '1'
-  x-apisguru-categories:
-    - payment
-  x-logo:
-    url: 'https://twitter.com/Adyen/profile_image?size=original'
+  version: '5'
   x-origin:
-    - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
-      format: openapi
-      url: 'https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/NotificationConfigurationService-v1.json'
+    - format: openapi
+      url: 'https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/NotificationConfigurationService-v5.json'
       version: '3.0'
   x-preferred: false
   x-providerName: adyen.com
@@ -181,32 +173,149 @@ components:
       required:
         - notificationIds
     EmptyRequest: {}
+    ErrorFieldType:
+      properties:
+        errorCode:
+          description: The validation error code.
+          format: int32
+          type: integer
+        errorDescription:
+          description: A description of the validation error.
+          type: string
+        fieldType:
+          $ref: '#/components/schemas/FieldType'
+          description: The type of error field.
     ExchangeMessage:
       properties:
         messageCode:
           type: string
         messageDescription:
           type: string
+    FieldType:
+      properties:
+        field:
+          description: The full name of the property.
+          type: string
+        fieldName:
+          description: The type of the field.
+          enum:
+            - accountCode
+            - accountHolderCode
+            - accountHolderDetails
+            - accountNumber
+            - accountStateType
+            - accountStatus
+            - accountType
+            - address
+            - bankAccount
+            - bankAccountCode
+            - bankAccountName
+            - bankAccountUUID
+            - bankBicSwift
+            - bankCity
+            - bankCode
+            - bankName
+            - bankStatement
+            - branchCode
+            - businessContact
+            - cardToken
+            - checkCode
+            - city
+            - companyRegistration
+            - country
+            - countryCode
+            - currency
+            - currencyCode
+            - dateOfBirth
+            - description
+            - destinationAccountCode
+            - document
+            - documentExpirationDate
+            - documentIssuerCountry
+            - documentIssuerState
+            - documentName
+            - documentNumber
+            - documentType
+            - doingBusinessAs
+            - drivingLicence
+            - drivingLicenceBack
+            - drivingLicense
+            - email
+            - firstName
+            - fullPhoneNumber
+            - gender
+            - hopWebserviceUser
+            - houseNumberOrName
+            - iban
+            - idCard
+            - idCardBack
+            - idCardFront
+            - idNumber
+            - identityDocument
+            - individualDetails
+            - lastName
+            - legalBusinessName
+            - legalEntity
+            - legalEntityType
+            - merchantAccount
+            - merchantCategoryCode
+            - merchantReference
+            - microDeposit
+            - name
+            - nationality
+            - originalReference
+            - ownerCity
+            - ownerCountryCode
+            - ownerHouseNumberOrName
+            - ownerName
+            - ownerPostalCode
+            - ownerState
+            - ownerStreet
+            - passport
+            - passportNumber
+            - payoutMethodCode
+            - personalData
+            - phoneCountryCode
+            - phoneNumber
+            - postalCode
+            - primaryCurrency
+            - reason
+            - registrationNumber
+            - returnUrl
+            - schedule
+            - shareholder
+            - shareholderCode
+            - socialSecurityNumber
+            - sourceAccountCode
+            - stateOrProvince
+            - status
+            - stockExchange
+            - stockNumber
+            - stockTicker
+            - store
+            - storeDetail
+            - storeName
+            - storeReference
+            - street
+            - taxId
+            - tier
+            - tierNumber
+            - transferCode
+            - unknown
+            - value
+            - virtualAccount
+            - visaNumber
+            - webAddress
+          type: string
+        shareholderCode:
+          description: 'The code of the shareholder that the field belongs to. If empty, the field belongs to an account holder.'
+          type: string
     GenericResponse:
       properties:
-        pspReference:
-          description: The reference of a request. Can be used to uniquely identify the request.
-          type: string
-        resultCode:
-          description: The result code.
-          type: string
-        submittedAsync:
-          description: |-
-            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
-            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-          type: boolean
-    GetNotificationConfigurationListResponse:
-      properties:
-        configurations:
-          description: Details of the notification subscription configurations.
+        invalidFields:
+          description: Contains field validation errors that would prevent requests from being processed.
           items:
-            $ref: '#/components/schemas/NotificationConfigurationDetails'
+            $ref: '#/components/schemas/ErrorFieldType'
           type: array
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
@@ -214,12 +323,24 @@ components:
         resultCode:
           description: The result code.
           type: string
-        submittedAsync:
-          description: |-
-            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
-            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-          type: boolean
+    GetNotificationConfigurationListResponse:
+      properties:
+        configurations:
+          description: Details of the notification subscription configurations.
+          items:
+            $ref: '#/components/schemas/NotificationConfigurationDetails'
+          type: array
+        invalidFields:
+          description: Contains field validation errors that would prevent requests from being processed.
+          items:
+            $ref: '#/components/schemas/ErrorFieldType'
+          type: array
+        pspReference:
+          description: The reference of a request. Can be used to uniquely identify the request.
+          type: string
+        resultCode:
+          description: The result code.
+          type: string
       required:
         - configurations
     GetNotificationConfigurationRequest:
@@ -235,18 +356,17 @@ components:
         configurationDetails:
           $ref: '#/components/schemas/NotificationConfigurationDetails'
           description: Details of the notification subscription configuration.
+        invalidFields:
+          description: Contains field validation errors that would prevent requests from being processed.
+          items:
+            $ref: '#/components/schemas/ErrorFieldType'
+          type: array
         pspReference:
           description: The reference of a request. Can be used to uniquely identify the request.
           type: string
         resultCode:
           description: The result code.
           type: string
-        submittedAsync:
-          description: |-
-            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
-            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-          type: boolean
       required:
         - configurationDetails
     NotificationConfigurationDetails:
@@ -266,14 +386,13 @@ components:
           items:
             $ref: '#/components/schemas/NotificationEventConfiguration'
           type: array
-        messageFormat:
-          deprecated: true
+        hmacSignatureKey:
           description: |-
-            The data format of the notification to be sent.
-            >Permitted values: `JSON`, `SOAP`.
-          enum:
-            - JSON
-            - SOAP
+            A string with which to salt the notification(s) before hashing. If this field is provided, a hash value will be included under the notification header `HmacSignature` and the hash protocol will be included under the notification header `Protocol`. A notification body along with its `hmacSignatureKey` and `Protocol` can be used to calculate a hash value; matching this hash value with the `HmacSignature` will ensure that the notification body has not been tampered with or corrupted.
+
+            >Must be a 32-byte hex-encoded string (i.e. a string containing 64 hexadecimal characters; e.g. "b0ea55c2fe60d4d1d605e9c385e0e7f7e6cafbb939ce07010f31a327a0871f27").
+
+            The omission of this field will preclude the provision of the `HmacSignature` and `Protocol` headers in notification(s).
           type: string
         notificationId:
           description: |-
@@ -290,12 +409,6 @@ components:
         notifyUsername:
           description: The username to use when accessing the notifyURL.
           type: string
-        sendActionHeader:
-          deprecated: true
-          description: |-
-            Indicates whether an action header should be included.
-            >Only applies to SOAP messages (as specified in messageFormat).
-          type: boolean
         sslProtocol:
           description: |-
             The SSL protocol employed by the endpoint.
@@ -426,6 +539,11 @@ components:
           items:
             $ref: '#/components/schemas/ExchangeMessage'
           type: array
+        invalidFields:
+          description: Contains field validation errors that would prevent requests from being processed.
+          items:
+            $ref: '#/components/schemas/ErrorFieldType'
+          type: array
         notificationId:
           description: The ID of the notification subscription configuration.
           format: int64
@@ -441,12 +559,6 @@ components:
         resultCode:
           description: The result code.
           type: string
-        submittedAsync:
-          description: |-
-            Indicates whether the request is processed asynchronously. Depending on the request's platform settings, the following scenarios may be applied:
-            * **true**: The request is queued and will be executed when the providing service is available in the order in which the requests are received.
-            * **false**: The processing of the request is immediately attempted; it may result in an error if the providing service is unavailable.
-          type: boolean
       required:
         - notificationId
         - eventTypes

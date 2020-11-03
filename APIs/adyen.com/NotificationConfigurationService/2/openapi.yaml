@@ -1,12 +1,11 @@
 openapi: 3.0.3
 servers:
-  - url: 'https://cal-test.adyen.com/cal/services/Notification/v1'
+  - url: 'https://cal-test.adyen.com/cal/services/Notification/v2'
 info:
   contact:
     email: support@adyen.com
     name: Adyen Support
     url: 'https://support.adyen.com/'
-    x-twitter: Adyen
   description: |-
     The Notification Configuration API provides endpoints for setting up and testing notifications that inform you of events on your platform, for example when a KYC check or a payout has been completed.
 
@@ -27,21 +26,14 @@ info:
 
     For example:
     ```
-    https://cal-test.adyen.com/cal/services/Notification/v1/createNotificationConfiguration
+    https://cal-test.adyen.com/cal/services/Notification/v2/createNotificationConfiguration
     ```
   termsOfService: 'https://www.adyen.com/legal/terms-and-conditions'
   title: 'Adyen for Platforms: Notification Configuration API'
-  version: '1'
-  x-apisguru-categories:
-    - payment
-  x-logo:
-    url: 'https://twitter.com/Adyen/profile_image?size=original'
+  version: '2'
   x-origin:
-    - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
-        version: 2.7.11
-      format: openapi
-      url: 'https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/NotificationConfigurationService-v1.json'
+    - format: openapi
+      url: 'https://raw.githubusercontent.com/Adyen/adyen-openapi/master/json/NotificationConfigurationService-v2.json'
       version: '3.0'
   x-preferred: false
   x-providerName: adyen.com
