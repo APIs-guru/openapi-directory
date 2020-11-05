@@ -3,7 +3,7 @@ info:
   version: '2017-11-27'
   x-release: v4
   title: AmazonMQ
-  description: 'Amazon MQ is a managed message broker service for Apache ActiveMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.'
+  description: 'Amazon MQ is a managed message broker service for Apache ActiveMQ and RabbitMQ that makes it easy to set up and operate message brokers in the cloud. A message broker allows software applications and components to communicate using various programming languages, operating systems, and formal messaging protocols.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -176,7 +176,7 @@ paths:
                   description: 'Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.'
                   type: string
                 configuration:
-                  description: A list of information about the configuration.
+                  description: A list of information about the configuration. <important>Does not apply to RabbitMQ brokers.</important>
                   type: object
                   properties:
                     Id:
@@ -200,6 +200,7 @@ paths:
                   enum:
                     - SINGLE_INSTANCE
                     - ACTIVE_STANDBY_MULTI_AZ
+                    - CLUSTER_MULTI_AZ
                 encryptionOptions:
                   description: Encryption options for the broker.
                   type: object
@@ -217,10 +218,11 @@ paths:
                             name: useAwsOwnedKey
                           description: Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
                 engineType:
-                  description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+                  description: 'The type of broker engine. Note: Currently, Amazon MQ supports ActiveMQ and RabbitMQ.'
                   type: string
                   enum:
                     - ACTIVEMQ
+                    - RABBITMQ
                 engineVersion:
                   description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
                   type: string
@@ -306,7 +308,7 @@ paths:
                         - $ref: '#/components/schemas/__boolean'
                         - xml:
                             name: audit
-                          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+                          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
                     General:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
@@ -344,13 +346,13 @@ paths:
                   items:
                     $ref: '#/components/schemas/__string'
                 storageType:
-                  description: The storage type of the broker.
+                  description: The broker's storage type. <important>EFS is currently not Supported for RabbitMQ engine type.</important>
                   type: string
                   enum:
                     - EBS
                     - EFS
                 subnetIds:
-                  description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+                  description: 'The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.'
                   type: array
                   items:
                     $ref: '#/components/schemas/__string'
@@ -360,7 +362,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/__string'
                 users:
-                  description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+                  description: 'Required. The list of broker users (persons or applications) who can access queues and topics. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ Web Console. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
                   type: array
                   items:
                     $ref: '#/components/schemas/User'
@@ -477,10 +479,11 @@ paths:
                     - SIMPLE
                     - LDAP
                 engineType:
-                  description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+                  description: 'The type of broker engine. Note: Currently, Amazon MQ supports ActiveMQ and RabbitMQ.'
                   type: string
                   enum:
                     - ACTIVEMQ
+                    - RABBITMQ
                 engineVersion:
                   description: 'Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html'
                   type: string
@@ -1042,7 +1045,7 @@ paths:
                   description: 'Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.'
                   type: boolean
                 configuration:
-                  description: A list of information about the configuration.
+                  description: A list of information about the configuration. <important>Does not apply to RabbitMQ brokers.</important>
                   type: object
                   properties:
                     Id:
@@ -1142,7 +1145,7 @@ paths:
                         - $ref: '#/components/schemas/__boolean'
                         - xml:
                             name: audit
-                          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+                          description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
                     General:
                       allOf:
                         - $ref: '#/components/schemas/__boolean'
@@ -1775,7 +1778,7 @@ components:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: consoleAccess
-              description: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+              description: Enables access to the ActiveMQ Web Console for the ActiveMQ user (Does not apply to RabbitMQ brokers).
         Groups:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -1787,14 +1790,14 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: password
-              description: 'Required. The password of the ActiveMQ user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
+              description: 'Required. The password of the broker user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.'
         Username:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: username
-              description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-      description: An ActiveMQ user associated with the broker.
+              description: 'Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+      description: A user associated with the broker.
     BadRequestException: {}
     UnauthorizedException: {}
     InternalServerErrorException: {}
@@ -1929,7 +1932,7 @@ components:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2013,7 +2016,7 @@ components:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: subnetIds
-              description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+              description: 'The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
@@ -2025,7 +2028,7 @@ components:
             - $ref: '#/components/schemas/__listOfUserSummary'
             - xml:
                 name: users
-              description: The list of all ActiveMQ usernames for the specified broker.
+              description: The list of all broker usernames for the specified broker.
     DescribeBrokerEngineTypesResponse:
       type: object
       properties:
@@ -2100,7 +2103,7 @@ components:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2412,7 +2415,8 @@ components:
       type: string
       enum:
         - ACTIVEMQ
-      description: 'The type of broker engine. Note: Currently, Amazon MQ supports only ActiveMQ.'
+        - RABBITMQ
+      description: 'The type of broker engine. Note: Currently, Amazon MQ supports ActiveMQ and RabbitMQ.'
     __listOfEngineVersion:
       type: array
       items:
@@ -2441,7 +2445,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: consoleURL
-              description: The URL of the broker's ActiveMQ Web Console.
+              description: The URL of the broker's Web Console.
         Endpoints:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
@@ -2453,7 +2457,7 @@ components:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: ipAddress
-              description: The IP address of the Elastic Network Interface (ENI) attached to the broker.
+              description: The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers
       description: Returns information about all brokers.
     __listOfAvailabilityZone:
       type: array
@@ -2464,7 +2468,7 @@ components:
       enum:
         - EBS
         - EFS
-      description: The storage type of the broker.
+      description: The broker's storage type. <important>EFS is currently not Supported for RabbitMQ engine type.</important>
     __listOfDeploymentMode:
       type: array
       items:
@@ -2526,6 +2530,7 @@ components:
       enum:
         - SINGLE_INSTANCE
         - ACTIVE_STANDBY_MULTI_AZ
+        - CLUSTER_MULTI_AZ
       description: The deployment mode of the broker.
     BrokerSummary:
       type: object
@@ -2566,6 +2571,12 @@ components:
             - xml:
                 name: deploymentMode
               description: Required. The deployment mode of the broker.
+        EngineType:
+          allOf:
+            - $ref: '#/components/schemas/EngineType'
+            - xml:
+                name: engineType
+              description: Required. The type of broker engine.
         HostInstanceType:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2638,7 +2649,7 @@ components:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2685,7 +2696,7 @@ components:
             - xml:
                 name: revision
               description: The revision number of the configuration.
-      description: A list of information about the configuration.
+      description: A list of information about the configuration. <important>Does not apply to RabbitMQ brokers.</important>
     __listOfConfigurationId:
       type: array
       items:
@@ -2808,7 +2819,7 @@ components:
             - $ref: '#/components/schemas/__boolean'
             - xml:
                 name: audit
-              description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged.
+              description: Enables audit logging. Every user management action made using JMX or the ActiveMQ Web Console is logged. Does not apply to RabbitMQ brokers.
         General:
           allOf:
             - $ref: '#/components/schemas/__boolean'
@@ -2893,7 +2904,7 @@ components:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -2947,7 +2958,7 @@ components:
             - $ref: '#/components/schemas/__listOf__string'
             - xml:
                 name: subnetIds
-              description: 'The list of groups (2 maximum) that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment requires two subnets.'
+              description: 'The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/__mapOf__string'
@@ -2959,7 +2970,7 @@ components:
             - $ref: '#/components/schemas/__listOfUser'
             - xml:
                 name: users
-              description: 'Required. The list of ActiveMQ users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+              description: 'Required. The list of broker users (persons or applications) who can access queues and topics. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ Web Console. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
       description: Creates a broker using the specified properties.
     CreateConfigurationRequest:
       type: object
@@ -2976,7 +2987,7 @@ components:
             - $ref: '#/components/schemas/EngineType'
             - xml:
                 name: engineType
-              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.'
+              description: 'Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.'
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -3406,13 +3417,13 @@ components:
             - $ref: '#/components/schemas/ChangeType'
             - xml:
                 name: pendingChange
-              description: The type of change pending for the ActiveMQ user.
+              description: The type of change pending for the broker user.
         Username:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: username
-              description: 'Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
-      description: Returns a list of all ActiveMQ users.
+              description: 'Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.'
+      description: Returns a list of all broker users.
 security:
   - hmac: []

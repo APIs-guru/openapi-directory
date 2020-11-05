@@ -4367,6 +4367,22 @@ paths:
             enum:
               - enabled
               - disabled
+        - name: ClientConnectOptions
+          in: query
+          required: false
+          description: The options for managing connection authorization for new client connections.
+          schema:
+            type: object
+            properties:
+              Enabled:
+                allOf:
+                  - $ref: '#/components/schemas/Boolean'
+                  - description: Indicates whether client connect options are enabled. The default is <code>false</code> (not enabled).
+              LambdaFunctionArn:
+                allOf:
+                  - $ref: '#/components/schemas/String'
+                  - description: The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.
+            description: The options for managing connection authorization for new client connections.
         - name: Action
           in: query
           required: true
@@ -5012,6 +5028,10 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/SpotAllocationStrategy'
                   - description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+              MaintenanceStrategies:
+                allOf:
+                  - $ref: '#/components/schemas/FleetSpotMaintenanceStrategiesRequest'
+                  - description: The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.
               InstanceInterruptionBehavior:
                 allOf:
                   - $ref: '#/components/schemas/SpotInstanceInterruptionBehavior'
@@ -5125,7 +5145,7 @@ paths:
         - name: Type
           in: query
           required: false
-          description: 'The type of the request. By default, the EC2 Fleet places an asynchronous request for your desired capacity, and maintains it by replenishing interrupted Spot Instances (<code>maintain</code>). A value of <code>instant</code> places a synchronous one-time request, and returns errors for any instances that could not be launched. A value of <code>request</code> places an asynchronous one-time request without maintaining capacity or submitting requests in alternative capacity pools if capacity is unavailable. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type">EC2 Fleet Request Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+          description: '<p>The type of request. The default value is <code>maintain</code>.</p> <ul> <li> <p> <code>maintain</code> - The EC2 Fleet plaees an asynchronous request for your desired capacity, and continues to maintain your desired Spot capacity by replenishing interrupted Spot Instances.</p> </li> <li> <p> <code>request</code> - The EC2 Fleet places an asynchronous one-time request for your desired capacity, but does submit Spot requests in alternative capacity pools if Spot capacity is unavailable, and does not maintain Spot capacity if Spot Instances are interrupted.</p> </li> <li> <p> <code>instant</code> - The EC2 Fleet places a synchronous one-time request for your desired capacity, and returns errors for any instances that could not be launched.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type">EC2 Fleet request types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
           schema:
             type: string
             enum:
@@ -5155,7 +5175,7 @@ paths:
         - name: TagSpecification
           in: query
           required: false
-          description: 'The key-value pair for tagging the EC2 Fleet request on creation. The value for <code>ResourceType</code> must be <code>fleet</code>, otherwise the fleet request fails. To tag instances at launch, specify the tags in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template">launch template</a>. For information about tagging after launch, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tagging Your Resources</a>. '
+          description: 'The key-value pair for tagging the EC2 Fleet request on creation. The value for <code>ResourceType</code> must be <code>fleet</code>, otherwise the fleet request fails. To tag instances at launch, specify the tags in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template">launch template</a>. For information about tagging after launch, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tagging your resources</a>.'
           schema:
             type: array
             items:
@@ -33811,6 +33831,22 @@ paths:
             enum:
               - enabled
               - disabled
+        - name: ClientConnectOptions
+          in: query
+          required: false
+          description: The options for managing connection authorization for new client connections.
+          schema:
+            type: object
+            properties:
+              Enabled:
+                allOf:
+                  - $ref: '#/components/schemas/Boolean'
+                  - description: Indicates whether client connect options are enabled. The default is <code>false</code> (not enabled).
+              LambdaFunctionArn:
+                allOf:
+                  - $ref: '#/components/schemas/String'
+                  - description: The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.
+            description: The options for managing connection authorization for new client connections.
         - name: Action
           in: query
           required: true
@@ -34079,7 +34115,7 @@ paths:
             type: string
         - name: TargetCapacitySpecification
           in: query
-          required: true
+          required: false
           description: The size of the EC2 Fleet.
           schema:
             type: object
@@ -40786,6 +40822,12 @@ paths:
                   - xml:
                       name: onDemandAllocationStrategy
                     description: 'The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify <code>lowestPrice</code>, Spot Fleet uses price to determine the order, launching the lowest price first. If you specify <code>prioritized</code>, Spot Fleet uses the priority that you assign to each Spot Fleet launch template override, launching the highest priority first. If you do not specify a value, Spot Fleet defaults to <code>lowestPrice</code>.'
+              SpotMaintenanceStrategies:
+                allOf:
+                  - $ref: '#/components/schemas/SpotMaintenanceStrategies'
+                  - xml:
+                      name: spotMaintenanceStrategies
+                    description: The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.
               ClientToken:
                 allOf:
                   - $ref: '#/components/schemas/String'
@@ -43002,7 +43044,7 @@ paths:
         - name: EnclaveOptions
           in: query
           required: false
-          description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+          description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance.</p>'
           schema:
             type: object
             properties:
@@ -43010,7 +43052,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/Boolean'
                   - description: 'To enable the instance for AWS Nitro Enclaves, set this parameter to <code>true</code>.'
-            description: 'Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+            description: 'Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.'
         - name: Action
           in: query
           required: true
@@ -45449,6 +45491,14 @@ components:
         - lowest-price
         - diversified
         - capacity-optimized
+    FleetSpotMaintenanceStrategiesRequest:
+      type: object
+      properties:
+        CapacityRebalance:
+          allOf:
+            - $ref: '#/components/schemas/FleetSpotCapacityRebalanceRequest'
+            - description: The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.
+      description: The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.
     SpotInstanceInterruptionBehavior:
       type: string
       enum:
@@ -45469,7 +45519,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/FleetCapacityReservationUsageStrategy'
             - description: '<p>Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity.</p> <p>If you specify <code>use-capacity-reservations-first</code>, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (<code>lowest-price</code> or <code>prioritized</code>) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (<code>lowest-price</code> or <code>prioritized</code>).</p> <p>If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>'
-      description: '<p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.</p> <note> <p>This strategy can only be used if the EC2 Fleet is of type <code>instant</code>.</p> </note> <p>For more information about Capacity Reservations, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html">On-Demand Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For examples of using Capacity Reservations in an EC2 Fleet, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html">EC2 Fleet Example Configurations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.</p> <note> <p>This strategy can only be used if the EC2 Fleet is of type <code>instant</code>.</p> </note> <p>For more information about Capacity Reservations, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html">On-Demand Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For examples of using Capacity Reservations in an EC2 Fleet, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html">EC2 Fleet example configurations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
     FleetLaunchTemplateConfigRequest:
       type: object
       properties:
@@ -51760,6 +51810,16 @@ components:
       enum:
         - lowestPrice
         - prioritized
+    SpotMaintenanceStrategies:
+      type: object
+      properties:
+        CapacityRebalance:
+          allOf:
+            - $ref: '#/components/schemas/SpotCapacityRebalance'
+            - xml:
+                name: capacityRebalance
+              description: The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.
+      description: The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.
     ExcessCapacityTerminationPolicy:
       type: string
       enum:
@@ -55021,7 +55081,7 @@ components:
             - xml:
                 name: usageStrategy
               description: '<p>Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity.</p> <p>If you specify <code>use-capacity-reservations-first</code>, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (<code>lowest-price</code> or <code>prioritized</code>) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (<code>lowest-price</code> or <code>prioritized</code>).</p> <p>If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>'
-      description: '<p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.</p> <note> <p>This strategy can only be used if the EC2 Fleet is of type <code>instant</code>.</p> </note> <p>For more information about Capacity Reservations, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html">On-Demand Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For examples of using Capacity Reservations in an EC2 Fleet, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html">EC2 Fleet Example Configurations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+      description: '<p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.</p> <note> <p>This strategy can only be used if the EC2 Fleet is of type <code>instant</code>.</p> </note> <p>For more information about Capacity Reservations, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html">On-Demand Capacity Reservations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For examples of using Capacity Reservations in an EC2 Fleet, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-examples.html">EC2 Fleet example configurations</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
     CapacityReservationSet:
       type: array
       items:
@@ -55294,6 +55354,56 @@ components:
                 name: message
               description: 'A message about the status of the client certificate revocation list, if applicable.'
       description: Describes the state of a client certificate revocation list.
+    ClientConnectOptions:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether client connect options are enabled. The default is <code>false</code> (not enabled).
+        LambdaFunctionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.
+      description: The options for managing connection authorization for new client connections.
+    ClientVpnEndpointAttributeStatus:
+      type: object
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/ClientVpnEndpointAttributeStatusCode'
+            - xml:
+                name: code
+              description: The status code.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: message
+              description: The status message.
+      description: Describes the status of the Client VPN endpoint attribute.
+    ClientConnectResponseOptions:
+      type: object
+      properties:
+        Enabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: enabled
+              description: Indicates whether client connect options are enabled.
+        LambdaFunctionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: lambdaFunctionArn
+              description: The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ClientVpnEndpointAttributeStatus'
+            - xml:
+                name: status
+              description: The status of any updates to the client connect options.
+      description: The options for managing connection authorization for new client connections.
     ClientData:
       type: object
       properties:
@@ -55511,6 +55621,12 @@ components:
             - xml:
                 name: connectionEndTime
               description: The date and time the client connection was terminated.
+        PostureComplianceStatuses:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - xml:
+                name: postureComplianceStatusSet
+              description: 'The statuses returned by the client connect handler for posture compliance, if applicable.'
       description: Describes a client connection.
     ClientVpnConnectionSet:
       type: array
@@ -55691,7 +55807,18 @@ components:
             - xml:
                 name: selfServicePortalUrl
               description: The URL of the self-service portal.
+        ClientConnectOptions:
+          allOf:
+            - $ref: '#/components/schemas/ClientConnectResponseOptions'
+            - xml:
+                name: clientConnectOptions
+              description: The options for managing connection authorization for new client connections.
       description: Describes a Client VPN endpoint.
+    ClientVpnEndpointAttributeStatusCode:
+      type: string
+      enum:
+        - applying
+        - applied
     ClientVpnEndpointIdList:
       type: array
       items:
@@ -56441,6 +56568,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SelfServicePortal'
             - description: '<p>Specify whether to enable the self-service portal for the Client VPN endpoint.</p> <p>Default Value: <code>enabled</code> </p>'
+        ClientConnectOptions:
+          allOf:
+            - $ref: '#/components/schemas/ClientConnectOptions'
+            - description: The options for managing connection authorization for new client connections.
     CreateClientVpnRouteRequest:
       type: object
       required:
@@ -56983,6 +57114,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SpotAllocationStrategy'
             - description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+        MaintenanceStrategies:
+          allOf:
+            - $ref: '#/components/schemas/FleetSpotMaintenanceStrategiesRequest'
+            - description: The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.
         InstanceInterruptionBehavior:
           allOf:
             - $ref: '#/components/schemas/SpotInstanceInterruptionBehavior'
@@ -57113,7 +57248,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/FleetType'
-            - description: 'The type of the request. By default, the EC2 Fleet places an asynchronous request for your desired capacity, and maintains it by replenishing interrupted Spot Instances (<code>maintain</code>). A value of <code>instant</code> places a synchronous one-time request, and returns errors for any instances that could not be launched. A value of <code>request</code> places an asynchronous one-time request without maintaining capacity or submitting requests in alternative capacity pools if capacity is unavailable. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type">EC2 Fleet Request Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+            - description: '<p>The type of request. The default value is <code>maintain</code>.</p> <ul> <li> <p> <code>maintain</code> - The EC2 Fleet plaees an asynchronous request for your desired capacity, and continues to maintain your desired Spot capacity by replenishing interrupted Spot Instances.</p> </li> <li> <p> <code>request</code> - The EC2 Fleet places an asynchronous one-time request for your desired capacity, but does submit Spot requests in alternative capacity pools if Spot capacity is unavailable, and does not maintain Spot capacity if Spot Instances are interrupted.</p> </li> <li> <p> <code>instant</code> - The EC2 Fleet places a synchronous one-time request for your desired capacity, and returns errors for any instances that could not be launched.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type">EC2 Fleet request types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
         ValidFrom:
           allOf:
             - $ref: '#/components/schemas/DateTime'
@@ -57131,7 +57266,7 @@ components:
             - $ref: '#/components/schemas/TagSpecificationList'
             - xml:
                 name: TagSpecification
-              description: 'The key-value pair for tagging the EC2 Fleet request on creation. The value for <code>ResourceType</code> must be <code>fleet</code>, otherwise the fleet request fails. To tag instances at launch, specify the tags in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template">launch template</a>. For information about tagging after launch, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tagging Your Resources</a>. '
+              description: 'The key-value pair for tagging the EC2 Fleet request on creation. The value for <code>ResourceType</code> must be <code>fleet</code>, otherwise the fleet request fails. To tag instances at launch, specify the tags in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template">launch template</a>. For information about tagging after launch, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources">Tagging your resources</a>.'
     FlowLogResourceIds:
       type: array
       items:
@@ -68145,7 +68280,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'To enable the instance for AWS Nitro Enclaves, set this parameter to <code>true</code>.'
-      description: 'Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+      description: 'Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.'
     EphemeralNvmeSupport:
       type: string
       enum:
@@ -68500,6 +68635,12 @@ components:
             - xml:
                 name: allocationStrategy
               description: '<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by the EC2 Fleet.</p> <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from the Spot Instance pools with the lowest price. This is the default allocation strategy.</p> <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all of the Spot Instance pools that you specify.</p> <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching.</p>'
+        MaintenanceStrategies:
+          allOf:
+            - $ref: '#/components/schemas/FleetSpotMaintenanceStrategies'
+            - xml:
+                name: maintenanceStrategies
+              description: The strategies for managing your workloads on your Spot Instances that will be interrupted. Currently only the capacity rebalance strategy is available.
         InstanceInterruptionBehavior:
           allOf:
             - $ref: '#/components/schemas/SpotInstanceInterruptionBehavior'
@@ -68858,6 +68999,38 @@ components:
             - $ref: '#/components/schemas/Placement'
             - description: 'The location where the instance launched, if applicable.'
       description: Describes overrides for a launch template.
+    FleetReplacementStrategy:
+      type: string
+      enum:
+        - launch
+    FleetSpotCapacityRebalance:
+      type: object
+      properties:
+        ReplacementStrategy:
+          allOf:
+            - $ref: '#/components/schemas/FleetReplacementStrategy'
+            - xml:
+                name: replacementStrategy
+              description: '<p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify <code>launch</code>. Only available for fleets of type <code>maintain</code>.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for both instances while they are running.</p> </note>'
+      description: The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.
+    FleetSpotCapacityRebalanceRequest:
+      type: object
+      properties:
+        ReplacementStrategy:
+          allOf:
+            - $ref: '#/components/schemas/FleetReplacementStrategy'
+            - description: '<p>The replacement strategy to use. Only available for fleets of type <code>maintain</code>.</p> <p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify <code>launch</code>. You must specify a value, otherwise you get an error.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for all instances while they are running.</p> </note>'
+      description: 'The Spot Instance replacement strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-capacity-rebalance">Capacity rebalancing</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+    FleetSpotMaintenanceStrategies:
+      type: object
+      properties:
+        CapacityRebalance:
+          allOf:
+            - $ref: '#/components/schemas/FleetSpotCapacityRebalance'
+            - xml:
+                name: capacityRebalance
+              description: The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.
+      description: The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.
     Float:
       type: number
       format: float
@@ -74274,6 +74447,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SelfServicePortal'
             - description: Specify whether to enable the self-service portal for the Client VPN endpoint.
+        ClientConnectOptions:
+          allOf:
+            - $ref: '#/components/schemas/ClientConnectOptions'
+            - description: The options for managing connection authorization for new client connections.
     ModifyDefaultCreditSpecificationRequest:
       type: object
       required:
@@ -74311,7 +74488,6 @@ components:
       type: object
       required:
         - FleetId
-        - TargetCapacitySpecification
       title: ModifyFleetRequest
       properties:
         DryRun:
@@ -77698,6 +77874,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    ReplacementStrategy:
+      type: string
+      enum:
+        - launch
     ReportStatusType:
       type: string
       enum:
@@ -77771,6 +77951,12 @@ components:
             - xml:
                 name: onDemandAllocationStrategy
               description: 'The order of the launch template overrides to use in fulfilling On-Demand capacity. If you specify <code>lowestPrice</code>, Spot Fleet uses price to determine the order, launching the lowest price first. If you specify <code>prioritized</code>, Spot Fleet uses the priority that you assign to each Spot Fleet launch template override, launching the highest priority first. If you do not specify a value, Spot Fleet defaults to <code>lowestPrice</code>.'
+        SpotMaintenanceStrategies:
+          allOf:
+            - $ref: '#/components/schemas/SpotMaintenanceStrategies'
+            - xml:
+                name: spotMaintenanceStrategies
+              description: The strategies for managing your Spot Instances that are at an elevated risk of being interrupted.
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -79154,7 +79340,7 @@ components:
         EnclaveOptions:
           allOf:
             - $ref: '#/components/schemas/EnclaveOptionsRequest'
-            - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance. For more information about AWS Nitro Enclaves requirements, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html#nitro-enclave-reqs"> AWS Nitro Enclaves</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
+            - description: '<p>Indicates whether the instance is enabled for AWS Nitro Enclaves. For more information, see <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html"> What is AWS Nitro Enclaves?</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p> <p>You can''t enable AWS Nitro Enclaves and hibernation on the same instance.</p>'
     ScheduledInstancesLaunchSpecification:
       type: object
       required:
@@ -79926,6 +80112,16 @@ components:
                 name: snapshotId
               description: Snapshot id that can be used to describe this snapshot.
       description: Information about a snapshot.
+    SpotCapacityRebalance:
+      type: object
+      properties:
+        ReplacementStrategy:
+          allOf:
+            - $ref: '#/components/schemas/ReplacementStrategy'
+            - xml:
+                name: replacementStrategy
+              description: '<p>The replacement strategy to use. Only available for fleets of type <code>maintain</code>. You must specify a value, otherwise you get an error.</p> <p>To allow Spot Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for a Spot Instance in the fleet, specify <code>launch</code>.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for all instances while they are running.</p> </note>'
+      description: 'The Spot Instance replacement strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#spot-fleet-capacity-rebalance">Capacity rebalancing</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
     SpotInstanceStateFault:
       type: object
       properties:

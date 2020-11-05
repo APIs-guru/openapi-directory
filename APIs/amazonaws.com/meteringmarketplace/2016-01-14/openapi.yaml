@@ -117,7 +117,7 @@ paths:
   /#X-Amz-Target=AWSMPMeteringService.BatchMeterUsage:
     post:
       operationId: BatchMeterUsage
-      description: '<p>BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to post metering records for a set of customers.</p> <p>For identical requests, the API is idempotent; requests can be retried with the same records or a subset of the input records.</p> <p>Every request to BatchMeterUsage is for one product. If you need to meter usage for multiple products, you must make multiple calls to BatchMeterUsage.</p> <p>BatchMeterUsage can process up to 25 UsageRecords at a time.</p>'
+      description: '<p>BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to post metering records for a set of customers.</p> <p>For identical requests, the API is idempotent; requests can be retried with the same records or a subset of the input records.</p> <p>Every request to BatchMeterUsage is for one product. If you need to meter usage for multiple products, you must make multiple calls to BatchMeterUsage.</p> <p>BatchMeterUsage can process up to 25 UsageRecords at a time.</p> <p>A UsageRecord can optionally include multiple usage allocations, to provide customers with usagedata split into buckets by tags that you define (or allow the customer to define).</p> <p>BatchMeterUsage requests must be less than 1MB in size.</p>'
       responses:
         '200':
           description: Success
@@ -144,24 +144,36 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidUsageDimensionException'
         '483':
+          description: InvalidTagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagException'
+        '484':
+          description: InvalidUsageAllocationsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidUsageAllocationsException'
+        '485':
           description: InvalidCustomerIdentifierException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidCustomerIdentifierException'
-        '484':
+        '486':
           description: TimestampOutOfBoundsException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimestampOutOfBoundsException'
-        '485':
+        '487':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '486':
+        '488':
           description: DisabledApiException
           content:
             application/json:
@@ -192,7 +204,7 @@ paths:
   /#X-Amz-Target=AWSMPMeteringService.MeterUsage:
     post:
       operationId: MeterUsage
-      description: '<p>API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID.</p> <p>MeterUsage is authenticated on the buyer''s AWS account using credentials from the EC2 instance, ECS task, or EKS pod.</p>'
+      description: '<p>API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID.</p> <p>MeterUsage is authenticated on the buyer''s AWS account using credentials from the EC2 instance, ECS task, or EKS pod.</p> <p>MeterUsage can optionally include multiple usage allocations, to provide customers with usage data split into buckets by tags that you define (or allow the customer to define).</p>'
       responses:
         '200':
           description: Success
@@ -219,30 +231,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidUsageDimensionException'
         '483':
+          description: InvalidTagException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidTagException'
+        '484':
+          description: InvalidUsageAllocationsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidUsageAllocationsException'
+        '485':
           description: InvalidEndpointRegionException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InvalidEndpointRegionException'
-        '484':
+        '486':
           description: TimestampOutOfBoundsException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TimestampOutOfBoundsException'
-        '485':
+        '487':
           description: DuplicateRequestException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DuplicateRequestException'
-        '486':
+        '488':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '487':
+        '489':
           description: CustomerNotEntitledException
           content:
             application/json:
@@ -497,6 +521,8 @@ components:
     InternalServiceErrorException: {}
     InvalidProductCodeException: {}
     InvalidUsageDimensionException: {}
+    InvalidTagException: {}
+    InvalidUsageAllocationsException: {}
     InvalidCustomerIdentifierException: {}
     TimestampOutOfBoundsException: {}
     ThrottlingException: {}
@@ -536,6 +562,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to <code>false</code> if not specified.'
+        UsageAllocations:
+          allOf:
+            - $ref: '#/components/schemas/UsageAllocations'
+            - description: '<p>The set of UsageAllocations to submit.</p> <p>The sum of all UsageAllocation quantities must equal the UsageQuantity of the MeterUsage request, and each UsageAllocation must have a unique set of tags (include no tags).</p>'
     InvalidEndpointRegionException: {}
     DuplicateRequestException: {}
     CustomerNotEntitledException: {}
@@ -597,6 +627,10 @@ components:
       description: Contains input to the ResolveCustomer operation.
     InvalidTokenException: {}
     ExpiredTokenException: {}
+    AllocatedUsageQuantity:
+      type: integer
+      minimum: 0
+      maximum: 2147483647
     UsageRecordList:
       type: array
       items:
@@ -605,6 +639,7 @@ components:
       maxItems: 25
     ProductCode:
       type: string
+      pattern: '[\s\S]+'
       minLength: 1
       maxLength: 255
     UsageRecordResultList:
@@ -615,6 +650,7 @@ components:
       type: boolean
     CustomerIdentifier:
       type: string
+      pattern: '[\s\S]+'
       minLength: 1
       maxLength: 255
     Timestamp:
@@ -622,23 +658,76 @@ components:
       format: date-time
     UsageDimension:
       type: string
+      pattern: '[\s\S]+'
       minLength: 1
       maxLength: 255
     UsageQuantity:
       type: integer
       minimum: 0
       maximum: 2147483647
+    UsageAllocations:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsageAllocation'
+      minItems: 1
+      maxItems: 500
     String:
       type: string
     NonEmptyString:
       type: string
-      pattern: \S+
+      pattern: '[\s\S]+'
     Nonce:
       type: string
+      pattern: '[\s\S]*'
       maxLength: 255
     VersionInteger:
       type: integer
       minimum: 1
+    TagKey:
+      type: string
+      pattern: '^[a-zA-Z0-9+ -=._:\/@]+$'
+      minLength: 1
+      maxLength: 100
+    TagValue:
+      type: string
+      pattern: '^[a-zA-Z0-9+ -=._:\/@]+$'
+      minLength: 1
+      maxLength: 256
+    Tag:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/TagKey'
+            - description: One part of a key-value pair that makes up a tag. A key is a label that acts like a category for the specific tag values.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/TagValue'
+            - description: One part of a key-value pair that makes up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.
+      description: Metadata assigned to an allocation. Each tag is made up of a key and a value.
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+      minItems: 1
+      maxItems: 5
+    UsageAllocation:
+      type: object
+      required:
+        - AllocatedUsageQuantity
+      properties:
+        AllocatedUsageQuantity:
+          allOf:
+            - $ref: '#/components/schemas/AllocatedUsageQuantity'
+            - description: The total quantity allocated to this bucket of usage.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The set of tags that define the bucket of usage. For the bucket of items with no tags, this parameter can be left out.'
+      description: <p>Usage allocations allow you to split usage into buckets by tags.</p> <p>Each UsageAllocation indicates the usage quantity for a specific set of tags.</p>
     UsageRecord:
       type: object
       required:
@@ -662,6 +751,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UsageQuantity'
             - description: The quantity of usage consumed by the customer for the given dimension and time. Defaults to <code>0</code> if not specified.
+        UsageAllocations:
+          allOf:
+            - $ref: '#/components/schemas/UsageAllocations'
+            - description: The set of UsageAllocations to submit. The sum of all UsageAllocation quantities must equal the Quantity of the UsageRecord.
       description: '<p>A UsageRecord indicates a quantity of usage for a given product, customer, dimension and time.</p> <p>Multiple requests with the same UsageRecords as input will be deduplicated to prevent double charges.</p>'
     UsageRecordResultStatus:
       type: string
