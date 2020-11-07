@@ -14737,6 +14737,12 @@ components:
     RtmpGroupSettings:
       type: object
       properties:
+        AdMarkers:
+          allOf:
+            - $ref: '#/components/schemas/__listOfRtmpAdMarkers'
+            - xml:
+                name: adMarkers
+              description: 'Choose the ad marker type for this output group. MediaLive will create a message based on the content of each SCTE-35 message, format it for that marker type, and insert it in the datastream.'
         AuthenticationScheme:
           allOf:
             - $ref: '#/components/schemas/AuthenticationScheme'
@@ -15130,6 +15136,11 @@ components:
         - ENHANCED
         - PREMIUM
       description: 'Video quality, e.g. ''STANDARD'' (Outputs only)'
+    RtmpAdMarkers:
+      type: string
+      enum:
+        - ON_CUE_POINT_SCTE35
+      description: Rtmp Ad Markers
     RtmpCacheFullBehavior:
       type: string
       enum:
@@ -15143,6 +15154,11 @@ components:
         - FIELD1_608
         - FIELD1_AND_FIELD2_608
       description: Rtmp Caption Data
+    __listOfRtmpAdMarkers:
+      type: array
+      description: Placeholder documentation for __listOfRtmpAdMarkers
+      items:
+        $ref: '#/components/schemas/RtmpAdMarkers'
     __integerMin30:
       type: integer
       description: Placeholder documentation for __integerMin30

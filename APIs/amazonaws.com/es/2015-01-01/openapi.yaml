@@ -567,6 +567,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/TLSSecurityPolicy'
                         - description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
+                    CustomEndpointEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specify if custom endpoint should be enabled for the Elasticsearch domain.
+                    CustomEndpoint:
+                      allOf:
+                        - $ref: '#/components/schemas/DomainNameFqdn'
+                        - description: Specify the fully qualified domain for your custom endpoint.
+                    CustomEndpointCertificateArn:
+                      allOf:
+                        - $ref: '#/components/schemas/ARN'
+                        - description: Specify ACM certificate ARN for your custom endpoint.
                 AdvancedSecurityOptions:
                   description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).'
                   type: object
@@ -1291,6 +1303,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/TLSSecurityPolicy'
                         - description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
+                    CustomEndpointEnabled:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Specify if custom endpoint should be enabled for the Elasticsearch domain.
+                    CustomEndpoint:
+                      allOf:
+                        - $ref: '#/components/schemas/DomainNameFqdn'
+                        - description: Specify the fully qualified domain for your custom endpoint.
+                    CustomEndpointCertificateArn:
+                      allOf:
+                        - $ref: '#/components/schemas/ARN'
+                        - description: Specify ACM certificate ARN for your custom endpoint.
                 AdvancedSecurityOptions:
                   description: 'Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).'
                   type: object
@@ -3089,6 +3113,14 @@ components:
       enum:
         - Policy-Min-TLS-1-0-2019-07
         - Policy-Min-TLS-1-2-2019-07
+    DomainNameFqdn:
+      type: string
+      pattern: '^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$'
+      minLength: 1
+      maxLength: 255
+    ARN:
+      type: string
+      description: 'The Amazon Resource Name (ARN) of the Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
     MasterUserOptions:
       type: object
       properties:
@@ -3494,9 +3526,6 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: ' This flag, when set to True, indicates that an Upgrade Eligibility Check needs to be performed. This will not actually perform the Upgrade. '
       description: ' Container for response returned by <code> <a>UpgradeElasticsearchDomain</a> </code> operation. '
-    ARN:
-      type: string
-      description: 'The Amazon Resource Name (ARN) of the Elasticsearch domain. See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html" target="_blank">Identifiers for IAM Entities</a> in <i>Using AWS Identity and Access Management</i> for more information.'
     CrossClusterSearchConnectionId:
       type: string
     AcceptInboundCrossClusterSearchConnectionRequest:
@@ -3983,6 +4012,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/TLSSecurityPolicy'
             - description: 'Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> '
+        CustomEndpointEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specify if custom endpoint should be enabled for the Elasticsearch domain.
+        CustomEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/DomainNameFqdn'
+            - description: Specify the fully qualified domain for your custom endpoint.
+        CustomEndpointCertificateArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: Specify ACM certificate ARN for your custom endpoint.
       description: Options to configure endpoint for the Elasticsearch domain.
     CreateElasticsearchDomainRequest:
       type: object

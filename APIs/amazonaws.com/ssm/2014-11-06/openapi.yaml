@@ -10212,7 +10212,7 @@ components:
         AssociationFilterList:
           allOf:
             - $ref: '#/components/schemas/AssociationFilterList'
-            - description: One or more filters. Use a filter to return a more specific list of results.
+            - description: <p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>Filtering associations using the <code>InstanceID</code> attribute only returns legacy associations created using the <code>InstanceID</code> attribute. Associations targeting the instance that are part of the Target Attributes <code>ResourceGroup</code> or <code>Tags</code> are not returned.</p> </note>
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -12502,7 +12502,7 @@ components:
         key:
           allOf:
             - $ref: '#/components/schemas/AssociationFilterKey'
-            - description: The name of the filter.
+            - description: <p>The name of the filter.</p> <note> <p> <code>InstanceId</code> has been deprecated.</p> </note>
         value:
           allOf:
             - $ref: '#/components/schemas/AssociationFilterValue'
@@ -12935,7 +12935,7 @@ components:
         Key:
           allOf:
             - $ref: '#/components/schemas/AutomationExecutionFilterKey'
-            - description: 'One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter.'
+            - description: 'One or more keys to limit the results. Valid filter keys include the following: DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId, CurrentAction, StartTimeBefore, StartTimeAfter, TargetResourceGroup.'
         Values:
           allOf:
             - $ref: '#/components/schemas/AutomationExecutionFilterValueList'

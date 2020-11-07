@@ -173,6 +173,132 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.CancelReplay:
+    post:
+      operationId: CancelReplay
+      description: Cancels the specified replay.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelReplayResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '482':
+          description: IllegalStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IllegalStatusException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CancelReplayRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.CancelReplay
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.CreateArchive:
+    post:
+      operationId: CreateArchive
+      description: 'Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateArchiveResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: InvalidEventPatternException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEventPatternException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateArchiveRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.CreateArchive
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSEvents.CreateEventBus:
     post:
       operationId: CreateEventBus
@@ -370,6 +496,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.DeleteArchive:
+    post:
+      operationId: DeleteArchive
+      description: Deletes the specified archive.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteArchiveResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteArchiveRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DeleteArchive
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSEvents.DeleteEventBus:
     post:
       operationId: DeleteEventBus
@@ -503,6 +680,57 @@ paths:
             type: string
             enum:
               - AWSEvents.DeleteRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.DescribeArchive:
+    post:
+      operationId: DescribeArchive
+      description: Retrieves details about an archive.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeArchiveResponse'
+        '480':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeArchiveRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DescribeArchive
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -658,6 +886,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.DescribeReplay:
+    post:
+      operationId: DescribeReplay
+      description: 'Retrieves details about a replay. Use <code>DescribeReplay</code> to determine the progress of a running replay. A replay processes events to replay based on the time in the event, and replays them using 1 minute intervals. If you use <code>StartReplay</code> and specify an <code>EventStartTime</code> and an <code>EventEndTime</code> that covers a 20 minute time range, the events are replayed from the first minute of that 20 minute range first. Then the events from the second minute are replayed. You can use <code>DescribeReplay</code> to determine the progress of a replay. The value returned for <code>EventLastReplayedTime</code> indicates the time within the specified time range associated with the last event replayed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeReplayResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeReplayRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.DescribeReplay
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSEvents.DescribeRule:
     post:
       operationId: DescribeRule
@@ -801,6 +1074,51 @@ paths:
             type: string
             enum:
               - AWSEvents.EnableRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.ListArchives:
+    post:
+      operationId: ListArchives
+      description: Lists your archives. You can either list all the archives or you can provide a prefix to match to the archive names. Filter parameters are exclusive.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListArchivesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListArchivesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListArchives
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -981,6 +1299,45 @@ paths:
             type: string
             enum:
               - AWSEvents.ListPartnerEventSources
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.ListReplays:
+    post:
+      operationId: ListReplays
+      description: Lists your replays. You can either list all the replays or you can provide a prefix to match to the replay names. Filter parameters are exclusive.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReplaysResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListReplaysRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.ListReplays
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1542,6 +1899,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.StartReplay:
+    post:
+      operationId: StartReplay
+      description: 'Starts the specified replay. Events are not necessarily replayed in the exact same order that they were added to the archive. A replay processes events to replay based on the time in the event, and replays them using 1 minute intervals. If you specify an <code>EventStartTime</code> and an <code>EventEndTime</code> that covers a 20 minute time range, the events are replayed from the first minute of that 20 minute range first. Then the events from the second minute are replayed. You can use <code>DescribeReplay</code> to determine the progress of a replay. The value returned for <code>EventLastReplayedTime</code> indicates the time within the specified time range associated with the last event replayed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartReplayResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '482':
+          description: InvalidEventPatternException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEventPatternException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartReplayRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.StartReplay
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSEvents.TagResource:
     post:
       operationId: TagResource
@@ -1701,6 +2121,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSEvents.UpdateArchive:
+    post:
+      operationId: UpdateArchive
+      description: Updates the specified archive.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateArchiveResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: InvalidEventPatternException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidEventPatternException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateArchiveRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSEvents.UpdateArchive
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1768,6 +2251,81 @@ components:
     InvalidStateException: {}
     InternalException: {}
     OperationDisabledException: {}
+    CancelReplayResponse:
+      type: object
+      properties:
+        ReplayArn:
+          allOf:
+            - $ref: '#/components/schemas/ReplayArn'
+            - description: The ARN of the replay to cancel.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ReplayState'
+            - description: The current state of the replay.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/ReplayStateReason'
+            - description: The reason that the replay is in the current state.
+    CancelReplayRequest:
+      type: object
+      required:
+        - ReplayName
+      title: CancelReplayRequest
+      properties:
+        ReplayName:
+          allOf:
+            - $ref: '#/components/schemas/ReplayName'
+            - description: The name of the replay to cancel.
+    IllegalStatusException: {}
+    CreateArchiveResponse:
+      type: object
+      properties:
+        ArchiveArn:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveArn'
+            - description: The ARN of the archive that was created.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveState'
+            - description: The state of the archive that was created.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveStateReason'
+            - description: The reason that the archive is in the state.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the archive was created.
+    CreateArchiveRequest:
+      type: object
+      required:
+        - ArchiveName
+        - EventSourceArn
+      title: CreateArchiveRequest
+      properties:
+        ArchiveName:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveName'
+            - description: The name for the archive to create.
+        EventSourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the event source associated with the archive.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveDescription'
+            - description: A description for the archive.
+        EventPattern:
+          allOf:
+            - $ref: '#/components/schemas/EventPattern'
+            - description: An event pattern to use to filter events sent to the archive.
+        RetentionDays:
+          allOf:
+            - $ref: '#/components/schemas/RetentionDays'
+            - description: 'The number of days to retain events for. Default value is 0. If set to 0, events are retained indefinitely'
+    ResourceAlreadyExistsException: {}
+    LimitExceededException: {}
+    InvalidEventPatternException: {}
     CreateEventBusResponse:
       type: object
       properties:
@@ -1793,8 +2351,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: Tags to associate with the event bus.
-    ResourceAlreadyExistsException: {}
-    LimitExceededException: {}
     CreatePartnerEventSourceResponse:
       type: object
       properties:
@@ -1827,6 +2383,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/EventSourceName'
             - description: The name of the partner event source to deactivate.
+    DeleteArchiveResponse:
+      type: object
+      properties: {}
+    DeleteArchiveRequest:
+      type: object
+      required:
+        - ArchiveName
+      title: DeleteArchiveRequest
+      properties:
+        ArchiveName:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveName'
+            - description: The name of the archive to delete.
     DeleteEventBusRequest:
       type: object
       required:
@@ -1871,6 +2440,63 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: 'If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.'
     ManagedRuleException: {}
+    DescribeArchiveResponse:
+      type: object
+      properties:
+        ArchiveArn:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveArn'
+            - description: The ARN of the archive.
+        ArchiveName:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveName'
+            - description: The name of the archive.
+        EventSourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the event source associated with the archive.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveDescription'
+            - description: The description of the archive.
+        EventPattern:
+          allOf:
+            - $ref: '#/components/schemas/EventPattern'
+            - description: The event pattern used to filter events sent to the archive.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveState'
+            - description: The state of the archive.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveStateReason'
+            - description: The reason that the archive is in the state.
+        RetentionDays:
+          allOf:
+            - $ref: '#/components/schemas/RetentionDays'
+            - description: The number of days to retain events for in the archive.
+        SizeBytes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The size of the archive in bytes.
+        EventCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of events in the archive.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the archive was created.
+    DescribeArchiveRequest:
+      type: object
+      required:
+        - ArchiveName
+      title: DescribeArchiveRequest
+      properties:
+        ArchiveName:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveName'
+            - description: The name of the archive to retrieve.
     DescribeEventBusResponse:
       type: object
       properties:
@@ -1952,6 +2578,67 @@ components:
           allOf:
             - $ref: '#/components/schemas/EventSourceName'
             - description: The name of the event source to display.
+    DescribeReplayResponse:
+      type: object
+      properties:
+        ReplayName:
+          allOf:
+            - $ref: '#/components/schemas/ReplayName'
+            - description: The name of the replay.
+        ReplayArn:
+          allOf:
+            - $ref: '#/components/schemas/ReplayArn'
+            - description: The ARN of the replay.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ReplayDescription'
+            - description: The description of the replay.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ReplayState'
+            - description: The current state of the replay.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/ReplayStateReason'
+            - description: The reason that the replay is in the current state.
+        EventSourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the archive events were replayed from.
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/ReplayDestination'
+            - description: A <code>ReplayDestination</code> object that contains details about the replay.
+        EventStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time stamp of the first event that was last replayed from the archive.
+        EventEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time stamp for the last event that was replayed from the archive.
+        EventLastReplayedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the event was last replayed.
+        ReplayStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A time stamp for the time that the replay started.
+        ReplayEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A time stamp for the time that the replay stopped.
+    DescribeReplayRequest:
+      type: object
+      required:
+        - ReplayName
+      title: DescribeReplayRequest
+      properties:
+        ReplayName:
+          allOf:
+            - $ref: '#/components/schemas/ReplayName'
+            - description: The name of the replay to retrieve.
     DescribeRuleResponse:
       type: object
       properties:
@@ -2033,6 +2720,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/EventBusName'
             - description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+    ListArchivesResponse:
+      type: object
+      properties:
+        Archives:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveResponseList'
+            - description: An array of <code>Archive</code> objects that include details about an archive.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token returned by a previous call to retrieve the next set of results.
+    ListArchivesRequest:
+      type: object
+      title: ListArchivesRequest
+      properties:
+        NamePrefix:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveName'
+            - description: A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.
+        EventSourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the event source associated with the archive.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveState'
+            - description: The state of the archive.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token returned by a previous call to retrieve the next set of results.
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/LimitMax100'
+            - description: The maximum number of results to return.
     ListEventBusesResponse:
       type: object
       properties:
@@ -2145,6 +2867,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/LimitMax100'
             - description: pecifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
+    ListReplaysResponse:
+      type: object
+      properties:
+        Replays:
+          allOf:
+            - $ref: '#/components/schemas/ReplayList'
+            - description: An array of <code>Replay</code> objects that contain information about the replay.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token returned by a previous call to retrieve the next set of results.
+    ListReplaysRequest:
+      type: object
+      title: ListReplaysRequest
+      properties:
+        NamePrefix:
+          allOf:
+            - $ref: '#/components/schemas/ReplayName'
+            - description: A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ReplayState'
+            - description: The state of the replay.
+        EventSourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the event source associated with the replay.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token returned by a previous call to retrieve the next set of results.
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/LimitMax100'
+            - description: The maximum number of replays to retrieve.
     ListRuleNamesByTargetResponse:
       type: object
       properties:
@@ -2375,7 +3132,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/EventBusName'
             - description: 'The event bus to associate with this rule. If you omit this, the default event bus is used.'
-    InvalidEventPatternException: {}
     PutTargetsResponse:
       type: object
       properties:
@@ -2454,6 +3210,59 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'If this is a managed rule, created by an AWS service on your behalf, you must specify <code>Force</code> as <code>True</code> to remove targets. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using <code>DescribeRule</code> or <code>ListRules</code> and checking the <code>ManagedBy</code> field of the response.'
+    StartReplayResponse:
+      type: object
+      properties:
+        ReplayArn:
+          allOf:
+            - $ref: '#/components/schemas/ReplayArn'
+            - description: The ARN of the replay.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ReplayState'
+            - description: The state of the replay.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/ReplayStateReason'
+            - description: The reason that the replay is in the state.
+        ReplayStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the replay started.
+    StartReplayRequest:
+      type: object
+      required:
+        - ReplayName
+        - EventSourceArn
+        - EventStartTime
+        - EventEndTime
+        - Destination
+      title: StartReplayRequest
+      properties:
+        ReplayName:
+          allOf:
+            - $ref: '#/components/schemas/ReplayName'
+            - description: The name of the replay to start.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ReplayDescription'
+            - description: A description for the replay to start.
+        EventSourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the archive to replay events from.
+        EventStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A time stamp for the time to start replaying events. Only events that occurred between the <code>EventStartTime</code> and <code>EventEndTime</code> are replayed.
+        EventEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A time stamp for the time to stop replaying events. Only events that occurred between the <code>EventStartTime</code> and <code>EventEndTime</code> are replayed.
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/ReplayDestination'
+            - description: A <code>ReplayDestination</code> object that includes details about the destination for the replay.
     TagResourceResponse:
       type: object
       properties: {}
@@ -2512,6 +3321,47 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The list of tag keys to remove from the resource.
+    UpdateArchiveResponse:
+      type: object
+      properties:
+        ArchiveArn:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveArn'
+            - description: The ARN of the archive.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveState'
+            - description: The state of the archive.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveStateReason'
+            - description: The reason that the archive is in the current state.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the archive was updated.
+    UpdateArchiveRequest:
+      type: object
+      required:
+        - ArchiveName
+      title: UpdateArchiveRequest
+      properties:
+        ArchiveName:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveName'
+            - description: The name of the archive to update.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveDescription'
+            - description: The description for the archive.
+        EventPattern:
+          allOf:
+            - $ref: '#/components/schemas/EventPattern'
+            - description: The event pattern to use to filter events sent to the archive.
+        RetentionDays:
+          allOf:
+            - $ref: '#/components/schemas/RetentionDays'
+            - description: The number of days to retain events in the archive.
     AccountId:
       type: string
       pattern: '\d{12}'
@@ -2527,10 +3377,85 @@ components:
       pattern: 'aws\.partner(/[\.\-_A-Za-z0-9]+){2,}'
       minLength: 1
       maxLength: 256
+    ArchiveName:
+      type: string
+      pattern: '[\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 48
     Arn:
       type: string
       minLength: 1
       maxLength: 1600
+    ArchiveState:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+        - CREATING
+        - UPDATING
+        - CREATE_FAILED
+        - UPDATE_FAILED
+    ArchiveStateReason:
+      type: string
+      pattern: .*
+      maxLength: 512
+    RetentionDays:
+      type: integer
+      minimum: 0
+    Long:
+      type: integer
+    Timestamp:
+      type: string
+      format: date-time
+    Archive:
+      type: object
+      properties:
+        ArchiveName:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveName'
+            - description: The name of the archive.
+        EventSourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the event bus associated with the archive. Only events from this event bus are sent to the archive.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveState'
+            - description: The current state of the archive.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/ArchiveStateReason'
+            - description: A description for the reason that the archive is in the current state.
+        RetentionDays:
+          allOf:
+            - $ref: '#/components/schemas/RetentionDays'
+            - description: The number of days to retain events in the archive before they are deleted.
+        SizeBytes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The size of the archive, in bytes.'
+        EventCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of events in the archive.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time stamp for the time that the archive was created.
+      description: An <code>Archive</code> object that contains details about an archive.
+    ArchiveArn:
+      type: string
+      pattern: '^arn:aws([a-z]|\-)*:events:([a-z]|\d|\-)*:([0-9]{12})?:.+\/.+$'
+      minLength: 1
+      maxLength: 1600
+    ArchiveDescription:
+      type: string
+      pattern: .*
+      maxLength: 512
+    ArchiveResponseList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Archive'
     AssignPublicIp:
       type: string
       enum:
@@ -2603,6 +3528,29 @@ components:
       description: The custom parameters to be used when the target is an AWS Batch job.
     Boolean:
       type: boolean
+    ReplayName:
+      type: string
+      pattern: '[\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 64
+    ReplayArn:
+      type: string
+      pattern: '^arn:aws([a-z]|\-)*:events:([a-z]|\d|\-)*:([0-9]{12})?:.+\/[\.\-_A-Za-z0-9]+$'
+      minLength: 1
+      maxLength: 1600
+    ReplayState:
+      type: string
+      enum:
+        - STARTING
+        - RUNNING
+        - CANCELLING
+        - COMPLETED
+        - CANCELLED
+        - FAILED
+    ReplayStateReason:
+      type: string
+      pattern: .*
+      maxLength: 512
     Condition:
       type: object
       required:
@@ -2623,6 +3571,8 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'Specifies the value for the key. Currently, this must be the ID of the organization.'
       description: '<p>A JSON string which you can use to limit the event bus permissions you are granting to only accounts that fulfill the condition. Currently, the only supported condition is membership in a certain AWS organization. The string must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields. The <code>Value</code> field specifies the ID of the AWS organization. Following is an example value for <code>Condition</code>:</p> <p> <code>''{"Type" : "StringEquals", "Key": "aws:PrincipalOrgID", "Value": "o-1234567890"}''</code> </p>'
+    EventPattern:
+      type: string
     EventBusName:
       type: string
       pattern: '[/\.\-_A-Za-z0-9]+'
@@ -2659,21 +3609,34 @@ components:
       pattern: '[\.\-_A-Za-z0-9]+'
       minLength: 1
       maxLength: 64
-    Timestamp:
-      type: string
-      format: date-time
     EventSourceState:
       type: string
       enum:
         - PENDING
         - ACTIVE
         - DELETED
+    ReplayDescription:
+      type: string
+      pattern: .*
+      maxLength: 512
+    ReplayDestination:
+      type: object
+      required:
+        - Arn
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the event bus to replay event to. You can replay events only to the event bus specified to create the archive.
+        FilterArns:
+          allOf:
+            - $ref: '#/components/schemas/ReplayDestinationFilters'
+            - description: A list of ARNs for rules to replay events to.
+      description: A <code>ReplayDestination</code> object that contains details about a replay.
     RuleArn:
       type: string
       minLength: 1
       maxLength: 1600
-    EventPattern:
-      type: string
     ScheduleExpression:
       type: string
       maxLength: 256
@@ -2909,6 +3872,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/PartnerEventSource'
+    ReplayList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Replay'
     TargetArn:
       type: string
       minLength: 1
@@ -3194,6 +4161,50 @@ components:
             - $ref: '#/components/schemas/ErrorMessage'
             - description: The error message that explains why the target removal failed.
       description: Represents a target that failed to be removed from a rule.
+    Replay:
+      type: object
+      properties:
+        ReplayName:
+          allOf:
+            - $ref: '#/components/schemas/ReplayName'
+            - description: The name of the replay.
+        EventSourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the archive to replay event from.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ReplayState'
+            - description: The current state of the replay.
+        StateReason:
+          allOf:
+            - $ref: '#/components/schemas/ReplayStateReason'
+            - description: A description of why the replay is in the current state.
+        EventStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A time stamp for the time to start replaying events. This is determined by the time in the event as described in <a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEventsRequestEntry.html#eventbridge-Type-PutEventsRequestEntry-Time">Time</a>.'
+        EventEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A time stamp for the time to start replaying events. Any event with a creation time prior to the <code>EventEndTime</code> specified is replayed.
+        EventLastReplayedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A time stamp for the time that the last event was replayed.
+        ReplayStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A time stamp for the time that the replay started.
+        ReplayEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A time stamp for the time that the replay completed.
+      description: A <code>Replay</code> object that contains details about a replay.
+    ReplayDestinationFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
     RetryPolicy:
       type: object
       properties:

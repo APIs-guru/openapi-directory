@@ -2013,6 +2013,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of key-value pairs that identify the index. You can use the tags to identify and organize your resources and to control access to resources.
+        UserTokenConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/UserTokenConfigurationList'
+            - description: The user token configuration.
+        UserContextPolicy:
+          allOf:
+            - $ref: '#/components/schemas/UserContextPolicy'
+            - description: '<p>The user context policy.</p> <dl> <dt>ATTRIBUTE_FILTER</dt> <dd> <p>All indexed content is searchable and displayable for all users. If there is an access control list, it is ignored. You can filter on user and group attributes. </p> </dd> <dt>USER_TOKEN</dt> <dd> <p>Enables SSO and token-based user access control. All documents with no access control and all documents accessible to the user will be searchable and displayable. </p> </dd> </dl>'
     DeleteDataSourceRequest:
       type: object
       required:
@@ -2234,6 +2242,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/CapacityUnitsConfiguration'
             - description: 'For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.'
+        UserTokenConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/UserTokenConfigurationList'
+            - description: The user token configuration for the Amazon Kendra index.
+        UserContextPolicy:
+          allOf:
+            - $ref: '#/components/schemas/UserContextPolicy'
+            - description: The user context policy for the Amazon Kendra index.
     DescribeIndexRequest:
       type: object
       required:
@@ -2447,6 +2463,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SortingConfiguration'
             - description: '<p>Provides information that determines how the results of the query are sorted. You can set the field that Amazon Kendra should sort the results on, and specify whether the results should be sorted in ascending or descending order. In the case of ties in sorting the results, the results are sorted by relevance.</p> <p>If you don''t provide sorting configuration, the results are sorted by the relevance that Amazon Kendra determines for the result.</p>'
+        UserContext:
+          allOf:
+            - $ref: '#/components/schemas/UserContext'
+            - description: The user context token.
     StartDataSourceSyncJobResponse:
       type: object
       properties:
@@ -2607,6 +2627,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/CapacityUnitsConfiguration'
             - description: '<p>Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day.</p> <p>If you are using extra storage units, you can''t reduce the storage capacity below that required to meet the storage needs for your index.</p>'
+        UserTokenConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/UserTokenConfigurationList'
+            - description: The user token configuration.
+        UserContextPolicy:
+          allOf:
+            - $ref: '#/components/schemas/UserContextPolicy'
+            - description: The user user token context policy.
     S3ObjectKey:
       type: string
       minLength: 1
@@ -2875,6 +2903,11 @@ components:
         $ref: '#/components/schemas/ColumnName'
       minItems: 1
       maxItems: 5
+    ClaimRegex:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 100
     ResultId:
       type: string
       minLength: 1
@@ -3052,6 +3085,7 @@ components:
     ConfluenceVersion:
       type: string
       enum:
+        - CLOUD
         - SERVER
     ConfluenceSpaceConfiguration:
       type: object
@@ -3120,7 +3154,7 @@ components:
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
-            - description: '<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>username - The user name of a user with administrative privileges for the Confluence server.</p> </li> <li> <p>password - The password associated with the user logging in to the Confluence server.</p> </li> </ul>'
+            - description: '<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>username - The user name or email address of a user with administrative privileges for the Confluence server.</p> </li> <li> <p>password - The password associated with the user logging in to the Confluence server.</p> </li> </ul>'
         Version:
           allOf:
             - $ref: '#/components/schemas/ConfluenceVersion'
@@ -3401,6 +3435,16 @@ components:
             - $ref: '#/components/schemas/KmsKeyId'
             - description: The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
       description: Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+    UserTokenConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserTokenConfiguration'
+      maxItems: 1
+    UserContextPolicy:
+      type: string
+      enum:
+        - ATTRIBUTE_FILTER
+        - USER_TOKEN
     S3DataSourceConfiguration:
       type: object
       required:
@@ -3474,6 +3518,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataSourceFieldName'
             - description: The Microsoft SharePoint attribute field that contains the title of the document.
+        DisableLocalGroups:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A Boolean value that specifies whether local groups are disabled (<code>True</code>) or enabled (<code>False</code>). '
       description: Provides configuration information for connecting to a Microsoft SharePoint data source.
     DatabaseConfiguration:
       type: object
@@ -3579,6 +3627,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
             - description: A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft OneDrive fields to custom fields in the Amazon Kendra index. You must first create the index fields before you map OneDrive fields.
+        DisableLocalGroups:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'A Boolean value that specifies whether local groups are disabled (<code>True</code>) or enabled (<code>False</code>). '
       description: Provides configuration information for data sources that connect to OneDrive.
     ServiceNowConfiguration:
       type: object
@@ -4094,6 +4146,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FaqSummary'
+    GroupAttributeField:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 100
     Highlight:
       type: object
       required:
@@ -4178,6 +4235,70 @@ components:
     IndexedTextDocumentsCount:
       type: integer
       minimum: 0
+    Issuer:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 65
+    JsonTokenTypeConfiguration:
+      type: object
+      required:
+        - UserNameAttributeField
+        - GroupAttributeField
+      properties:
+        UserNameAttributeField:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user name attribute field.
+        GroupAttributeField:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The group attribute field.
+      description: Configuration information for the JSON token type.
+    KeyLocation:
+      type: string
+      enum:
+        - URL
+        - SECRET_MANAGER
+    UserNameAttributeField:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 100
+    JwtTokenTypeConfiguration:
+      type: object
+      required:
+        - KeyLocation
+      properties:
+        KeyLocation:
+          allOf:
+            - $ref: '#/components/schemas/KeyLocation'
+            - description: The location of the key.
+        URL:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The signing key URL.
+        SecretManagerArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (arn) of the secret.
+        UserNameAttributeField:
+          allOf:
+            - $ref: '#/components/schemas/UserNameAttributeField'
+            - description: The user name attribute field.
+        GroupAttributeField:
+          allOf:
+            - $ref: '#/components/schemas/GroupAttributeField'
+            - description: The group attribute field.
+        Issuer:
+          allOf:
+            - $ref: '#/components/schemas/Issuer'
+            - description: The issuer of the token.
+        ClaimRegex:
+          allOf:
+            - $ref: '#/components/schemas/ClaimRegex'
+            - description: The regular expression that identifies the claim.
+      description: Configuration information for the JWT token type.
     KmsKeyId:
       type: string
       minLength: 1
@@ -4318,6 +4439,14 @@ components:
             - $ref: '#/components/schemas/SortOrder'
             - description: 'The order that the results should be returned in. In case of ties, the relevance assigned to the result by Amazon Kendra is used as the tie-breaker.'
       description: '<p>Specifies the document attribute to use to sort the response to a Amazon Kendra query. You can specify a single attribute for sorting. The attribute must have the <code>Sortable</code> flag set to <code>true</code>, otherwise Amazon Kendra returns an exception.</p> <p>You can sort attributes of the following types.</p> <ul> <li> <p>Date value</p> </li> <li> <p>Long value</p> </li> <li> <p>String value</p> </li> </ul> <p>You can''t sort attributes of the following type.</p> <ul> <li> <p>String list value</p> </li> </ul>'
+    UserContext:
+      type: object
+      properties:
+        Token:
+          allOf:
+            - $ref: '#/components/schemas/Token'
+            - description: The user context token. It must be a JWT or a JSON token.
+      description: Provides information about the user context for a Amazon Kendra index.
     QueryResultItemList:
       type: array
       items:
@@ -4711,6 +4840,23 @@ components:
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200
+    Token:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 100000
+    UserTokenConfiguration:
+      type: object
+      properties:
+        JwtTokenTypeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/JwtTokenTypeConfiguration'
+            - description: Information about the JWT token type configuration.
+        JsonTokenTypeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/JsonTokenTypeConfiguration'
+            - description: Information about the JSON token type configuration.
+      description: Provides configuration information for a token configuration.
     ValueImportanceMapKey:
       type: string
       minLength: 1

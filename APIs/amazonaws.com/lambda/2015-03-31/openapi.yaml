@@ -615,7 +615,7 @@ paths:
   /2015-03-31/event-source-mappings/:
     post:
       operationId: CreateEventSourceMapping
-      description: '<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html">Using AWS Lambda with Amazon MSK</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. Default -1 (infinite). Minimum 60. Maximum 604800.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When infinite, failed records will be retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
+      description: '<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html">Using AWS Lambda with Amazon MSK</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
       responses:
         '202':
           description: Success
@@ -733,6 +733,20 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/Topic'
+                  minItems: 1
+                  maxItems: 1
+                Queues:
+                  description: ' (MQ) The name of the Amazon MQ broker destination queue to consume. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Queue'
+                  minItems: 1
+                  maxItems: 1
+                SourceAccessConfigurations:
+                  description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SourceAccessConfiguration'
                   minItems: 1
                   maxItems: 1
     parameters:
@@ -1316,7 +1330,7 @@ paths:
             type: string
     put:
       operationId: UpdateEventSourceMapping
-      description: '<p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. Default -1 (infinite). Minimum 60. Maximum 604800.</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. Default -1 (infinite). Minimum 0. Maximum 10000. When infinite, failed records will be retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
+      description: '<p>Updates an event source mapping. You can change the function that AWS Lambda invokes, or pause invocation and resume later from the same location.</p> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
       responses:
         '202':
           description: Success
@@ -1423,6 +1437,13 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 10
+                SourceAccessConfigurations:
+                  description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SourceAccessConfiguration'
+                  minItems: 1
+                  maxItems: 1
   '/2015-03-31/functions/{FunctionName}':
     delete:
       operationId: DeleteFunction
@@ -4103,11 +4124,11 @@ components:
         MaximumBatchingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-            - description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
+            - description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.'
         ParallelizationFactor:
           allOf:
             - $ref: '#/components/schemas/ParallelizationFactor'
-            - description: (Streams) The number of batches to process from each shard concurrently.
+            - description: (Streams) The number of batches to process from each shard concurrently. The default value is 1.
         EventSourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4139,19 +4160,27 @@ components:
         Topics:
           allOf:
             - $ref: '#/components/schemas/Topics'
-            - description: ' (MSK) The name of the Kafka topic. '
+            - description: ' (MSK) The name of the Kafka topic to consume. '
+        Queues:
+          allOf:
+            - $ref: '#/components/schemas/Queues'
+            - description: ' (MQ) The name of the Amazon MQ broker destination queue to consume. '
+        SourceAccessConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/SourceAccessConfigurations'
+            - description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
         MaximumRecordAgeInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
-            - description: (Streams) The maximum age of a record that Lambda sends to a function for processing.
+            - description: '(Streams) Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.'
         BisectBatchOnFunctionError:
           allOf:
             - $ref: '#/components/schemas/BisectBatchOnFunctionError'
-            - description: '(Streams) If the function returns an error, split the batch in two and retry.'
+            - description: '(Streams) If the function returns an error, split the batch in two and retry. The default value is false.'
         MaximumRetryAttempts:
           allOf:
             - $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
-            - description: (Streams) The maximum number of times to retry when the function returns an error.
+            - description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.'
       description: A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.
     OnSuccess:
       type: object
@@ -4174,6 +4203,23 @@ components:
       pattern: '^[^.]([a-zA-Z0-9\-_.]+)'
       minLength: 1
       maxLength: 249
+    Queue:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 1
+      maxLength: 1000
+    SourceAccessConfiguration:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/SourceAccessType'
+            - description: '<p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+        URI:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: '<p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+      description: ' (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> '
     FunctionConfiguration:
       type: object
       example:
@@ -5275,6 +5321,18 @@ components:
         $ref: '#/components/schemas/Topic'
       minItems: 1
       maxItems: 1
+    Queues:
+      type: array
+      items:
+        $ref: '#/components/schemas/Queue'
+      minItems: 1
+      maxItems: 1
+    SourceAccessConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/SourceAccessConfiguration'
+      minItems: 1
+      maxItems: 1
     CreateEventSourceMappingRequest:
       type: object
       required:
@@ -5334,6 +5392,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Topics'
             - description: ' (MSK) The name of the Kafka topic. '
+        Queues:
+          allOf:
+            - $ref: '#/components/schemas/Queues'
+            - description: ' (MQ) The name of the Amazon MQ broker destination queue to consume. '
+        SourceAccessConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/SourceAccessConfigurations'
+            - description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
     RoleArn:
       type: string
       pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -6067,6 +6133,10 @@ components:
       properties: {}
     SecurityGroupId:
       type: string
+    SourceAccessType:
+      type: string
+      enum:
+        - BASIC_AUTH
     SubnetId:
       type: string
     TagKeyList:
@@ -6147,6 +6217,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ParallelizationFactor'
             - description: (Streams) The number of batches to process from each shard concurrently.
+        SourceAccessConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/SourceAccessConfigurations'
+            - description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
     UpdateFunctionCodeRequest:
       type: object
       title: UpdateFunctionCodeRequest

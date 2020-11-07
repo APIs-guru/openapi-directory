@@ -516,7 +516,7 @@ paths:
   /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteDetector:
     post:
       operationId: DeleteDetector
-      description: 'Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.'
+      description: '<p>Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.</p> <p>When you delete a detector, Amazon Fraud Detector permanently deletes the detector and the data is no longer stored in Amazon Fraud Detector.</p>'
       responses:
         '200':
           description: Success
@@ -579,7 +579,7 @@ paths:
   /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteDetectorVersion:
     post:
       operationId: DeleteDetectorVersion
-      description: Deletes the detector version. You cannot delete detector versions that are in <code>ACTIVE</code> status.
+      description: '<p>Deletes the detector version. You cannot delete detector versions that are in <code>ACTIVE</code> status.</p> <p>When you delete a detector version, Amazon Fraud Detector permanently deletes the detector and the data is no longer stored in Amazon Fraud Detector.</p>'
       responses:
         '200':
           description: Success
@@ -645,10 +645,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteEntityType:
+    post:
+      operationId: DeleteEntityType
+      description: '<p>Deletes an entity type.</p> <p>You cannot delete an entity type that is included in an event type.</p> <p>When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEntityTypeResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEntityTypeRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteEntityType
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteEvent:
     post:
       operationId: DeleteEvent
-      description: Deletes the specified event.
+      description: '<p>Deletes the specified event.</p> <p>When you delete an event, Amazon Fraud Detector permanently deletes that event from the evaluation history, and the event data is no longer stored in Amazon Fraud Detector.</p>'
       responses:
         '200':
           description: Success
@@ -674,6 +731,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       requestBody:
         required: true
         content:
@@ -696,10 +759,358 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteEventType:
+    post:
+      operationId: DeleteEventType
+      description: '<p>Deletes an event type.</p> <p>You cannot delete an event type that is used in a detector or a model.</p> <p>When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteEventTypeResult'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteEventTypeRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteEventType
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteExternalModel:
+    post:
+      operationId: DeleteExternalModel
+      description: '<p>Removes a SageMaker model from Amazon Fraud Detector.</p> <p>You can remove an Amazon SageMaker model if it is not associated with a detector version. Removing a SageMaker model disconnects it from Amazon Fraud Detector, but the model remains available in SageMaker.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteExternalModelResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteExternalModelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteExternalModel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteLabel:
+    post:
+      operationId: DeleteLabel
+      description: '<p>Deletes a label.</p> <p>You cannot delete labels that are included in an event type in Amazon Fraud Detector.</p> <p>You cannot delete a label assigned to an event ID. You must first delete the relevant event ID.</p> <p>When you delete a label, Amazon Fraud Detector permanently deletes that label from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteLabelResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLabelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteLabel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteModel:
+    post:
+      operationId: DeleteModel
+      description: '<p>Deletes a model.</p> <p>You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.</p> <p> When you delete a model, Amazon Fraud Detector permanently deletes that model from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteModelResult'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteModelRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteModel
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteModelVersion:
+    post:
+      operationId: DeleteModelVersion
+      description: '<p>Deletes a model version.</p> <p>You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.</p> <p> When you delete a model version, Amazon Fraud Detector permanently deletes that model version from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteModelVersionResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteModelVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteModelVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteOutcome:
+    post:
+      operationId: DeleteOutcome
+      description: '<p>Deletes an outcome.</p> <p>You cannot delete an outcome that is used in a rule version.</p> <p>When you delete an outcome, Amazon Fraud Detector permanently deletes that outcome from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOutcomeResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteOutcomeRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteOutcome
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteRule:
     post:
       operationId: DeleteRule
-      description: Deletes the rule. You cannot delete a rule if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.
+      description: '<p>Deletes the rule. You cannot delete a rule if it is used by an <code>ACTIVE</code> or <code>INACTIVE</code> detector version.</p> <p>When you delete a rule, Amazon Fraud Detector permanently deletes that rule from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>'
       responses:
         '200':
           description: Success
@@ -751,6 +1162,69 @@ paths:
             type: string
             enum:
               - AWSHawksNestServiceFacade.DeleteRule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSHawksNestServiceFacade.DeleteVariable:
+    post:
+      operationId: DeleteVariable
+      description: '<p>Deletes a variable.</p> <p>You can''t delete variables that are included in an event type in Amazon Fraud Detector.</p> <p>Amazon Fraud Detector automatically deletes model output variables and SageMaker model output variables when you delete the model. You can''t delete these variables manually.</p> <p>When you delete a variable, Amazon Fraud Detector permanently deletes that variable from the evaluation history, and the data is no longer stored in Amazon Fraud Detector.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteVariableResult'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteVariableRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSHawksNestServiceFacade.DeleteVariable
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1139,6 +1613,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
       requestBody:
         required: true
         content:
@@ -3208,6 +3688,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/wholeNumberVersionString'
             - description: The ID of the detector version to delete.
+    DeleteEntityTypeResult:
+      type: object
+      properties: {}
+    DeleteEntityTypeRequest:
+      type: object
+      required:
+        - name
+      title: DeleteEntityTypeRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the entity type to delete.
     DeleteEventResult:
       type: object
       properties: {}
@@ -3220,12 +3713,105 @@ components:
       properties:
         eventId:
           allOf:
-            - $ref: '#/components/schemas/string'
+            - $ref: '#/components/schemas/identifier'
             - description: The ID of the event to delete.
         eventTypeName:
           allOf:
-            - $ref: '#/components/schemas/string'
+            - $ref: '#/components/schemas/identifier'
             - description: The name of the event type.
+    DeleteEventTypeResult:
+      type: object
+      properties: {}
+    DeleteEventTypeRequest:
+      type: object
+      required:
+        - name
+      title: DeleteEventTypeRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the event type to delete.
+    DeleteExternalModelResult:
+      type: object
+      properties: {}
+    DeleteExternalModelRequest:
+      type: object
+      required:
+        - modelEndpoint
+      title: DeleteExternalModelRequest
+      properties:
+        modelEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/sageMakerEndpointIdentifier'
+            - description: The endpoint of the Amazon Sagemaker model to delete.
+    DeleteLabelResult:
+      type: object
+      properties: {}
+    DeleteLabelRequest:
+      type: object
+      required:
+        - name
+      title: DeleteLabelRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the label to delete.
+    DeleteModelResult:
+      type: object
+      properties: {}
+    DeleteModelRequest:
+      type: object
+      required:
+        - modelId
+        - modelType
+      title: DeleteModelRequest
+      properties:
+        modelId:
+          allOf:
+            - $ref: '#/components/schemas/modelIdentifier'
+            - description: The model ID of the model to delete.
+        modelType:
+          allOf:
+            - $ref: '#/components/schemas/ModelTypeEnum'
+            - description: The model type of the model to delete.
+    DeleteModelVersionResult:
+      type: object
+      properties: {}
+    DeleteModelVersionRequest:
+      type: object
+      required:
+        - modelId
+        - modelType
+        - modelVersionNumber
+      title: DeleteModelVersionRequest
+      properties:
+        modelId:
+          allOf:
+            - $ref: '#/components/schemas/modelIdentifier'
+            - description: The model ID of the model version to delete.
+        modelType:
+          allOf:
+            - $ref: '#/components/schemas/ModelTypeEnum'
+            - description: The model type of the model version to delete.
+        modelVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/floatVersionString'
+            - description: The model version number of the model version to delete.
+    DeleteOutcomeResult:
+      type: object
+      properties: {}
+    DeleteOutcomeRequest:
+      type: object
+      required:
+        - name
+      title: DeleteOutcomeRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/identifier'
+            - description: The name of the outcome to delete.
     DeleteRuleResult:
       type: object
       properties: {}
@@ -3237,6 +3823,19 @@ components:
       properties:
         rule:
           $ref: '#/components/schemas/Rule'
+    DeleteVariableResult:
+      type: object
+      properties: {}
+    DeleteVariableRequest:
+      type: object
+      required:
+        - name
+      title: DeleteVariableRequest
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the variable to delete.
     DescribeDetectorResult:
       type: object
       properties:
@@ -3597,7 +4196,7 @@ components:
         status:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: The model version status.
+            - description: '<p>The model version status.</p> <p>Possible values are:</p> <ul> <li> <p> <code>TRAINING_IN_PROGRESS</code> </p> </li> <li> <p> <code>TRAINING_COMPLETE</code> </p> </li> <li> <p> <code>ACTIVATE_REQUESTED</code> </p> </li> <li> <p> <code>ACTIVATE_IN_PROGRESS</code> </p> </li> <li> <p> <code>ACTIVE</code> </p> </li> <li> <p> <code>INACTIVATE_REQUESTED</code> </p> </li> <li> <p> <code>INACTIVATE_IN_PROGRESS</code> </p> </li> <li> <p> <code>INACTIVE</code> </p> </li> <li> <p> <code>ERROR</code> </p> </li> </ul>'
         arn:
           allOf:
             - $ref: '#/components/schemas/fraudDetectorArn'
@@ -4472,6 +5071,16 @@ components:
       pattern: '^([1-9][0-9]*)$'
       minLength: 1
       maxLength: 5
+    sageMakerEndpointIdentifier:
+      type: string
+      pattern: '^[0-9A-Za-z_-]+$'
+      minLength: 1
+      maxLength: 63
+    floatVersionString:
+      type: string
+      pattern: '^[1-9][0-9]{0,3}\.[0-9]{1,2}$'
+      minLength: 3
+      maxLength: 7
     DetectorVersionMaxResults:
       type: integer
       minimum: 1000
@@ -4485,11 +5094,6 @@ components:
       pattern: '^arn\:aws[a-z-]{0,15}\:frauddetector\:[a-z0-9-]{3,20}\:[0-9]{12}\:[^\s]{2,128}$'
       minLength: 1
       maxLength: 256
-    floatVersionString:
-      type: string
-      pattern: '^[1-9][0-9]{0,3}\.[0-9]{1,2}$'
-      minLength: 3
-      maxLength: 7
     modelsMaxPageSize:
       type: integer
       minimum: 1
@@ -4882,7 +5486,7 @@ components:
         $ref: '#/components/schemas/string'
     KmsEncryptionKeyArn:
       type: string
-      pattern: '^\w{8}-\w{4}-\w{4}-\w{4}-\w{12}|DEFAULT|arn:[a-zA-Z0-9-]+:kms:[a-zA-Z0-9-]+:\d{12}:key\/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$'
+      pattern: '^DEFAULT|arn:[a-zA-Z0-9-]+:kms:[a-zA-Z0-9-]+:\d{12}:key\/\w{8}-\w{4}-\w{4}-\w{4}-\w{12}$'
       minLength: 7
       maxLength: 90
     Label:
@@ -5141,11 +5745,6 @@ components:
             - $ref: '#/components/schemas/fraudDetectorArn'
             - description: The outcome ARN.
       description: The outcome.
-    sageMakerEndpointIdentifier:
-      type: string
-      pattern: '^[0-9A-Za-z_-]+$'
-      minLength: 1
-      maxLength: 63
     RuleDetail:
       type: object
       properties:
