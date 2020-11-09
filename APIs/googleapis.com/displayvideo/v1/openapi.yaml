@@ -5820,7 +5820,7 @@ components:
       properties:
         cmHybridConfig:
           $ref: "#/components/schemas/CmHybridConfig"
-          description: The configuration for advertisers that use both Campaign Manager (CM) and third-party ad servers.
+          description: The configuration for advertisers that use both Campaign Manager 360 (CM360) and third-party ad servers.
         thirdPartyOnlyConfig:
           $ref: "#/components/schemas/ThirdPartyOnlyConfig"
           description: The configuration for advertisers that use third-party ad servers only.
@@ -5839,7 +5839,7 @@ components:
           description: "Whether or not to use DV360's Online Behavioral Advertising (OBA) compliance. Warning: Changing OBA settings may cause the audit status of your creatives to be reset by some ad exchanges, making them ineligible to serve until they are re-approved."
           type: boolean
         videoCreativeDataSharingAuthorized:
-          description: By setting this field to `true`, you, on behalf of your company, authorize Google to use video creatives associated with this Display & Video 360 advertiser to provide reporting and features related to the advertiser's television campaigns. Applicable only when the advertiser has a CM hybrid ad server configuration.
+          description: By setting this field to `true`, you, on behalf of your company, authorize Google to use video creatives associated with this Display & Video 360 advertiser to provide reporting and features related to the advertiser's television campaigns. Applicable only when the advertiser has a CM360 hybrid ad server configuration.
           type: boolean
       type: object
     AdvertiserDataAccessConfig:
@@ -5859,7 +5859,7 @@ components:
           description: Required. The domain URL of the advertiser's primary website. The system will send this information to publishers that require website URL to associate a campaign with an advertiser. Provide a URL with no path or query string, beginning with `http:` or `https:`. For example, http://www.example.com
           type: string
         timeZone:
-          description: "Output only. The standard TZ database name of the advertiser's time zone. For example, `America/New_York`. See more at: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones For CM hybrid advertisers, the time zone is the same as that of the associated CM account; for third-party only advertisers, the time zone is the same as that of the parent partner."
+          description: "Output only. The standard TZ database name of the advertiser's time zone. For example, `America/New_York`. See more at: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones For CM360 hybrid advertisers, the time zone is the same as that of the associated CM360 account; for third-party only advertisers, the time zone is the same as that of the parent partner."
           readOnly: true
           type: string
       type: object
@@ -6745,45 +6745,45 @@ components:
           type: boolean
       type: object
     CmHybridConfig:
-      description: Settings for advertisers that use both Campaign Manager (CM) and third-party ad servers.
+      description: Settings for advertisers that use both Campaign Manager 360 (CM360) and third-party ad servers.
       properties:
         cmAccountId:
-          description: Required. Immutable. Account ID of the CM Floodlight configuration linked with the DV360 advertiser.
+          description: Required. Immutable. Account ID of the CM360 Floodlight configuration linked with the DV360 advertiser.
           format: int64
           type: string
         cmFloodlightConfigId:
-          description: Required. Immutable. ID of the CM Floodlight configuration linked with the DV360 advertiser.
+          description: Required. Immutable. ID of the CM360 Floodlight configuration linked with the DV360 advertiser.
           format: int64
           type: string
         cmFloodlightLinkingAuthorized:
           description: Required. Immutable. By setting this field to `true`, you, on behalf of your company, authorize the sharing of information from the given Floodlight configuration to this Display & Video 360 advertiser.
           type: boolean
         cmSyncableSiteIds:
-          description: A list of CM sites whose placements will be synced to DV360 as creatives. If absent or empty in CreateAdvertiser method, the system will automatically create a CM site. Removing sites from this list may cause DV360 creatives synced from CM to be deleted. At least one site must be specified.
+          description: A list of CM360 sites whose placements will be synced to DV360 as creatives. If absent or empty in CreateAdvertiser method, the system will automatically create a CM360 site. Removing sites from this list may cause DV360 creatives synced from CM360 to be deleted. At least one site must be specified.
           items:
             format: int64
             type: string
           type: array
         dv360ToCmCostReportingEnabled:
-          description: Whether or not to report DV360 cost to CM.
+          description: Whether or not to report DV360 cost to CM360.
           type: boolean
         dv360ToCmDataSharingEnabled:
-          description: Whether or not to include DV360 data in CM data transfer reports.
+          description: Whether or not to include DV360 data in CM360 data transfer reports.
           type: boolean
       type: object
     CmTrackingAd:
-      description: A Campaign Manager tracking ad.
+      description: A Campaign Manager 360 tracking ad.
       properties:
         cmAdId:
-          description: The ad ID of the campaign manager tracking Ad.
+          description: The ad ID of the campaign manager 360 tracking Ad.
           format: int64
           type: string
         cmCreativeId:
-          description: The creative ID of the campaign manager tracking Ad.
+          description: The creative ID of the campaign manager 360 tracking Ad.
           format: int64
           type: string
         cmPlacementId:
-          description: The placement ID of the campaign manager tracking Ad.
+          description: The placement ID of the campaign manager 360 tracking Ad.
           format: int64
           type: string
       type: object
@@ -7026,13 +7026,13 @@ components:
             $ref: "#/components/schemas/AssetAssociation"
           type: array
         cmPlacementId:
-          description: Output only. The unique ID of the Campaign Manager placement associated with the creative. This field is only applicable for creatives that are synced from Campaign Manager.
+          description: Output only. The unique ID of the Campaign Manager 360 placement associated with the creative. This field is only applicable for creatives that are synced from Campaign Manager.
           format: int64
           readOnly: true
           type: string
         cmTrackingAd:
           $ref: "#/components/schemas/CmTrackingAd"
-          description: "The Campaign Manager tracking ad associated with the creative. Optional for the following creative_type when created by an advertiser that uses both Campaign Manager and third-party ad serving: * `CREATIVE_TYPE_NATIVE` * `CREATIVE_TYPE_NATIVE_SITE_SQUARE` * `CREATIVE_TYPE_NATIVE_APP_INSTALL` * `CREATIVE_TYPE_NATIVE_APP_INSTALL_SQUARE` Output only for other cases."
+          description: "The Campaign Manager 360 tracking ad associated with the creative. Optional for the following creative_type when created by an advertiser that uses both Campaign Manager 360 and third-party ad serving: * `CREATIVE_TYPE_NATIVE` * `CREATIVE_TYPE_NATIVE_SITE_SQUARE` * `CREATIVE_TYPE_NATIVE_APP_INSTALL` * `CREATIVE_TYPE_NATIVE_APP_INSTALL_SQUARE` Output only for other cases."
         companionCreativeIds:
           description: "The IDs of companion creatives for a video creative. You can assign existing display creatives (with image or HTML5 assets) to serve surrounding the publisher's video player. Companions display around the video player while the video is playing and remain after the video has completed. Creatives contain additional dimensions can not be companion creatives. This field is only supported for following creative_type: * `CREATIVE_TYPE_AUDIO` * `CREATIVE_TYPE_VIDEO`"
           items:
@@ -7183,7 +7183,7 @@ components:
           description: "Optional. Indicates that the creative requires MRAID (Mobile Rich Media Ad Interface Definitions system). Set this if the creative relies on mobile gestures for interactivity, such as swiping or tapping. Optional and only valid for third-party tag creatives. Third-party tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_STANDARD` * `CREATIVE_TYPE_EXPANDABLE`"
           type: boolean
         requirePingForAttribution:
-          description: "Optional. Indicates that the creative will wait for a return ping for attribution. Only valid when using a Campaign Manager tracking ad with a third-party ad server parameter and the ${DC_DBM_TOKEN} macro. Optional and only valid for third-party tag creatives or third-party VAST tag creatives. Third-party tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_STANDARD` * `CREATIVE_TYPE_EXPANDABLE` Third-party VAST tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_VIDEO`"
+          description: "Optional. Indicates that the creative will wait for a return ping for attribution. Only valid when using a Campaign Manager 360 tracking ad with a third-party ad server parameter and the ${DC_DBM_TOKEN} macro. Optional and only valid for third-party tag creatives or third-party VAST tag creatives. Third-party tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_STANDARD` * `CREATIVE_TYPE_EXPANDABLE` Third-party VAST tag creatives are creatives with following hosting_source: * `HOSTING_SOURCE_THIRD_PARTY` combined with following creative_type: * `CREATIVE_TYPE_VIDEO`"
           type: boolean
         reviewStatus:
           $ref: "#/components/schemas/ReviewStatusInfo"
@@ -7849,6 +7849,7 @@ components:
             - EXCHANGE_INMOBI
             - EXCHANGE_SMAATO
             - EXCHANGE_AJA
+            - EXCHANGE_SUPERSHIP
             - EXCHANGE_NEXSTAR_DIGITAL
             - EXCHANGE_WAZE
           type: string
@@ -7929,6 +7930,7 @@ components:
             - EXCHANGE_INMOBI
             - EXCHANGE_SMAATO
             - EXCHANGE_AJA
+            - EXCHANGE_SUPERSHIP
             - EXCHANGE_NEXSTAR_DIGITAL
             - EXCHANGE_WAZE
           type: string
@@ -8005,6 +8007,7 @@ components:
             - EXCHANGE_INMOBI
             - EXCHANGE_SMAATO
             - EXCHANGE_AJA
+            - EXCHANGE_SUPERSHIP
             - EXCHANGE_NEXSTAR_DIGITAL
             - EXCHANGE_WAZE
           readOnly: true
@@ -8798,6 +8801,7 @@ components:
             - EXCHANGE_INMOBI
             - EXCHANGE_SMAATO
             - EXCHANGE_AJA
+            - EXCHANGE_SUPERSHIP
             - EXCHANGE_NEXSTAR_DIGITAL
             - EXCHANGE_WAZE
           type: string
@@ -8965,7 +8969,7 @@ components:
           type: string
       type: object
     LineItem:
-      description: A single line item.
+      description: "A single line item. Next id: 24"
       properties:
         advertiserId:
           description: Output only. The unique ID of the advertiser the line item belongs to.
@@ -9531,10 +9535,10 @@ components:
       description: Measurement settings of a partner.
       properties:
         dv360ToCmCostReportingEnabled:
-          description: Whether or not to report DV360 cost to CM.
+          description: Whether or not to report DV360 cost to CM360.
           type: boolean
         dv360ToCmDataSharingEnabled:
-          description: Whether or not to include DV360 data in CM data transfer reports.
+          description: Whether or not to include DV360 data in CM360 data transfer reports.
           type: boolean
       type: object
     Money:

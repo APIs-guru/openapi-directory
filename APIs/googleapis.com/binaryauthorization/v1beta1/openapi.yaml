@@ -27,7 +27,7 @@ info:
       format: google
       url: https://binaryauthorization.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: binaryauthorization
 externalDocs:
@@ -537,7 +537,6 @@ components:
       description: Associates `members` with a `role`.
       properties:
         bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
           type: string
         condition:
           $ref: "#/components/schemas/Expr"

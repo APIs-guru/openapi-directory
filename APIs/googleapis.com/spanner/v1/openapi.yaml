@@ -1682,7 +1682,6 @@ components:
       description: Associates `members` with a `role`.
       properties:
         bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
           type: string
         condition:
           $ref: "#/components/schemas/Expr"
@@ -1935,7 +1934,7 @@ components:
       description: Message representing a single field of a struct.
       properties:
         name:
-          description: The name of the field. For reads, this is the column name. For SQL queries, it is the column alias (e.g., `"Word"` in the query `"SELECT 'hello' AS Word"`), or the column name (e.g., `"ColName"` in the query `"SELECT ColName FROM Table"`). Some columns might have an empty name (e.g., !"SELECT UPPER(ColName)"`). Note that a query result can contain multiple fields with the same name.
+          description: The name of the field. For reads, this is the column name. For SQL queries, it is the column alias (e.g., `"Word"` in the query `"SELECT 'hello' AS Word"`), or the column name (e.g., `"ColName"` in the query `"SELECT ColName FROM Table"`). Some columns might have an empty name (e.g., `"SELECT UPPER(ColName)"`). Note that a query result can contain multiple fields with the same name.
           type: string
         type:
           $ref: "#/components/schemas/Type"

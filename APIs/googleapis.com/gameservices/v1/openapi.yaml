@@ -1,109 +1,108 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://gameservices.googleapis.com/'
+  - url: https://gameservices.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
     x-twitter: youtube
   description: Deploy and manage infrastructure for global multiplayer gaming experiences.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: Game Services API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - format: google
-      url: 'https://gameservices.googleapis.com/$discovery/rest?version=v1'
+      url: https://gameservices.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: gameservices
 externalDocs:
-  url: 'https://cloud.google.com/solutions/gaming/'
+  url: https://cloud.google.com/solutions/gaming/
 tags:
   - name: projects
 paths:
-  '/v1/{name}':
+  "/v1/{name}":
     delete:
       description: Deletes a single game server cluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.delete
       parameters:
-        - description: 'Required. The name of the game server cluster to delete, in the following form: `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.'
+        - description: "Required. The name of the game server cluster to delete, in the following form: `projects/{project}/locations/{location}/gameServerClusters/{cluster}`."
           in: path
           name: name
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     get:
       description: Gets details of a single game server cluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.get
       parameters:
-        - description: 'Required. The name of the game server cluster to retrieve, in the following form: `projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}`.'
+        - description: "Required. The name of the game server cluster to retrieve, in the following form: `projects/{project}/locations/{location}/realms/{realm-id}/gameServerClusters/{cluster}`."
           in: path
           name: name
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GameServerCluster'
+                $ref: "#/components/schemas/GameServerCluster"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Patches a single game server cluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.patch
       parameters:
-        - description: 'Required. The resource name of the game server cluster, in the following form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`.'
+        - description: "Required. The resource name of the game server cluster, in the following form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`."
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: 'Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask'
+        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask"
           in: query
           name: updateMask
           schema:
@@ -112,27 +111,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GameServerCluster'
+              $ref: "#/components/schemas/GameServerCluster"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/locations':
+  "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
       operationId: gameservices.projects.locations.list
       parameters:
-        - description: 'The resource that owns the locations collection, if applicable.'
+        - description: The resource that owns the locations collection, if applicable.
           in: path
           name: name
           required: true
@@ -143,7 +142,7 @@ paths:
           name: filter
           schema:
             type: string
-        - description: 'If true, the returned list will include locations which are not yet revealed.'
+        - description: If true, the returned list will include locations which are not yet revealed.
           in: query
           name: includeUnrevealedLocations
           schema:
@@ -159,34 +158,34 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListLocationsResponse'
+                $ref: "#/components/schemas/ListLocationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/v1/{name}/operations':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}/operations":
     get:
-      description: 'Lists operations that match the specified filter in the request. If the server doesn''t support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `"/v1/{name=users/*}/operations"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id.'
+      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
       operationId: gameservices.projects.locations.operations.list
       parameters:
         - description: The name of the operation's parent resource.
@@ -211,79 +210,79 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListOperationsResponse'
+                $ref: "#/components/schemas/ListOperationsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/v1/{name}/rollout':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}/rollout":
     get:
       description: Gets details a single game server deployment rollout.
       operationId: gameservices.projects.locations.gameServerDeployments.getRollout
       parameters:
-        - description: 'Required. The name of the game server delpoyment to retrieve, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`.'
+        - description: "Required. The name of the game server delpoyment to retrieve, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`."
           in: path
           name: name
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GameServerDeploymentRollout'
+                $ref: "#/components/schemas/GameServerDeploymentRollout"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
-      description: 'Patches a single game server deployment rollout. The method will not return an error if the update does not affect any existing realms. For example - if the default_game_server_config is changed but all existing realms use the override, that is valid. Similarly, if a non existing realm is explicitly called out in game_server_config_overrides field, that will also not result in an error.'
+      description: Patches a single game server deployment rollout. The method will not return an error if the update does not affect any existing realms. For example - if the default_game_server_config is changed but all existing realms use the override, that is valid. Similarly, if a non existing realm is explicitly called out in game_server_config_overrides field, that will also not result in an error.
       operationId: gameservices.projects.locations.gameServerDeployments.updateRollout
       parameters:
-        - description: 'The resource name of the game server deployment rollout, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`.'
+        - description: "The resource name of the game server deployment rollout, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`."
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: 'Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask'
+        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask"
           in: query
           name: updateMask
           schema:
@@ -292,39 +291,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GameServerDeploymentRollout'
+              $ref: "#/components/schemas/GameServerDeploymentRollout"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}/rollout:preview':
+  "/v1/{name}/rollout:preview":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Previews the game server deployment rollout. This API does not mutate the rollout resource.
       operationId: gameservices.projects.locations.gameServerDeployments.previewRollout
       parameters:
-        - description: 'The resource name of the game server deployment rollout, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`.'
+        - description: "The resource name of the game server deployment rollout, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`."
           in: path
           name: name
           required: true
@@ -335,7 +334,7 @@ paths:
           name: previewTime
           schema:
             type: string
-        - description: 'Optional. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask'
+        - description: "Optional. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask"
           in: query
           name: updateMask
           schema:
@@ -344,36 +343,36 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GameServerDeploymentRollout'
+              $ref: "#/components/schemas/GameServerDeploymentRollout"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PreviewGameServerDeploymentRolloutResponse'
+                $ref: "#/components/schemas/PreviewGameServerDeploymentRolloutResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:cancel':
+  "/v1/{name}:cancel":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: 'Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn''t support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.'
+      description: Starts asynchronous cancellation on a long-running operation. The server makes a best effort to cancel the operation, but success is not guaranteed. If the server doesn't support this method, it returns `google.rpc.Code.UNIMPLEMENTED`. Clients can use Operations.GetOperation or other methods to check whether the cancellation succeeded or whether the operation completed despite cancellation. On successful cancellation, the operation is not deleted; instead, it becomes an operation with an Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
       operationId: gameservices.projects.locations.operations.cancel
       parameters:
         - description: The name of the operation resource to be cancelled.
@@ -386,39 +385,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CancelOperationRequest'
+              $ref: "#/components/schemas/CancelOperationRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Empty'
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:fetchDeploymentState':
+  "/v1/{name}:fetchDeploymentState":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: 'Retrieves information about the current state of the game server deployment. Gathers all the Agones fleets and Agones autoscalers, including fleets running an older version of the game server deployment.'
+      description: Retrieves information about the current state of the game server deployment. Gathers all the Agones fleets and Agones autoscalers, including fleets running an older version of the game server deployment.
       operationId: gameservices.projects.locations.gameServerDeployments.fetchDeploymentState
       parameters:
-        - description: 'Required. The name of the game server delpoyment, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`.'
+        - description: "Required. The name of the game server delpoyment, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`."
           in: path
           name: name
           required: true
@@ -428,27 +427,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FetchDeploymentStateRequest'
+              $ref: "#/components/schemas/FetchDeploymentStateRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FetchDeploymentStateResponse'
+                $ref: "#/components/schemas/FetchDeploymentStateResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{name}:previewDelete':
+  "/v1/{name}:previewDelete":
     delete:
       description: Previews deletion of a single game server cluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.previewDelete
       parameters:
-        - description: 'Required. The name of the game server cluster to delete, in the following form: `projects/{project}/locations/{location}/gameServerClusters/{cluster}`.'
+        - description: "Required. The name of the game server cluster to delete, in the following form: `projects/{project}/locations/{location}/gameServerClusters/{cluster}`."
           in: path
           name: name
           required: true
@@ -460,49 +459,49 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PreviewDeleteGameServerClusterResponse'
+                $ref: "#/components/schemas/PreviewDeleteGameServerClusterResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/v1/{name}:previewUpdate':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:previewUpdate":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Previews updating a GameServerCluster.
       operationId: gameservices.projects.locations.realms.gameServerClusters.previewUpdate
       parameters:
-        - description: 'Required. The resource name of the game server cluster, in the following form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`.'
+        - description: "Required. The resource name of the game server cluster, in the following form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`."
           in: path
           name: name
           required: true
@@ -513,7 +512,7 @@ paths:
           name: previewTime
           schema:
             type: string
-        - description: 'Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask'
+        - description: "Required. Mask of fields to update. At least one path must be supplied in this field. For the `FieldMask` definition, see https: //developers.google.com/protocol-buffers // /docs/reference/google.protobuf#fieldmask"
           in: query
           name: updateMask
           schema:
@@ -522,27 +521,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GameServerCluster'
+              $ref: "#/components/schemas/GameServerCluster"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PreviewUpdateGameServerClusterResponse'
+                $ref: "#/components/schemas/PreviewUpdateGameServerClusterResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/configs':
+  "/v1/{parent}/configs":
     get:
-      description: 'Lists game server configs in a given project, location, and game server deployment.'
+      description: Lists game server configs in a given project, location, and game server deployment.
       operationId: gameservices.projects.locations.gameServerDeployments.configs.list
       parameters:
-        - description: 'Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*`.'
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/*`."
           in: path
           name: parent
           required: true
@@ -553,52 +552,52 @@ paths:
           name: filter
           schema:
             type: string
-        - description: 'Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.'
+        - description: Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.
           in: query
           name: orderBy
           schema:
             type: string
-        - description: 'Optional. The maximum number of items to return. If unspecified, server will pick an appropriate default. Server may return fewer items than requested. A caller should only rely on response''s next_page_token to determine if there are more GameServerConfigs left to be queried.'
+        - description: Optional. The maximum number of items to return. If unspecified, server will pick an appropriate default. Server may return fewer items than requested. A caller should only rely on response's next_page_token to determine if there are more GameServerConfigs left to be queried.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'Optional. The next_page_token value returned from a previous list request, if any.'
+        - description: Optional. The next_page_token value returned from a previous list request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListGameServerConfigsResponse'
+                $ref: "#/components/schemas/ListGameServerConfigsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: 'Creates a new game server config in a given project, location, and game server deployment. Game server configs are immutable, and are not applied until referenced in the game server deployment rollout resource.'
+      description: Creates a new game server config in a given project, location, and game server deployment. Game server configs are immutable, and are not applied until referenced in the game server deployment rollout resource.
       operationId: gameservices.projects.locations.gameServerDeployments.configs.create
       parameters:
-        - description: 'Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`.'
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/`."
           in: path
           name: parent
           required: true
@@ -613,22 +612,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GameServerConfig'
+              $ref: "#/components/schemas/GameServerConfig"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/gameServerClusters':
+  "/v1/{parent}/gameServerClusters":
     get:
       description: Lists game server clusters in a given project and location.
       operationId: gameservices.projects.locations.realms.gameServerClusters.list
@@ -644,52 +643,52 @@ paths:
           name: filter
           schema:
             type: string
-        - description: 'Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.'
+        - description: Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.
           in: query
           name: orderBy
           schema:
             type: string
-        - description: 'Optional. The maximum number of items to return. If unspecified, the server will pick an appropriate default. The server may return fewer items than requested. A caller should only rely on response''s next_page_token to determine if there are more GameServerClusters left to be queried.'
+        - description: Optional. The maximum number of items to return. If unspecified, the server will pick an appropriate default. The server may return fewer items than requested. A caller should only rely on response's next_page_token to determine if there are more GameServerClusters left to be queried.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'Optional. The next_page_token value returned from a previous List request, if any.'
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListGameServerClustersResponse'
+                $ref: "#/components/schemas/ListGameServerClustersResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new game server cluster in a given project and location.
       operationId: gameservices.projects.locations.realms.gameServerClusters.create
       parameters:
-        - description: 'Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/realms/{realm-id}`.'
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/realms/{realm-id}`."
           in: path
           name: parent
           required: true
@@ -704,39 +703,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GameServerCluster'
+              $ref: "#/components/schemas/GameServerCluster"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/gameServerClusters:previewCreate':
+  "/v1/{parent}/gameServerClusters:previewCreate":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Previews creation of a new game server cluster in a given project and location.
       operationId: gameservices.projects.locations.realms.gameServerClusters.previewCreate
       parameters:
-        - description: 'Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/realms/{realm}`.'
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}/realms/{realm}`."
           in: path
           name: parent
           required: true
@@ -756,27 +755,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GameServerCluster'
+              $ref: "#/components/schemas/GameServerCluster"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PreviewCreateGameServerClusterResponse'
+                $ref: "#/components/schemas/PreviewCreateGameServerClusterResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/gameServerDeployments':
+  "/v1/{parent}/gameServerDeployments":
     get:
       description: Lists game server deployments in a given project and location.
       operationId: gameservices.projects.locations.gameServerDeployments.list
       parameters:
-        - description: 'Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`.'
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`."
           in: path
           name: parent
           required: true
@@ -787,52 +786,52 @@ paths:
           name: filter
           schema:
             type: string
-        - description: 'Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.'
+        - description: Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.
           in: query
           name: orderBy
           schema:
             type: string
-        - description: 'Optional. The maximum number of items to return. If unspecified, the server will pick an appropriate default. The server may return fewer items than requested. A caller should only rely on response''s next_page_token to determine if there are more GameServerDeployments left to be queried.'
+        - description: Optional. The maximum number of items to return. If unspecified, the server will pick an appropriate default. The server may return fewer items than requested. A caller should only rely on response's next_page_token to determine if there are more GameServerDeployments left to be queried.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'Optional. The next_page_token value returned from a previous List request, if any.'
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListGameServerDeploymentsResponse'
+                $ref: "#/components/schemas/ListGameServerDeploymentsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new game server deployment in a given project and location.
       operationId: gameservices.projects.locations.gameServerDeployments.create
       parameters:
-        - description: 'Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`.'
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`."
           in: path
           name: parent
           required: true
@@ -847,27 +846,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GameServerDeployment'
+              $ref: "#/components/schemas/GameServerDeployment"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{parent}/realms':
+  "/v1/{parent}/realms":
     get:
       description: Lists realms in a given project and location.
       operationId: gameservices.projects.locations.realms.list
       parameters:
-        - description: 'Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`.'
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`."
           in: path
           name: parent
           required: true
@@ -878,52 +877,52 @@ paths:
           name: filter
           schema:
             type: string
-        - description: 'Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.'
+        - description: Optional. Specifies the ordering of results following syntax at https://cloud.google.com/apis/design/design_patterns#sorting_order.
           in: query
           name: orderBy
           schema:
             type: string
-        - description: 'Optional. The maximum number of items to return. If unspecified, server will pick an appropriate default. Server may return fewer items than requested. A caller should only rely on response''s next_page_token to determine if there are more realms left to be queried.'
+        - description: Optional. The maximum number of items to return. If unspecified, server will pick an appropriate default. Server may return fewer items than requested. A caller should only rely on response's next_page_token to determine if there are more realms left to be queried.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: 'Optional. The next_page_token value returned from a previous List request, if any.'
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListRealmsResponse'
+                $ref: "#/components/schemas/ListRealmsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a new realm in a given project and location.
       operationId: gameservices.projects.locations.realms.create
       parameters:
-        - description: 'Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`.'
+        - description: "Required. The parent resource name, in the following form: `projects/{project}/locations/{location}`."
           in: path
           name: parent
           required: true
@@ -938,81 +937,81 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Realm'
+              $ref: "#/components/schemas/Realm"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{resource}:getIamPolicy':
+  "/v1/{resource}:getIamPolicy":
     get:
       description: Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.
       operationId: gameservices.projects.locations.gameServerDeployments.getIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field.'
+        - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
           in: path
           name: resource
           required: true
           schema:
             type: string
-        - description: 'Optional. The policy format version to be returned. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).'
+        - description: Optional. The policy format version to be returned. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
           in: query
           name: options.requestedPolicyVersion
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/v1/{resource}:setIamPolicy':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/v1/{resource}:setIamPolicy":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: 'Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.'
+      description: Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
       operationId: gameservices.projects.locations.gameServerDeployments.setIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field.'
+        - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1022,39 +1021,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SetIamPolicyRequest'
+              $ref: "#/components/schemas/SetIamPolicyRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  '/v1/{resource}:testIamPermissions':
+  "/v1/{resource}:testIamPermissions":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: 'Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may "fail open" without warning.'
       operationId: gameservices.projects.locations.gameServerDeployments.testIamPermissions
       parameters:
-        - description: 'REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field.'
+        - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
           in: path
           name: resource
           required: true
@@ -1064,19 +1063,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TestIamPermissionsRequest'
+              $ref: "#/components/schemas/TestIamPermissionsRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TestIamPermissionsResponse'
+                $ref: "#/components/schemas/TestIamPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
 components:
@@ -1087,8 +1086,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -1119,7 +1118,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1137,19 +1136,19 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -1161,18 +1160,18 @@ components:
         auditLogConfigs:
           description: The configuration for logging of each type of permission.
           items:
-            $ref: '#/components/schemas/AuditLogConfig'
+            $ref: "#/components/schemas/AuditLogConfig"
           type: array
         exemptedMembers:
           items:
             type: string
           type: array
         service:
-          description: 'Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.'
+          description: Specifies a service that will be enabled for audit logging. For example, `storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices` is a special value that covers all services.
           type: string
       type: object
     AuditLogConfig:
-      description: 'Provides the configuration for logging a type of permissions. Example: { "audit_log_configs": [ { "log_type": "DATA_READ", "exempted_members": [ "user:jose@example.com" ] }, { "log_type": "DATA_WRITE" } ] } This enables ''DATA_READ'' and ''DATA_WRITE'' logging, while exempting jose@example.com from DATA_READ logging.'
+      description: "Provides the configuration for logging a type of permissions. Example: { \"audit_log_configs\": [ { \"log_type\": \"DATA_READ\", \"exempted_members\": [ \"user:jose@example.com\" ] }, { \"log_type\": \"DATA_WRITE\" } ] } This enables 'DATA_READ' and 'DATA_WRITE' logging, while exempting jose@example.com from DATA_READ logging."
       properties:
         exemptedMembers:
           description: Specifies the identities that do not cause logging for this type of permission. Follows the same format of Binding.members.
@@ -1207,18 +1206,17 @@ components:
       description: Associates `members` with a `role`.
       properties:
         bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
           type: string
         condition:
-          $ref: '#/components/schemas/Expr'
-          description: 'The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the members in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).'
+          $ref: "#/components/schemas/Expr"
+          description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the members in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
         members:
-          description: 'Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. '
+          description: "Specifies the identities requesting access for a Cloud Platform resource. `members` can have the following values: * `allUsers`: A special identifier that represents anyone who is on the internet; with or without a Google account. * `allAuthenticatedUsers`: A special identifier that represents anyone who is authenticated with a Google account or a service account. * `user:{emailid}`: An email address that represents a specific Google account. For example, `alice@example.com` . * `serviceAccount:{emailid}`: An email address that represents a service account. For example, `my-other-app@appspot.gserviceaccount.com`. * `group:{emailid}`: An email address that represents a Google group. For example, `admins@example.com`. * `deleted:user:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a user that has been recently deleted. For example, `alice@example.com?uid=123456789012345678901`. If the user is recovered, this value reverts to `user:{emailid}` and the recovered user retains the role in the binding. * `deleted:serviceAccount:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a service account that has been recently deleted. For example, `my-other-app@appspot.gserviceaccount.com?uid=123456789012345678901`. If the service account is undeleted, this value reverts to `serviceAccount:{emailid}` and the undeleted service account retains the role in the binding. * `deleted:group:{emailid}?uid={uniqueid}`: An email address (plus unique identifier) representing a Google group that has been recently deleted. For example, `admins@example.com?uid=123456789012345678901`. If the group is recovered, this value reverts to `group:{emailid}` and the recovered group retains the role in the binding. * `domain:{domain}`: The G Suite domain (primary) that represents all the users of that domain. For example, `google.com` or `example.com`. "
           items:
             type: string
           type: array
         role:
-          description: 'Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.'
+          description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
           type: string
       type: object
     CancelOperationRequest:
@@ -1229,7 +1227,7 @@ components:
       description: Write a Cloud Audit log
       properties:
         authorizationLoggingOptions:
-          $ref: '#/components/schemas/AuthorizationLoggingOptions'
+          $ref: "#/components/schemas/AuthorizationLoggingOptions"
           description: Information used by the Cloud Audit Logging pipeline.
         logName:
           description: The log_name to populate in the Cloud Audit Record.
@@ -1283,12 +1281,12 @@ components:
           type: array
       type: object
     CounterOptions:
-      description: 'Increment a streamz counter with the specified metric and field names. Metric names should start with a ''/'', generally be lowercase-only, and end in "_count". Field names should not contain an initial slash. The actual exported metric names will have "/iam/policy" prepended. Field names correspond to IAM request parameters and field values are their respective values. Supported field names: - "authority", which is "[token]" if IAMContext.token is present, otherwise the value of IAMContext.authority_selector if present, and otherwise a representation of IAMContext.principal; or - "iam_principal", a representation of IAMContext.principal even if a token or authority selector is present; or - "" (empty string), resulting in a counter with no fields. Examples: counter { metric: "/debug_access_count" field: "iam_principal" } ==> increment counter /iam/policy/debug_access_count {iam_principal=[value of IAMContext.principal]}'
+      description: "Increment a streamz counter with the specified metric and field names. Metric names should start with a '/', generally be lowercase-only, and end in \"_count\". Field names should not contain an initial slash. The actual exported metric names will have \"/iam/policy\" prepended. Field names correspond to IAM request parameters and field values are their respective values. Supported field names: - \"authority\", which is \"[token]\" if IAMContext.token is present, otherwise the value of IAMContext.authority_selector if present, and otherwise a representation of IAMContext.principal; or - \"iam_principal\", a representation of IAMContext.principal even if a token or authority selector is present; or - \"\" (empty string), resulting in a counter with no fields. Examples: counter { metric: \"/debug_access_count\" field: \"iam_principal\" } ==> increment counter /iam/policy/debug_access_count {iam_principal=[value of IAMContext.principal]}"
       properties:
         customFields:
           description: Custom fields.
           items:
-            $ref: '#/components/schemas/CustomField'
+            $ref: "#/components/schemas/CustomField"
           type: array
         field:
           description: The field value to attribute.
@@ -1298,13 +1296,13 @@ components:
           type: string
       type: object
     CustomField:
-      description: 'Custom fields. These can be used to create a counter with arbitrary field/value pairs. See: go/rpcsp-custom-fields.'
+      description: "Custom fields. These can be used to create a counter with arbitrary field/value pairs. See: go/rpcsp-custom-fields."
       properties:
         name:
           description: Name is the field name.
           type: string
         value:
-          description: 'Value is the field value. It is important that in contrast to the CounterOptions.field, the value here is a constant that is not derived from the IAMContext.'
+          description: Value is the field value. It is important that in contrast to the CounterOptions.field, the value here is a constant that is not derived from the IAMContext.
           type: string
       type: object
     DataAccessOptions:
@@ -1325,7 +1323,7 @@ components:
         fleetDetails:
           description: The details about the Agones fleets and autoscalers created in the game server cluster.
           items:
-            $ref: '#/components/schemas/DeployedFleetDetails'
+            $ref: "#/components/schemas/DeployedFleetDetails"
           type: array
       type: object
     DeployedFleet:
@@ -1338,10 +1336,10 @@ components:
           description: The fleet spec retrieved from the Agones fleet.
           type: string
         specSource:
-          $ref: '#/components/schemas/SpecSource'
+          $ref: "#/components/schemas/SpecSource"
           description: The source spec that is used to create the Agones fleet. The GameServerConfig resource may no longer exist in the system.
         status:
-          $ref: '#/components/schemas/DeployedFleetStatus'
+          $ref: "#/components/schemas/DeployedFleetStatus"
           description: The current status of the Agones fleet. Includes count of game servers in various states.
       type: object
     DeployedFleetAutoscaler:
@@ -1354,21 +1352,21 @@ components:
           description: The autoscaler spec retrieved from Agones.
           type: string
         specSource:
-          $ref: '#/components/schemas/SpecSource'
+          $ref: "#/components/schemas/SpecSource"
           description: The source spec that is used to create the autoscaler. The GameServerConfig resource may no longer exist in the system.
       type: object
     DeployedFleetDetails:
       description: Details of the deployed Agones fleet.
       properties:
         deployedAutoscaler:
-          $ref: '#/components/schemas/DeployedFleetAutoscaler'
+          $ref: "#/components/schemas/DeployedFleetAutoscaler"
           description: Information about the Agones autoscaler for that fleet.
         deployedFleet:
-          $ref: '#/components/schemas/DeployedFleet'
+          $ref: "#/components/schemas/DeployedFleet"
           description: Information about the Agones fleet.
       type: object
     DeployedFleetStatus:
-      description: 'DeployedFleetStatus has details about the Agones fleets such as how many are running, how many allocated, and so on.'
+      description: DeployedFleetStatus has details about the Agones fleets such as how many are running, how many allocated, and so on.
       properties:
         allocatedReplicas:
           description: The number of GameServer replicas in the ALLOCATED state in this fleet.
@@ -1383,28 +1381,28 @@ components:
           format: int64
           type: string
         reservedReplicas:
-          description: 'The number of GameServer replicas in the RESERVED state in this fleet. Reserved instances won''t be deleted on scale down, but won''t cause an autoscaler to scale up.'
+          description: The number of GameServer replicas in the RESERVED state in this fleet. Reserved instances won't be deleted on scale down, but won't cause an autoscaler to scale up.
           format: int64
           type: string
       type: object
     Empty:
-      description: 'A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.'
+      description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
     Expr:
-      description: 'Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: "Summary size limit" description: "Determines if a summary is less than 100 chars" expression: "document.summary.size() < 100" Example (Equality): title: "Requestor is owner" description: "Determines if requestor is the document owner" expression: "document.owner == request.auth.claims.email" Example (Logic): title: "Public documents" description: "Determine whether the document should be publicly visible" expression: "document.type != ''private'' && document.type != ''internal''" Example (Data Manipulation): title: "Notification string" description: "Create a notification string with a timestamp." expression: "''New message received at '' + string(document.create_time)" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information.'
+      description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
       properties:
         description:
-          description: 'Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.'
+          description: Optional. Description of the expression. This is a longer text which describes the expression, e.g. when hovered over it in a UI.
           type: string
         expression:
           description: Textual representation of an expression in Common Expression Language syntax.
           type: string
         location:
-          description: 'Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.'
+          description: Optional. String indicating the location of the expression for error reporting, e.g. a file name and a position in the file.
           type: string
         title:
-          description: 'Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.'
+          description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
     FetchDeploymentStateRequest:
@@ -1417,7 +1415,7 @@ components:
         clusterState:
           description: The state of the game server deployment in each game server cluster.
           items:
-            $ref: '#/components/schemas/DeployedClusterState'
+            $ref: "#/components/schemas/DeployedClusterState"
           type: array
         unavailable:
           description: List of locations that could not be reached.
@@ -1429,7 +1427,7 @@ components:
       description: Fleet configs for Agones.
       properties:
         fleetSpec:
-          description: 'Agones fleet spec. Example spec: `https://agones.dev/site/docs/reference/fleet/`.'
+          description: "Agones fleet spec. Example spec: `https://agones.dev/site/docs/reference/fleet/`."
           type: string
         name:
           description: The name of the FleetConfig.
@@ -1439,7 +1437,7 @@ components:
       description: A game server cluster resource.
       properties:
         connectionInfo:
-          $ref: '#/components/schemas/GameServerClusterConnectionInfo'
+          $ref: "#/components/schemas/GameServerClusterConnectionInfo"
           description: The game server cluster connection information. This information is used to manage game server clusters.
         createTime:
           description: Output only. The creation time.
@@ -1458,7 +1456,7 @@ components:
           description: The labels associated with this game server cluster. Each label is a key-value pair.
           type: object
         name:
-          description: 'Required. The resource name of the game server cluster, in the following form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`.'
+          description: "Required. The resource name of the game server cluster, in the following form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`. For example, `projects/my-project/locations/{location}/realms/zanzibar/gameServerClusters/my-onprem-cluster`."
           type: string
         updateTime:
           description: Output only. The last-modified time.
@@ -1470,7 +1468,7 @@ components:
       description: The game server cluster connection information.
       properties:
         gkeClusterReference:
-          $ref: '#/components/schemas/GkeClusterReference'
+          $ref: "#/components/schemas/GkeClusterReference"
           description: Reference to the GKE cluster where the game servers are installed.
         namespace:
           description: Namespace designated on the game server cluster where the Agones game server instances will be created. Existence of the namespace will be validated during creation.
@@ -1490,7 +1488,7 @@ components:
         fleetConfigs:
           description: FleetConfig contains a list of Agones fleet specs. Only one FleetConfig is allowed.
           items:
-            $ref: '#/components/schemas/FleetConfig'
+            $ref: "#/components/schemas/FleetConfig"
           type: array
         labels:
           additionalProperties:
@@ -1498,12 +1496,12 @@ components:
           description: The labels associated with this game server config. Each label is a key-value pair.
           type: object
         name:
-          description: 'The resource name of the game server config, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`. For example, `projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config`.'
+          description: "The resource name of the game server config, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/configs/{config}`. For example, `projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config`."
           type: string
         scalingConfigs:
           description: The autoscaling settings.
           items:
-            $ref: '#/components/schemas/ScalingConfig'
+            $ref: "#/components/schemas/ScalingConfig"
           type: array
         updateTime:
           description: Output only. The last-modified time.
@@ -1518,7 +1516,7 @@ components:
           description: The game server config for this override.
           type: string
         realmsSelector:
-          $ref: '#/components/schemas/RealmSelector'
+          $ref: "#/components/schemas/RealmSelector"
           description: Selector for choosing applicable realms.
       type: object
     GameServerDeployment:
@@ -1541,7 +1539,7 @@ components:
           description: The labels associated with this game server deployment. Each label is a key-value pair.
           type: object
         name:
-          description: 'The resource name of the game server deployment, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment`.'
+          description: "The resource name of the game server deployment, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment`."
           type: string
         updateTime:
           description: Output only. The last-modified time.
@@ -1558,18 +1556,18 @@ components:
           readOnly: true
           type: string
         defaultGameServerConfig:
-          description: 'The default game server config is applied to all realms unless overridden in the rollout. For example, `projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config`.'
+          description: The default game server config is applied to all realms unless overridden in the rollout. For example, `projects/my-project/locations/global/gameServerDeployments/my-game/configs/my-config`.
           type: string
         etag:
           description: ETag of the resource.
           type: string
         gameServerConfigOverrides:
-          description: 'Contains the game server config rollout overrides. Overrides are processed in the order they are listed. Once a match is found for a realm, the rest of the list is not processed.'
+          description: Contains the game server config rollout overrides. Overrides are processed in the order they are listed. Once a match is found for a realm, the rest of the list is not processed.
           items:
-            $ref: '#/components/schemas/GameServerConfigOverride'
+            $ref: "#/components/schemas/GameServerConfigOverride"
           type: array
         name:
-          description: 'The resource name of the game server deployment rollout, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`.'
+          description: "The resource name of the game server deployment rollout, in the following form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment}/rollout`. For example, `projects/my-project/locations/global/gameServerDeployments/my-deployment/rollout`."
           type: string
         updateTime:
           description: Output only. The last-modified time.
@@ -1581,11 +1579,11 @@ components:
       description: A reference to a GKE cluster.
       properties:
         cluster:
-          description: 'The full or partial name of a GKE cluster, using one of the following forms: * `projects/{project}/locations/{location}/clusters/{cluster}` * `locations/{location}/clusters/{cluster}` * `{cluster}` If project and location are not specified, the project and location of the GameServerCluster resource are used to generate the full name of the GKE cluster.'
+          description: "The full or partial name of a GKE cluster, using one of the following forms: * `projects/{project}/locations/{location}/clusters/{cluster}` * `locations/{location}/clusters/{cluster}` * `{cluster}` If project and location are not specified, the project and location of the GameServerCluster resource are used to generate the full name of the GKE cluster."
           type: string
       type: object
     LabelSelector:
-      description: 'The label selector, used to group labels on the resources.'
+      description: The label selector, used to group labels on the resources.
       properties:
         labels:
           additionalProperties:
@@ -1599,10 +1597,10 @@ components:
         gameServerClusters:
           description: The list of game server clusters.
           items:
-            $ref: '#/components/schemas/GameServerCluster'
+            $ref: "#/components/schemas/GameServerCluster"
           type: array
         nextPageToken:
-          description: 'Token to retrieve the next page of results, or empty if there are no more results in the list.'
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
         unreachable:
           description: List of locations that could not be reached.
@@ -1616,10 +1614,10 @@ components:
         gameServerConfigs:
           description: The list of game server configs.
           items:
-            $ref: '#/components/schemas/GameServerConfig'
+            $ref: "#/components/schemas/GameServerConfig"
           type: array
         nextPageToken:
-          description: 'Token to retrieve the next page of results, or empty if there are no more results in the list.'
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
         unreachable:
           description: List of locations that could not be reached.
@@ -1633,10 +1631,10 @@ components:
         gameServerDeployments:
           description: The list of game server deployments.
           items:
-            $ref: '#/components/schemas/GameServerDeployment'
+            $ref: "#/components/schemas/GameServerDeployment"
           type: array
         nextPageToken:
-          description: 'Token to retrieve the next page of results, or empty if there are no more results in the list.'
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
         unreachable:
           description: List of locations that could not be reached.
@@ -1650,7 +1648,7 @@ components:
         locations:
           description: A list of locations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Location'
+            $ref: "#/components/schemas/Location"
           type: array
         nextPageToken:
           description: The standard List next-page token.
@@ -1665,19 +1663,19 @@ components:
         operations:
           description: A list of operations that matches the specified filter in the request.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     ListRealmsResponse:
       description: Response message for RealmsService.ListRealms.
       properties:
         nextPageToken:
-          description: 'Token to retrieve the next page of results, or empty if there are no more results in the list.'
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
         realms:
           description: The list of realms.
           items:
-            $ref: '#/components/schemas/Realm'
+            $ref: "#/components/schemas/Realm"
           type: array
         unreachable:
           description: List of locations that could not be reached.
@@ -1689,7 +1687,7 @@ components:
       description: A resource that represents Google Cloud Platform location.
       properties:
         displayName:
-          description: 'The friendly name for this location, typically a nearby city name. For example, "Tokyo".'
+          description: The friendly name for this location, typically a nearby city name. For example, "Tokyo".
           type: string
         labels:
           additionalProperties:
@@ -1712,36 +1710,36 @@ components:
       description: Specifies what kind of log the caller must write
       properties:
         cloudAudit:
-          $ref: '#/components/schemas/CloudAuditOptions'
+          $ref: "#/components/schemas/CloudAuditOptions"
           description: Cloud audit options.
         counter:
-          $ref: '#/components/schemas/CounterOptions'
+          $ref: "#/components/schemas/CounterOptions"
           description: Counter options.
         dataAccess:
-          $ref: '#/components/schemas/DataAccessOptions'
+          $ref: "#/components/schemas/DataAccessOptions"
           description: Data access options.
       type: object
     Operation:
       description: This resource represents a long-running operation that is the result of a network API call.
       properties:
         done:
-          description: 'If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.'
+          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
           type: boolean
         error:
-          $ref: '#/components/schemas/Status'
+          $ref: "#/components/schemas/Status"
           description: The error result of the operation in case of failure or cancellation.
         metadata:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: 'Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.'
+          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
           type: object
         name:
-          description: 'The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.'
+          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
           type: string
         response:
           additionalProperties:
             description: Properties of the object. Contains field @type with type URL.
-          description: 'The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.'
+          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
           type: object
       type: object
     OperationMetadata:
@@ -1763,16 +1761,16 @@ components:
           type: string
         operationStatus:
           additionalProperties:
-            $ref: '#/components/schemas/OperationStatus'
-          description: 'Output only. Operation status for Game Services API operations. Operation status is in the form of key-value pairs where keys are resource IDs and the values show the status of the operation. In case of failures, the value includes an error code and error message.'
+            $ref: "#/components/schemas/OperationStatus"
+          description: Output only. Operation status for Game Services API operations. Operation status is in the form of key-value pairs where keys are resource IDs and the values show the status of the operation. In case of failures, the value includes an error code and error message.
           readOnly: true
           type: object
         requestedCancellation:
-          description: 'Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.'
+          description: Output only. Identifies whether the user has requested cancellation of the operation. Operations that have successfully been cancelled have Operation.error value with a google.rpc.Status.code of 1, corresponding to `Code.CANCELLED`.
           readOnly: true
           type: boolean
         statusMessage:
-          description: 'Output only. Human-readable status of the operation, if any.'
+          description: Output only. Human-readable status of the operation, if any.
           readOnly: true
           type: string
         target:
@@ -1809,31 +1807,31 @@ components:
           type: string
       type: object
     Policy:
-      description: 'An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { "bindings": [ { "role": "roles/resourcemanager.organizationAdmin", "members": [ "user:mike@example.com", "group:admins@example.com", "domain:google.com", "serviceAccount:my-project-id@appspot.gserviceaccount.com" ] }, { "role": "roles/resourcemanager.organizationViewer", "members": [ "user:eve@example.com" ], "condition": { "title": "expirable access", "description": "Does not grant access after Sep 2020", "expression": "request.time < timestamp(''2020-10-01T00:00:00.000Z'')", } } ], "etag": "BwWWja0YfJA=", "version": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp(''2020-10-01T00:00:00.000Z'') - etag: BwWWja0YfJA= - version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/).'
+      description: "An Identity and Access Management (IAM) policy, which specifies access controls for Google Cloud resources. A `Policy` is a collection of `bindings`. A `binding` binds one or more `members` to a single `role`. Members can be user accounts, service accounts, Google groups, and domains (such as G Suite). A `role` is a named list of permissions; each `role` can be an IAM predefined role or a user-created custom role. For some types of Google Cloud resources, a `binding` can also specify a `condition`, which is a logical expression that allows access to a resource only if the expression evaluates to `true`. A condition can add constraints based on attributes of the request, the resource, or both. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies). **JSON example:** { \"bindings\": [ { \"role\": \"roles/resourcemanager.organizationAdmin\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-project-id@appspot.gserviceaccount.com\" ] }, { \"role\": \"roles/resourcemanager.organizationViewer\", \"members\": [ \"user:eve@example.com\" ], \"condition\": { \"title\": \"expirable access\", \"description\": \"Does not grant access after Sep 2020\", \"expression\": \"request.time < timestamp('2020-10-01T00:00:00.000Z')\", } } ], \"etag\": \"BwWWja0YfJA=\", \"version\": 3 } **YAML example:** bindings: - members: - user:mike@example.com - group:admins@example.com - domain:google.com - serviceAccount:my-project-id@appspot.gserviceaccount.com role: roles/resourcemanager.organizationAdmin - members: - user:eve@example.com role: roles/resourcemanager.organizationViewer condition: title: expirable access description: Does not grant access after Sep 2020 expression: request.time < timestamp('2020-10-01T00:00:00.000Z') - etag: BwWWja0YfJA= - version: 3 For a description of IAM and its features, see the [IAM documentation](https://cloud.google.com/iam/docs/)."
       properties:
         auditConfigs:
           description: Specifies cloud audit logging configuration for this policy.
           items:
-            $ref: '#/components/schemas/AuditConfig'
+            $ref: "#/components/schemas/AuditConfig"
           type: array
         bindings:
-          description: 'Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.'
+          description: Associates a list of `members` to a `role`. Optionally, may specify a `condition` that determines how and when the `bindings` are applied. Each of the `bindings` must contain at least one member.
           items:
-            $ref: '#/components/schemas/Binding'
+            $ref: "#/components/schemas/Binding"
           type: array
         etag:
-          description: '`etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy. **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.'
+          description: "`etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy. **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost."
           format: byte
           type: string
         iamOwned:
           type: boolean
         rules:
-          description: 'If more than one rule is specified, the rules are applied in the following manner: - All matching LOG rules are always applied. - If any DENY/DENY_WITH_LOG rule matches, permission is denied. Logging will be applied if one or more matching rule requires logging. - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is granted. Logging will be applied if one or more matching rule requires logging. - Otherwise, if no rule applies, permission is denied.'
+          description: "If more than one rule is specified, the rules are applied in the following manner: - All matching LOG rules are always applied. - If any DENY/DENY_WITH_LOG rule matches, permission is denied. Logging will be applied if one or more matching rule requires logging. - Otherwise, if any ALLOW/ALLOW_WITH_LOG rule matches, permission is granted. Logging will be applied if one or more matching rule requires logging. - Otherwise, if no rule applies, permission is denied."
           items:
-            $ref: '#/components/schemas/Rule'
+            $ref: "#/components/schemas/Rule"
           type: array
         version:
-          description: 'Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).'
+          description: "Specifies the format of the policy. Valid values are `0`, `1`, and `3`. Requests that specify an invalid value are rejected. Any operation that affects conditional role bindings must specify version `3`. This requirement applies to the following operations: * Getting a policy that includes a conditional role binding * Adding a conditional role binding to a policy * Changing a conditional role binding in a policy * Removing any role binding, with or without a condition, from a policy that includes conditions **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost. If a policy does not include any conditions, operations on that policy may specify any valid version or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies)."
           format: int32
           type: integer
       type: object
@@ -1844,7 +1842,7 @@ components:
           description: The ETag of the game server cluster.
           type: string
         targetState:
-          $ref: '#/components/schemas/TargetState'
+          $ref: "#/components/schemas/TargetState"
           description: The target state.
       type: object
     PreviewDeleteGameServerClusterResponse:
@@ -1854,7 +1852,7 @@ components:
           description: The ETag of the game server cluster.
           type: string
         targetState:
-          $ref: '#/components/schemas/TargetState'
+          $ref: "#/components/schemas/TargetState"
           description: The target state.
       type: object
     PreviewGameServerDeploymentRolloutResponse:
@@ -1864,7 +1862,7 @@ components:
           description: ETag of the game server deployment.
           type: string
         targetState:
-          $ref: '#/components/schemas/TargetState'
+          $ref: "#/components/schemas/TargetState"
           description: The target state.
         unavailable:
           description: Locations that could not be reached on this request.
@@ -1879,7 +1877,7 @@ components:
           description: ETag of the realm.
           type: string
         targetState:
-          $ref: '#/components/schemas/TargetState'
+          $ref: "#/components/schemas/TargetState"
           description: The target state.
       type: object
     PreviewUpdateGameServerClusterResponse:
@@ -1889,7 +1887,7 @@ components:
           description: The ETag of the game server cluster.
           type: string
         targetState:
-          $ref: '#/components/schemas/TargetState'
+          $ref: "#/components/schemas/TargetState"
           description: The target state.
       type: object
     Realm:
@@ -1912,10 +1910,10 @@ components:
           description: The labels associated with this realm. Each label is a key-value pair.
           type: object
         name:
-          description: 'The resource name of the realm, in the following form: `projects/{project}/locations/{location}/realms/{realm}`. For example, `projects/my-project/locations/{location}/realms/my-realm`.'
+          description: "The resource name of the realm, in the following form: `projects/{project}/locations/{location}/realms/{realm}`. For example, `projects/my-project/locations/{location}/realms/my-realm`."
           type: string
         timeZone:
-          description: 'Required. Time zone where all policies targeting this realm are evaluated. The value of this field must be from the IANA time zone database: https://www.iana.org/time-zones.'
+          description: "Required. Time zone where all policies targeting this realm are evaluated. The value of this field must be from the IANA time zone database: https://www.iana.org/time-zones."
           type: string
         updateTime:
           description: Output only. The last-modified time.
@@ -1924,7 +1922,7 @@ components:
           type: string
       type: object
     RealmSelector:
-      description: 'The realm selector, used to match realm resources.'
+      description: The realm selector, used to match realm resources.
       properties:
         realms:
           description: List of realms to match.
@@ -1948,28 +1946,28 @@ components:
         conditions:
           description: Additional restrictions that must be met. All conditions must pass for the rule to match.
           items:
-            $ref: '#/components/schemas/Condition'
+            $ref: "#/components/schemas/Condition"
           type: array
         description:
           description: Human-readable description of the rule.
           type: string
         in:
-          description: 'If one or more ''in'' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.'
+          description: If one or more 'in' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in at least one of these entries.
           items:
             type: string
           type: array
         logConfig:
           description: The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.
           items:
-            $ref: '#/components/schemas/LogConfig'
+            $ref: "#/components/schemas/LogConfig"
           type: array
         notIn:
-          description: 'If one or more ''not_in'' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries. The format for in and not_in entries can be found at in the Local IAM documentation (see go/local-iam#features).'
+          description: If one or more 'not_in' clauses are specified, the rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in none of the entries. The format for in and not_in entries can be found at in the Local IAM documentation (see go/local-iam#features).
           items:
             type: string
           type: array
         permissions:
-          description: 'A permission is a string of form ''..'' (e.g., ''storage.buckets.list''). A value of ''*'' matches all permissions, and a verb part of ''*'' (e.g., ''storage.buckets.*'') matches all verbs.'
+          description: A permission is a string of form '..' (e.g., 'storage.buckets.list'). A value of '*' matches all permissions, and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.
           items:
             type: string
           type: array
@@ -1978,7 +1976,7 @@ components:
       description: Autoscaling config for an Agones fleet.
       properties:
         fleetAutoscalerSpec:
-          description: 'Required. Agones fleet autoscaler spec. Example spec: https://agones.dev/site/docs/reference/fleetautoscaler/'
+          description: "Required. Agones fleet autoscaler spec. Example spec: https://agones.dev/site/docs/reference/fleetautoscaler/"
           type: string
         name:
           description: Required. The name of the Scaling Config
@@ -1986,23 +1984,23 @@ components:
         schedules:
           description: The schedules to which this Scaling Config applies.
           items:
-            $ref: '#/components/schemas/Schedule'
+            $ref: "#/components/schemas/Schedule"
           type: array
         selectors:
           description: Labels used to identify the game server clusters to which this Agones scaling config applies. A game server cluster is subject to this Agones scaling config if its labels match any of the selector entries.
           items:
-            $ref: '#/components/schemas/LabelSelector'
+            $ref: "#/components/schemas/LabelSelector"
           type: array
       type: object
     Schedule:
-      description: 'The schedule of a recurring or one time event. The event''s time span is specified by start_time and end_time. If the scheduled event''s timespan is larger than the cron_spec + cron_job_duration, the event will be recurring. If only cron_spec + cron_job_duration are specified, the event is effective starting at the local time specified by cron_spec, and is recurring. start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time cron job: cron spec start time + duration'
+      description: "The schedule of a recurring or one time event. The event's time span is specified by start_time and end_time. If the scheduled event's timespan is larger than the cron_spec + cron_job_duration, the event will be recurring. If only cron_spec + cron_job_duration are specified, the event is effective starting at the local time specified by cron_spec, and is recurring. start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time cron job: cron spec start time + duration"
       properties:
         cronJobDuration:
           description: The duration for the cron job event. The duration of the event is effective after the cron job's start time.
           format: google-duration
           type: string
         cronSpec:
-          description: 'The cron definition of the scheduled event. See https://en.wikipedia.org/wiki/Cron. Cron spec specifies the local time as defined by the realm.'
+          description: The cron definition of the scheduled event. See https://en.wikipedia.org/wiki/Cron. Cron spec specifies the local time as defined by the realm.
           type: string
         endTime:
           description: The end time of the event.
@@ -2017,8 +2015,8 @@ components:
       description: Request message for `SetIamPolicy` method.
       properties:
         policy:
-          $ref: '#/components/schemas/Policy'
-          description: 'REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them.'
+          $ref: "#/components/schemas/Policy"
+          description: "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them."
         updateMask:
           description: 'OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only the fields in the mask will be modified. If no mask is provided, the following default mask is used: `paths: "bindings, etag"`'
           format: google-fieldmask
@@ -2028,17 +2026,17 @@ components:
       description: Encapsulates Agones fleet spec and Agones autoscaler spec sources.
       properties:
         gameServerConfigName:
-          description: 'The game server config resource. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}/configs/{config_id}`.'
+          description: "The game server config resource. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}/configs/{config_id}`."
           type: string
         name:
           description: The name of the Agones leet config or Agones scaling config used to derive the Agones fleet or Agones autoscaler spec.
           type: string
       type: object
     Status:
-      description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
       properties:
         code:
-          description: 'The status code, which should be an enum value of google.rpc.Code.'
+          description: The status code, which should be an enum value of google.rpc.Code.
           format: int32
           type: integer
         details:
@@ -2049,7 +2047,7 @@ components:
             type: object
           type: array
         message:
-          description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
           type: string
       type: object
     TargetDetails:
@@ -2058,13 +2056,13 @@ components:
         fleetDetails:
           description: Agones fleet details for game server clusters and game server deployments.
           items:
-            $ref: '#/components/schemas/TargetFleetDetails'
+            $ref: "#/components/schemas/TargetFleetDetails"
           type: array
         gameServerClusterName:
-          description: 'The game server cluster name. Uses the form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`.'
+          description: "The game server cluster name. Uses the form: `projects/{project}/locations/{location}/realms/{realm}/gameServerClusters/{cluster}`."
           type: string
         gameServerDeploymentName:
-          description: 'The game server deployment name. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}`.'
+          description: "The game server deployment name. Uses the form: `projects/{project}/locations/{location}/gameServerDeployments/{deployment_id}`."
           type: string
       type: object
     TargetFleet:
@@ -2074,7 +2072,7 @@ components:
           description: The name of the Agones fleet.
           type: string
         specSource:
-          $ref: '#/components/schemas/SpecSource'
+          $ref: "#/components/schemas/SpecSource"
           description: Encapsulates the source of the Agones fleet spec. The Agones fleet spec source.
       type: object
     TargetFleetAutoscaler:
@@ -2084,17 +2082,17 @@ components:
           description: The name of the Agones autoscaler.
           type: string
         specSource:
-          $ref: '#/components/schemas/SpecSource'
+          $ref: "#/components/schemas/SpecSource"
           description: Encapsulates the source of the Agones fleet spec. Details about the Agones autoscaler spec.
       type: object
     TargetFleetDetails:
       description: Details of the target Agones fleet.
       properties:
         autoscaler:
-          $ref: '#/components/schemas/TargetFleetAutoscaler'
+          $ref: "#/components/schemas/TargetFleetAutoscaler"
           description: Reference to target Agones fleet autoscaling policy.
         fleet:
-          $ref: '#/components/schemas/TargetFleet'
+          $ref: "#/components/schemas/TargetFleet"
           description: Reference to target Agones fleet.
       type: object
     TargetState:
@@ -2103,14 +2101,14 @@ components:
         details:
           description: Details about Agones fleets.
           items:
-            $ref: '#/components/schemas/TargetDetails'
+            $ref: "#/components/schemas/TargetDetails"
           type: array
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.
       properties:
         permissions:
-          description: 'The set of permissions to check for the `resource`. Permissions with wildcards (such as ''*'' or ''storage.*'') are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).'
+          description: The set of permissions to check for the `resource`. Permissions with wildcards (such as '*' or 'storage.*') are not allowed. For more information see [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
           items:
             type: string
           type: array
@@ -2129,16 +2127,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

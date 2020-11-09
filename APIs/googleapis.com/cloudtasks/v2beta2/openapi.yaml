@@ -511,6 +511,11 @@ paths:
           name: pageToken
           schema:
             type: string
+        - description: Optional. Read mask is used for a more granular control over what the API returns. If the mask is not present all fields will be returned except [Queue.stats], if the mask is set to "*" all fields including [Queue.stats] will be returned, otherwise only the fields explicitly specified in the mask will be returned.
+          in: query
+          name: readMask
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -978,7 +983,6 @@ components:
       description: Associates `members` with a `role`.
       properties:
         bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
           type: string
         condition:
           $ref: "#/components/schemas/Expr"

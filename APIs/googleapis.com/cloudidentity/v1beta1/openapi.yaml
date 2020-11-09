@@ -27,7 +27,7 @@ info:
       format: google
       url: https://cloudidentity.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
-  x-preferred: false
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: cloudidentity
 externalDocs:
@@ -793,7 +793,7 @@ paths:
         - groups
   "/v1beta1/{parent}/memberships:checkTransitiveMembership":
     get:
-      description: Check a potential member for membership in a group. A member has membership to a group as long as there is a single viewable transitive membership between the group and the member. The actor must have view permissions to at least one transitive membership between the member and group.
+      description: Check a potential member for membership in a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. A member has membership to a group as long as there is a single viewable transitive membership between the group and the member. The actor must have view permissions to at least one transitive membership between the member and group.
       operationId: cloudidentity.groups.memberships.checkTransitiveMembership
       parameters:
         - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to check the transitive membership in. Format: `groups/{group_id}`, where `group_id` is the unique id assigned to the Group to which the Membership belongs to."
@@ -843,7 +843,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}/memberships:getMembershipGraph":
     get:
-      description: Get a membership graph of just a member or both a member and a group. Given a member, the response will contain all membership paths from the member. Given both a group and a member, the response will contain all membership paths between the group and the member.
+      description: Get a membership graph of just a member or both a member and a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. Given a member, the response will contain all membership paths from the member. Given both a group and a member, the response will contain all membership paths between the group and the member.
       operationId: cloudidentity.groups.memberships.getMembershipGraph
       parameters:
         - description: 'Required. [Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to the Group to which the Membership belongs to. group_id can be a wildcard collection id "-". When a group_id is specified, the membership graph will be constrained to paths between the member (defined in the query) and the parent. If a wildcard collection is provided, all membership paths connected to the member will be returned.'
@@ -948,7 +948,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}/memberships:searchTransitiveGroups":
     get:
-      description: Search transitive groups of a member. A transitive group is any group that has a direct or indirect membership to the member. Actor must have view permissions all transitive groups.
+      description: Search transitive groups of a member. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. A transitive group is any group that has a direct or indirect membership to the member. Actor must have view permissions all transitive groups.
       operationId: cloudidentity.groups.memberships.searchTransitiveGroups
       parameters:
         - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is always '-' as this API will search across all groups for a given member."
@@ -1008,7 +1008,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
   "/v1beta1/{parent}/memberships:searchTransitiveMemberships":
     get:
-      description: Search transitive memberships of a group. A transitive membership is any direct or indirect membership of a group. Actor must have view permissions to all transitive memberships.
+      description: Search transitive memberships of a group. **Note:** This feature is only available to Google Workspace Enterprise Standard, Enterprise Plus, and Enterprise for Education; and Cloud Identity Premium accounts. A transitive membership is any direct or indirect membership of a group. Actor must have view permissions to all transitive memberships.
       operationId: cloudidentity.groups.memberships.searchTransitiveMemberships
       parameters:
         - description: "[Resource name](https://cloud.google.com/apis/design/resource_names) of the group to search transitive memberships in. Format: `groups/{group_id}`, where `group_id` is the unique ID assigned to the Group."

@@ -1692,7 +1692,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: External sync mode
+        - description: External sync mode.
           in: query
           name: syncMode
           schema:
@@ -2387,6 +2387,17 @@ components:
           format: int32
           type: integer
       type: object
+    BackupContext:
+      description: Backup context.
+      properties:
+        backupId:
+          description: The identifier of the backup.
+          format: int64
+          type: string
+        kind:
+          description: This is always *sql#backupContext*.
+          type: string
+      type: object
     BackupRetentionSettings:
       description: We currently only support backup retention by specifying the number of backups we will retain.
       properties:
@@ -3008,6 +3019,23 @@ components:
           description: "Path to the import file in Cloud Storage, in the form *gs: //bucketName/fileName*. Compressed gzip files (.gz) are supported // when *fileType* is *SQL*. The instance must have // write permissions to the bucket and read access to the file."
           type: string
       type: object
+    InsightsConfig:
+      description: Insights configuration. This specifies when Cloud SQL Insights feature is enabled and optional configuration.
+      properties:
+        queryInsightsEnabled:
+          description: Whether Query Insights feature is enabled.
+          type: boolean
+        queryStringLength:
+          description: "Maximum query length stored in bytes. Default value: 1024 bytes. Range: 256-4500 bytes. Query length more than this field value will be truncated to this value. When unset, query length will be the default value."
+          format: int32
+          type: integer
+        recordApplicationTags:
+          description: Whether Query Insights will record application tags from query when enabled.
+          type: boolean
+        recordClientAddress:
+          description: Whether Query Insights will record client address when enabled.
+          type: boolean
+      type: object
     InstancesCloneRequest:
       description: Database instance clone request.
       properties:
@@ -3242,8 +3270,11 @@ components:
           type: string
       type: object
     Operation:
-      description: An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource.
+      description: "An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource. Next field: 18"
       properties:
+        backupContext:
+          $ref: "#/components/schemas/BackupContext"
+          description: The context for backup operation, if applicable.
         endTime:
           description: The time this operation finished in UTC timezone in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
@@ -3488,6 +3519,9 @@ components:
           items:
             $ref: "#/components/schemas/DenyMaintenancePeriod"
           type: array
+        insightsConfig:
+          $ref: "#/components/schemas/InsightsConfig"
+          description: Insights configuration, for now relevant only for Postgres.
         ipConfiguration:
           $ref: "#/components/schemas/IpConfiguration"
           description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance. The IPv4 address cannot be disabled for Second Generation instances.

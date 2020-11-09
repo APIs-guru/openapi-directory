@@ -3217,7 +3217,7 @@ components:
           additionalProperties:
             description: A mapping from export format to URL
             type: string
-          description: Links for exporting Google Docs to specific formats.
+          description: Links for exporting Docs Editors files to specific formats.
           type: object
         fileExtension:
           description: The final component of fullFileExtension. This is only available for files with binary content in Google Drive.
@@ -3755,7 +3755,7 @@ components:
           additionalProperties:
             description: A mapping from export format to URL
             type: string
-          description: Links for exporting Google Docs to specific formats.
+          description: Links for exporting Docs Editors files to specific formats.
           type: object
         id:
           description: The ID of the revision.
@@ -3787,16 +3787,16 @@ components:
           description: The original filename used to create this revision. This is only applicable to files with binary content in Drive.
           type: string
         publishAuto:
-          description: Whether subsequent revisions will be automatically republished. This is only applicable to Google Docs.
+          description: Whether subsequent revisions will be automatically republished. This is only applicable to Docs Editors files.
           type: boolean
         published:
-          description: Whether this revision is published. This is only applicable to Google Docs.
+          description: Whether this revision is published. This is only applicable to Docs Editors files.
           type: boolean
         publishedLink:
           description: A link to the published revision. This is only populated for Google Sites files.
           type: string
         publishedOutsideDomain:
-          description: Whether this revision is published outside the domain. This is only applicable to Google Docs.
+          description: Whether this revision is published outside the domain. This is only applicable to Docs Editors files.
           type: boolean
         size:
           description: The size of the revision's content in bytes. This is only applicable to files with binary content in Drive.

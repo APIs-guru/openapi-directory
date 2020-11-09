@@ -5331,6 +5331,66 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendBuckets
+  "/projects/{project}/global/backendBuckets/{backendBucket}/setEdgeSecurityPolicy":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the edge security policy for the specified backend bucket.
+      operationId: compute.backendBuckets.setEdgeSecurityPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the BackendService resource to which the security policy should be set. The name should conform to RFC1035.
+          in: path
+          name: backendBucket
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityPolicyReference"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - backendBuckets
   "/projects/{project}/global/backendBuckets/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
@@ -5984,6 +6044,66 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - backendServices
+  "/projects/{project}/global/backendServices/{backendService}/setEdgeSecurityPolicy":
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+    post:
+      description: Sets the edge security policy for the specified backend service.
+      operationId: compute.backendServices.setEdgeSecurityPolicy
+      parameters:
+        - description: Project ID for this request.
+          in: path
+          name: project
+          required: true
+          schema:
+            type: string
+        - description: Name of the BackendService resource to which the edge security policy should be set. The name should conform to RFC1035.
+          in: path
+          name: backendService
+          required: true
+          schema:
+            type: string
+        - description: >-
+            An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+
+
+            For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+
+
+            The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+          in: query
+          name: requestId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SecurityPolicyReference"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
       tags:
         - backendServices
   "/projects/{project}/global/backendServices/{backendService}/setSecurityPolicy":
@@ -45453,6 +45573,9 @@ components:
           description: The size of the disk in GB.
           format: int64
           type: string
+        forceAttach:
+          description: "[Input Only] Whether to force attach the regional disk even if it's currently attached to another instance. If you try to force attach a zonal disk to an instance, you will receive an error."
+          type: boolean
         guestOsFeatures:
           description: A list of features to enable on the guest operating system. Applicable only for bootable images. Read  Enabling guest operating system features to see a list of available options.
           items:
@@ -46453,6 +46576,9 @@ components:
         description:
           description: An optional textual description of the resource; provided by the client when the resource is created.
           type: string
+        edgeSecurityPolicy:
+          description: "[Output Only] The resource URL for the edge security policy associated with this backend bucket."
+          type: string
         enableCdn:
           description: If true, enable Cloud CDN for this BackendBucket.
           type: boolean
@@ -46713,6 +46839,9 @@ components:
           type: array
         description:
           description: An optional description of this resource. Provide this property when you create the resource.
+          type: string
+        edgeSecurityPolicy:
+          description: "[Output Only] The resource URL for the edge security policy associated with this backend service."
           type: string
         enableCDN:
           description: If true, enables Cloud CDN for the backend service. Only applicable if the loadBalancingScheme is EXTERNAL and the protocol is HTTP or HTTPS.
@@ -54852,6 +54981,10 @@ components:
         customerRouterIpAddress:
           description: "[Output Only] IPv4 address + prefix length to be configured on the customer router subinterface for this interconnect attachment."
           type: string
+        dataplaneVersion:
+          description: "[Output Only] Dataplane version for this InterconnectAttachment."
+          format: int32
+          type: integer
         description:
           description: An optional description of this resource.
           type: string
@@ -56102,7 +56235,7 @@ components:
           type: string
       type: object
     LocationPolicy:
-      description: Configuration for location policy among multiple possible locations (e.g. preferences for zone selection among zones in a single region). Note that this message has a copy in logs/proto/bigcluster/bulk_apis.proto.
+      description: Configuration for location policy among multiple possible locations (e.g. preferences for zone selection among zones in a single region).
       properties:
         locations:
           additionalProperties:
@@ -63806,6 +63939,7 @@ components:
           description: The type indicates the intended use of the security policy. CLOUD_ARMOR policies apply to backend services. FIREWALL policies apply to organizations.
           enum:
             - CLOUD_ARMOR
+            - CLOUD_ARMOR_EDGE
             - FIREWALL
           type: string
       type: object

@@ -28,7 +28,7 @@ info:
       format: google
       url: https://servicebroker.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: true
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: servicebroker
 externalDocs:
@@ -345,8 +345,7 @@ components:
                recovered group retains the role in the binding.
 
 
-            * `domain:{domain}`: The G Suite domain (primary) that represents all the
-               users of that domain. For example, `google.com` or `example.com`.
+            * `domain:{domain}`: The G Suite domain (primary) that represents all the    users of that domain. For example, `google.com` or `example.com`.
 
           items:
             type: string

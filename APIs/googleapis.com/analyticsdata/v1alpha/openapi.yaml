@@ -24,6 +24,7 @@ info:
       version: v1
   x-providerName: googleapis.com
   x-serviceName: analyticsdata
+  x-preferred: true
 externalDocs:
   url: https://developers.google.com/analytics/trusted-testing/analytics-data/
 tags:
@@ -105,6 +106,52 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1alpha/{property}:runRealtimeReport":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: The Google Analytics Realtime API returns a customized report of realtime event data for your property. These reports show events and usage from the last 30 minutes.
+      operationId: analyticsdata.properties.runRealtimeReport
+      parameters:
+        - description: "A Google Analytics GA4 property identifier whose events are tracked. Specified in the URL path and not the body. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id). Example: properties/1234"
+          in: path
+          name: property
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RunRealtimeReportRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RunRealtimeReportResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics
+        - Oauth2:
+            - https://www.googleapis.com/auth/analytics.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/analytics.readonly
+      tags:
+        - properties
   /v1alpha:batchRunPivotReports:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -566,7 +613,7 @@ components:
           $ref: "#/components/schemas/InListFilter"
           description: A filter for in list values.
         nullFilter:
-          description: A filter for null values.
+          description: A filter for null values. If True, a null dimension value is matched by this filter. Null filter is commonly used inside a NOT filter expression. For example, a NOT expression of a null filter removes rows when a dimension is null.
           type: boolean
         numericFilter:
           $ref: "#/components/schemas/NumericFilter"
@@ -845,16 +892,16 @@ components:
       properties:
         concurrentRequests:
           $ref: "#/components/schemas/QuotaStatus"
-          description: Analytics Properties can send up to 10 concurrent requests.
+          description: Standard Analytics Properties can send up to 10 concurrent requests; Analytics 360 Properties can use up to 50 concurrent requests.
         serverErrorsPerProjectPerHour:
           $ref: "#/components/schemas/QuotaStatus"
-          description: Analytics Properties and cloud project pairs can have up to 10 server errors per hour.
+          description: Standard Analytics Properties and cloud project pairs can have up to 10 server errors per hour; Analytics 360 Properties and cloud project pairs can have up to 50 server errors per hour.
         tokensPerDay:
           $ref: "#/components/schemas/QuotaStatus"
-          description: Analytics Properties can use up to 25,000 tokens per day. Most requests consume fewer than 10 tokens.
+          description: Standard Analytics Properties can use up to 25,000 tokens per day; Analytics 360 Properties can use 250,000 tokens per day. Most requests consume fewer than 10 tokens.
         tokensPerHour:
           $ref: "#/components/schemas/QuotaStatus"
-          description: Analytics Properties can use up to 5,000 tokens per day. An API request consumes a single number of tokens, and that number is deducted from both the hourly and daily quotas.
+          description: Standard Analytics Properties can use up to 5,000 tokens per day; Analytics 360 Properties can use 50,000 tokens per day. An API request consumes a single number of tokens, and that number is deducted from both the hourly and daily quotas.
       type: object
     QuotaStatus:
       description: Current state for a particular quota group.
@@ -876,7 +923,7 @@ components:
           type: boolean
       type: object
     Row:
-      description: "Report data for each row. For example if RunReportRequest contains: ```none dimensions { name: \"eventName\" } dimensions { name: \"countryId\" } metrics { name: \"eventCount\" } ``` One row with 'in_app_purchase' as the eventName, 'us' as the countryId, and 15 as the eventCount, would be: ```none dimension_values { name: 'in_app_purchase' name: 'us' } metric_values { int64_value: 15 } ```"
+      description: "Report data for each row. For example if RunReportRequest contains: ```none \"dimensions\": [ { \"name\": \"eventName\" }, { \"name\": \"countryId\" } ], \"metrics\": [ { \"name\": \"eventCount\" } ] ``` One row with 'in_app_purchase' as the eventName, 'JP' as the countryId, and 15 as the eventCount, would be: ```none \"dimensionValues\": [ { \"value\": \"in_app_purchase\" }, { \"value\": \"JP\" } ], \"metricValues\": [ { \"value\": \"15\" } ] ```"
       properties:
         dimensionValues:
           description: List of requested dimension values. In a PivotReport, dimension_values are only listed for dimensions included in a pivot.
@@ -965,6 +1012,90 @@ components:
           description: This Analytics Property's quota state including this request.
         rows:
           description: Rows of dimension value combinations and metric values in the report.
+          items:
+            $ref: "#/components/schemas/Row"
+          type: array
+      type: object
+    RunRealtimeReportRequest:
+      description: The request to generate a realtime report.
+      properties:
+        dimensionFilter:
+          $ref: "#/components/schemas/FilterExpression"
+          description: The filter clause of dimensions. Dimensions must be requested to be used in this filter. Metrics cannot be used in this filter.
+        dimensions:
+          description: The dimensions requested and displayed.
+          items:
+            $ref: "#/components/schemas/Dimension"
+          type: array
+        limit:
+          description: The number of rows to return. If unspecified, 10 rows are returned. If -1, all rows are returned.
+          format: int64
+          type: string
+        metricAggregations:
+          description: Aggregation of metrics. Aggregated metric values will be shown in rows where the dimension_values are set to "RESERVED_(MetricAggregation)".
+          items:
+            enum:
+              - METRIC_AGGREGATION_UNSPECIFIED
+              - TOTAL
+              - MINIMUM
+              - MAXIMUM
+              - COUNT
+            type: string
+          type: array
+        metricFilter:
+          $ref: "#/components/schemas/FilterExpression"
+          description: The filter clause of metrics. Applied at post aggregation phase, similar to SQL having-clause. Metrics must be requested to be used in this filter. Dimensions cannot be used in this filter.
+        metrics:
+          description: The metrics requested and displayed.
+          items:
+            $ref: "#/components/schemas/Metric"
+          type: array
+        orderBys:
+          description: Specifies how rows are ordered in the response.
+          items:
+            $ref: "#/components/schemas/OrderBy"
+          type: array
+        returnPropertyQuota:
+          description: Toggles whether to return the current state of this Analytics Property's Realtime quota. Quota is returned in [PropertyQuota](#PropertyQuota).
+          type: boolean
+      type: object
+    RunRealtimeReportResponse:
+      description: The response realtime report table corresponding to a request.
+      properties:
+        dimensionHeaders:
+          description: Describes dimension columns. The number of DimensionHeaders and ordering of DimensionHeaders matches the dimensions present in rows.
+          items:
+            $ref: "#/components/schemas/DimensionHeader"
+          type: array
+        maximums:
+          description: If requested, the maximum values of metrics.
+          items:
+            $ref: "#/components/schemas/Row"
+          type: array
+        metricHeaders:
+          description: Describes metric columns. The number of MetricHeaders and ordering of MetricHeaders matches the metrics present in rows.
+          items:
+            $ref: "#/components/schemas/MetricHeader"
+          type: array
+        minimums:
+          description: If requested, the minimum values of metrics.
+          items:
+            $ref: "#/components/schemas/Row"
+          type: array
+        propertyQuota:
+          $ref: "#/components/schemas/PropertyQuota"
+          description: This Analytics Property's Realtime quota state including this request.
+        rowCount:
+          description: The total number of rows in the query result, regardless of the number of rows returned in the response. For example if a query returns 175 rows and includes limit = 50 in the API request, the response will contain row_count = 175 but only 50 rows.
+          format: int32
+          type: integer
+        rows:
+          description: Rows of dimension value combinations and metric values in the report.
+          items:
+            $ref: "#/components/schemas/Row"
+          type: array
+        totals:
+          description: If requested, the totaled values of metrics.
           items:
             $ref: "#/components/schemas/Row"
           type: array

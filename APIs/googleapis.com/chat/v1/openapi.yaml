@@ -895,7 +895,7 @@ components:
           description: Obfuscated domain information.
           type: string
         isAnonymous:
-          description: Set to true if none of the depending services (Gaia, PeopleApi) returns any info for this user.
+          description: True when the user is deleted or the user's proifle is not visible.
           type: boolean
         name:
           description: Resource name, in the format "users/*".

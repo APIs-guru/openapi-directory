@@ -1,34 +1,33 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://doubleclickbidmanager.googleapis.com/doubleclickbidmanager/v1'
+  - url: https://doubleclickbidmanager.googleapis.com/doubleclickbidmanager/v1
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
     x-twitter: youtube
   description: DoubleClick Bid Manager API allows users to manage and create campaigns and reports.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: DoubleClick Bid Manager API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - format: google
-      url: 'https://doubleclickbidmanager.googleapis.com/$discovery/rest?version=v1'
+      url: https://doubleclickbidmanager.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: doubleclickbidmanager
 externalDocs:
-  url: 'https://developers.google.com/bid-manager/'
+  url: https://developers.google.com/bid-manager/
 tags:
   - name: lineitems
   - name: queries
@@ -37,17 +36,17 @@ tags:
 paths:
   /lineitems/downloadlineitems:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Retrieves line items in CSV format. YouTube & partners line items are not supported.
       operationId: doubleclickbidmanager.lineitems.downloadlineitems
@@ -55,34 +54,34 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DownloadLineItemsRequest'
+              $ref: "#/components/schemas/DownloadLineItemsRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DownloadLineItemsResponse'
+                $ref: "#/components/schemas/DownloadLineItemsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
           Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - lineitems
   /lineitems/uploadlineitems:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Uploads line items in CSV format. YouTube & partners line items are not supported.
       operationId: doubleclickbidmanager.lineitems.uploadlineitems
@@ -90,19 +89,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UploadLineItemsRequest'
+              $ref: "#/components/schemas/UploadLineItemsRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UploadLineItemsResponse'
+                $ref: "#/components/schemas/UploadLineItemsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
           Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - lineitems
   /queries:
@@ -110,32 +109,32 @@ paths:
       description: Retrieves stored queries.
       operationId: doubleclickbidmanager.queries.listqueries
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListQueriesResponse'
+                $ref: "#/components/schemas/ListQueriesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
           Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - queries
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/queries/{queryId}/reports':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/queries/{queryId}/reports":
     get:
       description: Retrieves stored reports.
       operationId: doubleclickbidmanager.reports.listreports
@@ -147,44 +146,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListReportsResponse'
+                $ref: "#/components/schemas/ListReportsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
           Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - reports
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   /query:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a query.
       operationId: doubleclickbidmanager.queries.createquery
@@ -192,22 +191,22 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Query'
+              $ref: "#/components/schemas/Query"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Query'
+                $ref: "#/components/schemas/Query"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
           Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - queries
-  '/query/{queryId}':
+  "/query/{queryId}":
     delete:
       description: Deletes a stored query as well as the associated stored reports.
       operationId: doubleclickbidmanager.queries.deletequery
@@ -219,13 +218,13 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
           Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - queries
     get:
@@ -239,31 +238,31 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Query'
+                $ref: "#/components/schemas/Query"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
           Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - queries
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Runs a stored query to generate a report.
       operationId: doubleclickbidmanager.queries.runquery
@@ -278,30 +277,30 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RunQueryRequest'
+              $ref: "#/components/schemas/RunQueryRequest"
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
           Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - queries
   /sdf/download:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Retrieves entities in SDF format.
       operationId: doubleclickbidmanager.sdf.download
@@ -309,19 +308,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DownloadRequest'
+              $ref: "#/components/schemas/DownloadRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DownloadResponse'
+                $ref: "#/components/schemas/DownloadResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
           Oauth2c:
-            - 'https://www.googleapis.com/auth/doubleclickbidmanager'
+            - https://www.googleapis.com/auth/doubleclickbidmanager
       tags:
         - sdf
 components:
@@ -332,8 +331,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -364,7 +363,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -382,19 +381,19 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -404,12 +403,12 @@ components:
       description: Request to fetch stored line items.
       properties:
         fileSpec:
-          description: 'File specification (column names, types, order) in which the line items will be returned. Default to EWF.'
+          description: File specification (column names, types, order) in which the line items will be returned. Default to EWF.
           enum:
             - EWF
           type: string
         filterIds:
-          description: 'Ids of the specified filter type used to filter line items to fetch. If omitted, all the line items will be returned.'
+          description: Ids of the specified filter type used to filter line items to fetch. If omitted, all the line items will be returned.
           items:
             format: int64
             type: string
@@ -431,11 +430,11 @@ components:
       description: Download line items response.
       properties:
         lineItems:
-          description: 'Retrieved line items in CSV format. For more information about file formats, see Entity Write File Format.'
+          description: Retrieved line items in CSV format. For more information about file formats, see Entity Write File Format.
           type: string
       type: object
     DownloadRequest:
-      description: 'Request to fetch stored inventory sources, campaigns, insertion orders, line items, YouTube ad groups and ads.'
+      description: Request to fetch stored inventory sources, campaigns, insertion orders, line items, YouTube ad groups and ads.
       properties:
         fileTypes:
           description: 'File types that will be returned. If INVENTORY_SOURCE is requested, no other file types may be requested. Acceptable values are: - "AD" - "AD_GROUP" - "CAMPAIGN" - "INSERTION_ORDER" - "INVENTORY_SOURCE" - "LINE_ITEM" '
@@ -466,7 +465,7 @@ components:
             - PARTNER_ID
           type: string
         version:
-          description: 'SDF Version (column names, types, order) in which the entities will be returned. Default to 5.'
+          description: SDF Version (column names, types, order) in which the entities will be returned. Default to 5.
           type: string
       type: object
     DownloadResponse:
@@ -627,7 +626,7 @@ components:
         queries:
           description: Retrieved queries.
           items:
-            $ref: '#/components/schemas/Query'
+            $ref: "#/components/schemas/Query"
           type: array
       type: object
     ListReportsResponse:
@@ -639,7 +638,7 @@ components:
         reports:
           description: Retrieved reports.
           items:
-            $ref: '#/components/schemas/Report'
+            $ref: "#/components/schemas/Report"
           type: array
       type: object
     Parameters:
@@ -648,7 +647,7 @@ components:
         filters:
           description: Filters used to match traffic data in your report.
           items:
-            $ref: '#/components/schemas/FilterPair'
+            $ref: "#/components/schemas/FilterPair"
           type: array
         groupBys:
           description: Data is grouped by the filters listed in this field.
@@ -1098,25 +1097,25 @@ components:
           description: 'Identifies what kind of resource this is. Value: the fixed string "doubleclickbidmanager#query".'
           type: string
         metadata:
-          $ref: '#/components/schemas/QueryMetadata'
+          $ref: "#/components/schemas/QueryMetadata"
           description: Query metadata.
         params:
-          $ref: '#/components/schemas/Parameters'
+          $ref: "#/components/schemas/Parameters"
           description: Query parameters.
         queryId:
           description: Query ID.
           format: int64
           type: string
         reportDataEndTimeMs:
-          description: 'The ending time for the data that is shown in the report. Note, reportDataEndTimeMs is required if metadata.dataRange is CUSTOM_DATES and ignored otherwise.'
+          description: The ending time for the data that is shown in the report. Note, reportDataEndTimeMs is required if metadata.dataRange is CUSTOM_DATES and ignored otherwise.
           format: int64
           type: string
         reportDataStartTimeMs:
-          description: 'The starting time for the data that is shown in the report. Note, reportDataStartTimeMs is required if metadata.dataRange is CUSTOM_DATES and ignored otherwise.'
+          description: The starting time for the data that is shown in the report. Note, reportDataStartTimeMs is required if metadata.dataRange is CUSTOM_DATES and ignored otherwise.
           format: int64
           type: string
         schedule:
-          $ref: '#/components/schemas/QuerySchedule'
+          $ref: "#/components/schemas/QuerySchedule"
           description: Information on how often and when to run a query.
         timezoneCode:
           description: Canonical timezone code for report data time. Defaults to America/New_York.
@@ -1205,7 +1204,7 @@ components:
             - QUARTERLY
           type: string
         nextRunMinuteOfDay:
-          description: 'Time of day at which a new report will be generated, represented as minutes past midnight. Range is 0 to 1439. Only applies to scheduled reports.'
+          description: Time of day at which a new report will be generated, represented as minutes past midnight. Range is 0 to 1439. Only applies to scheduled reports.
           format: int32
           type: integer
         nextRunTimezoneCode:
@@ -1216,13 +1215,13 @@ components:
       description: Represents a report.
       properties:
         key:
-          $ref: '#/components/schemas/ReportKey'
+          $ref: "#/components/schemas/ReportKey"
           description: Key used to identify a report.
         metadata:
-          $ref: '#/components/schemas/ReportMetadata'
+          $ref: "#/components/schemas/ReportMetadata"
           description: Report metadata.
         params:
-          $ref: '#/components/schemas/Parameters'
+          $ref: "#/components/schemas/Parameters"
           description: Report parameters.
       type: object
     ReportFailure:
@@ -1278,15 +1277,15 @@ components:
           format: int64
           type: string
         status:
-          $ref: '#/components/schemas/ReportStatus'
+          $ref: "#/components/schemas/ReportStatus"
           description: Report status.
       type: object
     ReportStatus:
       description: Report status.
       properties:
         failure:
-          $ref: '#/components/schemas/ReportFailure'
-          description: 'If the report failed, this records the cause.'
+          $ref: "#/components/schemas/ReportFailure"
+          description: If the report failed, this records the cause.
         finishTimeMs:
           description: The time when this report either completed successfully or failed.
           format: int64
@@ -1359,11 +1358,11 @@ components:
             - TYPE_NOT_SUPPORTED
           type: string
         reportDataEndTimeMs:
-          description: 'The ending time for the data that is shown in the report. Note, reportDataEndTimeMs is required if dataRange is CUSTOM_DATES and ignored otherwise.'
+          description: The ending time for the data that is shown in the report. Note, reportDataEndTimeMs is required if dataRange is CUSTOM_DATES and ignored otherwise.
           format: int64
           type: string
         reportDataStartTimeMs:
-          description: 'The starting time for the data that is shown in the report. Note, reportDataStartTimeMs is required if dataRange is CUSTOM_DATES and ignored otherwise.'
+          description: The starting time for the data that is shown in the report. Note, reportDataStartTimeMs is required if dataRange is CUSTOM_DATES and ignored otherwise.
           format: int64
           type: string
         timezoneCode:
@@ -1389,7 +1388,7 @@ components:
       description: Upload line items response.
       properties:
         uploadStatus:
-          $ref: '#/components/schemas/UploadStatus'
+          $ref: "#/components/schemas/UploadStatus"
           description: Status of upload.
       type: object
     UploadStatus:
@@ -1403,7 +1402,7 @@ components:
         rowStatus:
           description: Per-row upload status.
           items:
-            $ref: '#/components/schemas/RowStatus'
+            $ref: "#/components/schemas/RowStatus"
           type: array
       type: object
   securitySchemes:
@@ -1411,16 +1410,16 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/doubleclickbidmanager': View and manage your reports in DoubleClick Bid Manager
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/doubleclickbidmanager': View and manage your reports in DoubleClick Bid Manager
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/doubleclickbidmanager: View and manage your reports in DoubleClick Bid Manager
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

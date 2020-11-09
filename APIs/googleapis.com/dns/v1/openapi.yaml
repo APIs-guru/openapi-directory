@@ -1,34 +1,33 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://dns.googleapis.com/'
+  - url: https://dns.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
     x-twitter: youtube
-  description: ''
+  description: ""
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: Cloud DNS API
   version: v1
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - format: google
-      url: 'https://dns.googleapis.com/$discovery/rest?version=v1'
+      url: https://dns.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: dns
 externalDocs:
-  url: 'https://cloud.google.com/dns/docs'
+  url: https://cloud.google.com/dns/docs
 tags:
   - name: changes
   - name: dnsKeys
@@ -38,7 +37,7 @@ tags:
   - name: projects
   - name: resourceRecordSets
 paths:
-  '/dns/v1/projects/{project}':
+  "/dns/v1/projects/{project}":
     get:
       description: Fetch the representation of an existing Project.
       operationId: dns.projects.get
@@ -55,44 +54,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Project'
+                $ref: "#/components/schemas/Project"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - projects
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/dns/v1/projects/{project}/managedZones':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/dns/v1/projects/{project}/managedZones":
     get:
       description: Enumerate ManagedZones that have been created but not yet deleted.
       operationId: dns.managedZones.list
@@ -108,7 +107,7 @@ paths:
           name: dnsName
           schema:
             type: string
-        - description: 'Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.'
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
@@ -119,43 +118,43 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ManagedZonesListResponse'
+                $ref: "#/components/schemas/ManagedZonesListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new ManagedZone.
       operationId: dns.managedZones.create
@@ -175,26 +174,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ManagedZone'
+              $ref: "#/components/schemas/ManagedZone"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ManagedZone'
+                $ref: "#/components/schemas/ManagedZone"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
-  '/dns/v1/projects/{project}/managedZones/{managedZone}':
+  "/dns/v1/projects/{project}/managedZones/{managedZone}":
     delete:
       description: Delete a previously created ManagedZone.
       operationId: dns.managedZones.delete
@@ -217,17 +216,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
     get:
@@ -252,43 +251,43 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ManagedZone'
+                $ref: "#/components/schemas/ManagedZone"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Apply a partial update to an existing ManagedZone.
       operationId: dns.managedZones.patch
@@ -314,23 +313,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ManagedZone'
+              $ref: "#/components/schemas/ManagedZone"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
     put:
@@ -358,26 +357,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ManagedZone'
+              $ref: "#/components/schemas/ManagedZone"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZones
-  '/dns/v1/projects/{project}/managedZones/{managedZone}/changes':
+  "/dns/v1/projects/{project}/managedZones/{managedZone}/changes":
     get:
       description: Enumerate Changes to a ResourceRecordSet collection.
       operationId: dns.changes.list
@@ -394,7 +393,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.'
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
@@ -411,49 +410,49 @@ paths:
             enum:
               - changeSequence
             type: string
-        - description: 'Sorting order direction: ''ascending'' or ''descending''.'
+        - description: "Sorting order direction: 'ascending' or 'descending'."
           in: query
           name: sortOrder
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ChangesListResponse'
+                $ref: "#/components/schemas/ChangesListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - changes
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Atomically update the ResourceRecordSet collection.
       operationId: dns.changes.create
@@ -479,26 +478,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Change'
+              $ref: "#/components/schemas/Change"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Change'
+                $ref: "#/components/schemas/Change"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - changes
-  '/dns/v1/projects/{project}/managedZones/{managedZone}/changes/{changeId}':
+  "/dns/v1/projects/{project}/managedZones/{managedZone}/changes/{changeId}":
     get:
       description: Fetch the representation of an existing Change.
       operationId: dns.changes.get
@@ -515,7 +514,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'The identifier of the requested change, from a previous ResourceRecordSetsChangeResponse.'
+        - description: The identifier of the requested change, from a previous ResourceRecordSetsChangeResponse.
           in: path
           name: changeId
           required: true
@@ -527,44 +526,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Change'
+                $ref: "#/components/schemas/Change"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - changes
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/dns/v1/projects/{project}/managedZones/{managedZone}/dnsKeys':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/dns/v1/projects/{project}/managedZones/{managedZone}/dnsKeys":
     get:
       description: Enumerate DnsKeys to a ResourceRecordSet collection.
       operationId: dns.dnsKeys.list
@@ -581,12 +580,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.'
+        - description: An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.
           in: query
           name: digestType
           schema:
             type: string
-        - description: 'Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.'
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
@@ -597,44 +596,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DnsKeysListResponse'
+                $ref: "#/components/schemas/DnsKeysListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - dnsKeys
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/dns/v1/projects/{project}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/dns/v1/projects/{project}/managedZones/{managedZone}/dnsKeys/{dnsKeyId}":
     get:
       description: Fetch the representation of an existing DnsKey.
       operationId: dns.dnsKeys.get
@@ -662,50 +661,50 @@ paths:
           name: clientOperationId
           schema:
             type: string
-        - description: 'An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.'
+        - description: An optional comma-separated list of digest types to compute and display for key signing keys. If omitted, the recommended digest type will be computed and displayed.
           in: query
           name: digestType
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DnsKey'
+                $ref: "#/components/schemas/DnsKey"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - dnsKeys
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/dns/v1/projects/{project}/managedZones/{managedZone}/operations':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/dns/v1/projects/{project}/managedZones/{managedZone}/operations":
     get:
       description: Enumerate Operations for the given ManagedZone.
       operationId: dns.managedZoneOperations.list
@@ -722,7 +721,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.'
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
@@ -741,44 +740,44 @@ paths:
               - id
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ManagedZoneOperationsListResponse'
+                $ref: "#/components/schemas/ManagedZoneOperationsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZoneOperations
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/dns/v1/projects/{project}/managedZones/{managedZone}/operations/{operation}':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/dns/v1/projects/{project}/managedZones/{managedZone}/operations/{operation}":
     get:
       description: Fetch the representation of an existing Operation.
       operationId: dns.managedZoneOperations.get
@@ -807,44 +806,44 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Operation'
+                $ref: "#/components/schemas/Operation"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - managedZoneOperations
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/dns/v1/projects/{project}/managedZones/{managedZone}/rrsets':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/dns/v1/projects/{project}/managedZones/{managedZone}/rrsets":
     get:
       description: Enumerate ResourceRecordSets that have been created but not yet deleted.
       operationId: dns.resourceRecordSets.list
@@ -861,7 +860,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.'
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
@@ -876,50 +875,50 @@ paths:
           name: pageToken
           schema:
             type: string
-        - description: 'Restricts the list to return only records of this type. If present, the "name" parameter must also be present.'
+        - description: Restricts the list to return only records of this type. If present, the "name" parameter must also be present.
           in: query
           name: type
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResourceRecordSetsListResponse'
+                $ref: "#/components/schemas/ResourceRecordSetsListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - resourceRecordSets
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/dns/v1/projects/{project}/policies':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/dns/v1/projects/{project}/policies":
     get:
       description: Enumerate all Policies associated with a project.
       operationId: dns.policies.list
@@ -930,7 +929,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.'
+        - description: Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.
           in: query
           name: maxResults
           schema:
@@ -941,43 +940,43 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PoliciesListResponse'
+                $ref: "#/components/schemas/PoliciesListResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Create a new Policy
       operationId: dns.policies.create
@@ -997,26 +996,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Policy'
+              $ref: "#/components/schemas/Policy"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
-  '/dns/v1/projects/{project}/policies/{policy}':
+  "/dns/v1/projects/{project}/policies/{policy}":
     delete:
       description: Delete a previously created Policy. Will fail if the policy is still being referenced by a network.
       operationId: dns.policies.delete
@@ -1039,17 +1038,17 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
     get:
@@ -1074,43 +1073,43 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Policy'
+                $ref: "#/components/schemas/Policy"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
+            - https://www.googleapis.com/auth/cloud-platform.read-only
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readonly'
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     patch:
       description: Apply a partial update to an existing Policy.
       operationId: dns.policies.patch
@@ -1136,23 +1135,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Policy'
+              $ref: "#/components/schemas/Policy"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PoliciesPatchResponse'
+                $ref: "#/components/schemas/PoliciesPatchResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
     put:
@@ -1180,23 +1179,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Policy'
+              $ref: "#/components/schemas/Policy"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PoliciesUpdateResponse'
+                $ref: "#/components/schemas/PoliciesUpdateResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
-            - 'https://www.googleapis.com/auth/cloud-platform'
+            - https://www.googleapis.com/auth/cloud-platform
         - Oauth2:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
           Oauth2c:
-            - 'https://www.googleapis.com/auth/ndev.clouddns.readwrite'
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - policies
 components:
@@ -1207,8 +1206,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -1239,7 +1238,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -1257,19 +1256,19 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -1281,12 +1280,12 @@ components:
         additions:
           description: Which ResourceRecordSets to add?
           items:
-            $ref: '#/components/schemas/ResourceRecordSet'
+            $ref: "#/components/schemas/ResourceRecordSet"
           type: array
         deletions:
           description: Which ResourceRecordSets to remove? Must match existing data exactly.
           items:
-            $ref: '#/components/schemas/ResourceRecordSet'
+            $ref: "#/components/schemas/ResourceRecordSet"
           type: array
         id:
           description: Unique identifier for the resource; defined by the server (output only).
@@ -1313,16 +1312,16 @@ components:
         changes:
           description: The requested changes.
           items:
-            $ref: '#/components/schemas/Change'
+            $ref: "#/components/schemas/Change"
           type: array
         header:
-          $ref: '#/components/schemas/ResponseHeader'
+          $ref: "#/components/schemas/ResponseHeader"
         kind:
           default: dns#changesListResponse
           description: Type of resource.
           type: string
         nextPageToken:
-          description: 'The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.'
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
           type: string
       type: object
     DnsKey:
@@ -1346,7 +1345,7 @@ components:
         digests:
           description: Cryptographic hashes of the DNSKEY resource record associated with this DnsKey. These digests are needed to construct a DS record that points at this DNS key. Output only.
           items:
-            $ref: '#/components/schemas/DnsKeyDigest'
+            $ref: "#/components/schemas/DnsKeyDigest"
           type: array
         id:
           description: Unique identifier for the resource; defined by the server (output only).
@@ -1359,7 +1358,7 @@ components:
           format: uint32
           type: integer
         keyTag:
-          description: 'The key tag is a non-cryptographic hash of the a DNSKEY resource record associated with this DnsKey. The key tag can be used to identify a DNSKEY more quickly (but it is not a unique identifier). In particular, the key tag is used in a parent zone''s DS record to point at the DNSKEY in this child ManagedZone. The key tag is a number in the range [0, 65535] and the algorithm to calculate it is specified in RFC4034 Appendix B. Output only.'
+          description: The key tag is a non-cryptographic hash of the a DNSKEY resource record associated with this DnsKey. The key tag can be used to identify a DNSKEY more quickly (but it is not a unique identifier). In particular, the key tag is used in a parent zone's DS record to point at the DNSKEY in this child ManagedZone. The key tag is a number in the range [0, 65535] and the algorithm to calculate it is specified in RFC4034 Appendix B. Output only.
           format: int32
           type: integer
         kind:
@@ -1369,7 +1368,7 @@ components:
           description: Base64 encoded public half of this key. Output only.
           type: string
         type:
-          description: 'One of "KEY_SIGNING" or "ZONE_SIGNING". Keys of type KEY_SIGNING have the Secure Entry Point flag set and, when active, will be used to sign only resource record sets of type DNSKEY. Otherwise, the Secure Entry Point flag will be cleared and this key will be used to sign only resource record sets of other types. Immutable after creation time.'
+          description: One of "KEY_SIGNING" or "ZONE_SIGNING". Keys of type KEY_SIGNING have the Secure Entry Point flag set and, when active, will be used to sign only resource record sets of type DNSKEY. Otherwise, the Secure Entry Point flag will be cleared and this key will be used to sign only resource record sets of other types. Immutable after creation time.
           enum:
             - keySigning
             - zoneSigning
@@ -1405,7 +1404,7 @@ components:
           format: uint32
           type: integer
         keyType:
-          description: 'Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, will only be used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and will be used to sign all other types of resource record sets.'
+          description: Specifies whether this is a key signing key (KSK) or a zone signing key (ZSK). Key signing keys have the Secure Entry Point flag set and, when active, will only be used to sign resource record sets of type DNSKEY. Zone signing keys do not have the Secure Entry Point flag set and will be used to sign all other types of resource record sets.
           enum:
             - keySigning
             - zoneSigning
@@ -1420,16 +1419,16 @@ components:
         dnsKeys:
           description: The requested resources.
           items:
-            $ref: '#/components/schemas/DnsKey'
+            $ref: "#/components/schemas/DnsKey"
           type: array
         header:
-          $ref: '#/components/schemas/ResponseHeader'
+          $ref: "#/components/schemas/ResponseHeader"
         kind:
           default: dns#dnsKeysListResponse
           description: Type of resource.
           type: string
         nextPageToken:
-          description: 'The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.'
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a "snapshot" of collections larger than the maximum page size.
           type: string
       type: object
     ManagedZone:
@@ -1442,13 +1441,13 @@ components:
           description: A mutable string of at most 1024 characters associated with this resource for the user's convenience. Has no effect on the managed zone's function.
           type: string
         dnsName:
-          description: 'The DNS name of this managed zone, for instance "example.com.".'
+          description: The DNS name of this managed zone, for instance "example.com.".
           type: string
         dnssecConfig:
-          $ref: '#/components/schemas/ManagedZoneDnsSecConfig'
+          $ref: "#/components/schemas/ManagedZoneDnsSecConfig"
           description: DNSSEC configuration.
         forwardingConfig:
-          $ref: '#/components/schemas/ManagedZoneForwardingConfig'
+          $ref: "#/components/schemas/ManagedZoneForwardingConfig"
           description: The presence for this field indicates that outbound forwarding is enabled for this zone. The value of this field contains the set of destinations to forward to.
         id:
           description: Unique identifier for the resource; defined by the server (output only)
@@ -1463,7 +1462,7 @@ components:
           description: User labels.
           type: object
         name:
-          description: 'User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.'
+          description: User assigned name for this resource. Must be unique within the project. The name must be 1-63 characters long, must begin with a letter, end with a letter or digit, and only contain lowercase letters, digits or dashes.
           type: string
         nameServerSet:
           description: Optionally specifies the NameServerSet for this ManagedZone. A NameServerSet is a set of DNS name servers that all host the same ManagedZones. Most users will leave this field unset.
@@ -1474,16 +1473,16 @@ components:
             type: string
           type: array
         peeringConfig:
-          $ref: '#/components/schemas/ManagedZonePeeringConfig'
+          $ref: "#/components/schemas/ManagedZonePeeringConfig"
           description: The presence of this field indicates that DNS Peering is enabled for this zone. The value of this field contains the network to peer with.
         privateVisibilityConfig:
-          $ref: '#/components/schemas/ManagedZonePrivateVisibilityConfig'
-          description: 'For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from.'
+          $ref: "#/components/schemas/ManagedZonePrivateVisibilityConfig"
+          description: For privately visible zones, the set of Virtual Private Cloud resources that the zone is visible from.
         reverseLookupConfig:
-          $ref: '#/components/schemas/ManagedZoneReverseLookupConfig'
+          $ref: "#/components/schemas/ManagedZoneReverseLookupConfig"
           description: The presence of this field indicates that this is a managed reverse lookup zone and Cloud DNS will resolve reverse lookup queries using automatically configured records for VPC resources. This only applies to networks listed under private_visibility_config.
         visibility:
-          description: 'The zone''s visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources.'
+          description: "The zone's visibility: public zones are exposed to the Internet, while private zones are visible only to Virtual Private Cloud resources."
           enum:
             - public
             - private
@@ -1494,7 +1493,7 @@ components:
         defaultKeySpecs:
           description: Specifies parameters for generating initial DnsKeys for this ManagedZone. Can only be changed while the state is OFF.
           items:
-            $ref: '#/components/schemas/DnsKeySpec'
+            $ref: "#/components/schemas/DnsKeySpec"
           type: array
         kind:
           default: dns#managedZoneDnsSecConfig
@@ -1506,10 +1505,10 @@ components:
             - nsec3
           type: string
         state:
-          description: 'Specifies whether DNSSEC is enabled, and what mode it is in.'
+          description: Specifies whether DNSSEC is enabled, and what mode it is in.
           enum:
-            - 'off'
-            - 'on'
+            - off
+            - on
             - transfer
           type: string
       type: object
@@ -1521,13 +1520,13 @@ components:
         targetNameServers:
           description: List of target name servers to forward to. Cloud DNS will select the best available name server if more than one target is given.
           items:
-            $ref: '#/components/schemas/ManagedZoneForwardingConfigNameServerTarget'
+            $ref: "#/components/schemas/ManagedZoneForwardingConfigNameServerTarget"
           type: array
       type: object
     ManagedZoneForwardingConfigNameServerTarget:
       properties:
         forwardingPath:
-          description: 'Forwarding path for this NameServerTarget. If unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target.'
+          description: Forwarding path for this NameServerTarget. If unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target.
           enum:
             - default
             - private
@@ -1542,17 +1541,17 @@ components:
     ManagedZoneOperationsListResponse:
       properties:
         header:
-          $ref: '#/components/schemas/ResponseHeader'
+          $ref: "#/components/schemas/ResponseHeader"
         kind:
           default: dns#managedZoneOperationsListResponse
           type: string
         nextPageToken:
-          description: 'The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.'
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         operations:
           description: The operation resources.
           items:
-            $ref: '#/components/schemas/Operation'
+            $ref: "#/components/schemas/Operation"
           type: array
       type: object
     ManagedZonePeeringConfig:
@@ -1561,19 +1560,19 @@ components:
           default: dns#managedZonePeeringConfig
           type: string
         targetNetwork:
-          $ref: '#/components/schemas/ManagedZonePeeringConfigTargetNetwork'
+          $ref: "#/components/schemas/ManagedZonePeeringConfigTargetNetwork"
           description: The network with which to peer.
       type: object
     ManagedZonePeeringConfigTargetNetwork:
       properties:
         deactivateTime:
-          description: 'The time at which the zone was deactivated, in RFC 3339 date-time format. An empty string indicates that the peering connection is active. The producer network can deactivate a zone. The zone is automatically deactivated if the producer network that the zone targeted is deleted. Output only.'
+          description: The time at which the zone was deactivated, in RFC 3339 date-time format. An empty string indicates that the peering connection is active. The producer network can deactivate a zone. The zone is automatically deactivated if the producer network that the zone targeted is deleted. Output only.
           type: string
         kind:
           default: dns#managedZonePeeringConfigTargetNetwork
           type: string
         networkUrl:
-          description: 'The fully qualified URL of the VPC network to forward queries to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}'
+          description: The fully qualified URL of the VPC network to forward queries to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
           type: string
       type: object
     ManagedZonePrivateVisibilityConfig:
@@ -1584,7 +1583,7 @@ components:
         networks:
           description: The list of VPC networks that can see this zone.
           items:
-            $ref: '#/components/schemas/ManagedZonePrivateVisibilityConfigNetwork'
+            $ref: "#/components/schemas/ManagedZonePrivateVisibilityConfigNetwork"
           type: array
       type: object
     ManagedZonePrivateVisibilityConfigNetwork:
@@ -1593,7 +1592,7 @@ components:
           default: dns#managedZonePrivateVisibilityConfigNetwork
           type: string
         networkUrl:
-          description: 'The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}'
+          description: The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
           type: string
       type: object
     ManagedZoneReverseLookupConfig:
@@ -1605,7 +1604,7 @@ components:
     ManagedZonesListResponse:
       properties:
         header:
-          $ref: '#/components/schemas/ResponseHeader'
+          $ref: "#/components/schemas/ResponseHeader"
         kind:
           default: dns#managedZonesListResponse
           description: Type of resource.
@@ -1613,20 +1612,20 @@ components:
         managedZones:
           description: The managed zone resources.
           items:
-            $ref: '#/components/schemas/ManagedZone'
+            $ref: "#/components/schemas/ManagedZone"
           type: array
         nextPageToken:
-          description: 'The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.'
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
       type: object
     Operation:
-      description: 'An operation represents a successful mutation performed on a Cloud DNS resource. Operations provide: - An audit log of server resource mutations. - A way to recover/retry API calls in the case where the response is never received by the caller. Use the caller specified client_operation_id.'
+      description: "An operation represents a successful mutation performed on a Cloud DNS resource. Operations provide: - An audit log of server resource mutations. - A way to recover/retry API calls in the case where the response is never received by the caller. Use the caller specified client_operation_id."
       properties:
         dnsKeyContext:
-          $ref: '#/components/schemas/OperationDnsKeyContext'
+          $ref: "#/components/schemas/OperationDnsKeyContext"
           description: Only populated if the operation targeted a DnsKey (output only).
         id:
-          description: 'Unique identifier for the resource. This is the client_operation_id if the client specified it when the mutation was initiated, otherwise, it is generated by the server. The name must be 1-63 characters long and match the regular expression [-a-z0-9]? (output only)'
+          description: Unique identifier for the resource. This is the client_operation_id if the client specified it when the mutation was initiated, otherwise, it is generated by the server. The name must be 1-63 characters long and match the regular expression [-a-z0-9]? (output only)
           type: string
         kind:
           default: dns#operation
@@ -1641,75 +1640,75 @@ components:
             - done
           type: string
         type:
-          description: 'Type of the operation. Operations include insert, update, and delete (output only).'
+          description: Type of the operation. Operations include insert, update, and delete (output only).
           type: string
         user:
-          description: 'User who requested the operation, for example: user@example.com. cloud-dns-system for operations automatically done by the system. (output only)'
+          description: "User who requested the operation, for example: user@example.com. cloud-dns-system for operations automatically done by the system. (output only)"
           type: string
         zoneContext:
-          $ref: '#/components/schemas/OperationManagedZoneContext'
+          $ref: "#/components/schemas/OperationManagedZoneContext"
           description: Only populated if the operation targeted a ManagedZone (output only).
       type: object
     OperationDnsKeyContext:
       properties:
         newValue:
-          $ref: '#/components/schemas/DnsKey'
+          $ref: "#/components/schemas/DnsKey"
           description: The post-operation DnsKey resource.
         oldValue:
-          $ref: '#/components/schemas/DnsKey'
+          $ref: "#/components/schemas/DnsKey"
           description: The pre-operation DnsKey resource.
       type: object
     OperationManagedZoneContext:
       properties:
         newValue:
-          $ref: '#/components/schemas/ManagedZone'
+          $ref: "#/components/schemas/ManagedZone"
           description: The post-operation ManagedZone resource.
         oldValue:
-          $ref: '#/components/schemas/ManagedZone'
+          $ref: "#/components/schemas/ManagedZone"
           description: The pre-operation ManagedZone resource.
       type: object
     PoliciesListResponse:
       properties:
         header:
-          $ref: '#/components/schemas/ResponseHeader'
+          $ref: "#/components/schemas/ResponseHeader"
         kind:
           default: dns#policiesListResponse
           description: Type of resource.
           type: string
         nextPageToken:
-          description: 'The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.'
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your page token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         policies:
           description: The policy resources.
           items:
-            $ref: '#/components/schemas/Policy'
+            $ref: "#/components/schemas/Policy"
           type: array
       type: object
     PoliciesPatchResponse:
       properties:
         header:
-          $ref: '#/components/schemas/ResponseHeader'
+          $ref: "#/components/schemas/ResponseHeader"
         policy:
-          $ref: '#/components/schemas/Policy'
+          $ref: "#/components/schemas/Policy"
       type: object
     PoliciesUpdateResponse:
       properties:
         header:
-          $ref: '#/components/schemas/ResponseHeader'
+          $ref: "#/components/schemas/ResponseHeader"
         policy:
-          $ref: '#/components/schemas/Policy'
+          $ref: "#/components/schemas/Policy"
       type: object
     Policy:
       description: A policy is a collection of DNS rules applied to one or more Virtual Private Cloud resources.
       properties:
         alternativeNameServerConfig:
-          $ref: '#/components/schemas/PolicyAlternativeNameServerConfig'
-          description: 'Sets an alternative name server for the associated networks. When specified, all DNS queries are forwarded to a name server that you choose. Names such as .internal are not available when an alternative name server is specified.'
+          $ref: "#/components/schemas/PolicyAlternativeNameServerConfig"
+          description: Sets an alternative name server for the associated networks. When specified, all DNS queries are forwarded to a name server that you choose. Names such as .internal are not available when an alternative name server is specified.
         description:
           description: A mutable string of at most 1024 characters associated with this resource for the user's convenience. Has no effect on the policy's function.
           type: string
         enableInboundForwarding:
-          description: 'Allows networks bound to this policy to receive DNS queries sent by VMs or applications over VPN connections. When enabled, a virtual IP address will be allocated from each of the sub-networks that are bound to this policy.'
+          description: Allows networks bound to this policy to receive DNS queries sent by VMs or applications over VPN connections. When enabled, a virtual IP address will be allocated from each of the sub-networks that are bound to this policy.
           type: boolean
         enableLogging:
           description: Controls whether logging is enabled for the networks bound to this policy. Defaults to no logging if not set.
@@ -1727,7 +1726,7 @@ components:
         networks:
           description: List of network names specifying networks to which this policy is applied.
           items:
-            $ref: '#/components/schemas/PolicyNetwork'
+            $ref: "#/components/schemas/PolicyNetwork"
           type: array
       type: object
     PolicyAlternativeNameServerConfig:
@@ -1736,15 +1735,15 @@ components:
           default: dns#policyAlternativeNameServerConfig
           type: string
         targetNameServers:
-          description: 'Sets an alternative name server for the associated networks. When specified, all DNS queries are forwarded to a name server that you choose. Names such as .internal are not available when an alternative name server is specified.'
+          description: Sets an alternative name server for the associated networks. When specified, all DNS queries are forwarded to a name server that you choose. Names such as .internal are not available when an alternative name server is specified.
           items:
-            $ref: '#/components/schemas/PolicyAlternativeNameServerConfigTargetNameServer'
+            $ref: "#/components/schemas/PolicyAlternativeNameServerConfigTargetNameServer"
           type: array
       type: object
     PolicyAlternativeNameServerConfigTargetNameServer:
       properties:
         forwardingPath:
-          description: 'Forwarding path for this TargetNameServer. If unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target.'
+          description: Forwarding path for this TargetNameServer. If unset or set to DEFAULT, Cloud DNS will make forwarding decision based on address ranges, i.e. RFC1918 addresses go to the VPC, non-RFC1918 addresses go to the Internet. When set to PRIVATE, Cloud DNS will always send queries through VPC for this target.
           enum:
             - default
             - private
@@ -1762,7 +1761,7 @@ components:
           default: dns#policyNetwork
           type: string
         networkUrl:
-          description: 'The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}'
+          description: The fully qualified URL of the VPC network to bind to. This should be formatted like https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}
           type: string
       type: object
     Project:
@@ -1779,7 +1778,7 @@ components:
           format: uint64
           type: string
         quota:
-          $ref: '#/components/schemas/Quota'
+          $ref: "#/components/schemas/Quota"
           description: Quotas assigned to this project (output only).
       type: object
     Quota:
@@ -1843,31 +1842,31 @@ components:
         whitelistedKeySpecs:
           description: DNSSEC algorithm and key length types that can be used for DnsKeys.
           items:
-            $ref: '#/components/schemas/DnsKeySpec'
+            $ref: "#/components/schemas/DnsKeySpec"
           type: array
       type: object
     RRSetRoutingPolicy:
       description: A RRSetRoutingPolicy represents ResourceRecordSet data that will be returned dynamically with the response varying based on configured properties such as geolocation or by weighted random selection.
       properties:
         geoPolicy:
-          $ref: '#/components/schemas/RRSetRoutingPolicyGeoPolicy'
+          $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicy"
         kind:
           default: dns#rRSetRoutingPolicy
           type: string
         wrrPolicy:
-          $ref: '#/components/schemas/RRSetRoutingPolicyWrrPolicy'
+          $ref: "#/components/schemas/RRSetRoutingPolicyWrrPolicy"
       type: object
     RRSetRoutingPolicyGeoPolicy:
       properties:
         failovers:
-          description: 'If the health check for the primary target for a geo location returns an unhealthy status, the failover target is returned instead. This failover configuration is not mandatory. If a failover is not provided, the primary target won''t be healthchecked - we''ll return the primarily configured rrdata irrespective of whether it is healthy or not.'
+          description: If the health check for the primary target for a geo location returns an unhealthy status, the failover target is returned instead. This failover configuration is not mandatory. If a failover is not provided, the primary target won't be healthchecked - we'll return the primarily configured rrdata irrespective of whether it is healthy or not.
           items:
-            $ref: '#/components/schemas/RRSetRoutingPolicyGeoPolicyGeoPolicyItem'
+            $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicyGeoPolicyItem"
           type: array
         items:
-          description: 'The primary geo routing configuration. If there are multiple items with the same location, an error is returned instead.'
+          description: The primary geo routing configuration. If there are multiple items with the same location, an error is returned instead.
           items:
-            $ref: '#/components/schemas/RRSetRoutingPolicyGeoPolicyGeoPolicyItem'
+            $ref: "#/components/schemas/RRSetRoutingPolicyGeoPolicyGeoPolicyItem"
           type: array
         kind:
           default: dns#rRSetRoutingPolicyGeoPolicy
@@ -1879,7 +1878,7 @@ components:
           default: dns#rRSetRoutingPolicyGeoPolicyGeoPolicyItem
           type: string
         location:
-          description: 'The geo-location granularity is a GCP region. This location string should correspond to a GCP region. e.g "us-east1", "southamerica-east1", "asia-east1", etc.'
+          description: The geo-location granularity is a GCP region. This location string should correspond to a GCP region. e.g "us-east1", "southamerica-east1", "asia-east1", etc.
           type: string
         rrdatas:
           items:
@@ -1895,7 +1894,7 @@ components:
       properties:
         items:
           items:
-            $ref: '#/components/schemas/RRSetRoutingPolicyWrrPolicyWrrPolicyItem'
+            $ref: "#/components/schemas/RRSetRoutingPolicyWrrPolicyWrrPolicyItem"
           type: array
         kind:
           default: dns#rRSetRoutingPolicyWrrPolicy
@@ -1916,7 +1915,7 @@ components:
             type: string
           type: array
         weight:
-          description: 'The weight corresponding to this subset of rrdata. When multiple WeightedRoundRobinPolicyItems are configured, the probability of returning an rrset is proportional to its weight relative to the sum of weights configured for all items. This weight should be a decimal in the range [0,1].'
+          description: The weight corresponding to this subset of rrdata. When multiple WeightedRoundRobinPolicyItems are configured, the probability of returning an rrset is proportional to its weight relative to the sum of weights configured for all items. This weight should be a decimal in the range [0,1].
           format: double
           type: number
       type: object
@@ -1927,10 +1926,10 @@ components:
           default: dns#resourceRecordSet
           type: string
         name:
-          description: 'For example, www.example.com.'
+          description: For example, www.example.com.
           type: string
         routingPolicy:
-          $ref: '#/components/schemas/RRSetRoutingPolicy'
+          $ref: "#/components/schemas/RRSetRoutingPolicy"
           description: Configures dynamic query responses based on geo location of querying user or a weighted round robin based routing policy. A ResourceRecordSet should only have either rrdata (static) or routing_policy(dynamic). An error is returned otherwise.
         rrdatas:
           description: As defined in RFC 1035 (section 5) and RFC 1034 (section 3.6.1) -- see examples.
@@ -1953,25 +1952,25 @@ components:
     ResourceRecordSetsListResponse:
       properties:
         header:
-          $ref: '#/components/schemas/ResponseHeader'
+          $ref: "#/components/schemas/ResponseHeader"
         kind:
           default: dns#resourceRecordSetsListResponse
           description: Type of resource.
           type: string
         nextPageToken:
-          description: 'The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.'
+          description: The presence of this field indicates that there exist more results following your last page of results in pagination order. To fetch them, make another list request using this value as your pagination token. In this way you can retrieve the complete contents of even very large collections one page at a time. However, if the contents of the collection change between the first and last paginated list request, the set of all elements returned will be an inconsistent view of the collection. There is no way to retrieve a consistent snapshot of a collection larger than the maximum page size.
           type: string
         rrsets:
           description: The resource record set resources.
           items:
-            $ref: '#/components/schemas/ResourceRecordSet'
+            $ref: "#/components/schemas/ResourceRecordSet"
           type: array
       type: object
     ResponseHeader:
       description: Elements common to every response.
       properties:
         operationId:
-          description: 'For mutating operation requests that completed successfully. This is the client_operation_id if the client specified it, otherwise it is generated by the server (output only).'
+          description: For mutating operation requests that completed successfully. This is the client_operation_id if the client specified it, otherwise it is generated by the server (output only).
           type: string
       type: object
   securitySchemes:
@@ -1979,22 +1978,22 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/ndev.clouddns.readonly': View your DNS records hosted by Google Cloud DNS
-            'https://www.googleapis.com/auth/ndev.clouddns.readwrite': View and manage your DNS records hosted by Google Cloud DNS
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/ndev.clouddns.readonly: View your DNS records hosted by Google Cloud DNS
+            https://www.googleapis.com/auth/ndev.clouddns.readwrite: View and manage your DNS records hosted by Google Cloud DNS
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
-            'https://www.googleapis.com/auth/ndev.clouddns.readonly': View your DNS records hosted by Google Cloud DNS
-            'https://www.googleapis.com/auth/ndev.clouddns.readwrite': View and manage your DNS records hosted by Google Cloud DNS
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
+            https://www.googleapis.com/auth/ndev.clouddns.readonly: View your DNS records hosted by Google Cloud DNS
+            https://www.googleapis.com/auth/ndev.clouddns.readwrite: View and manage your DNS records hosted by Google Cloud DNS
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

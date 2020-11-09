@@ -24,6 +24,7 @@ info:
       version: v1
   x-providerName: googleapis.com
   x-serviceName: shoppingcontent
+  x-preferred: true
 externalDocs:
   url: https://developers.google.com/shopping-content/v2/
 tags:
@@ -7431,7 +7432,7 @@ components:
           type: integer
         inventory:
           $ref: "#/components/schemas/PosInventory"
-          description: The inventory to submit. Set this only if the method is `inventory`.
+          description: The inventory to submit. This should be set only if the method is `inventory`.
         merchantId:
           description: The ID of the POS data provider.
           format: uint64
@@ -7441,12 +7442,12 @@ components:
           type: string
         sale:
           $ref: "#/components/schemas/PosSale"
-          description: The sale information to submit. Set this only if the method is `sale`.
+          description: The sale information to submit. This should be set only if the method is `sale`.
         store:
           $ref: "#/components/schemas/PosStore"
-          description: The store information to submit. Set this only if the method is `insert`.
+          description: The store information to submit. This should be set only if the method is `insert`.
         storeCode:
-          description: The store code. Set this only if the method is `delete` or `get`.
+          description: The store code. This should be set only if the method is `delete` or `get`.
           type: string
         targetMerchantId:
           description: The ID of the account for which to get/submit data.
@@ -7770,7 +7771,7 @@ components:
             type: string
           type: array
         adult:
-          description: Set to true if the item is targeted towards adults.
+          description: Should be set to true if the item is targeted towards adults.
           type: boolean
         adwordsGrouping:
           description: Used to group items in an arbitrary way. Only for CPA%, discouraged otherwise.
@@ -8234,7 +8235,7 @@ components:
           description: The geographic region to which the tax rate applies.
           type: string
         taxShip:
-          description: Set to true if tax is charged on shipping.
+          description: Should be set to true if tax is charged on shipping.
           type: boolean
       type: object
     ProductUnitPricingBaseMeasure:

@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://www.googleapis.com/
+  - url: https://admin.googleapis.com/
 info:
   contact:
     name: Google
@@ -6544,7 +6544,7 @@ components:
           type: integer
       type: object
     UserPosixAccount:
-      description: "JSON template for a POSIX account entry. Description of the field family: go/fbs-posix."
+      description: JSON template for a POSIX account entry.
       properties:
         accountId:
           description: A POSIX account field identifier.

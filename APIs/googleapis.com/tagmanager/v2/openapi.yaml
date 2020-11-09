@@ -1,34 +1,34 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://tagmanager.googleapis.com/'
+  - url: https://tagmanager.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
     x-twitter: youtube
   description: This API allows clients to access and modify container and tag configuration.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: Tag Manager API
   version: v2
   x-apiClientRegistration:
-    url: 'https://console.developers.google.com'
+    url: https://console.developers.google.com
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
     - format: google
-      url: 'https://tagmanager.googleapis.com/$discovery/rest?version=v2'
+      url: https://tagmanager.googleapis.com/$discovery/rest?version=v2
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: tagmanager
+  x-preferred: true
 externalDocs:
-  url: 'https://developers.google.com/tag-manager'
+  url: https://developers.google.com/tag-manager
 tags:
   - name: accounts
 paths:
@@ -43,45 +43,45 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListAccountsResponse'
+                $ref: "#/components/schemas/ListAccountsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.accounts'
+            - https://www.googleapis.com/auth/tagmanager.manage.accounts
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.accounts'
+            - https://www.googleapis.com/auth/tagmanager.manage.accounts
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/tagmanager/v2/{parent}/built_in_variables':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/tagmanager/v2/{parent}/built_in_variables":
     get:
       description: Lists all the enabled Built-In Variables of a GTM Container.
       operationId: tagmanager.accounts.containers.workspaces.built_in_variables.list
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -93,40 +93,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListEnabledBuiltInVariablesResponse'
+                $ref: "#/components/schemas/ListEnabledBuiltInVariablesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates one or more GTM Built-In Variables.
       operationId: tagmanager.accounts.containers.workspaces.built_in_variables.create
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -253,25 +253,25 @@ paths:
             type: array
           style: form
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateBuiltInVariableResponse'
+                $ref: "#/components/schemas/CreateBuiltInVariableResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/containers':
+  "/tagmanager/v2/{parent}/containers":
     get:
       description: Lists all Containers that belongs to a GTM Account.
       operationId: tagmanager.accounts.containers.list
       parameters:
-        - description: 'GTM Accounts''s API relative path. Example: accounts/{account_id}.'
+        - description: "GTM Accounts's API relative path. Example: accounts/{account_id}."
           in: path
           name: parent
           required: true
@@ -283,40 +283,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListContainersResponse'
+                $ref: "#/components/schemas/ListContainersResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a Container.
       operationId: tagmanager.accounts.containers.create
       parameters:
-        - description: 'GTM Account''s API relative path. Example: accounts/{account_id}.'
+        - description: "GTM Account's API relative path. Example: accounts/{account_id}."
           in: path
           name: parent
           required: true
@@ -326,27 +326,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Container'
+              $ref: "#/components/schemas/Container"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Container'
+                $ref: "#/components/schemas/Container"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/environments':
+  "/tagmanager/v2/{parent}/environments":
     get:
       description: Lists all GTM Environments of a GTM Container.
       operationId: tagmanager.accounts.containers.environments.list
       parameters:
-        - description: 'GTM Container''s API relative path. Example: accounts/{account_id}/containers/{container_id}'
+        - description: "GTM Container's API relative path. Example: accounts/{account_id}/containers/{container_id}"
           in: path
           name: parent
           required: true
@@ -358,40 +358,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListEnvironmentsResponse'
+                $ref: "#/components/schemas/ListEnvironmentsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a GTM Environment.
       operationId: tagmanager.accounts.containers.environments.create
       parameters:
-        - description: 'GTM Container''s API relative path. Example: accounts/{account_id}/containers/{container_id}'
+        - description: "GTM Container's API relative path. Example: accounts/{account_id}/containers/{container_id}"
           in: path
           name: parent
           required: true
@@ -401,27 +401,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Environment'
+              $ref: "#/components/schemas/Environment"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Environment'
+                $ref: "#/components/schemas/Environment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/folders':
+  "/tagmanager/v2/{parent}/folders":
     get:
       description: Lists all GTM Folders of a Container.
       operationId: tagmanager.accounts.containers.workspaces.folders.list
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -433,40 +433,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListFoldersResponse'
+                $ref: "#/components/schemas/ListFoldersResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a GTM Folder.
       operationId: tagmanager.accounts.containers.workspaces.folders.create
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -476,27 +476,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Folder'
+              $ref: "#/components/schemas/Folder"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Folder'
+                $ref: "#/components/schemas/Folder"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/tags':
+  "/tagmanager/v2/{parent}/tags":
     get:
       description: Lists all GTM Tags of a Container.
       operationId: tagmanager.accounts.containers.workspaces.tags.list
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -508,40 +508,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListTagsResponse'
+                $ref: "#/components/schemas/ListTagsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a GTM Tag.
       operationId: tagmanager.accounts.containers.workspaces.tags.create
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -551,27 +551,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Tag'
+              $ref: "#/components/schemas/Tag"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tag'
+                $ref: "#/components/schemas/Tag"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/templates':
+  "/tagmanager/v2/{parent}/templates":
     get:
       description: Lists all GTM Templates of a GTM container workspace.
       operationId: tagmanager.accounts.containers.workspaces.templates.list
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -583,40 +583,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListTemplatesResponse'
+                $ref: "#/components/schemas/ListTemplatesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a GTM Custom Template.
       operationId: tagmanager.accounts.containers.workspaces.templates.create
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -626,27 +626,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CustomTemplate'
+              $ref: "#/components/schemas/CustomTemplate"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CustomTemplate'
+                $ref: "#/components/schemas/CustomTemplate"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/triggers':
+  "/tagmanager/v2/{parent}/triggers":
     get:
       description: Lists all GTM Triggers of a Container.
       operationId: tagmanager.accounts.containers.workspaces.triggers.list
       parameters:
-        - description: 'GTM Workspaces''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspaces's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -658,40 +658,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListTriggersResponse'
+                $ref: "#/components/schemas/ListTriggersResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a GTM Trigger.
       operationId: tagmanager.accounts.containers.workspaces.triggers.create
       parameters:
-        - description: 'GTM Workspaces''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspaces's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -701,27 +701,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Trigger'
+              $ref: "#/components/schemas/Trigger"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Trigger'
+                $ref: "#/components/schemas/Trigger"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/user_permissions':
+  "/tagmanager/v2/{parent}/user_permissions":
     get:
       description: List all users that have access to the account along with Account and Container user access granted to each of them.
       operationId: tagmanager.accounts.user_permissions.list
       parameters:
-        - description: 'GTM Accounts''s API relative path. Example: accounts/{account_id}'
+        - description: "GTM Accounts's API relative path. Example: accounts/{account_id}"
           in: path
           name: parent
           required: true
@@ -733,36 +733,36 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListUserPermissionsResponse'
+                $ref: "#/components/schemas/ListUserPermissionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a user's Account & Container access.
       operationId: tagmanager.accounts.user_permissions.create
       parameters:
-        - description: 'GTM Account''s API relative path. Example: accounts/{account_id}'
+        - description: "GTM Account's API relative path. Example: accounts/{account_id}"
           in: path
           name: parent
           required: true
@@ -772,27 +772,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserPermission'
+              $ref: "#/components/schemas/UserPermission"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserPermission'
+                $ref: "#/components/schemas/UserPermission"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/variables':
+  "/tagmanager/v2/{parent}/variables":
     get:
       description: Lists all GTM Variables of a Container.
       operationId: tagmanager.accounts.containers.workspaces.variables.list
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -804,40 +804,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListVariablesResponse'
+                $ref: "#/components/schemas/ListVariablesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a GTM Variable.
       operationId: tagmanager.accounts.containers.workspaces.variables.create
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -847,27 +847,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Variable'
+              $ref: "#/components/schemas/Variable"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Variable'
+                $ref: "#/components/schemas/Variable"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/version_headers':
+  "/tagmanager/v2/{parent}/version_headers":
     get:
       description: Lists all Container Versions of a GTM Container.
       operationId: tagmanager.accounts.containers.version_headers.list
       parameters:
-        - description: 'GTM Container''s API relative path. Example: accounts/{account_id}/containers/{container_id}'
+        - description: "GTM Container's API relative path. Example: accounts/{account_id}/containers/{container_id}"
           in: path
           name: parent
           required: true
@@ -884,127 +884,127 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListContainerVersionsResponse'
+                $ref: "#/components/schemas/ListContainerVersionsResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - https://www.googleapis.com/auth/tagmanager.edit.containerversions
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - https://www.googleapis.com/auth/tagmanager.edit.containerversions
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/tagmanager/v2/{parent}/version_headers:latest':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/tagmanager/v2/{parent}/version_headers:latest":
     get:
       description: Gets the latest container version header
       operationId: tagmanager.accounts.containers.version_headers.latest
       parameters:
-        - description: 'GTM Container''s API relative path. Example: accounts/{account_id}/containers/{container_id}'
+        - description: "GTM Container's API relative path. Example: accounts/{account_id}/containers/{container_id}"
           in: path
           name: parent
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContainerVersionHeader'
+                $ref: "#/components/schemas/ContainerVersionHeader"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/tagmanager/v2/{parent}/versions:live':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/tagmanager/v2/{parent}/versions:live":
     get:
       description: Gets the live (i.e. published) container version
       operationId: tagmanager.accounts.containers.versions.live
       parameters:
-        - description: 'GTM Container''s API relative path. Example: accounts/{account_id}/containers/{container_id}'
+        - description: "GTM Container's API relative path. Example: accounts/{account_id}/containers/{container_id}"
           in: path
           name: parent
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContainerVersion'
+                $ref: "#/components/schemas/ContainerVersion"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/tagmanager/v2/{parent}/workspaces':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/tagmanager/v2/{parent}/workspaces":
     get:
       description: Lists all Workspaces that belong to a GTM Container.
       operationId: tagmanager.accounts.containers.workspaces.list
       parameters:
-        - description: 'GTM parent Container''s API relative path. Example: accounts/{account_id}/containers/{container_id}'
+        - description: "GTM parent Container's API relative path. Example: accounts/{account_id}/containers/{container_id}"
           in: path
           name: parent
           required: true
@@ -1016,40 +1016,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListWorkspacesResponse'
+                $ref: "#/components/schemas/ListWorkspacesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a Workspace.
       operationId: tagmanager.accounts.containers.workspaces.create
       parameters:
-        - description: 'GTM parent Container''s API relative path. Example: accounts/{account_id}/containers/{container_id}'
+        - description: "GTM parent Container's API relative path. Example: accounts/{account_id}/containers/{container_id}"
           in: path
           name: parent
           required: true
@@ -1059,27 +1059,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Workspace'
+              $ref: "#/components/schemas/Workspace"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Workspace'
+                $ref: "#/components/schemas/Workspace"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{parent}/zones':
+  "/tagmanager/v2/{parent}/zones":
     get:
       description: Lists all GTM Zones of a GTM container workspace.
       operationId: tagmanager.accounts.containers.workspaces.zones.list
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -1091,40 +1091,40 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListZonesResponse'
+                $ref: "#/components/schemas/ListZonesResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Creates a GTM Zone.
       operationId: tagmanager.accounts.containers.workspaces.zones.create
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: parent
           required: true
@@ -1134,27 +1134,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Zone'
+              $ref: "#/components/schemas/Zone"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Zone'
+                $ref: "#/components/schemas/Zone"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{path}':
+  "/tagmanager/v2/{path}":
     delete:
-      description: 'Removes a user from the account, revoking access to it and all of its containers.'
+      description: Removes a user from the account, revoking access to it and all of its containers.
       operationId: tagmanager.accounts.user_permissions.delete
       parameters:
-        - description: 'GTM UserPermission''s API relative path. Example: accounts/{account_id}/user_permissions/{user_permission_id}'
+        - description: "GTM UserPermission's API relative path. Example: accounts/{account_id}/user_permissions/{user_permission_id}"
           in: path
           name: path
           required: true
@@ -1281,20 +1281,20 @@ paths:
             type: array
           style: form
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
       tags:
         - accounts
     get:
       description: Gets a user's Account & Container access.
       operationId: tagmanager.accounts.user_permissions.get
       parameters:
-        - description: 'GTM UserPermission''s API relative path. Example: accounts/{account_id}/user_permissions/{user_permission_id}'
+        - description: "GTM UserPermission's API relative path. Example: accounts/{account_id}/user_permissions/{user_permission_id}"
           in: path
           name: path
           required: true
@@ -1306,50 +1306,50 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserPermission'
+                $ref: "#/components/schemas/UserPermission"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     put:
       description: Updates a user's Account & Container access.
       operationId: tagmanager.accounts.user_permissions.update
       parameters:
-        - description: 'GTM UserPermission''s API relative path. Example: accounts/{account_id}/user_permissions/{user_permission_id}'
+        - description: "GTM UserPermission's API relative path. Example: accounts/{account_id}/user_permissions/{user_permission_id}"
           in: path
           name: path
           required: true
           schema:
             type: string
-        - description: 'When provided, this fingerprint must match the fingerprint of the zone in storage.'
+        - description: When provided, this fingerprint must match the fingerprint of the zone in storage.
           in: query
           name: fingerprint
           schema:
@@ -1358,39 +1358,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserPermission'
+              $ref: "#/components/schemas/UserPermission"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserPermission'
+                $ref: "#/components/schemas/UserPermission"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.manage.users'
+            - https://www.googleapis.com/auth/tagmanager.manage.users
       tags:
         - accounts
-  '/tagmanager/v2/{path}/built_in_variables:revert':
+  "/tagmanager/v2/{path}/built_in_variables:revert":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Reverts changes to a GTM Built-In Variables in a GTM Workspace.
       operationId: tagmanager.accounts.containers.workspaces.built_in_variables.revert
       parameters:
-        - description: 'GTM BuiltInVariable''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/built_in_variables'
+        - description: "GTM BuiltInVariable's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/built_in_variables"
           in: path
           name: path
           required: true
@@ -1513,78 +1513,78 @@ paths:
               - queryString
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RevertBuiltInVariableResponse'
+                $ref: "#/components/schemas/RevertBuiltInVariableResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{path}/status':
+  "/tagmanager/v2/{path}/status":
     get:
       description: Finds conflicting and modified entities in the workspace.
       operationId: tagmanager.accounts.containers.workspaces.getStatus
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: path
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetWorkspaceStatusResponse'
+                $ref: "#/components/schemas/GetWorkspaceStatusResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
-  '/tagmanager/v2/{path}:create_version':
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+  "/tagmanager/v2/{path}:create_version":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
-      description: 'Creates a Container Version from the entities present in the workspace, deletes the workspace, and sets the base container version to the newly created version.'
+      description: Creates a Container Version from the entities present in the workspace, deletes the workspace, and sets the base container version to the newly created version.
       operationId: tagmanager.accounts.containers.workspaces.create_version
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: path
           required: true
@@ -1594,39 +1594,39 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateContainerVersionRequestVersionOptions'
+              $ref: "#/components/schemas/CreateContainerVersionRequestVersionOptions"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateContainerVersionResponse'
+                $ref: "#/components/schemas/CreateContainerVersionResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - https://www.googleapis.com/auth/tagmanager.edit.containerversions
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - https://www.googleapis.com/auth/tagmanager.edit.containerversions
       tags:
         - accounts
-  '/tagmanager/v2/{path}:entities':
+  "/tagmanager/v2/{path}:entities":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: List all entities in a GTM Folder.
       operationId: tagmanager.accounts.containers.workspaces.folders.entities
       parameters:
-        - description: 'GTM Folder''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/folders/{folder_id}'
+        - description: "GTM Folder's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/folders/{folder_id}"
           in: path
           name: path
           required: true
@@ -1638,41 +1638,41 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FolderEntities'
+                $ref: "#/components/schemas/FolderEntities"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.readonly'
+            - https://www.googleapis.com/auth/tagmanager.readonly
       tags:
         - accounts
-  '/tagmanager/v2/{path}:move_entities_to_folder':
+  "/tagmanager/v2/{path}:move_entities_to_folder":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Moves entities to a GTM Folder.
       operationId: tagmanager.accounts.containers.workspaces.folders.move_entities_to_folder
       parameters:
-        - description: 'GTM Folder''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/folders/{folder_id}'
+        - description: "GTM Folder's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/folders/{folder_id}"
           in: path
           name: path
           required: true
@@ -1709,114 +1709,114 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Folder'
+              $ref: "#/components/schemas/Folder"
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{path}:publish':
+  "/tagmanager/v2/{path}:publish":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Publishes a Container Version.
       operationId: tagmanager.accounts.containers.versions.publish
       parameters:
-        - description: 'GTM ContainerVersion''s API relative path. Example: accounts/{account_id}/containers/{container_id}/versions/{version_id}'
+        - description: "GTM ContainerVersion's API relative path. Example: accounts/{account_id}/containers/{container_id}/versions/{version_id}"
           in: path
           name: path
           required: true
           schema:
             type: string
-        - description: 'When provided, this fingerprint must match the fingerprint of the container version in storage.'
+        - description: When provided, this fingerprint must match the fingerprint of the container version in storage.
           in: query
           name: fingerprint
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PublishContainerVersionResponse'
+                $ref: "#/components/schemas/PublishContainerVersionResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.publish'
+            - https://www.googleapis.com/auth/tagmanager.publish
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.publish'
+            - https://www.googleapis.com/auth/tagmanager.publish
       tags:
         - accounts
-  '/tagmanager/v2/{path}:quick_preview':
+  "/tagmanager/v2/{path}:quick_preview":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Quick previews a workspace by creating a fake container version from all entities in the provided workspace.
       operationId: tagmanager.accounts.containers.workspaces.quick_preview
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: path
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/QuickPreviewResponse'
+                $ref: "#/components/schemas/QuickPreviewResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - https://www.googleapis.com/auth/tagmanager.edit.containerversions
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - https://www.googleapis.com/auth/tagmanager.edit.containerversions
       tags:
         - accounts
-  '/tagmanager/v2/{path}:reauthorize':
+  "/tagmanager/v2/{path}:reauthorize":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Re-generates the authorization code for a GTM Environment.
       operationId: tagmanager.accounts.containers.environments.reauthorize
       parameters:
-        - description: 'GTM Environment''s API relative path. Example: accounts/{account_id}/containers/{container_id}/environments/{environment_id}'
+        - description: "GTM Environment's API relative path. Example: accounts/{account_id}/containers/{container_id}/environments/{environment_id}"
           in: path
           name: path
           required: true
@@ -1826,45 +1826,45 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Environment'
+              $ref: "#/components/schemas/Environment"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Environment'
+                $ref: "#/components/schemas/Environment"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.publish'
+            - https://www.googleapis.com/auth/tagmanager.publish
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.publish'
+            - https://www.googleapis.com/auth/tagmanager.publish
       tags:
         - accounts
-  '/tagmanager/v2/{path}:resolve_conflict':
+  "/tagmanager/v2/{path}:resolve_conflict":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Resolves a merge conflict for a workspace entity by updating it to the resolved entity passed in the request.
       operationId: tagmanager.accounts.containers.workspaces.resolve_conflict
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: path
           required: true
           schema:
             type: string
-        - description: 'When provided, this fingerprint must match the fingerprint of the entity_in_workspace in the merge conflict.'
+        - description: When provided, this fingerprint must match the fingerprint of the entity_in_workspace in the merge conflict.
           in: query
           name: fingerprint
           schema:
@@ -1873,168 +1873,168 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Entity'
+              $ref: "#/components/schemas/Entity"
       responses:
-        '200':
+        "200":
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{path}:revert':
+  "/tagmanager/v2/{path}:revert":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Reverts changes to a GTM Zone in a GTM Workspace.
       operationId: tagmanager.accounts.containers.workspaces.zones.revert
       parameters:
-        - description: 'GTM Zone''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/zones/{zone_id}'
+        - description: "GTM Zone's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}/zones/{zone_id}"
           in: path
           name: path
           required: true
           schema:
             type: string
-        - description: 'When provided, this fingerprint must match the fingerprint of the zone in storage.'
+        - description: When provided, this fingerprint must match the fingerprint of the zone in storage.
           in: query
           name: fingerprint
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RevertZoneResponse'
+                $ref: "#/components/schemas/RevertZoneResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{path}:set_latest':
+  "/tagmanager/v2/{path}:set_latest":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Sets the latest version used for synchronization of workspaces when detecting conflicts and errors.
       operationId: tagmanager.accounts.containers.versions.set_latest
       parameters:
-        - description: 'GTM ContainerVersion''s API relative path. Example: accounts/{account_id}/containers/{container_id}/versions/{version_id}'
+        - description: "GTM ContainerVersion's API relative path. Example: accounts/{account_id}/containers/{container_id}/versions/{version_id}"
           in: path
           name: path
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContainerVersion'
+                $ref: "#/components/schemas/ContainerVersion"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{path}:sync':
+  "/tagmanager/v2/{path}:sync":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Syncs a workspace to the latest container version by updating all unmodified workspace entities and displaying conflicts for modified entities.
       operationId: tagmanager.accounts.containers.workspaces.sync
       parameters:
-        - description: 'GTM Workspace''s API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}'
+        - description: "GTM Workspace's API relative path. Example: accounts/{account_id}/containers/{container_id}/workspaces/{workspace_id}"
           in: path
           name: path
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SyncWorkspaceResponse'
+                $ref: "#/components/schemas/SyncWorkspaceResponse"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containers'
+            - https://www.googleapis.com/auth/tagmanager.edit.containers
       tags:
         - accounts
-  '/tagmanager/v2/{path}:undelete':
+  "/tagmanager/v2/{path}:undelete":
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Undeletes a Container Version.
       operationId: tagmanager.accounts.containers.versions.undelete
       parameters:
-        - description: 'GTM ContainerVersion''s API relative path. Example: accounts/{account_id}/containers/{container_id}/versions/{version_id}'
+        - description: "GTM ContainerVersion's API relative path. Example: accounts/{account_id}/containers/{container_id}/versions/{version_id}"
           in: path
           name: path
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContainerVersion'
+                $ref: "#/components/schemas/ContainerVersion"
           description: Successful response
       security:
         - Oauth2:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - https://www.googleapis.com/auth/tagmanager.edit.containerversions
           Oauth2c:
-            - 'https://www.googleapis.com/auth/tagmanager.edit.containerversions'
+            - https://www.googleapis.com/auth/tagmanager.edit.containerversions
       tags:
         - accounts
 components:
@@ -2045,8 +2045,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -2077,7 +2077,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -2095,19 +2095,19 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -2129,7 +2129,7 @@ components:
           description: GTM Account's API relative path.
           type: string
         shareData:
-          description: 'Whether the account shares data anonymously with Google and others. This flag enables benchmarking by sharing your data in an anonymous form. Google will remove all identifiable information about your website, combine the data with hundreds of other anonymous sites and report aggregate trends in the benchmarking service. @mutable tagmanager.accounts.create @mutable tagmanager.accounts.update'
+          description: Whether the account shares data anonymously with Google and others. This flag enables benchmarking by sharing your data in an anonymous form. Google will remove all identifiable information about your website, combine the data with hundreds of other anonymous sites and report aggregate trends in the benchmarking service. @mutable tagmanager.accounts.create @mutable tagmanager.accounts.update
           type: boolean
         tagManagerUrl:
           description: Auto generated link to the tag manager UI
@@ -2139,7 +2139,7 @@ components:
       description: Defines the Google Tag Manager Account access permissions.
       properties:
         permission:
-          description: 'Whether the user has no access, user access, or admin access to an account. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update'
+          description: Whether the user has no access, user access, or admin access to an account. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
           enum:
             - accountPermissionUnspecified
             - noAccess
@@ -2148,7 +2148,7 @@ components:
           type: string
       type: object
     BuiltInVariable:
-      description: 'Built-in variables are a special category of variables that are pre-created and non-customizable. They provide common functionality like accessing propeties of the gtm data layer, monitoring clicks, or accessing elements of a page URL.'
+      description: Built-in variables are a special category of variables that are pre-created and non-customizable. They provide common functionality like accessing propeties of the gtm data layer, monitoring clicks, or accessing elements of a page URL.
       properties:
         accountId:
           description: GTM Account ID.
@@ -2300,7 +2300,7 @@ components:
         parameter:
           description: The client's parameters. @mutable tagmanager.accounts.containers.workspaces.clients.create @mutable tagmanager.accounts.containers.workspaces.clients.update
           items:
-            $ref: '#/components/schemas/Parameter'
+            $ref: "#/components/schemas/Parameter"
           type: array
         parentFolderId:
           description: Parent folder id.
@@ -2326,9 +2326,9 @@ components:
       description: Represents a predicate.
       properties:
         parameter:
-          description: 'A list of named parameters (key/value), depending on the condition''s type. Notes: - For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively. - At this time, the left operand (arg0) must be a reference to a variable. - For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive. - To negate an operator, include a boolean parameter named negate boolean parameter that is set to true. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update'
+          description: "A list of named parameters (key/value), depending on the condition's type. Notes: - For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively. - At this time, the left operand (arg0) must be a reference to a variable. - For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive. - To negate an operator, include a boolean parameter named negate boolean parameter that is set to true. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update"
           items:
-            $ref: '#/components/schemas/Parameter'
+            $ref: "#/components/schemas/Parameter"
           type: array
         type:
           description: The type of operator for this condition. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
@@ -2348,7 +2348,7 @@ components:
           type: string
       type: object
     Container:
-      description: 'Represents a Google Tag Manager Container, which specifies the platform tags will run on, manages workspaces, and retains container versions.'
+      description: Represents a Google Tag Manager Container, which specifies the platform tags will run on, manages workspaces, and retains container versions.
       properties:
         accountId:
           description: GTM Account ID.
@@ -2380,7 +2380,7 @@ components:
           description: Auto generated link to the tag manager UI
           type: string
         usageContext:
-          description: 'List of Usage Contexts for the Container. Valid values include: web, android, or ios. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update'
+          description: "List of Usage Contexts for the Container. Valid values include: web, android, or ios. @mutable tagmanager.accounts.containers.create @mutable tagmanager.accounts.containers.update"
           items:
             enum:
               - usageContextUnspecified
@@ -2420,15 +2420,15 @@ components:
         builtInVariable:
           description: The built-in variables in the container that this version was taken from.
           items:
-            $ref: '#/components/schemas/BuiltInVariable'
+            $ref: "#/components/schemas/BuiltInVariable"
           type: array
         client:
           description: The clients in the container that this version was taken from.
           items:
-            $ref: '#/components/schemas/Client'
+            $ref: "#/components/schemas/Client"
           type: array
         container:
-          $ref: '#/components/schemas/Container'
+          $ref: "#/components/schemas/Container"
           description: The container that this version was taken from.
         containerId:
           description: GTM Container ID.
@@ -2439,7 +2439,7 @@ components:
         customTemplate:
           description: The custom templates in the container that this version was taken from.
           items:
-            $ref: '#/components/schemas/CustomTemplate'
+            $ref: "#/components/schemas/CustomTemplate"
           type: array
         deleted:
           description: A value of true indicates this container version has been deleted.
@@ -2453,7 +2453,7 @@ components:
         folder:
           description: The folders in the container that this version was taken from.
           items:
-            $ref: '#/components/schemas/Folder'
+            $ref: "#/components/schemas/Folder"
           type: array
         name:
           description: Container version display name. @mutable tagmanager.accounts.containers.versions.update
@@ -2464,7 +2464,7 @@ components:
         tag:
           description: The tags in the container that this version was taken from.
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: "#/components/schemas/Tag"
           type: array
         tagManagerUrl:
           description: Auto generated link to the tag manager UI
@@ -2472,17 +2472,17 @@ components:
         trigger:
           description: The triggers in the container that this version was taken from.
           items:
-            $ref: '#/components/schemas/Trigger'
+            $ref: "#/components/schemas/Trigger"
           type: array
         variable:
           description: The variables in the container that this version was taken from.
           items:
-            $ref: '#/components/schemas/Variable'
+            $ref: "#/components/schemas/Variable"
           type: array
         zone:
           description: The zones in the container that this version was taken from.
           items:
-            $ref: '#/components/schemas/Zone'
+            $ref: "#/components/schemas/Zone"
           type: array
       type: object
     ContainerVersionHeader:
@@ -2536,7 +2536,7 @@ components:
         builtInVariable:
           description: List of created built-in variables.
           items:
-            $ref: '#/components/schemas/BuiltInVariable'
+            $ref: "#/components/schemas/BuiltInVariable"
           type: array
       type: object
     CreateContainerVersionRequestVersionOptions:
@@ -2556,13 +2556,13 @@ components:
           description: Compiler errors or not.
           type: boolean
         containerVersion:
-          $ref: '#/components/schemas/ContainerVersion'
+          $ref: "#/components/schemas/ContainerVersion"
           description: The container version created.
         newWorkspacePath:
           description: Auto generated workspace path created as a result of version creation. This field should only be populated if the created version was not a quick preview.
           type: string
         syncStatus:
-          $ref: '#/components/schemas/SyncStatus'
+          $ref: "#/components/schemas/SyncStatus"
           description: Whether version creation failed when syncing the workspace to the latest container version.
       type: object
     CustomTemplate:
@@ -2578,7 +2578,7 @@ components:
           description: The fingerprint of the GTM Custom Template as computed at storage time. This value is recomputed whenever the template is modified.
           type: string
         galleryReference:
-          $ref: '#/components/schemas/GalleryReference'
+          $ref: "#/components/schemas/GalleryReference"
           description: A reference to the Community Template Gallery entry.
         name:
           description: Custom Template display name.
@@ -2600,7 +2600,7 @@ components:
           type: string
       type: object
     Entity:
-      description: 'A workspace entity that may represent a tag, trigger, variable, or folder in addition to its status in the workspace.'
+      description: A workspace entity that may represent a tag, trigger, variable, or folder in addition to its status in the workspace.
       properties:
         changeStatus:
           description: Represents how the entity has been changed in the workspace.
@@ -2612,23 +2612,23 @@ components:
             - updated
           type: string
         client:
-          $ref: '#/components/schemas/Client'
+          $ref: "#/components/schemas/Client"
           description: The client being represented by the entity.
         folder:
-          $ref: '#/components/schemas/Folder'
+          $ref: "#/components/schemas/Folder"
           description: The folder being represented by the entity.
         tag:
-          $ref: '#/components/schemas/Tag'
+          $ref: "#/components/schemas/Tag"
           description: The tag being represented by the entity.
         trigger:
-          $ref: '#/components/schemas/Trigger'
+          $ref: "#/components/schemas/Trigger"
           description: The trigger being represented by the entity.
         variable:
-          $ref: '#/components/schemas/Variable'
+          $ref: "#/components/schemas/Variable"
           description: The variable being represented by the entity.
       type: object
     Environment:
-      description: 'Represents a Google Tag Manager Environment. Note that a user can create, delete and update environments of type USER, but can only update the enable_debug and url fields of environments of other types.'
+      description: Represents a Google Tag Manager Environment. Note that a user can create, delete and update environments of type USER, but can only update the enable_debug and url fields of environments of other types.
       properties:
         accountId:
           description: GTM Account ID.
@@ -2722,17 +2722,17 @@ components:
         tag:
           description: The list of tags inside the folder.
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: "#/components/schemas/Tag"
           type: array
         trigger:
           description: The list of triggers inside the folder.
           items:
-            $ref: '#/components/schemas/Trigger'
+            $ref: "#/components/schemas/Trigger"
           type: array
         variable:
           description: The list of variables inside the folder.
           items:
-            $ref: '#/components/schemas/Variable'
+            $ref: "#/components/schemas/Variable"
           type: array
       type: object
     GalleryReference:
@@ -2763,12 +2763,12 @@ components:
         mergeConflict:
           description: The merge conflict after sync.
           items:
-            $ref: '#/components/schemas/MergeConflict'
+            $ref: "#/components/schemas/MergeConflict"
           type: array
         workspaceChange:
           description: Entities that have been changed in the workspace.
           items:
-            $ref: '#/components/schemas/Entity'
+            $ref: "#/components/schemas/Entity"
           type: array
       type: object
     ListAccountsResponse:
@@ -2777,7 +2777,7 @@ components:
         account:
           description: List of GTM Accounts that a user has access to.
           items:
-            $ref: '#/components/schemas/Account'
+            $ref: "#/components/schemas/Account"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2789,7 +2789,7 @@ components:
         containerVersionHeader:
           description: All container version headers of a GTM Container.
           items:
-            $ref: '#/components/schemas/ContainerVersionHeader'
+            $ref: "#/components/schemas/ContainerVersionHeader"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2801,7 +2801,7 @@ components:
         container:
           description: All Containers of a GTM Account.
           items:
-            $ref: '#/components/schemas/Container'
+            $ref: "#/components/schemas/Container"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2813,7 +2813,7 @@ components:
         builtInVariable:
           description: All GTM BuiltInVariables of a GTM container.
           items:
-            $ref: '#/components/schemas/BuiltInVariable'
+            $ref: "#/components/schemas/BuiltInVariable"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2825,7 +2825,7 @@ components:
         environment:
           description: All Environments of a GTM Container.
           items:
-            $ref: '#/components/schemas/Environment'
+            $ref: "#/components/schemas/Environment"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2837,7 +2837,7 @@ components:
         folder:
           description: All GTM Folders of a GTM Container.
           items:
-            $ref: '#/components/schemas/Folder'
+            $ref: "#/components/schemas/Folder"
           type: array
         nextPageToken:
           description: Continuation token for fetching the next page of results.
@@ -2852,7 +2852,7 @@ components:
         tag:
           description: All GTM Tags of a GTM Container.
           items:
-            $ref: '#/components/schemas/Tag'
+            $ref: "#/components/schemas/Tag"
           type: array
       type: object
     ListTemplatesResponse:
@@ -2863,7 +2863,7 @@ components:
         template:
           description: All GTM Custom Templates of a GTM Container.
           items:
-            $ref: '#/components/schemas/CustomTemplate'
+            $ref: "#/components/schemas/CustomTemplate"
           type: array
       type: object
     ListTriggersResponse:
@@ -2875,7 +2875,7 @@ components:
         trigger:
           description: All GTM Triggers of a GTM Container.
           items:
-            $ref: '#/components/schemas/Trigger'
+            $ref: "#/components/schemas/Trigger"
           type: array
       type: object
     ListUserPermissionsResponse:
@@ -2887,7 +2887,7 @@ components:
         userPermission:
           description: All GTM UserPermissions of a GTM Account.
           items:
-            $ref: '#/components/schemas/UserPermission'
+            $ref: "#/components/schemas/UserPermission"
           type: array
       type: object
     ListVariablesResponse:
@@ -2899,7 +2899,7 @@ components:
         variable:
           description: All GTM Variables of a GTM Container.
           items:
-            $ref: '#/components/schemas/Variable'
+            $ref: "#/components/schemas/Variable"
           type: array
       type: object
     ListWorkspacesResponse:
@@ -2911,7 +2911,7 @@ components:
         workspace:
           description: All Workspaces of a GTM Container.
           items:
-            $ref: '#/components/schemas/Workspace'
+            $ref: "#/components/schemas/Workspace"
           type: array
       type: object
     ListZonesResponse:
@@ -2922,37 +2922,37 @@ components:
         zone:
           description: All GTM Zones of a GTM Container.
           items:
-            $ref: '#/components/schemas/Zone'
+            $ref: "#/components/schemas/Zone"
           type: array
       type: object
     MergeConflict:
       description: Represents a merge conflict.
       properties:
         entityInBaseVersion:
-          $ref: '#/components/schemas/Entity'
-          description: 'The base version entity (since the latest sync operation) that has conflicting changes compared to the workspace. If this field is missing, it means the workspace entity is deleted from the base version.'
+          $ref: "#/components/schemas/Entity"
+          description: The base version entity (since the latest sync operation) that has conflicting changes compared to the workspace. If this field is missing, it means the workspace entity is deleted from the base version.
         entityInWorkspace:
-          $ref: '#/components/schemas/Entity'
-          description: 'The workspace entity that has conflicting changes compared to the base version. If an entity is deleted in a workspace, it will still appear with a deleted change status.'
+          $ref: "#/components/schemas/Entity"
+          description: The workspace entity that has conflicting changes compared to the base version. If an entity is deleted in a workspace, it will still appear with a deleted change status.
       type: object
     Parameter:
       description: Represents a Google Tag Manager Parameter.
       properties:
         key:
-          description: 'The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update'
+          description: The named key that uniquely identifies a parameter. Required for top-level parameters, as well as map values. Ignored for list values. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           type: string
         list:
           description: This list parameter's parameters (keys will be ignored). @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           items:
-            $ref: '#/components/schemas/Parameter'
+            $ref: "#/components/schemas/Parameter"
           type: array
         map:
           description: This map parameter's parameters (must have keys; keys must be unique). @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           items:
-            $ref: '#/components/schemas/Parameter'
+            $ref: "#/components/schemas/Parameter"
           type: array
         type:
-          description: 'The parameter type. Valid values are: - boolean: The value represents a boolean, represented as ''true'' or ''false'' - integer: The value represents a 64-bit signed integer value, in base 10 - list: A list of parameters should be specified - map: A map of parameters should be specified - template: The value represents any text; this can include variable references (even variable references that might return non-string types) - trigger_reference: The value represents a trigger, represented as the trigger id - tag_reference: The value represents a tag, represented as the tag name @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update'
+          description: "The parameter type. Valid values are: - boolean: The value represents a boolean, represented as 'true' or 'false' - integer: The value represents a 64-bit signed integer value, in base 10 - list: A list of parameters should be specified - map: A map of parameters should be specified - template: The value represents any text; this can include variable references (even variable references that might return non-string types) - trigger_reference: The value represents a trigger, represented as the trigger id - tag_reference: The value represents a tag, represented as the tag name @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update"
           enum:
             - typeUnspecified
             - template
@@ -2964,7 +2964,7 @@ components:
             - tagReference
           type: string
         value:
-          description: 'A parameter''s value (may contain variable references such as "{{myVariable}}") as appropriate to the specified type. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update'
+          description: A parameter's value (may contain variable references such as "{{myVariable}}") as appropriate to the specified type. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           type: string
       type: object
     PublishContainerVersionResponse:
@@ -2974,7 +2974,7 @@ components:
           description: Compiler errors or not.
           type: boolean
         containerVersion:
-          $ref: '#/components/schemas/ContainerVersion'
+          $ref: "#/components/schemas/ContainerVersion"
           description: The container version created.
       type: object
     QuickPreviewResponse:
@@ -2984,10 +2984,10 @@ components:
           description: Were there compiler errors or not.
           type: boolean
         containerVersion:
-          $ref: '#/components/schemas/ContainerVersion'
+          $ref: "#/components/schemas/ContainerVersion"
           description: The quick previewed container version.
         syncStatus:
-          $ref: '#/components/schemas/SyncStatus'
+          $ref: "#/components/schemas/SyncStatus"
           description: Whether quick previewing failed when syncing the workspace to the latest container version.
       type: object
     RevertBuiltInVariableResponse:
@@ -3001,49 +3001,49 @@ components:
       description: The result of reverting folder changes in a workspace.
       properties:
         folder:
-          $ref: '#/components/schemas/Folder'
-          description: 'Folder as it appears in the latest container version since the last workspace synchronization operation. If no folder is present, that means the folder was deleted in the latest container version.'
+          $ref: "#/components/schemas/Folder"
+          description: Folder as it appears in the latest container version since the last workspace synchronization operation. If no folder is present, that means the folder was deleted in the latest container version.
       type: object
     RevertTagResponse:
       description: The result of reverting a tag in a workspace.
       properties:
         tag:
-          $ref: '#/components/schemas/Tag'
-          description: 'Tag as it appears in the latest container version since the last workspace synchronization operation. If no tag is present, that means the tag was deleted in the latest container version.'
+          $ref: "#/components/schemas/Tag"
+          description: Tag as it appears in the latest container version since the last workspace synchronization operation. If no tag is present, that means the tag was deleted in the latest container version.
       type: object
     RevertTemplateResponse:
       description: The result of reverting a template in a workspace.
       properties:
         template:
-          $ref: '#/components/schemas/CustomTemplate'
-          description: 'Template as it appears in the latest container version since the last workspace synchronization operation. If no template is present, that means the template was deleted in the latest container version.'
+          $ref: "#/components/schemas/CustomTemplate"
+          description: Template as it appears in the latest container version since the last workspace synchronization operation. If no template is present, that means the template was deleted in the latest container version.
       type: object
     RevertTriggerResponse:
       description: The result of reverting a trigger in a workspace.
       properties:
         trigger:
-          $ref: '#/components/schemas/Trigger'
-          description: 'Trigger as it appears in the latest container version since the last workspace synchronization operation. If no trigger is present, that means the trigger was deleted in the latest container version.'
+          $ref: "#/components/schemas/Trigger"
+          description: Trigger as it appears in the latest container version since the last workspace synchronization operation. If no trigger is present, that means the trigger was deleted in the latest container version.
       type: object
     RevertVariableResponse:
       description: The result of reverting a variable in a workspace.
       properties:
         variable:
-          $ref: '#/components/schemas/Variable'
-          description: 'Variable as it appears in the latest container version since the last workspace synchronization operation. If no variable is present, that means the variable was deleted in the latest container version.'
+          $ref: "#/components/schemas/Variable"
+          description: Variable as it appears in the latest container version since the last workspace synchronization operation. If no variable is present, that means the variable was deleted in the latest container version.
       type: object
     RevertZoneResponse:
       description: The result of reverting a zone in a workspace.
       properties:
         zone:
-          $ref: '#/components/schemas/Zone'
-          description: 'Zone as it appears in the latest container version since the last workspace synchronization operation. If no zone is present, that means the zone was deleted in the latest container version.'
+          $ref: "#/components/schemas/Zone"
+          description: Zone as it appears in the latest container version since the last workspace synchronization operation. If no zone is present, that means the zone was deleted in the latest container version.
       type: object
     SetupTag:
       description: Represents a reference to atag that fires before another tag in order to set up dependencies.
       properties:
         stopOnSetupFailure:
-          description: 'If true, fire the main tag if and only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.'
+          description: If true, fire the main tag if and only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.
           type: boolean
         tagName:
           description: The name of the setup tag.
@@ -3063,12 +3063,12 @@ components:
       description: A response after synchronizing the workspace to the latest container version.
       properties:
         mergeConflict:
-          description: 'The merge conflict after sync. If this field is not empty, the sync is still treated as successful. But a version cannot be created until all conflicts are resolved.'
+          description: The merge conflict after sync. If this field is not empty, the sync is still treated as successful. But a version cannot be created until all conflicts are resolved.
           items:
-            $ref: '#/components/schemas/MergeConflict'
+            $ref: "#/components/schemas/MergeConflict"
           type: array
         syncStatus:
-          $ref: '#/components/schemas/SyncStatus'
+          $ref: "#/components/schemas/SyncStatus"
           description: Indicates whether synchronization caused a merge conflict or sync error.
       type: object
     Tag:
@@ -3078,12 +3078,12 @@ components:
           description: GTM Account ID.
           type: string
         blockingRuleId:
-          description: 'Blocking rule IDs. If any of the listed rules evaluate to true, the tag will not fire. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update'
+          description: Blocking rule IDs. If any of the listed rules evaluate to true, the tag will not fire. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           items:
             type: string
           type: array
         blockingTriggerId:
-          description: 'Blocking trigger IDs. If any of the listed triggers evaluate to true, the tag will not fire. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update'
+          description: Blocking trigger IDs. If any of the listed triggers evaluate to true, the tag will not fire. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           items:
             type: string
           type: array
@@ -3104,13 +3104,13 @@ components:
             type: string
           type: array
         liveOnly:
-          description: 'If set to true, this tag will only fire in the live environment (e.g. not in preview or debug mode). @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update'
+          description: If set to true, this tag will only fire in the live environment (e.g. not in preview or debug mode). @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           type: boolean
         monitoringMetadata:
-          $ref: '#/components/schemas/Parameter'
-          description: 'A map of key-value pairs of tag metadata to be included in the event data for tag monitoring. Notes: - This parameter must be type MAP. - Each parameter in the map are type TEMPLATE, however cannot contain variable references. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update'
+          $ref: "#/components/schemas/Parameter"
+          description: "A map of key-value pairs of tag metadata to be included in the event data for tag monitoring. Notes: - This parameter must be type MAP. - Each parameter in the map are type TEMPLATE, however cannot contain variable references. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update"
         monitoringMetadataTagNameKey:
-          description: 'If non-empty, then the tag display name will be included in the monitoring metadata map using the key specified. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update'
+          description: If non-empty, then the tag display name will be included in the monitoring metadata map using the key specified. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           type: string
         name:
           description: Tag display name. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
@@ -3121,7 +3121,7 @@ components:
         parameter:
           description: The tag's parameters. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           items:
-            $ref: '#/components/schemas/Parameter'
+            $ref: "#/components/schemas/Parameter"
           type: array
         parentFolderId:
           description: Parent folder id.
@@ -3130,10 +3130,10 @@ components:
           description: GTM Tag's API relative path.
           type: string
         paused:
-          description: 'Indicates whether the tag is paused, which prevents the tag from firing. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update'
+          description: Indicates whether the tag is paused, which prevents the tag from firing. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
           type: boolean
         priority:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: User defined numeric priority of the tag. Tags are fired asynchronously in order of priority. Tags with higher numeric value fire first. A tag's priority can be a positive or negative value. The default value is 0. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
         scheduleEndMs:
           description: The end timestamp in milliseconds to schedule a tag. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
@@ -3146,7 +3146,7 @@ components:
         setupTag:
           description: The list of setup tags. Currently we only allow one.
           items:
-            $ref: '#/components/schemas/SetupTag'
+            $ref: "#/components/schemas/SetupTag"
           type: array
         tagFiringOption:
           description: Option to fire this tag.
@@ -3165,7 +3165,7 @@ components:
         teardownTag:
           description: The list of teardown tags. Currently we only allow one.
           items:
-            $ref: '#/components/schemas/TeardownTag'
+            $ref: "#/components/schemas/TeardownTag"
           type: array
         type:
           description: GTM Tag Type. @mutable tagmanager.accounts.containers.workspaces.tags.create @mutable tagmanager.accounts.containers.workspaces.tags.update
@@ -3178,7 +3178,7 @@ components:
       description: Represents a tag that fires after another tag in order to tear down dependencies.
       properties:
         stopTeardownOnFailure:
-          description: 'If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.'
+          description: If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.
           type: boolean
         tagName:
           description: The name of the teardown tag.
@@ -3193,47 +3193,47 @@ components:
         autoEventFilter:
           description: Used in the case of auto event tracking. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
           items:
-            $ref: '#/components/schemas/Condition'
+            $ref: "#/components/schemas/Condition"
           type: array
         checkValidation:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: Whether or not we should only fire tags if the form submit or link click event is not cancelled by some other event handler (e.g. because of validation). Only valid for Form Submission and Link Click triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         containerId:
           description: GTM Container ID.
           type: string
         continuousTimeMinMilliseconds:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: A visibility trigger minimum continuous visible time (in milliseconds). Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         customEventFilter:
-          description: 'Used in the case of custom event, which is fired iff all Conditions are true. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update'
+          description: Used in the case of custom event, which is fired iff all Conditions are true. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
           items:
-            $ref: '#/components/schemas/Condition'
+            $ref: "#/components/schemas/Condition"
           type: array
         eventName:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: Name of the GTM event that is fired. Only valid for Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         filter:
           description: The trigger will only fire iff all Conditions are true. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
           items:
-            $ref: '#/components/schemas/Condition'
+            $ref: "#/components/schemas/Condition"
           type: array
         fingerprint:
           description: The fingerprint of the GTM Trigger as computed at storage time. This value is recomputed whenever the trigger is modified.
           type: string
         horizontalScrollPercentageList:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled horizontally. Only valid for AMP scroll triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         interval:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: Time between triggering recurring Timer Events (in milliseconds). Only valid for Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         intervalSeconds:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: Time between Timer Events to fire (in seconds). Only valid for AMP Timer trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         limit:
-          $ref: '#/components/schemas/Parameter'
-          description: 'Limit of the number of GTM events this Timer Trigger will fire. If no limit is set, we will continue to fire GTM events until the user leaves the page. Only valid for Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update'
+          $ref: "#/components/schemas/Parameter"
+          description: Limit of the number of GTM events this Timer Trigger will fire. If no limit is set, we will continue to fire GTM events until the user leaves the page. Only valid for Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         maxTimerLengthSeconds:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: Max time to fire Timer Events (in seconds). Only valid for AMP Timer trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         name:
           description: Trigger display name. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
@@ -3244,7 +3244,7 @@ components:
         parameter:
           description: Additional parameters. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
           items:
-            $ref: '#/components/schemas/Parameter'
+            $ref: "#/components/schemas/Parameter"
           type: array
         parentFolderId:
           description: Parent folder id.
@@ -3253,13 +3253,13 @@ components:
           description: GTM Trigger's API relative path.
           type: string
         selector:
-          $ref: '#/components/schemas/Parameter'
-          description: 'A click trigger CSS selector (i.e. "a", "button" etc.). Only valid for AMP Click trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update'
+          $ref: "#/components/schemas/Parameter"
+          description: A click trigger CSS selector (i.e. "a", "button" etc.). Only valid for AMP Click trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         tagManagerUrl:
           description: Auto generated link to the tag manager UI
           type: string
         totalTimeMinMilliseconds:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: A visibility trigger minimum total visible time (in milliseconds). Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         triggerId:
           description: The Trigger ID uniquely identifies the GTM Trigger.
@@ -3301,25 +3301,25 @@ components:
             - elementVisibility
           type: string
         uniqueTriggerId:
-          $ref: '#/components/schemas/Parameter'
-          description: 'Globally unique id of the trigger that auto-generates this (a Form Submit, Link Click or Timer listener) if any. Used to make incompatible auto-events work together with trigger filtering based on trigger ids. This value is populated during output generation since the tags implied by triggers don''t exist until then. Only valid for Form Submit, Link Click and Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update'
+          $ref: "#/components/schemas/Parameter"
+          description: Globally unique id of the trigger that auto-generates this (a Form Submit, Link Click or Timer listener) if any. Used to make incompatible auto-events work together with trigger filtering based on trigger ids. This value is populated during output generation since the tags implied by triggers don't exist until then. Only valid for Form Submit, Link Click and Timer triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         verticalScrollPercentageList:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: List of integer percentage values for scroll triggers. The trigger will fire when each percentage is reached when the view is scrolled vertically. Only valid for AMP scroll triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         visibilitySelector:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: A visibility trigger CSS selector (i.e. "#id"). Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         visiblePercentageMax:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: A visibility trigger maximum percent visibility. Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         visiblePercentageMin:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: A visibility trigger minimum percent visibility. Only valid for AMP Visibility trigger. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         waitForTags:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: Whether or not we should delay the form submissions or link opening until all of the tags have fired (by preventing the default action and later simulating the default action). Only valid for Form Submission and Link Click triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         waitForTagsTimeout:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: How long to wait (in milliseconds) for tags to fire when 'waits_for_tags' above evaluates to true. Only valid for Form Submission and Link Click triggers. @mutable tagmanager.accounts.containers.workspaces.triggers.create @mutable tagmanager.accounts.containers.workspaces.triggers.update
         workspaceId:
           description: GTM Workspace ID.
@@ -3329,7 +3329,7 @@ components:
       description: Represents a user's permissions to an account and its container.
       properties:
         accountAccess:
-          $ref: '#/components/schemas/AccountAccess'
+          $ref: "#/components/schemas/AccountAccess"
           description: GTM Account access permissions. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
         accountId:
           description: The Account ID uniquely identifies the GTM Account.
@@ -3337,7 +3337,7 @@ components:
         containerAccess:
           description: GTM Container access permissions. @mutable tagmanager.accounts.permissions.create @mutable tagmanager.accounts.permissions.update
           items:
-            $ref: '#/components/schemas/ContainerAccess'
+            $ref: "#/components/schemas/ContainerAccess"
           type: array
         emailAddress:
           description: User's email address. @mutable tagmanager.accounts.permissions.create
@@ -3356,12 +3356,12 @@ components:
           description: GTM Container ID.
           type: string
         disablingTriggerId:
-          description: 'For mobile containers only: A list of trigger IDs for disabling conditional variables; the variable is enabled if one of the enabling trigger is true while all the disabling trigger are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update'
+          description: "For mobile containers only: A list of trigger IDs for disabling conditional variables; the variable is enabled if one of the enabling trigger is true while all the disabling trigger are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update"
           items:
             type: string
           type: array
         enablingTriggerId:
-          description: 'For mobile containers only: A list of trigger IDs for enabling conditional variables; the variable is enabled if one of the enabling triggers is true while all the disabling triggers are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update'
+          description: "For mobile containers only: A list of trigger IDs for enabling conditional variables; the variable is enabled if one of the enabling triggers is true while all the disabling triggers are false. Treated as an unordered set. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update"
           items:
             type: string
           type: array
@@ -3369,7 +3369,7 @@ components:
           description: The fingerprint of the GTM Variable as computed at storage time. This value is recomputed whenever the variable is modified.
           type: string
         formatValue:
-          $ref: '#/components/schemas/VariableFormatValue'
+          $ref: "#/components/schemas/VariableFormatValue"
           description: Option to convert a variable value to other value.
         name:
           description: Variable display name. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
@@ -3380,7 +3380,7 @@ components:
         parameter:
           description: The variable's parameters. @mutable tagmanager.accounts.containers.workspaces.variables.create @mutable tagmanager.accounts.containers.workspaces.variables.update
           items:
-            $ref: '#/components/schemas/Parameter'
+            $ref: "#/components/schemas/Parameter"
           type: array
         parentFolderId:
           description: Parent folder id.
@@ -3419,16 +3419,16 @@ components:
             - uppercase
           type: string
         convertFalseToValue:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: The value to convert if a variable value is false.
         convertNullToValue:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: The value to convert if a variable value is null.
         convertTrueToValue:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: The value to convert if a variable value is true.
         convertUndefinedToValue:
-          $ref: '#/components/schemas/Parameter'
+          $ref: "#/components/schemas/Parameter"
           description: The value to convert if a variable value is undefined.
       type: object
     Workspace:
@@ -3466,12 +3466,12 @@ components:
           description: GTM Account ID.
           type: string
         boundary:
-          $ref: '#/components/schemas/ZoneBoundary'
+          $ref: "#/components/schemas/ZoneBoundary"
           description: This Zone's boundary.
         childContainer:
           description: Containers that are children of this Zone.
           items:
-            $ref: '#/components/schemas/ZoneChildContainer'
+            $ref: "#/components/schemas/ZoneChildContainer"
           type: array
         containerId:
           description: GTM Container ID.
@@ -3492,7 +3492,7 @@ components:
           description: Auto generated link to the tag manager UI
           type: string
         typeRestriction:
-          $ref: '#/components/schemas/ZoneTypeRestriction'
+          $ref: "#/components/schemas/ZoneTypeRestriction"
           description: This Zone's type restrictions.
         workspaceId:
           description: GTM Workspace ID.
@@ -3505,9 +3505,9 @@ components:
       description: Represents a Zone's boundaries.
       properties:
         condition:
-          description: 'The conditions that, when conjoined, make up the boundary.'
+          description: The conditions that, when conjoined, make up the boundary.
           items:
-            $ref: '#/components/schemas/Condition'
+            $ref: "#/components/schemas/Condition"
           type: array
         customEvaluationTriggerId:
           description: Custom evaluation trigger IDs. A zone will evaluate its boundary conditions when any of the listed triggers are true.
@@ -3542,28 +3542,28 @@ components:
       description: Oauth 2.0 implicit authentication
       flows:
         implicit:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/tagmanager.delete.containers': Delete your Google Tag Manager containers
-            'https://www.googleapis.com/auth/tagmanager.edit.containers': 'Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing'
-            'https://www.googleapis.com/auth/tagmanager.edit.containerversions': Manage your Google Tag Manager container versions
-            'https://www.googleapis.com/auth/tagmanager.manage.accounts': View and manage your Google Tag Manager accounts
-            'https://www.googleapis.com/auth/tagmanager.manage.users': Manage user permissions of your Google Tag Manager account and container
-            'https://www.googleapis.com/auth/tagmanager.publish': Publish your Google Tag Manager container versions
-            'https://www.googleapis.com/auth/tagmanager.readonly': View your Google Tag Manager container and its subcomponents
+            https://www.googleapis.com/auth/tagmanager.delete.containers: Delete your Google Tag Manager containers
+            https://www.googleapis.com/auth/tagmanager.edit.containers: Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing
+            https://www.googleapis.com/auth/tagmanager.edit.containerversions: Manage your Google Tag Manager container versions
+            https://www.googleapis.com/auth/tagmanager.manage.accounts: View and manage your Google Tag Manager accounts
+            https://www.googleapis.com/auth/tagmanager.manage.users: Manage user permissions of your Google Tag Manager account and container
+            https://www.googleapis.com/auth/tagmanager.publish: Publish your Google Tag Manager container versions
+            https://www.googleapis.com/auth/tagmanager.readonly: View your Google Tag Manager container and its subcomponents
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
       flows:
         authorizationCode:
-          authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+          authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
-            'https://www.googleapis.com/auth/tagmanager.delete.containers': Delete your Google Tag Manager containers
-            'https://www.googleapis.com/auth/tagmanager.edit.containers': 'Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing'
-            'https://www.googleapis.com/auth/tagmanager.edit.containerversions': Manage your Google Tag Manager container versions
-            'https://www.googleapis.com/auth/tagmanager.manage.accounts': View and manage your Google Tag Manager accounts
-            'https://www.googleapis.com/auth/tagmanager.manage.users': Manage user permissions of your Google Tag Manager account and container
-            'https://www.googleapis.com/auth/tagmanager.publish': Publish your Google Tag Manager container versions
-            'https://www.googleapis.com/auth/tagmanager.readonly': View your Google Tag Manager container and its subcomponents
-          tokenUrl: 'https://accounts.google.com/o/oauth2/token'
+            https://www.googleapis.com/auth/tagmanager.delete.containers: Delete your Google Tag Manager containers
+            https://www.googleapis.com/auth/tagmanager.edit.containers: Manage your Google Tag Manager container and its subcomponents, excluding versioning and publishing
+            https://www.googleapis.com/auth/tagmanager.edit.containerversions: Manage your Google Tag Manager container versions
+            https://www.googleapis.com/auth/tagmanager.manage.accounts: View and manage your Google Tag Manager accounts
+            https://www.googleapis.com/auth/tagmanager.manage.users: Manage user permissions of your Google Tag Manager account and container
+            https://www.googleapis.com/auth/tagmanager.publish: Publish your Google Tag Manager container versions
+            https://www.googleapis.com/auth/tagmanager.readonly: View your Google Tag Manager container and its subcomponents
+          tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -21,15 +21,12 @@ info:
   x-logo:
     url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
   x-origin:
-    - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
-      format: google
-      url: https://www.googleapis.com/discovery/v1/apis/content/v2.1/rest
+    - format: google
+      url: https://shoppingcontent.googleapis.com/$discovery/rest?version=v2.1
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: content
+  x-preferred: true
 externalDocs:
   url: https://developers.google.com/shopping-content/v2/
 tags:
@@ -8632,7 +8629,7 @@ components:
           type: integer
         inventory:
           $ref: "#/components/schemas/PosInventory"
-          description: The inventory to submit. Set this only if the method is `inventory`.
+          description: The inventory to submit. This should be set only if the method is `inventory`.
         merchantId:
           description: The ID of the POS data provider.
           format: uint64
@@ -8642,12 +8639,12 @@ components:
           type: string
         sale:
           $ref: "#/components/schemas/PosSale"
-          description: The sale information to submit. Set this only if the method is `sale`.
+          description: The sale information to submit. This should be set only if the method is `sale`.
         store:
           $ref: "#/components/schemas/PosStore"
-          description: The store information to submit. Set this only if the method is `insert`.
+          description: The store information to submit. This should be set only if the method is `insert`.
         storeCode:
-          description: The store code. Set this only if the method is `delete` or `get`.
+          description: The store code. This should be set only if the method is `delete` or `get`.
           type: string
         targetMerchantId:
           description: The ID of the account for which to get/submit data.
@@ -8977,7 +8974,7 @@ components:
           description: Allows advertisers to override the item URL when the product is shown within the context of Product Ads.
           type: string
         adult:
-          description: Set to true if the item is targeted towards adults.
+          description: Should be set to true if the item is targeted towards adults.
           type: boolean
         ageGroup:
           description: Target age group of the item.
@@ -9427,7 +9424,7 @@ components:
           description: The geographic region to which the tax rate applies.
           type: string
         taxShip:
-          description: Set to true if tax is charged on shipping.
+          description: Should be set to true if tax is charged on shipping.
           type: boolean
       type: object
     ProductUnitPricingBaseMeasure:
@@ -10016,9 +10013,9 @@ components:
           type: string
         returnAddress:
           $ref: "#/components/schemas/ReturnAddress"
-          description: The return address to submit. Set this only if the method is `insert`.
+          description: The return address to submit. This should be set only if the method is `insert`.
         returnAddressId:
-          description: The return address ID. Set this only if the method is `delete` or `get`.
+          description: The return address ID. This should be set only if the method is `delete` or `get`.
           type: string
       type: object
     ReturnaddressCustomBatchResponse:
@@ -10084,9 +10081,9 @@ components:
           type: string
         returnPolicy:
           $ref: "#/components/schemas/ReturnPolicy"
-          description: The return policy to submit. Set this only if the method is `insert`.
+          description: The return policy to submit. This should be set only if the method is `insert`.
         returnPolicyId:
-          description: The return policy ID. Set this only if the method is `delete` or `get`.
+          description: The return policy ID. This should be set only if the method is `delete` or `get`.
           type: string
       type: object
     ReturnpolicyCustomBatchResponse:

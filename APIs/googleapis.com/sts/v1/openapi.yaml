@@ -1,48 +1,47 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://sts.googleapis.com/'
+  - url: https://sts.googleapis.com/
 info:
   contact:
     name: Google
-    url: 'https://google.com'
+    url: https://google.com
     x-twitter: youtube
   description: The Security Token Service exchanges Google or third-party credentials for a short-lived access token to Google Cloud resources.
   license:
     name: Creative Commons Attribution 3.0
-    url: 'http://creativecommons.org/licenses/by/3.0/'
-  termsOfService: 'https://developers.google.com/terms/'
+    url: http://creativecommons.org/licenses/by/3.0/
+  termsOfService: https://developers.google.com/terms/
   title: Security Token Service API
   version: v1
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg'
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
     - format: google
-      url: 'https://sts.googleapis.com/$discovery/rest?version=v1'
+      url: https://sts.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: sts
 externalDocs:
-  url: 'http://cloud.google.com/iam/docs/workload-identity-federation'
+  url: http://cloud.google.com/iam/docs/workload-identity-federation
 tags:
   - name: v1
 paths:
   /v1/token:
     parameters:
-      - $ref: '#/components/parameters/_.xgafv'
-      - $ref: '#/components/parameters/access_token'
-      - $ref: '#/components/parameters/alt'
-      - $ref: '#/components/parameters/callback'
-      - $ref: '#/components/parameters/fields'
-      - $ref: '#/components/parameters/key'
-      - $ref: '#/components/parameters/oauth_token'
-      - $ref: '#/components/parameters/prettyPrint'
-      - $ref: '#/components/parameters/quotaUser'
-      - $ref: '#/components/parameters/upload_protocol'
-      - $ref: '#/components/parameters/uploadType'
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
     post:
       description: Exchanges a credential for a Google OAuth 2.0 access token.
       operationId: sts.token
@@ -50,13 +49,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GoogleIdentityStsV1ExchangeTokenRequest'
+              $ref: "#/components/schemas/GoogleIdentityStsV1ExchangeTokenRequest"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GoogleIdentityStsV1ExchangeTokenResponse'
+                $ref: "#/components/schemas/GoogleIdentityStsV1ExchangeTokenResponse"
           description: Successful response
       tags:
         - v1
@@ -68,8 +67,8 @@ components:
       name: $.xgafv
       schema:
         enum:
-          - '1'
-          - '2'
+          - "1"
+          - "2"
         type: string
     access_token:
       description: OAuth access token.
@@ -100,7 +99,7 @@ components:
       schema:
         type: string
     key:
-      description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+      description: API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.
       in: query
       name: key
       schema:
@@ -118,19 +117,19 @@ components:
       schema:
         type: boolean
     quotaUser:
-      description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+      description: Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.
       in: query
       name: quotaUser
       schema:
         type: string
     uploadType:
-      description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+      description: Legacy upload protocol for media (e.g. "media", "multipart").
       in: query
       name: uploadType
       schema:
         type: string
     upload_protocol:
-      description: 'Upload protocol for media (e.g. "raw", "multipart").'
+      description: Upload protocol for media (e.g. "raw", "multipart").
       in: query
       name: upload_protocol
       schema:
@@ -140,29 +139,29 @@ components:
       description: Request message for ExchangeToken.
       properties:
         grantType:
-          description: 'Required. The grant type. Must be `urn:ietf:params:oauth:grant-type:token-exchange`, which indicates a token exchange.'
+          description: Required. The grant type. Must be `urn:ietf:params:oauth:grant-type:token-exchange`, which indicates a token exchange.
           type: string
         options:
-          description: 'A set of features that Security Token Service supports, in addition to the standard OAuth 2.0 token exchange, formatted as a serialized JSON object of Options.'
+          description: A set of features that Security Token Service supports, in addition to the standard OAuth 2.0 token exchange, formatted as a serialized JSON object of Options.
           type: string
         requestedTokenType:
-          description: 'Required. An identifier for the type of requested security token. Must be `urn:ietf:params:oauth:token-type:access_token`.'
+          description: Required. An identifier for the type of requested security token. Must be `urn:ietf:params:oauth:token-type:access_token`.
           type: string
         subjectToken:
-          description: 'Required. The input token. You can use a Google-issued OAuth 2.0 access token with this field to obtain an access token with new security attributes applied, such as a Credential Access Boundary. If an access token already contains security attributes, you cannot apply additional security attributes.'
+          description: Required. The input token. You can use a Google-issued OAuth 2.0 access token with this field to obtain an access token with new security attributes applied, such as a Credential Access Boundary. If an access token already contains security attributes, you cannot apply additional security attributes.
           type: string
         subjectTokenType:
-          description: 'Required. An identifier that indicates the type of the security token in the `subject_token` parameter. Must be `urn:ietf:params:oauth:token-type:access_token`.'
+          description: Required. An identifier that indicates the type of the security token in the `subject_token` parameter. Must be `urn:ietf:params:oauth:token-type:access_token`.
           type: string
       type: object
     GoogleIdentityStsV1ExchangeTokenResponse:
       description: Response message for ExchangeToken.
       properties:
         access_token:
-          description: 'An OAuth 2.0 security token, issued by Google, in response to the token exchange request.'
+          description: An OAuth 2.0 security token, issued by Google, in response to the token exchange request.
           type: string
         expires_in:
-          description: 'The amount of time, in seconds, between the time when the `access_token` was issued and the time when the `access_token` will expire. This field is absent when the `subject_token` in the request is a Google-issued, short-lived access token. In this case, the `access_token` has the same expiration time as the `subject_token`.'
+          description: The amount of time, in seconds, between the time when the `access_token` was issued and the time when the `access_token` will expire. This field is absent when the `subject_token` in the request is a Google-issued, short-lived access token. In this case, the `access_token` has the same expiration time as the `subject_token`.
           format: int32
           type: integer
         issued_token_type:

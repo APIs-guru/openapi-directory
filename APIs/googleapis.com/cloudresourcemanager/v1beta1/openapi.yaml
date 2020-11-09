@@ -805,7 +805,6 @@ components:
       description: Associates `members` with a `role`.
       properties:
         bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
           type: string
         condition:
           $ref: "#/components/schemas/Expr"
@@ -817,6 +816,46 @@ components:
           type: array
         role:
           description: Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`, or `roles/owner`.
+          type: string
+      type: object
+    CloudresourcemanagerGoogleCloudResourcemanagerV2alpha1FolderOperation:
+      description: Metadata describing a long running folder operation
+      properties:
+        destinationParent:
+          description: The resource name of the folder or organization we are either creating the folder under or moving the folder to.
+          type: string
+        displayName:
+          description: The display name of the folder.
+          type: string
+        operationType:
+          description: The type of this operation.
+          enum:
+            - OPERATION_TYPE_UNSPECIFIED
+            - CREATE
+            - MOVE
+          type: string
+        sourceParent:
+          description: The resource name of the folder's parent. Only applicable when the operation_type is MOVE.
+          type: string
+      type: object
+    CloudresourcemanagerGoogleCloudResourcemanagerV2beta1FolderOperation:
+      description: Metadata describing a long running folder operation
+      properties:
+        destinationParent:
+          description: The resource name of the folder or organization we are either creating the folder under or moving the folder to.
+          type: string
+        displayName:
+          description: The display name of the folder.
+          type: string
+        operationType:
+          description: The type of this operation.
+          enum:
+            - OPERATION_TYPE_UNSPECIFIED
+            - CREATE
+            - MOVE
+          type: string
+        sourceParent:
+          description: The resource name of the folder's parent. Only applicable when the operation_type is MOVE.
           type: string
       type: object
     Empty:
