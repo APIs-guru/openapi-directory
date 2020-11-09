@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: developer.opto22.com
@@ -7,55 +7,78 @@ info:
   contact:
     email: developer@opto22.com
     name: Opto 22
-    url: 'http://developer.opto22.com'
+    url: http://developer.opto22.com
     x-twitter: opto22
-  description: |
+  description: >
     #### Revised: 6/15/2018
 
+
     ### Overview
+
     This API provides secure access to a SNAP-PAC-R or -S series controller's variable and I/O tags. Confidentiality for API transactions is provided by HTTPS. Authentication uses HTTP Basic Authentication with an API key. An API key ID is submitted in the Basic Authentication userid field and API key value in the password field.
+
 
     **For more information visit:** [developer.opto22.com](http://developer.opto22.com)
 
+
     ### Examples
 
+
     **Read an array** of all the integer32 variables defined in the PAC's strategy.
+
     For example, on your SNAP-PAC-R or -S series controller at IP address 1.2.3.4, you would use the URL: 
 
+
     ```
+
     https://1.2.3.4/api/v1/device/strategy/vars/int32s
+
     ```
+
     and provide appropriate authentication. The GET response will be a JSON array of name-value 
+
     pairs such as: 
+
     ```json
+
     [ { "nMyVeryFavoriteNumber": 22 },
       { "nWidgetsProducedToday": 22222 },
       { "DELAY_LOOP_TIME_IN_MSECS"  : 200 } ]
     ```
+
     **Read the engineering units** (EU) of an analog input point configured in the PAC's strategy.
+
     For an analog input (I/O point) named aiTemperatureInDegreesF, use 
+
 
     `https://1.2.3.4/api/v1/device/strategy/ios/analogInputs/aiTemperatureInDegreesF/eu`
 
+
     The GET response will be a single JSON name-value pair such as:
+
     ```json
+
     { "value": 72.22 }
+
     ```    
 
+
     ### Note on packet sizes:
+
     When doing POSTs or GETs, the JSON payload in the body should not exceed 3k (3072 bytes).
   title: PAC Control
   version: R1.0a
   x-apisguru-categories:
     - iot
   x-logo:
-    url: 'https://twitter.com/opto22/profile_image?size=original'
+    url: https://twitter.com/opto22/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://developer.opto22.com/static/generated/pac-rest-api/pac-rest-api.snap-pac.yaml'
-      version: '2.0'
+      url: http://developer.opto22.com/static/generated/pac-rest-api/pac-rest-api.snap-pac.yaml
+      version: "2.0"
   x-providerName: opto22.com
   x-serviceName: pac
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -67,7 +90,7 @@ securityDefinitions:
 tags:
   - description: Everything available through this RESTful API related to the PAC and its strategy
     name: all
-  - description: 'PAC''s type, firmware version, mac addresses, and uptime'
+  - description: PAC's type, firmware version, mac addresses, and uptime
     name: device
   - description: Information about the currently loaded strategy
     name: strategy
@@ -84,18 +107,18 @@ paths:
       operationId: readDeviceDetails
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ControllerResponse'
-        '400':
+            $ref: "#/definitions/ControllerResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
@@ -103,22 +126,22 @@ paths:
         - device
   /device/strategy:
     get:
-      description: 'Returns the name, date, time, and CRC of the strategy currently in the controller, and the number of charts currently running. Empty strings and a 0 will be returned when there is no strategy.'
+      description: Returns the name, date, time, and CRC of the strategy currently in the controller, and the number of charts currently running. Empty strings and a 0 will be returned when there is no strategy.
       operationId: readStrategyDetails
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StrategyResponse'
-        '400':
+            $ref: "#/definitions/StrategyResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
@@ -130,26 +153,26 @@ paths:
       operationId: readAnalogInputs
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/FloatVar'
+              $ref: "#/definitions/FloatVar"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - ios
-  '/device/strategy/ios/analogInputs/{ioName}/eu':
+  "/device/strategy/ios/analogInputs/{ioName}/eu":
     get:
       description: Reads the value in engineering units (EU) of the specified analog input
       operationId: readAnalogInputEu
@@ -160,22 +183,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/FloatValueObject'
-        '400':
+            $ref: "#/definitions/FloatValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -187,26 +210,26 @@ paths:
       operationId: readAnalogOutputs
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/FloatVar'
+              $ref: "#/definitions/FloatVar"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - ios
-  '/device/strategy/ios/analogOutputs/{ioName}/eu':
+  "/device/strategy/ios/analogOutputs/{ioName}/eu":
     get:
       description: Reads the value in engineering units (EU) of the specified analog output
       operationId: readAnalogOutputEu
@@ -217,22 +240,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/FloatValueObject'
-        '400':
+            $ref: "#/definitions/FloatValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -252,22 +275,22 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/FloatValueObject'
+            $ref: "#/definitions/FloatValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -275,32 +298,32 @@ paths:
         - ios
   /device/strategy/ios/digitalInputs:
     get:
-      description: 'Returns the name and state (true = on, false = off) of all digital input points in the strategy. If there is no strategy in the controller, or the strategy includes no digital inputs, the returned array will be empty.'
+      description: Returns the name and state (true = on, false = off) of all digital input points in the strategy. If there is no strategy in the controller, or the strategy includes no digital inputs, the returned array will be empty.
       operationId: readDigitalInputs
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/DigitalPointStateVar'
+              $ref: "#/definitions/DigitalPointStateVar"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - ios
-  '/device/strategy/ios/digitalInputs/{ioName}/state':
+  "/device/strategy/ios/digitalInputs/{ioName}/state":
     get:
-      description: 'Returns the specified digital input point''s state (true = on, false = off)'
+      description: Returns the specified digital input point's state (true = on, false = off)
       operationId: readDigitalInputState
       parameters:
         - description: Name of the digital input point to read
@@ -309,22 +332,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DigitalPointStateObject'
-        '400':
+            $ref: "#/definitions/DigitalPointStateObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -332,32 +355,32 @@ paths:
         - ios
   /device/strategy/ios/digitalOutputs:
     get:
-      description: 'Returns the name and state (true = on, false = off) of all digital output points in the strategy'
+      description: Returns the name and state (true = on, false = off) of all digital output points in the strategy
       operationId: readDigitalOutputs
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/DigitalPointStateVar'
+              $ref: "#/definitions/DigitalPointStateVar"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - ios
-  '/device/strategy/ios/digitalOutputs/{ioName}/state':
+  "/device/strategy/ios/digitalOutputs/{ioName}/state":
     get:
-      description: 'Returns the specified digital output point''s state (true = on, false = off)'
+      description: Returns the specified digital output point's state (true = on, false = off)
       operationId: readDigitalOutputState
       parameters:
         - description: Name of the digit output point to read
@@ -366,22 +389,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DigitalPointStateObject'
-        '400':
+            $ref: "#/definitions/DigitalPointStateObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -401,22 +424,22 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/DigitalPointStateObject'
+            $ref: "#/definitions/DigitalPointStateObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -428,32 +451,36 @@ paths:
       operationId: readFloatTables
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/TableDef'
+              $ref: "#/definitions/TableDef"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/floats/{tableName}':
+  "/device/strategy/tables/floats/{tableName}":
     get:
-      description: |
+      description: >
         Read table elements
+
         #### Examples ####
+
         * Read all elements in a table named ftable: https://1.2.3.4/api/v1/device/strategy/tables/floats/ftable
+
         * Read elements 5 and up in a table named ftable starting with index 5: https://1.2.3.4/api/v1/device/strategy/tables/floats/ftable?startIndex=5
+
         * Read 3 consecutive elements in a table named ftable starting with the element at index 10: https://1.2.3.4/api/v1/device/strategy/tables/floats/ftable?startIndex=10&numElements=3
       operationId: readFloatTable
       parameters:
@@ -475,7 +502,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
@@ -483,27 +510,29 @@ paths:
               format: float
               type: number
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
     post:
-      description: |
+      description: >
         Write table elements
+
         #### Examples ####
+
         * Write the values (1.5, 2.4, 3.5) to 3 consecutive elements in a table named ftable starting with the element at index 10:POST to https://1.2.3.4/api/v1/device/strategy/tables/floats/ftable?startIndex=10  with body of the POST request set to [ 1.5, 2.4, 3.5 ]
       operationId: writeFloatTable
       parameters:
@@ -529,26 +558,26 @@ paths:
               type: number
             type: array
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/floats/{tableName}/{index}':
+  "/device/strategy/tables/floats/{tableName}/{index}":
     get:
       description: Read specified table element
       operationId: readFloatTableElement
@@ -565,22 +594,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/FloatValueObject'
-        '400':
+            $ref: "#/definitions/FloatValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -606,22 +635,22 @@ paths:
           name: FloatElementObject
           required: true
           schema:
-            $ref: '#/definitions/FloatValueObject'
+            $ref: "#/definitions/FloatValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -633,28 +662,28 @@ paths:
       operationId: readInt32Tables
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/TableDef'
+              $ref: "#/definitions/TableDef"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/int32s/{tableName}':
+  "/device/strategy/tables/int32s/{tableName}":
     get:
-      description: |
+      description: >
         "Read a range of table elements from the specified integer32 table"
          #### Examples ####
          * Read all elements in a table named itable: https://1.2.3.4/api/v1/device/strategy/tables/int32s/itable
@@ -680,7 +709,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
@@ -688,27 +717,29 @@ paths:
               format: int32
               type: integer
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
     post:
-      description: |
+      description: >
         "Write a range of table elements"
+
         #### Examples ####
+
         * Write the values (1, 2, 3) to 3 consecutive elements in a table named itable starting with the element at index 10:POST to https://1.2.3.4/api/v1/device/strategy/tables/int32s/itable?startIndex=10  with body of the POST request set to [ 1, 2, 3 ]      
       operationId: writeInt32Table
       parameters:
@@ -723,7 +754,7 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: 'Array of element values to write starting at startIndex; if the list of elements is too long to fit in the specified table, extra elements will be ignored'
+        - description: Array of element values to write starting at startIndex; if the list of elements is too long to fit in the specified table, extra elements will be ignored
           in: body
           name: int32Array
           required: true
@@ -734,26 +765,26 @@ paths:
               type: integer
             type: array
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/int32s/{tableName}/{index}':
+  "/device/strategy/tables/int32s/{tableName}/{index}":
     get:
       description: Read specified integer32 table element
       operationId: readInt32TableElement
@@ -770,22 +801,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Int32ValueObject'
-        '400':
+            $ref: "#/definitions/Int32ValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -811,22 +842,22 @@ paths:
           name: int32ElementObject
           required: true
           schema:
-            $ref: '#/definitions/Int32ValueObject'
+            $ref: "#/definitions/Int32ValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -838,28 +869,28 @@ paths:
       operationId: readInt64Tables
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/TableDef'
+              $ref: "#/definitions/TableDef"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/int64s/{tableName}':
+  "/device/strategy/tables/int64s/{tableName}":
     get:
-      description: |
+      description: >
         "Read a range of table elements from the specified integer64 table"
          #### Examples ####
          * Read all elements in a table named i64table: https://1.2.3.4/api/v1/device/strategy/tables/int64s/i64table
@@ -885,7 +916,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
@@ -893,27 +924,29 @@ paths:
               format: int64
               type: integer
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
     post:
-      description: |
+      description: >
         "Write a range of table elements"
+
         #### Examples ####
+
         * Write the values (1, 2, 3) to 3 consecutive elements in a table named i64table starting with the element at index 10:POST to https://1.2.3.4/api/v1/device/strategy/tables/int64s/i64table?startIndex=10  with body of the POST request set to [ 1, 2, 3 ]
       operationId: writeInt64Table
       parameters:
@@ -928,7 +961,7 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: 'Array of element values to write starting at startIndex; if the array of elements is too long  to fit in the specified table, extra elements will be ignored'
+        - description: Array of element values to write starting at startIndex; if the array of elements is too long  to fit in the specified table, extra elements will be ignored
           in: body
           name: int64Array
           required: true
@@ -939,28 +972,28 @@ paths:
               type: integer
             type: array
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/int64s/{tableName}/_string':
+  "/device/strategy/tables/int64s/{tableName}/_string":
     get:
-      description: |
+      description: >
         "Read a range of table elements from the specified integer64 table"
          #### Examples ####
          * Read all elements in a table named i64table: https://1.2.3.4/api/v1/device/strategy/tables/int64s/i64table/_string
@@ -986,34 +1019,36 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
               description: Value of the integer64 variable expressed as a decimal string. E.g. "34359738367"
               type: string
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
     post:
-      description: |
+      description: >
         "Write a range of table elements"
+
         #### Examples ####
+
         * Write the values (1, 2, 3) to 3 consecutive elements in a table named i64table starting with the element at index 10:POST to https://1.2.3.4/api/v1/device/strategy/tables/int64s/i64table/_string?startIndex=10  with body of the POST request set to [ "1", "2", "3" ]
       operationId: writeInt64TableAsString
       parameters:
@@ -1028,7 +1063,7 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: 'Array of element values to write starting at startIndex; if the array of elements is too long  to fit in the specified table, extra elements will be ignored'
+        - description: Array of element values to write starting at startIndex; if the array of elements is too long  to fit in the specified table, extra elements will be ignored
           in: body
           name: int64AsStringArray
           required: true
@@ -1038,26 +1073,26 @@ paths:
               type: string
             type: array
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/int64s/{tableName}/{index}':
+  "/device/strategy/tables/int64s/{tableName}/{index}":
     get:
       description: Read specified integer64 table element
       operationId: readInt64TableElement
@@ -1074,22 +1109,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Int64ValueObject'
-        '400':
+            $ref: "#/definitions/Int64ValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1115,28 +1150,28 @@ paths:
           name: int64ElementObject
           required: true
           schema:
-            $ref: '#/definitions/Int64ValueObject'
+            $ref: "#/definitions/Int64ValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/int64s/{tableName}/{index}/_string':
+  "/device/strategy/tables/int64s/{tableName}/{index}/_string":
     get:
       description: Read specified integer64 table element as string
       operationId: readInt64TableElementAsString
@@ -1153,22 +1188,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Int64StringValueObject'
-        '400':
+            $ref: "#/definitions/Int64StringValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1194,22 +1229,22 @@ paths:
           name: int64ElementObject
           required: true
           schema:
-            $ref: '#/definitions/Int64StringValueObject'
+            $ref: "#/definitions/Int64StringValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1221,28 +1256,28 @@ paths:
       operationId: readStringTables
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/TableDef'
+              $ref: "#/definitions/TableDef"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/strings/{tableName}':
+  "/device/strategy/tables/strings/{tableName}":
     get:
-      description: |
+      description: >
         "Read a range of table elements from the specified string table"
          #### Examples ####
          * Read all elements in a table named strTable: https://1.2.3.4/api/v1/device/strategy/tables/strings/strTable
@@ -1268,7 +1303,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
@@ -1276,27 +1311,29 @@ paths:
               maxLength: 1024
               type: string
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
     post:
-      description: |
+      description: >
         "Write a range of table elements"
+
         #### Examples ####
+
         * Write the values ("first", "second", "third") to 3 consecutive elements in a table named strTable starting with the element at index 10:POST to https://1.2.3.4/api/v1/device/strategy/tables/strings/strtable?startIndex=10  with body of the POST request set to [ "first", "second", "third" ]
       operationId: writeStringTable
       parameters:
@@ -1311,7 +1348,7 @@ paths:
           name: startIndex
           required: false
           type: integer
-        - description: 'Array of element values to write starting at startIndex; if an element value is longer than the string width, the string will be truncated to fit'
+        - description: Array of element values to write starting at startIndex; if an element value is longer than the string width, the string will be truncated to fit
           in: body
           name: stringArray
           required: true
@@ -1322,28 +1359,28 @@ paths:
               type: string
             type: array
       responses:
-        '200':
+        "200":
           description: OK - but check details for any error messages
           schema:
-            $ref: '#/definitions/ErrorResponse200OKish'
-        '400':
+            $ref: "#/definitions/ErrorResponse200OKish"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - tables
-  '/device/strategy/tables/strings/{tableName}/{index}':
+  "/device/strategy/tables/strings/{tableName}/{index}":
     get:
       description: Read specified table element
       operationId: readStringTableElement
@@ -1360,22 +1397,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StringValueObject'
-        '400':
+            $ref: "#/definitions/StringValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1401,22 +1438,22 @@ paths:
           name: stringElementObject
           required: true
           schema:
-            $ref: '#/definitions/StringValueObject'
+            $ref: "#/definitions/StringValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1428,26 +1465,26 @@ paths:
       operationId: readDownTimerVars
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/FloatVar'
+              $ref: "#/definitions/FloatVar"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - vars
-  '/device/strategy/vars/downTimers/{downTimerName}/value':
+  "/device/strategy/vars/downTimers/{downTimerName}/value":
     get:
       description: Returns current value of the specified down timer
       operationId: readDownTimerValue
@@ -1458,22 +1495,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/FloatValueObject'
-        '400':
+            $ref: "#/definitions/FloatValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1485,26 +1522,26 @@ paths:
       operationId: readFloatVars
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/FloatVar'
+              $ref: "#/definitions/FloatVar"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - vars
-  '/device/strategy/vars/floats/{floatName}':
+  "/device/strategy/vars/floats/{floatName}":
     get:
       description: Returns value of the specified float variable
       operationId: readFloatVar
@@ -1515,22 +1552,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/FloatValueObject'
-        '400':
+            $ref: "#/definitions/FloatValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1550,22 +1587,22 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/FloatValueObject'
+            $ref: "#/definitions/FloatValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1577,26 +1614,26 @@ paths:
       operationId: readInt32Vars
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Int32Var'
+              $ref: "#/definitions/Int32Var"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - vars
-  '/device/strategy/vars/int32s/{int32Name}':
+  "/device/strategy/vars/int32s/{int32Name}":
     get:
       description: Returns value of the specified integer32 variable
       operationId: readInt32Var
@@ -1607,22 +1644,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Int32ValueObject'
-        '400':
+            $ref: "#/definitions/Int32ValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1642,22 +1679,22 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Int32ValueObject'
+            $ref: "#/definitions/Int32ValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1669,20 +1706,20 @@ paths:
       operationId: readInt64Vars
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Int64Var'
+              $ref: "#/definitions/Int64Var"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
@@ -1694,26 +1731,26 @@ paths:
       operationId: readInt64VarsAsStrings
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/Int64VarAsString'
+              $ref: "#/definitions/Int64VarAsString"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - vars
-  '/device/strategy/vars/int64s/{int64Name}':
+  "/device/strategy/vars/int64s/{int64Name}":
     get:
       description: Returns value of the specified integer64 variable
       operationId: readInt64Var
@@ -1724,22 +1761,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Int64ValueObject'
-        '400':
+            $ref: "#/definitions/Int64ValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1759,28 +1796,28 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Int64ValueObject'
+            $ref: "#/definitions/Int64ValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
         - all
         - vars
-  '/device/strategy/vars/int64s/{int64Name}/_string':
+  "/device/strategy/vars/int64s/{int64Name}/_string":
     get:
       description: Returns value of the specified integer64 variable as a string
       operationId: readInt64VarAsString
@@ -1791,22 +1828,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Int64StringValueObject'
-        '400':
+            $ref: "#/definitions/Int64StringValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1826,22 +1863,22 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Int64StringValueObject'
+            $ref: "#/definitions/Int64StringValueObject"
       responses:
-        '200':
+        "200":
           description: OK
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1853,26 +1890,26 @@ paths:
       operationId: readStringVars
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/StringVar'
+              $ref: "#/definitions/StringVar"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - vars
-  '/device/strategy/vars/strings/{stringName}':
+  "/device/strategy/vars/strings/{stringName}":
     get:
       description: Returns value of the specified string
       operationId: readStringVar
@@ -1883,22 +1920,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StringValueObject'
-        '400':
+            $ref: "#/definitions/StringValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1913,29 +1950,29 @@ paths:
           name: stringName
           required: true
           type: string
-        - description: 'String to write. If the value is longer than the string width, the string will be truncated to fit.'
+        - description: String to write. If the value is longer than the string width, the string will be truncated to fit.
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/StringValueObject'
+            $ref: "#/definitions/StringValueObject"
       responses:
-        '200':
+        "200":
           description: OK - but check details for any error messages
           schema:
-            $ref: '#/definitions/ErrorResponse200OKish'
-        '400':
+            $ref: "#/definitions/ErrorResponse200OKish"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -1947,26 +1984,26 @@ paths:
       operationId: readUpTimerVars
       parameters: []
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/FloatVar'
+              $ref: "#/definitions/FloatVar"
             type: array
-        '400':
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
       security:
         - basicAuth: []
       tags:
         - all
         - vars
-  '/device/strategy/vars/upTimers/{upTimerName}/value':
+  "/device/strategy/vars/upTimers/{upTimerName}/value":
     get:
       description: Returns current value of the specified up timer
       operationId: readUpTimerValue
@@ -1977,22 +2014,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/FloatValueObject'
-        '400':
+            $ref: "#/definitions/FloatValueObject"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse400BadAdminOrValue'
-        '401':
+            $ref: "#/definitions/ErrorResponse400BadAdminOrValue"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse401BadKeyForBasicAuth'
-        '404':
+            $ref: "#/definitions/ErrorResponse401BadKeyForBasicAuth"
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorResponse404NotFound'
+            $ref: "#/definitions/ErrorResponse404NotFound"
       security:
         - basicAuth: []
       tags:
@@ -2020,23 +2057,23 @@ definitions:
   DigitalPointStateObject:
     properties:
       value:
-        description: 'State of a digital point (true = on, false = off)'
+        description: State of a digital point (true = on, false = off)
         type: boolean
     type: object
   DigitalPointStateVar:
     properties:
       name:
-        description: 'Name of the tag (strategy variable, i/o point, etc.)'
+        description: Name of the tag (strategy variable, i/o point, etc.)
         maxLength: 50
         type: string
       value:
-        description: 'State of a digital point (true = on, false = off)'
+        description: State of a digital point (true = on, false = off)
         type: boolean
     type: object
   ErrorResponse200OKish:
     properties:
       errorCode:
-        description: 'Details: ** -23 ** The string you passed is longer than the width of PAC Control string variable or table element you are writing to.'
+        description: "Details: ** -23 ** The string you passed is longer than the width of PAC Control string variable or table element you are writing to."
         format: int32
         type: integer
       message:
@@ -2048,7 +2085,7 @@ definitions:
   ErrorResponse400BadAdminOrValue:
     properties:
       errorCode:
-        description: 'Details: ** -1 ** Invalid or no strategy. Use PAC Control to download strategy logic. ** -3 ** Buffer overrun or invalid length. The number or range of table indicies you specified exceeds elements in the PAC Control table. ** -8 ** Invalid data. Check format of data written. Compare to what''s read for the same endpoint. ** -12 ** You''ve passed a table index that is less than zero or greater than the length of the table minus 1. ** -13 ** The value you passed to write is outside of the valid range for the PAC Control data type you''re writing to. For example, if you specified the value 999999999999999 for an integer32 (since integer32 data types must be in the range: -2147483648 to 2147483647). ** -17 or -20 ** The controller is busy with another task, for example, downloading a new strategy. Try again later. ** -36 ** Endpoint is not defined. ** -109 ** Attempting to write without write permissions. Check /admin/keys settings. ** -13019 ** Invalid endpoint. Check syntax of the URL (e.g. did you use ''ev'' instead of ''eu''). ** 400 ** Before using the API on this device, you must first change the default user name and password via the URL /admin/keys. Use the default User Name: ''admin'' and Password: ''password'' to log ininitially.'
+        description: "Details: ** -1 ** Invalid or no strategy. Use PAC Control to download strategy logic. ** -3 ** Buffer overrun or invalid length. The number or range of table indicies you specified exceeds elements in the PAC Control table. ** -8 ** Invalid data. Check format of data written. Compare to what's read for the same endpoint. ** -12 ** You've passed a table index that is less than zero or greater than the length of the table minus 1. ** -13 ** The value you passed to write is outside of the valid range for the PAC Control data type you're writing to. For example, if you specified the value 999999999999999 for an integer32 (since integer32 data types must be in the range: -2147483648 to 2147483647). ** -17 or -20 ** The controller is busy with another task, for example, downloading a new strategy. Try again later. ** -36 ** Endpoint is not defined. ** -109 ** Attempting to write without write permissions. Check /admin/keys settings. ** -13019 ** Invalid endpoint. Check syntax of the URL (e.g. did you use 'ev' instead of 'eu'). ** 400 ** Before using the API on this device, you must first change the default user name and password via the URL /admin/keys. Use the default User Name: 'admin' and Password: 'password' to log ininitially."
         format: int32
         type: integer
       message:
@@ -2060,7 +2097,7 @@ definitions:
   ErrorResponse401BadKeyForBasicAuth:
     properties:
       errorCode:
-        description: 'Details: ** -104 ** Invalid key ID/value in HTTP header. Before using the API on this device, you must create at least one key ID/value via the URL /admin/keys. Then use one of those in your HTTP header for Basic Authentication.'
+        description: "Details: ** -104 ** Invalid key ID/value in HTTP header. Before using the API on this device, you must create at least one key ID/value via the URL /admin/keys. Then use one of those in your HTTP header for Basic Authentication."
         format: int32
         type: integer
       message:
@@ -2072,7 +2109,7 @@ definitions:
   ErrorResponse404NotFound:
     properties:
       errorCode:
-        description: 'Details: ** -29 ** The tag (variable, table, timer, I/O point, etc.) you requested exists on the controller but does not match the data type for this endpoint.  ** -28 ** The tag (variable, table, timer, I/O point, etc.) does not currently exist on the controller. Check the tag name and the controller''s status. ** 404 ** Endpoint does not exist. Check URL.'
+        description: "Details: ** -29 ** The tag (variable, table, timer, I/O point, etc.) you requested exists on the controller but does not match the data type for this endpoint.  ** -28 ** The tag (variable, table, timer, I/O point, etc.) does not currently exist on the controller. Check the tag name and the controller's status. ** 404 ** Endpoint does not exist. Check URL."
         format: int32
         type: integer
       message:
@@ -2091,7 +2128,7 @@ definitions:
   FloatVar:
     properties:
       name:
-        description: 'Name of the tag (strategy variable, i/o point, etc.)'
+        description: Name of the tag (strategy variable, i/o point, etc.)
         maxLength: 50
         type: string
       value:
@@ -2109,7 +2146,7 @@ definitions:
   Int32Var:
     properties:
       name:
-        description: 'Name of the tag (strategy variable, i/o point, etc.)'
+        description: Name of the tag (strategy variable, i/o point, etc.)
         maxLength: 50
         type: string
       value:
@@ -2120,7 +2157,7 @@ definitions:
   Int64StringValueObject:
     properties:
       value:
-        description: 'Value of the integer64 variable expressed as decimal string, e.g. "34359738367"'
+        description: Value of the integer64 variable expressed as decimal string, e.g. "34359738367"
         type: string
     type: object
   Int64ValueObject:
@@ -2133,7 +2170,7 @@ definitions:
   Int64Var:
     properties:
       name:
-        description: 'Name of the tag (strategy variable, i/o point, etc.)'
+        description: Name of the tag (strategy variable, i/o point, etc.)
         maxLength: 50
         type: string
       value:
@@ -2144,11 +2181,11 @@ definitions:
   Int64VarAsString:
     properties:
       name:
-        description: 'Name of the tag (strategy variable, i/o point, etc.)'
+        description: Name of the tag (strategy variable, i/o point, etc.)
         maxLength: 50
         type: string
       value:
-        description: 'Value of the integer64 variable expressed as a decimal string, E.g. "34359738367"'
+        description: Value of the integer64 variable expressed as a decimal string, E.g. "34359738367"
         type: string
     type: object
   StrategyResponse:
@@ -2175,7 +2212,7 @@ definitions:
   StringVar:
     properties:
       name:
-        description: 'Name of the tag (strategy variable, i/o point, etc.)'
+        description: Name of the tag (strategy variable, i/o point, etc.)
         maxLength: 50
         type: string
       value:
@@ -2190,7 +2227,7 @@ definitions:
         format: int32
         type: integer
       name:
-        description: 'Name of the tag (strategy variable, i/o point, etc.)'
+        description: Name of the tag (strategy variable, i/o point, etc.)
         maxLength: 50
         type: string
     type: object

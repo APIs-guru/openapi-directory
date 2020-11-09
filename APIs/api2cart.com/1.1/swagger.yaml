@@ -20,6 +20,7 @@ info:
       url: https://app.api2cart.com/default/index/swagger-json
       version: "2.0"
   x-providerName: api2cart.com
+  x-preferred: true
 externalDocs:
   description: Find out more about API2Cart
   url: http://docs.api2cart.com
@@ -366,6 +367,11 @@ paths:
         - description: Access token authorizing the app to access resources on behalf of a user
           in: query
           name: shopify_access_token
+          required: false
+          type: string
+        - description: Shopware api key
+          in: query
+          name: shopware_api_key
           required: false
           type: string
         - description: It's a Volusion account for which API is enabled
@@ -2400,6 +2406,11 @@ paths:
         - description: LightSpeed api secret
           in: query
           name: lightspeed_api_secret
+          required: false
+          type: string
+        - description: Shopware api key
+          in: query
+          name: shopware_api_key
           required: false
           type: string
       produces:
@@ -8598,6 +8609,9 @@ definitions:
         type: string
       shopify_shared_secret:
         description: Shared secret
+        type: string
+      shopware_api_key:
+        description: Shopware api key
         type: string
       squarespace_api_key:
         description: Squarespace API Key

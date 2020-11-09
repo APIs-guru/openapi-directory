@@ -1,22 +1,23 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api2.lotadata.com
 basePath: /v2
 info:
-  description: 'Access the most exhaustive, accurate and up-to-date collection of global and hyper-local geocoded events and activities across a wide range of categories and genres'
+  description: Access the most exhaustive, accurate and up-to-date collection of global and hyper-local geocoded events and activities across a wide range of categories and genres
   title: LotaData
   version: 2.0.0
   x-apisguru-categories:
     - location
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/664666044754079744/OtP5eqwm_400x400.png'
+    backgroundColor: "#FFFFFF"
+    url: https://pbs.twimg.com/profile_images/664666044754079744/OtP5eqwm_400x400.png
   x-origin:
     - format: swagger
-      url: 'https://developers.lotadata.com/swagger/spec/apiv2.json'
-      version: '2.0'
+      url: https://developers.lotadata.com/swagger/spec/apiv2.json
+      version: "2.0"
   x-providerName: lotadata.com
+  x-preferred: true
 produces:
   - application/json
 securityDefinitions:
@@ -54,7 +55,7 @@ paths:
           in: query
           name: name
           type: string
-        - description: 'Text query matching titles, description, various text, tags, category'
+        - description: Text query matching titles, description, various text, tags, category
           in: query
           name: q
           type: string
@@ -80,7 +81,7 @@ paths:
           name: capacity_max
           required: false
           type: number
-        - description: 'latitude,longitude of the origin point'
+        - description: latitude,longitude of the origin point
           in: query
           name: center
           type: string
@@ -89,7 +90,7 @@ paths:
           name: radius
           type: integer
         - collectionFormat: multi
-          description: 'Corner of a bounding box (lat,lng). Requires 0 or 2 pairs'
+          description: Corner of a bounding box (lat,lng). Requires 0 or 2 pairs
           in: query
           items:
             type: string
@@ -97,7 +98,7 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: 'Closed custom polygon. Ordered list of lat,lng pairs'
+          description: Closed custom polygon. Ordered list of lat,lng pairs
           in: query
           items:
             type: string
@@ -118,7 +119,7 @@ paths:
           name: limit
           type: integer
         - default: context
-          description: 'Return results starting at specified offset (summary, context, detail)'
+          description: Return results starting at specified offset (summary, context, detail)
           enum:
             - summary
             - detail
@@ -129,18 +130,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: List of matching events
           schema:
-            $ref: '#/definitions/EventsSearchResponse'
-        '400':
+            $ref: "#/definitions/EventsSearchResponse"
+        "400":
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Find event occurrences in the area. Returns results at specific place and time, event groups are expanded for every occurrence.'
+            $ref: "#/definitions/Error"
+      summary: Find event occurrences in the area. Returns results at specific place and time, event groups are expanded for every occurrence.
       tags:
         - Events
-  '/events/{id}':
+  "/events/{id}":
     get:
       parameters:
         - description: event @id
@@ -158,14 +159,14 @@ paths:
           name: fieldset
           type: string
       responses:
-        '200':
+        "200":
           description: Requested event
           schema:
-            $ref: '#/definitions/EventOccurenceDetail'
-        '404':
+            $ref: "#/definitions/EventOccurenceDetail"
+        "404":
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Get Specific event details.
       tags:
         - Events
@@ -226,7 +227,7 @@ paths:
           in: query
           name: street
           type: string
-        - description: 'city, town, or neighborhood of the place'
+        - description: city, town, or neighborhood of the place
           in: query
           name: locality
           type: string
@@ -242,7 +243,7 @@ paths:
           in: query
           name: country
           type: string
-        - description: 'latitude,longitude of the origin point'
+        - description: latitude,longitude of the origin point
           in: query
           name: center
           type: string
@@ -251,7 +252,7 @@ paths:
           name: radius
           type: integer
         - collectionFormat: multi
-          description: 'Corner of a bounding box (lat,lng). Requires 0 or 2 pairs'
+          description: Corner of a bounding box (lat,lng). Requires 0 or 2 pairs
           in: query
           items:
             type: string
@@ -259,7 +260,7 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: 'Closed custom polygon. Ordered list of lat,lng pairs'
+          description: Closed custom polygon. Ordered list of lat,lng pairs
           in: query
           items:
             type: string
@@ -280,7 +281,7 @@ paths:
           name: limit
           type: integer
         - default: context
-          description: 'Return results starting at specified offset (summary, context, detail)'
+          description: Return results starting at specified offset (summary, context, detail)
           enum:
             - summary
             - detail
@@ -290,18 +291,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: List of matching events
           schema:
-            $ref: '#/definitions/PlacesSearchResponse'
-        '400':
+            $ref: "#/definitions/PlacesSearchResponse"
+        "400":
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
-      summary: 'Venues, landmarks, regions, these are all places to search.'
+            $ref: "#/definitions/Error"
+      summary: Venues, landmarks, regions, these are all places to search.
       tags:
         - Places
-  '/places/{id}':
+  "/places/{id}":
     get:
       parameters:
         - description: place @id
@@ -319,14 +320,14 @@ paths:
           name: fieldset
           type: string
       responses:
-        '200':
+        "200":
           description: Requested place
           schema:
-            $ref: '#/definitions/PlaceDetail'
-        '404':
+            $ref: "#/definitions/PlaceDetail"
+        "404":
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Get specific place details
       tags:
         - Places
@@ -347,7 +348,7 @@ definitions:
       region:
         type: string
       street:
-        description: 'Street portion of the address, may sometimes be a common name of the place'
+        description: Street portion of the address, may sometimes be a common name of the place
         type: string
       unit:
         type: string
@@ -399,10 +400,10 @@ definitions:
   EventOccurenceDetail:
     description: Event Occurrence Detail limited to requested fieldset.
     properties:
-      '@id':
+      "@id":
         description: Unique event id
         type: string
-      '@type':
+      "@type":
         description: Type of occurrence. You will usually see Organized as the type for most events. While Virtual events will get their own Virtual type.
         enum:
           - Organized
@@ -413,26 +414,26 @@ definitions:
       activity:
         description: Associated ActivityType entries
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
       ambience:
         description: expected mood and feel of the event
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
       at:
-        $ref: '#/definitions/PlaceReference'
+        $ref: "#/definitions/PlaceReference"
         description: Reference to the location where event takes place
       awayTeam:
-        $ref: '#/definitions/FeatureReference'
+        $ref: "#/definitions/FeatureReference"
         description: other SportsTeam playing
       category:
-        description: 'Associated EventCategory. May be multiple, such as Charity Music event'
+        description: Associated EventCategory. May be multiple, such as Charity Music event
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
       contactPoint:
-        $ref: '#/definitions/ContactDetail'
+        $ref: "#/definitions/ContactDetail"
         description: Social and contact references
       description:
         description: Full description in plain text
@@ -448,33 +449,33 @@ definitions:
         description: endDate is approximated based on historical data
         type: boolean
       endDate:
-        description: 'Time when the event ends, if known'
+        description: Time when the event ends, if known
         format: date-time
         type: string
       extTaxonomy:
         description: extended taxonomy such as IAB and Google AdWords
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
       genre:
-        description: 'applicable Genres. (Tier 2 taxonomy). May include related genres from categories, not deemed as primary'
+        description: applicable Genres. (Tier 2 taxonomy). May include related genres from categories, not deemed as primary
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
       headline:
         description: Optional short description in plain text
         type: string
       homeTeam:
-        $ref: '#/definitions/FeatureReference'
+        $ref: "#/definitions/FeatureReference"
         description: SportsTeam playing at home field
       htmlDescription:
-        description: 'Full description with HTML formatting, where available'
+        description: Full description with HTML formatting, where available
         type: string
       image:
-        $ref: '#/definitions/ImageMeta'
+        $ref: "#/definitions/ImageMeta"
         description: Primary image
       inLanguage:
-        $ref: '#/definitions/FeatureReference'
+        $ref: "#/definitions/FeatureReference"
         description: Primary language of the event
       name:
         description: Name of the event in plain text
@@ -485,7 +486,7 @@ definitions:
       offers:
         description: Ticketing options
         items:
-          $ref: '#/definitions/TicketOffer'
+          $ref: "#/definitions/TicketOffer"
         type: array
       onDemand:
         description: This event can start at any time during specified window
@@ -493,20 +494,20 @@ definitions:
       performer:
         description: List of Personas significant for this event
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
       photo:
         description: Primary image
         items:
-          $ref: '#/definitions/ImageMeta'
+          $ref: "#/definitions/ImageMeta"
         type: array
       startDate:
         description: Time when the event starts
         format: date-time
         type: string
       superEvent:
-        $ref: '#/definitions/OccurrenceReference'
-        description: 'Parent id, if this event is part of a series of a group'
+        $ref: "#/definitions/OccurrenceReference"
+        description: Parent id, if this event is part of a series of a group
       updated:
         description: Timestamp of last modification (UTC)
         format: date-time
@@ -517,10 +518,10 @@ definitions:
       workPerformed:
         description: Subject matter of the event
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
   EventsQuery:
-    description: 'Specific filters understood and executed for this query. If your parameter is not visible here, then consult the documentation for correct usage.'
+    description: Specific filters understood and executed for this query. If your parameter is not visible here, then consult the documentation for correct usage.
     properties:
       activity:
         description: required activity types
@@ -539,20 +540,20 @@ definitions:
     properties:
       events:
         items:
-          $ref: '#/definitions/EventOccurenceDetail'
+          $ref: "#/definitions/EventOccurenceDetail"
         type: array
       query:
-        $ref: '#/definitions/EventsQuery'
+        $ref: "#/definitions/EventsQuery"
       stats:
-        $ref: '#/definitions/SearchStatsMetaResult'
+        $ref: "#/definitions/SearchStatsMetaResult"
   FeatureReference:
     description: Identifier for a Feature
     properties:
-      '@id':
+      "@id":
         description: Feature id
         type: string
-      '@type':
-        description: 'Type of specific feature or Taxonomy node such as EventCategory, SportsTeam, Persona.'
+      "@type":
+        description: Type of specific feature or Taxonomy node such as EventCategory, SportsTeam, Persona.
         type: string
       name:
         description: Display name of the feature
@@ -568,7 +569,7 @@ definitions:
   ImageMeta:
     description: Image meta data
     properties:
-      '@id':
+      "@id":
         type: string
       caption:
         type: string
@@ -580,7 +581,7 @@ definitions:
         type: integer
   OccurrenceReference:
     properties:
-      '@id':
+      "@id":
         type: string
       name:
         type: string
@@ -590,40 +591,40 @@ definitions:
         type: string
   PlaceDetail:
     allOf:
-      - $ref: '#/definitions/PlaceReference'
+      - $ref: "#/definitions/PlaceReference"
     properties:
       ambience:
         description: expected mood and feel of the event
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
       category:
         description: Associated PlaceCategory. May be multiple (Tier 1)
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
       contact:
-        $ref: '#/definitions/ContactDetail'
+        $ref: "#/definitions/ContactDetail"
       function:
         description: PlaceFunction. (Tier 2 taxonomy)
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
       openingHours:
         items:
-          $ref: '#/definitions/Timeframe'
+          $ref: "#/definitions/Timeframe"
         type: array
       photo:
         items:
-          $ref: '#/definitions/ImageMeta'
+          $ref: "#/definitions/ImageMeta"
         type: array
   PlaceReference:
     description: Unique Location
     properties:
-      '@id':
+      "@id":
         type: string
-      '@type':
-        description: 'Type of place where Place is a physical address, LocalBusiness is any type of comercial property, AdministrativeArea is a political or colloquial area, and Virtual is out of this world'
+      "@type":
+        description: Type of place where Place is a physical address, LocalBusiness is any type of comercial property, AdministrativeArea is a political or colloquial area, and Virtual is out of this world
         enum:
           - Place
           - LocalBusiness
@@ -635,28 +636,28 @@ definitions:
           - Virtual
         type: string
       address:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
         description: Address of the physical place
       geo:
-        $ref: '#/definitions/GeoPt'
+        $ref: "#/definitions/GeoPt"
       geometry:
-        $ref: '#/definitions/GeoJsonObject'
+        $ref: "#/definitions/GeoJsonObject"
       location:
-        $ref: '#/definitions/VirtualLocation'
+        $ref: "#/definitions/VirtualLocation"
         description: applies to Virtual places
       logo:
-        $ref: '#/definitions/ImageMeta'
+        $ref: "#/definitions/ImageMeta"
       name:
         type: string
       tag:
         items:
-          $ref: '#/definitions/FeatureReference'
+          $ref: "#/definitions/FeatureReference"
         type: array
   PlacesQuery:
-    description: 'Specific filters understood and executed for this query. If your parameter is not visible here, then consult the documentation for correct usage.'
+    description: Specific filters understood and executed for this query. If your parameter is not visible here, then consult the documentation for correct usage.
     properties:
       address:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
         description: Address filter
       category:
         description: required categories
@@ -670,14 +671,14 @@ definitions:
     properties:
       places:
         items:
-          $ref: '#/definitions/PlaceDetail'
+          $ref: "#/definitions/PlaceDetail"
         type: array
       query:
-        $ref: '#/definitions/PlacesQuery'
+        $ref: "#/definitions/PlacesQuery"
       stats:
-        $ref: '#/definitions/SearchStatsMetaResult'
+        $ref: "#/definitions/SearchStatsMetaResult"
   SearchStatsMetaResult:
-    description: 'Shows invocation details about the query. Running query again, could produce different results'
+    description: Shows invocation details about the query. Running query again, could produce different results
     properties:
       count:
         description: Total matches for the query
@@ -736,11 +737,11 @@ definitions:
   Timeframe:
     properties:
       closes:
-        description: 'Close time for all days mentioned in the dayOfWeek. If close time is less than open, then it is following day.'
+        description: Close time for all days mentioned in the dayOfWeek. If close time is less than open, then it is following day.
         format: date-time
         type: string
       dayOfWeek:
-        description: 'ISO day of the week. 1- Monday, 7- Sunday'
+        description: ISO day of the week. 1- Monday, 7- Sunday
         items:
           type: integer
         type: array

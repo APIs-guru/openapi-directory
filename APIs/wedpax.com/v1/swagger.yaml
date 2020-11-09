@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: api.wedpax.com
@@ -9,9 +9,10 @@ info:
     - social
   x-origin:
     - format: swagger
-      url: 'http://api.wedpax.com/swagger/v1/swagger.json'
-      version: '2.0'
+      url: http://api.wedpax.com/swagger/v1/swagger.json
+      version: "2.0"
   x-providerName: wedpax.com
+  x-preferred: true
 securityDefinitions:
   bearerAuth:
     description: 'JWT Authorization header using the Bearer scheme. Example: "Authorization: Bearer {token}"'
@@ -46,10 +47,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/PagedResultDto[WeddingVendorDto]'
+            $ref: "#/definitions/PagedResultDto[WeddingVendorDto]"
       tags:
         - ServiceQuery
   /api/ServiceQuery/Search:
@@ -76,11 +77,11 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/ServiceListModel'
+              $ref: "#/definitions/ServiceListModel"
             type: array
             uniqueItems: false
       tags:
@@ -100,10 +101,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UpdateWeddingVendorDto'
+            $ref: "#/definitions/UpdateWeddingVendorDto"
       tags:
         - ServiceQuery
   /api/ServiceQuery/UserServices:
@@ -121,11 +122,11 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/UserServicesDto'
+              $ref: "#/definitions/UserServicesDto"
             type: array
             uniqueItems: false
       tags:
@@ -143,16 +144,16 @@ paths:
           name: model
           required: false
           schema:
-            $ref: '#/definitions/AuthenticateModel'
+            $ref: "#/definitions/AuthenticateModel"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/AuthenticateResultModel'
+            $ref: "#/definitions/AuthenticateResultModel"
       tags:
         - TokenAuth
   /api/TokenAuth/ExternalAuthenticate:
@@ -168,16 +169,16 @@ paths:
           name: model
           required: false
           schema:
-            $ref: '#/definitions/ExternalAuthenticateModel'
+            $ref: "#/definitions/ExternalAuthenticateModel"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ExternalAuthenticateResultModel'
+            $ref: "#/definitions/ExternalAuthenticateResultModel"
       tags:
         - TokenAuth
   /api/TokenAuth/GetExternalAuthenticationProviders:
@@ -190,11 +191,11 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/ExternalLoginProviderInfoModel'
+              $ref: "#/definitions/ExternalLoginProviderInfoModel"
             type: array
             uniqueItems: false
       tags:
@@ -212,16 +213,16 @@ paths:
           name: model
           required: false
           schema:
-            $ref: '#/definitions/LoginModel'
+            $ref: "#/definitions/LoginModel"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/AuthenticateResultModel'
+            $ref: "#/definitions/AuthenticateResultModel"
       tags:
         - TokenAuth
   /api/TokenAuth/RefreshToken:
@@ -238,10 +239,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/AuthenticateResultModel'
+            $ref: "#/definitions/AuthenticateResultModel"
       tags:
         - TokenAuth
   /api/services/app/Account/IsTenantAvailable:
@@ -257,16 +258,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/IsTenantAvailableInput'
+            $ref: "#/definitions/IsTenantAvailableInput"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/IsTenantAvailableOutput'
+            $ref: "#/definitions/IsTenantAvailableOutput"
       tags:
         - Account
   /api/services/app/Account/Register:
@@ -282,16 +283,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/RegisterInput'
+            $ref: "#/definitions/RegisterInput"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/RegisterOutput'
+            $ref: "#/definitions/RegisterOutput"
       tags:
         - Account
   /api/services/app/AddressServices/Create:
@@ -306,16 +307,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/GeoDetailsCreateDto'
+            $ref: "#/definitions/GeoDetailsCreateDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GeoDetailsDto'
+            $ref: "#/definitions/GeoDetailsDto"
       tags:
         - AddressServices
   /api/services/app/AddressServices/Delete:
@@ -329,7 +330,7 @@ paths:
           type: integer
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - AddressServices
@@ -347,10 +348,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GeoDetailsDto'
+            $ref: "#/definitions/GeoDetailsDto"
       tags:
         - AddressServices
   /api/services/app/AddressServices/GetAll:
@@ -380,10 +381,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/PagedResultDto[GeoDetailsDto]'
+            $ref: "#/definitions/PagedResultDto[GeoDetailsDto]"
       tags:
         - AddressServices
   /api/services/app/AddressServices/GetCities:
@@ -401,11 +402,11 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/CityDto'
+              $ref: "#/definitions/CityDto"
             type: array
             uniqueItems: false
       tags:
@@ -420,11 +421,11 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/ProvinceDto'
+              $ref: "#/definitions/ProvinceDto"
             type: array
             uniqueItems: false
       tags:
@@ -441,16 +442,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/GeoDetailsUpdateDto'
+            $ref: "#/definitions/GeoDetailsUpdateDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GeoDetailsDto'
+            $ref: "#/definitions/GeoDetailsDto"
       tags:
         - AddressServices
   /api/services/app/CategoryService/Create:
@@ -465,16 +466,16 @@ paths:
           name: categoryDto
           required: false
           schema:
-            $ref: '#/definitions/ServiceCategroyCreateDto'
+            $ref: "#/definitions/ServiceCategroyCreateDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ServiceCategoryDto'
+            $ref: "#/definitions/ServiceCategoryDto"
       tags:
         - CategoryService
   /api/services/app/CategoryService/Delete:
@@ -488,7 +489,7 @@ paths:
           type: integer
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - CategoryService
@@ -506,10 +507,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ServiceCategoryDto'
+            $ref: "#/definitions/ServiceCategoryDto"
       tags:
         - CategoryService
   /api/services/app/CategoryService/GetAll:
@@ -533,10 +534,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/PagedResultDto[ServiceCategoryDto]'
+            $ref: "#/definitions/PagedResultDto[ServiceCategoryDto]"
       tags:
         - CategoryService
   /api/services/app/CategoryService/GetById:
@@ -554,10 +555,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ServiceCategory'
+            $ref: "#/definitions/ServiceCategory"
       tags:
         - CategoryService
   /api/services/app/CategoryService/GetByName:
@@ -574,10 +575,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ServiceCategoryDto'
+            $ref: "#/definitions/ServiceCategoryDto"
       tags:
         - CategoryService
   /api/services/app/CategoryService/GetCategories:
@@ -590,11 +591,11 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/ServiceCategoryDto'
+              $ref: "#/definitions/ServiceCategoryDto"
             type: array
             uniqueItems: false
       tags:
@@ -611,16 +612,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/ServiceCategoryUpdateDto'
+            $ref: "#/definitions/ServiceCategoryUpdateDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ServiceCategoryDto'
+            $ref: "#/definitions/ServiceCategoryDto"
       tags:
         - CategoryService
   /api/services/app/Configuration/ChangeUiTheme:
@@ -636,10 +637,10 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/ChangeUiThemeInput'
+            $ref: "#/definitions/ChangeUiThemeInput"
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - Configuration
@@ -655,16 +656,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/CreateRoleDto'
+            $ref: "#/definitions/CreateRoleDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/RoleDto'
+            $ref: "#/definitions/RoleDto"
       tags:
         - Role
   /api/services/app/Role/Delete:
@@ -678,7 +679,7 @@ paths:
           type: integer
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - Role
@@ -696,10 +697,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/RoleDto'
+            $ref: "#/definitions/RoleDto"
       tags:
         - Role
   /api/services/app/Role/GetAll:
@@ -729,10 +730,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/PagedResultDto[RoleDto]'
+            $ref: "#/definitions/PagedResultDto[RoleDto]"
       tags:
         - Role
   /api/services/app/Role/GetAllPermissions:
@@ -745,10 +746,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListResultDto[PermissionDto]'
+            $ref: "#/definitions/ListResultDto[PermissionDto]"
       tags:
         - Role
   /api/services/app/Role/GetRoleForEdit:
@@ -766,10 +767,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetRoleForEditOutput'
+            $ref: "#/definitions/GetRoleForEditOutput"
       tags:
         - Role
   /api/services/app/Role/GetRolesAsync:
@@ -786,10 +787,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListResultDto[RoleListDto]'
+            $ref: "#/definitions/ListResultDto[RoleListDto]"
       tags:
         - Role
   /api/services/app/Role/Update:
@@ -804,16 +805,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/RoleDto'
+            $ref: "#/definitions/RoleDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/RoleDto'
+            $ref: "#/definitions/RoleDto"
       tags:
         - Role
   /api/services/app/ServiceFacilityService/Create:
@@ -828,16 +829,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/ServiceFacilityCreateDto'
+            $ref: "#/definitions/ServiceFacilityCreateDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ServiceFacilityDto'
+            $ref: "#/definitions/ServiceFacilityDto"
       tags:
         - ServiceFacilityService
   /api/services/app/ServiceFacilityService/Delete:
@@ -851,7 +852,7 @@ paths:
           type: integer
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - ServiceFacilityService
@@ -869,10 +870,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ServiceFacilityDto'
+            $ref: "#/definitions/ServiceFacilityDto"
       tags:
         - ServiceFacilityService
   /api/services/app/ServiceFacilityService/GetAll:
@@ -891,10 +892,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/PagedResultDto[ServiceFacilityDto]'
+            $ref: "#/definitions/PagedResultDto[ServiceFacilityDto]"
       tags:
         - ServiceFacilityService
   /api/services/app/ServiceFacilityService/GetFacilities:
@@ -907,11 +908,11 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/ServiceFacilityDto'
+              $ref: "#/definitions/ServiceFacilityDto"
             type: array
             uniqueItems: false
       tags:
@@ -935,11 +936,11 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             items:
-              $ref: '#/definitions/ServiceFacilityDto'
+              $ref: "#/definitions/ServiceFacilityDto"
             type: array
             uniqueItems: false
       tags:
@@ -956,16 +957,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/ServiceFacilityUpdateDto'
+            $ref: "#/definitions/ServiceFacilityUpdateDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ServiceFacilityDto'
+            $ref: "#/definitions/ServiceFacilityDto"
       tags:
         - ServiceFacilityService
   /api/services/app/Session/GetCurrentLoginInformations:
@@ -978,10 +979,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/GetCurrentLoginInformationsOutput'
+            $ref: "#/definitions/GetCurrentLoginInformationsOutput"
       tags:
         - Session
   /api/services/app/Tenant/Create:
@@ -996,16 +997,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/CreateTenantDto'
+            $ref: "#/definitions/CreateTenantDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/TenantDto'
+            $ref: "#/definitions/TenantDto"
       tags:
         - Tenant
   /api/services/app/Tenant/Delete:
@@ -1019,7 +1020,7 @@ paths:
           type: integer
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - Tenant
@@ -1037,10 +1038,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/TenantDto'
+            $ref: "#/definitions/TenantDto"
       tags:
         - Tenant
   /api/services/app/Tenant/GetAll:
@@ -1074,10 +1075,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/PagedResultDto[TenantDto]'
+            $ref: "#/definitions/PagedResultDto[TenantDto]"
       tags:
         - Tenant
   /api/services/app/Tenant/Update:
@@ -1092,16 +1093,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/TenantDto'
+            $ref: "#/definitions/TenantDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/TenantDto'
+            $ref: "#/definitions/TenantDto"
       tags:
         - Tenant
   /api/services/app/User/AddManagerToUserRoles:
@@ -1117,10 +1118,10 @@ paths:
           name: user
           required: false
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - User
@@ -1137,10 +1138,10 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/ChangeUserLanguageDto'
+            $ref: "#/definitions/ChangeUserLanguageDto"
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - User
@@ -1157,13 +1158,13 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/ChangePasswordDto'
+            $ref: "#/definitions/ChangePasswordDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             type: boolean
@@ -1182,10 +1183,10 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/ConfirmCodeDto'
+            $ref: "#/definitions/ConfirmCodeDto"
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - User
@@ -1201,16 +1202,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/CreateUserDto'
+            $ref: "#/definitions/CreateUserDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UserDto'
+            $ref: "#/definitions/UserDto"
       tags:
         - User
   /api/services/app/User/Delete:
@@ -1224,7 +1225,7 @@ paths:
           type: integer
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - User
@@ -1242,10 +1243,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UserDto'
+            $ref: "#/definitions/UserDto"
       tags:
         - User
   /api/services/app/User/GetAll:
@@ -1279,10 +1280,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/PagedResultDto[UserDto]'
+            $ref: "#/definitions/PagedResultDto[UserDto]"
       tags:
         - User
   /api/services/app/User/GetRoles:
@@ -1295,10 +1296,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/ListResultDto[RoleDto]'
+            $ref: "#/definitions/ListResultDto[RoleDto]"
       tags:
         - User
   /api/services/app/User/GetToEntity:
@@ -1316,10 +1317,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       tags:
         - User
   /api/services/app/User/ProhibitPermission:
@@ -1335,10 +1336,10 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/ProhibitPermissionInput'
+            $ref: "#/definitions/ProhibitPermissionInput"
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - User
@@ -1355,13 +1356,13 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/ResetPasswordDto'
+            $ref: "#/definitions/ResetPasswordDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
             type: boolean
@@ -1379,16 +1380,16 @@ paths:
           name: input
           required: false
           schema:
-            $ref: '#/definitions/UserDto'
+            $ref: "#/definitions/UserDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/UserDto'
+            $ref: "#/definitions/UserDto"
       tags:
         - User
   /api/services/app/WeddingVendorServices/Create:
@@ -1403,16 +1404,16 @@ paths:
           name: model
           required: false
           schema:
-            $ref: '#/definitions/CreateWeddingVendorDto'
+            $ref: "#/definitions/CreateWeddingVendorDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/WeddingVendorDto'
+            $ref: "#/definitions/WeddingVendorDto"
       tags:
         - WeddingVendorServices
   /api/services/app/WeddingVendorServices/Delete:
@@ -1426,7 +1427,7 @@ paths:
           type: integer
       produces: []
       responses:
-        '200':
+        "200":
           description: Success
       tags:
         - WeddingVendorServices
@@ -1444,10 +1445,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/WeddingVendorDto'
+            $ref: "#/definitions/WeddingVendorDto"
       tags:
         - WeddingVendorServices
   /api/services/app/WeddingVendorServices/GetAll:
@@ -1477,10 +1478,10 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/PagedResultDto[WeddingVendorDto]'
+            $ref: "#/definitions/PagedResultDto[WeddingVendorDto]"
       tags:
         - WeddingVendorServices
   /api/services/app/WeddingVendorServices/Update:
@@ -1495,16 +1496,16 @@ paths:
           name: model
           required: false
           schema:
-            $ref: '#/definitions/UpdateWeddingVendorDto'
+            $ref: "#/definitions/UpdateWeddingVendorDto"
       produces:
         - text/plain
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/WeddingVendorDto'
+            $ref: "#/definitions/WeddingVendorDto"
       tags:
         - WeddingVendorServices
 definitions:
@@ -1560,7 +1561,7 @@ definitions:
         format: int32
         type: integer
       category:
-        $ref: '#/definitions/ServiceCategory'
+        $ref: "#/definitions/ServiceCategory"
       categoryId:
         format: int32
         type: integer
@@ -1571,13 +1572,13 @@ definitions:
         minLength: 20
         type: string
       geoDetails:
-        $ref: '#/definitions/GeoDetails'
+        $ref: "#/definitions/GeoDetails"
       id:
         format: int64
         type: integer
       images:
         items:
-          $ref: '#/definitions/ServiceImages'
+          $ref: "#/definitions/ServiceImages"
         type: array
         uniqueItems: false
       mainImage:
@@ -1589,7 +1590,7 @@ definitions:
       title:
         type: string
       user:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
     required:
       - description
       - user
@@ -1686,7 +1687,7 @@ definitions:
       tenancyName:
         maxLength: 64
         minLength: 0
-        pattern: '^[a-zA-Z][a-zA-Z0-9_-]{1,}$'
+        pattern: ^[a-zA-Z][a-zA-Z0-9_-]{1,}$
         type: string
     required:
       - tenancyName
@@ -1706,7 +1707,7 @@ definitions:
     properties:
       base64Images:
         items:
-          $ref: '#/definitions/ImageData'
+          $ref: "#/definitions/ImageData"
         type: array
         uniqueItems: false
       capacity:
@@ -1796,7 +1797,7 @@ definitions:
       address:
         type: string
       baseServices:
-        $ref: '#/definitions/BaseServices'
+        $ref: "#/definitions/BaseServices"
       city:
         type: string
       country:
@@ -1885,11 +1886,11 @@ definitions:
   GetCurrentLoginInformationsOutput:
     properties:
       application:
-        $ref: '#/definitions/ApplicationInfoDto'
+        $ref: "#/definitions/ApplicationInfoDto"
       tenant:
-        $ref: '#/definitions/TenantLoginInfoDto'
+        $ref: "#/definitions/TenantLoginInfoDto"
       user:
-        $ref: '#/definitions/UserLoginInfoDto'
+        $ref: "#/definitions/UserLoginInfoDto"
     type: object
   GetRoleForEditOutput:
     properties:
@@ -1900,11 +1901,11 @@ definitions:
         uniqueItems: false
       permissions:
         items:
-          $ref: '#/definitions/FlatPermissionDto'
+          $ref: "#/definitions/FlatPermissionDto"
         type: array
         uniqueItems: false
       role:
-        $ref: '#/definitions/RoleEditDto'
+        $ref: "#/definitions/RoleEditDto"
     type: object
   ImageData:
     properties:
@@ -1939,27 +1940,27 @@ definitions:
         format: int32
         type: integer
     type: object
-  'ListResultDto[PermissionDto]':
+  "ListResultDto[PermissionDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/PermissionDto'
+          $ref: "#/definitions/PermissionDto"
         type: array
         uniqueItems: false
     type: object
-  'ListResultDto[RoleDto]':
+  "ListResultDto[RoleDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/RoleDto'
+          $ref: "#/definitions/RoleDto"
         type: array
         uniqueItems: false
     type: object
-  'ListResultDto[RoleListDto]':
+  "ListResultDto[RoleListDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/RoleListDto'
+          $ref: "#/definitions/RoleListDto"
         type: array
         uniqueItems: false
     type: object
@@ -1974,77 +1975,77 @@ definitions:
     required:
       - mobileNumber
     type: object
-  'PagedResultDto[GeoDetailsDto]':
+  "PagedResultDto[GeoDetailsDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/GeoDetailsDto'
+          $ref: "#/definitions/GeoDetailsDto"
         type: array
         uniqueItems: false
       totalCount:
         format: int32
         type: integer
     type: object
-  'PagedResultDto[RoleDto]':
+  "PagedResultDto[RoleDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/RoleDto'
+          $ref: "#/definitions/RoleDto"
         type: array
         uniqueItems: false
       totalCount:
         format: int32
         type: integer
     type: object
-  'PagedResultDto[ServiceCategoryDto]':
+  "PagedResultDto[ServiceCategoryDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/ServiceCategoryDto'
+          $ref: "#/definitions/ServiceCategoryDto"
         type: array
         uniqueItems: false
       totalCount:
         format: int32
         type: integer
     type: object
-  'PagedResultDto[ServiceFacilityDto]':
+  "PagedResultDto[ServiceFacilityDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/ServiceFacilityDto'
+          $ref: "#/definitions/ServiceFacilityDto"
         type: array
         uniqueItems: false
       totalCount:
         format: int32
         type: integer
     type: object
-  'PagedResultDto[TenantDto]':
+  "PagedResultDto[TenantDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/TenantDto'
+          $ref: "#/definitions/TenantDto"
         type: array
         uniqueItems: false
       totalCount:
         format: int32
         type: integer
     type: object
-  'PagedResultDto[UserDto]':
+  "PagedResultDto[UserDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/UserDto'
+          $ref: "#/definitions/UserDto"
         type: array
         uniqueItems: false
       totalCount:
         format: int32
         type: integer
     type: object
-  'PagedResultDto[WeddingVendorDto]':
+  "PagedResultDto[WeddingVendorDto]":
     properties:
       items:
         items:
-          $ref: '#/definitions/WeddingVendorDto'
+          $ref: "#/definitions/WeddingVendorDto"
         type: array
         uniqueItems: false
       totalCount:
@@ -2179,12 +2180,12 @@ definitions:
     properties:
       baseServices:
         items:
-          $ref: '#/definitions/BaseServices'
+          $ref: "#/definitions/BaseServices"
         type: array
         uniqueItems: false
       children:
         items:
-          $ref: '#/definitions/ServiceCategory'
+          $ref: "#/definitions/ServiceCategory"
         type: array
         uniqueItems: false
       creationTime:
@@ -2207,7 +2208,7 @@ definitions:
     properties:
       children:
         items:
-          $ref: '#/definitions/ServiceCategoryDto'
+          $ref: "#/definitions/ServiceCategoryDto"
         type: array
         uniqueItems: false
       icon:
@@ -2227,7 +2228,7 @@ definitions:
     properties:
       children:
         items:
-          $ref: '#/definitions/ServiceCategoryDto'
+          $ref: "#/definitions/ServiceCategoryDto"
         type: array
         uniqueItems: false
       icon:
@@ -2236,7 +2237,7 @@ definitions:
         format: int32
         type: integer
       parent:
-        $ref: '#/definitions/ServiceCategoryDto'
+        $ref: "#/definitions/ServiceCategoryDto"
       parentId:
         format: int32
         type: integer
@@ -2253,7 +2254,7 @@ definitions:
         format: int32
         type: integer
       parent:
-        $ref: '#/definitions/ServiceCategoryDto'
+        $ref: "#/definitions/ServiceCategoryDto"
       parentId:
         format: int32
         type: integer
@@ -2296,7 +2297,7 @@ definitions:
       alt:
         type: string
       baseServices:
-        $ref: '#/definitions/BaseServices'
+        $ref: "#/definitions/BaseServices"
       creationTime:
         format: date-time
         type: string
@@ -2331,7 +2332,7 @@ definitions:
         type: integer
       facilityDtos:
         items:
-          $ref: '#/definitions/ServiceFacilityDto'
+          $ref: "#/definitions/ServiceFacilityDto"
         type: array
         uniqueItems: false
       id:
@@ -2404,7 +2405,7 @@ definitions:
       tenancyName:
         maxLength: 64
         minLength: 0
-        pattern: '^[a-zA-Z][a-zA-Z0-9_-]{1,}$'
+        pattern: ^[a-zA-Z][a-zA-Z0-9_-]{1,}$
         type: string
     required:
       - tenancyName
@@ -2424,7 +2425,7 @@ definitions:
     properties:
       base64Images:
         items:
-          $ref: '#/definitions/ImageData'
+          $ref: "#/definitions/ImageData"
         type: array
         uniqueItems: false
       capacity:
@@ -2438,7 +2439,7 @@ definitions:
         type: string
       facilityDtos:
         items:
-          $ref: '#/definitions/ServiceFacilityDto'
+          $ref: "#/definitions/ServiceFacilityDto"
         type: array
         uniqueItems: false
       id:
@@ -2477,7 +2478,7 @@ definitions:
         type: string
       claims:
         items:
-          $ref: '#/definitions/UserClaim'
+          $ref: "#/definitions/UserClaim"
         type: array
         uniqueItems: false
       code:
@@ -2491,12 +2492,12 @@ definitions:
         format: date-time
         type: string
       creatorUser:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
       creatorUserId:
         format: int64
         type: integer
       deleterUser:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
       deleterUserId:
         format: int64
         type: integer
@@ -2536,7 +2537,7 @@ definitions:
         format: date-time
         type: string
       lastModifierUser:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
       lastModifierUserId:
         format: int64
         type: integer
@@ -2545,7 +2546,7 @@ definitions:
         type: string
       logins:
         items:
-          $ref: '#/definitions/UserLogin'
+          $ref: "#/definitions/UserLogin"
         type: array
         uniqueItems: false
       name:
@@ -2570,7 +2571,7 @@ definitions:
         type: string
       permissions:
         items:
-          $ref: '#/definitions/UserPermissionSetting'
+          $ref: "#/definitions/UserPermissionSetting"
         type: array
         uniqueItems: false
       phoneNumber:
@@ -2579,7 +2580,7 @@ definitions:
         type: string
       roles:
         items:
-          $ref: '#/definitions/UserRole'
+          $ref: "#/definitions/UserRole"
         type: array
         uniqueItems: false
       securityStamp:
@@ -2588,7 +2589,7 @@ definitions:
         type: string
       settings:
         items:
-          $ref: '#/definitions/Setting'
+          $ref: "#/definitions/Setting"
         type: array
         uniqueItems: false
       surname:
@@ -2600,7 +2601,7 @@ definitions:
         type: integer
       tokens:
         items:
-          $ref: '#/definitions/UserToken'
+          $ref: "#/definitions/UserToken"
         type: array
         uniqueItems: false
       userName:
@@ -2831,5 +2832,5 @@ definitions:
       title:
         type: string
       userDto:
-        $ref: '#/definitions/UserDto'
+        $ref: "#/definitions/UserDto"
     type: object

@@ -1,10 +1,10 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.geneea.com
 basePath: /
 info:
-  description: |
+  description: >
     <div class="api-description">
         <h2>Authentication</h2>
         <p>For all calls, supply your API key. <a href="https://www.geneea.com/pricing">Sign up to <em>obtain the key</em></a>.</p>
@@ -87,19 +87,20 @@ info:
         </p>
     </div>
   title: Geneea Natural Language Processing
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'http://www.geneea.com/img/geneea-logo.png'
+    url: http://www.geneea.com/img/geneea-logo.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.25
       format: swagger
-      url: 'https://api.geneea.com/api-docs?group=s1'
-      version: '1.2'
+      url: https://api.geneea.com/api-docs?group=s1
+      version: "1.2"
   x-providerName: geneea.com
+  x-preferred: true
 consumes:
   - application/json
 securityDefinitions:
@@ -125,15 +126,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Information%20about%20a%20user%20account.'
-        '401':
+            $ref: "#/definitions/Information%20about%20a%20user%20account."
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Information about current user account
       tags:
@@ -141,7 +142,7 @@ paths:
   /s1/correction:
     get:
       deprecated: false
-      description: '<br/><strong>Possible options:</strong><p class="markdown">An optional parameter <code>diacritize</code> with values <code>yes</code>, <code>no</code> or <code>auto</code> indicate whether the text diacritization will be performed. The default value is <code>auto</code>.</p>'
+      description: <br/><strong>Possible options:</strong><p class="markdown">An optional parameter <code>diacritize</code> with values <code>yes</code>, <code>no</code> or <code>auto</code> indicate whether the text diacritization will be performed. The default value is <code>auto</code>.</p>
       operationId: correctionGet
       parameters:
         - description: document ID
@@ -180,15 +181,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Response%20for%20the%20text%20correction'
-        '401':
+            $ref: "#/definitions/Response%20for%20the%20text%20correction"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs text correction (diacritization) on the given document
       tags:
@@ -203,21 +204,21 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Request'
+            $ref: "#/definitions/Request"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/Response%20for%20the%20text%20correction'
-        '201':
+            $ref: "#/definitions/Response%20for%20the%20text%20correction"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs text correction (diacritization) on the given document
       tags:
@@ -264,15 +265,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/EntitiesResponse'
-        '401':
+            $ref: "#/definitions/EntitiesResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs named-entity recognition on the given document
       tags:
@@ -287,21 +288,21 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Request'
+            $ref: "#/definitions/Request"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/EntitiesResponse'
-        '201':
+            $ref: "#/definitions/EntitiesResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs named-entity recognition on the given document
       tags:
@@ -348,15 +349,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/LemmatizeResponse'
-        '401':
+            $ref: "#/definitions/LemmatizeResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs lemmatization on the given document
       tags:
@@ -371,21 +372,21 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Request'
+            $ref: "#/definitions/Request"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/LemmatizeResponse'
-        '201':
+            $ref: "#/definitions/LemmatizeResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs lemmatization on the given document
       tags:
@@ -432,15 +433,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SentimentResponse'
-        '401':
+            $ref: "#/definitions/SentimentResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs sentiment analysis on the given document
       tags:
@@ -455,21 +456,21 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Request'
+            $ref: "#/definitions/Request"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/SentimentResponse'
-        '201':
+            $ref: "#/definitions/SentimentResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs sentiment analysis on the given document
       tags:
@@ -516,15 +517,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TopicResponse'
-        '401':
+            $ref: "#/definitions/TopicResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs topic detection on the given document
       tags:
@@ -539,21 +540,21 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Request'
+            $ref: "#/definitions/Request"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/TopicResponse'
-        '201':
+            $ref: "#/definitions/TopicResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Performs topic detection on the given document
       tags:
@@ -567,15 +568,15 @@ paths:
         - text/plain
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Gets status of the Interpretor service
       tags:
@@ -587,7 +588,7 @@ definitions:
       entities:
         description: Found named entities in the document
         items:
-          $ref: '#/definitions/Entity'
+          $ref: "#/definitions/Entity"
         type: array
       id:
         description: Unique identifier of the document
@@ -608,7 +609,7 @@ definitions:
         description: Disambiguated and standardized form of the entity
         type: string
       links:
-        description: 'Disambiguation links for the entity, e.g. its DBpedia page'
+        description: Disambiguation links for the entity, e.g. its DBpedia page
         type: object
       sentiment:
         description: Detected sentiment of the entity (value from -1.0 to 1.0)
@@ -626,7 +627,7 @@ definitions:
       - links
       - textOffset
       - type
-  'Entry«string,long»':
+  "Entry«string,long»":
     properties:
       key:
         format: int64
@@ -637,7 +638,7 @@ definitions:
       remainingQuotas:
         description: Remaining quotas for the user account.
         items:
-          $ref: '#/definitions/Entry«string,long»'
+          $ref: "#/definitions/Entry«string,long»"
         type: array
       type:
         description: Type (plan) of the user account.
@@ -665,7 +666,7 @@ definitions:
         description: The used language of the document
         type: string
       lemmatizedText:
-        description: 'Lemmatized text of the document, individual tokens are separated by a space and sentences are separated by a new-line character'
+        description: Lemmatized text of the document, individual tokens are separated by a space and sentences are separated by a new-line character
         type: string
       text:
         description: The raw text of the document which has been analysed
@@ -677,29 +678,29 @@ definitions:
     description: Request encapsulation for simple API version 1
     properties:
       extractor:
-        description: '[optional] Text extractor to be used when analyzing HTML document'
+        description: "[optional] Text extractor to be used when analyzing HTML document"
         enum:
           - default
           - article
           - keep-everything
         type: string
       id:
-        description: 'Unique identifier of the document, it''s optional'
+        description: Unique identifier of the document, it's optional
         type: string
       language:
-        description: '[optional] The language of the document, auto-detection will be used if omitted'
+        description: "[optional] The language of the document, auto-detection will be used if omitted"
         type: string
       options:
-        description: '[optional] Additional options for the internal modules (key-value pairs)'
+        description: "[optional] Additional options for the internal modules (key-value pairs)"
         type: object
       returnTextInfo:
-        description: '[optional] Indicates whether to return the source text within the response object'
+        description: "[optional] Indicates whether to return the source text within the response object"
         type: boolean
       text:
-        description: 'The raw text to be analyzed, mutually exclusive with the ''url'' parameter'
+        description: The raw text to be analyzed, mutually exclusive with the 'url' parameter
         type: string
       url:
-        description: 'URL of a document to be analysed, mutually exclusive with the ''text'' parameter'
+        description: URL of a document to be analysed, mutually exclusive with the 'text' parameter
         type: string
   Response for the text correction: {}
   Response_for_the_text_correction:
@@ -755,7 +756,7 @@ definitions:
       labels:
         description: Probabilistic distribution over possible topic labels
         items:
-          $ref: '#/definitions/Label'
+          $ref: "#/definitions/Label"
         type: array
       language:
         description: The used language of the document

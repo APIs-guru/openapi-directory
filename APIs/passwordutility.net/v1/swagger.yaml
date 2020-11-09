@@ -1,7 +1,7 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
-host: 'passwordutility.net:80'
+host: passwordutility.net:80
 info:
   description: Validate and generate passwords using open source tools
   title: PasswordUtility.Web
@@ -11,9 +11,10 @@ info:
     - tools
   x-origin:
     - format: swagger
-      url: 'http://passwordutility.net/swagger/docs/v1'
-      version: '2.0'
+      url: http://passwordutility.net/swagger/docs/v1
+      version: "2.0"
   x-providerName: passwordutility.net
+  x-preferred: true
 consumes: []
 produces:
   - application/json
@@ -44,10 +45,10 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       tags:
         - Password
   /api/password/validate:
@@ -60,10 +61,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       tags:
         - Password
 definitions:

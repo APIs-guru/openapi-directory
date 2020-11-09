@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.figshare.com
@@ -10,22 +10,23 @@ info:
   x-apisguru-categories:
     - open_data
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://user-images.githubusercontent.com/21603/27885832-5da28e32-61d1-11e7-8811-ed7238df2c20.png'
+    backgroundColor: "#FFFFFF"
+    url: https://user-images.githubusercontent.com/21603/27885832-5da28e32-61d1-11e7-8811-ed7238df2c20.png
   x-origin:
     - format: swagger
-      url: 'http://docs.figshare.com/swagger.json'
-      version: '2.0'
+      url: http://docs.figshare.com/swagger.json
+      version: "2.0"
   x-providerName: figshare.com
+  x-preferred: true
 produces:
   - application/json
 securityDefinitions:
   OAuth2:
-    authorizationUrl: 'https://figshare.com/account/applications/authorize'
+    authorizationUrl: https://figshare.com/account/applications/authorize
     flow: accessCode
     scopes:
       all: Grants all access
-    tokenUrl: 'https://api.figshare.com/v2/token'
+    tokenUrl: https://api.figshare.com/v2/token
     type: oauth2
 paths:
   /account:
@@ -33,15 +34,15 @@ paths:
       description: Account information for token/personal token
       operationId: private_account
       responses:
-        '200':
+        "200":
           description: OK. Account representation
           schema:
-            $ref: '#/definitions/Account'
-        '403':
+            $ref: "#/definitions/Account"
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -88,19 +89,19 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. An array of articles belonging to the account
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -117,19 +118,19 @@ paths:
           name: Article
           required: true
           schema:
-            $ref: '#/definitions/ArticleCreate'
+            $ref: "#/definitions/ArticleCreate"
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -150,15 +151,15 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. An array of account report entries
           schema:
             items:
-              $ref: '#/definitions/AccountReport'
+              $ref: "#/definitions/AccountReport"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -170,11 +171,11 @@ paths:
       description: Initiate a new Article Report for this Account
       operationId: account_article_report_generate
       responses:
-        '200':
+        "200":
           description: OK. AccountReport created.
           schema:
-            $ref: '#/definitions/AccountReport'
-        '500':
+            $ref: "#/definitions/AccountReport"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -192,21 +193,21 @@ paths:
           name: search
           required: true
           schema:
-            $ref: '#/definitions/PrivateArticleSearch'
+            $ref: "#/definitions/PrivateArticleSearch"
       responses:
-        '200':
+        "200":
           description: OK. An array of articles
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -214,20 +215,20 @@ paths:
       summary: Private Articles search
       tags:
         - articles
-  '/account/articles/{article_id}':
+  "/account/articles/{article_id}":
     delete:
       description: Delete an article
       operationId: private_article_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -240,19 +241,19 @@ paths:
       description: View a private article
       operationId: private_article_details
       responses:
-        '200':
+        "200":
           description: OK. Article representation
           schema:
-            $ref: '#/definitions/ArticleCompletePrivate'
-        '400':
+            $ref: "#/definitions/ArticleCompletePrivate"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -278,22 +279,22 @@ paths:
           name: Article
           required: true
           schema:
-            $ref: '#/definitions/ArticleUpdate'
+            $ref: "#/definitions/ArticleUpdate"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of newly created article
               format: link
               type: string
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -302,26 +303,26 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article
-  '/account/articles/{article_id}/authors':
+  "/account/articles/{article_id}/authors":
     get:
       description: List article authors
       operationId: private_article_authors_list
       responses:
-        '200':
+        "200":
           description: OK. Authors list for article
           schema:
             items:
-              $ref: '#/definitions/Author'
+              $ref: "#/definitions/Author"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -347,24 +348,24 @@ paths:
           name: Authors
           required: true
           schema:
-            $ref: '#/definitions/AuthorsCreator'
+            $ref: "#/definitions/AuthorsCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of list of authors
               format: url
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -382,24 +383,24 @@ paths:
           name: Authors
           required: true
           schema:
-            $ref: '#/definitions/AuthorsCreator'
+            $ref: "#/definitions/AuthorsCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of list of authors
               format: url
               type: string
-        '400':
+        "400":
           description: Bad Request. Article ID must be an integer and bigger than 0. Author with ID Not Found.
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -408,7 +409,7 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Authors
-  '/account/articles/{article_id}/authors/{author_id}':
+  "/account/articles/{article_id}/authors/{author_id}":
     delete:
       description: De-associate author from article
       operationId: private_article_author_delete
@@ -428,15 +429,15 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: No Content
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -445,26 +446,26 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Authors
-  '/account/articles/{article_id}/categories':
+  "/account/articles/{article_id}/categories":
     get:
       description: List article categories
       operationId: private_article_categories_list
       responses:
-        '200':
+        "200":
           description: OK. Article categories
           schema:
             items:
-              $ref: '#/definitions/Category'
+              $ref: "#/definitions/Category"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -489,19 +490,19 @@ paths:
           name: categories
           required: true
           schema:
-            $ref: '#/definitions/CategoriesCreator'
+            $ref: "#/definitions/CategoriesCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -518,19 +519,19 @@ paths:
           name: categories
           required: true
           schema:
-            $ref: '#/definitions/CategoriesCreator'
+            $ref: "#/definitions/CategoriesCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -539,7 +540,7 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Categories
-  '/account/articles/{article_id}/categories/{category_id}':
+  "/account/articles/{article_id}/categories/{category_id}":
     delete:
       description: De-associate category from article
       operationId: private_article_category_delete
@@ -559,15 +560,15 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: No Content
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -576,22 +577,22 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Categories
-  '/account/articles/{article_id}/confidentiality':
+  "/account/articles/{article_id}/confidentiality":
     delete:
       description: Delete confidentiality settings
       operationId: private_article_confidentiality_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -604,19 +605,19 @@ paths:
       description: View confidentiality settings
       operationId: private_article_confidentiality_details
       responses:
-        '200':
+        "200":
           description: OK. Article categories
           schema:
-            $ref: '#/definitions/ArticleConfidentiality'
-        '400':
+            $ref: "#/definitions/ArticleConfidentiality"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -641,19 +642,19 @@ paths:
           name: reason
           required: true
           schema:
-            $ref: '#/definitions/ConfidentialityCreator'
+            $ref: "#/definitions/ConfidentialityCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -662,20 +663,20 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Confidentiality
-  '/account/articles/{article_id}/embargo':
+  "/account/articles/{article_id}/embargo":
     delete:
       description: Will lift the embargo for the specified article
       operationId: private_article_embargo_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -688,19 +689,19 @@ paths:
       description: View a private article embargo details
       operationId: private_article_embargo_details
       responses:
-        '200':
+        "200":
           description: OK. Embargo for article
           schema:
-            $ref: '#/definitions/ArticleEmbargo'
-        '400':
+            $ref: "#/definitions/ArticleEmbargo"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -718,7 +719,7 @@ paths:
         required: true
         type: integer
     put:
-      description: 'Note: setting an article under whole embargo does not imply that the article will be published when the embargo will expire. You must explicitly call the publish endpoint to enable this functionality.'
+      description: "Note: setting an article under whole embargo does not imply that the article will be published when the embargo will expire. You must explicitly call the publish endpoint to enable this functionality."
       operationId: private_article_embargo_update
       parameters:
         - description: Embargo description
@@ -726,24 +727,24 @@ paths:
           name: Embargo
           required: true
           schema:
-            $ref: '#/definitions/ArticleEmbargoUpdater'
+            $ref: "#/definitions/ArticleEmbargoUpdater"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of embargo
               format: link
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -752,26 +753,26 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Embargo
-  '/account/articles/{article_id}/files':
+  "/account/articles/{article_id}/files":
     get:
       description: List private files
       operationId: private_article_files_list
       responses:
-        '200':
+        "200":
           description: OK. Article files list
           schema:
             items:
-              $ref: '#/definitions/PrivateFile'
+              $ref: "#/definitions/PrivateFile"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -789,16 +790,16 @@ paths:
         required: true
         type: integer
     post:
-      description: 'Initiate new file upload within the article. Either use link to provide only an existing file that will not be uploaded on figshare or use the other 3 parameters(md5, name, size)'
+      description: Initiate new file upload within the article. Either use link to provide only an existing file that will not be uploaded on figshare or use the other 3 parameters(md5, name, size)
       operationId: private_article_upload_initiate
       parameters:
         - in: body
           name: File
           required: true
           schema:
-            $ref: '#/definitions/FileCreator'
+            $ref: "#/definitions/FileCreator"
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Location:
@@ -806,16 +807,16 @@ paths:
               format: url
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -824,22 +825,22 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Files
-  '/account/articles/{article_id}/files/{file_id}':
+  "/account/articles/{article_id}/files/{file_id}":
     delete:
       description: Complete file upload
       operationId: private_article_file_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -852,19 +853,19 @@ paths:
       description: View details of file for specified article
       operationId: private_article_file
       responses:
-        '200':
+        "200":
           description: OK. Article private file
           schema:
-            $ref: '#/definitions/PrivateFile'
-        '400':
+            $ref: "#/definitions/PrivateFile"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -892,17 +893,17 @@ paths:
       description: Complete file upload
       operationId: private_article_upload_complete
       responses:
-        '202':
+        "202":
           description: Accepted
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -911,26 +912,26 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Files
-  '/account/articles/{article_id}/private_links':
+  "/account/articles/{article_id}/private_links":
     get:
       description: List private links
       operationId: private_article_private_link
       responses:
-        '200':
+        "200":
           description: OK. Article private links
           schema:
             items:
-              $ref: '#/definitions/PrivateLink'
+              $ref: "#/definitions/PrivateLink"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -955,9 +956,9 @@ paths:
           name: private_link
           required: false
           schema:
-            $ref: '#/definitions/PrivateLinkCreator'
+            $ref: "#/definitions/PrivateLinkCreator"
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Location:
@@ -965,18 +966,18 @@ paths:
               format: url
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '422':
+        "422":
           description: Unprocessable Entity
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -985,22 +986,22 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Private Links
-  '/account/articles/{article_id}/private_links/{link_id}':
+  "/account/articles/{article_id}/private_links/{link_id}":
     delete:
       description: Disable/delete private link for this article
       operationId: private_article_private_link_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1030,26 +1031,26 @@ paths:
           name: private_link
           required: false
           schema:
-            $ref: '#/definitions/PrivateLinkCreator'
+            $ref: "#/definitions/PrivateLinkCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of private link
               format: url
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '422':
+        "422":
           description: Unprocessable Entity
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1058,10 +1059,11 @@ paths:
       tags:
         - articles
       x-subcategory: Private Article Private Links
-  '/account/articles/{article_id}/publish':
+  "/account/articles/{article_id}/publish":
     post:
-      description: |-
+      description: >-
         - If the whole article is under embargo, it will not be published immediatly, but when the embargo expires or is lifted.
+
         - When an article is published, a new public version will be generated. Any further updates to the article will affect the private article data. In order to make these changes publicly visible, an explicit publish operation is needed.
       operationId: private_article_publish
       parameters:
@@ -1073,7 +1075,7 @@ paths:
           required: true
           type: integer
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Location:
@@ -1081,16 +1083,16 @@ paths:
               format: link
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1098,7 +1100,7 @@ paths:
       summary: Private Article Publish
       tags:
         - articles
-  '/account/articles/{article_id}/reserve_doi':
+  "/account/articles/{article_id}/reserve_doi":
     post:
       description: Reserve DOI for article
       operationId: private_article_reserve_doi
@@ -1111,19 +1113,19 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ArticleDOI'
-        '400':
+            $ref: "#/definitions/ArticleDOI"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1131,7 +1133,7 @@ paths:
       summary: Private Article Reserve DOI
       tags:
         - articles
-  '/account/articles/{article_id}/reserve_handle':
+  "/account/articles/{article_id}/reserve_handle":
     post:
       description: Reserve Handle for article
       operationId: private_article_reserve_handle
@@ -1144,19 +1146,19 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ArticleHandle'
-        '400':
+            $ref: "#/definitions/ArticleHandle"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1173,21 +1175,21 @@ paths:
           in: body
           name: search
           schema:
-            $ref: '#/definitions/PrivateAuthorsSearch'
+            $ref: "#/definitions/PrivateAuthorsSearch"
       responses:
-        '200':
+        "200":
           description: OK. An array of authors
           schema:
             items:
-              $ref: '#/definitions/Author'
+              $ref: "#/definitions/Author"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1195,24 +1197,24 @@ paths:
       summary: Search Authors
       tags:
         - authors
-  '/account/authors/{author_id}':
+  "/account/authors/{author_id}":
     get:
       description: View author details
       operationId: private_author_details
       responses:
-        '200':
+        "200":
           description: OK. Article representation
           schema:
-            $ref: '#/definitions/AuthorComplete'
-        '400':
+            $ref: "#/definitions/AuthorComplete"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1233,19 +1235,19 @@ paths:
       description: List institution categories (including parent Categories)
       operationId: private_categories_list
       responses:
-        '200':
+        "200":
           description: OK. An array of categories
           schema:
             items:
-              $ref: '#/definitions/Category'
+              $ref: "#/definitions/Category"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1312,19 +1314,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK. An array of collections
           schema:
             items:
-              $ref: '#/definitions/Collection'
+              $ref: "#/definitions/Collection"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1341,19 +1343,19 @@ paths:
           name: Collection
           required: true
           schema:
-            $ref: '#/definitions/CollectionCreate'
+            $ref: "#/definitions/CollectionCreate"
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/CollectionComplete'
-        '400':
+            $ref: "#/definitions/CollectionComplete"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1372,21 +1374,21 @@ paths:
           name: search
           required: true
           schema:
-            $ref: '#/definitions/PrivateCollectionSearch'
+            $ref: "#/definitions/PrivateCollectionSearch"
       responses:
-        '200':
+        "200":
           description: OK. An array of collections
           schema:
             items:
-              $ref: '#/definitions/Collection'
+              $ref: "#/definitions/Collection"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1394,22 +1396,22 @@ paths:
       summary: Private Collections Search
       tags:
         - collections
-  '/account/collections/{collection_id}':
+  "/account/collections/{collection_id}":
     delete:
       description: Delete n collection
       operationId: private_collection_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1422,15 +1424,15 @@ paths:
       description: View a collection
       operationId: private_collection_details
       responses:
-        '200':
+        "200":
           description: OK. Collection representation
           schema:
-            $ref: '#/definitions/CollectionComplete'
-        '400':
+            $ref: "#/definitions/CollectionComplete"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1456,24 +1458,24 @@ paths:
           name: Collection
           required: true
           schema:
-            $ref: '#/definitions/CollectionUpdate'
+            $ref: "#/definitions/CollectionUpdate"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of collection
               format: link
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1482,26 +1484,26 @@ paths:
       tags:
         - collections
       x-subcategory: Private Collection
-  '/account/collections/{collection_id}/articles':
+  "/account/collections/{collection_id}/articles":
     get:
       description: List collection articles
       operationId: private_collection_articles_list
       responses:
-        '200':
+        "200":
           description: OK. Articles List
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1527,9 +1529,9 @@ paths:
           name: articles
           required: true
           schema:
-            $ref: '#/definitions/ArticlesCreator'
+            $ref: "#/definitions/ArticlesCreator"
       responses:
-        '201':
+        "201":
           description: Reset Content
           headers:
             Location:
@@ -1537,16 +1539,16 @@ paths:
               format: url
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1564,24 +1566,24 @@ paths:
           name: articles
           required: true
           schema:
-            $ref: '#/definitions/ArticlesCreator'
+            $ref: "#/definitions/ArticlesCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of list of articles
               format: url
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1590,7 +1592,7 @@ paths:
       tags:
         - collections
       x-subcategory: Private Collection Articles
-  '/account/collections/{collection_id}/articles/{article_id}':
+  "/account/collections/{collection_id}/articles/{article_id}":
     delete:
       description: De-associate article from collection
       operationId: private_collection_article_delete
@@ -1610,15 +1612,15 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: No Content
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1627,26 +1629,26 @@ paths:
       tags:
         - collections
       x-subcategory: Private Collection Articles
-  '/account/collections/{collection_id}/authors':
+  "/account/collections/{collection_id}/authors":
     get:
       description: List collection authors
       operationId: private_collection_authors_list
       responses:
-        '200':
+        "200":
           description: OK. Embargo for article
           schema:
             items:
-              $ref: '#/definitions/Author'
+              $ref: "#/definitions/Author"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1672,9 +1674,9 @@ paths:
           name: Authors
           required: true
           schema:
-            $ref: '#/definitions/AuthorsCreator'
+            $ref: "#/definitions/AuthorsCreator"
       responses:
-        '201':
+        "201":
           description: Reset Content
           headers:
             Location:
@@ -1682,16 +1684,16 @@ paths:
               format: url
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1709,24 +1711,24 @@ paths:
           name: Authors
           required: true
           schema:
-            $ref: '#/definitions/AuthorsCreator'
+            $ref: "#/definitions/AuthorsCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of list of authors
               format: url
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1735,7 +1737,7 @@ paths:
       tags:
         - collections
       x-subcategory: Private Collection Authors
-  '/account/collections/{collection_id}/authors/{author_id}':
+  "/account/collections/{collection_id}/authors/{author_id}":
     delete:
       description: Delete collection author
       operationId: private_collection_author_delete
@@ -1755,15 +1757,15 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: No Content
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1772,26 +1774,26 @@ paths:
       tags:
         - collections
       x-subcategory: Private Collection Authors
-  '/account/collections/{collection_id}/categories':
+  "/account/collections/{collection_id}/categories":
     get:
       description: List collection categories
       operationId: private_collection_categories_list
       responses:
-        '200':
+        "200":
           description: OK. Categories list
           schema:
             items:
-              $ref: '#/definitions/Category'
+              $ref: "#/definitions/Category"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1817,9 +1819,9 @@ paths:
           name: categories
           required: true
           schema:
-            $ref: '#/definitions/CategoriesCreator'
+            $ref: "#/definitions/CategoriesCreator"
       responses:
-        '201':
+        "201":
           description: Reset Content
           headers:
             Location:
@@ -1827,16 +1829,16 @@ paths:
               format: url
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1854,24 +1856,24 @@ paths:
           name: categories
           required: true
           schema:
-            $ref: '#/definitions/CategoriesCreator'
+            $ref: "#/definitions/CategoriesCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of list of categories
               format: url
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1880,7 +1882,7 @@ paths:
       tags:
         - collections
       x-subcategory: Private Collection Categories
-  '/account/collections/{collection_id}/categories/{category_id}':
+  "/account/collections/{collection_id}/categories/{category_id}":
     delete:
       description: De-associate category from collection
       operationId: private_collection_category_delete
@@ -1900,15 +1902,15 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: No Content
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1917,26 +1919,26 @@ paths:
       tags:
         - collections
       x-subcategory: Private Collection Categories
-  '/account/collections/{collection_id}/private_links':
+  "/account/collections/{collection_id}/private_links":
     get:
       description: List article private links
       operationId: private_collection_private_links_list
       responses:
-        '200':
+        "200":
           description: OK. Collection private links
           schema:
             items:
-              $ref: '#/definitions/PrivateLink'
+              $ref: "#/definitions/PrivateLink"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1961,9 +1963,9 @@ paths:
           name: private_link
           required: false
           schema:
-            $ref: '#/definitions/CollectionPrivateLinkCreator'
+            $ref: "#/definitions/CollectionPrivateLinkCreator"
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Location:
@@ -1971,16 +1973,16 @@ paths:
               format: url
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -1989,22 +1991,22 @@ paths:
       tags:
         - collections
       x-subcategory: Private Collection Private Links
-  '/account/collections/{collection_id}/private_links/{link_id}':
+  "/account/collections/{collection_id}/private_links/{link_id}":
     delete:
       description: Disable/delete private link for this collection
       operationId: private_collection_private_link_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2034,26 +2036,26 @@ paths:
           name: private_link
           required: false
           schema:
-            $ref: '#/definitions/CollectionPrivateLinkCreator'
+            $ref: "#/definitions/CollectionPrivateLinkCreator"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of new private link
               format: url
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '422':
+        "422":
           description: Unprocessable Entity
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2062,9 +2064,9 @@ paths:
       tags:
         - collections
       x-subcategory: Private Collection Private Links
-  '/account/collections/{collection_id}/publish':
+  "/account/collections/{collection_id}/publish":
     post:
-      description: 'When a collection is published, a new public version will be generated. Any further updates to the collection will affect the private collection data. In order to make these changes publicly visible, an explicit publish operation is needed.'
+      description: When a collection is published, a new public version will be generated. Any further updates to the collection will affect the private collection data. In order to make these changes publicly visible, an explicit publish operation is needed.
       operationId: private_collection_publish
       parameters:
         - description: Collection Unique identifier
@@ -2075,7 +2077,7 @@ paths:
           required: true
           type: integer
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Location:
@@ -2083,14 +2085,14 @@ paths:
               format: link
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2098,7 +2100,7 @@ paths:
       summary: Private Collection Publish
       tags:
         - collections
-  '/account/collections/{collection_id}/reserve_doi':
+  "/account/collections/{collection_id}/reserve_doi":
     post:
       description: Reserve DOI for collection
       operationId: private_collection_reserve_doi
@@ -2111,17 +2113,17 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CollectionDOI'
-        '400':
+            $ref: "#/definitions/CollectionDOI"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2129,7 +2131,7 @@ paths:
       summary: Private Collection Reserve DOI
       tags:
         - collections
-  '/account/collections/{collection_id}/reserve_handle':
+  "/account/collections/{collection_id}/reserve_handle":
     post:
       description: Reserve Handle for collection
       operationId: private_collection_reserve_handle
@@ -2142,17 +2144,17 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CollectionHandle'
-        '400':
+            $ref: "#/definitions/CollectionHandle"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2169,21 +2171,21 @@ paths:
           in: body
           name: search
           schema:
-            $ref: '#/definitions/FundingSearch'
+            $ref: "#/definitions/FundingSearch"
       responses:
-        '200':
+        "200":
           description: OK. An array of funding information
           schema:
             items:
-              $ref: '#/definitions/FundingInformation'
+              $ref: "#/definitions/FundingInformation"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2196,17 +2198,17 @@ paths:
       description: Account institution details
       operationId: private_institution_details
       responses:
-        '200':
+        "200":
           description: OK. An array of institutions
           schema:
-            $ref: '#/definitions/Institution'
-        '400':
+            $ref: "#/definitions/Institution"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2271,19 +2273,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK. An array of Accounts
           schema:
             items:
-              $ref: '#/definitions/ShortAccount'
+              $ref: "#/definitions/ShortAccount"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2300,17 +2302,17 @@ paths:
           name: Account
           required: true
           schema:
-            $ref: '#/definitions/AccountCreate'
+            $ref: "#/definitions/AccountCreate"
       responses:
-        '201':
+        "201":
           description: Created
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2328,21 +2330,21 @@ paths:
           name: search
           required: true
           schema:
-            $ref: '#/definitions/InstitutionAccountsSearch'
+            $ref: "#/definitions/InstitutionAccountsSearch"
       responses:
-        '200':
+        "200":
           description: OK. An array of Accounts
           schema:
             items:
-              $ref: '#/definitions/ShortAccount'
+              $ref: "#/definitions/ShortAccount"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2350,7 +2352,7 @@ paths:
       summary: Private Account Institution Accounts Search
       tags:
         - institutions
-  '/account/institution/accounts/{account_id}':
+  "/account/institution/accounts/{account_id}":
     put:
       description: Update Institution Account
       operationId: private_institution_accounts_update
@@ -2367,24 +2369,24 @@ paths:
           name: Account
           required: true
           schema:
-            $ref: '#/definitions/AccountUpdate'
+            $ref: "#/definitions/AccountUpdate"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of newly created article
               format: link
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2472,26 +2474,26 @@ paths:
           name: resource_doi
           required: false
           type: string
-        - description: 'Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model'
+        - description: "Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model"
           format: int64
           in: query
           name: item_type
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. An array of articles belonging to the institution
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2504,19 +2506,19 @@ paths:
       description: Returns the groups for which the account has administrative privileges (assigned and inherited).
       operationId: private_institution_groups_list
       responses:
-        '200':
+        "200":
           description: OK. An array of Groups
           schema:
             items:
-              $ref: '#/definitions/Group'
+              $ref: "#/definitions/Group"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2524,24 +2526,24 @@ paths:
       summary: Private Account Institution Groups
       tags:
         - institutions
-  '/account/institution/review/{curation_id}':
+  "/account/institution/review/{curation_id}":
     get:
       description: Retrieve a certain curation review by its ID
       operationId: account_institution_curation
       responses:
-        '200':
+        "200":
           description: OK. A curation review.
           schema:
-            $ref: '#/definitions/CurationDetail'
-        '400':
+            $ref: "#/definitions/CurationDetail"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2557,7 +2559,7 @@ paths:
         name: curation_id
         required: true
         type: integer
-  '/account/institution/review/{curation_id}/comments':
+  "/account/institution/review/{curation_id}/comments":
     get:
       description: Retrieve a certain curation review's comments.
       parameters:
@@ -2578,20 +2580,20 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. A curation review's comments.
           schema:
-            $ref: '#/definitions/CurationComment'
+            $ref: "#/definitions/CurationComment"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2615,19 +2617,19 @@ paths:
           name: CurationComment
           required: true
           schema:
-            $ref: '#/definitions/CurationCommentCreate'
+            $ref: "#/definitions/CurationCommentCreate"
       responses:
-        '200':
+        "200":
           description: OK.
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2681,20 +2683,20 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. A list of curation reviews.
           schema:
-            $ref: '#/definitions/Curation'
+            $ref: "#/definitions/Curation"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2707,19 +2709,19 @@ paths:
       description: Returns the roles available for groups and the institution group.
       operationId: private_institution_roles_list
       responses:
-        '200':
+        "200":
           description: OK. An array of Roles
           schema:
             items:
-              $ref: '#/definitions/Role'
+              $ref: "#/definitions/Role"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2727,24 +2729,24 @@ paths:
       summary: Private Account Institution Roles
       tags:
         - institutions
-  '/account/institution/roles/{account_id}':
+  "/account/institution/roles/{account_id}":
     get:
       description: List Institution Account Group Roles
       operationId: private_institution_account_group_roles
       responses:
-        '200':
+        "200":
           description: OK. Account Group Roles
           schema:
-            $ref: '#/definitions/AccountGroupRoles'
-        '400':
+            $ref: "#/definitions/AccountGroupRoles"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2769,17 +2771,17 @@ paths:
           name: Account
           required: true
           schema:
-            $ref: '#/definitions/AccountGroupRolesCreate'
+            $ref: "#/definitions/AccountGroupRolesCreate"
       responses:
-        '201':
+        "201":
           description: Created
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2787,7 +2789,7 @@ paths:
       summary: Add Institution Account Group Roles
       tags:
         - institutions
-  '/account/institution/roles/{account_id}/{group_id}/{role_id}':
+  "/account/institution/roles/{account_id}/{group_id}/{role_id}":
     delete:
       description: Delete Institution Account Group Role
       operationId: private_institution_account_group_role_delete
@@ -2814,17 +2816,17 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2832,7 +2834,7 @@ paths:
       summary: Delete Institution Account Group Role
       tags:
         - institutions
-  '/account/institution/users/{account_id}':
+  "/account/institution/users/{account_id}":
     get:
       description: Retrieve institution user information using the account_id
       operationId: private_account_institution_user
@@ -2845,19 +2847,19 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. User representation
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2870,19 +2872,19 @@ paths:
       description: This is a private endpoint that requires OAuth. It will return a list with figshare public licenses AND licenses defined for account's institution.
       operationId: private_licenses_list
       responses:
-        '200':
+        "200":
           description: OK. An array of personal licenses
           schema:
             items:
-              $ref: '#/definitions/License'
+              $ref: "#/definitions/License"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2960,19 +2962,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK. An array of projects
           schema:
             items:
-              $ref: '#/definitions/ProjectPrivate'
+              $ref: "#/definitions/ProjectPrivate"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -2989,19 +2991,19 @@ paths:
           name: Project
           required: true
           schema:
-            $ref: '#/definitions/ProjectCreate'
+            $ref: "#/definitions/ProjectCreate"
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3020,43 +3022,45 @@ paths:
           name: search
           required: false
           schema:
-            $ref: '#/definitions/ProjectsSearch'
+            $ref: "#/definitions/ProjectsSearch"
       responses:
-        '200':
+        "200":
           description: OK. An array of projects
           schema:
             items:
-              $ref: '#/definitions/ProjectPrivate'
+              $ref: "#/definitions/ProjectPrivate"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '422':
+        "422":
           description: Bad Request
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Private Projects search
       tags:
         - projects
-  '/account/projects/{project_id}':
+  "/account/projects/{project_id}":
     delete:
-      description: |
+      description: >
         A project can be deleted only if: - it is not public - it does not have public articles.
 
+
         When an individual project is deleted, all the articles are moved to my data of each owner.
+
 
         When a group project is deleted, all the articles and files are deleted as well. Only project owner, group admin and above can delete a project.
       operationId: private_project_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3069,19 +3073,19 @@ paths:
       description: View a private project
       operationId: private_project_details
       responses:
-        '200':
+        "200":
           description: OK. Project representation
           schema:
-            $ref: '#/definitions/ProjectCompletePrivate'
-        '400':
+            $ref: "#/definitions/ProjectCompletePrivate"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3107,22 +3111,22 @@ paths:
           name: Project
           required: true
           schema:
-            $ref: '#/definitions/ProjectUpdate'
+            $ref: "#/definitions/ProjectUpdate"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location of project
               format: link
               type: string
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3131,26 +3135,26 @@ paths:
       tags:
         - projects
       x-subcategory: Private Project
-  '/account/projects/{project_id}/articles':
+  "/account/projects/{project_id}/articles":
     get:
       description: List project articles
       operationId: private_project_articles_list
       responses:
-        '200':
+        "200":
           description: OK. List of articles
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3209,9 +3213,9 @@ paths:
           name: Article
           required: true
           schema:
-            $ref: '#/definitions/ArticleCreate'
+            $ref: "#/definitions/ArticleCreate"
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Location:
@@ -3219,16 +3223,16 @@ paths:
               format: url
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3237,22 +3241,22 @@ paths:
       tags:
         - projects
       x-subcategory: Private Project Articles
-  '/account/projects/{project_id}/articles/{article_id}':
+  "/account/projects/{project_id}/articles/{article_id}":
     delete:
       description: Delete project article
       operationId: private_project_article_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3265,19 +3269,19 @@ paths:
       description: Project article details
       operationId: private_project_article_details
       responses:
-        '200':
+        "200":
           description: OK. Article representation
           schema:
-            $ref: '#/definitions/ProjectArticle'
-        '400':
+            $ref: "#/definitions/ProjectArticle"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3301,7 +3305,7 @@ paths:
         name: article_id
         required: true
         type: integer
-  '/account/projects/{project_id}/articles/{article_id}/files':
+  "/account/projects/{project_id}/articles/{article_id}/files":
     get:
       description: List article files
       operationId: private_project_article_files
@@ -3321,21 +3325,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. List of files
           schema:
             items:
-              $ref: '#/definitions/PrivateFile'
+              $ref: "#/definitions/PrivateFile"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3344,7 +3348,7 @@ paths:
       tags:
         - projects
       x-subcategory: Private Project Articles
-  '/account/projects/{project_id}/articles/{article_id}/files/{file_id}':
+  "/account/projects/{project_id}/articles/{article_id}/files/{file_id}":
     get:
       description: Project article file details
       operationId: private_project_article_file
@@ -3371,19 +3375,19 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. File representation
           schema:
-            $ref: '#/definitions/PrivateFile'
-        '400':
+            $ref: "#/definitions/PrivateFile"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3392,26 +3396,26 @@ paths:
       tags:
         - projects
       x-subcategory: Private Project Articles
-  '/account/projects/{project_id}/collaborators':
+  "/account/projects/{project_id}/collaborators":
     get:
       description: List Project collaborators and invited users
       operationId: private_project_collaborators_list
       responses:
-        '200':
+        "200":
           description: OK. List of Collaborators
           schema:
             items:
-              $ref: '#/definitions/ProjectCollaborator'
+              $ref: "#/definitions/ProjectCollaborator"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3437,21 +3441,21 @@ paths:
           name: Collaborator
           required: true
           schema:
-            $ref: '#/definitions/ProjectCollaboratorInvite'
+            $ref: "#/definitions/ProjectCollaboratorInvite"
       responses:
-        '201':
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/ResponseMessage'
-        '400':
+            $ref: "#/definitions/ResponseMessage"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3460,7 +3464,7 @@ paths:
       tags:
         - projects
       x-subcategory: Private Project Collaborators
-  '/account/projects/{project_id}/collaborators/{user_id}':
+  "/account/projects/{project_id}/collaborators/{user_id}":
     delete:
       description: Remove project collaborator
       operationId: private_project_collaborator__Delete
@@ -3480,17 +3484,17 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: OK
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3499,9 +3503,9 @@ paths:
       tags:
         - projects
       x-subcategory: Private Project Collaborators
-  '/account/projects/{project_id}/leave':
+  "/account/projects/{project_id}/leave":
     post:
-      description: 'Please note: project''s owner cannot leave the project.'
+      description: "Please note: project's owner cannot leave the project."
       operationId: private_project_leave
       parameters:
         - description: Project unique identifier
@@ -3512,17 +3516,17 @@ paths:
           required: true
           type: integer
       responses:
-        '204':
+        "204":
           description: No Content
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3531,7 +3535,7 @@ paths:
       tags:
         - projects
       x-subcategory: Private Project Collaborators
-  '/account/projects/{project_id}/notes':
+  "/account/projects/{project_id}/notes":
     get:
       description: List project notes
       operationId: private_project_notes_list
@@ -3570,21 +3574,21 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. List of project notes
           schema:
             items:
-              $ref: '#/definitions/ProjectNote'
+              $ref: "#/definitions/ProjectNote"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3610,9 +3614,9 @@ paths:
           name: Note
           required: true
           schema:
-            $ref: '#/definitions/ProjectNoteCreate'
+            $ref: "#/definitions/ProjectNoteCreate"
       responses:
-        '201':
+        "201":
           description: Created
           headers:
             Location:
@@ -3620,16 +3624,16 @@ paths:
               format: url
               type: string
           schema:
-            $ref: '#/definitions/Location'
-        '400':
+            $ref: "#/definitions/Location"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3638,19 +3642,19 @@ paths:
       tags:
         - projects
       x-subcategory: Private Project Notes
-  '/account/projects/{project_id}/notes/{note_id}':
+  "/account/projects/{project_id}/notes/{note_id}":
     delete:
       operationId: private_project_note_delete
       responses:
-        '204':
+        "204":
           description: No Content
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3662,19 +3666,19 @@ paths:
     get:
       operationId: private_project_note
       responses:
-        '200':
+        "200":
           description: OK. Note representation
           schema:
-            $ref: '#/definitions/ProjectNotePrivate'
-        '400':
+            $ref: "#/definitions/ProjectNotePrivate"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3706,24 +3710,24 @@ paths:
           name: Note
           required: true
           schema:
-            $ref: '#/definitions/ProjectNoteCreate'
+            $ref: "#/definitions/ProjectNoteCreate"
       responses:
-        '205':
+        "205":
           description: Reset Content
           headers:
             Location:
               description: Location note
               format: url
               type: string
-        '400':
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3732,7 +3736,7 @@ paths:
       tags:
         - projects
       x-subcategory: Private Project Notes
-  '/account/projects/{project_id}/publish':
+  "/account/projects/{project_id}/publish":
     post:
       description: Publish a project. Possible after all items inside it are public
       operationId: private_project_publish
@@ -3745,19 +3749,19 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ResponseMessage'
-        '400':
+            $ref: "#/definitions/ResponseMessage"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -3851,7 +3855,7 @@ paths:
           name: resource_doi
           required: false
           type: string
-        - description: 'Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model'
+        - description: "Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model"
           format: int64
           in: query
           name: item_type
@@ -3868,17 +3872,17 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK. An array of articles
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '422':
+        "422":
           description: Unprocessable Entity. Syntax is correct but one of the parameters isn't correctly processed
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Articles
@@ -3886,7 +3890,7 @@ paths:
         - articles
   /articles/search:
     post:
-      description: 'Returns a list of public articles, filtered by the search parameters'
+      description: Returns a list of public articles, filtered by the search parameters
       operationId: articles_search
       parameters:
         - description: Search Parameters
@@ -3894,25 +3898,25 @@ paths:
           name: search
           required: false
           schema:
-            $ref: '#/definitions/ArticleSearch'
+            $ref: "#/definitions/ArticleSearch"
       responses:
-        '200':
+        "200":
           description: OK. An array of articles
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '422':
+        "422":
           description: Unprocessable Entity. Syntax is correct but one of the parameters isn't correctly processed
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Articles Search
       tags:
         - articles
-  '/articles/{article_id}':
+  "/articles/{article_id}":
     get:
       description: View an article
       operationId: article_details
@@ -3925,22 +3929,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. Article representation
           schema:
-            $ref: '#/definitions/ArticleComplete'
-        '400':
+            $ref: "#/definitions/ArticleComplete"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: View article details
       tags:
         - articles
       x-subcategory: Public Article
-  '/articles/{article_id}/files':
+  "/articles/{article_id}/files":
     get:
       description: Files list for article
       operationId: article_files
@@ -3953,24 +3957,24 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. List of article files
           schema:
             items:
-              $ref: '#/definitions/PublicFile'
+              $ref: "#/definitions/PublicFile"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: List article files
       tags:
         - articles
       x-subcategory: Public Article files
-  '/articles/{article_id}/files/{file_id}':
+  "/articles/{article_id}/files/{file_id}":
     get:
       description: File by id
       operationId: article_file_details
@@ -3990,22 +3994,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. File representation
           schema:
-            $ref: '#/definitions/PublicFile'
-        '400':
+            $ref: "#/definitions/PublicFile"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Article file details
       tags:
         - articles
       x-subcategory: Public Article files
-  '/articles/{article_id}/versions':
+  "/articles/{article_id}/versions":
     get:
       description: List public article versions
       operationId: article_versions
@@ -4018,24 +4022,24 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. Article version representations
           schema:
             items:
-              $ref: '#/definitions/ArticleVersions'
+              $ref: "#/definitions/ArticleVersions"
             type: array
-        '400':
+        "400":
           description: Bad Request. Article ID must be an integer and bigger than 0.
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: List article versions
       tags:
         - articles
       x-subcategory: Public Article
-  '/articles/{article_id}/versions/{v_number}':
+  "/articles/{article_id}/versions/{v_number}":
     get:
       description: Article with specified version
       operationId: article_version_details
@@ -4055,22 +4059,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. Article representation
           schema:
-            $ref: '#/definitions/ArticleComplete'
-        '400':
+            $ref: "#/definitions/ArticleComplete"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Article details for version
       tags:
         - articles
       x-subcategory: Public Article
-  '/articles/{article_id}/versions/{v_number}/confidentiality':
+  "/articles/{article_id}/versions/{v_number}/confidentiality":
     get:
       description: Confidentiality for article version
       operationId: article_version_confidentiality
@@ -4090,21 +4094,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. Confidentiality representation
           schema:
-            $ref: '#/definitions/ArticleConfidentiality'
-        '400':
+            $ref: "#/definitions/ArticleConfidentiality"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Article Confidentiality for article version
       tags:
         - articles
-  '/articles/{article_id}/versions/{v_number}/embargo':
+  "/articles/{article_id}/versions/{v_number}/embargo":
     get:
       description: Embargo for article version
       operationId: article_version_embargo
@@ -4124,15 +4128,15 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. Embargo representation
           schema:
-            $ref: '#/definitions/ArticleEmbargo'
-        '400':
+            $ref: "#/definitions/ArticleEmbargo"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Article Embargo for article version
@@ -4143,13 +4147,13 @@ paths:
       description: Returns a list of public categories
       operationId: categories_list
       responses:
-        '200':
+        "200":
           description: OK. An array of categories
           schema:
             items:
-              $ref: '#/definitions/Category'
+              $ref: "#/definitions/Category"
             type: array
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Categories
@@ -4251,17 +4255,17 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK. An array of collections
           schema:
             items:
-              $ref: '#/definitions/Collection'
+              $ref: "#/definitions/Collection"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '422':
+        "422":
           description: Bad Request
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Collections
@@ -4277,25 +4281,25 @@ paths:
           name: search
           required: false
           schema:
-            $ref: '#/definitions/CollectionSearch'
+            $ref: "#/definitions/CollectionSearch"
       responses:
-        '200':
+        "200":
           description: OK. An array of collections
           schema:
             items:
-              $ref: '#/definitions/Collection'
+              $ref: "#/definitions/Collection"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '422':
+        "422":
           description: Bad Request
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Collections Search
       tags:
         - collections
-  '/collections/{collection_id}':
+  "/collections/{collection_id}":
     get:
       description: View a collection
       operationId: collection_details
@@ -4308,22 +4312,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. Collection representation
           schema:
-            $ref: '#/definitions/CollectionComplete'
-        '400':
+            $ref: "#/definitions/CollectionComplete"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Collection details
       tags:
         - collections
       x-subcategory: Public Collection
-  '/collections/{collection_id}/articles':
+  "/collections/{collection_id}/articles":
     get:
       description: Returns a list of public collection articles
       operationId: collection_articles
@@ -4369,25 +4373,25 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. An array of articles belonging to the collection
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '422':
+        "422":
           description: Bad Request
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Collection Articles
       tags:
         - collections
-  '/collections/{collection_id}/versions':
+  "/collections/{collection_id}/versions":
     get:
       description: Returns a list of public collection Versions
       operationId: collection_versions
@@ -4400,24 +4404,24 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. An array of versions
           schema:
             items:
-              $ref: '#/definitions/CollectionVersions'
+              $ref: "#/definitions/CollectionVersions"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Collection Versions list
       tags:
         - collections
       x-subcategory: Public Collection
-  '/collections/{collection_id}/versions/{version_id}':
+  "/collections/{collection_id}/versions/{version_id}":
     get:
       description: View details for a certain version of a collection
       operationId: collection_version_details
@@ -4437,22 +4441,22 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. Collection for that version
           schema:
-            $ref: '#/definitions/CollectionComplete'
-        '400':
+            $ref: "#/definitions/CollectionComplete"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Collection Version details
       tags:
         - collections
       x-subcategory: Public Collection
-  '/file/download/{file_id}':
+  "/file/download/{file_id}":
     get:
       description: Starts the download of a file
       operationId: file_download
@@ -4466,9 +4470,9 @@ paths:
       produces:
         - application/force-download
       responses:
-        '200':
+        "200":
           description: OK
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public File Download
@@ -4478,7 +4482,7 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: 'More info in the <a href="#hr_feed">HR Feed section</a>'
+      description: More info in the <a href="#hr_feed">HR Feed section</a>
       operationId: institution_hrfeed_upload
       parameters:
         - description: You can find an example in the Hr Feed section
@@ -4486,17 +4490,17 @@ paths:
           name: hrfeed
           type: file
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ResponseMessage'
-        '400':
+            $ref: "#/definitions/ResponseMessage"
+        "400":
           description: Bad Request
-        '403':
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '500':
+            $ref: "#/definitions/ErrorMessage"
+        "500":
           description: Internal Server Error
       security:
         - OAuth2:
@@ -4504,7 +4508,7 @@ paths:
       summary: Private Institution HRfeed Upload
       tags:
         - institutions
-  '/institutions/{institution_string_id}/articles/filter-by':
+  "/institutions/{institution_string_id}/articles/filter-by":
     get:
       description: Returns a list of articles belonging to the institution
       operationId: institution_articles
@@ -4522,13 +4526,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK. An array of articles
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '500':
+        "500":
           description: Internal Server Error
       summary: Public Licenses
       tags:
@@ -4538,13 +4542,13 @@ paths:
       description: Returns a list of public licenses
       operationId: licenses_list
       responses:
-        '200':
+        "200":
           description: OK. An array of licenses
           schema:
             items:
-              $ref: '#/definitions/License'
+              $ref: "#/definitions/License"
             type: array
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Licenses
@@ -4624,17 +4628,17 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. An array of projects
           schema:
             items:
-              $ref: '#/definitions/Project'
+              $ref: "#/definitions/Project"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '422':
+        "422":
           description: Bad Request
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Projects
@@ -4650,25 +4654,25 @@ paths:
           name: search
           required: false
           schema:
-            $ref: '#/definitions/ProjectsSearch'
+            $ref: "#/definitions/ProjectsSearch"
       responses:
-        '200':
+        "200":
           description: OK. An array of projects
           schema:
             items:
-              $ref: '#/definitions/Project'
+              $ref: "#/definitions/Project"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '422':
+        "422":
           description: Bad Request
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Projects Search
       tags:
         - projects
-  '/projects/{project_id}':
+  "/projects/{project_id}":
     get:
       description: View a project
       operationId: project_details
@@ -4681,21 +4685,21 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. Project representation
           schema:
-            $ref: '#/definitions/ProjectComplete'
-        '400':
+            $ref: "#/definitions/ProjectComplete"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Project
       tags:
         - projects
-  '/projects/{project_id}/articles':
+  "/projects/{project_id}/articles":
     get:
       description: List articles in project
       operationId: project_articles
@@ -4708,17 +4712,17 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK. Project articles list
           schema:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Internal Server Error
       security: []
       summary: Public Project Articles
@@ -4734,7 +4738,7 @@ definitions:
         type: integer
       created_date:
         description: Date when account was created
-        example: '2018-05-22T04:04:04'
+        example: 2018-05-22T04:04:04
         type: string
       email:
         description: User email
@@ -4774,7 +4778,7 @@ definitions:
         type: integer
       modified_date:
         description: Date of last account modification
-        example: '2018-05-22T04:04:04'
+        example: 2018-05-22T04:04:04
         type: string
       pending_quota_request:
         description: True if a quota request is pending
@@ -4811,7 +4815,7 @@ definitions:
         minLength: 3
         type: string
       first_name:
-        default: ''
+        default: ""
         description: First Name
         example: John
         maxLength: 30
@@ -4821,7 +4825,7 @@ definitions:
         format: int64
         type: integer
       institution_user_id:
-        default: ''
+        default: ""
         description: Institution user id
         example: johndoe
         maxLength: 50
@@ -4830,7 +4834,7 @@ definitions:
         description: Is account active
         type: boolean
       last_name:
-        default: ''
+        default: ""
         description: Last Name
         example: Doe
         maxLength: 30
@@ -4841,7 +4845,7 @@ definitions:
         format: int64
         type: integer
       symplectic_user_id:
-        default: ''
+        default: ""
         description: Symplectic user id
         example: johndoe
         maxLength: 50
@@ -4853,7 +4857,7 @@ definitions:
     x-tag: institutions
   AccountGroupRoles:
     example:
-      '2':
+      "2":
         - category: group
           id: 7
           name: User
@@ -4862,10 +4866,10 @@ definitions:
     x-tag: institutions
   AccountGroupRolesCreate:
     example:
-      '2':
+      "2":
         - 2
         - 7
-      '3':
+      "3":
         - 7
         - 9
     properties: {}
@@ -4879,15 +4883,15 @@ definitions:
         type: integer
       created_date:
         description: Date when the AccountReport was requested
-        example: '2017-05-15T15:12:26Z'
+        example: 2017-05-15T15:12:26Z
         type: string
       download_url:
         description: The download link for the generated XLSX
-        example: 'https://some.com/storage/path/123/report-456.xlsx'
+        example: https://some.com/storage/path/123/report-456.xlsx
         format: url
         type: string
       group_id:
-        description: 'The group ID that was used to filter the report, if any.'
+        description: The group ID that was used to filter the report, if any.
         format: int64
         type: integer
       id:
@@ -4933,7 +4937,7 @@ definitions:
         example: 1234
         type:
           - number
-          - 'null'
+          - "null"
       handle:
         description: Handle
         example: 111184/figshare.1234
@@ -4945,17 +4949,17 @@ definitions:
         type: integer
       published_date:
         description: Posted date
-        example: '2015-12-31T23:59:59.000Z'
+        example: 2015-12-31T23:59:59.000Z
         type:
           - string
-          - 'null'
+          - "null"
       thumb:
         description: Thumbnail image
-        example: 'https://ndownloader.figshare.com/files/123456789/preview/12345678/thumb.png'
+        example: https://ndownloader.figshare.com/files/123456789/preview/12345678/thumb.png
         format: url
         type: string
       timeline:
-        $ref: '#/definitions/Timeline'
+        $ref: "#/definitions/Timeline"
         description: Various timeline dates
         type: object
       title:
@@ -4964,79 +4968,79 @@ definitions:
         type: string
       url:
         description: Api endpoint for article
-        example: 'http://api.figshare.com/articles/1434614'
+        example: http://api.figshare.com/articles/1434614
         format: url
         type: string
       url_private_api:
         description: Private Api endpoint for article
-        example: 'https://api.figshare.com/account/articles/1434614'
+        example: https://api.figshare.com/account/articles/1434614
         format: url
         type: string
       url_private_html:
         description: Private site endpoint for article
-        example: 'https://figshare.com/account/articles/1434614'
+        example: https://figshare.com/account/articles/1434614
         format: url
         type: string
       url_public_api:
         description: Public Api endpoint for article
-        example: 'https://api.figshare.com/articles/1434614'
+        example: https://api.figshare.com/articles/1434614
         format: url
         type: string
       url_public_html:
         description: Public site endpoint for article
-        example: 'https://figshare.com/articles/Test_article_title/1434614'
+        example: https://figshare.com/articles/Test_article_title/1434614
         format: url
         type: string
     type: object
     x-tag: articles
   ArticleComplete:
     allOf:
-      - $ref: '#/definitions/ProjectArticle'
+      - $ref: "#/definitions/ProjectArticle"
     properties:
       authors:
         description: List of article authors
         items:
-          $ref: '#/definitions/Author'
+          $ref: "#/definitions/Author"
         type: array
       custom_fields:
         description: List of custom fields values
         items:
-          $ref: '#/definitions/CustomArticleField'
+          $ref: "#/definitions/CustomArticleField"
         type: array
       figshare_url:
         description: Article public url
-        example: 'http://figshare.com/articles/article_name/2000005'
+        example: http://figshare.com/articles/article_name/2000005
         format: url
         type: string
       files:
         description: List of article files
         items:
-          $ref: '#/definitions/PublicFile'
+          $ref: "#/definitions/PublicFile"
         type: array
       resource_doi:
         description: Article DOI
         example: 10.5072/FK2.developmentfigshare.2000005
         type:
           - string
-          - 'null'
+          - "null"
       resource_title:
         description: Article resource title
         example: first article
         type:
           - string
-          - 'null'
+          - "null"
     type: object
     x-tag: articles
   ArticleCompletePrivate:
     allOf:
-      - $ref: '#/definitions/ArticleComplete'
+      - $ref: "#/definitions/ArticleComplete"
     properties:
       group_resource_id:
         description: Group resource id
         example: null
         type:
           - string
-          - 'null'
+          - "null"
     type: object
     x-tag: articles
   ArticleConfidentiality:
@@ -5055,7 +5059,7 @@ definitions:
     properties:
       authors:
         default: []
-        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
+        description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
         example:
           - name: John Doe
           - id: 1000008
@@ -5064,7 +5068,7 @@ definitions:
         type: array
       categories:
         default: []
-        description: 'List of category ids to be associated with the article(e.g [1, 23, 33, 66])'
+        description: List of category ids to be associated with the article(e.g [1, 23, 33, 66])
         example:
           - 1
           - 10
@@ -5074,40 +5078,40 @@ definitions:
           type: integer
         type: array
       custom_fields:
-        description: 'List of key, values pairs to be associated with the article'
+        description: List of key, values pairs to be associated with the article
         example:
           defined_key: value for it
         type: object
       defined_type:
-        description: '<b>One of:</b> <code>figure</code> <code>online resource</code> <code>preprint</code> <code>book</code> <code>conference contribution</code> <code>media</code> <code>dataset</code> <code>poster</code> <code>journal contribution</code> <code>presentation</code> <code>thesis</code> <code>software</code>'
+        description: <b>One of:</b> <code>figure</code> <code>online resource</code> <code>preprint</code> <code>book</code> <code>conference contribution</code> <code>media</code> <code>dataset</code> <code>poster</code> <code>journal contribution</code> <code>presentation</code> <code>thesis</code> <code>software</code>
         example: media
         type: string
       description:
-        default: ''
-        description: 'The article description. In a publisher case, usually this is the remote article description'
+        default: ""
+        description: The article description. In a publisher case, usually this is the remote article description
         example: Test description of article
         maxLength: 10000
         type: string
       doi:
-        default: ''
-        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        default: ""
+        description: Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
         type: string
       funding:
-        default: ''
+        default: ""
         description: Grant number or funding authority
         type: string
       funding_list:
         description: Funding creation / update items
         items:
-          $ref: '#/definitions/FundingCreate'
+          $ref: "#/definitions/FundingCreate"
         type: array
       group_id:
         description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
         format: int64
         type: integer
       handle:
-        default: ''
-        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        default: ""
+        description: Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
         type: string
       keywords:
         default: []
@@ -5126,21 +5130,21 @@ definitions:
         type: integer
       references:
         default: []
-        description: 'List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])'
+        description: List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
         example:
-          - 'http://figshare.com'
-          - 'http://api.figshare.com'
+          - http://figshare.com
+          - http://api.figshare.com
         items:
           format: link
           type: string
         type: array
       resource_doi:
-        default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI.'
+        default: ""
+        description: Not applicable to regular users. In a publisher case, this is the publisher article DOI.
         type: string
       resource_title:
-        default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title.'
+        default: ""
+        description: Not applicable to regular users. In a publisher case, this is the publisher article title.
         type: string
       tags:
         default: []
@@ -5152,7 +5156,7 @@ definitions:
           type: string
         type: array
       timeline:
-        $ref: '#/definitions/TimelineUpdate'
+        $ref: "#/definitions/TimelineUpdate"
         description: Various timeline dates
         type: object
       title:
@@ -5177,20 +5181,20 @@ definitions:
     properties:
       embargo_date:
         description: Date when embargo lifts
-        example: '2018-05-22T04:04:04'
+        example: 2018-05-22T04:04:04
         type:
           - string
-          - 'null'
+          - "null"
       embargo_reason:
         description: Reason for embargo
-        example: ''
+        example: ""
         type: string
       embargo_type:
         description: Embargo type
-        example: ''
+        example: ""
         type:
           - string
-          - 'null'
+          - "null"
       is_embargoed:
         description: True if embargoed
         example: true
@@ -5201,14 +5205,14 @@ definitions:
     properties:
       embargo_date:
         description: Date when the embargo expires and the article gets published
-        example: '2018-05-22T04:04:04'
+        example: 2018-05-22T04:04:04
         type: string
       embargo_reason:
         description: Reason for setting embargo
-        example: ''
+        example: ""
         type: string
       embargo_type:
-        description: 'Embargo can be enabled at the article or the file level. Possible values: article, file'
+        description: "Embargo can be enabled at the article or the file level. Possible values: article, file"
         enum:
           - article
           - file
@@ -5230,7 +5234,7 @@ definitions:
     x-tag: articles
   ArticleSearch:
     allOf:
-      - $ref: '#/definitions/CommonSearch'
+      - $ref: "#/definitions/CommonSearch"
     properties:
       doi:
         description: Only return articles with this doi
@@ -5241,7 +5245,7 @@ definitions:
         example: 111084/m9.figshare.14074
         type: string
       item_type:
-        description: 'Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model'
+        description: "Only return articles with the respective type. Mapping for item_type is: 1 - Figure, 2 - Media, 3 - Dataset, 5 - Poster, 6 - Journal contribution, 7 - Presentation, 8 - Thesis, 9 - Software, 11 - Online resource, 12 - Preprint, 13 - Book, 14 - Conference contribution, 15 - Chapter, 16 - Peer review, 17 - Educational resource, 18 - Report, 19 - Standard, 20 - Composition, 21 - Funding, 22 - Physical object, 23 - Data management plan, 24 - Workflow, 25 - Monograph, 26 - Performance, 27 - Event, 28 - Service, 29 - Model"
         example: 1
         format: int64
         type: integer
@@ -5266,7 +5270,7 @@ definitions:
     properties:
       authors:
         default: []
-        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
+        description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
         example:
           - name: John Doe
           - id: 1000008
@@ -5275,7 +5279,7 @@ definitions:
         type: array
       categories:
         default: []
-        description: 'List of category ids to be associated with the article(e.g [1, 23, 33, 66])'
+        description: List of category ids to be associated with the article(e.g [1, 23, 33, 66])
         example:
           - 1
           - 10
@@ -5285,40 +5289,40 @@ definitions:
           type: integer
         type: array
       custom_fields:
-        description: 'List of key, values pairs to be associated with the article'
+        description: List of key, values pairs to be associated with the article
         example:
           defined_key: value for it
         type: object
       defined_type:
-        description: '<b>One of:</b> <code>figure</code> <code>online resource</code> <code>preprint</code> <code>book</code> <code>conference contribution</code> <code>media</code> <code>dataset</code> <code>poster</code> <code>journal contribution</code> <code>presentation</code> <code>thesis</code> <code>software</code>'
+        description: <b>One of:</b> <code>figure</code> <code>online resource</code> <code>preprint</code> <code>book</code> <code>conference contribution</code> <code>media</code> <code>dataset</code> <code>poster</code> <code>journal contribution</code> <code>presentation</code> <code>thesis</code> <code>software</code>
         example: media
         type: string
       description:
-        default: ''
-        description: 'The article description. In a publisher case, usually this is the remote article description'
+        default: ""
+        description: The article description. In a publisher case, usually this is the remote article description
         example: Test description of article
         maxLength: 10000
         type: string
       doi:
-        default: ''
-        description: 'Not appliable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        default: ""
+        description: Not appliable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
         type: string
       funding:
-        default: ''
+        default: ""
         description: Grant number or funding authority
         type: string
       funding_list:
         description: Funding creation / update items
         items:
-          $ref: '#/definitions/FundingCreate'
+          $ref: "#/definitions/FundingCreate"
         type: array
       group_id:
         description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
         format: int64
         type: integer
       handle:
-        default: ''
-        description: 'Not appliable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        default: ""
+        description: Not appliable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
         type: string
       keywords:
         default: []
@@ -5337,21 +5341,21 @@ definitions:
         type: integer
       references:
         default: []
-        description: 'List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])'
+        description: List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
         example:
-          - 'http://figshare.com'
-          - 'http://api.figshare.com'
+          - http://figshare.com
+          - http://api.figshare.com
         items:
           format: link
           type: string
         type: array
       resource_doi:
-        default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI.'
+        default: ""
+        description: Not applicable to regular users. In a publisher case, this is the publisher article DOI.
         type: string
       resource_title:
-        default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title.'
+        default: ""
+        description: Not applicable to regular users. In a publisher case, this is the publisher article title.
         type: string
       tags:
         default: []
@@ -5363,7 +5367,7 @@ definitions:
           type: string
         type: array
       timeline:
-        $ref: '#/definitions/TimelineUpdate'
+        $ref: "#/definitions/TimelineUpdate"
         description: Various timeline dates
         type: object
       title:
@@ -5378,7 +5382,7 @@ definitions:
     properties:
       url:
         description: Api endpoint for the item version
-        example: 'https://api.figshare.com/v2/articles/2000005/versions/1'
+        example: https://api.figshare.com/v2/articles/2000005/versions/1
         format: url
         type: string
       version:
@@ -5431,7 +5435,7 @@ definitions:
     x-tag: authors
   AuthorComplete:
     allOf:
-      - $ref: '#/definitions/Author'
+      - $ref: "#/definitions/Author"
     properties:
       first_name:
         description: First Name
@@ -5459,7 +5463,7 @@ definitions:
   AuthorsCreator:
     properties:
       authors:
-        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
+        description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
         example:
           - id: 12121
           - id: 34345
@@ -5538,24 +5542,24 @@ definitions:
         format: int64
         type: integer
       published_date:
-        description: 'Date when collection was published '
-        example: '2015-08-12T00:39:55'
+        description: "Date when collection was published "
+        example: 2015-08-12T00:39:55
         type:
           - string
-          - 'null'
+          - "null"
       title:
         description: Collection title
         example: Sample collection
         type: string
       url:
         description: Api endpoint
-        example: 'https://api.figshare.com/v2/collections/123'
+        example: https://api.figshare.com/v2/collections/123
         type: string
     type: object
     x-tag: collections
   CollectionComplete:
     allOf:
-      - $ref: '#/definitions/Collection'
+      - $ref: "#/definitions/Collection"
     properties:
       articles_count:
         description: Number of articles in collection
@@ -5565,12 +5569,12 @@ definitions:
       authors:
         description: List of collection authors
         items:
-          $ref: '#/definitions/Author'
+          $ref: "#/definitions/Author"
         type: array
       categories:
         description: List of collection categories
         items:
-          $ref: '#/definitions/Category'
+          $ref: "#/definitions/Category"
         type: array
       citation:
         description: Collection citation
@@ -5578,12 +5582,12 @@ definitions:
         type: string
       created_date:
         description: Date when collection was created
-        example: '2017-05-15T15:12:26Z'
+        example: 2017-05-15T15:12:26Z
         type: string
       custom_fields:
         description: Collection custom fields
         items:
-          $ref: '#/definitions/CustomArticleField'
+          $ref: "#/definitions/CustomArticleField"
         type: array
       description:
         description: Collection description
@@ -5592,7 +5596,7 @@ definitions:
       funding:
         description: Full Collection funding information
         items:
-          $ref: '#/definitions/FundingInformation'
+          $ref: "#/definitions/FundingInformation"
           type: object
         type: array
       group_id:
@@ -5605,7 +5609,7 @@ definitions:
         example: 1
         type:
           - string
-          - 'null'
+          - "null"
       institution_id:
         description: Collection institution
         example: 1
@@ -5613,7 +5617,7 @@ definitions:
         type: integer
       modified_date:
         description: Date when collection was last modified
-        example: '2017-05-15T15:12:26Z'
+        example: 2017-05-15T15:12:26Z
         type: string
       public:
         description: True if collection is published
@@ -5631,11 +5635,11 @@ definitions:
         type: string
       resource_id:
         description: Collection resource id
-        example: ''
+        example: ""
         type: string
       resource_link:
         description: Collection resource link
-        example: 'http://figshare.com'
+        example: http://figshare.com
         type: string
       resource_title:
         description: Collection resource title
@@ -5655,7 +5659,7 @@ definitions:
           type: string
         type: array
       timeline:
-        $ref: '#/definitions/Timeline'
+        $ref: "#/definitions/Timeline"
         description: Various timeline dates
         type: object
       version:
@@ -5677,7 +5681,7 @@ definitions:
         type: array
       authors:
         default: []
-        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
+        description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
         example:
           - name: John Doe
           - id: 20005
@@ -5686,7 +5690,7 @@ definitions:
         type: array
       categories:
         default: []
-        description: 'List of category ids to be associated with the article(e.g [1, 23, 33, 66])'
+        description: List of category ids to be associated with the article(e.g [1, 23, 33, 66])
         example:
           - 1
           - 10
@@ -5696,36 +5700,36 @@ definitions:
           type: integer
         type: array
       custom_fields:
-        description: 'List of key, values pairs to be associated with the article'
+        description: List of key, values pairs to be associated with the article
         example:
           defined_key: value for it
         type: object
       description:
-        default: ''
-        description: 'The article description. In a publisher case, usually this is the remote article description'
+        default: ""
+        description: The article description. In a publisher case, usually this is the remote article description
         example: Test description of article
         maxLength: 10000
         type: string
       doi:
-        default: ''
-        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        default: ""
+        description: Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
         type: string
       funding:
-        default: ''
+        default: ""
         description: Grant number or funding authority
         type: string
       funding_list:
         description: Funding creation / update items
         items:
-          $ref: '#/definitions/FundingCreate'
+          $ref: "#/definitions/FundingCreate"
         type: array
       group_id:
         description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
         format: int64
         type: integer
       handle:
-        default: ''
-        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        default: ""
+        description: Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
         type: string
       keywords:
         default: []
@@ -5738,30 +5742,30 @@ definitions:
         type: array
       references:
         default: []
-        description: 'List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])'
+        description: List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
         example:
-          - 'http://figshare.com'
-          - 'http://api.figshare.com'
+          - http://figshare.com
+          - http://api.figshare.com
         items:
           format: link
           type: string
         type: array
       resource_doi:
-        default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI.'
+        default: ""
+        description: Not applicable to regular users. In a publisher case, this is the publisher article DOI.
         type: string
       resource_id:
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article id'
+        description: Not applicable to regular users. In a publisher case, this is the publisher article id
         type: string
       resource_link:
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article link'
+        description: Not applicable to regular users. In a publisher case, this is the publisher article link
         type: string
       resource_title:
-        default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title.'
+        default: ""
+        description: Not applicable to regular users. In a publisher case, this is the publisher article title.
         type: string
       resource_version:
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article version'
+        description: Not applicable to regular users. In a publisher case, this is the publisher article version
         type: integer
       tags:
         default: []
@@ -5773,7 +5777,7 @@ definitions:
           type: string
         type: array
       timeline:
-        $ref: '#/definitions/TimelineUpdate'
+        $ref: "#/definitions/TimelineUpdate"
         description: Various timeline dates
         type: object
       title:
@@ -5806,17 +5810,17 @@ definitions:
     properties:
       expires_date:
         description: Date when this private link should expire - optional. By default private links expire in 365 days.
-        example: '2018-02-22 22:22:22'
+        example: 2018-02-22 22:22:22
         type: string
       read_only:
-        description: 'Optional, default true. Set to false to give private link users editing rights for this collection.'
+        description: Optional, default true. Set to false to give private link users editing rights for this collection.
         example: true
         type: boolean
     type: object
     x-tag: collections
   CollectionSearch:
     allOf:
-      - $ref: '#/definitions/CommonSearch'
+      - $ref: "#/definitions/CommonSearch"
     properties:
       doi:
         description: Only return collections with this doi
@@ -5854,7 +5858,7 @@ definitions:
         type: array
       authors:
         default: []
-        description: 'List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint.'
+        description: "List of authors to be associated with the article. The list can contain the following fields: id, name, first_name, last_name, email, orcid_id. If an id is supplied, it will take priority and everything else will be ignored. No more than 10 authors. For adding more authors use the specific authors endpoint."
         example:
           - name: John Doe
           - id: 20005
@@ -5863,7 +5867,7 @@ definitions:
         type: array
       categories:
         default: []
-        description: 'List of category ids to be associated with the article(e.g [1, 23, 33, 66])'
+        description: List of category ids to be associated with the article(e.g [1, 23, 33, 66])
         example:
           - 1
           - 10
@@ -5873,36 +5877,36 @@ definitions:
           type: integer
         type: array
       custom_fields:
-        description: 'List of key, values pairs to be associated with the article'
+        description: List of key, values pairs to be associated with the article
         example:
           defined_key: value for it
         type: object
       description:
-        default: ''
-        description: 'The article description. In a publisher case, usually this is the remote article description'
+        default: ""
+        description: The article description. In a publisher case, usually this is the remote article description
         example: Test description of article
         maxLength: 10000
         type: string
       doi:
-        default: ''
-        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        default: ""
+        description: Not applicable for regular users. In an institutional case, make sure your group supports setting DOIs. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
         type: string
       funding:
-        default: ''
+        default: ""
         description: Grant number or funding authority
         type: string
       funding_list:
         description: Funding creation / update items
         items:
-          $ref: '#/definitions/FundingCreate'
+          $ref: "#/definitions/FundingCreate"
         type: array
       group_id:
         description: Not applicable to regular users. This field is reserved to institutions/publishers with access to assign to specific groups
         format: int64
         type: integer
       handle:
-        default: ''
-        description: 'Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.'
+        default: ""
+        description: Not applicable for regular users. In an institutional case, make sure your group supports setting Handles. This setting is applied by figshare via opening a ticket through our support/helpdesk system.
         type: string
       keywords:
         default: []
@@ -5915,30 +5919,30 @@ definitions:
         type: array
       references:
         default: []
-        description: 'List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])'
+        description: List of links to be associated with the article (e.g ["http://link1", "http://link2", "http://link3"])
         example:
-          - 'http://figshare.com'
-          - 'http://api.figshare.com'
+          - http://figshare.com
+          - http://api.figshare.com
         items:
           format: link
           type: string
         type: array
       resource_doi:
-        default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article DOI.'
+        default: ""
+        description: Not applicable to regular users. In a publisher case, this is the publisher article DOI.
         type: string
       resource_id:
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article id'
+        description: Not applicable to regular users. In a publisher case, this is the publisher article id
         type: string
       resource_link:
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article link'
+        description: Not applicable to regular users. In a publisher case, this is the publisher article link
         type: string
       resource_title:
-        default: ''
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article title.'
+        default: ""
+        description: Not applicable to regular users. In a publisher case, this is the publisher article title.
         type: string
       resource_version:
-        description: 'Not applicable to regular users. In a publisher case, this is the publisher article version'
+        description: Not applicable to regular users. In a publisher case, this is the publisher article version
         type: integer
       tags:
         default: []
@@ -5950,7 +5954,7 @@ definitions:
           type: string
         type: array
       timeline:
-        $ref: '#/definitions/TimelineUpdate'
+        $ref: "#/definitions/TimelineUpdate"
         description: Various timeline dates
         type: object
       title:
@@ -5970,7 +5974,7 @@ definitions:
         type: integer
       url:
         description: Api endpoint for the collection version
-        example: 'https://api.figshare.com/v2/collections/2000005/versions/1'
+        example: https://api.figshare.com/v2/collections/2000005/versions/1
         format: url
         type: string
     type: object
@@ -5996,7 +6000,7 @@ definitions:
         type: integer
       modified_since:
         description: Filter by article modified date. Will only return articles published after the date. date(ISO 8601) YYYY-MM-DD
-        example: '2017-12-22'
+        example: 2017-12-22
         type: string
       offset:
         description: Where to start the listing(the offset of the first result). Used for pagination with limit
@@ -6030,7 +6034,7 @@ definitions:
         type: integer
       published_since:
         description: Filter by article publishing date. Will only return articles published after the date. date(ISO 8601) YYYY-MM-DD
-        example: '2017-12-22'
+        example: 2017-12-22
         type: string
       search_for:
         description: Search term
@@ -6080,7 +6084,7 @@ definitions:
         description: The last time a comment has been added to the review.
         type:
           - string
-          - 'null'
+          - "null"
       status:
         description: The status of the review.
         enum:
@@ -6131,10 +6135,10 @@ definitions:
     x-tag: institutions
   CurationDetail:
     allOf:
-      - $ref: '#/definitions/Curation'
+      - $ref: "#/definitions/Curation"
     properties:
       item:
-        $ref: '#/definitions/ArticleComplete'
+        $ref: "#/definitions/ArticleComplete"
         description: Article details
         type: object
     type: object
@@ -6146,7 +6150,7 @@ definitions:
         example: false
         type:
           - boolean
-          - 'null'
+          - "null"
       name:
         description: Custom  metadata name
         example: key
@@ -6160,7 +6164,7 @@ definitions:
   ErrorMessage:
     properties:
       code:
-        description: 'A machine friendly error code, used by the dev team to identify the error.'
+        description: A machine friendly error code, used by the dev team to identify the error.
         format: int64
         type: integer
       message:
@@ -6172,7 +6176,7 @@ definitions:
     properties:
       link:
         description: Url for an existing file that will not be uploaded on figshare
-        example: 'http://figshare.com/file.txt'
+        example: http://figshare.com/file.txt
         type: string
       md5:
         description: MD5 sum pre computed on the client side
@@ -6222,7 +6226,7 @@ definitions:
         type: string
       url:
         description: The grant url
-        example: 'https://app.dimensions.ai/details/grant/1'
+        example: https://app.dimensions.ai/details/grant/1
         format: url
         type: string
     type: object
@@ -6237,7 +6241,7 @@ definitions:
   Group:
     properties:
       association_criteria:
-        description: 'HR code associated with group, if code exists'
+        description: HR code associated with group, if code exists
         example: IT
         type: string
       id:
@@ -6256,7 +6260,7 @@ definitions:
         type: integer
       resource_id:
         description: Group resource id
-        example: ''
+        example: ""
         type: string
     type: object
     x-tag: institutions
@@ -6267,7 +6271,7 @@ definitions:
         example: null
         type:
           - string
-          - 'null'
+          - "null"
       id:
         description: Institution id
         example: 0
@@ -6338,7 +6342,7 @@ definitions:
         type: string
       url:
         description: License url
-        example: 'http://creativecommons.org/licenses/by/4.0/'
+        example: http://creativecommons.org/licenses/by/4.0/
         format: url
         type: string
       value:
@@ -6358,11 +6362,11 @@ definitions:
     x-tag: common
   PrivateArticleSearch:
     allOf:
-      - $ref: '#/definitions/ArticleSearch'
+      - $ref: "#/definitions/ArticleSearch"
     properties:
       resource_id:
         description: only return collections with this resource_id
-        example: '1407024'
+        example: "1407024"
         type: string
     type: object
     x-tag: articles
@@ -6443,17 +6447,17 @@ definitions:
     x-tag: authors
   PrivateCollectionSearch:
     allOf:
-      - $ref: '#/definitions/CollectionSearch'
+      - $ref: "#/definitions/CollectionSearch"
     properties:
       resource_id:
         description: only return collections with this resource_id
-        example: '1407024'
+        example: "1407024"
         type: string
     type: object
     x-tag: collections
   PrivateFile:
     allOf:
-      - $ref: '#/definitions/PublicFile'
+      - $ref: "#/definitions/PublicFile"
     properties:
       preview_state:
         description: File preview state
@@ -6464,14 +6468,14 @@ definitions:
         example: created
         type:
           - string
-          - 'null'
+          - "null"
       upload_token:
         description: Token for file upload
         example: 9dfc5fe3-d617-4d93-ac11-8afe7e984a4b
         type: string
       upload_url:
         description: Upload url for file
-        example: 'https://uploads.figshare.com'
+        example: https://uploads.figshare.com
         format: url
         type: string
       viewer_type:
@@ -6483,7 +6487,7 @@ definitions:
     properties:
       expires_date:
         description: Date when link will expire
-        example: '2015-07-03T00:00:00'
+        example: 2015-07-03T00:00:00
         type: string
       id:
         description: Private link id
@@ -6499,7 +6503,7 @@ definitions:
     properties:
       expires_date:
         description: Date when this private link should expire - optional. By default private links expire in 365 days.
-        example: '2018-02-22 22:22:22'
+        example: 2018-02-22 22:22:22
         type: string
     type: object
     x-tag: articles
@@ -6512,32 +6516,32 @@ definitions:
         type: integer
       published_date:
         description: Date when project was published
-        example: '2017-05-16T14:55:08Z'
+        example: 2017-05-16T14:55:08Z
         type:
           - string
-          - 'null'
+          - "null"
       title:
         description: Project title
         example: project
         type: string
       url:
         description: Api endpoint
-        example: 'http://api.figshare.com/v2/account/projects/1'
+        example: http://api.figshare.com/v2/account/projects/1
         type: string
     type: object
     x-tag: projects
   ProjectArticle:
     allOf:
-      - $ref: '#/definitions/Article'
+      - $ref: "#/definitions/Article"
     properties:
       categories:
         description: List of categories selected for the article
         items:
-          $ref: '#/definitions/Category'
+          $ref: "#/definitions/Category"
         type: array
       citation:
         description: Article citation
-        example: |-
+        example: >-
           lilliput, figshare admin (2017): first project item. figshare.
            
            Retrieved: 14 01, May 22, 2017 (GMT)
@@ -6548,7 +6552,7 @@ definitions:
         type: string
       created_date:
         description: Date when article was created
-        example: '2017-05-18T11:49:03Z'
+        example: 2017-05-18T11:49:03Z
         type: string
       description:
         description: Article description
@@ -6556,10 +6560,10 @@ definitions:
         type: string
       embargo_date:
         description: Date when embargo lifts
-        example: '2017-05-18T11:49:03Z'
+        example: 2017-05-18T11:49:03Z
         type:
           - string
-          - 'null'
+          - "null"
       embargo_reason:
         description: Reason for embargo
         example: not complete
@@ -6569,7 +6573,7 @@ definitions:
         example: article
         type:
           - string
-          - 'null'
+          - "null"
       funding:
         description: Article funding
         example: none
@@ -6603,7 +6607,7 @@ definitions:
         example: true
         type: boolean
       license:
-        $ref: '#/definitions/License'
+        $ref: "#/definitions/License"
         description: Article selected license
       metadata_reason:
         description: Article metadata reason
@@ -6611,15 +6615,15 @@ definitions:
         type: string
       modified_date:
         description: Date when article was last modified
-        example: '2017-05-18T11:49:03Z'
+        example: 2017-05-18T11:49:03Z
         type:
           - string
-          - 'null'
+          - "null"
       references:
         description: List of references
         example:
-          - 'http://figshare.com'
-          - 'http://figshare.com/api'
+          - http://figshare.com
+          - http://figshare.com/api
         items:
           format: url
           type: string
@@ -6697,12 +6701,12 @@ definitions:
     x-tag: projects
   ProjectComplete:
     allOf:
-      - $ref: '#/definitions/Project'
+      - $ref: "#/definitions/Project"
     properties:
       collaborators:
         description: List of project collaborators
         items:
-          $ref: '#/definitions/Collaborator'
+          $ref: "#/definitions/Collaborator"
         type: array
       description:
         description: Project description
@@ -6710,34 +6714,34 @@ definitions:
         type: string
       figshare_url:
         description: Project public url
-        example: 'https://figshare.com/projects/project/1'
+        example: https://figshare.com/projects/project/1
         type:
           - string
-          - 'null'
+          - "null"
       funding:
         description: Project funding
-        example: ''
+        example: ""
         type: string
       funding_list:
         description: Full Project funding information
         items:
-          $ref: '#/definitions/FundingInformation'
+          $ref: "#/definitions/FundingInformation"
           type: object
         type: array
     type: object
     x-tag: projects
   ProjectCompletePrivate:
     allOf:
-      - $ref: '#/definitions/ProjectPrivate'
+      - $ref: "#/definitions/ProjectPrivate"
     properties:
       collaborators:
         description: List of project collaborators
         items:
-          $ref: '#/definitions/Collaborator'
+          $ref: "#/definitions/Collaborator"
         type: array
       created_date:
         description: Date when project was created
-        example: '2017-05-16T14:52:54Z'
+        example: 2017-05-16T14:52:54Z
         type: string
       description:
         description: Project description
@@ -6745,10 +6749,10 @@ definitions:
         type: string
       figshare_url:
         description: Project public url
-        example: 'https://figshare.com/projects/project/1'
+        example: https://figshare.com/projects/project/1
         type:
           - string
-          - 'null'
+          - "null"
       funding:
         description: Project funding
         example: none
@@ -6756,7 +6760,7 @@ definitions:
       funding_list:
         description: Full Project funding information
         items:
-          $ref: '#/definitions/FundingInformation'
+          $ref: "#/definitions/FundingInformation"
           type: object
         type: array
       group_id:
@@ -6766,7 +6770,7 @@ definitions:
         type: integer
       modified_date:
         description: Date when project was last modified
-        example: '2017-05-16T14:52:54Z'
+        example: 2017-05-16T14:52:54Z
         type: string
       quota:
         description: Project quota
@@ -6799,12 +6803,12 @@ definitions:
         type: string
       funding:
         description: Grant number or organization(s) that funded this project. Up to 2000 characters permitted.
-        example: ''
+        example: ""
         type: string
       funding_list:
         description: Funding creation / update items
         items:
-          $ref: '#/definitions/FundingCreate'
+          $ref: "#/definitions/FundingCreate"
         type: array
       group_id:
         description: Only if project type is group.
@@ -6829,7 +6833,7 @@ definitions:
         type: string
       created_date:
         description: Date when note was created
-        example: '2017-05-16T16:49:11Z'
+        example: 2017-05-16T16:49:11Z
         type: string
       id:
         description: Project note id
@@ -6838,7 +6842,7 @@ definitions:
         type: integer
       modified_date:
         description: Date when note was last modified
-        example: '2017-05-16T16:49:11Z'
+        example: 2017-05-16T16:49:11Z
         type: string
       user_id:
         description: User who wrote the note
@@ -6864,7 +6868,7 @@ definitions:
     x-tag: projects
   ProjectNotePrivate:
     allOf:
-      - $ref: '#/definitions/ProjectNote'
+      - $ref: "#/definitions/ProjectNote"
     properties:
       text:
         description: Full text of note
@@ -6874,7 +6878,7 @@ definitions:
     x-tag: projects
   ProjectPrivate:
     allOf:
-      - $ref: '#/definitions/Project'
+      - $ref: "#/definitions/Project"
     properties:
       role:
         description: Role inside this project
@@ -6902,12 +6906,12 @@ definitions:
         type: string
       funding:
         description: Grant number or organization(s) that funded this project. Up to 2000 characters permitted.
-        example: ''
+        example: ""
         type: string
       funding_list:
         description: Funding creation / update items
         items:
-          $ref: '#/definitions/FundingCreate'
+          $ref: "#/definitions/FundingCreate"
         type: array
       title:
         description: The title for this project - mandatory. 3 - 500 characters.
@@ -6919,7 +6923,7 @@ definitions:
     x-tag: projects
   ProjectsSearch:
     allOf:
-      - $ref: '#/definitions/CommonSearch'
+      - $ref: "#/definitions/CommonSearch"
     properties:
       order:
         default: published_date
@@ -6940,7 +6944,7 @@ definitions:
         type: string
       download_url:
         description: Url for file download
-        example: 'https://ndownloader.figshare.com/files/3000002'
+        example: https://ndownloader.figshare.com/files/3000002
         format: url
         type: string
       id:
@@ -7032,41 +7036,41 @@ definitions:
     x-tag: other
   Timeline:
     allOf:
-      - $ref: '#/definitions/TimelineUpdate'
+      - $ref: "#/definitions/TimelineUpdate"
     properties:
       posted:
         description: Posted date
-        example: '2015-12-31'
+        example: 2015-12-31
         type:
           - string
-          - 'null'
+          - "null"
       revision:
         description: Revision date from curation (if curated)
-        example: '2015-12-31'
+        example: 2015-12-31
         type:
           - string
-          - 'null'
+          - "null"
       submission:
         description: Submission date in curation (if curated)
-        example: '2015-12-31'
+        example: 2015-12-31
         type:
           - string
-          - 'null'
+          - "null"
     type: object
     x-tag: timeline
   TimelineUpdate:
     properties:
       firstOnline:
         description: Online posted date
-        example: '2015-12-31'
+        example: 2015-12-31
         type: string
       publisherAcceptance:
         description: Date when the item was accepted for publication
-        example: '2015-12-31'
+        example: 2015-12-31
         type: string
       publisherPublication:
         description: Publish date
-        example: '2015-12-31'
+        example: 2015-12-31
         type: string
     type: object
     x-tag: timeline_update
@@ -7078,7 +7082,7 @@ definitions:
         format: int64
         type: integer
       locked:
-        description: 'When a part is being uploaded it is being locked, by setting the locked flag to true. No changes/uploads can happen on this part from other requests.'
+        description: When a part is being uploaded it is being locked, by setting the locked flag to true. No changes/uploads can happen on this part from other requests.
         type: boolean
       partNo:
         description: File part id
@@ -7111,7 +7115,7 @@ definitions:
       parts:
         description: Uploads parts
         items:
-          $ref: '#/definitions/UploadFilePart'
+          $ref: "#/definitions/UploadFilePart"
         type: array
       size:
         description: size of file in bytes

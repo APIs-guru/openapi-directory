@@ -1,12 +1,13 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: circuitsandbox.net
 basePath: /rest/v2
 x-hasEquivalentPaths: true
 info:
-  description: |-
+  description: >-
     Circuit REST API to interact with the Circuit system.
+
 
     [Learn more about the Circuit Development Community](https://www.circuit.com/web/developers/home)
   title: REST API Version 2
@@ -14,16 +15,17 @@ info:
   x-apisguru-categories:
     - messaging
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/927933988269903874/4jU82-IJ_400x400.jpg'
+    backgroundColor: "#FFFFFF"
+    url: https://pbs.twimg.com/profile_images/927933988269903874/4jU82-IJ_400x400.jpg
   x-origin:
     - format: swagger
-      url: 'https://circuitsandbox.net/rest/v2/swagger'
-      version: '2.0'
+      url: https://circuitsandbox.net/rest/v2/swagger
+      version: "2.0"
   x-providerName: circuitsandbox.net
+  x-preferred: true
 securityDefinitions:
   oauth:
-    authorizationUrl: 'https://circuitsandbox.net/oauth/authorize'
+    authorizationUrl: https://circuitsandbox.net/oauth/authorize
     flow: implicit
     scopes:
       ALL: allows full access to all functionalities of the REST API
@@ -41,7 +43,7 @@ securityDefinitions:
       READ_USER_PROFILE: allows to read the user profile of the authenticated user
       SEARCH_CONVERSATIONS: Search conversations
       UPDATE_CONVERSATION_CONTENT: Update content of conversations
-      USER_MANAGEMENT: 'allows to create, update and delete users'
+      USER_MANAGEMENT: allows to create, update and delete users
       USER_TO_USER: User2User
       WRITE_CONVERSATIONS: allows to create and update conversations of the authenticated user or to post messages
       WRITE_USER_PROFILE: allows to update the user profile of the authenticated user
@@ -51,12 +53,13 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets a list of conversations and communities the authenticated user participates in.
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getConversations
       parameters:
-        - description: 'The modification time of the conversation in UTC format. During the query the conversations before (<i>default</i>) or after this timestamp are returned. In case no timestamp is specified the current server time in UTC is used, i.e. the last 25 modified conversations are returned'
+        - description: The modification time of the conversation in UTC format. During the query the conversations before (<i>default</i>) or after this timestamp are returned. In case no timestamp is specified the current server time in UTC is used, i.e. the last 25 modified conversations are returned
           format: date-time
           in: query
           name: modTime
@@ -85,19 +88,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The matching conversations
           schema:
             items:
-              $ref: '#/definitions/Conversation'
+              $ref: "#/definitions/Conversation"
             type: array
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -110,8 +113,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets a list of communities. This endpoint can be used to explore the communities the authenticated user could join.
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getCommunityConversations
       parameters:
@@ -137,7 +141,7 @@ paths:
           required: false
           type: string
         - default: false
-          description: 'If set to false only conversations are returned where the user is no member of, otherwise all community conversations are returned'
+          description: If set to false only conversations are returned where the user is no member of, otherwise all community conversations are returned
           in: query
           name: includeOwn
           required: false
@@ -164,19 +168,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The matching conversations
           schema:
             items:
-              $ref: '#/definitions/Conversation'
+              $ref: "#/definitions/Conversation"
             type: array
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul>a field constraint is violated</ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul>a field constraint is violated</ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -188,13 +192,14 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Creates a community. Communities are open conversations that anyone in a Circuit domain (tenant) can join without having to be added by another user.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: createCommunityConversation
       parameters:
         - collectionFormat: multi
-          description: 'list of participants that will be part of this conversation, specified by the Circuit user ID or the unique email address. At least one participant needs to be added'
+          description: list of participants that will be part of this conversation, specified by the Circuit user ID or the unique email address. At least one participant needs to be added
           in: formData
           items:
             maxLength: 2048
@@ -218,17 +223,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The conversation was created successfully and can be accessed via the conversation ID
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -238,12 +243,13 @@ paths:
       summary: Creates a community conversation
       tags:
         - Conversations
-  '/conversations/community/{convId}':
+  "/conversations/community/{convId}":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Updates the information of the given community.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: updateConversationCommunity
       parameters:
@@ -269,17 +275,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the updated conversation object with the new topic / description
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -289,12 +295,13 @@ paths:
       summary: Updates the information of a community
       tags:
         - Conversations
-  '/conversations/community/{convId}/join':
+  "/conversations/community/{convId}/join":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds the authenticated user to the given community (i.e., allows the user to join this community). Contrary to the operation of adding a new participant, this operation can only be performed by a user who is not yet a member of the community.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: joinCommunityConversation
       parameters:
@@ -308,17 +315,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the conversation object to which the participants was added
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -328,12 +335,13 @@ paths:
       summary: Adds the authenticated user to a community
       tags:
         - Conversations
-  '/conversations/community/{convId}/participants':
+  "/conversations/community/{convId}/participants":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Removes one or more participants from the given community. The last participant of a community cannot be removed. This operation can only be performed by a user who is already a member of the community.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: removeParticipantCommunity
       parameters:
@@ -356,17 +364,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the conversation object from which the participants were removed.
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul></li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul></li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -379,8 +387,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds one or more participants to the given community. This operation can only be performed by a user who is already a member of the community.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: addParticipantCommunity
       parameters:
@@ -403,17 +412,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the conversation object to which the participants were added.
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type COMMUNITY</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -427,12 +436,13 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Checks if a 1-to-1 conversation between the authenticated user and the user with the provided userId exists.
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getDirectConversation
       parameters:
-        - description: 'The participant that will be part of this conversation together with the creator, specified by the Circuit user ID or the unique email address'
+        - description: The participant that will be part of this conversation together with the creator, specified by the Circuit user ID or the unique email address
           in: query
           maxLength: 2048
           name: participant
@@ -442,17 +452,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The conversation was found and can be accessed via the conversation ID
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or the user does not exist</li><li>or the user is the same who initiates the request</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or the user does not exist</li><li>or the user is the same who initiates the request</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -464,12 +474,13 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Creates a 1-to-1 conversation between the authenticated user and the user with the provided userId. In case there is already an existing 1-to-1 conversation between these users, the endpoint returns the existing conversation.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: createDirectConversation
       parameters:
-        - description: 'The participant that will be part of this conversation together with the creator, specified by the Circuit user ID or the unique email address'
+        - description: The participant that will be part of this conversation together with the creator, specified by the Circuit user ID or the unique email address
           in: formData
           maxLength: 2048
           name: participant
@@ -479,21 +490,21 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The conversation was created successfully and can be accessed via the conversation ID
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or the user does not exist</li><li>or the user is the same who initiates the request</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or the user does not exist</li><li>or the user is the same who initiates the request</li></ul>"
+        "401":
           description: The authentication was not successful
-        '409':
+        "409":
           description: A conversation already exists. The response contains this conversation.
           schema:
-            $ref: '#/definitions/Conversation'
-        '500':
+            $ref: "#/definitions/Conversation"
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -505,24 +516,25 @@ paths:
         - Conversations
   /conversations/favorite:
     get:
-      description: |-
+      description: >-
         Gets the conversationIds which are marked as favorites.
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getFavoriteConversations
       responses:
-        '200':
+        "200":
           description: A list of marked conversations or an empty response.
           schema:
             items:
-              $ref: '#/definitions/String'
+              $ref: "#/definitions/String"
             type: array
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -535,13 +547,14 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Creates a group conversation between three or more users. The authenticated user is directly added to this conversation.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: createGroupConversation
       parameters:
         - collectionFormat: multi
-          description: 'A list of participants that will be part of this conversation, specified by the Circuit user ID or the unique email address. At least one participant needs to be added'
+          description: A list of participants that will be part of this conversation, specified by the Circuit user ID or the unique email address. At least one participant needs to be added
           in: formData
           items:
             maxLength: 2048
@@ -559,17 +572,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The conversation was created successfully and can be accessed via the conversation ID
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -579,12 +592,13 @@ paths:
       summary: Creates a group conversation
       tags:
         - Conversations
-  '/conversations/group/{convId}':
+  "/conversations/group/{convId}":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Updates the information of the given group conversation.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: updateConversationGroup
       parameters:
@@ -604,17 +618,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the updated conversation object with the new topic
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -624,12 +638,13 @@ paths:
       summary: Updates the information of a group conversation
       tags:
         - Conversations
-  '/conversations/group/{convId}/participants':
+  "/conversations/group/{convId}/participants":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Removes one or more participants from the given group conversation. The last participant of a group conversation cannot be removed. This operation can only be performed on behalf of a user who is already a member of the conversation.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: removeParticipantGroup
       parameters:
@@ -652,17 +667,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the conversation object from which the participants were removed.
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -675,8 +690,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds one or more participants to the given group conversation. This operation can only be performed by a user who is already a member of the conversation.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: addParticipantGroup
       parameters:
@@ -699,17 +715,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the conversation object to which the participants were added.
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or an valid email address</li><li>or one or more of the user do not exist</li><li>the conversation does not exist</li><li>the conversation is not of type GROUP</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -719,12 +735,13 @@ paths:
       summary: Adds participants to a group conversation
       tags:
         - Conversations
-  '/conversations/label/{labelId}':
+  "/conversations/label/{labelId}":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Returns conversations with matching labels and paginated 
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getConversationsByLabel
       parameters:
@@ -753,17 +770,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Returns a list of conversations that are tagged with a certain label
           schema:
-            $ref: '#/definitions/ConversationsPage'
-        '400':
+            $ref: "#/definitions/ConversationsPage"
+        "400":
           description: he request cannot be fulfilled due to bad syntax
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -774,22 +791,23 @@ paths:
         - Conversations
   /conversations/messages/flag:
     get:
-      description: |-
+      description: >-
         Gets a list of all the messages the authenticated user has flagged. This endpoint should be used carefully in case where the authenticated user has a lot of flagged messages.
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getFlagItemConv
       responses:
-        '200':
+        "200":
           description: Gets the list of flagged items
           schema:
             items:
-              $ref: '#/definitions/ConversationItem'
+              $ref: "#/definitions/ConversationItem"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -798,12 +816,13 @@ paths:
       summary: Gets a list of the flagged messages
       tags:
         - Conversations
-  '/conversations/messages/{itemId}':
+  "/conversations/messages/{itemId}":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Returns a text item for a given item id
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getSingleConversationtem
       parameters:
@@ -817,17 +836,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The item was successful returned
           schema:
-            $ref: '#/definitions/ConversationItem'
-        '400':
+            $ref: "#/definitions/ConversationItem"
+        "400":
           description: The item with the given id was not found
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -836,12 +855,13 @@ paths:
       summary: Returns a text item
       tags:
         - Conversations
-  '/conversations/moderate/{convId}':
+  "/conversations/moderate/{convId}":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Set a conversation in moderatd mode. Moderators can be added and removed
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MODERATE_CONVERSATIONS
       operationId: moderateConversation
       parameters:
@@ -855,15 +875,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The conversation is in moderated mode
-        '401':
+        "401":
           description: Permission denied
-        '403':
+        "403":
           description: Forbidden to edit this conversation
-        '500':
+        "500":
           description: Internal server error
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -877,8 +897,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Resolves an invite token to a conversation
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: resolveInvitationToken
       parameters:
@@ -892,19 +913,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Returns the conversation object that belongs to the invite token if you are member of the conversation
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
+            $ref: "#/definitions/Conversation"
+        "400":
           description: In case no invitation token was send
-        '401':
+        "401":
           description: The authentication was not successful
-        '404':
-          description: 'If the token does not exist or you are not member of the conversation '
-        '500':
+        "404":
+          description: "If the token does not exist or you are not member of the conversation "
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -917,8 +938,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Performs a search for conversation content. A maximum of 100 conversations is returned. If you hit this limit you should refine the search term.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS
       operationId: searchConversations
       parameters:
@@ -938,17 +960,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: A list of conversations and items that match the term
           schema:
-            $ref: '#/definitions/ConversationSearchResult'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/ConversationSearchResult"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -957,12 +979,13 @@ paths:
       summary: Performs a conversation search
       tags:
         - Conversations
-  '/conversations/unmoderate/{convId}':
+  "/conversations/unmoderate/{convId}":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Set a conversation to unmoderatd mode
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MODERATE_CONVERSATIONS
       operationId: unmoderateConversation
       parameters:
@@ -976,15 +999,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The conversation is in unmoderated mode
-        '401':
+        "401":
           description: Forbidden to edit this conversation
-        '403':
+        "403":
           description: Permission denied
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -994,12 +1017,13 @@ paths:
       summary: Set conversation unmoderated
       tags:
         - Conversations
-  '/conversations/{convId}':
+  "/conversations/{convId}":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets a conversation based on the given ID.
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getConversationbyId
       parameters:
@@ -1013,17 +1037,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the conversation object
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Conversation"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1032,12 +1056,13 @@ paths:
       summary: Gets a conversation
       tags:
         - Conversations
-  '/conversations/{convId}/conversationdetails':
+  "/conversations/{convId}/conversationdetails":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets the conference details of the given conversation. Conference details include the URL, which is used to join the conference through a web or mobile application, as well as the dial-in phone numbers and conference PIN, which are used to join the conference by phone.
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getJoinDetails
       parameters:
@@ -1051,17 +1076,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The join details.
           schema:
-            $ref: '#/definitions/ConversationDetails'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li></ul>'
-        '401':
+            $ref: "#/definitions/ConversationDetails"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1070,12 +1095,13 @@ paths:
       summary: Gets the conference details of a conversation
       tags:
         - Conversations
-  '/conversations/{convId}/favorite':
+  "/conversations/{convId}/favorite":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Removes a conversation from favorites. Favorites can be displayed in a separate side tab inside of the Circuit client to have a better overview of important conversations.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS
       operationId: deleteFavorite
       parameters:
@@ -1089,15 +1115,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The conversation was successfully unmarked
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li><li>the conversation was not marked before</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li><li>the conversation was not marked before</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1109,8 +1135,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds a conversation to the favorites. Favorites can be displayed in a separate side tab inside of the Circuit client to have a better overview of important conversations.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS
       operationId: addFavorite
       parameters:
@@ -1124,15 +1151,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The conversation was successfully marked
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1141,12 +1168,13 @@ paths:
       summary: Adds a conversation to the favorites
       tags:
         - Conversations
-  '/conversations/{convId}/items':
+  "/conversations/{convId}/items":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets a list of conversation items.
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getConversationItems
       parameters:
@@ -1156,7 +1184,7 @@ paths:
           name: convId
           required: true
           type: string
-        - description: 'The modification time of the item in UTC format. During the query the items before (default) or after this timestamps are returned. In case no timestamp is specified the current server time in UTC is used, i.e. the last 25 modified items are returned'
+        - description: The modification time of the item in UTC format. During the query the items before (default) or after this timestamps are returned. In case no timestamp is specified the current server time in UTC is used, i.e. the last 25 modified items are returned
           format: date-time
           in: query
           name: modTime
@@ -1185,19 +1213,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The matching conversation items
           schema:
             items:
-              $ref: '#/definitions/ConversationItem'
+              $ref: "#/definitions/ConversationItem"
             type: array
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1206,12 +1234,13 @@ paths:
       summary: Gets a list of conversation items
       tags:
         - Conversations
-  '/conversations/{convId}/label':
+  "/conversations/{convId}/label":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds a label to a conversation, you can search and organize your conversations based on these labels
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, ORGANIZE_CONVERSATIONS
       operationId: assignLabel
       parameters:
@@ -1221,7 +1250,7 @@ paths:
           name: convId
           required: true
           type: string
-        - description: 'The actual label '
+        - description: "The actual label "
           in: formData
           maxLength: 2048
           name: label
@@ -1231,17 +1260,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The label was successfully added
           schema:
-            $ref: '#/definitions/Label'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>you reached the maximum of 250 labels</li></ul>'
-        '401':
+            $ref: "#/definitions/Label"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>you reached the maximum of 250 labels</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1251,12 +1280,13 @@ paths:
       summary: Adds a label to a conversation
       tags:
         - Conversations
-  '/conversations/{convId}/label/{labelId}':
+  "/conversations/{convId}/label/{labelId}":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Removes a label from a conversation, you can search and organize your conversations based on these labels
+
         OauthScopes: ALL, WRITE_CONVERSATIONS
       operationId: unassignLabel
       parameters:
@@ -1266,7 +1296,7 @@ paths:
           name: convId
           required: true
           type: string
-        - description: 'The actual label '
+        - description: "The actual label "
           in: path
           maxLength: 2048
           name: labelId
@@ -1276,17 +1306,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The label was successfully removed
           schema:
-            $ref: '#/definitions/Label'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>the label was not assigned to the conversation</li></ul>'
-        '401':
+            $ref: "#/definitions/Label"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>the label was not assigned to the conversation</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1295,12 +1325,13 @@ paths:
       summary: Removes a label from a conversation
       tags:
         - Conversations
-  '/conversations/{convId}/messages':
+  "/conversations/{convId}/messages":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds a message to the given conversation. This operation can be only performed on behalf of a user who is already a member of the conversation.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, CREATE_CONVERSATIONS_CONTENT
       operationId: addTextItem
       parameters:
@@ -1310,7 +1341,7 @@ paths:
           name: convId
           required: true
           type: string
-        - description: 'The actual content of the item, is mandatory unless an attachment is added'
+        - description: The actual content of the item, is mandatory unless an attachment is added
           in: formData
           maxLength: 16384
           name: content
@@ -1341,17 +1372,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the new text item object
           schema:
-            $ref: '#/definitions/ConversationItem'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/ConversationItem"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1361,12 +1392,13 @@ paths:
       summary: Adds a message to a conversation
       tags:
         - Conversations
-  '/conversations/{convId}/messages/flag':
+  "/conversations/{convId}/messages/flag":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets a list of all the flagged messages in the given conversation.
+
         OauthScopes: ALL, READ_CONVERSATIONS, ORGANIZE_CONVERSATIONS
       operationId: getFlagItem
       parameters:
@@ -1380,19 +1412,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the list of flagged items
           schema:
             items:
-              $ref: '#/definitions/ConversationItem'
+              $ref: "#/definitions/ConversationItem"
             type: array
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1402,12 +1434,13 @@ paths:
       summary: Gets a list of the flagged messages of a conversation
       tags:
         - Conversations
-  '/conversations/{convId}/messages/{itemId}':
+  "/conversations/{convId}/messages/{itemId}":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Marks a message in the given conversation as deleted. Deleted messages are still part of the conversation, but their content is no more visible. This operation can only be performed on behalf of the message's creator.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, DELETE_CONVERSATIONS_CONTENT
       operationId: deleteTextItem
       parameters:
@@ -1427,17 +1460,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the deleted text item object
           schema:
-            $ref: '#/definitions/ConversationItem'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/ConversationItem"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1450,8 +1483,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds a message to the existing item. The added message will be a child item of the message with the given itemId.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS
       operationId: addTextItemWithParent
       parameters:
@@ -1498,17 +1532,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the new text item object
           schema:
-            $ref: '#/definitions/ConversationItem'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the parent item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/ConversationItem"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the parent item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1520,8 +1554,9 @@ paths:
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Updates the content or subject of the existing message. Only the creator of the message is allowed to perform this operation.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, UPDATE_CONVERSATION_CONTENT
       operationId: updateTextItem
       parameters:
@@ -1568,17 +1603,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Gets the modified text item object
           schema:
-            $ref: '#/definitions/ConversationItem'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/ConversationItem"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1588,12 +1623,13 @@ paths:
       summary: Updates a message
       tags:
         - Conversations
-  '/conversations/{convId}/messages/{itemId}/flag':
+  "/conversations/{convId}/messages/{itemId}/flag":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Removes the flag from a given message that is posted to the given conversation.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, ORGANIZE_CONVERSATIONS
       operationId: unFlagItem
       parameters:
@@ -1613,15 +1649,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The flagged state of item was successfully removed
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1634,8 +1670,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds a flag to the given message in the given conversation.
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, ORGANIZE_CONVERSATIONS
       operationId: flagItem
       parameters:
@@ -1667,15 +1704,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The item was successful flagged
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1685,12 +1722,13 @@ paths:
       summary: Adds a flag to a message in a conversation
       tags:
         - Conversations
-  '/conversations/{convId}/messages/{itemId}/like':
+  "/conversations/{convId}/messages/{itemId}/like":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Removes a "like" from the given message in the given conversation
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, UPDATE_CONVERSATION_CONTENT
       operationId: unlikeItem
       parameters:
@@ -1710,15 +1748,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The item was successful unliked
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1731,8 +1769,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds a "like" to the given message in the given conversation
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, UPDATE_CONVERSATION_CONTENT
       operationId: likeItem
       parameters:
@@ -1752,15 +1791,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The item was successful liked
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the conversation does not exist</li><li>the item does not exist</li><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1770,12 +1809,13 @@ paths:
       summary: Adds a "like" to a message
       tags:
         - Conversations
-  '/conversations/{convId}/moderators':
+  "/conversations/{convId}/moderators":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Removes a list of moderators from a conversation
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MODERATE_CONVERSATIONS
       operationId: removeModerators
       parameters:
@@ -1798,15 +1838,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The moderators were successfully removed
-        '400':
+        "400":
           description: Failure in moderators list
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1819,8 +1859,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Adds a list of moderators to a conversation
+
         OauthScopes: ALL, WRITE_CONVERSATIONS, MANAGE_CONVERSATIONS
       operationId: addModerators
       parameters:
@@ -1831,7 +1872,7 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: 'The list of moderator ids to add '
+          description: "The list of moderator ids to add "
           in: formData
           items:
             maxLength: 6500
@@ -1843,15 +1884,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The moderators were successfully added
-        '400':
+        "400":
           description: Error reading list of moderators to add
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1861,12 +1902,13 @@ paths:
       summary: Add moderators
       tags:
         - Conversations
-  '/conversations/{convId}/participants':
+  "/conversations/{convId}/participants":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Performs a search for participants. The max number of participants is configurable. If more participants are available a search pointer is returned for consecutive calls.
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getParticipantsByConvId
       parameters:
@@ -1913,19 +1955,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: A list of conversations and items that match the term
           schema:
             items:
-              $ref: '#/definitions/ConversationParticipantsList'
+              $ref: "#/definitions/ConversationParticipantsList"
             type: array
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the user is no participant of the conversation</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1934,12 +1976,13 @@ paths:
       summary: Performs a list of participants
       tags:
         - Conversations
-  '/conversations/{convId}/pins':
+  "/conversations/{convId}/pins":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Returns pinned topics of a conversation
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: getPinnedConversations
       parameters:
@@ -1953,19 +1996,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The pinned topics
           schema:
             items:
-              $ref: '#/definitions/PinnedTopic'
+              $ref: "#/definitions/PinnedTopic"
             type: array
-        '400':
+        "400":
           description: The request cannot be fulfilled due to bad syntax
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -1974,12 +2017,13 @@ paths:
       summary: Returns pinned topics of a conversation
       tags:
         - Conversations
-  '/conversations/{convId}/pins/{itemId}':
+  "/conversations/{convId}/pins/{itemId}":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Unpins a topic of a conversation
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: unPinAConversation
       parameters:
@@ -1999,17 +2043,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Returns the pinned conversation conversation after unpinning a topic
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
+            $ref: "#/definitions/Conversation"
+        "400":
           description: The request cannot be fulfilled due to bad syntax
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2021,8 +2065,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Pins a topic of a conversation
+
         OauthScopes: ALL, READ_CONVERSATIONS
       operationId: pinAConversation
       parameters:
@@ -2042,17 +2087,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Returns the pinned conversation conversation after pinning a topic
           schema:
-            $ref: '#/definitions/Conversation'
-        '400':
+            $ref: "#/definitions/Conversation"
+        "400":
           description: The request cannot be fulfilled due to bad syntax
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2063,20 +2108,21 @@ paths:
         - Conversations
   /rtc/sessions:
     get:
-      description: |-
+      description: >-
         Gets a list of active RTCsessions
+
         OauthScopes: ALL, CALLS
       operationId: getActiveSessions
       responses:
-        '200':
+        "200":
           description: The list of active RTCsessions was returned
           schema:
-            $ref: '#/definitions/Label'
-        '401':
+            $ref: "#/definitions/Label"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2089,8 +2135,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Get the spaces
+
         OauthScopes: ALL
       operationId: getSpaces
       parameters:
@@ -2112,15 +2159,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Spaces successfully retrieved.
           schema:
-            $ref: '#/definitions/GetSpacesResult'
-        '401':
+            $ref: "#/definitions/GetSpacesResult"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2132,8 +2179,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Create a space
+
         OauthScopes: ALL
       operationId: createSpace
       parameters:
@@ -2217,15 +2265,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Space successfully created.
           schema:
-            $ref: '#/definitions/ParticipantSpaceWrapper'
-        '401':
+            $ref: "#/definitions/ParticipantSpaceWrapper"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2237,13 +2285,14 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Get the directory by a search query in ordered way
+
         OauthScopes: ALL
       operationId: getDirectory
       parameters:
         - default: LAST_CONTENT
-          description: 'sort the spaces by LAST_CONTENT, NAME, NUMBER_OF_USERS or CREATION_DATE'
+          description: sort the spaces by LAST_CONTENT, NAME, NUMBER_OF_USERS or CREATION_DATE
           enum:
             - LAST_CONTENT
             - NAME
@@ -2265,7 +2314,7 @@ paths:
           required: true
           type: string
         - default: NONE
-          description: 'filter for spaces (JOINED, REQUESTED, OPEN, CLOSED or NOT_JOINED_REQUESTED)'
+          description: filter for spaces (JOINED, REQUESTED, OPEN, CLOSED or NOT_JOINED_REQUESTED)
           enum:
             - NONE
             - JOINED
@@ -2284,14 +2333,14 @@ paths:
           name: query
           required: false
           type: string
-        - description: 'page pointer, start with nothing and for next query use returned pointer'
+        - description: page pointer, start with nothing and for next query use returned pointer
           in: query
           maxLength: 2048
           name: pagePointer
           required: false
           type: string
         - default: 25
-          description: 'number of results to return, 25 by default.'
+          description: number of results to return, 25 by default.
           format: int32
           in: query
           maximum: 255
@@ -2303,15 +2352,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Spaces successfully retrieved.
           schema:
-            $ref: '#/definitions/DirectoryResult'
-        '401':
+            $ref: "#/definitions/DirectoryResult"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2319,12 +2368,13 @@ paths:
       summary: Get the directory
       tags:
         - Spaces
-  '/spaces/exists/{name}':
+  "/spaces/exists/{name}":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Find out if a space name already exists for non-secret spaces.
+
         OauthScopes: ALL
       operationId: existsSpaceName
       parameters:
@@ -2338,13 +2388,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
-          description: 'Check performed successfully, returning true if found, false if not found.'
-        '401':
+        "200":
+          description: Check performed successfully, returning true if found, false if not found.
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2352,12 +2402,13 @@ paths:
       summary: Space name exists
       tags:
         - Spaces
-  '/spaces/flag/{itemId}':
+  "/spaces/flag/{itemId}":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         flag a space item
+
         OauthScopes: ALL
       operationId: flagSpaceItem
       parameters:
@@ -2371,13 +2422,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Space item successfully flagged
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2389,8 +2440,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Get flagged items
+
         OauthScopes: ALL
       operationId: getFlaggedItems
       parameters:
@@ -2429,15 +2481,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Flagged items successfully retrieved
           schema:
-            $ref: '#/definitions/FlaggedItemsResult'
-        '401':
+            $ref: "#/definitions/FlaggedItemsResult"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2449,8 +2501,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Get the spaces by their ids
+
         OauthScopes: ALL
       operationId: getSpacesByIds
       parameters:
@@ -2467,15 +2520,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Spaces successfully retrieved.
           schema:
-            $ref: '#/definitions/GetSpacesResult'
-        '401':
+            $ref: "#/definitions/GetSpacesResult"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2483,12 +2536,13 @@ paths:
       summary: Get the spaces by their ids
       tags:
         - Spaces
-  '/spaces/item/{itemId}':
+  "/spaces/item/{itemId}":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         deletes a space item
+
         OauthScopes: ALL
       operationId: deleteSpaceItem
       parameters:
@@ -2502,15 +2556,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: the deletion was a success
-        '400':
+        "400":
           description: invalid itemid
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2518,12 +2572,13 @@ paths:
       summary: deletes a space item
       tags:
         - Spaces
-  '/spaces/like/{itemId}':
+  "/spaces/like/{itemId}":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Like a space item
+
         OauthScopes: ALL
       operationId: likeSpaceItem
       parameters:
@@ -2537,13 +2592,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Space item successfully liked
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2551,12 +2606,13 @@ paths:
       summary: Like a space item
       tags:
         - Spaces
-  '/spaces/likes/{itemId}':
+  "/spaces/likes/{itemId}":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Get the likes of an item
+
         OauthScopes: ALL
       operationId: getLikes
       parameters:
@@ -2585,15 +2641,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Likes successfully retrieved
           schema:
-            $ref: '#/definitions/ParticipantsLikeResult'
-        '401':
+            $ref: "#/definitions/ParticipantsLikeResult"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2605,8 +2661,9 @@ paths:
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Add recent search of a client to search controller.
+
         OauthScopes: ALL
       operationId: addRecentSpaceSearch
       parameters:
@@ -2646,26 +2703,27 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Search successfully added.
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
             - ALL
-      summary: 'Add recent search '
+      summary: "Add recent search "
       tags:
         - Spaces
-  '/spaces/search/cancel/{searchId}':
+  "/spaces/search/cancel/{searchId}":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Cancels a space search of a client.
+
         OauthScopes: ALL
       operationId: cancelSpaceSearch
       parameters:
@@ -2679,13 +2737,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Search successfully cancelled.
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2695,22 +2753,23 @@ paths:
         - Spaces
   /spaces/search/recent:
     get:
-      description: |-
+      description: >-
         Retrieve recent space searches for a user.
+
         OauthScopes: ALL
       operationId: getRecentSearches
       responses:
-        '200':
+        "200":
           description: Recent searches successfully retrieved (or none available).
           schema:
             items:
-              $ref: '#/definitions/SpacesSearchTermResult'
+              $ref: "#/definitions/SpacesSearchTermResult"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2722,8 +2781,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         starts a basic search in spaces
+
         OauthScopes: ALL
       operationId: startBasicSpacesSearch
       parameters:
@@ -2772,15 +2832,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: search successfully executed
           schema:
-            $ref: '#/definitions/BasicSearchResult'
-        '401':
+            $ref: "#/definitions/BasicSearchResult"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2792,8 +2852,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         starts a detailed search in a space
+
         OauthScopes: ALL
       operationId: startDetailedSpaceSearch
       parameters:
@@ -2845,17 +2906,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: search successfully executed
           schema:
             items:
-              $ref: '#/definitions/SpaceSearchResultDetailedBack'
+              $ref: "#/definitions/SpaceSearchResultDetailedBack"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2863,12 +2924,13 @@ paths:
       summary: starts a detailed search in a space
       tags:
         - Spaces
-  '/spaces/unflag/{itemId}':
+  "/spaces/unflag/{itemId}":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Unflag a space item
+
         OauthScopes: ALL
       operationId: unflagSpaceItem
       parameters:
@@ -2882,13 +2944,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Space item successfully unflagged.
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2896,12 +2958,13 @@ paths:
       summary: Unflag a space item
       tags:
         - Spaces
-  '/spaces/unlike/{itemId}':
+  "/spaces/unlike/{itemId}":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Unlike a space item
+
         OauthScopes: ALL
       operationId: unlikeSpaceItem
       parameters:
@@ -2915,13 +2978,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Space item successfully unliked.
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2929,12 +2992,13 @@ paths:
       summary: Unlike a space item
       tags:
         - Spaces
-  '/spaces/{id}':
+  "/spaces/{id}":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Delete a space
+
         OauthScopes: ALL
       operationId: deleteSpace
       parameters:
@@ -2948,13 +3012,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Space successfully deleted.
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -2965,8 +3029,9 @@ paths:
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Update a space
+
         OauthScopes: ALL
       operationId: updateSpace
       parameters:
@@ -3065,15 +3130,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Space successfully updated.
           schema:
-            $ref: '#/definitions/ParticipantSpaceWrapper'
-        '401':
+            $ref: "#/definitions/ParticipantSpaceWrapper"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3081,12 +3146,13 @@ paths:
       summary: Update a space
       tags:
         - Spaces
-  '/spaces/{id}/join':
+  "/spaces/{id}/join":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Join a space
+
         OauthScopes: ALL
       operationId: joinSpace
       parameters:
@@ -3100,15 +3166,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Space successfully joined
           schema:
-            $ref: '#/definitions/ParticipantSpaceWrapper'
-        '401':
+            $ref: "#/definitions/ParticipantSpaceWrapper"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3116,12 +3182,13 @@ paths:
       summary: Join a space
       tags:
         - Spaces
-  '/spaces/{id}/leave':
+  "/spaces/{id}/leave":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Leave a space
+
         OauthScopes: ALL
       operationId: leaveSpace
       parameters:
@@ -3135,13 +3202,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Space successfully left
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3149,12 +3216,13 @@ paths:
       summary: Leave a space
       tags:
         - Spaces
-  '/spaces/{id}/participant':
+  "/spaces/{id}/participant":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Add a participant to a space
+
         OauthScopes: ALL
       operationId: addParticipantsToSpace
       parameters:
@@ -3190,17 +3258,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Successfully added participant.
           schema:
             items:
-              $ref: '#/definitions/ParticipantAddResult'
+              $ref: "#/definitions/ParticipantAddResult"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3208,12 +3276,13 @@ paths:
       summary: Add Participant to Space
       tags:
         - Spaces
-  '/spaces/{id}/participant/remove':
+  "/spaces/{id}/participant/remove":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         removes Participants from a space
+
         OauthScopes: ALL
       operationId: v2RemoveParticipantsFromSpace
       parameters:
@@ -3224,7 +3293,7 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: 'The ids of the participants to remove '
+          description: "The ids of the participants to remove "
           in: formData
           items:
             maxLength: 2048
@@ -3236,13 +3305,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: participants successfully removed
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3250,12 +3319,13 @@ paths:
       summary: Removes participants from a space
       tags:
         - Spaces
-  '/spaces/{id}/participants':
+  "/spaces/{id}/participants":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Get the participants of a space
+
         OauthScopes: ALL
       operationId: getSpaceParticipants
       parameters:
@@ -3266,7 +3336,7 @@ paths:
           required: true
           type: string
         - default: NAME
-          description: 'sort the spaces by LAST_CONTENT, NAME, NUMBER_OF_USERS or CREATION_DATE'
+          description: sort the spaces by LAST_CONTENT, NAME, NUMBER_OF_USERS or CREATION_DATE
           enum:
             - DISPLAY_NAME
             - NAME
@@ -3286,7 +3356,7 @@ paths:
           name: sortOrder
           required: true
           type: string
-        - description: 'filtertype for participants (ACCESS_TYPE, ROLE or STATE)'
+        - description: filtertype for participants (ACCESS_TYPE, ROLE or STATE)
           enum:
             - NONE
             - ACCESS_TYPE
@@ -3316,7 +3386,7 @@ paths:
           required: false
           type: string
         - default: 25
-          description: 'number of results to return, 25 by default.'
+          description: number of results to return, 25 by default.
           format: int32
           in: query
           maximum: 255
@@ -3328,15 +3398,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Participants successfully retrieved
           schema:
-            $ref: '#/definitions/ParticipantsSearchResult'
-        '401':
+            $ref: "#/definitions/ParticipantsSearchResult"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3344,12 +3414,13 @@ paths:
       summary: Get the participants of a space
       tags:
         - Spaces
-  '/spaces/{id}/participants/pending':
+  "/spaces/{id}/participants/pending":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Get the pending participants of a space
+
         OauthScopes: ALL
       operationId: getPendingParticipants
       parameters:
@@ -3366,7 +3437,7 @@ paths:
           required: false
           type: string
         - default: 25
-          description: 'number of results to return, 25 by default.'
+          description: number of results to return, 25 by default.
           format: int32
           in: query
           maximum: 255
@@ -3378,15 +3449,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Pending participants successfully retrieved
           schema:
-            $ref: '#/definitions/ParticipantsSearchResult'
-        '401':
+            $ref: "#/definitions/ParticipantsSearchResult"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3394,12 +3465,13 @@ paths:
       summary: Get the pending participants of a space
       tags:
         - Spaces
-  '/spaces/{id}/pinnedTopics':
+  "/spaces/{id}/pinnedTopics":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Retrieve pinned topics of a space
+
         OauthScopes: ALL
       operationId: getPinnedTopics
       parameters:
@@ -3413,17 +3485,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
-          description: 'Pinned topics successfully retrieved (or none available). '
+        "200":
+          description: "Pinned topics successfully retrieved (or none available). "
           schema:
             items:
-              $ref: '#/definitions/SpacePinnedTopic'
+              $ref: "#/definitions/SpacePinnedTopic"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3431,12 +3503,13 @@ paths:
       summary: Retrieve pinned topics
       tags:
         - Spaces
-  '/spaces/{id}/searchParticipantsToAdd':
+  "/spaces/{id}/searchParticipantsToAdd":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Finds participants to add to a space 
+
         OauthScopes: ALL
       operationId: searchParticipantsToAdd
       parameters:
@@ -3446,7 +3519,7 @@ paths:
           name: id
           required: true
           type: string
-        - description: 'The query '
+        - description: "The query "
           in: query
           maxLength: 2048
           name: query
@@ -3456,30 +3529,31 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: participants successfully found
           schema:
             items:
-              $ref: '#/definitions/AddParticipantsSearchResult'
+              $ref: "#/definitions/AddParticipantsSearchResult"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
             - ALL
-      summary: 'Finds participants to add to add to a space '
+      summary: "Finds participants to add to add to a space "
       tags:
         - Spaces
-  '/spaces/{id}/searchSpaceParticipants':
+  "/spaces/{id}/searchSpaceParticipants":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Get the participants of a space
+
         OauthScopes: ALL
       operationId: searchSpaceParticipants
       parameters:
@@ -3489,7 +3563,7 @@ paths:
           name: id
           required: true
           type: string
-        - description: 'The query to search with. If searchpointer/hasMotre is returned, refine query.'
+        - description: The query to search with. If searchpointer/hasMotre is returned, refine query.
           in: query
           maxLength: 2048
           name: query
@@ -3499,17 +3573,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Participants successfully retrieved
           schema:
             items:
-              $ref: '#/definitions/ParticipantsSearchResultLarge'
+              $ref: "#/definitions/ParticipantsSearchResultLarge"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3517,12 +3591,13 @@ paths:
       summary: Get the participants of a space
       tags:
         - Spaces
-  '/spaces/{id}/updateTimestamp':
+  "/spaces/{id}/updateTimestamp":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Update read timestamp
+
         OauthScopes: ALL
       operationId: updateReadTimestamp
       parameters:
@@ -3542,13 +3617,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Read timestamp successfully updated.
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3556,12 +3631,13 @@ paths:
       summary: Update read timestamp
       tags:
         - Spaces
-  '/spaces/{spaceId}/participant':
+  "/spaces/{spaceId}/participant":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         missing documentation
+
         OauthScopes: ALL
       operationId: updateParticipantInSpace
       parameters:
@@ -3592,13 +3668,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: missing documentation
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3606,12 +3682,13 @@ paths:
       summary: missing documentation
       tags:
         - Spaces
-  '/spaces/{spaceId}/participant/import/':
+  "/spaces/{spaceId}/participant/import/":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         missing documentation
+
         OauthScopes: ALL
       operationId: getParticipantsImportData
       parameters:
@@ -3625,15 +3702,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: missing documentation
           schema:
-            $ref: '#/definitions/ParticipantsImportDataResult'
-        '401':
+            $ref: "#/definitions/ParticipantsImportDataResult"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3641,12 +3718,13 @@ paths:
       summary: missing documentation
       tags:
         - Spaces
-  '/spaces/{spaceId}/participant/request':
+  "/spaces/{spaceId}/participant/request":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         request access for a space
+
         OauthScopes: ALL
       operationId: requestSpaceAcces
       parameters:
@@ -3666,15 +3744,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: request is recieved
-        '400':
+        "400":
           description: invalid parameter
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3682,12 +3760,13 @@ paths:
       summary: request access for a space
       tags:
         - Spaces
-  '/spaces/{spaceId}/participant/{participantId}/deny':
+  "/spaces/{spaceId}/participant/{participantId}/deny":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Deny access for a space
+
         OauthScopes: ALL
       operationId: denySpaceAcces
       parameters:
@@ -3713,15 +3792,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Access dienied
-        '400':
+        "400":
           description: Invalid parameter
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3729,12 +3808,13 @@ paths:
       summary: Deny access for a space
       tags:
         - Spaces
-  '/spaces/{spaceId}/participant/{participantId}/grant':
+  "/spaces/{spaceId}/participant/{participantId}/grant":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         grant access for a space
+
         OauthScopes: ALL
       operationId: grantSpaceAcces
       parameters:
@@ -3754,15 +3834,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: access granted
-        '400':
+        "400":
           description: invalid parameter
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3770,12 +3850,13 @@ paths:
       summary: grant access for a space
       tags:
         - Spaces
-  '/spaces/{spaceId}/topic':
+  "/spaces/{spaceId}/topic":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         creates a new space topic
+
         OauthScopes: ALL
       operationId: createSpaceTopic
       parameters:
@@ -3827,17 +3908,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: returns the created topic
           schema:
-            $ref: '#/definitions/SpaceTopic'
-        '400':
+            $ref: "#/definitions/SpaceTopic"
+        "400":
           description: something went wrong
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3845,12 +3926,13 @@ paths:
       summary: creates a new space topic
       tags:
         - Spaces
-  '/spaces/{spaceId}/topic/{topicId}':
+  "/spaces/{spaceId}/topic/{topicId}":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets a number of Space replies with a matching topic
+
         OauthScopes: ALL
       operationId: v2GetTopicWithReplies
       parameters:
@@ -3879,15 +3961,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Returns the replies with a topic
           schema:
-            $ref: '#/definitions/SpaceTopicWithReplies'
-        '401':
+            $ref: "#/definitions/SpaceTopicWithReplies"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3898,8 +3980,9 @@ paths:
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Updates a topic
+
         OauthScopes: ALL
       operationId: updateSpaceTopic
       parameters:
@@ -3960,17 +4043,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Returns the updated space topic
           schema:
-            $ref: '#/definitions/SpaceTopic'
-        '400':
+            $ref: "#/definitions/SpaceTopic"
+        "400":
           description: Http_bad_request
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -3978,12 +4061,13 @@ paths:
       summary: Updates a topic
       tags:
         - Spaces
-  '/spaces/{spaceId}/topic/{topicId}/reply':
+  "/spaces/{spaceId}/topic/{topicId}/reply":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets a number of Space replies
+
         OauthScopes: ALL
       operationId: getSpaceReplies
       parameters:
@@ -4028,15 +4112,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Returns the replies
           schema:
-            $ref: '#/definitions/SpaceReply'
-        '401':
+            $ref: "#/definitions/SpaceReply"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4047,8 +4131,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         creates a reply to a topic
+
         OauthScopes: ALL
       operationId: createReply
       parameters:
@@ -4100,17 +4185,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: returns the created reply
           schema:
-            $ref: '#/definitions/SpaceReply'
-        '400':
+            $ref: "#/definitions/SpaceReply"
+        "400":
           description: invalid input
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4118,12 +4203,13 @@ paths:
       summary: creates a reply to a topic
       tags:
         - Spaces
-  '/spaces/{spaceId}/topic/{topicId}/reply/{replyId}':
+  "/spaces/{spaceId}/topic/{topicId}/reply/{replyId}":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Updates a space reply
+
         OauthScopes: ALL
       operationId: updateSpaceReply
       parameters:
@@ -4184,17 +4270,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The updated space reply
           schema:
-            $ref: '#/definitions/SpaceReply'
-        '400':
+            $ref: "#/definitions/SpaceReply"
+        "400":
           description: Invalid input
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4202,12 +4288,13 @@ paths:
       summary: Updates a space reply
       tags:
         - Spaces
-  '/spaces/{spaceId}/topics':
+  "/spaces/{spaceId}/topics":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets a number of Space topics
+
         OauthScopes: ALL
       operationId: getSpaceTopics
       parameters:
@@ -4246,17 +4333,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Returns the the topics
           schema:
             items:
-              $ref: '#/definitions/SpaceTopic'
+              $ref: "#/definitions/SpaceTopic"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4264,12 +4351,13 @@ paths:
       summary: Gets space topics
       tags:
         - Spaces
-  '/spaces/{topicId}/pin':
+  "/spaces/{topicId}/pin":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Pin a topic
+
         OauthScopes: ALL
       operationId: pinTopic
       parameters:
@@ -4291,13 +4379,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Topic successfully pinned.
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4305,12 +4393,13 @@ paths:
       summary: Pin a topic
       tags:
         - Spaces
-  '/spaces/{topicId}/unpin':
+  "/spaces/{topicId}/unpin":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Unpin a topic
+
         OauthScopes: ALL
       operationId: unpinTopic
       parameters:
@@ -4324,13 +4413,13 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Topic successfully unpinned.
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4342,8 +4431,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Search for users based on an email address or username
+
         OauthScopes: ALL, READ_USER
       operationId: searchUser
       parameters:
@@ -4357,21 +4447,21 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The users which match the search criteria
           schema:
             items:
-              $ref: '#/definitions/User'
+              $ref: "#/definitions/User"
             type: array
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '404':
+        "404":
           description: The search term did not much any results
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4382,22 +4472,23 @@ paths:
         - Users
   /users/labels:
     get:
-      description: |-
+      description: >-
         Returns all labels of the user that were defined either explicit or implicit via assignment to conversations.
+
         OauthScopes: ALL, READ_USER_PROFILE, ORGANIZE_CONVERSATIONS
       operationId: getLabel
       responses:
-        '200':
+        "200":
           description: List of labels
           schema:
             items:
-              $ref: '#/definitions/Label'
+              $ref: "#/definitions/Label"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4410,8 +4501,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Add a label to the list of user labels
+
         OauthScopes: ALL, WRITE_USER_PROFILE, ORGANIZE_CONVERSATIONS
       operationId: addLabel
       parameters:
@@ -4425,15 +4517,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The label was successfully added
           schema:
-            $ref: '#/definitions/Label'
-        '401':
+            $ref: "#/definitions/Label"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4443,16 +4535,17 @@ paths:
       summary: Add a user label
       tags:
         - Conversations
-  '/users/labels/{labelId}':
+  "/users/labels/{labelId}":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Remove a label from the list of user labels
+
         OauthScopes: ALL, WRITE_USER_PROFILE, ORGANIZE_CONVERSATIONS
       operationId: removeLabel
       parameters:
-        - description: 'The label value to remove, either the unique ID or the label value'
+        - description: The label value to remove, either the unique ID or the label value
           in: path
           maxLength: 2048
           name: labelId
@@ -4462,17 +4555,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The label was successfully removed
           schema:
-            $ref: '#/definitions/Label'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>the label does not exist</li></ul>'
-        '401':
+            $ref: "#/definitions/Label"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>a field constraint is violated</li><li>the label does not exist</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4486,8 +4579,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Search multiple users given by id or email address.
+
         OauthScopes: ALL, READ_USER
       operationId: searchUsersList
       parameters:
@@ -4504,21 +4598,21 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: At least one user was found and returned in a list
           schema:
             items:
-              $ref: '#/definitions/User'
+              $ref: "#/definitions/User"
             type: array
-        '400':
+        "400":
           description: Bad Request
-        '401':
+        "401":
           description: The authentication was not successful
-        '404':
+        "404":
           description: No user was found
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4531,8 +4625,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets the presence status of the users whose IDs or email addresses are given.
+
         OauthScopes: ALL, READ_USER
       operationId: getPresence
       parameters:
@@ -4549,21 +4644,21 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The presence states
           schema:
             items:
-              $ref: '#/definitions/Presence'
+              $ref: "#/definitions/Presence"
             type: array
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or a valid email address</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the userIds passed as parameter are not provided in the correct format</li><li> or a valid email address</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '404':
+        "404":
           description: One or more of the users do not exist
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4575,8 +4670,9 @@ paths:
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Updates the presence status of the authenticated user.
+
         OauthScopes: ALL, WRITE_USER_PROFILE, MANAGE_PRESENCE
       operationId: setUserPresence
       parameters:
@@ -4608,17 +4704,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The presence states
           schema:
-            $ref: '#/definitions/Presence'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the presence state is DND and the data format of the passed dndUntil is missing </li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Presence"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the presence state is DND and the data format of the passed dndUntil is missing </li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4630,20 +4726,21 @@ paths:
         - Users
   /users/profile:
     get:
-      description: |-
+      description: >-
         Gets the authenticated user's profile information.
+
         OauthScopes: ALL, READ_USER_PROFILE
       operationId: getProfile
       responses:
-        '200':
+        "200":
           description: Gets the authenticated user's profile information
           schema:
-            $ref: '#/definitions/User'
-        '401':
+            $ref: "#/definitions/User"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4655,8 +4752,9 @@ paths:
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Updates the user profile of the authenticated user
+
         OauthScopes: ALL, WRITE_USER_PROFILE
       operationId: updateProfile
       parameters:
@@ -4678,7 +4776,7 @@ paths:
           name: jobTitle
           required: false
           type: string
-        - description: 'The new locale of the user. One of EN_US, DE_DE, EN_GB, ES_ES, FR_FR, IT_IT, RU_RU, ZH_HANS_CN.'
+        - description: The new locale of the user. One of EN_US, DE_DE, EN_GB, ES_ES, FR_FR, IT_IT, RU_RU, ZH_HANS_CN.
           enum:
             - EN_US
             - DE_DE
@@ -4697,17 +4795,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The modified user object.
           schema:
-            $ref: '#/definitions/User'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the user does not exist</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/User"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the user does not exist</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4716,12 +4814,13 @@ paths:
       summary: Updates the user profile
       tags:
         - Conversations
-  '/users/{id}':
+  "/users/{id}":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets the profile information of the user with the given ID.
+
         OauthScopes: ALL, READ_USER
       operationId: getUserById
       parameters:
@@ -4735,19 +4834,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
-          description: 'The operation was successful, the user profile is returned'
+        "200":
+          description: The operation was successful, the user profile is returned
           schema:
-            $ref: '#/definitions/User'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/User"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or an valid email address</li><li>or a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '404':
+        "404":
           description: The user does not exist
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4756,12 +4855,13 @@ paths:
       summary: Gets the user's profile information
       tags:
         - Users
-  '/users/{id}/presence':
+  "/users/{id}/presence":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets the presence status of the users whose ID or email address is given.
+
         OauthScopes: ALL, READ_USER
       operationId: getUserPresence
       parameters:
@@ -4775,19 +4875,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The presence state
           schema:
-            $ref: '#/definitions/Presence'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or a valid email address</li><li>or a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/Presence"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the passed user does not match either a UUID (user primary key)</li><li> or a valid email address</li><li>or a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '404':
+        "404":
           description: The user does not exist
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4798,18 +4898,19 @@ paths:
         - Users
   /webhooks:
     delete:
-      description: |-
+      description: >-
         Unregisters all webHooks of the authenticated user
+
         OauthScopes: ALL, READ_CONVERSATIONS, READ_USER
       operationId: removeWebHooks
       responses:
-        '204':
+        "204":
           description: The operation was successful
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4820,22 +4921,23 @@ paths:
       tags:
         - Outgoing Webhooks
     get:
-      description: |-
+      description: >-
         Gets the list of webHooks registered for this user or API.
+
         OauthScopes: ALL, READ_CONVERSATIONS, READ_USER
       operationId: getWebHook
       responses:
-        '200':
+        "200":
           description: The list of registered webHooks
           schema:
             items:
-              $ref: '#/definitions/WebHook'
+              $ref: "#/definitions/WebHook"
             type: array
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4848,8 +4950,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Registers the webHook with the given filter and callback URL.
+
         OauthScopes: ALL, READ_CONVERSATIONS, READ_USER
       operationId: addWebHook
       parameters:
@@ -4860,7 +4963,7 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: 'A filter for WebHooks that checks for a list of configured events. This filter will use a regular expression to determine if it is interested in the events or not. The event itself is converted into a string of format AREA.EVENT. Examples: CONVERSATION.CREATE / USER.UPDATE'
+          description: "A filter for WebHooks that checks for a list of configured events. This filter will use a regular expression to determine if it is interested in the events or not. The event itself is converted into a string of format AREA.EVENT. Examples: CONVERSATION.CREATE / USER.UPDATE"
           in: formData
           items:
             enum:
@@ -4881,19 +4984,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '201':
+        "201":
           description: The webHook was successfully registered
           schema:
-            $ref: '#/definitions/WebHook'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>an invalid event filter</li><li>an unsupported event filter</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/WebHook"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>an invalid event filter</li><li>an unsupported event filter</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '403':
+        "403":
           description: The maximum number of allowed webHook is reached
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4903,12 +5006,13 @@ paths:
       summary: Registers a WebHook
       tags:
         - Outgoing Webhooks
-  '/webhooks/incoming/create/{conversationId}':
+  "/webhooks/incoming/create/{conversationId}":
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Create a new webhook. Conversation must exist and creater has to be participant.
+
         OauthScopes: ALL, MANAGE_CONVERSATIONS
       operationId: createIncomingWebhook
       parameters:
@@ -4940,17 +5044,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The created webhook object as JSON string.
           schema:
-            $ref: '#/definitions/IncomingWebhook'
-        '400':
+            $ref: "#/definitions/IncomingWebhook"
+        "400":
           description: Could not create webhook.
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -4959,12 +5063,13 @@ paths:
       summary: Create a new webhook for existing conversation.
       tags:
         - Incoming Webhooks
-  '/webhooks/incoming/user/{userId}':
+  "/webhooks/incoming/user/{userId}":
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Get all webhooks of a special user.
+
         OauthScopes: ALL, MANAGE_CONVERSATIONS
       operationId: getIncomingWebhookByUser
       parameters:
@@ -4993,19 +5098,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Result successful
           schema:
             items:
-              $ref: '#/definitions/IncomingWebhook'
+              $ref: "#/definitions/IncomingWebhook"
             type: array
-        '400':
+        "400":
           description: The request cannot be fulfilled due to bad syntax
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -5014,12 +5119,13 @@ paths:
       summary: Get all webhooks of a special user.
       tags:
         - Incoming Webhooks
-  '/webhooks/incoming/{webhookId}':
+  "/webhooks/incoming/{webhookId}":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Delete a new webhook. Webhook must exist
+
         OauthScopes: ALL, MANAGE_CONVERSATIONS
       operationId: deleteIncomingWebhook
       parameters:
@@ -5033,15 +5139,15 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The webhook was deleted
-        '401':
+        "401":
           description: The authentication was not successful
-        '404':
+        "404":
           description: Could not find webhook
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -5067,20 +5173,20 @@ paths:
           name: content
           required: true
           schema:
-            $ref: '#/definitions/IncomingWebhookSlackMessage'
+            $ref: "#/definitions/IncomingWebhookSlackMessage"
       produces:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: Message was posted to conversation
-        '400':
+        "400":
           description: The request cannot be fulfilled due to bad syntax
-        '401':
+        "401":
           description: The authentication was not successful
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       summary: Post text item for conversation via webhook.
       tags:
@@ -5089,8 +5195,9 @@ paths:
     post:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Registers a webHook that has a presence filter with the given URL and userIds. There is a maximum number of userIds allowed
+
         OauthScopes: ALL, READ_USER
       operationId: addPresenceWebHook
       parameters:
@@ -5113,19 +5220,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '201':
+        "201":
           description: The webHook was successfully registered
           schema:
-            $ref: '#/definitions/WebHook'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>one or more invalid userIds</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/WebHook"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>one or more invalid userIds</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '403':
+        "403":
           description: The maximum number of allowed userIds is reached or the maximum number of allowed webHook is reached
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -5134,12 +5241,13 @@ paths:
       summary: Registers Presence WebHook registration
       tags:
         - Outgoing Webhooks
-  '/webhooks/presence/{id}':
+  "/webhooks/presence/{id}":
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Updates a registration of a webHook that has a presence filter. The update can be performed either on the URL and/or the userIds. The new userIds, if any, will override any existing userIds.
+
         OauthScopes: ALL, READ_USER
       operationId: updatePresenceWebHook
       parameters:
@@ -5168,21 +5276,21 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The webHook registration was successfully updated
           schema:
-            $ref: '#/definitions/WebHook'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>one or more invalid userIds</li><li>no input parameter is provided</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/WebHook"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>one or more invalid userIds</li><li>no input parameter is provided</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '403':
+        "403":
           description: The maximum number of allowed userIds is reached
-        '404':
+        "404":
           description: The webHook does not exist
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -5191,12 +5299,13 @@ paths:
       summary: Updates a Presence WebHook registration
       tags:
         - Outgoing Webhooks
-  '/webhooks/{id}':
+  "/webhooks/{id}":
     delete:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Unregisters the webHook with the given ID.
+
         OauthScopes: ALL, READ_CONVERSATIONS, READ_USER
       operationId: removeWebHook
       parameters:
@@ -5210,17 +5319,17 @@ paths:
         - application/json
         - application/xml
       responses:
-        '204':
+        "204":
           description: The operation was successful
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the given id does not match a UUID</li><li>a field constraint is violated</li></ul>'
-        '401':
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the given id does not match a UUID</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '404':
+        "404":
           description: The webHook does not exist
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -5233,8 +5342,9 @@ paths:
     get:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Gets the registered webHook with the given ID.
+
         OauthScopes: ALL, READ_CONVERSATIONS, READ_USER
       operationId: getWebHookById
       parameters:
@@ -5248,19 +5358,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The registered webHook with the given ID
           schema:
-            $ref: '#/definitions/WebHook'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the given id does not match a UUID</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/WebHook"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>the data format of the given id does not match a UUID</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '404':
+        "404":
           description: The webHook does not exist
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -5273,8 +5383,9 @@ paths:
     put:
       consumes:
         - application/x-www-form-urlencoded
-      description: |-
+      description: >-
         Updates a webHook registration with the given filter and callback URL.
+
         OauthScopes: ALL, READ_CONVERSATIONS, READ_USER
       operationId: updateWebHook
       parameters:
@@ -5291,7 +5402,7 @@ paths:
           required: false
           type: string
         - collectionFormat: multi
-          description: 'A filter for WebHooks that checks for a list of configured events. This filter will use a regular expression to determine if it is interested in the events or not. The event itself is converted into a string of format AREA.EVENT. Examples: CONVERSATION.CREATE / USER.UPDATE'
+          description: "A filter for WebHooks that checks for a list of configured events. This filter will use a regular expression to determine if it is interested in the events or not. The event itself is converted into a string of format AREA.EVENT. Examples: CONVERSATION.CREATE / USER.UPDATE"
           in: formData
           items:
             enum:
@@ -5310,19 +5421,19 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: The webHook registration was successfully updated
           schema:
-            $ref: '#/definitions/WebHook'
-        '400':
-          description: 'The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>an invalid event filter</li><li>an unsupported event filter</li><li>no input parameter is provided</li><li>a field constraint is violated</li></ul>'
-        '401':
+            $ref: "#/definitions/WebHook"
+        "400":
+          description: "The request cannot be fulfilled due to bad syntax: <ul><li>an invalid URL</li><li>an invalid event filter</li><li>an unsupported event filter</li><li>no input parameter is provided</li><li>a field constraint is violated</li></ul>"
+        "401":
           description: The authentication was not successful
-        '404':
+        "404":
           description: The webHook does not exist
-        '500':
+        "500":
           description: The server encountered an internal error and the operation could not be completed.
-        '503':
+        "503":
           description: The server is currently unable to receive requests.
       security:
         - oauth:
@@ -5342,7 +5453,7 @@ definitions:
         description: The first name of the participant
         type: string
       isMember:
-        description: 'is the participant a member, true or false'
+        description: is the participant a member, true or false
         type: boolean
       jobTitle:
         description: The job title of the participant
@@ -5399,10 +5510,10 @@ definitions:
       spaces:
         description: List of spaces
         items:
-          $ref: '#/definitions/Space'
+          $ref: "#/definitions/Space"
         type: array
       status:
-        description: 'The status of the search (NORESULT, ERROR, TIMEOUT, MORERESULT)'
+        description: The status of the search (NORESULT, ERROR, TIMEOUT, MORERESULT)
         type: string
   BridgeNumber:
     properties:
@@ -5422,7 +5533,7 @@ definitions:
         description: The name / identifier of the bridge
         type: string
       type:
-        description: 'Information of the billing for the call, i.e. if the caller has to pay or not for the call'
+        description: Information of the billing for the call, i.e. if the caller has to pay or not for the call
         type: string
   Conversation:
     properties:
@@ -5470,14 +5581,14 @@ definitions:
         description: The title of the conversation. Conversations of type DIRECT cannot have a title
         type: string
       type:
-        description: 'The type of the conversation. It can be one of the following: DIRECT, GROUP, COMMUNITY or LARGE'
+        description: "The type of the conversation. It can be one of the following: DIRECT, GROUP, COMMUNITY or LARGE"
         type: string
   ConversationDetails:
     properties:
       bridgeNumbers:
         description: A list of bridge numbers which can be used to dial in to the real time session via phone
         items:
-          $ref: '#/definitions/BridgeNumber'
+          $ref: "#/definitions/BridgeNumber"
         type: array
       conversationCreatorId:
         description: The user ID of the conversation creator
@@ -5499,7 +5610,7 @@ definitions:
       attachments:
         description: Array of files attached to the item
         items:
-          $ref: '#/definitions/Attachment'
+          $ref: "#/definitions/Attachment"
         type: array
       convId:
         description: The ID of the conversation the item belongs to
@@ -5522,13 +5633,13 @@ definitions:
         format: int64
         type: number
       rtc:
-        $ref: '#/definitions/RtcItem'
+        $ref: "#/definitions/RtcItem"
       system:
-        $ref: '#/definitions/SystemItem'
+        $ref: "#/definitions/SystemItem"
       text:
-        $ref: '#/definitions/ConversationTextItem'
+        $ref: "#/definitions/ConversationTextItem"
       type:
-        description: 'The type of the conversation item. It can be one of the following TEXT, SYSTEM or RTC'
+        description: The type of the conversation item. It can be one of the following TEXT, SYSTEM or RTC
         type: string
   ConversationParticipant:
     properties:
@@ -5559,22 +5670,22 @@ definitions:
   ConversationParticipantsList:
     properties:
       hasMore:
-        description: 'are more results available, then start another search with finer query'
+        description: are more results available, then start another search with finer query
         type: boolean
       participantList:
         description: list of participants
         items:
-          $ref: '#/definitions/ConversationParticipant'
+          $ref: "#/definitions/ConversationParticipant"
         type: array
       searchPointer:
-        description: 'pointer for stored search '
+        description: "pointer for stored search "
         type: string
   ConversationSearchResult:
     properties:
       matchingConversations:
         description: A list of result items for conversations that match the search term.
         items:
-          $ref: '#/definitions/ConversationSearchResultItem'
+          $ref: "#/definitions/ConversationSearchResultItem"
         type: array
   ConversationSearchResultItem:
     properties:
@@ -5592,7 +5703,7 @@ definitions:
         description: The content of the text item
         type: string
       contentType:
-        description: 'The type of the text item. It can be one of the following: RICH (with HTML content) or PLAIN (only text)'
+        description: "The type of the text item. It can be one of the following: RICH (with HTML content) or PLAIN (only text)"
         type: string
       formMetaData:
         description: The meta data form
@@ -5609,9 +5720,9 @@ definitions:
         description: The ID of the parent item of the text item. This field is optional and can be used for thread views
         type: string
       preview:
-        $ref: '#/definitions/Preview'
+        $ref: "#/definitions/Preview"
       state:
-        description: 'The state of the text item. It can be one of the following: CREATED (which denotes that it was not modified since its creation), EDITED (which denotes that the creator of this item modified the item) or DELETED (which denotes that the item itself exists but its content was removed)'
+        description: "The state of the text item. It can be one of the following: CREATED (which denotes that it was not modified since its creation), EDITED (which denotes that the creator of this item modified the item) or DELETED (which denotes that the item itself exists but its content was removed)"
         type: string
       subject:
         description: TThe subject of the text item. This field is optional and maybe filled when creating the text item
@@ -5621,7 +5732,7 @@ definitions:
       conversationList:
         description: List of conversations
         items:
-          $ref: '#/definitions/Conversation'
+          $ref: "#/definitions/Conversation"
         type: array
       hasMore:
         description: Has more pages of conversations
@@ -5631,28 +5742,28 @@ definitions:
   DirectoryResult:
     properties:
       hasMore:
-        description: 'are more results available, than start another search'
+        description: are more results available, than start another search
         type: boolean
       searchPointer:
-        description: 'pointer for stored search '
+        description: "pointer for stored search "
         type: string
       spaces:
         description: list of spaces
         items:
-          $ref: '#/definitions/Space'
+          $ref: "#/definitions/Space"
         type: array
   FlaggedItem:
     properties:
       item:
-        $ref: '#/definitions/SpaceItem'
+        $ref: "#/definitions/SpaceItem"
       parentItem:
-        $ref: '#/definitions/SpaceItem'
+        $ref: "#/definitions/SpaceItem"
   FlaggedItemsResult:
     properties:
       flaggedItems:
         description: A list of flagged items
         items:
-          $ref: '#/definitions/FlaggedItem'
+          $ref: "#/definitions/FlaggedItem"
         type: array
       hasMore:
         description: More results available (true-use searchpointer for next search/false)
@@ -5702,7 +5813,7 @@ definitions:
   IncomingWebhookSlackMessage:
     properties:
       mrkdwn:
-        description: 'Optional field. If false, textitem will not be formatted. Default is true.'
+        description: Optional field. If false, textitem will not be formatted. Default is true.
         type: boolean
       text:
         description: The text which will occur in the conversation. May contain formats like *bold* or _italic_
@@ -5852,7 +5963,7 @@ definitions:
         description: The id of the space
         type: string
       state:
-        description: 'The name of the state '
+        description: "The name of the state "
         type: string
       tenantId:
         description: the tenant id of the participant
@@ -5928,7 +6039,7 @@ definitions:
       participants:
         description: A list of participants who like the topic
         items:
-          $ref: '#/definitions/ParticipantsLike'
+          $ref: "#/definitions/ParticipantsLike"
         type: array
       searchPointer:
         description: The searchpointer
@@ -5936,28 +6047,28 @@ definitions:
   ParticipantsSearchResult:
     properties:
       hasMore:
-        description: 'are more results available, than start another search'
+        description: are more results available, than start another search
         type: boolean
       participants:
         description: list of participants
         items:
-          $ref: '#/definitions/ParticipantSearchResult'
+          $ref: "#/definitions/ParticipantSearchResult"
         type: array
       searchPointer:
-        description: 'pointer for stored search '
+        description: "pointer for stored search "
         type: string
   ParticipantsSearchResultLarge:
     properties:
       hasMore:
-        description: 'are more results available, then start another search with finer query'
+        description: are more results available, then start another search with finer query
         type: boolean
       participants:
         description: list of participants
         items:
-          $ref: '#/definitions/ParticipantSearchResultLarge'
+          $ref: "#/definitions/ParticipantSearchResultLarge"
         type: array
       searchPointer:
-        description: 'pointer for stored search '
+        description: "pointer for stored search "
         type: string
   PinnedTopic:
     properties:
@@ -5998,7 +6109,7 @@ definitions:
         description: n/a
         type: boolean
       state:
-        description: 'The presence state of the user. It can be one of the following: AVAILABLE, OFFLINE, AWAY, BUSY, or DND (Do-Not-Disturb)'
+        description: "The presence state of the user. It can be one of the following: AVAILABLE, OFFLINE, AWAY, BUSY, or DND (Do-Not-Disturb)"
         type: string
       statusMessage:
         description: A free formed status message of the user
@@ -6040,16 +6151,16 @@ definitions:
   RtcItem:
     properties:
       ended:
-        $ref: '#/definitions/RtcEnded'
+        $ref: "#/definitions/RtcEnded"
       missed:
         description: Indicates a missed call.
         type: string
       moved:
-        $ref: '#/definitions/RtcMoved'
+        $ref: "#/definitions/RtcMoved"
       rtcParticipants:
         description: Participants of the call.
         items:
-          $ref: '#/definitions/RtcParticipant'
+          $ref: "#/definitions/RtcParticipant"
         type: array
       type:
         description: The type of the RTC item.
@@ -6207,7 +6318,7 @@ definitions:
   SpaceExternalAttachment:
     properties:
       attachment:
-        $ref: '#/definitions/SpaceAttachment'
+        $ref: "#/definitions/SpaceAttachment"
       downloadLocation:
         description: the location of the download
         type: string
@@ -6228,7 +6339,7 @@ definitions:
       attachments:
         description: The list of attachments
         items:
-          $ref: '#/definitions/SpaceAttachment'
+          $ref: "#/definitions/SpaceAttachment"
         type: array
       complex:
         description: Is this item complex
@@ -6244,12 +6355,12 @@ definitions:
         description: The Id of the creator
         type: string
       deletedBy:
-        description: 'Incase this item got deleted, the id of the deletor'
+        description: Incase this item got deleted, the id of the deletor
         type: string
       externalAttachments:
         description: A list of external attachments
         items:
-          $ref: '#/definitions/SpaceExternalAttachment'
+          $ref: "#/definitions/SpaceExternalAttachment"
         type: array
       formMetaData:
         description: Incase there is FormMetaData
@@ -6273,7 +6384,7 @@ definitions:
       previews:
         description: A list of previews
         items:
-          $ref: '#/definitions/SpaceItemPreview'
+          $ref: "#/definitions/SpaceItemPreview"
         type: array
       spaceId:
         description: the Id of the space containing this item
@@ -6322,7 +6433,7 @@ definitions:
         description: The Id of the parent topic
         type: string
       spaceItem:
-        $ref: '#/definitions/SpaceItem'
+        $ref: "#/definitions/SpaceItem"
   SpaceSearchResultDetailed:
     properties:
       fileIds:
@@ -6339,14 +6450,14 @@ definitions:
         description: The id of the space
         type: string
       status:
-        description: 'The status of the search (NORESULT, ERROR, TIMEOUT, MORERESULT)'
+        description: The status of the search (NORESULT, ERROR, TIMEOUT, MORERESULT)
         type: string
   SpaceSearchResultDetailedBack:
     properties:
       resList:
-        description: 'A list of v2restspacesearchresultdetailedback containing spaceId, item ids and file ids'
+        description: A list of v2restspacesearchresultdetailedback containing spaceId, item ids and file ids
         items:
-          $ref: '#/definitions/SpaceSearchResultDetailed'
+          $ref: "#/definitions/SpaceSearchResultDetailed"
         type: array
   SpaceTopic:
     properties:
@@ -6365,7 +6476,7 @@ definitions:
         description: Is this topic pinned
         type: boolean
       spaceItem:
-        $ref: '#/definitions/SpaceItem'
+        $ref: "#/definitions/SpaceItem"
       subject:
         description: The subject of this topic
         type: string
@@ -6374,10 +6485,10 @@ definitions:
       replies:
         description: A List holding the replies for a topic
         items:
-          $ref: '#/definitions/SpaceReply'
+          $ref: "#/definitions/SpaceReply"
         type: array
       topic:
-        $ref: '#/definitions/SpaceTopic'
+        $ref: "#/definitions/SpaceTopic"
   SpacesSearchTerm:
     properties:
       endTime:
@@ -6395,7 +6506,7 @@ definitions:
       resList:
         description: A list of space search terms.
         items:
-          $ref: '#/definitions/SpacesSearchTerm'
+          $ref: "#/definitions/SpacesSearchTerm"
         type: array
   String:
     properties:
@@ -6436,7 +6547,7 @@ definitions:
       emailAddresses:
         description: additional email addresses of the user
         items:
-          $ref: '#/definitions/UserEmailAddress'
+          $ref: "#/definitions/UserEmailAddress"
         type: array
       firstName:
         description: The first name of the user
@@ -6448,7 +6559,7 @@ definitions:
         description: The last name of the user
         type: string
       locale:
-        description: 'The locale of the user. (E.g. en-US, de-DE)'
+        description: The locale of the user. (E.g. en-US, de-DE)
         type: string
       phoneNumber:
         description: provisioned phone number of the user
@@ -6456,7 +6567,7 @@ definitions:
       phoneNumbers:
         description: additional phone numbers of the user
         items:
-          $ref: '#/definitions/UserPhoneNumber'
+          $ref: "#/definitions/UserPhoneNumber"
         type: array
       userId:
         description: The ID of the user
@@ -6495,16 +6606,16 @@ definitions:
         description: The unique identifier for this webhook. Can be used later to unregister the webhook.
         type: string
       subscriptionIds:
-        description: 'The optional list of userids for which this webhook is subscribed, i.e. presence events for the user are forwarded to the WebHook callback URL.'
+        description: The optional list of userids for which this webhook is subscribed, i.e. presence events for the user are forwarded to the WebHook callback URL.
         items:
           type: string
         type: array
       type:
-        description: 'The type of a WebHook. This can either be MANUAL or EXTENSION. While manual WebHooks are only temporary and for development only use, permanent ones (EXTENSION) will bemanaged by the system.'
+        description: The type of a WebHook. This can either be MANUAL or EXTENSION. While manual WebHooks are only temporary and for development only use, permanent ones (EXTENSION) will bemanaged by the system.
         type: string
       url:
         description: The callback URL of this webhook.
         type: string
       userId:
-        description: 'The user ID for which this webhook is subscribed, i.e. events for this user are forwarded to the WebHook callback URL.'
+        description: The user ID for which this webhook is subscribed, i.e. events for this user are forwarded to the WebHook callback URL.
         type: string

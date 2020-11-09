@@ -1,26 +1,27 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
-host: 'api.consumerfinance.gov:443'
+host: api.consumerfinance.gov:443
 basePath: /
 info:
-  description: 'Learn more about home mortgage data, download the data yourself, or build new tools using our API.'
+  description: Learn more about home mortgage data, download the data yourself, or build new tools using our API.
   title: The Consumer Financial Protection Bureau
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'http://cfpb.github.io/img/logo_210.png'
+    url: http://cfpb.github.io/img/logo_210.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.11
       format: swagger
-      url: 'https://api.consumerfinance.gov/api-docs'
-      version: '1.2'
+      url: https://api.consumerfinance.gov/api-docs
+      version: "1.2"
   x-providerName: consumerfinance.gov
+  x-preferred: true
 externalDocs:
-  url: 'http://cfpb.github.io/api/hmda/'
+  url: http://cfpb.github.io/api/hmda/
 tags:
   - description: Operations about datasets
     name: data
@@ -34,7 +35,7 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get a list of all datasets.
       tags:
@@ -47,12 +48,12 @@ paths:
         - application/xml
         - text/javascript
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get metadata for this dataset.
       tags:
         - hmda
-  '/data/hmda/concept/{concept}':
+  "/data/hmda/concept/{concept}":
     get:
       operationId: getConceptHmda
       parameters:
@@ -66,12 +67,12 @@ paths:
         - application/xml
         - text/javascript
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get information about a particular concept in this dataset.
       tags:
         - hmda
-  '/data/hmda/slice/{slice}':
+  "/data/hmda/slice/{slice}":
     get:
       operationId: querySliceHmda
       parameters:
@@ -80,22 +81,22 @@ paths:
           name: slice
           required: true
           type: string
-        - description: 'Fields to return, separated by commas.'
+        - description: Fields to return, separated by commas.
           in: query
           name: $select
           required: false
           type: string
-        - description: 'Conditions to search for in the slice, in SQL WHERE style.'
+        - description: Conditions to search for in the slice, in SQL WHERE style.
           in: query
           name: $where
           required: false
           type: string
-        - description: 'Fields to group by, summarizing the data, separated by commas.'
+        - description: Fields to group by, summarizing the data, separated by commas.
           in: query
           name: $group
           required: false
           type: string
-        - description: 'Number of records to return, 100 by default. Enter 0 for no limit.'
+        - description: Number of records to return, 100 by default. Enter 0 for no limit.
           in: query
           name: $limit
           required: false
@@ -105,7 +106,7 @@ paths:
           name: $offset
           required: false
           type: integer
-        - description: 'Fields to order by, separated by commas. ASC and DESC can be used to modify the order.'
+        - description: Fields to order by, separated by commas. ASC and DESC can be used to modify the order.
           in: query
           name: $orderBy
           required: false
@@ -121,14 +122,14 @@ paths:
         - text/javascript
         - text/csv
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/QueryResponse'
+            $ref: "#/definitions/QueryResponse"
       summary: Query a slice in this dataset.
       tags:
         - hmda
-  '/data/hmda/slice/{slice}/metadata':
+  "/data/hmda/slice/{slice}/metadata":
     get:
       operationId: getSliceMetadataHmda
       parameters:
@@ -142,12 +143,12 @@ paths:
         - application/xml
         - text/javascript
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get the metadata for a slice in this dataset.
       tags:
         - hmda
-  '/data/{dataset}':
+  "/data/{dataset}":
     get:
       operationId: getDataset
       parameters:
@@ -160,7 +161,7 @@ paths:
         - application/json
         - application/xml
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get metadata about a dataset.
       tags:

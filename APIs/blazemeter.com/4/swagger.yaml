@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: a.blazemeter.com
@@ -10,21 +10,22 @@ info:
   description: Live API Documentation
   license:
     name: LGPL-2.1
-    url: 'https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html'
+    url: https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
   title: Blazemeter API Explorer
-  version: '4'
+  version: "4"
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://twitter.com/BlazeMeter/profile_image?size=original'
+    url: https://twitter.com/BlazeMeter/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.6.0
       format: swagger
-      url: 'https://a.blazemeter.com/api/v4/explorer/resources.json'
-      version: '1.2'
+      url: https://a.blazemeter.com/api/v4/explorer/resources.json
+      version: "1.2"
   x-providerName: blazemeter.com
+  x-preferred: true
 consumes:
   - application/json
   - multipart/form-data
@@ -48,10 +49,10 @@ paths:
     get:
       operationId: active_sessions
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
       security:
         - apiKey: []
       summary: '&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>'
@@ -66,12 +67,12 @@ paths:
           name: blazemeter\Routing\v4\UserModel5
           required: false
           schema:
-            $ref: '#/definitions/blazemeter\Routing\v4\UserModel5'
+            $ref: "#/definitions/blazemeter\\Routing\\v4\\UserModel5"
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
       security:
         - apiKey: []
       summary: '&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>'
@@ -90,11 +91,11 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
-        '500':
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
+        "500":
           description: RestException
       security:
         - apiKey: []
@@ -105,7 +106,7 @@ paths:
     get:
       operationId: retrieveInvites
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
@@ -120,11 +121,11 @@ paths:
     get:
       operationId: retrieveLocations
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
-        '500':
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
+        "500":
           description: RestException
       security:
         - apiKey: []
@@ -147,10 +148,10 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
       security:
         - apiKey: []
       summary: List user private masters&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>
@@ -164,13 +165,13 @@ paths:
           name: blazemeter\Routing\v4\UserModel1
           required: true
           schema:
-            $ref: '#/definitions/blazemeter\Routing\v4\UserModel1'
+            $ref: "#/definitions/blazemeter\\Routing\\v4\\UserModel1"
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
-        '500':
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
+        "500":
           description: RestException
       security:
         - apiKey: []
@@ -184,13 +185,13 @@ paths:
           name: blazemeter\Routing\v4\UserModel3
           required: true
           schema:
-            $ref: '#/definitions/blazemeter\Routing\v4\UserModel3'
+            $ref: "#/definitions/blazemeter\\Routing\\v4\\UserModel3"
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
-        '500':
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
+        "500":
           description: RestException
       security:
         - apiKey: []
@@ -204,13 +205,13 @@ paths:
           name: blazemeter\Routing\v4\UserModel2
           required: true
           schema:
-            $ref: '#/definitions/blazemeter\Routing\v4\UserModel2'
+            $ref: "#/definitions/blazemeter\\Routing\\v4\\UserModel2"
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
-        '500':
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
+        "500":
           description: RestException
       security:
         - apiKey: []
@@ -221,10 +222,10 @@ paths:
     get:
       operationId: retrieveProjects
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
       security:
         - apiKey: []
       summary: Get user projects&nbsp; <i class="fa fa-lg fa-unlock-alt"></i>
@@ -255,11 +256,11 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
-        '500':
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
+        "500":
           description: RestException
       security:
         - apiKey: []
@@ -274,13 +275,13 @@ paths:
           name: blazemeter\Routing\v4\UserModel4
           required: true
           schema:
-            $ref: '#/definitions/blazemeter\Routing\v4\UserModel4'
+            $ref: "#/definitions/blazemeter\\Routing\\v4\\UserModel4"
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
-        '500':
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
+        "500":
           description: RestException
       security:
         - apiKey: []
@@ -300,11 +301,11 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/blazemeter\Model\ApiResponse'
-        '500':
+            $ref: "#/definitions/blazemeter\\Model\\ApiResponse"
+        "500":
           description: RestException
       security:
         - apiKey: []
@@ -315,7 +316,7 @@ paths:
     get:
       operationId: top
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:

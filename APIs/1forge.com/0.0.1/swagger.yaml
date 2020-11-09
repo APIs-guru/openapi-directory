@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -8,20 +8,21 @@ info:
   contact:
     email: contact@1forge.com
     name: 1Forge
-    url: 'http://1forge.com'
+    url: http://1forge.com
   description: Stock and Forex Data and Realtime Quotes
   title: 1Forge Finance APIs
   version: 0.0.1
   x-apisguru-categories:
     - financial
   x-logo:
-    backgroundColor: '#24292e'
-    url: 'https://1forge.com/assets/images/f-blue.svg'
+    backgroundColor: "#24292e"
+    url: https://1forge.com/assets/images/f-blue.svg
   x-origin:
     - format: swagger
-      url: 'http://1forge.com/openapi.json'
-      version: '2.0'
+      url: http://1forge.com/openapi.json
+      version: "2.0"
   x-providerName: 1forge.com
+  x-preferred: true
 produces:
   - application/json
 paths:
@@ -30,9 +31,9 @@ paths:
       description: Get quotes
       externalDocs:
         description: Find out more
-        url: 'http://1forge.com/forex-data-api'
+        url: http://1forge.com/forex-data-api
       responses:
-        '200':
+        "200":
           description: A list of quotes
       summary: Get quotes for all symbols
       tags:
@@ -44,9 +45,9 @@ paths:
       description: Symbol List
       externalDocs:
         description: Find out more
-        url: 'http://1forge.com/forex-data-api'
+        url: http://1forge.com/forex-data-api
       responses:
-        '200':
+        "200":
           description: A list of symbols
           schema:
             example:

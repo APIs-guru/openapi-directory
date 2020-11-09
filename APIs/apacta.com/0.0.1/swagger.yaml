@@ -1,30 +1,48 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: app.apacta.com
 basePath: /api/v1
 info:
-  description: |-
+  description: >-
     API for a tool to craftsmen used to register working hours, material usage and quality assurance.    
+
     # Endpoint
+
     The endpoint `https://app.apacta.com/api/v1` should be used to communicate with the API. API access is only allowed with SSL encrypted connection (https).
+
     # Authentication
+
     URL query authentication with an API key is used, so appending `?api_key={api_key}` to the URL where `{api_key}` is found within Apacta settings is used for authentication
+
     # Pagination
+
     If the endpoint returns a `pagination` object it means the endpoint supports pagination - currently it's only possible to change pages with `?page={page_number}` but implementing custom page sizes are on the road map.
 
 
+
     # Search/filter
+
     Is experimental but implemented in some cases - see the individual endpoints' docs for further explanation.
+
     # Ordering
+
     Is currently experimental, but on some endpoints it's implemented on URL querys so eg. to order Invoices by `invoice_number` appending `?sort=Invoices.invoice_number&direction=desc` would sort the list descending by the value of `invoice_number`.
+
     # Associations
+
     Is currently implemented on an experimental basis where you can append eg. `?include=Contacts,Projects`  to the `/api/v1/invoices/` endpoint to embed `Contact` and `Project` objects directly.
+
     # Project Files
+
     Currently project files can be retrieved from two endpoints. `/projects/{project_id}/files` handles files uploaded from wall posts or forms. `/projects/{project_id}/project_files` allows uploading and showing files, not belonging to specific form or wall post.
+
     # Errors/Exceptions
+
     ## 422 (Validation)
+
     Write something about how the `errors` object contains keys with the properties that failes validation like:
+
     ```
       {
           "success": false,
@@ -41,14 +59,21 @@ info:
           }
       }
     ```
+
     ## Code examples
+
     Running examples of how to retrieve the 5 most recent forms registered and embed the details of the User that made the form, and eventual products contained in the form
+
     ### Swift
+
     ```
       
     ```
+
     ### Java
+
     #### OkHttp
+
     ```
       OkHttpClient client = new OkHttpClient();
       
@@ -61,15 +86,20 @@ info:
       
       Response response = client.newCall(request).execute();
     ```
+
     #### Unirest
+
     ```
       HttpResponse<String> response = Unirest.get("https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5")
         .header("x-auth-token", "{INSERT_YOUR_TOKEN}")
         .header("accept", "application/json")
         .asString();
     ```
+
     ### Javascript
+
     #### Native
+
     ```
       var data = null;
       
@@ -88,7 +118,9 @@ info:
       
       xhr.send(data);
     ```
+
     #### jQuery
+
     ```
       var settings = {
         "async": true,
@@ -105,7 +137,9 @@ info:
         console.log(response);
       });
     ```
+
     #### NodeJS (Request)
+
     ```
       var request = require("request");
 
@@ -128,7 +162,9 @@ info:
       });
 
     ```
+
     ### Python 3
+
     ```
       import http.client
       
@@ -148,8 +184,11 @@ info:
       
       print(data.decode("utf-8"))
     ```
+
     ### C#
+
     #### RestSharp
+
     ```
       var client = new RestClient("https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5");
       var request = new RestRequest(Method.GET);
@@ -157,7 +196,9 @@ info:
       request.AddHeader("x-auth-token", "{INSERT_YOUR_TOKEN}");
       IRestResponse response = client.Execute(request);    
     ```
+
     ### Ruby
+
     ```
       require 'uri'
       require 'net/http'
@@ -175,7 +216,9 @@ info:
       response = http.request(request)
       puts response.read_body
     ```
+
     ### PHP (HttpRequest)
+
     ```
       <?php
 
@@ -204,10 +247,13 @@ info:
         echo $ex;
       }
     ```
+
     ### Shell (cURL)
+
     ```
 
       $ curl --request GET --url 'https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5' --header 'accept: application/json' --header 'x-auth-token: {INSERT_YOUR_TOKEN}'
+
       
     ```
   title: Apacta
@@ -216,12 +262,13 @@ info:
     - time_management
     - project_management
   x-logo:
-    url: 'https://twitter.com/apactadk/profile_image?size=original'
+    url: https://twitter.com/apactadk/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://apidoc.apacta.com/swagger.yaml'
-      version: '2.0'
+      url: http://apidoc.apacta.com/swagger.yaml
+      version: "2.0"
   x-providerName: apacta.com
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -257,31 +304,31 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/City'
+                  $ref: "#/definitions/City"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Get list of cities supported in Apacta
       tags:
         - Cities
-  '/cities/{city_id}':
+  "/cities/{city_id}":
     get:
       parameters:
         - in: path
@@ -289,20 +336,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/City'
+                $ref: "#/definitions/City"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -318,16 +365,16 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/ClockingRecord'
+                  $ref: "#/definitions/ClockingRecord"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -358,7 +405,7 @@ paths:
                 type: string
             type: object
       responses:
-        '201':
+        "201":
           description: Successfully added clocking record
           schema:
             properties:
@@ -372,10 +419,10 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -385,7 +432,7 @@ paths:
   /clocking_records/checkout:
     post:
       responses:
-        '201':
+        "201":
           description: Successfully checked out
           schema:
             properties:
@@ -393,17 +440,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Checkout active clocking record for authenticated user
       tags:
         - ClockingRecords
-  '/clocking_records/{clocking_record_id}':
+  "/clocking_records/{clocking_record_id}":
     delete:
       parameters:
         - in: path
@@ -411,7 +458,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -435,20 +482,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/ClockingRecord'
+                $ref: "#/definitions/ClockingRecord"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Clocking record not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -462,7 +509,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -482,16 +529,16 @@ paths:
   /companies:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Company'
+                  $ref: "#/definitions/Company"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -502,7 +549,7 @@ paths:
       summary: Get a list of companies
       tags:
         - Companies
-  '/companies/{company_id}':
+  "/companies/{company_id}":
     get:
       parameters:
         - in: path
@@ -510,27 +557,27 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Company object
           schema:
             properties:
               data:
-                $ref: '#/definitions/Company'
+                $ref: "#/definitions/Company"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Company not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Details of 1 company
       tags:
         - Companies
-  '/companies/{company_id}/integration_feature_settings':
+  "/companies/{company_id}/integration_feature_settings":
     get:
       parameters:
         - in: path
@@ -538,16 +585,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/IntegrationFeatureSetting'
+                  $ref: "#/definitions/IntegrationFeatureSetting"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -558,7 +605,7 @@ paths:
       summary: Get a list of integration feature settings
       tags:
         - Companies
-  '/companies/{company_id}/integration_feature_settings/{integration_feature_setting_id}':
+  "/companies/{company_id}/integration_feature_settings/{integration_feature_setting_id}":
     get:
       parameters:
         - in: path
@@ -570,20 +617,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/IntegrationFeatureSetting'
+                $ref: "#/definitions/IntegrationFeatureSetting"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: IntegrationFeatureSetting not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -598,31 +645,31 @@ paths:
           name: identifier
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/ContactType'
+                  $ref: "#/definitions/ContactType"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Get list of contact types supported in Apacta
       tags:
         - ContactTypes
-  '/contact_types/{contact_type_id}':
+  "/contact_types/{contact_type_id}":
     get:
       parameters:
         - in: path
@@ -630,20 +677,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/ContactType'
+                $ref: "#/definitions/ContactType"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -680,16 +727,16 @@ paths:
           name: city
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Contact'
+                  $ref: "#/definitions/Contact"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -730,7 +777,7 @@ paths:
                 maxLength: 255
                 type: string
               erp_id:
-                description: 'If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact'
+                description: If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact
                 maxLength: 255
                 type: string
               name:
@@ -745,7 +792,7 @@ paths:
                 type: string
             type: object
       responses:
-        '201':
+        "201":
           description: Successfully added contact
           schema:
             properties:
@@ -759,17 +806,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add a new contact
       tags:
         - Contacts
-  '/contacts/{contact_id}':
+  "/contacts/{contact_id}":
     delete:
       parameters:
         - in: path
@@ -777,7 +824,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -801,20 +848,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Contact'
+                $ref: "#/definitions/Contact"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Contact not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -855,7 +902,7 @@ paths:
                 maxLength: 255
                 type: string
               erp_id:
-                description: 'If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact'
+                description: If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact
                 maxLength: 255
                 type: string
               name:
@@ -870,7 +917,7 @@ paths:
                 type: string
             type: object
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -890,31 +937,31 @@ paths:
   /currencies:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Currency'
+                  $ref: "#/definitions/Currency"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Get list of currencies supported in Apacta
       tags:
         - Currencies
-  '/currencies/{currency_id}':
+  "/currencies/{currency_id}":
     get:
       parameters:
         - in: path
@@ -922,20 +969,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Currency'
+                $ref: "#/definitions/Currency"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -956,7 +1003,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1007,16 +1054,16 @@ paths:
           name: expense_id
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/ExpenseFile'
+                  $ref: "#/definitions/ExpenseFile"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -1040,7 +1087,7 @@ paths:
           required: false
           type: string
       responses:
-        '201':
+        "201":
           description: Successfully added file
           schema:
             properties:
@@ -1054,17 +1101,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add file to expense
       tags:
         - ExpenseFiles
-  '/expense_files/{expense_file_id}':
+  "/expense_files/{expense_file_id}":
     delete:
       parameters:
         - in: path
@@ -1072,7 +1119,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1097,7 +1144,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1109,10 +1156,10 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -1127,7 +1174,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1159,16 +1206,16 @@ paths:
           name: expense_id
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/ExpenseLine'
+                  $ref: "#/definitions/ExpenseLine"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -1205,7 +1252,7 @@ paths:
                 type: string
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -1219,17 +1266,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add line to expense
       tags:
         - ExpenseLines
-  '/expense_lines/{expense_line_id}':
+  "/expense_lines/{expense_line_id}":
     delete:
       parameters:
         - in: path
@@ -1237,12 +1284,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/ExpenseLine'
+                $ref: "#/definitions/ExpenseLine"
               success:
                 default: true
                 type: boolean
@@ -1260,20 +1307,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/ExpenseLine'
+                $ref: "#/definitions/ExpenseLine"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -1287,12 +1334,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/ExpenseLine'
+                $ref: "#/definitions/ExpenseLine"
               success:
                 default: true
                 type: boolean
@@ -1333,16 +1380,16 @@ paths:
           name: lt_created
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Expense'
+                  $ref: "#/definitions/Expense"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -1385,7 +1432,7 @@ paths:
                 type: string
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -1399,17 +1446,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add line to expense
       tags:
         - Expenses
-  '/expenses/{expense_id}':
+  "/expenses/{expense_id}":
     delete:
       parameters:
         - in: path
@@ -1417,12 +1464,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Expense'
+                $ref: "#/definitions/Expense"
               success:
                 default: true
                 type: boolean
@@ -1440,20 +1487,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Expense'
+                $ref: "#/definitions/Expense"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -1467,12 +1514,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Expense'
+                $ref: "#/definitions/Expense"
               success:
                 default: true
                 type: boolean
@@ -1483,7 +1530,7 @@ paths:
       summary: Edit expense
       tags:
         - Expenses
-  '/expenses/{expense_id}/original_files':
+  "/expenses/{expense_id}/original_files":
     get:
       parameters:
         - in: path
@@ -1491,7 +1538,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1505,7 +1552,7 @@ paths:
       summary: Show list of all OIOUBL files for the expense
       tags:
         - Expense OIOUBL files
-  '/expenses/{expense_id}/original_files/{file_id}':
+  "/expenses/{expense_id}/original_files/{file_id}":
     get:
       parameters:
         - in: path
@@ -1517,7 +1564,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1525,10 +1572,10 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -1548,16 +1595,16 @@ paths:
           name: identifier
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/FormFieldType'
+                  $ref: "#/definitions/FormFieldType"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -1568,7 +1615,7 @@ paths:
       summary: Get list of form field types
       tags:
         - FormFieldTypes
-  '/form_field_types/{form_field_type_id}':
+  "/form_field_types/{form_field_type_id}":
     get:
       parameters:
         - in: path
@@ -1576,19 +1623,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/FormFieldType'
+                $ref: "#/definitions/FormFieldType"
               success:
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -1625,7 +1672,7 @@ paths:
                 type: integer
             type: object
       responses:
-        '201':
+        "201":
           description: Successfully added field
           schema:
             properties:
@@ -1639,17 +1686,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add a new field to a `Form`
       tags:
         - FormFields
-  '/form_fields/{form_field_id}':
+  "/form_fields/{form_field_id}":
     get:
       parameters:
         - in: path
@@ -1657,20 +1704,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/FormField'
+                $ref: "#/definitions/FormField"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -1698,16 +1745,16 @@ paths:
           name: description
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/FormTemplate'
+                  $ref: "#/definitions/FormTemplate"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -1717,7 +1764,7 @@ paths:
       summary: Get array of form_templates for your company
       tags:
         - FormTemplates
-  '/form_templates/{form_template_id}':
+  "/form_templates/{form_template_id}":
     get:
       parameters:
         - in: path
@@ -1725,19 +1772,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/FormTemplate'
+                $ref: "#/definitions/FormTemplate"
               success:
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -1779,16 +1826,16 @@ paths:
           name: form_template_id
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Form'
+                  $ref: "#/definitions/Form"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -1816,7 +1863,7 @@ paths:
               - form_template_id
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -1830,17 +1877,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add new form
       tags:
         - Forms
-  '/forms/{form_id}':
+  "/forms/{form_id}":
     delete:
       description: You can only delete the forms that you've submitted yourself
       parameters:
@@ -1849,7 +1896,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
       security:
         - X-Auth-Token: []
@@ -1864,12 +1911,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Form'
+                $ref: "#/definitions/Form"
               success:
                 type: boolean
             type: object
@@ -1886,7 +1933,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
       security:
         - X-Auth-Token: []
@@ -1916,16 +1963,16 @@ paths:
           name: discount_text
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/InvoiceLine'
+                  $ref: "#/definitions/InvoiceLine"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -1970,7 +2017,7 @@ paths:
                 type: string
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -1984,17 +2031,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add invoice
       tags:
         - InvoiceLines
-  '/invoice_lines/{invoice_line_id}':
+  "/invoice_lines/{invoice_line_id}":
     delete:
       parameters:
         - format: uuid
@@ -2003,7 +2050,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2028,12 +2075,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/InvoiceLine'
+                $ref: "#/definitions/InvoiceLine"
               success:
                 type: boolean
             type: object
@@ -2083,7 +2130,7 @@ paths:
                 type: string
             type: object
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2152,16 +2199,16 @@ paths:
           name: issued_date
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Invoice'
+                  $ref: "#/definitions/Invoice"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -2233,7 +2280,7 @@ paths:
                 type: integer
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -2247,17 +2294,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add invoice
       tags:
         - Invoices
-  '/invoices/{invoice_id}':
+  "/invoices/{invoice_id}":
     delete:
       parameters:
         - in: path
@@ -2265,7 +2312,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2289,12 +2336,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Invoice'
+                $ref: "#/definitions/Invoice"
               success:
                 type: boolean
             type: object
@@ -2367,7 +2414,7 @@ paths:
                 type: integer
             type: object
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2393,16 +2440,16 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/MassMessagesUser'
+                  $ref: "#/definitions/MassMessagesUser"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -2412,7 +2459,7 @@ paths:
       summary: View list of mass messages for specific user
       tags:
         - MassMessagesUsers
-  '/mass_messages_users/{mass_messages_user_id}':
+  "/mass_messages_users/{mass_messages_user_id}":
     get:
       parameters:
         - in: path
@@ -2420,12 +2467,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/MassMessagesUser'
+                $ref: "#/definitions/MassMessagesUser"
               success:
                 type: boolean
             type: object
@@ -2442,7 +2489,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2484,16 +2531,16 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Material'
+                  $ref: "#/definitions/Material"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -2503,7 +2550,7 @@ paths:
       summary: View list of all materials
       tags:
         - Materials
-  '/materials/{material_id}':
+  "/materials/{material_id}":
     delete:
       parameters:
         - in: path
@@ -2511,7 +2558,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2535,12 +2582,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Material'
+                $ref: "#/definitions/Material"
               success:
                 type: boolean
             type: object
@@ -2557,7 +2604,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2574,7 +2621,7 @@ paths:
       summary: Edit material
       tags:
         - Materials
-  '/materials/{material_id}/rentals/':
+  "/materials/{material_id}/rentals/":
     get:
       parameters:
         - in: path
@@ -2582,16 +2629,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/MaterialRental'
+                  $ref: "#/definitions/MaterialRental"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -2635,7 +2682,7 @@ paths:
                 type: string
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -2649,17 +2696,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add material rental
       tags:
         - MaterialRentals
-  '/materials/{material_id}/rentals/checkout/':
+  "/materials/{material_id}/rentals/checkout/":
     post:
       parameters:
         - in: path
@@ -2681,7 +2728,7 @@ paths:
                 type: string
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -2695,17 +2742,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Checkout material rental
       tags:
         - MaterialRentals
-  '/materials/{material_id}/rentals/{material_rental_id}/':
+  "/materials/{material_id}/rentals/{material_rental_id}/":
     delete:
       description: Delete rental for material
       parameters:
@@ -2720,7 +2767,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2747,19 +2794,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/MaterialRental'
+                $ref: "#/definitions/MaterialRental"
               success:
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -2802,7 +2849,7 @@ paths:
                 type: number
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -2816,10 +2863,10 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -2840,7 +2887,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2859,16 +2906,16 @@ paths:
   /payment_term_types:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/PaymentTermType'
+                  $ref: "#/definitions/PaymentTermType"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -2879,7 +2926,7 @@ paths:
       summary: Get a list of payment term types
       tags:
         - PaymentTermTypes
-  '/payment_term_types/{payment_term_type_id}':
+  "/payment_term_types/{payment_term_type_id}":
     get:
       parameters:
         - in: path
@@ -2887,20 +2934,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/PaymentTermType'
+                $ref: "#/definitions/PaymentTermType"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -2910,16 +2957,16 @@ paths:
   /payment_terms:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/PaymentTerm'
+                  $ref: "#/definitions/PaymentTerm"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -2930,7 +2977,7 @@ paths:
       summary: Get a list of payment terms
       tags:
         - PaymentTerms
-  '/payment_terms/{payment_term_id}':
+  "/payment_terms/{payment_term_id}":
     get:
       parameters:
         - in: path
@@ -2938,20 +2985,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/PaymentTerm'
+                $ref: "#/definitions/PaymentTerm"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: PaymentTerm not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -2961,7 +3008,7 @@ paths:
   /ping:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -2992,16 +3039,16 @@ paths:
           name: barcode
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Product'
+                  $ref: "#/definitions/Product"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -3042,7 +3089,7 @@ paths:
               - name
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -3056,17 +3103,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add new product
       tags:
         - Products
-  '/products/{product_id}':
+  "/products/{product_id}":
     delete:
       parameters:
         - in: path
@@ -3074,7 +3121,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3098,12 +3145,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Product'
+                $ref: "#/definitions/Product"
               success:
                 type: boolean
             type: object
@@ -3120,7 +3167,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3140,16 +3187,16 @@ paths:
   /project_statuses:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/ProjectStatus'
+                  $ref: "#/definitions/ProjectStatus"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -3159,7 +3206,7 @@ paths:
       summary: Get list of project statuses
       tags:
         - ProjectStatuses
-  '/project_statuses/{project_status_id}':
+  "/project_statuses/{project_status_id}":
     get:
       parameters:
         - in: path
@@ -3167,20 +3214,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/ProjectStatus'
+                $ref: "#/definitions/ProjectStatus"
               success:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -3239,16 +3286,16 @@ paths:
           name: start_time_eq
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/Project'
+                  $ref: "#/definitions/Project"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -3292,7 +3339,7 @@ paths:
               - name
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -3306,17 +3353,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add a project
       tags:
         - Projects
-  '/projects/{project_id}':
+  "/projects/{project_id}":
     delete:
       parameters:
         - in: path
@@ -3324,7 +3371,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3348,12 +3395,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/Project'
+                $ref: "#/definitions/Project"
               success:
                 type: boolean
             type: object
@@ -3401,7 +3448,7 @@ paths:
               - name
             type: object
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3418,7 +3465,7 @@ paths:
       summary: Edit a project
       tags:
         - Projects
-  '/projects/{project_id}/files':
+  "/projects/{project_id}/files":
     get:
       description: Used to show files uploaded to a project from wall post or form
       parameters:
@@ -3427,7 +3474,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3436,7 +3483,7 @@ paths:
                   type: string
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -3447,7 +3494,7 @@ paths:
       summary: Show list of files uploaded to project
       tags:
         - Projects
-  '/projects/{project_id}/files/{file_id}/':
+  "/projects/{project_id}/files/{file_id}/":
     delete:
       description: Delete file uploaded to a project from wall post or form
       parameters:
@@ -3462,7 +3509,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3490,7 +3537,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3500,10 +3547,10 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -3524,7 +3571,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3540,16 +3587,16 @@ paths:
       summary: Edit file
       tags:
         - Projects
-  '/projects/{project_id}/project_files':
+  "/projects/{project_id}/project_files":
     get:
-      description: 'Returns files belonging to the project, not uploaded from wall post or form'
+      description: Returns files belonging to the project, not uploaded from wall post or form
       parameters:
         - in: path
           name: project_id
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3558,7 +3605,7 @@ paths:
                   type: string
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 default: true
                 type: boolean
@@ -3582,7 +3629,7 @@ paths:
           required: true
           type: file
       responses:
-        '201':
+        "201":
           description: Successfully added project file
           schema:
             properties:
@@ -3596,17 +3643,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add project file to projects
       tags:
         - Projects
-  '/projects/{project_id}/project_files/{project_file_id}/':
+  "/projects/{project_id}/project_files/{project_file_id}/":
     delete:
       parameters:
         - format: uuid
@@ -3620,7 +3667,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3647,7 +3694,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3657,10 +3704,10 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '404':
+        "404":
           description: Not found
           schema:
-            $ref: '#/definitions/ErrorNotFound'
+            $ref: "#/definitions/ErrorNotFound"
       security:
         - X-Auth-Token: []
         - api_key: []
@@ -3680,7 +3727,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3696,7 +3743,7 @@ paths:
       summary: Edit project file
       tags:
         - Projects
-  '/projects/{project_id}/users/':
+  "/projects/{project_id}/users/":
     get:
       parameters:
         - in: path
@@ -3704,16 +3751,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/User'
+                  $ref: "#/definitions/User"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -3740,7 +3787,7 @@ paths:
               - user_id
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -3754,17 +3801,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add user to project
       tags:
         - Projects
-  '/projects/{project_id}/users/{user_id}':
+  "/projects/{project_id}/users/{user_id}":
     delete:
       parameters:
         - in: path
@@ -3776,7 +3823,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3804,12 +3851,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/User'
+                $ref: "#/definitions/User"
               success:
                 type: boolean
             type: object
@@ -3827,16 +3874,16 @@ paths:
           name: name
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/StockLocation'
+                  $ref: "#/definitions/StockLocation"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -3859,7 +3906,7 @@ paths:
               - name
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -3873,17 +3920,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add new stock_locations
       tags:
         - StockLocations
-  '/stock_locations/{location_id}':
+  "/stock_locations/{location_id}":
     delete:
       parameters:
         - in: path
@@ -3891,7 +3938,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3915,12 +3962,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/StockLocation'
+                $ref: "#/definitions/StockLocation"
               success:
                 type: boolean
             type: object
@@ -3937,7 +3984,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -3985,16 +4032,16 @@ paths:
           name: gt_sum
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/TimeEntry'
+                  $ref: "#/definitions/TimeEntry"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -4022,7 +4069,7 @@ paths:
                 format: uuid
                 type: string
               sum:
-                description: 'Amount of seconds - should only be included when using is_all_day, otherwise will be calculated from from_time and to_time'
+                description: Amount of seconds - should only be included when using is_all_day, otherwise will be calculated from from_time and to_time
                 format: int32
                 type: integer
               time_entry_type_id:
@@ -4039,7 +4086,7 @@ paths:
               - time_entry_type_id
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -4053,17 +4100,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add new time entry
       tags:
         - TimeEntries
-  '/time_entries/{time_entry_id}':
+  "/time_entries/{time_entry_id}":
     delete:
       parameters:
         - format: uuid
@@ -4072,7 +4119,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -4097,12 +4144,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/TimeEntry'
+                $ref: "#/definitions/TimeEntry"
               success:
                 type: boolean
             type: object
@@ -4120,7 +4167,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -4140,16 +4187,16 @@ paths:
   /time_entry_intervals:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/TimeEntryInterval'
+                  $ref: "#/definitions/TimeEntryInterval"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -4159,7 +4206,7 @@ paths:
       summary: List possible time entry intervals
       tags:
         - TimeEntryIntervals
-  '/time_entry_intervals/{time_entry_interval_id}':
+  "/time_entry_intervals/{time_entry_interval_id}":
     get:
       parameters:
         - format: uuid
@@ -4168,12 +4215,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/TimeEntryInterval'
+                $ref: "#/definitions/TimeEntryInterval"
               success:
                 type: boolean
             type: object
@@ -4186,16 +4233,16 @@ paths:
   /time_entry_types:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/TimeEntryType'
+                  $ref: "#/definitions/TimeEntryType"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -4229,7 +4276,7 @@ paths:
               - name
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -4243,17 +4290,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add new time entry type
       tags:
         - TimeEntryTypes
-  '/time_entry_types/{time_entry_type_id}':
+  "/time_entry_types/{time_entry_type_id}":
     delete:
       parameters:
         - format: uuid
@@ -4262,7 +4309,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -4287,12 +4334,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/TimeEntryType'
+                $ref: "#/definitions/TimeEntryType"
               success:
                 type: boolean
             type: object
@@ -4310,7 +4357,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -4330,16 +4377,16 @@ paths:
   /time_entry_unit_types:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/TimeEntryUnitType'
+                  $ref: "#/definitions/TimeEntryUnitType"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -4349,7 +4396,7 @@ paths:
       summary: List possible time entry unit types
       tags:
         - TimeEntryUnitTypes
-  '/time_entry_unit_types/{time_entry_unit_type_id}':
+  "/time_entry_unit_types/{time_entry_unit_type_id}":
     get:
       parameters:
         - format: uuid
@@ -4358,12 +4405,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/TimeEntryUnitType'
+                $ref: "#/definitions/TimeEntryUnitType"
               success:
                 type: boolean
             type: object
@@ -4376,16 +4423,16 @@ paths:
   /time_entry_value_types:
     get:
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/TimeEntryValueType'
+                  $ref: "#/definitions/TimeEntryValueType"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -4395,7 +4442,7 @@ paths:
       summary: List possible time entry value types
       tags:
         - TimeEntryValueTypes
-  '/time_entry_value_types/{time_entry_value_type_id}':
+  "/time_entry_value_types/{time_entry_value_type_id}":
     get:
       parameters:
         - format: uuid
@@ -4404,12 +4451,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/TimeEntryValueType'
+                $ref: "#/definitions/TimeEntryValueType"
               success:
                 type: boolean
             type: object
@@ -4441,16 +4488,16 @@ paths:
           name: stock_location_id
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/User'
+                  $ref: "#/definitions/User"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -4478,7 +4525,7 @@ paths:
                 maxLength: 255
                 type: string
               extra_price:
-                description: 'Additional cost on this employee (pension, vacation etc.)'
+                description: Additional cost on this employee (pension, vacation etc.)
                 format: float
                 type: number
               first_name:
@@ -4522,7 +4569,7 @@ paths:
               - first_name
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -4536,17 +4583,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add user to company
       tags:
         - Users
-  '/users/{user_id}':
+  "/users/{user_id}":
     delete:
       parameters:
         - in: path
@@ -4554,7 +4601,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -4578,12 +4625,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/User'
+                $ref: "#/definitions/User"
               success:
                 type: boolean
             type: object
@@ -4600,7 +4647,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -4638,16 +4685,16 @@ paths:
           name: vendor_id
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/VendorProduct'
+                  $ref: "#/definitions/VendorProduct"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
@@ -4657,7 +4704,7 @@ paths:
       summary: List vendor products
       tags:
         - VendorProducts
-  '/vendor_products/{vendor_product_id}':
+  "/vendor_products/{vendor_product_id}":
     get:
       parameters:
         - in: path
@@ -4665,12 +4712,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/VendorProduct'
+                $ref: "#/definitions/VendorProduct"
               success:
                 type: boolean
             type: object
@@ -4697,7 +4744,7 @@ paths:
               - message
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -4711,17 +4758,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add wall comment
       tags:
         - WallComments
-  '/wall_comments/{wall_comment_id}':
+  "/wall_comments/{wall_comment_id}":
     get:
       parameters:
         - in: path
@@ -4729,12 +4776,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/WallComment'
+                $ref: "#/definitions/WallComment"
               success:
                 type: boolean
             type: object
@@ -4757,22 +4804,22 @@ paths:
           name: user_id
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/WallPost'
+                  $ref: "#/definitions/WallPost"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
-        '401':
+        "401":
           description: Not authorized to access project
-        '404':
+        "404":
           description: Project not found
       security:
         - X-Auth-Token: []
@@ -4796,7 +4843,7 @@ paths:
               - message
             type: object
       responses:
-        '201':
+        "201":
           description: OK
           schema:
             properties:
@@ -4810,17 +4857,17 @@ paths:
                 default: true
                 type: boolean
             type: object
-        '422':
+        "422":
           description: Validation error
           schema:
-            $ref: '#/definitions/ErrorValidation'
+            $ref: "#/definitions/ErrorValidation"
       security:
         - X-Auth-Token: []
         - api_key: []
       summary: Add a wall post
       tags:
         - WallPosts
-  '/wall_posts/{wall_post_id}':
+  "/wall_posts/{wall_post_id}":
     get:
       parameters:
         - in: path
@@ -4828,12 +4875,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
-                $ref: '#/definitions/WallPost'
+                $ref: "#/definitions/WallPost"
               success:
                 type: boolean
             type: object
@@ -4843,7 +4890,7 @@ paths:
       summary: View wall post
       tags:
         - WallPosts
-  '/wall_posts/{wall_post_id}/wall_comments':
+  "/wall_posts/{wall_post_id}/wall_comments":
     get:
       parameters:
         - in: path
@@ -4851,22 +4898,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               data:
                 items:
-                  $ref: '#/definitions/WallComment'
+                  $ref: "#/definitions/WallComment"
                 type: array
               pagination:
-                $ref: '#/definitions/PaginationDetails'
+                $ref: "#/definitions/PaginationDetails"
               success:
                 type: boolean
             type: object
-        '401':
+        "401":
           description: Not authorized to access project
-        '404':
+        "404":
           description: Wall post not found
       security:
         - X-Auth-Token: []
@@ -4878,14 +4925,14 @@ definitions:
   City:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       id:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -4910,17 +4957,17 @@ definitions:
       checkout_longitude:
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       id:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       modified_by_id:
         format: uuid
         type: string
@@ -4940,7 +4987,7 @@ definitions:
         format: uuid
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         description: Read-only
         format: uuid
@@ -4949,7 +4996,7 @@ definitions:
         maxLength: 255
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       expired:
         format: date-time
         type: string
@@ -4967,7 +5014,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5012,7 +5059,7 @@ definitions:
         format: uuid
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         description: Read-only
         format: uuid
@@ -5021,7 +5068,7 @@ definitions:
         maxLength: 255
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5029,14 +5076,14 @@ definitions:
         maxLength: 255
         type: string
       erp_id:
-        description: 'If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact'
+        description: If company has integration to an ERP system, and the contacts are synchronized, this will be the ERP-systems ID of this contact
         maxLength: 255
         type: string
       id:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5051,13 +5098,13 @@ definitions:
   ContactType:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         description: Read-only
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5072,7 +5119,7 @@ definitions:
           - supplier
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5080,12 +5127,12 @@ definitions:
   Currency:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       currency_sign:
         maxLength: 8
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5096,7 +5143,7 @@ definitions:
         maxLength: 255
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5155,7 +5202,7 @@ definitions:
         format: uuid
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         description: Read-only
         format: uuid
@@ -5164,7 +5211,7 @@ definitions:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       delivery_date:
         format: date
         type: string
@@ -5176,7 +5223,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       project_id:
         format: uuid
         type: string
@@ -5193,13 +5240,13 @@ definitions:
   ExpenseFile:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         description: Read-only
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5233,7 +5280,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
     type: object
   ExpenseLine:
     properties:
@@ -5241,7 +5288,7 @@ definitions:
         format: float
         type: number
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         description: Read-only
         format: uuid
@@ -5250,7 +5297,7 @@ definitions:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       expense_id:
         format: uuid
         type: string
@@ -5259,7 +5306,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       quantity:
         format: int32
         type: integer
@@ -5279,13 +5326,13 @@ definitions:
         format: uuid
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         description: Read-only
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       form_date:
         format: date
         type: string
@@ -5309,7 +5356,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       project_id:
         format: uuid
         type: string
@@ -5323,13 +5370,13 @@ definitions:
         maxLength: 255
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         description: Read-only
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       file_id:
         format: uuid
         type: string
@@ -5347,7 +5394,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       placement:
         format: int32
         type: integer
@@ -5355,13 +5402,13 @@ definitions:
   FormFieldType:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         description: Read-only
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5373,7 +5420,7 @@ definitions:
         maxLength: 255
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5381,12 +5428,12 @@ definitions:
   FormTemplate:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5405,7 +5452,7 @@ definitions:
       is_active:
         type: boolean
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5416,7 +5463,7 @@ definitions:
   IntegrationFeatureSetting:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
@@ -5424,7 +5471,7 @@ definitions:
         maxLength: 255
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5440,7 +5487,7 @@ definitions:
       is_custom_setting:
         type: boolean
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5454,7 +5501,7 @@ definitions:
         format: uuid
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
@@ -5468,7 +5515,7 @@ definitions:
         format: date
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       erp_id:
         maxLength: 255
         type: string
@@ -5503,7 +5550,7 @@ definitions:
         maxLength: 8192
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       net_payment:
         format: float
         type: number
@@ -5531,12 +5578,12 @@ definitions:
   InvoiceLine:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5553,7 +5600,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 2048
         type: string
@@ -5579,27 +5626,27 @@ definitions:
         maxLength: 8192
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       id:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
     type: object
   MassMessagesUser:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       id:
         format: uuid
         type: string
@@ -5608,12 +5655,12 @@ definitions:
       is_sent_email:
         type: boolean
       mass_message:
-        $ref: '#/definitions/MassMessage'
+        $ref: "#/definitions/MassMessage"
       mass_message_id:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       modified_by_id:
         format: uuid
         type: string
@@ -5636,12 +5683,12 @@ definitions:
         format: float
         type: number
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5651,7 +5698,7 @@ definitions:
       is_single_usage:
         type: boolean
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       modified_by_id:
         format: uuid
         type: string
@@ -5668,12 +5715,12 @@ definitions:
         format: float
         type: number
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       from_date:
         format: dateTime
         type: string
@@ -5687,7 +5734,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       modified_by_id:
         format: uuid
         type: string
@@ -5719,7 +5766,7 @@ definitions:
   PaymentTerm:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
@@ -5728,12 +5775,12 @@ definitions:
         maxLength: 11
         type: integer
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       id:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       payment_term_type_id:
         format: uuid
         type: string
@@ -5741,12 +5788,12 @@ definitions:
   PaymentTermType:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5757,7 +5804,7 @@ definitions:
         maxLength: 255
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5774,12 +5821,12 @@ definitions:
         format: uuid
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5790,7 +5837,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5807,12 +5854,12 @@ definitions:
         format: uuid
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5826,7 +5873,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5846,12 +5893,12 @@ definitions:
   ProjectStatus:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5867,7 +5914,7 @@ definitions:
         maxLength: 255
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5878,17 +5925,17 @@ definitions:
         format: uuid
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       id:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -5896,12 +5943,12 @@ definitions:
   TimeEntry:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       form_id:
         format: uuid
         type: string
@@ -5914,7 +5961,7 @@ definitions:
       is_all_day:
         type: boolean
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       modified_by_id:
         format: uuid
         type: string
@@ -5938,12 +5985,12 @@ definitions:
   TimeEntryInterval:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5954,7 +6001,7 @@ definitions:
         maxLength: 255
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       modified_by_id:
         format: uuid
         type: string
@@ -5968,12 +6015,12 @@ definitions:
         format: uuid
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -5981,7 +6028,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       modified_by_id:
         format: uuid
         type: string
@@ -6001,12 +6048,12 @@ definitions:
         maxLength: 255
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -6017,7 +6064,7 @@ definitions:
         maxLength: 255
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       modified_by_id:
         format: uuid
         type: string
@@ -6028,12 +6075,12 @@ definitions:
   TimeEntryValueType:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 8192
         type: string
@@ -6044,7 +6091,7 @@ definitions:
         maxLength: 255
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       modified_by_id:
         format: uuid
         type: string
@@ -6071,18 +6118,18 @@ definitions:
         format: float
         type: number
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       email:
         format: email
         maxLength: 255
         type: string
       extra_price:
-        description: 'Additional cost on this employee (pension, vacation etc.)'
+        description: Additional cost on this employee (pension, vacation etc.)
         format: float
         type: number
       first_name:
@@ -6109,7 +6156,7 @@ definitions:
         maxLength: 8
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       password:
         format: password
         maxLength: 255
@@ -6140,12 +6187,12 @@ definitions:
         maxLength: 255
         type: string
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       created_by_id:
         format: uuid
         type: string
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       description:
         maxLength: 255
         type: string
@@ -6153,7 +6200,7 @@ definitions:
         format: uuid
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       name:
         maxLength: 255
         type: string
@@ -6173,16 +6220,16 @@ definitions:
   WallComment:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       id:
         format: uuid
         type: string
       message:
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       user_id:
         maxLength: 255
         type: string
@@ -6193,16 +6240,16 @@ definitions:
   WallPost:
     properties:
       created:
-        $ref: '#/definitions/created'
+        $ref: "#/definitions/created"
       deleted:
-        $ref: '#/definitions/deleted'
+        $ref: "#/definitions/deleted"
       id:
         format: uuid
         type: string
       message:
         type: string
       modified:
-        $ref: '#/definitions/modified'
+        $ref: "#/definitions/modified"
       project_id:
         format: uuid
         type: string

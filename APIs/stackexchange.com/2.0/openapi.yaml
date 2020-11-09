@@ -18,6 +18,7 @@ info:
       version: "3.0"
   x-providerName: stackexchange.com
   x-unofficialSpec: true
+  x-preferred: true
 externalDocs:
   url: https://api.stackexchange.com/
 paths:
@@ -269,6 +270,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of answers.
       parameters:
@@ -442,6 +444,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -622,6 +625,7 @@ paths:
           creation is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -1866,6 +1870,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of comments.
       parameters:
@@ -2033,6 +2038,7 @@ paths:
           creation is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -2608,7 +2614,9 @@ paths:
          - creating a user
 
 
+
           
+
 
 
          
@@ -6121,6 +6129,7 @@ paths:
          This method requires an access_token, with a scope containing "private_info".
 
 
+
          
         This method returns a list of reputation_history.
       parameters:
@@ -7627,6 +7636,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of posts.
       parameters:
@@ -7800,6 +7810,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -7980,6 +7991,7 @@ paths:
           creation is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -8285,6 +8297,7 @@ paths:
           creation is the default sort.
          
          {ids} can contain up to 100 semicolon delimited ids, to find ids programatically look for post_id, answer_id, or question_id on post, answer, and question objects respectively.
+
 
 
          
@@ -8714,6 +8727,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of questions.
       parameters:
@@ -8910,6 +8924,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of questions.
       parameters:
@@ -9090,6 +9105,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -9276,6 +9292,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of questions.
       parameters:
@@ -9454,6 +9471,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -9637,6 +9655,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of answers.
       parameters:
@@ -9817,6 +9836,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of comments.
       parameters:
@@ -9994,6 +10014,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -10181,6 +10202,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -10644,6 +10666,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of questions.
       parameters:
@@ -10842,6 +10865,7 @@ paths:
          - wiki - true to return only community wiki questions, false to return only non-community wiki ones. Omit to elide constraint.
 
 
+
           
         At least one additional parameter must be set if nottagged is set, for performance reasons.
          
@@ -10853,6 +10877,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -11111,6 +11136,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -11585,6 +11611,7 @@ paths:
           creation is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -12291,6 +12318,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of tag_synonyms.
       parameters:
@@ -12895,6 +12923,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of tag synonyms.
       parameters:
@@ -13463,6 +13492,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         The inname parameter lets consumers filter the results down to just those users with a certain substring in their display name. For example, inname=kevin will return all users with both users named simply "Kevin" or those with Kevin as one of (or part of) their names; such as "Kevin Montrose".
       parameters:
@@ -13646,6 +13676,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of users.
       parameters:
@@ -13823,6 +13854,7 @@ paths:
           reputation is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -14004,6 +14036,7 @@ paths:
           reputation is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -14188,6 +14221,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -14667,6 +14701,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of comments.
       parameters:
@@ -14840,6 +14875,7 @@ paths:
           creation is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -15024,6 +15060,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of questions.
       parameters:
@@ -15205,6 +15242,7 @@ paths:
          - creation - creation_date
          - votes - score
           It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -15504,6 +15542,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of questions.
       parameters:
@@ -15681,6 +15720,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -15864,6 +15904,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of questions.
       parameters:
@@ -16043,6 +16084,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -16226,6 +16268,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -16665,6 +16708,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of suggested-edits.
       parameters:
@@ -16844,6 +16888,7 @@ paths:
           popular is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          
@@ -17914,6 +17959,7 @@ paths:
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
 
 
+
          
         This method returns a list of answers.
       parameters:
@@ -18096,6 +18142,7 @@ paths:
           activity is the default sort.
          
          It is possible to create moderately complex queries using sort, min, max, fromdate, and todate.
+
 
 
          

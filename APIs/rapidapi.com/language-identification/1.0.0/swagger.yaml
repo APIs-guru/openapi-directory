@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: language-identification-prediction.p.rapidapi.com
@@ -6,7 +6,7 @@ basePath: /v1/
 info:
   contact:
     name: Forum
-    url: 'https://rapidapi.com/BigLobster/api/language-identification-prediction/discussions'
+    url: https://rapidapi.com/BigLobster/api/language-identification-prediction/discussions
     x-twitter: Rapid_API
   description: Automatic language detection for any texts. Supports over 150 languages.
   title: Language Identification (Prediction)
@@ -14,15 +14,16 @@ info:
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'https://twitter.com/Rapid_API/profile_image?size=original'
+    url: https://twitter.com/Rapid_API/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/BigLobsterito/apis/master/language-identification-swagger.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/BigLobsterito/apis/master/language-identification-swagger.yaml
+      version: "2.0"
   x-providerName: rapidapi.com
   x-serviceName: language-identification
+  x-preferred: true
 externalDocs:
-  url: 'https://rapidapi.com/BigLobster/api/language-identification-prediction/details'
+  url: https://rapidapi.com/BigLobster/api/language-identification-prediction/details
 consumes:
   - application/x-www-form-urlencoded
   - multipart/form-data
@@ -47,6 +48,6 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
       summary: Recognize Language

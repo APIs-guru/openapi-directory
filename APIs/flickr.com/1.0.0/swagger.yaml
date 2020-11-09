@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.flickr.com
@@ -7,18 +7,19 @@ info:
   contact:
     x-twitter: Flickr
   description: A subset of Flickr's API defined in Swagger format.
-  termsOfService: 'https://www.flickr.com/services/api/tos/'
+  termsOfService: https://www.flickr.com/services/api/tos/
   title: Flickr API Schema
   version: 1.0.0
   x-apisguru-categories:
     - media
   x-logo:
-    url: 'https://twitter.com/Flickr/profile_image?size=original'
+    url: https://twitter.com/Flickr/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/flickr/flickr-api-swagger/master/dist/schema.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/flickr/flickr-api-swagger/master/dist/schema.json
+      version: "2.0"
   x-providerName: flickr.com
+  x-preferred: true
 consumes:
   - multipart/form-data
 produces:
@@ -39,7 +40,7 @@ paths:
           type: string
         - in: query
           name: oauth_timestamp
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
         - in: query
@@ -63,7 +64,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
@@ -84,7 +85,7 @@ paths:
           type: string
         - in: query
           name: oauth_timestamp
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
         - in: query
@@ -105,7 +106,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
@@ -122,16 +123,16 @@ paths:
           type: string
         - in: query
           name: photo_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
         - in: query
           name: user_id
-          pattern: '^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$'
+          pattern: ^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -141,11 +142,11 @@ paths:
                     type: string
                 type: object
               nextphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               prevphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -175,7 +176,7 @@ paths:
           name: per_page
           type: number
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -187,7 +188,7 @@ paths:
                 type: number
               photos:
                 items:
-                  $ref: '#/definitions/Photo'
+                  $ref: "#/definitions/Photo"
                 type: array
               total:
                 type: number
@@ -208,13 +209,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               photos:
                 items:
-                  $ref: '#/definitions/Photo'
+                  $ref: "#/definitions/Photo"
                 type: array
             type: object
       tags:
@@ -230,28 +231,28 @@ paths:
           type: string
         - in: query
           name: group_id
-          pattern: '^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$'
+          pattern: ^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$
           required: false
           type: string
         - in: query
           name: topic_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
         - in: query
           name: reply_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               reply:
-                $ref: '#/definitions/TopicReply'
+                $ref: "#/definitions/TopicReply"
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -266,23 +267,23 @@ paths:
           type: string
         - in: query
           name: group_id
-          pattern: '^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$'
+          pattern: ^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$
           required: false
           type: string
         - in: query
           name: topic_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
               topic:
-                $ref: '#/definitions/Topic'
+                $ref: "#/definitions/Topic"
             type: object
       tags:
         - Public
@@ -297,7 +298,7 @@ paths:
           type: string
         - in: query
           name: group_id
-          pattern: '^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$'
+          pattern: ^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$
           required: false
           type: string
         - in: query
@@ -307,7 +308,7 @@ paths:
           name: per_page
           type: number
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -333,7 +334,7 @@ paths:
                 type: number
               topics:
                 items:
-                  $ref: '#/definitions/Topic'
+                  $ref: "#/definitions/Topic"
                 type: array
               total:
                 type: number
@@ -351,7 +352,7 @@ paths:
           type: string
         - in: query
           name: group_id
-          pattern: '^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$'
+          pattern: ^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$
           required: false
           type: string
         - in: query
@@ -363,14 +364,14 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               group:
-                $ref: '#/definitions/Group'
+                $ref: "#/definitions/Group"
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -384,16 +385,16 @@ paths:
           type: string
         - in: query
           name: photo_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
         - in: query
           name: group_id
-          pattern: '^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$'
+          pattern: ^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -403,11 +404,11 @@ paths:
                     type: string
                 type: object
               nextphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               prevphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -421,17 +422,17 @@ paths:
           type: string
         - in: query
           name: group_id
-          pattern: '^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$'
+          pattern: ^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               photos:
                 items:
-                  $ref: '#/definitions/Photo'
+                  $ref: "#/definitions/Photo"
                 type: array
             type: object
       tags:
@@ -447,18 +448,18 @@ paths:
           type: string
         - in: query
           name: user_id
-          pattern: '^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$'
+          pattern: ^([0-9]+@N[0-9]+)|([0-9a-zA-Z-_]+)$
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               person:
-                $ref: '#/definitions/Person'
+                $ref: "#/definitions/Person"
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -503,7 +504,7 @@ paths:
           name: per_page
           type: number
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -515,7 +516,7 @@ paths:
                 type: number
               photos:
                 items:
-                  $ref: '#/definitions/Photo'
+                  $ref: "#/definitions/Photo"
                 type: array
               total:
                 type: number
@@ -533,7 +534,7 @@ paths:
           type: string
         - in: query
           name: photo_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
         - in: query
@@ -541,7 +542,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -551,11 +552,11 @@ paths:
                     type: string
                 type: object
               nextphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               prevphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -570,11 +571,11 @@ paths:
           type: string
         - in: query
           name: photo_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -584,11 +585,11 @@ paths:
                     type: string
                 type: object
               nextphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               prevphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -603,7 +604,7 @@ paths:
           type: string
         - in: query
           name: photo_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
         - in: query
@@ -611,7 +612,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -647,7 +648,7 @@ paths:
                     type: string
                 type: object
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -662,18 +663,18 @@ paths:
           type: string
         - in: query
           name: photo_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: a photo
           schema:
             properties:
               photo:
-                $ref: '#/definitions/Photo'
+                $ref: "#/definitions/Photo"
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -688,11 +689,11 @@ paths:
           type: string
         - in: query
           name: photo_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Photo sizes
           schema:
             properties:
@@ -706,11 +707,11 @@ paths:
                     type: number
                   sizes:
                     items:
-                      $ref: '#/definitions/Size'
+                      $ref: "#/definitions/Size"
                     type: array
                 type: object
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -724,7 +725,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -743,7 +744,7 @@ paths:
                     type: array
                 type: object
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -756,7 +757,7 @@ paths:
           name: api_key
           required: true
           type: string
-        - description: 'A free text search. Photos who''s title, description or tags contain the text will be returned. You can exclude results that match a term by prepending it with a - character.'
+        - description: A free text search. Photos who's title, description or tags contain the text will be returned. You can exclude results that match a term by prepending it with a - character.
           in: query
           name: text
           type: string
@@ -788,7 +789,7 @@ paths:
           in: query
           name: license
           type: string
-        - description: |
+        - description: >
             The order in which to sort returned photos. Deafults to date-posted-desc (unless you are doing a radial geo query, in which case the default sorting is by ascending distance from the point specified). The possible values are:
               date-posted-asc,
               date-posted-desc,
@@ -800,7 +801,7 @@ paths:
           in: query
           name: sort
           type: string
-        - description: |
+        - description: >
             Return photos only matching a certain privacy level. This only applies when making an authenticated call to view photos you own. Valid values are:,
               1: public photos,
               2: private photos visible to friends,
@@ -814,7 +815,7 @@ paths:
           in: query
           name: bbox
           type: string
-        - description: |
+        - description: >
             Recorded accuracy level of the location information. Current range is 1-16:
               World level is 1
               Country is ~3
@@ -824,7 +825,7 @@ paths:
           in: query
           name: accuracy
           type: string
-        - description: |
+        - description: >
             Safe search setting:
               1: for safe,
               2: for moderate,
@@ -832,7 +833,7 @@ paths:
           in: query
           name: safe_search
           type: number
-        - description: |
+        - description: >
             Content Type setting:
               1: photos only.
               2: screenshots only.
@@ -844,16 +845,16 @@ paths:
           in: query
           name: content_type
           type: number
-        - description: |
+        - description: >
             Aside from passing in a fully formed machine tag, there is a special syntax for searching on specific properties : Find photos using the 'dc' namespace : "machine_tags" => "dc:" Find photos with a title in the 'dc' namespace : "machine_tags" => "dc:title=" Find photos titled "mr. camera" in the 'dc' namespace : "machine_tags" => "dc:title=\"mr. camera\" Find photos whose value is "mr. camera" : "machine_tags" => "*:*=\"mr. camera\"" Find photos that have a title, in any namespace : "machine_tags" => "*:title=" Find photos that have a title, in any namespace, whose value is "mr. camera" : "machine_tags" => "*:title=\"mr. camera\"" Find photos, in the 'dc' namespace whose value is "mr. camera" : "machine_tags" => "dc:*=\"mr. camera\"" Multiple machine tags may be queried by passing a comma-separated list. The number of machine tags you can pass in a single query depends on the tag mode (AND or OR) that you are querying with. "AND" queries are limited to (16) machine tags. "OR" queries are limited to (8).
           in: query
           name: machine_tags
           type: string
-        - description: 'Either ''any'' for an OR combination of tags, or ''all'' for an AND combination. Defaults to ''any'' if not specified.'
+        - description: Either 'any' for an OR combination of tags, or 'all' for an AND combination. Defaults to 'any' if not specified.
           in: query
           name: machine_tag_mode
           type: string
-        - description: 'The id of a group who''s pool to search. If specified, only matching photos posted to the group''s pool will be returned.'
+        - description: The id of a group who's pool to search. If specified, only matching photos posted to the group's pool will be returned.
           in: query
           name: group_id
           type: string
@@ -865,36 +866,36 @@ paths:
           in: query
           name: woe_id
           type: string
-        - description: |
+        - description: >
             A Flickr place id. (not used if bbox argument is present). Geo queries require some sort of limiting agent in order to prevent the database from crying. This is basically like the check against "parameterless searches" for queries without a geo component. A tag, for instance, is considered a limiting agent as are user defined min_date_taken and min_date_upload parameters — If no limiting factor is passed we return only photos added in the last 12 hours (though we may extend the limit in the future).
           in: query
           name: place_id
           type: string
-        - description: 'Filter results by media type. Possible values are all (default), photos or videos'
+        - description: Filter results by media type. Possible values are all (default), photos or videos
           in: query
           name: media
           type: string
-        - description: |
+        - description: >
             Any photo that has been geotagged, or if the value is "0" any photo that has not been geotagged. Geo queries require some sort of limiting agent in order to prevent the database from crying. This is basically like the check against "parameterless searches" for queries without a geo component. A tag, for instance, is considered a limiting agent as are user defined min_date_taken and min_date_upload parameters — If no limiting factor is passed we return only photos added in the last 12 hours (though we may extend the limit in the future).
           in: query
           name: has_geo
           type: string
-        - description: |
+        - description: >
             Geo context is a numeric value representing the photo's geotagginess beyond latitude and longitude. For example, you may wish to search for photos that were taken "indoors" or "outdoors". The current list of context IDs is: 0, not defined. 1, indoors. 2, outdoors. Geo queries require some sort of limiting agent in order to prevent the database from crying. This is basically like the check against "parameterless searches" for queries without a geo component. A tag, for instance, is considered a limiting agent as are user defined min_date_taken and min_date_upload parameters — If no limiting factor is passed we return only photos added in the last 12 hours (though we may extend the limit in the future).
           in: query
           name: geo_context
           type: string
-        - description: |
+        - description: >
             A valid latitude, in decimal format, for doing radial geo queries. Geo queries require some sort of limiting agent in order to prevent the database from crying. This is basically like the check against "parameterless searches" for queries without a geo component. A tag, for instance, is considered a limiting agent as are user defined min_date_taken and min_date_upload parameters — If no limiting factor is passed we return only photos added in the last 12 hours (though we may extend the limit in the future).
           in: query
           name: lat
           type: string
-        - description: |
+        - description: >
             A valid longitude, in decimal format, for doing radial geo queries. Geo queries require some sort of limiting agent in order to prevent the database from crying. This is basically like the check against "parameterless searches" for queries without a geo component. A tag, for instance, is considered a limiting agent as are user defined min_date_taken and min_date_upload parameters — If no limiting factor is passed we return only photos added in the last 12 hours (though we may extend the limit in the future).
           in: query
           name: lon
           type: string
-        - description: 'A valid radius used for geo queries, greater than zero and less than 20 miles (or 32 kilometers), for use with point-based geo queries. The default value is 5 (km).'
+        - description: A valid radius used for geo queries, greater than zero and less than 20 miles (or 32 kilometers), for use with point-based geo queries. The default value is 5 (km).
           in: query
           name: radius
           type: number
@@ -906,7 +907,7 @@ paths:
           in: query
           name: is_commons
           type: boolean
-        - description: 'Limit the scope of the search to only photos that are in a gallery? Default is false, search all photos.'
+        - description: Limit the scope of the search to only photos that are in a gallery? Default is false, search all photos.
           in: query
           name: in_gallery
           type: boolean
@@ -914,16 +915,16 @@ paths:
           in: query
           name: is_getty
           type: boolean
-        - description: 'Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.'
+        - description: Number of photos to return per page. If this argument is omitted, it defaults to 100. The maximum allowed value is 500.
           in: query
           name: per_page
           type: number
-        - description: 'The page of results to return. If this argument is omitted, it defaults to 1.'
+        - description: The page of results to return. If this argument is omitted, it defaults to 1.
           in: query
           name: page
           type: number
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -935,7 +936,7 @@ paths:
                 type: number
               photos:
                 items:
-                  $ref: '#/definitions/Photo'
+                  $ref: "#/definitions/Photo"
                 type: array
               total:
                 type: number
@@ -953,16 +954,16 @@ paths:
           type: string
         - in: query
           name: photo_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
         - in: query
           name: photoset_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -972,11 +973,11 @@ paths:
                     type: string
                 type: object
               nextphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               prevphoto:
-                $ref: '#/definitions/ContextPhoto'
+                $ref: "#/definitions/ContextPhoto"
               stat:
-                $ref: '#/definitions/Stat'
+                $ref: "#/definitions/Stat"
             type: object
       tags:
         - Public
@@ -1000,7 +1001,7 @@ paths:
           name: per_page
           type: number
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1012,7 +1013,7 @@ paths:
                 type: number
               photosets:
                 items:
-                  $ref: '#/definitions/Album'
+                  $ref: "#/definitions/Album"
                 type: array
               total:
                 type: number
@@ -1030,17 +1031,17 @@ paths:
           type: string
         - in: query
           name: photoset_id
-          pattern: '^[0-9]+$'
+          pattern: ^[0-9]+$
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
               photoset:
                 items:
-                  $ref: '#/definitions/Photo'
+                  $ref: "#/definitions/Photo"
                 type: array
             type: object
       tags:
@@ -1059,7 +1060,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             properties:
@@ -1097,51 +1098,51 @@ paths:
           required: false
           type: string
         - enum:
-            - '0'
-            - '1'
+            - "0"
+            - "1"
           in: formData
           name: is_public
           required: false
           type: string
         - enum:
-            - '0'
-            - '1'
+            - "0"
+            - "1"
           in: formData
           name: is_friend
           required: false
           type: string
         - enum:
-            - '0'
-            - '1'
+            - "0"
+            - "1"
           in: formData
           name: is_family
           required: false
           type: string
         - enum:
-            - '1'
-            - '2'
-            - '3'
+            - "1"
+            - "2"
+            - "3"
           in: formData
           name: safety_level
           required: false
           type: string
         - enum:
-            - '1'
-            - '2'
-            - '3'
+            - "1"
+            - "2"
+            - "3"
           in: formData
           name: content_type
           required: false
           type: string
         - enum:
-            - '1'
-            - '2'
+            - "1"
+            - "2"
           in: formData
           name: hidden
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: object
@@ -1210,7 +1211,7 @@ definitions:
     properties:
       photos:
         items:
-          $ref: '#/definitions/ContextPhoto'
+          $ref: "#/definitions/ContextPhoto"
         type: array
     type: object
   Cover:
@@ -1233,7 +1234,7 @@ definitions:
         type: string
       title:
         type: string
-      'y':
+      y:
         type: string
     type: object
   Group:
@@ -1248,13 +1249,13 @@ definitions:
             type: string
         type: object
       cover:
-        $ref: '#/definitions/Cover'
+        $ref: "#/definitions/Cover"
       coverphoto_farm:
         type: string
       coverphoto_server:
         type: string
       coverphoto_url:
-        $ref: '#/definitions/PhotoURLs'
+        $ref: "#/definitions/PhotoURLs"
       description:
         properties:
           _content:
@@ -1383,9 +1384,9 @@ definitions:
       can_buy_pro:
         type: boolean
       cover:
-        $ref: '#/definitions/Cover'
+        $ref: "#/definitions/Cover"
       coverphoto:
-        $ref: '#/definitions/PhotoURLs'
+        $ref: "#/definitions/PhotoURLs"
       coverphoto_farm:
         type: string
       coverphoto_server:
@@ -1543,13 +1544,13 @@ definitions:
         properties:
           note:
             items:
-              $ref: '#/definitions/Note'
+              $ref: "#/definitions/Note"
             type: array
         type: object
       originalsecret:
         type: string
       owner:
-        $ref: '#/definitions/Owner'
+        $ref: "#/definitions/Owner"
       people:
         properties:
           haspeople:
@@ -1583,7 +1584,7 @@ definitions:
         properties:
           tag:
             items:
-              $ref: '#/definitions/Tag'
+              $ref: "#/definitions/Tag"
             type: array
         type: object
       title:
@@ -1595,7 +1596,7 @@ definitions:
         properties:
           url:
             items:
-              $ref: '#/definitions/URL'
+              $ref: "#/definitions/URL"
             type: array
         type: object
       usage:

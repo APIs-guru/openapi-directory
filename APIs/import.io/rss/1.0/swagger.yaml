@@ -1,24 +1,25 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: rss.import.io
 basePath: /
 info:
   title: import.io
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - tools
   x-logo:
-    backgroundColor: '#F6248E'
-    url: 'http://api.docs.import.io/images/import-io-logo.svg'
+    backgroundColor: "#F6248E"
+    url: http://api.docs.import.io/images/import-io-logo.svg
   x-origin:
     - format: swagger
-      url: 'http://api.docs.import.io/rss/swagger.json'
-      version: '2.0'
+      url: http://api.docs.import.io/rss/swagger.json
+      version: "2.0"
   x-providerName: import.io
   x-serviceName: rss
+  x-preferred: true
 externalDocs:
-  url: 'http://api.docs.import.io/'
+  url: http://api.docs.import.io/
 produces:
   - application/xml
 securityDefinitions:
@@ -49,7 +50,7 @@ tags:
   - name: schedule.import.io
   - name: api.import.io
 paths:
-  '/extractor/{extractorId}/runs':
+  "/extractor/{extractorId}/runs":
     get:
       parameters:
         - description: The id of the extractor to start get the crawl run data
@@ -58,20 +59,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             additionalProperties:
               type: string
             type: object
-        '401':
-          description: 'User doesn''t own this extractor, or doesn''t have a valid session.'
+        "401":
+          description: User doesn't own this extractor, or doesn't have a valid session.
           schema:
-            $ref: '#/definitions/APIError'
-        '404':
-          description: 'Not found: Extractor has not been run.'
+            $ref: "#/definitions/APIError"
+        "404":
+          description: "Not found: Extractor has not been run."
           schema:
-            $ref: '#/definitions/APIError'
+            $ref: "#/definitions/APIError"
       security:
         - api_key: []
       summary: Get a feed of the runs performed on an extractor
@@ -145,7 +146,7 @@ definitions:
                 _type:
                   type: string
                 fields:
-                  $ref: '#/definitions/CrawlRun'
+                  $ref: "#/definitions/CrawlRun"
               type: object
             type: array
           total:

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.ritc.io
@@ -10,23 +10,24 @@ info:
   x-apisguru-categories:
     - cloud
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/664480221534552064/CwdeYGxs_400x400.jpg'
+    url: https://pbs.twimg.com/profile_images/664480221534552064/CwdeYGxs_400x400.jpg
   x-origin:
     - format: swagger
-      url: 'http://www.ritc.io/openapi/ritc.swagger.json'
-      version: '2.0'
+      url: http://www.ritc.io/openapi/ritc.swagger.json
+      version: "2.0"
   x-providerName: ritc.io
+  x-preferred: true
 consumes:
   - application/json
 produces:
   - application/json
 securityDefinitions:
   Authorization:
-    description: 'HTTP Basic Authentication/API Key. Basic Auth requires a username and a password. For the username, use a valid API key. Ritc accepts the API key as both plaintext and base64 encoded. Remember that you must append a colon after the api key in order to avoid being prompted for a password. The format is Base64encode(api-key:)'
+    description: HTTP Basic Authentication/API Key. Basic Auth requires a username and a password. For the username, use a valid API key. Ritc accepts the API key as both plaintext and base64 encoded. Remember that you must append a colon after the api key in order to avoid being prompted for a password. The format is Base64encode(api-key:)
     in: header
     name: Authorization
     type: apiKey
-    x-testValue: ''
+    x-testValue: ""
 paths:
   /actions:
     get:
@@ -34,13 +35,13 @@ paths:
       operationId: listActions
       parameters: []
       responses:
-        '200':
+        "200":
           description: A list of actions in an app
           schema:
             items:
-              $ref: '#/definitions/ActionShortResponse'
+              $ref: "#/definitions/ActionShortResponse"
             type: array
-        '400':
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -65,13 +66,13 @@ paths:
           name: Action Object
           required: true
           schema:
-            $ref: '#/definitions/Action59'
+            $ref: "#/definitions/Action59"
       responses:
-        '200':
+        "200":
           description: An action was created
           schema:
-            $ref: '#/definitions/ActionShortResponse'
-        '400':
+            $ref: "#/definitions/ActionShortResponse"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -87,7 +88,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/actions/{action_id}':
+  "/actions/{action_id}":
     delete:
       description: Delete an action
       operationId: removeAction
@@ -98,9 +99,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The action was successfully removed
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -126,11 +127,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about an action
           schema:
             items:
-              $ref: '#/definitions/ActionFullResponse'
+              $ref: "#/definitions/ActionFullResponse"
             type: array
         default:
           description: Unexpected error
@@ -159,13 +160,13 @@ paths:
           name: Action Object
           required: true
           schema:
-            $ref: '#/definitions/Action59'
+            $ref: "#/definitions/Action59"
       responses:
-        '200':
+        "200":
           description: Information about the action was updated successfully
           schema:
-            $ref: '#/definitions/ActionShortResponse'
-        '400':
+            $ref: "#/definitions/ActionShortResponse"
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -187,7 +188,7 @@ paths:
       operationId: admin
       parameters: []
       responses:
-        '200':
+        "200":
           description: Ritc is up
           schema:
             type: object
@@ -216,7 +217,7 @@ paths:
           schema:
             type: object
       responses:
-        '200':
+        "200":
           description: Message logged
           schema:
             type: object
@@ -239,7 +240,7 @@ paths:
       operationId: pingRitc
       parameters: []
       responses:
-        '200':
+        "200":
           description: Ritc is up
           schema:
             type: object
@@ -262,13 +263,13 @@ paths:
       operationId: listApps
       parameters: []
       responses:
-        '200':
+        "200":
           description: A list of apps in an org
           schema:
             items:
-              $ref: '#/definitions/AppResponse'
+              $ref: "#/definitions/AppResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -293,13 +294,13 @@ paths:
           name: App Object
           required: true
           schema:
-            $ref: '#/definitions/App'
+            $ref: "#/definitions/App"
       responses:
-        '200':
+        "200":
           description: An app was created
           schema:
-            $ref: '#/definitions/AppResponse'
-        '400':
+            $ref: "#/definitions/AppResponse"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -321,13 +322,13 @@ paths:
       operationId: listAppChannels
       parameters: []
       responses:
-        '200':
+        "200":
           description: List of all channels in an app
           schema:
             items:
-              $ref: '#/definitions/AppChannelResponse'
+              $ref: "#/definitions/AppChannelResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -343,7 +344,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/apps/channels/{channel_id}/users':
+  "/apps/channels/{channel_id}/users":
     get:
       description: Get users of a specified channel
       operationId: listAppChannelUsers
@@ -354,13 +355,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about users of a specified channel
           schema:
             items:
-              $ref: '#/definitions/AppChannelResponse'
+              $ref: "#/definitions/AppChannelResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -376,7 +377,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/apps/channels/{channel_id}/users/{user_id}':
+  "/apps/channels/{channel_id}/users/{user_id}":
     get:
       description: Get user of a specified channel
       operationId: getAppChannelUser
@@ -392,13 +393,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about a specified user of a specified channel
           schema:
             items:
-              $ref: '#/definitions/AppChannelResponse'
+              $ref: "#/definitions/AppChannelResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -429,11 +430,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: User was assigned to a channel in in app
           schema:
-            $ref: '#/definitions/AppChannelResponse'
-        '400':
+            $ref: "#/definitions/AppChannelResponse"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -455,13 +456,13 @@ paths:
       operationId: listChannelExternalCredentials
       parameters: []
       responses:
-        '200':
+        "200":
           description: Detailed information about external credentials
           schema:
             items:
-              $ref: '#/definitions/AppExternalCredentialsResponse'
+              $ref: "#/definitions/AppExternalCredentialsResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -486,13 +487,13 @@ paths:
           name: App_External_Credentials Object
           required: true
           schema:
-            $ref: '#/definitions/AppExternalCredentials'
+            $ref: "#/definitions/AppExternalCredentials"
       responses:
-        '200':
+        "200":
           description: External credentials created
           schema:
-            $ref: '#/definitions/AppExternalCredentialsResponse'
-        '400':
+            $ref: "#/definitions/AppExternalCredentialsResponse"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -508,7 +509,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/apps/ext/api/credentials/{channel_id}':
+  "/apps/ext/api/credentials/{channel_id}":
     delete:
       description: Delete credentials for a channel
       operationId: removeChannelExternalCredentials
@@ -519,9 +520,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The credentials for a channel were successfully removed
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -547,13 +548,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Credentials for a channel in an app
           schema:
             items:
-              $ref: '#/definitions/AppExternalCredentialsResponse'
+              $ref: "#/definitions/AppExternalCredentialsResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -583,13 +584,13 @@ paths:
           name: App_External_Credentials Object
           required: true
           schema:
-            $ref: '#/definitions/AppExternalCredentials'
+            $ref: "#/definitions/AppExternalCredentials"
       responses:
-        '200':
+        "200":
           description: Information about the channel credentials was updated successfully
           schema:
-            $ref: '#/definitions/AppExternalCredentialsResponse'
-        '400':
+            $ref: "#/definitions/AppExternalCredentialsResponse"
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -605,12 +606,12 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/apps/rulegroup/run/{rule_id_list}':
+  "/apps/rulegroup/run/{rule_id_list}":
     post:
       description: Run specified rule group in the app
       operationId: runRuleGroup
       parameters:
-        - description: 'Ids of rules in the group, separated by commas, no spaces'
+        - description: Ids of rules in the group, separated by commas, no spaces
           in: path
           name: rule_id_list
           required: true
@@ -627,13 +628,13 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
-          description: 'Execution of specified rules in the app (for user #1)'
+        "200":
+          description: "Execution of specified rules in the app (for user #1)"
           schema:
             items:
-              $ref: '#/definitions/RuleResults'
+              $ref: "#/definitions/RuleResults"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -666,13 +667,13 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
-          description: 'Execution of active rules in the app (for user #1)'
+        "200":
+          description: "Execution of active rules in the app (for user #1)"
           schema:
             items:
-              $ref: '#/definitions/RuleResults'
+              $ref: "#/definitions/RuleResults"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -688,7 +689,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/apps/{app_id}':
+  "/apps/{app_id}":
     delete:
       description: Delete an app
       operationId: removeApp
@@ -699,9 +700,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The app was successfully removed
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -727,13 +728,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about an app
           schema:
             items:
-              $ref: '#/definitions/AppResponse'
+              $ref: "#/definitions/AppResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -763,13 +764,13 @@ paths:
           name: App Object
           required: true
           schema:
-            $ref: '#/definitions/App'
+            $ref: "#/definitions/App"
       responses:
-        '200':
+        "200":
           description: Information about the app was updated successfully
           schema:
-            $ref: '#/definitions/AppResponse'
-        '400':
+            $ref: "#/definitions/AppResponse"
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -791,13 +792,13 @@ paths:
       operationId: listChannels
       parameters: []
       responses:
-        '200':
+        "200":
           description: A list of channels available to a logged-in user
           schema:
             items:
-              $ref: '#/definitions/ChannelResponse'
+              $ref: "#/definitions/ChannelResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -822,13 +823,13 @@ paths:
           name: Channel Object
           required: true
           schema:
-            $ref: '#/definitions/Channel'
+            $ref: "#/definitions/Channel"
       responses:
-        '200':
+        "200":
           description: A private channel was created
           schema:
-            $ref: '#/definitions/ChannelResponse'
-        '400':
+            $ref: "#/definitions/ChannelResponse"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -850,13 +851,13 @@ paths:
       operationId: listAnonymousChannels
       parameters: []
       responses:
-        '200':
+        "200":
           description: A list of channels available to an anonymous user
           schema:
             items:
-              $ref: '#/definitions/ChannelResponse'
+              $ref: "#/definitions/ChannelResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -872,7 +873,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/channels/{channel_id}':
+  "/channels/{channel_id}":
     delete:
       description: Delete a channel
       operationId: removeChannel
@@ -883,9 +884,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The channel was successfully removed
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -911,13 +912,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about a channel
           schema:
             items:
-              $ref: '#/definitions/ChannelResponse'
+              $ref: "#/definitions/ChannelResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -947,13 +948,13 @@ paths:
           name: Channel Object
           required: true
           schema:
-            $ref: '#/definitions/Rule'
+            $ref: "#/definitions/Rule"
       responses:
-        '200':
+        "200":
           description: Information about the channel was updated successfully
           schema:
-            $ref: '#/definitions/ChannelResponse'
-        '400':
+            $ref: "#/definitions/ChannelResponse"
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -969,7 +970,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/channels/{channel_id}/functions':
+  "/channels/{channel_id}/functions":
     get:
       description: Retrieve Channel Functions
       operationId: listChannelFunctions
@@ -980,13 +981,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A list of functions available in a channel
           schema:
             items:
-              $ref: '#/definitions/FunctionResponse'
+              $ref: "#/definitions/FunctionResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1016,13 +1017,13 @@ paths:
           name: Channel Function Object
           required: true
           schema:
-            $ref: '#/definitions/Function7'
+            $ref: "#/definitions/Function7"
       responses:
-        '200':
+        "200":
           description: A private channel function  was created
           schema:
-            $ref: '#/definitions/FunctionResponse'
-        '400':
+            $ref: "#/definitions/FunctionResponse"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -1038,7 +1039,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/channels/{channel_id}/functions/{function_id}':
+  "/channels/{channel_id}/functions/{function_id}":
     get:
       description: Get channel function information
       operationId: getChannelFunction
@@ -1054,13 +1055,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about a channel function
           schema:
             items:
-              $ref: '#/definitions/FunctionResponse'
+              $ref: "#/definitions/FunctionResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1086,15 +1087,15 @@ paths:
           name: Org Object
           required: true
           schema:
-            $ref: '#/definitions/Org'
+            $ref: "#/definitions/Org"
       responses:
-        '200':
+        "200":
           description: An org was successfully created
           schema:
             items:
-              $ref: '#/definitions/OrgResponse'
+              $ref: "#/definitions/OrgResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1116,13 +1117,13 @@ paths:
       operationId: getMyOrganization
       parameters: []
       responses:
-        '200':
+        "200":
           description: Detailed information about an org
           schema:
             items:
-              $ref: '#/definitions/OrgResponse'
+              $ref: "#/definitions/OrgResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1144,13 +1145,13 @@ paths:
       operationId: listRules
       parameters: []
       responses:
-        '200':
+        "200":
           description: A list of rules in an app
           schema:
             items:
-              $ref: '#/definitions/RuleShortResponse'
+              $ref: "#/definitions/RuleShortResponse"
             type: array
-        '400':
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -1175,13 +1176,13 @@ paths:
           name: Rule Object
           required: true
           schema:
-            $ref: '#/definitions/Rule'
+            $ref: "#/definitions/Rule"
       responses:
-        '200':
+        "200":
           description: A rule was created
           schema:
-            $ref: '#/definitions/RuleFullResponse'
-        '400':
+            $ref: "#/definitions/RuleFullResponse"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -1197,7 +1198,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/rules/{rule_id}':
+  "/rules/{rule_id}":
     delete:
       description: Delete a rule
       operationId: removeRule
@@ -1208,9 +1209,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The rule was successfully removed
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1236,11 +1237,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about a rule
           schema:
             items:
-              $ref: '#/definitions/RuleFullResponse'
+              $ref: "#/definitions/RuleFullResponse"
             type: array
         default:
           description: Unexpected error
@@ -1269,13 +1270,13 @@ paths:
           name: Rule Object
           required: true
           schema:
-            $ref: '#/definitions/Rule'
+            $ref: "#/definitions/Rule"
       responses:
-        '200':
+        "200":
           description: Information about the rule was updated successfully
           schema:
-            $ref: '#/definitions/RuleFullResponse'
-        '400':
+            $ref: "#/definitions/RuleFullResponse"
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1291,7 +1292,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/rules/{rule_id}/run':
+  "/rules/{rule_id}/run":
     post:
       description: Run a rule
       operationId: runRule
@@ -1308,11 +1309,11 @@ paths:
           schema:
             type: object
       responses:
-        '200':
+        "200":
           description: A rule ran successfully
           schema:
             type: object
-        '400':
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -1334,13 +1335,13 @@ paths:
       operationId: listTriggers
       parameters: []
       responses:
-        '200':
+        "200":
           description: A list of triggers in an app
           schema:
             items:
-              $ref: '#/definitions/TriggerShortResponse'
+              $ref: "#/definitions/TriggerShortResponse"
             type: array
-        '400':
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -1365,13 +1366,13 @@ paths:
           name: Trigger Object
           required: true
           schema:
-            $ref: '#/definitions/Trigger54'
+            $ref: "#/definitions/Trigger54"
       responses:
-        '200':
+        "200":
           description: A trigger was successfully created
           schema:
-            $ref: '#/definitions/TriggerShortResponse'
-        '400':
+            $ref: "#/definitions/TriggerShortResponse"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -1387,7 +1388,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/triggers/{trigger_id}':
+  "/triggers/{trigger_id}":
     delete:
       description: Delete a trigger
       operationId: removeTrigger
@@ -1398,9 +1399,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The trigger was successfully removed
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1426,11 +1427,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about a trigger
           schema:
             items:
-              $ref: '#/definitions/TriggerFullResponse'
+              $ref: "#/definitions/TriggerFullResponse"
             type: array
         default:
           description: Unexpected error
@@ -1459,13 +1460,13 @@ paths:
           name: Trigger Object
           required: true
           schema:
-            $ref: '#/definitions/Trigger54'
+            $ref: "#/definitions/Trigger54"
       responses:
-        '200':
+        "200":
           description: Information about the trigger was updated successfully
           schema:
-            $ref: '#/definitions/TriggerShortResponse'
-        '400':
+            $ref: "#/definitions/TriggerShortResponse"
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1487,13 +1488,13 @@ paths:
       operationId: listAppUsers
       parameters: []
       responses:
-        '200':
+        "200":
           description: A list of App Users in an app
           schema:
             items:
-              $ref: '#/definitions/AppUserResponse'
+              $ref: "#/definitions/AppUserResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1518,13 +1519,13 @@ paths:
           name: App User Object
           required: true
           schema:
-            $ref: '#/definitions/AppUser'
+            $ref: "#/definitions/AppUser"
       responses:
-        '200':
+        "200":
           description: An App User was created
           schema:
-            $ref: '#/definitions/AppUserResponse'
-        '400':
+            $ref: "#/definitions/AppUserResponse"
+        "400":
           description: Unexpected error
           schema: {}
         default:
@@ -1546,13 +1547,13 @@ paths:
       operationId: listAdminUsers
       parameters: []
       responses:
-        '200':
+        "200":
           description: A list of admin users in an app
           schema:
             items:
-              $ref: '#/definitions/AdminUserResponse'
+              $ref: "#/definitions/AdminUserResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1577,13 +1578,13 @@ paths:
           name: Admin_User Object
           required: true
           schema:
-            $ref: '#/definitions/AdminUser'
+            $ref: "#/definitions/AdminUser"
       responses:
-        '200':
+        "200":
           description: An admin user was created
           schema:
-            $ref: '#/definitions/AdminUserResponse'
-        '400':
+            $ref: "#/definitions/AdminUserResponse"
+        "400":
           description: Unexpected error
           schema: {}
         default:
@@ -1599,7 +1600,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/users/admin/{user_id}':
+  "/users/admin/{user_id}":
     delete:
       description: Remove an admin user
       operationId: removeAdminUser
@@ -1610,9 +1611,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The admin user was successfully removed
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1638,13 +1639,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about an admin user
           schema:
             items:
-              $ref: '#/definitions/AdminUserResponse'
+              $ref: "#/definitions/AdminUserResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1674,13 +1675,13 @@ paths:
           name: Admin_User Object
           required: true
           schema:
-            $ref: '#/definitions/AdminUser'
+            $ref: "#/definitions/AdminUser"
       responses:
-        '200':
+        "200":
           description: Information about the admin user was updated successfully
           schema:
-            $ref: '#/definitions/AdminUserResponse'
-        '400':
+            $ref: "#/definitions/AdminUserResponse"
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1696,7 +1697,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/users/authenticate/{user_id}/channel/{channel_id}':
+  "/users/authenticate/{user_id}/channel/{channel_id}":
     post:
       description: Authenticate a user for a channel
       operationId: authenticateAppUserForChannel
@@ -1712,13 +1713,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Authorize url to be sent an authorize request
           schema:
             items:
-              $ref: '#/definitions/AuthorizeUrlResponse'
+              $ref: "#/definitions/AuthorizeUrlResponse"
             type: array
-        '400':
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -1734,7 +1735,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/users/{user_id}':
+  "/users/{user_id}":
     delete:
       description: Remove a user
       operationId: removeAppUser
@@ -1745,9 +1746,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The user was successfully removed
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1773,13 +1774,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about an App User
           schema:
             items:
-              $ref: '#/definitions/AppUserResponse'
+              $ref: "#/definitions/AppUserResponse"
             type: array
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1809,13 +1810,13 @@ paths:
           name: App User Object
           required: true
           schema:
-            $ref: '#/definitions/AppUser'
+            $ref: "#/definitions/AppUser"
       responses:
-        '200':
+        "200":
           description: Information about the user was updated successfully
           schema:
-            $ref: '#/definitions/AppUserResponse'
-        '400':
+            $ref: "#/definitions/AppUserResponse"
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1831,7 +1832,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/users/{user_id}/channels':
+  "/users/{user_id}/channels":
     get:
       description: Channels available to a User
       operationId: listAppUserChannels
@@ -1842,13 +1843,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A list of channels available to a specific user
           schema:
             items:
-              $ref: '#/definitions/UserChannel'
+              $ref: "#/definitions/UserChannel"
             type: array
-        '400':
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -1880,11 +1881,11 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: A channel was assigned to a user
           schema:
-            $ref: '#/definitions/UserChannel'
-        '400':
+            $ref: "#/definitions/UserChannel"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -1900,7 +1901,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/users/{user_id}/channels/{channel_id}':
+  "/users/{user_id}/channels/{channel_id}":
     delete:
       description: Remove a user channel assignment
       operationId: removeAppUserFromChannel
@@ -1916,9 +1917,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The channel was successfully removed from the user
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -1949,11 +1950,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about a specific channel for a specific user
           schema:
             items:
-              $ref: '#/definitions/UserChannel'
+              $ref: "#/definitions/UserChannel"
             type: array
         default:
           description: Unexpected error
@@ -1968,7 +1969,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/users/{user_id}/rules':
+  "/users/{user_id}/rules":
     get:
       description: Rules for a User
       operationId: listAppUserRules
@@ -1979,13 +1980,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A list of rules applying to a specific user
           schema:
             items:
-              $ref: '#/definitions/RuleShortResponse'
+              $ref: "#/definitions/RuleShortResponse"
             type: array
-        '400':
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -2001,7 +2002,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/users/{user_id}/rules/{rule_id}':
+  "/users/{user_id}/rules/{rule_id}":
     delete:
       description: Remove a rule user
       operationId: removeAppUserFromRule
@@ -2017,9 +2018,9 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The rule was successfully removed from the system
-        '400':
+        "400":
           description: Invalid input
           schema: {}
         default:
@@ -2050,11 +2051,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed information about a rule
           schema:
             items:
-              $ref: '#/definitions/RuleFullResponse'
+              $ref: "#/definitions/RuleFullResponse"
             type: array
         default:
           description: Unexpected error
@@ -2084,11 +2085,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A rule was assigned to the user
           schema:
-            $ref: '#/definitions/RuleShortResponse'
-        '400':
+            $ref: "#/definitions/RuleShortResponse"
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -2104,7 +2105,7 @@ paths:
         CollectParameters: false
         IsMultiContentStreaming: false
       x-unitTests: []
-  '/users/{user_id}/rules/{rule_id}/run':
+  "/users/{user_id}/rules/{rule_id}/run":
     post:
       description: Run rule for a user
       operationId: runRuleForAppUser
@@ -2120,11 +2121,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A rule ran successfully for a user
           schema:
             type: object
-        '400':
+        "400":
           description: Invalid Input
           schema: {}
         default:
@@ -2160,7 +2161,7 @@ definitions:
       name:
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
     title: Action
     type: object
   Action59:
@@ -2217,7 +2218,7 @@ definitions:
       parameters:
         type: object
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
     title: Action_Full_Response
     type: object
   ActionShortResponse:
@@ -2241,7 +2242,7 @@ definitions:
         description: Action name
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
     title: Action_Short_Response
     type: object
   AdminUser:
@@ -2253,7 +2254,7 @@ definitions:
         description: Admin User password
         type: string
       type:
-        $ref: '#/definitions/Type41'
+        $ref: "#/definitions/Type41"
     title: Admin_User
     type: object
   AdminUserResponse:
@@ -2274,7 +2275,7 @@ definitions:
         description: Admin User name
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
         description: Indicates the status of an Admin User
     title: Admin_User_Response
     type: object
@@ -2308,7 +2309,7 @@ definitions:
         format: int32
         type: integer
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
         description: Assignment status
       userId:
         description: Id of App User assigned to Channel
@@ -2319,7 +2320,7 @@ definitions:
   AppExternalCredentials:
     properties:
       authType:
-        $ref: '#/definitions/AuthType'
+        $ref: "#/definitions/AuthType"
       channel_id:
         type: string
       credentials:
@@ -2332,7 +2333,7 @@ definitions:
   AppExternalCredentialsResponse:
     properties:
       authType:
-        $ref: '#/definitions/AuthType'
+        $ref: "#/definitions/AuthType"
       channel_id:
         type: string
       credentials:
@@ -2364,7 +2365,7 @@ definitions:
         description: App name
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
     title: App_Response
     type: object
   AppUser:
@@ -2398,7 +2399,7 @@ definitions:
         description: Display name of App User
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
         description: App User status
     title: App_User_Response
     type: object
@@ -2423,7 +2424,7 @@ definitions:
         type: string
       functions:
         items:
-          $ref: '#/definitions/Function'
+          $ref: "#/definitions/Function"
         type: array
       id:
         description: Id of channel
@@ -2432,7 +2433,7 @@ definitions:
         description: Channel name
         type: string
       type:
-        description: 'Type of channel. Choices are ''public'' or ''private''. Private channels are only viewable within an account, while public channels are viewable to everyone in the system'
+        description: Type of channel. Choices are 'public' or 'private'. Private channels are only viewable within an account, while public channels are viewable to everyone in the system
         type: object
     title: Channel
     type: object
@@ -2443,7 +2444,7 @@ definitions:
         type: string
       functions:
         items:
-          $ref: '#/definitions/Function5'
+          $ref: "#/definitions/Function5"
         type: array
       id:
         description: Id of channel
@@ -2452,7 +2453,7 @@ definitions:
         description: Channel name
         type: string
       type:
-        description: 'Type of channel. Choices are ''public'' or ''private''. Private channels are only viewable within an account, while public channels are viewable to everyone'
+        description: Type of channel. Choices are 'public' or 'private'. Private channels are only viewable within an account, while public channels are viewable to everyone
         type: object
     title: Channel_Response
     type: object
@@ -2476,10 +2477,10 @@ definitions:
         type: string
       parameters:
         items:
-          $ref: '#/definitions/Parameter'
+          $ref: "#/definitions/Parameter"
         type: array
       type:
-        $ref: '#/definitions/Type'
+        $ref: "#/definitions/Type"
     title: Function
     type: object
   Function5:
@@ -2493,13 +2494,13 @@ definitions:
         description: Function name
         type: string
       type:
-        $ref: '#/definitions/Type'
+        $ref: "#/definitions/Type"
     title: Function5
     type: object
   Function7:
     properties:
       apiType:
-        $ref: '#/definitions/ApiType'
+        $ref: "#/definitions/ApiType"
       desc:
         description: Function description
         type: string
@@ -2507,24 +2508,24 @@ definitions:
         description: Function endpoint
         type: string
       httpMethod:
-        $ref: '#/definitions/HttpMethod'
+        $ref: "#/definitions/HttpMethod"
       name:
         description: Function name
         type: string
       requestParameters:
         items:
-          $ref: '#/definitions/RequestParameter'
+          $ref: "#/definitions/RequestParameter"
         type: array
       responseFormat:
-        $ref: '#/definitions/ResponseFormat'
+        $ref: "#/definitions/ResponseFormat"
       type:
-        $ref: '#/definitions/Type'
+        $ref: "#/definitions/Type"
     title: Function7
     type: object
   FunctionResponse:
     properties:
       apiType:
-        $ref: '#/definitions/ApiType'
+        $ref: "#/definitions/ApiType"
       description:
         description: Function description
         type: string
@@ -2532,7 +2533,7 @@ definitions:
         description: Function endpoint
         type: string
       httpMethod:
-        $ref: '#/definitions/HttpMethod'
+        $ref: "#/definitions/HttpMethod"
       id:
         type: string
       name:
@@ -2540,12 +2541,12 @@ definitions:
         type: string
       requestParameters:
         items:
-          $ref: '#/definitions/RequestParameter'
+          $ref: "#/definitions/RequestParameter"
         type: array
       responseFormat:
-        $ref: '#/definitions/ResponseFormat'
+        $ref: "#/definitions/ResponseFormat"
       type:
-        $ref: '#/definitions/Type'
+        $ref: "#/definitions/Type"
     title: Function_Response
     type: object
   HttpMethod:
@@ -2585,7 +2586,7 @@ definitions:
         description: Org name
         type: string
       plan:
-        $ref: '#/definitions/Plan'
+        $ref: "#/definitions/Plan"
       planCat:
         type: object
       status:
@@ -2623,7 +2624,7 @@ definitions:
       name:
         type: string
       schema:
-        $ref: '#/definitions/Schema'
+        $ref: "#/definitions/Schema"
     title: RequestParameter
     type: object
   ResponseFormat:
@@ -2646,7 +2647,7 @@ definitions:
         description: Rule name
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
         description: Rule status
       triggerIds:
         description: Rule description
@@ -2657,7 +2658,7 @@ definitions:
     properties:
       actions:
         items:
-          $ref: '#/definitions/Action'
+          $ref: "#/definitions/Action"
         type: array
       createdDate:
         description: The date the rule was created
@@ -2676,11 +2677,11 @@ definitions:
         description: Rule name
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
         description: Rule status
       triggers:
         items:
-          $ref: '#/definitions/Trigger'
+          $ref: "#/definitions/Trigger"
         type: array
     title: Rule_Full_Response
     type: object
@@ -2692,7 +2693,7 @@ definitions:
         description: Name of rule results
         type: string
       type:
-        $ref: '#/definitions/Type'
+        $ref: "#/definitions/Type"
     title: Rule_Results
     type: object
   RuleShortResponse:
@@ -2714,7 +2715,7 @@ definitions:
         description: Rule name
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
         description: Rule status
     title: Rule_Short_Response
     type: object
@@ -2729,7 +2730,7 @@ definitions:
       required:
         type: object
       style:
-        $ref: '#/definitions/Style'
+        $ref: "#/definitions/Style"
     title: Schema
     type: object
   Status:
@@ -2764,7 +2765,7 @@ definitions:
       name:
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
     title: Trigger
     type: object
   Trigger54:
@@ -2821,7 +2822,7 @@ definitions:
       parameters:
         type: object
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
     title: Trigger_Full_Response
     type: object
   TriggerShortResponse:
@@ -2847,7 +2848,7 @@ definitions:
         description: Trigger name
         type: string
       status:
-        $ref: '#/definitions/Status'
+        $ref: "#/definitions/Status"
     title: Trigger_Short_Response
     type: object
   Type:

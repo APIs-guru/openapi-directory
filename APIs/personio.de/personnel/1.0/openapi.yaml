@@ -17,6 +17,7 @@ info:
       version: "3.0"
   x-providerName: personio.de
   x-serviceName: personnel
+  x-preferred: true
 paths:
   /company/attendances:
     get:
@@ -114,6 +115,9 @@ paths:
                 response:
                   value:
                     data:
+                      id:
+                        - 1
+                        - 2
                       message: success
                     success: true
               schema:
@@ -127,10 +131,29 @@ paths:
                   value:
                     error:
                       code: 400
+                      detailed_message:
+                        - break: 60
+                          comment: ""
+                          date: 2017-01-01
+                          employee: 1234
+                          end_time: 18:00
+                          error_msg: null
+                          id: 1
+                          start_time: 09:00
+                          success: true
+                        - break: 60
+                          comment: ""
+                          date: 2017-01-01
+                          employee: 1234
+                          end_time: 18:00
+                          error_msg: Existing overlapping attendances periods
+                          id: null
+                          start_time: 09:00
+                          success: false
                       message: Error when trying to insert Attendances periods rows
-                    success: true
+                    success: false
               schema:
-                $ref: "#/components/schemas/ErrorResponse"
+                $ref: "#/components/schemas/DetailedErrorResponse"
           description: Invalid request
   "/company/attendances/{id}":
     delete:
@@ -1278,6 +1301,45 @@ components:
               type: string
           type: object
       type: object
+    DetailedErrorResponse:
+      properties:
+        error:
+          properties:
+            code:
+              type: integer
+            detailed_message:
+              items:
+                properties:
+                  break:
+                    type: integer
+                  comment:
+                    type: string
+                  date:
+                    type: string
+                  employee:
+                    type: integer
+                  end_time:
+                    type: string
+                  error_msg:
+                    type: string
+                  id:
+                    type: integer
+                  start_time:
+                    type: string
+                  success:
+                    type: boolean
+                type: object
+              type: array
+            message:
+              type: string
+          type: object
+        success:
+          type: boolean
+      required:
+        - success
+        - error
+      title: Default error response
+      type: object
     Employee:
       properties:
         attributes:
@@ -1410,13 +1472,13 @@ components:
             date: 2017-01-18
             employee: 1234
             end_time: 18:00
-            start_time: 8:00
+            start_time: 08:00
           - break: 35
             comment: I was productive as hell
             date: 2017-01-17
             employee: 1235
             end_time: 12:00
-            start_time: 9:00
+            start_time: 09:00
       properties:
         attendances:
           items:
@@ -1460,6 +1522,10 @@ components:
         - properties:
             data:
               properties:
+                id:
+                  items:
+                    type: integer
+                  type: array
                 message:
                   type: string
               type: object

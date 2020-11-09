@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.stoplight.io
@@ -11,12 +11,13 @@ info:
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://twitter.com/stoplightio/profile_image?size=original'
+    url: https://twitter.com/stoplightio/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://api.stoplight.io/v1/versions/wDcMCTKXwn8X4ynL9/export/oas.json'
-      version: '2.0'
+      url: https://api.stoplight.io/v1/versions/wDcMCTKXwn8X4ynL9/export/oas.json
+      version: "2.0"
   x-providerName: stoplight.io
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -27,16 +28,16 @@ securityDefinitions:
     name: Authorization
     type: apiKey
 responses:
-  'trait:standardErrors:400':
-    description: ''
+  trait:standardErrors:400:
+    description: ""
     schema:
-      $ref: '#/definitions/standarderror'
-  'trait:standardErrors:401':
-    description: ''
+      $ref: "#/definitions/standarderror"
+  trait:standardErrors:401:
+    description: ""
     schema:
       type: object
-  'trait:standardErrors:404':
-    description: ''
+  trait:standardErrors:404:
+    description: ""
     schema:
       properties:
         bar:
@@ -44,47 +45,65 @@ responses:
         foo:
           type: string
       type: object
-  'trait:standardErrors:500':
-    description: ''
+  trait:standardErrors:500:
+    description: ""
     schema:
-      $ref: '#/definitions/standarderror'
+      $ref: "#/definitions/standarderror"
 paths:
   /versions/publish/anon:
     post:
-      description: |-
+      description: >-
         Anonymously publish to API Docs.
+
 
         This endpoint will take a JSON spec or a URL to a swagger or raml spec.
 
+
         ```
+
         {
           "specData": {...}
         }
+
         ```
+
 
         or
 
+
         ```
+
         {
           "url": "http://petstore.swagger.io/v2/swagger.json"
         }
+
         ```
+
 
         The spec will be published to api-docs.io anonymously, which means you will not be able to update or remove this documentation.
 
+
         The response will contain a url to the published documentation.
 
+
         ```
+
         {
           "url": "https://swagger-petstore.api-docs.io/v1.0.0"
         }
+
         ```
 
 
+
         The limitations of anonymous publishing
+
         * Cannot update/remove the documentation
+
         * Cannot choose the subdomain
+
         * Cannot choose the version
+
         * Cannot add theming
       operationId: POST_versions-publish-anon
       parameters:
@@ -100,11 +119,11 @@ paths:
                 type: string
             type: object
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           examples:
             application/json:
-              url: 'https://stoplight.api-docs.io/api-v1'
+              url: https://stoplight.api-docs.io/api-v1
           schema:
             properties:
               url:
@@ -112,69 +131,79 @@ paths:
             required:
               - url
             type: object
-        '400':
-          description: ''
+        "400":
+          description: ""
           schema:
-            $ref: '#/definitions/standarderror'
-        '401':
-          description: ''
+            $ref: "#/definitions/standarderror"
+        "401":
+          description: ""
           schema:
-            $ref: '#/definitions/standarderror'
-        '404':
-          description: ''
+            $ref: "#/definitions/standarderror"
+        "404":
+          description: ""
           schema:
-            $ref: '#/definitions/standarderror'
-        '500':
-          description: ''
+            $ref: "#/definitions/standarderror"
+        "500":
+          description: ""
           schema:
-            $ref: '#/definitions/standarderror'
+            $ref: "#/definitions/standarderror"
       summary: Publish Anonymous
-  '/versions/{versionId}/export/{format}':
+  "/versions/{versionId}/export/{format}":
     get:
-      description: |-
+      description: >-
         Export a version to your choice of API specification.
+
 
         ### Allowed Formats:
 
+
         - oas.json
+
         - oas.yaml
+
         - raml08.yaml
+
         - raml10.yaml
+
         - stoplight.json
+
         - stoplight.yaml
+
 
         The stoplight format actually returns OAS (Swagger 2) with x-stoplight annotations. If you are exporting with the intent on importing back into Stoplight, this export format preserves the most information.
 
+
         ### Example URL:
+
 
         `https://api.stoplight.io/v1/versions/123/export/oas.json`
       operationId: GET_versions-versionId-export-format
       produces:
         - text/yaml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           examples:
             application/json:
               info:
                 title: Test API
-                version: '1.0'
+                version: "1.0"
               paths: {}
-              swagger: '2.0'
+              swagger: "2.0"
           schema:
-            description: 'The specification. Returned as a string when YAML, object when JSON.'
+            description: The specification. Returned as a string when YAML, object when JSON.
             type:
               - object
               - string
-        '401':
-          $ref: '#/responses/trait:standardErrors:401'
-        '404':
-          $ref: '#/responses/trait:standardErrors:404'
+        "401":
+          $ref: "#/responses/trait:standardErrors:401"
+        "404":
+          $ref: "#/responses/trait:standardErrors:404"
       summary: Export
       tags:
         - Versions
     parameters:
-      - default: ''
+      - default: ""
         description: This is the unique identifier for the version.
         in: path
         name: versionId
@@ -193,7 +222,7 @@ paths:
         name: format
         required: true
         type: string
-  '/versions/{versionId}/import':
+  "/versions/{versionId}/import":
     parameters:
       - description: This is the unique identifier for the version.
         in: path
@@ -201,21 +230,29 @@ paths:
         required: true
         type: string
     put:
-      description: |-
+      description: >-
         Import the given specification into an existing version. 
+
 
         **Warning, this is a destructive action! Any resources present in both the existing version, and the specification being imported, will be overwritten.**
 
+
         This endpoint is particularly useful when you manage a specification file (Swagger or RAML) outside of Stoplight, and want to keep your Stoplight API version up to date as that specification changes.
+
 
         By default, a "merge" is performed when importing. If a resource exists in the specification that you are importing, and in the Stoplight API, the resource will be overwritten. If a resource exists in the Stoplight API, but not in the spefication that you are importing, the resource will be left alone (and not deleted).
 
+
         You can include an optional `options` property in the request body, to indicate if you would like to perform more of a replacement (instead of a merge). The options are documented in full in the response definition below these notes.
+
 
         Take this request + request body for example:
 
+
         `PUT https://api.stoplight.io/v1/versions/123/import`
+
         ```json
+
         {
           "url": "http://petstore.swagger.io/v2/swagger.json",
           "options": {
@@ -223,14 +260,20 @@ paths:
             "removeExtraSchemas": true
           }
         }
+
         ```
+
 
         This request will grab the swagger specification described at `http://petstore.swagger.io/v2/swagger.json`, and import it into the Stoplight API version with id `123`. Additionally, it will delete any existing endpoints or models that are not described in the petstore swagger being imported.
 
+
         Instead of a URL, you can provide the actual specification to be imported, either as a string (in the case of YAML) or an object (in the case of JSON). That request would look something like this:
 
+
         `PUT https://api.stoplight.io/v1/versions/123/import`
+
         ```json
+
         {
           "specData": {
             "swagger": "2.0",
@@ -238,6 +281,7 @@ paths:
             ... rest of spec
           }
         }
+
         ```
       operationId: PUT_versions-versionId-import
       parameters:
@@ -248,21 +292,21 @@ paths:
               options:
                 removeExtraEndpoints: true
                 removeExtraModels: true
-              url: 'http://petstore.swagger.io/v2/swagger.json'
+              url: http://petstore.swagger.io/v2/swagger.json
             properties:
               options:
                 properties:
                   removeExtraEndpoints:
-                    description: 'Default: false.'
+                    description: "Default: false."
                     type: boolean
                   removeExtraSchemas:
-                    description: 'Default: false.'
+                    description: "Default: false."
                     type: boolean
                   removeExtraTextSections:
-                    description: 'Default: false.'
+                    description: "Default: false."
                     type: boolean
                   removeExtraTraits:
-                    description: 'Default: false.'
+                    description: "Default: false."
                     type: boolean
                 type: object
               specData:
@@ -273,8 +317,8 @@ paths:
                 type: string
             type: object
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
             properties:
               data:
@@ -316,16 +360,16 @@ paths:
             required:
               - data
             type: object
-        '401':
-          $ref: '#/responses/trait:standardErrors:401'
-        '404':
-          $ref: '#/responses/trait:standardErrors:404'
+        "401":
+          $ref: "#/responses/trait:standardErrors:401"
+        "404":
+          $ref: "#/responses/trait:standardErrors:404"
       security:
         - Authorization: []
       summary: Import
       tags:
         - Versions
-  '/versions/{versionId}/publish':
+  "/versions/{versionId}/publish":
     parameters:
       - description: This is the unique identifier for the version.
         in: path
@@ -333,24 +377,29 @@ paths:
         required: true
         type: string
     post:
-      description: |-
+      description: >-
         Re-publish an API version in Stoplight. This will re-publish the given API version, with whatever publish settings have already been setup in the app.
+
 
         This will only work with APIs that have previously been published at least once.
 
+
         This works well with the #endpoint:957qEfc97BB5XGAeZ endpoint to augment your continuous integration processes, and automatically re-publish your documentation when certain events happen. Once such scenario is:
 
+
         1. Swagger is generated from your codebase, and pushed up to Github.
+
         2. A simple script that you write sends a request to the Stoplight API to import the new specification, passing in the URL to the swagger file on Github.
+
         3. After the import succeeds, and your API in Stoplight is up to date, the script sends a request to the Stoplight API (this endpoint) to re-publish your documentation.
       operationId: POST_versions-versionId-publish
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           examples:
             application/json:
-              customDomain: 'https://help.stoplight.io/api-v1'
-              url: 'https://stoplight.api-docs.io/api-v1'
+              customDomain: https://help.stoplight.io/api-v1
+              url: https://stoplight.api-docs.io/api-v1
           schema:
             properties:
               customDomain:
@@ -360,16 +409,16 @@ paths:
             required:
               - url
             type: object
-        '401':
-          $ref: '#/responses/trait:standardErrors:401'
-        '404':
-          $ref: '#/responses/trait:standardErrors:404'
+        "401":
+          $ref: "#/responses/trait:standardErrors:401"
+        "404":
+          $ref: "#/responses/trait:standardErrors:404"
       security:
         - Authorization: []
       summary: Publish
       tags:
         - Versions
-  '/versions/{versionId}/unpublish':
+  "/versions/{versionId}/unpublish":
     parameters:
       - description: This is the unique identifier for the version.
         in: path
@@ -380,8 +429,8 @@ paths:
       description: Unpublish the documentation associated with the given API version.
       operationId: PUT_versions-versionId-unpublish
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           examples:
             application/json:
               data: {}
@@ -390,10 +439,10 @@ paths:
               data:
                 type: object
             type: object
-        '401':
-          $ref: '#/responses/trait:standardErrors:401'
-        '404':
-          $ref: '#/responses/trait:standardErrors:404'
+        "401":
+          $ref: "#/responses/trait:standardErrors:401"
+        "404":
+          $ref: "#/responses/trait:standardErrors:404"
       security:
         - Authorization: []
       summary: Unpublish
@@ -402,7 +451,7 @@ paths:
 definitions:
   shared-user:
     properties:
-      '':
+      "":
         type: string
       username:
         type: string

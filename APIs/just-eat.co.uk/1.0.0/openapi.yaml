@@ -110,6 +110,7 @@ info:
       url: https://uk.api.just-eat.io/docs/openapi.json
       version: "3.0"
   x-providerName: just-eat.co.uk
+  x-preferred: true
 paths:
   /acceptance-requested:
     post:
@@ -349,41 +350,6 @@ paths:
       summary: Get restaurant delivery fees
       tags:
         - DeliveryFee
-        - publicly-accessible
-  /delivery/deliverablerestaurants:
-    get:
-      description: Get deliverable restaurants
-      parameters:
-        - description: The latitude of the position to filter deliverable restaurants on.
-          in: query
-          name: toLat
-          required: false
-          schema:
-            format: double
-            type: number
-        - description: The longitude of the position to filter deliverable restaurants on.
-          in: query
-          name: toLon
-          required: false
-          schema:
-            format: double
-            type: number
-        - description: The postcode to filter deliverable restaurants on.
-          in: query
-          name: toPostcode
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/deliverable-restaurants"
-          description: OK
-      summary: Get deliverable restaurants
-      tags:
-        - Order Delivery API
         - publicly-accessible
   /delivery/estimate:
     get:
@@ -9938,7 +9904,7 @@ components:
       additionalProperties: false
       example:
         discountPercentage: 100
-        modifiersGroups:
+        modifierGroups:
           - minimumChoices: 1
             modifierGroupId: modifier111
             modifiers:
@@ -9988,7 +9954,7 @@ components:
         header: Free item!
         itemDiscounts:
           - discountPercentage: 100
-            modifiersGroups:
+            modifierGroups:
               - minimumChoices: 1
                 modifierGroupId: modifier111
                 modifiers:
@@ -14089,6 +14055,15 @@ components:
       required:
         - restaurantId
       type: object
+    RestaurantCommentsOnReview:
+      example:
+        restaurantComments: Thank you very much for positive feedback
+      properties:
+        restaurantComments:
+          description: Restaurant comments in response on the customer review
+          nullable: false
+          type: string
+      type: object
     RestaurantDeliveryFees:
       example:
         bands:
@@ -14938,7 +14913,8 @@ components:
     RestaurantSearchResponse:
       example:
         restaurants:
-          - products:
+          - isSponsored: true
+            products:
               - fullName: Chicken Korma
                 price: 799
                 productId: "289347"
@@ -14946,7 +14922,8 @@ components:
                 price: 699
                 productId: "563454"
             restaurantId: "110230"
-          - products:
+          - isSponsored: false
+            products:
               - fullName: BBQ Chicken Pizza
                 price: 1099
                 productId: "67832"
@@ -14964,6 +14941,7 @@ components:
       type: object
     RestaurantSearchResponseItem:
       example:
+        isSponsored: false
         products:
           - fullName: Chicken Korma
             price: 799
@@ -14971,9 +14949,11 @@ components:
           - fullName: Chicken Madras
             price: 699
             productId: "563454"
-          - restaurantId: "229390"
         restaurantId: "110230"
       properties:
+        isSponsored:
+          description: Flag to indicate if the restaurant is sponsored, so has been promoted to the top of the results
+          type: boolean
         products:
           description: Ordered list of products available from the restaurant which matched the search term
           items:
@@ -15066,6 +15046,8 @@ components:
               SeoName: danish
               Total: 171
           District: EC4
+          Latitude: 0
+          Longitude: 0
           Postcode: EC4
           ResultCount: 1
           SearchedTerms: null
@@ -15230,11 +15212,17 @@ components:
                 items:
                   properties:
                     FullName:
+                      description: The full name of the product
                       type: string
                     Price:
+                      description: The price of the product
                       type: number
                     ProductId:
+                      description: Deprecated field no longer populated, but retained for backwards compatibility with clients
                       type: number
+                    StrProductId:
+                      description: The id of the product
+                      type: string
                   type: object
                 type: array
               RestaurantId:
@@ -15271,6 +15259,12 @@ components:
               type: array
             District:
               type: string
+            Latitude:
+              description: The latitude of the search location
+              type: number
+            Longitude:
+              description: The longitude of the search location
+              type: number
             Postcode:
               type: string
             ResultCount:
@@ -15718,7 +15712,7 @@ components:
       items:
         properties:
           end:
-            description: Local end time of the slot in hh:mm:ss format. Must be greater than Start, or 00:00:00 (no rolling over midnight). Times are in the restaurant's time zone which can be obtained by converting `location.geoPosition` value from [the restaurant's details](#operation/GetRestaurantDetails) using a lookup API such as  timezonedb.com.
+            description: Local end time of the slot in hh:mm:ss format. The end time occurs on the next day if less than or equal to the start time. Times are in the restaurant's time zone which can be obtained by converting `location.geoPosition` value from [the restaurant's details](#operation/GetRestaurantDetails) using a lookup API such as  timezonedb.com.
             pattern: ^([0-1]\d|2[0-3]):[0-5]\d$:[0-5]\d$
             type: string
           start:
@@ -17731,6 +17725,12 @@ components:
         - FinalReviewRejected
         - Approved
       type: string
+    applicationSubmitResponse:
+      properties:
+        state:
+          $ref: "#/components/schemas/applicationState"
+          description: The current application state i.e. Open, Approved etc.
+      type: object
     assessmentStatusTypes:
       description: Denotes the type of segmentation status that restaurant can have
       enum:
@@ -18590,29 +18590,6 @@ components:
           $ref: "#/components/schemas/scoreTypes"
           description: Represent the type of score data. It would always be number (0) customer experience score.
       type: object
-    deliverable-restaurant:
-      properties:
-        DeliveryDistanceInMetres:
-          format: int32
-          type: integer
-        DeliveryDurationInSeconds:
-          format: int32
-          type: integer
-        EstimatedWaitForDeliveryPickupInSeconds:
-          format: int32
-          type: integer
-        Restaurant:
-          $ref: "#/components/schemas/deliveryable-restaurant-location-info"
-      type: object
-    deliverable-restaurants:
-      properties:
-        DeliveryLocation:
-          $ref: "#/components/schemas/location"
-        Restaurants:
-          items:
-            $ref: "#/components/schemas/deliverable-restaurant"
-          type: array
-      type: object
     delivery-abort-with-reason:
       example:
         deliveryPartnerReasonCode: courier_issue
@@ -19028,22 +19005,6 @@ components:
             format: int32
             type: number
           type: array
-      type: object
-    deliveryable-restaurant-location-info:
-      properties:
-        Latitude:
-          example: 51.51641
-          format: double
-          type: number
-        Longitude:
-          example: -0.103198
-          format: double
-          type: number
-        RestaurantId:
-          example: 10202
-          type: string
-        RestaurantReference:
-          type: string
       type: object
     document:
       properties:
@@ -20903,41 +20864,6 @@ components:
       properties:
         OrderId:
           type: string
-      type: object
-    shootingStatus:
-      description: Shooting status
-      enum:
-        - cancel
-        - to_approve
-        - searching
-        - travel_validation
-        - waiting_confirmation
-        - confirmed
-        - processing
-        - reviewing
-        - watermarking
-        - ready
-        - medias_selected
-        - delivered
-        - reported
-      type: string
-    shootingStatusUpdateRequest:
-      example:
-        new_status: searching
-        old_status: to_approve
-        shooting_id: "03570107"
-      properties:
-        new_status:
-          $ref: "#/components/schemas/shootingStatus"
-        old_status:
-          $ref: "#/components/schemas/shootingStatus"
-        shooting_id:
-          description: The shooting id
-          type: string
-      required:
-        - shooting_id
-        - old_status
-        - new_status
       type: object
     supportRequest:
       properties:

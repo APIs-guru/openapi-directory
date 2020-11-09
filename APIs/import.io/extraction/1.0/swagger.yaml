@@ -1,24 +1,25 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: extraction.import.io
 basePath: /
 info:
   title: import.io
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - tools
   x-logo:
-    backgroundColor: '#F6248E'
-    url: 'http://api.docs.import.io/images/import-io-logo.svg'
+    backgroundColor: "#F6248E"
+    url: http://api.docs.import.io/images/import-io-logo.svg
   x-origin:
     - format: swagger
-      url: 'http://api.docs.import.io/extraction/swagger.json'
-      version: '2.0'
+      url: http://api.docs.import.io/extraction/swagger.json
+      version: "2.0"
   x-providerName: import.io
   x-serviceName: extraction
+  x-preferred: true
 externalDocs:
-  url: 'http://api.docs.import.io/'
+  url: http://api.docs.import.io/
 produces:
   - application/json;charset=UTF-8
 securityDefinitions:
@@ -49,7 +50,7 @@ tags:
   - name: schedule.import.io
   - name: api.import.io
 paths:
-  '/extractor/{extractorId}':
+  "/extractor/{extractorId}":
     get:
       parameters:
         - description: extractorId
@@ -63,21 +64,21 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/QueryResponse'
-        '400':
+            $ref: "#/definitions/QueryResponse"
+        "400":
           description: Invalid ID supplied
           schema:
-            $ref: '#/definitions/APIError'
-        '401':
+            $ref: "#/definitions/APIError"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/APIError'
+            $ref: "#/definitions/APIError"
       security:
         - api_key: []
-      summary: 'Query by extractor endpoint, adhoc runs only.'
+      summary: Query by extractor endpoint, adhoc runs only.
       tags:
         - extraction.import.io
 definitions:
@@ -148,7 +149,7 @@ definitions:
                 _type:
                   type: string
                 fields:
-                  $ref: '#/definitions/CrawlRun'
+                  $ref: "#/definitions/CrawlRun"
               type: object
             type: array
           total:

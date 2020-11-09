@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: vatapi.com
@@ -6,19 +6,20 @@ basePath: /v1
 info:
   description: A developer friendly API to help your business achieve VAT compliance
   title: VAT API
-  version: '1'
+  version: "1"
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'http://vatapi.com/graphics/logo.svg'
+    url: http://vatapi.com/graphics/logo.svg
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.11
       format: swagger
-      url: 'https://vatapi.com/api-docs.json'
-      version: '1.2'
+      url: https://vatapi.com/api-docs.json
+      version: "1.2"
   x-providerName: vatapi.com
+  x-preferred: true
 securityDefinitions:
   apikey:
     description: Enter your API key
@@ -44,10 +45,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Country_Code_Check'
+            $ref: "#/definitions/Country_Code_Check"
       summary: Retrieve a countries VAT rates by its 2 digit country code
       tags:
         - api
@@ -69,16 +70,16 @@ paths:
           name: currency_to
           required: true
           type: string
-        - description: 'Optional, an amount you are wanting to convert. Leave blank to just get the current rate'
+        - description: Optional, an amount you are wanting to convert. Leave blank to just get the current rate
           in: query
           name: amount
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Currency_Conversion'
+            $ref: "#/definitions/Currency_Conversion"
       summary: Convert a currency
       tags:
         - api
@@ -95,16 +96,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Invoice_Data'
+            $ref: "#/definitions/Invoice_Data"
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Create_Invoice'
+            $ref: "#/definitions/Create_Invoice"
       summary: Create a VAT invoice
       tags:
         - api
-  '/invoice/{id}':
+  "/invoice/{id}":
     delete:
       operationId: invoice_delete
       parameters:
@@ -118,7 +119,7 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete an invoice
       tags:
@@ -136,10 +137,10 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Retrieve_Invoice'
+            $ref: "#/definitions/Retrieve_Invoice"
       summary: Retrieve an invoice
       tags:
         - api
@@ -160,12 +161,12 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Update_Invoice_Array'
+            $ref: "#/definitions/Update_Invoice_Array"
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Update_Invoice'
+            $ref: "#/definitions/Update_Invoice"
       summary: Update an existing invoice
       tags:
         - api
@@ -183,10 +184,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/IP_Check'
+            $ref: "#/definitions/IP_Check"
       summary: Retrieve a countries VAT rates from an IP address
       tags:
         - api
@@ -199,16 +200,16 @@ paths:
           name: Response-Type
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Api_Usage'
+            $ref: "#/definitions/Api_Usage"
       summary: Check api requests remaining on current subscription plan
       tags:
         - api
   /vat-number-check:
     get:
-      description: '<p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href=''http://www.braemoor.co.uk/software/vat.shtml'' target=''_blank''>Heres a client side way to check the format using Javascript</a></p>'
+      description: <p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href='http://www.braemoor.co.uk/software/vat.shtml' target='_blank'>Heres a client side way to check the format using Javascript</a></p>
       operationId: vat_number_validate
       parameters:
         - description: The default response type is application/json if you would like to receive an XML response then set this to XML
@@ -221,7 +222,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Validate a VAT number
       tags:
@@ -239,7 +240,7 @@ paths:
           name: code
           required: true
           type: string
-        - description: 'The VAT rate to get the price for. Default: standard'
+        - description: "The VAT rate to get the price for. Default: standard"
           in: query
           name: country_rate
           required: false
@@ -249,16 +250,16 @@ paths:
           name: price
           required: true
           type: integer
-        - description: 'Optional, if the price is including VAT set the type to ''incl''. Otherwise the default is assumed as excluding VAT already, ''excl'''
+        - description: Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'
           in: query
           name: type
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Convert_Price'
+            $ref: "#/definitions/Convert_Price"
       summary: Convert a price to or from VAT price.
       tags:
         - api
@@ -271,10 +272,10 @@ paths:
           name: Response-Type
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Vat_Rates'
+            $ref: "#/definitions/Vat_Rates"
       summary: Retrieve all current EU VAT rates
       tags:
         - api
@@ -334,13 +335,13 @@ definitions:
         description: The 2 digit country code
         type: string
       rates:
-        $ref: '#/definitions/Country_Rates'
+        $ref: "#/definitions/Country_Rates"
         description: An array of the EU VAT rates for that country
       status:
         description: Response code
         type: integer
       vat_applies:
-        description: 'TRUE or FALSE, depending if country is within the EU.'
+        description: TRUE or FALSE, depending if country is within the EU.
         type: string
     required:
       - country
@@ -354,7 +355,7 @@ definitions:
         description: The country name
         type: string
       rates:
-        $ref: '#/definitions/Country_Rates'
+        $ref: "#/definitions/Country_Rates"
         description: An array of the rates for the country
     required:
       - country
@@ -362,19 +363,19 @@ definitions:
   Country_Rates:
     properties:
       parking:
-        $ref: '#/definitions/parking'
+        $ref: "#/definitions/parking"
         description: The type of rate
       reduced:
-        $ref: '#/definitions/reduced'
+        $ref: "#/definitions/reduced"
         description: The type of rate
       reduced_alt:
-        $ref: '#/definitions/reduced_alt'
+        $ref: "#/definitions/reduced_alt"
         description: The type of rate
       standard:
-        $ref: '#/definitions/standard'
+        $ref: "#/definitions/standard"
         description: The type of rate
       super_reduced:
-        $ref: '#/definitions/super_reduced'
+        $ref: "#/definitions/super_reduced"
         description: The type of rate
     required:
       - parking
@@ -385,7 +386,7 @@ definitions:
   Create_Invoice:
     properties:
       invoice:
-        $ref: '#/definitions/Invoice_Array'
+        $ref: "#/definitions/Invoice_Array"
         description: The new invoice object
       status:
         description: Response code
@@ -427,13 +428,13 @@ definitions:
         description: The 2 digit country code
         type: string
       rates:
-        $ref: '#/definitions/Country_Rates'
+        $ref: "#/definitions/Country_Rates"
         description: An array of the EU VAT rates for that country
       status:
         description: Response code
         type: integer
       vat_applies:
-        description: 'TRUE or FALSE, depending if country is within the EU.'
+        description: TRUE or FALSE, depending if country is within the EU.
         type: string
     required:
       - country
@@ -485,10 +486,10 @@ definitions:
       items:
         description: An array of your invoice items
         items:
-          $ref: '#/definitions/Invoice_Items'
+          $ref: "#/definitions/Invoice_Items"
         type: array
       logo_url:
-        description: 'A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended'
+        description: A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended
         type: string
       notes:
         description: Any notes attached to the invoice
@@ -561,13 +562,13 @@ definitions:
       items:
         description: An array of your invoice items
         items:
-          $ref: '#/definitions/Invoice_Items'
+          $ref: "#/definitions/Invoice_Items"
         type: array
       notes:
         description: Add a note to the invoice.
         type: string
       price_type:
-        description: 'Optional, if the price is including VAT set the type to ''incl''. Otherwise the default is assumed as excluding VAT already, ''excl'''
+        description: Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'
         type: string
       tax_point:
         description: (or 'time of supply') if this is different from the invoice date
@@ -579,7 +580,7 @@ definitions:
         description: Your VAT number
         type: string
       zero_rated:
-        description: 'To Zero-Rate the VAT, set to true.'
+        description: To Zero-Rate the VAT, set to true.
         type: string
     required:
       - business_address
@@ -610,7 +611,7 @@ definitions:
   Retrieve_Invoice:
     properties:
       invoice:
-        $ref: '#/definitions/Retrieve_Invoice_Array'
+        $ref: "#/definitions/Retrieve_Invoice_Array"
         description: The invoice array
       status:
         description: Response code
@@ -642,7 +643,7 @@ definitions:
         description: Your customers name or trading name
         type: string
       customer_vat_number:
-        description: 'Optional, customers VAT number'
+        description: Optional, customers VAT number
         type: string
       date:
         description: The date the invoice was issued
@@ -662,16 +663,16 @@ definitions:
       items:
         description: An array of your invoice items
         items:
-          $ref: '#/definitions/Invoice_Items'
+          $ref: "#/definitions/Invoice_Items"
         type: array
       logo_url:
-        description: 'A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended'
+        description: A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended
         type: string
       notes:
         description: Any notes attached to the invoice
         type: string
       price_type:
-        description: 'Optional, if the price is including VAT set the type to ''incl''. Otherwise the default is assumed as excluding VAT already, ''excl'''
+        description: Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'
         type: string
       subtotal:
         description: Total amount excluding VAT
@@ -692,7 +693,7 @@ definitions:
         description: Total amount of VAT
         type: integer
       zero_rated:
-        description: 'To Zero-Rate the VAT, set to true.'
+        description: To Zero-Rate the VAT, set to true.
         type: string
     required:
       - business_address
@@ -712,7 +713,7 @@ definitions:
   Update_Invoice:
     properties:
       invoice:
-        $ref: '#/definitions/Retrieve_Invoice_Array'
+        $ref: "#/definitions/Retrieve_Invoice_Array"
         description: The invoice array
       status:
         description: Response code
@@ -755,10 +756,10 @@ definitions:
       items:
         description: An array of your invoice items
         items:
-          $ref: '#/definitions/Invoice_Items'
+          $ref: "#/definitions/Invoice_Items"
         type: array
       logo_url:
-        description: 'A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended'
+        description: A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended
         type: string
       notes:
         description: Add a note to the invoice.
@@ -784,7 +785,7 @@ definitions:
       countries:
         description: An array of the EU VAT countries and their respective rates
         items:
-          $ref: '#/definitions/Vat_Rates_Countries'
+          $ref: "#/definitions/Vat_Rates_Countries"
         type: array
       status:
         description: Response code
@@ -795,7 +796,7 @@ definitions:
   Vat_Rates_Countries:
     properties:
       country_code:
-        $ref: '#/definitions/Country_Data'
+        $ref: "#/definitions/Country_Data"
         description: The 2 digit country code
     required:
       - country_code

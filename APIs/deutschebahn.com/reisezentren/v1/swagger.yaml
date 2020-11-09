@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
   - http
@@ -9,21 +9,22 @@ info:
     email: Joachim.Schirrmacher@deutschebahn.com
     name: DB Systel GmbH
   description: This REST-API enables you to query information about travel centers in Germany.
-  termsOfService: 'https://developer.deutschebahn.com/store/'
+  termsOfService: https://developer.deutschebahn.com/store/
   title: Reisezentren-API
   version: v1
   x-apisguru-categories:
     - transport
     - open_data
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://pbs.twimg.com/profile_images/591140150413025280/Cjcqjl2J.png'
+    backgroundColor: "#FFFFFF"
+    url: https://pbs.twimg.com/profile_images/591140150413025280/Cjcqjl2J.png
   x-origin:
     - format: swagger
-      url: 'https://developer.deutschebahn.com/store/api-docs/DBOpenData/Reisezentren/v1'
-      version: '2.0'
+      url: https://developer.deutschebahn.com/store/api-docs/DBOpenData/Reisezentren/v1
+      version: "2.0"
   x-providerName: deutschebahn.com
   x-serviceName: reisezentren
+  x-preferred: true
 securityDefinitions: {}
 tags:
   - name: API
@@ -40,22 +41,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: List has been created
           schema:
-            $ref: '#/definitions/TravelCenterList'
-        '404':
+            $ref: "#/definitions/TravelCenterList"
+        "404":
           description: No travel centers could be found matching the given name
           schema:
-            $ref: '#/definitions/Error'
-        '416':
+            $ref: "#/definitions/Error"
+        "416":
           description: Filtering required - specify a name fragment of at least 3 characters
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Get all station infos
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/reisezentren/loc/{lat}/{lon}':
+  "/reisezentren/loc/{lat}/{lon}":
     get:
       description: Get information about a station near a location
       parameters:
@@ -74,14 +75,14 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: A station was found
           schema:
-            $ref: '#/definitions/TravelCenter'
+            $ref: "#/definitions/TravelCenter"
       summary: Get information about a station near a location
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/reisezentren/loc/{lat}/{lon}/{dist}':
+  "/reisezentren/loc/{lat}/{lon}/{dist}":
     get:
       description: Get stations in a given radius
       parameters:
@@ -106,14 +107,14 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: A station was found
           schema:
-            $ref: '#/definitions/TravelCenter'
+            $ref: "#/definitions/TravelCenter"
       summary: Get stations in a given radius
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
-  '/reisezentren/{id}':
+  "/reisezentren/{id}":
     get:
       description: Get information about a specific station
       parameters:
@@ -123,14 +124,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The travel center was found
           schema:
-            $ref: '#/definitions/TravelCenter'
-        '404':
+            $ref: "#/definitions/TravelCenter"
+        "404":
           description: No travel center found
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Get information about a specific station
       x-auth-type: Application & Application User
       x-throttling-tier: Unlimited
@@ -168,22 +169,22 @@ definitions:
         description: Name of travel center
         type: string
       openingTimes:
-        description: 'Opening times of the travel center, ordered by week day'
+        description: Opening times of the travel center, ordered by week day
         properties:
           fri:
-            $ref: '#/definitions/OpeningTime'
+            $ref: "#/definitions/OpeningTime"
           mon:
-            $ref: '#/definitions/OpeningTime'
+            $ref: "#/definitions/OpeningTime"
           sat:
-            $ref: '#/definitions/OpeningTime'
+            $ref: "#/definitions/OpeningTime"
           sun:
-            $ref: '#/definitions/OpeningTime'
+            $ref: "#/definitions/OpeningTime"
           thu:
-            $ref: '#/definitions/OpeningTime'
+            $ref: "#/definitions/OpeningTime"
           tue:
-            $ref: '#/definitions/OpeningTime'
+            $ref: "#/definitions/OpeningTime"
           wed:
-            $ref: '#/definitions/OpeningTime'
+            $ref: "#/definitions/OpeningTime"
         type: object
       postCode:
         description: Post code of travel center
@@ -197,5 +198,5 @@ definitions:
     type: object
   TravelCenterList:
     items:
-      $ref: '#/definitions/TravelCenter'
+      $ref: "#/definitions/TravelCenter"
     type: array

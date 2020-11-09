@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: watchful.li
@@ -9,18 +9,19 @@ info:
   x-apisguru-categories:
     - hosting
   x-logo:
-    backgroundColor: '#1B4E65'
-    url: 'https://d2071nnd6m4201.cloudfront.net/templates/balloon/images/logo.svg'
+    backgroundColor: "#1B4E65"
+    url: https://d2071nnd6m4201.cloudfront.net/templates/balloon/images/logo.svg
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: swagger
-      url: 'https://watchful.li/api/v1/api-docs/'
-      version: '1.2'
+      url: https://watchful.li/api/v1/api-docs/
+      version: "1.2"
   x-providerName: watchful.li
+  x-preferred: true
 externalDocs:
-  url: 'https://watchful.li/faqs/tools/watchful-rest-api.html'
+  url: https://watchful.li/faqs/tools/watchful-rest-api.html
 tags:
   - description: Operations about audits
     name: audits
@@ -44,7 +45,7 @@ paths:
       description: Returns a list of audits
       operationId: getAudits
       parameters:
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -58,7 +59,7 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: 'ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-'
+        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -68,11 +69,11 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Audit'
-        '403':
+            $ref: "#/definitions/Audit"
+        "403":
           description: Invalid API Key
       summary: Get a list of audits
       tags:
@@ -86,14 +87,14 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             type: string
       summary: Get the list of fields
       tags:
         - audits
-  '/audits/{id}':
+  "/audits/{id}":
     delete:
       description: Delete a specific audit
       operationId: deleteAuditById
@@ -110,13 +111,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Audit correctly deleted
           schema:
             type: string
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Delete a specific audit
       tags:
@@ -132,7 +133,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
@@ -142,13 +143,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Audit'
-        '400':
+            $ref: "#/definitions/Audit"
+        "400":
           description: Invalid ID
-        '403':
+        "403":
           description: Invalid API Key
       summary: Find audit by ID
       tags:
@@ -158,7 +159,7 @@ paths:
       description: Returns a list Extensions
       operationId: getExtensions
       parameters:
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: ext_name
           required: false
@@ -168,12 +169,12 @@ paths:
           name: siteids
           required: false
           type: string
-        - description: 'Do a ''LIKE'' search, you can also use ''%''. technical name of the extension com_xxxx'
+        - description: Do a 'LIKE' search, you can also use '%'. technical name of the extension com_xxxx
           in: query
           name: ext_prefix
           required: false
           type: string
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: version
           required: false
@@ -186,12 +187,12 @@ paths:
           name: vUpdate
           required: false
           type: integer
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
           type: string
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -205,7 +206,7 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: 'ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-'
+        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -215,13 +216,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Extension'
-        '403':
+            $ref: "#/definitions/Extension"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid
       summary: Get a list Extensions
       tags:
@@ -235,14 +236,14 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             type: string
       summary: Get the list of fields
       tags:
         - extensions
-  '/extensions/{id}/ignore':
+  "/extensions/{id}/ignore":
     post:
       description: Set 'ignore updates' for a given extension / site_id
       operationId: ignoreExtensionUpdate
@@ -259,16 +260,16 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Extension successfully updated
           schema:
             type: string
-        '404':
+        "404":
           description: Update not found for the given extension
       summary: Set 'ignore updates' for a given extension / site_id
       tags:
         - extensions
-  '/extensions/{id}/unignore':
+  "/extensions/{id}/unignore":
     post:
       description: Remove 'ignore updates' for a given extension
       operationId: unignoreExtensionUpdate
@@ -285,16 +286,16 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Extension successfully updated
           schema:
             type: string
-        '404':
+        "404":
           description: Update not found for the given extension
       summary: Remove 'ignore updates' for a given extension
       tags:
         - extensions
-  '/extensions/{id}/update':
+  "/extensions/{id}/update":
     post:
       description: Update the extension on the remote site
       operationId: updateExtension
@@ -311,11 +312,11 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Extension successfully updated
           schema:
             type: string
-        '404':
+        "404":
           description: Update not found for the given extension
       summary: Update the extension on the remote site
       tags:
@@ -325,7 +326,7 @@ paths:
       description: Returns a list of feedbacks
       operationId: getFeedbacks
       parameters:
-        - description: 'Fields to return separate by comas (es. name,id)'
+        - description: Fields to return separate by comas (es. name,id)
           in: query
           name: fields
           required: false
@@ -335,11 +336,11 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Feedback'
-        '403':
+            $ref: "#/definitions/Feedback"
+        "403":
           description: Invalid API Key
       summary: Get feedbacks
       tags:
@@ -353,23 +354,23 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Feedback'
+            $ref: "#/definitions/Feedback"
       produces:
         - application/json
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Audit'
-        '201':
+            $ref: "#/definitions/Audit"
+        "201":
           description: Saved successfully
-        '400':
+        "400":
           description: Invalid data
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Not saved
       summary: Create a feedback
       tags:
@@ -383,7 +384,7 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             type: string
@@ -396,7 +397,7 @@ paths:
       parameters:
         - description: Type of the log
           enum:
-            - ''
+            - ""
             - plugin_sends_error
             - curlerror
             - modified_file
@@ -411,27 +412,27 @@ paths:
           in: query
           name: log_type
           type: string
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: log_entry
           required: false
           type: string
-        - description: 'Logs after this date, format YYYY-MM-DD HH:MM:SS'
+        - description: Logs after this date, format YYYY-MM-DD HH:MM:SS
           in: query
           name: from
           required: false
           type: string
-        - description: 'Logs before this date, format YYYY-MM-DD HH:MM:SS'
+        - description: Logs before this date, format YYYY-MM-DD HH:MM:SS
           in: query
           name: to
           required: false
           type: string
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
           type: string
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -445,7 +446,7 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: 'ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-'
+        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -455,11 +456,11 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Log'
-        '403':
+            $ref: "#/definitions/Log"
+        "403":
           description: Invalid API Key
       summary: Get a list of logs
       tags:
@@ -485,7 +486,7 @@ paths:
           type: integer
         - description: Type of the log
           enum:
-            - ''
+            - ""
             - plugin_sends_error
             - curlerror
             - modified_file
@@ -500,22 +501,22 @@ paths:
           in: query
           name: filter_type
           type: string
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: search
           required: false
           type: string
-        - description: 'Logs after this date, format YYYY-MM-DD HH:MM:SS'
+        - description: Logs after this date, format YYYY-MM-DD HH:MM:SS
           in: query
           name: startdate
           required: false
           type: string
-        - description: 'Logs before this date, format YYYY-MM-DD HH:MM:SS'
+        - description: Logs before this date, format YYYY-MM-DD HH:MM:SS
           in: query
           name: enddate
           required: false
           type: string
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -534,9 +535,9 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '403':
+        "403":
           description: Invalid API Key
       summary: Get a CSV or PDF file contain the list of logs
       tags:
@@ -550,7 +551,7 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             type: string
@@ -566,14 +567,14 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             type: string
       summary: Get the list of log types
       tags:
         - logs
-  '/logs/{id}':
+  "/logs/{id}":
     delete:
       description: Delete a specific log
       operationId: deleteLogById
@@ -590,13 +591,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Log correctly deleted
           schema:
             type: string
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Delete a specific log
       tags:
@@ -608,7 +609,7 @@ paths:
       responses:
         default:
           description: No description
-  '/reports/sites/{id}':
+  "/reports/sites/{id}":
     get:
       description: Returns a PDF report based on a site ID
       parameters:
@@ -619,24 +620,24 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Start of the report, format YYYY-MM-DD, default today-30day '
+        - description: "Start of the report, format YYYY-MM-DD, default today-30day "
           in: query
           name: from
           required: false
           type: string
-        - description: 'End of the report, format YYYY-MM-DD, default today'
+        - description: End of the report, format YYYY-MM-DD, default today
           in: query
           name: to
           required: false
           type: string
-        - description: 'Type of reports separate by comas: Ga,Logs,Uptime'
+        - description: "Type of reports separate by comas: Ga,Logs,Uptime"
           in: query
           name: reports
           required: false
           type: string
         - description: Type of the log to show in the report
           enum:
-            - ''
+            - ""
             - plugin_sends_error
             - curlerror
             - modified_file
@@ -660,18 +661,18 @@ paths:
       produces:
         - application/pdf
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Reports'
-        '403':
+            $ref: "#/definitions/Reports"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Returns a PDF report for a specific site
       tags:
         - reports
-  '/reports/tags/{id}':
+  "/reports/tags/{id}":
     get:
       description: Returns a report based on a site ID
       parameters:
@@ -682,24 +683,24 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Start of the report, format YYYY-MM-DD, default today-30day '
+        - description: "Start of the report, format YYYY-MM-DD, default today-30day "
           in: query
           name: from
           required: false
           type: string
-        - description: 'End of the report, format YYYY-MM-DD, default today'
+        - description: End of the report, format YYYY-MM-DD, default today
           in: query
           name: to
           required: false
           type: string
-        - description: 'Type of reports separate by comas: Ga,Logs,Uptime'
+        - description: "Type of reports separate by comas: Ga,Logs,Uptime"
           in: query
           name: reports
           required: false
           type: string
         - description: Type of the log to show in the report
           enum:
-            - ''
+            - ""
             - plugin_sends_error
             - curlerror
             - modified_file
@@ -723,13 +724,13 @@ paths:
       produces:
         - application/pdf
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Reports'
-        '403':
+            $ref: "#/definitions/Reports"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Find sites by ID
       tags:
@@ -744,27 +745,27 @@ paths:
           name: siteids
           required: false
           type: string
-        - description: 'Site name. Do a ''LIKE'' search, you can also use ''%'''
+        - description: Site name. Do a 'LIKE' search, you can also use '%'
           in: query
           name: name
           required: false
           type: string
-        - description: 'Access URL. Do a ''LIKE'' search, you can also use ''%'''
+        - description: Access URL. Do a 'LIKE' search, you can also use '%'
           in: query
           name: access_url
           required: false
           type: string
-        - description: 'Joomla version. Do a ''LIKE'' search, you can also use ''%'''
+        - description: Joomla version. Do a 'LIKE' search, you can also use '%'
           in: query
           name: j_version
           required: false
           type: string
-        - description: 'Ip address. Do a ''LIKE'' search, you can also use ''%'''
+        - description: Ip address. Do a 'LIKE' search, you can also use '%'
           in: query
           name: ip
           required: false
           type: string
-        - description: 'Joomla core update status (1: update required, 0: update not required)'
+        - description: "Joomla core update status (1: update required, 0: update not required)"
           enum:
             - 1
             - 0
@@ -803,12 +804,12 @@ paths:
           name: up
           required: false
           type: integer
-        - description: 'Fields to return separated by commas (e.g. name,id)'
+        - description: Fields to return separated by commas (e.g. name,id)
           in: query
           name: fields
           required: false
           type: string
-        - description: 'Number of objects to return (max 100, default 25)'
+        - description: Number of objects to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -822,7 +823,7 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: 'ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-'
+        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -832,13 +833,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Site'
-        '403':
+            $ref: "#/definitions/Site"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Get a list of Sites
       tags:
@@ -852,23 +853,23 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PostSite'
+            $ref: "#/definitions/PostSite"
       produces:
         - application/json
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Site'
-        '201':
+            $ref: "#/definitions/Site"
+        "201":
           description: Saved successfully
-        '400':
+        "400":
           description: Invalid data
-        '403':
+        "403":
           description: Not allowed to add sites
-        '404':
+        "404":
           description: Not saved
       summary: Create a site
       tags:
@@ -881,14 +882,14 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             type: string
       summary: Get the list of fields
       tags:
         - sites
-  '/sites/{id}':
+  "/sites/{id}":
     delete:
       description: Delete a specific Site
       parameters:
@@ -904,13 +905,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Deleted successfully
           schema:
             type: string
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Delete a specific Site
       tags:
@@ -926,7 +927,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
@@ -936,13 +937,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Site'
-        '403':
+            $ref: "#/definitions/Site"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Find sites by ID
       tags:
@@ -962,26 +963,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PostSite'
+            $ref: "#/definitions/PostSite"
       produces:
         - application/json
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Updated successfully
           schema:
-            $ref: '#/definitions/Site'
-        '400':
+            $ref: "#/definitions/Site"
+        "400":
           description: Invalid data
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Update a site
       tags:
         - sites
-  '/sites/{id}/audits':
+  "/sites/{id}/audits":
     get:
       description: Return audits for a specific website
       operationId: getSiteAudits
@@ -993,12 +994,12 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
           type: string
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -1022,13 +1023,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Audits'
-        '403':
+            $ref: "#/definitions/Audits"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Return audits for a specific website
       tags:
@@ -1049,22 +1050,22 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Audit'
-        '201':
+            $ref: "#/definitions/Audit"
+        "201":
           description: Saved successfully
-        '400':
+        "400":
           description: Invalid data
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Not saved
       summary: Create an audit for the site
       tags:
         - sites
-  '/sites/{id}/backupnow':
+  "/sites/{id}/backupnow":
     post:
       description: Add the site to the backup queue
       operationId: addSiteToBackupQueue
@@ -1081,18 +1082,18 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Site'
-        '403':
+            $ref: "#/definitions/Site"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Add the site to the backup queue
       tags:
         - sites
-  '/sites/{id}/backupprofiles':
+  "/sites/{id}/backupprofiles":
     get:
       description: Return backup profile
       operationId: getBackupProfiles
@@ -1109,16 +1110,16 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Return backup profile
       tags:
         - sites
-  '/sites/{id}/backups':
+  "/sites/{id}/backups":
     get:
       description: List of latest backups
       operationId: getListBackups
@@ -1135,16 +1136,16 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: List of latest backups
       tags:
         - sites
-  '/sites/{id}/backupstart':
+  "/sites/{id}/backupstart":
     post:
       description: Start a remote backup for the site
       operationId: startSiteBackup
@@ -1161,18 +1162,18 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Site'
-        '403':
+            $ref: "#/definitions/Site"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Start a remote backup for the site
       tags:
         - sites
-  '/sites/{id}/backupstep':
+  "/sites/{id}/backupstep":
     post:
       description: Step (continue) a remote backup for the site
       operationId: stepSiteBackup
@@ -1189,18 +1190,18 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Site'
-        '403':
+            $ref: "#/definitions/Site"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Step (continue) a remote backup for the site
       tags:
         - sites
-  '/sites/{id}/extensions':
+  "/sites/{id}/extensions":
     get:
       description: Get extensions for a site
       parameters:
@@ -1211,12 +1212,12 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
           type: string
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -1240,13 +1241,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Extension'
-        '403':
+            $ref: "#/definitions/Extension"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid
       summary: Get extensions for a site
       tags:
@@ -1272,16 +1273,16 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Install extension
       tags:
         - sites
-  '/sites/{id}/logs':
+  "/sites/{id}/logs":
     get:
       description: Return logs for a specific website
       parameters:
@@ -1292,14 +1293,14 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: log_entry
           required: false
           type: string
         - description: Type of the log
           enum:
-            - ''
+            - ""
             - plugin_sends_error
             - curlerror
             - modified_file
@@ -1313,22 +1314,22 @@ paths:
           in: query
           name: log_type
           type: string
-        - description: 'Logs after this date, format YYYY-MM-DD HH:MM:SS'
+        - description: Logs after this date, format YYYY-MM-DD HH:MM:SS
           in: query
           name: from
           required: false
           type: string
-        - description: 'Logs before this date, format YYYY-MM-DD HH:MM:SS'
+        - description: Logs before this date, format YYYY-MM-DD HH:MM:SS
           in: query
           name: to
           required: false
           type: string
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
           type: string
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -1342,7 +1343,7 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: 'ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-'
+        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -1352,13 +1353,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Log'
-        '403':
+            $ref: "#/definitions/Log"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Return logs for a specific website
       tags:
@@ -1379,28 +1380,28 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PostLog'
+            $ref: "#/definitions/PostLog"
       produces:
         - application/json
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Log'
-        '201':
+            $ref: "#/definitions/Log"
+        "201":
           description: Saved successfully
-        '400':
+        "400":
           description: Invalid data
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Not saved
       summary: Create a custom log for a specific website
       tags:
         - sites
-  '/sites/{id}/monitor':
+  "/sites/{id}/monitor":
     delete:
       description: Return boolean
       operationId: deleteMonitor
@@ -1417,13 +1418,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Monitor'
-        '403':
+            $ref: "#/definitions/Monitor"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Delete uptime monitor
       tags:
@@ -1444,18 +1445,18 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Monitor'
-        '403':
+            $ref: "#/definitions/Monitor"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Post uptime monitor
       tags:
         - sites
-  '/sites/{id}/scanner':
+  "/sites/{id}/scanner":
     get:
       description: Scan the site for malware
       operationId: scanner
@@ -1472,18 +1473,18 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             type: string
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Scan the site for malware
       tags:
         - sites
-  '/sites/{id}/seo':
+  "/sites/{id}/seo":
     get:
       description: SEO analyze for a page
       operationId: seoAnalyze
@@ -1500,18 +1501,18 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             type: string
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: SEO analyze for a page
       tags:
         - sites
-  '/sites/{id}/tags':
+  "/sites/{id}/tags":
     get:
       description: Return tags for a specific website
       parameters:
@@ -1522,14 +1523,14 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: name
           required: false
           type: string
         - description: Bootstrap color of the tag
           enum:
-            - ''
+            - ""
             - default
             - success
             - warning
@@ -1539,12 +1540,12 @@ paths:
           in: query
           name: type
           type: string
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
           type: string
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -1568,13 +1569,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Tag'
-        '403':
+            $ref: "#/definitions/Tag"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Return tags for a specific website
       tags:
@@ -1595,26 +1596,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
       produces:
         - application/json
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Site'
-        '201':
+            $ref: "#/definitions/Site"
+        "201":
           description: Saved successfully
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Add tags for a specific website
       tags:
         - sites
-  '/sites/{id}/updatejoomla':
+  "/sites/{id}/updatejoomla":
     post:
       description: Update Joomla core on the remote site
       operationId: updateJoomla
@@ -1631,18 +1632,18 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Joomla core successfully updated
           schema:
             type: string
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID or Joomla Update not found
       summary: Update Joomla core on the remote site
       tags:
         - sites
-  '/sites/{id}/uptime':
+  "/sites/{id}/uptime":
     get:
       description: Return uptime data
       operationId: getUptime
@@ -1659,18 +1660,18 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Uptime'
-        '403':
+            $ref: "#/definitions/Uptime"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Return uptime data
       tags:
         - sites
-  '/sites/{id}/validate':
+  "/sites/{id}/validate":
     get:
       description: validate the site
       operationId: validateSite
@@ -1687,18 +1688,18 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Log'
-        '403':
+            $ref: "#/definitions/Log"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
-      summary: 'validate the site, return the new logs'
+      summary: validate the site, return the new logs
       tags:
         - sites
-  '/sites/{id}/validatedebug':
+  "/sites/{id}/validatedebug":
     get:
       operationId: validateDebugSite
       parameters:
@@ -1714,15 +1715,15 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Log'
-        '403':
+            $ref: "#/definitions/Log"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
-      summary: 'validate the site, return the debug information'
+      summary: validate the site, return the debug information
       tags:
         - sites
   /ssousers:
@@ -1734,11 +1735,11 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/SsoUsers'
-        '403':
+            $ref: "#/definitions/SsoUsers"
+        "403":
           description: Invalid API Key
       summary: Get a list of SSO Users
       tags:
@@ -1752,28 +1753,28 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/SsoUsers'
+            $ref: "#/definitions/SsoUsers"
       produces:
         - application/json
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/SsoUsers'
-        '201':
+            $ref: "#/definitions/SsoUsers"
+        "201":
           description: Saved successfully
-        '400':
+        "400":
           description: Invalid data
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Not saved
       summary: Create a SSO User
       tags:
         - ssousers
-  '/ssousers/{id}':
+  "/ssousers/{id}":
     delete:
       description: Delete a specific SSO User
       operationId: deleteSsoUserById
@@ -1790,13 +1791,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: SSO User correctly deleted
           schema:
             type: string
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Delete a specific SSO User
       tags:
@@ -1812,7 +1813,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
@@ -1822,13 +1823,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/SsoUsers'
-        '400':
+            $ref: "#/definitions/SsoUsers"
+        "400":
           description: Invalid ID
-        '403':
+        "403":
           description: Invalid API Key
       summary: Find SSO User by ID
       tags:
@@ -1849,23 +1850,23 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/SsoUsers'
+            $ref: "#/definitions/SsoUsers"
       produces:
         - application/json
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/SsoUsers'
-        '201':
+            $ref: "#/definitions/SsoUsers"
+        "201":
           description: Updated successfully
-        '400':
+        "400":
           description: Invalid data
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Not saved
       summary: Update a SSO User
       tags:
@@ -1874,14 +1875,14 @@ paths:
     get:
       description: Returns a list of tags
       parameters:
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: name
           required: false
           type: string
         - description: Bootstrap color of the tag
           enum:
-            - ''
+            - ""
             - default
             - success
             - warning
@@ -1891,12 +1892,12 @@ paths:
           in: query
           name: type
           type: string
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
           type: string
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -1910,7 +1911,7 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: 'ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-'
+        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -1920,11 +1921,11 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Tag'
-        '403':
+            $ref: "#/definitions/Tag"
+        "403":
           description: Invalid API Key
       summary: Get a list of tags
       tags:
@@ -1938,23 +1939,23 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
       produces:
         - application/json
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Tag'
-        '201':
+            $ref: "#/definitions/Tag"
+        "201":
           description: Saved successfully
-        '400':
+        "400":
           description: Invalid data
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Not saved
       summary: Create a tag
       tags:
@@ -1967,14 +1968,14 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             type: string
       summary: Get the list of fields
       tags:
         - tags
-  '/tags/{id}':
+  "/tags/{id}":
     delete:
       description: Delete a specific tag
       parameters:
@@ -1990,13 +1991,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Tag correctly deleted
           schema:
             type: string
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Delete a specific tag
       tags:
@@ -2012,7 +2013,7 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
@@ -2022,13 +2023,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Tag'
-        '400':
+            $ref: "#/definitions/Tag"
+        "400":
           description: Invalid ID
-        '403':
+        "403":
           description: Invalid API Key
       summary: Find tag by ID
       tags:
@@ -2049,26 +2050,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Tag'
+            $ref: "#/definitions/Tag"
       produces:
         - application/json
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: Updated successfully
           schema:
-            $ref: '#/definitions/Tag'
-        '400':
+            $ref: "#/definitions/Tag"
+        "400":
           description: Invalid data
-        '403':
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Update a tag
       tags:
         - tags
-  '/tags/{id}/sites':
+  "/tags/{id}/sites":
     get:
       description: Returns a list of sites based with a specific tag id
       operationId: getSitesByTags
@@ -2080,22 +2081,22 @@ paths:
           name: id
           required: true
           type: integer
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: name
           required: false
           type: string
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: access_url
           required: false
           type: string
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: j_version
           required: false
           type: string
-        - description: 'Do a ''LIKE'' search, you can also use ''%'''
+        - description: Do a 'LIKE' search, you can also use '%'
           in: query
           name: ip
           required: false
@@ -2132,12 +2133,12 @@ paths:
           name: up
           required: false
           type: integer
-        - description: 'Fields to return separate by comas: name,id'
+        - description: "Fields to return separate by comas: name,id"
           in: query
           name: fields
           required: false
           type: string
-        - description: 'Number of object to return (max 100, default 25)'
+        - description: Number of object to return (max 100, default 25)
           format: int64
           in: query
           minimum: 1
@@ -2151,7 +2152,7 @@ paths:
           name: limitstart
           required: false
           type: integer
-        - description: 'ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-'
+        - description: "ORDER by this field separete by comas. Add + / - after field for set ASC / DESC: type+,name-"
           in: query
           name: order
           required: false
@@ -2161,13 +2162,13 @@ paths:
         - application/xml
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Site'
-        '403':
+            $ref: "#/definitions/Site"
+        "403":
           description: Invalid API Key
-        '404':
+        "404":
           description: Invalid ID
       summary: Find sites by tag ID
       tags:
@@ -2183,7 +2184,7 @@ definitions:
       - id
   Audits:
     items:
-      $ref: '#/definitions/Audit'
+      $ref: "#/definitions/Audit"
     type: array
   Extension:
     properties:
@@ -2311,7 +2312,7 @@ definitions:
         description: Watchful secret word
         type: string
       tags:
-        description: 'JSON encoded array of tags for the site (e.g. [{<q>name</q>:<q>mytag</q>},{<q>name</q>:<q>anothertag</q>}])'
+        description: JSON encoded array of tags for the site (e.g. [{<q>name</q>:<q>mytag</q>},{<q>name</q>:<q>anothertag</q>}])
         format: json
         type: string
       word_akeeba:
@@ -2359,7 +2360,7 @@ definitions:
         description: server IP
         type: string
       jUpdate:
-        description: '?'
+        description: "?"
         type: boolean
       j_version:
         description: Joomla site version

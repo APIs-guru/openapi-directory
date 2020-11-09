@@ -1,11 +1,12 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.abr.ato.gov.au
 basePath: /
 info:
-  description: |
+  description: >
     # Introduction
+
     The Business Registries API is built on HTTP. The API is RESTful. It has predictable resource URIs.
 
       The API is documented in <a target="_blank" href="https://github.com/OAI/OpenAPI-Specification">OpenAPI</a> format.
@@ -13,13 +14,17 @@ info:
       <a target="_blank" href="https://github.com/Rebilly/ReDoc/blob/master/docs/redoc-vendor-extensions.md">vendor extensions</a>.
 
     # Overview
+
     The following sections describe the resources that make up the Business Registries REST API.
+
     ## Current Version
+
     By default, all requests to https://api.abr.ato.gov.au receive the `v1` version of the REST API. We encourage you to explicitly request this version via the `Accept` header.
 
         Accept: application/vnd.abr-ato.v1+json
 
     ## Schema
+
     All API access is over HTTPS, and accessed from https://api.abr.ato.gov.au. All data is sent and received as JSON. Blank fields are included.
 
       All dates use the [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format:
@@ -35,13 +40,17 @@ info:
       For example: `2017-07-01T11:05:06+10:00`
 
     ## Timezones
+
     Some requests allow for specifying timestamps or generate timestamps with time zone information. We apply the following rules, in order of priority, to determine timezone information for API calls.
+
     ### Explicitly provide an ISO 8601 timestamp with timezone information
+
     For API calls that allow for a timestamp to be specified, we use that exact timestamp.
 
       For example: `2017-07-01T11:05:06+10:00`
 
     ## Pagination
+
     Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
 
       For example:
@@ -50,14 +59,19 @@ info:
               <https://api.abr.ato.gov.au/individuals?page=34>; rel="last"
 
     `rel="next"` states that the next page is `page=2`. This makes sense, since by default, all paginated queries start at page `1`. `rel="last"` provides some more information, stating that the last page of results is on `page 34`. Accordingly, we have 33 more pages of information that we can consume.
+
     ## Parameters
+
     Many API methods take optional parameters:
 
         GET /individuals/1234/addresses/?addressType='Mailing'
 
     In this example, the '1234' value is provided for the `:partyId` parameter in the path while `:addressType` is passed in the query string.
+
     For POST, PATCH, PUT, and DELETE requests, parameters not included in the URL should be encoded as JSON with a Content-Type of 'application/json'.
+
     ## Metadata
+
     The API provides **metadata services** that you can use to discover information about the classifcation schemes and values used by the Registry.
 
       For example:
@@ -81,11 +95,13 @@ info:
         ]
 
     ## Root Endpoint
+
     You can issue a GET request to the root endpoint (also known as the service root) to get all the endpoint categories that the REST API supports:
 
         curl https://api.abr.ato.gov.au
 
     ## Authentication
+
     The Business Registries API supports API Key authentication.
 
       When you sign up for an account, you are given your first API key. You can generate additional API keys, and delete
@@ -96,20 +112,21 @@ info:
       accidental leakage of information to unauthorised users.
   license:
     name: Creative Commons Attribution 3.0 Australia
-    url: 'https://creativecommons.org/licenses/by/3.0/au/'
-  termsOfService: 'https://ato.gov.au/terms-of-service/'
+    url: https://creativecommons.org/licenses/by/3.0/au/
+  termsOfService: https://ato.gov.au/terms-of-service/
   title: Business Registries
   version: 0.0.6
   x-apisguru-categories:
     - financial
   x-logo:
-    backgroundColor: '#D3D3D3'
-    url: 'https://www.ato.gov.au/uploadedImages/Content/_DEM/Images/logo-ato.png'
+    backgroundColor: "#D3D3D3"
+    url: https://www.ato.gov.au/uploadedImages/Content/_DEM/Images/logo-ato.png
   x-origin:
     - format: swagger
-      url: 'https://ato-team.github.io/business-registries-rest-api-specification/swagger.yaml'
-      version: '2.0'
+      url: https://ato-team.github.io/business-registries-rest-api-specification/swagger.yaml
+      version: "2.0"
   x-providerName: ato.gov.au
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -128,13 +145,13 @@ parameters:
     required: true
     type: string
   dateOfBirth:
-    description: 'The individual''s date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
+    description: The individual's date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
     in: query
     name: dateOfBirth
     required: false
     type: string
   identifier:
-    description: 'The identifier, for example, `123456789`.'
+    description: The identifier, for example, `123456789`.
     in: query
     name: identifier
     required: false
@@ -146,7 +163,7 @@ parameters:
     required: true
     type: string
   placeOfBirth:
-    description: 'The individual''s place of birth, for example, `Tamworth`.'
+    description: The individual's place of birth, for example, `Tamworth`.
     in: query
     name: placeOfBirth
     required: false
@@ -158,7 +175,7 @@ parameters:
     required: true
     type: string
   registeredIdentifier:
-    description: 'The registered identifier, for example, `ACN` or `ABN`.'
+    description: The registered identifier, for example, `ACN` or `ABN`.
     in: query
     name: registeredIdentifier
     required: false
@@ -173,179 +190,206 @@ responses:
   FailedPrecondition:
     description: Request can not be executed in the current system state
     schema:
-      $ref: '#/definitions/failed-precondition'
+      $ref: "#/definitions/failed-precondition"
   InvalidArgument:
     description: The client specified an invalid argument
     schema:
-      $ref: '#/definitions/invalid-argument'
+      $ref: "#/definitions/invalid-argument"
   NotFound:
     description: The specified resource was not found
     schema:
-      $ref: '#/definitions/not-found'
+      $ref: "#/definitions/not-found"
   PermissionDenied:
     description: The client does not have sufficient permission
     schema:
-      $ref: '#/definitions/permission-denied'
+      $ref: "#/definitions/permission-denied"
   Unauthenticated:
-    description: 'Request not authenticated due to missing, invalid, or expired token'
+    description: Request not authenticated due to missing, invalid, or expired token
     schema:
-      $ref: '#/definitions/unauthenticated'
+      $ref: "#/definitions/unauthenticated"
 tags:
-  - description: |
+  - description: >
       An individual is a person about whom the registry wishes to maintain information.
 
         For example, the individual's date and place of birth (for the purposes of identification) and the individual's
         residential address (which is used for administrative purposes).
     name: Individuals
-  - description: |
+  - description: >
       A role defines the characteristics of a relationship between parties.
+
       An Individual can participate in a relationship with other individuals and organisations.
+
 
       For example:
 
+
       | Party         | Role           | Relationship     | Role          | Party                           |
+
       | ------------- | -------------- | ---------------- | ------------- | ------------------------------- |
+
       | Homer Simpson | Husband        | Marriage         | Wife          | Marge Simpson                   |
+
       | Homer Simpson | Employee       | Employment       | Employer      | Springfield Nuclear Power Plant |
+
       | Homer Simpson | Safety Officer | Colleague        | Supervisor    | Carl Carlson                    |
+
       | Homer Simpson | Director       | Directorship     | Company       | Compu Global Hyper Mega Net     |
+
       | Homer Simpson | Employee       | Employment       | Employer      | Compu Global Hyper Mega Net     |
+
       | Homer Simpson | Member         | Membership       | Organisation  | The Stonecutters                |
+
       | Homer Simpson | Partner        | Partnership      | Partnership   | The Be Sharps                   |
+
       | Homer Simpson | Trustee        | Trusteeship      | Trust         | The Simpson Family Trust        |
+
       | Homer Simpson | Member         | Membership       | Association   | Mensa International             |
 
+
       You can use the API's **metadata services** to retrieve information about the classifcation schemes and
+
       values used by the Registry.
     name: Individuals Roles
-  - description: |
+  - description: >
       The registry maintains information about an individual's contact details for administrative purposes.
 
         Including:
         - an address for the service of documents
         - a principal place of business address
     name: Individuals Addresses
-  - description: |
+  - description: >
       The registry maintains information about an individual's contact details for administrative purposes.
 
         Including:
         - an email address
         - a mobile number
     name: Individuals Electronic Addresses
-  - description: |
+  - description: >
       A business name is a name or title under which a person conducts a business.
     name: Individuals Business Names
-  - description: |
+  - description: >
       If you carry on a business you may need to hold a licence.
 
         For example, if you provide financial services, you are required to hold an Australian Financial
         Services (AFS) licence.
     name: Individuals Licenses
-  - description: |
+  - description: >
       An organisation usually consists of a number of individuals or groups bound by a common purpose about whom the
+
       registry wishes to maintain information.
 
         For example, the organisation's legal entity type (e.g., Incorporated Entity, Unincorporated Entity,
         Partnership or Joint Venture).
     name: Organisations
-  - description: |
+  - description: >
       A role defines the characteristics of a relationship between parties.
+
       An Organisation can participate in a relationship with other organisations and indiviuals.
+
 
       For example:
 
+
       | Party                           | Role     | Relationship | Role         | Party             |
+
       | ------------------------------- | -------- | -------------| ------------ | ----------------- |
+
       | Springfield Nuclear Power Plant | Employer | Employment   | Employee     | Homer Simpson     |
+
       | Springfield Nuclear Power Plant | Company  | Directorship | Director     | Mr Burns          |
+
       | Springfield Nuclear Power Plant | Employer | Employment   | Employee     | Mr Burns          |
+
       | Springfield Nuclear Power Plant | Sponsor  | Sponsorship  | Organisation | The Stonecutters  |
 
+
       You can use the API's **metadata services** to retrieve information about the classifcation schemes and
+
       values used by the Registry.
     name: Organisations Roles
-  - description: |
+  - description: >
       The registry maintains information about an organisation's contact details for administrative purposes.
 
         Including:
         - an address for the service of documents
         - a principal place of business address
     name: Organisations Addresses
-  - description: |
+  - description: >
       The registry maintains information about an organisation's contact details for administrative purposes.
 
         Including:
         - an email address
         - a mobile number
     name: Organisations Electronic Addresses
-  - description: |
+  - description: >
       A business name is a name or title under which an organisation conducts a business.
     name: Organisations Business Names
-  - description: |
+  - description: >
       If you carry on a business you may need to hold a licence.
 
         For example, if you provide financial services, you are required to hold an Australian Financial
         Services (AFS) licence.
     name: Organisations Licenses
-  - description: |
+  - description: >
       A business name is a name or title under which a person or organisation conducts a business.
     name: Business Names
-  - description: |
+  - description: >
       If you carry on a business you may need to hold a licence.
 
         For example, if you provide financial services, you are required to hold an Australian Financial
         Services (AFS) licence.
     name: Licenses
-  - description: |
+  - description: >
       A classification scheme for business names.
     name: Business Name Lifecycle States
-  - description: |
+  - description: >
       A classification scheme for names.
     name: Name Directions
-  - description: |
+  - description: >
       A classification scheme for names.
     name: Name Prefixes
-  - description: |
+  - description: >
       A classification scheme for names.
     name: Name Types
-  - description: |
+  - description: >
       A classification scheme for addresses.
     name: Address Types
-  - description: |
+  - description: >
       A classification scheme for electronic addresses.
     name: Electronic Address Types
-  - description: |
+  - description: >
       A classification scheme for the representation of human sexes.
     name: Genders
-  - description: |
+  - description: >
       A classification scheme for parties (individuals and organisations).
     name: Legal Entity Types
-  - description: |
+  - description: >
       A classification scheme for licenses.
     name: License Lifecycle States
-  - description: |
+  - description: >
       A classification scheme for licenses.
     name: License Types
-  - description: |
+  - description: >
       A classification scheme for registered identifiers.
     name: Registered Identifier Types
-  - description: |
+  - description: >
       A classification scheme for the characteristics of relationships between parties (individuals and organisations).
     name: Roles
 paths:
   /business-names:
     get:
-      description: |
+      description: >
         Retrieve a list of business names
       parameters:
-        - $ref: '#/parameters/apiKey'
+        - $ref: "#/parameters/apiKey"
       responses:
-        '200':
+        "200":
           description: A list of business names was retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -355,24 +399,25 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/business-name'
+              $ref: "#/definitions/business-name"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of business names
       tags:
         - Business Names
   /classifications/address-types:
     get:
       responses:
-        '200':
+        "200":
           description: Address types were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -389,26 +434,27 @@ paths:
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: Principal Place of Business
             items:
-              $ref: '#/definitions/address-type'
+              $ref: "#/definitions/address-type"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of address types
       tags:
         - Address Types
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/business-name-lifecycle-states:
     get:
       responses:
-        '200':
+        "200":
           description: Business name lifecycle states were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -434,26 +480,27 @@ paths:
                 id: 123e4567-e89b-12d3-a456-426655440005
                 name: Suspended
             items:
-              $ref: '#/definitions/business-name-lifecycle-state'
+              $ref: "#/definitions/business-name-lifecycle-state"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of business name lifecycle states
       tags:
         - Business Name Lifecycle States
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/electronic-address-types:
     get:
       responses:
-        '200':
+        "200":
           description: Electronic address types were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -470,26 +517,27 @@ paths:
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: Fax
             items:
-              $ref: '#/definitions/electronic-address-type'
+              $ref: "#/definitions/electronic-address-type"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of electronic address types
       tags:
         - Electronic Address Types
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/genders:
     get:
       responses:
-        '200':
+        "200":
           description: Genders were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -508,26 +556,27 @@ paths:
               - gender: Not Applicable
                 id: 123e4567-e89b-12d3-a456-426655440004
             items:
-              $ref: '#/definitions/gender'
+              $ref: "#/definitions/gender"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of genders
       tags:
         - Genders
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/legal-entity-types:
     get:
       responses:
-        '200':
+        "200":
           description: Legal entity types were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -537,42 +586,43 @@ paths:
               type: string
           schema:
             example:
-              - description: 'If you operate as a sole trader, you''re responsible for all aspects of the business, including any debts the business incurs.'
+              - description: If you operate as a sole trader, you're responsible for all aspects of the business, including any debts the business incurs.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Sole Trader
               - description: A partnership is two or more individuals or organisations who do business as partners or receive income jointly.
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: Partnership
-              - description: 'A joint venture is two or more people or entities who join to do business together for a particular purpose, usually a single project, rather than as an ongoing business.'
+              - description: A joint venture is two or more people or entities who join to do business together for a particular purpose, usually a single project, rather than as an ongoing business.
                 id: 123e4567-e89b-12d3-a456-426655440003
                 name: Joint Venture
-              - description: 'A company is a separate legal entity. This means it has the same rights as a natural person and can incur debt, sue and be sued.'
+              - description: A company is a separate legal entity. This means it has the same rights as a natural person and can incur debt, sue and be sued.
                 id: 123e4567-e89b-12d3-a456-426655440004
                 name: Company
               - description: A trust is an obligation imposed on a person – the trustee – to hold property or assets (e.g. business assets) for the benefit of others (known as beneficiaries).
                 id: 123e4567-e89b-12d3-a456-426655440005
                 name: Trust
             items:
-              $ref: '#/definitions/legal-entity-type'
+              $ref: "#/definitions/legal-entity-type"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of legal entity types
       tags:
         - Legal Entity Types
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/license-lifecycle-states:
     get:
       responses:
-        '200':
+        "200":
           description: License lifecycle states were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -598,26 +648,27 @@ paths:
                 id: 123e4567-e89b-12d3-a456-426655440005
                 name: Suspended
             items:
-              $ref: '#/definitions/license-lifecycle-state'
+              $ref: "#/definitions/license-lifecycle-state"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of license lifecycle states
       tags:
         - License Lifecycle States
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/license-types:
     get:
       responses:
-        '200':
+        "200":
           description: License types were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -627,33 +678,34 @@ paths:
               type: string
           schema:
             example:
-              - description: 'To conduct a financial services business in Australia, you must have an Australian Financial Services (AFS) licence.'
+              - description: To conduct a financial services business in Australia, you must have an Australian Financial Services (AFS) licence.
                 id: 123e4567-e89b-12d3-a456-426655440001
                 name: Australian Financial Services License
               - description: To conduct a <insert-name-here> business you must have a 2B licence.
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: 2B License
             items:
-              $ref: '#/definitions/license-type'
+              $ref: "#/definitions/license-type"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of license types
       tags:
         - License Types
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/name-directions:
     get:
       responses:
-        '200':
+        "200":
           description: Name directions were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -670,26 +722,27 @@ paths:
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: right-to-left
             items:
-              $ref: '#/definitions/name-direction'
+              $ref: "#/definitions/name-direction"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of name directions
       tags:
         - Name Directions
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/name-prefixes:
     get:
       responses:
-        '200':
+        "200":
           description: Name prefixes were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -706,26 +759,27 @@ paths:
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: Ms
             items:
-              $ref: '#/definitions/name-prefix'
+              $ref: "#/definitions/name-prefix"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of name prefixes
       tags:
         - Name Prefixes
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/name-types:
     get:
       responses:
-        '200':
+        "200":
           description: Name types were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -742,26 +796,27 @@ paths:
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: Principal Name
             items:
-              $ref: '#/definitions/name-type'
+              $ref: "#/definitions/name-type"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of name types
       tags:
         - Name Types
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/registered-identifier-types:
     get:
       responses:
-        '200':
+        "200":
           description: Registered identifier types were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -778,26 +833,27 @@ paths:
                 id: 123e4567-e89b-12d3-a456-426655440002
                 name: ACN
             items:
-              $ref: '#/definitions/registered-identifier-type'
+              $ref: "#/definitions/registered-identifier-type"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of registered identifier types
       tags:
         - Registered Identifier Types
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /classifications/roles:
     get:
       responses:
-        '200':
+        "200":
           description: Roles were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -820,32 +876,33 @@ paths:
                 role: Employee
                 roleDescription: An individual employed for wages or salary.
             items:
-              $ref: '#/definitions/role'
+              $ref: "#/definitions/role"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of roles
       tags:
         - Roles
     parameters:
-      - $ref: '#/parameters/apiKey'
+      - $ref: "#/parameters/apiKey"
   /individuals:
     get:
-      description: |
+      description: >
         Retrieve a list of individuals
       parameters:
-        - $ref: '#/parameters/apiKey'
-        - $ref: '#/parameters/dateOfBirth'
-        - $ref: '#/parameters/placeOfBirth'
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/dateOfBirth"
+        - $ref: "#/parameters/placeOfBirth"
       responses:
-        '200':
+        "200":
           description: A list of individuals was retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -855,80 +912,80 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/individual'
+              $ref: "#/definitions/individual"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of individuals
       tags:
         - Individuals
     post:
-      description: |
+      description: >
         Create an individual
       parameters:
-        - $ref: '#/parameters/apiKey'
+        - $ref: "#/parameters/apiKey"
         - description: Individual resource
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/individual'
+            $ref: "#/definitions/individual"
       responses:
-        '201':
+        "201":
           description: Individual was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/individual'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/individual"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create an individual
       tags:
         - Individuals
-  '/individuals/{partyId}':
+  "/individuals/{partyId}":
     delete:
-      description: |
+      description: >
         Delete an individual with the specified identifier
       responses:
-        '204':
+        "204":
           description: Individual was deleted
-        '400':
-          $ref: '#/responses/FailedPrecondition'
+        "400":
+          $ref: "#/responses/FailedPrecondition"
           description: Individual has related resources and cannot be deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete an individual
       tags:
         - Individuals
     get:
-      description: |
+      description: >
         Retrieve an individual with the specified identifier
       responses:
-        '200':
+        "200":
           description: Individual was retrieved successfully
           schema:
-            $ref: '#/definitions/individual'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/individual"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve an individual
       tags:
         - Individuals
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     put:
-      description: |
+      description: >
         Update an individual
       parameters:
         - description: Individual resource
@@ -936,30 +993,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/individual'
+            $ref: "#/definitions/individual"
       responses:
-        '200':
+        "200":
           description: Individual was updated
           schema:
-            $ref: '#/definitions/individual'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/individual"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update an individual
       tags:
         - Individuals
-  '/individuals/{partyId}/addresses':
+  "/individuals/{partyId}/addresses":
     get:
       responses:
-        '200':
+        "200":
           description: Addresses were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -969,20 +1027,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/address'
+              $ref: "#/definitions/address"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of addresses
       tags:
         - Individuals Addresses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create an address
       parameters:
         - description: Address resource
@@ -990,59 +1048,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/address'
+            $ref: "#/definitions/address"
       responses:
-        '201':
+        "201":
           description: Address was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/address'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/address"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create an address
       tags:
         - Individuals Addresses
-  '/individuals/{partyId}/addresses/{addressId}':
+  "/individuals/{partyId}/addresses/{addressId}":
     delete:
-      description: |
+      description: >
         Delete an address
       responses:
-        '204':
+        "204":
           description: Address was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete an address
       tags:
         - Individuals Addresses
     get:
-      description: |
+      description: >
         Retrieve an address
       responses:
-        '200':
+        "200":
           description: Address was retrieved successfully
           schema:
-            $ref: '#/definitions/address'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/address"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve an address
       tags:
         - Individuals Addresses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/addressId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/addressId"
     put:
-      description: |
+      description: >
         Update an address
       parameters:
         - description: Address resource
@@ -1050,30 +1108,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/address'
+            $ref: "#/definitions/address"
       responses:
-        '200':
+        "200":
           description: Address was updated
           schema:
-            $ref: '#/definitions/address'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/address"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update an address
       tags:
         - Individuals Addresses
-  '/individuals/{partyId}/business-names':
+  "/individuals/{partyId}/business-names":
     get:
       responses:
-        '200':
+        "200":
           description: Business Names were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1083,20 +1142,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/business-name'
+              $ref: "#/definitions/business-name"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of business names
       tags:
         - Individuals Business Names
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create a business name
       parameters:
         - description: Business Name resource
@@ -1104,59 +1163,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/business-name'
+            $ref: "#/definitions/business-name"
       responses:
-        '201':
+        "201":
           description: Business Name was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/business-name'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/business-name"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create a business name
       tags:
         - Individuals Business Names
-  '/individuals/{partyId}/business-names/{productId}':
+  "/individuals/{partyId}/business-names/{productId}":
     delete:
-      description: |
+      description: >
         Delete a business name
       responses:
-        '204':
+        "204":
           description: Address was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete a business name
       tags:
         - Individuals Business Names
     get:
-      description: |
+      description: >
         Retrieve a business name
       responses:
-        '200':
+        "200":
           description: Business Name was retrieved successfully
           schema:
-            $ref: '#/definitions/business-name'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/business-name"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a business name
       tags:
         - Individuals Business Names
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/productId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/productId"
     put:
-      description: |
+      description: >
         Update a business name
       parameters:
         - description: Business Name resource
@@ -1164,30 +1223,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/business-name'
+            $ref: "#/definitions/business-name"
       responses:
-        '200':
+        "200":
           description: Address was updated
           schema:
-            $ref: '#/definitions/business-name'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/business-name"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update a business name
       tags:
         - Individuals Business Names
-  '/individuals/{partyId}/electronic-addresses':
+  "/individuals/{partyId}/electronic-addresses":
     get:
       responses:
-        '200':
+        "200":
           description: Electronic addresses were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1197,20 +1257,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/electronic-address'
+              $ref: "#/definitions/electronic-address"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of electronic addresses
       tags:
         - Individuals Electronic Addresses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create an electronic address
       parameters:
         - description: Electronic Address resource
@@ -1218,59 +1278,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/electronic-address'
+            $ref: "#/definitions/electronic-address"
       responses:
-        '201':
+        "201":
           description: Electronic Address was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/electronic-address'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/electronic-address"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create an electronic address
       tags:
         - Individuals Electronic Addresses
-  '/individuals/{partyId}/electronic-addresses/{addressId}':
+  "/individuals/{partyId}/electronic-addresses/{addressId}":
     delete:
-      description: |
+      description: >
         Delete an electronic address
       responses:
-        '204':
+        "204":
           description: Electronic Address was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete an electronic address
       tags:
         - Individuals Electronic Addresses
     get:
-      description: |
+      description: >
         Retrieve an electronic address
       responses:
-        '200':
+        "200":
           description: Electronic Address was retrieved successfully
           schema:
-            $ref: '#/definitions/electronic-address'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/electronic-address"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve an electronic address
       tags:
         - Individuals Electronic Addresses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/addressId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/addressId"
     put:
-      description: |
+      description: >
         Update an electronic address
       parameters:
         - description: Electronic Address resource
@@ -1278,30 +1338,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/electronic-address'
+            $ref: "#/definitions/electronic-address"
       responses:
-        '200':
+        "200":
           description: Electronic Address was updated
           schema:
-            $ref: '#/definitions/electronic-address'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/electronic-address"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update an electronic address
       tags:
         - Individuals Electronic Addresses
-  '/individuals/{partyId}/licenses':
+  "/individuals/{partyId}/licenses":
     get:
       responses:
-        '200':
+        "200":
           description: Licenses were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1311,20 +1372,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/license'
+              $ref: "#/definitions/license"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of licenses
       tags:
         - Individuals Licenses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create a license
       parameters:
         - description: License resource
@@ -1332,59 +1393,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/license'
+            $ref: "#/definitions/license"
       responses:
-        '201':
+        "201":
           description: License was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/license'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/license"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create a license
       tags:
         - Individuals Licenses
-  '/individuals/{partyId}/licenses/{productId}':
+  "/individuals/{partyId}/licenses/{productId}":
     delete:
-      description: |
+      description: >
         Delete a license
       responses:
-        '204':
+        "204":
           description: License was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete a license
       tags:
         - Individuals Licenses
     get:
-      description: |
+      description: >
         Retrieve a license
       responses:
-        '200':
+        "200":
           description: License was retrieved successfully
           schema:
-            $ref: '#/definitions/license'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/license"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a license
       tags:
         - Individuals Licenses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/productId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/productId"
     put:
-      description: |
+      description: >
         Update a license
       parameters:
         - description: License resource
@@ -1392,30 +1453,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/license'
+            $ref: "#/definitions/license"
       responses:
-        '200':
+        "200":
           description: License was updated
           schema:
-            $ref: '#/definitions/license'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/license"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update a license
       tags:
         - Individuals Licenses
-  '/individuals/{partyId}/roles':
+  "/individuals/{partyId}/roles":
     get:
       responses:
-        '200':
+        "200":
           description: Roles were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1425,20 +1487,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/party-role'
+              $ref: "#/definitions/party-role"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of roles
       tags:
         - Individuals Roles
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create a role
       parameters:
         - description: Role resource
@@ -1446,59 +1508,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/party-role'
+            $ref: "#/definitions/party-role"
       responses:
-        '201':
+        "201":
           description: Role was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/party-role'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/party-role"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create a role
       tags:
         - Individuals Roles
-  '/individuals/{partyId}/roles/{roleId}':
+  "/individuals/{partyId}/roles/{roleId}":
     delete:
-      description: |
+      description: >
         Delete a role
       responses:
-        '204':
+        "204":
           description: Role was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete a role
       tags:
         - Individuals Roles
     get:
-      description: |
+      description: >
         Retrieve a role
       responses:
-        '200':
+        "200":
           description: Role was retrieved successfully
           schema:
-            $ref: '#/definitions/party-role'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/party-role"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a role
       tags:
         - Individuals Roles
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/roleId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/roleId"
     put:
-      description: |
+      description: >
         Update a role
       parameters:
         - description: Role resource
@@ -1506,34 +1568,35 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/party-role'
+            $ref: "#/definitions/party-role"
       responses:
-        '200':
+        "200":
           description: Role was updated
           schema:
-            $ref: '#/definitions/party-role'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/party-role"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update a role
       tags:
         - Individuals Roles
   /licenses:
     get:
-      description: |
+      description: >
         Retrieve a list of licenses
       parameters:
-        - $ref: '#/parameters/apiKey'
+        - $ref: "#/parameters/apiKey"
       responses:
-        '200':
+        "200":
           description: A list of licenses was retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1543,30 +1606,31 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/license'
+              $ref: "#/definitions/license"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of licenses
       tags:
         - Licenses
   /organisations:
     get:
-      description: |
+      description: >
         Retrieve a list of organisations
       parameters:
-        - $ref: '#/parameters/apiKey'
-        - $ref: '#/parameters/registeredIdentifier'
-        - $ref: '#/parameters/identifier'
+        - $ref: "#/parameters/apiKey"
+        - $ref: "#/parameters/registeredIdentifier"
+        - $ref: "#/parameters/identifier"
       responses:
-        '200':
+        "200":
           description: A list of organisations was retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1576,80 +1640,80 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/organisation'
+              $ref: "#/definitions/organisation"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of organisations
       tags:
         - Organisations
     post:
-      description: |
+      description: >
         Create an organisation
       parameters:
-        - $ref: '#/parameters/apiKey'
+        - $ref: "#/parameters/apiKey"
         - description: Organisation resource
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/organisation'
+            $ref: "#/definitions/organisation"
       responses:
-        '201':
+        "201":
           description: Organisation was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/organisation'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/organisation"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create an organisation
       tags:
         - Organisations
-  '/organisations/{partyId}':
+  "/organisations/{partyId}":
     delete:
-      description: |
+      description: >
         Delete an organisation with the specified identifier
       responses:
-        '204':
+        "204":
           description: Organisation was deleted
-        '400':
-          $ref: '#/responses/FailedPrecondition'
+        "400":
+          $ref: "#/responses/FailedPrecondition"
           description: Organisation has related resources and cannot be deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete an organisation
       tags:
         - Organisations
     get:
-      description: |
+      description: >
         Retrieve an organisation with the specified identifier
       responses:
-        '200':
+        "200":
           description: Individual was retrieved successfully
           schema:
-            $ref: '#/definitions/organisation'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/organisation"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve an organisation
       tags:
         - Organisations
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     put:
-      description: |
+      description: >
         Update an organisation
       parameters:
         - description: Organisation resource
@@ -1657,30 +1721,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/organisation'
+            $ref: "#/definitions/organisation"
       responses:
-        '200':
+        "200":
           description: Organisation was updated
           schema:
-            $ref: '#/definitions/organisation'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/organisation"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update an organisation
       tags:
         - Organisations
-  '/organisations/{partyId}/addresses':
+  "/organisations/{partyId}/addresses":
     get:
       responses:
-        '200':
+        "200":
           description: Addresses were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1690,20 +1755,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/address'
+              $ref: "#/definitions/address"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of addresses
       tags:
         - Organisations Addresses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create an address
       parameters:
         - description: Address resource
@@ -1711,59 +1776,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/address'
+            $ref: "#/definitions/address"
       responses:
-        '201':
+        "201":
           description: Address was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/address'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/address"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create an address
       tags:
         - Organisations Addresses
-  '/organisations/{partyId}/addresses/{addressId}':
+  "/organisations/{partyId}/addresses/{addressId}":
     delete:
-      description: |
+      description: >
         Delete an address
       responses:
-        '204':
+        "204":
           description: Address was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete an address
       tags:
         - Organisations Addresses
     get:
-      description: |
+      description: >
         Retrieve an address
       responses:
-        '200':
+        "200":
           description: Address was retrieved successfully
           schema:
-            $ref: '#/definitions/address'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/address"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve an address
       tags:
         - Organisations Addresses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/addressId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/addressId"
     put:
-      description: |
+      description: >
         Update an address
       parameters:
         - description: Address resource
@@ -1771,30 +1836,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/address'
+            $ref: "#/definitions/address"
       responses:
-        '200':
+        "200":
           description: Address was updated
           schema:
-            $ref: '#/definitions/address'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/address"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update an address
       tags:
         - Organisations Addresses
-  '/organisations/{partyId}/business-names':
+  "/organisations/{partyId}/business-names":
     get:
       responses:
-        '200':
+        "200":
           description: Business Names were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1804,20 +1870,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/business-name'
+              $ref: "#/definitions/business-name"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of business names
       tags:
         - Organisations Business Names
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create a business name
       parameters:
         - description: Business Name resource
@@ -1825,59 +1891,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/business-name'
+            $ref: "#/definitions/business-name"
       responses:
-        '201':
+        "201":
           description: Business Name was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/business-name'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/business-name"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create a business name
       tags:
         - Organisations Business Names
-  '/organisations/{partyId}/business-names/{productId}':
+  "/organisations/{partyId}/business-names/{productId}":
     delete:
-      description: |
+      description: >
         Delete a business name
       responses:
-        '204':
+        "204":
           description: Address was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete a business name
       tags:
         - Organisations Business Names
     get:
-      description: |
+      description: >
         Retrieve a business name
       responses:
-        '200':
+        "200":
           description: Business Name was retrieved successfully
           schema:
-            $ref: '#/definitions/business-name'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/business-name"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a business name
       tags:
         - Organisations Business Names
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/productId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/productId"
     put:
-      description: |
+      description: >
         Update a business name
       parameters:
         - description: Business Name resource
@@ -1885,30 +1951,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/business-name'
+            $ref: "#/definitions/business-name"
       responses:
-        '200':
+        "200":
           description: Address was updated
           schema:
-            $ref: '#/definitions/business-name'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/business-name"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update a business name
       tags:
         - Organisations Business Names
-  '/organisations/{partyId}/electronic-addresses':
+  "/organisations/{partyId}/electronic-addresses":
     get:
       responses:
-        '200':
+        "200":
           description: Electronic addresses were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -1918,20 +1985,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/electronic-address'
+              $ref: "#/definitions/electronic-address"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of electronic addresses
       tags:
         - Organisations Electronic Addresses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create an electronic address
       parameters:
         - description: Electronic Address resource
@@ -1939,59 +2006,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/electronic-address'
+            $ref: "#/definitions/electronic-address"
       responses:
-        '201':
+        "201":
           description: Electronic Address was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/electronic-address'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/electronic-address"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create an electronic address
       tags:
         - Organisations Electronic Addresses
-  '/organisations/{partyId}/electronic-addresses/{addressId}':
+  "/organisations/{partyId}/electronic-addresses/{addressId}":
     delete:
-      description: |
+      description: >
         Delete an electronic address
       responses:
-        '204':
+        "204":
           description: Electronic Address was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete an electronic address
       tags:
         - Organisations Electronic Addresses
     get:
-      description: |
+      description: >
         Retrieve an electronic address
       responses:
-        '200':
+        "200":
           description: Electronic address was retrieved successfully
           schema:
-            $ref: '#/definitions/electronic-address'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/electronic-address"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve an electronic address
       tags:
         - Organisations Electronic Addresses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/addressId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/addressId"
     put:
-      description: |
+      description: >
         Update an electronic address
       parameters:
         - description: Electronic Address resource
@@ -1999,30 +2066,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/electronic-address'
+            $ref: "#/definitions/electronic-address"
       responses:
-        '200':
+        "200":
           description: Electronic Address was updated
           schema:
-            $ref: '#/definitions/electronic-address'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/electronic-address"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update an electronic address
       tags:
         - Organisations Electronic Addresses
-  '/organisations/{partyId}/licenses':
+  "/organisations/{partyId}/licenses":
     get:
       responses:
-        '200':
+        "200":
           description: Licenses were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -2032,20 +2100,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/license'
+              $ref: "#/definitions/license"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of licenses
       tags:
         - Organisations Licenses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create a license
       parameters:
         - description: License resource
@@ -2053,59 +2121,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/license'
+            $ref: "#/definitions/license"
       responses:
-        '201':
+        "201":
           description: License was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/license'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/license"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create a license
       tags:
         - Organisations Licenses
-  '/organisations/{partyId}/licenses/{productId}':
+  "/organisations/{partyId}/licenses/{productId}":
     delete:
-      description: |
+      description: >
         Delete a license
       responses:
-        '204':
+        "204":
           description: License was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete a license
       tags:
         - Organisations Licenses
     get:
-      description: |
+      description: >
         Retrieve a license
       responses:
-        '200':
+        "200":
           description: License was retrieved successfully
           schema:
-            $ref: '#/definitions/license'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/license"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a license
       tags:
         - Organisations Licenses
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/productId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/productId"
     put:
-      description: |
+      description: >
         Update a license
       parameters:
         - description: License resource
@@ -2113,30 +2181,31 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/license'
+            $ref: "#/definitions/license"
       responses:
-        '200':
+        "200":
           description: License was updated
           schema:
-            $ref: '#/definitions/license'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/license"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update a license
       tags:
         - Organisations Licenses
-  '/organisations/{partyId}/roles':
+  "/organisations/{partyId}/roles":
     get:
       responses:
-        '200':
+        "200":
           description: Roles were retrieved successfully
           headers:
             Link:
-              description: |
+              description: >
                 Information about pagination is provided in the [Link](https://tools.ietf.org/html/rfc5988#page-6) header.
+
                 For example:
 
                     Link: <https://api.abr.ato.gov.au/individuals?page=2>; rel="next",
@@ -2146,20 +2215,20 @@ paths:
               type: string
           schema:
             items:
-              $ref: '#/definitions/party-role'
+              $ref: "#/definitions/party-role"
             type: array
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a list of roles
       tags:
         - Organisations Roles
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
     post:
-      description: |
+      description: >
         Create a role
       parameters:
         - description: Role resource
@@ -2167,59 +2236,59 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/party-role'
+            $ref: "#/definitions/party-role"
       responses:
-        '201':
+        "201":
           description: Role was created
           headers:
             Location:
-              description: |
+              description: >
                 A [Location](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30) header pointing to the location of the new resource.
               type: string
           schema:
-            $ref: '#/definitions/party-role'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
+            $ref: "#/definitions/party-role"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
       summary: Create a role
       tags:
         - Organisations Roles
-  '/organisations/{partyId}/roles/{roleId}':
+  "/organisations/{partyId}/roles/{roleId}":
     delete:
-      description: |
+      description: >
         Delete a role
       responses:
-        '204':
+        "204":
           description: Role was deleted
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Delete a role
       tags:
         - Organisations Roles
     get:
-      description: |
+      description: >
         Retrieve a role
       responses:
-        '200':
+        "200":
           description: Role was retrieved successfully
           schema:
-            $ref: '#/definitions/party-role'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/party-role"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Retrieve a role
       tags:
         - Organisations Roles
     parameters:
-      - $ref: '#/parameters/apiKey'
-      - $ref: '#/parameters/partyId'
-      - $ref: '#/parameters/roleId'
+      - $ref: "#/parameters/apiKey"
+      - $ref: "#/parameters/partyId"
+      - $ref: "#/parameters/roleId"
     put:
-      description: |
+      description: >
         Update a role
       parameters:
         - description: Role resource
@@ -2227,18 +2296,18 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/party-role'
+            $ref: "#/definitions/party-role"
       responses:
-        '200':
+        "200":
           description: Role was updated
           schema:
-            $ref: '#/definitions/party-role'
-        '400':
-          $ref: '#/responses/InvalidArgument'
-        '401':
-          $ref: '#/responses/Unauthenticated'
-        '404':
-          $ref: '#/responses/NotFound'
+            $ref: "#/definitions/party-role"
+        "400":
+          $ref: "#/responses/InvalidArgument"
+        "401":
+          $ref: "#/responses/Unauthenticated"
+        "404":
+          $ref: "#/responses/NotFound"
       summary: Update a role
       tags:
         - Organisations Roles
@@ -2255,14 +2324,14 @@ definitions:
         example: Australia
         type: string
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '1979-01-13T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/addressId'
+          - $ref: "#/definitions/addressId"
         description: The resource's unique identifier.
         readOnly: true
       line1:
@@ -2275,7 +2344,7 @@ definitions:
         type: string
       line3:
         description: The address line 3.
-        example: ''
+        example: ""
         type: string
       name:
         description: The address name.
@@ -2283,39 +2352,39 @@ definitions:
         type: string
       postalCode:
         description: The postal code.
-        example: '2601'
+        example: "2601"
         type: string
       suburb:
         description: The suburb.
         example: Civic
         type: string
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
     type: object
   address-type:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   addressId:
     allOf:
-      - $ref: '#/definitions/resourceId'
+      - $ref: "#/definitions/resourceId"
       - type: string
   business-name:
     description: The Business Name resource.
     properties:
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '1979-01-13T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/resourceId'
+          - $ref: "#/definitions/resourceId"
         description: The resource's unique identifier.
         readOnly: true
       lifecycleState:
@@ -2333,26 +2402,26 @@ definitions:
         example: XYZ Technology Ventures
         type: string
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
     type: object
   business-name-lifecycle-state:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   electronic-address:
     description: The Electronic Address resource.
     properties:
       areaCode:
-        description: 'The area code, for example, "02".'
-        example: '02'
+        description: The area code, for example, "02".
+        example: "02"
         type: string
       countryPrefix:
-        description: 'The country prefix, for example, "61".'
-        example: '61'
+        description: The country prefix, for example, "61".
+        example: "61"
         type: string
       electronicAddressType:
         default: Landline
@@ -2365,42 +2434,42 @@ definitions:
           - Website
         type: string
       email:
-        description: 'The email address, for example, "robert.ferguson@ato.gov.au".'
-        example: ''
+        description: The email address, for example, "robert.ferguson@ato.gov.au".
+        example: ""
         type: string
       extension:
-        description: 'The extension number, for example, "4453".'
-        example: ''
+        description: The extension number, for example, "4453".
+        example: ""
         type: string
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '1979-01-13T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/addressId'
+          - $ref: "#/definitions/addressId"
         description: The resource's unique identifier.
         readOnly: true
       number:
-        description: 'The number, for example, "62164453".'
-        example: '62164453'
+        description: The number, for example, "62164453".
+        example: "62164453"
         type: string
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
       url:
-        description: 'The website address, for example, "https://ato.gov.au".'
-        example: ''
+        description: The website address, for example, "https://ato.gov.au".
+        example: ""
         type: string
     type: object
   electronic-address-type:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   error-details:
     properties:
@@ -2421,11 +2490,11 @@ definitions:
     properties:
       code:
         description: The error code.
-        example: '400'
+        example: "400"
         type: string
       details:
         items:
-          $ref: '#/definitions/error-details'
+          $ref: "#/definitions/error-details"
         type: array
       message:
         description: The error message.
@@ -2444,7 +2513,7 @@ definitions:
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/resourceId'
+          - $ref: "#/definitions/resourceId"
         description: The resource's unique identifier.
         readOnly: true
     type: object
@@ -2453,20 +2522,20 @@ definitions:
     properties:
       addresses:
         items:
-          $ref: '#/definitions/individual-address'
+          $ref: "#/definitions/individual-address"
         type: array
       dateOfBirth:
-        description: 'The individual''s date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
-        example: '1979-01-13'
+        description: The individual's date of birth, for example, `1979-01-13` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+        example: 1979-01-13
         format: date
         type: string
       electronicAddresses:
         items:
-          $ref: '#/definitions/electronic-address'
+          $ref: "#/definitions/electronic-address"
         type: array
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '1979-01-13T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
@@ -2481,20 +2550,20 @@ definitions:
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/partyId'
+          - $ref: "#/definitions/partyId"
         description: The party's unique identifier.
         readOnly: true
       names:
         items:
-          $ref: '#/definitions/individual-name'
+          $ref: "#/definitions/individual-name"
         type: array
       placeOfBirth:
-        description: 'The individual''s place of birth, for example, `Tamworth`.'
+        description: The individual's place of birth, for example, `Tamworth`.
         example: Tamworth
         type: string
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
@@ -2504,7 +2573,7 @@ definitions:
     type: object
   individual-address:
     allOf:
-      - $ref: '#/definitions/address'
+      - $ref: "#/definitions/address"
       - properties:
           addressType:
             default: Principal Place of Residence
@@ -2515,14 +2584,14 @@ definitions:
               - Principal Place of Residence
             type: string
           fromDate:
-            description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-            example: '1979-01-13T09:05:06+10:00'
+            description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            example: 1979-01-13T09:05:06+10:00
             format: date-time
             readOnly: true
             type: string
           toDate:
-            description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-            example: ''
+            description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            example: ""
             format: date-time
             readOnly: true
             type: string
@@ -2542,12 +2611,12 @@ definitions:
         example: Ferguson
         type: string
       formalSalutation:
-        description: 'The individual''s formal salutation, for example, "Mr William Smith".'
+        description: The individual's formal salutation, for example, "Mr William Smith".
         example: Mr Robert Ferguson
         type: string
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '1979-01-13T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
@@ -2557,11 +2626,11 @@ definitions:
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/resourceId'
+          - $ref: "#/definitions/resourceId"
         description: The resource's unique identifier.
         readOnly: true
       informalSalutation:
-        description: 'The individual''s informal salutation, for example, "Bill".'
+        description: The individual's informal salutation, for example, "Bill".
         example: Rob
         type: string
       middleName:
@@ -2576,8 +2645,8 @@ definitions:
           - Ms
         type: string
       nameSuffix:
-        description: 'The individual''s name suffix, for example, "Jr" or "Sr".'
-        example: ''
+        description: The individual's name suffix, for example, "Jr" or "Sr".
+        example: ""
         type: string
       nameType:
         default: Principal Name
@@ -2587,8 +2656,8 @@ definitions:
           - Principal Name
         type: string
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
@@ -2597,11 +2666,11 @@ definitions:
     properties:
       code:
         description: The error code.
-        example: '400'
+        example: "400"
         type: string
       details:
         items:
-          $ref: '#/definitions/error-details'
+          $ref: "#/definitions/error-details"
         type: array
       message:
         description: The error message.
@@ -2614,20 +2683,20 @@ definitions:
     type: object
   legal-entity-type:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   license:
     description: The License resource.
     properties:
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '1979-01-13T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/resourceId'
+          - $ref: "#/definitions/resourceId"
         description: The resource's unique identifier.
         readOnly: true
       licenseType:
@@ -2648,41 +2717,41 @@ definitions:
           - Suspended
         type: string
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
     type: object
   license-lifecycle-state:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   license-type:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   name-direction:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   name-prefix:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   name-type:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   not-found:
     properties:
       code:
         description: The error code.
-        example: '404'
+        example: "404"
         type: string
       details:
         items:
-          $ref: '#/definitions/error-details'
+          $ref: "#/definitions/error-details"
         type: array
       message:
         description: The error message.
@@ -2698,26 +2767,26 @@ definitions:
     properties:
       addresses:
         items:
-          $ref: '#/definitions/organisation-address'
+          $ref: "#/definitions/organisation-address"
         type: array
       electronicAddresses:
         items:
-          $ref: '#/definitions/electronic-address'
+          $ref: "#/definitions/electronic-address"
         type: array
       establishmentDate:
-        description: 'The organisation''s establishment date, for example, `1928-03-03` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).'
-        example: '1928-03-03'
+        description: The organisation's establishment date, for example, `1928-03-03` (in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format).
+        example: 1928-03-03
         format: date
         type: string
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '1979-01-13T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/partyId'
+          - $ref: "#/definitions/partyId"
         description: The party's unique identifier.
         readOnly: true
       legalEntityType:
@@ -2731,15 +2800,15 @@ definitions:
         type: string
       names:
         items:
-          $ref: '#/definitions/organisation-name'
+          $ref: "#/definitions/organisation-name"
         type: array
       registeredIdentifiers:
         items:
-          $ref: '#/definitions/registered-identifier'
+          $ref: "#/definitions/registered-identifier"
         type: array
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
@@ -2749,7 +2818,7 @@ definitions:
     type: object
   organisation-address:
     allOf:
-      - $ref: '#/definitions/address'
+      - $ref: "#/definitions/address"
       - properties:
           addressType:
             default: Principal Place of Business
@@ -2759,14 +2828,14 @@ definitions:
               - Principal Place of Business
             type: string
           fromDate:
-            description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-            example: '1979-01-13T09:05:06+10:00'
+            description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            example: 1979-01-13T09:05:06+10:00
             format: date-time
             readOnly: true
             type: string
           toDate:
-            description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-            example: ''
+            description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+            example: ""
             format: date-time
             readOnly: true
             type: string
@@ -2775,14 +2844,14 @@ definitions:
     description: The Organisation Name resource.
     properties:
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '1928-03-03T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 1928-03-03T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/resourceId'
+          - $ref: "#/definitions/resourceId"
         description: The resource's unique identifier.
         readOnly: true
       name:
@@ -2790,8 +2859,8 @@ definitions:
         example: 321 Technology Ventures
         type: string
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
@@ -2800,14 +2869,14 @@ definitions:
     description: The Party Role resource.
     properties:
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '2016-01-13T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 2016-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/roleId'
+          - $ref: "#/definitions/roleId"
         description: The resource's unique identifier.
         readOnly: true
       partyRoleType:
@@ -2822,7 +2891,7 @@ definitions:
         type: string
       relatedPartyId:
         allOf:
-          - $ref: '#/definitions/partyId'
+          - $ref: "#/definitions/partyId"
         description: The related party's unique identifier.
       relatedPartyRoleType:
         default: Employer
@@ -2846,8 +2915,8 @@ definitions:
           - Trusteeship
         type: string
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
@@ -2857,17 +2926,17 @@ definitions:
     type: object
   partyId:
     allOf:
-      - $ref: '#/definitions/resourceId'
+      - $ref: "#/definitions/resourceId"
       - type: string
   permission-denied:
     properties:
       code:
         description: The error code.
-        example: '403'
+        example: "403"
         type: string
       details:
         items:
-          $ref: '#/definitions/error-details'
+          $ref: "#/definitions/error-details"
         type: array
       message:
         description: The error message.
@@ -2882,19 +2951,19 @@ definitions:
     description: The Registered Identifier resource.
     properties:
       fromDate:
-        description: 'The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: '1979-01-13T09:05:06+10:00'
+        description: The date and time the resource became active in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: 1979-01-13T09:05:06+10:00
         format: date-time
         readOnly: true
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/resourceId'
+          - $ref: "#/definitions/resourceId"
         description: The resource's unique identifier.
         readOnly: true
       identifier:
         description: The registered identifier.
-        example: '123456789'
+        example: "123456789"
         type: string
       identifierType:
         default: ACN
@@ -2904,15 +2973,15 @@ definitions:
           - ABN
         type: string
       toDate:
-        description: 'The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).'
-        example: ''
+        description: The date and time the resource became inactive in the format defined by [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601).
+        example: ""
         format: date-time
         readOnly: true
         type: string
     type: object
   registered-identifier-type:
     allOf:
-      - $ref: '#/definitions/type'
+      - $ref: "#/definitions/type"
       - type: object
   resourceId:
     description: The resource ID. Defaults to UUID v4
@@ -2924,7 +2993,7 @@ definitions:
     properties:
       id:
         allOf:
-          - $ref: '#/definitions/resourceId'
+          - $ref: "#/definitions/resourceId"
         description: The resource's unique identifier.
         readOnly: true
       reciprocalRole:
@@ -2945,7 +3014,7 @@ definitions:
     type: object
   roleId:
     allOf:
-      - $ref: '#/definitions/resourceId'
+      - $ref: "#/definitions/resourceId"
       - type: string
   type:
     description: The Type resource.
@@ -2955,7 +3024,7 @@ definitions:
         type: string
       id:
         allOf:
-          - $ref: '#/definitions/resourceId'
+          - $ref: "#/definitions/resourceId"
         description: The resource's unique identifier.
         readOnly: true
       name:
@@ -2966,13 +3035,13 @@ definitions:
     properties:
       code:
         description: The error code.
-        example: '401'
+        example: "401"
         type: string
       details:
-        $ref: '#/definitions/error-details'
+        $ref: "#/definitions/error-details"
       message:
         description: The error message.
-        example: 'Request not authenticated due to missing, invalid, or expired token'
+        example: Request not authenticated due to missing, invalid, or expired token
         type: string
       status:
         description: The error status.

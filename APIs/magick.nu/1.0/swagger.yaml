@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: devui.magick.nu
@@ -6,29 +6,30 @@ basePath: /rest
 info:
   contact:
     x-twitter: tradeworks_tech
-  description: |-
+  description: >-
     Authentication is required to access all methods of the API. Enter username and password.
                     Credentials are automatically set as you type.
   title: Tradeworks
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'https://twitter.com/tradeworks_tech/profile_image?size=original'
+    url: https://twitter.com/tradeworks_tech/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.6.2
       format: swagger
-      url: 'http://devui.magick.nu/api/api-docs'
-      version: '1.2'
+      url: http://devui.magick.nu/api/api-docs
+      version: "1.2"
   x-providerName: magick.nu
+  x-preferred: true
 tags:
   - name: strategies
   - name: tradingAccounts
   - name: users
 paths:
-  '/strategies/strategyId/{strategyId}':
+  "/strategies/strategyId/{strategyId}":
     get:
       operationId: getStrategiesStrategyIdStrategyId
       parameters:
@@ -37,7 +38,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get Strategy by ID
       tags:
@@ -46,7 +47,7 @@ paths:
     get:
       operationId: getStrategiesTemplates
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get all Template Strategies
       tags:
@@ -61,16 +62,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/TradingAccount'
+            $ref: "#/definitions/TradingAccount"
       produces:
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Add a Trading Account
       tags:
         - tradingAccounts
-  '/tradingAccounts/password/{username}/{brokerserver}/{mt4username}':
+  "/tradingAccounts/password/{username}/{brokerserver}/{mt4username}":
     put:
       consumes:
         - application/json
@@ -92,11 +93,11 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PasswordDTO'
+            $ref: "#/definitions/PasswordDTO"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update MT4 Account Password
       tags:
@@ -111,16 +112,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/UserDTO'
+            $ref: "#/definitions/UserDTO"
       produces:
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create a new Tradeworks User
       tags:
         - users
-  '/users/email/{email}':
+  "/users/email/{email}":
     get:
       operationId: getUsersEmailEmail
       parameters:
@@ -129,12 +130,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Check if email is available
       tags:
         - users
-  '/users/password/{username}':
+  "/users/password/{username}":
     put:
       consumes:
         - application/json
@@ -148,16 +149,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PasswordDTO'
+            $ref: "#/definitions/PasswordDTO"
       produces:
         - text/plain
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update user's password
       tags:
         - users
-  '/users/username/{username}':
+  "/users/username/{username}":
     get:
       operationId: getUsersUsernameUsername
       parameters:
@@ -166,7 +167,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Check if username is available
       tags:

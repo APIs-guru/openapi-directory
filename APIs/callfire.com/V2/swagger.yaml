@@ -25,6 +25,7 @@ info:
       url: https://www.callfire.com/v2/api-docs/swagger.json
       version: "2.0"
   x-providerName: callfire.com
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -9973,6 +9974,9 @@ definitions:
         type: array
       prefix:
         description: Country prefix of requested numbers
+        type: string
+      promo:
+        description: "~"
         type: string
       state:
         description: A two-letter state code of requested numbers

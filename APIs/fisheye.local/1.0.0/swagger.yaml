@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: fisheye.local
@@ -11,15 +11,16 @@ info:
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    url: 'https://twitter.com/Atlassian/profile_image?size=original'
+    url: https://twitter.com/Atlassian/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.18
       format: wadl
-      url: 'https://docs.atlassian.com/fisheye-crucible/latest_backup/wadl/fisheye.wadl'
-      version: '1.0'
+      url: https://docs.atlassian.com/fisheye-crucible/latest_backup/wadl/fisheye.wadl
+      version: "1.0"
   x-providerName: fisheye.local
+  x-preferred: true
 paths:
   /rest-service-fe/changeset-v1/listChangesets:
     get:
@@ -62,10 +63,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters: []
-  '/rest-service-fe/commit-graph-v1/details/{repository}':
+  "/rest-service-fe/commit-graph-v1/details/{repository}":
     parameters:
       - description: the key of the repository
         in: path
@@ -73,18 +74,18 @@ paths:
         required: true
         type: string
     post:
-      description: 'Retrieves detailed information about a set of changesets in a repository, designed to be used with the FishEye commit graph'
+      description: Retrieves detailed information about a set of changesets in a repository, designed to be used with the FishEye commit graph
       operationId: getChangesetDetails
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful Response
-  '/rest-service-fe/commit-graph-v1/slice/{repository}':
+  "/rest-service-fe/commit-graph-v1/slice/{repository}":
     get:
       description: finds slice data the query
       operationId: findSliceData
       parameters:
-        - description: 'the set of branches to search. If not specified, will search all branches'
+        - description: the set of branches to search. If not specified, will search all branches
           in: query
           name: branch
           required: false
@@ -95,7 +96,7 @@ paths:
           required: false
           type: string
         - default: around
-          description: 'the direction to traverse. May be "before", "after" or "around"'
+          description: the direction to traverse. May be "before", "after" or "around"
           in: query
           name: direction
           required: false
@@ -108,7 +109,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the key of the repository to search
@@ -121,15 +122,15 @@ paths:
       description: List all the repositories.
       operationId: getAllRepositories
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters: []
-  '/rest-service-fe/repositories-v1/{repository}':
+  "/rest-service-fe/repositories-v1/{repository}":
     get:
       description: Get the information about a repository.
       operationId: getRepositoryInfo
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the key of the repository
@@ -137,11 +138,11 @@ paths:
         name: repository
         required: true
         type: string
-  '/rest-service-fe/revisionData-v1/changeset/{repository}/{csid}':
+  "/rest-service-fe/revisionData-v1/changeset/{repository}/{csid}":
     get:
       operationId: getChangeset
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the ChangesetID of the changeset to return.
@@ -154,12 +155,12 @@ paths:
         name: repository
         required: true
         type: string
-  '/rest-service-fe/revisionData-v1/changesetList/{repository}':
+  "/rest-service-fe/revisionData-v1/changesetList/{repository}":
     get:
       description: Get a list of changesets on a repository.
       operationId: listChangesets
       parameters:
-        - description: 'restrict the changesets to those in this path, should be "/" to look at the whole repository.'
+        - description: restrict the changesets to those in this path, should be "/" to look at the whole repository.
           in: query
           name: path
           required: false
@@ -180,7 +181,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the key of the repository to query.
@@ -188,7 +189,7 @@ paths:
         name: repository
         required: true
         type: string
-  '/rest-service-fe/revisionData-v1/pathHistory/{repository}':
+  "/rest-service-fe/revisionData-v1/pathHistory/{repository}":
     get:
       description: Get a list of the file revisions for a specific path.
       operationId: listPathHistory
@@ -199,7 +200,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the key of the repository to query.
@@ -207,18 +208,18 @@ paths:
         name: repository
         required: true
         type: string
-  '/rest-service-fe/revisionData-v1/pathList/{repository}':
+  "/rest-service-fe/revisionData-v1/pathList/{repository}":
     get:
       description: Get a list of information about files and directories in a path.
       operationId: getPathList
       parameters:
-        - description: 'the path to query, with respect to the fisheye repository root.'
+        - description: the path to query, with respect to the fisheye repository root.
           in: query
           name: path
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the key of the repository to query.
@@ -226,11 +227,11 @@ paths:
         name: repository
         required: true
         type: string
-  '/rest-service-fe/revisionData-v1/revisionInfo/{repository}':
+  "/rest-service-fe/revisionData-v1/revisionInfo/{repository}":
     get:
       operationId: getRevisionInfo
       parameters:
-        - description: 'the path of the filerevision, with respect to the fisheye repository root.'
+        - description: the path of the filerevision, with respect to the fisheye repository root.
           in: query
           name: path
           required: false
@@ -241,7 +242,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the key of the repository to query.
@@ -249,11 +250,11 @@ paths:
         name: repository
         required: true
         type: string
-  '/rest-service-fe/revisionData-v1/revisionTags/{repository}':
+  "/rest-service-fe/revisionData-v1/revisionTags/{repository}":
     get:
       operationId: listTagsForRevision
       parameters:
-        - description: 'the path of the filerevision, with respect to the fisheye repository root.'
+        - description: the path of the filerevision, with respect to the fisheye repository root.
           in: query
           name: path
           required: false
@@ -264,7 +265,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the key of the repository to query.
@@ -274,7 +275,7 @@ paths:
         type: string
   /rest-service-fe/search-v1/crossRepositoryQuery:
     get:
-      description: 'Execute a query across repositories. By default, this will search all repositories.'
+      description: Execute a query across repositories. By default, this will search all repositories.
       operationId: getCrossRepositoryQuery
       parameters:
         - description: text to search for in commit message and p4 jobId. Must not be empty.
@@ -287,7 +288,7 @@ paths:
           name: repository
           required: false
           type: string
-        - description: |-
+        - description: >-
             expand query parameter to specify the maximum number of results. Format is changesets[n:m].revisions[n:m],reviews
                     the default number of changesets returned is 30, the maximum returned is 100
           in: query
@@ -295,10 +296,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters: []
-  '/rest-service-fe/search-v1/query/{repository}':
+  "/rest-service-fe/search-v1/query/{repository}":
     get:
       description: Execute a FishEye query against a specific repository.
       operationId: getQuery
@@ -308,7 +309,7 @@ paths:
           name: query
           required: false
           type: string
-        - description: |-
+        - description: >-
             maximum number of results (which can be left unspecified, but in that case,
              the maximum number of results will set to 3000 results)
           in: query
@@ -316,7 +317,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the key of the repository
@@ -324,7 +325,7 @@ paths:
         name: repository
         required: true
         type: string
-  '/rest-service-fe/search-v1/queryAsRows/{repository}':
+  "/rest-service-fe/search-v1/queryAsRows/{repository}":
     get:
       description: Execute a FishEye query (that contains a "return" statement) against a specific repository.
       operationId: getQueryAsRows
@@ -334,7 +335,7 @@ paths:
           name: query
           required: false
           type: string
-        - description: |-
+        - description: >-
             maximum number of results (which can be left unspecified, but in that case,
              the maximum number of results will set to 3000 results)
           in: query
@@ -342,7 +343,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful Response
     parameters:
       - description: the key of the repository
@@ -350,7 +351,7 @@ paths:
         name: repository
         required: true
         type: string
-  '/rest-service-fe/search-v1/reviewsForChangeset/{repository}':
+  "/rest-service-fe/search-v1/reviewsForChangeset/{repository}":
     parameters:
       - description: the key of the repository
         in: path
@@ -362,9 +363,9 @@ paths:
       operationId: getReviewsForChangeset
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful Response
-  '/rest-service-fe/search-v1/reviewsForChangesets/{repository}':
+  "/rest-service-fe/search-v1/reviewsForChangesets/{repository}":
     parameters:
       - description: the key of the repository
         in: path
@@ -376,5 +377,5 @@ paths:
       operationId: getReviewsForChangesets
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful Response

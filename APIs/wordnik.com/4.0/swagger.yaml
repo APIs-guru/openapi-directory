@@ -1,27 +1,28 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: api.wordnik.com
 basePath: /v4
 info:
-  description: |
+  description: >
     Wordnik is the world's biggest online English dictionary, by number of words
   title: Wordnik
-  version: '4.0'
+  version: "4.0"
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'https://wordnik.com/img/logo-wordnik-home.png'
+    url: https://wordnik.com/img/logo-wordnik-home.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.6.2
       format: swagger
-      url: 'https://developer.wordnik.com/api-docs/swagger.json'
-      version: '2.0'
+      url: https://developer.wordnik.com/api-docs/swagger.json
+      version: "2.0"
   x-providerName: wordnik.com
+  x-preferred: true
 externalDocs:
-  url: 'http://developer.wordnik.com/'
+  url: http://developer.wordnik.com/
 securityDefinitions:
   api_key:
     in: query
@@ -46,14 +47,14 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ApiTokenStatus'
+            $ref: "#/definitions/ApiTokenStatus"
       summary: Returns usage statistics for the API account.
       tags:
         - account
-  '/account.json/authenticate/{username}':
+  "/account.json/authenticate/{username}":
     get:
       operationId: authenticate
       parameters:
@@ -68,10 +69,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/AuthenticationToken'
+            $ref: "#/definitions/AuthenticationToken"
       summary: Authenticates a User
       tags:
         - account
@@ -90,10 +91,10 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/AuthenticationToken'
+            $ref: "#/definitions/AuthenticationToken"
       summary: Authenticates a user
       tags:
         - account
@@ -102,16 +103,16 @@ paths:
       description: Requires a valid auth_token to be set.
       operationId: getLoggedInUser
       parameters:
-        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       summary: Returns the logged-in User
       tags:
         - account
@@ -139,16 +140,16 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
-              $ref: '#/definitions/WordList'
+              $ref: "#/definitions/WordList"
             type: array
       summary: Fetches WordList objects for the logged-in user.
       tags:
         - account
-  '/word.json/{word}':
+  "/word.json/{word}":
     get:
       operationId: getWord
       parameters:
@@ -157,27 +158,27 @@ paths:
           name: word
           required: true
           type: string
-        - default: 'false'
+        - default: "false"
           description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
           type: string
-        - default: 'true'
-          description: 'Return suggestions (for correct spelling, case variants, etc.)'
+        - default: "true"
+          description: Return suggestions (for correct spelling, case variants, etc.)
           in: query
           name: includeSuggestions
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/WordObject'
-      summary: 'Given a word as a string, returns the WordObject that represents it'
+            $ref: "#/definitions/WordObject"
+      summary: Given a word as a string, returns the WordObject that represents it
       tags:
         - word
-  '/word.json/{word}/audio':
+  "/word.json/{word}/audio":
     get:
       description: The metadata includes a time-expiring fileUrl which allows reading the audio file directly from the API.  Currently only audio pronunciations from the American Heritage Dictionary in mp3 format are supported.
       operationId: getAudio
@@ -187,7 +188,7 @@ paths:
           name: word
           required: true
           type: string
-        - default: 'false'
+        - default: "false"
           description: Use the canonical form of the word
           in: query
           name: useCanonical
@@ -201,16 +202,16 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
-              $ref: '#/definitions/AudioFile'
+              $ref: "#/definitions/AudioFile"
             type: array
       summary: Fetches audio metadata for a word.
       tags:
         - word
-  '/word.json/{word}/definitions':
+  "/word.json/{word}/definitions":
     get:
       operationId: getDefinitions
       parameters:
@@ -231,42 +232,42 @@ paths:
           name: partOfSpeech
           required: false
           type: string
-        - default: 'false'
+        - default: "false"
           description: Return related words with definitions
           in: query
           name: includeRelated
           required: false
           type: string
-        - description: 'Source dictionary to return definitions from.  If ''all'' is received, results are returned from all sources. If multiple values are received (e.g. ''century,wiktionary''), results are returned from the first specified dictionary that has definitions. If left blank, results are returned from the first dictionary that has definitions. By default, dictionaries are searched in this order: ahd, wiktionary, webster, century, wordnet'
+        - description: "Source dictionary to return definitions from.  If 'all' is received, results are returned from all sources. If multiple values are received (e.g. 'century,wiktionary'), results are returned from the first specified dictionary that has definitions. If left blank, results are returned from the first dictionary that has definitions. By default, dictionaries are searched in this order: ahd, wiktionary, webster, century, wordnet"
           in: query
           items:
             type: string
           name: sourceDictionaries
           required: false
           type: array
-        - default: 'false'
+        - default: "false"
           description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
           type: string
-        - default: 'false'
+        - default: "false"
           description: Return a closed set of XML tags in response
           in: query
           name: includeTags
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
-              $ref: '#/definitions/Definition'
+              $ref: "#/definitions/Definition"
             type: array
       summary: Return definitions for a word
       tags:
         - word
-  '/word.json/{word}/etymologies':
+  "/word.json/{word}/etymologies":
     get:
       operationId: getEtymologies
       parameters:
@@ -281,7 +282,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
@@ -290,7 +291,7 @@ paths:
       summary: Fetches etymology data
       tags:
         - word
-  '/word.json/{word}/examples':
+  "/word.json/{word}/examples":
     get:
       operationId: getExamples
       parameters:
@@ -299,13 +300,13 @@ paths:
           name: word
           required: true
           type: string
-        - default: 'false'
+        - default: "false"
           description: Show duplicate examples from different sources
           in: query
           name: includeDuplicates
           required: false
           type: string
-        - default: 'false'
+        - default: "false"
           description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
@@ -326,14 +327,14 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ExampleSearchResults'
+            $ref: "#/definitions/ExampleSearchResults"
       summary: Returns examples for a word
       tags:
         - word
-  '/word.json/{word}/frequency':
+  "/word.json/{word}/frequency":
     get:
       operationId: getWordFrequency
       parameters:
@@ -342,7 +343,7 @@ paths:
           name: word
           required: true
           type: string
-        - default: 'false'
+        - default: "false"
           description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
@@ -363,14 +364,14 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/FrequencySummary'
+            $ref: "#/definitions/FrequencySummary"
       summary: Returns word usage over time
       tags:
         - word
-  '/word.json/{word}/hyphenation':
+  "/word.json/{word}/hyphenation":
     get:
       operationId: getHyphenation
       parameters:
@@ -379,13 +380,13 @@ paths:
           name: word
           required: true
           type: string
-        - default: 'false'
+        - default: "false"
           description: If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
           type: string
-        - description: 'Get from a single dictionary. Valid options: ahd, century, wiktionary, webster, and wordnet.'
+        - description: "Get from a single dictionary. Valid options: ahd, century, wiktionary, webster, and wordnet."
           in: query
           name: sourceDictionary
           required: false
@@ -398,16 +399,16 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
-              $ref: '#/definitions/Syllable'
+              $ref: "#/definitions/Syllable"
             type: array
       summary: Returns syllable information for a word
       tags:
         - word
-  '/word.json/{word}/phrases':
+  "/word.json/{word}/phrases":
     get:
       operationId: getPhrases
       parameters:
@@ -430,23 +431,23 @@ paths:
           name: wlmi
           required: false
           type: integer
-        - default: 'false'
+        - default: "false"
           description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
-              $ref: '#/definitions/Bigram'
+              $ref: "#/definitions/Bigram"
             type: array
       summary: Fetches bi-gram phrases for a word
       tags:
         - word
-  '/word.json/{word}/pronunciations':
+  "/word.json/{word}/pronunciations":
     get:
       operationId: getTextPronunciations
       parameters:
@@ -455,7 +456,7 @@ paths:
           name: word
           required: true
           type: string
-        - default: 'false'
+        - default: "false"
           description: If true will try to return a correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
@@ -479,16 +480,16 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
-              $ref: '#/definitions/TextPron'
+              $ref: "#/definitions/TextPron"
             type: array
       summary: Returns text pronunciations for a given word
       tags:
         - word
-  '/word.json/{word}/relatedWords':
+  "/word.json/{word}/relatedWords":
     get:
       operationId: getRelatedWords
       parameters:
@@ -497,7 +498,7 @@ paths:
           name: word
           required: true
           type: string
-        - default: 'false'
+        - default: "false"
           description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
@@ -516,16 +517,16 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
-              $ref: '#/definitions/Related'
+              $ref: "#/definitions/Related"
             type: array
-      summary: 'Given a word as a string, returns relationships from the Word Graph'
+      summary: Given a word as a string, returns relationships from the Word Graph
       tags:
         - word
-  '/word.json/{word}/topExample':
+  "/word.json/{word}/topExample":
     get:
       operationId: getTopExample
       parameters:
@@ -534,21 +535,21 @@ paths:
           name: word
           required: true
           type: string
-        - default: 'false'
+        - default: "false"
           description: If true will try to return the correct word root ('cats' -> 'cat'). If false returns exactly what was requested.
           in: query
           name: useCanonical
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Example'
+            $ref: "#/definitions/Example"
       summary: Returns a top example for a word
       tags:
         - word
-  '/wordList.json/{permalink}':
+  "/wordList.json/{permalink}":
     delete:
       operationId: deleteWordList
       parameters:
@@ -557,13 +558,13 @@ paths:
           name: permalink
           required: true
           type: string
-        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Deletes an existing WordList
       tags:
@@ -576,16 +577,16 @@ paths:
           name: permalink
           required: true
           type: string
-        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/WordList'
+            $ref: "#/definitions/WordList"
       summary: Fetches a WordList by ID
       tags:
         - wordList
@@ -602,19 +603,19 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WordList'
-        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+            $ref: "#/definitions/WordList"
+        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Updates an existing WordList
       tags:
         - wordList
-  '/wordList.json/{permalink}/deleteWords':
+  "/wordList.json/{permalink}/deleteWords":
     post:
       operationId: deleteWordsFromWordList
       parameters:
@@ -629,20 +630,20 @@ paths:
           required: false
           schema:
             items:
-              $ref: '#/definitions/StringValue'
+              $ref: "#/definitions/StringValue"
             type: array
-        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Removes words from a WordList
       tags:
         - wordList
-  '/wordList.json/{permalink}/words':
+  "/wordList.json/{permalink}/words":
     get:
       operationId: getWordListWords
       parameters:
@@ -677,17 +678,17 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
-              $ref: '#/definitions/WordListWord'
+              $ref: "#/definitions/WordListWord"
             type: array
       summary: Fetches words in a WordList
       tags:
@@ -706,15 +707,15 @@ paths:
           required: false
           schema:
             items:
-              $ref: '#/definitions/StringValue'
+              $ref: "#/definitions/StringValue"
             type: array
-        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Adds words to a WordList
       tags:
@@ -728,17 +729,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WordList'
-        - description: 'The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)'
+            $ref: "#/definitions/WordList"
+        - description: The auth token of the logged-in user, obtained by calling /account.{format}/authenticate/{username} (described above)
           in: header
           name: auth_token
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/WordList'
+            $ref: "#/definitions/WordList"
       summary: Creates a WordList.
       tags:
         - wordLists
@@ -746,7 +747,7 @@ paths:
     get:
       operationId: getRandomWord
       parameters:
-        - default: 'true'
+        - default: "true"
           description: Only return words with dictionary definitions
           in: query
           name: hasDictionaryDef
@@ -805,10 +806,10 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/WordObject'
+            $ref: "#/definitions/WordObject"
       summary: Returns a single random WordObject
       tags:
         - words
@@ -816,7 +817,7 @@ paths:
     get:
       operationId: getRandomWords
       parameters:
-        - default: 'true'
+        - default: "true"
           description: Only return words with dictionary definitions
           in: query
           name: hasDictionaryDef
@@ -892,11 +893,11 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
             items:
-              $ref: '#/definitions/WordObject'
+              $ref: "#/definitions/WordObject"
             type: array
       summary: Returns an array of random WordObjects
       tags:
@@ -968,7 +969,7 @@ paths:
           name: expandTerms
           required: false
           type: string
-        - default: 'false'
+        - default: "false"
           description: Return a closed set of XML tags in response
           in: query
           name: includeTags
@@ -984,7 +985,7 @@ paths:
           name: sortOrder
           required: false
           type: string
-        - default: '0'
+        - default: "0"
           description: Results to skip
           in: query
           name: skip
@@ -998,14 +999,14 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/DefinitionSearchResults'
+            $ref: "#/definitions/DefinitionSearchResults"
       summary: Reverse dictionary search
       tags:
         - words
-  '/words.json/search/{query}':
+  "/words.json/search/{query}":
     get:
       operationId: searchWords
       parameters:
@@ -1014,7 +1015,7 @@ paths:
           name: query
           required: true
           type: string
-        - default: 'true'
+        - default: "true"
           description: Search case sensitive
           in: query
           name: caseSensitive
@@ -1087,10 +1088,10 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/WordSearchResults'
+            $ref: "#/definitions/WordSearchResults"
       summary: Searches words
       tags:
         - words
@@ -1104,10 +1105,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/WordOfTheDay'
+            $ref: "#/definitions/WordOfTheDay"
       summary: Returns a specific WordOfTheDay
       tags:
         - words
@@ -1230,27 +1231,27 @@ definitions:
         type: string
       citations:
         items:
-          $ref: '#/definitions/Citation'
+          $ref: "#/definitions/Citation"
         type: array
       exampleUses:
         items:
-          $ref: '#/definitions/ExampleUsage'
+          $ref: "#/definitions/ExampleUsage"
         type: array
       extendedText:
         type: string
       labels:
         items:
-          $ref: '#/definitions/Label'
+          $ref: "#/definitions/Label"
         type: array
       notes:
         items:
-          $ref: '#/definitions/Note'
+          $ref: "#/definitions/Note"
         type: array
       partOfSpeech:
         type: string
       relatedWords:
         items:
-          $ref: '#/definitions/Related'
+          $ref: "#/definitions/Related"
         type: array
       score:
         format: float
@@ -1265,7 +1266,7 @@ definitions:
         type: string
       textProns:
         items:
-          $ref: '#/definitions/TextPron'
+          $ref: "#/definitions/TextPron"
         type: array
       word:
         type: string
@@ -1273,7 +1274,7 @@ definitions:
     properties:
       results:
         items:
-          $ref: '#/definitions/Definition'
+          $ref: "#/definitions/Definition"
         type: array
       totalResults:
         format: int32
@@ -1290,14 +1291,14 @@ definitions:
         format: int64
         type: integer
       provider:
-        $ref: '#/definitions/ContentProvider'
+        $ref: "#/definitions/ContentProvider"
       rating:
         format: float
         type: number
       score:
-        $ref: '#/definitions/ScoredWord'
+        $ref: "#/definitions/ScoredWord"
       sentence:
-        $ref: '#/definitions/Sentence'
+        $ref: "#/definitions/Sentence"
       text:
         type: string
       title:
@@ -1313,11 +1314,11 @@ definitions:
     properties:
       examples:
         items:
-          $ref: '#/definitions/Example'
+          $ref: "#/definitions/Example"
         type: array
       facets:
         items:
-          $ref: '#/definitions/Facet'
+          $ref: "#/definitions/Facet"
         type: array
   ExampleUsage:
     properties:
@@ -1327,7 +1328,7 @@ definitions:
     properties:
       facetValues:
         items:
-          $ref: '#/definitions/FacetValue'
+          $ref: "#/definitions/FacetValue"
         type: array
       name:
         type: string
@@ -1350,7 +1351,7 @@ definitions:
     properties:
       frequency:
         items:
-          $ref: '#/definitions/Frequency'
+          $ref: "#/definitions/Frequency"
         type: array
       frequencyString:
         type: string
@@ -1385,11 +1386,11 @@ definitions:
     properties:
       allCategories:
         items:
-          $ref: '#/definitions/Category'
+          $ref: "#/definitions/Category"
         type: array
       roots:
         items:
-          $ref: '#/definitions/Root'
+          $ref: "#/definitions/Root"
         type: array
       storageAbbr:
         items:
@@ -1417,7 +1418,7 @@ definitions:
     properties:
       categories:
         items:
-          $ref: '#/definitions/Category'
+          $ref: "#/definitions/Category"
         type: array
       id:
         format: int64
@@ -1473,7 +1474,7 @@ definitions:
         type: integer
       scoredWords:
         items:
-          $ref: '#/definitions/ScoredWord'
+          $ref: "#/definitions/ScoredWord"
         type: array
   SimpleDefinition:
     properties:
@@ -1615,7 +1616,7 @@ definitions:
       category:
         type: string
       contentProvider:
-        $ref: '#/definitions/ContentProvider'
+        $ref: "#/definitions/ContentProvider"
       createdAt:
         format: date
         type: string
@@ -1623,11 +1624,11 @@ definitions:
         type: string
       definitions:
         items:
-          $ref: '#/definitions/SimpleDefinition'
+          $ref: "#/definitions/SimpleDefinition"
         type: array
       examples:
         items:
-          $ref: '#/definitions/SimpleExample'
+          $ref: "#/definitions/SimpleExample"
         type: array
       htmlExtra:
         type: string
@@ -1659,7 +1660,7 @@ definitions:
     properties:
       searchResults:
         items:
-          $ref: '#/definitions/WordSearchResult'
+          $ref: "#/definitions/WordSearchResult"
         type: array
       totalResults:
         format: int32

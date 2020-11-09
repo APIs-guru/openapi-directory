@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: data.orghunter.com
@@ -8,15 +8,16 @@ info:
   title: OrgHunter
   version: 1.0.0
   x-logo:
-    url: 'http://orghunter.com/sites/all/themes/orghunter/img/logo.jpg'
+    url: http://orghunter.com/sites/all/themes/orghunter/img/logo.jpg
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.0.1
       format: swagger
-      url: 'https://orghunter.3scale.net/swagger/spec.json'
-      version: '1.2'
+      url: https://orghunter.3scale.net/swagger/spec.json
+      version: "1.2"
   x-providerName: orghunter.com
+  x-preferred: true
 securityDefinitions:
   user_key:
     description: Your API access key
@@ -47,7 +48,7 @@ paths:
       operationId: get categories
       parameters: []
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get categories!
       tags:
@@ -62,7 +63,7 @@ paths:
           type: string
           x-data-threescale-name: ein
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get details!
       tags:
@@ -77,7 +78,7 @@ paths:
           type: string
           x-data-threescale-name: ein
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get details!
       tags:
@@ -92,7 +93,7 @@ paths:
           type: string
           x-data-threescale-name: ein
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get details!
       tags:
@@ -107,7 +108,7 @@ paths:
           type: string
           x-data-threescale-name: ein
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get details!
       tags:
@@ -122,12 +123,12 @@ paths:
           name: ein
           type: string
           x-data-threescale-name: ein
-        - description: 'Charity Name or Keyword. Example: humane society or cancer'
+        - description: "Charity Name or Keyword. Example: humane society or cancer"
           in: query
           name: searchTerm
           type: string
           x-data-threescale-name: searchTerm
-        - description: 'City Name. Example: Miami'
+        - description: "City Name. Example: Miami"
           in: query
           name: city
           type: string
@@ -163,7 +164,7 @@ paths:
           type: string
           x-data-threescale-name: rows
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get summary data!
       tags:

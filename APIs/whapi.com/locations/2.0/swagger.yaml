@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: sandbox.whapi.com
@@ -8,17 +8,18 @@ info:
     x-twitter: WilliamHill
   description: The Locations API is a collection of methods that support geographical information. The first method is an address lookup service for UK addresses. This service can be used to provide a new customer with a list of possible addresses from which they can populate a registration form.
   title: Locations
-  version: '2.0'
+  version: "2.0"
   x-apisguru-categories:
     - entertainment
   x-logo:
-    url: 'https://twitter.com/WillHillHelp/profile_image?size=original'
+    url: https://twitter.com/WillHillHelp/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://developer.williamhill.com/wh-docs/docs-sdks/locations/swagger/docs'
-      version: '2.0'
+      url: https://developer.williamhill.com/wh-docs/docs-sdks/locations/swagger/docs
+      version: "2.0"
   x-providerName: whapi.com
   x-serviceName: locations
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -61,7 +62,7 @@ parameters:
     type: string
     x-eg: 4
   postCode:
-    description: 'Postcode of the address, no spaces required.'
+    description: Postcode of the address, no spaces required.
     in: query
     name: postCode
     required: true
@@ -70,7 +71,7 @@ parameters:
 paths:
   /address/lookup/:
     get:
-      description: |
+      description: >
         Retrieves a list of addresses when supplied with a house number or name and a postcode. It is generally used during customer registration to provide a list of possible addresses from where the customer can select their own address details.
       operationId: addressLookup
       parameters:
@@ -80,17 +81,17 @@ paths:
           required: true
           type: string
           x-eg: 4
-        - description: 'Postcode of the address, no spaces required.'
+        - description: Postcode of the address, no spaces required.
           in: query
           name: postCode
           required: true
           type: string
           x-eg: GX11AA
       responses:
-        '200':
+        "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                 "addresses": 
                 [
@@ -104,11 +105,11 @@ paths:
                 ]
               }        
           schema:
-            $ref: '#/definitions/addresses'
-        '400':
+            $ref: "#/definitions/addresses"
+        "400":
           description: Missing or Invalid Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                 "errors":
                 [
@@ -125,11 +126,11 @@ paths:
                 ]
               }
           schema:
-            $ref: '#/definitions/locationsErrors'
-        '404':
+            $ref: "#/definitions/locationsErrors"
+        "404":
           description: Address not found
           examples:
-            application/json: |
+            application/json: >
               {
                 "errors" : 
                 [
@@ -141,7 +142,7 @@ paths:
                 ]
               }
           schema:
-            $ref: '#/definitions/locationsErrors'
+            $ref: "#/definitions/locationsErrors"
       tags:
         - Locations
       x-canReturnErrors:
@@ -155,10 +156,10 @@ paths:
       operationId: getCountries
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful response
           examples:
-            application/json: |
+            application/json: >
               {
                   "countries": 
                   [
@@ -171,11 +172,11 @@ paths:
                   ]
               }
           schema:
-            $ref: '#/definitions/countries'
-        '400':
+            $ref: "#/definitions/countries"
+        "400":
           description: Missing or Invalid Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                   "errors" : 
                   [
@@ -192,11 +193,11 @@ paths:
                   ]
               }
           schema:
-            $ref: '#/definitions/locationsErrors'
-        '404':
+            $ref: "#/definitions/locationsErrors"
+        "404":
           description: Country/Countries not found
           examples:
-            application/json: |
+            application/json: >
               {
                   "errors" : 
                   [
@@ -207,12 +208,12 @@ paths:
                   ]
               }
           schema:
-            $ref: '#/definitions/locationsErrors'
+            $ref: "#/definitions/locationsErrors"
       tags:
         - Locations
       x-canReturnErrors:
         - 20303
-  '/countries/{countryCode}':
+  "/countries/{countryCode}":
     get:
       description: Retrieves the specified country and its currency.
       operationId: getCountry
@@ -224,10 +225,10 @@ paths:
           type: string
           x-eg: GB
       responses:
-        '200':
+        "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                 "code":"gb",
                 "name":"Great Britain",
@@ -235,11 +236,11 @@ paths:
                 "dialCode":"+44"
               }
           schema:
-            $ref: '#/definitions/country'
-        '400':
+            $ref: "#/definitions/country"
+        "400":
           description: Missing or Invalid Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                   "errors" : 
                   [
@@ -256,11 +257,11 @@ paths:
                   ]
               }
           schema:
-            $ref: '#/definitions/locationsErrors'
-        '404':
+            $ref: "#/definitions/locationsErrors"
+        "404":
           description: Country/Countries not found
           examples:
-            application/json: |
+            application/json: >
               {
                   "errors" : 
                   [
@@ -271,7 +272,7 @@ paths:
                   ]
               }
           schema:
-            $ref: '#/definitions/locationsErrors'
+            $ref: "#/definitions/locationsErrors"
       tags:
         - Locations
       x-canReturnErrors:
@@ -284,10 +285,10 @@ paths:
       operationId: getCurrencies
       parameters: []
       responses:
-        '200':
+        "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                 "currencies": 
                 [
@@ -303,11 +304,11 @@ paths:
                 ]
               }
           schema:
-            $ref: '#/definitions/currencies'
-        '404':
+            $ref: "#/definitions/currencies"
+        "404":
           description: Currency not found
           examples:
-            application/json: |
+            application/json: >
               {
                   "errors" : 
                   [
@@ -318,12 +319,12 @@ paths:
                   ]
               }
           schema:
-            $ref: '#/definitions/locationsErrors'
+            $ref: "#/definitions/locationsErrors"
       tags:
         - Locations
       x-canReturnErrors:
         - 20304
-  '/currencies/{currencyCode}':
+  "/currencies/{currencyCode}":
     get:
       description: Retreives the specified currency.
       operationId: getCurrency
@@ -335,10 +336,10 @@ paths:
           type: string
           x-eg: GBP
       responses:
-        '200':
+        "200":
           description: Success
           examples:
-            application/json: |
+            application/json: >
               {
                   "code":"GBP",
                   "name":"Pound",
@@ -349,11 +350,11 @@ paths:
                   "exchangeRate":"1.00"
               }
           schema:
-            $ref: '#/definitions/currency'
-        '400':
+            $ref: "#/definitions/currency"
+        "400":
           description: Missing or Invalid Parameter
           examples:
-            application/json: |
+            application/json: >
               {
                   "errors" : 
                   [
@@ -370,11 +371,11 @@ paths:
                   ]
               }
           schema:
-            $ref: '#/definitions/locationsErrors'
-        '404':
+            $ref: "#/definitions/locationsErrors"
+        "404":
           description: Currency not found
           examples:
-            application/json: |
+            application/json: >
               {
                   "errors" : 
                   [
@@ -385,7 +386,7 @@ paths:
                   ]
               }
           schema:
-            $ref: '#/definitions/locationsErrors'
+            $ref: "#/definitions/locationsErrors"
       tags:
         - Locations
       x-canReturnErrors:
@@ -416,14 +417,14 @@ definitions:
     properties:
       addresses:
         items:
-          $ref: '#/definitions/address'
+          $ref: "#/definitions/address"
         type: array
     type: object
   countries:
     properties:
       countries:
         items:
-          $ref: '#/definitions/country'
+          $ref: "#/definitions/country"
         type: array
     type: object
   country:
@@ -446,7 +447,7 @@ definitions:
     properties:
       currencies:
         items:
-          $ref: '#/definitions/currency'
+          $ref: "#/definitions/currency"
         type: array
     type: object
   currency:
@@ -494,7 +495,7 @@ definitions:
     properties:
       errors:
         items:
-          $ref: '#/definitions/error'
+          $ref: "#/definitions/error"
         type: array
     type: object
 x-customerrors:

@@ -1,24 +1,25 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: schedule.import.io
 basePath: /
 info:
   title: import.io
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - tools
   x-logo:
-    backgroundColor: '#F6248E'
-    url: 'http://api.docs.import.io/images/import-io-logo.svg'
+    backgroundColor: "#F6248E"
+    url: http://api.docs.import.io/images/import-io-logo.svg
   x-origin:
     - format: swagger
-      url: 'http://api.docs.import.io/schedule/swagger.json'
-      version: '2.0'
+      url: http://api.docs.import.io/schedule/swagger.json
+      version: "2.0"
   x-providerName: import.io
   x-serviceName: schedule
+  x-preferred: true
 externalDocs:
-  url: 'http://api.docs.import.io/'
+  url: http://api.docs.import.io/
 consumes:
   - application/json
 produces:
@@ -54,18 +55,18 @@ paths:
   /extractor:
     get:
       responses:
-        '200':
+        "200":
           description: array of crawl run schedules
           schema:
-            $ref: '#/definitions/Schedule'
-        '401':
+            $ref: "#/definitions/Schedule"
+        "401":
           description: User doesn't have a valid session.
           schema:
-            $ref: '#/definitions/APIError'
-        '404':
+            $ref: "#/definitions/APIError"
+        "404":
           description: Unable to find supplied extractor ID.
           schema:
-            $ref: '#/definitions/APIError'
+            $ref: "#/definitions/APIError"
       security:
         - api_key: []
       summary: Get the list of schedules for all your extractors
@@ -78,34 +79,34 @@ paths:
           name: Schedule Request Body
           required: true
           schema:
-            $ref: '#/definitions/ScheduleRequest'
+            $ref: "#/definitions/ScheduleRequest"
       responses:
-        '200':
+        "200":
           description: crawl run schedule
           schema:
-            $ref: '#/definitions/Schedule'
-        '400':
+            $ref: "#/definitions/Schedule"
+        "400":
           description: Validation errors on the request input.
           schema:
-            $ref: '#/definitions/APIError'
-        '401':
-          description: 'User doesn''t own this extractor, or doesn''t have a valid session.'
+            $ref: "#/definitions/APIError"
+        "401":
+          description: User doesn't own this extractor, or doesn't have a valid session.
           schema:
-            $ref: '#/definitions/APIError'
-        '403':
+            $ref: "#/definitions/APIError"
+        "403":
           description: User is not allowed to create schedule for this extractor.
           schema:
-            $ref: '#/definitions/APIError'
-        '404':
+            $ref: "#/definitions/APIError"
+        "404":
           description: Unable to find supplied extractor ID.
           schema:
-            $ref: '#/definitions/APIError'
+            $ref: "#/definitions/APIError"
       security:
         - api_key: []
       summary: Schedule and extractor to run at a specific time
       tags:
         - schedule.import.io
-  '/extractor/{extractorId}/':
+  "/extractor/{extractorId}/":
     delete:
       parameters:
         - description: the id of the extractor with a schedule
@@ -114,20 +115,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Empty object
-        '401':
+        "401":
           description: User doesn't have a valid session.
           schema:
-            $ref: '#/definitions/APIError'
-        '403':
+            $ref: "#/definitions/APIError"
+        "403":
           description: User is not allowed to delete this schedule.
           schema:
-            $ref: '#/definitions/APIError'
-        '404':
+            $ref: "#/definitions/APIError"
+        "404":
           description: Unable to find supplied extractor ID.
           schema:
-            $ref: '#/definitions/APIError'
+            $ref: "#/definitions/APIError"
       security:
         - api_key: []
       summary: Delete an existing schedule
@@ -141,10 +142,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: crawl run schedule
           schema:
-            $ref: '#/definitions/Schedule'
+            $ref: "#/definitions/Schedule"
       security:
         - api_key: []
       summary: Get the schedule of a particular extractor
@@ -218,7 +219,7 @@ definitions:
                 _type:
                   type: string
                 fields:
-                  $ref: '#/definitions/CrawlRun'
+                  $ref: "#/definitions/CrawlRun"
               type: object
             type: array
           total:

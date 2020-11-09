@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: developer.walmart.com
@@ -7,19 +7,20 @@ info:
   contact:
     name: partnerapis@walmartlabs.com
     x-twitter: Walmart
-  description: 'Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.'
+  description: Please make sure you use the correct version of the APIs for your use case. To find out the appropriate version, go to the API Docs  drop down on the menu.
   title: Inventory
   version: 3.0.1
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/Walmart/profile_image?size=original'
+    url: https://twitter.com/Walmart/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://developer.walmart.com/v1/swaggerProxy?type=inventory'
-      version: '2.0'
+      url: https://developer.walmart.com/v1/swaggerProxy?type=inventory
+      version: "2.0"
   x-providerName: walmart.com
   x-serviceName: inventory
+  x-preferred: true
 produces:
   - application/xml
 tags:
@@ -30,7 +31,7 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: 'You can upload an inventory feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed'
+      description: You can upload an inventory feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed
       parameters:
         - default: inventory
           description: Feed Type
@@ -153,7 +154,7 @@ paths:
     post:
       consumes:
         - multipart/form-data
-      description: 'You can upload an inventory feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed'
+      description: You can upload an inventory feed. If the feed successfully processed, it returns a feed ID. Use the returned feed ID to retrieve a feed status. You need Your Consumer ID and the private key to upload the feed
       parameters:
         - default: inventory
           description: Feed Type

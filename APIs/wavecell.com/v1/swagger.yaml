@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
   - https
@@ -8,21 +8,22 @@ info:
   contact:
     email: support@wavecell.com
     name: Wavecell Dev team
-    url: 'https://wavecell.com/'
+    url: https://wavecell.com/
   description: This API allows Wavecell customers to originate request to send SMS messages anywhere in the World. The messages can be send individually or as a bulk request.
-  termsOfService: 'https://wavecell.com/terms.html'
+  termsOfService: https://wavecell.com/terms.html
   title: Wavecell.Sms.Api
   version: v1
   x-apisguru-categories:
     - messaging
   x-logo:
-    backgroundColor: '#050917'
-    url: 'https://wavecell.com/wp-content/uploads/2020/05/Group.svg'
+    backgroundColor: "#050917"
+    url: https://wavecell.com/wp-content/uploads/2020/05/Group.svg
   x-origin:
     - format: swagger
-      url: 'https://api.wavecell.com/swagger/v1/swagger.json'
-      version: '2.0'
+      url: https://api.wavecell.com/swagger/v1/swagger.json
+      version: "2.0"
   x-providerName: wavecell.com
+  x-preferred: true
 produces: []
 securityDefinitions:
   basicAuth:
@@ -35,11 +36,11 @@ paths:
       deprecated: false
       operationId: SmsV1StatusGet
       responses:
-        '204':
+        "204":
           description: No Content
       tags:
         - StatusPage
-  '/sms/v1/{subAccountId}/many':
+  "/sms/v1/{subAccountId}/many":
     post:
       consumes:
         - application/json
@@ -56,29 +57,29 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/BulkSmsRequest'
+            $ref: "#/definitions/BulkSmsRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BulkSmsResponse'
-        '204':
+            $ref: "#/definitions/BulkSmsResponse"
+        "204":
           description: No Content
-        '400':
+        "400":
           description: BadRequest
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '500':
+            $ref: "#/definitions/ErrorResponse"
+        "500":
           description: InternalServerError
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       tags:
         - SmsApi
-  '/sms/v1/{subAccountId}/many/compact':
+  "/sms/v1/{subAccountId}/many/compact":
     post:
       consumes:
         - application/json
@@ -95,29 +96,29 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/BulkSmsRequestCompact'
+            $ref: "#/definitions/BulkSmsRequestCompact"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BulkSmsResponse'
-        '204':
+            $ref: "#/definitions/BulkSmsResponse"
+        "204":
           description: No Content
-        '400':
+        "400":
           description: BadRequest
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '500':
+            $ref: "#/definitions/ErrorResponse"
+        "500":
           description: InternalServerError
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       tags:
         - SmsApi
-  '/sms/v1/{subAccountId}/single':
+  "/sms/v1/{subAccountId}/single":
     post:
       consumes:
         - application/json
@@ -134,26 +135,26 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/SmsRequest'
+            $ref: "#/definitions/SmsRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SmsResponse'
-        '204':
+            $ref: "#/definitions/SmsResponse"
+        "204":
           description: No Content
-        '400':
+        "400":
           description: BadRequest
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '500':
+            $ref: "#/definitions/ErrorResponse"
+        "500":
           description: InternalServerError
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       tags:
         - SmsApi
 definitions:
@@ -166,10 +167,10 @@ definitions:
         type: boolean
       messages:
         items:
-          $ref: '#/definitions/SmsRequest'
+          $ref: "#/definitions/SmsRequest"
         type: array
       template:
-        $ref: '#/definitions/SmsTemplate'
+        $ref: "#/definitions/SmsTemplate"
     required:
       - messages
     type: object
@@ -185,7 +186,7 @@ definitions:
       includeMessagesInResponse:
         type: boolean
       template:
-        $ref: '#/definitions/SmsTemplate'
+        $ref: "#/definitions/SmsTemplate"
     required:
       - destinations
       - template
@@ -202,7 +203,7 @@ definitions:
         type: string
       messages:
         items:
-          $ref: '#/definitions/SmsResponse'
+          $ref: "#/definitions/SmsResponse"
         type: array
       rejectedCount:
         format: int32
@@ -231,7 +232,7 @@ definitions:
         maxLength: 20
         type: string
       destination:
-        pattern: '^\+{0,1}[1-9]{1}[0-9]{6,14}$'
+        pattern: ^\+{0,1}[1-9]{1}[0-9]{6,14}$
         type: string
       encoding:
         enum:
@@ -260,7 +261,7 @@ definitions:
       destination:
         type: string
       status:
-        $ref: '#/definitions/SmsStatus'
+        $ref: "#/definitions/SmsStatus"
       umid:
         type: string
     type: object

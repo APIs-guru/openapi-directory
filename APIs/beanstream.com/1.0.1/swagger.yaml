@@ -1,10 +1,10 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: www.beanstream.com
 basePath: /api/v1
 info:
-  description: 'https://www.beanstream.com/api/v1'
+  description: https://www.beanstream.com/api/v1
   title: Beanstream Payments
   version: 1.0.1
   x-apisguru-categories:
@@ -12,60 +12,61 @@ info:
     - financial
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/bambora_na/profile_image?size=original'
+    url: https://twitter.com/bambora_na/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://support.beanstream.com/restapi/swagger.json'
-      version: '2.0'
+      url: http://support.beanstream.com/restapi/swagger.json
+      version: "2.0"
   x-providerName: beanstream.com
   x-tags:
     - payments
     - bank-neutral
     - omni-channel reporting
+  x-preferred: true
 produces:
   - application/json
 paths:
   /payments:
     post:
-      description: 'Make a payment using credit card, cash, cheque, profile, or token. Each payment type has its own json definition passed in the body. For all payments you have the standard Billing, Shipping, Comments, etc. fields that are optional. Only the amount is required along with the payment data for card, cash, cheque, profile, and token. You must change the payment_method for each payment type. Credit Card - "card", Payment Profile - "payment_profile", Legato Token - "token", Cash - "cash", Cheque - "cheque", Interac - "interac"'
+      description: Make a payment using credit card, cash, cheque, profile, or token. Each payment type has its own json definition passed in the body. For all payments you have the standard Billing, Shipping, Comments, etc. fields that are optional. Only the amount is required along with the payment data for card, cash, cheque, profile, and token. You must change the payment_method for each payment type. Credit Card - "card", Payment Profile - "payment_profile", Legato Token - "token", Cash - "cash", Cheque - "cheque", Interac - "interac"
       parameters:
         - in: body
           name: payment_request
           schema:
-            $ref: '#/definitions/PaymentRequest'
+            $ref: "#/definitions/PaymentRequest"
       responses:
-        '200':
+        "200":
           description: Payment response containing the payment details as well as if the payment was approved or declined.
           schema:
-            $ref: '#/definitions/PaymentResponse'
-        '400':
+            $ref: "#/definitions/PaymentResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Make Payment
       tags:
         - Payments
-  '/payments/{transId}':
+  "/payments/{transId}":
     get:
       description: Get a previous payment (transaction).
       parameters:
@@ -76,38 +77,38 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: A transaction object.
           schema:
-            $ref: '#/definitions/Transaction'
-        '400':
+            $ref: "#/definitions/Transaction"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Get payment
       tags:
         - Payments
-  '/payments/{transId}/completions':
+  "/payments/{transId}/completions":
     post:
       description: Complete a pre-authorized payment. The amount of the transaction to complete must be less than or equal to the original pre-auth amount. Complete must be set to true.
       parameters:
@@ -120,40 +121,40 @@ paths:
         - in: body
           name: payment_request
           schema:
-            $ref: '#/definitions/PaymentRequest'
+            $ref: "#/definitions/PaymentRequest"
       responses:
-        '200':
+        "200":
           description: Payment response containing the payment details as well as if the transaction was approved or declined.
           schema:
-            $ref: '#/definitions/PaymentResponse'
-        '400':
+            $ref: "#/definitions/PaymentResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Complete pre-auth
       tags:
         - Payments
-  '/payments/{transId}/returns':
+  "/payments/{transId}/returns":
     post:
       description: Return payment.
       parameters:
@@ -167,42 +168,42 @@ paths:
           name: return
           required: true
           schema:
-            $ref: '#/definitions/Return'
+            $ref: "#/definitions/Return"
       responses:
-        '200':
+        "200":
           description: Payment response containing the payment details as well as if the transaction was approved or declined.
           schema:
-            $ref: '#/definitions/PaymentResponse'
-        '400':
+            $ref: "#/definitions/PaymentResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Return payment
       tags:
         - Payments
-  '/payments/{transId}/void':
+  "/payments/{transId}/void":
     post:
-      description: 'Void a transaction. You can void payments, returns, pre-auths, and completions. It will cancel that transaction.'
+      description: Void a transaction. You can void payments, returns, pre-auths, and completions. It will cancel that transaction.
       parameters:
         - description: The transaction id to void.
           format: double
@@ -214,36 +215,36 @@ paths:
           name: void
           required: true
           schema:
-            $ref: '#/definitions/Void'
+            $ref: "#/definitions/Void"
       responses:
-        '200':
+        "200":
           description: Payment response containing the payment details as well as if the transaction was approved or declined.
           schema:
-            $ref: '#/definitions/PaymentResponse'
-        '400':
+            $ref: "#/definitions/PaymentResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Void Transaction
       tags:
         - Payments
@@ -255,42 +256,42 @@ paths:
           name: createProfileBody
           required: true
           schema:
-            $ref: '#/definitions/CreateProfileBody'
+            $ref: "#/definitions/CreateProfileBody"
       responses:
-        '200':
+        "200":
           description: The Profile.
           schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
+            $ref: "#/definitions/ProfileResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Create Profile
       tags:
         - Profiles
-  '/profiles/{profileId}':
+  "/profiles/{profileId}":
     delete:
-      description: 'Delete a Payment Profile using the profile ID, also known as the Customer Code.'
+      description: Delete a Payment Profile using the profile ID, also known as the Customer Code.
       parameters:
         - description: The profile id. (aka CustomerCode)
           in: path
@@ -298,39 +299,39 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The Profile.
           schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
+            $ref: "#/definitions/ProfileResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Delete profile
       tags:
         - Profiles
     get:
-      description: 'Get a Payment Profile using the profile ID, also known as the Customer Code.'
+      description: Get a Payment Profile using the profile ID, also known as the Customer Code.
       parameters:
         - description: The profile id. (aka CustomerCode)
           in: path
@@ -338,34 +339,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The Profile.
           schema:
-            $ref: '#/definitions/PaymentProfile'
-        '400':
+            $ref: "#/definitions/PaymentProfile"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Get profile
       tags:
         - Profiles
@@ -381,40 +382,40 @@ paths:
           name: updateProfileBody
           required: true
           schema:
-            $ref: '#/definitions/UpdateProfileBody'
+            $ref: "#/definitions/UpdateProfileBody"
       responses:
-        '200':
+        "200":
           description: The Profile.
           schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
+            $ref: "#/definitions/ProfileResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Update Profile
       tags:
         - Profiles
-  '/profiles/{profileId}/cards':
+  "/profiles/{profileId}/cards":
     get:
       description: Get all of the cards on the profile.
       parameters:
@@ -424,34 +425,34 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The Profile.
           schema:
-            $ref: '#/definitions/ProfileGetCards'
-        '400':
+            $ref: "#/definitions/ProfileGetCards"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Get cards
       tags:
         - Profiles
@@ -468,40 +469,40 @@ paths:
           name: card
           required: true
           schema:
-            $ref: '#/definitions/ProfileCard'
+            $ref: "#/definitions/ProfileCard"
       responses:
-        '200':
+        "200":
           description: The Profile.
           schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
+            $ref: "#/definitions/ProfileResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Add card
       tags:
         - Profiles
-  '/profiles/{profileId}/cards/{cardId}':
+  "/profiles/{profileId}/cards/{cardId}":
     delete:
       description: Delete a card on the profile.
       parameters:
@@ -517,34 +518,34 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: The Profile.
           schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
+            $ref: "#/definitions/ProfileResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Delete card
       tags:
         - Profiles
@@ -567,92 +568,92 @@ paths:
           name: card
           required: true
           schema:
-            $ref: '#/definitions/ProfileCard'
+            $ref: "#/definitions/ProfileCard"
       responses:
-        '200':
+        "200":
           description: The Profile.
           schema:
-            $ref: '#/definitions/ProfileResponse'
-        '400':
+            $ref: "#/definitions/ProfileResponse"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Update card
       tags:
         - Profiles
   /reports:
     post:
-      description: 'Query for transactions using a date range and optional search criteria. This method allows you to page your search results if you are expecting a lot of results to be returned. The page start value begins at 1. If no records are found the API will return a 404 error message. For details on the parameters and allowed values for Criteria please visit the documentation http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/'
+      description: Query for transactions using a date range and optional search criteria. This method allows you to page your search results if you are expecting a lot of results to be returned. The page start value begins at 1. If no records are found the API will return a 404 error message. For details on the parameters and allowed values for Criteria please visit the documentation http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/
       parameters:
         - in: body
           name: search_query
           schema:
-            $ref: '#/definitions/SearchQuery'
+            $ref: "#/definitions/SearchQuery"
       responses:
-        '200':
+        "200":
           description: A transaction object.
           schema:
-            $ref: '#/definitions/SearchResult'
-        '400':
+            $ref: "#/definitions/SearchResult"
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '401':
+            $ref: "#/definitions/BeanstreamException"
+        "401":
           description: Authentication Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '402':
+            $ref: "#/definitions/BeanstreamException"
+        "402":
           description: Business Rule Violation or Decline
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '403':
+            $ref: "#/definitions/BeanstreamException"
+        "403":
           description: Authorization Failure
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '405':
+            $ref: "#/definitions/BeanstreamException"
+        "405":
           description: Invalid Request Method
           schema:
-            $ref: '#/definitions/BeanstreamException'
-        '500':
+            $ref: "#/definitions/BeanstreamException"
+        "500":
           description: Internal Server Error
           schema:
-            $ref: '#/definitions/BeanstreamException'
+            $ref: "#/definitions/BeanstreamException"
       summary: Search Query
       tags:
         - Reporting
   /scripts/tokenization/tokens:
     post:
-      description: 'NOTE that the full URL for this API call is https://www.beanstream.com/scripts/tokenization/tokens. Turn a credit card into a token using this service. This helps lessen your PCI scope by not passing the credit card information to your server. Instead you turn the card number into a token in the client app, then send the token to the server. When you send the token to Beanstream to make a payment, Beanstream then looks up the card number from that token and makes the payment. Tokens can also be used to create payment profiles.'
+      description: NOTE that the full URL for this API call is https://www.beanstream.com/scripts/tokenization/tokens. Turn a credit card into a token using this service. This helps lessen your PCI scope by not passing the credit card information to your server. Instead you turn the card number into a token in the client app, then send the token to the server. When you send the token to Beanstream to make a payment, Beanstream then looks up the card number from that token and makes the payment. Tokens can also be used to create payment profiles.
       parameters:
         - in: body
           name: token_request
           schema:
-            $ref: '#/definitions/TokenRequest'
+            $ref: "#/definitions/TokenRequest"
       responses:
-        '200':
+        "200":
           description: Token response object. One will always be returned even if the data or card was invalid. The validity of the card is not checked with this API call.
           schema:
-            $ref: '#/definitions/TokenResponse'
+            $ref: "#/definitions/TokenResponse"
       summary: Tokenize credit card
       tags:
         - Tokenization
@@ -695,7 +696,7 @@ definitions:
         format: integer
         type: number
       created:
-        description: 'The date it was created ''2015-04-22T10:03:19.323-07:00'''
+        description: The date it was created '2015-04-22T10:03:19.323-07:00'
         type: string
       id:
         format: integer
@@ -716,7 +717,7 @@ definitions:
         type: integer
       details:
         items:
-          $ref: '#/definitions/Detail'
+          $ref: "#/definitions/Detail"
         type: array
       message:
         type: string
@@ -726,25 +727,25 @@ definitions:
     properties:
       complete:
         default: true
-        description: 'set to false for Pre-Authorize, and true to complete a payment'
+        description: set to false for Pre-Authorize, and true to complete a payment
         type: boolean
       cvd:
-        default: '123'
+        default: "123"
         description: Security code on the back of the credit card. This can be set to mandatory in the back office. digits(3 or 4)
         type: string
       expiry_month:
-        default: '02'
+        default: "02"
         description: eg. 02 for February. digits(2)
         type: string
       expiry_year:
-        default: '18'
+        default: "18"
         description: eg. 15 for 2015. digits(2)
         type: string
       name:
         description: Card holder name. alphanumeric(64)
         type: string
       number:
-        default: '5100000010001004'
+        default: "5100000010001004"
         description: Credit card number (PAN). digits(20)
         type: string
     required:
@@ -795,27 +796,27 @@ definitions:
   CreateProfileBody:
     properties:
       billing:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       card:
-        $ref: '#/definitions/ProfileFromCard'
+        $ref: "#/definitions/ProfileFromCard"
       comment:
         description: alphanumeric(256)
         type: string
       custom:
-        $ref: '#/definitions/Custom'
+        $ref: "#/definitions/Custom"
       language:
         description: characters(2)
         type: string
       token:
-        $ref: '#/definitions/ProfileFromToken'
+        $ref: "#/definitions/ProfileFromToken"
   Criteria:
     properties:
       field:
-        description: 'Refer to the table on this page for the searchable fields http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/'
+        description: Refer to the table on this page for the searchable fields http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/
         format: integer
         type: number
       operator:
-        description: 'URL encoded comparators such as less than, greater than, equals... Refer to the table on this page for the full list of comparators http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/'
+        description: URL encoded comparators such as less than, greater than, equals... Refer to the table on this page for the full list of comparators http://developer.beanstream.com/documentation/analyze-payments/search-specific-criteria/
         type: string
       value:
         description: The value you want to match against.
@@ -846,7 +847,7 @@ definitions:
   GetProfileDefaultCard:
     properties:
       card_type:
-        description: 'MC, VI etc. characters(2)'
+        description: MC, VI etc. characters(2)
         type: string
       expiry_month:
         description: digits(2)
@@ -863,10 +864,10 @@ definitions:
   Link:
     properties:
       href:
-        description: 'alphanumeric (256). Url to perform the void, return, completion etc.'
+        description: alphanumeric (256). Url to perform the void, return, completion etc.
         type: string
       method:
-        description: 'characters (16). Http method. post, put, get etc.'
+        description: characters (16). Http method. post, put, get etc.
         type: string
       ref:
         description: characters (16). Eg. "void" or "return"
@@ -876,15 +877,15 @@ definitions:
       account_ref:
         type: string
       billing:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       card:
-        $ref: '#/definitions/GetProfileDefaultCard'
+        $ref: "#/definitions/GetProfileDefaultCard"
       code:
         description: digits(2)
         format: int32
         type: integer
       custom:
-        $ref: '#/definitions/Custom'
+        $ref: "#/definitions/Custom"
       customer_code:
         description: alphanumeric(32)
         type: string
@@ -910,20 +911,20 @@ definitions:
   PaymentRequest:
     properties:
       amount:
-        description: 'A decimal value in dollars, or relevant currency. digits(9)'
+        description: A decimal value in dollars, or relevant currency. digits(9)
         format: double
         type: number
       billing:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
         description: The billing address
       card:
-        $ref: '#/definitions/Card'
+        $ref: "#/definitions/Card"
         description: Payment with a credit card. The payment_method must be 'card'
       comments:
         description: alphanumeric (256)
         type: string
       custom:
-        $ref: '#/definitions/Custom'
+        $ref: "#/definitions/Custom"
       customer_ip:
         description: alphanumeric (30)
         type: string
@@ -934,19 +935,19 @@ definitions:
         description: A unique order number. alphanumeric(30)
         type: string
       payment_method:
-        description: 'One of (card, token, payment_profile, cash, cheque). characters(20)'
+        description: One of (card, token, payment_profile, cash, cheque). characters(20)
         type: string
       payment_profile:
-        $ref: '#/definitions/ProfilePurchase'
+        $ref: "#/definitions/ProfilePurchase"
         description: Payment with a Payment Profile. The payment_method must be 'payment_profile'
       shipping:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
         description: The shipping address
       term_url:
         description: alphanumeric (256)
         type: string
       token:
-        $ref: '#/definitions/TokenPurchase'
+        $ref: "#/definitions/TokenPurchase"
         description: Payment with a Legato token. The payment_method must be 'token'
     required:
       - amount
@@ -954,13 +955,13 @@ definitions:
   PaymentResponse:
     properties:
       approved:
-        description: 'Approved = 1, declined = 0'
+        description: Approved = 1, declined = 0
         type: integer
       auth_code:
         description: alphanumeric (32)
         type: string
       card:
-        $ref: '#/definitions/CardPurchaseResponse'
+        $ref: "#/definitions/CardPurchaseResponse"
       created:
         description: alphanumeric (32)
         type: string
@@ -969,7 +970,7 @@ definitions:
         type: string
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       message:
         description: alphanumeric (256)
@@ -1006,7 +1007,7 @@ definitions:
         description: 1-indexed card ID. Total number of cards allowed is configured in your merchant account.
         type: string
       card_type:
-        description: 'MC, VI etc. characters(2)'
+        description: MC, VI etc. characters(2)
         type: string
       expiry_month:
         description: digits(2)
@@ -1023,19 +1024,19 @@ definitions:
   ProfileFromCard:
     properties:
       cvd:
-        default: '123'
+        default: "123"
         description: Security code on the back of the credit card. This can be set to mandatory in the back office. digits(3)
         type: string
       expiry_month:
-        default: '02'
+        default: "02"
         description: eg. 02 for February. digits(2)
         type: string
       expiry_year:
-        default: '18'
+        default: "18"
         description: digits(2)
         type: string
       name:
-        default: '5100000010001004'
+        default: "5100000010001004"
         description: Card holder name. alphanumeric(64)
         type: string
       number:
@@ -1061,7 +1062,7 @@ definitions:
     properties:
       card:
         items:
-          $ref: '#/definitions/ProfileCards'
+          $ref: "#/definitions/ProfileCards"
         type: array
       code:
         description: digits(2)
@@ -1121,10 +1122,10 @@ definitions:
       criteria:
         description: Optional search criteria. All criteria are ANDed together.
         items:
-          $ref: '#/definitions/Criteria'
+          $ref: "#/definitions/Criteria"
         type: array
       end_date:
-        description: 'The end date (inclusive) ''2015-04-22T10:03:19'' in the timezone of your merchant account.'
+        description: The end date (inclusive) '2015-04-22T10:03:19' in the timezone of your merchant account.
         type: string
       end_row:
         default: 2
@@ -1135,7 +1136,7 @@ definitions:
         description: Only accepts 2 values. Can be either 'Search' for all fields or 'TransHistoryMinimal' for a subset of the fields returned in the results.
         type: string
       start_date:
-        description: 'The start date (inclusive) ''2015-04-22T10:03:19'' in the timezone of your merchant account.'
+        description: The start date (inclusive) '2015-04-22T10:03:19' in the timezone of your merchant account.
         type: string
       start_row:
         default: 1
@@ -1169,7 +1170,7 @@ definitions:
       b_province:
         type: string
       customer_code:
-        description: 'The PaymentProfile ID used in this transaction, if appropriate.'
+        description: The PaymentProfile ID used in this transaction, if appropriate.
         type: string
       message_id:
         format: integer
@@ -1236,7 +1237,7 @@ definitions:
         format: integer
         type: number
       trn_date_time:
-        description: '2015-04-22T10:03:19.323-07:00'
+        description: 2015-04-22T10:03:19.323-07:00
         type: string
       trn_id:
         format: integer
@@ -1268,7 +1269,7 @@ definitions:
     properties:
       records:
         items:
-          $ref: '#/definitions/SearchRecord'
+          $ref: "#/definitions/SearchRecord"
         type: array
   TokenPurchase:
     properties:
@@ -1309,10 +1310,10 @@ definitions:
         description: Response code for the message. It can be ignored.
         type: string
       message:
-        description: 'Response message with any hints as to what might have gone wrong, if something went wrong.'
+        description: Response message with any hints as to what might have gone wrong, if something went wrong.
         type: string
       token:
-        description: 'The token representing the credit card number that you will send to Beanstream for purchases. You will always receive a token, even if the request data is wrong or the card is invalid.'
+        description: The token representing the credit card number that you will send to Beanstream for purchases. You will always receive a token, even if the request data is wrong or the card is invalid.
         type: string
       version:
         description: Message version number. Can be ignored.
@@ -1323,7 +1324,7 @@ definitions:
     properties:
       adjusted_by:
         items:
-          $ref: '#/definitions/Adjustment'
+          $ref: "#/definitions/Adjustment"
         type: array
       amount:
         format: double
@@ -1335,22 +1336,22 @@ definitions:
       batch_number:
         type: string
       billing:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       card:
-        $ref: '#/definitions/CardGetTransactionResponse'
+        $ref: "#/definitions/CardGetTransactionResponse"
       comments:
         type: string
       created:
-        description: 'The date it was created ''2015-04-22T10:03:19.323-07:00'''
+        description: The date it was created '2015-04-22T10:03:19.323-07:00'
         type: string
       custom:
-        $ref: '#/definitions/Custom'
+        $ref: "#/definitions/Custom"
       id:
         format: integer
         type: number
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       message:
         type: string
@@ -1362,7 +1363,7 @@ definitions:
       payment_method:
         type: string
       shipping:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       total_completions:
         format: double
         type: number
@@ -1374,14 +1375,14 @@ definitions:
   UpdateProfileBody:
     properties:
       billing:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       card:
-        $ref: '#/definitions/ProfileToken'
+        $ref: "#/definitions/ProfileToken"
       comment:
         description: alphanumeric(256)
         type: string
       custom:
-        $ref: '#/definitions/Custom'
+        $ref: "#/definitions/Custom"
       language:
         description: characters(2)
         type: string

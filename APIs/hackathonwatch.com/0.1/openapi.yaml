@@ -1,23 +1,24 @@
 openapi: 3.0.0
 servers:
-  - url: 'http://www.hackathonwatch.com/api/'
+  - url: http://www.hackathonwatch.com/api/
 info:
   contact:
     x-twitter: Hackathonwatch
   title: HackathonWatch
-  version: '0.1'
+  version: "0.1"
   x-apisguru-categories:
     - social
   x-logo:
-    url: 'https://twitter.com/Hackathonwatch/profile_image?size=original'
+    url: https://twitter.com/Hackathonwatch/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: swagger
-      url: 'http://www.hackathonwatch.com/api/swagger_doc'
-      version: '1.2'
+      url: http://www.hackathonwatch.com/api/swagger_doc
+      version: "1.2"
   x-providerName: hackathonwatch.com
+  x-preferred: true
 tags:
   - description: Operations about hackathons
     name: hackathons
@@ -37,12 +38,12 @@ paths:
             format: int32
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return a list of coming hackathons
       tags:
         - hackathons
-  '/hackathons/{id}.json':
+  "/hackathons/{id}.json":
     get:
       operationId: GET-hackathons--id---format-
       parameters:
@@ -54,7 +55,7 @@ paths:
             format: int32
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return the detail of a given hackathon
       tags:
@@ -63,12 +64,12 @@ paths:
     get:
       operationId: GET-swagger_doc---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Swagger compatible API description
       tags:
         - swagger_doc
-  '/swagger_doc/{name}.json':
+  "/swagger_doc/{name}.json":
     get:
       operationId: GET-swagger_doc--name---format-
       parameters:
@@ -79,7 +80,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Swagger compatible API description for specific API
       tags:

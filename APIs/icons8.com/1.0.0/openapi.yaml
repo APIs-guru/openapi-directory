@@ -1,88 +1,128 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.icons8.com/'
+  - url: https://api.icons8.com/
 info:
-  description: |-
+  description: >-
     # Icons8 API
+
 
     Icons8 API allows us to search and obtain [our icons](https://icons8.com/web-app).
 
+
     You're welcome to use our icons to extend the functionality of your web and mobile applications, website templates, and even tattoos.
+
 
     ![Tattoos](https://cdn.rawgit.com/icons8/api-docs/cff6fdf0/tattoos.svg)
 
+
     ## Usage Examples
+
 
     Some examples of what you can do with our icons:
 
+
     * **Template customization.** This way, [Canva](https://www.canva.com/) uses our icons to customize their layouts.
+
 
     * **Graphics and text editors.** [Gravit](https://gravit.io/) allows to insert our icons into the mockups.
 
+
     * **Any application with customization.** [TimeTune](http://timetune.center/) uses our icons to customize the activities.
+
 
     ## Getting Started
 
+
     To get started, please [contact us](https://icons8.com/contact) to obtain an API key.
+
 
     ## Pricing
 
+
     Our API license starts at $100/month.
-  title: 'Use a [New Version](https://icons8.github.io/icons8-docs/) Instead'
+  title: Use a [New Version](https://icons8.github.io/icons8-docs/) Instead
   version: 1.0.0
   x-apisguru-categories:
     - media
   x-logo:
-    url: 'https://twitter.com/icons_8/profile_image?size=original'
+    url: https://twitter.com/icons_8/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: apiBlueprint
-      url: 'https://raw.githubusercontent.com/icons8/api-docs/master/apiary.apib'
+      url: https://raw.githubusercontent.com/icons8/api-docs/master/apiary.apib
       version: 1A
   x-providerName: icons8.com
+  x-preferred: true
 tags:
-  - description: |-
+  - description: >-
       ## Platform
 
+
       Attributes and parameters named `platform` or `platform_api_code` or `platform_code` all indicate the style of the icons.
+
       We’re sorry we have various parameters meaning the same.
 
+
       `platform` | Icon style | Example
+
       ---:|---|---
+
       win8 | icons in the Microsoft Windows 8/Metro style | [example](https://icons8.com/windows-8-icons/)
+
       win10 | icons in the Microsoft Windows 10/Threshold style | [example](https://icons8.com/download-huge-windows8-set/)
+
       ios7 | icons in the Apple iOS 7/8/9/10 style | [example](https://icons8.com/free-ios-7-icons-in-vector/)
+
       android | icons in the Google Android 4 Kitkat style | [example](https://icons8.com/android-kitkat-icons/)
+
       androidL | icons in the Google Android 5 Lollipop (Material) style | [example](https://icons8.com/android-icons/)
+
       color | flat color icons | [example](https://icons8.com/color-icons/)
+
       office | icons in the Microsoft Office style | [example](https://icons8.com/office-icons/)
+
 
       ## Language
 
+
       Icon names, categories and tags are localized. Here's the list of supported languages:
 
+
       `language` | Language name
+
       ---|---
+
       `en-US` | English
+
       `fr-FR` | French
+
       `de-DE` | German
+
       `it-IT` | Italian
+
       `pt-BR` | Portuguese
+
       `pl-PL` | Polish
+
       `ru-RU` | Russian
+
       `es-ES` | Spanish
+
       `zh-CN` | Chinese
+
       `ja-JP` | Japanese
+
 
       The primary language is English - if we do not translate something, it will be in English.
     name: Parameters
 paths:
-  '/api/iconsets/v3/categories?platform={platform}&language={language}':
+  "/api/iconsets/v3/categories?platform={platform}&language={language}":
     get:
-      description: |-
+      description: >-
         The operation will not return the categories that have less than 10 icons.
+
         We need it to test the categories without showing garbage on the production website.
       parameters:
         - description: the platform that we are searching icons for
@@ -116,91 +156,91 @@ paths:
               - es-ES
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
                 response:
                   value:
                     parameters:
-                      language: ''
-                      platform: ''
+                      language: ""
+                      platform: ""
                     result:
                       categories:
-                        - category_code: ''
-                          category_name: ''
+                        - category_code: ""
+                          category_name: ""
                           subcategory:
                             - icons:
                                 - common_icon_id: 0
-                                  created: ''
+                                  created: ""
                                   features:
                                     bitmap: 0
                                     nolink: 0
                                     vector: 0
                                   id: 0
-                                  name: ''
-                                  platform_code: ''
-                                  svg: ''
-                                  url: ''
-                              subcategory_code: ''
-                              subcategory_name: ''
+                                  name: ""
+                                  platform_code: ""
+                                  svg: ""
+                                  url: ""
+                              subcategory_code: ""
+                              subcategory_name: ""
                         - api_code: Alphabet
-                          category_code: ''
-                          category_name: ''
+                          category_code: ""
+                          category_name: ""
                           name: Alphabet
                           subcategory:
                             - icons:
                                 - common_icon_id: 0
-                                  created: ''
+                                  created: ""
                                   features:
                                     bitmap: 0
                                     nolink: 0
                                     vector: 0
                                   id: 0
-                                  name: ''
-                                  platform_code: ''
-                                  svg: ''
-                                  url: ''
-                              subcategory_code: ''
-                              subcategory_name: ''
+                                  name: ""
+                                  platform_code: ""
+                                  svg: ""
+                                  url: ""
+                              subcategory_code: ""
+                              subcategory_name: ""
                         - api_code: Very_Basic
-                          category_code: ''
-                          category_name: ''
+                          category_code: ""
+                          category_name: ""
                           name: Very Basic
                           subcategory:
                             - icons:
                                 - common_icon_id: 0
-                                  created: ''
+                                  created: ""
                                   features:
                                     bitmap: 0
                                     nolink: 0
                                     vector: 0
                                   id: 0
-                                  name: ''
-                                  platform_code: ''
-                                  svg: ''
-                                  url: ''
-                              subcategory_code: ''
-                              subcategory_name: ''
+                                  name: ""
+                                  platform_code: ""
+                                  svg: ""
+                                  url: ""
+                              subcategory_code: ""
+                              subcategory_name: ""
                         - api_code: Photo_Video
-                          category_code: ''
-                          category_name: ''
+                          category_code: ""
+                          category_name: ""
                           name: Photo and Video
                           subcategory:
                             - icons:
                                 - common_icon_id: 0
-                                  created: ''
+                                  created: ""
                                   features:
                                     bitmap: 0
                                     nolink: 0
                                     vector: 0
                                   id: 0
-                                  name: ''
-                                  platform_code: ''
-                                  svg: ''
-                                  url: ''
-                              subcategory_code: ''
-                              subcategory_name: ''
+                                  name: ""
+                                  platform_code: ""
+                                  svg: ""
+                                  url: ""
+                              subcategory_code: ""
+                              subcategory_name: ""
               schema:
                 properties:
                   parameters:
@@ -223,9 +263,9 @@ paths:
           headers: {}
       summary: Categories
       tags: []
-  '/api/iconsets/v3/category?category={category}&subcategory={subcategory}&amount={amount}&offset={offset}&platform={platform}&language={language}':
+  "/api/iconsets/v3/category?category={category}&subcategory={subcategory}&amount={amount}&offset={offset}&platform={platform}&language={language}":
     get:
-      description: ''
+      description: ""
       parameters:
         - description: the code of category
           example: free_icons
@@ -285,7 +325,7 @@ paths:
               - es-ES
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -293,48 +333,48 @@ paths:
                   value:
                     parameters:
                       amount: 0
-                      category: ''
-                      language: ''
-                      offset: ''
-                      platform: ''
-                      subcategory: ''
+                      category: ""
+                      language: ""
+                      offset: ""
+                      platform: ""
+                      subcategory: ""
                     result:
                       category:
-                        - category_code: ''
-                          category_name: ''
+                        - category_code: ""
+                          category_name: ""
                           subcategory:
                             - icons:
                                 - common_icon_id: 0
-                                  created: ''
+                                  created: ""
                                   features:
                                     bitmap: 0
                                     nolink: 0
                                     vector: 0
                                   id: 0
-                                  name: ''
-                                  platform_code: ''
-                                  svg: ''
-                                  url: ''
-                              subcategory_code: ''
-                              subcategory_name: ''
+                                  name: ""
+                                  platform_code: ""
+                                  svg: ""
+                                  url: ""
+                              subcategory_code: ""
+                              subcategory_name: ""
                         - category: Very Basic
-                          common_icon_id: '72'
-                          created: '2015-05-21T05:28:59+00:00'
+                          common_icon_id: "72"
+                          created: 2015-05-21T05:28:59+00:00
                           features:
-                            bitmap: '1'
-                            nolink: '1'
-                            vector: '1'
-                          id: '12229'
+                            bitmap: "1"
+                            nolink: "1"
+                            vector: "1"
+                          id: "12229"
                           name: Home
                           platform_code: color
                           share:
                             png:
-                              - link: 'https://maxcdn.icons8.com/Share/google/h/home.png'
-                              - link: 'https://maxcdn.icons8.com/Share/twitter/h/home.png'
+                              - link: https://maxcdn.icons8.com/Share/google/h/home.png
+                              - link: https://maxcdn.icons8.com/Share/twitter/h/home.png
                                 type: twitter
-                              - link: 'https://maxcdn.icons8.com/Share/social/h/home.png'
+                              - link: https://maxcdn.icons8.com/Share/social/h/home.png
                                 type: social
-                            url: 'http://ic8.link/12229'
+                            url: http://ic8.link/12229
                           subcategory:
                             api_code: website_sections
                             name: Website Sections
@@ -375,9 +415,9 @@ paths:
           headers: {}
       summary: By Category
       tags: []
-  '/api/iconsets/v3/latest?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}':
+  "/api/iconsets/v3/latest?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}":
     get:
-      description: ''
+      description: ""
       parameters:
         - description: the maximum number of icons which you'd like to receive
           in: path
@@ -423,7 +463,7 @@ paths:
               - es-ES
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -431,10 +471,10 @@ paths:
                   value:
                     parameters:
                       amount: 0
-                      language: ''
-                      offset: ''
-                      platform: ''
-                      term: ''
+                      language: ""
+                      offset: ""
+                      platform: ""
+                      term: ""
                     result:
                       latest:
                         - common_icon_id: 0
@@ -444,46 +484,46 @@ paths:
                             nolink: 0
                             vector: 0
                           id: 0
-                          name: ''
-                          platform_code: ''
+                          name: ""
+                          platform_code: ""
                           share:
                             png:
-                              - link: ''
-                            url: ''
+                              - link: ""
+                            url: ""
                           subcategory:
-                            api_code: ''
-                            name: ''
-                          svg: ''
+                            api_code: ""
+                            name: ""
+                          svg: ""
                           vector:
-                            eps: ''
-                            pdf: ''
-                            svg-simplified: ''
-                        - common_icon_id: '72'
-                          created: '2015-05-21T05:28:59+00:00'
+                            eps: ""
+                            pdf: ""
+                            svg-simplified: ""
+                        - common_icon_id: "72"
+                          created: 2015-05-21T05:28:59+00:00
                           features:
-                            bitmap: '1'
-                            nolink: '1'
-                            vector: '1'
-                          id: '12229'
+                            bitmap: "1"
+                            nolink: "1"
+                            vector: "1"
+                          id: "12229"
                           name: Home
                           platform_code: color
                           share:
                             png:
-                              - link: 'https://maxcdn.icons8.com/Share/google/h/home.png'
-                              - link: 'https://maxcdn.icons8.com/Share/twitter/h/home.png'
+                              - link: https://maxcdn.icons8.com/Share/google/h/home.png
+                              - link: https://maxcdn.icons8.com/Share/twitter/h/home.png
                                 type: twitter
-                              - link: 'https://maxcdn.icons8.com/Share/social/h/home.png'
+                              - link: https://maxcdn.icons8.com/Share/social/h/home.png
                                 type: social
-                            url: 'http://ic8.link/12229'
+                            url: http://ic8.link/12229
                           subcategory:
-                            api_code: ''
-                            name: ''
-                          svg: ''
+                            api_code: ""
+                            name: ""
+                          svg: ""
                           url: /web-app/12229/home
                           vector:
-                            eps: ''
-                            pdf: ''
-                            svg-simplified: ''
+                            eps: ""
+                            pdf: ""
+                            svg-simplified: ""
               schema:
                 properties:
                   parameters:
@@ -512,12 +552,13 @@ paths:
           headers: {}
       summary: Latest
       tags: []
-  '/api/iconsets/v3/search?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}&exact_amount={exact_amount}':
+  "/api/iconsets/v3/search?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}&exact_amount={exact_amount}":
     get:
-      description: ''
+      description: ""
       parameters:
-        - description: |
+        - description: >
             the name or tag of the icon or any other phrase.
+
             e.g. use "@home" to find icons with the tag "home" and "=home" to find icons with the name "home"
           example: home
           in: path
@@ -525,14 +566,14 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'the maximum number of icons which you''d like to receive (will be multiplied by platforms count, if you didn''t specify the platform and didn''t set the ''exact_amount'' parameter)'
+        - description: the maximum number of icons which you'd like to receive (will be multiplied by platforms count, if you didn't specify the platform and didn't set the 'exact_amount' parameter)
           in: path
           name: amount
           required: true
           schema:
             default: 25
             type: number
-        - description: 'set it to ''true'' if you''d like to receive the exact amount of icons, not multiplied by platforms count'
+        - description: set it to 'true' if you'd like to receive the exact amount of icons, not multiplied by platforms count
           in: path
           name: exact_amount
           required: true
@@ -575,7 +616,7 @@ paths:
               - es-ES
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -583,10 +624,10 @@ paths:
                   value:
                     parameters:
                       amount: 0
-                      language: ''
-                      offset: ''
-                      platform: ''
-                      term: ''
+                      language: ""
+                      offset: ""
+                      platform: ""
+                      term: ""
                     result:
                       search:
                         - common_icon_id: 0
@@ -596,38 +637,38 @@ paths:
                             nolink: 0
                             vector: 0
                           id: 0
-                          name: ''
-                          platform_code: ''
+                          name: ""
+                          platform_code: ""
                           share:
                             png:
-                              - link: ''
-                            url: ''
+                              - link: ""
+                            url: ""
                           subcategory:
-                            api_code: ''
-                            name: ''
-                          svg: ''
+                            api_code: ""
+                            name: ""
+                          svg: ""
                           vector:
-                            eps: ''
-                            pdf: ''
-                            svg-simplified: ''
+                            eps: ""
+                            pdf: ""
+                            svg-simplified: ""
                         - category: Very Basic
-                          common_icon_id: '72'
-                          created: '2015-05-21T05:28:59+00:00'
+                          common_icon_id: "72"
+                          created: 2015-05-21T05:28:59+00:00
                           features:
-                            bitmap: '1'
-                            nolink: '1'
-                            vector: '1'
-                          id: '12229'
+                            bitmap: "1"
+                            nolink: "1"
+                            vector: "1"
+                          id: "12229"
                           name: Home
                           platform_code: color
                           share:
                             png:
-                              - link: 'https://maxcdn.icons8.com/Share/google/h/home.png'
-                              - link: 'https://maxcdn.icons8.com/Share/twitter/h/home.png'
+                              - link: https://maxcdn.icons8.com/Share/google/h/home.png
+                              - link: https://maxcdn.icons8.com/Share/twitter/h/home.png
                                 type: twitter
-                              - link: 'https://maxcdn.icons8.com/Share/social/h/home.png'
+                              - link: https://maxcdn.icons8.com/Share/social/h/home.png
                                 type: social
-                            url: 'http://ic8.link/12229'
+                            url: http://ic8.link/12229
                           subcategory:
                             api_code: website_sections
                             name: Website Sections
@@ -666,39 +707,40 @@ paths:
           headers: {}
       summary: By Keyword v3
       tags: []
-  '/api/iconsets/v3/total?since={since}':
+  "/api/iconsets/v3/total?since={since}":
     get:
-      description: ''
+      description: ""
       parameters:
-        - description: |
+        - description: >
             the optional date to calculate the total number of icons that were created after it.
+
             It should be in format "four year digits - dash - two month number digits - dash - two day number digits. For example 2014-12-31 means "31th of December, 2014".
-          example: '2014-12-31'
+          example: 2014-12-31
           in: path
           name: since
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
                 response:
                   value:
                     parameters:
-                      since: ''
+                      since: ""
                     result:
                       total:
                         - api_code: ios7
-                          name: ''
+                          name: ""
                           total: 0
                         - api_code: win8
                           name: Windows 8/Metro
-                          total: '802'
+                          total: "802"
                         - api_code: ios7
                           name: iPhone/iOS 7
-                          total: '7379'
+                          total: "7379"
               schema:
                 properties:
                   parameters:
@@ -719,12 +761,13 @@ paths:
           headers: {}
       summary: Totals
       tags: []
-  '/api/iconsets/v4/search?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}&exact_amount={exact_amount}':
+  "/api/iconsets/v4/search?term={term}&amount={amount}&offset={offset}&platform={platform}&language={language}&exact_amount={exact_amount}":
     get:
-      description: ''
+      description: ""
       parameters:
-        - description: |
+        - description: >
             the name or tag of the icon or any other phrase.
+
             e.g. use "@home" to find icons with the tag "home" and "=home" to find icons with the name "home"
           example: home
           in: path
@@ -732,7 +775,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'the maximum number of icons which you''d like to receive (will be multiplied by platforms count, if you didn''t specify the platform and didn''t set the ''exact_amount'' parameter)'
+        - description: the maximum number of icons which you'd like to receive (will be multiplied by platforms count, if you didn't specify the platform and didn't set the 'exact_amount' parameter)
           in: path
           name: amount
           required: true
@@ -790,7 +833,7 @@ paths:
               - ja-JP
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -798,23 +841,23 @@ paths:
                   value:
                     icons:
                       - category: Travel
-                        commonId: '3022'
+                        commonId: "3022"
                         commonName: sea-waves
-                        id: '23756'
+                        id: "23756"
                         name: Sea Waves
                         platform: win10
-                        timestamp: '1461024690'
+                        timestamp: "1461024690"
                       - category: Animals
-                        commonId: '3035'
+                        commonId: "3035"
                         commonName: starfish
-                        id: '19995'
+                        id: "19995"
                         name: Sea Star
                         platform: win10
-                        timestamp: '1450119085'
+                        timestamp: "1450119085"
                     parameters:
-                      amount `50`: ''
+                      amount `50`: ""
                       language: en-US
-                      offset: '0'
+                      offset: "0"
                       platform: win10
                       term: sea
               schema:
@@ -844,11 +887,11 @@ paths:
       tags: []
   /api/task/web-font/collection:
     post:
-      description: ''
+      description: ""
       requestBody:
-        $ref: '#/components/requestBodies/Body'
+        $ref: "#/components/requestBodies/Body"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -856,14 +899,14 @@ paths:
                   value:
                     messages:
                       - code: paid_feature
-                        description: 'Icons "dog", "cat" and 5 more were excluded'
+                        description: Icons "dog", "cat" and 5 more were excluded
                       - code: not_possible
                         description: Icons "dog-color" and "cat-color" were excluded
                     result:
-                      description: ''
+                      description: ""
                       id: abc-def
                       results:
-                        zip: 'https://st.icons8.com/zip/abc-def/icons8-font.zip'
+                        zip: https://st.icons8.com/zip/abc-def/icons8-font.zip
                       status: complete
                       type: create_web_font
               schema:
@@ -902,11 +945,11 @@ paths:
       tags: []
   /api/task/web-font/icons:
     post:
-      description: ''
+      description: ""
       requestBody:
-        $ref: '#/components/requestBodies/Body'
+        $ref: "#/components/requestBodies/Body"
       responses:
-        '200':
+        "200":
           content:
             application/json:
               examples:
@@ -914,14 +957,14 @@ paths:
                   value:
                     messages:
                       - code: paid_feature
-                        description: 'Icons "dog", "cat" and 5 more were excluded'
+                        description: Icons "dog", "cat" and 5 more were excluded
                       - code: not_possible
                         description: Icons "dog-color" and "cat-color" were excluded
                     result:
-                      description: ''
+                      description: ""
                       id: abc-def
                       results:
-                        zip: 'https://st.icons8.com/zip/abc-def/icons8-font.zip'
+                        zip: https://st.icons8.com/zip/abc-def/icons8-font.zip
                       status: complete
                       type: create_web_font
               schema:
@@ -972,7 +1015,7 @@ components:
                   collection: bef787ce-41ad-4424-8e0e-19ce78e104c3
                   css_prefix: icons8
                   css_rules_case: lowercase
-                  css_selector: '.icons8-{{glyph}}'
+                  css_selector: .icons8-{{glyph}}
                   font_name: Material Very Basic
             properties:
               auth:
@@ -992,7 +1035,7 @@ components:
                         type: string
                       css_prefix:
                         default: icons8
-                        description: 'prefix for CSS rules, used to generate LESS/SCSS'
+                        description: prefix for CSS rules, used to generate LESS/SCSS
                         type: string
                       css_rules_case:
                         default: lowercase
@@ -1002,8 +1045,8 @@ components:
                           - as_is
                         type: string
                       css_selector:
-                        default: '.icons8-{{glyph}}'
-                        description: 'template for glyph selector; placeholder {{glyph}} will be replaced with glyph names'
+                        default: .icons8-{{glyph}}
+                        description: template for glyph selector; placeholder {{glyph}} will be replaced with glyph names
                         type: string
                       font_name:
                         default: font_icons8
@@ -1042,7 +1085,7 @@ components:
               description: collection identifier
               type: string
             css_prefix:
-              description: 'prefix for CSS rules, used to generate LESS/SCSS'
+              description: prefix for CSS rules, used to generate LESS/SCSS
               type: string
             css_rules_case:
               description: glyph names conversion rule
@@ -1051,7 +1094,7 @@ components:
                 - as_is
               type: string
             css_selector:
-              description: 'template for glyph selector; placeholder {{glyph}} will be replaced with glyph names'
+              description: template for glyph selector; placeholder {{glyph}} will be replaced with glyph names
               type: string
             font_name:
               description: name of iconic webfont
@@ -1161,7 +1204,7 @@ components:
       type: object
     IconV3Item:
       allOf:
-        - $ref: '#/components/schemas/CompactIconV3Item'
+        - $ref: "#/components/schemas/CompactIconV3Item"
         - properties:
             category:
               type: string
@@ -1291,7 +1334,7 @@ components:
         status:
           description: task status
           enum:
-            - '`preparing+'
+            - "`preparing+"
             - idle
             - in_progress
             - timeout

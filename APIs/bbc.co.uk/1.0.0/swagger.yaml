@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: rms.api.bbc.co.uk
@@ -10,13 +10,14 @@ info:
   x-apisguru-categories:
     - media
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/BBC_Radio_logo.svg/140px-BBC_Radio_logo.svg.png'
+    backgroundColor: "#FFFFFF"
+    url: https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/BBC_Radio_logo.svg/140px-BBC_Radio_logo.svg.png
   x-origin:
     - format: swagger
-      url: 'https://rms.api.bbc.co.uk/docs/swagger.json'
-      version: '2.0'
+      url: https://rms.api.bbc.co.uk/docs/swagger.json
+      version: "2.0"
   x-providerName: bbc.co.uk
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -55,7 +56,7 @@ parameters:
     required: false
     type: string
   coverage:
-    description: 'Local, National or Regional Coverage'
+    description: Local, National or Regional Coverage
     enum:
       - local
       - national
@@ -65,7 +66,7 @@ parameters:
     required: false
     type: string
   decomposed:
-    description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+    description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
     in: query
     name: decomposed
     required: false
@@ -131,9 +132,9 @@ parameters:
     description: Sort order for Podcasts results
     enum:
       - title
-      - '-title'
+      - -title
       - available_from_date
-      - '-available_from_date'
+      - -available_from_date
     in: query
     name: sort
     required: false
@@ -146,7 +147,7 @@ parameters:
     type: string
 tags:
   - name: Experience
-  - description: '<a href="https://confluence.dev.bbc.co.uk/display/RMServices/Playspace+API+Client+Documetation">Client Documentation</a>'
+  - description: <a href="https://confluence.dev.bbc.co.uk/display/RMServices/Playspace+API+Client+Documetation">Client Documentation</a>
     name: Playspace
   - name: Categories
   - name: Networks
@@ -163,7 +164,7 @@ tags:
 paths:
   /broadcasts:
     get:
-      description: |
+      description: >
         All broadcasts
       parameters:
         - description: API_KEY
@@ -191,29 +192,29 @@ paths:
           name: date
           required: false
           type: string
-        - description: 'Sort by provided query. E.g. ''start_at'' sorts in ascending order, and ''-start_at'' sorts in descending order'
+        - description: Sort by provided query. E.g. 'start_at' sorts in ascending order, and '-start_at' sorts in descending order
           enum:
             - start_at
-            - '-start_at'
+            - -start_at
             - end_at
-            - '-end_at'
+            - -end_at
           in: query
           name: sort
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BroadcastsResponse'
-        '401':
+            $ref: "#/definitions/BroadcastsResponse"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       schemes:
         - https
       summary: Broadcasts
@@ -221,7 +222,7 @@ paths:
         - Broadcasts
   /broadcasts/latest:
     get:
-      description: |
+      description: >
         Broadcasts for the current day
       parameters:
         - description: API_KEY
@@ -263,37 +264,37 @@ paths:
           name: previous
           required: false
           type: string
-        - description: 'Sort by provided query. E.g. ''start_at'' sorts in ascending order, and ''-start_at'' sorts in descending order'
+        - description: Sort by provided query. E.g. 'start_at' sorts in ascending order, and '-start_at' sorts in descending order
           enum:
             - start_at
-            - '-start_at'
+            - -start_at
             - end_at
-            - '-end_at'
+            - -end_at
           in: query
           name: sort
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BroadcastsResponse'
-        '401':
+            $ref: "#/definitions/BroadcastsResponse"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       schemes:
         - https
       summary: Latest Broadcasts
       tags:
         - Broadcasts
-  '/broadcasts/{pid}':
+  "/broadcasts/{pid}":
     get:
-      description: |
+      description: >
         Find broadcast by PID
       operationId: getBroadcastByPid
       parameters:
@@ -308,18 +309,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BroadcastsResponse'
-        '401':
+            $ref: "#/definitions/BroadcastsResponse"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       schemes:
         - https
       summary: Broadcasts by PID
@@ -327,7 +328,7 @@ paths:
         - Broadcasts
   /categories:
     get:
-      description: |
+      description: >
         Retrieve Categories
       parameters:
         - description: API_KEY
@@ -343,20 +344,20 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CategoriesResponse'
+            $ref: "#/definitions/CategoriesResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/CategoryErrorResponse'
+            $ref: "#/definitions/CategoryErrorResponse"
       summary: List of categories
       tags:
         - Categories
-  '/categories/{id}':
+  "/categories/{id}":
     get:
-      description: |
+      description: >
         Retrieve Categories by ID
       parameters:
         - description: API_KEY
@@ -370,20 +371,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CategoriesResponse'
+            $ref: "#/definitions/CategoriesResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/CategoryErrorResponse'
+            $ref: "#/definitions/CategoryErrorResponse"
       summary: Category by ID
       tags:
         - Categories
-  '/collections/{pid}/members':
+  "/collections/{pid}/members":
     get:
-      description: |
+      description: >
         Episodes and Clips from Collection
       operationId: getCollectionMembers
       parameters:
@@ -408,18 +409,18 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ProgrammesResponse'
-        '404':
+            $ref: "#/definitions/ProgrammesResponse"
+        "404":
           description: Collection not found
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       schemes:
         - https
       summary: Collection Members
@@ -427,7 +428,7 @@ paths:
         - Collections
   /experience/homepage:
     get:
-      description: |
+      description: >
         Homepage Experience
       operationId: getExperienceHomepage
       parameters:
@@ -437,14 +438,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ExperienceResponse'
+            $ref: "#/definitions/ExperienceResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       schemes:
         - https
       summary: Homepage Experience
@@ -452,7 +453,7 @@ paths:
         - Experience
   /music/popular/artists:
     get:
-      description: |
+      description: >
         List of Most Popular artists from BBC Music.
       operationId: getMusicPopularArtists
       parameters:
@@ -471,7 +472,7 @@ paths:
           name: until
           required: false
           type: string
-        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -487,22 +488,22 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicPopularityArtists'
+            $ref: "#/definitions/MusicPopularityArtists"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicPopularityError'
+            $ref: "#/definitions/MusicPopularityError"
       schemes:
         - http
       summary: Popular Artists
       tags:
         - Music
-  '/music/popular/artists/{id}':
+  "/music/popular/artists/{id}":
     get:
-      description: |
+      description: >
         Popularity Artist By Id
       operationId: getMusicPopularArtistById
       parameters:
@@ -521,7 +522,7 @@ paths:
           name: until
           required: false
           type: string
-        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -532,14 +533,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicPopularityArtists'
+            $ref: "#/definitions/MusicPopularityArtists"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicPopularityError'
+            $ref: "#/definitions/MusicPopularityError"
       schemes:
         - http
       summary: Single Artist Popularity
@@ -547,7 +548,7 @@ paths:
         - Music
   /music/popular/playlists:
     get:
-      description: |
+      description: >
         List of Most Popular playlists from BBC Music.
       operationId: getMusicPopularPlaylists
       parameters:
@@ -566,7 +567,7 @@ paths:
           name: until
           required: false
           type: string
-        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -582,22 +583,22 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicPopularityPlaylists'
+            $ref: "#/definitions/MusicPopularityPlaylists"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicPopularityError'
+            $ref: "#/definitions/MusicPopularityError"
       schemes:
         - http
       summary: Popular Playlists
       tags:
         - Music
-  '/music/popular/playlists/{id}':
+  "/music/popular/playlists/{id}":
     get:
-      description: |
+      description: >
         Popular playlist by Id
       operationId: getMusicPopularPlaylistById
       parameters:
@@ -616,7 +617,7 @@ paths:
           name: until
           required: false
           type: string
-        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -627,14 +628,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicPopularityPlaylists'
+            $ref: "#/definitions/MusicPopularityPlaylists"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicPopularityError'
+            $ref: "#/definitions/MusicPopularityError"
       schemes:
         - http
       summary: Single Playlist Popularity
@@ -642,7 +643,7 @@ paths:
         - Music
   /music/popular/tracks:
     get:
-      description: |
+      description: >
         List of popular tracks for BBC Music. Filter by time, network, artist, playlist or programme.
       operationId: getMusicPopularTracks
       parameters:
@@ -676,7 +677,7 @@ paths:
           name: artist
           required: false
           type: string
-        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -692,22 +693,22 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicPopularityTracks'
+            $ref: "#/definitions/MusicPopularityTracks"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicPopularityError'
+            $ref: "#/definitions/MusicPopularityError"
       schemes:
         - http
       summary: Popular Tracks
       tags:
         - Music
-  '/music/popular/tracks/{id}':
+  "/music/popular/tracks/{id}":
     get:
-      description: |
+      description: >
         Popular Track for BBC Music
       operationId: getMusicPopularTrackById
       parameters:
@@ -741,7 +742,7 @@ paths:
           name: artist
           required: false
           type: string
-        - description: 'In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days'
+        - description: In addition to the overall score, return a list of scores broken down by day N.B Must be used in conjunction with since and/or until and since is >= 31 days
           in: query
           name: decomposed
           required: false
@@ -752,14 +753,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicPopularityTracks'
+            $ref: "#/definitions/MusicPopularityTracks"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicPopularityError'
+            $ref: "#/definitions/MusicPopularityError"
       schemes:
         - http
       summary: Single Track Popularity
@@ -783,23 +784,23 @@ paths:
           name: Body
           required: true
           schema:
-            $ref: '#/definitions/Body_1'
+            $ref: "#/definitions/Body_1"
       responses:
-        '202':
+        "202":
           description: Request successfully sent to UAS.
-        '400':
+        "400":
           description: The request was malformed.
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: Unfollow category
       tags:
         - Personalised Categories
     get:
-      description: |
+      description: >
         List of followed categories for a given user.
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -824,14 +825,14 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedCategoriesResponse'
+            $ref: "#/definitions/PersonalisedCategoriesResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: List of followed categories
       tags:
         - Personalised Categories
@@ -852,24 +853,24 @@ paths:
           name: Body
           required: true
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '202':
+        "202":
           description: Request successfully sent to UAS.
-        '400':
+        "400":
           description: The request was malformed.
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: Follow category
       tags:
         - Personalised Categories
   /my/music/export:
     get:
-      description: |
+      description: >
         Returns status of all previous third party export actions for a given BBC Music user.
       operationId: getMusicExport
       parameters:
@@ -901,20 +902,20 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicExportJob'
+            $ref: "#/definitions/MusicExportJob"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Exports
       tags:
         - Music Export
   /my/music/exports/jobs:
     get:
-      description: |
+      description: >
         All items associated to a users export request
       operationId: getMusicExportJobs
       parameters:
@@ -951,19 +952,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicExportJob'
+            $ref: "#/definitions/MusicExportJob"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Jobs
       tags:
         - Music Export
     post:
-      description: |
+      description: >
         Create Export Job for a user
       operationId: postMusicExportJob
       parameters:
@@ -999,29 +1000,29 @@ paths:
           name: vendor
           required: false
           type: string
-        - description: ''
+        - description: ""
           in: body
           name: body
           required: true
           schema:
             items:
-              $ref: '#/definitions/MusicExportJob'
+              $ref: "#/definitions/MusicExportJob"
             type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicExportSuccess'
+            $ref: "#/definitions/MusicExportSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Jobs
       tags:
         - Music Export
   /my/music/exports/tracks:
     get:
-      description: |
+      description: >
         Retrieves vendor and status specific tracks
       operationId: getMusicExportTracks
       parameters:
@@ -1077,20 +1078,20 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicExportJob'
+            $ref: "#/definitions/MusicExportJob"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Tracks
       tags:
         - Music Export
   /my/music/favourites:
     get:
-      description: |
+      description: >
         List of favourited tracks and clips for a given user for BBC Music.
       operationId: getPersonalisedMusicFavourites
       parameters:
@@ -1129,26 +1130,27 @@ paths:
           name: action
           required: false
           type: string
-        - description: 'Omits music data from the response, defaults to true'
+        - description: Omits music data from the response, defaults to true
           in: query
           name: music-data
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicResponse'
+            $ref: "#/definitions/PersonalisedMusicResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
       summary: Favourite Tracks or Clips
       tags:
         - Music
     post:
-      description: |
+      description: >
         Add multiple tracks and/or clips to a BBC Music user's favourites.
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedMusicFavouritesBatch
@@ -1176,23 +1178,24 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/PersonalisedMusicBatchRequest'
+              $ref: "#/definitions/PersonalisedMusicBatchRequest"
             type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicResponse'
+            $ref: "#/definitions/PersonalisedMusicResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
       summary: Favourite Tracks or Clips
       tags:
         - Music
     put:
-      description: |
+      description: >
         Update tracks or clips from a BBC Music user favourites.
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedMusicFavouritesBatch
@@ -1220,23 +1223,23 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/PersonalisedMusicBatchRequest'
+              $ref: "#/definitions/PersonalisedMusicBatchRequest"
             type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicSuccess'
+            $ref: "#/definitions/PersonalisedMusicSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
       summary: Favourite Tracks or Clips
       tags:
         - Music
-  '/my/music/favourites/{type}':
+  "/my/music/favourites/{type}":
     get:
-      description: |
+      description: >
         List of favourited tracks or clips for a given user for BBC Music.
       operationId: getPersonalisedMusicFavouritesByType
       parameters:
@@ -1257,7 +1260,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music favourite types: Clips or Tracks'
+        - description: "Supported Music favourite types: Clips or Tracks"
           enum:
             - clips
             - tracks
@@ -1284,20 +1287,20 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicResponse'
+            $ref: "#/definitions/PersonalisedMusicResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
       summary: Favourite Tracks or Clips by Type
       tags:
         - Music
-  '/my/music/favourites/{type}/{id}':
+  "/my/music/favourites/{type}/{id}":
     delete:
-      description: |
+      description: >
         Delete track or clip from a BBC Music user favourites.
       operationId: deletePersonalisedMusicFavouritesByTypeById
       parameters:
@@ -1318,7 +1321,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music favourite types: Clips or Tracks'
+        - description: "Supported Music favourite types: Clips or Tracks"
           enum:
             - clips
             - tracks
@@ -1332,19 +1335,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicSuccess'
+            $ref: "#/definitions/PersonalisedMusicSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
       summary: Favourite Track or Clip
       tags:
         - Music
     get:
-      description: |
+      description: >
         Check to see if a single track or clip entity is in a users favourites - determines UX of add button.
       operationId: getPersonalisedMusicFavouritesByTypeById
       parameters:
@@ -1365,7 +1368,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music favourite types: Clips or Tracks'
+        - description: "Supported Music favourite types: Clips or Tracks"
           enum:
             - clips
             - tracks
@@ -1379,20 +1382,21 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicResponse'
+            $ref: "#/definitions/PersonalisedMusicResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
       summary: Favourite Track or Clip
       tags:
         - Music
     post:
-      description: |
+      description: >
         Add track or clip to a BBC Music user favourites.
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedMusicFavouritesByTypeById
@@ -1414,7 +1418,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music favourite types: Clips or Tracks'
+        - description: "Supported Music favourite types: Clips or Tracks"
           enum:
             - clips
             - tracks
@@ -1432,22 +1436,23 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PersonalisedMusicRequest'
+            $ref: "#/definitions/PersonalisedMusicRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicResponse'
+            $ref: "#/definitions/PersonalisedMusicResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
       summary: Favourite Track or Clip
       tags:
         - Music
     put:
-      description: |
+      description: >
         Update tracks or clips from a BBC Music user favourites.
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedMusicFavouritesByTypeById
@@ -1469,7 +1474,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music favourite types: Clips or Tracks'
+        - description: "Supported Music favourite types: Clips or Tracks"
           enum:
             - clips
             - tracks
@@ -1487,22 +1492,22 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PersonalisedMusicRequest'
+            $ref: "#/definitions/PersonalisedMusicRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicSuccess'
+            $ref: "#/definitions/PersonalisedMusicSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
       summary: Favourite Track or Clip
       tags:
         - Music
   /my/music/follows:
     get:
-      description: |
+      description: >
         List of followed networks, categories, artists, playlists and genres for a given user for BBC Music.
       operationId: getPersonalisedMusicFollows
       parameters:
@@ -1531,7 +1536,7 @@ paths:
           name: action
           required: false
           type: string
-        - description: 'Omits music data from the response, defaults to true'
+        - description: Omits music data from the response, defaults to true
           in: query
           name: music-data
           required: false
@@ -1565,20 +1570,21 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicResponse'
+            $ref: "#/definitions/PersonalisedMusicResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
-      summary: 'Followed Networks, Categories, Artists, Playlists and Genres'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
+      summary: Followed Networks, Categories, Artists, Playlists and Genres
       tags:
         - Music
     post:
-      description: |
+      description: >
         Add networks, categories, artists, playlists, networks, genres or services in a users follows
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedMusicFollowsBatch
@@ -1608,7 +1614,7 @@ paths:
           name: action
           required: false
           type: string
-        - description: 'Omits music data from the response, defaults to true'
+        - description: Omits music data from the response, defaults to true
           in: query
           name: music-data
           required: false
@@ -1637,23 +1643,24 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/PersonalisedMusicBatchRequest'
+              $ref: "#/definitions/PersonalisedMusicBatchRequest"
             type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicSuccess'
+            $ref: "#/definitions/PersonalisedMusicSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
-      summary: 'Followed Networks, Categories, Artists, Playlists and Genres'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
+      summary: Followed Networks, Categories, Artists, Playlists and Genres
       tags:
         - Music
     put:
-      description: |
+      description: >
         Update networks, categories, artists, playlists, networks, genres or services in a users follows
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedMusicFollowsBatch
@@ -1683,7 +1690,7 @@ paths:
           name: action
           required: false
           type: string
-        - description: 'Omits music data from the response, defaults to true'
+        - description: Omits music data from the response, defaults to true
           in: query
           name: music-data
           required: false
@@ -1712,23 +1719,23 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/PersonalisedMusicBatchRequest'
+              $ref: "#/definitions/PersonalisedMusicBatchRequest"
             type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicSuccess'
+            $ref: "#/definitions/PersonalisedMusicSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
-      summary: 'Followed Networks, Categories, Artists, Playlists and Genres'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
+      summary: Followed Networks, Categories, Artists, Playlists and Genres
       tags:
         - Music
-  '/my/music/follows/{type}':
+  "/my/music/follows/{type}":
     get:
-      description: |
+      description: >
         List of followed networks, categories, artists, playlists, networks, genres, categories or services for a given BBC Music user.
       operationId: getPersonalisedMusicFollowsByType
       parameters:
@@ -1749,7 +1756,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -1769,7 +1776,7 @@ paths:
           name: action
           required: false
           type: string
-        - description: 'Omits music data from the response, defaults to true'
+        - description: Omits music data from the response, defaults to true
           in: query
           name: music-data
           required: false
@@ -1803,20 +1810,20 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicResponse'
+            $ref: "#/definitions/PersonalisedMusicResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
-      summary: 'Followed Networks, Categories, Artists, Playlists and Genres by Type'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
+      summary: Followed Networks, Categories, Artists, Playlists and Genres by Type
       tags:
         - Music
-  '/my/music/follows/{type}/{id}':
+  "/my/music/follows/{type}/{id}":
     delete:
-      description: |
+      description: >
         Remove a single network, category, artist, playlist, network, genre or service entity is in a users follows
       operationId: deletePersonalisedMusicFollowsByTypeById
       parameters:
@@ -1837,7 +1844,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -1849,12 +1856,12 @@ paths:
           name: type
           required: true
           type: string
-        - description: 'Playlists, Services, Networks, Genres, Categories or Artists ID'
+        - description: Playlists, Services, Networks, Genres, Categories or Artists ID
           in: path
           name: id
           required: true
           type: string
-        - description: 'Omits music data from the response, defaults to true'
+        - description: Omits music data from the response, defaults to true
           in: query
           name: music-data
           required: false
@@ -1878,19 +1885,19 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicSuccess'
+            $ref: "#/definitions/PersonalisedMusicSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
-      summary: 'Followed Network, Category, Artist, Playlist and Genre'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
+      summary: Followed Network, Category, Artist, Playlist and Genre
       tags:
         - Music
     get:
-      description: |
+      description: >
         Check to see if a single network, category, artist, playlist, network, genre or service entity is in a users follows - determines UX of add button.
       operationId: getPersonalisedMusicFollowsByTypeById
       parameters:
@@ -1911,7 +1918,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -1923,12 +1930,12 @@ paths:
           name: type
           required: true
           type: string
-        - description: 'Playlists, Services, Networks, Genres, Categories or Artists ID'
+        - description: Playlists, Services, Networks, Genres, Categories or Artists ID
           in: path
           name: id
           required: true
           type: string
-        - description: 'Omits music data from the response, defaults to true'
+        - description: Omits music data from the response, defaults to true
           in: query
           name: music-data
           required: false
@@ -1952,20 +1959,21 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicResponse'
+            $ref: "#/definitions/PersonalisedMusicResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
-      summary: 'Followed Network, Category, Artist, Playlist and Genre'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
+      summary: Followed Network, Category, Artist, Playlist and Genre
       tags:
         - Music
     post:
-      description: |
+      description: >
         Add a single network, category, artist, playlist, network, genre or service entity is in a users follows
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedMusicFollowsByTypeById
@@ -1987,7 +1995,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -1999,12 +2007,12 @@ paths:
           name: type
           required: true
           type: string
-        - description: 'Playlists, Services, Networks, Genres, Categories or Artists ID'
+        - description: Playlists, Services, Networks, Genres, Categories or Artists ID
           in: path
           name: id
           required: true
           type: string
-        - description: 'Omits music data from the response, defaults to true'
+        - description: Omits music data from the response, defaults to true
           in: query
           name: music-data
           required: false
@@ -2032,22 +2040,23 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PersonalisedMusicRequest'
+            $ref: "#/definitions/PersonalisedMusicRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicSuccess'
+            $ref: "#/definitions/PersonalisedMusicSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
-      summary: 'Followed Network, Category, Artist, Playlist and Genre'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
+      summary: Followed Network, Category, Artist, Playlist and Genre
       tags:
         - Music
     put:
-      description: |
+      description: >
         Update a single network, category, artist, playlist, network, genre or service entity is in a users follows
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedMusicFollowsByTypeById
@@ -2069,7 +2078,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Music follows types: Playlists, Services, Genres & Artists'
+        - description: "Supported Music follows types: Playlists, Services, Genres & Artists"
           enum:
             - playlists
             - services
@@ -2081,12 +2090,12 @@ paths:
           name: type
           required: true
           type: string
-        - description: 'Playlists, Services, Networks, Genres, Categories or Artists ID'
+        - description: Playlists, Services, Networks, Genres, Categories or Artists ID
           in: path
           name: id
           required: true
           type: string
-        - description: 'Omits music data from the response, defaults to true'
+        - description: Omits music data from the response, defaults to true
           in: query
           name: music-data
           required: false
@@ -2114,22 +2123,22 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PersonalisedMusicRequest'
+            $ref: "#/definitions/PersonalisedMusicRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedMusicSuccess'
+            $ref: "#/definitions/PersonalisedMusicSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedMusicErrorResponse'
-      summary: 'Followed Network, Category, Artist, Playlist and Genre'
+            $ref: "#/definitions/PersonalisedMusicErrorResponse"
+      summary: Followed Network, Category, Artist, Playlist and Genre
       tags:
         - Music
   /my/music/preferences/export:
     delete:
-      description: |
+      description: >
         Remove export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: deleteMusicPreferencesExport
       parameters:
@@ -2151,19 +2160,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicExportSuccess'
+            $ref: "#/definitions/MusicExportSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Preferences
       tags:
         - Music Export
     get:
-      description: |
+      description: >
         Returns export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: getMusicPreferencesExport
       parameters:
@@ -2185,19 +2194,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicExportPreferencesResponse'
+            $ref: "#/definitions/MusicExportPreferencesResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Preferences
       tags:
         - Music Export
     post:
-      description: |
+      description: >
         Create export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: postMusicPreferencesExport
       parameters:
@@ -2218,27 +2227,27 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/MusicExportPreferences'
+            $ref: "#/definitions/MusicExportPreferences"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicExportSuccess'
+            $ref: "#/definitions/MusicExportSuccess"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Preferences
       tags:
         - Music Export
-  '/my/music/preferences/export/{vendor}':
+  "/my/music/preferences/export/{vendor}":
     delete:
-      description: |
+      description: >
         Remove Vendor specific export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: deleteMusicPreferencesExportVendor
       parameters:
@@ -2270,17 +2279,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Vendor Preferences
       tags:
         - Music Export
     get:
-      description: |
+      description: >
         Returns vendor specific export preferences for a given BBC Music user.
       operationId: getMusicPreferencesExportVendor
       parameters:
@@ -2312,19 +2321,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/MusicExportPreferencesResponse'
+            $ref: "#/definitions/MusicExportPreferencesResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Vendor Preferences
       tags:
         - Music Export
     post:
-      description: |
+      description: >
         Create Vendor specific export preferences (e.g. 3rd party vendors, partner id's) for a given BBC Music user.
       operationId: postMusicPreferencesExportVendor
       parameters:
@@ -2355,24 +2364,24 @@ paths:
           name: vendor
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/MusicExportPreferences'
+            $ref: "#/definitions/MusicExportPreferences"
       responses:
-        '200':
+        "200":
           description: OK
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Vendor Preferences
       tags:
         - Music Export
     put:
-      description: |
+      description: >
         Update vendor specific export preferences for a given BBC Music user.
       operationId: putMusicPreferencesExportVendor
       parameters:
@@ -2403,19 +2412,19 @@ paths:
           name: vendor
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/MusicExportPreferences'
+            $ref: "#/definitions/MusicExportPreferences"
       responses:
-        '200':
+        "200":
           description: OK
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/MusicExportErrorResponse'
+            $ref: "#/definitions/MusicExportErrorResponse"
       summary: Music Export Vendor Preferences
       tags:
         - Music Export
@@ -2447,23 +2456,23 @@ paths:
           name: Body
           required: true
           schema:
-            $ref: '#/definitions/Body_3'
+            $ref: "#/definitions/Body_3"
       responses:
-        '202':
+        "202":
           description: Request successfully sent to UAS.
-        '400':
+        "400":
           description: The request was malformed.
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: Unfollow network
       tags:
         - Personalised Networks
     get:
-      description: |
+      description: >
         List of followed networks for a given user.
       parameters:
         - default: Bearer OAUTH_TOKEN
@@ -2488,14 +2497,14 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedNetworksResponse'
+            $ref: "#/definitions/PersonalisedNetworksResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: List of followed networks
       tags:
         - Personalised Networks
@@ -2526,18 +2535,18 @@ paths:
           name: Body
           required: true
           schema:
-            $ref: '#/definitions/Body_2'
+            $ref: "#/definitions/Body_2"
       responses:
-        '202':
+        "202":
           description: Request successfully sent to UAS.
-        '400':
+        "400":
           description: The request was malformed.
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: Follow network
       tags:
         - Personalised Networks
@@ -2559,18 +2568,18 @@ paths:
           name: Body
           required: true
           schema:
-            $ref: '#/definitions/Body_4'
+            $ref: "#/definitions/Body_4"
       responses:
-        '202':
+        "202":
           description: Request successfully sent to UAS.
-        '400':
+        "400":
           description: The request was malformed.
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       schemes:
         - https
       summary: Write Play Event
@@ -2578,7 +2587,7 @@ paths:
         - Personalised Plays
   /my/playspace/containers/suggested:
     get:
-      description: |
+      description: >
         Suggested Playspace Container
       operationId: suggestContainer
       parameters:
@@ -2604,22 +2613,22 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PlayspaceContainer'
-        '401':
+            $ref: "#/definitions/PlayspaceContainer"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       schemes:
         - https
       summary: Suggested Playspace Container
       tags:
         - Playspace
-  '/my/playspace/containers/{id}':
+  "/my/playspace/containers/{id}":
     get:
-      description: |
+      description: >
         Playspace Container by ID
       operationId: getContainer
       parameters:
@@ -2640,18 +2649,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PlayspaceContainer'
-        '401':
+            $ref: "#/definitions/PlayspaceContainer"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '404':
+            $ref: "#/definitions/ErrorResponse"
+        "404":
           description: No Playspace container with given ID could be found.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       schemes:
         - https
       summary: Playspace Container by ID
@@ -2659,7 +2668,7 @@ paths:
         - Playspace
   /my/programmes/recommendations:
     get:
-      description: |
+      description: >
         Recommended Programmes from the Audience Platforms' Recomendations Service
       operationId: getRecommendations
       parameters:
@@ -2693,27 +2702,29 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ProgrammesResponse'
-        '401':
+            $ref: "#/definitions/ProgrammesResponse"
+        "401":
           description: There was an error with the supplied `Authorization` header.
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: Recommended Programmes
       tags:
         - Programmes
   /my/radio/favourites:
     get:
-      description: |
+      description: >
         List of favourited episodes and clips for a given user for iPlayer Radio.
 
+
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioFavourites
@@ -2760,22 +2771,23 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioResponse'
+            $ref: "#/definitions/PersonalisedRadioResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       schemes:
         - https
       summary: Favourite Episodes and Clips
       tags:
         - Radio
     post:
-      description: |
+      description: >
         Add User favourites
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedRadioBatch
@@ -2803,23 +2815,24 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/PersonalisedRadioBatchRequest'
+              $ref: "#/definitions/PersonalisedRadioBatchRequest"
             type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Favourite Episodes and Clips
       tags:
         - Radio
     put:
-      description: |
+      description: >
         Update user favourites
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedRadioBatch
@@ -2847,26 +2860,28 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/PersonalisedRadioBatchRequest'
+              $ref: "#/definitions/PersonalisedRadioBatchRequest"
             type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Favourite Episodes and Clips
       tags:
         - Radio
-  '/my/radio/favourites/{type}':
+  "/my/radio/favourites/{type}":
     get:
-      description: |
+      description: >
         List of followed 'clips' or 'episode' items for a given iPlayer Radio user
 
+
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioFavouritesByType
@@ -2888,7 +2903,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio favourite types: Clips or Episodes'
+        - description: "Supported Radio favourite types: Clips or Episodes"
           enum:
             - clips
             - episodes
@@ -2921,20 +2936,20 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioResponse'
+            $ref: "#/definitions/PersonalisedRadioResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Favourite Episodes and Clips by Type
       tags:
         - Radio
-  '/my/radio/favourites/{type}/{pid}':
+  "/my/radio/favourites/{type}/{pid}":
     delete:
-      description: |
+      description: >
         Remove User favourite
       operationId: deletePersonalisedRadioByActivityTypeById
       parameters:
@@ -2955,7 +2970,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio favourite types: Clips or Episodes'
+        - description: "Supported Radio favourite types: Clips or Episodes"
           enum:
             - clips
             - episodes
@@ -2969,22 +2984,24 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Favourite Episode or Clip
       tags:
         - Radio
     get:
-      description: |
+      description: >
         Check to see if a single clip or episode entity is in a users favourites - determines UX of add button.
 
+
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioByActivityTypeById
@@ -3006,7 +3023,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio favourite types: Clips or Episodes'
+        - description: "Supported Radio favourite types: Clips or Episodes"
           enum:
             - clips
             - episodes
@@ -3025,20 +3042,21 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioResponse'
+            $ref: "#/definitions/PersonalisedRadioResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Favourite Episode or Clip
       tags:
         - Radio
     post:
-      description: |
+      description: >
         Add User favourite
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedRadioByActivityTypeById
@@ -3060,7 +3078,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio favourite types: Clips or Episodes'
+        - description: "Supported Radio favourite types: Clips or Episodes"
           enum:
             - clips
             - episodes
@@ -3078,22 +3096,23 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PersonalisedRadioRequest'
+            $ref: "#/definitions/PersonalisedRadioRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Favourite Episode or Clip
       tags:
         - Radio
     put:
-      description: |
+      description: >
         Update user favourite
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedRadioByActivityTypeById
@@ -3115,7 +3134,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio favourite types: Clips or Episodes'
+        - description: "Supported Radio favourite types: Clips or Episodes"
           enum:
             - clips
             - episodes
@@ -3133,25 +3152,27 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PersonalisedRadioRequest'
+            $ref: "#/definitions/PersonalisedRadioRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Favourite Episode or Clip
       tags:
         - Radio
   /my/radio/follows:
     get:
-      description: |
+      description: >
         List of favourited brands and series for a given user for iPlayer Radio.
 
+
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioFollows
@@ -3198,20 +3219,21 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioResponse'
+            $ref: "#/definitions/PersonalisedRadioResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Followed Brands and Series
       tags:
         - Radio
     post:
-      description: |
+      description: >
         Add 'brand' or 'series' items to a users iPlayer Radio follows
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedRadioFollowsBatch
@@ -3239,23 +3261,24 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/PersonalisedRadioBatchRequest'
+              $ref: "#/definitions/PersonalisedRadioBatchRequest"
             type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Followed Brands and Series
       tags:
         - Radio
     put:
-      description: |
+      description: >
         Update 'brands' or 'series' items from a users iPlayer Radio follows
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedRadioFollowsBatch
@@ -3283,26 +3306,28 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/PersonalisedRadioBatchRequest'
+              $ref: "#/definitions/PersonalisedRadioBatchRequest"
             type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Followed Brands and Series
       tags:
         - Radio
-  '/my/radio/follows/{type}':
+  "/my/radio/follows/{type}":
     get:
-      description: |
+      description: >
         List of followed 'brand' or 'series' items for a given iPlayer Radio user
 
+
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioFollowsByType
@@ -3324,7 +3349,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio follows types: Brands or Series'
+        - description: "Supported Radio follows types: Brands or Series"
           enum:
             - brands
             - series
@@ -3357,20 +3382,20 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioResponse'
+            $ref: "#/definitions/PersonalisedRadioResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Followed Brands or Series by Type
       tags:
         - Radio
-  '/my/radio/follows/{type}/{pid}':
+  "/my/radio/follows/{type}/{pid}":
     delete:
-      description: |
+      description: >
         Remove 'brand' or 'series' items from a users iPlayer Radio follows
       operationId: deletePersonalisedRadioFollowsByTypeById
       parameters:
@@ -3391,7 +3416,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio follows types: Brands or Series'
+        - description: "Supported Radio follows types: Brands or Series"
           enum:
             - brands
             - series
@@ -3405,19 +3430,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Followed Brand or Series
       tags:
         - Radio
     get:
-      description: |
+      description: >
         Check to see if a single brand or series entity is in a users follows - determines UX of add button.
       operationId: getPersonalisedRadioFollowsByTypeById
       parameters:
@@ -3438,7 +3463,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio follows types: Brands or Series'
+        - description: "Supported Radio follows types: Brands or Series"
           enum:
             - brands
             - series
@@ -3452,20 +3477,21 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioResponse'
+            $ref: "#/definitions/PersonalisedRadioResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Followed Brand or Series
       tags:
         - Radio
     post:
-      description: |
+      description: >
         Add 'brand' or 'series' items from a users iPlayer Radio follows
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: postPersonalisedRadioFollowsByTypeById
@@ -3487,7 +3513,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio follows types: Brands or Series'
+        - description: "Supported Radio follows types: Brands or Series"
           enum:
             - brands
             - series
@@ -3505,22 +3531,23 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PersonalisedRadioRequest'
+            $ref: "#/definitions/PersonalisedRadioRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Followed Brand or Series
       tags:
         - Radio
     put:
-      description: |
+      description: >
         Update 'brand' or 'series' items from a users iPlayer Radio follows
+
 
         N.B. Any HTML tags submitted in metadata will be removed
       operationId: putPersonalisedRadioFollowsByTypeById
@@ -3542,7 +3569,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Supported Radio follows types: Brands or Series'
+        - description: "Supported Radio follows types: Brands or Series"
           enum:
             - brands
             - series
@@ -3560,25 +3587,27 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PersonalisedRadioRequest'
+            $ref: "#/definitions/PersonalisedRadioRequest"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioSuccessResponse'
+            $ref: "#/definitions/PersonalisedRadioSuccessResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Followed Brand or Series
       tags:
         - Radio
   /my/radio/plays:
     get:
-      description: |
+      description: >
         Returns mixed episode and clip plays for a given BBC iPlayer radio user.
 
+
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+
         and Clip Summaries so we are defining data as a Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getPersonalisedRadioPlays
@@ -3625,20 +3654,20 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PersonalisedRadioResponse'
+            $ref: "#/definitions/PersonalisedRadioResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PersonalisedRadioErrorResponse'
+            $ref: "#/definitions/PersonalisedRadioErrorResponse"
       summary: Played Episode or Clip
       tags:
         - Radio
   /podcasts:
     get:
-      description: |
+      description: >
         Retrieve all Podcasts
       operationId: getPodcasts
       parameters:
@@ -3660,9 +3689,9 @@ paths:
         - description: Sort order for Podcasts results
           enum:
             - title
-            - '-title'
+            - -title
             - available_from_date
-            - '-available_from_date'
+            - -available_from_date
           in: query
           name: sort
           required: false
@@ -3687,7 +3716,7 @@ paths:
           name: q
           required: false
           type: string
-        - description: 'Local, National or Regional Coverage'
+        - description: Local, National or Regional Coverage
           enum:
             - local
             - national
@@ -3697,20 +3726,20 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PodcastsResponse'
+            $ref: "#/definitions/PodcastsResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PodcastErrorResponse'
+            $ref: "#/definitions/PodcastErrorResponse"
       summary: All Podcasts
       tags:
         - Podcasts
   /podcasts/featured:
     get:
-      description: |
+      description: >
         Retrieve featured podcasts
       operationId: getPodcastsFeatured
       parameters:
@@ -3720,20 +3749,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PodcastsFeaturedResponse'
+            $ref: "#/definitions/PodcastsFeaturedResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PodcastErrorResponse'
+            $ref: "#/definitions/PodcastErrorResponse"
       summary: Featured Podcasts
       tags:
         - Podcasts
-  '/podcasts/{pid}':
+  "/podcasts/{pid}":
     get:
-      description: |
+      description: >
         Retrieve data about the podcast with the supplied PID
       operationId: getPodcastByPid
       parameters:
@@ -3758,20 +3787,20 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PodcastsResponse'
+            $ref: "#/definitions/PodcastsResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PodcastErrorResponse'
+            $ref: "#/definitions/PodcastErrorResponse"
       summary: Podcast
       tags:
         - Podcasts
-  '/podcasts/{pid}/episodes':
+  "/podcasts/{pid}/episodes":
     get:
-      description: |
+      description: >
         Retrieve all episodes for a specific podcast
       operationId: getPodcastEpisodes
       parameters:
@@ -3796,20 +3825,20 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PodcastEpisodesResponse'
+            $ref: "#/definitions/PodcastEpisodesResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PodcastErrorResponse'
+            $ref: "#/definitions/PodcastErrorResponse"
       summary: Podcast Episodes
       tags:
         - Podcasts
   /radio/networks.json:
     get:
-      description: |
+      description: >
         All iPlayer Radio networks - contains business logic for masterbrand and service relationships
       operationId: getRadioNetworks
       parameters:
@@ -3829,20 +3858,20 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/NetworksResponse'
+            $ref: "#/definitions/NetworksResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/RadioErrorResponse'
+            $ref: "#/definitions/RadioErrorResponse"
       summary: Networks
       tags:
         - Networks
   /radio/popular:
     get:
-      description: |
+      description: >
         Retrieve Popular Episodes & Clips
       operationId: getPopularEpisodesClips
       parameters:
@@ -3855,7 +3884,7 @@ paths:
           enum:
             - episode
             - clip
-            - 'episode,clip'
+            - episode,clip
           in: query
           name: type
           required: false
@@ -3891,7 +3920,7 @@ paths:
           enum:
             - tv
             - radio
-            - 'tv,radio'
+            - tv,radio
           in: query
           name: group
           required: false
@@ -3900,18 +3929,18 @@ paths:
           enum:
             - audio
             - video
-            - 'audio,video'
+            - audio,video
           in: query
           name: media_type
           required: false
           type: string
-        - description: 'Filter by container. Accepts any pid e.g. brand,series,episode'
+        - description: Filter by container. Accepts any pid e.g. brand,series,episode
           in: query
           name: container
           required: false
           type: string
         - collectionFormat: csv
-          description: 'Filter by media set name. Accepts comma separated combinations of the following: pc,mobile-download,android-download-high,apple-ios-download-high,mobile-cellular-main,mobile-phone-main,iptv-all'
+          description: "Filter by media set name. Accepts comma separated combinations of the following: pc,mobile-download,android-download-high,apple-ios-download-high,mobile-cellular-main,mobile-phone-main,iptv-all"
           enum:
             - pc
             - mobile-download
@@ -3931,23 +3960,25 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PopularResponse'
+            $ref: "#/definitions/PopularResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/PopularErrorResponse'
+            $ref: "#/definitions/PopularErrorResponse"
       summary: Popular Episodes & Clips
       tags:
         - Programmes
   /radio/programmes:
     get:
-      description: |
+      description: >
         Provides a paginated list of programmes by PID (brand, series, episode and clip). Accepts various filters and sorting methods.
 
+
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+
         and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getRadioProgrammes
@@ -3957,7 +3988,7 @@ paths:
           name: X-API-Key
           required: true
           type: string
-        - description: 'Filter by provided query. E.g. ''tleo'' returns top level objects, ie. brands, orphaned series, and orphaned episodes'
+        - description: Filter by provided query. E.g. 'tleo' returns top level objects, ie. brands, orphaned series, and orphaned episodes
           enum:
             - tleo
           in: query
@@ -3979,12 +4010,12 @@ paths:
           name: category
           required: false
           type: string
-        - description: 'Sort by provided query. E.g. ''title'' sorts in ascending order, and -title sorts in descending order'
+        - description: Sort by provided query. E.g. 'title' sorts in ascending order, and -title sorts in descending order
           enum:
             - available_from_date
-            - '-available_from_date'
+            - -available_from_date
             - title
-            - '-title'
+            - -title
           in: query
           name: sort
           required: false
@@ -4000,29 +4031,31 @@ paths:
             - series
             - episode
             - clip
-            - 'episode,clip'
+            - episode,clip
           in: query
           name: type
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ProgrammesResponse'
+            $ref: "#/definitions/ProgrammesResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/RadioErrorResponse'
+            $ref: "#/definitions/RadioErrorResponse"
       summary: Radio programmes
       tags:
         - Programmes
-  '/radio/programmes/{pid}':
+  "/radio/programmes/{pid}":
     get:
-      description: |
+      description: >
         Find programmes by PID (brand, series, episode and clip)
 
+
         N.B.  Swagger schemas cannot currently handle multiple combinations of object in an array i.e. a mix of Episode
+
         and Clip Summaries so we are defining results as an array of Programme Summary here.  This will be resolved in V3 with full support for
          anyOf https://www.openapis.org/blog/2017/01/24/a-new-year-a-new-specification
       operationId: getRadioProgrammesByPid
@@ -4038,14 +4071,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ProgrammesResponse'
+            $ref: "#/definitions/ProgrammesResponse"
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/RadioErrorResponse'
+            $ref: "#/definitions/RadioErrorResponse"
       summary: Available radio programme by Pid
       tags:
         - Programmes
@@ -4058,10 +4091,10 @@ definitions:
         type: string
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       titles:
-        $ref: '#/definitions/AncestorTitles'
+        $ref: "#/definitions/AncestorTitles"
       type:
         type: string
     required:
@@ -4195,24 +4228,24 @@ definitions:
     properties:
       available_versions:
         items:
-          $ref: '#/definitions/AvailableVersions'
+          $ref: "#/definitions/AvailableVersions"
         type: array
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       latest_available_episodes:
         items:
-          $ref: '#/definitions/EpisodeSummary'
+          $ref: "#/definitions/EpisodeSummary"
         type: array
       network_summary:
-        $ref: '#/definitions/NetworkSummary'
+        $ref: "#/definitions/NetworkSummary"
       pid:
         type: string
       short_synopsis:
         type: string
       titles:
-        $ref: '#/definitions/ProgrammeTitles'
+        $ref: "#/definitions/ProgrammeTitles"
       total_available_episodes:
         type: integer
       type:
@@ -4250,7 +4283,7 @@ definitions:
       pid:
         type: string
       programme:
-        $ref: '#/definitions/ProgrammeSummary'
+        $ref: "#/definitions/ProgrammeSummary"
       service_id:
         type: string
       start:
@@ -4284,7 +4317,7 @@ definitions:
         type: integer
       results:
         items:
-          $ref: '#/definitions/Broadcast'
+          $ref: "#/definitions/Broadcast"
         type: array
       total:
         type: integer
@@ -4305,7 +4338,7 @@ definitions:
         type: integer
       results:
         items:
-          $ref: '#/definitions/Category'
+          $ref: "#/definitions/Category"
         type: array
       total:
         type: integer
@@ -4322,7 +4355,7 @@ definitions:
         type: string
       child_categories:
         items:
-          $ref: '#/definitions/ChildCategory'
+          $ref: "#/definitions/ChildCategory"
         type: array
       depth:
         type: integer
@@ -4371,7 +4404,7 @@ definitions:
         type: string
       errors:
         items:
-          $ref: '#/definitions/CategoryError'
+          $ref: "#/definitions/CategoryError"
         type: array
     required:
       - $schema
@@ -4402,7 +4435,7 @@ definitions:
         type: string
       child_categories:
         items:
-          $ref: '#/definitions/ChildCategory'
+          $ref: "#/definitions/ChildCategory"
         type: array
       depth:
         type: integer
@@ -4430,20 +4463,20 @@ definitions:
     properties:
       ancestors:
         items:
-          $ref: '#/definitions/AncestorSummary'
+          $ref: "#/definitions/AncestorSummary"
         type: array
       available_versions:
         items:
-          $ref: '#/definitions/AvailableVersions'
+          $ref: "#/definitions/AvailableVersions"
         type: array
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       media_type:
         type: string
       network_summary:
-        $ref: '#/definitions/NetworkSummary'
+        $ref: "#/definitions/NetworkSummary"
       pid:
         type: string
       release_date:
@@ -4451,7 +4484,7 @@ definitions:
       short_synopsis:
         type: string
       titles:
-        $ref: '#/definitions/ProgrammeTitles'
+        $ref: "#/definitions/ProgrammeTitles"
       type:
         enum:
           - clip_summary
@@ -4512,20 +4545,20 @@ definitions:
     properties:
       ancestors:
         items:
-          $ref: '#/definitions/AncestorSummary'
+          $ref: "#/definitions/AncestorSummary"
         type: array
       available_versions:
         items:
-          $ref: '#/definitions/AvailableVersions'
+          $ref: "#/definitions/AvailableVersions"
         type: array
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       media_type:
         type: string
       network_summary:
-        $ref: '#/definitions/NetworkSummary'
+        $ref: "#/definitions/NetworkSummary"
       pid:
         type: string
       release_date:
@@ -4533,7 +4566,7 @@ definitions:
       short_synopsis:
         type: string
       titles:
-        $ref: '#/definitions/ProgrammeTitles'
+        $ref: "#/definitions/ProgrammeTitles"
       type:
         enum:
           - episode_summary
@@ -4572,7 +4605,7 @@ definitions:
         type: string
       errors:
         items:
-          $ref: '#/definitions/Error'
+          $ref: "#/definitions/Error"
         type: array
     required:
       - $schema
@@ -4584,7 +4617,7 @@ definitions:
         type: string
       data:
         items:
-          $ref: '#/definitions/DisplayModule'
+          $ref: "#/definitions/DisplayModule"
         type: array
     required:
       - $schema
@@ -4619,9 +4652,9 @@ definitions:
   MetaData:
     properties:
       miscellaneous:
-        $ref: '#/definitions/Miscellaneous'
+        $ref: "#/definitions/Miscellaneous"
       origin:
-        $ref: '#/definitions/Origin'
+        $ref: "#/definitions/Origin"
       programme_type:
         type: string
       type:
@@ -4656,7 +4689,7 @@ definitions:
     properties:
       errors:
         items:
-          $ref: '#/definitions/MusicExportError'
+          $ref: "#/definitions/MusicExportError"
         type: array
       schema:
         type: string
@@ -4725,7 +4758,7 @@ definitions:
         type: string
       results:
         items:
-          $ref: '#/definitions/MusicExportPreferences'
+          $ref: "#/definitions/MusicExportPreferences"
         type: array
       schema:
         type: string
@@ -4785,7 +4818,7 @@ definitions:
         type: string
       results:
         items:
-          $ref: '#/definitions/MusicPopularityArtist'
+          $ref: "#/definitions/MusicPopularityArtist"
         type: array
       schema:
         type: string
@@ -4819,7 +4852,7 @@ definitions:
         type: string
       externalPartners:
         items:
-          $ref: '#/definitions/ExternalPartner'
+          $ref: "#/definitions/ExternalPartner"
         type: array
       genre:
         type: string
@@ -4884,7 +4917,7 @@ definitions:
         type: string
       results:
         items:
-          $ref: '#/definitions/MusicPopularityPlaylist'
+          $ref: "#/definitions/MusicPopularityPlaylist"
         type: array
       schema:
         type: string
@@ -4907,7 +4940,7 @@ definitions:
         type: string
       artists:
         items:
-          $ref: '#/definitions/MusicTrackArtist'
+          $ref: "#/definitions/MusicTrackArtist"
         type: array
       baseTitle:
         type: string
@@ -4920,14 +4953,14 @@ definitions:
           type: string
         type: array
       preferredMultiplayRecordAudio:
-        $ref: '#/definitions/MusicRecordAudio'
+        $ref: "#/definitions/MusicRecordAudio"
       preferredRecordAudio:
-        $ref: '#/definitions/MusicRecordAudio'
+        $ref: "#/definitions/MusicRecordAudio"
       radioEdit:
         type: boolean
       recordAudio:
         items:
-          $ref: '#/definitions/MusicRecordAudio'
+          $ref: "#/definitions/MusicRecordAudio"
         type: array
       recordImageHref:
         type: string
@@ -4955,7 +4988,7 @@ definitions:
         type: string
       results:
         items:
-          $ref: '#/definitions/MusicPopularityTrack'
+          $ref: "#/definitions/MusicPopularityTrack"
         type: array
       schema:
         type: string
@@ -5009,11 +5042,11 @@ definitions:
         type: boolean
       contacts:
         items:
-          $ref: '#/definitions/Contact'
+          $ref: "#/definitions/Contact"
         type: array
       date_ranges:
         items:
-          $ref: '#/definitions/DateRange'
+          $ref: "#/definitions/DateRange"
         type: array
       group:
         type: string
@@ -5027,11 +5060,11 @@ definitions:
         type: boolean
       promoted_category_summaries:
         items:
-          $ref: '#/definitions/CategorySummary'
+          $ref: "#/definitions/CategorySummary"
         type: array
       services:
         items:
-          $ref: '#/definitions/Service'
+          $ref: "#/definitions/Service"
         type: array
       short_title:
         type: string
@@ -5067,7 +5100,7 @@ definitions:
       key:
         type: string
       titles:
-        $ref: '#/definitions/NetworkTitles'
+        $ref: "#/definitions/NetworkTitles"
       type:
         type: string
     required:
@@ -5101,7 +5134,7 @@ definitions:
         type: integer
       results:
         items:
-          $ref: '#/definitions/Network'
+          $ref: "#/definitions/Network"
         type: array
       total:
         type: integer
@@ -5155,14 +5188,14 @@ definitions:
         type: string
       data:
         items:
-          $ref: '#/definitions/PersonalisedMusicData'
+          $ref: "#/definitions/PersonalisedMusicData"
         type: array
       domain:
         type: string
       id:
         type: string
       meta_data:
-        $ref: '#/definitions/PersonalisedMusicMetaData'
+        $ref: "#/definitions/PersonalisedMusicMetaData"
       type:
         type: string
       urn:
@@ -5184,7 +5217,7 @@ definitions:
         type: string
       images:
         items:
-          $ref: '#/definitions/PersonalisedMusicImage'
+          $ref: "#/definitions/PersonalisedMusicImage"
         type: array
       name:
         type: string
@@ -5204,7 +5237,7 @@ definitions:
       id:
         type: string
       meta_data:
-        $ref: '#/definitions/PersonalisedMusicMetaData'
+        $ref: "#/definitions/PersonalisedMusicMetaData"
       type:
         type: string
     required:
@@ -5230,7 +5263,7 @@ definitions:
       mediaType:
         type: string
       parentProgramme:
-        $ref: '#/definitions/PersonalisedMusicClipParentProgramme'
+        $ref: "#/definitions/PersonalisedMusicClipParentProgramme"
       pid:
         type: string
       startDate:
@@ -5240,7 +5273,7 @@ definitions:
       title:
         type: string
       version:
-        $ref: '#/definitions/PersonalisedMusicVersion'
+        $ref: "#/definitions/PersonalisedMusicVersion"
     type: object
   PersonalisedMusicClipParentProgramme:
     properties:
@@ -5254,17 +5287,17 @@ definitions:
   PersonalisedMusicData:
     properties:
       artist:
-        $ref: '#/definitions/PersonalisedMusicArtist'
+        $ref: "#/definitions/PersonalisedMusicArtist"
       clip:
-        $ref: '#/definitions/PersonalisedMusicClip'
+        $ref: "#/definitions/PersonalisedMusicClip"
       genre:
-        $ref: '#/definitions/PersonalisedMusicGenre'
+        $ref: "#/definitions/PersonalisedMusicGenre"
       playlist:
-        $ref: '#/definitions/PersonalisedMusicPlaylist'
+        $ref: "#/definitions/PersonalisedMusicPlaylist"
       service:
-        $ref: '#/definitions/PersonalisedMusicService'
+        $ref: "#/definitions/PersonalisedMusicService"
       track:
-        $ref: '#/definitions/PersonalisedMusicTrack'
+        $ref: "#/definitions/PersonalisedMusicTrack"
     type: object
   PersonalisedMusicError:
     properties:
@@ -5283,7 +5316,7 @@ definitions:
     properties:
       errors:
         items:
-          $ref: '#/definitions/PersonalisedMusicError'
+          $ref: "#/definitions/PersonalisedMusicError"
         type: array
       schema:
         type: string
@@ -5324,7 +5357,7 @@ definitions:
         type: string
       images:
         items:
-          $ref: '#/definitions/PersonalisedMusicImage'
+          $ref: "#/definitions/PersonalisedMusicImage"
         type: array
       playback_type:
         type: string
@@ -5333,13 +5366,13 @@ definitions:
       title:
         type: string
       tracks:
-        $ref: '#/definitions/PersonalisedMusicTrack'
+        $ref: "#/definitions/PersonalisedMusicTrack"
       type:
         type: string
       updated_at:
         type: string
       version:
-        $ref: '#/definitions/PersonalisedMusicPlaylistVersion'
+        $ref: "#/definitions/PersonalisedMusicPlaylistVersion"
     type: object
   PersonalisedMusicPlaylistVersion:
     properties:
@@ -5367,7 +5400,7 @@ definitions:
       context:
         type: string
       meta_data:
-        $ref: '#/definitions/PersonalisedMusicMetaData'
+        $ref: "#/definitions/PersonalisedMusicMetaData"
     required:
       - action
     type: object
@@ -5383,7 +5416,7 @@ definitions:
         type: string
       results:
         items:
-          $ref: '#/definitions/PersonalisedMusicActivity'
+          $ref: "#/definitions/PersonalisedMusicActivity"
         type: array
       schema:
         type: string
@@ -5426,24 +5459,24 @@ definitions:
     properties:
       contributions:
         items:
-          $ref: '#/definitions/PersonalisedMusicTrackContribution'
+          $ref: "#/definitions/PersonalisedMusicTrackContribution"
         type: array
       id:
         type: string
       images:
         items:
-          $ref: '#/definitions/PersonalisedMusicTrackImage'
+          $ref: "#/definitions/PersonalisedMusicTrackImage"
         type: array
       media:
         items:
-          $ref: '#/definitions/PersonalisedMusicTrackMedia'
+          $ref: "#/definitions/PersonalisedMusicTrackMedia"
         type: array
       title:
         type: string
       type:
         type: string
       version:
-        $ref: '#/definitions/PersonalisedMusicVersion'
+        $ref: "#/definitions/PersonalisedMusicVersion"
     required:
       - contributions
       - id
@@ -5459,7 +5492,7 @@ definitions:
         type: string
       images:
         items:
-          $ref: '#/definitions/PersonalisedMusicTrackImage'
+          $ref: "#/definitions/PersonalisedMusicTrackImage"
         type: array
       name:
         type: string
@@ -5537,7 +5570,7 @@ definitions:
         type: integer
       results:
         items:
-          $ref: '#/definitions/PersonalisedNetworks'
+          $ref: "#/definitions/PersonalisedNetworks"
         type: array
       total:
         type: integer
@@ -5557,13 +5590,13 @@ definitions:
       added_at:
         type: string
       data:
-        $ref: '#/definitions/ProgrammeSummary'
+        $ref: "#/definitions/ProgrammeSummary"
       domain:
         type: string
       id:
         type: string
       metadata:
-        $ref: '#/definitions/MetaData'
+        $ref: "#/definitions/MetaData"
       type:
         type: string
       uas_type:
@@ -5593,7 +5626,7 @@ definitions:
       id:
         type: string
       metadata:
-        $ref: '#/definitions/PersonalisedRadioMetaData'
+        $ref: "#/definitions/PersonalisedRadioMetaData"
       type:
         type: string
     required:
@@ -5605,7 +5638,7 @@ definitions:
         type: string
       errors:
         items:
-          $ref: '#/definitions/PersonalisedRadioErrorResponse_errors'
+          $ref: "#/definitions/PersonalisedRadioErrorResponse_errors"
         type: array
     required:
       - $schema
@@ -5651,7 +5684,7 @@ definitions:
       context:
         type: string
       metadata:
-        $ref: '#/definitions/PersonalisedRadioMetaData'
+        $ref: "#/definitions/PersonalisedRadioMetaData"
     required:
       - action
     type: object
@@ -5669,7 +5702,7 @@ definitions:
         type: string
       results:
         items:
-          $ref: '#/definitions/PersonalisedRadioActivity'
+          $ref: "#/definitions/PersonalisedRadioActivity"
         type: array
       total:
         type: integer
@@ -5716,7 +5749,7 @@ definitions:
         type: string
       members:
         items:
-          $ref: '#/definitions/PlayableItem'
+          $ref: "#/definitions/PlayableItem"
         type: array
       title:
         type: string
@@ -5727,7 +5760,7 @@ definitions:
     properties:
       category_summaries:
         items:
-          $ref: '#/definitions/CategorySummary'
+          $ref: "#/definitions/CategorySummary"
         type: array
       days_available:
         type: integer
@@ -5739,24 +5772,24 @@ definitions:
         type: string
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       latest_available_episodes:
         items:
-          $ref: '#/definitions/PodcastEpisodeSummary'
+          $ref: "#/definitions/PodcastEpisodeSummary"
         type: array
       network_summary:
-        $ref: '#/definitions/NetworkSummary'
+        $ref: "#/definitions/NetworkSummary"
       pid:
         type: string
       rss_url:
         type: string
       synopses:
-        $ref: '#/definitions/PodcastSynopses'
+        $ref: "#/definitions/PodcastSynopses"
       territory:
         type: string
       titles:
-        $ref: '#/definitions/ProgrammeTitles'
+        $ref: "#/definitions/ProgrammeTitles"
       total_available_episodes:
         type: integer
       type:
@@ -5787,16 +5820,16 @@ definitions:
         type: string
       available_versions:
         items:
-          $ref: '#/definitions/AvailableVersions'
+          $ref: "#/definitions/AvailableVersions"
         type: array
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       media_type:
         type: string
       network_summary:
-        $ref: '#/definitions/NetworkSummary'
+        $ref: "#/definitions/NetworkSummary"
       pid:
         type: string
       release_date:
@@ -5804,7 +5837,7 @@ definitions:
       short_synopsis:
         type: string
       titles:
-        $ref: '#/definitions/ProgrammeTitles'
+        $ref: "#/definitions/ProgrammeTitles"
       type:
         type: string
     required:
@@ -5829,7 +5862,7 @@ definitions:
         type: number
       results:
         items:
-          $ref: '#/definitions/PodcastEpisodeSummary'
+          $ref: "#/definitions/PodcastEpisodeSummary"
         type: array
       total:
         type: number
@@ -5858,7 +5891,7 @@ definitions:
         type: string
       errors:
         items:
-          $ref: '#/definitions/PodcastError'
+          $ref: "#/definitions/PodcastError"
         type: array
     type: object
   PodcastSynopses:
@@ -5881,7 +5914,7 @@ definitions:
     properties:
       featured_podcasts:
         items:
-          $ref: '#/definitions/Podcast'
+          $ref: "#/definitions/Podcast"
         type: array
       title:
         type: string
@@ -5898,7 +5931,7 @@ definitions:
         type: number
       results:
         items:
-          $ref: '#/definitions/PodcastsFeatured'
+          $ref: "#/definitions/PodcastsFeatured"
         type: array
       total:
         type: number
@@ -5918,7 +5951,7 @@ definitions:
         type: integer
       results:
         items:
-          $ref: '#/definitions/Podcast'
+          $ref: "#/definitions/Podcast"
         type: array
       total:
         type: integer
@@ -5954,7 +5987,7 @@ definitions:
         type: string
       errors:
         items:
-          $ref: '#/definitions/PopularError'
+          $ref: "#/definitions/PopularError"
         type: array
     required:
       - $schema
@@ -5963,7 +5996,7 @@ definitions:
   PopularItemSummary:
     properties:
       data:
-        $ref: '#/definitions/ProgrammeSummary'
+        $ref: "#/definitions/ProgrammeSummary"
       id:
         type: string
       score:
@@ -5986,7 +6019,7 @@ definitions:
         type: integer
       results:
         items:
-          $ref: '#/definitions/PopularItemSummary'
+          $ref: "#/definitions/PopularItemSummary"
         type: array
       total:
         type: integer
@@ -6001,20 +6034,20 @@ definitions:
     properties:
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       latest_available_episodes:
         items:
-          $ref: '#/definitions/EpisodeSummary'
+          $ref: "#/definitions/EpisodeSummary"
         type: array
       network_summary:
-        $ref: '#/definitions/NetworkSummary'
+        $ref: "#/definitions/NetworkSummary"
       pid:
         type: string
       short_synopsis:
         type: string
       titles:
-        $ref: '#/definitions/ProgrammeTitles'
+        $ref: "#/definitions/ProgrammeTitles"
       total_available_episodes:
         type: integer
       type:
@@ -6072,7 +6105,7 @@ definitions:
         type: integer
       results:
         items:
-          $ref: '#/definitions/ProgrammeSummary'
+          $ref: "#/definitions/ProgrammeSummary"
         type: array
       total:
         type: integer
@@ -6114,7 +6147,7 @@ definitions:
         type: string
       errors:
         items:
-          $ref: '#/definitions/RadioError'
+          $ref: "#/definitions/RadioError"
         type: array
     required:
       - $schema
@@ -6124,24 +6157,24 @@ definitions:
     properties:
       ancestors:
         items:
-          $ref: '#/definitions/AncestorSummary'
+          $ref: "#/definitions/AncestorSummary"
         type: array
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       latest_available_episodes:
         items:
-          $ref: '#/definitions/EpisodeSummary'
+          $ref: "#/definitions/EpisodeSummary"
         type: array
       network_summary:
-        $ref: '#/definitions/NetworkSummary'
+        $ref: "#/definitions/NetworkSummary"
       pid:
         type: string
       short_synopsis:
         type: string
       titles:
-        $ref: '#/definitions/ProgrammeTitles'
+        $ref: "#/definitions/ProgrammeTitles"
       total_available_episodes:
         type: integer
       type:
@@ -6167,7 +6200,7 @@ definitions:
         type: string
       date_ranges:
         items:
-          $ref: '#/definitions/DateRange'
+          $ref: "#/definitions/DateRange"
         type: array
       default:
         type: boolean

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: www.healthcare.gov
@@ -10,18 +10,19 @@ info:
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://www.healthcare.gov/images/logo.png'
+    url: https://www.healthcare.gov/images/logo.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/APIs-guru/unofficial_openapi_specs/master/healthcare.gov/1.0.0/swagger.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/APIs-guru/unofficial_openapi_specs/master/healthcare.gov/1.0.0/swagger.yaml
+      version: "2.0"
   x-providerName: healthcare.gov
   x-unofficialSpec: true
+  x-preferred: true
 externalDocs:
-  url: 'https://www.healthcare.gov/developers/'
+  url: https://www.healthcare.gov/developers/
 securityDefinitions: {}
 paths:
-  '/api/articles{mediaTypeExtension}':
+  "/api/articles{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -33,13 +34,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/articlesList'
-        '404':
+            $ref: "#/definitions/articlesList"
+        "404":
           description: Resource not found.
-  '/api/blog{mediaTypeExtension}':
+  "/api/blog{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -51,13 +52,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/blogList'
-        '404':
+            $ref: "#/definitions/blogList"
+        "404":
           description: Resource not found.
-  '/api/glossary{mediaTypeExtension}':
+  "/api/glossary{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -69,13 +70,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/glossaryList'
-        '404':
+            $ref: "#/definitions/glossaryList"
+        "404":
           description: Resource not found.
-  '/api/questions{mediaTypeExtension}':
+  "/api/questions{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -87,13 +88,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/questionsList'
-        '404':
+            $ref: "#/definitions/questionsList"
+        "404":
           description: Resource not found.
-  '/api/states{mediaTypeExtension}':
+  "/api/states{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -105,13 +106,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/statesList'
-        '404':
+            $ref: "#/definitions/statesList"
+        "404":
           description: Resource not found.
-  '/api/topics{mediaTypeExtension}':
+  "/api/topics{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -123,37 +124,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/topicsList'
-        '404':
+            $ref: "#/definitions/topicsList"
+        "404":
           description: Resource not found.
-  '/blog/{pageName}{mediaTypeExtension}':
-    get:
-      description: Returns pages content.
-      parameters:
-        - description: Omiting the param causes html to be returned.
-          enum:
-            - .json
-          in: path
-          name: mediaTypeExtension
-          required: true
-          type: string
-        - in: path
-          name: pageName
-          required: true
-          type: string
-      produces:
-        - application/html
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/blogPage'
-        '404':
-          description: Resource not found.
-  '/es/blog/{pageName}{mediaTypeExtension}':
+  "/blog/{pageName}{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -171,13 +148,13 @@ paths:
       produces:
         - application/html
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/blogPage'
-        '404':
+            $ref: "#/definitions/blogPage"
+        "404":
           description: Resource not found.
-  '/es/glossary/{pageName}{mediaTypeExtension}':
+  "/es/blog/{pageName}{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -195,35 +172,13 @@ paths:
       produces:
         - application/html
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/glossaryPage'
-        '404':
+            $ref: "#/definitions/blogPage"
+        "404":
           description: Resource not found.
-  '/es/question/{pageName}{mediaTypeExtension}':
-    get:
-      description: Returns pages content.
-      parameters:
-        - description: Omiting the param causes html to be returned.
-          enum:
-            - .json
-          in: path
-          name: mediaTypeExtension
-          required: true
-          type: string
-        - in: path
-          name: pageName
-          required: true
-          type: string
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/questionPage'
-        '404':
-          description: Resource not found.
-  '/es/{pageName}{mediaTypeExtension}':
+  "/es/glossary/{pageName}{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -241,13 +196,59 @@ paths:
       produces:
         - application/html
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/page'
-        '404':
+            $ref: "#/definitions/glossaryPage"
+        "404":
           description: Resource not found.
-  '/es/{stateName}{mediaTypeExtension}':
+  "/es/question/{pageName}{mediaTypeExtension}":
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/questionPage"
+        "404":
+          description: Resource not found.
+  "/es/{pageName}{mediaTypeExtension}":
+    get:
+      description: Returns pages content.
+      parameters:
+        - description: Omiting the param causes html to be returned.
+          enum:
+            - .json
+          in: path
+          name: mediaTypeExtension
+          required: true
+          type: string
+        - in: path
+          name: pageName
+          required: true
+          type: string
+      produces:
+        - application/html
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/page"
+        "404":
+          description: Resource not found.
+  "/es/{stateName}{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -263,13 +264,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/statePage'
-        '404':
+            $ref: "#/definitions/statePage"
+        "404":
           description: Resource not found.
-  '/glossary/{pageName}{mediaTypeExtension}':
+  "/glossary/{pageName}{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -287,13 +288,13 @@ paths:
       produces:
         - application/html
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/glossaryPage'
-        '404':
+            $ref: "#/definitions/glossaryPage"
+        "404":
           description: Resource not found.
-  '/question/{pageName}{mediaTypeExtension}':
+  "/question/{pageName}{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -309,13 +310,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/questionPage'
-        '404':
+            $ref: "#/definitions/questionPage"
+        "404":
           description: Resource not found.
-  '/{pageName}{mediaTypeExtension}':
+  "/{pageName}{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -333,13 +334,13 @@ paths:
       produces:
         - application/html
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/page'
-        '404':
+            $ref: "#/definitions/page"
+        "404":
           description: Resource not found.
-  '/{stateName}{mediaTypeExtension}':
+  "/{stateName}{mediaTypeExtension}":
     get:
       description: Returns pages content.
       parameters:
@@ -355,11 +356,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/statePage'
-        '404':
+            $ref: "#/definitions/statePage"
+        "404":
           description: Resource not found.
 definitions:
   articlesList:

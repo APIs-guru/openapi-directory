@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: quicksold.co.uk
@@ -7,32 +7,33 @@ info:
   contact:
     email: info@quicksold.co.uk
     name: Greg Eke
-    url: 'https://quicksold.co.uk'
+    url: https://quicksold.co.uk
     x-twitter: QuicksoldCoUk
   description: Useful utility APIs.
   license:
     name: License
-    url: 'https://quicksold.co.uk/terms-and-conditions'
-  termsOfService: 'https://quicksold.co.uk/terms-and-conditions'
+    url: https://quicksold.co.uk/terms-and-conditions
+  termsOfService: https://quicksold.co.uk/terms-and-conditions
   title: Quicksold
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - location
   x-logo:
-    url: 'https://twitter.com/QuicksoldCoUk/profile_image?size=original'
+    url: https://twitter.com/QuicksoldCoUk/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://quicksold.co.uk/v2/api-docs'
-      version: '2.0'
+      url: https://quicksold.co.uk/v2/api-docs
+      version: "2.0"
   x-providerName: quicksold.co.uk
   x-serviceName: location
+  x-preferred: true
 produces:
   - application/json
 tags:
   - description: Api Controller
     name: WGS84 to OSGB36
 paths:
-  '/wgs84ToOsgb36/{latitude}/{longitude}':
+  "/wgs84ToOsgb36/{latitude}/{longitude}":
     get:
       deprecated: false
       description: Convert a WGS84 latitude and longitude to OSGB36 easting and northing (British National Grid).
@@ -49,15 +50,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ApiResponse'
-        '401':
+            $ref: "#/definitions/ApiResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: WGS84 to OSGB36
       tags:

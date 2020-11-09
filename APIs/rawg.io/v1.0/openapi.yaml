@@ -44,9 +44,9 @@ info:
 
     and we will talk it through.
 
-    - Every API request should have a User-Agent header with your app name. If you don’t provide it, we may ban your
+    - You must include an API key with every request. The key can be obtained at https://rawg.io/apidocs.
 
-    requests.
+    If you don’t provide it, we may ban your requests.
 
 
     __[Read more](https://rawg.io/apidocs)__.
@@ -61,6 +61,7 @@ info:
       url: https://api.rawg.io/docs/?format=openapi
       version: "3.0"
   x-providerName: rawg.io
+  x-preferred: true
 paths:
   /creator-roles:
     get:

@@ -1,8 +1,8 @@
 openapi: 3.0.0
 servers:
-  - url: 'http://www.neowsapp.com/'
+  - url: http://www.neowsapp.com/
 info:
-  description: |-
+  description: >-
     A web service for near earth objects. All the data is from the <a href="http://neo.jpl.nasa.gov/" target="_blank">NASA JPL Asteroid team</a>. 
 
      
@@ -11,17 +11,18 @@ info:
 
      Follow us on <a href="https://twitter.com/AsteroidTracker" target="_blank">Twitter</a>
   title: NeoWs - (Near Earth Object Web Service)
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - open_data
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: swagger
-      url: 'http://www.neowsapp.com/api-docs'
-      version: '1.2'
+      url: http://www.neowsapp.com/api-docs
+      version: "1.2"
   x-providerName: neowsapp.com
+  x-preferred: true
 tags:
   - description: Operations with NearEarthObjects
     name: feed
@@ -35,16 +36,16 @@ paths:
   /rest/v1/feed:
     get:
       deprecated: false
-      description: 'Get a list of Near Earth Objects within a date range, The max range in one query is 7 days'
+      description: Get a list of Near Earth Objects within a date range, The max range in one query is 7 days
       operationId: retrieveNearEarthObjectFeed
       parameters:
-        - description: 'Start of date range search, format: yyyy-MM-dd - (ex: 2015-04-28)'
+        - description: "Start of date range search, format: yyyy-MM-dd - (ex: 2015-04-28)"
           in: query
           name: start_date
           required: false
           schema:
             type: string
-        - description: 'End of date range search, format: yyyy-MM-dd - (ex: 2015-04-28). If left off search will extends 7 days from start_date'
+        - description: "End of date range search, format: yyyy-MM-dd - (ex: 2015-04-28). If left off search will extends 7 days from start_date"
           in: query
           name: end_date
           required: false
@@ -57,17 +58,17 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NearEarthObjectList'
+                $ref: "#/components/schemas/NearEarthObjectList"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Find Near Earth Objects by date
       tags:
@@ -85,17 +86,17 @@ paths:
           schema:
             type: boolean
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NearEarthObjectList'
+                $ref: "#/components/schemas/NearEarthObjectList"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Find Near Earth Objects for today
       tags:
@@ -123,17 +124,17 @@ paths:
             format: int32
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NearEarthObject'
+                $ref: "#/components/schemas/NearEarthObject"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Browse the Near Earth Objects service
       tags:
@@ -144,7 +145,7 @@ paths:
       description: Retrieves Near Earth Objects listed in the NASA sentry data set
       operationId: retrieveSentryRiskData
       parameters:
-        - description: 'show current list of Sentry objects, or show removed Sentry objects'
+        - description: show current list of Sentry objects, or show removed Sentry objects
           in: query
           name: is_active
           required: false
@@ -168,73 +169,73 @@ paths:
             format: int32
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SentryObjectPagingDto'
+                $ref: "#/components/schemas/SentryObjectPagingDto"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Retrieve Sentry (Impact Risk ) Near Earth Objects
       tags:
         - neosentry
-  '/rest/v1/neo/sentry/{asteroid_id}':
+  "/rest/v1/neo/sentry/{asteroid_id}":
     get:
       deprecated: false
       description: Retrieves Sentry Near Earth Object by ID
       operationId: retrieveSentryRiskDataById
       parameters:
-        - description: 'ID of NearEarth object.  ID can be SPK_ID, Asteroid des (designation) or Sentry ID'
+        - description: ID of NearEarth object.  ID can be SPK_ID, Asteroid des (designation) or Sentry ID
           in: path
           name: asteroid_id
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SentryImpactRiskObject'
+                $ref: "#/components/schemas/SentryImpactRiskObject"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
-      summary: 'Retrieve Sentry (Impact Risk ) Near Earth Objectby ID '
+      summary: "Retrieve Sentry (Impact Risk ) Near Earth Objectby ID "
       tags:
         - neosentry
-  '/rest/v1/neo/{asteroid_id}':
+  "/rest/v1/neo/{asteroid_id}":
     get:
       deprecated: false
       description: Retrieve a Near Earth Objects with a given id
       operationId: retrieveNearEarthObjectById
       parameters:
-        - description: 'ID of Near Earth Object - (ex: 3729835)'
+        - description: "ID of Near Earth Object - (ex: 3729835)"
           in: path
           name: asteroid_id
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NearEarthObject'
+                $ref: "#/components/schemas/NearEarthObject"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Find Near Earth Objects by id
       tags:
@@ -245,17 +246,17 @@ paths:
       description: retrieveCurrentNeoStatistics
       operationId: retrieveCurrentNeoStatistics
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Statistics'
+                $ref: "#/components/schemas/Statistics"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get the Near Earth Object data set totals
       tags:
@@ -272,11 +273,11 @@ components:
           format: int64
           type: integer
         miss_distance:
-          $ref: '#/components/schemas/MissDistance'
+          $ref: "#/components/schemas/MissDistance"
         orbiting_body:
           type: string
         relative_velocity:
-          $ref: '#/components/schemas/RelVelocity'
+          $ref: "#/components/schemas/RelVelocity"
       type: object
     EstimatedDiameter:
       properties:
@@ -292,16 +293,16 @@ components:
     EstimatedDiameterContainer:
       properties:
         feet:
-          $ref: '#/components/schemas/EstimatedDiameter'
+          $ref: "#/components/schemas/EstimatedDiameter"
           description: estimated diameter feet
         kilometers:
-          $ref: '#/components/schemas/EstimatedDiameter'
+          $ref: "#/components/schemas/EstimatedDiameter"
           description: estimated diameter kilometer
         meters:
-          $ref: '#/components/schemas/EstimatedDiameter'
+          $ref: "#/components/schemas/EstimatedDiameter"
           description: estimated diameter meter
         miles:
-          $ref: '#/components/schemas/EstimatedDiameter'
+          $ref: "#/components/schemas/EstimatedDiameter"
           description: estimated diameter miles
       type: object
     HashMap_string_List_NearEarthObject_: {}
@@ -325,13 +326,13 @@ components:
         close_approach_data:
           description: Close approach information of the Asteroid
           items:
-            $ref: '#/components/schemas/CloseApproachData'
+            $ref: "#/components/schemas/CloseApproachData"
           type: array
         designation:
           type: string
         estimated_diameter:
-          $ref: '#/components/schemas/EstimatedDiameterContainer'
-          description: 'A collection of estimated diameters (kilometers, meters, miles, feet'
+          $ref: "#/components/schemas/EstimatedDiameterContainer"
+          description: A collection of estimated diameters (kilometers, meters, miles, feet
         is_potentially_hazardous_asteroid:
           type: boolean
         is_sentry_object:
@@ -347,7 +348,7 @@ components:
           description: The reference ID of the Asteroid - This correlates to the SPK ID for the JPL NEO data
           type: string
         orbital_data:
-          $ref: '#/components/schemas/OrbitalData'
+          $ref: "#/components/schemas/OrbitalData"
           description: Orbital information of t1he asteroid
         sentry_data:
           type: string
@@ -362,7 +363,7 @@ components:
           description: Hypermedia links to collection
           type: object
         near_earth_objects:
-          $ref: '#/components/schemas/HashMap_string_List_NearEarthObject_'
+          $ref: "#/components/schemas/HashMap_string_List_NearEarthObject_"
           description: A collection of NearEarthObjects
       type: object
     OrbitClass:
@@ -429,7 +430,7 @@ components:
           format: int64
           type: integer
         orbit_class:
-          $ref: '#/components/schemas/OrbitClass'
+          $ref: "#/components/schemas/OrbitClass"
         orbit_determination_date:
           type: string
         orbit_id:
@@ -514,10 +515,10 @@ components:
         links:
           type: object
         page:
-          $ref: '#/components/schemas/PageMetaData'
+          $ref: "#/components/schemas/PageMetaData"
         sentry_objects:
           items:
-            $ref: '#/components/schemas/SentryImpactRiskObject'
+            $ref: "#/components/schemas/SentryImpactRiskObject"
           type: array
       type: object
     Statistics:
@@ -530,7 +531,7 @@ components:
           description: TimeStamp the last time the DB was updated
           type: string
         nasa_jpl_url:
-          $ref: '#/components/schemas/URL'
+          $ref: "#/components/schemas/URL"
         near_earth_object_count:
           description: Number of NearEarthObjects listed in NeoWs
           format: int64

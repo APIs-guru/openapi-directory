@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.carbondoomsday.com
@@ -12,12 +12,13 @@ info:
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://twitter.com/CarbonDoomsday/profile_image?size=original'
+    url: https://twitter.com/CarbonDoomsday/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://api.carbondoomsday.com/?format=openapi'
-      version: '2.0'
+      url: https://api.carbondoomsday.com/?format=openapi
+      version: "2.0"
   x-providerName: carbondoomsday.com
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -30,10 +31,12 @@ security:
 paths:
   /co2/:
     get:
-      description: |-
+      description: >-
         CO2 measurements from the Mauna Loa observatory.
 
+
         This data is made available through the good work of the people at the
+
         Mauna Loa observatory. Their release notes say:
 
             These data are made freely available to the public and the scientific
@@ -48,20 +51,25 @@ paths:
 
         We have daily CO2 measurements as far back as 1958.
 
+
         Learn about using pagination via [the 3rd party documentation].
 
+
         [co2_mlo_weekly.csv]: https://www.esrl.noaa.gov/gmd/webdata/ccgg/trends/co2_mlo_weekly.csv
+
         [co2_mlo_surface-insitu_1_ccgg_DailyData.txt]: ftp://aftp.cmdl.noaa.gov/data/trace_gases/co2/in-situ/surface/mlo/co2_mlo_surface-insitu_1_ccgg_DailyData.txt
+
         [weekly_mlo.csv]: http://scrippsco2.ucsd.edu/sites/default/files/data/in_situ_co2/weekly_mlo.csv
+
         [the 3rd party documentation]: http://www.django-rest-framework.org/api-guide/pagination/#pagenumberpagination
       operationId: co2_list
       parameters:
-        - description: ''
+        - description: ""
           in: query
           name: ppm
           required: false
           type: number
-        - description: ''
+        - description: ""
           in: query
           name: date
           required: false
@@ -90,8 +98,8 @@ paths:
         - application/json
         - text/csv
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
             properties:
               count:
@@ -104,7 +112,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/CO2'
+                  $ref: "#/definitions/CO2"
                 type: array
             required:
               - count
@@ -113,12 +121,14 @@ paths:
       tags:
         - co2
     parameters: []
-  '/co2/{date}/':
+  "/co2/{date}/":
     get:
-      description: |-
+      description: >-
         CO2 measurements from the Mauna Loa observatory.
 
+
         This data is made available through the good work of the people at the
+
         Mauna Loa observatory. Their release notes say:
 
             These data are made freely available to the public and the scientific
@@ -133,11 +143,16 @@ paths:
 
         We have daily CO2 measurements as far back as 1958.
 
+
         Learn about using pagination via [the 3rd party documentation].
 
+
         [co2_mlo_weekly.csv]: https://www.esrl.noaa.gov/gmd/webdata/ccgg/trends/co2_mlo_weekly.csv
+
         [co2_mlo_surface-insitu_1_ccgg_DailyData.txt]: ftp://aftp.cmdl.noaa.gov/data/trace_gases/co2/in-situ/surface/mlo/co2_mlo_surface-insitu_1_ccgg_DailyData.txt
+
         [weekly_mlo.csv]: http://scrippsco2.ucsd.edu/sites/default/files/data/in_situ_co2/weekly_mlo.csv
+
         [the 3rd party documentation]: http://www.django-rest-framework.org/api-guide/pagination/#pagenumberpagination
       operationId: co2_read
       parameters: []
@@ -145,10 +160,10 @@ paths:
         - application/json
         - text/csv
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/CO2'
+            $ref: "#/definitions/CO2"
       tags:
         - co2
     parameters:

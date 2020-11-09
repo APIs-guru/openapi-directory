@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: ethereum.apidapp.com
@@ -7,14 +7,15 @@ info:
   contact:
     x-twitter: api_dapp
   title: ApiDapp
-  version: '2019-02-14T16:47:01Z'
+  version: 2019-02-14T16:47:01Z
   x-apisguru-categories:
     - financial
   x-origin:
     - format: swagger
-      url: 'https://apidapp.s3.amazonaws.com/ApiDapp-Start-swagger-7/ApiDapp-Start-swagger+(7).json'
-      version: '2.0'
+      url: https://apidapp.s3.amazonaws.com/ApiDapp-Start-swagger-7/ApiDapp-Start-swagger+(7).json
+      version: "2.0"
   x-providerName: apidapp.com
+  x-preferred: true
 produces:
   - application/json
 securityDefinitions:
@@ -29,7 +30,7 @@ paths:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -39,21 +40,21 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     x-amazon-apigateway-any-method:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /account:
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -63,20 +64,20 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       description: Create new account
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
-  '/account/{id}':
+  "/account/{id}":
     get:
       description: Get account balance
       parameters:
@@ -85,13 +86,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
@@ -103,7 +104,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -113,25 +114,25 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /block:
     get:
       description: Access detailed block information
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -141,8 +142,8 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
-  '/block/{id}':
+            $ref: "#/definitions/Empty"
+  "/block/{id}":
     get:
       description: Get information about particular block
       parameters:
@@ -151,13 +152,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
@@ -169,7 +170,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -179,8 +180,8 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
-  '/block/{id}/transaction':
+            $ref: "#/definitions/Empty"
+  "/block/{id}/transaction":
     get:
       description: Get transaction count within block
       parameters:
@@ -189,13 +190,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
@@ -207,7 +208,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -217,8 +218,8 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
-  '/block/{id}/transaction/{index}':
+            $ref: "#/definitions/Empty"
+  "/block/{id}/transaction/{index}":
     get:
       description: Get information about particular transaction within block
       parameters:
@@ -231,13 +232,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
@@ -253,7 +254,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -263,25 +264,25 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /blockchain:
     get:
       description: Get a list of supported blockchains
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -291,8 +292,8 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
-  '/blockchain/{id}':
+            $ref: "#/definitions/Empty"
+  "/blockchain/{id}":
     get:
       description: Get information about blockchain woth given id
       parameters:
@@ -301,13 +302,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
@@ -319,7 +320,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -329,13 +330,13 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /contract:
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -345,15 +346,15 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       description: Create a new smart contract
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
-  '/contract/{id}':
+            $ref: "#/definitions/Empty"
+  "/contract/{id}":
     get:
       description: Get contract balance
       parameters:
@@ -362,13 +363,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
@@ -380,7 +381,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -390,7 +391,7 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       description: Call the contract
       parameters:
@@ -399,13 +400,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
   /echo:
@@ -413,7 +414,7 @@ paths:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -423,28 +424,28 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     x-amazon-apigateway-any-method:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /erc20:
     get:
-      description: 'Get token information such as name, total amount in circulation, etc'
+      description: Get token information such as name, total amount in circulation, etc
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -454,14 +455,14 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
-  '/erc20/{address}':
+            $ref: "#/definitions/Empty"
+  "/erc20/{address}":
     get:
       description: Get information amout token balance in the account
       parameters:
@@ -470,10 +471,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     options:
       consumes:
         - application/json
@@ -483,7 +484,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -493,7 +494,7 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       description: Transfer tokens to another account
       parameters:
@@ -502,10 +503,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /key:
     get:
       parameters:
@@ -514,15 +515,15 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -532,14 +533,14 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
-  '/key/{key}':
+            $ref: "#/definitions/Empty"
+  "/key/{key}":
     delete:
       parameters:
         - in: path
@@ -547,10 +548,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     options:
       consumes:
         - application/json
@@ -560,7 +561,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -570,13 +571,13 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /transaction:
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -586,20 +587,20 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       description: Create a new transaction. Transfer Ether between accounts
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
-  '/transaction/{hash}':
+  "/transaction/{hash}":
     get:
       description: Get information about transaction by the transaction hash value
       parameters:
@@ -608,13 +609,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
@@ -626,7 +627,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -636,8 +637,8 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
-  '/transaction/{hash}/receipt':
+            $ref: "#/definitions/Empty"
+  "/transaction/{hash}/receipt":
     get:
       description: Get receipt detail information
       parameters:
@@ -646,13 +647,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
       security:
         - Key2: []
     options:
@@ -664,7 +665,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -674,23 +675,23 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /version:
     get:
       description: Get API version info
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -700,20 +701,20 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /wallet:
     get:
       description: Get current account balance
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -723,26 +724,26 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       description: Create personal wallet
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
   /wallet/account:
     get:
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     options:
       consumes:
         - application/json
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -752,14 +753,14 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
-  '/wallet/account/{id}':
+            $ref: "#/definitions/Empty"
+  "/wallet/account/{id}":
     get:
       description: Get account balance
       parameters:
@@ -768,10 +769,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     options:
       consumes:
         - application/json
@@ -781,7 +782,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -791,8 +792,8 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
-  '/wallet/account/{id}/contract':
+            $ref: "#/definitions/Empty"
+  "/wallet/account/{id}/contract":
     post:
       parameters:
         - in: path
@@ -800,11 +801,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
-  '/wallet/account/{id}/erc20':
+            $ref: "#/definitions/Empty"
+  "/wallet/account/{id}/erc20":
     post:
       parameters:
         - in: path
@@ -812,11 +813,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
-  '/wallet/account/{id}/pay':
+            $ref: "#/definitions/Empty"
+  "/wallet/account/{id}/pay":
     options:
       consumes:
         - application/json
@@ -826,7 +827,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           headers:
             Access-Control-Allow-Headers:
@@ -836,7 +837,7 @@ paths:
             Access-Control-Allow-Origin:
               type: string
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
     post:
       description: Send payment from the account held within the wallet
       parameters:
@@ -845,10 +846,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: 200 response
           schema:
-            $ref: '#/definitions/Empty'
+            $ref: "#/definitions/Empty"
 definitions:
   Empty:
     title: Empty Schema

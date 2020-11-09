@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.polygon.io
@@ -11,12 +11,13 @@ info:
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'https://twitter.com/polygon_io/profile_image?size=original'
+    url: https://twitter.com/polygon_io/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://polygon.io/docs/swagger.json'
-      version: '2.0'
+      url: https://polygon.io/docs/swagger.json
+      version: "2.0"
   x-providerName: polygon.io
+  x-preferred: true
 produces:
   - application/json
 securityDefinitions:
@@ -29,7 +30,7 @@ security:
 paths:
   /v1/companies:
     get:
-      description: |
+      description: >
         Get a list of the traded companies that polygon.io streams. Company includes some details about the company which we hope to add more to soon.
       parameters:
         - description: Which field to sort by. For desc place a `-` in front of the field name. eg `?sort=-marketcap`
@@ -49,25 +50,25 @@ paths:
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: An array of companies
           schema:
             items:
-              $ref: '#/definitions/Company'
+              $ref: "#/definitions/Company"
             type: array
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Available Companies
       tags:
         - Stocks
   /v1/currencies:
     get:
-      description: |
+      description: >
         Get a list of the currencies that polygon.io streams.
       responses:
-        '200':
+        "200":
           description: An array of currencies
           schema:
             items:
@@ -76,13 +77,13 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Available Currencies
       tags:
         - Currencies
-  '/v1/historic/agg/{size}/{symbol}/{date}':
+  "/v1/historic/agg/{size}/{symbol}/{date}":
     get:
-      description: |
+      description: >
         Get historic aggregations for a symbol.
       parameters:
         - description: Size of the aggregation. `second` or `minute`
@@ -104,19 +105,19 @@ paths:
           name: date
           required: true
           type: string
-        - description: 'Timestamp offset, used for pagination'
+        - description: Timestamp offset, used for pagination
           in: query
           name: offset
           required: false
           type: integer
         - default: 100
-          description: 'Limit the size of response, max: 10000'
+          description: "Limit the size of response, max: 10000"
           in: query
           name: limit
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: An array of aggregates
           schema:
             properties:
@@ -135,19 +136,19 @@ paths:
                 type: string
               ticks:
                 items:
-                  $ref: '#/definitions/Aggregate'
+                  $ref: "#/definitions/Aggregate"
                 type: array
             type: object
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Historic Aggregates
       tags:
         - Stocks
-  '/v1/historic/forex/{from}/{to}/{date}':
+  "/v1/historic/forex/{from}/{to}/{date}":
     get:
-      description: |
+      description: >
         Get historic ticks for a currency pair. Example for **USD/JPY** the from would be **USD** and to would be **JPY**. The date formatted like **2017-6-22**
       parameters:
         - description: From Symbol of the currency pair
@@ -166,19 +167,19 @@ paths:
           name: date
           required: true
           type: string
-        - description: 'Timestamp offset, used for pagination'
+        - description: Timestamp offset, used for pagination
           in: query
           name: offset
           required: false
           type: integer
         - default: 100
-          description: 'Limit the size of response, max: 10000'
+          description: "Limit the size of response, max: 10000"
           in: query
           name: limit
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: An array of forex ticks
           schema:
             properties:
@@ -197,19 +198,19 @@ paths:
                 type: string
               ticks:
                 items:
-                  $ref: '#/definitions/Forex'
+                  $ref: "#/definitions/Forex"
                 type: array
             type: object
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Historic Forex Ticks
       tags:
         - Currencies
-  '/v1/historic/quotes/{symbol}/{date}':
+  "/v1/historic/quotes/{symbol}/{date}":
     get:
-      description: |
+      description: >
         Get historic quotes for a symbol.
       parameters:
         - description: Symbol of the company to retrieve
@@ -223,19 +224,19 @@ paths:
           name: date
           required: true
           type: string
-        - description: 'Timestamp offset, used for pagination'
+        - description: Timestamp offset, used for pagination
           in: query
           name: offset
           required: false
           type: integer
         - default: 100
-          description: 'Limit the size of response, max: 10000'
+          description: "Limit the size of response, max: 10000"
           in: query
           name: limit
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: An array of quotes
           schema:
             properties:
@@ -254,19 +255,19 @@ paths:
                 type: string
               ticks:
                 items:
-                  $ref: '#/definitions/Quote'
+                  $ref: "#/definitions/Quote"
                 type: array
             type: object
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Historic Quotes
       tags:
         - Stocks
-  '/v1/historic/trades/{symbol}/{date}':
+  "/v1/historic/trades/{symbol}/{date}":
     get:
-      description: |
+      description: >
         Get historic trades for a symbol.
       parameters:
         - description: Symbol of the company to retrieve
@@ -280,19 +281,19 @@ paths:
           name: date
           required: true
           type: string
-        - description: 'Timestamp offset, used for pagination'
+        - description: Timestamp offset, used for pagination
           in: query
           name: offset
           required: false
           type: integer
         - default: 100
-          description: 'Limit the size of response, max: 10000'
+          description: "Limit the size of response, max: 10000"
           in: query
           name: limit
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: An array of trades
           schema:
             properties:
@@ -311,19 +312,19 @@ paths:
                 type: string
               ticks:
                 items:
-                  $ref: '#/definitions/Trade'
+                  $ref: "#/definitions/Trade"
                 type: array
             type: object
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Historic Trades
       tags:
         - Stocks
-  '/v1/last/currencies/{from}/{to}':
+  "/v1/last/currencies/{from}/{to}":
     get:
-      description: |
+      description: >
         Get Last Trade Tick for a Currency Pair.
       parameters:
         - description: From Symbol of the pair
@@ -337,12 +338,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Last tick for this currency pair
           schema:
             properties:
               last:
-                $ref: '#/definitions/LastForexTrade'
+                $ref: "#/definitions/LastForexTrade"
               status:
                 description: Status of this requests response
                 type: string
@@ -353,13 +354,13 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Last Trade for a Currency Pair
       tags:
         - Currencies
-  '/v1/last/stocks/{symbol}':
+  "/v1/last/stocks/{symbol}":
     get:
-      description: |
+      description: >
         Get the last trade for a given stock.
       parameters:
         - description: Symbol of the stock to get
@@ -368,12 +369,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Last trade for this stock
           schema:
             properties:
               last:
-                $ref: '#/definitions/LastTrade'
+                $ref: "#/definitions/LastTrade"
               status:
                 description: Status of this requests response
                 type: string
@@ -384,13 +385,13 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Last Trade for a Symbol
       tags:
         - Stocks
-  '/v1/last_quote/currencies/{from}/{to}':
+  "/v1/last_quote/currencies/{from}/{to}":
     get:
-      description: |
+      description: >
         Get Last Quote Tick for a Currency Pair.
       parameters:
         - description: From Symbol of the pair
@@ -404,12 +405,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Last quote tick for this currency pair
           schema:
             properties:
               last:
-                $ref: '#/definitions/LastForexQuote'
+                $ref: "#/definitions/LastForexQuote"
               status:
                 description: Status of this requests response
                 type: string
@@ -420,13 +421,13 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Last Quote for a Currency Pair
       tags:
         - Currencies
-  '/v1/last_quote/stocks/{symbol}':
+  "/v1/last_quote/stocks/{symbol}":
     get:
-      description: |
+      description: >
         Get the last quote tick for a given stock.
       parameters:
         - description: Symbol of the stock to get
@@ -435,12 +436,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Last quote tick for this stock
           schema:
             properties:
               last:
-                $ref: '#/definitions/LastQuote'
+                $ref: "#/definitions/LastQuote"
               status:
                 description: Status of this requests response
                 type: string
@@ -451,7 +452,7 @@ paths:
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       summary: Last Quote for a Symbol
       tags:
         - Stocks

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: trips.furkot.com
@@ -6,59 +6,62 @@ basePath: /pub/api
 info:
   contact:
     email: trips@furkot.com
-  description: |
+  description: >
     Furkot provides Rest API to access user trip data.
+
     Using Furkot API an application can list user trips and display stops for a specific trip.
+
     Furkot API uses OAuth2 protocol to authorize applications to access data on behalf of users.
   title: Furkot Trips
   version: 1.0.0
   x-apisguru-categories:
     - location
   x-logo:
-    url: 'https://cdn.furkot.com/img/furkot-banner-black-4x1.svg'
+    url: https://cdn.furkot.com/img/furkot-banner-black-4x1.svg
   x-origin:
     - format: swagger
-      url: 'https://help.furkot.com/widgets/furkot-api.yaml'
-      version: '2.0'
+      url: https://help.furkot.com/widgets/furkot-api.yaml
+      version: "2.0"
   x-providerName: furkot.com
+  x-preferred: true
 externalDocs:
   description: Furkot API description
-  url: 'https://help.furkot.com/widgets/furkot-api.html'
+  url: https://help.furkot.com/widgets/furkot-api.html
 produces:
   - application/json
 securityDefinitions:
   furkot_auth_access_code:
-    authorizationUrl: 'https://trips.furkot.com/oauth/authorize'
+    authorizationUrl: https://trips.furkot.com/oauth/authorize
     flow: accessCode
     scopes:
-      'read:trips': list trips and stops info
-    tokenUrl: 'https://trips.furkot.com/pub/api/access_token'
+      read:trips: list trips and stops info
+    tokenUrl: https://trips.furkot.com/pub/api/access_token
     type: oauth2
   furkot_auth_implicit:
-    authorizationUrl: 'https://trips.furkot.com/oauth/authorize'
+    authorizationUrl: https://trips.furkot.com/oauth/authorize
     flow: implicit
     scopes:
-      'read:trips': list users trips info
+      read:trips: list users trips info
     type: oauth2
 security:
   - furkot_auth_access_code:
-      - 'read:trips'
+      - read:trips
   - furkot_auth_implicit:
-      - 'read:trips'
+      - read:trips
 paths:
   /trip:
     get:
       description: list user's trips
       responses:
-        '200':
+        "200":
           description: Successful response
           schema:
             items:
-              $ref: '#/definitions/Trip'
+              $ref: "#/definitions/Trip"
             type: array
-  '/trip/{trip_id}/stop':
+  "/trip/{trip_id}/stop":
     get:
-      description: 'list stops for a trip identified by {trip_id}'
+      description: list stops for a trip identified by {trip_id}
       parameters:
         - description: id of the trip
           in: path
@@ -66,11 +69,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
           schema:
             items:
-              $ref: '#/definitions/Step'
+              $ref: "#/definitions/Step"
             type: array
 definitions:
   Step:
@@ -79,7 +82,7 @@ definitions:
         description: address of the stop
         type: string
       arrival:
-        description: 'arrival at the stop in its local timezone as YYYY-MM-DDThh:mm'
+        description: arrival at the stop in its local timezone as YYYY-MM-DDThh:mm
         format: date-time
         type: string
       coordinates:
@@ -95,7 +98,7 @@ definitions:
             type: number
         type: object
       departure:
-        description: 'departure from the stop in its local timezone as YYYY-MM-DDThh:mm'
+        description: departure from the stop in its local timezone as YYYY-MM-DDThh:mm
         format: date-time
         type: string
       name:
@@ -136,14 +139,14 @@ definitions:
   Trip:
     properties:
       begin:
-        description: 'begin of the trip in its local timezone as YYYY-MM-DDThh:mm'
+        description: begin of the trip in its local timezone as YYYY-MM-DDThh:mm
         format: date-time
         type: string
       description:
         description: description of the trip (truncated to 200 characters)
         type: string
       end:
-        description: 'end of the trip in its local timezone as YYYY-MM-DDThh:mm'
+        description: end of the trip in its local timezone as YYYY-MM-DDThh:mm
         format: date-time
         type: string
       id:

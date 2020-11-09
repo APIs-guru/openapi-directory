@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.reverb.com
@@ -8,25 +8,26 @@ info:
   contact:
     email: integrations@reverb.com
     name: Reverb API
-    url: 'https://www.reverb-api.com'
+    url: https://www.reverb-api.com
   description: reverb
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-  termsOfService: 'https://reverb.com/page/terms'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://reverb.com/page/terms
   title: reverb
-  version: '3.0'
+  version: "3.0"
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://d1g5417jjjo7sf.cloudfront.net/assets/top-level/reverb-logo-d2c75af0b020521f0bc5e90c883a13b5.svg'
+    url: https://d1g5417jjjo7sf.cloudfront.net/assets/top-level/reverb-logo-d2c75af0b020521f0bc5e90c883a13b5.svg
   x-origin:
     - format: swagger
-      url: 'https://s3.amazonaws.com/swagger.reverb.com/swagger.json'
-      version: '2.0'
+      url: https://s3.amazonaws.com/swagger.reverb.com/swagger.json
+      version: "2.0"
   x-providerName: reverb.com
+  x-preferred: true
 externalDocs:
-  url: 'https://dev.reverb.com/'
+  url: https://dev.reverb.com/
 consumes:
   - application/json
 produces:
@@ -35,25 +36,25 @@ securityDefinitions:
   oauth2:
     flow: application
     scopes:
-      public: ''
-      read_feedback: ''
-      read_listings: ''
-      read_lists: ''
-      read_messages: ''
-      read_offers: ''
-      read_orders: ''
-      read_payouts: ''
-      read_profile: ''
-      write_feedback: ''
-      write_listings: ''
-      write_listings_for_others: ''
-      write_lists: ''
-      write_messages: ''
-      write_offers: ''
-      write_orders: ''
-      write_profile: ''
-      write_reviews: ''
-    tokenUrl: 'https://reverb.com/oauth/token'
+      public: ""
+      read_feedback: ""
+      read_listings: ""
+      read_lists: ""
+      read_messages: ""
+      read_offers: ""
+      read_orders: ""
+      read_payouts: ""
+      read_profile: ""
+      write_feedback: ""
+      write_listings: ""
+      write_listings_for_others: ""
+      write_lists: ""
+      write_messages: ""
+      write_offers: ""
+      write_orders: ""
+      write_profile: ""
+      write_reviews: ""
+    tokenUrl: https://reverb.com/oauth/token
     type: oauth2
 paths:
   /articles:
@@ -122,7 +123,7 @@ paths:
       summary: Full taxonomy tree of categories including middle categories
       tags:
         - categories
-  '/categories/{product_type}/{category}':
+  "/categories/{product_type}/{category}":
     get:
       description: Get subcategory details
       parameters:
@@ -140,7 +141,7 @@ paths:
       summary: Get subcategory details
       tags:
         - categories
-  '/categories/{uuid}':
+  "/categories/{uuid}":
     get:
       description: Get category details
       parameters:
@@ -183,7 +184,7 @@ paths:
       summary: Show comparison shopping page
       tags:
         - comparison_shopping_pages
-  '/comparison_shopping_pages/{id}':
+  "/comparison_shopping_pages/{id}":
     get:
       parameters:
         - in: path
@@ -195,7 +196,7 @@ paths:
           description: Unexpected error
       tags:
         - comparison_shopping_pages
-  '/comparison_shopping_pages/{id}/listings':
+  "/comparison_shopping_pages/{id}/listings":
     get:
       description: Return new or used listings for a comparison shopping page
       parameters:
@@ -228,7 +229,7 @@ paths:
       summary: Return new or used listings for a comparison shopping page
       tags:
         - comparison_shopping_pages
-  '/comparison_shopping_pages/{id}/reviews':
+  "/comparison_shopping_pages/{id}/reviews":
     get:
       description: View reviews of a comparison shopping page
       parameters:
@@ -242,7 +243,7 @@ paths:
       summary: View reviews of a comparison shopping page
       tags:
         - comparison_shopping_pages
-  '/conversations/{conversation_id}/offer':
+  "/conversations/{conversation_id}/offer":
     post:
       description: Make an offer to the other participant in the conversation
       parameters:
@@ -280,7 +281,7 @@ paths:
               price:
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                    description: The amount of money being expressed, as a POSIX-compliant decimal number
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -309,7 +310,7 @@ paths:
                 description: Shipping price (sellers only)
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                    description: The amount of money being expressed, as a POSIX-compliant decimal number
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -337,7 +338,7 @@ paths:
       summary: Make an offer to the other participant in the conversation
       tags:
         - conversations
-  '/conversations/{id}/offer':
+  "/conversations/{id}/offer":
     post:
       description: Make an offer to the other participant in the conversation
       parameters:
@@ -416,7 +417,7 @@ paths:
       summary: Show comparison shopping page
       tags:
         - csps
-  '/csps/{id}':
+  "/csps/{id}":
     get:
       parameters:
         - in: path
@@ -428,7 +429,7 @@ paths:
           description: Unexpected error
       tags:
         - csps
-  '/curated_sets/{slug}':
+  "/curated_sets/{slug}":
     get:
       parameters:
         - in: path
@@ -458,7 +459,7 @@ paths:
       summary: List of supported listing currencies for shops
       tags:
         - currencies
-  '/feedback/{feedback_id}':
+  "/feedback/{feedback_id}":
     get:
       description: Feedback details
       parameters:
@@ -472,7 +473,7 @@ paths:
       summary: Feedback details
       tags:
         - feedback
-  '/handpicked/{slug}':
+  "/handpicked/{slug}":
     get:
       description: Get results from a handpicked collection
       parameters:
@@ -501,19 +502,19 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           in: query
           items:
             type: string
           name: conditions
           required: false
           type: array
-        - description: 'Decade: e.g. 1970s, early 70s'
+        - description: "Decade: e.g. 1970s, early 70s"
           in: query
           name: decade
           required: false
           type: string
-        - description: 'Visual finish of the item, common for guitars'
+        - description: Visual finish of the item, common for guitars
           in: query
           name: finish
           required: false
@@ -555,7 +556,7 @@ paths:
           name: model
           required: false
           type: string
-        - description: 'Search term negation. If you want to exclude a term, add it here'
+        - description: Search term negation. If you want to exclude a term, add it here
           in: query
           name: must_not
           required: false
@@ -587,12 +588,12 @@ paths:
           name: year_min
           required: false
           type: integer
-        - description: 'If true, include only items that accept gift cards'
+        - description: If true, include only items that accept gift cards
           in: query
           name: accepts_gift_cards
           required: false
           type: boolean
-        - description: 'If true, include only items by Reverb Preferred Sellers'
+        - description: If true, include only items by Reverb Preferred Sellers
           in: query
           name: preferred_seller
           required: false
@@ -607,7 +608,7 @@ paths:
           name: shop_id
           required: false
           type: string
-        - description: 'Type of listing: auctions,offers'
+        - description: "Type of listing: auctions,offers"
           in: query
           name: listing_type
           required: false
@@ -617,12 +618,12 @@ paths:
           name: ships_to
           required: false
           type: string
-        - description: 'If true, exclude auctions'
+        - description: If true, exclude auctions
           in: query
           name: exclude_auctions
           required: false
           type: boolean
-        - description: 'If true, only show items that can be purchased with a payment plan'
+        - description: If true, only show items that can be purchased with a payment plan
           in: query
           name: accepts_payment_plans
           required: false
@@ -632,7 +633,7 @@ paths:
           name: watchers_count_min
           required: false
           type: integer
-        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+        - description: Listing ID negation. If you want to exclude a listing, add it here.
           in: query
           items:
             type: string
@@ -698,19 +699,19 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           in: query
           items:
             type: string
           name: conditions
           required: false
           type: array
-        - description: 'Decade: e.g. 1970s, early 70s'
+        - description: "Decade: e.g. 1970s, early 70s"
           in: query
           name: decade
           required: false
           type: string
-        - description: 'Visual finish of the item, common for guitars'
+        - description: Visual finish of the item, common for guitars
           in: query
           name: finish
           required: false
@@ -752,7 +753,7 @@ paths:
           name: model
           required: false
           type: string
-        - description: 'Search term negation. If you want to exclude a term, add it here'
+        - description: Search term negation. If you want to exclude a term, add it here
           in: query
           name: must_not
           required: false
@@ -784,12 +785,12 @@ paths:
           name: year_min
           required: false
           type: integer
-        - description: 'If true, include only items that accept gift cards'
+        - description: If true, include only items that accept gift cards
           in: query
           name: accepts_gift_cards
           required: false
           type: boolean
-        - description: 'If true, include only items by Reverb Preferred Sellers'
+        - description: If true, include only items by Reverb Preferred Sellers
           in: query
           name: preferred_seller
           required: false
@@ -804,7 +805,7 @@ paths:
           name: shop_id
           required: false
           type: string
-        - description: 'Type of listing: auctions,offers'
+        - description: "Type of listing: auctions,offers"
           in: query
           name: listing_type
           required: false
@@ -814,12 +815,12 @@ paths:
           name: ships_to
           required: false
           type: string
-        - description: 'If true, exclude auctions'
+        - description: If true, exclude auctions
           in: query
           name: exclude_auctions
           required: false
           type: boolean
-        - description: 'If true, only show items that can be purchased with a payment plan'
+        - description: If true, only show items that can be purchased with a payment plan
           in: query
           name: accepts_payment_plans
           required: false
@@ -829,7 +830,7 @@ paths:
           name: watchers_count_min
           required: false
           type: integer
-        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+        - description: Listing ID negation. If you want to exclude a listing, add it here.
           in: query
           items:
             type: string
@@ -901,14 +902,14 @@ paths:
                 description: Product description. Please keep formatting to a minimum.
                 type: string
               exclusive_channel:
-                description: 'Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to ''seller_site'''
+                description: Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to 'seller_site'
                 enum:
                   - seller_site
                   - reverb
                   - none
                 type: string
               finish:
-                description: 'Finish, e.g. ''Sunburst'''
+                description: Finish, e.g. 'Sunburst'
                 type: string
               has_inventory:
                 description: Set true if selling more than one
@@ -919,32 +920,32 @@ paths:
               location:
                 properties:
                   country_code:
-                    description: 'Ex: US'
+                    description: "Ex: US"
                     type: string
                   locality:
-                    description: 'Ex: Chicago'
+                    description: "Ex: Chicago"
                     type: string
                   region:
-                    description: 'Ex: IL'
+                    description: "Ex: IL"
                     type: string
                 type: object
               make:
-                description: 'ex: Fender, Gibson'
+                description: "ex: Fender, Gibson"
                 type: string
               model:
-                description: 'ex: Stratocaster, SG'
+                description: "ex: Stratocaster, SG"
                 type: string
               multi_item:
                 description: Specifies if the listing is a bundle of multiple individual items
                 type: boolean
               offers_enabled:
-                description: 'Whether the listing accepts negotiated offers (default: true)'
+                description: "Whether the listing accepts negotiated offers (default: true)"
                 type: boolean
               origin_country_code:
-                description: 'Country of origin/manufacture, ISO code (e.g: US)'
+                description: "Country of origin/manufacture, ISO code (e.g: US)"
                 type: string
               photos:
-                description: 'An array of image URLs. Ex: [''http://my.site.com/image.jpg'']'
+                description: "An array of image URLs. Ex: ['http://my.site.com/image.jpg']"
                 items:
                   type: string
                 type: array
@@ -961,7 +962,7 @@ paths:
                       - weeks
                     type: string
                   ship_date:
-                    description: 'The date the item will be available to ship. In the response body of the request, `estimated_ship_date`, will be the same as ship_date. Date must be ISO8601 format - e.g: 2015-04-09T10:52:23-00:00.'
+                    description: "The date the item will be available to ship. In the response body of the request, `estimated_ship_date`, will be the same as ship_date. Date must be ISO8601 format - e.g: 2015-04-09T10:52:23-00:00."
                     type: string
                 required:
                   - lead_time_unit
@@ -969,7 +970,7 @@ paths:
               price:
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                    description: The amount of money being expressed, as a POSIX-compliant decimal number
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -988,7 +989,7 @@ paths:
                   - currency
                 type: object
               prop_65_warning:
-                description: 'If your listing contains chemicals that are required to be reported under California Prop 65, please provide your warning statement. We will add the required ''Warning'' label and link to California''s information page, so you only need to provide the body of the warning. For more information, see https://www.p65warnings.ca.gov/new-proposition-65-warnings'
+                description: If your listing contains chemicals that are required to be reported under California Prop 65, please provide your warning statement. We will add the required 'Warning' label and link to California's information page, so you only need to provide the body of the warning. For more information, see https://www.p65warnings.ca.gov/new-proposition-65-warnings
                 type: string
               publish:
                 description: Publish your listing if draft
@@ -999,7 +1000,7 @@ paths:
                     type: string
                 type: object
               seller_cost:
-                description: 'Cost of goods in your currency as a POSIX-compliant decimal number (internal use only, not shown to buyers)'
+                description: Cost of goods in your currency as a POSIX-compliant decimal number (internal use only, not shown to buyers)
                 type: string
               shipping:
                 properties:
@@ -1013,7 +1014,7 @@ paths:
                         rate:
                           properties:
                             amount:
-                              description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                              description: The amount of money being expressed, as a POSIX-compliant decimal number
                               type: string
                             currency:
                               description: The currency the money will be expressed in
@@ -1041,7 +1042,7 @@ paths:
                 description: id of a shop's shipping profile
                 type: string
               shipping_profile_name:
-                description: 'DEPRECATED, please use shipping_profile_id. Name of a shipping profile'
+                description: DEPRECATED, please use shipping_profile_id. Name of a shipping profile
                 type: string
               sku:
                 description: Unique identifier for product
@@ -1062,10 +1063,10 @@ paths:
                 description: Valid UPC code
                 type: string
               upc_does_not_apply:
-                description: 'True if a brand new product has no UPC code, ie for a handmade or custom item'
+                description: True if a brand new product has no UPC code, ie for a handmade or custom item
                 type: boolean
               videos:
-                description: 'List of YouTube video urls. Note: ONLY ONE ALLOWED'
+                description: "List of YouTube video urls. Note: ONLY ONE ALLOWED"
                 items:
                   properties:
                     link:
@@ -1076,7 +1077,7 @@ paths:
                   type: object
                 type: array
               year:
-                description: 'Supports many formats. Ex: 1979, mid-70s, late 90s'
+                description: "Supports many formats. Ex: 1979, mid-70s, late 90s"
                 type: string
             type: object
       responses:
@@ -1091,7 +1092,7 @@ paths:
         - listings
   /listings/all:
     get:
-      description: 'All listings including used, handmade, and brand new'
+      description: All listings including used, handmade, and brand new
       parameters:
         - description: Search query.
           in: query
@@ -1114,19 +1115,19 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           in: query
           items:
             type: string
           name: conditions
           required: false
           type: array
-        - description: 'Decade: e.g. 1970s, early 70s'
+        - description: "Decade: e.g. 1970s, early 70s"
           in: query
           name: decade
           required: false
           type: string
-        - description: 'Visual finish of the item, common for guitars'
+        - description: Visual finish of the item, common for guitars
           in: query
           name: finish
           required: false
@@ -1168,7 +1169,7 @@ paths:
           name: model
           required: false
           type: string
-        - description: 'Search term negation. If you want to exclude a term, add it here'
+        - description: Search term negation. If you want to exclude a term, add it here
           in: query
           name: must_not
           required: false
@@ -1200,12 +1201,12 @@ paths:
           name: year_min
           required: false
           type: integer
-        - description: 'If true, include only items that accept gift cards'
+        - description: If true, include only items that accept gift cards
           in: query
           name: accepts_gift_cards
           required: false
           type: boolean
-        - description: 'If true, include only items by Reverb Preferred Sellers'
+        - description: If true, include only items by Reverb Preferred Sellers
           in: query
           name: preferred_seller
           required: false
@@ -1220,7 +1221,7 @@ paths:
           name: shop_id
           required: false
           type: string
-        - description: 'Type of listing: auctions,offers'
+        - description: "Type of listing: auctions,offers"
           in: query
           name: listing_type
           required: false
@@ -1230,12 +1231,12 @@ paths:
           name: ships_to
           required: false
           type: string
-        - description: 'If true, exclude auctions'
+        - description: If true, exclude auctions
           in: query
           name: exclude_auctions
           required: false
           type: boolean
-        - description: 'If true, only show items that can be purchased with a payment plan'
+        - description: If true, only show items that can be purchased with a payment plan
           in: query
           name: accepts_payment_plans
           required: false
@@ -1245,7 +1246,7 @@ paths:
           name: watchers_count_min
           required: false
           type: integer
-        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+        - description: Listing ID negation. If you want to exclude a listing, add it here.
           in: query
           items:
             type: string
@@ -1274,7 +1275,7 @@ paths:
       responses:
         default:
           description: Unexpected error
-      summary: 'All listings including used, handmade, and brand new'
+      summary: All listings including used, handmade, and brand new
       tags:
         - listings
   /listings/facets/seller_location:
@@ -1286,7 +1287,7 @@ paths:
       summary: Individual facets
       tags:
         - listings
-  '/listings/{id}/negotiation':
+  "/listings/{id}/negotiation":
     get:
       description: Returns the latest negotiation for the requesting user given a listing id
       parameters:
@@ -1303,7 +1304,7 @@ paths:
       summary: Returns the latest negotiation for the requesting user given a listing id
       tags:
         - listings
-  '/listings/{id}/offer':
+  "/listings/{id}/offer":
     post:
       description: Make an offer to the seller of a listing
       parameters:
@@ -1337,7 +1338,7 @@ paths:
       summary: Make an offer to the seller of a listing
       tags:
         - listings
-  '/listings/{listing_id}/bump':
+  "/listings/{listing_id}/bump":
     get:
       description: View available bump tiers and stats for a listing
       parameters:
@@ -1354,7 +1355,7 @@ paths:
       summary: View available bump tiers and stats for a listing
       tags:
         - listings
-  '/listings/{listing_id}/bump/{budget_type}':
+  "/listings/{listing_id}/bump/{budget_type}":
     post:
       description: Bump a listing
       parameters:
@@ -1375,7 +1376,7 @@ paths:
       summary: Bump a listing
       tags:
         - listings
-  '/listings/{listing_id}/conversations':
+  "/listings/{listing_id}/conversations":
     post:
       description: Start a conversation with a seller
       parameters:
@@ -1402,7 +1403,7 @@ paths:
       summary: Start a conversation with a seller
       tags:
         - listings
-  '/listings/{listing_id}/images':
+  "/listings/{listing_id}/images":
     get:
       description: View the images associated with a particular listing
       parameters:
@@ -1419,7 +1420,7 @@ paths:
       summary: View the images associated with a particular listing
       tags:
         - listings
-  '/listings/{listing_id}/images/{image_id}':
+  "/listings/{listing_id}/images/{image_id}":
     delete:
       description: Delete an image from a listing
       parameters:
@@ -1440,7 +1441,7 @@ paths:
       summary: Delete an image from a listing
       tags:
         - listings
-  '/listings/{listing_id}/product_bundle':
+  "/listings/{listing_id}/product_bundle":
     get:
       description: Find a product bundle attached to a listing
       parameters:
@@ -1459,7 +1460,7 @@ paths:
       summary: Find a product bundle attached to a listing
       tags:
         - listings
-  '/listings/{listing_id}/sales':
+  "/listings/{listing_id}/sales":
     get:
       description: See all sales that include a listing.
       parameters:
@@ -1473,7 +1474,7 @@ paths:
       summary: See all sales that include a listing.
       tags:
         - listings
-  '/listings/{slug}':
+  "/listings/{slug}":
     delete:
       description: Delete a draft listing. Cannot be used on non-drafts.
       parameters:
@@ -1547,14 +1548,14 @@ paths:
                 description: Product description. Please keep formatting to a minimum.
                 type: string
               exclusive_channel:
-                description: 'Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to ''seller_site'''
+                description: Currently for users of seller sites only, this allows you to have a listing available only to your seller site by setting this to 'seller_site'
                 enum:
                   - seller_site
                   - reverb
                   - none
                 type: string
               finish:
-                description: 'Finish, e.g. ''Sunburst'''
+                description: Finish, e.g. 'Sunburst'
                 type: string
               has_inventory:
                 description: Set true if selling more than one
@@ -1565,32 +1566,32 @@ paths:
               location:
                 properties:
                   country_code:
-                    description: 'Ex: US'
+                    description: "Ex: US"
                     type: string
                   locality:
-                    description: 'Ex: Chicago'
+                    description: "Ex: Chicago"
                     type: string
                   region:
-                    description: 'Ex: IL'
+                    description: "Ex: IL"
                     type: string
                 type: object
               make:
-                description: 'ex: Fender, Gibson'
+                description: "ex: Fender, Gibson"
                 type: string
               model:
-                description: 'ex: Stratocaster, SG'
+                description: "ex: Stratocaster, SG"
                 type: string
               multi_item:
                 description: Specifies if the listing is a bundle of multiple individual items
                 type: boolean
               offers_enabled:
-                description: 'Whether the listing accepts negotiated offers (default: true)'
+                description: "Whether the listing accepts negotiated offers (default: true)"
                 type: boolean
               origin_country_code:
-                description: 'Country of origin/manufacture, ISO code (e.g: US)'
+                description: "Country of origin/manufacture, ISO code (e.g: US)"
                 type: string
               photos:
-                description: 'An array of image URLs. Ex: [''http://my.site.com/image.jpg'']'
+                description: "An array of image URLs. Ex: ['http://my.site.com/image.jpg']"
                 items:
                   type: string
                 type: array
@@ -1607,7 +1608,7 @@ paths:
                       - weeks
                     type: string
                   ship_date:
-                    description: 'The date the item will be available to ship. In the response body of the request, `estimated_ship_date`, will be the same as ship_date. Date must be ISO8601 format - e.g: 2015-04-09T10:52:23-00:00.'
+                    description: "The date the item will be available to ship. In the response body of the request, `estimated_ship_date`, will be the same as ship_date. Date must be ISO8601 format - e.g: 2015-04-09T10:52:23-00:00."
                     type: string
                 required:
                   - lead_time_unit
@@ -1615,7 +1616,7 @@ paths:
               price:
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                    description: The amount of money being expressed, as a POSIX-compliant decimal number
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -1634,7 +1635,7 @@ paths:
                   - currency
                 type: object
               prop_65_warning:
-                description: 'If your listing contains chemicals that are required to be reported under California Prop 65, please provide your warning statement. We will add the required ''Warning'' label and link to California''s information page, so you only need to provide the body of the warning. For more information, see https://www.p65warnings.ca.gov/new-proposition-65-warnings'
+                description: If your listing contains chemicals that are required to be reported under California Prop 65, please provide your warning statement. We will add the required 'Warning' label and link to California's information page, so you only need to provide the body of the warning. For more information, see https://www.p65warnings.ca.gov/new-proposition-65-warnings
                 type: string
               publish:
                 description: Publish your listing if draft
@@ -1645,7 +1646,7 @@ paths:
                     type: string
                 type: object
               seller_cost:
-                description: 'Cost of goods in your currency as a POSIX-compliant decimal number (internal use only, not shown to buyers)'
+                description: Cost of goods in your currency as a POSIX-compliant decimal number (internal use only, not shown to buyers)
                 type: string
               shipping:
                 properties:
@@ -1659,7 +1660,7 @@ paths:
                         rate:
                           properties:
                             amount:
-                              description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                              description: The amount of money being expressed, as a POSIX-compliant decimal number
                               type: string
                             currency:
                               description: The currency the money will be expressed in
@@ -1687,7 +1688,7 @@ paths:
                 description: id of a shop's shipping profile
                 type: string
               shipping_profile_name:
-                description: 'DEPRECATED, please use shipping_profile_id. Name of a shipping profile'
+                description: DEPRECATED, please use shipping_profile_id. Name of a shipping profile
                 type: string
               sku:
                 description: Unique identifier for product
@@ -1708,10 +1709,10 @@ paths:
                 description: Valid UPC code
                 type: string
               upc_does_not_apply:
-                description: 'True if a brand new product has no UPC code, ie for a handmade or custom item'
+                description: True if a brand new product has no UPC code, ie for a handmade or custom item
                 type: boolean
               videos:
-                description: 'List of YouTube video urls. Note: ONLY ONE ALLOWED'
+                description: "List of YouTube video urls. Note: ONLY ONE ALLOWED"
                 items:
                   properties:
                     link:
@@ -1722,7 +1723,7 @@ paths:
                   type: object
                 type: array
               year:
-                description: 'Supports many formats. Ex: 1979, mid-70s, late 90s'
+                description: "Supports many formats. Ex: 1979, mid-70s, late 90s"
                 type: string
             type: object
       responses:
@@ -1734,7 +1735,7 @@ paths:
       summary: Update a listing
       tags:
         - listings
-  '/listings/{slug}/edit':
+  "/listings/{slug}/edit":
     get:
       description: Edit listing.
       parameters:
@@ -1751,7 +1752,7 @@ paths:
       summary: Edit listing.
       tags:
         - listings
-  '/listings/{slug}/flag':
+  "/listings/{slug}/flag":
     post:
       description: Flag a listing for inappropriate content or fraud
       parameters:
@@ -1765,7 +1766,7 @@ paths:
           schema:
             properties:
               reason:
-                description: 'Valid reasons: ''Sexuality/nudity'', ''Hateful or inappropriate speech'', ''Item not as described or potential fraud'', ''Trademark infringement'', ''Other'''
+                description: "Valid reasons: 'Sexuality/nudity', 'Hateful or inappropriate speech', 'Item not as described or potential fraud', 'Trademark infringement', 'Other'"
                 type: string
             required:
               - reason
@@ -1776,7 +1777,7 @@ paths:
       summary: Flag a listing for inappropriate content or fraud
       tags:
         - listings
-  '/listings/{slug}/reviews':
+  "/listings/{slug}/reviews":
     get:
       description: View reviews of a listing
       parameters:
@@ -1806,7 +1807,7 @@ paths:
       summary: Create a review for a listing
       tags:
         - listings
-  '/listings/{slug}/similar_listings':
+  "/listings/{slug}/similar_listings":
     get:
       description: Listing details
       parameters:
@@ -1888,7 +1889,7 @@ paths:
       summary: Create a new address in your address book
       tags:
         - my
-  '/my/addresses/{address_id}':
+  "/my/addresses/{address_id}":
     delete:
       description: Delete an existing address in your address book
       parameters:
@@ -1998,7 +1999,7 @@ paths:
       summary: Start a conversation
       tags:
         - my
-  '/my/conversations/{conversation_id}/messages':
+  "/my/conversations/{conversation_id}/messages":
     post:
       description: Send a message
       parameters:
@@ -2025,7 +2026,7 @@ paths:
       summary: Send a message
       tags:
         - my
-  '/my/conversations/{id}':
+  "/my/conversations/{id}":
     get:
       description: Display conversation details with messages in natural time order (oldest to newest)
       parameters:
@@ -2079,7 +2080,7 @@ paths:
       summary: Get your actionable status counts
       tags:
         - my
-  '/my/curated_set/product/{product_id}':
+  "/my/curated_set/product/{product_id}":
     delete:
       parameters:
         - in: path
@@ -2208,7 +2209,7 @@ paths:
       summary: Set a user's ArticleCategoryFollows
       tags:
         - my
-  '/my/follows/brands/{slug}':
+  "/my/follows/brands/{slug}":
     delete:
       description: Unfollow a brand
       parameters:
@@ -2257,7 +2258,7 @@ paths:
       summary: Follow a brand
       tags:
         - my
-  '/my/follows/categories/{category}/{subcategory}':
+  "/my/follows/categories/{category}/{subcategory}":
     delete:
       description: Unfollow a subcategory
       parameters:
@@ -2318,7 +2319,7 @@ paths:
       summary: Follow a subcategory
       tags:
         - my
-  '/my/follows/categories/{identifier}':
+  "/my/follows/categories/{identifier}":
     delete:
       description: Unfollow a category
       parameters:
@@ -2367,7 +2368,7 @@ paths:
       summary: Follow a category
       tags:
         - my
-  '/my/follows/categories/{uuid}':
+  "/my/follows/categories/{uuid}":
     post:
       description: Follow a category
       parameters:
@@ -2384,7 +2385,7 @@ paths:
       summary: Follow a category
       tags:
         - my
-  '/my/follows/collections/{slug}':
+  "/my/follows/collections/{slug}":
     delete:
       description: Unfollow a collection
       parameters:
@@ -2433,7 +2434,7 @@ paths:
       summary: Follow a collection
       tags:
         - my
-  '/my/follows/handpicked/{slug}':
+  "/my/follows/handpicked/{slug}":
     delete:
       description: Unfollow a handpicked collection
       parameters:
@@ -2503,10 +2504,10 @@ paths:
           schema:
             properties:
               accepts_gift_cards:
-                description: 'If true, include only items that accept gift cards'
+                description: If true, include only items that accept gift cards
                 type: boolean
               accepts_payment_plans:
-                description: 'If true, only show items that can be purchased with a payment plan'
+                description: If true, only show items that can be purchased with a payment plan
                 type: boolean
               auction_price_max:
                 description: Maximum current auction price
@@ -2516,7 +2517,7 @@ paths:
                 description: Category slug from /api/categories
                 type: string
               conditions:
-                description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
+                description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
                 enum:
                   - all
                   - new
@@ -2556,13 +2557,13 @@ paths:
                   - RUB
                 type: string
               decade:
-                description: 'Decade: e.g. 1970s, early 70s'
+                description: "Decade: e.g. 1970s, early 70s"
                 type: string
               exclude_auctions:
-                description: 'If true, exclude auctions'
+                description: If true, exclude auctions
                 type: boolean
               finish:
-                description: 'Visual finish of the item, common for guitars'
+                description: Visual finish of the item, common for guitars
                 type: string
               handmade:
                 description: Handmade items only
@@ -2580,7 +2581,7 @@ paths:
                 description: State or region code where item is located
                 type: string
               listing_type:
-                description: 'Type of listing: auctions,offers'
+                description: "Type of listing: auctions,offers"
                 enum:
                   - auctions
                   - offers
@@ -2597,15 +2598,15 @@ paths:
                 description: Model of item (e.g. Stratocaster)
                 type: string
               must_not:
-                description: 'Search term negation. If you want to exclude a term, add it here'
+                description: Search term negation. If you want to exclude a term, add it here
                 type: string
               not_ids:
-                description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+                description: Listing ID negation. If you want to exclude a listing, add it here.
                 items:
                   type: integer
                 type: array
               preferred_seller:
-                description: 'If true, include only items by Reverb Preferred Sellers'
+                description: If true, include only items by Reverb Preferred Sellers
                 type: boolean
               price_max:
                 description: Maximum price of search results (USD)
@@ -2649,7 +2650,7 @@ paths:
       summary: Follow a search
       tags:
         - my
-  '/my/follows/shops/{slug}':
+  "/my/follows/shops/{slug}":
     delete:
       description: Unfollow a shop
       parameters:
@@ -2698,7 +2699,7 @@ paths:
       summary: Follow a shop
       tags:
         - my
-  '/my/follows/{follow_id}':
+  "/my/follows/{follow_id}":
     delete:
       description: Delete a follow
       parameters:
@@ -2715,7 +2716,7 @@ paths:
       summary: Delete a follow
       tags:
         - my
-  '/my/follows/{follow_id}/alert':
+  "/my/follows/{follow_id}/alert":
     delete:
       parameters:
         - in: path
@@ -2763,19 +2764,19 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           in: query
           items:
             type: string
           name: conditions
           required: false
           type: array
-        - description: 'Decade: e.g. 1970s, early 70s'
+        - description: "Decade: e.g. 1970s, early 70s"
           in: query
           name: decade
           required: false
           type: string
-        - description: 'Visual finish of the item, common for guitars'
+        - description: Visual finish of the item, common for guitars
           in: query
           name: finish
           required: false
@@ -2817,7 +2818,7 @@ paths:
           name: model
           required: false
           type: string
-        - description: 'Search term negation. If you want to exclude a term, add it here'
+        - description: Search term negation. If you want to exclude a term, add it here
           in: query
           name: must_not
           required: false
@@ -2849,12 +2850,12 @@ paths:
           name: year_min
           required: false
           type: integer
-        - description: 'If true, include only items that accept gift cards'
+        - description: If true, include only items that accept gift cards
           in: query
           name: accepts_gift_cards
           required: false
           type: boolean
-        - description: 'If true, include only items by Reverb Preferred Sellers'
+        - description: If true, include only items by Reverb Preferred Sellers
           in: query
           name: preferred_seller
           required: false
@@ -2869,7 +2870,7 @@ paths:
           name: shop_id
           required: false
           type: string
-        - description: 'Type of listing: auctions,offers'
+        - description: "Type of listing: auctions,offers"
           in: query
           name: listing_type
           required: false
@@ -2879,12 +2880,12 @@ paths:
           name: ships_to
           required: false
           type: string
-        - description: 'If true, exclude auctions'
+        - description: If true, exclude auctions
           in: query
           name: exclude_auctions
           required: false
           type: boolean
-        - description: 'If true, only show items that can be purchased with a payment plan'
+        - description: If true, only show items that can be purchased with a payment plan
           in: query
           name: accepts_payment_plans
           required: false
@@ -2894,7 +2895,7 @@ paths:
           name: watchers_count_min
           required: false
           type: integer
-        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+        - description: Listing ID negation. If you want to exclude a listing, add it here.
           in: query
           items:
             type: string
@@ -2907,7 +2908,7 @@ paths:
           required: false
           type: boolean
         - default: live
-          description: 'Available: ["all", "draft", "ended", "live", "ordered", "sold_out", "suspended", "seller_unavailable"]. Defaults to ''live'''
+          description: "Available: [\"all\", \"draft\", \"ended\", \"live\", \"ordered\", \"sold_out\", \"suspended\", \"seller_unavailable\"]. Defaults to 'live'"
           in: query
           name: state
           required: false
@@ -2951,19 +2952,19 @@ paths:
           name: product_type
           required: false
           type: string
-        - description: 'Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint'
+        - description: "Condition: all,new,b-stock,used,non-functioning,all-but-new,poor,fair,good,very-good,excellent,mint"
           in: query
           items:
             type: string
           name: conditions
           required: false
           type: array
-        - description: 'Decade: e.g. 1970s, early 70s'
+        - description: "Decade: e.g. 1970s, early 70s"
           in: query
           name: decade
           required: false
           type: string
-        - description: 'Visual finish of the item, common for guitars'
+        - description: Visual finish of the item, common for guitars
           in: query
           name: finish
           required: false
@@ -3005,7 +3006,7 @@ paths:
           name: model
           required: false
           type: string
-        - description: 'Search term negation. If you want to exclude a term, add it here'
+        - description: Search term negation. If you want to exclude a term, add it here
           in: query
           name: must_not
           required: false
@@ -3037,12 +3038,12 @@ paths:
           name: year_min
           required: false
           type: integer
-        - description: 'If true, include only items that accept gift cards'
+        - description: If true, include only items that accept gift cards
           in: query
           name: accepts_gift_cards
           required: false
           type: boolean
-        - description: 'If true, include only items by Reverb Preferred Sellers'
+        - description: If true, include only items by Reverb Preferred Sellers
           in: query
           name: preferred_seller
           required: false
@@ -3057,7 +3058,7 @@ paths:
           name: shop_id
           required: false
           type: string
-        - description: 'Type of listing: auctions,offers'
+        - description: "Type of listing: auctions,offers"
           in: query
           name: listing_type
           required: false
@@ -3067,12 +3068,12 @@ paths:
           name: ships_to
           required: false
           type: string
-        - description: 'If true, exclude auctions'
+        - description: If true, exclude auctions
           in: query
           name: exclude_auctions
           required: false
           type: boolean
-        - description: 'If true, only show items that can be purchased with a payment plan'
+        - description: If true, only show items that can be purchased with a payment plan
           in: query
           name: accepts_payment_plans
           required: false
@@ -3082,7 +3083,7 @@ paths:
           name: watchers_count_min
           required: false
           type: integer
-        - description: 'Listing ID negation. If you want to exclude a listing, add it here.'
+        - description: Listing ID negation. If you want to exclude a listing, add it here.
           in: query
           items:
             type: string
@@ -3130,7 +3131,7 @@ paths:
       summary: Get a list of active negotiations as a seller
       tags:
         - my
-  '/my/listings/{slug}/state/end':
+  "/my/listings/{slug}/state/end":
     put:
       description: End a listing
       parameters:
@@ -3163,14 +3164,14 @@ paths:
         - my
   /my/lists:
     get:
-      description: 'Get a list of your lists (wishlist, watch list, etc)'
+      description: Get a list of your lists (wishlist, watch list, etc)
       responses:
         default:
           description: Unexpected error
       security:
         - oauth2:
             - read_lists
-      summary: 'Get a list of your lists (wishlist, watch list, etc)'
+      summary: Get a list of your lists (wishlist, watch list, etc)
       tags:
         - my
   /my/negotiations/buying:
@@ -3200,7 +3201,7 @@ paths:
       summary: Get a list of active negotiations as a buyer
       tags:
         - my
-  '/my/negotiations/{id}':
+  "/my/negotiations/{id}":
     get:
       description: Get offer details
       parameters:
@@ -3217,7 +3218,7 @@ paths:
       summary: Get offer details
       tags:
         - my
-  '/my/negotiations/{id}/accept':
+  "/my/negotiations/{id}/accept":
     post:
       description: Accept an offer
       parameters:
@@ -3243,7 +3244,7 @@ paths:
       summary: Accept an offer
       tags:
         - my
-  '/my/negotiations/{id}/counter':
+  "/my/negotiations/{id}/counter":
     post:
       description: Counter an offer
       parameters:
@@ -3281,7 +3282,7 @@ paths:
               price:
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                    description: The amount of money being expressed, as a POSIX-compliant decimal number
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -3310,7 +3311,7 @@ paths:
                 description: Shipping price (sellers only)
                 properties:
                   amount:
-                    description: 'The amount of money being expressed, as a POSIX-compliant decimal number'
+                    description: The amount of money being expressed, as a POSIX-compliant decimal number
                     type: string
                   currency:
                     description: The currency the money will be expressed in
@@ -3338,7 +3339,7 @@ paths:
       summary: Counter an offer
       tags:
         - my
-  '/my/negotiations/{id}/decline':
+  "/my/negotiations/{id}/decline":
     post:
       description: Decline an offer
       parameters:
@@ -3369,17 +3370,17 @@ paths:
         - my
   /my/orders/buying/all:
     get:
-      description: 'Returns all orders, newest first.'
+      description: Returns all orders, newest first.
       responses:
         default:
           description: Unexpected error
       security:
         - oauth2:
             - read_orders
-      summary: 'Returns all orders, newest first.'
+      summary: Returns all orders, newest first.
       tags:
         - my
-  '/my/orders/buying/by_uuid/{uuid}':
+  "/my/orders/buying/by_uuid/{uuid}":
     get:
       parameters:
         - in: path
@@ -3393,17 +3394,17 @@ paths:
         - my
   /my/orders/buying/unpaid:
     get:
-      description: 'Returns unpaid orders, newest first.'
+      description: Returns unpaid orders, newest first.
       responses:
         default:
           description: Unexpected error
       security:
         - oauth2:
             - read_orders
-      summary: 'Returns unpaid orders, newest first.'
+      summary: Returns unpaid orders, newest first.
       tags:
         - my
-  '/my/orders/buying/{id}':
+  "/my/orders/buying/{id}":
     get:
       description: Returns order details for a buyer
       parameters:
@@ -3420,7 +3421,7 @@ paths:
       summary: Returns order details for a buyer
       tags:
         - my
-  '/my/orders/buying/{id}/mark_received':
+  "/my/orders/buying/{id}/mark_received":
     post:
       description: Marks an order as received by the buyer
       parameters:
@@ -3439,29 +3440,29 @@ paths:
         - my
   /my/orders/selling/all:
     get:
-      description: 'Get all seller orders, newest first.'
+      description: Get all seller orders, newest first.
       responses:
         default:
           description: Unexpected error
       security:
         - oauth2:
             - read_orders
-      summary: 'Get all seller orders, newest first.'
+      summary: Get all seller orders, newest first.
       tags:
         - my
   /my/orders/selling/awaiting_shipment:
     get:
-      description: 'Get unpaid seller orders, newest first.'
+      description: Get unpaid seller orders, newest first.
       responses:
         default:
           description: Unexpected error
       security:
         - oauth2:
             - read_orders
-      summary: 'Get unpaid seller orders, newest first.'
+      summary: Get unpaid seller orders, newest first.
       tags:
         - my
-  '/my/orders/selling/buyer_history/{buyer_id}':
+  "/my/orders/selling/buyer_history/{buyer_id}":
     get:
       description: See previous orders from buyer
       parameters:
@@ -3478,7 +3479,7 @@ paths:
       summary: See previous orders from buyer
       tags:
         - my
-  '/my/orders/selling/by_uuid/{uuid}':
+  "/my/orders/selling/by_uuid/{uuid}":
     get:
       parameters:
         - in: path
@@ -3492,17 +3493,17 @@ paths:
         - my
   /my/orders/selling/unpaid:
     get:
-      description: 'Get unpaid seller orders, newest first.'
+      description: Get unpaid seller orders, newest first.
       responses:
         default:
           description: Unexpected error
       security:
         - oauth2:
             - read_orders
-      summary: 'Get unpaid seller orders, newest first.'
+      summary: Get unpaid seller orders, newest first.
       tags:
         - my
-  '/my/orders/selling/{id}':
+  "/my/orders/selling/{id}":
     get:
       description: Returns order details for a seller
       parameters:
@@ -3519,7 +3520,7 @@ paths:
       summary: Returns order details for a seller
       tags:
         - my
-  '/my/orders/selling/{id}/mark_picked_up':
+  "/my/orders/selling/{id}/mark_picked_up":
     post:
       description: Marks an order as picked up
       parameters:
@@ -3545,7 +3546,7 @@ paths:
       summary: Marks an order as picked up
       tags:
         - my
-  '/my/orders/selling/{id}/ship':
+  "/my/orders/selling/{id}/ship":
     post:
       description: Marks an order as shipped
       parameters:
@@ -3559,7 +3560,7 @@ paths:
           schema:
             properties:
               provider:
-                description: 'Shipping provider: One of UPS, USPS, FedEx, DHL Deutschland, DHLExpress, DHLGlobalMail, DHL, Canada Post, Royal Mail, PostNL, Australia Post, EMS, La Poste, China Post, GLS, Parcelforce, Purolator, Interlogistica, Correos España, Ukraine Post, DPD Germany, DPD UK, DPD France, Other'
+                description: "Shipping provider: One of UPS, USPS, FedEx, DHL Deutschland, DHLExpress, DHLGlobalMail, DHL, Canada Post, Royal Mail, PostNL, Australia Post, EMS, La Poste, China Post, GLS, Parcelforce, Purolator, Interlogistica, Correos España, Ukraine Post, DPD Germany, DPD UK, DPD France, Other"
                 type: string
               send_notification:
                 description: Should we send an email notification to the buyer
@@ -3581,7 +3582,7 @@ paths:
       summary: Marks an order as shipped
       tags:
         - my
-  '/my/orders/selling/{order_id}/refund_requests':
+  "/my/orders/selling/{order_id}/refund_requests":
     post:
       description: Initiate a refund for a sold order
       parameters:
@@ -3616,22 +3617,22 @@ paths:
           name: offset
           required: false
           type: integer
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+        - description: "Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00"
           in: query
           name: created_start_date
           required: false
           type: string
-        - description: 'Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+        - description: "Filter by date created in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00"
           in: query
           name: created_end_date
           required: false
           type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+        - description: "Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00"
           in: query
           name: updated_start_date
           required: false
           type: string
-        - description: 'Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00'
+        - description: "Filter by date modified in ISO8601 format - e.g: 2015-04-09T10:52:23-00:00"
           in: query
           name: updated_end_date
           required: false
@@ -3650,7 +3651,7 @@ paths:
       summary: Get payments
       tags:
         - my
-  '/my/payments/selling/{id}':
+  "/my/payments/selling/{id}":
     get:
       description: Get payment
       parameters:
@@ -3679,7 +3680,7 @@ paths:
       summary: Get a list of payouts
       tags:
         - my
-  '/my/payouts/{id}/line_items':
+  "/my/payouts/{id}/line_items":
     get:
       description: Read the line items of a payout
       parameters:
@@ -3708,7 +3709,7 @@ paths:
       summary: Get a list of refund requests as a seller
       tags:
         - my
-  '/my/refund_requests/selling/{id}':
+  "/my/refund_requests/selling/{id}":
     put:
       description: Update a refund request for a sold order
       parameters:
@@ -3749,7 +3750,7 @@ paths:
       summary: Get a list of wishlisted items
       tags:
         - my
-  '/my/wishlist/{id}':
+  "/my/wishlist/{id}":
     delete:
       description: Remove a listing from your wishlist
       parameters:
@@ -3782,7 +3783,7 @@ paths:
       summary: Add a listing to your wishlist
       tags:
         - my
-  '/orders/{order_id}/feedback/buyer':
+  "/orders/{order_id}/feedback/buyer":
     get:
       description: Feedback details for an order's buyer
       parameters:
@@ -3812,7 +3813,7 @@ paths:
       summary: Add feedback about an order's buyer
       tags:
         - orders
-  '/orders/{order_id}/feedback/seller':
+  "/orders/{order_id}/feedback/seller":
     get:
       description: Feedback details for an order's seller
       parameters:
@@ -3851,7 +3852,7 @@ paths:
       summary: Get list of payment methods
       tags:
         - payment_methods
-  '/priceguide/{id}/transactions/summary':
+  "/priceguide/{id}/transactions/summary":
     get:
       description: Get a summary of transactions for a given price guide
       parameters:
@@ -3875,7 +3876,7 @@ paths:
       summary: Get a summary of transactions for a given price guide
       tags:
         - priceguide
-  '/products/reviews/{id}':
+  "/products/reviews/{id}":
     get:
       description: View a review
       parameters:
@@ -3920,7 +3921,7 @@ paths:
       summary: Update a review
       tags:
         - products
-  '/products/{slug}/reviews':
+  "/products/{slug}/reviews":
     get:
       description: View reviews of a comparison shopping page
       parameters:
@@ -3974,7 +3975,7 @@ paths:
       summary: View your created sales.
       tags:
         - sales
-  '/sales/{sale_id}/listings':
+  "/sales/{sale_id}/listings":
     delete:
       description: Remove a listing from a sale
       parameters:
@@ -4007,7 +4008,7 @@ paths:
       summary: Add listings to a sale
       tags:
         - sales
-  '/sales/{slug}':
+  "/sales/{slug}":
     get:
       parameters:
         - in: path
@@ -4251,7 +4252,7 @@ paths:
                   - NG
                   - NI
                   - NL
-                  - 'NO'
+                  - NO
                   - NP
                   - NR
                   - NU
@@ -4419,7 +4420,7 @@ paths:
       summary: Enable vacation mode. All listings will be unavailable until vacation mode is turned off.
       tags:
         - shop
-  '/shops/{id}/storefronts':
+  "/shops/{id}/storefronts":
     get:
       description: Get storefront details on a shop.
       parameters:
@@ -4433,7 +4434,7 @@ paths:
       summary: Get storefront details on a shop.
       tags:
         - shops
-  '/shops/{shop_id}/shipping_profiles':
+  "/shops/{shop_id}/shipping_profiles":
     get:
       description: List of shipping profiles for your shop
       parameters:
@@ -4450,7 +4451,7 @@ paths:
       summary: List of shipping profiles for your shop
       tags:
         - shops
-  '/shops/{slug}':
+  "/shops/{slug}":
     get:
       description: Get details on a shop.
       parameters:
@@ -4469,7 +4470,7 @@ paths:
       summary: Get details on a shop.
       tags:
         - shops
-  '/shops/{slug}/feedback':
+  "/shops/{slug}/feedback":
     get:
       description: Get seller's feedback
       parameters:
@@ -4483,7 +4484,7 @@ paths:
       summary: Get seller's feedback
       tags:
         - shops
-  '/shops/{slug}/feedback/buyer':
+  "/shops/{slug}/feedback/buyer":
     get:
       description: Get seller's feedback as a buyer
       parameters:
@@ -4497,7 +4498,7 @@ paths:
       summary: Get seller's feedback as a buyer
       tags:
         - shops
-  '/shops/{slug}/feedback/seller':
+  "/shops/{slug}/feedback/seller":
     get:
       description: Get seller's feedback as a seller
       parameters:
@@ -4523,7 +4524,7 @@ paths:
       summary: A list of wanted items by the user
       tags:
         - wants
-  '/wants/{id}':
+  "/wants/{id}":
     delete:
       description: Unmark an item wanted.
       parameters:
@@ -4574,7 +4575,7 @@ paths:
           schema:
             properties:
               topic:
-                description: 'Valid values: listings/update, listings/publish, listings/bumps-ran-out, orders/create, orders/update, payments/create, payments/update, app/uninstalled'
+                description: "Valid values: listings/update, listings/publish, listings/bumps-ran-out, orders/create, orders/update, payments/create, payments/update, app/uninstalled"
                 enum:
                   - listings/update
                   - listings/publish
@@ -4597,7 +4598,7 @@ paths:
       summary: Register a webhook
       tags:
         - webhooks
-  '/webhooks/registrations/{id}':
+  "/webhooks/registrations/{id}":
     delete:
       description: Remove a webhook
       parameters:

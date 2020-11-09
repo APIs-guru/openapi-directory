@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.inboxroute.com
@@ -6,20 +6,21 @@ basePath: /api
 info:
   contact:
     email: support@mailsquad.com
-    url: 'https://mailsquad.com'
-  description: 'MailSquad offers an affordable and super easy way to create, send and track delightful emails.'
+    url: https://mailsquad.com
+  description: MailSquad offers an affordable and super easy way to create, send and track delightful emails.
   title: Mailsquad
-  version: '0.9'
+  version: "0.9"
   x-apisguru-categories:
     - email
     - marketing
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/528918177711796225/5tzW9XKS.png'
+    url: https://pbs.twimg.com/profile_images/528918177711796225/5tzW9XKS.png
   x-origin:
     - format: swagger
-      url: 'https://api.inboxroute.com/api/api-docs'
-      version: '2.0'
+      url: https://api.inboxroute.com/api/api-docs
+      version: "2.0"
   x-providerName: inboxroute.com
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -32,7 +33,7 @@ securityDefinitions:
 security:
   - mqApiKey: []
 responses:
-  '401':
+  "401":
     description: Invalid api key or key does not have access to this ressource
     schema:
       items:
@@ -44,7 +45,7 @@ responses:
             description: Human readable description of the error
             type: string
       type: array
-  '404':
+  "404":
     description: The requested resource was not found
     schema:
       items:
@@ -56,7 +57,7 @@ responses:
             description: Human readable description of the error
             type: string
       type: array
-  '422':
+  "422":
     description: The request parameters were invalid
     schema:
       items:
@@ -90,16 +91,16 @@ paths:
           name: sort
           type: string
       responses:
-        '200':
+        "200":
           description: Page object
           schema:
-            $ref: '#/definitions/ContactPage'
-        '401':
-          $ref: '#/responses/401'
-        '404':
-          $ref: '#/responses/404'
-        '422':
-          $ref: '#/responses/422'
+            $ref: "#/definitions/ContactPage"
+        "401":
+          $ref: "#/responses/401"
+        "404":
+          $ref: "#/responses/404"
+        "422":
+          $ref: "#/responses/422"
       security:
         - mqApiKey: []
       tags:
@@ -121,16 +122,16 @@ paths:
           name: sort
           type: string
       responses:
-        '200':
+        "200":
           description: Page object
           schema:
-            $ref: '#/definitions/ContactListPage'
-        '401':
-          $ref: '#/responses/401'
-        '404':
-          $ref: '#/responses/404'
-        '422':
-          $ref: '#/responses/422'
+            $ref: "#/definitions/ContactListPage"
+        "401":
+          $ref: "#/responses/401"
+        "404":
+          $ref: "#/responses/404"
+        "422":
+          $ref: "#/responses/422"
       security:
         - mqApiKey: []
       tags:
@@ -142,21 +143,21 @@ paths:
           in: body
           name: contactlist
           schema:
-            $ref: '#/definitions/ContactListUpdate'
+            $ref: "#/definitions/ContactListUpdate"
       responses:
-        '200':
+        "200":
           description: Page object
           schema:
-            $ref: '#/definitions/NewId'
-        '401':
-          $ref: '#/responses/401'
-        '422':
-          $ref: '#/responses/422'
+            $ref: "#/definitions/NewId"
+        "401":
+          $ref: "#/responses/401"
+        "422":
+          $ref: "#/responses/422"
       security:
         - mqApiKey: []
       tags:
         - lists
-  '/contacts/lists/{listid}':
+  "/contacts/lists/{listid}":
     delete:
       description: Delete an existing contact list
       parameters:
@@ -166,12 +167,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Empty response
-        '401':
-          $ref: '#/responses/401'
-        '404':
-          $ref: '#/responses/404'
+        "401":
+          $ref: "#/responses/401"
+        "404":
+          $ref: "#/responses/404"
       security:
         - mqApiKey: []
       tags:
@@ -188,21 +189,21 @@ paths:
           in: body
           name: contactlist
           schema:
-            $ref: '#/definitions/ContactListUpdate'
+            $ref: "#/definitions/ContactListUpdate"
       responses:
-        '200':
+        "200":
           description: Empty response
-        '401':
-          $ref: '#/responses/401'
-        '404':
-          $ref: '#/responses/404'
-        '422':
-          $ref: '#/responses/422'
+        "401":
+          $ref: "#/responses/401"
+        "404":
+          $ref: "#/responses/404"
+        "422":
+          $ref: "#/responses/422"
       security:
         - mqApiKey: []
       tags:
         - lists
-  '/contacts/{contactid}':
+  "/contacts/{contactid}":
     delete:
       description: Delete an existing contact
       parameters:
@@ -212,12 +213,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Empty response
-        '401':
-          $ref: '#/responses/401'
-        '404':
-          $ref: '#/responses/404'
+        "401":
+          $ref: "#/responses/401"
+        "404":
+          $ref: "#/responses/404"
       security:
         - mqApiKey: []
       tags:
@@ -235,31 +236,36 @@ paths:
           name: contact
           required: true
           schema:
-            $ref: '#/definitions/ContactUpdate'
+            $ref: "#/definitions/ContactUpdate"
       responses:
-        '200':
+        "200":
           description: Empty response
-        '401':
-          $ref: '#/responses/401'
-        '404':
-          $ref: '#/responses/404'
-        '422':
-          $ref: '#/responses/422'
+        "401":
+          $ref: "#/responses/401"
+        "404":
+          $ref: "#/responses/404"
+        "422":
+          $ref: "#/responses/422"
       security:
         - mqApiKey: []
       tags:
         - contacts
-  '/subscription/{listid}':
+  "/subscription/{listid}":
     post:
-      description: |
+      description: >
         Subscribe an email address to a list. This api call has the same behavior as
+
         a regular subscribe form. However, single opt-in is allowed for system integration
+
         purposes.
 
+
         - If email address does not exist, a new contact will be added to the list.
+
         - If email address exists custom fields will be updated and status will be put
           to unconfirmed or active depending of singleoptin value.
         - If current status if Active, this operation will only update the custom fields.
+
         - If singleoptin is true, no email confirmation will be sent. In that case,
           you must provide the subscribe's origin ip and confirmation date-time.
       parameters:
@@ -273,16 +279,16 @@ paths:
           name: subscription
           required: true
           schema:
-            $ref: '#/definitions/SubscriptionRequest'
+            $ref: "#/definitions/SubscriptionRequest"
       responses:
-        '204':
+        "204":
           description: Empty response
-        '401':
-          $ref: '#/responses/401'
-        '404':
-          $ref: '#/responses/404'
-        '422':
-          $ref: '#/responses/422'
+        "401":
+          $ref: "#/responses/401"
+        "404":
+          $ref: "#/responses/404"
+        "422":
+          $ref: "#/responses/422"
       security:
         - mqApiKey: []
       tags:
@@ -306,22 +312,23 @@ definitions:
         description: Email address
         type: string
       fullname:
-        description: |
+        description: >
           Full name (Last name, First Name) of the subscriber
         type: string
       ip:
         description: Subscriber's IP address when he/she confirmed list opt-in
         type: string
       lang:
-        description: |
+        description: >
           ISO 639-1 language code of the subscriber. When lang is one the supported system language, all communication
+
           will be in this language. 
         type: string
       listid:
         description: Unique 16 characters ID of the list owner
         type: string
       status:
-        description: |
+        description: >
           Status (
             1- Active,
             2- Unconfirmed,
@@ -347,7 +354,7 @@ definitions:
         description: Unique 16 characters ID of the list owner
         type: string
       status:
-        description: |
+        description: >
           Status (
             1- Active,
             2- Unconfirmed,
@@ -370,7 +377,7 @@ definitions:
         description: Is field required
         type: boolean
       type:
-        description: |
+        description: >
           Type (
             1- String / text free form
             2- Numeric / integer or decimal
@@ -395,12 +402,12 @@ definitions:
       customfields:
         description: Array of ContactCustomFieldSchema
         items:
-          $ref: '#/definitions/ContactCustomFieldSchema'
+          $ref: "#/definitions/ContactCustomFieldSchema"
         type: array
       eventcustomizations:
         description: Array of ContactListEventCustomization
         items:
-          $ref: '#/definitions/ContactListEventCustomization'
+          $ref: "#/definitions/ContactListEventCustomization"
         type: array
       name:
         description: Name of the contact list
@@ -411,7 +418,7 @@ definitions:
         description: full url of the destination landing page
         type: string
       type:
-        description: |
+        description: >
           Type (
             1- Subscribe confirmation request landing page
             2- Subscribe opt-in landing page
@@ -425,7 +432,7 @@ definitions:
       page:
         description: Array of ContactList for that page
         items:
-          $ref: '#/definitions/ContactList'
+          $ref: "#/definitions/ContactList"
         type: array
       total:
         description: Total number of items in query
@@ -435,12 +442,12 @@ definitions:
       customfields:
         description: Array of ContactCustomFieldSchema
         items:
-          $ref: '#/definitions/ContactCustomFieldSchema'
+          $ref: "#/definitions/ContactCustomFieldSchema"
         type: array
       eventcustomizations:
         description: Array of ContactListEventCustomization
         items:
-          $ref: '#/definitions/ContactListEventCustomization'
+          $ref: "#/definitions/ContactListEventCustomization"
         type: array
       name:
         description: Name of the contact list
@@ -450,7 +457,7 @@ definitions:
       page:
         description: Array of Contact for that page
         items:
-          $ref: '#/definitions/Contact'
+          $ref: "#/definitions/Contact"
         type: array
       total:
         description: Total number of items in query
@@ -470,7 +477,7 @@ definitions:
         description: Subscriber's IP address when he/she confirmed list opt-in
         type: string
       status:
-        description: |
+        description: >
           Status (
             1- Active,
             2- Unconfirmed,
@@ -493,20 +500,22 @@ definitions:
         description: Email address of the subscriber
         type: string
       fullname:
-        description: |
+        description: >
           Full name (Last name, First Name) of the subscriber
         type: string
       ip:
         description: Origin Ip of the subscriber when he/she opted-in. Required if singleoptin is true.
         type: string
       lang:
-        description: |
+        description: >
           ISO 639-1 language code of the subscriber. When lang is one the supported system language, all communication
+
           will be in this language.
         type: string
       singleoptin:
-        description: |
+        description: >
           If true, no email will be sent asking user subscription confirmation. In that case, you must provide
+
           the confirmation date (confirmed) and origin ip (ip) manually.
         type: boolean
     required:

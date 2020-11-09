@@ -1,25 +1,26 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
-host: 'od-api-demo.oxforddictionaries.com:443'
+host: od-api-demo.oxforddictionaries.com:443
 basePath: /api/v1
 x-hasEquivalentPaths: true
 info:
   license:
     name: API Terms And Conditions
-    url: 'https://developer.oxforddictionaries.com/api-terms-and-conditions'
-  termsOfService: 'http://helloreverb.com/terms/'
+    url: https://developer.oxforddictionaries.com/api-terms-and-conditions
+  termsOfService: http://helloreverb.com/terms/
   title: Oxford Dictionaries
   version: 1.11.0
   x-apisguru-categories:
     - text
   x-logo:
-    url: 'https://twitter.com/OxfordWordsAPI/profile_image?size=original'
+    url: https://twitter.com/OxfordWordsAPI/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://developer.oxforddictionaries.com/swagger/spec/public_doc_guest.json'
-      version: '2.0'
+      url: https://developer.oxforddictionaries.com/swagger/spec/public_doc_guest.json
+      version: "2.0"
   x-providerName: oxforddictionaries.com
+  x-preferred: true
 produces:
   - application/json
 parameters:
@@ -47,7 +48,7 @@ parameters:
     required: true
     type: string
   keyValFilters:
-    default: 'grammaticalFeatures=singular,past;lexicalCategory=noun'
+    default: grammaticalFeatures=singular,past;lexicalCategory=noun
     description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
     in: path
     items:
@@ -109,9 +110,9 @@ parameters:
     required: true
     type: string
 paths:
-  '/domains/{source_domains_language}/{target_domains_language}':
+  "/domains/{source_domains_language}/{target_domains_language}":
     get:
-      description: |
+      description: >
         Returns a list of the available [domains](documentation/glossary?term=domain) for a given bilingual language dataset.
       parameters:
         - description: IANA language code
@@ -142,24 +143,24 @@ paths:
           name: target_domains_language
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/UtilityLabels'
+            $ref: "#/definitions/UtilityLabels"
             title: DomainsResults
-        '400':
+        "400":
           description: source_language and target_language are same.
-        '404':
+        "404":
           description: Unknown source_language and/or target_language.
       summary: Lists available domains in a bilingual dataset
       tags:
         - Utility
-  '/domains/{source_language}':
+  "/domains/{source_language}":
     get:
-      description: |
+      description: >
         Returns a list of the available [domains](documentation/glossary?term=domain) for a given monolingual language dataset.
       parameters:
         - description: IANA language code
@@ -179,28 +180,28 @@ paths:
           name: source_language
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/UtilityLabels'
+            $ref: "#/definitions/UtilityLabels"
             title: DomainsResults
-        '404':
+        "404":
           description: Unknown source_language.
       summary: Lists available domains in a monolingual dataset
       tags:
         - Utility
-  '/entries/{source_language}/{word_id}/sentences':
+  "/entries/{source_language}/{word_id}/sentences":
     get:
-      description: |
-
+      description: >
+        
         Use this to retrieve sentences extracted from  corpora which show how a word is used in the language. This is available for English and Spanish. For English, the sentences are linked to the correct [sense](documentation/glossary?term=sense) of the word in the dictionary. In Spanish, they are linked at the [headword](documentation/glossary?term=headword) level.
           <div id="sentences"></div>
       externalDocs:
         description: find more info here
-        url: 'https://helloreverb.com/about'
+        url: https://helloreverb.com/about
       parameters:
         - description: IANA language code
           enum:
@@ -216,32 +217,32 @@ paths:
           name: word_id
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/SentencesResults'
+            $ref: "#/definitions/SentencesResults"
             title: SentencesResults
-        '404':
-          description: |
+        "404":
+          description: >
             No entry is found matching supplied id and source_language
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve corpus sentences for a given word
       tags:
         - The Sentence Dictionary
-  '/entries/{source_lang}/{word_id}':
+  "/entries/{source_lang}/{word_id}":
     get:
-      description: |
-
+      description: >
+        
         Use this to retrieve definitions, [pronunciations](documentation/glossary?term=pronunciation), example sentences, [grammatical information](documentation/glossary?term=grammaticalfeatures) and [word origins](documentation/glossary?term=etymology). It only works for dictionary [headwords](documentation/glossary?term=headword), so you may need to use the [Lemmatron](documentation/glossary?term=lemma) first if your input is likely to be an [inflected](documentation/glossary?term=inflection) form (e.g., 'swimming'). This would return the linked [headword](documentation/glossary?term=headword) (e.g., 'swim') which you can then use in the Entries endpoint. Unless specified using a region filter, the default lookup will be the Oxford Dictionary of English (GB). 
           <div id="dictionary_entries"></div>
       externalDocs:
         description: find more info here
-        url: 'https://helloreverb.com/about'
+        url: https://helloreverb.com/about
       parameters:
         - description: IANA language code
           enum:
@@ -263,33 +264,33 @@ paths:
           name: word_id
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/RetrieveEntry'
+            $ref: "#/definitions/RetrieveEntry"
             title: RetrieveEntryResults
-        '404':
-          description: |
+        "404":
+          description: >
             No entry is found matching supplied id and source_lang or filters are not recognized
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve dictionary information for a given word
       tags:
         - Dictionary entries
-  '/entries/{source_lang}/{word_id}/antonyms':
+  "/entries/{source_lang}/{word_id}/antonyms":
     get:
-      description: |
-
+      description: >
+        
         Retrieve words that are opposite in meaning to the input word ([antonym](documentation/glossary?term=thesaurus)).
 
           <div id="antonyms"></div>
       externalDocs:
         description: find more info here
-        url: 'https://helloreverb.com/about'
+        url: https://helloreverb.com/about
       parameters:
         - description: IANA language code
           enum:
@@ -304,31 +305,31 @@ paths:
           name: word_id
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Thesaurus'
+            $ref: "#/definitions/Thesaurus"
             title: ThesaurusResults
-        '404':
-          description: |
+        "404":
+          description: >
             No entry is found matching supplied id and source_lang or filters are not recognized
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve words that mean the opposite
       tags:
         - Thesaurus
-  '/entries/{source_lang}/{word_id}/regions={region}':
+  "/entries/{source_lang}/{word_id}/regions={region}":
     get:
-      description: |
-
+      description: >
+        
         USe this filter to restrict the lookup to either our Oxford Dictionary of English (GB) or New Oxford American Dictionary (US).
       externalDocs:
         description: find more info here
-        url: 'https://helloreverb.com/about'
+        url: https://helloreverb.com/about
       parameters:
         - description: IANA language code
           enum:
@@ -351,34 +352,35 @@ paths:
           name: region
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/RetrieveEntry'
+            $ref: "#/definitions/RetrieveEntry"
             title: RetrieveEntryResults
-        '404':
-          description: |
+        "404":
+          description: >
             no entry is found matching supplied source_lang and id
+
             and/or that entry has no senses with translations in the target language. 
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Specify GB or US dictionary for English entry search
       tags:
         - Dictionary entries
-  '/entries/{source_lang}/{word_id}/synonyms':
+  "/entries/{source_lang}/{word_id}/synonyms":
     get:
-      description: |
-
+      description: >
+        
         Use this to retrieve words that are similar in meaning to the input word ([synonym](documentation/glossary?term=synonym)).
 
           <div id="synonyms"></div>
       externalDocs:
         description: find more info here
-        url: 'https://helloreverb.com/about'
+        url: https://helloreverb.com/about
       parameters:
         - description: IANA language code
           enum:
@@ -393,33 +395,33 @@ paths:
           name: word_id
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Thesaurus'
+            $ref: "#/definitions/Thesaurus"
             title: ThesaurusResults
-        '404':
-          description: |
+        "404":
+          description: >
             No entry is found matching supplied id and source_lang or filters are not recognized
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve words that are similar
       tags:
         - Thesaurus
-  '/entries/{source_lang}/{word_id}/synonyms;antonyms':
+  "/entries/{source_lang}/{word_id}/synonyms;antonyms":
     get:
-      description: |
-
+      description: >
+        
         Retrieve available [synonyms](documentation/glossary?term=thesaurus) and [antonyms](documentation/glossary?term=thesaurus) for a given word and language. 
 
           <div id="synonyms_and_antonyms"></div>
       externalDocs:
         description: find more info here
-        url: 'https://helloreverb.com/about'
+        url: https://helloreverb.com/about
       parameters:
         - description: IANA language code
           enum:
@@ -434,27 +436,27 @@ paths:
           name: word_id
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Thesaurus'
+            $ref: "#/definitions/Thesaurus"
             title: ThesaurusResults
-        '404':
-          description: |
+        "404":
+          description: >
             No entry is found matching supplied id and source_lang or filters are not recognized
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve synonyms and antonyms for a given word
       tags:
         - Thesaurus
-  '/entries/{source_lang}/{word_id}/{filters}':
+  "/entries/{source_lang}/{word_id}/{filters}":
     get:
-      description: |
-
+      description: >
+        
         Use filters to limit the [entry](documentation/glossary?term=entry) information that is returned. For example, you may only require definitions and not everything else, or just [pronunciations](documentation/glossary?term=pronunciation). The full list of filters can be retrieved from the filters Utility endpoint. You can also specify values within the filter using '='. For example 'grammaticalFeatures=singular'. Filters can also be combined using a semicolon.
 
           <div id="dictionary_entries_filters"></div>
@@ -479,7 +481,7 @@ paths:
           name: word_id
           required: true
           type: string
-        - default: 'grammaticalFeatures=singular,past;lexicalCategory=noun'
+        - default: grammaticalFeatures=singular,past;lexicalCategory=noun
           description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
           in: path
           items:
@@ -488,28 +490,29 @@ paths:
           name: filters
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/RetrieveEntry'
+            $ref: "#/definitions/RetrieveEntry"
             title: RetrieveEntryResults
-        '404':
-          description: |
+        "404":
+          description: >
             no entry is found matching supplied source_lang and id
+
             and/or that entry has no senses with translations in the target language. 
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Apply filters to response
       tags:
         - Dictionary entries
-  '/entries/{source_translation_language}/{word_id}/translations={target_translation_language}':
+  "/entries/{source_translation_language}/{word_id}/translations={target_translation_language}":
     get:
-      description: |
-
+      description: >
+        
         Use this to return translations for a given word. In the event that a word in the dataset does not have a direct translation, the response will be a [definition](documentation/glossary?term=entry) in the target language.
 
           <div id="translation"></div>
@@ -551,47 +554,48 @@ paths:
           name: target_translation_language
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response. In case word doesn't have a direct translation a response would be definitions.
           schema:
-            $ref: '#/definitions/RetrieveEntry'
+            $ref: "#/definitions/RetrieveEntry"
             title: InflectionsResults
-        '400':
+        "400":
           description: any of target languages is unknown
-        '404':
-          description: |
+        "404":
+          description: >
             no entry is found matching supplied source_lang and id
+
             and/or that entry has no senses with translations in the target language(s). 
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve translation for a given word
       tags:
         - Translation
   /filters:
     get:
-      description: |
+      description: >
         Returns a list of all the valid filters to construct API calls.
       parameters:
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Filters'
+            $ref: "#/definitions/Filters"
             title: FiltersResults
-        '500':
+        "500":
           description: Internal Error. An error occurred while processing the data.
       summary: Lists available filters
       tags:
         - Utility
-  '/filters/{endpoint}':
+  "/filters/{endpoint}":
     get:
-      description: |
+      description: >
         Returns a list of all the valid filters for a given endpoint to construct API calls.
       parameters:
         - description: Name of the endpoint.
@@ -603,24 +607,24 @@ paths:
           name: endpoint
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Filters'
+            $ref: "#/definitions/Filters"
             title: FiltersResults
-        '404':
+        "404":
           description: Unknown endpoint.
-        '500':
+        "500":
           description: Internal Error. An error occurred while processing the data.
       summary: Lists available filters for specific endpoint
       tags:
         - Utility
-  '/grammaticalFeatures/{source_language}':
+  "/grammaticalFeatures/{source_language}":
     get:
-      description: |
+      description: >
         Returns a list of the available [grammatical features](documentation/glossary?term=grammaticalfeatures) for a given language dataset.
       parameters:
         - description: IANA language code. If provided output will be filtered by sourceLanguage.
@@ -643,23 +647,23 @@ paths:
           name: source_language
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/UtilityLabels'
+            $ref: "#/definitions/UtilityLabels"
             title: RegistersResults
-        '404':
+        "404":
           description: Unknown source_language.
       summary: Lists available grammatical features in a dataset
       tags:
         - Utility
-  '/inflections/{source_lang}/{word_id}/{filters}':
+  "/inflections/{source_lang}/{word_id}/{filters}":
     get:
-      description: |
-
+      description: >
+        
         Use this to check if a word exists in the dictionary, or what 'root' form it links to (e.g., swimming > swim). The response tells you the possible [lemmas](documentation/glossary?term=lemma) for a given [inflected](documentation/glossary?term=inflection) word. This can then be combined with other endpoints to retrieve more information.
 
           <div id="lemmatron"></div>
@@ -678,7 +682,7 @@ paths:
           name: source_lang
           required: true
           type: string
-        - default: 'grammaticalFeatures=singular,past;lexicalCategory=noun'
+        - default: grammaticalFeatures=singular,past;lexicalCategory=noun
           description: Separate filtering conditions using a semicolon. Conditions take values grammaticalFeatures and/or lexicalCategory and are case-sensitive. To list multiple values in single condition divide them with comma.
           in: path
           items:
@@ -693,23 +697,23 @@ paths:
           name: word_id
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Lemmatron'
+            $ref: "#/definitions/Lemmatron"
             title: InflectionsResults
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Check a word exists in the dictionary and retrieve its root form
       tags:
         - Lemmatron
   /languages:
     get:
-      description: |
+      description: >
         Returns a list of monolingual and bilingual language datasets available in the API
       parameters:
         - description: IANA language code. If provided output will be filtered by sourceLanguage.
@@ -752,24 +756,24 @@ paths:
           name: targetLanguage
           required: false
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Languages'
+            $ref: "#/definitions/Languages"
             title: LanguagesResults
-        '404':
+        "404":
           description: Unknown sourceLanguage and/or targetLanguage.
-        '500':
+        "500":
           description: Internal Error. An error occurred while processing the data.
       summary: Lists available dictionaries
       tags:
         - Utility
-  '/lexicalcategories/{language}':
+  "/lexicalcategories/{language}":
     get:
-      description: |
+      description: >
         Returns a list of available [lexical categories](documentation/glossary?term=lexicalcategory) for a given language dataset.
       parameters:
         - description: IANA language code
@@ -794,24 +798,24 @@ paths:
           name: language
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/UtilityLabels'
+            $ref: "#/definitions/UtilityLabels"
             title: LexicalCategoriesResults
-        '404':
+        "404":
           description: Unknown language.
-        '500':
+        "500":
           description: Internal Error. An error occurred while processing the data.
       summary: Lists available lexical categories in a dataset
       tags:
         - Utility
-  '/regions/{source_language}':
+  "/regions/{source_language}":
     get:
-      description: |
+      description: >
         Returns a list of the available [regions](documentation/glossary?term=regions) for a given monolingual language dataset.
       parameters:
         - description: IANA language code
@@ -821,22 +825,22 @@ paths:
           name: source_language
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Regions'
+            $ref: "#/definitions/Regions"
             title: RegionsResults
-        '404':
+        "404":
           description: Unknown source_language.
       summary: Lists available regions in a monolingual dataset
       tags:
         - Utility
-  '/registers/{source_language}':
+  "/registers/{source_language}":
     get:
-      description: |
+      description: >
         Returns a list of the available [registers](documentation/glossary?term=registers) for a given monolingual language dataset.
       parameters:
         - description: IANA language code
@@ -857,24 +861,24 @@ paths:
           name: source_language
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/UtilityLabels'
+            $ref: "#/definitions/UtilityLabels"
             title: RegistersResults
-        '404':
+        "404":
           description: Unknown source_language.
-        '500':
+        "500":
           description: Internal Error. An error occurred while processing the data.
       summary: Lists available registers in a  monolingual dataset
       tags:
         - Utility
-  '/registers/{source_register_language}/{target_register_language}':
+  "/registers/{source_register_language}/{target_register_language}":
     get:
-      description: |
+      description: >
         Returns a list of the available [registers](documentation/glossary?term=registers) for a given bilingual language dataset.
       parameters:
         - description: IANA language code
@@ -906,33 +910,33 @@ paths:
           name: target_register_language
           required: true
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/UtilityLabels'
+            $ref: "#/definitions/UtilityLabels"
             title: RegistersResults
-        '400':
+        "400":
           description: source_language and target_language are same.
-        '404':
+        "404":
           description: Unknown source_language and/or target_language.
-        '500':
+        "500":
           description: Internal Error. An error occurred while processing the data.
       summary: Lists available registers in a bilingual dataset
       tags:
         - Utility
-  '/search/{source_lang}':
+  "/search/{source_lang}":
     get:
-      description: |
-
+      description: >
+        
         Use this to retrieve possible [headword](documentation/glossary?term=headword) matches for a given string of text. The results are culculated using headword matching, fuzzy matching, and [lemmatization](documentation/glossary?term=lemma) 
 
           <div id="search"></div>
       externalDocs:
         description: find more info here
-        url: 'https://helloreverb.com/about'
+        url: https://helloreverb.com/about
       parameters:
         - description: IANA language code
           enum:
@@ -955,13 +959,13 @@ paths:
           type: string
         - description: Set prefix to true if you'd like to get results only starting with search string.
           enum:
-            - 'false'
-            - 'true'
+            - "false"
+            - "true"
           in: query
           name: prefix
           required: false
           type: boolean
-        - description: 'If searching in English, filter words with specific region(s) either ''us'' or ''gb''.'
+        - description: If searching in English, filter words with specific region(s) either 'us' or 'gb'.
           in: query
           name: regions
           required: false
@@ -976,33 +980,33 @@ paths:
           name: offset
           required: false
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Wordlist'
+            $ref: "#/definitions/Wordlist"
             title: WordlistResults
-        '404':
-          description: |
+        "404":
+          description: >
             No entry is found matching supplied id and source_lang or filters are not recognized
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve possible matches to input
       tags:
         - Search
-  '/search/{source_search_language}/translations={target_search_language}':
+  "/search/{source_search_language}/translations={target_search_language}":
     get:
-      description: |
-
+      description: >
+        
         Use this to find matches in our translation dictionaries.
 
           <div id="search_translation"></div>
       externalDocs:
         description: find more info here
-        url: 'https://helloreverb.com/about'
+        url: https://helloreverb.com/about
       parameters:
         - description: IANA language code
           enum:
@@ -1043,13 +1047,13 @@ paths:
           type: string
         - description: Set prefix to true if you'd like to get results only starting with search string.
           enum:
-            - 'false'
-            - 'true'
+            - "false"
+            - "true"
           in: query
           name: prefix
           required: false
           type: boolean
-        - description: 'Filter words with specific region(s) E.g., regions=us. For now gb, us are available for en language.'
+        - description: Filter words with specific region(s) E.g., regions=us. For now gb, us are available for en language.
           in: query
           name: regions
           required: false
@@ -1064,29 +1068,32 @@ paths:
           name: offset
           required: false
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Wordlist'
+            $ref: "#/definitions/Wordlist"
             title: WordlistResults
-        '404':
-          description: |
+        "404":
+          description: >
             No entry is found matching supplied id and source_lang or filters are not recognized
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve possible translation matches to input
       tags:
         - Search
-  '/stats/frequency/ngrams/{source_lang}/{corpus}/{ngram-size}/':
+  "/stats/frequency/ngrams/{source_lang}/{corpus}/{ngram-size}/":
     get:
-      description: |
+      description: >
         This endpoint returns frequencies of ngrams of size 1-4. That is the number of times a word (ngram size = 1) or words (ngram size > 1) appear in the corpus. Ngrams are case sensitive ("I AM" and "I am" will have different frequency) and frequencies are calculated per word (true case) so "the book" and "the books" are two different ngrams. The results can be filtered based on query parameters. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overridden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> Example for bigrams (ngram of size 2):
+
         * PATH: /tokens=a word,another word
+
         * GET: /?tokens=a word&tokens=another word
+
         * POST (json):
 
           ```javascript
@@ -1096,6 +1103,7 @@ paths:
           ```
 
         Either "tokens" or "contains" has to be provided. <br> <br> Some queries with "contains" or "sort" can exceed the 30s timeout, in which case the API will return an error message with status code 503. You mitigate this by providing additional restrictions such as "minFrequency" and "maxFrequency". <br> <br> You can use the parameters "offset" and "limit" to paginate through large result sets. For convenience, the HTTP header "Link" is set on the response to provide links to "first", "self", "next", "prev" and "last" pages of results (depending on the context). For example, if the result set contains 50 results and the parameter "limit" is set to 25, the Links header will contain an URL for the first 25 results and the next 25 results. <br> <br> Some libraries such as python's `requests` can parse the header automatically and offer a convenient way of iterating through the results. For example:
+
         ```python def get_all_results(url):
             while url:
                 r = requests.get(url)
@@ -1123,7 +1131,7 @@ paths:
           required: true
           type: string
         - default: a word
-          description: 'List of tokens to filter. The tokens are separated by spaces, the list items are separated by comma (e.g., for bigrams (n=2) tokens=this is,this was, this will)'
+          description: List of tokens to filter. The tokens are separated by spaces, the list items are separated by comma (e.g., for bigrams (n=2) tokens=this is,this was, this will)
           in: query
           name: tokens
           required: false
@@ -1168,12 +1176,12 @@ paths:
           name: maxDocumentFrequency
           required: false
           type: integer
-        - description: 'collate the results by wordform, trueCase, lemma, lexicalCategory. Multiple values can be separated by commas (e.g., collate=trueCase,lemma,lexicalCategory).'
+        - description: collate the results by wordform, trueCase, lemma, lexicalCategory. Multiple values can be separated by commas (e.g., collate=trueCase,lemma,lexicalCategory).
           in: query
           name: collate
           required: false
           type: string
-        - description: 'sort the resulting list by wordform, trueCase, lemma, lexicalCategory, frequency, normalizedFrequency. Descending order is achieved by prepending the value with the minus sign (''-''). Multiple values can be separated by commas (e.g., sort=lexicalCategory,-frequency)'
+        - description: sort the resulting list by wordform, trueCase, lemma, lexicalCategory, frequency, normalizedFrequency. Descending order is achieved by prepending the value with the minus sign ('-'). Multiple values can be separated by commas (e.g., sort=lexicalCategory,-frequency)
           in: query
           name: sort
           required: false
@@ -1192,35 +1200,38 @@ paths:
           name: limit
           required: false
           type: integer
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       produces:
         - application/json
         - text/csv
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/NgramsResult'
+            $ref: "#/definitions/NgramsResult"
             title: NgramsResult
-        '400':
-          description: |
+        "400":
+          description: >
             Invalid option name...
-        '404':
-          description: |
+        "404":
+          description: >
             language is not in...
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve the frequency of ngrams (1-4) derived from a corpus
       tags:
         - LexiStats
-  '/stats/frequency/word/{source_lang}/':
+  "/stats/frequency/word/{source_lang}/":
     get:
-      description: |
+      description: >
         This endpoint provides the frequency of a given word. When multiple database records match the query parameters, the returned frequency is the sum of the individual frequencies. For example, if the query parameters are lemma=test, the returned frequency will include the verb "test", the noun "test" and the adjective "test" in all forms (Test, tested, testing, etc.) <br> <br> If you are interested in the frequency of the word "test" but want to exclude other forms (e.g., tested) use the option trueCase=test. Normally, the word "test" will be spelt with a capital letter at the beginning of a sentence. The option trueCase will ignore this and it will count "Test" and "test" as the same token. If you are interested in frequencies of "Test" and "test", use the option wordform=test or wordform=Test. Note that trueCase is not just a lower case of the word as some words are genuinely spelt with a capital letter such as the word "press" in Oxford University Press. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overriden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). Examples:
+
         * PATH: /lemma=test;lexicalCategory=noun
+
         * GET: /?lemma=test&lexicalCategory=noun
+
         * POST (json):
 
           ```javascript
@@ -1244,7 +1255,7 @@ paths:
           name: corpus
           required: false
           type: string
-        - description: 'The written form of the word to look up (preserving case e.g., Books vs books)'
+        - description: The written form of the word to look up (preserving case e.g., Books vs books)
           in: query
           name: wordform
           required: false
@@ -1255,52 +1266,58 @@ paths:
           required: false
           type: string
         - default: test
-          description: 'The lemma of the word to look up (e.g., Book, booked, books all have the lemma "book")'
+          description: The lemma of the word to look up (e.g., Book, booked, books all have the lemma "book")
           in: query
           name: lemma
           required: false
           type: string
-        - description: 'The lexical category of the word(s) to look up (e.g., noun or verb)'
+        - description: The lexical category of the word(s) to look up (e.g., noun or verb)
           in: query
           name: lexicalCategory
           required: false
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       produces:
         - application/json
         - text/csv
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/StatsWordResult'
+            $ref: "#/definitions/StatsWordResult"
             title: StatsWordResult
-        '400':
-          description: |
+        "400":
+          description: >
             You need to specify at least one option. Try one of 'wordform, lemma, trueCase, lexicalCategory'.
-        '404':
-          description: |
+        "404":
+          description: >
             language is not in...
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve the frequency of a word derived from a corpus.
       tags:
         - LexiStats
-  '/stats/frequency/words/{source_lang}/':
+  "/stats/frequency/words/{source_lang}/":
     get:
-      description: |
+      description: >
         This endpoint provides a list of frequencies for a given word or words. Unlike the /word/ endpoint, the results are split into the smallest units. <br> <br> To exclude a specific value, prepend it with the minus sign ('-'). For example, to get frequencies of the lemma 'happy' but exclude superlative forms (i.e., happiest) you could use options 'lemma=happy;grammaticalFeatures=-degreeType:superlative'. <br> <br> Parameters can be provided in PATH, GET or POST (form or json). The parameters in PATH are overridden by parameters in GET, POST and json (in that order). In PATH, individual options are separated by semicolon and values are separated by commas (where multiple values can be used). <br> <br> The parameters wordform/trueCase/lemma/lexicalCategory also exist in a plural form, taking a lists of items. Examples:
+
         * PATH: /wordforms=happy,happier,happiest
+
         * GET: /?wordforms=happy&wordforms=happier&wordforms=happiest
+
         * POST (json):
+
         ```javascript
           {
             "wordforms": ["happy", "happier", "happiest"]
           }
         ```
+
         A mor complex example of retrieving frequencies of multiple lemmas:
+
         ```
           {
               "lemmas": ["happy", "content", "cheerful", "cheery", "merry", "joyful", "ecstatic"],
@@ -1311,7 +1328,9 @@ paths:
               "sort": ["lemma", "-frequency"]
           }
         ```
+
         Some queries with "collate" or "sort" can exceed the 30s timeout, in which case the API will return an error message with status code 503. You mitigate this by providing additional restrictions such as "minFrequency" and "maxFrequency". <br> <br> You can use the parameters "offset" and "limit" to paginate through large result sets. For convenience, the HTTP header "Link" is set on the response to provide links to "first", "self", "next", "prev" and "last" pages of results (depending on the context). For example, if the result set contains 50 results and the parameter "limit" is set to 25, the Links header will contain an URL for the first 25 results and the next 25 results. <br> <br> Some libraries such as python's `requests` can parse the header automatically and offer a convenient way of iterating through the results. For example:
+
         ```python def get_all_results(url):
             while url:
                 r = requests.get(url)
@@ -1333,7 +1352,7 @@ paths:
           name: corpus
           required: false
           type: string
-        - description: 'The written form of the word to look up (preserving case e.g., Book vs book)'
+        - description: The written form of the word to look up (preserving case e.g., Book vs book)
           in: query
           name: wordform
           required: false
@@ -1344,27 +1363,27 @@ paths:
           required: false
           type: string
         - default: test
-          description: 'The lemma of the word to look up (e.g., Book, booked, books all have the lemma "book")'
+          description: The lemma of the word to look up (e.g., Book, booked, books all have the lemma "book")
           in: query
           name: lemma
           required: false
           type: string
-        - description: 'The lexical category of the word(s) to look up (e.g., adjective or noun)'
+        - description: The lexical category of the word(s) to look up (e.g., adjective or noun)
           in: query
           name: lexicalCategory
           required: false
           type: string
-        - description: 'The grammatical features of the word(s) to look up entered as a list of k:v (e.g., degree_type:comparative)'
+        - description: The grammatical features of the word(s) to look up entered as a list of k:v (e.g., degree_type:comparative)
           in: query
           name: grammaticalFeatures
           required: false
           type: string
-        - description: 'sort the resulting list by wordform, trueCase, lemma, lexicalCategory, frequency, normalizedFrequency. Descending order is achieved by prepending the value with the minus sign (''-''). Multiple values can be separated by commas (e.g., sort=lexicalCategory,-frequency)'
+        - description: sort the resulting list by wordform, trueCase, lemma, lexicalCategory, frequency, normalizedFrequency. Descending order is achieved by prepending the value with the minus sign ('-'). Multiple values can be separated by commas (e.g., sort=lexicalCategory,-frequency)
           in: query
           name: sort
           required: false
           type: string
-        - description: 'collate the results by wordform, trueCase, lemma, lexicalCategory. Multiple values can be separated by commas (e.g., collate=trueCase,lemma,lexicalCategory).'
+        - description: collate the results by wordform, trueCase, lemma, lexicalCategory. Multiple values can be separated by commas (e.g., collate=trueCase,lemma,lexicalCategory).
           in: query
           name: collate
           required: false
@@ -1407,31 +1426,31 @@ paths:
           name: limit
           required: false
           type: integer
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       produces:
         - application/json
         - text/csv
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/StatsWordResultList'
+            $ref: "#/definitions/StatsWordResultList"
             title: StatsWordResultList
-        '400':
+        "400":
           description: Invalid option name...; Option ... must have a value.; The option 'minFrequency' has to have an non-negative integer parameter.; The option 'maxFrequency' has to have an non-negative integer parameter.; The option 'limit' has to have an non-negative integer parameter.; The option 'offset' has to have an non-negative integer parameter.
-        '404':
-          description: |
+        "404":
+          description: >
             language is not in...
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve a list of frequencies of a word/words derived from a corpus.
       tags:
         - LexiStats
-  '/wordlist/{source_lang}/{filters_advanced}':
+  "/wordlist/{source_lang}/{filters_advanced}":
     get:
-      description: |
+      description: >
         Use this to apply more complex filters to the [list of words](documentation/glossary?term=wordlist). For example, you may only want to filter out words for which all [senses](documentation/glossary?term=sense) match the filter, or only its 'prime sense'. You can also filter by word length or match by substring (prefix). 
 
           <div id="wordlist_advanced"></div>
@@ -1450,28 +1469,28 @@ paths:
           required: true
           type: string
         - default: lexicalCategory=Noun;domains=sport
-          description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
+          description: "Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5."
           in: path
           name: filters_advanced
           required: true
           type: string
-        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes headwords that have any senses in specified exclusion attributes (lexical categories, domains, etc.) from results.'
+        - description: Semicolon separated list of parameters-value pairs (same as filters). Excludes headwords that have any senses in specified exclusion attributes (lexical categories, domains, etc.) from results.
           in: query
           name: exclude
           required: false
           type: string
-        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes only those senses of a particular headword that match specified exclusion attributes (lexical categories, domains, etc.) from results but includes the headword if it has other permitted senses.'
+        - description: Semicolon separated list of parameters-value pairs (same as filters). Excludes only those senses of a particular headword that match specified exclusion attributes (lexical categories, domains, etc.) from results but includes the headword if it has other permitted senses.
           in: query
           name: exclude_senses
           required: false
           type: string
-        - description: 'Semicolon separated list of parameters-value pairs (same as filters). Excludes a headword only if the primary sense matches the specified exclusion attributes (registers, domains only).'
+        - description: Semicolon separated list of parameters-value pairs (same as filters). Excludes a headword only if the primary sense matches the specified exclusion attributes (registers, domains only).
           in: query
           name: exclude_prime_senses
           required: false
           type: string
-        - default: '>5,<10'
-          description: 'Parameter to speficy the minimum (>), exact or maximum (<) length of the words required. E.g., >5 - more than 5 chars; <4 - less than 4 chars; >5<10 - from 5 to 10 chars; 3 - exactly 3 chars.'
+        - default: ">5,<10"
+          description: Parameter to speficy the minimum (>), exact or maximum (<) length of the words required. E.g., >5 - more than 5 chars; <4 - less than 4 chars; >5<10 - from 5 to 10 chars; 3 - exactly 3 chars.
           in: query
           name: word_length
           required: false
@@ -1484,8 +1503,8 @@ paths:
           type: string
         - description: If exact=true wordlist returns a list of entries that exactly matches the search string. Otherwise wordlist lists entries that start with prefix string.
           enum:
-            - 'false'
-            - 'true'
+            - "false"
+            - "true"
           in: query
           name: exact
           required: false
@@ -1500,29 +1519,29 @@ paths:
           name: offset
           required: false
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Wordlist'
+            $ref: "#/definitions/Wordlist"
             title: WordlistResults
-        '400':
+        "400":
           description: disjoint sets of word_length values (eg <3>10); filter has no values; total number of filters > 20; filters and excludes values can not be the same; source_lang and translations can not be same; word_length conflicts with prefix length.
-        '404':
-          description: |
+        "404":
+          description: >
             No entries is found matching supplied filters or lang or filters is not recognized.
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve list of words for category with advanced options
       tags:
         - Wordlist
-  '/wordlist/{source_lang}/{filters_basic}':
+  "/wordlist/{source_lang}/{filters_basic}":
     get:
-      description: |
-
+      description: >
+        
         Use this to retrieve a [list of words](documentation/glossary?term=wordlist) for particular [domain](documentation/glossary?term=domain), [lexical category](documentation/glossary?term=lexicalcategory), [register](documentation/glossary?term=registers) and/or [region](documentation/glossary?term=regions). View the full list of possible filters using the filters Utility endpoint.  The response only includes [headwords](documentation/glossary?term=headword), not all their possible [inflections](documentation/glossary?term=inflection). If you require a full [wordlist](documentation/glossary?term=wordlist) including [inflected forms](documentation/glossary?term=inflection), contact us and we can help.
 
           <div id="wordlist"></div>
@@ -1541,7 +1560,7 @@ paths:
           required: true
           type: string
         - default: registers=Rare;domains=Art
-          description: 'Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5.'
+          description: "Semicolon separated list of wordlist parameters, presented as value pairs: LexicalCategory, domains, regions, registers. Parameters can take comma separated list of values. E.g., lexicalCategory=noun,adjective;domains=sport. Number of values limited to 5."
           in: path
           name: filters_basic
           required: true
@@ -1556,21 +1575,21 @@ paths:
           name: offset
           required: false
           type: string
-        - $ref: '#/parameters/appId'
-        - $ref: '#/parameters/appKey'
+        - $ref: "#/parameters/appId"
+        - $ref: "#/parameters/appKey"
       responses:
-        '200':
+        "200":
           description: Successful response.
           schema:
-            $ref: '#/definitions/Wordlist'
+            $ref: "#/definitions/Wordlist"
             title: WordlistResults
-        '400':
+        "400":
           description: filter has no values; total number of filters > 20.
-        '404':
-          description: |
+        "404":
+          description: >
             No entries is found matching supplied filters or lang or filters is not recognized.
-        '500':
-          description: |
+        "500":
+          description: >
             Internal Error. An error occurred while processing the data.
       summary: Retrieve a list of words in a category
       tags:
@@ -1582,8 +1601,8 @@ definitions:
       additionalProperties: false
       properties:
         domains:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A subject, discipline, or branch of knowledge particular to the Sense'
+          $ref: "#/definitions/arrayofstrings"
+          description: A subject, discipline, or branch of knowledge particular to the Sense
         id:
           description: The identifier of the word
           type: string
@@ -1591,11 +1610,11 @@ definitions:
           description: IANA language code specifying the language of the word
           type: string
         regions:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A particular area in which the pronunciation occurs, e.g. ''Great Britain'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A particular area in which the pronunciation occurs, e.g. 'Great Britain'
         registers:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A level of language usage, typically with respect to formality. e.g. 'offensive', 'informal'
           type: string
         text:
           type: string
@@ -1626,7 +1645,7 @@ definitions:
     minItems: 1
     type: array
   CrossReferencesList:
-    description: 'A reference to another word that is closely related, might provide additional information about the subject, has a variant spelling or is an abbreviated form of it.'
+    description: A reference to another word that is closely related, might provide additional information about the subject, has a variant spelling or is an abbreviated form of it.
     items:
       additionalProperties: false
       description: cross references of a sense
@@ -1638,7 +1657,7 @@ definitions:
           description: The word of cooccurrence
           type: string
         type:
-          description: 'The type of relation between the two words. Possible values are ''close match'', ''related'', ''see also'', ''variant spelling'', and ''abbreviation'' in case of crossreferences, or ''pre'', ''post'' in case of collocates.'
+          description: The type of relation between the two words. Possible values are 'close match', 'related', 'see also', 'variant spelling', and 'abbreviation' in case of crossreferences, or 'pre', 'post' in case of collocates.
           type: string
       required:
         - id
@@ -1652,26 +1671,26 @@ definitions:
     minProperties: 1
     properties:
       etymologies:
-        $ref: '#/definitions/arrayofstrings'
+        $ref: "#/definitions/arrayofstrings"
         description: The origin of the word and the way in which its meaning has changed throughout history
       grammaticalFeatures:
-        $ref: '#/definitions/GrammaticalFeaturesList'
+        $ref: "#/definitions/GrammaticalFeaturesList"
       homographNumber:
         description: Identifies the homograph grouping. The last two digits identify different entries of the same homograph. The first one/two digits identify the homograph number.
         type: string
       notes:
-        $ref: '#/definitions/CategorizedTextList'
+        $ref: "#/definitions/CategorizedTextList"
       pronunciations:
-        $ref: '#/definitions/PronunciationsList'
+        $ref: "#/definitions/PronunciationsList"
       senses:
         description: Complete list of senses
         items:
-          $ref: '#/definitions/Sense'
+          $ref: "#/definitions/Sense"
         minItems: 1
         type: array
       variantForms:
-        $ref: '#/definitions/VariantFormsList'
-        description: 'Various words that are used interchangeably depending on the context, e.g ''a'' and ''an'''
+        $ref: "#/definitions/VariantFormsList"
+        description: Various words that are used interchangeably depending on the context, e.g 'a' and 'an'
     type: object
   ExamplesList:
     description: A list of written or spoken rendering of examples of use of a word or text
@@ -1679,26 +1698,26 @@ definitions:
       additionalProperties: false
       properties:
         definitions:
-          $ref: '#/definitions/arrayofstrings'
+          $ref: "#/definitions/arrayofstrings"
           description: A list of statements of the exact meaning of a word
         domains:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A subject, discipline, or branch of knowledge particular to the Sense'
+          $ref: "#/definitions/arrayofstrings"
+          description: A subject, discipline, or branch of knowledge particular to the Sense
         notes:
-          $ref: '#/definitions/CategorizedTextList'
+          $ref: "#/definitions/CategorizedTextList"
         regions:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A particular area in which the pronunciation occurs, e.g. ''Great Britain'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A particular area in which the pronunciation occurs, e.g. 'Great Britain'
         registers:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A level of language usage, typically with respect to formality. e.g. 'offensive', 'informal'
         senseIds:
-          $ref: '#/definitions/arrayofstrings'
+          $ref: "#/definitions/arrayofstrings"
           description: The list of sense identifiers related to the example. Provided in the sentences endpoint only.
         text:
           type: string
         translations:
-          $ref: '#/definitions/TranslationsList'
+          $ref: "#/definitions/TranslationsList"
       required:
         - text
       type: object
@@ -1716,16 +1735,16 @@ definitions:
         minProperties: 1
         properties:
           entries:
-            $ref: '#/definitions/arrayofstrings'
+            $ref: "#/definitions/arrayofstrings"
             description: A list of filters available for Retrieve Entry endpoint
           inflections:
-            $ref: '#/definitions/arrayofstrings'
+            $ref: "#/definitions/arrayofstrings"
             description: A list of filters available for LEMMATRON endpoint
           translations:
-            $ref: '#/definitions/arrayofstrings'
+            $ref: "#/definitions/arrayofstrings"
             description: A list of filters available for Translations endpoint
           wordlist:
-            $ref: '#/definitions/arrayofstrings'
+            $ref: "#/definitions/arrayofstrings"
             description: A list of filters available for Translations endpoint
         type: object
   GrammaticalFeaturesList:
@@ -1754,18 +1773,18 @@ definitions:
         description: IANA language code
         type: string
       lexicalEntries:
-        description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+        description: A grouping of various senses in a specific language, and a lexical category that relates to a word
         items:
-          $ref: '#/definitions/lexicalEntry'
+          $ref: "#/definitions/lexicalEntry"
         minItems: 1
         type: array
       pronunciations:
-        $ref: '#/definitions/PronunciationsList'
+        $ref: "#/definitions/PronunciationsList"
       type:
-        description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+        description: The json object type. Could be 'headword', 'inflection' or 'phrase'
         type: string
       word:
-        description: 'A given written or spoken realisation of a an entry, lowercased.'
+        description: A given written or spoken realisation of a an entry, lowercased.
         type: string
     required:
       - id
@@ -1784,16 +1803,16 @@ definitions:
         description: IANA language code
         type: string
       lexicalEntries:
-        description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+        description: A grouping of various senses in a specific language, and a lexical category that relates to a word
         items:
-          $ref: '#/definitions/LemmatronLexicalEntry'
+          $ref: "#/definitions/LemmatronLexicalEntry"
         minItems: 1
         type: array
       type:
-        description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+        description: The json object type. Could be 'headword', 'inflection' or 'phrase'
         type: string
       word:
-        description: 'A given written or spoken realisation of a an entry, lowercased.'
+        description: A given written or spoken realisation of a an entry, lowercased.
         type: string
     required:
       - id
@@ -1812,16 +1831,16 @@ definitions:
         description: IANA language code
         type: string
       lexicalEntries:
-        description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+        description: A grouping of various senses in a specific language, and a lexical category that relates to a word
         items:
-          $ref: '#/definitions/ThesaurusLexicalEntry'
+          $ref: "#/definitions/ThesaurusLexicalEntry"
         minItems: 1
         type: array
       type:
-        description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+        description: The json object type. Could be 'headword', 'inflection' or 'phrase'
         type: string
       word:
-        description: 'A given written or spoken realisation of a an entry, lowercased.'
+        description: A given written or spoken realisation of a an entry, lowercased.
         type: string
     required:
       - word
@@ -1902,7 +1921,7 @@ definitions:
       results:
         description: A list of inflections matching a given word
         items:
-          $ref: '#/definitions/HeadwordLemmatron'
+          $ref: "#/definitions/HeadwordLemmatron"
         minItems: 1
         type: array
     type: object
@@ -1911,15 +1930,15 @@ definitions:
     description: Description of an entry for a particular part of speech and grammatical features
     properties:
       grammaticalFeatures:
-        $ref: '#/definitions/GrammaticalFeaturesList'
+        $ref: "#/definitions/GrammaticalFeaturesList"
       inflectionOf:
-        $ref: '#/definitions/InflectionsList'
+        $ref: "#/definitions/InflectionsList"
         description: The canonical form of words for which the entry is an inflection
       language:
         description: IANA language code
         type: string
       lexicalCategory:
-        description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+        description: A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb
         type: string
       text:
         description: A given written or spoken realisation of a an entry.
@@ -1969,8 +1988,8 @@ definitions:
           description: The URL of the sound file
           type: string
         dialects:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A local or regional variation where the pronunciation occurs, e.g. ''British English'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A local or regional variation where the pronunciation occurs, e.g. 'British English'
         phoneticNotation:
           description: The alphabetic system used to display the phonetic spelling
           type: string
@@ -1978,8 +1997,8 @@ definitions:
           description: Phonetic spelling is the representation of vocal sounds which express pronunciations of words. It is a system of spelling in which each letter represents invariably the same spoken sound
           type: string
         regions:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A particular area in which the pronunciation occurs, e.g. ''Great Britain'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A particular area in which the pronunciation occurs, e.g. 'Great Britain'
       type: object
     minItems: 1
     type: array
@@ -1991,7 +2010,7 @@ definitions:
         type: object
       results:
         additionalProperties:
-          $ref: '#/definitions/arrayofstrings'
+          $ref: "#/definitions/arrayofstrings"
           description: A list of lables for region.
         description: A mapping of regions available.
         type: object
@@ -2004,7 +2023,7 @@ definitions:
       results:
         description: A list of entries and all the data related to them
         items:
-          $ref: '#/definitions/HeadwordEntry'
+          $ref: "#/definitions/HeadwordEntry"
         minItems: 1
         type: array
     type: object
@@ -2014,51 +2033,51 @@ definitions:
     minProperties: 1
     properties:
       crossReferenceMarkers:
-        $ref: '#/definitions/arrayofstrings'
+        $ref: "#/definitions/arrayofstrings"
         description: A grouping of crossreference notes.
       crossReferences:
-        $ref: '#/definitions/CrossReferencesList'
+        $ref: "#/definitions/CrossReferencesList"
       definitions:
-        $ref: '#/definitions/arrayofstrings'
+        $ref: "#/definitions/arrayofstrings"
         description: A list of statements of the exact meaning of a word
       domains:
-        $ref: '#/definitions/arrayofstrings'
-        description: 'A subject, discipline, or branch of knowledge particular to the Sense'
+        $ref: "#/definitions/arrayofstrings"
+        description: A subject, discipline, or branch of knowledge particular to the Sense
       examples:
-        $ref: '#/definitions/ExamplesList'
+        $ref: "#/definitions/ExamplesList"
       id:
         description: The id of the sense that is required for the delete procedure
         type: string
       notes:
-        $ref: '#/definitions/CategorizedTextList'
+        $ref: "#/definitions/CategorizedTextList"
       pronunciations:
-        $ref: '#/definitions/PronunciationsList'
+        $ref: "#/definitions/PronunciationsList"
       regions:
-        $ref: '#/definitions/arrayofstrings'
-        description: 'A particular area in which the Sense occurs, e.g. ''Great Britain'''
+        $ref: "#/definitions/arrayofstrings"
+        description: A particular area in which the Sense occurs, e.g. 'Great Britain'
       registers:
-        $ref: '#/definitions/arrayofstrings'
-        description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+        $ref: "#/definitions/arrayofstrings"
+        description: A level of language usage, typically with respect to formality. e.g. 'offensive', 'informal'
       short_definitions:
-        $ref: '#/definitions/arrayofstrings'
+        $ref: "#/definitions/arrayofstrings"
         description: A list of short statements of the exact meaning of a word
       subsenses:
         description: Ordered list of subsenses of a sense
         items:
-          $ref: '#/definitions/Sense'
+          $ref: "#/definitions/Sense"
         minItems: 1
         type: array
       thesaurusLinks:
         description: Ordered list of links to the Thesaurus Dictionary
         items:
-          $ref: '#/definitions/thesaurusLink'
+          $ref: "#/definitions/thesaurusLink"
         minItems: 1
         type: array
       translations:
-        $ref: '#/definitions/TranslationsList'
+        $ref: "#/definitions/TranslationsList"
       variantForms:
-        $ref: '#/definitions/VariantFormsList'
-        description: 'Various words that are used interchangeably depending on the context, e.g ''duck'' and ''duck boat'''
+        $ref: "#/definitions/VariantFormsList"
+        description: Various words that are used interchangeably depending on the context, e.g 'duck' and 'duck boat'
     type: object
   SentencesEntry:
     additionalProperties: false
@@ -2071,16 +2090,16 @@ definitions:
         description: IANA language code
         type: string
       lexicalEntries:
-        description: 'A grouping of various senses in a specific language, and a lexical category that relates to a word'
+        description: A grouping of various senses in a specific language, and a lexical category that relates to a word
         items:
-          $ref: '#/definitions/SentencesLexicalEntry'
+          $ref: "#/definitions/SentencesLexicalEntry"
         minItems: 1
         type: array
       type:
-        description: 'The json object type. Could be ''headword'', ''inflection'' or ''phrase'''
+        description: The json object type. Could be 'headword', 'inflection' or 'phrase'
         type: string
       word:
-        description: 'A given written or spoken realisation of a an entry, lowercased.'
+        description: A given written or spoken realisation of a an entry, lowercased.
         type: string
     required:
       - id
@@ -2093,15 +2112,15 @@ definitions:
     description: Description of an entry for a particular part of speech
     properties:
       grammaticalFeatures:
-        $ref: '#/definitions/GrammaticalFeaturesList'
+        $ref: "#/definitions/GrammaticalFeaturesList"
       language:
         description: IANA language code
         type: string
       lexicalCategory:
-        description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+        description: A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb
         type: string
       sentences:
-        $ref: '#/definitions/ExamplesList'
+        $ref: "#/definitions/ExamplesList"
         description: A list of examples of use sentences
       text:
         description: A given written or spoken realisation of a an entry.
@@ -2120,7 +2139,7 @@ definitions:
       results:
         description: A list of entries and all the data related to them
         items:
-          $ref: '#/definitions/SentencesEntry'
+          $ref: "#/definitions/SentencesEntry"
         minItems: 1
         type: array
     type: object
@@ -2138,7 +2157,7 @@ definitions:
             description: The number of times a word appears in the entire corpus
             type: integer
           lemma:
-            description: 'A lemma of the word (e.g., wordforms "lay", "laid" and "laying" have all lemma "lay")'
+            description: A lemma of the word (e.g., wordforms "lay", "laid" and "laying" have all lemma "lay")
             type: string
           lexicalCategory:
             description: A lexical category such as 'verb' or 'noun'
@@ -2150,10 +2169,10 @@ definitions:
             description: The number of times a word appears on average in 1 million words
             type: integer
           trueCase:
-            description: 'A given written realisation of a an entry (e.g., "lay") usually lower case'
+            description: A given written realisation of a an entry (e.g., "lay") usually lower case
             type: string
           wordform:
-            description: 'A given written realisation of a an entry (e.g., "Lay") preserving case'
+            description: A given written realisation of a an entry (e.g., "Lay") preserving case
             type: string
         required:
           - frequency
@@ -2186,10 +2205,10 @@ definitions:
               description: The number of times a word appears on average in 1 million words
               type: integer
             trueCase:
-              description: 'A given written realisation of a an entry (e.g., "lay") usually lower case'
+              description: A given written realisation of a an entry (e.g., "lay") usually lower case
               type: string
             wordform:
-              description: 'A given written realisation of a an entry (e.g., "lay") preserving case'
+              description: A given written realisation of a an entry (e.g., "lay") preserving case
               type: string
           required:
             - wordform
@@ -2207,17 +2226,17 @@ definitions:
       additionalProperties: false
       properties:
         domains:
-          $ref: '#/definitions/arrayofstrings'
+          $ref: "#/definitions/arrayofstrings"
         id:
           type: string
         language:
           type: string
         regions:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A particular area in which the Sense occurs, e.g. ''Great Britain'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A particular area in which the Sense occurs, e.g. 'Great Britain'
         registers:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A level of language usage, typically with respect to formality. e.g. 'offensive', 'informal'
         text:
           type: string
       required:
@@ -2235,7 +2254,7 @@ definitions:
       results:
         description: A list of found synonyms or antonyms
         items:
-          $ref: '#/definitions/HeadwordThesaurus'
+          $ref: "#/definitions/HeadwordThesaurus"
         minItems: 1
         type: array
     type: object
@@ -2249,12 +2268,12 @@ definitions:
       senses:
         description: Complete list of senses
         items:
-          $ref: '#/definitions/ThesaurusSense'
+          $ref: "#/definitions/ThesaurusSense"
         minItems: 1
         type: array
       variantForms:
-        $ref: '#/definitions/VariantFormsList'
-        description: 'Various words that are used interchangeably depending on the context, e.g ''a'' and ''an'''
+        $ref: "#/definitions/VariantFormsList"
+        description: Various words that are used interchangeably depending on the context, e.g 'a' and 'an'
     type: object
   ThesaurusLexicalEntry:
     additionalProperties: false
@@ -2262,21 +2281,21 @@ definitions:
     properties:
       entries:
         items:
-          $ref: '#/definitions/ThesaurusEntry'
+          $ref: "#/definitions/ThesaurusEntry"
         minItems: 1
         type: array
       language:
         description: IANA language code
         type: string
       lexicalCategory:
-        description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+        description: A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb
         type: string
       text:
         description: A given written or spoken realisation of a an entry.
         type: string
       variantForms:
-        $ref: '#/definitions/VariantFormsList'
-        description: 'Various words that are used interchangeably depending on the context, e.g ''a'' and ''an'''
+        $ref: "#/definitions/VariantFormsList"
+        description: Various words that are used interchangeably depending on the context, e.g 'a' and 'an'
     required:
       - language
       - lexicalCategory
@@ -2288,30 +2307,30 @@ definitions:
     minProperties: 1
     properties:
       antonyms:
-        $ref: '#/definitions/SynonymsAntonyms'
+        $ref: "#/definitions/SynonymsAntonyms"
         description: antonym of word
       domains:
-        $ref: '#/definitions/arrayofstrings'
-        description: 'A subject, discipline, or branch of knowledge particular to the Sense'
+        $ref: "#/definitions/arrayofstrings"
+        description: A subject, discipline, or branch of knowledge particular to the Sense
       examples:
-        $ref: '#/definitions/ExamplesList'
+        $ref: "#/definitions/ExamplesList"
       id:
         description: The id of the sense that is required for the delete procedure
         type: string
       regions:
-        $ref: '#/definitions/arrayofstrings'
-        description: 'A particular area in which the Sense occurs, e.g. ''Great Britain'''
+        $ref: "#/definitions/arrayofstrings"
+        description: A particular area in which the Sense occurs, e.g. 'Great Britain'
       registers:
-        $ref: '#/definitions/arrayofstrings'
-        description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+        $ref: "#/definitions/arrayofstrings"
+        description: A level of language usage, typically with respect to formality. e.g. 'offensive', 'informal'
       subsenses:
         description: subsenses of word
         items:
-          $ref: '#/definitions/ThesaurusSense'
+          $ref: "#/definitions/ThesaurusSense"
         minItems: 1
         type: array
       synonyms:
-        $ref: '#/definitions/SynonymsAntonyms'
+        $ref: "#/definitions/SynonymsAntonyms"
         description: synonym of word
     type: object
   TranslationsList:
@@ -2320,21 +2339,21 @@ definitions:
       additionalProperties: false
       properties:
         domains:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A subject, discipline, or branch of knowledge particular to the translation'
+          $ref: "#/definitions/arrayofstrings"
+          description: A subject, discipline, or branch of knowledge particular to the translation
         grammaticalFeatures:
-          $ref: '#/definitions/GrammaticalFeaturesList'
+          $ref: "#/definitions/GrammaticalFeaturesList"
         language:
           description: IANA language code specifying the language of the translation
           type: string
         notes:
-          $ref: '#/definitions/CategorizedTextList'
+          $ref: "#/definitions/CategorizedTextList"
         regions:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A particular area in which the translation occurs, e.g. ''Great Britain'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A particular area in which the translation occurs, e.g. 'Great Britain'
         registers:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A level of language usage, typically with respect to formality. e.g. ''offensive'', ''informal'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A level of language usage, typically with respect to formality. e.g. 'offensive', 'informal'
         text:
           type: string
       required:
@@ -2344,14 +2363,14 @@ definitions:
     minItems: 1
     type: array
   UtilityLabels:
-    description: 'Schema for lexicalcategories, registers utility endpoints.'
+    description: Schema for lexicalcategories, registers utility endpoints.
     properties:
       metadata:
         description: Additional Information provided by OUP
         type: object
       results:
         additionalProperties:
-          description: 'the list of labels for an object. Every object can be a lexical category, or a register, or a domain.'
+          description: the list of labels for an object. Every object can be a lexical category, or a register, or a domain.
           properties:
             en:
               description: Label in English
@@ -2360,13 +2379,13 @@ definitions:
         description: Mapping of labels available.
         type: object
   VariantFormsList:
-    description: 'Various words that are used interchangeably depending on the context, e.g ''aluminium'' and ''aluminum'''
+    description: Various words that are used interchangeably depending on the context, e.g 'aluminium' and 'aluminum'
     items:
       additionalProperties: false
       properties:
         regions:
-          $ref: '#/definitions/arrayofstrings'
-          description: 'A particular area in which the variant form occurs, e.g. ''Great Britain'''
+          $ref: "#/definitions/arrayofstrings"
+          description: A particular area in which the variant form occurs, e.g. 'Great Britain'
         text:
           type: string
       required:
@@ -2392,14 +2411,14 @@ definitions:
             matchString:
               type:
                 - string
-                - 'null'
+                - "null"
             matchType:
               type: string
             region:
               description: Name of region.
               type: string
             word:
-              description: 'A given written or spoken realisation of a an entry, lowercased.'
+              description: A given written or spoken realisation of a an entry, lowercased.
               type: string
           required:
             - id
@@ -2417,34 +2436,34 @@ definitions:
     description: Description of an entry for a particular part of speech
     properties:
       derivativeOf:
-        $ref: '#/definitions/ArrayOfRelatedEntries'
+        $ref: "#/definitions/ArrayOfRelatedEntries"
         description: Other words from which this one derives
       derivatives:
-        $ref: '#/definitions/ArrayOfRelatedEntries'
+        $ref: "#/definitions/ArrayOfRelatedEntries"
         description: Other words from which their Sense derives
       entries:
         items:
-          $ref: '#/definitions/Entry'
+          $ref: "#/definitions/Entry"
         minItems: 1
         type: array
       grammaticalFeatures:
-        $ref: '#/definitions/GrammaticalFeaturesList'
+        $ref: "#/definitions/GrammaticalFeaturesList"
       language:
         description: IANA language code
         type: string
       lexicalCategory:
-        description: 'A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb'
+        description: A linguistic category of words (or more precisely lexical items), generally defined by the syntactic or morphological behaviour of the lexical item in question, such as noun or verb
         type: string
       notes:
-        $ref: '#/definitions/CategorizedTextList'
+        $ref: "#/definitions/CategorizedTextList"
       pronunciations:
-        $ref: '#/definitions/PronunciationsList'
+        $ref: "#/definitions/PronunciationsList"
       text:
         description: A given written or spoken realisation of a an entry.
         type: string
       variantForms:
-        $ref: '#/definitions/VariantFormsList'
-        description: 'Various words that are used interchangeably depending on the context, e.g ''a'' and ''an'''
+        $ref: "#/definitions/VariantFormsList"
+        description: Various words that are used interchangeably depending on the context, e.g 'a' and 'an'
     required:
       - language
       - lexicalCategory

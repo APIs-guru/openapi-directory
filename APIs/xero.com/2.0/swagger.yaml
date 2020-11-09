@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.xero.com
@@ -6,22 +6,24 @@ basePath: /api.xro/2.0
 info:
   contact:
     name: Xero Developer Team
-    url: 'https://developer.xero.com'
+    url: https://developer.xero.com
     x-twitter: XeroAPI
-  description: |
+  description: >
     # Introduction
+
     The Xero Accounting API is a RESTful web service and uses the OAuth (v1.0a) protocol to authenticate 3rd party applications. The Accounting API exposes accounting and related functions of the main Xero application and can be used for a variety of purposes such as creating transactions like invoices and credit notes, right through to extracting accounting data via our reports endpoint.
   title: Accounting
-  version: '2.0'
+  version: "2.0"
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'https://lh3.googleusercontent.com/-_IQ9BNy118c/AAAAAAAAAAI/AAAAAAAAAB0/yvA2ZQSg_pk/s500-c-no/photo.jpg'
+    url: https://lh3.googleusercontent.com/-_IQ9BNy118c/AAAAAAAAAAI/AAAAAAAAAB0/yvA2ZQSg_pk/s500-c-no/photo.jpg
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/spec/accounting2.yaml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/XeroAPI/Xero-OpenAPI/master/spec/accounting2.yaml
+      version: "2.0"
   x-providerName: xero.com
+  x-preferred: true
 consumes:
   - application/json
   - application/xml
@@ -30,8 +32,8 @@ produces:
   - application/xml
 parameters:
   If-Modified-Since:
-    default: '2009-11-12T00:00:00Z'
-    description: 'A UTC timestamp (yyyy-mm-ddThh:mm:ss) . Only invoices created or modified since this timestamp will be returned e.g. 2009-11-12T00:00:00'
+    default: 2009-11-12T00:00:00Z
+    description: A UTC timestamp (yyyy-mm-ddThh:mm:ss) . Only invoices created or modified since this timestamp will be returned e.g. 2009-11-12T00:00:00
     format: date-time
     in: header
     name: If-Modified-Since
@@ -39,7 +41,7 @@ parameters:
     type: string
   includeArchived:
     default: true
-    description: 'Include archived records in the response '
+    description: "Include archived records in the response "
     in: query
     name: includeArchived
     required: false
@@ -52,7 +54,7 @@ parameters:
     required: false
     type: integer
   order:
-    default: ''
+    default: ""
     description: Order by any element returned
     in: query
     name: order
@@ -74,7 +76,7 @@ parameters:
     type: boolean
   summarizeErrors:
     default: false
-    description: 'If you plan to submit more than one entity per API call, we recommend that you append the summarizeErrors=false querystring to your API call. This ensures that every entity is returned back to you, each having their own status attribute.'
+    description: If you plan to submit more than one entity per API call, we recommend that you append the summarizeErrors=false querystring to your API call. This ensures that every entity is returned back to you, each having their own status attribute.
     in: query
     name: summarizeErrors
     required: false
@@ -87,7 +89,7 @@ parameters:
     required: false
     type: integer
   where:
-    default: ''
+    default: ""
     description: Filter by an any element
     in: query
     name: where
@@ -157,7 +159,7 @@ responses:
       properties:
         Accounts:
           items:
-            $ref: '#/definitions/Account'
+            $ref: "#/definitions/Account"
           type: array
         DateTimeUTC:
           description: DateTime of the request
@@ -189,7 +191,7 @@ responses:
       properties:
         Attachments:
           items:
-            $ref: '#/definitions/Attachment'
+            $ref: "#/definitions/Attachment"
           type: array
         DateTimeUTC:
           description: DateTime of the request
@@ -221,7 +223,7 @@ responses:
       properties:
         BankTransactions:
           items:
-            $ref: '#/definitions/BankTransaction'
+            $ref: "#/definitions/BankTransaction"
           type: array
         DateTimeUTC:
           description: DateTime of the request
@@ -253,7 +255,7 @@ responses:
       properties:
         BankTransfers:
           items:
-            $ref: '#/definitions/BankTransfer'
+            $ref: "#/definitions/BankTransfer"
           type: array
         DateTimeUTC:
           description: DateTime of the request
@@ -285,7 +287,7 @@ responses:
       properties:
         BrandingThemes:
           items:
-            $ref: '#/definitions/BrandingTheme'
+            $ref: "#/definitions/BrandingTheme"
           type: array
         DateTimeUTC:
           description: DateTime of the request
@@ -317,7 +319,7 @@ responses:
       properties:
         ContactGroups:
           items:
-            $ref: '#/definitions/ContactGroup'
+            $ref: "#/definitions/ContactGroup"
           type: array
         DateTimeUTC:
           description: DateTime of the request
@@ -349,7 +351,7 @@ responses:
       properties:
         Contacts:
           items:
-            $ref: '#/definitions/Contact'
+            $ref: "#/definitions/Contact"
           type: array
         DateTimeUTC:
           description: DateTime of the request
@@ -381,7 +383,7 @@ responses:
       properties:
         CreditNotes:
           items:
-            $ref: '#/definitions/CreditNote'
+            $ref: "#/definitions/CreditNote"
           type: array
         DateTimeUTC:
           description: DateTime of the request
@@ -413,7 +415,7 @@ responses:
       properties:
         Currencies:
           items:
-            $ref: '#/definitions/Currency'
+            $ref: "#/definitions/Currency"
           type: array
         DateTimeUTC:
           description: DateTime of the request
@@ -450,7 +452,7 @@ responses:
           type: string
         Employees:
           items:
-            $ref: '#/definitions/Employee'
+            $ref: "#/definitions/Employee"
           type: array
         ID:
           description: Unique identifier for each response
@@ -482,7 +484,7 @@ responses:
           type: string
         ExpenseClaims:
           items:
-            $ref: '#/definitions/ExpenseClaim'
+            $ref: "#/definitions/ExpenseClaim"
           type: array
         ID:
           description: Unique identifier for each response
@@ -520,7 +522,7 @@ responses:
           type: string
         Invoices:
           items:
-            $ref: '#/definitions/Invoice'
+            $ref: "#/definitions/Invoice"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -552,7 +554,7 @@ responses:
           type: string
         Items:
           items:
-            $ref: '#/definitions/Item'
+            $ref: "#/definitions/Item"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -584,7 +586,7 @@ responses:
           type: string
         Journals:
           items:
-            $ref: '#/definitions/Journal'
+            $ref: "#/definitions/Journal"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -616,7 +618,7 @@ responses:
           type: string
         LinkedTransactions:
           items:
-            $ref: '#/definitions/LinkedTransaction'
+            $ref: "#/definitions/LinkedTransaction"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -648,7 +650,7 @@ responses:
           type: string
         ManualJournals:
           items:
-            $ref: '#/definitions/ManualJournal'
+            $ref: "#/definitions/ManualJournal"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -679,7 +681,7 @@ responses:
           type: string
         OnlineInvoices:
           items:
-            $ref: '#/definitions/OnlineInvoice'
+            $ref: "#/definitions/OnlineInvoice"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -709,7 +711,7 @@ responses:
           type: string
         Organisations:
           items:
-            $ref: '#/definitions/Organisation'
+            $ref: "#/definitions/Organisation"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -741,7 +743,7 @@ responses:
           type: string
         Overpayments:
           items:
-            $ref: '#/definitions/Overpayment'
+            $ref: "#/definitions/Overpayment"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -773,7 +775,7 @@ responses:
           type: string
         Payments:
           items:
-            $ref: '#/definitions/Payment'
+            $ref: "#/definitions/Payment"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -805,7 +807,7 @@ responses:
           type: string
         Prepayments:
           items:
-            $ref: '#/definitions/Prepayment'
+            $ref: "#/definitions/Prepayment"
           type: array
         ProviderName:
           description: Name of the application that made the request
@@ -842,7 +844,7 @@ responses:
           type: string
         PurchaseOrders:
           items:
-            $ref: '#/definitions/PurchaseOrder'
+            $ref: "#/definitions/PurchaseOrder"
           type: array
         Status:
           description: OK for a successful response
@@ -874,7 +876,7 @@ responses:
           type: string
         Receipts:
           items:
-            $ref: '#/definitions/Receipt'
+            $ref: "#/definitions/Receipt"
           type: array
         Status:
           description: OK for a successful response
@@ -906,7 +908,7 @@ responses:
           type: string
         RepeatingInvoices:
           items:
-            $ref: '#/definitions/RepeatingInvoice'
+            $ref: "#/definitions/RepeatingInvoice"
           type: array
         Status:
           description: OK for a successful response
@@ -938,7 +940,7 @@ responses:
           type: string
         Reports:
           items:
-            $ref: '#/definitions/ReportSummary'
+            $ref: "#/definitions/ReportSummary"
           type: array
         Status:
           description: OK for a successful response
@@ -970,7 +972,7 @@ responses:
           type: string
         Reports:
           items:
-            $ref: '#/definitions/Report'
+            $ref: "#/definitions/Report"
           type: array
         Status:
           description: OK for a successful response
@@ -1007,7 +1009,7 @@ responses:
           type: string
         TaxRates:
           items:
-            $ref: '#/definitions/TaxRate'
+            $ref: "#/definitions/TaxRate"
           type: array
       type: object
       xml:
@@ -1034,7 +1036,7 @@ responses:
           type: string
         Reports:
           items:
-            $ref: '#/definitions/TaxReport'
+            $ref: "#/definitions/TaxReport"
           type: array
         Status:
           description: OK for a successful response
@@ -1071,7 +1073,7 @@ responses:
           type: string
         TrackingCategories:
           items:
-            $ref: '#/definitions/TrackingCategory'
+            $ref: "#/definitions/TrackingCategory"
           type: array
       type: object
       xml:
@@ -1103,7 +1105,7 @@ responses:
           type: string
         Users:
           items:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
           type: array
       type: object
       xml:
@@ -1111,124 +1113,124 @@ responses:
 tags:
   - externalDocs:
       description: Accounts
-      url: 'https://developer.xero.com/documentation/api/accounts/'
+      url: https://developer.xero.com/documentation/api/accounts/
     name: Accounts
   - externalDocs:
       description: BankTransactions
-      url: 'https://developer.xero.com/documentation/api/banktransactions/'
+      url: https://developer.xero.com/documentation/api/banktransactions/
     name: BankTransactions
   - externalDocs:
       description: BankTransfers
-      url: 'https://developer.xero.com/documentation/api/banktransfers/'
+      url: https://developer.xero.com/documentation/api/banktransfers/
     name: BankTransfers
   - externalDocs:
       description: BrandingThemes
-      url: 'https://developer.xero.com/documentation/api/brandingthemes/'
+      url: https://developer.xero.com/documentation/api/brandingthemes/
     name: BrandingThemes
   - externalDocs:
       description: Contacts
-      url: 'https://developer.xero.com/documentation/api/contacts/'
+      url: https://developer.xero.com/documentation/api/contacts/
     name: Contacts
   - externalDocs:
       description: ContactGroups
-      url: 'https://developer.xero.com/documentation/api/contactgroups/'
+      url: https://developer.xero.com/documentation/api/contactgroups/
     name: ContactGroups
   - externalDocs:
       description: CreditNotes
-      url: 'https://developer.xero.com/documentation/api/creditnotes/'
+      url: https://developer.xero.com/documentation/api/creditnotes/
     name: CreditNotes
   - externalDocs:
       description: Currencies
-      url: 'https://developer.xero.com/documentation/api/currencies/'
+      url: https://developer.xero.com/documentation/api/currencies/
     name: Currencies
   - externalDocs:
       description: Employees
-      url: 'https://developer.xero.com/documentation/api/employees/'
+      url: https://developer.xero.com/documentation/api/employees/
     name: Employees
   - externalDocs:
       description: ExpenseClaims
-      url: 'https://developer.xero.com/documentation/api/expenseclaims/'
+      url: https://developer.xero.com/documentation/api/expenseclaims/
     name: ExpenseClaims
   - externalDocs:
       description: Invoices
-      url: 'https://developer.xero.com/documentation/api/invoices/'
+      url: https://developer.xero.com/documentation/api/invoices/
     name: Invoices
   - externalDocs:
       description: Items
-      url: 'https://developer.xero.com/documentation/api/items/'
+      url: https://developer.xero.com/documentation/api/items/
     name: Items
   - externalDocs:
       description: Journals
-      url: 'https://developer.xero.com/documentation/api/journals/'
+      url: https://developer.xero.com/documentation/api/journals/
     name: Journals
   - externalDocs:
       description: LinkedTransactions
-      url: 'https://developer.xero.com/documentation/api/Linked-Transactions/'
+      url: https://developer.xero.com/documentation/api/Linked-Transactions/
     name: LinkedTransactions
   - externalDocs:
       description: ManualJournals
-      url: 'https://developer.xero.com/documentation/api/manual-journals/'
+      url: https://developer.xero.com/documentation/api/manual-journals/
     name: ManualJournals
   - externalDocs:
       description: Organsiations
-      url: 'https://developer.xero.com/documentation/api/organisation/'
+      url: https://developer.xero.com/documentation/api/organisation/
     name: Organisations
   - externalDocs:
       description: Overpayments
-      url: 'https://developer.xero.com/documentation/api/overpayments/'
+      url: https://developer.xero.com/documentation/api/overpayments/
     name: Overpayments
   - externalDocs:
       description: Payments
-      url: 'https://developer.xero.com/documentation/api/payments/'
+      url: https://developer.xero.com/documentation/api/payments/
     name: Payments
   - externalDocs:
       description: Prepayments
-      url: 'https://developer.xero.com/documentation/api/prepayments/'
+      url: https://developer.xero.com/documentation/api/prepayments/
     name: Prepayments
   - externalDocs:
       description: PurchaseOrders
-      url: 'https://developer.xero.com/documentation/api/purchase-orders/'
+      url: https://developer.xero.com/documentation/api/purchase-orders/
     name: PurchaseOrders
   - externalDocs:
       description: Receipts
-      url: 'https://developer.xero.com/documentation/api/receipts/'
+      url: https://developer.xero.com/documentation/api/receipts/
     name: Receipts
   - externalDocs:
       description: RepeatingInvoices
-      url: 'https://developer.xero.com/documentation/api/repeating-invoices/'
+      url: https://developer.xero.com/documentation/api/repeating-invoices/
     name: RepeatingInvoices
   - externalDocs:
       description: Reports
-      url: 'https://developer.xero.com/documentation/api/reports/'
+      url: https://developer.xero.com/documentation/api/reports/
     name: Reports
   - externalDocs:
       description: TaxRates
-      url: 'https://developer.xero.com/documentation/api/tax-rates/'
+      url: https://developer.xero.com/documentation/api/tax-rates/
     name: TaxRates
   - externalDocs:
       description: TrackingCategories
-      url: 'https://developer.xero.com/documentation/api/tracking-categories/'
+      url: https://developer.xero.com/documentation/api/tracking-categories/
     name: TrackingCategories
   - externalDocs:
       description: Users
-      url: 'https://developer.xero.com/documentation/api/users/'
+      url: https://developer.xero.com/documentation/api/users/
     name: Users
 paths:
   /Accounts:
     get:
       description: Retrieve the chart of accounts
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AccountsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AccountsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve the full chart of accounts
       tags:
         - Accounts
@@ -1238,12 +1240,12 @@ paths:
           name: Accounts
           required: true
           schema:
-            $ref: '#/definitions/Account'
+            $ref: "#/definitions/Account"
       responses:
-        '200':
-          $ref: '#/responses/AccountsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
+        "200":
+          $ref: "#/responses/AccountsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
       summary: Create or update accounts
       tags:
         - Accounts
@@ -1253,17 +1255,17 @@ paths:
           name: Accounts
           required: true
           schema:
-            $ref: '#/definitions/Account'
+            $ref: "#/definitions/Account"
       responses:
-        '200':
-          $ref: '#/responses/AccountsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
+        "200":
+          $ref: "#/responses/AccountsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
       summary: Create new accounts
       tags:
         - Accounts
     x-related-model: Account
-  '/Accounts/{AccountID}':
+  "/Accounts/{AccountID}":
     delete:
       parameters:
         - format: uuid
@@ -1272,10 +1274,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A successful request
-        '404':
-          $ref: '#/responses/404ErrorResponse'
+        "404":
+          $ref: "#/responses/404ErrorResponse"
       summary: Delete an account
       tags:
         - Accounts
@@ -1287,10 +1289,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/AccountsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
+        "200":
+          $ref: "#/responses/AccountsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
       summary: Retrieve a single account
       tags:
         - Accounts
@@ -1300,24 +1302,24 @@ paths:
           name: Accounts
           required: true
           schema:
-            $ref: '#/definitions/Account'
+            $ref: "#/definitions/Account"
         - format: uuid
           in: path
           name: AccountID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/AccountsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
+        "200":
+          $ref: "#/responses/AccountsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
       summary: Update an account
       tags:
         - Accounts
     x-related-model: Account
-  '/Accounts/{AccountID}/Attachments':
+  "/Accounts/{AccountID}/Attachments":
     get:
       description: Retrieve Attachments
       parameters:
@@ -1326,21 +1328,21 @@ paths:
           name: AccountID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve Attachments
       tags:
         - Accounts
-  '/Accounts/{AccountID}/Attachments/{FileName}':
+  "/Accounts/{AccountID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -1354,17 +1356,17 @@ paths:
           name: AccountID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '404':
+        "404":
           description: Attachment does not exist
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - Accounts
@@ -1386,35 +1388,35 @@ paths:
           name: Content
           required: true
           schema:
-            $ref: '#/definitions/Content'
+            $ref: "#/definitions/Content"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '400':
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "400":
           description: Attachment couldn't be created.
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Upload an Attachment
       tags:
         - Accounts
   /BankTransactions:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/unitdp"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/BankTransactionsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BankTransactionsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve any spend or receive money transactions (inc. prepayments and overpayments)
       tags:
         - BankTransactions
@@ -1424,16 +1426,16 @@ paths:
           name: BankTransactions
           required: true
           schema:
-            $ref: '#/definitions/BankTransaction'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/BankTransaction"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/BankTransactionsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BankTransactionsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create a new spend or receive money (inc. prepayments and overpayments)
       tags:
         - BankTransactions
@@ -1443,20 +1445,20 @@ paths:
           name: BankTransactions
           required: true
           schema:
-            $ref: '#/definitions/BankTransaction'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/BankTransaction"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/BankTransactionsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BankTransactionsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create a new spend or receive money (inc. prepayments and overpayments)
       tags:
         - BankTransactions
     x-related-model: BankTransaction
-  '/BankTransactions/{BankTransactionID}':
+  "/BankTransactions/{BankTransactionID}":
     get:
       parameters:
         - format: uuid
@@ -1464,14 +1466,14 @@ paths:
           name: BankTransactionID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/BankTransactionsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BankTransactionsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a spend or receive money (inc. prepayments and overpayments)
       tags:
         - BankTransactions
@@ -1481,27 +1483,27 @@ paths:
           name: BankTransactions
           required: true
           schema:
-            $ref: '#/definitions/BankTransaction'
+            $ref: "#/definitions/BankTransaction"
         - format: uuid
           in: path
           name: BankTransactionID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/BankTransactionsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BankTransactionsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Update a spend or receive money
       tags:
         - BankTransactions
     x-related-model: BankTransaction
-  '/BankTransactions/{BankTransactionID}/Attachments':
+  "/BankTransactions/{BankTransactionID}/Attachments":
     get:
       description: Retrieve Attachments
       parameters:
@@ -1510,19 +1512,19 @@ paths:
           name: BankTransactionID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve Attachments
       tags:
         - BankTransactions
-  '/BankTransactions/{BankTransactionID}/Attachments/{FileName}':
+  "/BankTransactions/{BankTransactionID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -1536,17 +1538,17 @@ paths:
           name: BankTransactionID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - BankTransactions
@@ -1568,34 +1570,34 @@ paths:
           name: Content
           required: true
           schema:
-            $ref: '#/definitions/Content'
+            $ref: "#/definitions/Content"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Upload an Attachment
       tags:
         - BankTransactions
   /BankTransfers:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/BankTransfersResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BankTransfersResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a colection of bank transfers
       tags:
         - BankTransfers
@@ -1605,20 +1607,20 @@ paths:
           name: BankTransfers
           required: true
           schema:
-            $ref: '#/definitions/BankTransfer'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/BankTransfer"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/BankTransfersResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BankTransfersResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create a bank transfer
       tags:
         - BankTransfers
     x-related-model: BankTransfer
-  '/BankTransfers/{BankTransferID}':
+  "/BankTransfers/{BankTransferID}":
     get:
       parameters:
         - format: uuid
@@ -1627,17 +1629,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/BankTransfersResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BankTransfersResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve an individual bank transfer
       tags:
         - BankTransfers
     x-related-model: BankTransfer
-  '/BankTransfers/{BankTransferID}/Attachments/{FileName}':
+  "/BankTransfers/{BankTransferID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -1651,17 +1653,17 @@ paths:
           name: BankTransferID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - BankTransfers
@@ -1683,32 +1685,32 @@ paths:
           name: Content
           required: true
           schema:
-            $ref: '#/definitions/Content'
+            $ref: "#/definitions/Content"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Upload an Attachment
       tags:
         - BankTransfers
   /BrandingThemes:
     get:
       responses:
-        '200':
-          $ref: '#/responses/BrandingThemesResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BrandingThemesResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a collection of BrandingThemes
       tags:
         - BrandingThemes
     x-related-model: BrandingTheme
-  '/BrandingThemes/{BrandingThemeID}':
+  "/BrandingThemes/{BrandingThemeID}":
     get:
       parameters:
         - format: uuid
@@ -1717,12 +1719,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/BrandingThemesResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/BrandingThemesResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve an individual BrandingTheme
       tags:
         - BrandingThemes
@@ -1730,17 +1732,17 @@ paths:
   /ContactGroups:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/ContactGroupsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactGroupsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a collection of contact groups
       tags:
         - ContactGroups
@@ -1750,15 +1752,15 @@ paths:
           name: ContactGroups
           required: true
           schema:
-            $ref: '#/definitions/ContactGroup'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/ContactGroup"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ContactGroupsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactGroupsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create or update a contact group
       tags:
         - ContactGroups
@@ -1768,20 +1770,20 @@ paths:
           name: ContactGroups
           required: true
           schema:
-            $ref: '#/definitions/ContactGroup'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/ContactGroup"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ContactGroupsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactGroupsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create a new contact group
       tags:
         - ContactGroups
     x-related-model: ContactGroup
-  '/ContactGroups/{ContactGroupID}':
+  "/ContactGroups/{ContactGroupID}":
     delete:
       parameters:
         - format: uuid
@@ -1790,12 +1792,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A successful request
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Delete a contact group
       tags:
         - ContactGroups
@@ -1807,12 +1809,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ContactGroupsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactGroupsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve the ContactID and Name of all the contacts in a contact group
       tags:
         - ContactGroups
@@ -1822,26 +1824,26 @@ paths:
           name: ContactGroups
           required: true
           schema:
-            $ref: '#/definitions/ContactGroup'
+            $ref: "#/definitions/ContactGroup"
         - format: uuid
           in: path
           name: ContactGroupID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ContactGroupsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactGroupsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Update a contact group
       tags:
         - ContactGroups
     x-related-model: ContactGroup
-  '/ContactGroups/{ContactGroupID}/Contacts':
+  "/ContactGroups/{ContactGroupID}/Contacts":
     delete:
       parameters:
         - format: uuid
@@ -1850,12 +1852,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A successful request
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Remove all contacts from a contact group
       tags:
         - ContactGroups
@@ -1865,26 +1867,26 @@ paths:
           name: Contacts
           required: true
           schema:
-            $ref: '#/definitions/Contact'
+            $ref: "#/definitions/Contact"
         - format: uuid
           in: path
           name: ContactGroupID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ContactGroupsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactGroupsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Add contacts to a contact group
       tags:
         - ContactGroups
     x-related-model: ContactGroup
-  '/ContactGroups/{ContactGroupID}/Contacts/{ContactID}':
+  "/ContactGroups/{ContactGroupID}/Contacts/{ContactID}":
     delete:
       parameters:
         - format: uuid
@@ -1898,12 +1900,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A successful request
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Remove a contact from a contact group
       tags:
         - ContactGroups
@@ -1911,11 +1913,11 @@ paths:
   /Contacts:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/includeArchived'
-        - default: ''
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/includeArchived"
+        - default: ""
           description: Filter by a comma-separated list of ContactIDs
           in: query
           name: IDs
@@ -1925,10 +1927,10 @@ paths:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/ContactsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a collection of contacts
       tags:
         - Contacts
@@ -1938,15 +1940,15 @@ paths:
           name: Contacts
           required: true
           schema:
-            $ref: '#/definitions/Contact'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Contact"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ContactsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create or update a contact
       tags:
         - Contacts
@@ -1956,19 +1958,19 @@ paths:
           name: Contacts
           required: true
           schema:
-            $ref: '#/definitions/Contact'
+            $ref: "#/definitions/Contact"
       responses:
-        '200':
-          $ref: '#/responses/ContactsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create a contact
       tags:
         - Contacts
     x-related-model: Contact
-  '/Contacts/{ContactID}':
+  "/Contacts/{ContactID}":
     get:
       parameters:
         - format: uuid
@@ -1977,12 +1979,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ContactsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve an individual contact
       tags:
         - Contacts
@@ -1992,26 +1994,26 @@ paths:
           name: Contacts
           required: true
           schema:
-            $ref: '#/definitions/Contact'
+            $ref: "#/definitions/Contact"
         - format: uuid
           in: path
           name: ContactID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ContactsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ContactsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Update a contact
       tags:
         - Contacts
     x-related-model: Contact
-  '/Contacts/{ContactID}/Attachments':
+  "/Contacts/{ContactID}/Attachments":
     get:
       description: Retrieve Attachments
       parameters:
@@ -2020,21 +2022,21 @@ paths:
           name: ContactID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve Attachments
       tags:
         - Contacts
-  '/Contacts/{ContactID}/Attachments/{FileName}':
+  "/Contacts/{ContactID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -2048,17 +2050,17 @@ paths:
           name: ContactID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - Contacts
@@ -2080,36 +2082,36 @@ paths:
           name: Content
           required: true
           schema:
-            $ref: '#/definitions/Content'
+            $ref: "#/definitions/Content"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Upload an Attachment
       tags:
         - Contacts
   /CreditNotes:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/page'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/page"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/CreditNotesResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/CreditNotesResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a collection of credit notes
       tags:
         - CreditNotes
@@ -2119,16 +2121,16 @@ paths:
           name: CreditNotes
           required: true
           schema:
-            $ref: '#/definitions/CreditNote'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/CreditNote"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/CreditNotesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/CreditNotesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create or update a credit note
       tags:
         - CreditNotes
@@ -2138,21 +2140,21 @@ paths:
           name: CreditNotes
           required: true
           schema:
-            $ref: '#/definitions/CreditNote'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/CreditNote"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/CreditNotesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/CreditNotesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create a credit note
       tags:
         - CreditNotes
     x-related-model: CreditNote
-  '/CreditNotes/{CreditNoteID}':
+  "/CreditNotes/{CreditNoteID}":
     get:
       parameters:
         - format: uuid
@@ -2160,14 +2162,14 @@ paths:
           name: CreditNoteID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/CreditNotesResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/CreditNotesResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve an individual credit note
       tags:
         - CreditNotes
@@ -2177,51 +2179,51 @@ paths:
           name: CreditNotes
           required: true
           schema:
-            $ref: '#/definitions/CreditNote'
+            $ref: "#/definitions/CreditNote"
         - format: uuid
           in: path
           name: CreditNoteID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/CreditNotesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/CreditNotesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Update a credit note
       tags:
         - CreditNotes
     x-related-model: CreditNote
-  '/CreditNotes/{CreditNoteID}/Allocations':
+  "/CreditNotes/{CreditNoteID}/Allocations":
     put:
       parameters:
         - in: body
           name: Allocations
           required: true
           schema:
-            $ref: '#/definitions/Allocation'
+            $ref: "#/definitions/Allocation"
         - format: uuid
           in: path
           name: CreditNoteID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/CreditNotesResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/CreditNotesResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Allocate a credit note
       tags:
         - CreditNotes
     x-related-model: CreditNote
-  '/CreditNotes/{CreditNoteID}/Attachments':
+  "/CreditNotes/{CreditNoteID}/Attachments":
     get:
       description: Retrieve Attachments
       parameters:
@@ -2230,21 +2232,21 @@ paths:
           name: CreditNoteID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve Attachments
       tags:
         - CreditNotes
-  '/CreditNotes/{CreditNoteID}/Attachments/{FileName}':
+  "/CreditNotes/{CreditNoteID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -2258,19 +2260,19 @@ paths:
           name: CreditNoteID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - CreditNotes
@@ -2292,36 +2294,36 @@ paths:
           name: Content
           required: true
           schema:
-            $ref: '#/definitions/Content'
+            $ref: "#/definitions/Content"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Upload an Attachment
       tags:
         - CreditNotes
   /Currencies:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/CurrenciesResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/CurrenciesResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve the currencies the organisation is subscribed to
       tags:
         - Currencies
@@ -2331,18 +2333,18 @@ paths:
           name: Currencies
           required: true
           schema:
-            $ref: '#/definitions/Currency'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Currency"
+        - $ref: "#/parameters/summarizeErrors"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/CurrenciesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/CurrenciesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Add currencies to the organisation
       tags:
         - Currencies
@@ -2350,17 +2352,17 @@ paths:
   /Employees:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/EmployeesResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/EmployeesResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a collection of employees
       tags:
         - Employees
@@ -2370,15 +2372,15 @@ paths:
           name: Employees
           required: true
           schema:
-            $ref: '#/definitions/Employee'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Employee"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/EmployeesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/EmployeesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create or update employees
       tags:
         - Employees
@@ -2388,20 +2390,20 @@ paths:
           name: Employees
           required: true
           schema:
-            $ref: '#/definitions/Employee'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Employee"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/EmployeesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/EmployeesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create employees
       tags:
         - Employees
     x-related-model: Employee
-  '/Employees/{EmployeeID}':
+  "/Employees/{EmployeeID}":
     get:
       parameters:
         - format: uuid
@@ -2410,12 +2412,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/EmployeesResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/EmployeesResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve an individual employee
       tags:
         - Employees
@@ -2425,21 +2427,21 @@ paths:
           name: Employees
           required: true
           schema:
-            $ref: '#/definitions/Employee'
+            $ref: "#/definitions/Employee"
         - format: uuid
           in: path
           name: EmployeeID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/EmployeesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/EmployeesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Update an employee
       tags:
         - Employees
@@ -2447,17 +2449,17 @@ paths:
   /ExpenseClaims:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/ExpenseClaimsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ExpenseClaimsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a collection of expense claims
       tags:
         - ExpenseClaims
@@ -2467,15 +2469,15 @@ paths:
           name: ExpenseClaims
           required: true
           schema:
-            $ref: '#/definitions/ExpenseClaim'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/ExpenseClaim"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ExpenseClaimsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ExpenseClaimsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create or update an expense claim
       tags:
         - ExpenseClaims
@@ -2485,20 +2487,20 @@ paths:
           name: ExpenseClaims
           required: true
           schema:
-            $ref: '#/definitions/ExpenseClaim'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/ExpenseClaim"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ExpenseClaimsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ExpenseClaimsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create an expense claim
       tags:
         - ExpenseClaims
     x-related-model: ExpenseClaim
-  '/ExpenseClaims/{ExpenseClaimID}':
+  "/ExpenseClaims/{ExpenseClaimID}":
     get:
       parameters:
         - format: uuid
@@ -2507,12 +2509,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ExpenseClaimsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ExpenseClaimsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve an individual expense claim
       tags:
         - ExpenseClaims
@@ -2522,21 +2524,21 @@ paths:
           name: ExpenseClaims
           required: true
           schema:
-            $ref: '#/definitions/ExpenseClaim'
+            $ref: "#/definitions/ExpenseClaim"
         - format: uuid
           in: path
           name: ExpenseClaimID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ExpenseClaimsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ExpenseClaimsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Update an expense claim
       tags:
         - ExpenseClaims
@@ -2544,29 +2546,29 @@ paths:
   /Invoices:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/unitdp'
-        - default: ''
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/unitdp"
+        - default: ""
           description: Filter by a comma-separated list of InvoiceIDs
           in: query
           name: IDs
           required: false
           type: string
-        - default: ''
+        - default: ""
           description: Filter by a comma-separated list of ContactIDs
           in: query
           name: ContactIDs
           required: false
           type: string
-        - default: ''
+        - default: ""
           description: Filter by a comma-separated list of Statuses
           in: query
           name: Statuses
           required: false
           type: string
-        - default: ''
+        - default: ""
           description: Filter by a comma-separated list of InvoiceNumbers
           in: query
           name: InvoiceNumbers
@@ -2576,10 +2578,10 @@ paths:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/InvoicesResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/InvoicesResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a collection of invoices (sales invoices and bills)
       tags:
         - Invoices
@@ -2589,16 +2591,16 @@ paths:
           name: Invoices
           required: true
           schema:
-            $ref: '#/definitions/Invoice'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Invoice"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/InvoicesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/InvoicesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create or update an Invoice (sales invoices or bills)
       tags:
         - Invoices
@@ -2608,21 +2610,21 @@ paths:
           name: Invoices
           required: true
           schema:
-            $ref: '#/definitions/Invoice'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Invoice"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/InvoicesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/InvoicesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create an Invoice (sales invoices or bills)
       tags:
         - Invoices
     x-related-model: Invoice
-  '/Invoices/{InvoiceID}':
+  "/Invoices/{InvoiceID}":
     get:
       parameters:
         - format: uuid
@@ -2630,14 +2632,14 @@ paths:
           name: InvoiceID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/InvoicesResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/InvoicesResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve an Invoice (sales invoice or bill)
       tags:
         - Invoices
@@ -2647,27 +2649,27 @@ paths:
           name: Invoices
           required: true
           schema:
-            $ref: '#/definitions/Invoice'
+            $ref: "#/definitions/Invoice"
         - format: uuid
           in: path
           name: InvoiceID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/InvoicesResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/InvoicesResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Update an Invoice (sales invoice or bill)
       tags:
         - Invoices
     x-related-model: Invoice
-  '/Invoices/{InvoiceID}/Attachments':
+  "/Invoices/{InvoiceID}/Attachments":
     get:
       description: Retrieve Attachments
       parameters:
@@ -2676,21 +2678,21 @@ paths:
           name: InvoiceID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve Attachments
       tags:
         - Invoices
-  '/Invoices/{InvoiceID}/Attachments/{FileName}':
+  "/Invoices/{InvoiceID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -2704,17 +2706,17 @@ paths:
           name: InvoiceID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - Invoices
@@ -2736,21 +2738,21 @@ paths:
           name: Content
           required: true
           schema:
-            $ref: '#/definitions/Content'
+            $ref: "#/definitions/Content"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Upload an Attachment
       tags:
         - Invoices
-  '/Invoices/{InvoiceID}/OnlineInvoice':
+  "/Invoices/{InvoiceID}/OnlineInvoice":
     get:
       parameters:
         - format: uuid
@@ -2759,12 +2761,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/OnlineInvoicesResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/OnlineInvoicesResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve the URL to view the online invoice
       tags:
         - Invoices
@@ -2772,18 +2774,18 @@ paths:
   /Items:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/unitdp"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/ItemsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ItemsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a collection of items
       tags:
         - Items
@@ -2793,16 +2795,16 @@ paths:
           name: Items
           required: true
           schema:
-            $ref: '#/definitions/Item'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Item"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ItemsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ItemsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create or update an item
       tags:
         - Items
@@ -2812,21 +2814,21 @@ paths:
           name: Items
           required: true
           schema:
-            $ref: '#/definitions/Item'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Item"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ItemsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ItemsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Create an item
       tags:
         - Items
     x-related-model: Item
-  '/Items/{ItemID}':
+  "/Items/{ItemID}":
     delete:
       parameters:
         - format: uuid
@@ -2835,12 +2837,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A successful request
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Delete an item
       tags:
         - Items
@@ -2851,14 +2853,14 @@ paths:
           name: ItemID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/ItemsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ItemsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve an item
       tags:
         - Items
@@ -2868,22 +2870,22 @@ paths:
           name: Items
           required: true
           schema:
-            $ref: '#/definitions/Item'
+            $ref: "#/definitions/Item"
         - format: uuid
           in: path
           name: ItemID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/ItemsResponse'
-        '400':
-          $ref: '#/responses/400ErrorResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/ItemsResponse"
+        "400":
+          $ref: "#/responses/400ErrorResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Update an item
       tags:
         - Items
@@ -2891,22 +2893,22 @@ paths:
   /Journals:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/paymentsOnly'
-        - $ref: '#/parameters/offset'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/paymentsOnly"
+        - $ref: "#/parameters/offset"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/JournalsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/JournalsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve a collection of journals.
       tags:
         - Journals
     x-related-model: Journal
-  '/Journals/{JournalID}':
+  "/Journals/{JournalID}":
     get:
       parameters:
         - format: uuid
@@ -2915,12 +2917,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/JournalsResponse'
-        '404':
-          $ref: '#/responses/404ErrorResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/JournalsResponse"
+        "404":
+          $ref: "#/responses/404ErrorResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve an individual journal.
       tags:
         - Journals
@@ -2928,7 +2930,7 @@ paths:
   /LinkedTransactions:
     get:
       parameters:
-        - $ref: '#/parameters/page'
+        - $ref: "#/parameters/page"
         - description: Filter by the SourceTransactionID. Get all the linked transactions created from a particular ACCPAY invoice
           format: uuid
           in: query
@@ -2953,8 +2955,8 @@ paths:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/LinkedTransactionsResponse'
+        "200":
+          $ref: "#/responses/LinkedTransactionsResponse"
       summary: Retrieve a collection of linked transactions (billable expenses)
       tags:
         - LinkedTransactions
@@ -2964,10 +2966,10 @@ paths:
           name: LinkedTransactions
           required: true
           schema:
-            $ref: '#/definitions/LinkedTransaction'
+            $ref: "#/definitions/LinkedTransaction"
       responses:
-        '200':
-          $ref: '#/responses/LinkedTransactionsResponse'
+        "200":
+          $ref: "#/responses/LinkedTransactionsResponse"
       summary: Create or update a linked transaction (billable expense)
       tags:
         - LinkedTransactions
@@ -2977,15 +2979,15 @@ paths:
           name: LinkedTransactions
           required: true
           schema:
-            $ref: '#/definitions/LinkedTransaction'
+            $ref: "#/definitions/LinkedTransaction"
       responses:
-        '200':
-          $ref: '#/responses/LinkedTransactionsResponse'
+        "200":
+          $ref: "#/responses/LinkedTransactionsResponse"
       summary: Create a linked transaction (billable expense)
       tags:
         - LinkedTransactions
     x-related-model: LinkedTransaction
-  '/LinkedTransactions/{LinkedTransactionID}':
+  "/LinkedTransactions/{LinkedTransactionID}":
     delete:
       parameters:
         - format: uuid
@@ -2994,7 +2996,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A successful request
       summary: Delete a linked transaction (billable expense)
       tags:
@@ -3007,8 +3009,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/LinkedTransactionsResponse'
+        "200":
+          $ref: "#/responses/LinkedTransactionsResponse"
       summary: Retrieve a linked transaction (billable expense)
       tags:
         - LinkedTransactions
@@ -3018,15 +3020,15 @@ paths:
           name: LinkedTransactions
           required: true
           schema:
-            $ref: '#/definitions/LinkedTransaction'
+            $ref: "#/definitions/LinkedTransaction"
         - format: uuid
           in: path
           name: LinkedTransactionID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/LinkedTransactionsResponse'
+        "200":
+          $ref: "#/responses/LinkedTransactionsResponse"
       summary: Update a linked transaction (billable expense)
       tags:
         - LinkedTransactions
@@ -3034,16 +3036,16 @@ paths:
   /ManualJournals:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/page'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/page"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/ManualJournalsResponse'
+        "200":
+          $ref: "#/responses/ManualJournalsResponse"
       summary: Retrieve a collection of manual journals
       tags:
         - ManualJournals
@@ -3053,11 +3055,11 @@ paths:
           name: ManualJournals
           required: true
           schema:
-            $ref: '#/definitions/ManualJournal'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/ManualJournal"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ManualJournalsResponse'
+        "200":
+          $ref: "#/responses/ManualJournalsResponse"
       summary: Create or update a manual journal
       tags:
         - ManualJournals
@@ -3067,16 +3069,16 @@ paths:
           name: ManualJournals
           required: true
           schema:
-            $ref: '#/definitions/ManualJournal'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/ManualJournal"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ManualJournalsResponse'
+        "200":
+          $ref: "#/responses/ManualJournalsResponse"
       summary: Create a manual journal
       tags:
         - ManualJournals
     x-related-model: ManualJournal
-  '/ManualJournals/{ManualJournalID}':
+  "/ManualJournals/{ManualJournalID}":
     get:
       parameters:
         - format: uuid
@@ -3085,8 +3087,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ManualJournalsResponse'
+        "200":
+          $ref: "#/responses/ManualJournalsResponse"
       summary: Retrieve an individual manual journal
       tags:
         - ManualJournals
@@ -3096,20 +3098,20 @@ paths:
           name: ManualJournals
           required: true
           schema:
-            $ref: '#/definitions/ManualJournal'
+            $ref: "#/definitions/ManualJournal"
         - format: uuid
           in: path
           name: ManualJournalID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ManualJournalsResponse'
+        "200":
+          $ref: "#/responses/ManualJournalsResponse"
       summary: Update a manual journal
       tags:
         - ManualJournals
     x-related-model: ManualJournal
-  '/ManualJournals/{ManualJournalID}/Attachments':
+  "/ManualJournals/{ManualJournalID}/Attachments":
     get:
       description: Retrieve Attachments
       parameters:
@@ -3118,19 +3120,19 @@ paths:
           name: ManualJournalID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve Attachments
       tags:
         - ManualJournals
-  '/ManualJournals/{ManualJournalID}/Attachments/{FileName}':
+  "/ManualJournals/{ManualJournalID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -3144,17 +3146,17 @@ paths:
           name: ManualJournalID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '404':
+        "404":
           description: Attachment does not exist
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - ManualJournals
@@ -3176,30 +3178,30 @@ paths:
           name: Content
           required: true
           schema:
-            $ref: '#/definitions/Content'
+            $ref: "#/definitions/Content"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '400':
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "400":
           description: Attachment couldn't be created.
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Upload an Attachment
       tags:
         - ManualJournals
   /Organisation:
     get:
       responses:
-        '200':
-          $ref: '#/responses/OrganisationsResponse'
+        "200":
+          $ref: "#/responses/OrganisationsResponse"
       summary: Retrieve Organisation details
       tags:
         - Organisations
     x-related-model: Organisation
-  '/Organisation/{ShortCode}':
+  "/Organisation/{ShortCode}":
     get:
       parameters:
         - format: uuid
@@ -3208,8 +3210,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/OrganisationsResponse'
+        "200":
+          $ref: "#/responses/OrganisationsResponse"
       summary: Retrieve Organisation details
       tags:
         - Organisations
@@ -3217,22 +3219,22 @@ paths:
   /Overpayments:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/unitdp"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/OverpaymentsResponse'
+        "200":
+          $ref: "#/responses/OverpaymentsResponse"
       summary: Retrieve a collection of overpayments
       tags:
         - Overpayments
     x-related-model: Overpayment
-  '/Overpayments/{OverpaymentID}':
+  "/Overpayments/{OverpaymentID}":
     get:
       parameters:
         - format: uuid
@@ -3240,30 +3242,30 @@ paths:
           name: OverpaymentID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/OverpaymentsResponse'
+        "200":
+          $ref: "#/responses/OverpaymentsResponse"
       summary: Retrieve an overpayment
       tags:
         - Overpayments
     x-related-model: Overpayment
-  '/Overpayments/{OverpaymentID}/Allocations':
+  "/Overpayments/{OverpaymentID}/Allocations":
     put:
       parameters:
         - in: body
           name: Allocations
           required: true
           schema:
-            $ref: '#/definitions/Allocation'
+            $ref: "#/definitions/Allocation"
         - format: uuid
           in: path
           name: OverpaymentID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/OverpaymentsResponse'
+        "200":
+          $ref: "#/responses/OverpaymentsResponse"
       summary: Allocate an overpayment
       tags:
         - Overpayments
@@ -3271,16 +3273,16 @@ paths:
   /Payments:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/PaymentsResponse'
-      summary: 'Retrieve a collection of payments for invoices, credit notes, prepayments and overpayments'
+        "200":
+          $ref: "#/responses/PaymentsResponse"
+      summary: Retrieve a collection of payments for invoices, credit notes, prepayments and overpayments
       tags:
         - Payments
     post:
@@ -3289,11 +3291,11 @@ paths:
           name: Payments
           required: true
           schema:
-            $ref: '#/definitions/Payment'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Payment"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/PaymentsResponse'
+        "200":
+          $ref: "#/responses/PaymentsResponse"
       summary: Create a payment
       tags:
         - Payments
@@ -3303,16 +3305,16 @@ paths:
           name: Payments
           required: true
           schema:
-            $ref: '#/definitions/Payment'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Payment"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/PaymentsResponse'
+        "200":
+          $ref: "#/responses/PaymentsResponse"
       summary: Create a payment
       tags:
         - Payments
     x-related-model: Payment
-  '/Payments/{PaymentID}':
+  "/Payments/{PaymentID}":
     get:
       parameters:
         - format: uuid
@@ -3321,8 +3323,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/PaymentsResponse'
+        "200":
+          $ref: "#/responses/PaymentsResponse"
       summary: Retrieve a payment
       tags:
         - Payments
@@ -3332,15 +3334,15 @@ paths:
           name: Payments
           required: true
           schema:
-            $ref: '#/definitions/Payment'
+            $ref: "#/definitions/Payment"
         - format: uuid
           in: path
           name: PaymentID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/PaymentsResponse'
+        "200":
+          $ref: "#/responses/PaymentsResponse"
       summary: Update a payment's status to deleted
       tags:
         - Payments
@@ -3348,22 +3350,22 @@ paths:
   /Prepayments:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/unitdp"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/PrepaymentsResponse'
+        "200":
+          $ref: "#/responses/PrepaymentsResponse"
       summary: Retrieve a collection of prepayments
       tags:
         - Prepayments
     x-related-model: Prepayment
-  '/Prepayments/{PrepaymentID}':
+  "/Prepayments/{PrepaymentID}":
     get:
       parameters:
         - format: uuid
@@ -3371,30 +3373,30 @@ paths:
           name: PrepaymentID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/PrepaymentsResponse'
+        "200":
+          $ref: "#/responses/PrepaymentsResponse"
       summary: Retrieve an individual prepayment
       tags:
         - Prepayments
     x-related-model: Prepayment
-  '/Prepayments/{PrepaymentID}/Allocations':
+  "/Prepayments/{PrepaymentID}/Allocations":
     put:
       parameters:
         - in: body
           name: Allocations
           required: true
           schema:
-            $ref: '#/definitions/Allocation'
+            $ref: "#/definitions/Allocation"
         - format: uuid
           in: path
           name: PrepaymentID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/PrepaymentsResponse'
+        "200":
+          $ref: "#/responses/PrepaymentsResponse"
       summary: Allocate a prepayment
       tags:
         - Prepayments
@@ -3402,9 +3404,9 @@ paths:
   /PurchaseOrders:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/page'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/page"
         - format: date
           in: query
           name: DateFrom
@@ -3423,8 +3425,8 @@ paths:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/PurchaseOrdersResponse'
+        "200":
+          $ref: "#/responses/PurchaseOrdersResponse"
       summary: Retrieve a collection of purchase orders
       tags:
         - PurchaseOrders
@@ -3434,11 +3436,11 @@ paths:
           name: PurchaseOrders
           required: true
           schema:
-            $ref: '#/definitions/PurchaseOrder'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/PurchaseOrder"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/PurchaseOrdersResponse'
+        "200":
+          $ref: "#/responses/PurchaseOrdersResponse"
       summary: Create and update purchase orders
       tags:
         - PurchaseOrders
@@ -3448,16 +3450,16 @@ paths:
           name: PurchaseOrders
           required: true
           schema:
-            $ref: '#/definitions/PurchaseOrder'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/PurchaseOrder"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/PurchaseOrdersResponse'
+        "200":
+          $ref: "#/responses/PurchaseOrdersResponse"
       summary: Create purchase orders
       tags:
         - PurchaseOrders
     x-related-model: PurchaseOrder
-  '/PurchaseOrders/{PurchaseOrderID}':
+  "/PurchaseOrders/{PurchaseOrderID}":
     get:
       parameters:
         - format: uuid
@@ -3466,8 +3468,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/PurchaseOrdersResponse'
+        "200":
+          $ref: "#/responses/PurchaseOrdersResponse"
       summary: Retrieve a single purchase order
       tags:
         - PurchaseOrders
@@ -3477,20 +3479,20 @@ paths:
           name: PurchaseOrders
           required: true
           schema:
-            $ref: '#/definitions/PurchaseOrder'
+            $ref: "#/definitions/PurchaseOrder"
         - format: uuid
           in: path
           name: PurchaseOrderID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/PurchaseOrdersResponse'
+        "200":
+          $ref: "#/responses/PurchaseOrdersResponse"
       summary: Update a purchase order
       tags:
         - PurchaseOrders
     x-related-model: PurchaseOrder
-  '/PurchaseOrders/{PurchaseOrderID}/Attachments':
+  "/PurchaseOrders/{PurchaseOrderID}/Attachments":
     get:
       description: Retrieve Attachments
       parameters:
@@ -3499,19 +3501,19 @@ paths:
           name: PurchaseOrderID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve Attachments
       tags:
         - PurchaseOrders
-  '/PurchaseOrders/{PurchaseOrderID}/Attachments/{FileName}':
+  "/PurchaseOrders/{PurchaseOrderID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -3525,17 +3527,17 @@ paths:
           name: PurchaseOrderID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '404':
+        "404":
           description: Attachment does not exist
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - PurchaseOrders
@@ -3557,33 +3559,33 @@ paths:
           name: Content
           required: true
           schema:
-            $ref: '#/definitions/Content'
+            $ref: "#/definitions/Content"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '400':
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "400":
           description: Attachment couldn't be created.
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Upload an Attachment
       tags:
         - PurchaseOrders
   /Receipts:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/unitdp"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/ReceiptsResponse'
+        "200":
+          $ref: "#/responses/ReceiptsResponse"
       summary: Retrieve a collection of draft receipts
       tags:
         - Receipts
@@ -3593,12 +3595,12 @@ paths:
           name: Receipts
           required: true
           schema:
-            $ref: '#/definitions/Receipt'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Receipt"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ReceiptsResponse'
+        "200":
+          $ref: "#/responses/ReceiptsResponse"
       summary: Create or update a receipt
       tags:
         - Receipts
@@ -3608,17 +3610,17 @@ paths:
           name: Receipts
           required: true
           schema:
-            $ref: '#/definitions/Receipt'
-        - $ref: '#/parameters/unitdp'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/Receipt"
+        - $ref: "#/parameters/unitdp"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/ReceiptsResponse'
+        "200":
+          $ref: "#/responses/ReceiptsResponse"
       summary: Create a receipt
       tags:
         - Receipts
     x-related-model: Receipt
-  '/Receipts/{ReceiptID}':
+  "/Receipts/{ReceiptID}":
     get:
       parameters:
         - format: uuid
@@ -3626,10 +3628,10 @@ paths:
           name: ReceiptID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/ReceiptsResponse'
+        "200":
+          $ref: "#/responses/ReceiptsResponse"
       summary: Retrieve an individual receipt
       tags:
         - Receipts
@@ -3639,21 +3641,21 @@ paths:
           name: Receipts
           required: true
           schema:
-            $ref: '#/definitions/Receipt'
+            $ref: "#/definitions/Receipt"
         - format: uuid
           in: path
           name: ReceiptID
           required: true
           type: string
-        - $ref: '#/parameters/unitdp'
+        - $ref: "#/parameters/unitdp"
       responses:
-        '200':
-          $ref: '#/responses/ReceiptsResponse'
+        "200":
+          $ref: "#/responses/ReceiptsResponse"
       summary: Update a receipt
       tags:
         - Receipts
     x-related-model: Receipt
-  '/Receipts/{ReceiptID}/Attachments':
+  "/Receipts/{ReceiptID}/Attachments":
     get:
       description: Retrieve Attachments
       parameters:
@@ -3662,19 +3664,19 @@ paths:
           name: ReceiptID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve Attachments
       tags:
         - Receipts
-  '/Receipts/{ReceiptID}/Attachments/{FileName}':
+  "/Receipts/{ReceiptID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -3688,17 +3690,17 @@ paths:
           name: ReceiptID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '404':
+        "404":
           description: Attachment does not exist
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - Receipts
@@ -3720,37 +3722,37 @@ paths:
           name: Content
           required: true
           schema:
-            $ref: '#/definitions/Content'
+            $ref: "#/definitions/Content"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '400':
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "400":
           description: Attachment couldn't be created.
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Upload an Attachment
       tags:
         - Receipts
   /RepeatingInvoices:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/where'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/where"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/RepeatingInvoicesResponse'
+        "200":
+          $ref: "#/responses/RepeatingInvoicesResponse"
       summary: Retrieve a collection of repeating invoice templates
       tags:
         - RepeatingInvoices
     x-related-model: RepeatingInvoice
-  '/RepeatingInvoices/{RepeatingInvoiceID}':
+  "/RepeatingInvoices/{RepeatingInvoiceID}":
     get:
       parameters:
         - format: uuid
@@ -3759,13 +3761,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/RepeatingInvoicesResponse'
+        "200":
+          $ref: "#/responses/RepeatingInvoicesResponse"
       summary: Retrieve an individual repeating invoice template
       tags:
         - RepeatingInvoices
     x-related-model: RepeatingInvoice
-  '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments':
+  "/RepeatingInvoices/{RepeatingInvoiceID}/Attachments":
     get:
       description: Retrieve Attachments
       parameters:
@@ -3774,19 +3776,19 @@ paths:
           name: RepeatingInvoiceID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/AttachmentsResponse'
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "200":
+          $ref: "#/responses/AttachmentsResponse"
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Retrieve Attachments
       tags:
         - RepeatingInvoices
-  '/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}':
+  "/RepeatingInvoices/{RepeatingInvoiceID}/Attachments/{FileName}":
     get:
       description: Download an Attachment
       parameters:
@@ -3800,17 +3802,17 @@ paths:
           name: RepeatingInvoiceID
           required: true
           type: string
-        - $ref: '#/parameters/If-Modified-Since'
+        - $ref: "#/parameters/If-Modified-Since"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful response. The response message will contain the raw file content that was originally uploaded. The response won’t contain any xml or json encoded information
-        '404':
+        "404":
           description: Attachment does not exist
-        '500':
-          $ref: '#/responses/500ErrorResponse'
+        "500":
+          $ref: "#/responses/500ErrorResponse"
       summary: Download an Attachment
       tags:
         - RepeatingInvoices
@@ -3820,8 +3822,8 @@ paths:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/ReportSummaryResponse'
+        "200":
+          $ref: "#/responses/ReportSummaryResponse"
       summary: Retrieve a list of published GST reports (NZ) or BAS reports (AU)
       tags:
         - Reports
@@ -3851,8 +3853,8 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve an Aged Payables report for a contact
       tags:
         - Reports
@@ -3882,8 +3884,8 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve an Aged Receivables report for a contact
       tags:
         - Reports
@@ -3920,8 +3922,8 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve a Balance Sheet Report
       tags:
         - Reports
@@ -3946,8 +3948,8 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve a bank statement report
       tags:
         - Reports
@@ -3966,8 +3968,8 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve a bank summary report
       tags:
         - Reports
@@ -3985,14 +3987,14 @@ paths:
           name: periods
           required: false
           type: integer
-        - description: 'The period size to compare to (1=month, 3=quarter, 12=year)'
+        - description: The period size to compare to (1=month, 3=quarter, 12=year)
           in: query
           name: timeframe
           required: false
           type: integer
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve a budget summary report
       tags:
         - Reports
@@ -4006,8 +4008,8 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve an executive summary report
       tags:
         - Reports
@@ -4056,8 +4058,8 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve a profit and loss report
       tags:
         - Reports
@@ -4071,8 +4073,8 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve a 1099 Report (US only)
       tags:
         - Reports
@@ -4091,13 +4093,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          $ref: '#/responses/ReportsResponse'
+        "200":
+          $ref: "#/responses/ReportsResponse"
       summary: Retrieve a Trial Balance Report
       tags:
         - Reports
     x-related-model: Reports
-  '/Reports/{ReportID}':
+  "/Reports/{ReportID}":
     get:
       parameters:
         - format: uuid
@@ -4106,8 +4108,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/TaxReportResponse'
+        "200":
+          $ref: "#/responses/TaxReportResponse"
       summary: Retrieve an individual BAS Report (AU) or GST Report (NZ)
       tags:
         - Reports
@@ -4115,15 +4117,15 @@ paths:
   /TaxRates:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/where'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/where"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/TaxRatesResponse'
+        "200":
+          $ref: "#/responses/TaxRatesResponse"
       summary: Retrieve a collection of tax rates
       tags:
         - TaxRates
@@ -4133,11 +4135,11 @@ paths:
           name: TaxRates
           required: true
           schema:
-            $ref: '#/definitions/TaxRate'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/TaxRate"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/TaxRatesResponse'
+        "200":
+          $ref: "#/responses/TaxRatesResponse"
       summary: Create or update tax rates
       tags:
         - TaxRates
@@ -4147,11 +4149,11 @@ paths:
           name: TaxRates
           required: true
           schema:
-            $ref: '#/definitions/TaxRate'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/TaxRate"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/TaxRatesResponse'
+        "200":
+          $ref: "#/responses/TaxRatesResponse"
       summary: Create tax rates
       tags:
         - TaxRates
@@ -4159,16 +4161,16 @@ paths:
   /TrackingCategories:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/where'
-        - $ref: '#/parameters/includeArchived'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/where"
+        - $ref: "#/parameters/includeArchived"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/TrackingCategoriesResponse'
+        "200":
+          $ref: "#/responses/TrackingCategoriesResponse"
       summary: Retrieve a collection of tracking categories and options
       tags:
         - TrackingCategories
@@ -4178,11 +4180,11 @@ paths:
           name: TrackingCategories
           required: true
           schema:
-            $ref: '#/definitions/TrackingCategory'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/TrackingCategory"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/TrackingCategoriesResponse'
+        "200":
+          $ref: "#/responses/TrackingCategoriesResponse"
       summary: Create a tracking category
       tags:
         - TrackingCategories
@@ -4192,16 +4194,16 @@ paths:
           name: TrackingCategories
           required: true
           schema:
-            $ref: '#/definitions/TrackingCategory'
-        - $ref: '#/parameters/summarizeErrors'
+            $ref: "#/definitions/TrackingCategory"
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/TrackingCategoriesResponse'
+        "200":
+          $ref: "#/responses/TrackingCategoriesResponse"
       summary: Create a tracking category
       tags:
         - TrackingCategories
     x-related-model: TrackingCategory
-  '/TrackingCategories/{TrackingCategoryID}':
+  "/TrackingCategories/{TrackingCategoryID}":
     delete:
       parameters:
         - format: uuid
@@ -4210,7 +4212,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A successful request
       summary: Delete a Tracking Category
       tags:
@@ -4223,8 +4225,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/TrackingCategoriesResponse'
+        "200":
+          $ref: "#/responses/TrackingCategoriesResponse"
       summary: Retrieve a tracking category and it's options
       tags:
         - TrackingCategories
@@ -4234,41 +4236,41 @@ paths:
           name: TrackingCategories
           required: true
           schema:
-            $ref: '#/definitions/TrackingCategory'
+            $ref: "#/definitions/TrackingCategory"
         - format: uuid
           in: path
           name: TrackingCategoryID
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/TrackingCategoriesResponse'
+        "200":
+          $ref: "#/responses/TrackingCategoriesResponse"
       summary: Create or update a tracking category
       tags:
         - TrackingCategories
     x-related-model: TrackingCategory
-  '/TrackingCategories/{TrackingCategoryID}/Options':
+  "/TrackingCategories/{TrackingCategoryID}/Options":
     put:
       parameters:
         - in: body
           name: TrackingOptions
           required: true
           schema:
-            $ref: '#/definitions/TrackingOption'
+            $ref: "#/definitions/TrackingOption"
         - format: uuid
           in: path
           name: TrackingCategoryID
           required: true
           type: string
-        - $ref: '#/parameters/summarizeErrors'
+        - $ref: "#/parameters/summarizeErrors"
       responses:
-        '200':
-          $ref: '#/responses/TrackingCategoriesResponse'
+        "200":
+          $ref: "#/responses/TrackingCategoriesResponse"
       summary: Add options to a tracking category
       tags:
         - TrackingCategories
     x-related-model: TrackingCategory
-  '/TrackingCategories/{TrackingCategoryID}/Options/{TrackingOptionID}':
+  "/TrackingCategories/{TrackingCategoryID}/Options/{TrackingOptionID}":
     delete:
       parameters:
         - format: uuid
@@ -4282,7 +4284,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A successful request
       summary: Delete an option from a tracking category
       tags:
@@ -4291,20 +4293,20 @@ paths:
   /Users:
     get:
       parameters:
-        - $ref: '#/parameters/If-Modified-Since'
-        - $ref: '#/parameters/order'
-        - $ref: '#/parameters/where'
+        - $ref: "#/parameters/If-Modified-Since"
+        - $ref: "#/parameters/order"
+        - $ref: "#/parameters/where"
       produces:
         - application/xml
         - application/json
       responses:
-        '200':
-          $ref: '#/responses/UsersResponse'
+        "200":
+          $ref: "#/responses/UsersResponse"
       summary: Retrieve a collection of Users
       tags:
         - Users
     x-related-model: User
-  '/Users/{UserID}':
+  "/Users/{UserID}":
     get:
       parameters:
         - format: uuid
@@ -4313,8 +4315,8 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          $ref: '#/responses/UsersResponse'
+        "200":
+          $ref: "#/responses/UsersResponse"
       summary: Retrieve an individual User
       tags:
         - Users
@@ -4554,11 +4556,11 @@ definitions:
         type: string
       Url:
         description: The URL to where the attachment is located
-        example: 'https://api.xero.com/api.xro/2.0/Receipts/e59a2c7f-4078-a0f3-73537afcbba9/Attachments/my-receipt.jpg'
+        example: https://api.xero.com/api.xro/2.0/Receipts/e59a2c7f-4078-a0f3-73537afcbba9/Attachments/my-receipt.jpg
         type: string
     type: object
   Balances:
-    description: 'The raw AccountsReceivable (sales invoices) and AccountsPayable (bills) outstanding and overdue amounts, not converted to base currency'
+    description: The raw AccountsReceivable (sales invoices) and AccountsPayable (bills) outstanding and overdue amounts, not converted to base currency
     items:
       properties:
         AccountsPayable:
@@ -4614,10 +4616,10 @@ definitions:
     properties:
       Attachments:
         items:
-          $ref: '#/definitions/Attachment'
+          $ref: "#/definitions/Attachment"
         type: array
       BankAccount:
-        $ref: '#/definitions/BankAccount'
+        $ref: "#/definitions/BankAccount"
       BankTransactionId:
         description: Xero generated unique identifier for bank transactions
         example: 72f1dcfe-5d7d-4239-bf9d-e12469309716
@@ -4625,13 +4627,13 @@ definitions:
         readOnly: true
         type: string
       Contact:
-        $ref: '#/definitions/ContactSummary'
+        $ref: "#/definitions/ContactSummary"
       CurrencyCode:
         description: The currency that bank transaction has been raised in
         example: AUD
         type: string
       CurrencyRate:
-        description: 'The currency rate for a multicurrency bank transaction. If no rate is specified, the XE.com day rate is used.'
+        description: The currency rate for a multicurrency bank transaction. If no rate is specified, the XE.com day rate is used.
         format: float
         type: number
       Date:
@@ -4655,7 +4657,7 @@ definitions:
           - NoTax
         type: string
       LineItems:
-        $ref: '#/definitions/LineItems'
+        $ref: "#/definitions/LineItems"
       OverpaymentID:
         description: Xero generated unique identifier for an Overpayment. This will be returned on BankTransactions with a Type of SPEND-OVERPAYMENT or RECEIVE-OVERPAYMENT
         example: 66fbdc01-e2e7-4ee3-ab10-2d5821d38fe4
@@ -4713,8 +4715,8 @@ definitions:
         readOnly: true
         type: string
       Url:
-        description: 'URL link to a source document – shown as “Go to [appName]” in the Xero app'
-        example: 'https://yourapp.com/transactions/ABC123'
+        description: URL link to a source document – shown as “Go to [appName]” in the Xero app
+        example: https://yourapp.com/transactions/ABC123
         type: string
     required:
       - Type
@@ -4732,7 +4734,7 @@ definitions:
         type: number
       Attachments:
         items:
-          $ref: '#/definitions/Attachment'
+          $ref: "#/definitions/Attachment"
         type: array
       BankTransferId:
         description: Xero generated unique identifier for bank transfers
@@ -4741,7 +4743,7 @@ definitions:
         readOnly: true
         type: string
       CurrencyRate:
-        description: 'The currency rate for a multicurrency bank transfer. If no rate is specified, the XE.com day rate is used.'
+        description: The currency rate for a multicurrency bank transfer. If no rate is specified, the XE.com day rate is used.
         format: float
         type: number
       Date:
@@ -4749,7 +4751,7 @@ definitions:
         format: date
         type: string
       FromBankAccount:
-        $ref: '#/definitions/FromBankAccount'
+        $ref: "#/definitions/FromBankAccount"
       FromBankTransactionID:
         description: The Bank Transaction ID for the source account
         example: d2c63bbd-bc9e-4fb4-9d1c-e5d15749aaa2
@@ -4761,7 +4763,7 @@ definitions:
         readOnly: true
         type: boolean
       ToBankAccount:
-        $ref: '#/definitions/ToBankAccount'
+        $ref: "#/definitions/ToBankAccount"
       ToBankTransactionID:
         description: The Bank Transaction ID for the destination account
         example: 66fbdc01-e2e7-4ee3-ab10-2d5821d38fe4
@@ -4837,21 +4839,21 @@ definitions:
       Addresses:
         description: Address details for the contact
         items:
-          $ref: '#/definitions/Address'
+          $ref: "#/definitions/Address"
         type: array
       Balances:
-        $ref: '#/definitions/Balances'
+        $ref: "#/definitions/Balances"
       BankAccountDetails:
         description: Bank account number of contact
         example: 061844 8474733
         type: string
       BatchPayments:
-        $ref: '#/definitions/BatchPayments'
+        $ref: "#/definitions/BatchPayments"
       BrandingTheme:
-        $ref: '#/definitions/BrandingTheme'
+        $ref: "#/definitions/BrandingTheme"
       ContactGroups:
         items:
-          $ref: '#/definitions/ContactGroup'
+          $ref: "#/definitions/ContactGroup"
         readOnly: true
         type: array
       ContactID:
@@ -4861,7 +4863,7 @@ definitions:
         readOnly: true
         type: string
       ContactPersons:
-        $ref: '#/definitions/ContactPersons'
+        $ref: "#/definitions/ContactPersons"
       ContactStatus:
         description: Current status of a contact
         enum:
@@ -4909,27 +4911,27 @@ definitions:
         maxLength: 255
         type: string
       PaymentTerms:
-        $ref: '#/definitions/PaymentTerms'
+        $ref: "#/definitions/PaymentTerms"
       Phones:
-        $ref: '#/definitions/Phones'
+        $ref: "#/definitions/Phones"
       PurchasesDefaultAccountCode:
         description: The default purchases account code for contacts
         example: 420
         type: string
       PurchasesTrackingCategories:
-        $ref: '#/definitions/PurchasesTrackingCategories'
+        $ref: "#/definitions/PurchasesTrackingCategories"
       SalesDefaultAccountCode:
         description: The default sales account code for contacts
         example: 200
         type: string
       SalesTrackingCategories:
-        $ref: '#/definitions/SalesTrackingCategories'
+        $ref: "#/definitions/SalesTrackingCategories"
       SkypeUserName:
         description: Skype user name of contact
         example: adamm
         type: string
       TaxNumber:
-        description: 'Tax number of contact – this is also known as the ABN (Australia), GST Number (New Zealand), VAT Number (UK) or Tax ID Number (US and global) in the Xero UI depending on which regionalized version of Xero you are using.'
+        description: Tax number of contact – this is also known as the ABN (Australia), GST Number (New Zealand), VAT Number (UK) or Tax ID Number (US and global) in the Xero UI depending on which regionalized version of Xero you are using.
         example: GB12345667
         maxLength: 50
         type: string
@@ -4993,7 +4995,7 @@ definitions:
     type: object
   ContactPersons:
     items:
-      $ref: '#/definitions/ContactPerson'
+      $ref: "#/definitions/ContactPerson"
     type: array
   ContactSummary:
     properties:
@@ -5017,7 +5019,7 @@ definitions:
     properties:
       Content:
         description: The raw file content
-        example: '23456238745623865897326457634259763425976342596'
+        example: "23456238745623865897326457634259763425976342596"
         type: string
     required:
       - Content
@@ -5027,7 +5029,7 @@ definitions:
       Allocations:
         description: Transactions the credit note has been allocated to
         items:
-          $ref: '#/definitions/Allocation'
+          $ref: "#/definitions/Allocation"
         readOnly: true
         type: array
       BrandingThemeID:
@@ -5035,7 +5037,7 @@ definitions:
         format: uuid
         type: string
       Contact:
-        $ref: '#/definitions/ContactSummary'
+        $ref: "#/definitions/ContactSummary"
       CreditNoteID:
         description: Xero generated unique identifier
         format: uuid
@@ -5050,7 +5052,7 @@ definitions:
         example: AUD
         type: string
       CurrencyRate:
-        description: 'The currency rate for a multicurrency invoice. If no rate is specified, the XE.com day rate is used'
+        description: The currency rate for a multicurrency invoice. If no rate is specified, the XE.com day rate is used
         format: float
         type: number
       Date:
@@ -5075,7 +5077,7 @@ definitions:
         type: string
       LineItems:
         items:
-          $ref: '#/definitions/LineItem'
+          $ref: "#/definitions/LineItem"
         type: array
       Reference:
         description: ACCRECCREDIT only – additional reference number
@@ -5173,18 +5175,20 @@ definitions:
   Employee:
     properties:
       EmployeeID:
-        description: |-
+        description: >-
           The Xero identifier for an employee
+
           e.g. 297c2dc5-cc47-4afd-8ec8-74990b8761e9
         format: uuid
         readOnly: true
         type: string
       ExternalLink:
         allOf:
-          - description: |-
+          - description: >-
               Link to an external resource, for example, an employee record in an external system. You can specify the URL element.
+
               The description of the link is auto-generated in the form “Go to <App name>”. <App name> refers to the Xero application name that is making the API call.
-          - $ref: '#/definitions/ExternalLink'
+          - $ref: "#/definitions/ExternalLink"
         type: object
       FirstName:
         description: First name of an employee (max length = 255)
@@ -5231,13 +5235,13 @@ definitions:
       Payments:
         description: Payments applied to the expense claim
         items:
-          $ref: '#/definitions/PaymentSummary'
+          $ref: "#/definitions/PaymentSummary"
         readOnly: true
         type: array
       Receipts:
         description: The Receipts in the expense claim
         items:
-          $ref: '#/definitions/Receipt'
+          $ref: "#/definitions/Receipt"
         type: array
       ReportingDate:
         description: The date the expense claim will be reported in Xero YYYY-MM-DD
@@ -5262,7 +5266,7 @@ definitions:
         readOnly: true
         type: string
       User:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
     required:
       - User
       - Receipts
@@ -5280,7 +5284,7 @@ definitions:
         type: string
       Url:
         description: URL for service
-        example: 'http://twitter.com/xeroapi'
+        example: http://twitter.com/xeroapi
         type: string
     type: object
   FromBankAccount:
@@ -5302,7 +5306,7 @@ definitions:
   Invoice:
     properties:
       AmountCredited:
-        description: 'Sum of all credit notes, over-payments and pre-payments applied to invoice'
+        description: Sum of all credit notes, over-payments and pre-payments applied to invoice
         format: float
         readOnly: true
         type: number
@@ -5318,24 +5322,24 @@ definitions:
         type: number
       Attachments:
         items:
-          $ref: '#/definitions/Attachment'
+          $ref: "#/definitions/Attachment"
         type: array
       BrandingThemeID:
         description: The identifier for the branding theme applied to the invoice
         format: uuid
         type: string
       Contact:
-        $ref: '#/definitions/ContactSummary'
+        $ref: "#/definitions/ContactSummary"
       CreditNotes:
         items:
-          $ref: '#/definitions/CreditNoteSummary'
+          $ref: "#/definitions/CreditNoteSummary"
         type: array
       CurrencyCode:
         description: The currency that invoice has been raised in
         example: AUD
         type: string
       CurrencyRate:
-        description: 'The currency rate for a multicurrency invoice. If no rate is specified, the XE.com day rate is used.'
+        description: The currency rate for a multicurrency invoice. If no rate is specified, the XE.com day rate is used.
         format: float
         type: number
       Date:
@@ -5365,10 +5369,13 @@ definitions:
         readOnly: true
         type: string
       InvoiceNumber:
-        description: |
+        description: >
           User defined alphanumeric code for identifying invoices. 
+
           - Unique for ACCREC but not for ACCPAY. 
+
           - For ACCREC it will auto-generate when left blank. 
+
           - For ACCPAY it displays as Reference in the UI.
         example: INV-123
         type: string
@@ -5381,14 +5388,14 @@ definitions:
           - NoTax
         type: string
       LineItems:
-        $ref: '#/definitions/LineItems'
+        $ref: "#/definitions/LineItems"
       Overpayments:
         items:
-          $ref: '#/definitions/OverpaymentSummary'
+          $ref: "#/definitions/OverpaymentSummary"
         type: array
       Payments:
         items:
-          $ref: '#/definitions/PaymentSummary'
+          $ref: "#/definitions/PaymentSummary"
         type: array
       PlannedPaymentDate:
         description: Shown on bills (Accounts Payable) when this has been set
@@ -5396,7 +5403,7 @@ definitions:
         type: string
       Prepayments:
         items:
-          $ref: '#/definitions/PrepaymentSummary'
+          $ref: "#/definitions/PrepaymentSummary"
         type: array
       Reference:
         description: ACCREC only – additional reference number
@@ -5449,8 +5456,8 @@ definitions:
         readOnly: true
         type: string
       Url:
-        description: 'URL link to a source document – shown as “Go to [appName]” in the Xero app'
-        example: 'https://myapp.com/INV-123'
+        description: URL link to a source document – shown as “Go to [appName]” in the Xero app
+        example: https://myapp.com/INV-123
         type: string
     required:
       - Type
@@ -5462,17 +5469,20 @@ definitions:
   InvoiceSummary:
     properties:
       Contact:
-        $ref: '#/definitions/ContactSummary'
+        $ref: "#/definitions/ContactSummary"
       InvoiceID:
         description: Xero generated unique identifier for invoice
         format: uuid
         readOnly: true
         type: string
       InvoiceNumber:
-        description: |
+        description: >
           User defined alphanumeric code for identifying invoices. 
+
           - Unique for ACCREC but not for ACCPAY. 
+
           - For ACCREC it will auto-generate when left blank. 
+
           - For ACCPAY it displays as Reference in the UI.
         example: INV-123
         type: string
@@ -5502,10 +5512,10 @@ definitions:
         example: 630
         type: string
       IsPurchased:
-        description: 'Boolean value, defaults to true. When IsPurchased is true the item is available for purchase transactions in the Xero UI. If IsPurchased is updated to false then PurchaseDescription and PurchaseDetails values will be nulled.'
+        description: Boolean value, defaults to true. When IsPurchased is true the item is available for purchase transactions in the Xero UI. If IsPurchased is updated to false then PurchaseDescription and PurchaseDetails values will be nulled.
         type: boolean
       IsSold:
-        description: 'Boolean value, defaults to true. When IsSold is true the item will be available on sales transactions in the Xero UI. If IsSold is updated to false then Description and SalesDetails values will be nulled.'
+        description: Boolean value, defaults to true. When IsSold is true the item will be available on sales transactions in the Xero UI. If IsSold is updated to false then Description and SalesDetails values will be nulled.
         type: boolean
       IsTrackedAsInventory:
         description: True for items that are tracked as inventory. An item will be tracked as inventory if the InventoryAssetAccountCode and COGSAccountCode are set.
@@ -5527,14 +5537,14 @@ definitions:
         maxLength: 4000
         type: string
       PurchaseDetails:
-        $ref: '#/definitions/PurchaseDetails'
+        $ref: "#/definitions/PurchaseDetails"
       QuantityOnHand:
         description: The quantity of the item on hand
         format: float
         readOnly: true
         type: number
       SalesDetails:
-        $ref: '#/definitions/SalesDetails'
+        $ref: "#/definitions/SalesDetails"
       TotalCostPool:
         description: The value of the item on hand. Calculated using average cost accounting.
         format: float
@@ -5564,7 +5574,7 @@ definitions:
         type: string
       JournalLines:
         items:
-          $ref: '#/definitions/JournalLine'
+          $ref: "#/definitions/JournalLine"
         type: array
       JournalNumber:
         description: Xero generated journal number
@@ -5612,7 +5622,7 @@ definitions:
         example: Bought a thing
         type: string
       LineAmount:
-        description: 'Total for line. Debits are positive, credits are negative value'
+        description: Total for line. Debits are positive, credits are negative value
         format: float
         type: number
       TaxAmount:
@@ -5627,7 +5637,7 @@ definitions:
       Tracking:
         description: Optional Tracking Category. Any JournalLine can have a maximum of 2 TrackingCategory elements.
         items:
-          $ref: '#/definitions/TrackingCategory'
+          $ref: "#/definitions/TrackingCategory"
         type: array
   LineItem:
     properties:
@@ -5668,9 +5678,9 @@ definitions:
         description: Used as an override if the default Tax Code for the selected <AccountCode> is not correct
         type: string
       Tracking:
-        $ref: '#/definitions/Tracking'
+        $ref: "#/definitions/Tracking"
       UnitAmount:
-        description: 'Lineitem unit amount. By default, unit amount will be rounded to two decimal places. You can opt in to use four decimal places by adding the querystring parameter unitdp=4 to your query. See the Rounding in Xero guide for more information.'
+        description: Lineitem unit amount. By default, unit amount will be rounded to two decimal places. You can opt in to use four decimal places by adding the querystring parameter unitdp=4 to your query. See the Rounding in Xero guide for more information.
         format: float
         type: number
     required:
@@ -5678,7 +5688,7 @@ definitions:
     type: object
   LineItems:
     items:
-      $ref: '#/definitions/LineItem'
+      $ref: "#/definitions/LineItem"
     type: array
   LinkedTransaction:
     properties:
@@ -5749,7 +5759,7 @@ definitions:
       JournalLines:
         description: See JournalLines
         items:
-          $ref: '#/definitions/JournalLine'
+          $ref: "#/definitions/JournalLine"
         type: array
       LineAmountTypes:
         default: Exclusive
@@ -5780,8 +5790,8 @@ definitions:
         readOnly: true
         type: string
       Url:
-        description: 'Url link to a source document – shown as “Go to [appName]” in the Xero app'
-        example: 'https://myaapp.com/journal/123'
+        description: Url link to a source document – shown as “Go to [appName]” in the Xero app
+        example: https://myaapp.com/journal/123
         type: string
     required:
       - Narration
@@ -5791,7 +5801,7 @@ definitions:
     properties:
       OnlineInvoiceUrl:
         description: The URL to view the online invoice
-        example: 'https://in.xero.com/U56hvGos5l9yHoeNITNjmqCVMVFUuDQyJMDwy41X'
+        example: https://in.xero.com/U56hvGos5l9yHoeNITNjmqCVMVFUuDQyJMDwy41X
         readOnly: true
         type: string
   Organisation:
@@ -5803,7 +5813,7 @@ definitions:
       Addresses:
         description: Address details for organisation
         items:
-          $ref: '#/definitions/Address'
+          $ref: "#/definitions/Address"
         type: array
       BaseCurrency:
         description: Default currency for organisation. See ISO 4217 Currency Codes
@@ -5836,9 +5846,9 @@ definitions:
         format: date
         type: string
       ExternalLinks:
-        description: 'Organisation profile links for popular services such as Facebook, Twitter, GooglePlus and LinkedIn. You can also add link to your website here. Shown if Organisation settings  is updated in Xero. See ExternalLinks below'
+        description: Organisation profile links for popular services such as Facebook, Twitter, GooglePlus and LinkedIn. You can also add link to your website here. Shown if Organisation settings  is updated in Xero. See ExternalLinks below
         items:
-          $ref: '#/definitions/ExternalLink'
+          $ref: "#/definitions/ExternalLink"
         type: array
       FinancialYearEndDay:
         description: Calendar day e.g. 0-31
@@ -5895,9 +5905,9 @@ definitions:
       PaymentTerms:
         allOf:
           - description: Default payment terms for the organisation if set Terms below
-          - $ref: '#/definitions/PaymentTerms'
+          - $ref: "#/definitions/PaymentTerms"
       PaysTax:
-        description: 'Boolean to describe if organisation is registered with a local tax authority i.e. true, false'
+        description: Boolean to describe if organisation is registered with a local tax authority i.e. true, false
         type: boolean
       PeriodLockDate:
         description: Shown if set
@@ -5906,10 +5916,10 @@ definitions:
       Phones:
         description: Phones details for organisation
         items:
-          $ref: '#/definitions/Phone'
+          $ref: "#/definitions/Phone"
         type: array
       RegistrationNumber:
-        description: 'Shows for New Zealand, Australian and UK organisations'
+        description: Shows for New Zealand, Australian and UK organisations
         example: 11111111138
         type: string
       SalesTaxBasis:
@@ -5922,10 +5932,10 @@ definitions:
         type: string
       ShortCode:
         description: A unique identifier for the organisation. Used for deep linking into Xero.
-        example: '!YDrVg'
+        example: "!YDrVg"
         type: string
       TaxNumber:
-        description: 'Shown if set. Displays in the Xero UI as Tax File Number (AU), GST Number (NZ), VAT Number (UK) and Tax ID Number (US & Global).'
+        description: Shown if set. Displays in the Xero UI as Tax File Number (AU), GST Number (NZ), VAT Number (UK) and Tax ID Number (US & Global).
         example: 53003086616
         type: string
       Timezone:
@@ -5951,16 +5961,16 @@ definitions:
       Allocations:
         description: See Allocations
         items:
-          $ref: '#/definitions/Allocation'
+          $ref: "#/definitions/Allocation"
         type: array
       Contact:
-        $ref: '#/definitions/ContactSummary'
+        $ref: "#/definitions/ContactSummary"
       CurrencyCode:
         description: Currency used for the overpayment
         example: AUD
         type: string
       CurrencyRate:
-        description: 'The currency rate for a multicurrency overpayment. If no rate is specified, the XE.com day rate is used'
+        description: The currency rate for a multicurrency overpayment. If no rate is specified, the XE.com day rate is used
         format: float
         type: number
       Date:
@@ -5982,7 +5992,7 @@ definitions:
       LineItems:
         description: Overpayment Line Items
         items:
-          $ref: '#/definitions/LineItem'
+          $ref: "#/definitions/LineItem"
         type: array
       OverpaymentID:
         description: Xero generated unique identifier
@@ -5991,7 +6001,7 @@ definitions:
         type: string
       Payments:
         items:
-          $ref: '#/definitions/PaymentSummary'
+          $ref: "#/definitions/PaymentSummary"
         type: array
       RemainingCredit:
         description: The remaining credit balance on the overpayment
@@ -6072,7 +6082,7 @@ definitions:
         format: float
         type: number
       CreditNote:
-        $ref: '#/definitions/CreditNoteSummary'
+        $ref: "#/definitions/CreditNoteSummary"
       CurrencyRate:
         description: Exchange rate when payment is received. Only used for non base currency invoices and credit notes.
         format: float
@@ -6082,12 +6092,12 @@ definitions:
         format: date
         type: string
       Invoice:
-        $ref: '#/definitions/InvoiceSummary'
+        $ref: "#/definitions/InvoiceSummary"
       IsReconciled:
-        description: 'An optional parameter for the payment. A boolean indicating whether you would like the payment to be created as reconciled when using PUT, or whether a payment has been reconciled when using GET'
+        description: An optional parameter for the payment. A boolean indicating whether you would like the payment to be created as reconciled when using PUT, or whether a payment has been reconciled when using GET
         type: boolean
       Overpayment:
-        $ref: '#/definitions/OverpaymentSummary'
+        $ref: "#/definitions/OverpaymentSummary"
       PaymentID:
         description: The Xero identifier for an Payment
         format: uuid
@@ -6107,7 +6117,7 @@ definitions:
         readOnly: true
         type: string
       Prepayment:
-        $ref: '#/definitions/PrepaymentSummary'
+        $ref: "#/definitions/PrepaymentSummary"
       Reference:
         description: An optional description for the payment
         example: Direct Debit
@@ -6200,22 +6210,22 @@ definitions:
     type: object
   Phones:
     items:
-      $ref: '#/definitions/Phone'
+      $ref: "#/definitions/Phone"
     type: array
   Prepayment:
     properties:
       Allocations:
         items:
-          $ref: '#/definitions/Allocation'
+          $ref: "#/definitions/Allocation"
         type: array
       Contact:
-        $ref: '#/definitions/ContactSummary'
+        $ref: "#/definitions/ContactSummary"
       CurrencyCode:
         description: Currency used for the prepayment
         example: AUD
         type: string
       CurrencyRate:
-        description: 'The currency rate for a multicurrency prepayment. If no rate is specified, the XE.com day rate is used'
+        description: The currency rate for a multicurrency prepayment. If no rate is specified, the XE.com day rate is used
         format: float
         type: number
       Date:
@@ -6236,7 +6246,7 @@ definitions:
         type: string
       LineItems:
         items:
-          $ref: '#/definitions/LineItem'
+          $ref: "#/definitions/LineItem"
         type: array
       PrepaymentID:
         description: Xero generated unique identifier
@@ -6336,13 +6346,13 @@ definitions:
         format: uuid
         type: string
       Contact:
-        $ref: '#/definitions/ContactSummary'
+        $ref: "#/definitions/ContactSummary"
       CurrencyCode:
         description: The currency that purchase order has been raised in
         example: AUD
         type: string
       CurrencyRate:
-        description: 'The currency rate for a multicurrency purchase order. As no rate can be specified, the XE.com day rate is used.'
+        description: The currency rate for a multicurrency purchase order. As no rate can be specified, the XE.com day rate is used.
         format: float
         readOnly: true
         type: number
@@ -6352,7 +6362,7 @@ definitions:
         type: string
       DeliveryAddress:
         description: The address the goods are to be delivered to
-        example: '23 Main Street, Central City, Marineville,1234'
+        example: 23 Main Street, Central City, Marineville,1234
         type: string
       DeliveryDate:
         description: Date the goods are to be delivered – YYYY-MM-DD
@@ -6380,7 +6390,7 @@ definitions:
         type: string
       LineItems:
         items:
-          $ref: '#/definitions/LineItem'
+          $ref: "#/definitions/LineItem"
         type: array
       PurchaseOrderID:
         description: Xero generated unique identifier for purchase order
@@ -6443,7 +6453,7 @@ definitions:
     type: object
   PurchasesTrackingCategories:
     items:
-      $ref: '#/definitions/PurchasesTrackingCategory'
+      $ref: "#/definitions/PurchasesTrackingCategory"
     type: array
   PurchasesTrackingCategory:
     properties:
@@ -6458,7 +6468,7 @@ definitions:
   Receipt:
     properties:
       Contact:
-        $ref: '#/definitions/ContactSummary'
+        $ref: "#/definitions/ContactSummary"
       Date:
         description: Date of receipt – YYYY-MM-DD
         format: date
@@ -6477,7 +6487,7 @@ definitions:
         type: string
       Lineitems:
         items:
-          $ref: '#/definitions/LineItem'
+          $ref: "#/definitions/LineItem"
         type: array
       ReceiptID:
         description: Xero generated unique identifier for receipt
@@ -6521,11 +6531,11 @@ definitions:
         readOnly: true
         type: string
       Url:
-        description: 'URL link to a source document – shown as “Go to [appName]” in the Xero app'
-        example: 'https://myapp.com/receipt/123'
+        description: URL link to a source document – shown as “Go to [appName]” in the Xero app
+        example: https://myapp.com/receipt/123
         type: string
       User:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
     required:
       - Date
       - Contact
@@ -6539,7 +6549,7 @@ definitions:
         format: uuid
         type: string
       Contact:
-        $ref: '#/definitions/ContactSummary'
+        $ref: "#/definitions/ContactSummary"
       CurrencyCode:
         description: The currency that invoice has been raised in
         example: AUD
@@ -6558,7 +6568,7 @@ definitions:
         type: string
       LineItems:
         items:
-          $ref: '#/definitions/LineItem'
+          $ref: "#/definitions/LineItem"
         type: array
       Reference:
         description: ACCREC only – additional reference number
@@ -6570,9 +6580,9 @@ definitions:
         readOnly: true
         type: string
       Schedule:
-        $ref: '#/definitions/Schedule'
+        $ref: "#/definitions/Schedule"
       Status:
-        description: 'One of the following : DRAFT or AUTHORISED'
+        description: "One of the following : DRAFT or AUTHORISED"
         enum:
           - DRAFT
           - AUTHORISED
@@ -6726,7 +6736,7 @@ definitions:
     type: object
   SalesTrackingCategories:
     items:
-      $ref: '#/definitions/SalesTrackingCategory'
+      $ref: "#/definitions/SalesTrackingCategory"
     type: array
   SalesTrackingCategory:
     properties:
@@ -6741,7 +6751,7 @@ definitions:
   Schedule:
     properties:
       DueDate:
-        description: 'Integer used with due date type e.g 20 (of following month), 31 (of current month)'
+        description: Integer used with due date type e.g 20 (of following month), 31 (of current month)
         type: integer
       DueDateType:
         description: Used with due date to describe when the invoice is due
@@ -6760,14 +6770,14 @@ definitions:
         format: date
         type: string
       Period:
-        description: 'Integer used with the unit e.g. 1 (every 1 week), 2 (every 2 months)'
+        description: Integer used with the unit e.g. 1 (every 1 week), 2 (every 2 months)
         type: integer
       StartDate:
         description: Date the first invoice of the current version of the repeating schedule was generated (changes when repeating invoice is edited)
         format: date
         type: string
       Unit:
-        description: 'One of the following : WEEKLY or MONTHLY'
+        description: "One of the following : WEEKLY or MONTHLY"
         type: string
   TaxComponent:
     properties:
@@ -6790,13 +6800,13 @@ definitions:
   TaxRate:
     properties:
       CanApplyToAssets:
-        description: 'Boolean to describe if tax rate can be used for asset accounts '
+        description: "Boolean to describe if tax rate can be used for asset accounts "
         type: boolean
       CanApplyToEquity:
-        description: 'Boolean to describe if tax rate can be used for equity accounts '
+        description: "Boolean to describe if tax rate can be used for equity accounts "
         type: boolean
       CanApplyToExpenses:
-        description: 'Boolean to describe if tax rate can be used for expense accounts '
+        description: "Boolean to describe if tax rate can be used for expense accounts "
         type: boolean
       CanApplyToLiabilities:
         description: Boolean to describe if tax rate can be used for liability accounts
@@ -6830,7 +6840,7 @@ definitions:
         type: string
       TaxComponents:
         items:
-          $ref: '#/definitions/TaxComponent'
+          $ref: "#/definitions/TaxComponent"
         type: array
       TaxType:
         description: Tax Types – can only be used as the identifier on update calls
@@ -6858,7 +6868,7 @@ definitions:
                   type: string
                 Value:
                   description: The value of the field
-                  example: '2011-11-01T00:00:00.000Z'
+                  example: 2011-11-01T00:00:00.000Z
                   type: string
               type: object
             type: array
@@ -6871,7 +6881,7 @@ definitions:
               properties:
                 Description:
                   description: The description of the field
-                  example: 'Total salary, wages and other payments'
+                  example: Total salary, wages and other payments
                   type: string
                 FieldID:
                   description: The identifier for the field
@@ -6941,13 +6951,13 @@ definitions:
   TrackingCategory:
     properties:
       Name:
-        description: 'The name of the tracking category e.g. Department, Region (max length = 100)'
+        description: The name of the tracking category e.g. Department, Region (max length = 100)
         example: Region
         maxLength: 100
         type: string
       Options:
         items:
-          $ref: '#/definitions/TrackingOption'
+          $ref: "#/definitions/TrackingOption"
         type: array
       Status:
         description: The status of a tracking category
@@ -6963,7 +6973,7 @@ definitions:
   TrackingOption:
     properties:
       Name:
-        description: 'The name of the tracking option e.g. Marketing, East (max length = 50)'
+        description: The name of the tracking option e.g. Marketing, East (max length = 50)
         example: North
         maxLength: 50
         type: string

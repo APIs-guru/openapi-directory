@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: yunbi.com
@@ -10,18 +10,19 @@ info:
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/725256993741660160/LRhoyEy_.jpg'
+    url: https://pbs.twimg.com/profile_images/725256993741660160/LRhoyEy_.jpg
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.0.1
       format: swagger
-      url: 'https://yunbi.com/api/v2/doc/swagger'
-      version: '1.2'
+      url: https://yunbi.com/api/v2/doc/swagger
+      version: "1.2"
   x-providerName: yunbi.com
   x-tags:
     - bitcoin
     - digital currency
+  x-preferred: true
 produces:
   - application/json
 tags:
@@ -42,7 +43,7 @@ tags:
   - name: timestamp
   - name: trades
 paths:
-  '/v2/addresses/{address}.json':
+  "/v2/addresses/{address}.json":
     get:
       operationId: GET--version-addresses--address---format-
       parameters:
@@ -51,7 +52,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Check Deposit Address
       tags:
@@ -70,7 +71,7 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: query
           name: signature
           required: true
@@ -80,7 +81,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get details of specific deposit.
       tags:
@@ -99,20 +100,20 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: query
           name: signature
           required: true
           type: string
-        - description: 'The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st, rep, ans, zec, zmc, gnt, gxs, qtum, eos, snt, bcc, omg, lun, pay, ven'
+        - description: "The account to which you want to deposit. Available values: cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st, rep, ans, zec, zmc, gnt, gxs, qtum, eos, snt, bcc, omg, lun, pay, ven"
           in: query
           name: currency
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
-      summary: 'Where to deposit. The address field could be empty when a new address is generating (e.g. for bitcoin), you should try again later in that case.'
+      summary: Where to deposit. The address field could be empty when a new address is generating (e.g. for bitcoin), you should try again later in that case.
       tags:
         - deposit_address
   /v2/deposits.json:
@@ -129,12 +130,12 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: query
           name: signature
           required: true
           type: string
-        - description: 'Currency value contains  cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st, rep, ans, zec, zmc, gnt, gxs, qtum, eos, snt, bcc, omg, lun, pay, ven'
+        - description: Currency value contains  cny, btc, eth, pls, note, bts, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge, sc, dgd, dcs, dao, etc, amp, 1st, rep, ans, zec, zmc, gnt, gxs, qtum, eos, snt, bcc, omg, lun, pay, ven
           in: query
           name: currency
           required: false
@@ -144,13 +145,13 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'State value contains  submitting, cancelled, submitted, rejected, accepted, checked, warning'
+        - description: State value contains  submitting, cancelled, submitted, rejected, accepted, checked, warning
           in: query
           name: state
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get your deposits history.
       tags:
@@ -159,7 +160,7 @@ paths:
     get:
       operationId: GET--version-depth---format-
       parameters:
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: query
           name: market
           required: true
@@ -170,7 +171,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get depth or specified market. Both asks and bids are sorted from highest price to lowest.
       tags:
@@ -179,28 +180,28 @@ paths:
     get:
       operationId: GET--version-k---format-
       parameters:
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: query
           name: market
           required: true
           type: string
-        - description: 'Limit the number of returned data points, default to 30.'
+        - description: Limit the number of returned data points, default to 30.
           in: query
           name: limit
           required: false
           type: integer
-        - description: 'Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080'
+        - description: Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080
           in: query
           name: period
           required: false
           type: integer
-        - description: 'An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.'
+        - description: An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.
           in: query
           name: timestamp
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get OHLC(k line) of specific market.
       tags:
@@ -209,7 +210,7 @@ paths:
     get:
       operationId: GET--version-k_with_pending_trades---format-
       parameters:
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: query
           name: market
           required: true
@@ -219,32 +220,32 @@ paths:
           name: trade_id
           required: true
           type: integer
-        - description: 'Limit the number of returned data points, default to 30.'
+        - description: Limit the number of returned data points, default to 30.
           in: query
           name: limit
           required: false
           type: integer
-        - description: 'Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080'
+        - description: Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080
           in: query
           name: period
           required: false
           type: integer
-        - description: 'An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.'
+        - description: An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.
           in: query
           name: timestamp
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
-      summary: 'Get K data with pending trades, which are the trades not included in K data yet, because there''s delay between trade generated and processed by K data generator.'
+      summary: Get K data with pending trades, which are the trades not included in K data yet, because there's delay between trade generated and processed by K data generator.
       tags:
         - k_with_pending_trades
   /v2/markets.json:
     get:
       operationId: GET--version-markets---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get all available markets.
       tags:
@@ -263,13 +264,13 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: query
           name: signature
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get your profile and accounts info.
       tags:
@@ -288,7 +289,7 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: query
           name: signature
           required: true
@@ -299,7 +300,7 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get information of specified order.
       tags:
@@ -318,7 +319,7 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: formData
           name: signature
           required: true
@@ -329,7 +330,7 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Cancel an order.
       tags:
@@ -338,7 +339,7 @@ paths:
     get:
       operationId: GET--version-order_book---format-
       parameters:
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: query
           name: market
           required: true
@@ -354,7 +355,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get the order book of specified market.
       tags:
@@ -373,22 +374,22 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: query
           name: signature
           required: true
           type: string
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: query
           name: market
           required: true
           type: string
-        - description: 'Filter order by state. One of ''wait'', ''done'', or ''cancel''. An order in ''wait'' is an active order, waiting fullfillment; a ''done'' order is an order fullfilled; ''cancel'' means the order has been cancelled. Default to ''wait''.'
+        - description: Filter order by state. One of 'wait', 'done', or 'cancel'. An order in 'wait' is an active order, waiting fullfillment; a 'done' order is an order fullfilled; 'cancel' means the order has been cancelled. Default to 'wait'.
           in: query
           name: state
           required: false
           type: string
-        - description: 'Limit the number of returned orders, default to 100.'
+        - description: Limit the number of returned orders, default to 100.
           in: query
           name: limit
           required: false
@@ -398,15 +399,15 @@ paths:
           name: page
           required: false
           type: integer
-        - description: 'If set, returned orders will be sorted in specific order. One of ''asc'' or ''desc'', default to ''asc''.'
+        - description: If set, returned orders will be sorted in specific order. One of 'asc' or 'desc', default to 'asc'.
           in: query
           name: order_by
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
-      summary: 'Get your orders, results is paginated.'
+      summary: Get your orders, results is paginated.
       tags:
         - orders
     post:
@@ -422,12 +423,12 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: formData
           name: signature
           required: true
           type: string
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: formData
           name: market
           required: true
@@ -437,23 +438,23 @@ paths:
           name: side
           required: true
           type: string
-        - description: 'The amount user want to sell/buy. An order could be partially executed, e.g. an order sell 5 btc can be matched with a buy 3 btc order, left 2 btc to be sold; in this case the order''s volume would be ''5.0'', its remaining_volume would be ''2.0'', its executed volume is ''3.0''.'
+        - description: The amount user want to sell/buy. An order could be partially executed, e.g. an order sell 5 btc can be matched with a buy 3 btc order, left 2 btc to be sold; in this case the order's volume would be '5.0', its remaining_volume would be '2.0', its executed volume is '3.0'.
           in: formData
           name: volume
           required: true
           type: string
-        - description: 'Price for each unit. e.g. If you want to sell/buy 1 btc at 3000 CNY, the price is ''3000.0'''
+        - description: Price for each unit. e.g. If you want to sell/buy 1 btc at 3000 CNY, the price is '3000.0'
           in: formData
           name: price
           required: false
           type: string
-        - description: 'Type of order, either ''limit'' or ''market''.'
+        - description: Type of order, either 'limit' or 'market'.
           in: formData
           name: ord_type
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create a Sell/Buy order.
       tags:
@@ -472,18 +473,18 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: formData
           name: signature
           required: true
           type: string
-        - description: 'If present, only sell orders (asks) or buy orders (bids) will be canncelled.'
+        - description: If present, only sell orders (asks) or buy orders (bids) will be canncelled.
           in: formData
           name: side
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Cancel all my orders.
       tags:
@@ -502,12 +503,12 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: formData
           name: signature
           required: true
           type: string
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: formData
           name: market
           required: true
@@ -520,31 +521,31 @@ paths:
           type: array
         - description: Either 'sell' or 'buy'.
           in: formData
-          name: 'orders[side]'
+          name: orders[side]
           required: true
           type: string
-        - description: 'The amount user want to sell/buy. An order could be partially executed, e.g. an order sell 5 btc can be matched with a buy 3 btc order, left 2 btc to be sold; in this case the order''s volume would be ''5.0'', its remaining_volume would be ''2.0'', its executed volume is ''3.0''.'
+        - description: The amount user want to sell/buy. An order could be partially executed, e.g. an order sell 5 btc can be matched with a buy 3 btc order, left 2 btc to be sold; in this case the order's volume would be '5.0', its remaining_volume would be '2.0', its executed volume is '3.0'.
           in: formData
-          name: 'orders[volume]'
+          name: orders[volume]
           required: true
           type: string
-        - description: 'Price for each unit. e.g. If you want to sell/buy 1 btc at 3000 CNY, the price is ''3000.0'''
+        - description: Price for each unit. e.g. If you want to sell/buy 1 btc at 3000 CNY, the price is '3000.0'
           in: formData
-          name: 'orders[price]'
+          name: orders[price]
           required: false
           type: string
-        - description: 'Type of order, either ''limit'' or ''market''.'
+        - description: Type of order, either 'limit' or 'market'.
           in: formData
-          name: 'orders[ord_type]'
+          name: orders[ord_type]
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create multiple sell/buy orders.
       tags:
         - orders
-  '/v2/partners/orders/{id}/trades.json':
+  "/v2/partners/orders/{id}/trades.json":
     get:
       operationId: GET--version-partners-orders--id-trades---format-
       parameters:
@@ -557,7 +558,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       tags:
         - partners
@@ -565,22 +566,22 @@ paths:
     get:
       operationId: GET--version-tickers---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get ticker of all markets.
       tags:
         - tickers
-  '/v2/tickers/{market}.json':
+  "/v2/tickers/{market}.json":
     get:
       operationId: GET--version-tickers--market---format-
       parameters:
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: path
           name: market
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get ticker of specific market.
       tags:
@@ -589,16 +590,16 @@ paths:
     get:
       operationId: GET--version-timestamp---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
-      summary: 'Get server current time, in seconds since Unix epoch.'
+      summary: Get server current time, in seconds since Unix epoch.
       tags:
         - timestamp
   /v2/trades.json:
     get:
       operationId: GET--version-trades---format-
       parameters:
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: query
           name: market
           required: true
@@ -608,30 +609,30 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'An integer represents the seconds elapsed since Unix epoch. If set, only trades executed before the time will be returned.'
+        - description: An integer represents the seconds elapsed since Unix epoch. If set, only trades executed before the time will be returned.
           in: query
           name: timestamp
           required: false
           type: integer
-        - description: 'Trade id. If set, only trades created after the trade will be returned.'
+        - description: Trade id. If set, only trades created after the trade will be returned.
           in: query
           name: from
           required: false
           type: integer
-        - description: 'Trade id. If set, only trades created before the trade will be returned.'
+        - description: Trade id. If set, only trades created before the trade will be returned.
           in: query
           name: to
           required: false
           type: integer
-        - description: 'If set, returned trades will be sorted in specific order. One of ''asc'' or ''desc'', default to ''desc''.'
+        - description: If set, returned trades will be sorted in specific order. One of 'asc' or 'desc', default to 'desc'.
           in: query
           name: order_by
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
-      summary: 'Get recent trades on market, each trade is included only once. Trades are sorted in reverse creation order.'
+      summary: Get recent trades on market, each trade is included only once. Trades are sorted in reverse creation order.
       tags:
         - trades
   /v2/trades/my.json:
@@ -648,12 +649,12 @@ paths:
           name: tonce
           required: true
           type: integer
-        - description: 'The signature of your request payload, generated using your secret key.'
+        - description: The signature of your request payload, generated using your secret key.
           in: query
           name: signature
           required: true
           type: string
-        - description: 'Unique market id. It''s always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. ''btccny''. All available markets can be found at /api/v2/markets.'
+        - description: Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.
           in: query
           name: market
           required: true
@@ -663,28 +664,28 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'An integer represents the seconds elapsed since Unix epoch. If set, only trades executed before the time will be returned.'
+        - description: An integer represents the seconds elapsed since Unix epoch. If set, only trades executed before the time will be returned.
           in: query
           name: timestamp
           required: false
           type: integer
-        - description: 'Trade id. If set, only trades created after the trade will be returned.'
+        - description: Trade id. If set, only trades created after the trade will be returned.
           in: query
           name: from
           required: false
           type: integer
-        - description: 'Trade id. If set, only trades created before the trade will be returned.'
+        - description: Trade id. If set, only trades created before the trade will be returned.
           in: query
           name: to
           required: false
           type: integer
-        - description: 'If set, returned trades will be sorted in specific order. One of ''asc'' or ''desc'', default to ''desc''.'
+        - description: If set, returned trades will be sorted in specific order. One of 'asc' or 'desc', default to 'desc'.
           in: query
           name: order_by
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get your executed trades. Trades are sorted in reverse creation order.
       tags:

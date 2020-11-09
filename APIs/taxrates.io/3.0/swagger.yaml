@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.taxrates.io
@@ -6,22 +6,23 @@ basePath: /api
 info:
   contact:
     name: apiteam@taxrates.io
-  description: 'Taxrates.io API - the successfully streamlined tax rates monitoring process. We recommend using <a href=''https://www.getpostman.com/'' target=_new>Postman</a> when discovering our API. Happy using!'
+  description: Taxrates.io API - the successfully streamlined tax rates monitoring process. We recommend using <a href='https://www.getpostman.com/' target=_new>Postman</a> when discovering our API. Happy using!
   license:
     name: Private licence - only for using by authorized Members of taxrates.io
-    url: 'http://taxrates.io/license/'
-  termsOfService: 'http://taxrates.io/terms/'
+    url: http://taxrates.io/license/
+  termsOfService: http://taxrates.io/terms/
   title: Taxrates.io
-  version: '3.0'
+  version: "3.0"
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/919999226955927553/lLFntE3W_400x400.jpg'
+    url: https://pbs.twimg.com/profile_images/919999226955927553/lLFntE3W_400x400.jpg
   x-origin:
     - format: swagger
-      url: 'https://api.taxrates.io/taxrates_io_API.yaml'
-      version: '2.0'
+      url: https://api.taxrates.io/taxrates_io_API.yaml
+      version: "2.0"
   x-providerName: taxrates.io
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -34,7 +35,7 @@ securityDefinitions:
 paths:
   /v1/tax/byaddress:
     post:
-      description: |
+      description: >
         This endpoint returns tax rates for the country based on the address provided <pre><code class="js">var taxrates_endpoint = 'tax/address';
           var taxrates_params = '?domain=api.taxrates.io';
           var taxrates_url = '/api/v1/';
@@ -97,7 +98,7 @@ paths:
             return false;
           }</code></pre>
       parameters:
-        - description: 'Domain name: api.taxrates.io'
+        - description: "Domain name: api.taxrates.io"
           in: query
           name: domain
           required: true
@@ -107,23 +108,23 @@ paths:
           name: address
           required: true
           schema:
-            $ref: '#/definitions/Address'
-        - description: 'You can filter your taxes by one of following types: ''standard'', ''reduced'', ''second reduced'', ''third reduced'' and ''super reduced''.'
+            $ref: "#/definitions/Address"
+        - description: "You can filter your taxes by one of following types: 'standard', 'reduced', 'second reduced', 'third reduced' and 'super reduced'."
           in: query
           name: filter
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/Rates'
-        '404':
+            $ref: "#/definitions/Rates"
+        "404":
           description: Country not found. Please check you address and make sure it is valid.
-        '500':
+        "500":
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Apikey: []
       summary: Get tax rates by address
@@ -131,7 +132,7 @@ paths:
         - Tax service
   /v1/tax/countrycode:
     get:
-      description: |
+      description: >
         This endpoint returns all available tax rates for selected country <pre><code class="js">var taxrates_endpoint = 'tax/countrycode';
           var taxrates_params = {'domain':'api.taxrates.io', 'country_code':'IE'};
           var taxrates_url = '/api/v1/';
@@ -185,7 +186,7 @@ paths:
             return false;
           }</code></pre>
       parameters:
-        - description: 'Domain name: api.taxrates.io'
+        - description: "Domain name: api.taxrates.io"
           in: query
           name: domain
           required: true
@@ -195,7 +196,7 @@ paths:
           name: country_code
           required: true
           type: string
-        - description: 'You can filter your taxes by one of following types: ''standard'', ''reduced'', ''second reduced'', ''third reduced'' and ''super reduced''.'
+        - description: "You can filter your taxes by one of following types: 'standard', 'reduced', 'second reduced', 'third reduced' and 'super reduced'."
           in: query
           name: filter
           required: false
@@ -206,16 +207,16 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/Rates'
-        '404':
+            $ref: "#/definitions/Rates"
+        "404":
           description: Country not found. Have you provided correct alpha-2 country code?
-        '500':
+        "500":
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Apikey: []
       summary: Returns tax rate for selected country
@@ -223,7 +224,7 @@ paths:
         - Tax service
   /v1/tax/ip:
     get:
-      description: |
+      description: >
         This endpoint will return tax rates for country discovered based on Customer's IP address <pre><code class="js">var taxrates_endpoint = 'tax/ip';
           var taxrates_params = {'domain':'api.taxrates.io', 'ip':'208.80.152.201'};
           var taxrates_url = '/api/v1/';
@@ -277,7 +278,7 @@ paths:
             return false;
           }</code></pre>
       parameters:
-        - description: 'Domain name: api.taxrates.io'
+        - description: "Domain name: api.taxrates.io"
           in: query
           name: domain
           required: true
@@ -287,7 +288,7 @@ paths:
           name: ip
           required: true
           type: string
-        - description: 'You can filter your taxes by one of following types: ''standard'', ''reduced'', ''second reduced'', ''third reduced'' and ''super reduced''.'
+        - description: "You can filter your taxes by one of following types: 'standard', 'reduced', 'second reduced', 'third reduced' and 'super reduced'."
           in: query
           name: filter
           required: false
@@ -298,18 +299,18 @@ paths:
           required: false
           type: string
       responses:
-        '200':
-          description: 'An array of tax rates for VAT, GST & TAX'
+        "200":
+          description: An array of tax rates for VAT, GST & TAX
           schema:
             items:
-              $ref: '#/definitions/Rates'
+              $ref: "#/definitions/Rates"
             type: array
-        '404':
+        "404":
           description: Geolocation can not be processed/No matching country found
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Apikey: []
       summary: Tax rates by geolocation based on Customer IP address
@@ -317,7 +318,7 @@ paths:
         - Tax service
   /v3/tax/rates:
     get:
-      description: |
+      description: >
         This method returns all tax rates configured on Member's account using cursor. Use X-Cursor-Next header to recursively read all rates. Max limit is 500 records per request. <pre><code class="js">
           var taxrates_endpoint = 'tax/rates';
           var taxrates_params = {'domain':'api.taxrates.io'};
@@ -372,34 +373,34 @@ paths:
             return false;
           }</code></pre>
       parameters:
-        - description: 'Domain name: api.taxrates.io'
+        - description: "Domain name: api.taxrates.io"
           in: query
           name: domain
           required: true
           type: string
-        - description: 'You can filter your taxes by one of following types: ''standard'', ''reduced'', ''second reduced'', ''third reduced'' and ''super reduced''.'
+        - description: "You can filter your taxes by one of following types: 'standard', 'reduced', 'second reduced', 'third reduced' and 'super reduced'."
           in: query
           name: filter
           required: false
           type: string
-        - description: 'Cursor shows from which record you want to get information. Default value is 0, next value can be retrieved from X-Cursor-Next header.'
+        - description: Cursor shows from which record you want to get information. Default value is 0, next value can be retrieved from X-Cursor-Next header.
           in: query
           name: cursor
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: An array of locations with tax rates
           schema:
             items:
-              $ref: '#/definitions/Location'
+              $ref: "#/definitions/Location"
             type: array
-        '404':
+        "404":
           description: No configured tax rates found. Have you added any country to your account?
         default:
           description: Unexpected error
           schema:
-            $ref: '#/definitions/Error'
+            $ref: "#/definitions/Error"
       security:
         - Apikey: []
       summary: Get all tax rates
@@ -449,7 +450,7 @@ definitions:
         type: string
       rates:
         items:
-          $ref: '#/definitions/TaxRate'
+          $ref: "#/definitions/TaxRate"
         type: array
       state:
         description: State/province name if exists
@@ -465,7 +466,7 @@ definitions:
         type: string
       taxes:
         items:
-          $ref: '#/definitions/Tax'
+          $ref: "#/definitions/Tax"
         type: array
     type: object
   Tax:
@@ -477,7 +478,7 @@ definitions:
         description: The tax type
         type: string
       data_name:
-        description: 'The tax name and description (VAT, GST, PIT, CIT etc)'
+        description: The tax name and description (VAT, GST, PIT, CIT etc)
         type: string
       data_value:
         description: The tax value in percents
@@ -486,7 +487,7 @@ definitions:
   TaxRate:
     properties:
       data_name:
-        description: 'The tax name and description (VAT, GST, PIT, CIT etc)'
+        description: The tax name and description (VAT, GST, PIT, CIT etc)
         type: string
       data_value:
         description: The tax value in percents

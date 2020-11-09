@@ -1,20 +1,21 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://geodesystems.com:443/'
+  - url: https://geodesystems.com:443/
 info:
-  description: 'Search for data in lots of places - manage your documents, photos and critical business knowledge - communicate and coordinate with blogs, interactive wikis, and data integration dashboards.'
-  title: 'geodesystems.com:443'
+  description: Search for data in lots of places - manage your documents, photos and critical business knowledge - communicate and coordinate with blogs, interactive wikis, and data integration dashboards.
+  title: geodesystems.com:443
   version: 1.0.0
   x-logo:
-    url: 'https://geodesystems.com/repository/images/geodesystems.png'
+    url: https://geodesystems.com/repository/images/geodesystems.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: swagger
-      url: 'https://geodesystems.com/repository/swagger/api-docs'
-      version: '1.2'
+      url: https://geodesystems.com/repository/swagger/api-docs
+      version: "1.2"
   x-providerName: geodesystems.com
+  x-preferred: true
 tags:
   - description: Grid point data API
     name: gridaspoint
@@ -22,7 +23,7 @@ tags:
     name: gridsubset
   - description: Point data API
     name: point
-  - description: ' API for Extract sheets'
+  - description: " API for Extract sheets"
     name: service/media_tabular_extractsheet
   - description: Search API for '2017 Boulder Election Expenditures' entry type
     name: type/2017_boulder_election_expenditures
@@ -507,7 +508,7 @@ tags:
 paths:
   /repository/entry/show:
     get:
-      description: 'API to call: Extract sheets'
+      description: "API to call: Extract sheets"
       operationId: media_tabular_extractsheet
       parameters:
         - description: Output type  -don't change
@@ -530,7 +531,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: API for Extract sheets
       tags:
@@ -708,7 +709,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for '2017 Boulder Election Expenditures' entry type
       tags:
@@ -831,7 +832,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Any file type' entry type
       tags:
@@ -954,7 +955,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Before and After Images' entry type
       tags:
@@ -1107,7 +1108,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Bibliographic Entry' entry type
       tags:
@@ -1230,7 +1231,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'DICOM File' entry type
       tags:
@@ -1365,7 +1366,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'DICOM Test File' entry type
       tags:
@@ -1488,7 +1489,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'FASTA File' entry type
       tags:
@@ -1611,7 +1612,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'FASTQ File' entry type
       tags:
@@ -1734,7 +1735,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'HMMER Index File' entry type
       tags:
@@ -1857,7 +1858,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'OME TIFF File' entry type
       tags:
@@ -1980,7 +1981,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Assay' entry type
       tags:
@@ -2103,7 +2104,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Cohort' entry type
       tags:
@@ -2232,7 +2233,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Person' entry type
       tags:
@@ -2355,7 +2356,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Sample' entry type
       tags:
@@ -2478,7 +2479,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Series' entry type
       tags:
@@ -2601,7 +2602,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Study' entry type
       tags:
@@ -2724,7 +2725,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'SAM Data' entry type
       tags:
@@ -2847,7 +2848,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'PDB Protein File' entry type
       tags:
@@ -2970,7 +2971,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Sequence Read Archive' entry type
       tags:
@@ -3093,7 +3094,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Stockholm File' entry type
       tags:
@@ -3246,7 +3247,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Taxonomic Entry' entry type
       tags:
@@ -3375,7 +3376,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Weblog Entry' entry type
       tags:
@@ -3618,7 +3619,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Boulder Rental Housing' entry type
       tags:
@@ -3765,7 +3766,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Bookmarks' entry type
       tags:
@@ -3963,7 +3964,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Boston Crime' entry type
       tags:
@@ -4173,7 +4174,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Boulder 2017 Election Contributions' entry type
       tags:
@@ -4412,7 +4413,7 @@ paths:
             format: double
             type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Boulder Campaign Contributions' entry type
       tags:
@@ -4602,7 +4603,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Boulder Consulting Services Database' entry type
       tags:
@@ -4839,7 +4840,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Boulder County Voter Details' entry type
       tags:
@@ -4986,7 +4987,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Boulder Crime Reports' entry type
       tags:
@@ -5145,7 +5146,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Boulder Council Emails' entry type
       tags:
@@ -5321,7 +5322,7 @@ paths:
             format: double
             type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Boulder Employee Salaries' entry type
       tags:
@@ -5444,7 +5445,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Calendar' entry type
       tags:
@@ -5640,7 +5641,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Campaign Donors' entry type
       tags:
@@ -5830,7 +5831,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Campaign Expenditures' entry type
       tags:
@@ -5953,7 +5954,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Catalog Link' entry type
       tags:
@@ -6076,7 +6077,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Gridded Data File' entry type
       tags:
@@ -6199,7 +6200,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Chat Room' entry type
       tags:
@@ -6428,7 +6429,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Colorado Water Rights' entry type
       tags:
@@ -6612,7 +6613,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Committee Donations' entry type
       tags:
@@ -6735,7 +6736,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Data Hub' entry type
       tags:
@@ -6888,7 +6889,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Facility' entry type
       tags:
@@ -7193,7 +7194,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Construction Permits' entry type
       tags:
@@ -7334,7 +7335,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Contact List' entry type
       tags:
@@ -7500,7 +7501,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Colorado Health Indicators' entry type
       tags:
@@ -7659,7 +7660,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Landsat Satellite Data' entry type
       tags:
@@ -7782,7 +7783,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'FAQ' entry type
       tags:
@@ -8023,7 +8024,7 @@ paths:
             format: double
             type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'FEC PACs' entry type
       tags:
@@ -8301,7 +8302,7 @@ paths:
             format: double
             type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Candidates' entry type
       tags:
@@ -8424,7 +8425,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'RSS/ATOM Feed' entry type
       tags:
@@ -8547,7 +8548,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'File' entry type
       tags:
@@ -8688,7 +8689,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'FITS Data File' entry type
       tags:
@@ -8811,7 +8812,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Remote FTP File View' entry type
       tags:
@@ -8934,7 +8935,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Countdown' entry type
       tags:
@@ -9057,7 +9058,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Stock Ticker' entry type
       tags:
@@ -9180,7 +9181,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Weather' entry type
       tags:
@@ -9359,7 +9360,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Census Tracts' entry type
       tags:
@@ -9532,7 +9533,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Census Gazeteer Counties' entry type
       tags:
@@ -9655,7 +9656,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'GeoJson File' entry type
       tags:
@@ -9778,7 +9779,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'GeoTIFF' entry type
       tags:
@@ -9943,7 +9944,7 @@ paths:
             format: double
             type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'GPX GPS File' entry type
       tags:
@@ -10066,7 +10067,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'HDF5 File' entry type
       tags:
@@ -10189,7 +10190,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'KML/KMZ File' entry type
       tags:
@@ -10312,7 +10313,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Shapefile' entry type
       tags:
@@ -10435,7 +10436,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Shapefile with FIPS Code' entry type
       tags:
@@ -10558,7 +10559,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Glossary' entry type
       tags:
@@ -10681,7 +10682,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Grid Aggregation' entry type
       tags:
@@ -10804,7 +10805,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Folder' entry type
       tags:
@@ -10927,7 +10928,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'HipChat Group' entry type
       tags:
@@ -11050,7 +11051,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Home Page' entry type
       tags:
@@ -11191,7 +11192,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Incident' entry type
       tags:
@@ -11344,7 +11345,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Jeopardy' entry type
       tags:
@@ -11467,7 +11468,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Lat-Lon Image' entry type
       tags:
@@ -11590,7 +11591,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'LiDAR Collection' entry type
       tags:
@@ -11713,7 +11714,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'LAS Lidar Data' entry type
       tags:
@@ -11836,7 +11837,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'LVIS Lidar Data' entry type
       tags:
@@ -11959,7 +11960,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Link' entry type
       tags:
@@ -12082,7 +12083,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Server Side Files' entry type
       tags:
@@ -12223,7 +12224,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Locations' entry type
       tags:
@@ -12346,7 +12347,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Google Map URL' entry type
       tags:
@@ -12469,7 +12470,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Audio File' entry type
       tags:
@@ -12592,7 +12593,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Image Loop' entry type
       tags:
@@ -12715,7 +12716,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Photo Album' entry type
       tags:
@@ -12838,7 +12839,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Video Channel' entry type
       tags:
@@ -12961,7 +12962,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Quicktime Video' entry type
       tags:
@@ -13084,7 +13085,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'YouTube Video' entry type
       tags:
@@ -13213,7 +13214,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Notes' entry type
       tags:
@@ -13336,7 +13337,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Json File' entry type
       tags:
@@ -13459,7 +13460,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Note' entry type
       tags:
@@ -13582,7 +13583,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Notebook' entry type
       tags:
@@ -13705,7 +13706,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NWS Forecast Feed' entry type
       tags:
@@ -13828,7 +13829,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'OPeNDAP Link' entry type
       tags:
@@ -13951,7 +13952,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'OWL Class' entry type
       tags:
@@ -14074,7 +14075,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'OWL Ontology' entry type
       tags:
@@ -14197,7 +14198,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Paste Text Entry' entry type
       tags:
@@ -14320,7 +14321,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Text Point Data' entry type
       tags:
@@ -14485,7 +14486,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Police Stop Data' entry type
       tags:
@@ -14608,7 +14609,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Poll' entry type
       tags:
@@ -14731,7 +14732,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Campaign' entry type
       tags:
@@ -14866,7 +14867,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Case Study' entry type
       tags:
@@ -14989,7 +14990,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Research Contribution' entry type
       tags:
@@ -15124,7 +15125,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Data Format' entry type
       tags:
@@ -15265,7 +15266,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Dataset' entry type
       tags:
@@ -15388,7 +15389,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Deployment' entry type
       tags:
@@ -15511,7 +15512,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Experiment' entry type
       tags:
@@ -15634,7 +15635,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Field Note' entry type
       tags:
@@ -15757,7 +15758,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Control Points File' entry type
       tags:
@@ -15880,7 +15881,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Raw GPS File' entry type
       tags:
@@ -16003,7 +16004,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'RINEX File' entry type
       tags:
@@ -16126,7 +16127,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Instrument Data Collection' entry type
       tags:
@@ -16261,7 +16262,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Teaching Resource' entry type
       tags:
@@ -16402,7 +16403,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Meeting' entry type
       tags:
@@ -16537,7 +16538,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Organization' entry type
       tags:
@@ -16660,7 +16661,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Program' entry type
       tags:
@@ -16783,7 +16784,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Project' entry type
       tags:
@@ -16918,7 +16919,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Data Access Service' entry type
       tags:
@@ -17083,7 +17084,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Site' entry type
       tags:
@@ -17248,7 +17249,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Software Tool' entry type
       tags:
@@ -17383,7 +17384,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Standard Parameter Name' entry type
       tags:
@@ -17506,7 +17507,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Survey Location' entry type
       tags:
@@ -17635,7 +17636,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Vocabulary Term' entry type
       tags:
@@ -17758,7 +17759,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Site Visit' entry type
       tags:
@@ -17881,7 +17882,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Vocabulary' entry type
       tags:
@@ -18077,7 +18078,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Property Sales' entry type
       tags:
@@ -18274,7 +18275,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Property Database' entry type
       tags:
@@ -18397,7 +18398,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'IPython Notebook file' entry type
       tags:
@@ -18520,7 +18521,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Slack Team' entry type
       tags:
@@ -18655,7 +18656,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Status Board' entry type
       tags:
@@ -18778,7 +18779,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Sunrise/Sunset Display' entry type
       tags:
@@ -18918,7 +18919,7 @@ paths:
           required: false
           schema:
             type: string
-        - description: '% Complete'
+        - description: "% Complete"
           in: query
           name: search.db_tasks.complete
           required: false
@@ -18944,7 +18945,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Tasks' entry type
       tags:
@@ -19193,7 +19194,7 @@ paths:
             format: double
             type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Tmdb Movies' entry type
       tags:
@@ -19334,7 +19335,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Todo' entry type
       tags:
@@ -19457,7 +19458,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Event' entry type
       tags:
@@ -19580,7 +19581,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Flight Leg' entry type
       tags:
@@ -19703,7 +19704,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Lodging' entry type
       tags:
@@ -19826,7 +19827,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Trip Report' entry type
       tags:
@@ -19949,7 +19950,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Trip' entry type
       tags:
@@ -20078,7 +20079,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'AWC Weather Observations' entry type
       tags:
@@ -20201,7 +20202,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Stock Ticker Data' entry type
       tags:
@@ -20366,7 +20367,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'BLS Series' entry type
       tags:
@@ -20489,7 +20490,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'BLS Survey' entry type
       tags:
@@ -20629,14 +20630,14 @@ paths:
           required: false
           schema:
             type: string
-        - description: 'In #2'
+        - description: "In #2"
           in: query
           name: search.type_census_acs.in_type2
           required: false
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'US Census ACS Data' entry type
       tags:
@@ -20759,7 +20760,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Daymet Daily Weather' entry type
       tags:
@@ -20882,7 +20883,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Database Table' entry type
       tags:
@@ -21005,7 +21006,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'CSV File' entry type
       tags:
@@ -21128,7 +21129,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Word File' entry type
       tags:
@@ -21251,7 +21252,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'HTML File' entry type
       tags:
@@ -21374,7 +21375,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'PDF File' entry type
       tags:
@@ -21497,7 +21498,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Powerpoint File' entry type
       tags:
@@ -21620,7 +21621,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Excel File' entry type
       tags:
@@ -21743,7 +21744,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Drilsdown Case Study' entry type
       tags:
@@ -21902,7 +21903,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'SEC EDGAR Filing' entry type
       tags:
@@ -22025,7 +22026,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'EIA Category' entry type
       tags:
@@ -22148,7 +22149,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'EIA Series' entry type
       tags:
@@ -22271,7 +22272,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ESRI Feature Server' entry type
       tags:
@@ -22394,7 +22395,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ESRI Geometry Server' entry type
       tags:
@@ -22517,7 +22518,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ESRI GP Server' entry type
       tags:
@@ -22640,7 +22641,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ESRI Image Server' entry type
       tags:
@@ -22769,7 +22770,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ESRI Layer' entry type
       tags:
@@ -22892,7 +22893,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ESRI Map Server' entry type
       tags:
@@ -23015,7 +23016,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ESRI Services Folder' entry type
       tags:
@@ -23138,7 +23139,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ESRI Web Server' entry type
       tags:
@@ -23261,7 +23262,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ESRI Rest Service' entry type
       tags:
@@ -23396,7 +23397,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NOAA Extremes Data' entry type
       tags:
@@ -23519,7 +23520,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'FRED Category' entry type
       tags:
@@ -23642,7 +23643,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'FRED Series' entry type
       tags:
@@ -23765,7 +23766,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Transit Agency' entry type
       tags:
@@ -23900,7 +23901,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Transit Route' entry type
       tags:
@@ -24023,7 +24024,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Transit Route Collection' entry type
       tags:
@@ -24176,7 +24177,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Transit Stop' entry type
       tags:
@@ -24299,7 +24300,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Transit Stop Collection' entry type
       tags:
@@ -24446,7 +24447,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Transit Trip' entry type
       tags:
@@ -24575,7 +24576,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Hazard Data' entry type
       tags:
@@ -24704,7 +24705,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Colorado DNR Stream Gage' entry type
       tags:
@@ -24827,7 +24828,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'IDV Bundle' entry type
       tags:
@@ -24950,7 +24951,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Image' entry type
       tags:
@@ -25073,7 +25074,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Airport Image' entry type
       tags:
@@ -25196,7 +25197,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Webcam' entry type
       tags:
@@ -25319,7 +25320,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'MB Bathymetry' entry type
       tags:
@@ -25442,7 +25443,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Bathymetry Collection' entry type
       tags:
@@ -25565,7 +25566,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Basic MB point file' entry type
       tags:
@@ -25736,7 +25737,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Metadata Dictionary' entry type
       tags:
@@ -25907,7 +25908,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Metadata Field' entry type
       tags:
@@ -26030,7 +26031,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NASA AMES File' entry type
       tags:
@@ -26153,7 +26154,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NetCDF Point Subset' entry type
       tags:
@@ -26276,7 +26277,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NITF File' entry type
       tags:
@@ -26417,7 +26418,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Ameriflux Level 2 CSV File' entry type
       tags:
@@ -26558,7 +26559,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'AMRC Final QC Data' entry type
       tags:
@@ -26705,7 +26706,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'AMRC Freewave  Data' entry type
       tags:
@@ -26828,7 +26829,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'CZO Display File Format' entry type
       tags:
@@ -26951,7 +26952,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'GC-Net Point Data' entry type
       tags:
@@ -27110,7 +27111,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'IAGA 2002 Geomagnetism Data' entry type
       tags:
@@ -27245,7 +27246,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'WaterML' entry type
       tags:
@@ -27368,7 +27369,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ATM Ice SSN Data' entry type
       tags:
@@ -27491,7 +27492,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'ATM QFIT Data' entry type
       tags:
@@ -27614,7 +27615,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'McCords Irmcr2 Data' entry type
       tags:
@@ -27737,7 +27738,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'McCords Irmcr3 Data' entry type
       tags:
@@ -27860,7 +27861,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Paris Data' entry type
       tags:
@@ -27983,7 +27984,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'IDV Point File' entry type
       tags:
@@ -28106,7 +28107,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Inline Point File' entry type
       tags:
@@ -28229,7 +28230,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NC  DC Climate Data' entry type
       tags:
@@ -28352,7 +28353,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NetCDF Point File' entry type
       tags:
@@ -28505,7 +28506,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NOAA Carbon Measurements' entry type
       tags:
@@ -28658,7 +28659,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NOAA Flask Event Measurements' entry type
       tags:
@@ -28811,7 +28812,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NOAA Flask Month Measurements' entry type
       tags:
@@ -28934,7 +28935,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NOAA MADIS Point Data' entry type
       tags:
@@ -29063,7 +29064,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NOAA Tower Network' entry type
       tags:
@@ -29186,7 +29187,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'SeaBird CNV Data' entry type
       tags:
@@ -29309,7 +29310,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'SADO TTS Data' entry type
       tags:
@@ -29432,7 +29433,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'SADO Meteo Data' entry type
       tags:
@@ -29555,7 +29556,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'SADO Position Data' entry type
       tags:
@@ -29684,7 +29685,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NetCDF Glider Data' entry type
       tags:
@@ -29813,7 +29814,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NetCDF Track Data' entry type
       tags:
@@ -29936,7 +29937,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'OOI Data' entry type
       tags:
@@ -30083,7 +30084,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Open AQ Air Quality' entry type
       tags:
@@ -30236,7 +30237,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'PBO Position Time Series' entry type
       tags:
@@ -30359,7 +30360,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Simple Records' entry type
       tags:
@@ -30518,7 +30519,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'SNOTEL Snow Data' entry type
       tags:
@@ -30641,7 +30642,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Record Text File' entry type
       tags:
@@ -30782,7 +30783,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Global Geodynamics GGP Format' entry type
       tags:
@@ -30911,7 +30912,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NOAA-ESRL-PSD Monthly Climate Index' entry type
       tags:
@@ -31034,7 +31035,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'QUANDL Series' entry type
       tags:
@@ -31157,7 +31158,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Service Group' entry type
       tags:
@@ -31280,7 +31281,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Service Link' entry type
       tags:
@@ -31403,7 +31404,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'SOCRATA Series' entry type
       tags:
@@ -31526,7 +31527,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'COD Sounding' entry type
       tags:
@@ -31649,7 +31650,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'FRD Sounding' entry type
       tags:
@@ -31772,7 +31773,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'GSD Sounding' entry type
       tags:
@@ -31895,7 +31896,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'UW Sounding' entry type
       tags:
@@ -32018,7 +32019,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'NREL TMY Data' entry type
       tags:
@@ -32141,7 +32142,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Tweet' entry type
       tags:
@@ -32264,7 +32265,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'USGS Stream Gauge' entry type
       tags:
@@ -32387,7 +32388,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Virtual Group' entry type
       tags:
@@ -32510,7 +32511,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'WMS Capabilities' entry type
       tags:
@@ -32633,7 +32634,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'WMS Layer' entry type
       tags:
@@ -32825,7 +32826,7 @@ paths:
             format: double
             type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Ufo Sightings' entry type
       tags:
@@ -32985,7 +32986,7 @@ paths:
             format: double
             type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'US Places' entry type
       tags:
@@ -33114,7 +33115,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Simple Yes-No Vote' entry type
       tags:
@@ -33237,7 +33238,7 @@ paths:
           schema:
             type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Weblog' entry type
       tags:
@@ -33372,7 +33373,7 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Search API for 'Wiki Page' entry type
       tags:

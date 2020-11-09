@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: app.obono.at
@@ -7,26 +7,28 @@ info:
   contact:
     email: info@obono.at
     name: CodeWerkstatt OG
-    url: 'https://obono.at'
+    url: https://obono.at
     x-twitter: obono_at
-  description: |
+  description: >
     Provides a RESTful API for interacting with virtual cash registers and creating receipts that are conform with the Registrierkassensicherheitsverordnung (RKSV).
+
 
     You may find our [automatically generated clients](./clients) for various programming languages and environments helpful...
   license:
     name: Creative Commons Attribution NonCommercial 4.0 (CC-BY-NC)
-    url: 'https://creativecommons.org/licenses/by-nc/4.0/legalcode'
+    url: https://creativecommons.org/licenses/by-nc/4.0/legalcode
   title: obono RKSV
   version: 1.4.0.0
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/obono_at/profile_image?size=original'
+    url: https://twitter.com/obono_at/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://app.obono.at/api/docs/api.yml'
-      version: '2.0'
+      url: https://app.obono.at/api/docs/api.yml
+      version: "2.0"
   x-providerName: obono.at
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -54,15 +56,15 @@ paths:
     get:
       description: Request a JWT access token using your obono username and password.
       responses:
-        '200':
+        "200":
           description: The JWT `accessToken` to use for accessing secured resourced as well as the `registrierkassenUuid` of the corresponding "Registrierkasse".
           schema:
-            $ref: '#/definitions/AuthResult'
+            $ref: "#/definitions/AuthResult"
       security:
         - basicAuth: []
       tags:
         - auth
-  '/belege/{belegUuid}':
+  "/belege/{belegUuid}":
     get:
       description: Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
       parameters:
@@ -72,16 +74,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The requested `Beleg` resource.
           schema:
-            $ref: '#/definitions/Beleg'
-        '404':
+            $ref: "#/definitions/Beleg"
+        "404":
           description: The requested `Beleg` resource does not exist.
       security: []
       tags:
         - beleg
-  '/export/csv/registrierkassen/{registrierkasseUuid}/belege':
+  "/export/csv/registrierkassen/{registrierkasseUuid}/belege":
     get:
       parameters:
         - description: The `_uuid` of the `Registrierkasse` to export.
@@ -89,11 +91,11 @@ paths:
           name: registrierkasseUuid
           required: true
           type: string
-        - description: 'Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           type: string
-        - description: 'Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           type: string
@@ -104,11 +106,11 @@ paths:
       produces:
         - text/csv
       responses:
-        '200':
+        "200":
           description: The exported data of a particular `Registrierkasse` in its CSV representation.
       tags:
         - export
-  '/export/dep131/registrierkassen/{registrierkasseUuid}/belege':
+  "/export/dep131/registrierkassen/{registrierkasseUuid}/belege":
     get:
       parameters:
         - description: The `_uuid` of the `Registrierkasse` to export.
@@ -116,22 +118,22 @@ paths:
           name: registrierkasseUuid
           required: true
           type: string
-        - description: 'Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           type: string
-        - description: 'Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           type: string
       produces:
         - text/csv
       responses:
-        '200':
+        "200":
           description: The exported data of a particular `Registrierkasse` in its DEP131 / CSV representation.
       tags:
         - export
-  '/export/dep7/registrierkassen/{registrierkasseUuid}/belege':
+  "/export/dep7/registrierkassen/{registrierkasseUuid}/belege":
     get:
       parameters:
         - description: The `_uuid` of the `Registrierkasse` to export.
@@ -139,20 +141,20 @@ paths:
           name: registrierkasseUuid
           required: true
           type: string
-        - description: 'Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           type: string
-        - description: 'Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           type: string
       responses:
-        '200':
+        "200":
           description: The exported data of a particular `Registrierkasse` in its DEP7 representation.
       tags:
         - export
-  '/export/gobd/registrierkassen/{registrierkasseUuid}':
+  "/export/gobd/registrierkassen/{registrierkasseUuid}":
     get:
       parameters:
         - description: The `_uuid` of the `Registrierkasse` to export.
@@ -160,22 +162,22 @@ paths:
           name: registrierkasseUuid
           required: true
           type: string
-        - description: 'Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           type: string
-        - description: 'Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           type: string
       produces:
         - application/zip
       responses:
-        '200':
+        "200":
           description: The exported data of a particular `Registrierkasse` in its GoBD representation.
       tags:
         - export
-  '/export/html/belege/{belegUuid}':
+  "/export/html/belege/{belegUuid}":
     get:
       parameters:
         - description: The `_uuid` of a particular `Beleg` to export.
@@ -186,12 +188,12 @@ paths:
       produces:
         - text/html
       responses:
-        '200':
+        "200":
           description: A particular `Beleg` in its HTML representation.
       security: []
       tags:
         - export
-  '/export/pdf/belege/{belegUuid}':
+  "/export/pdf/belege/{belegUuid}":
     get:
       parameters:
         - description: The `_uuid` of a particular `Beleg` to export.
@@ -202,12 +204,12 @@ paths:
       produces:
         - application/pdf
       responses:
-        '200':
+        "200":
           description: A particular `Beleg` in its PDF representation.
       security: []
       tags:
         - export
-  '/export/qr/belege/{belegUuid}':
+  "/export/qr/belege/{belegUuid}":
     get:
       parameters:
         - description: The `_uuid` of a particular `Beleg` to export.
@@ -218,12 +220,12 @@ paths:
       produces:
         - image/png
       responses:
-        '200':
+        "200":
           description: The RKSV QR-Code as PNG file.
       security: []
       tags:
         - export
-  '/export/thermal-print/belege/{belegUuid}':
+  "/export/thermal-print/belege/{belegUuid}":
     get:
       parameters:
         - description: The `_uuid` of a particular `Beleg` to export.
@@ -262,12 +264,12 @@ paths:
       produces:
         - application/octet-stream
       responses:
-        '200':
+        "200":
           description: A particular `Beleg` in its ESC/POS or STAR representation.
       security: []
       tags:
         - export
-  '/export/xls/registrierkassen/{registrierkasseUuid}/belege':
+  "/export/xls/registrierkassen/{registrierkasseUuid}/belege":
     get:
       parameters:
         - description: The `_uuid` of the `Registrierkasse` to export.
@@ -275,22 +277,22 @@ paths:
           name: registrierkasseUuid
           required: true
           type: string
-        - description: 'Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           type: string
-        - description: 'Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that were saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           type: string
       produces:
         - application/vnd.ms-excel
       responses:
-        '200':
+        "200":
           description: The exported data of a particular `Registrierkasse` in its Microsoft Excel representation.
       tags:
         - export
-  '/registrierkassen/{registrierkasseUuid}':
+  "/registrierkassen/{registrierkasseUuid}":
     get:
       description: Returns information about a particular `Registrierkasse`.
       operationId: getRegistrierkasse
@@ -301,15 +303,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Information about a particular `Registrierkasse`.
           schema:
-            $ref: '#/definitions/Registrierkasse'
-        '404':
+            $ref: "#/definitions/Registrierkasse"
+        "404":
           description: This particular `Registrierkasse` does not exist.
       tags:
         - registrierkasse
-  '/registrierkassen/{registrierkasseUuid}/abschluss':
+  "/registrierkassen/{registrierkasseUuid}/abschluss":
     post:
       description: Generates an `Abschlussbeleg`.
       operationId: createAbschluss
@@ -324,10 +326,10 @@ paths:
           name: abschlussbelegdaten
           required: true
           schema:
-            $ref: '#/definitions/Abschlussbelegdaten'
+            $ref: "#/definitions/Abschlussbelegdaten"
       responses:
-        '201':
-          description: 'The `Abschlussbeleg` has been created, signed and added to the "Datenerfassungsprotokoll".'
+        "201":
+          description: The `Abschlussbeleg` has been created, signed and added to the "Datenerfassungsprotokoll".
           headers:
             Location:
               description: The URL (`_href`) of the newly created `Beleg` resource.
@@ -335,7 +337,7 @@ paths:
               type: string
       tags:
         - beleg
-  '/registrierkassen/{registrierkasseUuid}/belege':
+  "/registrierkassen/{registrierkasseUuid}/belege":
     get:
       description: Retrieves the `Beleg` collection from the "Datenerfassungsprotokoll".
       operationId: getBelege
@@ -372,11 +374,11 @@ paths:
           in: query
           name: offset
           type: integer
-        - description: 'Only return results that where saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that where saved before the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: before
           type: string
-        - description: 'Only return results that where saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).'
+        - description: Only return results that where saved after the specified date-time string (i.e., anything that `Date.parse()` can parse).
           in: query
           name: after
           type: string
@@ -389,13 +391,13 @@ paths:
           name: lte
           type: integer
       responses:
-        '200':
+        "200":
           description: The `Beleg` collection from the "Datenerfassungsprotokoll".
           schema:
-            $ref: '#/definitions/Belege'
+            $ref: "#/definitions/Belege"
       tags:
         - beleg
-  '/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}':
+  "/registrierkassen/{registrierkasseUuid}/belege/{belegUuid}":
     get:
       description: Retrieves a particular `Beleg` from the "Datenerfassungsprotokoll".
       parameters:
@@ -410,11 +412,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The requested `Beleg` resource.
           schema:
-            $ref: '#/definitions/Beleg'
-        '404':
+            $ref: "#/definitions/Beleg"
+        "404":
           description: The requested `Beleg` resource does not exist.
       tags:
         - beleg
@@ -437,30 +439,30 @@ paths:
           name: belegdaten
           required: true
           schema:
-            $ref: '#/definitions/Belegdaten'
+            $ref: "#/definitions/Belegdaten"
       responses:
-        '201':
+        "201":
           description: The `Beleg` has been signed and added to the "Datenerfassungsprotokoll".
           headers:
             Location:
               description: The URL (`_href`) of the newly created `Beleg` resource.
               format: url
               type: string
-        '400':
+        "400":
           description: The provided request payload is invalid i.e. not conform the the JSON schema.
-        '403':
+        "403":
           description: Access token is either missing or invalid. Be sure to include the Authorization HTTP header.
-        '409':
+        "409":
           description: A `Beleg` with this particular `belegUuid` already exists.
-        '415':
+        "415":
           description: The provided request payload is not JSON encoded.
-        '429':
+        "429":
           description: Request limit exceeded.
-        '500':
+        "500":
           description: The receipt could not be signed either because the HSM delivered invalid data or the request signing request timed out (currently after 10 seconds).
       tags:
         - beleg
-  '/registrierkassen/{registrierkasseUuid}/dep':
+  "/registrierkassen/{registrierkasseUuid}/dep":
     get:
       description: Generates a DEP file.
       operationId: getDEP
@@ -471,11 +473,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: The DEP file.
       tags:
         - registrierkasse
-  '/registrierkassen/{registrierkasseUuid}/monatsbelege':
+  "/registrierkassen/{registrierkasseUuid}/monatsbelege":
     get:
       description: Returns a list of `Monatsbelege`.
       operationId: getMonatsbelege
@@ -492,11 +494,11 @@ paths:
           name: month
           type: integer
       responses:
-        '200':
+        "200":
           description: Information about `Monatsbelege`.
           schema:
             items:
-              $ref: '#/definitions/Monatsbeleg'
+              $ref: "#/definitions/Monatsbeleg"
             type: array
       tags:
         - monatsbelege
@@ -540,7 +542,7 @@ definitions:
           type: string
         type: array
       Belegdaten:
-        $ref: '#/definitions/SignierteBelegdaten'
+        $ref: "#/definitions/SignierteBelegdaten"
       JWS:
         description: The signed `Beleg` as a JWS signature token.
         format: jws
@@ -585,11 +587,11 @@ definitions:
         type: array
       Posten:
         items:
-          $ref: '#/definitions/Posten'
+          $ref: "#/definitions/Posten"
         type: array
       Rabatte:
         items:
-          $ref: '#/definitions/Rabatt'
+          $ref: "#/definitions/Rabatt"
         type: array
       Storno:
         description: Storno?
@@ -627,19 +629,19 @@ definitions:
         type: string
       Zahlungen:
         items:
-          $ref: '#/definitions/Zahlung'
+          $ref: "#/definitions/Zahlung"
         type: array
     type: object
   Belege:
     allOf:
-      - $ref: '#/definitions/Belegformat'
-      - $ref: '#/definitions/Exportformat'
+      - $ref: "#/definitions/Belegformat"
+      - $ref: "#/definitions/Exportformat"
     type: object
   Belegformat:
     properties:
       Belege:
         items:
-          $ref: '#/definitions/Beleg'
+          $ref: "#/definitions/Beleg"
         type: array
     type: object
   Exportformat:
@@ -709,7 +711,7 @@ definitions:
           - ERMAESSIGT1
           - ERMAESSIGT2
           - BESONDERS
-          - 'NULL'
+          - "NULL"
         type: string
     required:
       - Bezeichnung
@@ -734,7 +736,7 @@ definitions:
           - ERMAESSIGT1
           - ERMAESSIGT2
           - BESONDERS
-          - 'NULL'
+          - "NULL"
         type: string
     required:
       - Bezeichnung
@@ -819,11 +821,11 @@ definitions:
         type: array
       Posten:
         items:
-          $ref: '#/definitions/Posten'
+          $ref: "#/definitions/Posten"
         type: array
       Rabatte:
         items:
-          $ref: '#/definitions/Rabatt'
+          $ref: "#/definitions/Rabatt"
         type: array
       Storno:
         description: Storno?
@@ -861,7 +863,7 @@ definitions:
         type: string
       Zahlungen:
         items:
-          $ref: '#/definitions/Zahlung'
+          $ref: "#/definitions/Zahlung"
         type: array
       Zertifikat-Seriennummer:
         type: string

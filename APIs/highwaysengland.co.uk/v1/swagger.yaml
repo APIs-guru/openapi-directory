@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: webtris.highwaysengland.co.uk
@@ -11,17 +11,18 @@ info:
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://twitter.com/HighwaysEngland/profile_image?size=original'
+    url: https://twitter.com/HighwaysEngland/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://webtris.highwaysengland.co.uk/api/swagger/docs/v1'
-      version: '2.0'
+      url: http://webtris.highwaysengland.co.uk/api/swagger/docs/v1
+      version: "2.0"
   x-providerName: highwaysengland.co.uk
+  x-preferred: true
 consumes: []
 produces:
   - application/json
 paths:
-  '/v{version}/areas':
+  "/v{version}/areas":
     get:
       deprecated: false
       parameters:
@@ -30,18 +31,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/AreaResponse'
-        '400':
+            $ref: "#/definitions/AreaResponse"
+        "400":
           description: Bad request
-        '500':
+        "500":
           description: Internal Server Error
       summary: Returns list of areas
       tags:
         - Areas
-  '/v{version}/areas/{area_Ids}':
+  "/v{version}/areas/{area_Ids}":
     get:
       deprecated: false
       parameters:
@@ -54,18 +55,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/AreaResponse'
-        '400':
+            $ref: "#/definitions/AreaResponse"
+        "400":
           description: Bad request
-        '500':
+        "500":
           description: Internal Server Error
       summary: Returns details of selected area
       tags:
         - Areas
-  '/v{version}/quality/daily':
+  "/v{version}/quality/daily":
     get:
       deprecated: false
       operationId: Quality_GetDailyDataQualityForSite
@@ -89,23 +90,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/DailyQualityResponse'
-        '400':
+            $ref: "#/definitions/DailyQualityResponse"
+        "400":
           description: Bad request
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Site DailyQuality
       tags:
         - Quality
-  '/v{version}/quality/overall':
+  "/v{version}/quality/overall":
     get:
       deprecated: false
       operationId: Quality_GetOverallDataQualityForSites
       parameters:
-        - description: 'Get site quality by site id delimited by ,'
+        - description: Get site quality by site id delimited by ,
           in: query
           name: sites
           required: true
@@ -125,23 +126,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/OverallQualityResponse'
-        '400':
+            $ref: "#/definitions/OverallQualityResponse"
+        "400":
           description: Bad request
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Site OverallQuality
       tags:
         - Quality
-  '/v{version}/reports/{report_type}':
+  "/v{version}/reports/{report_type}":
     get:
       deprecated: false
       description: Get's the report.
       parameters:
-        - description: 'Report Type Id (i.e Daily, Monthly, Annual)'
+        - description: Report Type Id (i.e Daily, Monthly, Annual)
           in: path
           name: report_type
           required: true
@@ -183,23 +184,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Object'
-        '400':
+            $ref: "#/definitions/Object"
+        "400":
           description: Bad request
-        '500':
+        "500":
           description: Internal Server Error
       summary: Gets the daily report.
       tags:
         - Reports
-  '/v{version}/reports/{start_date}/to/{end_date}/{report_type}':
+  "/v{version}/reports/{start_date}/to/{end_date}/{report_type}":
     get:
       deprecated: false
       description: Get's the report.
       parameters:
-        - description: 'Report Type Id (i.e Daily, Monthly, Annual)'
+        - description: Report Type Id (i.e Daily, Monthly, Annual)
           in: path
           name: report_type
           required: true
@@ -241,18 +242,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Object'
-        '400':
+            $ref: "#/definitions/Object"
+        "400":
           description: Bad request
-        '500':
+        "500":
           description: Internal Server Error
       summary: Gets the daily report.
       tags:
         - Reports
-  '/v{version}/sites':
+  "/v{version}/sites":
     get:
       deprecated: false
       parameters:
@@ -261,18 +262,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/SiteResponse'
-        '400':
+            $ref: "#/definitions/SiteResponse"
+        "400":
           description: Bad request
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get a list of sites
       tags:
         - Sites
-  '/v{version}/sites/{site_Ids}':
+  "/v{version}/sites/{site_Ids}":
     get:
       deprecated: false
       parameters:
@@ -286,18 +287,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/SiteResponse'
-        '400':
+            $ref: "#/definitions/SiteResponse"
+        "400":
           description: Bad request
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get selected sites
       tags:
         - Sites
-  '/v{version}/sitetypes':
+  "/v{version}/sitetypes":
     get:
       deprecated: false
       operationId: SiteTypes_Index
@@ -307,23 +308,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/SiteTypeResponse'
-        '400':
+            $ref: "#/definitions/SiteTypeResponse"
+        "400":
           description: Bad request
-        '500':
+        "500":
           description: Internal Server Error
       summary: Return list of site types
       tags:
         - SiteTypes
-  '/v{version}/sitetypes/{siteType_Id}/sites':
+  "/v{version}/sitetypes/{siteType_Id}/sites":
     get:
       deprecated: false
       operationId: SiteTypes_GetSitesForPublicFacingAPI
       parameters:
-        - description: '1 = MIDAS, 2 = TAME, 3 = TMU, 4 = TRADS Legacy'
+        - description: 1 = MIDAS, 2 = TAME, 3 = TMU, 4 = TRADS Legacy
           format: int32
           in: path
           name: siteType_Id
@@ -334,15 +335,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/SiteTypeLayer'
-        '400':
+            $ref: "#/definitions/SiteTypeLayer"
+        "400":
           description: Bad request
-        '404':
+        "404":
           description: Layer not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Returns the layer metadata for the LayerId specified.
       tags:
@@ -357,16 +358,16 @@ definitions:
       Name:
         type: string
       XLatitude:
-        pattern: '^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,15})?))$'
+        pattern: ^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,15})?))$
         type: string
       XLongitude:
-        pattern: '^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,15})?))$'
+        pattern: ^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,15})?))$
         type: string
       YLatitude:
-        pattern: '^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,15})?))$'
+        pattern: ^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,15})?))$
         type: string
       YLongitude:
-        pattern: '^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,15})?))$'
+        pattern: ^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,15})?))$
         type: string
     required:
       - Name
@@ -380,7 +381,7 @@ definitions:
     properties:
       areas:
         items:
-          $ref: '#/definitions/Area'
+          $ref: "#/definitions/Area"
         type: array
       row_count:
         format: int32
@@ -390,7 +391,7 @@ definitions:
     properties:
       Qualities:
         items:
-          $ref: '#/definitions/Qualities'
+          $ref: "#/definitions/Qualities"
         type: array
       row_count:
         format: int32
@@ -430,7 +431,7 @@ definitions:
         type: integer
       sites:
         items:
-          $ref: '#/definitions/SiteResult'
+          $ref: "#/definitions/SiteResult"
         type: array
     type: object
   SiteResult:
@@ -461,7 +462,7 @@ definitions:
     properties:
       Sites:
         items:
-          $ref: '#/definitions/Sites'
+          $ref: "#/definitions/Sites"
         type: array
     type: object
   SiteTypeResponse:
@@ -471,7 +472,7 @@ definitions:
         type: integer
       sitetypes:
         items:
-          $ref: '#/definitions/SiteType'
+          $ref: "#/definitions/SiteType"
         type: array
     type: object
   Sites:

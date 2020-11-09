@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.botify.com
@@ -11,15 +11,16 @@ info:
     - analytics
     - tools
   x-logo:
-    backgroundColor: '#1A1A1A'
-    url: 'https://static.botify.com/images/logos/botify-white.dc4215a12b9c.png'
+    backgroundColor: "#1A1A1A"
+    url: https://static.botify.com/images/logos/botify-white.dc4215a12b9c.png
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/botify-labs/botify-sdk-js/master/swagger.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/botify-labs/botify-sdk-js/master/swagger.json
+      version: "2.0"
   x-providerName: botify.com
+  x-preferred: true
 externalDocs:
-  url: 'https://developers.botify.com/'
+  url: https://developers.botify.com/
 produces:
   - application/json
 securityDefinitions:
@@ -30,7 +31,7 @@ securityDefinitions:
 security:
   - DjangoRestToken: []
 paths:
-  '/analyses/{username}/{project_slug}':
+  "/analyses/{username}/{project_slug}":
     get:
       description: List all analyses for a project
       operationId: getProjectAnalyses
@@ -58,7 +59,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -72,7 +73,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/Analysis'
+                  $ref: "#/definitions/Analysis"
                 type: array
               size:
                 type: integer
@@ -80,7 +81,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: List all analyses for a project
       tags:
         - Project
@@ -95,7 +96,7 @@ paths:
         name: project_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}':
+  "/analyses/{username}/{project_slug}/{analysis_slug}":
     get:
       description: Get an Analysis detail
       operationId: getAnalysisSummary
@@ -106,14 +107,14 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/AnalysisDetail'
+            $ref: "#/definitions/AnalysisDetail"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Get an Analysis detail
       tags:
         - Analysis
@@ -141,33 +142,33 @@ paths:
           in: body
           name: AnalysisUpdate
           schema:
-            $ref: '#/definitions/AnalysisUpdate'
+            $ref: "#/definitions/AnalysisUpdate"
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/AnalysisUpdate'
+            $ref: "#/definitions/AnalysisUpdate"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Update an Analysis' attribute
       tags:
         - Analysis
-  '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics":
     get:
       description: Return global statistics for an analysis
       operationId: getCrawlStatistics
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/CrawlStatistics'
+            $ref: "#/definitions/CrawlStatistics"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Return global statistics for an analysis
       tags:
         - Analysis
@@ -187,9 +188,9 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/time':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/time":
     get:
-      description: 'Return crawl statistics grouped by time frequency (1 min, 5 mins or 60 min) for an analysis'
+      description: Return crawl statistics grouped by time frequency (1 min, 5 mins or 60 min) for an analysis
       operationId: getCrawlStatisticsByFrequency
       parameters:
         - description: max number of elements to retrieve
@@ -208,15 +209,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/CrawlStatisticsTime'
+            $ref: "#/definitions/CrawlStatisticsTime"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
-      summary: 'Return crawl statistics grouped by time frequency (1 min, 5 mins or 60 min)'
+            $ref: "#/definitions/DefaultPayload"
+      summary: Return crawl statistics grouped by time frequency (1 min, 5 mins or 60 min)
       tags:
         - Analysis
     parameters:
@@ -235,22 +236,22 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/urls/{list_type}':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/crawl_statistics/urls/{list_type}":
     get:
       description: Return a list of 1000 latest URLs crawled (all crawled URLs or only URLS with HTTP errors)
       operationId: getCrawlStatisticsUrls
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/CrawlStatisticsUrls'
+              $ref: "#/definitions/CrawlStatisticsUrls"
             type: array
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Return a list of 1000 latest URLs crawled (all crawled URLs or only URLS with HTTP errors)
       tags:
         - Analysis
@@ -278,9 +279,9 @@ paths:
         name: list_type
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/ganalytics/orphan_urls/{medium}/{source}':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/ganalytics/orphan_urls/{medium}/{source}":
     get:
-      description: 'Legacy    List of Orphan URLs. URLs which generated visits from the selected source according to Google Analytics data, but were not crawled with by the Botify crawler (either because no links to them were found on the website, or because the crawler was not allowed to follow these links according to the project settings).   For a search engine (medium: origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo, yandex) or a social network (medium: social; sources: all, facebook, google+, linkedin, pinterest, reddit, tumblr, twitter)'
+      description: "Legacy    List of Orphan URLs. URLs which generated visits from the selected source according to Google Analytics data, but were not crawled with by the Botify crawler (either because no links to them were found on the website, or because the crawler was not allowed to follow these links according to the project settings).   For a search engine (medium: origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo, yandex) or a social network (medium: social; sources: all, facebook, google+, linkedin, pinterest, reddit, tumblr, twitter)"
       operationId: getGanalyticsOrphanURLs
       parameters:
         - default: 1
@@ -295,7 +296,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -309,7 +310,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/CrawlOrphanURLs'
+                  $ref: "#/definitions/CrawlOrphanURLs"
                 type: array
               size:
                 type: integer
@@ -317,7 +318,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: List of Orphan URLs
       tags:
         - Analysis
@@ -337,7 +338,7 @@ paths:
         name: analysis_slug
         required: true
         type: string
-      - description: 'Type of traffic, value: ''organic'' (from search engine)or ''social'' (from a social network)'
+      - description: "Type of traffic, value: 'organic' (from search engine)or 'social' (from a social network)"
         enum:
           - organic
           - social
@@ -345,7 +346,7 @@ paths:
         name: medium
         required: true
         type: string
-      - description: 'Traffic source, value: name of the search engine or social network'
+      - description: "Traffic source, value: name of the search engine or social network"
         enum:
           - all
           - aol
@@ -367,20 +368,20 @@ paths:
         name: source
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/links/percentiles':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/links/percentiles":
     get:
       description: Get inlinks percentiles
       operationId: getLinksPercentiles
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/LinksPercentiles'
+            $ref: "#/definitions/LinksPercentiles"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Get inlinks percentiles
       tags:
         - Analysis
@@ -400,20 +401,20 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/pagerank/lost':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/pagerank/lost":
     get:
       description: Lost pagerank
       operationId: getPageRankLost
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/PageRankLost'
+            $ref: "#/definitions/PageRankLost"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Lost pagerank
       tags:
         - Analysis
@@ -433,20 +434,20 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/scoring/summary':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/scoring/summary":
     get:
       description: Scoring summary
       operationId: getScoring
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ScoringSummary'
+            $ref: "#/definitions/ScoringSummary"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Scoring summary
       tags:
         - Analysis
@@ -466,20 +467,20 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/search_console/stats':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/search_console/stats":
     get:
       description: List clicks and impressions per day
       operationId: getKeywordsStats
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/KeywordsStats'
+            $ref: "#/definitions/KeywordsStats"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: List clicks and impressions per day
       tags:
         - Analysis
@@ -499,21 +500,21 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/report':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/report":
     get:
-      description: 'Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc.)'
+      description: Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc.)
       operationId: getSitemapsReport
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/SitemapsReport'
+            $ref: "#/definitions/SitemapsReport"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
-      summary: 'Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc'
+            $ref: "#/definitions/DefaultPayload"
+      summary: Get global information of the sitemaps found (sitemaps indexes, invalid sitemaps urls, etc
       tags:
         - Analysis
     parameters:
@@ -532,9 +533,9 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/out_of_config':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/out_of_config":
     get:
-      description: 'Sample list of URLs which were found in your sitemaps but outside of the crawl perimeter defined for the project, for instance domain/subdomain or protocol (HTTP/HTTPS) not allowed in the crawl settings.'
+      description: Sample list of URLs which were found in your sitemaps but outside of the crawl perimeter defined for the project, for instance domain/subdomain or protocol (HTTP/HTTPS) not allowed in the crawl settings.
       operationId: getSitemapsSamplesOutOfConfig
       parameters:
         - default: 1
@@ -549,7 +550,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -571,7 +572,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Sample list of URLs which were found in your sitemaps but outside of the
       tags:
         - Analysis
@@ -591,9 +592,9 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/sitemap_only':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/sitemaps/samples/sitemap_only":
     get:
-      description: 'Sample list of URLs which were found in your sitemaps, within the project allowed scope (allowed domains/subdomains/protocols), but not found by the Botify crawler.'
+      description: Sample list of URLs which were found in your sitemaps, within the project allowed scope (allowed domains/subdomains/protocols), but not found by the Botify crawler.
       operationId: getSitemapsSamplesSitemapsOnly
       parameters:
         - default: 1
@@ -608,7 +609,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -630,8 +631,8 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
-      summary: 'Sample list of URLs which were found in your sitemaps, within the project'
+            $ref: "#/definitions/DefaultPayload"
+      summary: Sample list of URLs which were found in your sitemaps, within the project
       tags:
         - Analysis
     parameters:
@@ -650,7 +651,7 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/top_domains/domains':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/top_domains/domains":
     get:
       description: Top domains
       operationId: getLinksTopDomains
@@ -667,7 +668,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -681,7 +682,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/LinksTopDomains'
+                  $ref: "#/definitions/LinksTopDomains"
                 type: array
               size:
                 type: integer
@@ -689,7 +690,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Top domains
       tags:
         - Analysis
@@ -709,7 +710,7 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/top_domains/subdomains':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/top_domains/subdomains":
     get:
       description: Top subddomains
       operationId: getLinksTopSubdomains
@@ -726,7 +727,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -740,7 +741,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/LinksTopDomains'
+                  $ref: "#/definitions/LinksTopDomains"
                 type: array
               size:
                 type: integer
@@ -748,7 +749,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Top subddomains
       tags:
         - Analysis
@@ -768,9 +769,9 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/features/visits/orphan_urls/{medium}/{source}':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/features/visits/orphan_urls/{medium}/{source}":
     get:
-      description: 'List of Orphan URLs. URLs which generated visits from the selected source according to Google Analytics data, but were not crawled with by the Botify crawler (either because no links to them were found on the website, or because the crawler was not allowed to follow these links according to the project settings).   For a search engine (medium: origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo, yandex) or a social network (medium: social; sources: all, facebook, google+, linkedin, pinterest, reddit, tumblr, twitter)'
+      description: "List of Orphan URLs. URLs which generated visits from the selected source according to Google Analytics data, but were not crawled with by the Botify crawler (either because no links to them were found on the website, or because the crawler was not allowed to follow these links according to the project settings).   For a search engine (medium: origanic; sources: all, aol, ask, baidu, bing, google, naver, yahoo, yandex) or a social network (medium: social; sources: all, facebook, google+, linkedin, pinterest, reddit, tumblr, twitter)"
       operationId: getVisitsOrphanURLs
       parameters:
         - default: 1
@@ -785,7 +786,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -799,7 +800,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/CrawlOrphanURLs'
+                  $ref: "#/definitions/CrawlOrphanURLs"
                 type: array
               size:
                 type: integer
@@ -807,7 +808,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: List of Orphan URLs
       tags:
         - Analysis
@@ -827,7 +828,7 @@ paths:
         name: analysis_slug
         required: true
         type: string
-      - description: 'Type of traffic, value: ''organic'' (from search engine)or ''social'' (from a social network)'
+      - description: "Type of traffic, value: 'organic' (from search engine)or 'social' (from a social network)"
         enum:
           - organic
           - social
@@ -835,7 +836,7 @@ paths:
         name: medium
         required: true
         type: string
-      - description: 'Traffic source, value: name of the search engine or social network'
+      - description: "Traffic source, value: name of the search engine or social network"
         enum:
           - all
           - aol
@@ -857,7 +858,7 @@ paths:
         name: source
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/segments':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/segments":
     get:
       description: Get the segments feature public metadata of an analysis.
       operationId: getAnalysisSegments
@@ -874,7 +875,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -888,7 +889,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/AnalysisSegments'
+                  $ref: "#/definitions/AnalysisSegments"
                 type: array
               size:
                 type: integer
@@ -896,7 +897,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Get the segments feature public metadata of an analysis
       tags:
         - Analysis
@@ -916,7 +917,7 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/staticfiles/robots-txt-indexes':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/staticfiles/robots-txt-indexes":
     get:
       description: Return a list of all robots.txt files found on the project's domains.
       operationId: getRobotsTxtIndexesView
@@ -933,7 +934,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -947,7 +948,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/Default'
+                  $ref: "#/definitions/Default"
                 type: array
               size:
                 type: integer
@@ -955,7 +956,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Return a list of all robots
       tags:
         - Analysis
@@ -975,7 +976,7 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/staticfiles/robots-txt-indexes/{robots_txt}':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/staticfiles/robots-txt-indexes/{robots_txt}":
     get:
       description: Return content of a robots.txt file.
       operationId: getRobotsTxtFileView
@@ -992,7 +993,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -1006,7 +1007,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/Default'
+                  $ref: "#/definitions/Default"
                 type: array
               size:
                 type: integer
@@ -1014,7 +1015,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Return content of a robots
       tags:
         - Analysis
@@ -1039,7 +1040,7 @@ paths:
         name: robots_txt
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/urls':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/urls":
     parameters:
       - description: User's identifier
         in: path
@@ -1064,7 +1065,7 @@ paths:
           in: body
           name: Query
           schema:
-            $ref: '#/definitions/Query'
+            $ref: "#/definitions/Query"
         - default: current
           description: Analysis context
           enum:
@@ -1096,7 +1097,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -1110,7 +1111,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/UrlDetail'
+                  $ref: "#/definitions/UrlDetail"
                 type: array
               size:
                 type: integer
@@ -1118,11 +1119,11 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Executes a query and returns a paginated response
       tags:
         - Analysis
-  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/aggs':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/urls/aggs":
     parameters:
       - description: User's identifier
         in: path
@@ -1147,7 +1148,7 @@ paths:
           in: body
           name: AggsQueries
           schema:
-            $ref: '#/definitions/AggsQueries'
+            $ref: "#/definitions/AggsQueries"
         - default: current
           description: Analysis context
           enum:
@@ -1167,20 +1168,20 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Aggs'
+              $ref: "#/definitions/Aggs"
             type: array
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Query aggregator
       tags:
         - Analysis
-  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/datamodel':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/urls/datamodel":
     get:
       description: Gets an Analysis datamodel
       operationId: getUrlsDatamodel
@@ -1204,14 +1205,14 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Datamodel'
+            $ref: "#/definitions/Datamodel"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Gets an Analysis datamodel
       tags:
         - Analysis
@@ -1231,7 +1232,7 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/datasets':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/urls/datasets":
     get:
       description: Gets Analysis Datasets
       operationId: getUrlsDatasets
@@ -1261,14 +1262,14 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Datasets'
+            $ref: "#/definitions/Datasets"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Gets Analysis Datasets
       tags:
         - Analysis
@@ -1288,7 +1289,7 @@ paths:
         name: analysis_slug
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/export':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/urls/export":
     get:
       description: A list of the CSV Exports requests and their current status
       operationId: getUrlsExports
@@ -1305,7 +1306,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -1319,7 +1320,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/CsvExportStatus'
+                  $ref: "#/definitions/CsvExportStatus"
                 type: array
               size:
                 type: integer
@@ -1327,7 +1328,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: A list of the CSV Exports requests and their current status
       tags:
         - Analysis
@@ -1355,7 +1356,7 @@ paths:
           in: body
           name: Query
           schema:
-            $ref: '#/definitions/Query'
+            $ref: "#/definitions/Query"
         - default: current
           description: Analysis context
           enum:
@@ -1387,31 +1388,31 @@ paths:
           required: false
           type: integer
       responses:
-        '201':
+        "201":
           description: Successful operation
           schema:
-            $ref: '#/definitions/CsvExportStatus'
+            $ref: "#/definitions/CsvExportStatus"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Creates a new UrlExport object and starts a task that will export the results into a csv
       tags:
         - Analysis
-  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/export/{url_export_id}':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/urls/export/{url_export_id}":
     get:
       description: Checks the status of an CSVUrlExportJob object. Returns json object with the status.
       operationId: getUrlsExportStatus
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/CsvExportStatus'
+            $ref: "#/definitions/CsvExportStatus"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Checks the status of an CSVUrlExportJob object
       tags:
         - Analysis
@@ -1436,20 +1437,20 @@ paths:
         name: url_export_id
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/html/{url}':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/urls/html/{url}":
     get:
       description: Gets the HTML of an URL for an analysis
       operationId: getUrlHTML
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/UrlHTML'
+            $ref: "#/definitions/UrlHTML"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Gets the HTML of an URL for an analysis
       tags:
         - Analysis
@@ -1474,7 +1475,7 @@ paths:
         name: url
         required: true
         type: string
-  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/suggested_filters':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/urls/suggested_filters":
     parameters:
       - description: User's identifier
         in: path
@@ -1499,7 +1500,7 @@ paths:
           in: body
           name: AggsQuery
           schema:
-            $ref: '#/definitions/AggsQuery'
+            $ref: "#/definitions/AggsQuery"
         - default: current
           description: Analysis context
           enum:
@@ -1510,18 +1511,18 @@ paths:
           required: false
           type: string
       responses:
-        '201':
+        "201":
           description: Successful operation
           schema:
-            $ref: '#/definitions/AggsQuery'
+            $ref: "#/definitions/AggsQuery"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Return most frequent segments (= suggested patterns in the previous version)
       tags:
         - Analysis
-  '/analyses/{username}/{project_slug}/{analysis_slug}/urls/{url}':
+  "/analyses/{username}/{project_slug}/{analysis_slug}/urls/{url}":
     get:
       description: Gets the detail of an URL for an analysis
       operationId: getUrlDetail
@@ -1535,14 +1536,14 @@ paths:
           required: false
           type: array
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/UrlDetail'
+            $ref: "#/definitions/UrlDetail"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Gets the detail of an URL for an analysis
       tags:
         - Analysis
@@ -1567,7 +1568,7 @@ paths:
         name: url
         required: true
         type: string
-  '/projects/{username}':
+  "/projects/{username}":
     get:
       description: List all active projects for the user
       operationId: getUserProjects
@@ -1588,7 +1589,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             properties:
@@ -1602,7 +1603,7 @@ paths:
                 type: string
               results:
                 items:
-                  $ref: '#/definitions/Project'
+                  $ref: "#/definitions/Project"
                 type: array
               size:
                 type: integer
@@ -1610,7 +1611,7 @@ paths:
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: List all active projects for the user
       tags:
         - User
@@ -1620,7 +1621,7 @@ paths:
         name: username
         required: true
         type: string
-  '/projects/{username}/{project_slug}/automations':
+  "/projects/{username}/{project_slug}/automations":
     parameters:
       - description: user to which belongs the project
         in: path
@@ -1640,20 +1641,20 @@ paths:
           in: body
           name: JobAutomation
           schema:
-            $ref: '#/definitions/JobAutomation'
+            $ref: "#/definitions/JobAutomation"
       responses:
-        '201':
+        "201":
           description: Successful operation
           schema:
-            $ref: '#/definitions/JobAutomation'
+            $ref: "#/definitions/JobAutomation"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Creates a new JobAutomation from data
       tags:
         - JobAutomation
-  '/projects/{username}/{project_slug}/automations/from/{job_id}':
+  "/projects/{username}/{project_slug}/automations/from/{job_id}":
     parameters:
       - description: user to which belongs the project
         in: path
@@ -1678,33 +1679,33 @@ paths:
           in: body
           name: JobAutomation
           schema:
-            $ref: '#/definitions/JobAutomation'
+            $ref: "#/definitions/JobAutomation"
       responses:
-        '201':
+        "201":
           description: Successful operation
           schema:
-            $ref: '#/definitions/JobAutomation'
+            $ref: "#/definitions/JobAutomation"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Creates a new JobAutomation from an existing job
       tags:
         - JobAutomation
-  '/projects/{username}/{project_slug}/collections':
+  "/projects/{username}/{project_slug}/collections":
     get:
       description: List all collections for a project
       operationId: getProjectCollections
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Collection'
+            $ref: "#/definitions/Collection"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: List all collections for a project
       tags:
         - Collections
@@ -1719,20 +1720,20 @@ paths:
         name: project_slug
         required: true
         type: string
-  '/projects/{username}/{project_slug}/collections/{collection}':
+  "/projects/{username}/{project_slug}/collections/{collection}":
     get:
       description: Get the detail of a collection
       operationId: getCollectionDetail
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/CollectionDatasets'
+            $ref: "#/definitions/CollectionDatasets"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Get the detail of a collection
       tags:
         - Collections
@@ -1752,20 +1753,20 @@ paths:
         name: collection
         required: true
         type: string
-  '/projects/{username}/{project_slug}/datasources':
+  "/projects/{username}/{project_slug}/datasources":
     get:
       description: List all datasources for a project
       operationId: getDatasourcesDetails
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ProjectDatasource'
+            $ref: "#/definitions/ProjectDatasource"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: List all datasources for a project
       tags:
         - Project
@@ -1780,21 +1781,21 @@ paths:
         name: project_slug
         required: true
         type: string
-  '/projects/{username}/{project_slug}/filters':
+  "/projects/{username}/{project_slug}/filters":
     get:
-      description: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
+      description: List all the project's saved filters (each filter's name, ID and filter value)
       operationId: getSavedFilters
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ProjectSavedFilter'
+            $ref: "#/definitions/ProjectSavedFilter"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
-      summary: 'List all the project''s saved filters (each filter''s name, ID and filter value)'
+            $ref: "#/definitions/DefaultPayload"
+      summary: List all the project's saved filters (each filter's name, ID and filter value)
       tags:
         - Project
     parameters:
@@ -1808,21 +1809,21 @@ paths:
         name: project_slug
         required: true
         type: string
-  '/projects/{username}/{project_slug}/filters/{identifier}':
+  "/projects/{username}/{project_slug}/filters/{identifier}":
     get:
-      description: 'Retrieves a specific saved filter''s name, ID and filter value'
+      description: Retrieves a specific saved filter's name, ID and filter value
       operationId: getSavedFilter
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ProjectSavedFilter'
+            $ref: "#/definitions/ProjectSavedFilter"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
-      summary: 'Retrieves a specific saved filter''s name, ID and filter value'
+            $ref: "#/definitions/DefaultPayload"
+      summary: Retrieves a specific saved filter's name, ID and filter value
       tags:
         - Project
     parameters:
@@ -1840,20 +1841,20 @@ paths:
         name: identifier
         required: true
         type: string
-  '/projects/{username}/{project_slug}/saved_explorers':
+  "/projects/{username}/{project_slug}/saved_explorers":
     get:
       description: List all the project's Saved Explorers.
       operationId: getSavedExplorers
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/SavedExplorer'
+            $ref: "#/definitions/SavedExplorer"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: List all the project's Saved Explorers
       tags:
         - Project
@@ -1868,7 +1869,7 @@ paths:
         name: project_slug
         required: true
         type: string
-  '/projects/{username}/{project_slug}/urls/aggs':
+  "/projects/{username}/{project_slug}/urls/aggs":
     parameters:
       - description: User's identifier
         in: path
@@ -1888,7 +1889,7 @@ paths:
           in: body
           name: AggsQueries
           schema:
-            $ref: '#/definitions/AggsQueries'
+            $ref: "#/definitions/AggsQueries"
         - default: current
           description: Analyses context
           enum:
@@ -1916,31 +1917,31 @@ paths:
           required: false
           type: integer
       responses:
-        '201':
+        "201":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Default'
+            $ref: "#/definitions/Default"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Project Query aggregator
       tags:
         - Project
-  '/users/{username}/datasources_summary_by_projects':
+  "/users/{username}/datasources_summary_by_projects":
     get:
       description: Get the datasources details for all projects of a user
       operationId: getDatasourcesSummaryByProjects
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ProjectDatasourceSummary'
+            $ref: "#/definitions/ProjectDatasourceSummary"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: Get the datasources details for all projects of a user
       tags:
         - Datasource
@@ -1950,20 +1951,20 @@ paths:
         name: username
         required: true
         type: string
-  '/users/{username}/projects':
+  "/users/{username}/projects":
     get:
       description: List all active projects for the user
       operationId: getAllUserProjects
       parameters: []
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Project'
+            $ref: "#/definitions/Project"
         default:
           description: error payload
           schema:
-            $ref: '#/definitions/DefaultPayload'
+            $ref: "#/definitions/DefaultPayload"
       summary: List all active projects for the user
       tags:
         - Project
@@ -2030,7 +2031,7 @@ definitions:
     properties:
       exporters:
         items:
-          $ref: '#/definitions/AdvancedExporter'
+          $ref: "#/definitions/AdvancedExporter"
         type: array
     required:
       - exporters
@@ -2038,7 +2039,7 @@ definitions:
   Aggs:
     properties:
       error:
-        $ref: '#/definitions/ErrorAgg'
+        $ref: "#/definitions/ErrorAgg"
       status:
         format: int64
         type: integer
@@ -2047,7 +2048,7 @@ definitions:
     type: object
   AggsQueries:
     items:
-      $ref: '#/definitions/AggsQuery'
+      $ref: "#/definitions/AggsQuery"
     type: array
   AggsQuery:
     description: AggsQuery
@@ -2151,7 +2152,7 @@ definitions:
         readOnly: true
         type: string
       user:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
     required:
       - user
     type: object
@@ -2232,7 +2233,7 @@ definitions:
         readOnly: true
         type: string
       user:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
     required:
       - user
     type: object
@@ -2263,11 +2264,11 @@ definitions:
     properties:
       add_on_features:
         items:
-          $ref: '#/definitions/SuggestedUpdatesAddOnFeatures'
+          $ref: "#/definitions/SuggestedUpdatesAddOnFeatures"
         type: array
       features_to_update:
         items:
-          $ref: '#/definitions/SuggestedUpdatesFeaturesToUpdate'
+          $ref: "#/definitions/SuggestedUpdatesFeaturesToUpdate"
         type: array
     required:
       - add_on_features
@@ -2314,10 +2315,10 @@ definitions:
     properties:
       datasets:
         items:
-          $ref: '#/definitions/Dataset'
+          $ref: "#/definitions/Dataset"
         type: array
       metadata:
-        $ref: '#/definitions/CollectionMetadata'
+        $ref: "#/definitions/CollectionMetadata"
     required:
       - datasets
     type: object
@@ -2396,40 +2397,40 @@ definitions:
     properties:
       avg_delay:
         items:
-          $ref: '#/definitions/CrawlStatisticsTimePoint'
+          $ref: "#/definitions/CrawlStatisticsTimePoint"
         type: array
       avg_size:
         items:
-          $ref: '#/definitions/CrawlStatisticsTimePoint'
+          $ref: "#/definitions/CrawlStatisticsTimePoint"
         type: array
       frequency:
         type: string
       http_code_2xx:
         items:
-          $ref: '#/definitions/CrawlStatisticsTimePoint'
+          $ref: "#/definitions/CrawlStatisticsTimePoint"
         type: array
       http_code_3xx:
         items:
-          $ref: '#/definitions/CrawlStatisticsTimePoint'
+          $ref: "#/definitions/CrawlStatisticsTimePoint"
         type: array
       http_code_4xx:
         items:
-          $ref: '#/definitions/CrawlStatisticsTimePoint'
+          $ref: "#/definitions/CrawlStatisticsTimePoint"
         type: array
       http_code_5xx:
         items:
-          $ref: '#/definitions/CrawlStatisticsTimePoint'
+          $ref: "#/definitions/CrawlStatisticsTimePoint"
         type: array
       http_code_xxx:
         items:
-          $ref: '#/definitions/CrawlStatisticsTimePoint'
+          $ref: "#/definitions/CrawlStatisticsTimePoint"
         type: array
       last_update_date:
         format: date-time
         type: string
       new_urls:
         items:
-          $ref: '#/definitions/CrawlStatisticsTimePoint'
+          $ref: "#/definitions/CrawlStatisticsTimePoint"
         type: array
     required:
       - avg_delay
@@ -2512,7 +2513,7 @@ definitions:
         minimum: 0
         type: integer
       query:
-        $ref: '#/definitions/Query'
+        $ref: "#/definitions/Query"
       results:
         readOnly: true
         type: string
@@ -2532,11 +2533,11 @@ definitions:
         type: object
       fields:
         items:
-          $ref: '#/definitions/DatamodelField'
+          $ref: "#/definitions/DatamodelField"
         type: array
       groups:
         items:
-          $ref: '#/definitions/DatamodelGroup'
+          $ref: "#/definitions/DatamodelGroup"
         type: array
       max_timeseries_fields:
         format: int64
@@ -2595,11 +2596,11 @@ definitions:
     properties:
       fields:
         items:
-          $ref: '#/definitions/DatasetField'
+          $ref: "#/definitions/DatasetField"
         type: array
       groups:
         items:
-          $ref: '#/definitions/DatasetGroup'
+          $ref: "#/definitions/DatasetGroup"
         type: array
       id:
         type: string
@@ -2609,7 +2610,7 @@ definitions:
         type: string
       suggested_operations:
         items:
-          $ref: '#/definitions/SuggestedOperations'
+          $ref: "#/definitions/SuggestedOperations"
         type: array
     required:
       - id
@@ -2679,7 +2680,7 @@ definitions:
     properties:
       datasets:
         items:
-          $ref: '#/definitions/Dataset'
+          $ref: "#/definitions/Dataset"
         type: array
     required:
       - datasets
@@ -2699,7 +2700,7 @@ definitions:
             description: Error Code
             type: string
           error_detail:
-            description: 'If available, detailed error'
+            description: If available, detailed error
             type: object
           message:
             description: Error Message
@@ -2723,7 +2724,7 @@ definitions:
         type: integer
       results:
         items:
-          $ref: '#/definitions/FieldValuesResult'
+          $ref: "#/definitions/FieldValuesResult"
         type: array
     required:
       - count
@@ -2767,7 +2768,7 @@ definitions:
     properties:
       data:
         items:
-          $ref: '#/definitions/KeywordsStatData'
+          $ref: "#/definitions/KeywordsStatData"
         type: array
       type:
         type: string
@@ -2780,16 +2781,16 @@ definitions:
   KeywordsStatData:
     properties:
       all:
-        $ref: '#/definitions/KeywordsStatDetail'
+        $ref: "#/definitions/KeywordsStatDetail"
       date:
         format: int64
         type: integer
       desktop:
-        $ref: '#/definitions/KeywordsStatDetail'
+        $ref: "#/definitions/KeywordsStatDetail"
       mobile:
-        $ref: '#/definitions/KeywordsStatDetail'
+        $ref: "#/definitions/KeywordsStatDetail"
       tablet:
-        $ref: '#/definitions/KeywordsStatDetail'
+        $ref: "#/definitions/KeywordsStatDetail"
     required:
       - date
       - all
@@ -2821,7 +2822,7 @@ definitions:
     properties:
       stats:
         items:
-          $ref: '#/definitions/KeywordsStat'
+          $ref: "#/definitions/KeywordsStat"
         type: array
     required:
       - stats
@@ -2832,7 +2833,7 @@ definitions:
         type: string
       percentiles:
         items:
-          $ref: '#/definitions/LinksPercentilesItem'
+          $ref: "#/definitions/LinksPercentilesItem"
         type: array
     required:
       - domain
@@ -2875,14 +2876,14 @@ definitions:
         type: integer
       follow_samples:
         items:
-          $ref: '#/definitions/LinksTopDomainsSamples'
+          $ref: "#/definitions/LinksTopDomainsSamples"
         type: array
       nofollow_links:
         format: int64
         type: integer
       nofollow_samples:
         items:
-          $ref: '#/definitions/LinksTopDomainsSamples'
+          $ref: "#/definitions/LinksTopDomainsSamples"
         type: array
       unique_follow_links:
         format: int64
@@ -2924,7 +2925,7 @@ definitions:
         readOnly: true
         type: string
       owner:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
       slug:
         readOnly: true
         type: string
@@ -2953,7 +2954,7 @@ definitions:
         readOnly: true
         type: string
       current_settings:
-        $ref: '#/definitions/ProjectSettings'
+        $ref: "#/definitions/ProjectSettings"
       date_created:
         readOnly: true
         type: string
@@ -2981,7 +2982,7 @@ definitions:
       name:
         type: string
       organization:
-        $ref: '#/definitions/OrganizationUser'
+        $ref: "#/definitions/OrganizationUser"
       permissions:
         readOnly: true
         type: string
@@ -3157,7 +3158,7 @@ definitions:
     description: Project's saved explorer
     properties:
       created_by:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
         readOnly: true
       created_date:
         format: date-time
@@ -3166,7 +3167,7 @@ definitions:
       description:
         type: string
       modified_by:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
         readOnly: true
       modified_date:
         format: date-time
@@ -3197,17 +3198,17 @@ definitions:
         type: integer
       errors:
         items:
-          $ref: '#/definitions/SitemapsReportSitemap'
+          $ref: "#/definitions/SitemapsReportSitemap"
         type: array
       sitemap_indexes:
         items:
-          $ref: '#/definitions/SitemapsReportSitemap'
+          $ref: "#/definitions/SitemapsReportSitemap"
         type: array
       sitemap_only:
-        $ref: '#/definitions/SitemapsReportOnly'
+        $ref: "#/definitions/SitemapsReportOnly"
       sitemaps:
         items:
-          $ref: '#/definitions/SitemapsReportSitemap'
+          $ref: "#/definitions/SitemapsReportSitemap"
         type: array
     required:
       - count
@@ -3231,7 +3232,7 @@ definitions:
   SitemapsReportSitemap:
     properties:
       error:
-        $ref: '#/definitions/SitemapsReportSitemapError'
+        $ref: "#/definitions/SitemapsReportSitemapError"
       file_type:
         type: string
       invalid_urls:
@@ -3305,7 +3306,7 @@ definitions:
       extract_type:
         type: string
       rule:
-        $ref: '#/definitions/RegexConfig'
+        $ref: "#/definitions/RegexConfig"
       url:
         type: string
     required:
@@ -3316,7 +3317,7 @@ definitions:
     properties:
       rules:
         items:
-          $ref: '#/definitions/RewritingRule'
+          $ref: "#/definitions/RewritingRule"
         type: array
       urls:
         items:
@@ -3347,7 +3348,7 @@ definitions:
       last_name:
         type: string
       username:
-        description: 'Required. 30 characters or fewer. Letters, numbers and /-/_/. characters'
+        description: Required. 30 characters or fewer. Letters, numbers and /-/_/. characters
         type: string
     required:
       - username

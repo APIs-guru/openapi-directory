@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.lyft.com
@@ -7,19 +7,20 @@ info:
   contact:
     email: api-support@lyft.com
     name: Lyft
-    url: 'http://developer.lyft.com'
+    url: http://developer.lyft.com
   description: Drive your app to success with Lyft's API
   title: Lyft
   version: 1.0.0
   x-apisguru-categories:
     - location
   x-logo:
-    url: 'https://twitter.com/lyft/profile_image?size=original'
+    url: https://twitter.com/lyft/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://api.lyft.com/v1/spec'
-      version: '2.0'
+      url: https://api.lyft.com/v1/spec
+      version: "2.0"
   x-providerName: lyft.com
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -30,19 +31,19 @@ securityDefinitions:
     flow: application
     scopes:
       public: Access public information such as ETAs and cost estimates
-    tokenUrl: 'https://api.lyft.com/oauth/token'
+    tokenUrl: https://api.lyft.com/oauth/token
     type: oauth2
   User Authentication:
-    authorizationUrl: 'https://api.lyft.com/oauth/authorize'
+    authorizationUrl: https://api.lyft.com/oauth/authorize
     description: OAuth 2.0 - User Credentials
     flow: accessCode
     scopes:
       profile: Access profile information about the user
       public: Access public information such as ETAs and cost estimates
       rides.read: Access information about the user's current and past rides
-      rides.request: |
+      rides.request: >
         Request a ride for the user. Cancel an existing request.
-    tokenUrl: 'https://api.lyft.com/oauth/token'
+    tokenUrl: https://api.lyft.com/oauth/token
     type: oauth2
 security:
   - Client Authentication:
@@ -79,7 +80,7 @@ parameters:
     required: false
     type: number
   OptionalEndTime:
-    description: |
+    description: >
       Restrict to rides starting before this point in time. The earliest supported date is 2015-01-01T00:00:00+00:00
     format: date-time
     in: query
@@ -88,7 +89,7 @@ parameters:
     type: string
   OptionalLimit:
     default: 10
-    description: |
+    description: >
       The maximum number of rides to return. The default limit is 10 if not specified. The maximum allowed value is 50, an integer greater that 50 will return at most 50 results.
     exclusiveMaximum: false
     exclusiveMinimum: true
@@ -124,7 +125,7 @@ parameters:
     required: true
     type: string
   StartTime:
-    description: |
+    description: >
       Restrict to rides starting after this point in time. The earliest supported date is 2015-01-01T00:00:00+00:00
     format: date-time
     in: query
@@ -143,11 +144,11 @@ tags:
 paths:
   /cost:
     get:
-      description: |
+      description: >
         Estimate the cost of taking a Lyft between two points.
       operationId: GetCost
       parameters:
-        - $ref: '#/parameters/OptionalRideType'
+        - $ref: "#/parameters/OptionalRideType"
         - description: Latitude of the starting location
           format: double
           in: query
@@ -173,96 +174,96 @@ paths:
           required: false
           type: number
       responses:
-        '200':
+        "200":
           description: An object with an array of cost estimates by ride type
           schema:
             properties:
               cost_estimates:
                 items:
-                  $ref: '#/definitions/CostEstimate'
+                  $ref: "#/definitions/CostEstimate"
                 type: array
             title: CostEstimateResponse
             type: object
-        '400':
-          description: |
+        "400":
+          description: >
             The 'error' field will be one of the following:
              * `bad_parameter`: A validation error occurred
              * `no_service_in_area`: start location is not within a Lyft service area
              * `ridetype_unavailable_in_region`: ridetype not supported at this start location
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       summary: Cost estimates
       tags:
         - Public
   /drivers:
     get:
-      description: |
+      description: >
         The drivers endpoint returns a list of nearby drivers' lat and lng at a given location.
       operationId: GetDrivers
       parameters:
-        - $ref: '#/parameters/LatParam'
-        - $ref: '#/parameters/LngParam'
+        - $ref: "#/parameters/LatParam"
+        - $ref: "#/parameters/LngParam"
       responses:
-        '200':
+        "200":
           description: An object with an array of available drivers sorted by eta for the given location
           schema:
             properties:
               nearby_drivers:
                 items:
-                  $ref: '#/definitions/NearbyDriversByRideType'
+                  $ref: "#/definitions/NearbyDriversByRideType"
                 type: array
             title: NearbyDriversResponse
             type: object
-        '400':
+        "400":
           description: A validation error occurred
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       summary: Available drivers nearby
       tags:
         - Public
   /eta:
     get:
-      description: |
+      description: >
         The ETA endpoint lets you know how quickly a Lyft driver can come get you
       operationId: GetETA
       parameters:
-        - $ref: '#/parameters/LatParam'
-        - $ref: '#/parameters/LngParam'
-        - $ref: '#/parameters/OptionalDestLatParam'
-        - $ref: '#/parameters/OptionalDestLngParam'
-        - $ref: '#/parameters/OptionalRideType'
+        - $ref: "#/parameters/LatParam"
+        - $ref: "#/parameters/LngParam"
+        - $ref: "#/parameters/OptionalDestLatParam"
+        - $ref: "#/parameters/OptionalDestLngParam"
+        - $ref: "#/parameters/OptionalRideType"
       responses:
-        '200':
+        "200":
           description: An object with an array of ETAs by ride type for the given location
           schema:
             properties:
               eta_estimates:
                 items:
-                  $ref: '#/definitions/Eta'
+                  $ref: "#/definitions/Eta"
                 type: array
             title: EtaEstimateResponse
             type: object
-        '400':
-          description: |
+        "400":
+          description: >
             The 'error' field will be one of the following:
              * `bad_parameter`: A validation error occurred
              * `no_service_in_area`: location is not within a Lyft service area
              * `ridetype_unavailable_in_region`: ridetype not supported at this location
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       summary: Pickup ETAs
       tags:
         - Public
   /profile:
     get:
-      description: |
+      description: >
         The v1 of this endpoint returns the user's ID, v2 will return more general info about the user. We require authentication for this endpoint, so we extract the user ID from the access token.
       operationId: GetProfile
       responses:
-        '200':
+        "200":
           description: User ID was found and returned
           schema:
-            $ref: '#/definitions/Profile'
+            $ref: "#/definitions/Profile"
       security:
         - User Authentication:
             - profile
@@ -271,29 +272,29 @@ paths:
         - User
   /rides:
     get:
-      description: |
+      description: >
         Get a list of past & current rides for this passenger.
       operationId: GetRides
       parameters:
-        - $ref: '#/parameters/StartTime'
-        - $ref: '#/parameters/OptionalEndTime'
-        - $ref: '#/parameters/OptionalLimit'
+        - $ref: "#/parameters/StartTime"
+        - $ref: "#/parameters/OptionalEndTime"
+        - $ref: "#/parameters/OptionalLimit"
       responses:
-        '200':
-          description: |
+        "200":
+          description: >
             An object with an array of up to `limit` rides taken by the user between `start_time` and `end_time`.
           schema:
             properties:
               ride_history:
                 items:
-                  $ref: '#/definitions/RideDetail'
+                  $ref: "#/definitions/RideDetail"
                 type: array
             title: RidesResponse
             type: object
-        '400':
+        "400":
           description: A validation error occurred
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       security:
         - User Authentication:
             - rides.read
@@ -301,7 +302,7 @@ paths:
       tags:
         - User
     post:
-      description: |
+      description: >
         Request a Lyft come pick you up at the given location.
       operationId: NewRide
       parameters:
@@ -310,14 +311,14 @@ paths:
           name: request
           required: true
           schema:
-            $ref: '#/definitions/Ride'
+            $ref: "#/definitions/Ride"
       responses:
-        '201':
-          description: 'An object with high level ride information. Use `GET /v1/rides/{id}` for more details.'
+        "201":
+          description: An object with high level ride information. Use `GET /v1/rides/{id}` for more details.
           schema:
-            $ref: '#/definitions/RideRequest'
-        '400':
-          description: |
+            $ref: "#/definitions/RideRequest"
+        "400":
+          description: >
             The 'error' field can be one of the following:
              * `bad_parameter`: A validation error occurred
              * `no_service_in_area`: origin is not within a Lyft service area
@@ -329,9 +330,9 @@ paths:
              User-displayable details in the 'error_description' field
              * `client_error`: an uncategorized error. Details in the 'error_description' field
           schema:
-            $ref: '#/definitions/RideRequestError'
-        '403':
-          description: |
+            $ref: "#/definitions/RideRequestError"
+        "403":
+          description: >
             User or client does not have permission to complete this request. Specific errors include:
              * `user_payment_required`: The user does not have a valid payment method on file.
              They must use the Lyft app to add or update one.
@@ -340,23 +341,23 @@ paths:
              * `verified_phone_required`: The user has not provided or verified their phone number.
              They can add one in the Lyft app
           schema:
-            $ref: '#/definitions/ApiError'
-        '409':
-          description: |
+            $ref: "#/definitions/ApiError"
+        "409":
+          description: >
             The 'error' field will be one of the following:
              * `no_drivers_available`: No drivers are available right now
              * `user_already_in_ride`: User cannot request a ride while in a ride
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       security:
         - User Authentication:
             - rides.request
       summary: Request a Lyft
       tags:
         - User
-  '/rides/{id}':
+  "/rides/{id}":
     get:
-      description: |
+      description: >
         Get the status of a ride along with information about the driver, vehicle and price of a given ride ID
       operationId: GetRide
       parameters:
@@ -366,28 +367,28 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: |
+        "200":
+          description: >
             Detailed ride information including ride status, driver information, passenger information, vehicle information, location information and price
           schema:
-            $ref: '#/definitions/RideDetail'
-        '403':
+            $ref: "#/definitions/RideDetail"
+        "403":
           description: User or client does not have permission to complete this request
           schema:
-            $ref: '#/definitions/ApiError'
-        '404':
+            $ref: "#/definitions/ApiError"
+        "404":
           description: No ride found with provided ride ID
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       security:
         - User Authentication:
             - rides.read
       summary: Get the ride detail of a given ride ID
       tags:
         - User
-  '/rides/{id}/cancel':
+  "/rides/{id}/cancel":
     post:
-      description: |
+      description: >
         Cancel a ongoing ride which was requested earlier by providing the ride id.
       operationId: CancelRide
       parameters:
@@ -399,38 +400,38 @@ paths:
         - in: body
           name: request
           schema:
-            $ref: '#/definitions/CancellationRequest'
+            $ref: "#/definitions/CancellationRequest"
       responses:
-        '204':
+        "204":
           description: Successfully canceled the ride
-        '400':
-          description: |
+        "400":
+          description: >
             Cancellation token required
              * `cancel_confirmation_required`: a cancelation fee applies which the user must accept
              * `invalid_cancel_confirmation`: provided token was invalid or expired
           schema:
-            $ref: '#/definitions/CancellationCostError'
-        '403':
+            $ref: "#/definitions/CancellationCostError"
+        "403":
           description: User or client does not have permission to complete this request
           schema:
-            $ref: '#/definitions/ApiError'
-        '404':
+            $ref: "#/definitions/ApiError"
+        "404":
           description: No ride found with provided ride ID
           schema:
-            $ref: '#/definitions/ApiError'
-        '409':
+            $ref: "#/definitions/ApiError"
+        "409":
           description: You cannot cancel this ride
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       security:
         - User Authentication:
             - rides.request
       summary: Cancel a ongoing requested ride
       tags:
         - User
-  '/rides/{id}/destination':
+  "/rides/{id}/destination":
     put:
-      description: |
+      description: >
         Add or update the ride's destination. Note that the ride must still be active (not droppedOff or canceled), and that destinations on Lyft Line rides can not be changed.
       operationId: SetRideDestination
       parameters:
@@ -444,14 +445,14 @@ paths:
           name: request
           required: true
           schema:
-            $ref: '#/definitions/Location'
+            $ref: "#/definitions/Location"
       responses:
-        '200':
+        "200":
           description: Successfully updated the destination. Returns the new destination.
           schema:
-            $ref: '#/definitions/Location'
-        '400':
-          description: |
+            $ref: "#/definitions/Location"
+        "400":
+          description: >
             The 'error' field will be one of the following:
              * `bad_parameter`: A validation error occurred
              * `invalid_destination`: Destination is generally invalid (eg. not in a Lyft service area)
@@ -460,25 +461,25 @@ paths:
              * `ride_is_lyft_line`: Cannot change the destination on Line rides
              * `ride_is_finished`: Ride has already been completed
           schema:
-            $ref: '#/definitions/ApiError'
-        '403':
-          description: |
+            $ref: "#/definitions/ApiError"
+        "403":
+          description: >
             User or client does not have permission to complete this request (`ride_does_not_belong_to_user`)
           schema:
-            $ref: '#/definitions/ApiError'
-        '404':
+            $ref: "#/definitions/ApiError"
+        "404":
           description: No ride found with provided ride ID
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       security:
         - User Authentication:
             - rides.request
       summary: Update the destination of the ride
       tags:
         - User
-  '/rides/{id}/rating':
+  "/rides/{id}/rating":
     put:
-      description: |
+      description: >
         Add the passenger's 1 to 5 star rating of the ride, optional written feedback, and optional tip amount in minor units and currency. The ride must already be dropped off, and ratings must be given within 24 hours of drop off. For purposes of display, 5 is considered the default rating. When this endpoint is successfully called, payment processing will begin.
       operationId: SetRideRating
       parameters:
@@ -492,12 +493,12 @@ paths:
           name: request
           required: true
           schema:
-            $ref: '#/definitions/RatingRequest'
+            $ref: "#/definitions/RatingRequest"
       responses:
-        '204':
+        "204":
           description: Successfully added the rating
-        '400':
-          description: |
+        "400":
+          description: >
             The 'error' field will be one of the following:
              * `bad_parameter`: A validation error occurred
              * `user_cannot_rate_this_ride`: Rides can only be rated once, within 24 hours of drop-off, and before
@@ -505,22 +506,22 @@ paths:
              * `tip_too_large`: tip amount is too large for this ride
              * `tip_currency_not_accepted`: That tip currency is not accepted
           schema:
-            $ref: '#/definitions/ApiError'
-        '409':
-          description: |
+            $ref: "#/definitions/ApiError"
+        "409":
+          description: >
             The 'error' field will be:
              * `ride_not_finished`: Ride is still in progress (not yet in the droppedOff status)
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       security:
         - User Authentication:
             - rides.request
-      summary: 'Add the passenger''s rating, feedback, and tip'
+      summary: Add the passenger's rating, feedback, and tip
       tags:
         - User
-  '/rides/{id}/receipt':
+  "/rides/{id}/receipt":
     get:
-      description: |
+      description: >
         Get the receipt information of a processed ride by providing the ride id. Receipts will only be available to view once the payment has been processed. In the case of canceled ride, cancellation penalty is included if applicable.
       operationId: GetRideReceipt
       parameters:
@@ -530,18 +531,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Detailed ride receipt information including cancel penalty if applicable.
           schema:
-            $ref: '#/definitions/RideReceipt'
-        '403':
+            $ref: "#/definitions/RideReceipt"
+        "403":
           description: User or client does not have permission to complete this request
           schema:
-            $ref: '#/definitions/ApiError'
-        '404':
+            $ref: "#/definitions/ApiError"
+        "404":
           description: No ride receipt found with provided ride ID
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       security:
         - User Authentication:
             - rides.read
@@ -550,56 +551,56 @@ paths:
         - User
   /ridetypes:
     get:
-      description: |
+      description: >
         The ride types endpoint returns information about what kinds of Lyft rides you can request at a given location.
       operationId: GetRideTypes
       parameters:
-        - $ref: '#/parameters/LatParam'
-        - $ref: '#/parameters/LngParam'
-        - $ref: '#/parameters/OptionalRideType'
+        - $ref: "#/parameters/LatParam"
+        - $ref: "#/parameters/LngParam"
+        - $ref: "#/parameters/OptionalRideType"
       responses:
-        '200':
+        "200":
           description: An object with an array of available Ride Types for the given location
           schema:
             properties:
               ride_types:
                 items:
-                  $ref: '#/definitions/RideType'
+                  $ref: "#/definitions/RideType"
                 type: array
             title: RideTypesResponse
             type: object
-        '400':
+        "400":
           description: A validation error occurred
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       summary: Types of rides
       tags:
         - Public
   /sandbox/primetime:
     put:
-      description: |
+      description: >
         Preset a Prime Time percentage in the region surrounding the specified location. This Prime Time percentage will be applied when requesting cost, or when requesting a ride in sandbox mode.
       operationId: SetPrimeTime
       parameters:
-        - description: 'Prime Time to be preset in the region surrounding the lat, lng'
+        - description: Prime Time to be preset in the region surrounding the lat, lng
           in: body
           name: request
           required: true
           schema:
-            $ref: '#/definitions/SandboxPrimetime'
+            $ref: "#/definitions/SandboxPrimetime"
       responses:
-        '204':
+        "204":
           description: Successfully applied Prime Time in sandbox
-        '400':
+        "400":
           description: Validation error occurred
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       summary: Preset Prime Time percentage
       tags:
         - Sandbox
-  '/sandbox/rides/{id}':
+  "/sandbox/rides/{id}":
     put:
-      description: |
+      description: >
         Propagate a sandbox-ride through various ride status
       operationId: SetRideStatus
       parameters:
@@ -613,20 +614,20 @@ paths:
           name: request
           required: true
           schema:
-            $ref: '#/definitions/SandboxRideStatus'
+            $ref: "#/definitions/SandboxRideStatus"
       responses:
-        '200':
+        "200":
           description: An object with the Ride ID and the new status
           schema:
-            $ref: '#/definitions/SandboxRideUpdate'
-        '400':
+            $ref: "#/definitions/SandboxRideUpdate"
+        "400":
           description: Validation error occurred
           schema:
-            $ref: '#/definitions/ApiError'
-        '403':
+            $ref: "#/definitions/ApiError"
+        "403":
           description: User or client does not have permission to complete this request
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       security:
         - User Authentication:
             - rides.request
@@ -635,58 +636,58 @@ paths:
         - Sandbox
   /sandbox/ridetypes:
     put:
-      description: |
+      description: >
         The sandbox-ridetypes endpoint allows you to preset the ridetypes in the region surrounding the specified latitude and longitude to allow testing different scenarios
       operationId: SetRideTypes
       parameters:
-        - description: 'Ridetypes to be preset in the region surrounding the lat, lng'
+        - description: Ridetypes to be preset in the region surrounding the lat, lng
           in: body
           name: request
           required: true
           schema:
-            $ref: '#/definitions/SandboxRideType'
+            $ref: "#/definitions/SandboxRideType"
       responses:
-        '200':
+        "200":
           description: An object listing the ridetypes at a given location
           schema:
-            $ref: '#/definitions/SandboxRideType'
-        '400':
+            $ref: "#/definitions/SandboxRideType"
+        "400":
           description: Validation error occurred
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       summary: Preset types of rides for sandbox
       tags:
         - Sandbox
-  '/sandbox/ridetypes/{ride_type}':
+  "/sandbox/ridetypes/{ride_type}":
     put:
-      description: |
+      description: >
         Set driver availability for the provided ride_type in the city/region surrounding the specified location
       operationId: SetRideTypeAvailability
       parameters:
-        - $ref: '#/parameters/RideStatusParam'
-        - description: 'Driver availability to be preset in the region surrounding the lat, lng'
+        - $ref: "#/parameters/RideStatusParam"
+        - description: Driver availability to be preset in the region surrounding the lat, lng
           in: body
           name: request
           required: true
           schema:
-            $ref: '#/definitions/SandboxDriverAvailability'
+            $ref: "#/definitions/SandboxDriverAvailability"
       responses:
-        '204':
+        "204":
           description: Successfully set driver availability in sandbox
-        '400':
+        "400":
           description: Validation error occurred
           schema:
-            $ref: '#/definitions/ApiError'
-        '404':
+            $ref: "#/definitions/ApiError"
+        "404":
           description: ride_type provided in the path is not supported in the current area
           schema:
-            $ref: '#/definitions/ApiError'
+            $ref: "#/definitions/ApiError"
       summary: Driver availability for processing ride request
       tags:
         - Sandbox
 definitions:
   ApiError:
-    description: 'Details about why a request failed, such as missing or invalid parameters'
+    description: Details about why a request failed, such as missing or invalid parameters
     properties:
       error:
         description: A "slug" that serves as the error code (eg. "bad_parameter")
@@ -696,17 +697,17 @@ definitions:
         type: string
       error_detail:
         items:
-          $ref: '#/definitions/ErrorDetail'
+          $ref: "#/definitions/ErrorDetail"
         type: array
   CancellationCost:
     allOf:
-      - $ref: '#/definitions/Cost'
+      - $ref: "#/definitions/Cost"
       - properties:
           token:
             description: Token used to confirm the fee when cancelling a request
             type: string
           token_duration:
-            description: 'How long, in seconds, before the token expires'
+            description: How long, in seconds, before the token expires
             format: int32
             minimum: 0
             type: integer
@@ -714,8 +715,8 @@ definitions:
     type: object
   CancellationCostError:
     allOf:
-      - $ref: '#/definitions/CancellationCost'
-      - $ref: '#/definitions/ApiError'
+      - $ref: "#/definitions/CancellationCost"
+      - $ref: "#/definitions/ApiError"
     example:
       amount: 500
       currency: USD
@@ -792,22 +793,22 @@ definitions:
         description: A human readable description of the ride type
         type: string
       estimated_cost_cents_max:
-        description: |
+        description: >
           Estimated upper bound for trip cost, in minor units (cents). Estimates are not guaranteed, and only provide a reasonable range based on current conditions.
         format: int32
         type: integer
       estimated_cost_cents_min:
-        description: |
+        description: >
           Estimated lower bound for trip cost, in minor units (cents). Estimates are not guaranteed, and only provide a reasonable range based on current conditions.
         format: int32
         type: integer
       estimated_distance_miles:
-        description: |
+        description: >
           Estimated distance for this trip
         format: double
         type: number
       estimated_duration_seconds:
-        description: |
+        description: >
           Estimated time to get from the start location to the end.
         format: int32
         type: integer
@@ -818,16 +819,18 @@ definitions:
         description: This token is needed when requesting rides. (Deprecated)
         type: string
       primetime_percentage:
-        description: |
+        description: >
           Current Prime Time Percentage. Prime Time adds a percentage to ride costs, prior to other applicable fees. When ride requests greatly outnumber available drivers, our system will automatically turn on Prime Time.
+
           If Prime Time is inactive, the value returned will be '0%'.
+
           Note: The returned estimate already has Prime Time factored in. The value is returned here for reference and to allow users to confirm/accept Prime Time prior to initiating a ride.
         type: string
       ride_type:
-        $ref: '#/definitions/RideTypeEnum'
+        $ref: "#/definitions/RideTypeEnum"
   CurrentRideLocation:
     allOf:
-      - $ref: '#/definitions/LatLng'
+      - $ref: "#/definitions/LatLng"
       - properties:
           bearing:
             description: Bearing of the driver's car in degrees
@@ -842,10 +845,10 @@ definitions:
   DriverDetail:
     example:
       first_name: Joe
-      image_url: 'http://example.com/lyft.png'
-      phone_number: '+15554445000'
-      rating: '4.9'
-      user_id: '123456789'
+      image_url: http://example.com/lyft.png
+      phone_number: "+15554445000"
+      rating: "4.9"
+      user_id: "123456789"
     properties:
       first_name:
         description: The driver's first name
@@ -854,7 +857,7 @@ definitions:
         description: The driver's image url
         type: string
       phone_number:
-        description: |
+        description: >
           The driver's contact phone number. Must be E.164 formatted.
         format: phone
         type: string
@@ -871,7 +874,7 @@ definitions:
       - image_url
       - user_id
   ErrorDetail:
-    description: |
+    description: >
       An object with a single key-value pair, where the key is the name of the invalid parameter, and the value is a description of the error.
     example:
       lat: (latitude) Missing required parameter in the query string
@@ -902,7 +905,7 @@ definitions:
         description: The validity of the ETA estimate returned
         type: boolean
       ride_type:
-        $ref: '#/definitions/RideTypeEnum'
+        $ref: "#/definitions/RideTypeEnum"
   LatLng:
     example:
       lat: 36.9442175
@@ -937,14 +940,14 @@ definitions:
       - currency
   Location:
     allOf:
-      - $ref: '#/definitions/LatLng'
+      - $ref: "#/definitions/LatLng"
       - properties:
           address:
             description: A human readable address at/near the given location
             type: string
         type: object
     example:
-      address: '123 Main St, Anytown, CA'
+      address: 123 Main St, Anytown, CA
       lat: 36.9442175
       lng: -123.8679133
     type: object
@@ -953,21 +956,21 @@ definitions:
       locations:
         description: the lastest recorded driver locations up to 5 sorted in chronological order.
         items:
-          $ref: '#/definitions/LatLng'
+          $ref: "#/definitions/LatLng"
         type: array
   NearbyDriversByRideType:
     properties:
       drivers:
         description: list of nearby drivers group by ride type sorted by eta
         items:
-          $ref: '#/definitions/NearbyDriver'
+          $ref: "#/definitions/NearbyDriver"
         type: array
       ride_type:
-        description: 'driver''s ride type. if driver is eligable for several ride types, he will be duplicated.'
+        description: driver's ride type. if driver is eligable for several ride types, he will be duplicated.
         type: string
   PassengerDetail:
     allOf:
-      - $ref: '#/definitions/UserDetail'
+      - $ref: "#/definitions/UserDetail"
       - properties:
           last_name:
             description: The passenger's last name
@@ -978,13 +981,13 @@ definitions:
         type: object
     example:
       first_name: Jane
-      image_url: 'https://public-api.lyft.com/static/images/user.png'
+      image_url: https://public-api.lyft.com/static/images/user.png
       last_name: Doe
       rating: 4.9
     type: object
   PickupDropoffLocation:
     allOf:
-      - $ref: '#/definitions/Location'
+      - $ref: "#/definitions/Location"
       - properties:
           time:
             description: Server time when the location object is created
@@ -992,10 +995,10 @@ definitions:
             type: string
         type: object
     example:
-      address: '123 Main St, Anytown, CA'
+      address: 123 Main St, Anytown, CA
       lat: 36.9442175
       lng: -123.8679133
-      time: '2015-09-24T23:26:25+00:00'
+      time: 2015-09-24T23:26:25+00:00
     type: object
   PricingDetails:
     example:
@@ -1075,32 +1078,32 @@ definitions:
         type: integer
       tip:
         allOf:
-          - $ref: '#/definitions/TipParams'
+          - $ref: "#/definitions/TipParams"
         description: Tip amount in minor units and tip currency
         type: object
     required:
       - rating
   Ride:
-    description: 'Represents a requested, ongoing, or finished Lyft ride'
+    description: Represents a requested, ongoing, or finished Lyft ride
     properties:
       cost_token:
         description: A token that confirms the user has accepted current Prime Time and/or fixed price charges
         type: string
       destination:
         allOf:
-          - $ref: '#/definitions/Location'
+          - $ref: "#/definitions/Location"
         description: The *requested* location for passenger drop off
         type: object
       origin:
         allOf:
-          - $ref: '#/definitions/Location'
+          - $ref: "#/definitions/Location"
         description: The *requested* location for passenger pickup
         type: object
       primetime_confirmation_token:
         description: A token that confirms the user has accepted current primetime charges (Deprecated)
         type: string
       ride_type:
-        $ref: '#/definitions/RideTypeEnum'
+        $ref: "#/definitions/RideTypeEnum"
     required:
       - ride_type
       - origin
@@ -1108,22 +1111,22 @@ definitions:
   RideDetail:
     description: Detail information about a ride
     example:
-      beacon_color: '#FFFFFF'
+      beacon_color: "#FFFFFF"
       destination:
-        address: '987 Second St, Anytown, CA'
+        address: 987 Second St, Anytown, CA
         lat: 36.9453452
         lng: -123.8642521
       distance_miles: 16.2
       driver:
         first_name: Joe
-        image_url: 'http://example.com/lyft.png'
-        phone_number: '+15554445111'
-        rating: '4.9'
+        image_url: http://example.com/lyft.png
+        phone_number: "+15554445111"
+        rating: "4.9"
       dropoff:
-        address: '987 Second St, Anytown, CA'
+        address: 987 Second St, Anytown, CA
         lat: 36.9453452
         lng: -123.8642521
-        time: '2015-09-24T23:28:25+00:00'
+        time: 2015-09-24T23:28:25+00:00
       duration_seconds: 1620
       line_items:
         - amount: 500
@@ -1136,35 +1139,35 @@ definitions:
           currency: USD
           type: Service fee
       location:
-        address: '987 Second St, Anytown, CA'
+        address: 987 Second St, Anytown, CA
         lat: 36.9453452
         lng: -123.8642521
       origin:
-        address: '123 Main St, Anytown, CA'
+        address: 123 Main St, Anytown, CA
         lat: 36.9442175
         lng: -123.8679133
       passenger:
         first_name: Jane
-        phone_number: '+15554445000'
-        user_id: '776630198662493392'
+        phone_number: "+15554445000"
+        user_id: "776630198662493392"
       pickup:
-        address: '123 Main St, Anytown, CA'
+        address: 123 Main St, Anytown, CA
         lat: 36.9442175
         lng: -123.8679133
-        time: '2015-09-24T23:27:25+00:00'
+        time: 2015-09-24T23:27:25+00:00
       price:
         amount: 905
         currency: USD
         description: Total ride price
       primetime_percentage: 50%
-      requested_at: '2015-09-24T23:26:25+00:00'
+      requested_at: 2015-09-24T23:26:25+00:00
       ride_id: 123456789
       ride_profile: personal
       ride_type: lyft
       status: droppedOff
       vehicle:
         color: black
-        image_url: 'http://example.com/lyft.png'
+        image_url: http://example.com/lyft.png
         license_plate: AAAAAAA
         make: Audi
         model: A4
@@ -1186,23 +1189,23 @@ definitions:
         type: string
       cancellation_price:
         allOf:
-          - $ref: '#/definitions/CancellationCost'
+          - $ref: "#/definitions/CancellationCost"
         description: The cost of cancellation if there would be a penalty
         type: object
       destination:
         allOf:
-          - $ref: '#/definitions/RideLocation'
+          - $ref: "#/definitions/RideLocation"
         description: The *requested* location for passenger drop off
         type: object
       distance_miles:
-        description: 'The distance, in miles, that this ride traveled. This field is only present after drop-off'
+        description: The distance, in miles, that this ride traveled. This field is only present after drop-off
         format: float
         type: number
       driver:
-        $ref: '#/definitions/DriverDetail'
+        $ref: "#/definitions/DriverDetail"
       dropoff:
         allOf:
-          - $ref: '#/definitions/PickupDropoffLocation'
+          - $ref: "#/definitions/PickupDropoffLocation"
         description: The *actual* location of passenger drop off
         type: object
       duration_seconds:
@@ -1219,39 +1222,39 @@ definitions:
       line_items:
         description: The break down of cost
         items:
-          $ref: '#/definitions/LineItem'
+          $ref: "#/definitions/LineItem"
         type: array
       location:
         allOf:
-          - $ref: '#/definitions/CurrentRideLocation'
+          - $ref: "#/definitions/CurrentRideLocation"
         description: The *current* location info of the ride
         type: object
       origin:
         allOf:
-          - $ref: '#/definitions/RideLocation'
+          - $ref: "#/definitions/RideLocation"
         description: The *requested* location for passenger pickup
         type: object
       passenger:
-        $ref: '#/definitions/PassengerDetail'
+        $ref: "#/definitions/PassengerDetail"
       pickup:
         allOf:
-          - $ref: '#/definitions/PickupDropoffLocation'
+          - $ref: "#/definitions/PickupDropoffLocation"
         description: The *actual* location of passenger pickup
         type: object
       price:
         allOf:
-          - $ref: '#/definitions/Cost'
+          - $ref: "#/definitions/Cost"
         description: The total price for the current ride
         type: object
       pricing_details_url:
-        description: |
+        description: >
           The web view showing the pricing structure for the geographic area where the ride was taken
         type: string
       primetime_percentage:
         description: The Prime Time percentage applied to the base price
         type: string
       rating:
-        description: 'The rating the user left for this ride, from 1 to 5'
+        description: The rating the user left for this ride, from 1 to 5
         format: int32
         type: integer
       requested_at:
@@ -1263,24 +1266,24 @@ definitions:
         type: string
       ride_profile:
         allOf:
-          - $ref: '#/definitions/RideProfileEnum'
-        description: |
+          - $ref: "#/definitions/RideProfileEnum"
+        description: >
           Indicates whether the ride was requested from the business profile or personal profile of the user.
         type: object
       ride_type:
-        $ref: '#/definitions/RideTypeEnumWithOther'
+        $ref: "#/definitions/RideTypeEnumWithOther"
       route_url:
-        description: |
+        description: >
           The web view showing the passenger, driver, and route for this ride. This field will only be present for rides created through this API, or that have been shared through the "Share my Route" feature
         type: string
       status:
-        $ref: '#/definitions/RideStatusEnum'
+        $ref: "#/definitions/RideStatusEnum"
       vehicle:
-        $ref: '#/definitions/VehicleDetail'
+        $ref: "#/definitions/VehicleDetail"
     type: object
   RideLocation:
     allOf:
-      - $ref: '#/definitions/Location'
+      - $ref: "#/definitions/Location"
       - properties:
           eta_seconds:
             description: Estimated seconds for a driver to pickup or reach destination based on ride status
@@ -1288,7 +1291,7 @@ definitions:
             type: integer
         type: object
     example:
-      address: '123 Main St, Anytown, CA'
+      address: 123 Main St, Anytown, CA
       eta_seconds: 200
       lat: 36.9442175
       lng: -123.8679133
@@ -1323,23 +1326,23 @@ definitions:
         amount: 905
         currency: USD
         description: Total ride price
-      requested_at: '2015-09-24T23:26:25+00:00'
+      requested_at: 2015-09-24T23:26:25+00:00
       ride_id: 123456789
       ride_profile: personal
     properties:
       charges:
         description: The break down of charge method
         items:
-          $ref: '#/definitions/Charge'
+          $ref: "#/definitions/Charge"
         type: array
       line_items:
         description: The break down of line items
         items:
-          $ref: '#/definitions/LineItem'
+          $ref: "#/definitions/LineItem"
         type: array
       price:
         allOf:
-          - $ref: '#/definitions/Cost'
+          - $ref: "#/definitions/Cost"
         description: The total price for the current ride
         type: object
       requested_at:
@@ -1351,8 +1354,8 @@ definitions:
         type: string
       ride_profile:
         allOf:
-          - $ref: '#/definitions/RideProfileEnum'
-        description: |
+          - $ref: "#/definitions/RideProfileEnum"
+        description: >
           Indicates whether the ride was requested from the business profile or personal profile of the user.
         type: object
     type: object
@@ -1360,40 +1363,40 @@ definitions:
     description: Minimal set of ride details
     example:
       destination:
-        address: '123 Main St, Anytown, CA'
+        address: 123 Main St, Anytown, CA
         lat: 36.9442175
         lng: -123.8679133
       origin:
-        address: '123 Main St, Anytown, CA'
+        address: 123 Main St, Anytown, CA
         lat: 36.9442175
         lng: -123.8679133
       passenger:
         first_name: Jane
-        image_url: 'https://public-api.lyft.com/static/images/user.png'
+        image_url: https://public-api.lyft.com/static/images/user.png
         rating: 4.9
-        user_id: '776630198662493392'
+        user_id: "776630198662493392"
       ride_id: 123456789
       status: pending
     properties:
       destination:
         allOf:
-          - $ref: '#/definitions/Location'
+          - $ref: "#/definitions/Location"
         description: The *requested* location for passenger drop off
         type: object
       origin:
         allOf:
-          - $ref: '#/definitions/Location'
+          - $ref: "#/definitions/Location"
         description: The *requested* location for passenger pickup
         type: object
       passenger:
-        $ref: '#/definitions/PassengerDetail'
+        $ref: "#/definitions/PassengerDetail"
       ride_id:
         description: The ID of the requested ride
         type: string
       status:
-        $ref: '#/definitions/RideStatusEnum'
+        $ref: "#/definitions/RideStatusEnum"
   RideRequestError:
-    description: 'Details about why a request failed, such as missing or invalid parameters'
+    description: Details about why a request failed, such as missing or invalid parameters
     properties:
       cost_token:
         description: A token that confirms the user has accepted current Prime Time and/or fixed price charges
@@ -1406,16 +1409,16 @@ definitions:
         type: string
       error_detail:
         items:
-          $ref: '#/definitions/ErrorDetail'
+          $ref: "#/definitions/ErrorDetail"
         type: array
       error_uri:
-        description: 'When a user must go through another flow before requesting a ride, this URI specifies which flow to use (e.g. an account challenge flow in a web view)'
+        description: When a user must go through another flow before requesting a ride, this URI specifies which flow to use (e.g. an account challenge flow in a web view)
         type: string
       primetime_confirmation_token:
         description: A token that confirms the user has accepted current Prime Time charges (Deprecated)
         type: string
       primetime_multiplier:
-        description: 'Current Prime Time multiplier (eg. if primetime_percentage is 100%, primetime_multiplier will be 2.0)'
+        description: Current Prime Time multiplier (eg. if primetime_percentage is 100%, primetime_multiplier will be 2.0)
         format: float
         type: number
       primetime_percentage:
@@ -1442,7 +1445,7 @@ definitions:
     example:
       ride_types:
         - display_name: Lyft Line
-          image_url: 'https://cdn.lyft.com/assets/car_standard.png'
+          image_url: https://cdn.lyft.com/assets/car_standard.png
           pricing_details:
             base_charge: 200
             cancel_penalty_amount: 500
@@ -1454,7 +1457,7 @@ definitions:
           ride_type: lyft_line
           seats: 2
         - display_name: Lyft
-          image_url: 'https://cdn.lyft.com/assets/car_standard.png'
+          image_url: https://cdn.lyft.com/assets/car_standard.png
           pricing_details:
             base_charge: 200
             cancel_penalty_amount: 500
@@ -1466,7 +1469,7 @@ definitions:
           ride_type: lyft
           seats: 4
         - display_name: Lyft Plus
-          image_url: 'https://cdn.lyft.com/assets/car_plus.png'
+          image_url: https://cdn.lyft.com/assets/car_plus.png
           pricing_details:
             base_charge: 300
             cancel_penalty_amount: 500
@@ -1485,11 +1488,11 @@ definitions:
         description: The URL of an image representing this ride type
         type: string
       pricing_details:
-        $ref: '#/definitions/PricingDetails'
+        $ref: "#/definitions/PricingDetails"
       ride_type:
-        $ref: '#/definitions/RideTypeEnum'
+        $ref: "#/definitions/RideTypeEnum"
       scheduled_pricing_details:
-        $ref: '#/definitions/PricingDetails'
+        $ref: "#/definitions/PricingDetails"
       seats:
         description: The maximum number of seats available for rides requested with this ride type
         type: integer
@@ -1550,7 +1553,7 @@ definitions:
         format: double
         type: number
       primetime_percentage:
-        description: 'The Prime Time to be applied as a string, e.g., ''25%'''
+        description: The Prime Time to be applied as a string, e.g., '25%'
         type: string
     required:
       - lat
@@ -1561,7 +1564,7 @@ definitions:
       status: lyft
     properties:
       status:
-        $ref: '#/definitions/RideStatusEnum'
+        $ref: "#/definitions/RideStatusEnum"
     required:
       - status
   SandboxRideType:
@@ -1583,7 +1586,7 @@ definitions:
         type: number
       ride_types:
         items:
-          $ref: '#/definitions/RideTypeEnum'
+          $ref: "#/definitions/RideTypeEnum"
         type: array
     required:
       - lat
@@ -1599,7 +1602,7 @@ definitions:
         description: The ID of the ride
         type: string
       status:
-        $ref: '#/definitions/RideStatusEnum'
+        $ref: "#/definitions/RideStatusEnum"
     type: object
   Tip:
     example:
@@ -1616,12 +1619,12 @@ definitions:
         type: string
   TipParams:
     allOf:
-      - $ref: '#/definitions/Tip'
+      - $ref: "#/definitions/Tip"
     type: object
   UserDetail:
     example:
       first_name: Jane
-      image_url: 'https://public-api.lyft.com/static/images/user.png'
+      image_url: https://public-api.lyft.com/static/images/user.png
       rating: 4.9
     properties:
       first_name:
@@ -1640,7 +1643,7 @@ definitions:
   VehicleDetail:
     example:
       color: black
-      image_url: 'http://example.com/lyft.png'
+      image_url: http://example.com/lyft.png
       license_plate: AAAAAAA
       license_plate_state: CA
       make: Audi

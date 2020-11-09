@@ -1,11 +1,12 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.exavault.com
 basePath: /
 info:
-  description: |
+  description: >
     ExaVault's API allows you to incorporate ExaVault's suite of file transfer and user management tools into your own application.
+
 
     ExaVault supports both POST (recommended when requesting large data sets) and GET operations, and requires an API key in order to use.
   title: ExaVault
@@ -13,20 +14,21 @@ info:
   x-apisguru-categories:
     - storage
   x-logo:
-    backgroundColor: '#222222'
-    url: 'https://twitter.com/ExaVaultInc/profile_image?size=original'
+    backgroundColor: "#222222"
+    url: https://twitter.com/ExaVaultInc/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.6.0
       format: swagger
-      url: 'https://www.exavault.com/api/docs'
-      version: '1.2'
+      url: https://www.exavault.com/api/docs
+      version: "1.2"
   x-providerName: exavault.com
+  x-preferred: true
 externalDocs:
-  url: 'https://www.exavault.com/developer/'
+  url: https://www.exavault.com/developer/
 tags:
-  - description: 'operations for files, notifications, sharing and users'
+  - description: operations for files, notifications, sharing and users
     name: v1
 paths:
   /v1/authenticateUser:
@@ -45,10 +47,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/AuthResponse'
+            $ref: "#/definitions/AuthResponse"
       summary: Authenticates a user into the API
       tags:
         - v1
@@ -70,10 +72,10 @@ paths:
           required: true
           type: array
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ExistingResourcesResponse'
+            $ref: "#/definitions/ExistingResourcesResponse"
       summary: Checks to see if each file or folder in the array exists
       tags:
         - v1
@@ -100,11 +102,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ModifiedResourcesResponse'
-      summary: 'Copies files, folders to the destination path'
+            $ref: "#/definitions/ModifiedResourcesResponse"
+      summary: Copies files, folders to the destination path
       tags:
         - v1
   /v1/createFolder:
@@ -128,10 +130,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Create a folder at a specified path
       tags:
         - v1
@@ -150,12 +152,12 @@ paths:
           name: path
           required: true
           type: string
-        - description: 'Type of action to filter on: ''upload'', ''download'', ''delete'', ''all'''
+        - description: "Type of action to filter on: 'upload', 'download', 'delete', 'all'"
           in: query
           name: action
           required: true
           type: string
-        - description: 'User type to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
+        - description: "User type to filter on: 'notice_user_all', 'notice_user_all_recipients', 'notice_user_all_users'"
           in: query
           name: usernames
           required: true
@@ -165,17 +167,17 @@ paths:
           name: sendEmail
           required: true
           type: boolean
-        - description: 'Email addresses to send notification to. If not specified, sends to owner by default.'
+        - description: Email addresses to send notification to. If not specified, sends to owner by default.
           in: query
           items:
             type: string
           name: emails
           type: array
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Creates a new Notification object
       tags:
         - v1
@@ -189,7 +191,7 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: 'The type of share to create: shared_folder, send, receive.'
+        - description: "The type of share to create: shared_folder, send, receive."
           in: query
           name: type
           required: true
@@ -234,7 +236,7 @@ paths:
           name: requireEmail
           required: false
           type: boolean
-        - description: 'Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete. Defaults to download if no option specified.'
+        - description: "Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete. Defaults to download if no option specified."
           in: query
           name: accessMode
           required: false
@@ -246,17 +248,17 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: 'True if share has a public URL, otherwise defaults to false'
+          description: True if share has a public URL, otherwise defaults to false
           in: query
           name: isPublic
           required: false
           type: boolean
-        - description: 'If not null, value of password is required to access this Share'
+        - description: If not null, value of password is required to access this Share
           in: query
           name: password
           required: false
           type: string
-        - description: 'The date the current Share should expire, formatted YYYY-mm-dd'
+        - description: The date the current Share should expire, formatted YYYY-mm-dd
           in: query
           name: expiration
           required: false
@@ -274,16 +276,16 @@ paths:
           required: false
           type: array
         - default: false
-          description: 'If true, all receive folder submissions will be uploaded separate folders (only applicable for Receive folder types)'
+          description: If true, all receive folder submissions will be uploaded separate folders (only applicable for Receive folder types)
           in: query
           name: fileDropCreateFolders
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Create a new Share object
       tags:
         - v1
@@ -317,18 +319,18 @@ paths:
           name: password
           required: true
           type: string
-        - description: 'The user''s role, i.e: ''user'' or ''admin'''
+        - description: "The user's role, i.e: 'user' or 'admin'"
           in: query
           name: role
           required: true
           type: string
-        - description: 'A CSV string of user permissions. The following values are supported: upload, download, delete, modify, list, changePassword, share, notification.'
+        - description: "A CSV string of user permissions. The following values are supported: upload, download, delete, modify, list, changePassword, share, notification."
           in: query
           name: permissions
           required: true
           type: string
         - default: America/Los_Angeles
-          description: 'The user''s timezone, used for accurate time display within SWFT. See <a href=''https://php.net/manual/en/timezones.php'' target=''blank''>this page</a> for allowed values'
+          description: The user's timezone, used for accurate time display within SWFT. See <a href='https://php.net/manual/en/timezones.php' target='blank'>this page</a> for allowed values
           in: query
           name: timeZone
           required: true
@@ -337,25 +339,25 @@ paths:
           in: query
           name: nickname
           type: string
-        - description: 'The date when the user should expire, formatted YYYY-mm-dd'
+        - description: The date when the user should expire, formatted YYYY-mm-dd
           in: query
           name: expiration
           type: string
         - default: false
-          description: 'If true, the user''s account is locked by default'
+          description: If true, the user's account is locked by default
           in: query
           name: locked
           type: boolean
         - default: false
-          description: 'If true, send a user email upon creation'
+          description: If true, send a user email upon creation
           in: query
           name: welcomeEmail
           type: boolean
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Adds a new subaccount user to the current account
       tags:
         - v1
@@ -376,10 +378,10 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Deletes a Notification by ID
       tags:
         - v1
@@ -401,10 +403,10 @@ paths:
           required: true
           type: array
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/DeletedResourcesResponse'
+            $ref: "#/definitions/DeletedResourcesResponse"
       summary: Delete the specified files/folders
       tags:
         - v1
@@ -425,10 +427,10 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Deletes a Share by ID
       tags:
         - v1
@@ -448,10 +450,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Deletes a subaccount user for the current account
       tags:
         - v1
@@ -466,10 +468,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/AccountResponse'
+            $ref: "#/definitions/AccountResponse"
       summary: Gets the account object for the currently logged in user
       tags:
         - v1
@@ -484,10 +486,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/UserResponse'
+            $ref: "#/definitions/UserResponse"
       summary: Gets the user object for the currently logged in user
       tags:
         - v1
@@ -512,10 +514,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/UrlResponse'
+            $ref: "#/definitions/UrlResponse"
       summary: Returns a unique URL for handling file downloads
       tags:
         - v1
@@ -536,23 +538,23 @@ paths:
           required: false
           type: integer
         - default: sort_logs_date
-          description: 'Sort method [''sort_logs_date'' or ''sort_logs_ip_address'' or ''sort_logs_username'' or ''sort_logs_file'' or ''sort_logs_file_source'' or ''sort_logs_operation'', or ''sort_logs_duration'', or ''sort_logs_size'', or ''sort_logs_protocol'']'
+          description: Sort method ['sort_logs_date' or 'sort_logs_ip_address' or 'sort_logs_username' or 'sort_logs_file' or 'sort_logs_file_source' or 'sort_logs_operation', or 'sort_logs_duration', or 'sort_logs_size', or 'sort_logs_protocol']
           in: query
           name: sortBy
           required: false
           type: string
         - default: desc
-          description: 'Sort in either ascending or descending order: asc, desc'
+          description: "Sort in either ascending or descending order: asc, desc"
           in: query
           name: sortOrder
           required: false
           type: string
-        - description: 'Field to search on [''filter_logs_date'' or ''filter_logs_ip_address'' or ''filter_logs_username'' or ''filter_logs_operation'' or ''filter_logs_file'']'
+        - description: Field to search on ['filter_logs_date' or 'filter_logs_ip_address' or 'filter_logs_username' or 'filter_logs_operation' or 'filter_logs_file']
           in: query
           name: filterBy
           required: false
           type: string
-        - description: 'Search criteria. For date ranges, use format ''start_date::end_date'''
+        - description: Search criteria. For date ranges, use format 'start_date::end_date'
           in: query
           name: filter
           required: false
@@ -564,10 +566,10 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/LogResponse'
+            $ref: "#/definitions/LogResponse"
       summary: Returns a list of account activity. Allows for searching the activity log.
       tags:
         - v1
@@ -587,10 +589,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ResourcePropertiesResponse'
+            $ref: "#/definitions/ResourcePropertiesResponse"
       summary: Get folders for a specified path
       tags:
         - v1
@@ -611,10 +613,10 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/NotificationResponse'
+            $ref: "#/definitions/NotificationResponse"
       summary: Returns a notification based on the given ID
       tags:
         - v1
@@ -629,10 +631,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/NotificationActivityResponse'
+            $ref: "#/definitions/NotificationActivityResponse"
       summary: Returns all notification activity for the current user
       tags:
         - v1
@@ -646,12 +648,12 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: 'Type of notification to filter on: ''file'', ''folder'', ''shared_folder'', ''send_receipt'', ''share_receipt'', ''file_drop'''
+        - description: "Type of notification to filter on: 'file', 'folder', 'shared_folder', 'send_receipt', 'share_receipt', 'file_drop'"
           in: query
           name: type
           required: true
           type: string
-        - description: 'Sort by one of the following: ''sort_notifications_folder_name'', ''sort_notifications_path'', ''sort_notifications_date'''
+        - description: "Sort by one of the following: 'sort_notifications_folder_name', 'sort_notifications_path', 'sort_notifications_date'"
           in: query
           name: sortBy
           required: false
@@ -667,10 +669,10 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/NotificationsResponse'
+            $ref: "#/definitions/NotificationsResponse"
       summary: Returns all notifications for the current user
       tags:
         - v1
@@ -689,12 +691,12 @@ paths:
           name: path
           required: true
           type: string
-        - description: 'Sort according to attribute: sort_files_name, sort_files_size, sort_files_date, sort_files_type, sort_files_timeline'
+        - description: "Sort according to attribute: sort_files_name, sort_files_size, sort_files_date, sort_files_type, sort_files_timeline"
           in: query
           name: sortBy
           required: true
           type: string
-        - description: 'Sort in either ascending or descending order: asc, desc'
+        - description: "Sort in either ascending or descending order: asc, desc"
           in: query
           name: sortOrder
           required: true
@@ -712,19 +714,19 @@ paths:
           required: true
           type: integer
         - default: false
-          description: 'If true, returns sharedFolder, notifications or other objects associated with specified path'
+          description: If true, returns sharedFolder, notifications or other objects associated with specified path
           in: query
           name: detailed
           type: boolean
-        - description: 'Regex string. If not null, perform a search with specified pattern'
+        - description: Regex string. If not null, perform a search with specified pattern
           in: query
           name: pattern
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ResourceResponse'
+            $ref: "#/definitions/ResourceResponse"
       summary: Get a listing of files/folders for the specified path
       tags:
         - v1
@@ -746,10 +748,10 @@ paths:
           required: true
           type: array
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ResourcePropertiesResponse'
+            $ref: "#/definitions/ResourcePropertiesResponse"
       summary: Get the properties for each of the specified files/folders
       tags:
         - v1
@@ -770,10 +772,10 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ShareResponse'
+            $ref: "#/definitions/ShareResponse"
       summary: Returns a share by the specified ID
       tags:
         - v1
@@ -794,10 +796,10 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ShareActivityResponse'
+            $ref: "#/definitions/ShareActivityResponse"
       summary: Return activity log entries for the specified Share ID
       tags:
         - v1
@@ -811,12 +813,12 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: 'The type of share to return: ''shared_folder'', ''send'', or ''receive''. If no argument specified, will return all Shares types.'
+        - description: "The type of share to return: 'shared_folder', 'send', or 'receive'. If no argument specified, will return all Shares types."
           in: query
           name: type
           required: false
           type: string
-        - description: 'Sort by one of the following: ''sort_shares_name'', ''sort_shares_date'', ''sort_shares_user'', ''sort_shares_access_mode''.'
+        - description: "Sort by one of the following: 'sort_shares_name', 'sort_shares_date', 'sort_shares_user', 'sort_shares_access_mode'."
           in: query
           name: sortBy
           required: false
@@ -831,12 +833,12 @@ paths:
           name: filter
           required: false
           type: string
-        - description: 'Filter by all, active-only, or current user''s only.'
+        - description: Filter by all, active-only, or current user's only.
           in: query
           name: include
           required: false
           type: string
-        - description: 'Start position of results to return, for pagination.'
+        - description: Start position of results to return, for pagination.
           format: int32
           in: query
           name: offset
@@ -849,10 +851,10 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/SharesResponse'
+            $ref: "#/definitions/SharesResponse"
       summary: Returns all Shares for the current user
       tags:
         - v1
@@ -866,34 +868,34 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: 'Size of the file to upload, in bytes'
+        - description: Size of the file to upload, in bytes
           format: int64
           in: query
           name: fileSize
           required: true
           type: integer
-        - description: 'Path relative to account''s home directory, including file name'
+        - description: Path relative to account's home directory, including file name
           in: query
           name: destinationPath
           required: true
           type: string
         - default: true
-          description: 'True if the file should be overwritten, false if different file names should be generated'
+          description: True if the file should be overwritten, false if different file names should be generated
           in: query
           name: allowOverwrite
           required: false
           type: boolean
         - default: false
-          description: 'True if upload resume is supported, false if it isn''t'
+          description: True if upload resume is supported, false if it isn't
           in: query
           name: resume
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/UrlResponse'
+            $ref: "#/definitions/UrlResponse"
       summary: Returns a unique URL for handling file uploads
       tags:
         - v1
@@ -913,10 +915,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/UserResponse'
+            $ref: "#/definitions/UserResponse"
       summary: Get the specified subaccount user for the current account
       tags:
         - v1
@@ -930,21 +932,21 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: 'sort method [''sort_users_username'' or ''sort_users_nickname'' or ''sort_users_email'' or ''sort_users_home_folder'']'
+        - description: sort method ['sort_users_username' or 'sort_users_nickname' or 'sort_users_email' or 'sort_users_home_folder']
           in: query
           name: sortBy
           required: true
           type: string
-        - description: 'sort order, i.e. ''asc'' or ''desc'''
+        - description: sort order, i.e. 'asc' or 'desc'
           in: query
           name: sortOrder
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/UsersResponse'
+            $ref: "#/definitions/UsersResponse"
       summary: Gets the user object for the currently logged in user
       tags:
         - v1
@@ -959,11 +961,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
-      summary: 'Removes user''s access token from database, logging them out of API'
+            $ref: "#/definitions/Response"
+      summary: Removes user's access token from database, logging them out of API
       tags:
         - v1
   /v1/moveResources:
@@ -989,11 +991,11 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/ModifiedResourcesResponse'
-      summary: 'Moves files, folders to the destination path'
+            $ref: "#/definitions/ModifiedResourcesResponse"
+      summary: Moves files, folders to the destination path
       tags:
         - v1
   /v1/previewFile:
@@ -1011,7 +1013,7 @@ paths:
           name: path
           required: true
           type: string
-        - description: 'The size of the image: small, medium, large'
+        - description: "The size of the image: small, medium, large"
           in: query
           name: size
           required: true
@@ -1032,10 +1034,10 @@ paths:
           name: page
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/PreviewFileResponse'
+            $ref: "#/definitions/PreviewFileResponse"
       summary: Returns a resized image of the specified document for support file types
       tags:
         - v1
@@ -1060,10 +1062,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Rename a file or folder at the specified path
       tags:
         - v1
@@ -1087,15 +1089,15 @@ paths:
           in: query
           name: path
           type: string
-        - description: 'Type of action to filter on: ''upload'', ''download'', ''delete'', ''all'''
+        - description: "Type of action to filter on: 'upload', 'download', 'delete', 'all'"
           in: query
           name: action
           type: string
-        - description: 'User type to filter on: ''notice_user_all'', ''notice_user_all_recipients'', ''notice_user_all_users'''
+        - description: "User type to filter on: 'notice_user_all', 'notice_user_all_recipients', 'notice_user_all_users'"
           in: query
           name: usernames
           type: string
-        - description: 'Email addresses to send notification to. If not specified, sends to owner by default.'
+        - description: Email addresses to send notification to. If not specified, sends to owner by default.
           in: query
           items:
             type: string
@@ -1106,10 +1108,10 @@ paths:
           name: sendEmail
           type: boolean
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Updates an existing notification by ID
       tags:
         - v1
@@ -1161,7 +1163,7 @@ paths:
           in: query
           name: requireEmail
           type: boolean
-        - description: 'Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete.'
+        - description: "Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete."
           in: query
           name: accessMode
           type: string
@@ -1169,15 +1171,15 @@ paths:
           in: query
           name: embed
           type: boolean
-        - description: 'True if share has a public URL, otherwise defaults to false'
+        - description: True if share has a public URL, otherwise defaults to false
           in: query
           name: isPublic
           type: boolean
-        - description: 'If not null, value of password is required to access this Share'
+        - description: If not null, value of password is required to access this Share
           in: query
           name: password
           type: string
-        - description: 'The date the current Share should expire, formatted YYYY-mm-dd'
+        - description: The date the current Share should expire, formatted YYYY-mm-dd
           in: query
           name: expiration
           type: string
@@ -1191,15 +1193,15 @@ paths:
             type: string
           name: notificationEmails
           type: array
-        - description: 'If true, all receive folder submissions will be uploaded separate folders (only applicable for Receive folder types)'
+        - description: If true, all receive folder submissions will be uploaded separate folders (only applicable for Receive folder types)
           in: query
           name: fileDropCreateFolders
           type: boolean
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Update an existing Share by ID
       tags:
         - v1
@@ -1213,7 +1215,7 @@ paths:
           name: access_token
           required: true
           type: string
-        - description: 'The user ID, must be obtained from getUser method first'
+        - description: The user ID, must be obtained from getUser method first
           format: int32
           in: query
           name: userId
@@ -1227,7 +1229,7 @@ paths:
           in: query
           name: nickname
           type: string
-        - description: 'The date when use should expire in format: YYYY-MM-DD'
+        - description: "The date when use should expire in format: YYYY-MM-DD"
           in: query
           name: expiration
           type: string
@@ -1243,11 +1245,11 @@ paths:
           in: query
           name: password
           type: string
-        - description: 'If true, the user''s account is locked by default'
+        - description: If true, the user's account is locked by default
           in: query
           name: locked
           type: boolean
-        - description: 'The user''s role, i.e: ''user'', ''admin'', ''master'''
+        - description: "The user's role, i.e: 'user', 'admin', 'master'"
           in: query
           name: role
           type: string
@@ -1256,10 +1258,10 @@ paths:
           name: permissions
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/Response'
+            $ref: "#/definitions/Response"
       summary: Updates a subaccount user for the current account
       tags:
         - v1
@@ -1279,10 +1281,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/AvailableUserResponse'
+            $ref: "#/definitions/AvailableUserResponse"
       summary: Returns true if requested username has not already been taken in the system
       tags:
         - v1
@@ -1322,7 +1324,7 @@ definitions:
         format: int32
         type: integer
       masterAccount:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
       maxUsers:
         format: int32
         type: integer
@@ -1379,9 +1381,9 @@ definitions:
   AccountResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
-        $ref: '#/definitions/Account'
+        $ref: "#/definitions/Account"
       success:
         format: int32
         type: integer
@@ -1408,9 +1410,9 @@ definitions:
   AuthResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
-        $ref: '#/definitions/Auth'
+        $ref: "#/definitions/Auth"
       success:
         format: int32
         type: integer
@@ -1427,9 +1429,9 @@ definitions:
   AvailableUserResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
-        $ref: '#/definitions/AvailableUser'
+        $ref: "#/definitions/AvailableUser"
       success:
         format: int32
         type: integer
@@ -1454,10 +1456,10 @@ definitions:
   DeletedResourcesResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/DeletedResource'
+          $ref: "#/definitions/DeletedResource"
         type: array
       success:
         format: int32
@@ -1481,17 +1483,17 @@ definitions:
       exists:
         type: boolean
       resource:
-        $ref: '#/definitions/ResourceProperty'
+        $ref: "#/definitions/ResourceProperty"
     required:
       - exists
       - resource
   ExistingResourcesResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/ExistingResource'
+          $ref: "#/definitions/ExistingResource"
         type: array
       success:
         format: int32
@@ -1544,10 +1546,10 @@ definitions:
   LogResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/LogEntry'
+          $ref: "#/definitions/LogEntry"
         type: array
       success:
         format: int32
@@ -1602,10 +1604,10 @@ definitions:
   ModifiedResourcesResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/ModifiedResource'
+          $ref: "#/definitions/ModifiedResource"
         type: array
       success:
         format: int32
@@ -1639,7 +1641,7 @@ definitions:
         type: array
       recipients:
         items:
-          $ref: '#/definitions/Recipient'
+          $ref: "#/definitions/Recipient"
         type: array
       sendEmail:
         type: string
@@ -1672,10 +1674,10 @@ definitions:
   NotificationActivityResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/NotificationMessage'
+          $ref: "#/definitions/NotificationMessage"
         type: array
       success:
         format: int32
@@ -1696,7 +1698,7 @@ definitions:
       message:
         type: string
       notificationSetting:
-        $ref: '#/definitions/Notification'
+        $ref: "#/definitions/Notification"
       path:
         type: string
       read:
@@ -1718,9 +1720,9 @@ definitions:
   NotificationResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
-        $ref: '#/definitions/Notification'
+        $ref: "#/definitions/Notification"
       success:
         format: int32
         type: integer
@@ -1731,10 +1733,10 @@ definitions:
   NotificationsResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/Notification'
+          $ref: "#/definitions/Notification"
         type: array
       success:
         format: int32
@@ -1759,9 +1761,9 @@ definitions:
   PreviewFileResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
-        $ref: '#/definitions/PreviewFile'
+        $ref: "#/definitions/PreviewFile"
       success:
         format: int32
         type: integer
@@ -1805,7 +1807,7 @@ definitions:
         type: string
       resources:
         items:
-          $ref: '#/definitions/ResourceProperty'
+          $ref: "#/definitions/ResourceProperty"
         type: array
       totalFiles:
         format: int32
@@ -1818,10 +1820,10 @@ definitions:
   ResourcePropertiesResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/ResourceProperty'
+          $ref: "#/definitions/ResourceProperty"
         type: array
       success:
         format: int32
@@ -1851,7 +1853,7 @@ definitions:
         type: boolean
       shares:
         items:
-          $ref: '#/definitions/Share'
+          $ref: "#/definitions/Share"
         type: array
       size:
         format: int64
@@ -1875,9 +1877,9 @@ definitions:
   ResourceResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
-        $ref: '#/definitions/Resource'
+        $ref: "#/definitions/Resource"
       success:
         format: int32
         type: integer
@@ -1888,7 +1890,7 @@ definitions:
   Response:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
           type: string
@@ -1931,7 +1933,7 @@ definitions:
         type: boolean
       messages:
         items:
-          $ref: '#/definitions/Message'
+          $ref: "#/definitions/Message"
         type: array
       modified:
         type: string
@@ -1952,11 +1954,11 @@ definitions:
         type: array
       recipients:
         items:
-          $ref: '#/definitions/Recipient'
+          $ref: "#/definitions/Recipient"
         type: array
       recipientsWithOwner:
         items:
-          $ref: '#/definitions/Recipient'
+          $ref: "#/definitions/Recipient"
         type: array
       requireEmail:
         type: boolean
@@ -2001,10 +2003,10 @@ definitions:
   ShareActivityResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/ShareLogEntry'
+          $ref: "#/definitions/ShareLogEntry"
         type: array
       success:
         format: int32
@@ -2041,9 +2043,9 @@ definitions:
   ShareResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
-        $ref: '#/definitions/Share'
+        $ref: "#/definitions/Share"
       success:
         format: int32
         type: integer
@@ -2054,10 +2056,10 @@ definitions:
   SharesResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/Share'
+          $ref: "#/definitions/Share"
         type: array
       success:
         format: int32
@@ -2078,9 +2080,9 @@ definitions:
   UrlResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
-        $ref: '#/definitions/Url'
+        $ref: "#/definitions/Url"
       success:
         format: int32
         type: integer
@@ -2164,9 +2166,9 @@ definitions:
   UserResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
       success:
         format: int32
         type: integer
@@ -2177,10 +2179,10 @@ definitions:
   UsersResponse:
     properties:
       error:
-        $ref: '#/definitions/Error'
+        $ref: "#/definitions/Error"
       results:
         items:
-          $ref: '#/definitions/User'
+          $ref: "#/definitions/User"
         type: array
       success:
         format: int32

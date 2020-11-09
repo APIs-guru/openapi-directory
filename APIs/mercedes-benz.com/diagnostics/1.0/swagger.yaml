@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.mercedes-benz.com
@@ -7,19 +7,20 @@ info:
   contact:
     name: The open API platform by Mercedes-Benz
     x-twitter: MercedesBenz
-  description: 'The Remote Diagnostic Support API will provide the possibility for 3rd party applications (e.g. ADAC, ATU, etc.) to access vehicle diagnostics data remotely on behalf of the Daimler customer. To use the endpoints you need a valid vin/fin (vehicleId).'
+  description: The Remote Diagnostic Support API will provide the possibility for 3rd party applications (e.g. ADAC, ATU, etc.) to access vehicle diagnostics data remotely on behalf of the Daimler customer. To use the endpoints you need a valid vin/fin (vehicleId).
   title: Remote Diagnostic Support
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - transport
   x-logo:
-    url: 'https://twitter.com/MercedesBenz/profile_image?size=original'
+    url: https://twitter.com/MercedesBenz/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://developer.mercedes-benz.com/content/sites/default/files/2018-10/swagger_remote_diagnostics_api_2.yaml'
-      version: '2.0'
+      url: https://developer.mercedes-benz.com/content/sites/default/files/2018-10/swagger_remote_diagnostics_api_2.yaml
+      version: "2.0"
   x-providerName: mercedes-benz.com
   x-serviceName: diagnostics
+  x-preferred: true
 tags:
   - description: Remote Diagnostic Support service for view all resources.
     name: Resources
@@ -30,9 +31,9 @@ tags:
   - description: Remote Diagnostic Support service for view dtc snapshot List.
     name: Diagnostic Trouble Code (DTC) Snapshots
 paths:
-  '/vehicles/{vehicleId}/dtcReadouts':
+  "/vehicles/{vehicleId}/dtcReadouts":
     post:
-      description: 'This API creates a readout of DTCs for one vehicle. If the result is available immediately, the result is returned. If the result isn''t available, a location to the DTC readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!'
+      description: "This API creates a readout of DTCs for one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the DTC readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!"
       operationId: getDtcDataListByEcuUsingPOST
       parameters:
         - description: The vehicle identifier of the vehicle to read from.
@@ -41,12 +42,12 @@ paths:
           required: true
           type: string
           x-example: WDD111111PKW01000
-        - description: 'Return DTCs from this ECU id only. Default: Return DTCs from all ECUs.'
+        - description: "Return DTCs from this ECU id only. Default: Return DTCs from all ECUs."
           in: query
           name: ecuId
           required: false
           type: string
-        - description: 'Returns DTCs with this statuses only. Default: Return DTCs with all statuses.'
+        - description: "Returns DTCs with this statuses only. Default: Return DTCs with all statuses."
           in: query
           name: dtcStatus
           required: false
@@ -55,60 +56,60 @@ paths:
         - application/x.exve.org.dtcreadout.v1+json;charset=utf-8
         - application/json;charset=utf-8
       responses:
-        '201':
+        "201":
           description: Returns a DTC List
           schema:
-            $ref: '#/definitions/DtcDataContainer'
-        '202':
-          description: 'The request has been accepted for processing, but not completed.'
-        '400':
+            $ref: "#/definitions/DtcDataContainer"
+        "202":
+          description: The request has been accepted for processing, but not completed.
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '402':
+            $ref: "#/definitions/ErrorResponse"
+        "402":
           description: Payment required
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '403':
+            $ref: "#/definitions/ErrorResponse"
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '404':
+            $ref: "#/definitions/ErrorResponse"
+        "404":
           description: Resource Not Found
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '406':
+            $ref: "#/definitions/ErrorResponse"
+        "406":
           description: Not Acceptable
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '429':
+            $ref: "#/definitions/ErrorResponse"
+        "429":
           description: Quota limit is exceeded.
-        '500':
+        "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '501':
+            $ref: "#/definitions/ErrorResponse"
+        "501":
           description: Not Implemented
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '503':
+            $ref: "#/definitions/ErrorResponse"
+        "503":
           description: Service Unavailable
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '505':
+            $ref: "#/definitions/ErrorResponse"
+        "505":
           description: Version not supported
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: View the List of DTCs for specific vehicleId.
       tags:
         - Diagnostic Trouble Codes (DTC's)
-  '/vehicles/{vehicleId}/ecuId/{ecuId}/dtcId/{dtcId}/dtcSnapshotReadouts':
+  "/vehicles/{vehicleId}/ecuId/{ecuId}/dtcId/{dtcId}/dtcSnapshotReadouts":
     post:
-      description: 'This API creates a readout of a DTC snapshot from one vehicle. If the result is available immediately, the result is returned. If the result isn''t available, a location to the DTC snapshot readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!'
+      description: "This API creates a readout of a DTC snapshot from one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the DTC snapshot readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!"
       operationId: getDtcSnapshotReadoutsUsingPOST
       parameters:
         - description: The vehicle identifier of the vehicle to read from
@@ -133,62 +134,62 @@ paths:
         - application/x.exve.org.dtcSnapshotReadout.v1+json;charset=utf-8
         - application/json;charset=utf-8
       responses:
-        '201':
+        "201":
           description: Returns a DTC Snapshot List
           schema:
-            $ref: '#/definitions/DtcSnapshotDataContainer'
-        '202':
-          description: 'The request has been accepted for processing, but not completed.'
-        '204':
-          description: 'The request has been accepted for processing, but no content is available.'
-        '400':
+            $ref: "#/definitions/DtcSnapshotDataContainer"
+        "202":
+          description: The request has been accepted for processing, but not completed.
+        "204":
+          description: The request has been accepted for processing, but no content is available.
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '402':
+            $ref: "#/definitions/ErrorResponse"
+        "402":
           description: Payment required
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '403':
+            $ref: "#/definitions/ErrorResponse"
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '404':
+            $ref: "#/definitions/ErrorResponse"
+        "404":
           description: Resource Not Found
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '406':
+            $ref: "#/definitions/ErrorResponse"
+        "406":
           description: Not Acceptable
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '429':
+            $ref: "#/definitions/ErrorResponse"
+        "429":
           description: Quota limit is exceeded.
-        '500':
+        "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '501':
+            $ref: "#/definitions/ErrorResponse"
+        "501":
           description: Not Implemented
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '503':
+            $ref: "#/definitions/ErrorResponse"
+        "503":
           description: Service Unavailable
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '505':
+            $ref: "#/definitions/ErrorResponse"
+        "505":
           description: Version not supported
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: View the List of DTC Snapshot for specific vehicleId.
       tags:
         - Diagnostic Trouble Code (DTC) Snapshots
-  '/vehicles/{vehicleId}/ecuReadouts':
+  "/vehicles/{vehicleId}/ecuReadouts":
     post:
-      description: 'This API creates a readout of ECUs for one vehicle. If the result is available immediately, the result is returned. If the result isn''t available, a location to the ECU readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!'
+      description: "This API creates a readout of ECUs for one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the ECU readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!"
       operationId: getEcuDataListByVehicleIdUsingPOST
       parameters:
         - description: The vehicle identifier of the vehicle to read from
@@ -197,7 +198,7 @@ paths:
           required: true
           type: string
           x-example: WDD111111PKW01000
-        - description: 'Return this ECU id only. Default: Return all ECUs.'
+        - description: "Return this ECU id only. Default: Return all ECUs."
           in: query
           name: ecuId
           required: false
@@ -206,60 +207,60 @@ paths:
         - application/x.exve.org.ecureadout.v1+json;charset=utf-8
         - application/json;charset=utf-8
       responses:
-        '201':
+        "201":
           description: Returns an ECU List
           schema:
-            $ref: '#/definitions/EcuDataContainer'
-        '202':
-          description: 'The request has been accepted for processing, but not completed.'
-        '400':
+            $ref: "#/definitions/EcuDataContainer"
+        "202":
+          description: The request has been accepted for processing, but not completed.
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '402':
+            $ref: "#/definitions/ErrorResponse"
+        "402":
           description: Payment required
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '403':
+            $ref: "#/definitions/ErrorResponse"
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '404':
+            $ref: "#/definitions/ErrorResponse"
+        "404":
           description: Resource Not Found
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '406':
+            $ref: "#/definitions/ErrorResponse"
+        "406":
           description: Not Acceptable
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '429':
+            $ref: "#/definitions/ErrorResponse"
+        "429":
           description: Quota limit is exceeded.
-        '500':
+        "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '501':
+            $ref: "#/definitions/ErrorResponse"
+        "501":
           description: Not Implemented
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '503':
+            $ref: "#/definitions/ErrorResponse"
+        "503":
           description: Service Unavailable
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '505':
+            $ref: "#/definitions/ErrorResponse"
+        "505":
           description: Version not supported
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: View the List of ECU for specific vehicleId.
       tags:
         - Electronical Control Units (ECU's)
-  '/vehicles/{vehicleId}/resourceReadouts':
+  "/vehicles/{vehicleId}/resourceReadouts":
     post:
-      description: 'This API creates a readout of available resources to the accessing party for one vehicle. If the result is available immediately, the result is returned. If the result isn''t available, a location to the resource readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!'
+      description: "This API creates a readout of available resources to the accessing party for one vehicle. If the result is available immediately, the result is returned. If the result isn't available, a location to the resource readout is returned. This location shall be polled until the result is available. INFO: GET Requests are not yet supported!"
       operationId: getResourceReadoutsUsingPOST
       parameters:
         - description: vehicleId of the resources to be viewed
@@ -272,54 +273,54 @@ paths:
         - application/x.exve.org.resourceReadout.v1+json;charset=utf-8
         - application/json;charset=utf-8
       responses:
-        '201':
+        "201":
           description: Returns a resource to the accessing party
           schema:
-            $ref: '#/definitions/ResourceDataContainer'
-        '202':
-          description: 'The request has been accepted for processing, but not completed.'
-        '400':
+            $ref: "#/definitions/ResourceDataContainer"
+        "202":
+          description: The request has been accepted for processing, but not completed.
+        "400":
           description: Bad Request
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '401':
+            $ref: "#/definitions/ErrorResponse"
+        "401":
           description: Unauthorized
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '402':
+            $ref: "#/definitions/ErrorResponse"
+        "402":
           description: Payment required
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '403':
+            $ref: "#/definitions/ErrorResponse"
+        "403":
           description: Forbidden
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '404':
+            $ref: "#/definitions/ErrorResponse"
+        "404":
           description: Resource Not Found
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '406':
+            $ref: "#/definitions/ErrorResponse"
+        "406":
           description: Not Acceptable
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '429':
+            $ref: "#/definitions/ErrorResponse"
+        "429":
           description: Quota limit is exceeded.
-        '500':
+        "500":
           description: Internal server error
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '501':
+            $ref: "#/definitions/ErrorResponse"
+        "501":
           description: Not Implemented
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '503':
+            $ref: "#/definitions/ErrorResponse"
+        "503":
           description: Service Unavailable
           schema:
-            $ref: '#/definitions/ErrorResponse'
-        '505':
+            $ref: "#/definitions/ErrorResponse"
+        "505":
           description: Version not supported
           schema:
-            $ref: '#/definitions/ErrorResponse'
+            $ref: "#/definitions/ErrorResponse"
       summary: View the List of resources
       tags:
         - Resources
@@ -370,7 +371,7 @@ definitions:
         format: date-time
         type: string
       vehicleId:
-        description: 'The vehicle identifier of the extended vehicle, e.g VIN'
+        description: The vehicle identifier of the extended vehicle, e.g VIN
         type: string
     required:
       - id
@@ -381,7 +382,7 @@ definitions:
   DtcDataContainer:
     properties:
       dtcReadout:
-        $ref: '#/definitions/DtcDataType'
+        $ref: "#/definitions/DtcDataType"
     type: object
   DtcDataItem:
     properties:
@@ -412,18 +413,18 @@ definitions:
     type: object
   DtcDataType:
     allOf:
-      - $ref: '#/definitions/CommonType'
+      - $ref: "#/definitions/CommonType"
       - properties:
           dtcs:
             description: List of DTCs
             items:
-              $ref: '#/definitions/DtcDataItem'
+              $ref: "#/definitions/DtcDataItem"
             type: array
         type: object
   DtcSnapshotDataContainer:
     properties:
       dtcSnapshotReadout:
-        $ref: '#/definitions/DtcSnapshotDataType'
+        $ref: "#/definitions/DtcSnapshotDataType"
     type: object
   DtcSnapshotDataItem:
     properties:
@@ -439,7 +440,7 @@ definitions:
     type: object
   DtcSnapshotDataType:
     allOf:
-      - $ref: '#/definitions/CommonType'
+      - $ref: "#/definitions/CommonType"
       - properties:
           dtcId:
             description: Identifier of the DTC
@@ -447,7 +448,7 @@ definitions:
           dtcSnapshotParameters:
             description: List of dtcSnapshotParameters.
             items:
-              $ref: '#/definitions/DtcSnapshotDataItem'
+              $ref: "#/definitions/DtcSnapshotDataItem"
             type: array
           ecuId:
             description: Identifier of the ECU
@@ -459,7 +460,7 @@ definitions:
   EcuDataContainer:
     properties:
       ecuReadout:
-        $ref: '#/definitions/EcuDataType'
+        $ref: "#/definitions/EcuDataType"
     type: object
   EcuDataItem:
     properties:
@@ -483,12 +484,12 @@ definitions:
     type: object
   EcuDataType:
     allOf:
-      - $ref: '#/definitions/CommonType'
+      - $ref: "#/definitions/CommonType"
       - properties:
           ecus:
             description: List of ECUs
             items:
-              $ref: '#/definitions/EcuDataItem'
+              $ref: "#/definitions/EcuDataItem"
             type: array
         type: object
   ErrorResponse:
@@ -503,7 +504,7 @@ definitions:
   ResourceDataContainer:
     properties:
       resourceReadout:
-        $ref: '#/definitions/ResourceDataType'
+        $ref: "#/definitions/ResourceDataType"
     type: object
   ResourceDataItem:
     properties:
@@ -523,12 +524,12 @@ definitions:
     type: object
   ResourceDataType:
     allOf:
-      - $ref: '#/definitions/CommonType'
+      - $ref: "#/definitions/CommonType"
       - properties:
           resources:
             description: List of resources.
             items:
-              $ref: '#/definitions/ResourceDataItem'
+              $ref: "#/definitions/ResourceDataItem"
             type: array
         type: object
 x-default-token: a1b2c3d4-a1b2-a1b2-a1b2-a1b2c3d4e5f6

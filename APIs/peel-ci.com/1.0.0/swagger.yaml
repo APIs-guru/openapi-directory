@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: hashtag.peel-ci.com
@@ -6,21 +6,22 @@ basePath: /
 info:
   contact:
     x-twitter: peeltv
-  description: 'The machine learning service APIs utilize hashtags from Twitter to find related, trending shows, related Twitter hashtags in real time and to generate direct tune-in URLs.'
+  description: The machine learning service APIs utilize hashtags from Twitter to find related, trending shows, related Twitter hashtags in real time and to generate direct tune-in URLs.
   title: Peel Tune-in API
   version: 1.0.0
   x-apisguru-categories:
     - media
   x-logo:
-    url: 'https://twitter.com/peeltv/profile_image?size=original'
+    url: https://twitter.com/peeltv/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.11
       format: swagger
-      url: 'https://s3-us-west-2.amazonaws.com/tuneinapi.peel-ci.com/resources.json'
-      version: '1.2'
+      url: https://s3-us-west-2.amazonaws.com/tuneinapi.peel-ci.com/resources.json
+      version: "1.2"
   x-providerName: peel-ci.com
+  x-preferred: true
 produces:
   - application/json
 tags:
@@ -47,7 +48,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Gets related hashtags for a show.
       tags:
@@ -67,14 +68,14 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Gets trending shows.
       tags:
         - hashtag
   /hashtag/tuneinlinks:
     get:
-      description: 'Either use <b>tweet</b>, <b>hashtags</b>, or <b>showID</b> as the parameter. The tunein URLs that match best are returned in order of best match.<br/><br/>A <b>tweet</b> in this context is shorthand for text from a social networking conversation, e.g., it could be from Facebook, Twitter, LinkedIn, etc., and be greater than 140 characters.'
+      description: Either use <b>tweet</b>, <b>hashtags</b>, or <b>showID</b> as the parameter. The tunein URLs that match best are returned in order of best match.<br/><br/>A <b>tweet</b> in this context is shorthand for text from a social networking conversation, e.g., it could be from Facebook, Twitter, LinkedIn, etc., and be greater than 140 characters.
       operationId: getTuneinLinks
       parameters:
         - description: Text from a social networking conversation
@@ -93,23 +94,23 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
-      summary: 'Gets tunein URLs (links) from either a tweet, hashtags, @mentions, or show ID.'
+      summary: Gets tunein URLs (links) from either a tweet, hashtags, @mentions, or show ID.
       tags:
         - hashtag
   /health:
     get:
       operationId: getHealth
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get health of Tune-in service (which includes its uptime).
       tags:
         - health
-  '/status/{showID}':
+  "/status/{showID}":
     get:
-      description: 'For Twitter, statuses are synonymous with tweets.'
+      description: For Twitter, statuses are synonymous with tweets.
       operationId: getStatuses
       parameters:
         - description: Unique ID for a show
@@ -118,7 +119,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Gets the last 100 statuses for this show.
       tags:

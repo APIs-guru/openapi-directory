@@ -18,6 +18,7 @@ info:
       url: https://api.motaword.com/swagger
       version: "3.0"
   x-providerName: motaword.com
+  x-preferred: true
 externalDocs:
   url: https://www.motaword.com/developer
 security:
@@ -114,6 +115,49 @@ paths:
       summary: Get blog posts - ordered by created desc by default
       tags:
         - Blog
+  /commissions:
+    get:
+      operationId: getCommissions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommissionList"
+          description: Commissions for client.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnauthorizedUser
+      summary: Returns a commission list of current client.
+      tags:
+        - Commission
+    post:
+      operationId: getCommissionsByFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReportFilter"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommissionList"
+          description: Commissions for client.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnauthorizedUser
+      summary: Returns a commission list of current client.
+      tags:
+        - Commission
   "/corporates/{corporateId}/users":
     get:
       description: Get a list of users for this corporate id
@@ -3331,6 +3375,49 @@ paths:
       summary: Returns your client and vendor statistics. This used to be called "summary" (\@deprecated).
       tags:
         - User
+  /stats/commissions:
+    get:
+      operationId: getCommissionStats
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommissionStats"
+          description: User's commission stats
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnauthorizedUser
+      summary: Returns the total commissions stats.
+      tags:
+        - Stats
+    post:
+      operationId: getCommissionStatsByFilter
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReportFilter"
+        required: false
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CommissionStats"
+          description: User's commission stats
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+          description: UnauthorizedUser
+      summary: Returns the total commissions stats by report filter.
+      tags:
+        - Stats
   /stats/popular-pairs:
     get:
       operationId: getPopularPairs
@@ -4815,6 +4902,46 @@ components:
         meta:
           $ref: "#/components/schemas/PagingMeta"
       type: object
+    Commission:
+      properties:
+        amount:
+          $ref: "#/components/schemas/Monetary"
+        date:
+          description: the date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z
+          format: date-time
+          type: string
+        project:
+          $ref: "#/components/schemas/Project"
+        status:
+          enum:
+            - completed
+            - unclaimed
+            - failed
+            - sent
+            - waiting
+            - waiting_invoice
+          type: string
+      type: object
+    CommissionList:
+      properties:
+        commissions:
+          items:
+            $ref: "#/components/schemas/Commission"
+          type: array
+        meta:
+          $ref: "#/components/schemas/PagingMeta"
+      type: object
+    CommissionStats:
+      properties:
+        balance:
+          $ref: "#/components/schemas/Monetary"
+        paid:
+          $ref: "#/components/schemas/Monetary"
+        quote_total:
+          $ref: "#/components/schemas/Monetary"
+        total:
+          $ref: "#/components/schemas/Monetary"
+      type: object
     CreditCard:
       properties:
         bin:
@@ -5811,6 +5938,8 @@ components:
           description: \@deprecated. use `vendor` key
           type: boolean
         is_prospect:
+          type: boolean
+        is_sales_person:
           type: boolean
         is_vendor:
           type: boolean

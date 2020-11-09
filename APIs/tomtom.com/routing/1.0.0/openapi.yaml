@@ -1,71 +1,76 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://api.tomtom.com'
+  - url: https://api.tomtom.com
 info:
   contact:
     name: Contact Us
-    url: 'https://developer.tomtom.com/contact-us'
+    url: https://developer.tomtom.com/contact-us
     x-twitter: TomTom
-  description: |-
+  description: >-
     Routing consists of the following service:
+
     <b>Calculate Route</b>
+
     Calculates a route between an origin and a destination, passing through waypoints (if specified). Additional routing parameters like traffic, avoidance conditions, departure/arrival time etc. can be taken into account.
+
     <b>Calculate Reachable Range</b>
+
     Calculates a set of locations that can be reached from the origin point, subject to the available fuel or energy budget that is specified in the request.
   title: Routing
   version: 1.0.0
   x-apisguru-categories:
     - location
   x-logo:
-    url: 'https://twitter.com/TomTom/profile_image?size=original'
+    url: https://twitter.com/TomTom/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: openapi
-      url: 'https://developer.tomtom.com/system/files/swagger_models/routing_api.yaml'
-      version: '3.0'
+      url: https://developer.tomtom.com/system/files/swagger_models/routing_api.yaml
+      version: "3.0"
   x-providerName: tomtom.com
   x-serviceName: routing
+  x-preferred: true
 security:
   - api_key: []
 paths:
-  '/routing/{versionNumber}/calculateReachableRange/{origin}/{contentType}':
+  "/routing/{versionNumber}/calculateReachableRange/{origin}/{contentType}":
     get:
       description: Calculates a set of locations that can be reached from the origin point.
       parameters:
-        - $ref: '#/components/parameters/versionNumber'
-        - $ref: '#/components/parameters/origin'
-        - $ref: '#/components/parameters/contentType'
-        - $ref: '#/components/parameters/fuelBudgetInLiters'
-        - $ref: '#/components/parameters/energyBudgetInkWh'
-        - $ref: '#/components/parameters/timeBudgetInSec'
-        - $ref: '#/components/parameters/callback'
-        - $ref: '#/components/parameters/report'
-        - $ref: '#/components/parameters/departAt'
-        - $ref: '#/components/parameters/arriveAt'
-        - $ref: '#/components/parameters/routeType'
-        - $ref: '#/components/parameters/traffic'
-        - $ref: '#/components/parameters/avoidInCalculateReachableRange'
-        - $ref: '#/components/parameters/travelMode'
-        - $ref: '#/components/parameters/hilliness'
-        - $ref: '#/components/parameters/windingness'
-        - $ref: '#/components/parameters/vehicleMaxSpeed'
-        - $ref: '#/components/parameters/vehicleWeight'
-        - $ref: '#/components/parameters/vehicleAxleWeight'
-        - $ref: '#/components/parameters/vehicleLength'
-        - $ref: '#/components/parameters/vehicleWidth'
-        - $ref: '#/components/parameters/vehicleHeight'
-        - $ref: '#/components/parameters/vehicleCommercial'
-        - $ref: '#/components/parameters/vehicleLoadType'
-        - $ref: '#/components/parameters/constantSpeedConsumptionInLitersPerHundredkm'
-        - $ref: '#/components/parameters/currentFuelInLiters'
-        - $ref: '#/components/parameters/auxiliaryPowerInLitersPerHour'
-        - $ref: '#/components/parameters/fuelEnergyDensityInMJoulesPerLiter'
-        - $ref: '#/components/parameters/accelerationEfficiency'
-        - $ref: '#/components/parameters/decelerationEfficiency'
-        - $ref: '#/components/parameters/uphillEfficiency'
-        - $ref: '#/components/parameters/downhillEfficiency'
+        - $ref: "#/components/parameters/versionNumber"
+        - $ref: "#/components/parameters/origin"
+        - $ref: "#/components/parameters/contentType"
+        - $ref: "#/components/parameters/fuelBudgetInLiters"
+        - $ref: "#/components/parameters/energyBudgetInkWh"
+        - $ref: "#/components/parameters/timeBudgetInSec"
+        - $ref: "#/components/parameters/callback"
+        - $ref: "#/components/parameters/report"
+        - $ref: "#/components/parameters/departAt"
+        - $ref: "#/components/parameters/arriveAt"
+        - $ref: "#/components/parameters/routeType"
+        - $ref: "#/components/parameters/traffic"
+        - $ref: "#/components/parameters/avoidInCalculateReachableRange"
+        - $ref: "#/components/parameters/travelMode"
+        - $ref: "#/components/parameters/hilliness"
+        - $ref: "#/components/parameters/windingness"
+        - $ref: "#/components/parameters/vehicleMaxSpeed"
+        - $ref: "#/components/parameters/vehicleWeight"
+        - $ref: "#/components/parameters/vehicleAxleWeight"
+        - $ref: "#/components/parameters/vehicleLength"
+        - $ref: "#/components/parameters/vehicleWidth"
+        - $ref: "#/components/parameters/vehicleHeight"
+        - $ref: "#/components/parameters/vehicleCommercial"
+        - $ref: "#/components/parameters/vehicleLoadType"
+        - $ref: "#/components/parameters/constantSpeedConsumptionInLitersPerHundredkm"
+        - $ref: "#/components/parameters/currentFuelInLiters"
+        - $ref: "#/components/parameters/auxiliaryPowerInLitersPerHour"
+        - $ref: "#/components/parameters/fuelEnergyDensityInMJoulesPerLiter"
+        - $ref: "#/components/parameters/accelerationEfficiency"
+        - $ref: "#/components/parameters/decelerationEfficiency"
+        - $ref: "#/components/parameters/uphillEfficiency"
+        - $ref: "#/components/parameters/downhillEfficiency"
         - description: Engine type of the vehicle.
           example: electric
           in: query
@@ -77,75 +82,75 @@ paths:
               - electric
             type: string
         - description: Specifies the speed-dependent component of consumption. Provided as an unordered list of speed/consumption-rate pairs.
-          example: '50,8.2:130,21.3'
+          example: 50,8.2:130,21.3
           in: query
           name: constantSpeedConsumptionInkWhPerHundredkm
           schema:
-            pattern: '^((\d+\.?\d*,\d+\.?\d*):?)+$'
+            pattern: ^((\d+\.?\d*,\d+\.?\d*):?)+$
             type: string
       responses:
-        '200':
-          description: 'OK: a range was calculated and the body of the response contains the polygon description and further data.'
-        '400':
-          description: 'Bad request: one or more parameters were incorrectly specified or are mutually exclusive, or the origin point specified in the request is not near enough to a road.'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '408':
-          $ref: '#/components/responses/408'
-        '414':
-          $ref: '#/components/responses/414'
-        '500':
-          $ref: '#/components/responses/500'
-        '502':
-          $ref: '#/components/responses/502'
-        '503':
-          $ref: '#/components/responses/503'
-        '504':
-          $ref: '#/components/responses/504'
-        '596':
-          $ref: '#/components/responses/596'
+        "200":
+          description: "OK: a range was calculated and the body of the response contains the polygon description and further data."
+        "400":
+          description: "Bad request: one or more parameters were incorrectly specified or are mutually exclusive, or the origin point specified in the request is not near enough to a road."
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "405":
+          $ref: "#/components/responses/405"
+        "408":
+          $ref: "#/components/responses/408"
+        "414":
+          $ref: "#/components/responses/414"
+        "500":
+          $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
+        "503":
+          $ref: "#/components/responses/503"
+        "504":
+          $ref: "#/components/responses/504"
+        "596":
+          $ref: "#/components/responses/596"
       summary: Reachable Range
       tags:
         - Routing
     post:
-      description: 'Calculates a set of locations that can be reached from the origin point. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>.'
+      description: "Calculates a set of locations that can be reached from the origin point. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>."
       parameters:
-        - $ref: '#/components/parameters/versionNumber'
-        - $ref: '#/components/parameters/origin'
-        - $ref: '#/components/parameters/contentType'
-        - $ref: '#/components/parameters/fuelBudgetInLiters'
-        - $ref: '#/components/parameters/energyBudgetInkWh'
-        - $ref: '#/components/parameters/timeBudgetInSec'
-        - $ref: '#/components/parameters/callback'
-        - $ref: '#/components/parameters/report'
-        - $ref: '#/components/parameters/departAt'
-        - $ref: '#/components/parameters/arriveAt'
-        - $ref: '#/components/parameters/routeType'
-        - $ref: '#/components/parameters/traffic'
-        - $ref: '#/components/parameters/avoidInCalculateReachableRange'
-        - $ref: '#/components/parameters/travelMode'
-        - $ref: '#/components/parameters/hilliness'
-        - $ref: '#/components/parameters/windingness'
-        - $ref: '#/components/parameters/vehicleMaxSpeed'
-        - $ref: '#/components/parameters/vehicleWeight'
-        - $ref: '#/components/parameters/vehicleAxleWeight'
-        - $ref: '#/components/parameters/vehicleLength'
-        - $ref: '#/components/parameters/vehicleWidth'
-        - $ref: '#/components/parameters/vehicleHeight'
-        - $ref: '#/components/parameters/vehicleCommercial'
-        - $ref: '#/components/parameters/vehicleLoadType'
-        - $ref: '#/components/parameters/constantSpeedConsumptionInLitersPerHundredkm'
-        - $ref: '#/components/parameters/currentFuelInLiters'
-        - $ref: '#/components/parameters/auxiliaryPowerInLitersPerHour'
-        - $ref: '#/components/parameters/fuelEnergyDensityInMJoulesPerLiter'
-        - $ref: '#/components/parameters/accelerationEfficiency'
-        - $ref: '#/components/parameters/decelerationEfficiency'
-        - $ref: '#/components/parameters/uphillEfficiency'
-        - $ref: '#/components/parameters/downhillEfficiency'
+        - $ref: "#/components/parameters/versionNumber"
+        - $ref: "#/components/parameters/origin"
+        - $ref: "#/components/parameters/contentType"
+        - $ref: "#/components/parameters/fuelBudgetInLiters"
+        - $ref: "#/components/parameters/energyBudgetInkWh"
+        - $ref: "#/components/parameters/timeBudgetInSec"
+        - $ref: "#/components/parameters/callback"
+        - $ref: "#/components/parameters/report"
+        - $ref: "#/components/parameters/departAt"
+        - $ref: "#/components/parameters/arriveAt"
+        - $ref: "#/components/parameters/routeType"
+        - $ref: "#/components/parameters/traffic"
+        - $ref: "#/components/parameters/avoidInCalculateReachableRange"
+        - $ref: "#/components/parameters/travelMode"
+        - $ref: "#/components/parameters/hilliness"
+        - $ref: "#/components/parameters/windingness"
+        - $ref: "#/components/parameters/vehicleMaxSpeed"
+        - $ref: "#/components/parameters/vehicleWeight"
+        - $ref: "#/components/parameters/vehicleAxleWeight"
+        - $ref: "#/components/parameters/vehicleLength"
+        - $ref: "#/components/parameters/vehicleWidth"
+        - $ref: "#/components/parameters/vehicleHeight"
+        - $ref: "#/components/parameters/vehicleCommercial"
+        - $ref: "#/components/parameters/vehicleLoadType"
+        - $ref: "#/components/parameters/constantSpeedConsumptionInLitersPerHundredkm"
+        - $ref: "#/components/parameters/currentFuelInLiters"
+        - $ref: "#/components/parameters/auxiliaryPowerInLitersPerHour"
+        - $ref: "#/components/parameters/fuelEnergyDensityInMJoulesPerLiter"
+        - $ref: "#/components/parameters/accelerationEfficiency"
+        - $ref: "#/components/parameters/decelerationEfficiency"
+        - $ref: "#/components/parameters/uphillEfficiency"
+        - $ref: "#/components/parameters/downhillEfficiency"
         - description: Engine type of the vehicle.
           example: electric
           in: query
@@ -157,200 +162,200 @@ paths:
               - electric
             type: string
         - description: Specifies the speed-dependent component of consumption. Provided as an unordered list of speed/consumption-rate pairs.
-          example: '50,8.2:130,21.3'
+          example: 50,8.2:130,21.3
           in: query
           name: constantSpeedConsumptionInkWhPerHundredkm
           schema:
-            pattern: '^((\d+\.?\d*,\d+\.?\d*):?)+$'
+            pattern: ^((\d+\.?\d*,\d+\.?\d*):?)+$
             type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/calculateReachableRangePostDataParameters'
+              $ref: "#/components/schemas/calculateReachableRangePostDataParameters"
           application/xml:
             schema:
-              $ref: '#/components/schemas/calculateReachableRangePostDataParameters'
+              $ref: "#/components/schemas/calculateReachableRangePostDataParameters"
       responses:
-        '200':
-          description: 'OK: a range was calculated and the body of the response contains the polygon description and further data.'
-        '400':
-          description: 'Bad request: one or more parameters were incorrectly specified or are mutually exclusive, or the origin point specified in the request is not near enough to a road.'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '408':
-          $ref: '#/components/responses/408'
-        '414':
-          $ref: '#/components/responses/414'
-        '500':
-          $ref: '#/components/responses/500'
-        '502':
-          $ref: '#/components/responses/502'
-        '503':
-          $ref: '#/components/responses/503'
-        '504':
-          $ref: '#/components/responses/504'
-        '596':
-          $ref: '#/components/responses/596'
+        "200":
+          description: "OK: a range was calculated and the body of the response contains the polygon description and further data."
+        "400":
+          description: "Bad request: one or more parameters were incorrectly specified or are mutually exclusive, or the origin point specified in the request is not near enough to a road."
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "405":
+          $ref: "#/components/responses/405"
+        "408":
+          $ref: "#/components/responses/408"
+        "414":
+          $ref: "#/components/responses/414"
+        "500":
+          $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
+        "503":
+          $ref: "#/components/responses/503"
+        "504":
+          $ref: "#/components/responses/504"
+        "596":
+          $ref: "#/components/responses/596"
       summary: Reachable Range
       tags:
         - Routing
-  '/routing/{versionNumber}/calculateRoute/{locations}/{contentType}':
+  "/routing/{versionNumber}/calculateRoute/{locations}/{contentType}":
     get:
       description: Calculates a route between an origin and a destination.
       parameters:
-        - $ref: '#/components/parameters/versionNumber'
-        - $ref: '#/components/parameters/locations'
-        - $ref: '#/components/parameters/contentType'
-        - $ref: '#/components/parameters/maxAlternatives'
-        - $ref: '#/components/parameters/alternativeType'
-        - $ref: '#/components/parameters/minDeviationDistance'
-        - $ref: '#/components/parameters/minDeviationTime'
-        - $ref: '#/components/parameters/instructionsType'
-        - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/computeBestOrder'
-        - $ref: '#/components/parameters/routeRepresentation'
-        - $ref: '#/components/parameters/computeTravelTimeFor'
-        - $ref: '#/components/parameters/vehicleHeading'
-        - $ref: '#/components/parameters/sectionType'
-        - $ref: '#/components/parameters/callback'
-        - $ref: '#/components/parameters/report'
-        - $ref: '#/components/parameters/departAt'
-        - $ref: '#/components/parameters/arriveAt'
-        - $ref: '#/components/parameters/routeType'
-        - $ref: '#/components/parameters/traffic'
-        - $ref: '#/components/parameters/avoid'
-        - $ref: '#/components/parameters/travelMode'
-        - $ref: '#/components/parameters/hilliness'
-        - $ref: '#/components/parameters/windingness'
-        - $ref: '#/components/parameters/vehicleMaxSpeed'
-        - $ref: '#/components/parameters/vehicleWeight'
-        - $ref: '#/components/parameters/vehicleAxleWeight'
-        - $ref: '#/components/parameters/vehicleLength'
-        - $ref: '#/components/parameters/vehicleWidth'
-        - $ref: '#/components/parameters/vehicleHeight'
-        - $ref: '#/components/parameters/vehicleCommercial'
-        - $ref: '#/components/parameters/vehicleLoadType'
-        - $ref: '#/components/parameters/vehicleEngineType'
-        - $ref: '#/components/parameters/constantSpeedConsumptionInLitersPerHundredkm'
-        - $ref: '#/components/parameters/currentFuelInLiters'
-        - $ref: '#/components/parameters/auxiliaryPowerInLitersPerHour'
-        - $ref: '#/components/parameters/fuelEnergyDensityInMJoulesPerLiter'
-        - $ref: '#/components/parameters/accelerationEfficiency'
-        - $ref: '#/components/parameters/decelerationEfficiency'
-        - $ref: '#/components/parameters/uphillEfficiency'
-        - $ref: '#/components/parameters/downhillEfficiency'
-        - $ref: '#/components/parameters/constantSpeedConsumptionInkWhPerHundredkm'
+        - $ref: "#/components/parameters/versionNumber"
+        - $ref: "#/components/parameters/locations"
+        - $ref: "#/components/parameters/contentType"
+        - $ref: "#/components/parameters/maxAlternatives"
+        - $ref: "#/components/parameters/alternativeType"
+        - $ref: "#/components/parameters/minDeviationDistance"
+        - $ref: "#/components/parameters/minDeviationTime"
+        - $ref: "#/components/parameters/instructionsType"
+        - $ref: "#/components/parameters/language"
+        - $ref: "#/components/parameters/computeBestOrder"
+        - $ref: "#/components/parameters/routeRepresentation"
+        - $ref: "#/components/parameters/computeTravelTimeFor"
+        - $ref: "#/components/parameters/vehicleHeading"
+        - $ref: "#/components/parameters/sectionType"
+        - $ref: "#/components/parameters/callback"
+        - $ref: "#/components/parameters/report"
+        - $ref: "#/components/parameters/departAt"
+        - $ref: "#/components/parameters/arriveAt"
+        - $ref: "#/components/parameters/routeType"
+        - $ref: "#/components/parameters/traffic"
+        - $ref: "#/components/parameters/avoid"
+        - $ref: "#/components/parameters/travelMode"
+        - $ref: "#/components/parameters/hilliness"
+        - $ref: "#/components/parameters/windingness"
+        - $ref: "#/components/parameters/vehicleMaxSpeed"
+        - $ref: "#/components/parameters/vehicleWeight"
+        - $ref: "#/components/parameters/vehicleAxleWeight"
+        - $ref: "#/components/parameters/vehicleLength"
+        - $ref: "#/components/parameters/vehicleWidth"
+        - $ref: "#/components/parameters/vehicleHeight"
+        - $ref: "#/components/parameters/vehicleCommercial"
+        - $ref: "#/components/parameters/vehicleLoadType"
+        - $ref: "#/components/parameters/vehicleEngineType"
+        - $ref: "#/components/parameters/constantSpeedConsumptionInLitersPerHundredkm"
+        - $ref: "#/components/parameters/currentFuelInLiters"
+        - $ref: "#/components/parameters/auxiliaryPowerInLitersPerHour"
+        - $ref: "#/components/parameters/fuelEnergyDensityInMJoulesPerLiter"
+        - $ref: "#/components/parameters/accelerationEfficiency"
+        - $ref: "#/components/parameters/decelerationEfficiency"
+        - $ref: "#/components/parameters/uphillEfficiency"
+        - $ref: "#/components/parameters/downhillEfficiency"
+        - $ref: "#/components/parameters/constantSpeedConsumptionInkWhPerHundredkm"
       responses:
-        '200':
-          description: 'OK: a route was calculated and the body of the response contains the route description and any other requested data.'
-        '400':
-          description: 'Bad request: one or more parameters were incorrectly specified, are mutually exclusive, the points in the request are not connected by the road network or the points in the request are not near enough to a road.'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '408':
-          $ref: '#/components/responses/408'
-        '414':
-          $ref: '#/components/responses/414'
-        '500':
-          $ref: '#/components/responses/500'
-        '502':
-          $ref: '#/components/responses/502'
-        '503':
-          $ref: '#/components/responses/503'
-        '504':
-          $ref: '#/components/responses/504'
-        '596':
-          $ref: '#/components/responses/596'
+        "200":
+          description: "OK: a route was calculated and the body of the response contains the route description and any other requested data."
+        "400":
+          description: "Bad request: one or more parameters were incorrectly specified, are mutually exclusive, the points in the request are not connected by the road network or the points in the request are not near enough to a road."
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "405":
+          $ref: "#/components/responses/405"
+        "408":
+          $ref: "#/components/responses/408"
+        "414":
+          $ref: "#/components/responses/414"
+        "500":
+          $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
+        "503":
+          $ref: "#/components/responses/503"
+        "504":
+          $ref: "#/components/responses/504"
+        "596":
+          $ref: "#/components/responses/596"
       summary: Calculate Route
       tags:
         - Routing
     post:
-      description: 'Calculates a route between an origin and a destination. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>.'
+      description: "Calculates a route between an origin and a destination. POST method handles additionally parameters: <em>supportingPoints</em>, <em>allowVignette</em>, <em>avoidVignette</em>, <em>avoidAreas</em>."
       parameters:
-        - $ref: '#/components/parameters/versionNumber'
-        - $ref: '#/components/parameters/locations'
-        - $ref: '#/components/parameters/contentType'
-        - $ref: '#/components/parameters/maxAlternatives'
-        - $ref: '#/components/parameters/alternativeType'
-        - $ref: '#/components/parameters/minDeviationDistance'
-        - $ref: '#/components/parameters/minDeviationTime'
-        - $ref: '#/components/parameters/instructionsType'
-        - $ref: '#/components/parameters/language'
-        - $ref: '#/components/parameters/computeBestOrder'
-        - $ref: '#/components/parameters/routeRepresentation'
-        - $ref: '#/components/parameters/computeTravelTimeFor'
-        - $ref: '#/components/parameters/vehicleHeading'
-        - $ref: '#/components/parameters/sectionType'
-        - $ref: '#/components/parameters/callback'
-        - $ref: '#/components/parameters/report'
-        - $ref: '#/components/parameters/departAt'
-        - $ref: '#/components/parameters/arriveAt'
-        - $ref: '#/components/parameters/routeType'
-        - $ref: '#/components/parameters/traffic'
-        - $ref: '#/components/parameters/avoid'
-        - $ref: '#/components/parameters/travelMode'
-        - $ref: '#/components/parameters/hilliness'
-        - $ref: '#/components/parameters/windingness'
-        - $ref: '#/components/parameters/vehicleMaxSpeed'
-        - $ref: '#/components/parameters/vehicleWeight'
-        - $ref: '#/components/parameters/vehicleAxleWeight'
-        - $ref: '#/components/parameters/vehicleLength'
-        - $ref: '#/components/parameters/vehicleWidth'
-        - $ref: '#/components/parameters/vehicleHeight'
-        - $ref: '#/components/parameters/vehicleCommercial'
-        - $ref: '#/components/parameters/vehicleLoadType'
-        - $ref: '#/components/parameters/vehicleEngineType'
-        - $ref: '#/components/parameters/constantSpeedConsumptionInLitersPerHundredkm'
-        - $ref: '#/components/parameters/currentFuelInLiters'
-        - $ref: '#/components/parameters/auxiliaryPowerInLitersPerHour'
-        - $ref: '#/components/parameters/fuelEnergyDensityInMJoulesPerLiter'
-        - $ref: '#/components/parameters/accelerationEfficiency'
-        - $ref: '#/components/parameters/decelerationEfficiency'
-        - $ref: '#/components/parameters/uphillEfficiency'
-        - $ref: '#/components/parameters/downhillEfficiency'
-        - $ref: '#/components/parameters/constantSpeedConsumptionInkWhPerHundredkm'
+        - $ref: "#/components/parameters/versionNumber"
+        - $ref: "#/components/parameters/locations"
+        - $ref: "#/components/parameters/contentType"
+        - $ref: "#/components/parameters/maxAlternatives"
+        - $ref: "#/components/parameters/alternativeType"
+        - $ref: "#/components/parameters/minDeviationDistance"
+        - $ref: "#/components/parameters/minDeviationTime"
+        - $ref: "#/components/parameters/instructionsType"
+        - $ref: "#/components/parameters/language"
+        - $ref: "#/components/parameters/computeBestOrder"
+        - $ref: "#/components/parameters/routeRepresentation"
+        - $ref: "#/components/parameters/computeTravelTimeFor"
+        - $ref: "#/components/parameters/vehicleHeading"
+        - $ref: "#/components/parameters/sectionType"
+        - $ref: "#/components/parameters/callback"
+        - $ref: "#/components/parameters/report"
+        - $ref: "#/components/parameters/departAt"
+        - $ref: "#/components/parameters/arriveAt"
+        - $ref: "#/components/parameters/routeType"
+        - $ref: "#/components/parameters/traffic"
+        - $ref: "#/components/parameters/avoid"
+        - $ref: "#/components/parameters/travelMode"
+        - $ref: "#/components/parameters/hilliness"
+        - $ref: "#/components/parameters/windingness"
+        - $ref: "#/components/parameters/vehicleMaxSpeed"
+        - $ref: "#/components/parameters/vehicleWeight"
+        - $ref: "#/components/parameters/vehicleAxleWeight"
+        - $ref: "#/components/parameters/vehicleLength"
+        - $ref: "#/components/parameters/vehicleWidth"
+        - $ref: "#/components/parameters/vehicleHeight"
+        - $ref: "#/components/parameters/vehicleCommercial"
+        - $ref: "#/components/parameters/vehicleLoadType"
+        - $ref: "#/components/parameters/vehicleEngineType"
+        - $ref: "#/components/parameters/constantSpeedConsumptionInLitersPerHundredkm"
+        - $ref: "#/components/parameters/currentFuelInLiters"
+        - $ref: "#/components/parameters/auxiliaryPowerInLitersPerHour"
+        - $ref: "#/components/parameters/fuelEnergyDensityInMJoulesPerLiter"
+        - $ref: "#/components/parameters/accelerationEfficiency"
+        - $ref: "#/components/parameters/decelerationEfficiency"
+        - $ref: "#/components/parameters/uphillEfficiency"
+        - $ref: "#/components/parameters/downhillEfficiency"
+        - $ref: "#/components/parameters/constantSpeedConsumptionInkWhPerHundredkm"
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/calculateRoutePostDataParameters'
+              $ref: "#/components/schemas/calculateRoutePostDataParameters"
           application/xml:
             schema:
-              $ref: '#/components/schemas/calculateRoutePostDataParameters'
+              $ref: "#/components/schemas/calculateRoutePostDataParameters"
       responses:
-        '200':
-          description: 'OK: a route was calculated and the body of the response contains the route description and any other requested data.'
-        '400':
-          description: 'Bad request: one or more parameters were incorrectly specified, are mutually exclusive, the points in the request are not connected by the road network or the points in the request are not near enough to a road.'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '405':
-          $ref: '#/components/responses/405'
-        '408':
-          $ref: '#/components/responses/408'
-        '414':
-          $ref: '#/components/responses/414'
-        '500':
-          $ref: '#/components/responses/500'
-        '502':
-          $ref: '#/components/responses/502'
-        '503':
-          $ref: '#/components/responses/503'
-        '504':
-          $ref: '#/components/responses/504'
-        '596':
-          $ref: '#/components/responses/596'
+        "200":
+          description: "OK: a route was calculated and the body of the response contains the route description and any other requested data."
+        "400":
+          description: "Bad request: one or more parameters were incorrectly specified, are mutually exclusive, the points in the request are not connected by the road network or the points in the request are not near enough to a road."
+        "403":
+          $ref: "#/components/responses/403"
+        "404":
+          $ref: "#/components/responses/404"
+        "405":
+          $ref: "#/components/responses/405"
+        "408":
+          $ref: "#/components/responses/408"
+        "414":
+          $ref: "#/components/responses/414"
+        "500":
+          $ref: "#/components/responses/500"
+        "502":
+          $ref: "#/components/responses/502"
+        "503":
+          $ref: "#/components/responses/503"
+        "504":
+          $ref: "#/components/responses/504"
+        "596":
+          $ref: "#/components/responses/596"
       summary: Calculate Route
       tags:
         - Routing
@@ -381,22 +386,23 @@ components:
         format: dateTime
         type: string
     auxiliaryPowerInLitersPerHour:
-      description: 'Specifies the amount of fuel consumed for sustaining auxiliary systems of the vehicle, in liters per hour.'
+      description: Specifies the amount of fuel consumed for sustaining auxiliary systems of the vehicle, in liters per hour.
       in: query
       name: auxiliaryPowerInLitersPerHour
       schema:
         format: float
         type: number
     auxiliaryPowerInkW:
-      description: 'Specifies the amount of power consumed by auxiliary systems, in kilowatts (kW).'
+      description: Specifies the amount of power consumed by auxiliary systems, in kilowatts (kW).
       in: query
       name: auxiliaryPowerInkW
       schema:
         format: float
         type: number
     avoid:
-      description: |-
+      description: >-
         Specifies whether the routing engine should try to avoid specific types of road segment when calculating the route. Can be specified multiple times.
+
         Possible values:
           - tollRoads
           - motorways
@@ -410,8 +416,9 @@ components:
       schema:
         type: string
     avoidInCalculateReachableRange:
-      description: |-
+      description: >-
         Specifies whether the routing engine should try to avoid specific types of road segment when calculating the route. Can be specified multiple times.
+
         Possible values:
           - tollRoads
           - motorways
@@ -438,7 +445,7 @@ components:
         default: false
         type: boolean
     computeTravelTimeFor:
-      description: 'Specifies whether to return additional travel times using different types of traffic information (none, historic, live) as well as the default best-estimate travel time.'
+      description: Specifies whether to return additional travel times using different types of traffic information (none, historic, live) as well as the default best-estimate travel time.
       in: query
       name: computeTravelTimeFor
       schema:
@@ -452,17 +459,17 @@ components:
       in: query
       name: constantSpeedConsumptionInLitersPerHundredkm
       schema:
-        pattern: '^((\d+\.?\d*,\d+\.?\d*):?)+$'
+        pattern: ^((\d+\.?\d*,\d+\.?\d*):?)+$
         type: string
     constantSpeedConsumptionInkWhPerHundredkm:
       description: Specifies the speed-dependent component of consumption. Provided as an unordered list of speed/consumption-rate pairs.
       in: query
       name: constantSpeedConsumptionInkWhPerHundredkm
       schema:
-        pattern: '^((\d+\.?\d*,\d+\.?\d*):?)+$'
+        pattern: ^((\d+\.?\d*,\d+\.?\d*):?)+$
         type: string
     contentType:
-      description: 'The content type of the response structure. If the content type is jsonp, a callback method can be specified in the query parameters.'
+      description: The content type of the response structure. If the content type is jsonp, a callback method can be specified in the query parameters.
       in: path
       name: contentType
       required: true
@@ -545,7 +552,7 @@ components:
           - high
         type: string
     instructionsType:
-      description: 'If specified, guidance instructions will be returned (if available).'
+      description: If specified, guidance instructions will be returned (if available).
       in: query
       name: instructionsType
       schema:
@@ -563,7 +570,7 @@ components:
         type: string
     locations:
       description: Locations through which the calculated route must pass.
-      example: '52.50931,13.42936:52.50274,13.43872'
+      example: 52.50931,13.42936:52.50274,13.43872
       in: path
       name: locations
       required: true
@@ -601,7 +608,7 @@ components:
         type: integer
     origin:
       description: Point from which the range calculation should start.
-      example: '52.50931,13.42936'
+      example: 52.50931,13.42936
       in: path
       name: origin
       required: true
@@ -638,7 +645,7 @@ components:
           - thrilling
         type: string
     sectionType:
-      description: |-
+      description: >-
         Specifies which section types are explicitly reported in the route response. Can be specified multiple times.
           - carTrain, ferry, tunnel or motorway
           - pedestrian
@@ -653,7 +660,7 @@ components:
         default: travelMode
         type: string
     timeBudgetInSec:
-      description: 'Time budget in seconds. Determines the maximum vehicle range using the specified driving time. The consumption parameters in the request will only affect eco-routes, and thereby indirectly the driving time.'
+      description: Time budget in seconds. Determines the maximum vehicle range using the specified driving time. The consumption parameters in the request will only affect eco-routes, and thereby indirectly the driving time.
       in: query
       name: timeBudgetInSec
       schema:
@@ -715,7 +722,7 @@ components:
           - electric
         type: string
     vehicleHeading:
-      description: 'The directional heading of the vehicle in degrees. Entered in degrees, measured clockwise from north (so north is 0, east is 90, etc.).'
+      description: The directional heading of the vehicle in degrees. Entered in degrees, measured clockwise from north (so north is 0, east is 90, etc.).
       in: query
       name: vehicleHeading
       schema:
@@ -739,8 +746,9 @@ components:
         format: float
         type: number
     vehicleLoadType:
-      description: |-
+      description: >-
         Indicates what kinds of hazardous materials the vehicle is carrying (if any). This means it may not be allowed on certain roads.
+
         Use these for routing in the US:
 
           - <i>USHazmatClass1</i> Explosives
@@ -807,8 +815,8 @@ components:
           - high
         type: string
   responses:
-    '403':
-      description: |-
+    "403":
+      description: >-
         Permission, capacity, or authentication issues:
           - Forbidden
           - Not authorized
@@ -816,23 +824,23 @@ components:
           - Account over queries per second limit
           - Account over rate limit
           - Rate limit exceeded
-    '404':
-      description: 'Not Found: the requested resource could not be found, but it may be available again in the future.'
-    '405':
-      description: 'Method Not Allowed: the client used a HTTP method other than GET or POST.'
-    '408':
+    "404":
+      description: "Not Found: the requested resource could not be found, but it may be available again in the future."
+    "405":
+      description: "Method Not Allowed: the client used a HTTP method other than GET or POST."
+    "408":
       description: Request timeout.
-    '414':
+    "414":
       description: Requested uri is too long.
-    '500':
+    "500":
       description: An error occurred while processing the request. Please try again later.
-    '502':
+    "502":
       description: Internal network connectivity issue.
-    '503':
+    "503":
       description: Service currently unavailable.
-    '504':
+    "504":
       description: Internal network connectivity issue or a request that has taken too long to complete.
-    '596':
+    "596":
       description: Service not found.
   schemas:
     calculateReachableRangePostDataParameters:

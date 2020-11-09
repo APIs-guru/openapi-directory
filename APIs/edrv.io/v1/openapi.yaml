@@ -20,6 +20,7 @@ info:
       url: https://developers.edrv.io/openapi/5f15c43c87b0d6001ea97414
       version: "3.0"
   x-providerName: edrv.io
+  x-preferred: true
 security:
   - oauth2: []
 paths:
@@ -1294,10 +1295,24 @@ paths:
                 locations:
                   items: {}
                   type: array
+                logo:
+                  type: string
                 name:
                   type: string
                 otp:
                   type: string
+                theme:
+                  properties:
+                    colors:
+                      properties:
+                        primary:
+                          type: string
+                        secondary:
+                          type: string
+                        tertiary:
+                          type: string
+                      type: object
+                  type: object
               type: object
         description: Include organization properties to create here
         required: true
@@ -2038,7 +2053,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: c58c47f12f50075b2781b004d28f683a3e5ddbac
+x-github-sha: 15f5ab9c17326899c95e0813f874be79bf7b50ae
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

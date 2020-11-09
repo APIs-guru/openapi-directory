@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.zalando.com
@@ -10,23 +10,28 @@ info:
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/Zalando/profile_image?size=original'
+    url: https://twitter.com/Zalando/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://api.zalando.com/schema/swagger.json'
-      version: '2.0'
+      url: https://api.zalando.com/schema/swagger.json
+      version: "2.0"
   x-providerName: zalando.com
+  x-preferred: true
 produces:
   - application/json
 parameters:
   acceptLanguage:
-    description: |-
+    description: >-
       Specify which Shop to use.
 
+
       A standard `Accept-Language` header which specifies the shop that should be used. E.g. `de-DE` will use the German
+
       shop (as does [https://www.zalando.de](https://www/zalando.de) and `de-AT` will use the Austrian one.
 
+
       The shop choosen will e.g. define the currency used for prices as well as the language for product names and
+
       descriptions. Furthermore it will impact which articles are available as they might differ between countries.
     enum:
       - da-DK
@@ -64,7 +69,7 @@ parameters:
     type: array
   ageGroup:
     collectionFormat: multi
-    description: 'filters by age group (eg: kids)'
+    description: "filters by age group (eg: kids)"
     in: query
     items:
       enum:
@@ -78,10 +83,12 @@ parameters:
     type: array
   articleId:
     collectionFormat: multi
-    description: |-
+    description: >-
       The `articleIds` to use use for filtering.
 
+
       One or more `articleIds` might be used as a filter criteria. Submit multiple `articleId` request parameters for
+
       more than one to be used. They will be treated as `OR` criteria.
     in: query
     items:
@@ -100,7 +107,7 @@ parameters:
     type: array
   articleReviewSort:
     default: newest
-    description: 'articles are sorted on reviews provided by customers (eg: best)'
+    description: "articles are sorted on reviews provided by customers (eg: best)"
     enum:
       - newest
       - best
@@ -121,7 +128,7 @@ parameters:
     type: array
   assortmentArea:
     collectionFormat: multi
-    description: 'filters by classification of articles (eg: maternity) '
+    description: "filters by classification of articles (eg: maternity) "
     in: query
     items:
       enum:
@@ -135,7 +142,7 @@ parameters:
     type: array
   brand:
     collectionFormat: multi
-    description: 'filters by brand key given by user (eg: SA5)'
+    description: "filters by brand key given by user (eg: SA5)"
     in: query
     items:
       type: string
@@ -144,7 +151,7 @@ parameters:
     type: array
   brandfamily:
     collectionFormat: multi
-    description: 'filters by brand family key (eg: nike) '
+    description: "filters by brand family key (eg: nike) "
     in: query
     items:
       type: string
@@ -153,7 +160,7 @@ parameters:
     type: array
   category:
     collectionFormat: multi
-    description: 'filters by category (eg: Socks, Rain Coats)'
+    description: "filters by category (eg: Socks, Rain Coats)"
     in: query
     items:
       type: string
@@ -162,7 +169,7 @@ parameters:
     type: array
   color:
     collectionFormat: multi
-    description: 'filters by color (eg: red, blue)'
+    description: "filters by color (eg: red, blue)"
     in: query
     items:
       enum:
@@ -190,7 +197,7 @@ parameters:
     type: array
   den:
     collectionFormat: multi
-    description: 'filters by den '
+    description: "filters by den "
     in: query
     items:
       enum:
@@ -210,8 +217,9 @@ parameters:
     type: array
   fields:
     collectionFormat: multi
-    description: |-
+    description: >-
       Comma separated list of fields that should be returned. Fields of subobjects are specified with dots as separator. Fields of objects within lists are specified in the same way.
+
 
       Example: id,name,brand.key,brand.name, units.id,units.size,units.price.formatted
     in: query
@@ -222,7 +230,7 @@ parameters:
     type: array
   filling:
     collectionFormat: multi
-    description: 'filters by different kinds of garment filling materials (eg: satin, wolle)'
+    description: "filters by different kinds of garment filling materials (eg: satin, wolle)"
     in: query
     items:
       enum:
@@ -251,7 +259,7 @@ parameters:
     required: false
     type: array
   fullText:
-    description: 'filters by text (eg: search by ''as'' gives result with articles of brand Sass)'
+    description: "filters by text (eg: search by 'as' gives result with articles of brand Sass)"
     in: query
     name: fullText
     required: false
@@ -270,7 +278,7 @@ parameters:
     type: array
   heelForm:
     collectionFormat: multi
-    description: 'filters by heel form (eg: flat)'
+    description: "filters by heel form (eg: flat)"
     in: query
     items:
       enum:
@@ -290,7 +298,7 @@ parameters:
     type: array
   heelHeight:
     collectionFormat: multi
-    description: 'filters by height of the heel size or length (eg: xs)'
+    description: "filters by height of the heel size or length (eg: xs)"
     in: query
     items:
       enum:
@@ -302,7 +310,7 @@ parameters:
     required: false
     type: array
   length:
-    description: 'filters by garments length (eg: 3/4 length, knee-length)'
+    description: "filters by garments length (eg: 3/4 length, knee-length)"
     in: query
     name: length
     required: false
@@ -321,7 +329,7 @@ parameters:
     type: string
   occasion:
     collectionFormat: multi
-    description: 'filters by type of occasion (eg: party, business)'
+    description: "filters by type of occasion (eg: party, business)"
     in: query
     items:
       enum:
@@ -349,7 +357,7 @@ parameters:
     type: string
   pattern:
     collectionFormat: multi
-    description: 'filters by pattern on the garments (eg: animal print, plain)'
+    description: "filters by pattern on the garments (eg: animal print, plain)"
     in: query
     items:
       enum:
@@ -374,7 +382,7 @@ parameters:
     required: false
     type: array
   price:
-    description: 'filters all articles in price range (eg: 9-90)'
+    description: "filters all articles in price range (eg: 9-90)"
     in: query
     name: price
     required: false
@@ -403,7 +411,7 @@ parameters:
     type: array
   shaftHeight:
     collectionFormat: multi
-    description: 'filters by shaft height (eg: s, xs)'
+    description: "filters by shaft height (eg: s, xs)"
     in: query
     items:
       enum:
@@ -417,7 +425,7 @@ parameters:
     type: array
   shaftWidth:
     collectionFormat: multi
-    description: 'filters by shaft width (eg: s, l)'
+    description: "filters by shaft width (eg: s, l)"
     in: query
     items:
       enum:
@@ -430,7 +438,7 @@ parameters:
     type: array
   shirtCollar:
     collectionFormat: multi
-    description: 'filters by shirt collar styles (eg: low V neck, lined collar)'
+    description: "filters by shirt collar styles (eg: low V neck, lined collar)"
     in: query
     items:
       enum:
@@ -474,7 +482,7 @@ parameters:
     type: array
   shoeFastener:
     collectionFormat: multi
-    description: 'filters by shoe fastener types (eg: buckle, lacing)'
+    description: "filters by shoe fastener types (eg: buckle, lacing)"
     in: query
     items:
       enum:
@@ -490,7 +498,7 @@ parameters:
     type: array
   shoeToecap:
     collectionFormat: multi
-    description: 'filters by shoe toe cap variants (eg: pointed, square)'
+    description: "filters by shoe toe cap variants (eg: pointed, square)"
     in: query
     items:
       enum:
@@ -521,7 +529,7 @@ parameters:
     required: false
     type: string
   sort:
-    description: 'sorting order (eg: popularity)'
+    description: "sorting order (eg: popularity)"
     enum:
       - popularity
       - activationdate
@@ -534,7 +542,7 @@ parameters:
     type: string
   sports:
     collectionFormat: multi
-    description: 'filters by different sport activities (eg: football)'
+    description: "filters by different sport activities (eg: football)"
     in: query
     items:
       enum:
@@ -614,7 +622,7 @@ parameters:
     type: array
   upperMaterial:
     collectionFormat: multi
-    description: 'filters by different type of upper material used on garments (eg: lace)'
+    description: "filters by different type of upper material used on garments (eg: lace)"
     in: query
     items:
       enum:
@@ -685,8 +693,9 @@ paths:
       description: Zalando API Article Reviews Schema
       parameters:
         - collectionFormat: multi
-          description: |
+          description: >
             Article IDs. A list of config SKUs for which the article reviews will be returned.
+
             Required if articleModelId is empty.
           in: query
           items:
@@ -695,8 +704,9 @@ paths:
           required: false
           type: array
         - collectionFormat: multi
-          description: |
+          description: >
             Article model IDs. A list of model SKUs for which the article reviews will be returned.
+
             Required if articleId is empty.
           in: query
           items:
@@ -704,15 +714,15 @@ paths:
           name: articleModelId
           required: false
           type: array
-        - $ref: '#/parameters/minStarRating'
-        - $ref: '#/parameters/maxStarRating'
-        - $ref: '#/parameters/articleReviewSort'
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/pageSize'
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/minStarRating"
+        - $ref: "#/parameters/maxStarRating"
+        - $ref: "#/parameters/articleReviewSort"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/pageSize"
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Articles Reviews response.
           examples:
             application/json:
@@ -722,10 +732,10 @@ paths:
                   articleSizeRatings:
                     OVERALL: 3
                     SHOE_WIDTH: 3
-                  created: '2015-07-23T17:52:14+02:00'
+                  created: 2015-07-23T17:52:14+02:00
                   customerCity: Brixton
                   customerCountry: GB
-                  description: 'Very nice trainers, with an extremely prompt arrival... '
+                  description: "Very nice trainers, with an extremely prompt arrival... "
                   helpfulCount: 0
                   language: en
                   rating: 5
@@ -734,11 +744,11 @@ paths:
                   title: Dream turned to reality in the blink of an eye!
                   unhelpfulCount: 0
           schema:
-            $ref: '#/definitions/Article-Reviews'
-        '400':
+            $ref: "#/definitions/Article-Reviews"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article Reviews
       tags:
         - articles
@@ -754,12 +764,12 @@ paths:
           name: articleModelId
           required: true
           type: array
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/pageSize'
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/pageSize"
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Articles Reviews Summaries response.
           examples:
             application/json:
@@ -770,21 +780,21 @@ paths:
                   numberOfUserRecommendations: 0
                   numberOfUserReviews: 1
                   starRatingDistribution:
-                    '1': 0
-                    '2': 0
-                    '3': 0
-                    '4': 1
-                    '5': 0
+                    "1": 0
+                    "2": 0
+                    "3": 0
+                    "4": 1
+                    "5": 0
           schema:
-            $ref: '#/definitions/Article-Reviews-Summaries'
-        '400':
+            $ref: "#/definitions/Article-Reviews-Summaries"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article Reviews Summaries
       tags:
         - articles
-  '/article-reviews-summaries/{articleModelId}':
+  "/article-reviews-summaries/{articleModelId}":
     get:
       description: Zalando API ArticleReviewsSummaries Schema
       parameters:
@@ -793,10 +803,10 @@ paths:
           name: articleModelId
           required: true
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Articles Reviews Summaries by articleModelId response.
           examples:
             application/json:
@@ -806,25 +816,25 @@ paths:
               numberOfUserRecommendations: 0
               numberOfUserReviews: 1
               starRatingDistribution:
-                '1': 0
-                '2': 0
-                '3': 0
-                '4': 1
-                '5': 0
+                "1": 0
+                "2": 0
+                "3": 0
+                "4": 1
+                "5": 0
           schema:
-            $ref: '#/definitions/Article-Reviews-Summary'
-        '400':
+            $ref: "#/definitions/Article-Reviews-Summary"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article Reviews Summaries by articleModelId
       tags:
         - articles
-  '/article-reviews/{reviewId}':
+  "/article-reviews/{reviewId}":
     get:
       description: Zalando API ArticleReviews Schema
       parameters:
@@ -833,10 +843,10 @@ paths:
           name: reviewId
           required: true
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Articles Reviews by reviewId response.
           examples:
             application/json:
@@ -845,10 +855,10 @@ paths:
               articleSizeRatings:
                 OVERALL: 3
                 SHOE_WIDTH: 3
-              created: '2015-07-23T17:52:14+02:00'
+              created: 2015-07-23T17:52:14+02:00
               customerCity: Brixton
               customerCountry: GB
-              description: 'Very nice trainers, with an extremely prompt arrival...'
+              description: Very nice trainers, with an extremely prompt arrival...
               helpfulCount: 0
               language: en
               rating: 5
@@ -857,72 +867,77 @@ paths:
               title: Dream turned to reality in the blink of an eye!
               unhelpfulCount: 0
           schema:
-            $ref: '#/definitions/Article-Review'
-        '404':
+            $ref: "#/definitions/Article-Review"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article Reviews by reviewId
       tags:
         - articles
   /articles:
     get:
-      description: |-
+      description: >-
         Search for articles based on various different possible filter like e.g. the `brandFamily`, the `catagory` or a
+
         specific `color`. See [Filters](https://todo) for a list of all available filter options.
 
+
         The default `pageSize` for responses is set to `20`. You can add a `pageSize` request parameter to adjust that.
+
         Please keep in mind that the maximum `pageSize` for this resource is `200`.
 
+
         The endpoint also supports reducing the fields returned for each article via the `fields` parameter. Please
+
         refer to [fields parameter](https://todo) for more details.
       parameters:
-        - $ref: '#/parameters/articleId'
-        - $ref: '#/parameters/articleModelId'
-        - $ref: '#/parameters/articleUnitId'
-        - $ref: '#/parameters/activationDate'
-        - $ref: '#/parameters/ageGroup'
-        - $ref: '#/parameters/assortmentArea'
-        - $ref: '#/parameters/brand'
-        - $ref: '#/parameters/brandfamily'
-        - $ref: '#/parameters/category'
-        - $ref: '#/parameters/color'
-        - $ref: '#/parameters/den'
-        - $ref: '#/parameters/filling'
-        - $ref: '#/parameters/fullText'
-        - $ref: '#/parameters/gender'
-        - $ref: '#/parameters/heelForm'
-        - $ref: '#/parameters/heelHeight'
-        - $ref: '#/parameters/length'
-        - $ref: '#/parameters/occasion'
-        - $ref: '#/parameters/pattern'
-        - $ref: '#/parameters/price'
-        - $ref: '#/parameters/sale'
-        - $ref: '#/parameters/season'
-        - $ref: '#/parameters/shaftHeight'
-        - $ref: '#/parameters/shaftWidth'
-        - $ref: '#/parameters/shirtCollar'
-        - $ref: '#/parameters/shoeFastener'
-        - $ref: '#/parameters/shoeToecap'
-        - $ref: '#/parameters/shopArea'
-        - $ref: '#/parameters/size'
-        - $ref: '#/parameters/sports'
-        - $ref: '#/parameters/technology'
-        - $ref: '#/parameters/trouserRise'
-        - $ref: '#/parameters/upperMaterial'
-        - $ref: '#/parameters/volume'
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/pageSize'
-        - $ref: '#/parameters/sort'
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/articleId"
+        - $ref: "#/parameters/articleModelId"
+        - $ref: "#/parameters/articleUnitId"
+        - $ref: "#/parameters/activationDate"
+        - $ref: "#/parameters/ageGroup"
+        - $ref: "#/parameters/assortmentArea"
+        - $ref: "#/parameters/brand"
+        - $ref: "#/parameters/brandfamily"
+        - $ref: "#/parameters/category"
+        - $ref: "#/parameters/color"
+        - $ref: "#/parameters/den"
+        - $ref: "#/parameters/filling"
+        - $ref: "#/parameters/fullText"
+        - $ref: "#/parameters/gender"
+        - $ref: "#/parameters/heelForm"
+        - $ref: "#/parameters/heelHeight"
+        - $ref: "#/parameters/length"
+        - $ref: "#/parameters/occasion"
+        - $ref: "#/parameters/pattern"
+        - $ref: "#/parameters/price"
+        - $ref: "#/parameters/sale"
+        - $ref: "#/parameters/season"
+        - $ref: "#/parameters/shaftHeight"
+        - $ref: "#/parameters/shaftWidth"
+        - $ref: "#/parameters/shirtCollar"
+        - $ref: "#/parameters/shoeFastener"
+        - $ref: "#/parameters/shoeToecap"
+        - $ref: "#/parameters/shopArea"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/sports"
+        - $ref: "#/parameters/technology"
+        - $ref: "#/parameters/trouserRise"
+        - $ref: "#/parameters/upperMaterial"
+        - $ref: "#/parameters/volume"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/pageSize"
+        - $ref: "#/parameters/sort"
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Articles response.
           examples:
             application/json:
               content:
-                - activationDate: '2015-01-12T17:12:15+01:00'
+                - activationDate: 2015-01-12T17:12:15+01:00
                   additionalInfos: []
                   ageGroups:
                     - BABY
@@ -960,10 +975,10 @@ paths:
                   available: false
                   brand:
                     key: BE8
-                    logoLargeUrl: 'https://i2.ztat.net/brandxl/belly-button-1.jpg'
-                    logoUrl: 'https://i2.ztat.net/brand/belly-button-1.jpg'
+                    logoLargeUrl: https://i2.ztat.net/brandxl/belly-button-1.jpg
+                    logoUrl: https://i2.ztat.net/brand/belly-button-1.jpg
                     name: bellybutton
-                    shopUrl: 'https://www.zalando.co.uk/belly-button'
+                    shopUrl: https://www.zalando.co.uk/belly-button
                   categoryKeys:
                     - catalog
                     - kids
@@ -978,47 +993,47 @@ paths:
                   id: BE824G002-C11
                   media:
                     images:
-                      - largeHdUrl: 'https://i2.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                        largeUrl: 'https://i2.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                        mediumHdUrl: 'https://i2.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                        mediumUrl: 'https://i2.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
+                      - largeHdUrl: https://i2.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                        largeUrl: https://i2.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                        mediumHdUrl: https://i2.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                        mediumUrl: https://i2.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
                         orderNumber: 1
-                        smallHdUrl: 'https://i2.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                        smallUrl: 'https://i2.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                        thumbnailHdUrl: 'https://i2.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
+                        smallHdUrl: https://i2.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                        smallUrl: https://i2.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                        thumbnailHdUrl: https://i2.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
                         type: NON_MODEL
-                      - largeHdUrl: 'https://i1.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg'
-                        largeUrl: 'https://i1.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg'
-                        mediumHdUrl: 'https://i1.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg'
-                        mediumUrl: 'https://i1.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg'
+                      - largeHdUrl: https://i1.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg
+                        largeUrl: https://i1.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg
+                        mediumHdUrl: https://i1.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg
+                        mediumUrl: https://i1.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg
                         orderNumber: 2
-                        smallHdUrl: 'https://i1.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg'
-                        smallUrl: 'https://i1.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg'
-                        thumbnailHdUrl: 'https://i1.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg'
+                        smallHdUrl: https://i1.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg
+                        smallUrl: https://i1.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg
+                        thumbnailHdUrl: https://i1.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@7.jpg
                         type: NON_MODEL
-                      - largeHdUrl: 'https://i2.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg'
-                        largeUrl: 'https://i2.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg'
-                        mediumHdUrl: 'https://i2.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg'
-                        mediumUrl: 'https://i2.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg'
+                      - largeHdUrl: https://i2.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg
+                        largeUrl: https://i2.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg
+                        mediumHdUrl: https://i2.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg
+                        mediumUrl: https://i2.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg
                         orderNumber: 3
-                        smallHdUrl: 'https://i2.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg'
-                        smallUrl: 'https://i2.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg'
-                        thumbnailHdUrl: 'https://i2.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg'
+                        smallHdUrl: https://i2.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg
+                        smallUrl: https://i2.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg
+                        thumbnailHdUrl: https://i2.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@6.jpg
                         type: NON_MODEL
-                      - largeHdUrl: 'https://i3.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg'
-                        largeUrl: 'https://i3.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg'
-                        mediumHdUrl: 'https://i3.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg'
-                        mediumUrl: 'https://i3.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg'
+                      - largeHdUrl: https://i3.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg
+                        largeUrl: https://i3.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg
+                        mediumHdUrl: https://i3.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg
+                        mediumUrl: https://i3.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg
                         orderNumber: 4
-                        smallHdUrl: 'https://i3.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg'
-                        smallUrl: 'https://i3.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg'
-                        thumbnailHdUrl: 'https://i3.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg'
+                        smallHdUrl: https://i3.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg
+                        smallUrl: https://i3.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg
+                        thumbnailHdUrl: https://i3.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@5.jpg
                         type: NON_MODEL
                   modelId: BE824G002
                   name: Long sleeved top - stormy weather
                   season: SUMMER
-                  seasonYear: '2015'
-                  shopUrl: 'https://www.zalando.co.uk/bellybutton-long-sleeved-top-grey-be824g002-c11.html'
+                  seasonYear: "2015"
+                  shopUrl: https://www.zalando.co.uk/bellybutton-long-sleeved-top-grey-be824g002-c11.html
                   units:
                     - available: false
                       id: BE824G002-C110068000
@@ -1081,19 +1096,19 @@ paths:
                       size: 2m
                       stock: 0
           schema:
-            $ref: '#/definitions/Articles'
-        '400':
+            $ref: "#/definitions/Articles"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Search for Articles
       tags:
         - articles
-  '/articles/{articleId}':
+  "/articles/{articleId}":
     get:
       description: Zalando API Article Schema
       parameters:
@@ -1102,14 +1117,14 @@ paths:
           name: articleId
           required: true
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Article response.
           examples:
             application/json:
-              activationDate: '2015-04-30T16:52:52+02:00'
+              activationDate: 2015-04-30T16:52:52+02:00
               additionalInfos: []
               ageGroups:
                 - ADULT
@@ -1123,9 +1138,9 @@ paths:
               available: true
               brand:
                 key: AN6
-                logoUrl: 'https://i6.ztat.net/brand/anna-field.jpg'
+                logoUrl: https://i6.ztat.net/brand/anna-field.jpg
                 name: Anna Field
-                shopUrl: 'https://www.zalando.co.uk/anna-field'
+                shopUrl: https://www.zalando.co.uk/anna-field
               categoryKeys:
                 - catalog
                 - women
@@ -1140,29 +1155,29 @@ paths:
               id: AN621C0S5-K11
               media:
                 images:
-                  - largeHdUrl: 'https://i2.ztat.net/large_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg'
-                    largeUrl: 'https://i2.ztat.net/large/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg'
-                    mediumHdUrl: 'https://i2.ztat.net/detail_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg'
-                    mediumUrl: 'https://i2.ztat.net/detail/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg'
+                  - largeHdUrl: https://i2.ztat.net/large_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg
+                    largeUrl: https://i2.ztat.net/large/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg
+                    mediumHdUrl: https://i2.ztat.net/detail_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg
+                    mediumUrl: https://i2.ztat.net/detail/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg
                     orderNumber: 1
-                    smallHdUrl: 'https://i2.ztat.net/catalog_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg'
-                    smallUrl: 'https://i2.ztat.net/catalog/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg'
-                    thumbnailHdUrl: 'https://i2.ztat.net/thumb_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg'
+                    smallHdUrl: https://i2.ztat.net/catalog_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg
+                    smallUrl: https://i2.ztat.net/catalog/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg
+                    thumbnailHdUrl: https://i2.ztat.net/thumb_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@16.jpg
                     type: NON_MODEL
-                  - largeHdUrl: 'https://i3.ztat.net/large_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg'
-                    largeUrl: 'https://i3.ztat.net/large/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg'
-                    mediumHdUrl: 'https://i3.ztat.net/detail_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg'
-                    mediumUrl: 'https://i3.ztat.net/detail/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg'
+                  - largeHdUrl: https://i3.ztat.net/large_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg
+                    largeUrl: https://i3.ztat.net/large/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg
+                    mediumHdUrl: https://i3.ztat.net/detail_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg
+                    mediumUrl: https://i3.ztat.net/detail/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg
                     orderNumber: 2
-                    smallHdUrl: 'https://i3.ztat.net/catalog_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg'
-                    smallUrl: 'https://i3.ztat.net/catalog/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg'
-                    thumbnailHdUrl: 'https://i3.ztat.net/thumb_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg'
+                    smallHdUrl: https://i3.ztat.net/catalog_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg
+                    smallUrl: https://i3.ztat.net/catalog/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg
+                    thumbnailHdUrl: https://i3.ztat.net/thumb_hd/AN/62/1C/0S/5K/11/AN621C0S5-K11@15.jpg
                     type: STYLE
               modelId: AN621C0S5
               name: Summer dress - blue/white
               season: SUMMER
-              seasonYear: '2015'
-              shopUrl: 'https://www.zalando.co.uk/anna-field-summer-dress-blue-white-an621c0s5-k11.html'
+              seasonYear: "2015"
+              shopUrl: https://www.zalando.co.uk/anna-field-summer-dress-blue-white-an621c0s5-k11.html
               units:
                 - available: true
                   id: AN621C0S5-K110420000
@@ -1174,22 +1189,22 @@ paths:
                     currency: GBP
                     formatted: £21.00
                     value: 21
-                  size: '16'
+                  size: "16"
                   stock: 3
           schema:
-            $ref: '#/definitions/Article'
-        '400':
+            $ref: "#/definitions/Article"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article by articleId
       tags:
         - articles
-  '/articles/{articleId}/media':
+  "/articles/{articleId}/media":
     get:
       description: Zalando API Article Schema
       parameters:
@@ -1198,37 +1213,37 @@ paths:
           name: articleId
           required: true
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Article response.
           examples:
             application/json:
               images:
-                - largeHdUrl: 'https://i2.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                  largeUrl: 'https://i2.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                  mediumHdUrl: 'https://i2.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                  mediumUrl: 'https://i2.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
+                - largeHdUrl: https://i2.ztat.net/large_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                  largeUrl: https://i2.ztat.net/large/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                  mediumHdUrl: https://i2.ztat.net/detail_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                  mediumUrl: https://i2.ztat.net/detail/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
                   orderNumber: 1
-                  smallHdUrl: 'https://i2.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                  smallUrl: 'https://i2.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
-                  thumbnailHdUrl: 'https://i2.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg'
+                  smallHdUrl: https://i2.ztat.net/catalog_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                  smallUrl: https://i2.ztat.net/catalog/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
+                  thumbnailHdUrl: https://i2.ztat.net/thumb_hd/BE/82/4G/00/2C/11/BE824G002-C11@8.jpg
                   type: NON_MODEL
           schema:
-            $ref: '#/definitions/Article-Media'
-        '400':
+            $ref: "#/definitions/Article-Media"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article media by articleId
       tags:
         - articles
-  '/articles/{articleId}/reviews':
+  "/articles/{articleId}/reviews":
     get:
       description: Zalando API Article Schema
       parameters:
@@ -1237,15 +1252,15 @@ paths:
           name: articleId
           required: true
           type: string
-        - $ref: '#/parameters/minStarRating'
-        - $ref: '#/parameters/maxStarRating'
-        - $ref: '#/parameters/articleReviewSort'
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/pageSize'
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/minStarRating"
+        - $ref: "#/parameters/maxStarRating"
+        - $ref: "#/parameters/articleReviewSort"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/pageSize"
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Article response.
           examples:
             application/json:
@@ -1255,10 +1270,10 @@ paths:
                   articleSizeRatings:
                     OVERALL: 3
                     SHOE_WIDTH: 3
-                  created: '2015-07-23T17:52:14+02:00'
+                  created: 2015-07-23T17:52:14+02:00
                   customerCity: Brixton
                   customerCountry: GB
-                  description: 'Very nice trainers, with an extremely prompt arrival...'
+                  description: Very nice trainers, with an extremely prompt arrival...
                   helpfulCount: 0
                   language: en
                   rating: 5
@@ -1271,19 +1286,19 @@ paths:
               totalElements: 1
               totalPages: 1
           schema:
-            $ref: '#/definitions/Article-Reviews'
-        '400':
+            $ref: "#/definitions/Article-Reviews"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article reviews by articleId
       tags:
         - articles
-  '/articles/{articleId}/reviews-summary':
+  "/articles/{articleId}/reviews-summary":
     get:
       description: Zalando API Article Schema
       parameters:
@@ -1292,10 +1307,10 @@ paths:
           name: articleId
           required: true
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Article response.
           examples:
             application/json:
@@ -1308,25 +1323,25 @@ paths:
               numberOfUserRecommendations: 1
               numberOfUserReviews: 1
               starRatingDistribution:
-                '1': 0
-                '2': 0
-                '3': 0
-                '4': 0
-                '5': 1
+                "1": 0
+                "2": 0
+                "3": 0
+                "4": 0
+                "5": 1
           schema:
-            $ref: '#/definitions/Article-Reviews-Summary'
-        '400':
+            $ref: "#/definitions/Article-Reviews-Summary"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article reviews summary by articleId
       tags:
         - articles
-  '/articles/{articleId}/units':
+  "/articles/{articleId}/units":
     get:
       description: Zalando API Article Schema
       parameters:
@@ -1335,10 +1350,10 @@ paths:
           name: articleId
           required: true
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Article response.
           examples:
             application/json:
@@ -1352,22 +1367,22 @@ paths:
                   currency: GBP
                   formatted: £65.00
                   value: 65
-                size: '14'
+                size: "14"
                 stock: 0
           schema:
-            $ref: '#/definitions/Article-Units'
-        '400':
+            $ref: "#/definitions/Article-Units"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article units by articleId
       tags:
         - articles
-  '/articles/{articleId}/units/{unitId}':
+  "/articles/{articleId}/units/{unitId}":
     get:
       description: Zalando API Article Schema
       parameters:
@@ -1381,10 +1396,10 @@ paths:
           name: unitId
           required: true
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Article response.
           examples:
             application/json:
@@ -1398,18 +1413,18 @@ paths:
                 currency: GBP
                 formatted: £65.00
                 value: 65
-              size: '14'
+              size: "14"
               stock: 0
           schema:
-            $ref: '#/definitions/Article-Unit'
-        '400':
+            $ref: "#/definitions/Article-Unit"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Article units by articleId snd unitId
       tags:
         - articles
@@ -1449,46 +1464,46 @@ paths:
           name: brandFamilyKey
           required: false
           type: array
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/pageSize'
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/pageSize"
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Brands response.
           examples:
             application/json:
               content:
                 - key: NV3
                   name: Nike Vision
-                  shopUrl: 'https://www.zalando.co.uk/nike-vision'
+                  shopUrl: https://www.zalando.co.uk/nike-vision
                 - brandFamily:
                     key: NIKE
                     name: Nike
-                    shopUrl: 'https://www.zalando.co.uk/nike'
+                    shopUrl: https://www.zalando.co.uk/nike
                   key: N12
-                  logoLargeUrl: 'https://i1.ztat.net/brandxl/nike-performance.jpg'
-                  logoUrl: 'https://i1.ztat.net/brand/nike-performance.jpg'
+                  logoLargeUrl: https://i1.ztat.net/brandxl/nike-performance.jpg
+                  logoUrl: https://i1.ztat.net/brand/nike-performance.jpg
                   name: Nike Performance
-                  shopUrl: 'https://www.zalando.co.uk/nike-performance'
+                  shopUrl: https://www.zalando.co.uk/nike-performance
               page: 1
               size: 2
               totalElements: 6
               totalPages: 3
           schema:
-            $ref: '#/definitions/Brands'
-        '400':
+            $ref: "#/definitions/Brands"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Shop Brands
       tags:
         - brands
-  '/brands/{key}':
+  "/brands/{key}":
     get:
       description: Zalando API Brand Schema
       parameters:
@@ -1497,28 +1512,28 @@ paths:
           name: key
           required: true
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Brand Key response.
           examples:
             application/json:
               brandFamily:
                 key: NIKE
                 name: Nike
-                shopUrl: 'https://www.zalando.co.uk/nike'
+                shopUrl: https://www.zalando.co.uk/nike
               key: N12
-              logoLargeUrl: 'https://i1.ztat.net/brandxl/nike-performance.jpg'
-              logoUrl: 'https://i1.ztat.net/brand/nike-performance.jpg'
+              logoLargeUrl: https://i1.ztat.net/brandxl/nike-performance.jpg
+              logoUrl: https://i1.ztat.net/brand/nike-performance.jpg
               name: Nike Performance
-              shopUrl: 'https://www.zalando.co.uk/nike-performance'
+              shopUrl: https://www.zalando.co.uk/nike-performance
           schema:
-            $ref: '#/definitions/Brand'
-        '404':
+            $ref: "#/definitions/Brand"
+        "404":
           description: Brand not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Single Brand by Key
       tags:
         - brands
@@ -1590,12 +1605,12 @@ paths:
           name: suggestedFilter
           required: false
           type: array
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/pageSize'
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/pageSize"
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Categories response.
           examples:
             application/json:
@@ -1640,19 +1655,19 @@ paths:
               totalElements: 2263
               totalPages: 1132
           schema:
-            $ref: '#/definitions/Categories'
-        '400':
+            $ref: "#/definitions/Categories"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
-        '404':
+            $ref: "#/definitions/ErrorMessage"
+        "404":
           description: Categories Not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Shop Categories
       tags:
         - categories
-  '/categories/{key}':
+  "/categories/{key}":
     get:
       description: Zalando API Category Schema
       parameters:
@@ -1663,10 +1678,10 @@ paths:
           name: key
           required: true
           type: array
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Category Key response.
           examples:
             application/json:
@@ -1684,11 +1699,11 @@ paths:
                   targetGroup: WOMEN
                   type: default
           schema:
-            $ref: '#/definitions/Category'
-        '404':
+            $ref: "#/definitions/Category"
+        "404":
           description: Category not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Single Category by Key
       tags:
         - categories
@@ -1696,12 +1711,12 @@ paths:
     get:
       description: Zalando API Domains Schema
       responses:
-        '200':
+        "200":
           description: Domains response.
           schema:
             description: Zalando API Domains Schema
             items:
-              $ref: '#/definitions/Domain'
+              $ref: "#/definitions/Domain"
             type: array
       summary: Shop Domains
       tags:
@@ -1710,42 +1725,42 @@ paths:
     get:
       description: Zalando API Facets Schema
       parameters:
-        - $ref: '#/parameters/ageGroup'
-        - $ref: '#/parameters/articleId'
-        - $ref: '#/parameters/activationDate'
-        - $ref: '#/parameters/articleModelId'
-        - $ref: '#/parameters/assortmentArea'
-        - $ref: '#/parameters/brand'
-        - $ref: '#/parameters/brandfamily'
-        - $ref: '#/parameters/category'
-        - $ref: '#/parameters/color'
-        - $ref: '#/parameters/den'
-        - $ref: '#/parameters/filling'
-        - $ref: '#/parameters/gender'
-        - $ref: '#/parameters/heelForm'
-        - $ref: '#/parameters/heelHeight'
-        - $ref: '#/parameters/length'
-        - $ref: '#/parameters/occasion'
-        - $ref: '#/parameters/pattern'
-        - $ref: '#/parameters/price'
-        - $ref: '#/parameters/sale'
-        - $ref: '#/parameters/season'
-        - $ref: '#/parameters/shaftHeight'
-        - $ref: '#/parameters/shaftWidth'
-        - $ref: '#/parameters/shirtCollar'
-        - $ref: '#/parameters/shoeFastener'
-        - $ref: '#/parameters/shoeToecap'
-        - $ref: '#/parameters/shopArea'
-        - $ref: '#/parameters/size'
-        - $ref: '#/parameters/sports'
-        - $ref: '#/parameters/technology'
-        - $ref: '#/parameters/trouserRise'
-        - $ref: '#/parameters/upperMaterial'
-        - $ref: '#/parameters/volume'
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/ageGroup"
+        - $ref: "#/parameters/articleId"
+        - $ref: "#/parameters/activationDate"
+        - $ref: "#/parameters/articleModelId"
+        - $ref: "#/parameters/assortmentArea"
+        - $ref: "#/parameters/brand"
+        - $ref: "#/parameters/brandfamily"
+        - $ref: "#/parameters/category"
+        - $ref: "#/parameters/color"
+        - $ref: "#/parameters/den"
+        - $ref: "#/parameters/filling"
+        - $ref: "#/parameters/gender"
+        - $ref: "#/parameters/heelForm"
+        - $ref: "#/parameters/heelHeight"
+        - $ref: "#/parameters/length"
+        - $ref: "#/parameters/occasion"
+        - $ref: "#/parameters/pattern"
+        - $ref: "#/parameters/price"
+        - $ref: "#/parameters/sale"
+        - $ref: "#/parameters/season"
+        - $ref: "#/parameters/shaftHeight"
+        - $ref: "#/parameters/shaftWidth"
+        - $ref: "#/parameters/shirtCollar"
+        - $ref: "#/parameters/shoeFastener"
+        - $ref: "#/parameters/shoeToecap"
+        - $ref: "#/parameters/shopArea"
+        - $ref: "#/parameters/size"
+        - $ref: "#/parameters/sports"
+        - $ref: "#/parameters/technology"
+        - $ref: "#/parameters/trouserRise"
+        - $ref: "#/parameters/upperMaterial"
+        - $ref: "#/parameters/volume"
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Facets response.
           examples:
             application/json:
@@ -1780,11 +1795,11 @@ paths:
                     key: winter
                 filter: season
           schema:
-            $ref: '#/definitions/Facets'
-        '400':
+            $ref: "#/definitions/Facets"
+        "400":
           description: Bad request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Shop Facets
       tags:
         - facets
@@ -1792,10 +1807,10 @@ paths:
     get:
       description: Zalando API Filters Schema
       parameters:
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Filters response.
           examples:
             application/json:
@@ -1816,11 +1831,11 @@ paths:
                 type: KEY
                 values: []
           schema:
-            $ref: '#/definitions/Filters'
+            $ref: "#/definitions/Filters"
       summary: Shop Filters
       tags:
         - filters
-  '/filters/{filterName}':
+  "/filters/{filterName}":
     get:
       description: Zalando API Filters Schema
       parameters:
@@ -1829,10 +1844,10 @@ paths:
           name: filterName
           required: true
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Filters response.
           examples:
             application/json:
@@ -1849,15 +1864,15 @@ paths:
                 - displayName: adult
                   key: adult
           schema:
-            $ref: '#/definitions/Filter'
-        '404':
+            $ref: "#/definitions/Filter"
+        "404":
           description: Filter not found.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Single Filter by filterName
       tags:
         - filters
-  '/recommendations/{articleIds}':
+  "/recommendations/{articleIds}":
     get:
       description: Zalando API Recommendations Schema
       parameters:
@@ -1873,34 +1888,34 @@ paths:
           name: maxResults
           required: false
           type: string
-        - $ref: '#/parameters/acceptLanguage'
-        - $ref: '#/parameters/fields'
+        - $ref: "#/parameters/acceptLanguage"
+        - $ref: "#/parameters/fields"
       responses:
-        '200':
+        "200":
           description: Recommendations response.
           examples:
             application/json:
               id: TC021A00J-A11
               media:
                 images:
-                  - largeHdUrl: 'https://i5.ztat.net/large_hd/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg'
-                    largeUrl: 'https://i5.ztat.net/large/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg'
-                    mediumHdUrl: 'https://i5.ztat.net/detail_hd/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg'
-                    mediumUrl: 'https://i5.ztat.net/detail/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg'
+                  - largeHdUrl: https://i5.ztat.net/large_hd/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg
+                    largeUrl: https://i5.ztat.net/large/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg
+                    mediumHdUrl: https://i5.ztat.net/detail_hd/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg
+                    mediumUrl: https://i5.ztat.net/detail/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg
                     orderNumber: 1
-                    smallHdUrl: 'https://i5.ztat.net/catalog_hd/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg'
-                    smallUrl: 'https://i5.ztat.net/catalog/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg'
-                    thumbnailHdUrl: 'https://i5.ztat.net/thumb_hd/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg'
+                    smallHdUrl: https://i5.ztat.net/catalog_hd/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg
+                    smallUrl: https://i5.ztat.net/catalog/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg
+                    thumbnailHdUrl: https://i5.ztat.net/thumb_hd/TC/02/1A/00/JA/11/TC021A00J-A11@12.jpg
                     type: UNSPECIFIED
               modelId: TC021A00J
               name: MADDY - Jumpsuit - waterlilly/noir
-              shopUrl: 'https://www.zalando.co.uk/2-love-tony-cohen-maddy-jumpsuit-white-tc021a00j-a11.html'
+              shopUrl: https://www.zalando.co.uk/2-love-tony-cohen-maddy-jumpsuit-white-tc021a00j-a11.html
           schema:
-            $ref: '#/definitions/Recommendations'
-        '400':
+            $ref: "#/definitions/Recommendations"
+        "400":
           description: Bad Request.
           schema:
-            $ref: '#/definitions/ErrorMessage'
+            $ref: "#/definitions/ErrorMessage"
       summary: Get Recommendations by articleId
       tags:
         - recommendations
@@ -1913,7 +1928,7 @@ definitions:
         format: date-time
         type: string
       additionalInfos:
-        description: 'any additional information of the article '
+        description: "any additional information of the article "
         items:
           type: string
         minItems: 0
@@ -1932,14 +1947,14 @@ definitions:
       attributes:
         description: article attributes
         items:
-          $ref: '#/definitions/Article-Attribute'
+          $ref: "#/definitions/Article-Attribute"
         minItems: 0
         type: array
       available:
         description: will be true if at least one article unit is available
         type: boolean
       brand:
-        $ref: '#/definitions/Brand'
+        $ref: "#/definitions/Brand"
       categoryKeys:
         description: category keys of the article belongs to
         items:
@@ -1962,7 +1977,7 @@ definitions:
         description: unique article id
         type: string
       media:
-        $ref: '#/definitions/Article-Media'
+        $ref: "#/definitions/Article-Media"
       modelId:
         description: unique article model id
         type: string
@@ -1978,7 +1993,7 @@ definitions:
         type: string
       seasonYear:
         description: collection year the article belongs to. Could be either a year or 'ALL'
-        pattern: '^ALL$|^20[0-9]{2}$'
+        pattern: ^ALL$|^20[0-9]{2}$
         type: string
       shopUrl:
         description: url of the article within the Zalando webshop
@@ -1991,7 +2006,7 @@ definitions:
       units:
         description: price of the article
         items:
-          $ref: '#/definitions/Article-Unit'
+          $ref: "#/definitions/Article-Unit"
         minItems: 1
         type: array
     required:
@@ -2082,7 +2097,7 @@ definitions:
     properties:
       images:
         items:
-          $ref: '#/definitions/Article-Image'
+          $ref: "#/definitions/Article-Image"
         minItems: 0
         type: array
     required:
@@ -2092,13 +2107,13 @@ definitions:
     description: Zalando API Article Price Schema
     properties:
       currency:
-        description: ''
+        description: ""
         type: string
       formatted:
-        description: ''
+        description: ""
         type: string
       value:
-        description: ''
+        description: ""
         type: number
     required:
       - currency
@@ -2113,7 +2128,7 @@ definitions:
       articleModelId:
         type: string
       articleSizeRatings:
-        description: ''
+        description: ""
         properties:
           BOOTLEG_WIDTH:
             type: integer
@@ -2191,22 +2206,22 @@ definitions:
     type: object
   Article-Reviews:
     allOf:
-      - $ref: '#/definitions/Page'
+      - $ref: "#/definitions/Page"
       - properties:
           content:
             items:
-              $ref: '#/definitions/Article-Review'
+              $ref: "#/definitions/Article-Review"
             minItems: 0
             type: array
     description: Zalando API Paged Article Reviews Schema
     type: object
   Article-Reviews-Summaries:
     allOf:
-      - $ref: '#/definitions/Page'
+      - $ref: "#/definitions/Page"
       - properties:
           content:
             items:
-              $ref: '#/definitions/Article-Reviews-Summary'
+              $ref: "#/definitions/Article-Reviews-Summary"
             minItems: 0
             type: array
     description: Zalando API Paged Article Reviews Summaries Schema
@@ -2259,22 +2274,22 @@ definitions:
       starRatingDistribution:
         description: start rating distribution of the article
         properties:
-          '1':
+          "1":
             type: integer
-          '2':
+          "2":
             type: integer
-          '3':
+          "3":
             type: integer
-          '4':
+          "4":
             type: integer
-          '5':
+          "5":
             type: integer
         required:
-          - '1'
-          - '2'
-          - '3'
-          - '4'
-          - '5'
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "5"
         type: object
     required:
       - articleModelId
@@ -2294,12 +2309,12 @@ definitions:
         description: article id (sku)
         type: string
       originalPrice:
-        $ref: '#/definitions/Article-Price'
+        $ref: "#/definitions/Article-Price"
       partnerId:
         description: partner id (vendor id) of the article
         type: string
       price:
-        $ref: '#/definitions/Article-Price'
+        $ref: "#/definitions/Article-Price"
       size:
         description: article size
         type: string
@@ -2317,16 +2332,16 @@ definitions:
   Article-Units:
     description: Zalando API Article Units Schema
     items:
-      $ref: '#/definitions/Article-Unit'
+      $ref: "#/definitions/Article-Unit"
     minItems: 1
     type: array
   Articles:
     allOf:
-      - $ref: '#/definitions/Page'
+      - $ref: "#/definitions/Page"
       - properties:
           content:
             items:
-              $ref: '#/definitions/Article'
+              $ref: "#/definitions/Article"
             minItems: 0
             type: array
     description: A simple container object that carries paging information as well as a list of articles on the `content` property.
@@ -2335,7 +2350,7 @@ definitions:
     description: Zalando API Brand Schema
     properties:
       brandFamily:
-        $ref: '#/definitions/BrandFamily'
+        $ref: "#/definitions/BrandFamily"
       key:
         description: The unique key for a brand
         type: string
@@ -2379,22 +2394,22 @@ definitions:
     type: object
   Brands:
     allOf:
-      - $ref: '#/definitions/Page'
+      - $ref: "#/definitions/Page"
       - properties:
           content:
             items:
-              $ref: '#/definitions/Brand'
+              $ref: "#/definitions/Brand"
             minItems: 0
             type: array
     description: Zalando API Paged Brands Schema
     type: object
   Categories:
     allOf:
-      - $ref: '#/definitions/Page'
+      - $ref: "#/definitions/Page"
       - properties:
           content:
             items:
-              $ref: '#/definitions/Category'
+              $ref: "#/definitions/Category"
             minItems: 0
             type: array
     description: Zalando API Paged Categories Schema
@@ -2502,7 +2517,7 @@ definitions:
     properties:
       errors:
         items:
-          $ref: '#/definitions/ErrorDetail'
+          $ref: "#/definitions/ErrorDetail"
         type: array
       message:
         type: string
@@ -2518,7 +2533,7 @@ definitions:
       facets:
         description: list of the calculated article counts for each filter value
         items:
-          $ref: '#/definitions/Facet-Value'
+          $ref: "#/definitions/Facet-Value"
         minItems: 1
         type: array
       filter:
@@ -2545,7 +2560,7 @@ definitions:
   Facets:
     description: Zalando API Facets Schema
     items:
-      $ref: '#/definitions/Facet'
+      $ref: "#/definitions/Facet"
     minItems: 0
     type: array
   Filter:
@@ -2569,7 +2584,7 @@ definitions:
       values:
         description: only if type is 'enum' this list contains all possible filter values
         items:
-          $ref: '#/definitions/Filter-Value'
+          $ref: "#/definitions/Filter-Value"
         minItems: 0
         type: array
     required:
@@ -2593,7 +2608,7 @@ definitions:
     type: object
   Filters:
     items:
-      $ref: '#/definitions/Filter'
+      $ref: "#/definitions/Filter"
     minItems: 0
     type: array
   Page:
@@ -2627,7 +2642,7 @@ definitions:
   Recommendations:
     description: Zalando API Recommendations Schema
     items:
-      $ref: '#/definitions/Recommendations-Article'
+      $ref: "#/definitions/Recommendations-Article"
     minItems: 0
     type: array
   Recommendations-Article:
@@ -2636,7 +2651,7 @@ definitions:
       id:
         type: string
       media:
-        $ref: '#/definitions/Article-Media'
+        $ref: "#/definitions/Article-Media"
       modelId:
         type: string
       name:

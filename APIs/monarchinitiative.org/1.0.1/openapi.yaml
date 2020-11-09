@@ -17,6 +17,7 @@ info:
       url: https://api.monarchinitiative.org/api/swagger.json
       version: "2.0"
   x-providerName: monarchinitiative.org
+  x-preferred: true
 tags:
   - description: Retrieval of domain entities plus associations
     name: bioentity
@@ -604,6 +605,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -712,6 +723,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -1358,6 +1379,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
         - description: "Additional filters: causal, non_causal, both"
           explode: true
           in: query
@@ -1475,6 +1506,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -1603,6 +1644,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -1813,6 +1864,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1921,6 +1982,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -2027,6 +2098,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -2223,6 +2304,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -2366,6 +2457,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
         - description: relationship type ('involved_in', 'involved_in_regulation_of' or 'acts_upstream_of_or_within')
@@ -2559,6 +2660,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -2758,6 +2869,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
         - description: "Additional filters: causal, non_causal, both"
           explode: true
           in: query
@@ -2875,6 +2996,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -3098,6 +3229,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -3319,6 +3460,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -3425,6 +3576,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -3535,6 +3696,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -3641,6 +3812,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -3751,6 +3932,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -3857,6 +4048,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -3967,6 +4168,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -4073,6 +4284,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -4272,6 +4493,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -4378,6 +4609,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -4489,6 +4730,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -4595,6 +4846,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -4705,6 +4966,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -4813,6 +5084,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -4919,6 +5200,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -5219,6 +5510,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -5325,6 +5626,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -5435,6 +5746,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -5541,6 +5862,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -5651,6 +5982,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -5757,6 +6098,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -5867,6 +6218,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -5975,6 +6336,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -6081,6 +6452,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -6375,6 +6756,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -6576,6 +6967,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -6682,6 +7083,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -6792,6 +7203,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -6898,6 +7319,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -7008,6 +7439,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -7114,6 +7555,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -7224,6 +7675,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -7330,6 +7791,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -7440,6 +7911,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -7548,6 +8029,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -7654,6 +8145,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -8132,6 +8633,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -8240,6 +8751,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -8346,6 +8867,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -8545,6 +9076,16 @@ paths:
           name: relation
           schema:
             type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -8651,6 +9192,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:
@@ -8848,6 +9399,16 @@ paths:
         - description: A relation CURIE to filter associations
           in: query
           name: relation
+          schema:
+            type: string
+        - description: Sorting responses <field> <desc,asc>
+          in: query
+          name: sort
+          schema:
+            type: string
+        - description: Query string to filter documents
+          in: query
+          name: q
           schema:
             type: string
       responses:

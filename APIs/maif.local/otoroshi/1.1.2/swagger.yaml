@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: maif.local
@@ -10,23 +10,24 @@ info:
   description: Admin API of the Otoroshi reverse proxy
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Otoroshi Admin
   version: 1.1.2
   x-apisguru-categories:
     - developer_tools
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://maif.github.io/otoroshi/assets/images/svg/otoroshi_logo.svg'
+    backgroundColor: "#FFFFFF"
+    url: https://maif.github.io/otoroshi/assets/images/svg/otoroshi_logo.svg
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/MAIF/otoroshi/master/docs/manual/code/swagger.json'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/MAIF/otoroshi/master/docs/manual/code/swagger.json
+      version: "2.0"
   x-providerName: maif.local
   x-serviceName: otoroshi
+  x-preferred: true
 externalDocs:
   description: Find out more about Otoroshi
-  url: 'https://maif.github.io/otoroshi/'
+  url: https://maif.github.io/otoroshi/
 securityDefinitions:
   otoroshi_auth:
     type: basic
@@ -57,17 +58,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/ApiKey'
+              $ref: "#/definitions/ApiKey"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -83,15 +84,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/GlobalConfig'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/GlobalConfig"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -108,19 +109,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Patch'
+            $ref: "#/definitions/Patch"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/GlobalConfig'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/GlobalConfig"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -137,19 +138,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/GlobalConfig'
+            $ref: "#/definitions/GlobalConfig"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/GlobalConfig'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/GlobalConfig"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -165,17 +166,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Group'
+              $ref: "#/definitions/Group"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -192,26 +193,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Group'
+            $ref: "#/definitions/Group"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Group'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Group"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Create a new service group
       tags:
         - groups
-  '/api/groups/{groupId}/apikeys':
+  "/api/groups/{groupId}/apikeys":
     get:
       deprecated: false
       description: Get all api keys for the group of a service
@@ -225,17 +226,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/ApiKey'
+              $ref: "#/definitions/ApiKey"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -257,26 +258,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ApiKey'
+            $ref: "#/definitions/ApiKey"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ApiKey'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ApiKey"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Create a new api key for a group
       tags:
         - apikeys
-  '/api/groups/{groupId}/apikeys/{clientId}':
+  "/api/groups/{groupId}/apikeys/{clientId}":
     delete:
       deprecated: false
       description: Delete an api key for a specified service group
@@ -295,15 +296,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Deleted'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Deleted"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -328,15 +329,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ApiKey'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ApiKey"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -363,19 +364,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Patch'
+            $ref: "#/definitions/Patch"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ApiKey'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ApiKey"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -402,26 +403,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ApiKey'
+            $ref: "#/definitions/ApiKey"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ApiKey'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ApiKey"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Update an api key
       tags:
         - apikeys
-  '/api/groups/{groupId}/apikeys/{clientId}/quotas':
+  "/api/groups/{groupId}/apikeys/{clientId}/quotas":
     delete:
       deprecated: false
       description: Reset the quota state of an api key
@@ -440,15 +441,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Quotas'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Quotas"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -473,22 +474,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Quotas'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Quotas"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Get the quota state of an api key
       tags:
         - apikeys
-  '/api/groups/{serviceGroupId}':
+  "/api/groups/{serviceGroupId}":
     delete:
       deprecated: false
       description: Delete a service group
@@ -502,15 +503,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Deleted'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Deleted"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -530,15 +531,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Group'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Group"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -560,19 +561,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Patch'
+            $ref: "#/definitions/Patch"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Group'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Group"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -594,26 +595,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Group'
+            $ref: "#/definitions/Group"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Group'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Group"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Update a service group
       tags:
         - groups
-  '/api/groups/{serviceGroupId}/services':
+  "/api/groups/{serviceGroupId}/services":
     get:
       deprecated: false
       description: Get all services descriptor for a group
@@ -627,17 +628,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/ApiKey'
+              $ref: "#/definitions/ApiKey"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -655,19 +656,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ImportExport'
+            $ref: "#/definitions/ImportExport"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Done'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Done"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -683,25 +684,25 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Stats'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Stats"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Get global otoroshi stats
       tags:
         - stats
-  '/api/live/{id}':
+  "/api/live/{id}":
     get:
       deprecated: false
-      description: 'Get live feed of global otoroshi stats (global) or for a service {id}'
+      description: Get live feed of global otoroshi stats (global) or for a service {id}
       operationId: serviceLiveStats
       parameters:
         - description: The service id or global for otoroshi stats
@@ -713,15 +714,15 @@ paths:
         - application/json
         - text/event-stream
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Stats'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Stats"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -737,15 +738,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ImportExport'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ImportExport"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -762,19 +763,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ImportExport'
+            $ref: "#/definitions/ImportExport"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Done'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Done"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -790,17 +791,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Service'
+              $ref: "#/definitions/Service"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -817,26 +818,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Service'
+            $ref: "#/definitions/Service"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Service'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Service"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Create a new service descriptor
       tags:
         - services
-  '/api/services/{serviceId}':
+  "/api/services/{serviceId}":
     delete:
       deprecated: false
       description: Delete a service descriptor
@@ -850,15 +851,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Deleted'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Deleted"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -878,15 +879,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Service'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Service"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -908,19 +909,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Patch'
+            $ref: "#/definitions/Patch"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Service'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Service"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -942,26 +943,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Service'
+            $ref: "#/definitions/Service"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Service'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Service"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Update a service descriptor
       tags:
         - services
-  '/api/services/{serviceId}/apikeys':
+  "/api/services/{serviceId}/apikeys":
     get:
       deprecated: false
       description: Get all api keys for the group of a service
@@ -975,17 +976,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/ApiKey'
+              $ref: "#/definitions/ApiKey"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1007,26 +1008,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ApiKey'
+            $ref: "#/definitions/ApiKey"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ApiKey'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ApiKey"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Create a new api key for a service
       tags:
         - apikeys
-  '/api/services/{serviceId}/apikeys/{clientId}':
+  "/api/services/{serviceId}/apikeys/{clientId}":
     delete:
       deprecated: false
       description: Delete an api key for a specified service descriptor
@@ -1045,15 +1046,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Deleted'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Deleted"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1078,15 +1079,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ApiKey'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ApiKey"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1113,19 +1114,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Patch'
+            $ref: "#/definitions/Patch"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ApiKey'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ApiKey"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1152,26 +1153,26 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ApiKey'
+            $ref: "#/definitions/ApiKey"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ApiKey'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ApiKey"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Update an api key
       tags:
         - apikeys
-  '/api/services/{serviceId}/apikeys/{clientId}/group':
+  "/api/services/{serviceId}/apikeys/{clientId}/group":
     get:
       deprecated: false
       description: Get the group of an api key
@@ -1190,22 +1191,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Group'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Group"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Get the group of an api key
       tags:
         - apikeys
-  '/api/services/{serviceId}/apikeys/{clientId}/quotas':
+  "/api/services/{serviceId}/apikeys/{clientId}/quotas":
     delete:
       deprecated: false
       description: Reset the quota state of an api key
@@ -1224,15 +1225,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Quotas'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Quotas"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1257,22 +1258,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Quotas'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Quotas"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Get the quota state of an api key
       tags:
         - apikeys
-  '/api/services/{serviceId}/targets':
+  "/api/services/{serviceId}/targets":
     delete:
       deprecated: false
       description: Delete a service descriptor target
@@ -1286,17 +1287,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Target'
+              $ref: "#/definitions/Target"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1316,17 +1317,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Target'
+              $ref: "#/definitions/Target"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1348,21 +1349,21 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Patch'
+            $ref: "#/definitions/Patch"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Target'
+              $ref: "#/definitions/Target"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1384,28 +1385,28 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Target'
+            $ref: "#/definitions/Target"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Target'
+              $ref: "#/definitions/Target"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Add a target to a service descriptor
       tags:
         - services
-  '/api/services/{serviceId}/template':
+  "/api/services/{serviceId}/template":
     delete:
       deprecated: false
       description: Delete a service descriptor error template
@@ -1419,15 +1420,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Deleted'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Deleted"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1447,15 +1448,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ErrorTemplate'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ErrorTemplate"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1477,19 +1478,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ErrorTemplate'
+            $ref: "#/definitions/ErrorTemplate"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ErrorTemplate'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ErrorTemplate"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1511,19 +1512,19 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/ErrorTemplate'
+            $ref: "#/definitions/ErrorTemplate"
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ErrorTemplate'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ErrorTemplate"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1539,13 +1540,13 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/OtoroshiHealth'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '404':
+            $ref: "#/definitions/OtoroshiHealth"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "404":
           description: Resource not found or does not exist
       summary: Return current Otoroshi health
       tags:
@@ -1559,22 +1560,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Environment'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Environment"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
       summary: Get all environments
       tags:
         - environments
-  '/lines/{line}/services':
+  "/lines/{line}/services":
     get:
       deprecated: false
       description: Get all services for an environment provided by the current Otoroshi instance
@@ -1588,17 +1589,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/Service'
+              $ref: "#/definitions/Service"
             type: array
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1614,15 +1615,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ApiKey'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/ApiKey"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1638,15 +1639,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Group'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Group"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1662,15 +1663,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/Service'
-        '400':
-          description: 'Bad resource format. Take another look to the swagger, or open an issue :)'
-        '401':
-          description: 'You have to provide an Api Key. Api Key can be passed with ''Otoroshi-Client-Id'' and ''Otoroshi-Client-Secret'' headers, or use basic http authentication'
-        '404':
+            $ref: "#/definitions/Service"
+        "400":
+          description: Bad resource format. Take another look to the swagger, or open an issue :)
+        "401":
+          description: You have to provide an Api Key. Api Key can be passed with 'Otoroshi-Client-Id' and 'Otoroshi-Client-Secret' headers, or use basic http authentication
+        "404":
           description: Resource not found or does not exist
       security:
         - otoroshi_auth: []
@@ -1686,15 +1687,15 @@ definitions:
         example: a string value
         type: string
       clientId:
-        description: 'The unique id of the Api Key. Usually 16 random alpha numerical characters, but can be anything'
+        description: The unique id of the Api Key. Usually 16 random alpha numerical characters, but can be anything
         example: a string value
         type: string
       clientName:
-        description: 'The name of the api key, for humans ;-)'
+        description: The name of the api key, for humans ;-)
         example: a string value
         type: string
       clientSecret:
-        description: 'The secret of the Api Key. Usually 64 random alpha numerical characters, but can be anything'
+        description: The secret of the Api Key. Usually 64 random alpha numerical characters, but can be anything
         example: a string value
         type: string
       dailyQuota:
@@ -1703,7 +1704,7 @@ definitions:
         format: int64
         type: integer
       enabled:
-        description: 'Whether or not the key is enabled. If disabled, resources won''t be available to calls using this key'
+        description: Whether or not the key is enabled. If disabled, resources won't be available to calls using this key
         example: true
         type: boolean
       metadata:
@@ -1719,7 +1720,7 @@ definitions:
         format: int64
         type: integer
       throttlingQuota:
-        description: 'Authorized number of calls per second, measured on 10 seconds'
+        description: Authorized number of calls per second, measured on 10 seconds
         example: 123
         format: int64
         type: integer
@@ -1763,13 +1764,13 @@ definitions:
         example: true
         type: boolean
       root:
-        description: 'Otoroshi will append this root to any target choosen. If the specified root is ''/api/foo'', then a request to https://yyyyyyy/bar will actually hit https://xxxxxxxxx/api/foo/bar'
+        description: Otoroshi will append this root to any target choosen. If the specified root is '/api/foo', then a request to https://yyyyyyy/bar will actually hit https://xxxxxxxxx/api/foo/bar
         example: a string value
         type: string
       targets:
         description: The list of target that Otoroshi will proxy and expose through the subdomain defined before. Otoroshi will do round-robin load balancing between all those targets with circuit breaker mecanism to avoid cascading failures
         items:
-          $ref: '#/definitions/Target'
+          $ref: "#/definitions/Target"
         type: array
       traffic:
         description: Ratio of traffic that will be sent to canary targets.
@@ -1841,12 +1842,12 @@ definitions:
         format: int32
         type: integer
       retryInitialDelay:
-        description: 'Specify the delay between two retries. Each retry, the delay is multiplied by the backoff factor'
+        description: Specify the delay between two retries. Each retry, the delay is multiplied by the backoff factor
         example: 123123
         format: int32
         type: integer
       sampleInterval:
-        description: 'Specify the sliding window time for the circuit breaker in milliseconds, after this time, error count will be reseted'
+        description: Specify the sliding window time for the circuit breaker in milliseconds, after this time, error count will be reseted
         example: 123123
         format: int32
         type: integer
@@ -1931,14 +1932,14 @@ definitions:
         type: boolean
       openApiDescriptorUrl:
         description: The URL of the Open API descriptor
-        example: 'http://www.google.com'
+        example: http://www.google.com
         format: uri
         type: string
     required:
       - exposeApi
     type: object
   GlobalConfig:
-    description: 'The global config object of Otoroshi, used to customize settings of the current Otoroshi instance'
+    description: The global config object of Otoroshi, used to customize settings of the current Otoroshi instance
     properties:
       alertsEmails:
         description: Email addresses that will receive all Otoroshi alert events
@@ -1950,31 +1951,31 @@ definitions:
       alertsWebhooks:
         description: Webhook that will receive all Otoroshi alert events
         items:
-          $ref: '#/definitions/Webhook'
+          $ref: "#/definitions/Webhook"
         type: array
       analyticsEventsUrl:
         description: The URL to get analytics events from
-        example: 'http://www.google.com'
+        example: http://www.google.com
         format: uri
         type: string
       analyticsWebhooks:
         description: Webhook that will receive all internal Otoroshi events
         items:
-          $ref: '#/definitions/Webhook'
+          $ref: "#/definitions/Webhook"
         type: array
       apiReadOnly:
-        description: 'If enabled, Admin API won''t be able to write/update/delete entities'
+        description: If enabled, Admin API won't be able to write/update/delete entities
         example: true
         type: boolean
       autoLinkToDefaultGroup:
-        description: 'If not defined, every new service descriptor will be added to the default group'
+        description: If not defined, every new service descriptor will be added to the default group
         example: true
         type: boolean
       backofficeAuth0Config:
-        $ref: '#/definitions/Auth0Config'
+        $ref: "#/definitions/Auth0Config"
         description: Optional configuration for the backoffice Auth0 domain
       cleverSettings:
-        $ref: '#/definitions/CleverSettings'
+        $ref: "#/definitions/CleverSettings"
         description: Optional CleverCloud configuration
       endlessIpAddresses:
         description: IP addresses for which any request to Otoroshi will respond with 128 Gb of zeros
@@ -1984,9 +1985,9 @@ definitions:
           type: string
         type: array
       ipFiltering:
-        $ref: '#/definitions/IpFiltering'
+        $ref: "#/definitions/IpFiltering"
       limitConcurrentRequests:
-        description: 'If enabled, Otoroshi will reject new request if too much at the same time'
+        description: If enabled, Otoroshi will reject new request if too much at the same time
         example: true
         type: boolean
       lines:
@@ -1996,7 +1997,7 @@ definitions:
           type: string
         type: array
       mailGunSettings:
-        $ref: '#/definitions/MailgunSettings'
+        $ref: "#/definitions/MailgunSettings"
         description: Optional mailgun configuration
       maxConcurrentRequests:
         description: The number of authorized request processed at the same time
@@ -2018,28 +2019,28 @@ definitions:
         example: true
         type: boolean
       perIpThrottlingQuota:
-        description: 'Authorized number of calls per second globally per IP address, measured on 10 seconds'
+        description: Authorized number of calls per second globally per IP address, measured on 10 seconds
         example: 123
         format: int64
         type: integer
       privateAppsAuth0Config:
-        $ref: '#/definitions/Auth0Config'
+        $ref: "#/definitions/Auth0Config"
         description: Optional configuration for the private apps Auth0 domain
       streamEntityOnly:
         description: HTTP will be streamed only. Doesn't work with old browsers
         example: true
         type: boolean
       throttlingQuota:
-        description: 'Authorized number of calls per second globally, measured on 10 seconds'
+        description: Authorized number of calls per second globally, measured on 10 seconds
         example: 123
         format: int64
         type: integer
       u2fLoginOnly:
-        description: 'If enabled, login to backoffice through Auth0 will be disabled'
+        description: If enabled, login to backoffice through Auth0 will be disabled
         example: true
         type: boolean
       useCircuitBreakers:
-        description: 'If enabled, services will be authorized to use circuit breakers'
+        description: If enabled, services will be authorized to use circuit breakers
         example: true
         type: boolean
     required:
@@ -2067,7 +2068,7 @@ definitions:
         example: a string value
         type: string
       id:
-        description: 'The unique id of the group. Usually 64 random alpha numerical characters, but can be anything'
+        description: The unique id of the group. Usually 64 random alpha numerical characters, but can be anything
         example: a string value
         type: string
       name:
@@ -2087,7 +2088,7 @@ definitions:
         type: boolean
       url:
         description: The URL to check
-        example: 'http://www.google.com'
+        example: http://www.google.com
         format: uri
         type: string
     required:
@@ -2143,15 +2144,15 @@ definitions:
               example: a string value
               type: string
             clientId:
-              description: 'The unique id of the Api Key. Usually 16 random alpha numerical characters, but can be anything'
+              description: The unique id of the Api Key. Usually 16 random alpha numerical characters, but can be anything
               example: a string value
               type: string
             clientName:
-              description: 'The name of the api key, for humans ;-)'
+              description: The name of the api key, for humans ;-)
               example: a string value
               type: string
             clientSecret:
-              description: 'The secret of the Api Key. Usually 64 random alpha numerical characters, but can be anything'
+              description: The secret of the Api Key. Usually 64 random alpha numerical characters, but can be anything
               example: a string value
               type: string
             dailyQuota:
@@ -2160,7 +2161,7 @@ definitions:
               format: int64
               type: integer
             enabled:
-              description: 'Whether or not the key is enabled. If disabled, resources won''t be available to calls using this key'
+              description: Whether or not the key is enabled. If disabled, resources won't be available to calls using this key
               example: true
               type: boolean
             metadata:
@@ -2176,7 +2177,7 @@ definitions:
               format: int64
               type: integer
             throttlingQuota:
-              description: 'Authorized number of calls per second, measured on 10 seconds'
+              description: Authorized number of calls per second, measured on 10 seconds
               example: 123
               format: int64
               type: integer
@@ -2196,10 +2197,10 @@ definitions:
           key: value
         type: object
       config:
-        $ref: '#/definitions/GlobalConfig'
+        $ref: "#/definitions/GlobalConfig"
         description: Current global config at the time of export
       date:
-        example: '2017-07-21T17:32:28Z'
+        example: 2017-07-21T17:32:28Z
         format: date-time
         type: string
       dateRaw:
@@ -2256,7 +2257,7 @@ definitions:
           description: An otoroshi service descriptor. Represent a forward HTTP call on a domain to another location with some optional api management mecanism
           properties:
             Canary:
-              $ref: '#/definitions/Canary'
+              $ref: "#/definitions/Canary"
             additionalHeaders:
               additionalProperties:
                 type: string
@@ -2265,31 +2266,31 @@ definitions:
                 key: value
               type: object
             api:
-              $ref: '#/definitions/ExposedApi'
+              $ref: "#/definitions/ExposedApi"
             buildMode:
               description: Display a construction page when a user try to use the service
               example: true
               type: boolean
             clientConfig:
-              $ref: '#/definitions/ClientConfig'
+              $ref: "#/definitions/ClientConfig"
             domain:
               description: The domain on which the service is available.
               example: a string value
               type: string
             enabled:
-              description: 'Activate or deactivate your service. Once disabled, users will get an error page saying the service does not exist'
+              description: Activate or deactivate your service. Once disabled, users will get an error page saying the service does not exist
               example: true
               type: boolean
             enforceSecureCommunication:
-              description: 'When enabled, Otoroshi will try to exchange headers with downstream service to ensure no one else can use the service from outside'
+              description: When enabled, Otoroshi will try to exchange headers with downstream service to ensure no one else can use the service from outside
               example: true
               type: boolean
             env:
-              description: 'The line on which the service is available. Based on that value, the name of the line will be appended to the subdomain. For line prod, nothing will be appended. For example, if the subdomain is ''foo'' and line is ''preprod'', then the exposed service will be available at ''foo.preprod.mydomain'''
+              description: The line on which the service is available. Based on that value, the name of the line will be appended to the subdomain. For line prod, nothing will be appended. For example, if the subdomain is 'foo' and line is 'preprod', then the exposed service will be available at 'foo.preprod.mydomain'
               example: a string value
               type: string
             forceHttps:
-              description: 'Will force redirection to https:// if not present'
+              description: Will force redirection to https:// if not present
               example: true
               type: boolean
             groupId:
@@ -2297,20 +2298,20 @@ definitions:
               example: a string value
               type: string
             healthCheck:
-              $ref: '#/definitions/HealthCheck'
+              $ref: "#/definitions/HealthCheck"
             id:
               description: A unique random string to identify your service
               example: 110e8400-e29b-11d4-a716-446655440000
               format: uuid
               type: string
             ipFiltering:
-              $ref: '#/definitions/IpFiltering'
+              $ref: "#/definitions/IpFiltering"
             localHost:
-              description: 'The host used localy, mainly localhost:xxxx'
+              description: The host used localy, mainly localhost:xxxx
               example: a string value
               type: string
             localScheme:
-              description: 'The scheme used localy, mainly http'
+              description: The scheme used localy, mainly http
               example: a string value
               type: string
             maintenanceMode:
@@ -2340,27 +2341,27 @@ definitions:
               example: a string value
               type: string
             privateApp:
-              description: 'When enabled, user will be allowed to use the service (UI) only if they are registered users of the private apps domain'
+              description: When enabled, user will be allowed to use the service (UI) only if they are registered users of the private apps domain
               example: true
               type: boolean
             privatePatterns:
-              description: 'If you define a public pattern that is a little bit too much, you can make some of public URL private again'
+              description: If you define a public pattern that is a little bit too much, you can make some of public URL private again
               items:
                 example: a string value
                 type: string
               type: array
             publicPatterns:
-              description: 'By default, every services are private only and you''ll need an API key to access it. However, if you want to expose a public UI, you can define one or more public patterns (regex) to allow access to anybody. For example if you want to allow anybody on any URL, just use ''/.*'''
+              description: By default, every services are private only and you'll need an API key to access it. However, if you want to expose a public UI, you can define one or more public patterns (regex) to allow access to anybody. For example if you want to allow anybody on any URL, just use '/.*'
               items:
                 example: a string value
                 type: string
               type: array
             redirectToLocal:
-              description: 'If you work locally with Otoroshi, you may want to use that feature to redirect one particuliar service to a local host. For example, you can relocate https://foo.preprod.bar.com to http://localhost:8080 to make some tests'
+              description: If you work locally with Otoroshi, you may want to use that feature to redirect one particuliar service to a local host. For example, you can relocate https://foo.preprod.bar.com to http://localhost:8080 to make some tests
               example: true
               type: boolean
             root:
-              description: 'Otoroshi will append this root to any target choosen. If the specified root is ''/api/foo'', then a request to https://yyyyyyy/bar will actually hit https://xxxxxxxxx/api/foo/bar'
+              description: Otoroshi will append this root to any target choosen. If the specified root is '/api/foo', then a request to https://yyyyyyy/bar will actually hit https://xxxxxxxxx/api/foo/bar
               example: a string value
               type: string
             secComExcludedPatterns:
@@ -2370,11 +2371,11 @@ definitions:
                 type: string
               type: array
             sendOtoroshiHeadersBack:
-              description: 'When enabled, Otoroshi will send headers to consumer like request id, client latency, overhead, etc ...'
+              description: When enabled, Otoroshi will send headers to consumer like request id, client latency, overhead, etc ...
               example: true
               type: boolean
             statsdConfig:
-              $ref: '#/definitions/StatsdConfig'
+              $ref: "#/definitions/StatsdConfig"
             subdomain:
               description: The subdomain on which the service is available
               example: a string value
@@ -2382,7 +2383,7 @@ definitions:
             targets:
               description: The list of target that Otoroshi will proxy and expose through the subdomain defined before. Otoroshi will do round-robin load balancing between all those targets with circuit breaker mecanism to avoid cascading failures
               items:
-                $ref: '#/definitions/Target'
+                $ref: "#/definitions/Target"
               type: array
           required:
             - id
@@ -2411,7 +2412,7 @@ definitions:
               example: a string value
               type: string
             id:
-              description: 'The unique id of the group. Usually 64 random alpha numerical characters, but can be anything'
+              description: The unique id of the group. Usually 64 random alpha numerical characters, but can be anything
               example: a string value
               type: string
             name:
@@ -2453,7 +2454,7 @@ definitions:
           type: object
         type: array
       stats:
-        $ref: '#/definitions/ImportExportStats'
+        $ref: "#/definitions/ImportExportStats"
         description: Current global stats at the time of export
     required:
       - label
@@ -2547,7 +2548,7 @@ definitions:
       - datastore
     type: object
   Patch:
-    description: 'A set of changes described in JSON Patch format: http://jsonpatch.com/ (RFC 6902)'
+    description: "A set of changes described in JSON Patch format: http://jsonpatch.com/ (RFC 6902)"
     items:
       properties:
         op:
@@ -2630,7 +2631,7 @@ definitions:
     description: An otoroshi service descriptor. Represent a forward HTTP call on a domain to another location with some optional api management mecanism
     properties:
       Canary:
-        $ref: '#/definitions/Canary'
+        $ref: "#/definitions/Canary"
       additionalHeaders:
         additionalProperties:
           type: string
@@ -2639,31 +2640,31 @@ definitions:
           key: value
         type: object
       api:
-        $ref: '#/definitions/ExposedApi'
+        $ref: "#/definitions/ExposedApi"
       buildMode:
         description: Display a construction page when a user try to use the service
         example: true
         type: boolean
       clientConfig:
-        $ref: '#/definitions/ClientConfig'
+        $ref: "#/definitions/ClientConfig"
       domain:
         description: The domain on which the service is available.
         example: a string value
         type: string
       enabled:
-        description: 'Activate or deactivate your service. Once disabled, users will get an error page saying the service does not exist'
+        description: Activate or deactivate your service. Once disabled, users will get an error page saying the service does not exist
         example: true
         type: boolean
       enforceSecureCommunication:
-        description: 'When enabled, Otoroshi will try to exchange headers with downstream service to ensure no one else can use the service from outside'
+        description: When enabled, Otoroshi will try to exchange headers with downstream service to ensure no one else can use the service from outside
         example: true
         type: boolean
       env:
-        description: 'The line on which the service is available. Based on that value, the name of the line will be appended to the subdomain. For line prod, nothing will be appended. For example, if the subdomain is ''foo'' and line is ''preprod'', then the exposed service will be available at ''foo.preprod.mydomain'''
+        description: The line on which the service is available. Based on that value, the name of the line will be appended to the subdomain. For line prod, nothing will be appended. For example, if the subdomain is 'foo' and line is 'preprod', then the exposed service will be available at 'foo.preprod.mydomain'
         example: a string value
         type: string
       forceHttps:
-        description: 'Will force redirection to https:// if not present'
+        description: Will force redirection to https:// if not present
         example: true
         type: boolean
       groupId:
@@ -2671,20 +2672,20 @@ definitions:
         example: a string value
         type: string
       healthCheck:
-        $ref: '#/definitions/HealthCheck'
+        $ref: "#/definitions/HealthCheck"
       id:
         description: A unique random string to identify your service
         example: 110e8400-e29b-11d4-a716-446655440000
         format: uuid
         type: string
       ipFiltering:
-        $ref: '#/definitions/IpFiltering'
+        $ref: "#/definitions/IpFiltering"
       localHost:
-        description: 'The host used localy, mainly localhost:xxxx'
+        description: The host used localy, mainly localhost:xxxx
         example: a string value
         type: string
       localScheme:
-        description: 'The scheme used localy, mainly http'
+        description: The scheme used localy, mainly http
         example: a string value
         type: string
       maintenanceMode:
@@ -2714,27 +2715,27 @@ definitions:
         example: a string value
         type: string
       privateApp:
-        description: 'When enabled, user will be allowed to use the service (UI) only if they are registered users of the private apps domain'
+        description: When enabled, user will be allowed to use the service (UI) only if they are registered users of the private apps domain
         example: true
         type: boolean
       privatePatterns:
-        description: 'If you define a public pattern that is a little bit too much, you can make some of public URL private again'
+        description: If you define a public pattern that is a little bit too much, you can make some of public URL private again
         items:
           example: a string value
           type: string
         type: array
       publicPatterns:
-        description: 'By default, every services are private only and you''ll need an API key to access it. However, if you want to expose a public UI, you can define one or more public patterns (regex) to allow access to anybody. For example if you want to allow anybody on any URL, just use ''/.*'''
+        description: By default, every services are private only and you'll need an API key to access it. However, if you want to expose a public UI, you can define one or more public patterns (regex) to allow access to anybody. For example if you want to allow anybody on any URL, just use '/.*'
         items:
           example: a string value
           type: string
         type: array
       redirectToLocal:
-        description: 'If you work locally with Otoroshi, you may want to use that feature to redirect one particuliar service to a local host. For example, you can relocate https://foo.preprod.bar.com to http://localhost:8080 to make some tests'
+        description: If you work locally with Otoroshi, you may want to use that feature to redirect one particuliar service to a local host. For example, you can relocate https://foo.preprod.bar.com to http://localhost:8080 to make some tests
         example: true
         type: boolean
       root:
-        description: 'Otoroshi will append this root to any target choosen. If the specified root is ''/api/foo'', then a request to https://yyyyyyy/bar will actually hit https://xxxxxxxxx/api/foo/bar'
+        description: Otoroshi will append this root to any target choosen. If the specified root is '/api/foo', then a request to https://yyyyyyy/bar will actually hit https://xxxxxxxxx/api/foo/bar
         example: a string value
         type: string
       secComExcludedPatterns:
@@ -2744,11 +2745,11 @@ definitions:
           type: string
         type: array
       sendOtoroshiHeadersBack:
-        description: 'When enabled, Otoroshi will send headers to consumer like request id, client latency, overhead, etc ...'
+        description: When enabled, Otoroshi will send headers to consumer like request id, client latency, overhead, etc ...
         example: true
         type: boolean
       statsdConfig:
-        $ref: '#/definitions/StatsdConfig'
+        $ref: "#/definitions/StatsdConfig"
       subdomain:
         description: The subdomain on which the service is available
         example: a string value
@@ -2756,7 +2757,7 @@ definitions:
       targets:
         description: The list of target that Otoroshi will proxy and expose through the subdomain defined before. Otoroshi will do round-robin load balancing between all those targets with circuit breaker mecanism to avoid cascading failures
         items:
-          $ref: '#/definitions/Target'
+          $ref: "#/definitions/Target"
         type: array
     required:
       - id
@@ -2884,7 +2885,7 @@ definitions:
     description: A Target is where an HTTP call will be forwarded in the end from a service domain
     properties:
       host:
-        description: 'The host on which the HTTP call will be forwarded. Can be a domain name, or an IP address. Can also have a port'
+        description: The host on which the HTTP call will be forwarded. Can be a domain name, or an IP address. Can also have a port
         example: www.google.com
         format: hostname
         type: string
@@ -2942,7 +2943,7 @@ definitions:
         type: object
       url:
         description: The URL where events are posted
-        example: 'http://www.google.com'
+        example: http://www.google.com
         format: uri
         type: string
     required:

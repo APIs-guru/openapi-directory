@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: demo.pims.io
@@ -6,22 +6,197 @@ basePath: /api/v1
 info:
   contact:
     email: support@pims.io
-  description: "\nHereafter is the documentation of the private API of [Pims: Pointages Intelligents pour le Monde du Spectacle](https://pims.io). This API is designed for 3rd-party softwares, editors and partners. Its main purpose is to give access the core data of a Pims customer (i.e. events, ticket counts and promotions).\n\n## Authentication\nThe API uses [basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication), meaning you will need a username and password to get authorized.\n\nAs each customer in Pims has its own domain (e.g. caramba.pims.io, gdp.pims.io...), each credentials will be valid for one domain/customer only. If you need dedicated credentials for one domain, please contact us. (In any case, we will need an explicit agreement from the customer before we create these credentials.)\n\n<div class=\"info\">\nTo make your life easy, you can try all endpoints with the public credentials below, pointing to our [demo domain](https://demo.pims.io):\n  <ul>\n    <li>Base path: `https://demo.pims.io/api`</li>\n    <li>Username: `demo`</li>\n    <li>Password: `q83792db2GCvgYVdKpU3yG3R`</li>\n  </ul>\n</div>\n\n## Response format\nThe API returns JSON and matches the [HAL specification](http://stateless.co/hal_specification.html). The `Content-Type` of each response will be `application/hal+json`, unless an error occurs.\n\nPlease note that this documentation describes all responses “as if” they were plain JSON. The specificities of HAL are ignored on purpose, in order to remain compact and avoid repetition.\n<div style=\"-webkit-column-count: 2; -moz-column-count: 2; column-count: 2; -webkit-column-rule: 1px dotted #e0e0e0; -moz-column-rule: 1px dotted #e0e0e0; column-rule: 1px dotted #e0e0e0;\">\n\t<div style=\"display: inline-block; width:100%;\">\n\t\t<strong>So when you read in the doc:</strong>\n<pre><code class=\"lang-json\">{\n\t<span class=\"token string\">\"id\"</span>: <span class=\"token number\">123</span>,\n\t<span class=\"token string\">\"property1\"</span>: <span class=\"token string\">\"Lorem ipsum\"</span>,\n\t<span class=\"token string\">\"object\"</span>: {\n\t\t<span class=\"token string\">\"id\"</span>: <span class=\"token number\">456</span>,\n\t\t<span class=\"token string\">\"property2\"</span>: <span class=\"token number\">7.89</span>\n\t}\n}</code></pre>\n\t</div>\n\t<div style=\"display: inline-block; width:100%;\">\n\t\t<strong>... you'll get in the Real World®:</strong>\n<pre><code class=\"lang-json\">{\n\t<span class=\"token string\">\"id\"</span>: <span class=\"token number\">123</span>,\n\t<span class=\"token string\">\"property2\"</span>: <span class=\"token string\">\"Lorem ipsum\"</span>,\n\t<span class=\"token string\">\"_embedded\"</span>: {\n\t\t<span class=\"token string\">\"object\"</span>: {\n\t\t\t<span class=\"token string\">\"id\"</span>: <span class=\"token number\">456</span>,\n\t\t\t<span class=\"token string\">\"property2\"</span>: <span class=\"token number\">7.89</span>,\n\t\t\t<span class=\"token string\">\"_links\"</span>: {\n\t\t\t\t<span class=\"token string\">\"self\"</span>: {\n\t\t\t\t\t<span class=\"token string\">\"href\"</span>: <span class=\"token string\">\"https://api.mydomain.com/other-item/456\"</span>\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\t<span class=\"token string\">\"_links\"</span>: {\n\t\t<span class=\"token string\">\"self\"</span>: {\n\t\t\t<span class=\"token string\">\"href\"</span>: <span class=\"token string\">\"https://api.mydomain.com/item/123\"</span>\n\t\t}\n\t}\n}</code></pre>\n\t</div>\n</div>\n\n### Errors\nErrors return JSON too and tries to match the [Problem Details for HTTP APIs specification](https://tools.ietf.org/html/rfc7807). If it does not match this spec, that's either a bug or a compatibility issue. Please contact us to solve the problem.\n\nThe `Content-Type` of errors will be `application/problem+json`. The content will match the following JSON:\n```json\n{\n\t\"type\": \"https://tools.ietf.org/html/rfc2616#section-10\",\n    \"title\": \"Not Found\",\n\t\"status\": 404,\n    \"detail\": \"Entity not found\"\n}\n```\n\n## Versioning\nThe API is fully versionned, using an URL-versioning scheme: `https://demo.pims.io/api/v1/events`, `https://demo.pims.io/api/v2/events`,...\n\nThe version part of the URL is optional, and will be completed with the last stable version if omitted.\n\n## Pagination\nAll responses corresponding to a collection of resources (e.g. `/venues` or `/series/:id/events`) are paginated. When so, you will only get the first 25 resources you asked for.\n\nIf you need to get more resources in one call, you can use the `page_size` query parameter. E.g. `/venues?page_size=50` to get the 50 first venues.\n\nAlso note that with HAL, the navigation in paginated responses is a piece of cake, as you can see below:\n```json\n{\n\t\"_links\": {\n\t\t\"self\": {\n\t\t\t\"href\": \"https://demo.pims.io/api/v1/events?page=1\"\n\t\t},\n\t\t\"first\": {\n\t\t\t\"href\": \"https://demo.pims.io/api/v1/events\"\n\t\t},\n\t\t\"last\": {\n\t\t\t\"href\": \"https://demo.pims.io/api/v1/events?page=14\"\n\t\t},\n\t\t\"next\": {\n\t\t\t\"href\": \"https://demo.pims.io/api/v1/events?page=2\"\n\t\t}\n\t},\n\t\"_embedded\": {\n \t\t... // data content goes here\n\t},\n\t\"page_count\": 14,\n\t\"page_size\": 25,\n\t\"total_items\": 331,\n\t\"page\": 1\n}\n```\n\n## Filtering and sorting\nEvery textual filter (e.g. `/events?label=U2`) and/or sort (e.g. `/events?sort=label`) performed with the API uses UTF8_UNICODE_CI collation, meaning it is:\n- Case insensitive: “Chloé” will be considered the same as “CHLOÉ”;\n- Diacritic insensitive: “Chloé” will be considered the same as “Chloe”.\n\nWhen performing a sort, it will always be *ascending* by default. To make it *descending*, just use a minus sign (`-`) in front of the parameter value (e.g. `/events?sort=-label`).\n\n## I18n\nIn responses, some labels can be translated (e.g. promotion types, event input types, etc.). These translatable labels are clearly indicated in the documentation below.\n\nBy default, they will be displayed in English, but you can change this behaviour via the `Accept-Language` header. E.g., use `fr` as a value for French.\n\n## PHP SDK\nWe provide a simple yet convenient SDK for the PHP language, see [the Github page of the project](https://github.com/pimssas/pims-api-client-php).\n\n## And now?\nGeneraly, you will start by [fetching one or more events](#tag/Events). An <span class=\"definition\">event</span> can be anything that occurs in one venue at one given date and time: a concert, a play, a match, a conference, etc. Additionnally, you can explore the [series](#tag/Series): a <span class=\"definition\">series</span> is just a group of events (e.g. a tour or a festival).\n\nOnce you retrieved the events you were interested in, you can look for the sales (<span class=\"definition\">ticket counts</span>):\n- Get a quick overview with [`/events/:id/ticket-counts`](#operation/fetchAllTicketCounts)\n- Or get a full insight by calling these endpoints:\n    1. [`/events/:id/categories`](#operation/fetchAllEventsCategories)\n    2. [`/events/:id/channels`](#operation/fetchAllEventsChannels)\n    3. [`/events/:id/ticket-counts/detailed`](#operation/fetchAllDetailedTicketCounts)\n\nEventually, you may also want to fetch the [promotions](#tag/Promotions). A <span class=\"definition\">promotion</span> can be anything meant to leverage the sales: ads, marketing campaigns, buzz or news around the event, etc. A promotion can be linked to any combination of events and/or series."
+  description: >-
+    
+    Hereafter is the documentation of the private API of [Pims: Pointages Intelligents pour le Monde du Spectacle](https://pims.io). This API is designed for 3rd-party softwares, editors and partners. Its main purpose is to give access the core data of a Pims customer (i.e. events, ticket counts and promotions).
+
+
+    ## Authentication
+
+    The API uses [basic access authentication](https://en.wikipedia.org/wiki/Basic_access_authentication), meaning you will need a username and password to get authorized.
+
+
+    As each customer in Pims has its own domain (e.g. caramba.pims.io, gdp.pims.io...), each credentials will be valid for one domain/customer only. If you need dedicated credentials for one domain, please contact us. (In any case, we will need an explicit agreement from the customer before we create these credentials.)
+
+
+    <div class="info">
+
+    To make your life easy, you can try all endpoints with the public credentials below, pointing to our [demo domain](https://demo.pims.io):
+      <ul>
+        <li>Base path: `https://demo.pims.io/api`</li>
+        <li>Username: `demo`</li>
+        <li>Password: `q83792db2GCvgYVdKpU3yG3R`</li>
+      </ul>
+    </div>
+
+
+    ## Response format
+
+    The API returns JSON and matches the [HAL specification](http://stateless.co/hal_specification.html). The `Content-Type` of each response will be `application/hal+json`, unless an error occurs.
+
+
+    Please note that this documentation describes all responses “as if” they were plain JSON. The specificities of HAL are ignored on purpose, in order to remain compact and avoid repetition.
+
+    <div style="-webkit-column-count: 2; -moz-column-count: 2; column-count: 2; -webkit-column-rule: 1px dotted #e0e0e0; -moz-column-rule: 1px dotted #e0e0e0; column-rule: 1px dotted #e0e0e0;">
+    	<div style="display: inline-block; width:100%;">
+    		<strong>So when you read in the doc:</strong>
+    <pre><code class="lang-json">{
+    	<span class="token string">"id"</span>: <span class="token number">123</span>,
+    	<span class="token string">"property1"</span>: <span class="token string">"Lorem ipsum"</span>,
+    	<span class="token string">"object"</span>: {
+    		<span class="token string">"id"</span>: <span class="token number">456</span>,
+    		<span class="token string">"property2"</span>: <span class="token number">7.89</span>
+    	}
+    }</code></pre>
+    	</div>
+    	<div style="display: inline-block; width:100%;">
+    		<strong>... you'll get in the Real World®:</strong>
+    <pre><code class="lang-json">{
+    	<span class="token string">"id"</span>: <span class="token number">123</span>,
+    	<span class="token string">"property2"</span>: <span class="token string">"Lorem ipsum"</span>,
+    	<span class="token string">"_embedded"</span>: {
+    		<span class="token string">"object"</span>: {
+    			<span class="token string">"id"</span>: <span class="token number">456</span>,
+    			<span class="token string">"property2"</span>: <span class="token number">7.89</span>,
+    			<span class="token string">"_links"</span>: {
+    				<span class="token string">"self"</span>: {
+    					<span class="token string">"href"</span>: <span class="token string">"https://api.mydomain.com/other-item/456"</span>
+    				}
+    			}
+    		}
+    	}
+    	<span class="token string">"_links"</span>: {
+    		<span class="token string">"self"</span>: {
+    			<span class="token string">"href"</span>: <span class="token string">"https://api.mydomain.com/item/123"</span>
+    		}
+    	}
+    }</code></pre>
+    	</div>
+    </div>
+
+
+    ### Errors
+
+    Errors return JSON too and tries to match the [Problem Details for HTTP APIs specification](https://tools.ietf.org/html/rfc7807). If it does not match this spec, that's either a bug or a compatibility issue. Please contact us to solve the problem.
+
+
+    The `Content-Type` of errors will be `application/problem+json`. The content will match the following JSON:
+
+    ```json
+
+    {
+    	"type": "https://tools.ietf.org/html/rfc2616#section-10",
+        "title": "Not Found",
+    	"status": 404,
+        "detail": "Entity not found"
+    }
+
+    ```
+
+
+    ## Versioning
+
+    The API is fully versionned, using an URL-versioning scheme: `https://demo.pims.io/api/v1/events`, `https://demo.pims.io/api/v2/events`,...
+
+
+    The version part of the URL is optional, and will be completed with the last stable version if omitted.
+
+
+    ## Pagination
+
+    All responses corresponding to a collection of resources (e.g. `/venues` or `/series/:id/events`) are paginated. When so, you will only get the first 25 resources you asked for.
+
+
+    If you need to get more resources in one call, you can use the `page_size` query parameter. E.g. `/venues?page_size=50` to get the 50 first venues.
+
+
+    Also note that with HAL, the navigation in paginated responses is a piece of cake, as you can see below:
+
+    ```json
+
+    {
+    	"_links": {
+    		"self": {
+    			"href": "https://demo.pims.io/api/v1/events?page=1"
+    		},
+    		"first": {
+    			"href": "https://demo.pims.io/api/v1/events"
+    		},
+    		"last": {
+    			"href": "https://demo.pims.io/api/v1/events?page=14"
+    		},
+    		"next": {
+    			"href": "https://demo.pims.io/api/v1/events?page=2"
+    		}
+    	},
+    	"_embedded": {
+     		... // data content goes here
+    	},
+    	"page_count": 14,
+    	"page_size": 25,
+    	"total_items": 331,
+    	"page": 1
+    }
+
+    ```
+
+
+    ## Filtering and sorting
+
+    Every textual filter (e.g. `/events?label=U2`) and/or sort (e.g. `/events?sort=label`) performed with the API uses UTF8_UNICODE_CI collation, meaning it is:
+
+    - Case insensitive: “Chloé” will be considered the same as “CHLOÉ”;
+
+    - Diacritic insensitive: “Chloé” will be considered the same as “Chloe”.
+
+
+    When performing a sort, it will always be *ascending* by default. To make it *descending*, just use a minus sign (`-`) in front of the parameter value (e.g. `/events?sort=-label`).
+
+
+    ## I18n
+
+    In responses, some labels can be translated (e.g. promotion types, event input types, etc.). These translatable labels are clearly indicated in the documentation below.
+
+
+    By default, they will be displayed in English, but you can change this behaviour via the `Accept-Language` header. E.g., use `fr` as a value for French.
+
+
+    ## PHP SDK
+
+    We provide a simple yet convenient SDK for the PHP language, see [the Github page of the project](https://github.com/pimssas/pims-api-client-php).
+
+
+    ## And now?
+
+    Generaly, you will start by [fetching one or more events](#tag/Events). An <span class="definition">event</span> can be anything that occurs in one venue at one given date and time: a concert, a play, a match, a conference, etc. Additionnally, you can explore the [series](#tag/Series): a <span class="definition">series</span> is just a group of events (e.g. a tour or a festival).
+
+
+    Once you retrieved the events you were interested in, you can look for the sales (<span class="definition">ticket counts</span>):
+
+    - Get a quick overview with [`/events/:id/ticket-counts`](#operation/fetchAllTicketCounts)
+
+    - Or get a full insight by calling these endpoints:
+        1. [`/events/:id/categories`](#operation/fetchAllEventsCategories)
+        2. [`/events/:id/channels`](#operation/fetchAllEventsChannels)
+        3. [`/events/:id/ticket-counts/detailed`](#operation/fetchAllDetailedTicketCounts)
+
+    Eventually, you may also want to fetch the [promotions](#tag/Promotions). A <span class="definition">promotion</span> can be anything meant to leverage the sales: ads, marketing campaigns, buzz or news around the event, etc. A promotion can be linked to any combination of events and/or series.
   license:
     name: Creative Commons CC BY-NC-ND 2.0
-    url: 'https://creativecommons.org/licenses/by-nc-nd/2.0/'
+    url: https://creativecommons.org/licenses/by-nc-nd/2.0/
   title: Pims
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    backgroundColor: '#FF9800'
-    url: 'https://cdn.pims.io/api/logo_white.svg'
+    backgroundColor: "#FF9800"
+    url: https://cdn.pims.io/api/logo_white.svg
   x-origin:
     - format: swagger
-      url: 'https://cdn.pims.io/api/swagger.json'
-      version: '2.0'
+      url: https://cdn.pims.io/api/swagger.json
+      version: "2.0"
   x-providerName: pims.io
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -51,7 +226,7 @@ parameters:
     type: integer
   query_capacities_show-ignored:
     default: false
-    description: 'If set to `false`, show only the [event-]categories which are not ignored. If set to `true`, show everything.'
+    description: If set to `false`, show only the [event-]categories which are not ignored. If set to `true`, show everything.
     in: query
     name: show_ignored
     type: boolean
@@ -76,13 +251,13 @@ parameters:
     description: Sort the events in the corresponding order.
     enum:
       - label
-      - '-label'
+      - -label
       - datetime
-      - '-datetime'
+      - -datetime
       - venue_label
-      - '-venue_label'
+      - -venue_label
       - city
-      - '-city'
+      - -city
     in: query
     name: sort
     type: string
@@ -94,7 +269,7 @@ parameters:
     type: string
   query_page-size:
     default: 25
-    description: 'Pagination size, i.e. maximum number of items to be displayed in the response.'
+    description: Pagination size, i.e. maximum number of items to be displayed in the response.
     format: int32
     in: query
     name: page_size
@@ -120,9 +295,9 @@ parameters:
     description: Sort the promotions in the corresponding order.
     enum:
       - date
-      - '-date'
+      - -date
       - total_cost
-      - '-total_cost'
+      - -total_cost
     in: query
     name: sort
     type: string
@@ -145,13 +320,13 @@ parameters:
     type: string
   query_ticket-counts_show-ignored:
     default: false
-    description: 'If set to `false`, show only the [event-]categories/[event-]price ranges/[event]channels which are not ignored. If set to `true`, show everything.'
+    description: If set to `false`, show only the [event-]categories/[event-]price ranges/[event]channels which are not ignored. If set to `true`, show everything.
     in: query
     name: show_ignored
     type: boolean
   query_ticket-counts_show-not-approved:
     default: false
-    description: 'If set to `false`, show only the approved ticket counts. If set to `true`, show all the ticket counts.'
+    description: If set to `false`, show only the approved ticket counts. If set to `true`, show all the ticket counts.
     in: query
     name: show_not_approved
     type: boolean
@@ -160,7 +335,7 @@ parameters:
     description: Sort the ticket counts in the corresponding order.
     enum:
       - date
-      - '-date'
+      - -date
     in: query
     name: sort
     type: string
@@ -171,37 +346,37 @@ parameters:
     name: to_date
     type: string
 responses:
-  '401':
-    description: 'Unauthorized, no authentication was made'
+  "401":
+    description: Unauthorized, no authentication was made
     schema:
-      $ref: '#/definitions/Error401'
-  '403':
-    description: 'Forbidden, the authentication is wrong'
+      $ref: "#/definitions/Error401"
+  "403":
+    description: Forbidden, the authentication is wrong
     schema:
-      $ref: '#/definitions/Error403'
-  '404':
+      $ref: "#/definitions/Error403"
+  "404":
     description: Not Found
     schema:
-      $ref: '#/definitions/Error404'
-  '422':
+      $ref: "#/definitions/Error404"
+  "422":
     description: Unprocessable Entity
     schema:
-      $ref: '#/definitions/Error422'
-  '500':
+      $ref: "#/definitions/Error422"
+  "500":
     description: Unexpected error
     schema:
-      $ref: '#/definitions/Error500'
+      $ref: "#/definitions/Error500"
   200-events:
-    description: 'Successful operation, gives an array of events'
+    description: Successful operation, gives an array of events
     schema:
       items:
-        $ref: '#/definitions/EventsEntity'
+        $ref: "#/definitions/EventsEntity"
       type: array
   200-promotions:
-    description: 'Successful operation, gives an array of promotions'
+    description: Successful operation, gives an array of promotions
     schema:
       items:
-        $ref: '#/definitions/PromotionsEntity'
+        $ref: "#/definitions/PromotionsEntity"
       type: array
 paths:
   /categories:
@@ -213,7 +388,7 @@ paths:
           name: label
           type: string
         - default: false
-          description: 'If set to `false`, show only the categories which are not ignored. If set to `true`, show all categories.'
+          description: If set to `false`, show only the categories which are not ignored. If set to `true`, show all categories.
           in: query
           name: show_ignored
           type: boolean
@@ -221,33 +396,33 @@ paths:
           description: Sort the categories in the corresponding order.
           enum:
             - label
-            - '-label'
+            - -label
             - order
-            - '-order'
+            - -order
           in: query
           name: sort
           type: string
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of categories'
+        "200":
+          description: Successful operation, gives an array of categories
           schema:
             items:
-              $ref: '#/definitions/CategoriesEntity'
+              $ref: "#/definitions/CategoriesEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all categories
       tags:
         - Categories
-  '/categories/{category_id}':
+  "/categories/{category_id}":
     get:
       operationId: fetchOneCategory
       parameters:
@@ -257,20 +432,20 @@ paths:
           name: category_id
           required: true
           type: integer
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives one category'
+        "200":
+          description: Successful operation, gives one category
           schema:
-            $ref: '#/definitions/CategoriesEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/CategoriesEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one category by ID
       tags:
         - Categories
@@ -283,7 +458,7 @@ paths:
           name: label
           type: string
         - default: false
-          description: 'If set to `false`, show only the channels which are not ignored. If set to `true`, show all channels.'
+          description: If set to `false`, show only the channels which are not ignored. If set to `true`, show all channels.
           in: query
           name: show_ignored
           type: boolean
@@ -291,33 +466,33 @@ paths:
           description: Sort the channels in the corresponding order.
           enum:
             - label
-            - '-label'
+            - -label
             - order
-            - '-order'
+            - -order
           in: query
           name: sort
           type: string
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of channels'
+        "200":
+          description: Successful operation, gives an array of channels
           schema:
             items:
-              $ref: '#/definitions/ChannelsEntity'
+              $ref: "#/definitions/ChannelsEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all channels
       tags:
         - Channels
-  '/channels/{channel_id}':
+  "/channels/{channel_id}":
     get:
       operationId: fetchOneChannel
       parameters:
@@ -327,20 +502,20 @@ paths:
           name: channel_id
           required: true
           type: integer
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives one channel'
+        "200":
+          description: Successful operation, gives one channel
           schema:
-            $ref: '#/definitions/ChannelsEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/ChannelsEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one channel by ID
       tags:
         - Channels
@@ -348,144 +523,144 @@ paths:
     get:
       operationId: fetchAllEvents
       parameters:
-        - $ref: '#/parameters/query_events_label'
-        - $ref: '#/parameters/query_events_from-datetime'
-        - $ref: '#/parameters/query_events_to-datetime'
-        - $ref: '#/parameters/query_events_city'
-        - $ref: '#/parameters/query_events_sort'
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_events_label"
+        - $ref: "#/parameters/query_events_from-datetime"
+        - $ref: "#/parameters/query_events_to-datetime"
+        - $ref: "#/parameters/query_events_city"
+        - $ref: "#/parameters/query_events_sort"
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          $ref: '#/responses/200-events'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "200":
+          $ref: "#/responses/200-events"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all events
       tags:
         - Events
-  '/events/{event_id}':
+  "/events/{event_id}":
     get:
       operationId: fetchOneEvent
       parameters:
-        - $ref: '#/parameters/path_event-id'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/path_event-id"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives one event'
+        "200":
+          description: Successful operation, gives one event
           schema:
-            $ref: '#/definitions/EventsEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/EventsEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one event by ID
       tags:
         - Events
-  '/events/{event_id}/capacities':
+  "/events/{event_id}/capacities":
     get:
       operationId: fetchAllEventsCapacities
       parameters:
-        - $ref: '#/parameters/path_event-id'
-        - $ref: '#/parameters/query_capacities_show-ignored'
+        - $ref: "#/parameters/path_event-id"
+        - $ref: "#/parameters/query_capacities_show-ignored"
         - default: date
           description: Sort the capacities in the corresponding order.
           enum:
             - date
-            - '-date'
+            - -date
           in: query
           name: sort
           type: string
-        - $ref: '#/parameters/query_page-size'
+        - $ref: "#/parameters/query_page-size"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of events capacities'
+        "200":
+          description: Successful operation, gives an array of events capacities
           schema:
             items:
-              $ref: '#/definitions/EventsCapacitiesEntity'
+              $ref: "#/definitions/EventsCapacitiesEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all capacities for one event
       tags:
         - Capacities
-  '/events/{event_id}/capacities/{capacity_id}':
+  "/events/{event_id}/capacities/{capacity_id}":
     get:
       operationId: fetchOneEventCapacity
       parameters:
-        - $ref: '#/parameters/path_event-id'
+        - $ref: "#/parameters/path_event-id"
         - description: ID of the targeted capacity.
           format: int32
           in: path
           name: capacity_id
           required: true
           type: integer
-        - $ref: '#/parameters/query_capacities_show-ignored'
+        - $ref: "#/parameters/query_capacities_show-ignored"
       responses:
-        '200':
-          description: 'Successful operation, gives one event capacity'
+        "200":
+          description: Successful operation, gives one event capacity
           schema:
-            $ref: '#/definitions/EventsCapacitiesEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/EventsCapacitiesEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one capacity by ID
       tags:
         - Capacities
-  '/events/{event_id}/categories':
+  "/events/{event_id}/categories":
     get:
       operationId: fetchAllEventsCategories
       parameters:
-        - $ref: '#/parameters/path_event-id'
+        - $ref: "#/parameters/path_event-id"
         - default: false
-          description: 'If set to `false`, show only the [event-]categories/[event-]price ranges which are not ignored. If set to `true`, show everything.'
+          description: If set to `false`, show only the [event-]categories/[event-]price ranges which are not ignored. If set to `true`, show everything.
           in: query
           name: show_ignored
           type: boolean
-        - $ref: '#/parameters/query_page-size'
+        - $ref: "#/parameters/query_page-size"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of events categories'
+        "200":
+          description: Successful operation, gives an array of events categories
           schema:
             items:
-              $ref: '#/definitions/EventsCategoriesEntity'
+              $ref: "#/definitions/EventsCategoriesEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all categories for one event
       tags:
         - Categories
-  '/events/{event_id}/categories/{category_id}':
+  "/events/{event_id}/categories/{category_id}":
     get:
       operationId: fetchOneEventCategory
       parameters:
-        - $ref: '#/parameters/path_event-id'
+        - $ref: "#/parameters/path_event-id"
         - description: ID of the targeted event category.
           format: int32
           in: path
@@ -493,60 +668,60 @@ paths:
           required: true
           type: number
         - default: false
-          description: 'If set to `false`, show only the embedded [event-]price ranges which are not ignored. If set to `true`, show everything.'
+          description: If set to `false`, show only the embedded [event-]price ranges which are not ignored. If set to `true`, show everything.
           in: query
           name: show_ignored
           type: boolean
       responses:
-        '200':
-          description: 'Successful operation, gives one event category'
+        "200":
+          description: Successful operation, gives one event category
           schema:
-            $ref: '#/definitions/EventsCategoriesEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/EventsCategoriesEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one event category by ID
       tags:
         - Categories
-  '/events/{event_id}/channels':
+  "/events/{event_id}/channels":
     get:
       operationId: fetchAllEventsChannels
       parameters:
-        - $ref: '#/parameters/path_event-id'
+        - $ref: "#/parameters/path_event-id"
         - default: false
-          description: 'If set to `false`, show only the [event-]channels which are not ignored. If set to `true`, show everything.'
+          description: If set to `false`, show only the [event-]channels which are not ignored. If set to `true`, show everything.
           in: query
           name: show_ignored
           type: boolean
-        - $ref: '#/parameters/query_page-size'
+        - $ref: "#/parameters/query_page-size"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of events channels'
+        "200":
+          description: Successful operation, gives an array of events channels
           schema:
             items:
-              $ref: '#/definitions/EventsChannelsEntity'
+              $ref: "#/definitions/EventsChannelsEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all channels for one event
       tags:
         - Channels
-  '/events/{event_id}/channels/{channel_id}':
+  "/events/{event_id}/channels/{channel_id}":
     get:
       operationId: fetchOneEventChannel
       parameters:
-        - $ref: '#/parameters/path_event-id'
+        - $ref: "#/parameters/path_event-id"
         - description: ID of the targeted event channel.
           format: int32
           in: path
@@ -554,159 +729,159 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
-          description: 'Successful operation, gives one event channel'
+        "200":
+          description: Successful operation, gives one event channel
           schema:
-            $ref: '#/definitions/EventsChannelsEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/EventsChannelsEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one event channel by ID
       tags:
         - Channels
-  '/events/{event_id}/promotions':
+  "/events/{event_id}/promotions":
     get:
       operationId: fetchAllEventsPromotions
       parameters:
-        - $ref: '#/parameters/path_event-id'
-        - $ref: '#/parameters/query_promotions_label'
-        - $ref: '#/parameters/query_promotions_from-date'
-        - $ref: '#/parameters/query_promotions_to-date'
-        - $ref: '#/parameters/query_promotions_type'
-        - $ref: '#/parameters/query_promotions_family'
-        - $ref: '#/parameters/query_promotions_sort'
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/path_event-id"
+        - $ref: "#/parameters/query_promotions_label"
+        - $ref: "#/parameters/query_promotions_from-date"
+        - $ref: "#/parameters/query_promotions_to-date"
+        - $ref: "#/parameters/query_promotions_type"
+        - $ref: "#/parameters/query_promotions_family"
+        - $ref: "#/parameters/query_promotions_sort"
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          $ref: '#/responses/200-promotions'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "200":
+          $ref: "#/responses/200-promotions"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all promotions for one event
       tags:
         - Promotions
-  '/events/{event_id}/ticket-counts':
+  "/events/{event_id}/ticket-counts":
     get:
       operationId: fetchAllTicketCounts
       parameters:
-        - $ref: '#/parameters/path_event-id'
-        - $ref: '#/parameters/query_ticket-counts_from-date'
-        - $ref: '#/parameters/query_ticket-counts_to-date'
-        - $ref: '#/parameters/query_ticket-counts_show-ignored'
-        - $ref: '#/parameters/query_ticket-counts_show-not-approved'
-        - $ref: '#/parameters/query_ticket-counts_sort'
-        - $ref: '#/parameters/query_page-size'
+        - $ref: "#/parameters/path_event-id"
+        - $ref: "#/parameters/query_ticket-counts_from-date"
+        - $ref: "#/parameters/query_ticket-counts_to-date"
+        - $ref: "#/parameters/query_ticket-counts_show-ignored"
+        - $ref: "#/parameters/query_ticket-counts_show-not-approved"
+        - $ref: "#/parameters/query_ticket-counts_sort"
+        - $ref: "#/parameters/query_page-size"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of ticket counts'
+        "200":
+          description: Successful operation, gives an array of ticket counts
           schema:
             items:
-              $ref: '#/definitions/TicketCountsEntity'
+              $ref: "#/definitions/TicketCountsEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all ticket counts for one event
       tags:
         - Counts
-  '/events/{event_id}/ticket-counts/detailed':
+  "/events/{event_id}/ticket-counts/detailed":
     get:
       operationId: fetchAllDetailedTicketCounts
       parameters:
-        - $ref: '#/parameters/path_event-id'
-        - $ref: '#/parameters/query_ticket-counts_from-date'
-        - $ref: '#/parameters/query_ticket-counts_to-date'
-        - $ref: '#/parameters/query_ticket-counts_show-ignored'
-        - $ref: '#/parameters/query_ticket-counts_show-not-approved'
-        - $ref: '#/parameters/query_ticket-counts_sort'
-        - $ref: '#/parameters/query_page-size'
+        - $ref: "#/parameters/path_event-id"
+        - $ref: "#/parameters/query_ticket-counts_from-date"
+        - $ref: "#/parameters/query_ticket-counts_to-date"
+        - $ref: "#/parameters/query_ticket-counts_show-ignored"
+        - $ref: "#/parameters/query_ticket-counts_show-not-approved"
+        - $ref: "#/parameters/query_ticket-counts_sort"
+        - $ref: "#/parameters/query_page-size"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of detailed ticket counts'
+        "200":
+          description: Successful operation, gives an array of detailed ticket counts
           schema:
             items:
-              $ref: '#/definitions/TicketCountsDetailedEntity'
+              $ref: "#/definitions/TicketCountsDetailedEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all detailed ticket counts for one event
       tags:
         - Counts
-  '/events/{event_id}/ticket-counts/detailed/{ticket_count_id}':
+  "/events/{event_id}/ticket-counts/detailed/{ticket_count_id}":
     get:
       operationId: fetchOneDetailedTicketCount
       parameters:
-        - $ref: '#/parameters/path_event-id'
+        - $ref: "#/parameters/path_event-id"
         - description: ID of the targeted ticket count.
           format: int32
           in: path
           name: ticket_count_id
           required: true
           type: integer
-        - $ref: '#/parameters/query_ticket-counts_show-ignored'
+        - $ref: "#/parameters/query_ticket-counts_show-ignored"
       responses:
-        '200':
-          description: 'Successful operation, gives one detailed ticket count'
+        "200":
+          description: Successful operation, gives one detailed ticket count
           schema:
-            $ref: '#/definitions/TicketCountsDetailedEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/TicketCountsDetailedEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one detailed ticket count by ID
       tags:
         - Counts
-  '/events/{event_id}/ticket-counts/{ticket_count_id}':
+  "/events/{event_id}/ticket-counts/{ticket_count_id}":
     get:
       operationId: fetchOneTicketCount
       parameters:
-        - $ref: '#/parameters/path_event-id'
+        - $ref: "#/parameters/path_event-id"
         - description: ID of the targeted ticket count.
           format: int32
           in: path
           name: ticket_count_id
           required: true
           type: integer
-        - $ref: '#/parameters/query_ticket-counts_show-ignored'
+        - $ref: "#/parameters/query_ticket-counts_show-ignored"
       responses:
-        '200':
-          description: 'Successful operation, gives one ticket count'
+        "200":
+          description: Successful operation, gives one ticket count
           schema:
-            $ref: '#/definitions/TicketCountsEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/TicketCountsEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one ticket count by ID
       tags:
         - Counts
@@ -719,7 +894,7 @@ paths:
           name: label
           type: string
         - default: false
-          description: 'If set to `false`, show only the price ranges which are not ignored. If set to `true`, show all price ranges.'
+          description: If set to `false`, show only the price ranges which are not ignored. If set to `true`, show all price ranges.
           in: query
           name: show_ignored
           type: boolean
@@ -727,33 +902,33 @@ paths:
           description: Sort the price ranges in the corresponding order.
           enum:
             - label
-            - '-label'
+            - -label
             - order
-            - '-order'
+            - -order
           in: query
           name: sort
           type: string
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of price ranges'
+        "200":
+          description: Successful operation, gives an array of price ranges
           schema:
             items:
-              $ref: '#/definitions/PriceRangesEntity'
+              $ref: "#/definitions/PriceRangesEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all price ranges
       tags:
         - Price ranges
-  '/price-ranges/{price_range_id}':
+  "/price-ranges/{price_range_id}":
     get:
       operationId: fetchOnePriceRange
       parameters:
@@ -763,20 +938,20 @@ paths:
           name: price_range_id
           required: true
           type: integer
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives one price range'
+        "200":
+          description: Successful operation, gives one price range
           schema:
-            $ref: '#/definitions/VenuesEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/VenuesEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one price range by ID
       tags:
         - Price ranges
@@ -784,29 +959,29 @@ paths:
     get:
       operationId: fetchAllPromotions
       parameters:
-        - $ref: '#/parameters/query_promotions_label'
-        - $ref: '#/parameters/query_promotions_from-date'
-        - $ref: '#/parameters/query_promotions_to-date'
-        - $ref: '#/parameters/query_promotions_type'
-        - $ref: '#/parameters/query_promotions_family'
-        - $ref: '#/parameters/query_promotions_sort'
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_promotions_label"
+        - $ref: "#/parameters/query_promotions_from-date"
+        - $ref: "#/parameters/query_promotions_to-date"
+        - $ref: "#/parameters/query_promotions_type"
+        - $ref: "#/parameters/query_promotions_family"
+        - $ref: "#/parameters/query_promotions_sort"
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          $ref: '#/responses/200-promotions'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "200":
+          $ref: "#/responses/200-promotions"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all promotions
       tags:
         - Promotions
-  '/promotions/{promotion_id}':
+  "/promotions/{promotion_id}":
     get:
       operationId: fetchOnePromotion
       parameters:
@@ -816,20 +991,20 @@ paths:
           name: promotion_id
           required: true
           type: integer
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives one promotion'
+        "200":
+          description: Successful operation, gives one promotion
           schema:
-            $ref: '#/definitions/PromotionsEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/PromotionsEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one promotion by ID
       tags:
         - Promotions
@@ -862,35 +1037,35 @@ paths:
           description: Sort the series in the corresponding order.
           enum:
             - label
-            - '-label'
+            - -label
             - first_date
-            - '-first_date'
+            - -first_date
             - last_date
-            - '-last_date'
+            - -last_date
           in: query
           name: sort
           type: string
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of series'
+        "200":
+          description: Successful operation, gives an array of series
           schema:
             items:
-              $ref: '#/definitions/SeriesEntity'
+              $ref: "#/definitions/SeriesEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all series
       tags:
         - Series
-  '/series/{series_id}':
+  "/series/{series_id}":
     get:
       operationId: fetchOneSeries
       parameters:
@@ -900,24 +1075,24 @@ paths:
           name: series_id
           required: true
           type: integer
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives one series'
+        "200":
+          description: Successful operation, gives one series
           schema:
-            $ref: '#/definitions/SeriesEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/SeriesEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one series by ID
       tags:
         - Series
-  '/series/{series_id}/events':
+  "/series/{series_id}/events":
     get:
       operationId: fetchAllSeriesEvents
       parameters:
@@ -927,27 +1102,27 @@ paths:
           name: series_id
           required: true
           type: integer
-        - $ref: '#/parameters/query_events_from-datetime'
-        - $ref: '#/parameters/query_events_to-datetime'
-        - $ref: '#/parameters/query_events_city'
-        - $ref: '#/parameters/query_events_sort'
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_events_from-datetime"
+        - $ref: "#/parameters/query_events_to-datetime"
+        - $ref: "#/parameters/query_events_city"
+        - $ref: "#/parameters/query_events_sort"
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          $ref: '#/responses/200-events'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "200":
+          $ref: "#/responses/200-events"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all events for one series
       tags:
         - Events
-  '/series/{series_id}/promotions':
+  "/series/{series_id}/promotions":
     get:
       operationId: fetchAllSeriesPromotions
       parameters:
@@ -957,25 +1132,25 @@ paths:
           name: series_id
           required: true
           type: integer
-        - $ref: '#/parameters/query_promotions_label'
-        - $ref: '#/parameters/query_promotions_from-date'
-        - $ref: '#/parameters/query_promotions_to-date'
-        - $ref: '#/parameters/query_promotions_type'
-        - $ref: '#/parameters/query_promotions_family'
-        - $ref: '#/parameters/query_promotions_sort'
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_promotions_label"
+        - $ref: "#/parameters/query_promotions_from-date"
+        - $ref: "#/parameters/query_promotions_to-date"
+        - $ref: "#/parameters/query_promotions_type"
+        - $ref: "#/parameters/query_promotions_family"
+        - $ref: "#/parameters/query_promotions_sort"
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          $ref: '#/responses/200-promotions'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "200":
+          $ref: "#/responses/200-promotions"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all promotions for one series
       tags:
         - Promotions
@@ -1006,35 +1181,35 @@ paths:
           description: Sort the venues in the corresponding order.
           enum:
             - label
-            - '-label'
+            - -label
             - city
-            - '-city'
+            - -city
             - country
-            - '-country'
+            - -country
           in: query
           name: sort
           type: string
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives an array of venues'
+        "200":
+          description: Successful operation, gives an array of venues
           schema:
             items:
-              $ref: '#/definitions/VenuesEntity'
+              $ref: "#/definitions/VenuesEntity"
             type: array
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all venues
       tags:
         - Venues
-  '/venues/{venue_id}':
+  "/venues/{venue_id}":
     get:
       operationId: fetchOneVenue
       parameters:
@@ -1044,24 +1219,24 @@ paths:
           name: venue_id
           required: true
           type: integer
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          description: 'Successful operation, gives one venue'
+        "200":
+          description: Successful operation, gives one venue
           schema:
-            $ref: '#/definitions/VenuesEntity'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '404':
-          $ref: '#/responses/404'
-        '500':
-          $ref: '#/responses/500'
+            $ref: "#/definitions/VenuesEntity"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "404":
+          $ref: "#/responses/404"
+        "500":
+          $ref: "#/responses/500"
       summary: Get one venue by ID
       tags:
         - Venues
-  '/venues/{venue_id}/events':
+  "/venues/{venue_id}/events":
     get:
       operationId: fetchAllVenuesEvents
       parameters:
@@ -1071,23 +1246,23 @@ paths:
           name: venue_id
           required: true
           type: integer
-        - $ref: '#/parameters/query_events_from-datetime'
-        - $ref: '#/parameters/query_events_to-datetime'
-        - $ref: '#/parameters/query_events_city'
-        - $ref: '#/parameters/query_events_sort'
-        - $ref: '#/parameters/query_page-size'
-        - $ref: '#/parameters/header_Accept-Language'
+        - $ref: "#/parameters/query_events_from-datetime"
+        - $ref: "#/parameters/query_events_to-datetime"
+        - $ref: "#/parameters/query_events_city"
+        - $ref: "#/parameters/query_events_sort"
+        - $ref: "#/parameters/query_page-size"
+        - $ref: "#/parameters/header_Accept-Language"
       responses:
-        '200':
-          $ref: '#/responses/200-events'
-        '401':
-          $ref: '#/responses/401'
-        '403':
-          $ref: '#/responses/403'
-        '422':
-          $ref: '#/responses/422'
-        '500':
-          $ref: '#/responses/500'
+        "200":
+          $ref: "#/responses/200-events"
+        "401":
+          $ref: "#/responses/401"
+        "403":
+          $ref: "#/responses/403"
+        "422":
+          $ref: "#/responses/422"
+        "500":
+          $ref: "#/responses/500"
       summary: Find all events for one venue
       tags:
         - Events
@@ -1175,7 +1350,7 @@ definitions:
         type: string
       type:
         description: Link to RFC 2616 about status codes definitions.
-        example: 'https://tools.ietf.org/html/rfc2616#section-10'
+        example: https://tools.ietf.org/html/rfc2616#section-10
         type: string
     required:
       - type
@@ -1200,7 +1375,7 @@ definitions:
         type: string
       type:
         description: Link to RFC 2616 about status codes definitions.
-        example: 'https://tools.ietf.org/html/rfc2616#section-10'
+        example: https://tools.ietf.org/html/rfc2616#section-10
         type: string
     required:
       - type
@@ -1225,7 +1400,7 @@ definitions:
         type: string
       type:
         description: Link to RFC 2616 about status codes definitions.
-        example: 'https://tools.ietf.org/html/rfc2616#section-10'
+        example: https://tools.ietf.org/html/rfc2616#section-10
         type: string
     required:
       - type
@@ -1237,7 +1412,7 @@ definitions:
     properties:
       detail:
         description: Description of the error.
-        example: 'Unknown date format, should be ''Y-m-d?H:i:s'''
+        example: Unknown date format, should be 'Y-m-d?H:i:s'
         type: string
       status:
         description: Status code of the error.
@@ -1250,7 +1425,7 @@ definitions:
         type: string
       type:
         description: Link to RFC 2616 about status codes definitions.
-        example: 'https://tools.ietf.org/html/rfc2616#section-10'
+        example: https://tools.ietf.org/html/rfc2616#section-10
         type: string
     required:
       - type
@@ -1275,7 +1450,7 @@ definitions:
         type: string
       type:
         description: Link to RFC 2616 about status codes definitions.
-        example: 'https://tools.ietf.org/html/rfc2616#section-10'
+        example: https://tools.ietf.org/html/rfc2616#section-10
         type: string
     required:
       - type
@@ -1299,7 +1474,7 @@ definitions:
               type: integer
               x-nullable: true
             holds:
-              description: 'Number of *holds* in the category. <span class="definition">Holds</span> are seats/places that are not in sale at the date of the capacity, but will eventually be later.'
+              description: Number of *holds* in the category. <span class="definition">Holds</span> are seats/places that are not in sale at the date of the capacity, but will eventually be later.
               format: int32
               type: integer
               x-nullable: true
@@ -1313,7 +1488,7 @@ definitions:
               type: integer
               x-nullable: true
             sellable_capacity:
-              description: 'Number of sellable seats/places in the category. This is calculated by the formula: `total_capacity - kills - comps - holds`.'
+              description: "Number of sellable seats/places in the category. This is calculated by the formula: `total_capacity - kills - comps - holds`."
               format: int32
               type: integer
             total_capacity:
@@ -1341,7 +1516,7 @@ definitions:
   EventsCategoriesEntity:
     properties:
       category:
-        $ref: '#/definitions/CategoriesEntity'
+        $ref: "#/definitions/CategoriesEntity"
       event_price_ranges:
         description: Array of event price ranges.
         items:
@@ -1366,7 +1541,7 @@ definitions:
               example: false
               type: boolean
             price_range:
-              $ref: '#/definitions/PriceRangesEntity'
+              $ref: "#/definitions/PriceRangesEntity"
             public_price:
               description: Public price of the event price range (i.e. including VAT and all commissions).
               example: 50
@@ -1400,7 +1575,7 @@ definitions:
   EventsChannelsEntity:
     properties:
       channel:
-        $ref: '#/definitions/ChannelsEntity'
+        $ref: "#/definitions/ChannelsEntity"
       id:
         description: Unique ID of the event channel.
         example: 12345
@@ -1489,7 +1664,7 @@ definitions:
         type: string
       datetime:
         description: Datetime of the event (relative to the timezone of the venue).
-        example: '2018-01-11T20:00:00'
+        example: 2018-01-11T20:00:00
         format: datetime
         type: string
       free:
@@ -1497,7 +1672,7 @@ definitions:
         type: boolean
       general_sales_date:
         description: Date the event went on general sales (relative to the timezone of the venue).
-        example: '2017-06-15'
+        example: 2017-06-15
         format: date
         type: string
       id:
@@ -1540,7 +1715,7 @@ definitions:
         type: integer
       presales_date:
         description: Date the event went on presales (relative to the timezone of the venue).
-        example: '2017-06-14'
+        example: 2017-06-14
         format: date
         type: string
       series_id:
@@ -1554,7 +1729,7 @@ definitions:
         format: date
         type: string
       venue:
-        $ref: '#/definitions/VenuesEntity'
+        $ref: "#/definitions/VenuesEntity"
     required:
       - id
       - series_id
@@ -1604,11 +1779,11 @@ definitions:
   PromotionsEntity:
     properties:
       applied_to:
-        description: 'List of events and/or series where the promotion is applied. A promotion can be applied on several events, and its costs can be split between those events.'
+        description: List of events and/or series where the promotion is applied. A promotion can be applied on several events, and its costs can be split between those events.
         items:
           properties:
             event_id:
-              description: 'ID of the event the promotion applies to. This property is exclusive with ''series_id'': if defined, then ''series_id'' will not be displayed.'
+              description: "ID of the event the promotion applies to. This property is exclusive with 'series_id': if defined, then 'series_id' will not be displayed."
               example: 2142
               format: int32
               type: integer
@@ -1620,13 +1795,13 @@ definitions:
               type: number
               x-nullable: true
             series_id:
-              description: 'ID of the series the promotion applies to. This property is exclusive with ''event_id'': if defined, then ''event_id'' will not be displayed.'
+              description: "ID of the series the promotion applies to. This property is exclusive with 'event_id': if defined, then 'event_id' will not be displayed."
               example: 263
               format: int32
               type: integer
               x-nullable: true
             unit_cost:
-              description: 'Unit cost share of the promotion devoted to this event/series. The total cost of the share can be calculated with: quantity × unit_cost. *This field may be omitted according to the customer configuration.*'
+              description: "Unit cost share of the promotion devoted to this event/series. The total cost of the share can be calculated with: quantity × unit_cost. *This field may be omitted according to the customer configuration.*"
               format: float
               minimum: 0
               type: number
@@ -1638,7 +1813,7 @@ definitions:
               type: number
               x-nullable: true
             valorized_unit_cost:
-              description: 'Valorized unit cost share of the promotion devoted to this event/series. The total valorized cost of the share can be calculated with: valorized_quantity × valorized_unit_cost.'
+              description: "Valorized unit cost share of the promotion devoted to this event/series. The total valorized cost of the share can be calculated with: valorized_quantity × valorized_unit_cost."
               format: float
               minimum: 0
               type: number
@@ -1653,7 +1828,7 @@ definitions:
         description: Cost of the promotion.
         properties:
           currency:
-            description: 'Currency of the unit_cost (<a href=''https://en.wikipedia.org/wiki/ISO_4217#Active_codes''>ISO 4212 alphabetic code</a>).'
+            description: Currency of the unit_cost (<a href='https://en.wikipedia.org/wiki/ISO_4217#Active_codes'>ISO 4212 alphabetic code</a>).
             type: string
             x-nullable: true
           exchange:
@@ -1705,7 +1880,7 @@ definitions:
               - label
             type: object
           unit_cost:
-            description: 'Unit cost of the promotion. The total cost of the promotion can be calculated with: quantity × unit_cost.'
+            description: "Unit cost of the promotion. The total cost of the promotion can be calculated with: quantity × unit_cost."
             format: float
             minimum: 0
             type: number
@@ -1717,7 +1892,7 @@ definitions:
             type: number
             x-nullable: true
           valorized_unit_cost:
-            description: 'Valorized unit cost of the promotion. The total valorized cost of the promotion can be calculated with: valorized_quantity × valorized_unit_cost. *This field may be omitted according to the customer configuration.*'
+            description: "Valorized unit cost of the promotion. The total valorized cost of the promotion can be calculated with: valorized_quantity × valorized_unit_cost. *This field may be omitted according to the customer configuration.*"
             format: float
             minimum: 0
             type: number
@@ -1726,8 +1901,8 @@ definitions:
           - type
         type: object
       end_date:
-        description: 'Date the promotion ends. (If null, has the same value as start_date.)'
-        example: '2018-01-31'
+        description: Date the promotion ends. (If null, has the same value as start_date.)
+        example: 2018-01-31
         format: date
         type: string
         x-nullable: true
@@ -1746,7 +1921,7 @@ definitions:
         type: string
       start_date:
         description: Date the promotion begins.
-        example: '2018-01-02'
+        example: 2018-01-02
         format: date
         type: string
         x-nullable: true
@@ -1866,7 +2041,7 @@ definitions:
         type: integer
       first_date:
         description: Date of the first event in the series.
-        example: '2018-05-22'
+        example: 2018-05-22
         format: date
         type: string
       id:
@@ -1880,7 +2055,7 @@ definitions:
         type: string
       last_date:
         description: Date of the last event in the series.
-        example: '2018-06-03'
+        example: 2018-06-03
         format: date
         type: string
       last_update_timestamp:
@@ -1907,7 +2082,7 @@ definitions:
           - label
         type: object
       venue:
-        $ref: '#/definitions/VenuesEntity'
+        $ref: "#/definitions/VenuesEntity"
         x-nullable: true
     required:
       - id
@@ -1932,7 +2107,7 @@ definitions:
         x-nullable: true
       date:
         description: Date of the ticket count.
-        example: '2018-07-03'
+        example: 2018-07-03
         format: date
         type: string
       event_channels:
@@ -1948,11 +2123,11 @@ definitions:
                     items:
                       properties:
                         currency:
-                          description: 'Currency of the gross (<a href=''https://en.wikipedia.org/wiki/ISO_4217#Active_codes''>ISO 4212 alphabetic code</a>).'
+                          description: Currency of the gross (<a href='https://en.wikipedia.org/wiki/ISO_4217#Active_codes'>ISO 4212 alphabetic code</a>).
                           example: EUR
                           type: string
                         gross:
-                          description: 'Gross (= income for the sold tickets for the current channel/category/price range, including VAT but excluding all commissions).'
+                          description: Gross (= income for the sold tickets for the current channel/category/price range, including VAT but excluding all commissions).
                           example: 864
                           format: float
                           minimum: 0
@@ -2005,7 +2180,7 @@ definitions:
           type: object
         type: array
       final:
-        description: 'Whether this ticket count is the last and final one of its event or not. If it is, it means that no further ticket counts will be added for the event it belongs to.'
+        description: Whether this ticket count is the last and final one of its event or not. If it is, it means that no further ticket counts will be added for the event it belongs to.
         example: false
         type: boolean
       id:
@@ -2033,20 +2208,20 @@ definitions:
         type: string
         x-nullable: true
       currency:
-        description: 'Currency of the gross (<a href=''https://en.wikipedia.org/wiki/ISO_4217#Active_codes''>ISO 4212 alphabetic code</a>).'
+        description: Currency of the gross (<a href='https://en.wikipedia.org/wiki/ISO_4217#Active_codes'>ISO 4212 alphabetic code</a>).
         example: EUR
         type: string
       date:
         description: Date of the ticket count.
-        example: '2018-07-03'
+        example: 2018-07-03
         format: date
         type: string
       final:
-        description: 'Whether this ticket count is the last and final one of its event or not. If it is, it means that no further ticket counts will be added for the event it belongs to.'
+        description: Whether this ticket count is the last and final one of its event or not. If it is, it means that no further ticket counts will be added for the event it belongs to.
         example: false
         type: boolean
       gross:
-        description: 'Gross (= income for the sold tickets, including VAT but excluding all commissions).'
+        description: Gross (= income for the sold tickets, including VAT but excluding all commissions).
         example: 48735.6
         format: float
         minimum: 0
@@ -2089,7 +2264,7 @@ definitions:
         example: Saint-Herblain
         type: string
       country_code:
-        description: 'Country in which the venue is (<a href=''https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3''>ISO 3166-1 alpha-3 code</a>).'
+        description: Country in which the venue is (<a href='https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3'>ISO 3166-1 alpha-3 code</a>).
         example: FR
         type: string
       creation_timestamp:
@@ -2145,7 +2320,7 @@ definitions:
         type: object
       zip_code:
         description: ZIP code of the venue.
-        example: '44800'
+        example: "44800"
         type: string
         x-nullable: true
     required:
@@ -2163,10 +2338,10 @@ definitions:
     title: Venue
     type: object
 x-servers:
-  - description: 'Server for testing purposes, with sandbox data from demo.pims.io'
-    url: 'https://demo.pims.io/api'
+  - description: Server for testing purposes, with sandbox data from demo.pims.io
+    url: https://demo.pims.io/api
   - description: Example of server for a real customer (Gérard Drouot Productions)
-    url: 'https://gdp.pims.io/api'
+    url: https://gdp.pims.io/api
 x-tagGroups:
   - name: Structure
     tags:

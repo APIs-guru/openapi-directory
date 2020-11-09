@@ -1,22 +1,23 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: live-api.letmc.com
 info:
   contact:
     x-twitter: LetMC
-  title: 'LetMC Api V2, Basic (Tier 2)'
+  title: LetMC Api V2, Basic (Tier 2)
   version: v2-basic-tier
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/agentOSSoftware/profile_image?size=original'
+    url: https://twitter.com/agentOSSoftware/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://live-api.letmc.com/swagger/docs/v2-basic-tier'
-      version: '2.0'
+      url: https://live-api.letmc.com/swagger/docs/v2-basic-tier
+      version: "2.0"
   x-providerName: letmc.com
   x-serviceName: basic-tier
+  x-preferred: true
 produces:
   - application/json
   - text/json
@@ -32,7 +33,7 @@ securityDefinitions:
     description: Basic HTTP Authentication
     type: basic
 paths:
-  '/v2/tier2/{shortName}/area/areas':
+  "/v2/tier2/{shortName}/area/areas":
     get:
       consumes: []
       deprecated: false
@@ -55,14 +56,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/AreaModelResults'
+            $ref: "#/definitions/AreaModelResults"
       summary: A collection of all the areas for a company
       tags:
         - AreaController
-  '/v2/tier2/{shortName}/area/areas/{areaID}':
+  "/v2/tier2/{shortName}/area/areas/{areaID}":
     get:
       consumes: []
       deprecated: false
@@ -78,14 +79,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/AreaModel'
+            $ref: "#/definitions/AreaModel"
       summary: Get a specific area given its unique Object ID (OID)
       tags:
         - AreaController
-  '/v2/tier2/{shortName}/branch/branches':
+  "/v2/tier2/{shortName}/branch/branches":
     get:
       consumes: []
       deprecated: false
@@ -108,14 +109,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BranchModelResults'
+            $ref: "#/definitions/BranchModelResults"
       summary: All branches defined for a company
       tags:
         - BranchController
-  '/v2/tier2/{shortName}/branch/branches/{branchID}':
+  "/v2/tier2/{shortName}/branch/branches/{branchID}":
     get:
       consumes: []
       deprecated: false
@@ -131,14 +132,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BranchModel'
+            $ref: "#/definitions/BranchModel"
       summary: Get a specific branch given its unique Object ID (OID)
       tags:
         - BranchController
-  '/v2/tier2/{shortName}/company':
+  "/v2/tier2/{shortName}/company":
     get:
       consumes: []
       deprecated: false
@@ -150,14 +151,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CompanyModel'
+            $ref: "#/definitions/CompanyModel"
       summary: Information about a specific company
       tags:
         - CompanyController
-  '/v2/tier2/{shortName}/county/counties':
+  "/v2/tier2/{shortName}/county/counties":
     get:
       consumes: []
       deprecated: false
@@ -180,14 +181,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CountyModelResults'
+            $ref: "#/definitions/CountyModelResults"
       summary: A collection of all counties available for a company
       tags:
         - CountyController
-  '/v2/tier2/{shortName}/county/counties/{countyID}':
+  "/v2/tier2/{shortName}/county/counties/{countyID}":
     get:
       consumes: []
       deprecated: false
@@ -203,14 +204,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/CountyModel'
+            $ref: "#/definitions/CountyModel"
       summary: Get a specific county given its unique Object ID (OID)
       tags:
         - CountyController
-  '/v2/tier2/{shortName}/county/counties/{countyID}/branches':
+  "/v2/tier2/{shortName}/county/counties/{countyID}/branches":
     get:
       consumes: []
       deprecated: false
@@ -239,14 +240,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BranchModelResults'
+            $ref: "#/definitions/BranchModelResults"
       summary: A collection of branches that manage a specific county
       tags:
         - CountyController
-  '/v2/tier2/{shortName}/diary/allocations':
+  "/v2/tier2/{shortName}/diary/allocations":
     get:
       consumes: []
       deprecated: false
@@ -269,14 +270,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAllocationModelResults'
+            $ref: "#/definitions/DiaryAllocationModelResults"
       summary: A collection of all diary allocations
       tags:
         - DiaryController
-  '/v2/tier2/{shortName}/diary/allocations/{diaryAllocationID}':
+  "/v2/tier2/{shortName}/diary/allocations/{diaryAllocationID}":
     get:
       consumes: []
       deprecated: false
@@ -292,14 +293,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAllocationModel'
+            $ref: "#/definitions/DiaryAllocationModel"
       summary: Get a specific diary allocation given its unique Object ID (OID)
       tags:
         - DiaryController
-  '/v2/tier2/{shortName}/diary/appointments':
+  "/v2/tier2/{shortName}/diary/appointments":
     get:
       consumes: []
       deprecated: false
@@ -322,14 +323,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAppointmentModelResults'
+            $ref: "#/definitions/DiaryAppointmentModelResults"
       summary: A collection of all diary appointments
       tags:
         - DiaryController
-  '/v2/tier2/{shortName}/diary/appointments/{diaryAppointmentID}':
+  "/v2/tier2/{shortName}/diary/appointments/{diaryAppointmentID}":
     get:
       consumes: []
       deprecated: false
@@ -345,14 +346,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAppointmentModel'
+            $ref: "#/definitions/DiaryAppointmentModel"
       summary: Get a specific diary appointment given its unique Object ID (OID)
       tags:
         - DiaryController
-  '/v2/tier2/{shortName}/diary/appointmenttypes':
+  "/v2/tier2/{shortName}/diary/appointmenttypes":
     get:
       consumes: []
       deprecated: false
@@ -375,14 +376,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAppointmentTypeModelResults'
+            $ref: "#/definitions/DiaryAppointmentTypeModelResults"
       summary: A collection of all diary appointment types
       tags:
         - DiaryController
-  '/v2/tier2/{shortName}/diary/appointmenttypes/{diaryAppointmentTypeID}':
+  "/v2/tier2/{shortName}/diary/appointmenttypes/{diaryAppointmentTypeID}":
     get:
       consumes: []
       deprecated: false
@@ -398,14 +399,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/DiaryAppointmentTypeModel'
+            $ref: "#/definitions/DiaryAppointmentTypeModel"
       summary: Get a specific diary appointment type given its unique Object ID (OID)
       tags:
         - DiaryController
-  '/v2/tier2/{shortName}/lettings/advertised':
+  "/v2/tier2/{shortName}/lettings/advertised":
     get:
       consumes: []
       deprecated: false
@@ -467,14 +468,14 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TenancyModelResults'
+            $ref: "#/definitions/TenancyModelResults"
       summary: Search all properties available for rent given a range of search criteria.
       tags:
         - LettingsController
-  '/v2/tier2/{shortName}/lettings/advertisedbetweendates':
+  "/v2/tier2/{shortName}/lettings/advertisedbetweendates":
     get:
       consumes: []
       deprecated: false
@@ -548,14 +549,14 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TenancyModelResults'
+            $ref: "#/definitions/TenancyModelResults"
       summary: Search all properties available for rent given a range of search criteria and dates.
       tags:
         - LettingsController
-  '/v2/tier2/{shortName}/lettings/tenancies':
+  "/v2/tier2/{shortName}/lettings/tenancies":
     get:
       consumes: []
       deprecated: false
@@ -578,14 +579,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TenancyModelResults'
+            $ref: "#/definitions/TenancyModelResults"
       summary: A collection of all the company's tenancies
       tags:
         - LettingsController
-  '/v2/tier2/{shortName}/lettings/tenancies/{tenancyID}':
+  "/v2/tier2/{shortName}/lettings/tenancies/{tenancyID}":
     get:
       consumes: []
       deprecated: false
@@ -601,14 +602,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TenancyModel'
+            $ref: "#/definitions/TenancyModel"
       summary: Get a specific tenancy given its unique Object ID (OID)
       tags:
         - LettingsController
-  '/v2/tier2/{shortName}/lettings/tenancies/{tenancyID}/brochure':
+  "/v2/tier2/{shortName}/lettings/tenancies/{tenancyID}/brochure":
     get:
       consumes: []
       deprecated: false
@@ -625,14 +626,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Downloads the brochure relating to the latest advertised rental of a property
       tags:
         - LettingsController
-  '/v2/tier2/{shortName}/photo/photos':
+  "/v2/tier2/{shortName}/photo/photos":
     get:
       consumes: []
       deprecated: false
@@ -655,14 +656,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PhotoModelResults'
+            $ref: "#/definitions/PhotoModelResults"
       summary: A collection of all photos in the company
       tags:
         - PhotoController
-  '/v2/tier2/{shortName}/photo/photos/{photoID}':
+  "/v2/tier2/{shortName}/photo/photos/{photoID}":
     get:
       consumes: []
       deprecated: false
@@ -678,14 +679,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PhotoModel'
+            $ref: "#/definitions/PhotoModel"
       summary: Get a specific photo given its unique Object ID (OID)
       tags:
         - PhotoController
-  '/v2/tier2/{shortName}/photos/photo/{photoID}/download':
+  "/v2/tier2/{shortName}/photos/photo/{photoID}/download":
     get:
       consumes: []
       deprecated: false
@@ -714,14 +715,14 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Downloads the photo of a property given the property and photo ID.
       tags:
         - PhotoController
-  '/v2/tier2/{shortName}/property/properties':
+  "/v2/tier2/{shortName}/property/properties":
     get:
       consumes: []
       deprecated: false
@@ -744,14 +745,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PropertyModelResults'
+            $ref: "#/definitions/PropertyModelResults"
       summary: A collection of all properties within a company
       tags:
         - PropertyController
-  '/v2/tier2/{shortName}/property/properties/{propertyID}':
+  "/v2/tier2/{shortName}/property/properties/{propertyID}":
     get:
       consumes: []
       deprecated: false
@@ -767,14 +768,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PropertyModel'
+            $ref: "#/definitions/PropertyModel"
       summary: Get a specific property given its unique Object ID (OID)
       tags:
         - PropertyController
-  '/v2/tier2/{shortName}/property/properties/{propertyID}/facilities':
+  "/v2/tier2/{shortName}/property/properties/{propertyID}/facilities":
     get:
       consumes: []
       deprecated: false
@@ -803,14 +804,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PropertyFacilityModelResults'
-      summary: 'A collection of facilities linked to a block, property or room'
+            $ref: "#/definitions/PropertyFacilityModelResults"
+      summary: A collection of facilities linked to a block, property or room
       tags:
         - PropertyController
-  '/v2/tier2/{shortName}/property/properties/{propertyID}/photos':
+  "/v2/tier2/{shortName}/property/properties/{propertyID}/photos":
     get:
       consumes: []
       deprecated: false
@@ -839,14 +840,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PhotoModelResults'
-      summary: 'A collection showing all the photos linked to a specific block, property or room'
+            $ref: "#/definitions/PhotoModelResults"
+      summary: A collection showing all the photos linked to a specific block, property or room
       tags:
         - PropertyController
-  '/v2/tier2/{shortName}/property/properties/{propertyID}/rooms':
+  "/v2/tier2/{shortName}/property/properties/{propertyID}/rooms":
     get:
       consumes: []
       deprecated: false
@@ -875,14 +876,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PropertyRoomModelResults'
+            $ref: "#/definitions/PropertyRoomModelResults"
       summary: A collection of the rooms that belong to this property or block
       tags:
         - PropertyController
-  '/v2/tier2/{shortName}/property/properties/{propertyID}/tenancies':
+  "/v2/tier2/{shortName}/property/properties/{propertyID}/tenancies":
     get:
       consumes: []
       deprecated: false
@@ -911,14 +912,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/TenancyModelResults'
-      summary: 'A collection of all tenancies associated with this block, property or room'
+            $ref: "#/definitions/TenancyModelResults"
+      summary: A collection of all tenancies associated with this block, property or room
       tags:
         - PropertyController
-  '/v2/tier2/{shortName}/property/structures/{propertyStructureID}/reports/eer':
+  "/v2/tier2/{shortName}/property/structures/{propertyStructureID}/reports/eer":
     get:
       consumes: []
       deprecated: false
@@ -935,14 +936,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Downloads the energy efficiency report (EER) graph for a property
       tags:
         - PropertyController
-  '/v2/tier2/{shortName}/property/structures/{propertyStructureID}/reports/eir':
+  "/v2/tier2/{shortName}/property/structures/{propertyStructureID}/reports/eir":
     get:
       consumes: []
       deprecated: false
@@ -959,14 +960,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Downloads the environmental impact report (EIR) graph for a property
       tags:
         - PropertyController
-  '/v2/tier2/{shortName}/sales/advertisedsales':
+  "/v2/tier2/{shortName}/sales/advertisedsales":
     get:
       consumes: []
       deprecated: false
@@ -1047,14 +1048,14 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SalesInstructionModelResults'
+            $ref: "#/definitions/SalesInstructionModelResults"
       summary: Search all sales properties available given a range of search criteria
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/reports/eer/{salesInstructionID}':
+  "/v2/tier2/{shortName}/sales/reports/eer/{salesInstructionID}":
     get:
       consumes: []
       deprecated: false
@@ -1071,14 +1072,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Downloads the energy efficiency report (EER) graph for a sales instruction
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/reports/eir/{salesInstructionID}':
+  "/v2/tier2/{shortName}/sales/reports/eir/{salesInstructionID}":
     get:
       consumes: []
       deprecated: false
@@ -1095,14 +1096,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Downloads the energy efficiency report (EIR) graph for a sales instruction
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/salesfeaturetypes':
+  "/v2/tier2/{shortName}/sales/salesfeaturetypes":
     get:
       consumes: []
       deprecated: false
@@ -1125,14 +1126,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SalesFeatureTypeModelResults'
+            $ref: "#/definitions/SalesFeatureTypeModelResults"
       summary: A collection of all sales feature types linked to a company
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/salesfeaturetypes/{salesFeatureTypeID}':
+  "/v2/tier2/{shortName}/sales/salesfeaturetypes/{salesFeatureTypeID}":
     get:
       consumes: []
       deprecated: false
@@ -1148,14 +1149,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SalesFeatureTypeModel'
+            $ref: "#/definitions/SalesFeatureTypeModel"
       summary: Get a specific sales feature type given its unique Object ID (OID)
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/salesinstructions':
+  "/v2/tier2/{shortName}/sales/salesinstructions":
     get:
       consumes: []
       deprecated: false
@@ -1178,14 +1179,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SalesInstructionModelResults'
+            $ref: "#/definitions/SalesInstructionModelResults"
       summary: A collection of all sales instructions linked to a company
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}':
+  "/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}":
     get:
       consumes: []
       deprecated: false
@@ -1201,14 +1202,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SalesInstructionModel'
+            $ref: "#/definitions/SalesInstructionModel"
       summary: Get a specific sales instruction given its unique Object ID (OID)
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}/features':
+  "/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}/features":
     get:
       consumes: []
       deprecated: false
@@ -1237,14 +1238,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/SalesFeatureModelResults'
+            $ref: "#/definitions/SalesFeatureModelResults"
       summary: A collection of all features linked to a sales instruction
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}/floorplans':
+  "/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}/floorplans":
     get:
       consumes: []
       deprecated: false
@@ -1273,14 +1274,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PhotoModelResults'
+            $ref: "#/definitions/PhotoModelResults"
       summary: A collection of floor plans linked to an instruction
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}/photos':
+  "/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}/photos":
     get:
       consumes: []
       deprecated: false
@@ -1309,14 +1310,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PhotoModelResults'
+            $ref: "#/definitions/PhotoModelResults"
       summary: A collection of photos linked to an instruction
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}/rooms':
+  "/v2/tier2/{shortName}/sales/salesinstructions/{salesInstructionID}/rooms":
     get:
       consumes: []
       deprecated: false
@@ -1345,14 +1346,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/PropertyRoomModelResults'
+            $ref: "#/definitions/PropertyRoomModelResults"
       summary: A collection of rooms linked to an instruction
       tags:
         - SalesController
-  '/v2/tier2/{shortName}/staff/staff':
+  "/v2/tier2/{shortName}/staff/staff":
     get:
       consumes: []
       deprecated: false
@@ -1375,14 +1376,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ApplicationStaffModelResults'
+            $ref: "#/definitions/ApplicationStaffModelResults"
       summary: A collection of all the staff members linked to a specific company
       tags:
         - StaffController
-  '/v2/tier2/{shortName}/staff/staff/{applicationStaffID}':
+  "/v2/tier2/{shortName}/staff/staff/{applicationStaffID}":
     get:
       consumes: []
       deprecated: false
@@ -1398,14 +1399,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ApplicationStaffModel'
+            $ref: "#/definitions/ApplicationStaffModel"
       summary: Get a specific application staff given its unique Object ID (OID)
       tags:
         - StaffController
-  '/v2/tier2/{shortName}/viewing/bookings':
+  "/v2/tier2/{shortName}/viewing/bookings":
     get:
       consumes: []
       deprecated: false
@@ -1431,11 +1432,11 @@ paths:
           required: true
           type: array
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/ViewingBookingModel'
+              $ref: "#/definitions/ViewingBookingModel"
             type: array
       summary: Gets a list of available viewing slots for one or more properties
       tags:
@@ -1488,7 +1489,7 @@ paths:
           name: selectedViewingSlot
           required: true
           schema:
-            $ref: '#/definitions/ViewingBookingModel'
+            $ref: "#/definitions/ViewingBookingModel"
         - description: Whether the prospect wants a shared property
           in: query
           name: wantRoomInSharedProperty
@@ -1542,7 +1543,7 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: boolean
@@ -1601,7 +1602,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/ApplicationStaffModel'
+          $ref: "#/definitions/ApplicationStaffModel"
         type: array
     type: object
   AreaModel:
@@ -1633,7 +1634,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/AreaModel'
+          $ref: "#/definitions/AreaModel"
         type: array
     type: object
   BranchModel:
@@ -1652,7 +1653,7 @@ definitions:
         description: Branch address line 4.
         type: string
       CompanyName:
-        description: 'The relevant company name, if not the one specified on the branch then the one on company.'
+        description: The relevant company name, if not the one specified on the branch then the one on company.
         type: string
       County:
         description: County
@@ -1692,7 +1693,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/BranchModel'
+          $ref: "#/definitions/BranchModel"
         type: array
     type: object
   CompanyModel:
@@ -1740,11 +1741,13 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/CountyModel'
+          $ref: "#/definitions/CountyModel"
         type: array
     type: object
   DiaryAllocationModel:
-    description: "Represents a single diary allocation, capable of holding a number\r\n            of appointments associated with a member of staff."
+    description: "Represents a single diary allocation, capable of holding a number\r
+
+      \            of appointments associated with a member of staff."
     properties:
       AppointmentType:
         description: The diary appointment type.
@@ -1777,7 +1780,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/DiaryAllocationModel'
+          $ref: "#/definitions/DiaryAllocationModel"
         type: array
     type: object
   DiaryAppointmentModel:
@@ -1855,7 +1858,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/DiaryAppointmentModel'
+          $ref: "#/definitions/DiaryAppointmentModel"
         type: array
     type: object
   DiaryAppointmentTypeModel:
@@ -1892,7 +1895,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/DiaryAppointmentTypeModel'
+          $ref: "#/definitions/DiaryAppointmentTypeModel"
         type: array
     type: object
   Object:
@@ -1952,7 +1955,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/PhotoModel'
+          $ref: "#/definitions/PhotoModel"
         type: array
     type: object
   PropertyFacilityModel:
@@ -1978,7 +1981,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/PropertyFacilityModel'
+          $ref: "#/definitions/PropertyFacilityModel"
         type: array
     type: object
   PropertyModel:
@@ -1988,31 +1991,31 @@ definitions:
         description: The area the property is located in.
         type: string
       Branch:
-        description: 'The branch the block, property or room is assigned to'
+        description: The branch the block, property or room is assigned to
         type: string
       Description:
-        description: 'The block, property or room description.'
+        description: The block, property or room description.
         type: string
       ETag:
         description: A unique identifier defining the object and change revision.
         type: string
       FullAddress:
-        description: 'The full address of a block, property or room, formatted with line breaks such that it may be used on a letter directly.'
+        description: The full address of a block, property or room, formatted with line breaks such that it may be used on a letter directly.
         type: string
       GlobalReference:
-        description: 'The global reference to this block, property or room'
+        description: The global reference to this block, property or room
         type: string
       MainPhoto:
-        description: 'Gets the main photo, if there is one.'
+        description: Gets the main photo, if there is one.
         type: string
       ManagedByStaff:
-        description: 'The staff memeber that manages the block, property or room'
+        description: The staff memeber that manages the block, property or room
         type: string
       OID:
         description: The unique Object ID (OID).
         type: string
       PropertySource:
-        description: 'The block, property or room source type'
+        description: The block, property or room source type
         type: string
       PropertyType:
         description: The block or property type.
@@ -2061,7 +2064,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/PropertyModel'
+          $ref: "#/definitions/PropertyModel"
         type: array
     type: object
   PropertyRoomModel:
@@ -2071,19 +2074,19 @@ definitions:
         description: The area the property is located in.
         type: string
       Branch:
-        description: 'The branch the block, property or room is assigned to'
+        description: The branch the block, property or room is assigned to
         type: string
       Description:
-        description: 'The block, property or room description.'
+        description: The block, property or room description.
         type: string
       ETag:
         description: A unique identifier defining the object and change revision.
         type: string
       FullAddress:
-        description: 'The full address of a block, property or room, formatted with line breaks such that it may be used on a letter directly.'
+        description: The full address of a block, property or room, formatted with line breaks such that it may be used on a letter directly.
         type: string
       GlobalReference:
-        description: 'The global reference to this block, property or room'
+        description: The global reference to this block, property or room
         type: string
       HeightCentimeters:
         description: Gets the CentiMeter part of the room Height.
@@ -2102,16 +2105,16 @@ definitions:
         format: int32
         type: integer
       MainPhoto:
-        description: 'Gets the main photo, if there is one.'
+        description: Gets the main photo, if there is one.
         type: string
       ManagedByStaff:
-        description: 'The staff memeber that manages the block, property or room'
+        description: The staff memeber that manages the block, property or room
         type: string
       OID:
         description: The unique Object ID (OID).
         type: string
       PropertySource:
-        description: 'The block, property or room source type'
+        description: The block, property or room source type
         type: string
       RoomFloor:
         description: Gets and sets the room floor.
@@ -2148,11 +2151,11 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/PropertyRoomModel'
+          $ref: "#/definitions/PropertyRoomModel"
         type: array
     type: object
   SalesFeatureModel:
-    description: ''
+    description: ""
     properties:
       Comment:
         description: The feature comment
@@ -2177,11 +2180,11 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/SalesFeatureModel'
+          $ref: "#/definitions/SalesFeatureModel"
         type: array
     type: object
   SalesFeatureTypeModel:
-    description: ''
+    description: ""
     properties:
       ETag:
         description: A unique identifier defining the object and change revision.
@@ -2203,11 +2206,11 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/SalesFeatureTypeModel'
+          $ref: "#/definitions/SalesFeatureTypeModel"
         type: array
     type: object
   SalesInstructionModel:
-    description: ''
+    description: ""
     properties:
       Address1:
         description: Address 1 of the property to be sold
@@ -2630,11 +2633,19 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/SalesInstructionModel'
+          $ref: "#/definitions/SalesInstructionModel"
         type: array
     type: object
   TenancyModel:
-    description: "Represents a single tenancy on a property structure. This class may\r\n            be considered to be the context of the tenancy strategy pattern. The\r\n            strategy is the tenancy service, that dictates the algorithm applied\r\n            to the tenancy. This class therefore holds the raw data of a tenancy,\r\n            and ignores any tenancy service (fully managed, let only) parameters."
+    description: "Represents a single tenancy on a property structure. This class may\r
+
+      \            be considered to be the context of the tenancy strategy pattern. The\r
+
+      \            strategy is the tenancy service, that dictates the algorithm applied\r
+
+      \            to the tenancy. This class therefore holds the raw data of a tenancy,\r
+
+      \            and ignores any tenancy service (fully managed, let only) parameters."
     properties:
       AdvertiseFrom:
         description: The date to advertise this tenancy from.
@@ -2670,7 +2681,11 @@ definitions:
         description: Is this property a student property.
         type: boolean
       IsTenancyAdvertised:
-        description: "Gets a value indicating whether this tenancy is being advertised. Note\r\n            that this will only return true while the tenancy has a valid advertise\r\n            date. It will not return true in the proposed phase."
+        description: "Gets a value indicating whether this tenancy is being advertised. Note\r
+
+          \            that this will only return true while the tenancy has a valid advertise\r
+
+          \            date. It will not return true in the proposed phase."
         type: boolean
       IsTenancyProposed:
         description: Is the tenancy a proposed tenancy?
@@ -2707,7 +2722,7 @@ definitions:
         description: The property linked to this tenancy.
         type: string
       TenantSystemTypes:
-        description: 'The specific tenant type list, or empty if for all types.'
+        description: The specific tenant type list, or empty if for all types.
         items:
           enum:
             - Employed
@@ -2773,7 +2788,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/TenancyModel'
+          $ref: "#/definitions/TenancyModel"
         type: array
     type: object
   ViewingBookingModel:

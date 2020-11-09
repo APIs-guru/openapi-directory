@@ -1,20 +1,21 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.illumidesk.com
 info:
   title: IllumiDesk
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - open_data
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://avatars3.githubusercontent.com/u/12212444?v=4&s=200'
+    backgroundColor: "#FFFFFF"
+    url: https://avatars3.githubusercontent.com/u/12212444?v=4&s=200
   x-origin:
     - format: swagger
-      url: 'https://raw.githubusercontent.com/3Blades/openapi/master/tbs_swagger.yml'
-      version: '2.0'
+      url: https://raw.githubusercontent.com/3Blades/openapi/master/tbs_swagger.yml
+      version: "2.0"
   x-providerName: illumidesk.com
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -22,8 +23,9 @@ produces:
   - text/html
 securityDefinitions:
   jwt:
-    description: |
+    description: >
       A valid JSON Web Token (JWT) must be passed for all operations except for those in the `/auth` route. A JWT can be retrieved from the `/auth/jwt-token-auth` endpoint.
+
 
       The following syntax is required:
 
@@ -41,19 +43,19 @@ paths:
         - in: body
           name: jwt_data
           schema:
-            $ref: '#/definitions/JWTData'
+            $ref: "#/definitions/JWTData"
       responses:
-        '201':
+        "201":
           description: JWT created
           examples:
             application/json:
               token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
           schema:
-            $ref: '#/definitions/JWT'
-        '400':
+            $ref: "#/definitions/JWT"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/JWTError'
+            $ref: "#/definitions/JWTError"
       security: []
       summary: Create JSON Web Token (JWT)
       tags:
@@ -66,16 +68,16 @@ paths:
         - in: body
           name: refreshjwt_data
           schema:
-            $ref: '#/definitions/RefreshJSONWebTokenData'
+            $ref: "#/definitions/RefreshJSONWebTokenData"
       responses:
-        '201':
+        "201":
           description: RefreshJSONWebToken created
           schema:
-            $ref: '#/definitions/RefreshJSONWebToken'
-        '400':
+            $ref: "#/definitions/RefreshJSONWebToken"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/RefreshJSONWebTokenError'
+            $ref: "#/definitions/RefreshJSONWebTokenError"
       security: []
       summary: Refresh a JSON Web Token (JWT)
       tags:
@@ -88,24 +90,24 @@ paths:
         - in: body
           name: verifyjwt_data
           schema:
-            $ref: '#/definitions/VerifyJSONWebTokenData'
+            $ref: "#/definitions/VerifyJSONWebTokenData"
       responses:
-        '201':
+        "201":
           description: VerifyJSONWebToken created
           examples:
             application/json:
               token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
           schema:
-            $ref: '#/definitions/VerifyJSONWebToken'
-        '400':
+            $ref: "#/definitions/VerifyJSONWebToken"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/VerifyJSONWebTokenError'
+            $ref: "#/definitions/VerifyJSONWebTokenError"
       security: []
       summary: Validate JSON Web Token (JWT)
       tags:
         - auth
-  '/auth/login/{provider}/':
+  "/auth/login/{provider}/":
     get:
       operationId: oauth_login
       parameters:
@@ -119,7 +121,7 @@ paths:
           required: true
           type: string
       responses:
-        '302':
+        "302":
           description: Redirect to backend auth page
       tags:
         - auth
@@ -131,9 +133,9 @@ paths:
         - in: body
           name: user_data
           schema:
-            $ref: '#/definitions/UserData'
+            $ref: "#/definitions/UserData"
       responses:
-        '201':
+        "201":
           description: User created
           examples:
             application/json:
@@ -142,19 +144,19 @@ paths:
               id: 536686d7-0096-4c72-a4c3-5d710a361a0a
               last_name: Doe
               profile:
-                avatar_url: 'http://example.com/'
+                avatar_url: http://example.com/
                 bio: I like tests
                 company: IllumiDesk
-                location: 'Atlanta, GA'
+                location: Atlanta, GA
                 timezone: America/New_York
-                url: 'http://about.me/myprofile'
+                url: http://about.me/myprofile
               username: johndoe
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/UserError'
+            $ref: "#/definitions/UserError"
       security: []
       summary: Register a user
       tags:
@@ -163,7 +165,7 @@ paths:
     get:
       operationId: me
       responses:
-        '200':
+        "200":
           description: User information retrieved.
           examples:
             application/json:
@@ -172,15 +174,15 @@ paths:
               id: 66949654-1f75-4c6f-a5c5-e3572eae6527
               last_name: Doe
               profile:
-                avatar_url: 'http://example.com/'
+                avatar_url: http://example.com/
                 bio: I like tests
                 company: 3Blades
-                location: 'Atlanta, GA'
+                location: Atlanta, GA
                 timezone: America/New_York
-                url: 'http://about.me/myprofile'
+                url: http://about.me/myprofile
               username: johndoe
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       summary: A convenience endpoint that is equivalent to GET /v1/users/profiles/<my user id>/
       tags:
         - users
@@ -204,13 +206,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Server size list.
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/ServerSize'
+              $ref: "#/definitions/ServerSize"
             type: array
       summary: Retrieve available server sizes
       tags:
@@ -222,9 +224,9 @@ paths:
         - in: body
           name: serversize_data
           schema:
-            $ref: '#/definitions/ServerSizeData'
+            $ref: "#/definitions/ServerSizeData"
       responses:
-        '201':
+        "201":
           description: ServerSize created. This operation is available only to super users.
           examples:
             application/json:
@@ -234,15 +236,15 @@ paths:
               memory: 512
               name: myResource
           schema:
-            $ref: '#/definitions/ServerSize'
-        '400':
+            $ref: "#/definitions/ServerSize"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/ServerSizeError'
+            $ref: "#/definitions/ServerSizeError"
       summary: Create a new server size item
       tags:
         - servers
-  '/v1/servers/options/server-size/{size}/':
+  "/v1/servers/options/server-size/{size}/":
     delete:
       description: Only super users with on-premises version have acceess to this endpoint.
       operationId: servers_options_server_size_delete
@@ -253,12 +255,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Server size deleted. This operation is available only to super users
-        '404':
+        "404":
           description: ServerSize not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a server size by id
       tags:
         - servers
@@ -271,7 +273,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Environment resource retrieved.
           examples:
             application/json:
@@ -281,11 +283,11 @@ paths:
               memory: 512
               name: myResource
           schema:
-            $ref: '#/definitions/ServerSize'
-        '404':
+            $ref: "#/definitions/ServerSize"
+        "404":
           description: Environment resource not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a server size by id
       tags:
         - servers
@@ -301,9 +303,9 @@ paths:
         - in: body
           name: serversize_data
           schema:
-            $ref: '#/definitions/ServerSizeData'
+            $ref: "#/definitions/ServerSizeData"
       responses:
-        '200':
+        "200":
           description: Server size updated. This operation is available only to super users.
           examples:
             application/json:
@@ -313,15 +315,15 @@ paths:
               memory: 512
               name: myServerSizeWithPatch
           schema:
-            $ref: '#/definitions/ServerSize'
-        '400':
+            $ref: "#/definitions/ServerSize"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerSizeError'
-        '404':
+            $ref: "#/definitions/ServerSizeError"
+        "404":
           description: Server size not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a server size by id
       tags:
         - servers
@@ -337,9 +339,9 @@ paths:
         - in: body
           name: serversize_data
           schema:
-            $ref: '#/definitions/ServerSizeData'
+            $ref: "#/definitions/ServerSizeData"
       responses:
-        '200':
+        "200":
           description: Server size replaced. This operation is available only to super users.
           examples:
             application/json:
@@ -349,15 +351,15 @@ paths:
               memory: 512
               name: myResourceWithPut
           schema:
-            $ref: '#/definitions/ServerSize'
-        '400':
+            $ref: "#/definitions/ServerSize"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerSizeError'
-        '404':
+            $ref: "#/definitions/ServerSizeError"
+        "404":
           description: ServerSize not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Replace a server size by id
       tags:
         - servers
@@ -376,13 +378,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Team list
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/Team'
+              $ref: "#/definitions/Team"
             type: array
       summary: Get teams
       tags:
@@ -393,20 +395,20 @@ paths:
         - in: body
           name: team_data
           schema:
-            $ref: '#/definitions/TeamData'
+            $ref: "#/definitions/TeamData"
       responses:
-        '201':
+        "201":
           description: Team created
           schema:
-            $ref: '#/definitions/Team'
-        '400':
+            $ref: "#/definitions/Team"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/TeamError'
+            $ref: "#/definitions/TeamError"
       summary: Create a new team
       tags:
         - teams
-  '/v1/teams/{team}/':
+  "/v1/teams/{team}/":
     delete:
       operationId: teams_delete
       parameters:
@@ -416,12 +418,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Team deleted.
-        '404':
+        "404":
           description: Team not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a team
       tags:
         - teams
@@ -434,14 +436,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Team retrieved successfully.
           schema:
-            $ref: '#/definitions/Team'
-        '404':
+            $ref: "#/definitions/Team"
+        "404":
           description: Team not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a team
       tags:
         - teams
@@ -456,20 +458,20 @@ paths:
         - in: body
           name: team_data
           schema:
-            $ref: '#/definitions/TeamData'
+            $ref: "#/definitions/TeamData"
       responses:
-        '200':
+        "200":
           description: Team updated
           schema:
-            $ref: '#/definitions/Team'
-        '400':
+            $ref: "#/definitions/Team"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/TeamError'
-        '404':
+            $ref: "#/definitions/TeamError"
+        "404":
           description: Team not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a team
       tags:
         - teams
@@ -484,20 +486,20 @@ paths:
         - in: body
           name: team_data
           schema:
-            $ref: '#/definitions/TeamData'
+            $ref: "#/definitions/TeamData"
       responses:
-        '200':
+        "200":
           description: Team updated
           schema:
-            $ref: '#/definitions/Team'
-        '400':
+            $ref: "#/definitions/Team"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/TeamError'
+            $ref: "#/definitions/TeamError"
       summary: Replace a team
       tags:
         - teams
-  '/v1/teams/{team}/billing/invoices/':
+  "/v1/teams/{team}/billing/invoices/":
     get:
       operationId: teams_billing_invoices_list
       parameters:
@@ -517,19 +519,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Invoice list.
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/Invoice'
+              $ref: "#/definitions/Invoice"
             type: array
       summary: Get team invoices
       tags:
         - teams
         - billing
-  '/v1/teams/{team}/billing/invoices/{id}/':
+  "/v1/teams/{team}/billing/invoices/{id}/":
     get:
       operationId: teams_billing_invoices_read
       parameters:
@@ -544,19 +546,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Team invoice retrieved.
           schema:
-            $ref: '#/definitions/Invoice'
-        '404':
+            $ref: "#/definitions/Invoice"
+        "404":
           description: Team invoice not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get an invoice
       tags:
         - teams
         - billing
-  '/v1/teams/{team}/billing/invoices/{invoice_id}/invoice-items/':
+  "/v1/teams/{team}/billing/invoices/{invoice_id}/invoice-items/":
     get:
       operationId: teams_billing_invoice_items_list
       parameters:
@@ -565,7 +567,7 @@ paths:
           name: team
           required: true
           type: string
-        - description: 'Invoice id, expressed as UUID.'
+        - description: Invoice id, expressed as UUID.
           in: path
           name: invoice_id
           required: true
@@ -586,19 +588,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Team invoiceItem list.
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/InvoiceItem'
+              $ref: "#/definitions/InvoiceItem"
             type: array
       summary: Get team invoice items for a given invoice.
       tags:
         - teams
         - billing
-  '/v1/teams/{team}/billing/invoices/{invoice_id}/invoice-items/{id}':
+  "/v1/teams/{team}/billing/invoices/{invoice_id}/invoice-items/{id}":
     get:
       operationId: teams_billing_invoice_items_read
       parameters:
@@ -607,30 +609,30 @@ paths:
           name: team
           required: true
           type: string
-        - description: 'Invoice id, expressed as UUID.'
+        - description: Invoice id, expressed as UUID.
           in: path
           name: invoice_id
           required: true
           type: string
-        - description: 'InvoiceItem id, expressed as UUID.'
+        - description: InvoiceItem id, expressed as UUID.
           in: path
           name: id
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Team invoiceItem retrieved.
           schema:
-            $ref: '#/definitions/InvoiceItem'
-        '404':
+            $ref: "#/definitions/InvoiceItem"
+        "404":
           description: InvoiceItem not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a specific team InvoiceItem.
       tags:
         - teams
         - billing
-  '/v1/teams/{team}/billing/subscriptions/':
+  "/v1/teams/{team}/billing/subscriptions/":
     get:
       operationId: teams_billing_subscriptions_list
       parameters:
@@ -655,29 +657,29 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Teams subscription list.
           examples:
             application/json:
               - application_fee_percent: 0
                 cancel_at_period_end: false
-                canceled_at: ''
-                created: '2017-07-24T17:25:04Z'
-                current_period_end: '2017-07-31T17:25:04Z'
-                current_period_start: '2017-07-24T17:25:04Z'
-                ended_at: ''
+                canceled_at: ""
+                created: 2017-07-24T17:25:04Z
+                current_period_end: 2017-07-31T17:25:04Z
+                current_period_start: 2017-07-24T17:25:04Z
+                ended_at: ""
                 id: 579208c3-4f5c-4b5d-baa3-309a06db681c
                 livemode: false
                 plan: efb36cb0-0ef2-4af3-ae5d-10d9ae73845d
                 quantity: 1
-                start: '2017-07-24T17:25:04Z'
+                start: 2017-07-24T17:25:04Z
                 status: trialing
                 stripe_id: sub_B5KyO9BZ6lUNPP
-                trial_end: '2017-07-31T17:25:04Z'
-                trial_start: '2017-07-24T17:25:04Z'
+                trial_end: 2017-07-31T17:25:04Z
+                trial_start: 2017-07-24T17:25:04Z
           schema:
             items:
-              $ref: '#/definitions/Subscription'
+              $ref: "#/definitions/Subscription"
             type: array
       summary: Get active team subscriptons
       tags:
@@ -694,39 +696,39 @@ paths:
         - in: body
           name: subscription_data
           schema:
-            $ref: '#/definitions/SubscriptionData'
+            $ref: "#/definitions/SubscriptionData"
       responses:
-        '201':
+        "201":
           description: Team subscription created
           examples:
             application/json:
               application_fee_percent: 0
               cancel_at_period_end: false
-              canceled_at: ''
-              created: '2017-07-24T17:25:04Z'
-              current_period_end: '2017-07-31T17:25:04Z'
-              current_period_start: '2017-07-24T17:25:04Z'
-              ended_at: ''
+              canceled_at: ""
+              created: 2017-07-24T17:25:04Z
+              current_period_end: 2017-07-31T17:25:04Z
+              current_period_start: 2017-07-24T17:25:04Z
+              ended_at: ""
               id: 579208c3-4f5c-4b5d-baa3-309a06db681c
               livemode: false
               plan: efb36cb0-0ef2-4af3-ae5d-10d9ae73845d
               quantity: 1
-              start: '2017-07-24T17:25:04Z'
+              start: 2017-07-24T17:25:04Z
               status: trialing
               stripe_id: sub_B5KyO9BZ6lUNPP
-              trial_end: '2017-07-31T17:25:04Z'
-              trial_start: '2017-07-24T17:25:04Z'
+              trial_end: 2017-07-31T17:25:04Z
+              trial_start: 2017-07-24T17:25:04Z
           schema:
-            $ref: '#/definitions/Subscription'
-        '400':
+            $ref: "#/definitions/Subscription"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/SubscriptionError'
+            $ref: "#/definitions/SubscriptionError"
       summary: Create a new team subscription
       tags:
         - teams
         - billing
-  '/v1/teams/{team}/billing/subscriptions/{id}/':
+  "/v1/teams/{team}/billing/subscriptions/{id}/":
     delete:
       operationId: teams_billing_subscriptions_delete
       parameters:
@@ -741,12 +743,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Subscription deleted.
-        '404':
+        "404":
           description: Subscription not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a subscription
       tags:
         - teams
@@ -765,19 +767,19 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Team subscription retrieved.
           schema:
-            $ref: '#/definitions/Subscription'
-        '404':
+            $ref: "#/definitions/Subscription"
+        "404":
           description: Subscription not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get team subscriptions
       tags:
         - teams
         - billing
-  '/v1/teams/{team}/groups/':
+  "/v1/teams/{team}/groups/":
     get:
       operationId: teams_groups_list
       parameters:
@@ -797,16 +799,16 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Team groups list
           schema:
             items:
-              $ref: '#/definitions/Group'
+              $ref: "#/definitions/Group"
             type: array
       summary: Get team groups
       tags:
         - teams
-  '/v1/teams/{team}/groups/{group}/':
+  "/v1/teams/{team}/groups/{group}/":
     delete:
       operationId: teams_groups_delete
       parameters:
@@ -821,12 +823,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Group deleted
-        '404':
+        "404":
           description: Group not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete team group
       tags:
         - teams
@@ -844,10 +846,10 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Group retrieved.
           schema:
-            $ref: '#/definitions/Group'
+            $ref: "#/definitions/Group"
       summary: Get team group
       tags:
         - teams
@@ -867,20 +869,20 @@ paths:
         - in: body
           name: group_data
           schema:
-            $ref: '#/definitions/GroupData'
+            $ref: "#/definitions/GroupData"
       responses:
-        '200':
+        "200":
           description: Group updated
           schema:
-            $ref: '#/definitions/Group'
-        '400':
+            $ref: "#/definitions/Group"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/GroupError'
-        '404':
+            $ref: "#/definitions/GroupError"
+        "404":
           description: Group not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Patch team group
       tags:
         - teams
@@ -900,20 +902,20 @@ paths:
         - in: body
           name: group_data
           schema:
-            $ref: '#/definitions/GroupData'
+            $ref: "#/definitions/GroupData"
       responses:
-        '200':
+        "200":
           description: Group replaced
           schema:
-            $ref: '#/definitions/Group'
-        '400':
+            $ref: "#/definitions/Group"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/GroupError'
+            $ref: "#/definitions/GroupError"
       summary: Patch team group
       tags:
         - teams
-  '/v1/teams/{team}/groups/{group}/add/':
+  "/v1/teams/{team}/groups/{group}/add/":
     post:
       operationId: teams_groups_add_to_group
       parameters:
@@ -928,22 +930,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: User added to group.
           schema:
-            $ref: '#/definitions/GroupUser'
-        '400':
+            $ref: "#/definitions/GroupUser"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/GroupUserError'
-        '404':
+            $ref: "#/definitions/GroupUserError"
+        "404":
           description: Group not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Add user to group
       tags:
         - teams
-  '/v1/teams/{team}/groups/{group}/remove/':
+  "/v1/teams/{team}/groups/{group}/remove/":
     post:
       operationId: teams_groups_remove_from_group
       parameters:
@@ -958,14 +960,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: User removed from group.
-        '400':
+        "400":
           description: Invalid data supplied
-        '404':
+        "404":
           description: Group not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: User removed from group
       tags:
         - teams
@@ -999,7 +1001,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: User list
           examples:
             application/json:
@@ -1008,28 +1010,28 @@ paths:
                 id: 66949654-1f75-4c6f-a5c5-e3572eae6527
                 last_name: Doe
                 profile:
-                  avatar_url: 'http://example.com/'
+                  avatar_url: http://example.com/
                   bio: I like tests
                   company: 3Blades
-                  location: 'Atlanta, GA'
+                  location: Atlanta, GA
                   timezone: America/New_York
-                  url: 'http://about.me/myprofile'
+                  url: http://about.me/myprofile
                 username: johndoe
               - email: janedoe@email.com
                 first_name: John
                 id: 66949654-1f75-4c6f-a5c5-e3572eae6527
                 last_name: Doe
                 profile:
-                  avatar_url: 'http://example.com/'
+                  avatar_url: http://example.com/
                   bio: I like tests
                   company: 3Blades
-                  location: 'Atlanta, GA'
+                  location: Atlanta, GA
                   timezone: America/New_York
-                  url: 'http://about.me/myprofile'
+                  url: http://about.me/myprofile
                 username: janedoe
           schema:
             items:
-              $ref: '#/definitions/User'
+              $ref: "#/definitions/User"
             type: array
       summary: Get user list
       tags:
@@ -1041,9 +1043,9 @@ paths:
         - in: body
           name: user_data
           schema:
-            $ref: '#/definitions/UserData'
+            $ref: "#/definitions/UserData"
       responses:
-        '201':
+        "201":
           description: User created
           examples:
             application/json:
@@ -1052,23 +1054,23 @@ paths:
               id: 66949654-1f75-4c6f-a5c5-e3572eae6527
               last_name: Doe
               profile:
-                avatar_url: 'http://example.com/'
+                avatar_url: http://example.com/
                 bio: I like tests
                 company: 3Blades
-                location: 'Atlanta, GA'
+                location: Atlanta, GA
                 timezone: America/New_York
-                url: 'http://about.me/myprofile'
+                url: http://about.me/myprofile
               username: johndoe
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/UserError'
+            $ref: "#/definitions/UserError"
       summary: Create new user
       tags:
         - users
-  '/v1/users/profiles/{user}/':
+  "/v1/users/profiles/{user}/":
     delete:
       operationId: users_delete
       parameters:
@@ -1078,12 +1080,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: User deleted.
-        '404':
+        "404":
           description: User not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a user
       tags:
         - users
@@ -1096,7 +1098,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: User retrieved.
           examples:
             application/json:
@@ -1105,19 +1107,19 @@ paths:
               id: 66949654-1f75-4c6f-a5c5-e3572eae6527
               last_name: Doe
               profile:
-                avatar_url: 'http://example.com/'
+                avatar_url: http://example.com/
                 bio: I like tests
                 company: 3Blades
-                location: 'Atlanta, GA'
+                location: Atlanta, GA
                 timezone: America/New_York
-                url: 'http://about.me/myprofile'
+                url: http://about.me/myprofile
               username: johndoe
           schema:
-            $ref: '#/definitions/User'
-        '404':
+            $ref: "#/definitions/User"
+        "404":
           description: User not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a user
       tags:
         - users
@@ -1132,9 +1134,9 @@ paths:
         - in: body
           name: user_data
           schema:
-            $ref: '#/definitions/UserData'
+            $ref: "#/definitions/UserData"
       responses:
-        '200':
+        "200":
           description: User updated.
           examples:
             application/json:
@@ -1143,27 +1145,27 @@ paths:
               id: 66949654-1f75-4c6f-a5c5-e3572eae6527
               last_name: Doe
               profile:
-                avatar_url: 'http://example.com/'
+                avatar_url: http://example.com/
                 bio: Data updated with patch
                 company: 3Blades
-                location: 'Atlanta, GA'
+                location: Atlanta, GA
                 timezone: America/New_York
-                url: 'http://about.me/myprofile'
+                url: http://about.me/myprofile
               username: johndoe
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/UserError'
-        '404':
+            $ref: "#/definitions/UserError"
+        "404":
           description: User not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a user
       tags:
         - users
-  '/v1/users/{user}/api-key/':
+  "/v1/users/{user}/api-key/":
     get:
       operationId: users_api-key_list
       parameters:
@@ -1173,12 +1175,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Api Key
       summary: Retrieve account's API key
       tags:
         - users
-  '/v1/users/{user}/avatar/':
+  "/v1/users/{user}/avatar/":
     delete:
       operationId: user_avatar_delete
       parameters:
@@ -1188,12 +1190,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Avatar deleted
-        '404':
+        "404":
           description: Avatar not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete avatar
       tags:
         - users
@@ -1206,7 +1208,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: User avatar
       summary: Retrieve user's avatar
       tags:
@@ -1222,18 +1224,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Avatar updated.
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/UserError'
-        '404':
+            $ref: "#/definitions/UserError"
+        "404":
           description: Avatar not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a project file
       tags:
         - users
@@ -1248,16 +1250,16 @@ paths:
           required: true
           type: string
       responses:
-        '201':
+        "201":
           description: Added user avatar
           schema:
-            $ref: '#/definitions/User'
-        '400':
+            $ref: "#/definitions/User"
+        "400":
           description: Invalid data supplied
       summary: Add user avatar
       tags:
         - users
-  '/v1/users/{user}/emails/':
+  "/v1/users/{user}/emails/":
     get:
       operationId: users_emails_list
       parameters:
@@ -1282,13 +1284,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Email list
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/Email'
+              $ref: "#/definitions/Email"
             type: array
       summary: Retrieve account email addresses
       tags:
@@ -1304,9 +1306,9 @@ paths:
         - in: body
           name: email_data
           schema:
-            $ref: '#/definitions/EmailData'
+            $ref: "#/definitions/EmailData"
       responses:
-        '201':
+        "201":
           description: Email created
           examples:
             application/json:
@@ -1315,15 +1317,15 @@ paths:
               public: true
               unsubscribed: false
           schema:
-            $ref: '#/definitions/Email'
-        '400':
+            $ref: "#/definitions/Email"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/EmailError'
+            $ref: "#/definitions/EmailError"
       summary: Create an email address
       tags:
         - users
-  '/v1/users/{user}/emails/{email_id}/':
+  "/v1/users/{user}/emails/{email_id}/":
     delete:
       operationId: users_emails_delete
       parameters:
@@ -1338,12 +1340,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Email deleted.
-        '404':
+        "404":
           description: Email not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an email address
       tags:
         - users
@@ -1361,7 +1363,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Email retrieved
           examples:
             application/json:
@@ -1370,11 +1372,11 @@ paths:
               public: true
               unsubscribed: false
           schema:
-            $ref: '#/definitions/Email'
-        '404':
+            $ref: "#/definitions/Email"
+        "404":
           description: Email not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a user's email addresses
       tags:
         - users
@@ -1394,9 +1396,9 @@ paths:
         - in: body
           name: email_data
           schema:
-            $ref: '#/definitions/EmailData'
+            $ref: "#/definitions/EmailData"
       responses:
-        '200':
+        "200":
           description: Email updated
           examples:
             application/json:
@@ -1405,15 +1407,15 @@ paths:
               public: false
               unsubscribed: false
           schema:
-            $ref: '#/definitions/Email'
-        '400':
+            $ref: "#/definitions/Email"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/EmailError'
-        '404':
+            $ref: "#/definitions/EmailError"
+        "404":
           description: Email not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update an email address
       tags:
         - users
@@ -1433,9 +1435,9 @@ paths:
         - in: body
           name: email_data
           schema:
-            $ref: '#/definitions/EmailData'
+            $ref: "#/definitions/EmailData"
       responses:
-        '200':
+        "200":
           description: Email updated
           examples:
             application/json:
@@ -1444,15 +1446,15 @@ paths:
               public: false
               unsubscribed: true
           schema:
-            $ref: '#/definitions/Email'
-        '400':
+            $ref: "#/definitions/Email"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/EmailError'
+            $ref: "#/definitions/EmailError"
       summary: Replace an email address
       tags:
         - users
-  '/v1/users/{user}/ssh-key/':
+  "/v1/users/{user}/ssh-key/":
     get:
       operationId: users_ssh-key_list
       parameters:
@@ -1462,7 +1464,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: SSH Key.
           examples:
             application/json:
@@ -1470,7 +1472,7 @@ paths:
       summary: Retrieve an SSH key
       tags:
         - users
-  '/v1/users/{user}/ssh-key/reset/':
+  "/v1/users/{user}/ssh-key/reset/":
     post:
       operationId: users_ssh-key_reset
       parameters:
@@ -1480,17 +1482,17 @@ paths:
           required: true
           type: string
       responses:
-        '201':
+        "201":
           description: Reset SSH Key successfully.
           examples:
             application/json:
               key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDhMvg2+n2yNu0H2Hg8uiXfQtAid0WGRigNckb5J0T9GFINmqkYalI/AsWZbl4UfNMviD73h9xowUx+d7s2vB3E8bFxB9OWM22eLSp8fnbuhdI5mKBflq0jr6ms1cR/SD3YsbZ9sX6BqycQrjjYYl7WLM9rgec6b+EYyr/6nbDH/wql06TrNl6LUNkqI+YIqjRvqMeNEY9ux3sB+f46FRKO683u/cRCcp1eWAYf1ByYupIGREbQFLxhYv/NcKD8uIo7DRAuutwHKGOgnAl4WGUVsT5dplhaDYKlDTf2iMiJ+QDT25QABdrkHcIsu5D21AIdH3FI5UQnnu4unyEA77IDLp2EwKRr9k1XQc1o3zQ61+9Gm7Rt80WWgRsnhmshvAIDNcBv1+82kmA9jyeUf3M7KoRJLk6nIbZ1NwoVCX0VF3lRIB0Hvm/dL7Rpk8m/hE0SIIWIGaXbOT4ANFj+TxcF1Mfk7C3/T5/AYLHcq9ocYFKe4Q3Jv7tuHm600edpUfORdpCpjytcKStza07dRDa+OU577r6a1zHMrEMh8oEUtVO5pC1+EaRijTVaOR62DoarHdxJ23Ctk44o0JZfzj9VoVaAwVAhL1aT3pAQxQlWiTKpmYaHUYUp9SRJhyeFr/gpeIGTydKdawkh9Mz8KMlnu1GUolDDuOvSnvidzWaEaw==
-        '400':
+        "400":
           description: Invalid data supplied.
       summary: Recreate an SSH key
       tags:
         - users
-  '/v1/{namespace}/billing/cards/':
+  "/v1/{namespace}/billing/cards/":
     get:
       operationId: billing_cards_list
       parameters:
@@ -1515,13 +1517,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Card list
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/Card'
+              $ref: "#/definitions/Card"
             type: array
       summary: Get credit cards
       tags:
@@ -1537,9 +1539,9 @@ paths:
         - in: body
           name: card_data
           schema:
-            $ref: '#/definitions/CardDataPost'
+            $ref: "#/definitions/CardDataPost"
       responses:
-        '201':
+        "201":
           description: Card created
           examples:
             application/json:
@@ -1547,32 +1549,32 @@ paths:
               address_country: United States
               address_line1: 3423 Piedmont Rd NE
               address_line1_check: pass
-              address_line2: ''
+              address_line2: ""
               address_state: Georgia
-              address_zip: '30305'
+              address_zip: "30305"
               address_zip_check: pass
               brand: Visa
-              created: '2017-07-24T15:16:07.995380Z'
+              created: 2017-07-24T15:16:07.995380Z
               customer: 7e102c7b-55cd-49a0-9b23-58865eba1cc3
-              cvc_check: ''
+              cvc_check: ""
               exp_month: 1
               exp_year: 2019
               fingerprint: WpZ4zQymdmF5LhbH
               funding: credit
               id: 4126086e-525a-4027-b9e7-ae8de47210b2
-              last4: '4242'
+              last4: "4242"
               name: John Doe
               stripe_id: card_1Aj8HuLUHPUzUsaQlDbaXjzA
           schema:
-            $ref: '#/definitions/Card'
-        '400':
+            $ref: "#/definitions/Card"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/CardError'
+            $ref: "#/definitions/CardError"
       summary: Create new credit card
       tags:
         - billing
-  '/v1/{namespace}/billing/cards/{id}/':
+  "/v1/{namespace}/billing/cards/{id}/":
     delete:
       operationId: billing_cards_delete
       parameters:
@@ -1587,12 +1589,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Card deleted.
-        '404':
+        "404":
           description: Card not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a credit card
       tags:
         - billing
@@ -1610,7 +1612,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Card retrieved.
           examples:
             application/json:
@@ -1618,28 +1620,28 @@ paths:
               address_country: United States
               address_line1: 3423 Piedmont Rd NE
               address_line1_check: pass
-              address_line2: ''
+              address_line2: ""
               address_state: Georgia
-              address_zip: '30305'
+              address_zip: "30305"
               address_zip_check: pass
               brand: Visa
-              created: '2017-07-24T15:16:07.995380Z'
+              created: 2017-07-24T15:16:07.995380Z
               customer: 7e102c7b-55cd-49a0-9b23-58865eba1cc3
-              cvc_check: ''
+              cvc_check: ""
               exp_month: 1
               exp_year: 2019
               fingerprint: WpZ4zQymdmF5LhbH
               funding: credit
               id: 4126086e-525a-4027-b9e7-ae8de47210b2
-              last4: '4242'
+              last4: "4242"
               name: John Doe
               stripe_id: card_1Aj8HuLUHPUzUsaQlDbaXjzA
           schema:
-            $ref: '#/definitions/Card'
-        '404':
+            $ref: "#/definitions/Card"
+        "404":
           description: Card not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get credit card by id
       tags:
         - billing
@@ -1659,9 +1661,9 @@ paths:
         - in: body
           name: card_data
           schema:
-            $ref: '#/definitions/CardDataPutandPatch'
+            $ref: "#/definitions/CardDataPutandPatch"
       responses:
-        '200':
+        "200":
           description: Card updated
           examples:
             application/json:
@@ -1669,32 +1671,32 @@ paths:
               address_country: United States
               address_line1: 3423 Piedmont Rd NE
               address_line1_check: pass
-              address_line2: ''
+              address_line2: ""
               address_state: Georgia
-              address_zip: '30305'
+              address_zip: "30305"
               address_zip_check: pass
               brand: Visa
-              created: '2017-07-24T15:16:10.806003Z'
+              created: 2017-07-24T15:16:10.806003Z
               customer: 7e102c7b-55cd-49a0-9b23-58865eba1cc3
-              cvc_check: ''
+              cvc_check: ""
               exp_month: 1
               exp_year: 2025
               fingerprint: WpZ4zQymdmF5LhbH
               funding: credit
               id: 4126086e-525a-4027-b9e7-ae8de47210b2
-              last4: '4242'
+              last4: "4242"
               name: John Doe
               stripe_id: card_1Aj8HuLUHPUzUsaQlDbaXjzA
           schema:
-            $ref: '#/definitions/Card'
-        '400':
+            $ref: "#/definitions/Card"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/CardUpdateError'
-        '404':
+            $ref: "#/definitions/CardUpdateError"
+        "404":
           description: Card not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a credit card
       tags:
         - billing
@@ -1706,7 +1708,7 @@ paths:
           name: namespace
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: path
           name: id
           required: true
@@ -1714,9 +1716,9 @@ paths:
         - in: body
           name: card_data
           schema:
-            $ref: '#/definitions/CardDataPutandPatch'
+            $ref: "#/definitions/CardDataPutandPatch"
       responses:
-        '200':
+        "200":
           description: Card updated
           examples:
             application/json:
@@ -1724,32 +1726,32 @@ paths:
               address_country: United States
               address_line1: 3423 Piedmont Rd NE
               address_line1_check: pass
-              address_line2: ''
+              address_line2: ""
               address_state: Georgia
-              address_zip: '30305'
+              address_zip: "30305"
               address_zip_check: pass
               brand: Visa
-              created: '2017-07-24T15:16:07.995380Z'
+              created: 2017-07-24T15:16:07.995380Z
               customer: 7e102c7b-55cd-49a0-9b23-58865eba1cc3
-              cvc_check: ''
+              cvc_check: ""
               exp_month: 1
               exp_year: 2027
               fingerprint: WpZ4zQymdmF5LhbH
               funding: credit
               id: 4126086e-525a-4027-b9e7-ae8de47210b2
-              last4: '4242'
+              last4: "4242"
               name: John Doe
               stripe_id: card_1Aj8HuLUHPUzUsaQlDbaXjzA
           schema:
-            $ref: '#/definitions/Card'
-        '400':
+            $ref: "#/definitions/Card"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/CardError'
+            $ref: "#/definitions/CardError"
       summary: Replace a credit card
       tags:
         - billing
-  '/v1/{namespace}/billing/invoices/':
+  "/v1/{namespace}/billing/invoices/":
     get:
       operationId: billing_invoices_list
       parameters:
@@ -1774,18 +1776,18 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Invoice list.
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/Invoice'
+              $ref: "#/definitions/Invoice"
             type: array
       summary: Get invoices
       tags:
         - billing
-  '/v1/{namespace}/billing/invoices/{id}/':
+  "/v1/{namespace}/billing/invoices/{id}/":
     get:
       operationId: billing_invoices_read
       parameters:
@@ -1800,18 +1802,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Invoice retrieved.
           schema:
-            $ref: '#/definitions/Invoice'
-        '404':
+            $ref: "#/definitions/Invoice"
+        "404":
           description: Invoice not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get an invoice
       tags:
         - billing
-  '/v1/{namespace}/billing/invoices/{invoice_id}/invoice-items/':
+  "/v1/{namespace}/billing/invoices/{invoice_id}/invoice-items/":
     get:
       operationId: billing_invoice_items_list
       parameters:
@@ -1820,7 +1822,7 @@ paths:
           name: namespace
           required: true
           type: string
-        - description: 'Invoice id, expressed as UUID.'
+        - description: Invoice id, expressed as UUID.
           in: path
           name: invoice_id
           required: true
@@ -1841,18 +1843,18 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: InvoiceItem list.
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/InvoiceItem'
+              $ref: "#/definitions/InvoiceItem"
             type: array
       summary: Get invoice items for a given invoice.
       tags:
         - billing
-  '/v1/{namespace}/billing/invoices/{invoice_id}/invoice-items/{id}':
+  "/v1/{namespace}/billing/invoices/{invoice_id}/invoice-items/{id}":
     get:
       operationId: billing_invoice_items_read
       parameters:
@@ -1861,29 +1863,29 @@ paths:
           name: namespace
           required: true
           type: string
-        - description: 'Invoice id, expressed as UUID.'
+        - description: Invoice id, expressed as UUID.
           in: path
           name: invoice_id
           required: true
           type: string
-        - description: 'InvoiceItem id, expressed as UUID.'
+        - description: InvoiceItem id, expressed as UUID.
           in: path
           name: id
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: InvoiceItem retrieved.
           schema:
-            $ref: '#/definitions/InvoiceItem'
-        '404':
+            $ref: "#/definitions/InvoiceItem"
+        "404":
           description: InvoiceItem not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a specific InvoiceItem.
       tags:
         - billing
-  '/v1/{namespace}/billing/plans/':
+  "/v1/{namespace}/billing/plans/":
     get:
       operationId: billing_plans_list
       parameters:
@@ -1908,12 +1910,12 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Plan list.
           examples:
             application/json:
               - amount: 20
-                created: '2017-07-24T15:46:39Z'
+                created: 2017-07-24T15:46:39Z
                 currency: usd
                 id: d5791ab3-aefb-45af-80fc-2c7a166d78eb
                 interval: year
@@ -1921,11 +1923,11 @@ paths:
                 livemode: false
                 metadata: {}
                 name: patch_billing_plan
-                statement_descriptor: ''
+                statement_descriptor: ""
                 stripe_id: post_billing_plan
                 trial_period_days: 7
               - amount: 20
-                created: '2017-07-24T15:46:48Z'
+                created: 2017-07-24T15:46:48Z
                 currency: usd
                 id: 256fd63a-9d6b-48d2-8ff5-f56eaf54c59b
                 interval: week
@@ -1933,11 +1935,11 @@ paths:
                 livemode: false
                 metadata: {}
                 name: post_billing_plan_2
-                statement_descriptor: ''
+                statement_descriptor: ""
                 stripe_id: post_billing_plan_2
                 trial_period_days: 7
               - amount: 20
-                created: '2017-07-24T15:46:52Z'
+                created: 2017-07-24T15:46:52Z
                 currency: usd
                 id: 5915a2ae-12f5-4927-bb26-3b0609228791
                 interval: month
@@ -1945,17 +1947,17 @@ paths:
                 livemode: false
                 metadata: {}
                 name: post_billing_plan_3
-                statement_descriptor: ''
+                statement_descriptor: ""
                 stripe_id: post_billing_plan_3
                 trial_period_days: 7
           schema:
             items:
-              $ref: '#/definitions/Plan'
+              $ref: "#/definitions/Plan"
             type: array
       summary: Get billing plans
       tags:
         - billing
-  '/v1/{namespace}/billing/plans/{id}/':
+  "/v1/{namespace}/billing/plans/{id}/":
     get:
       operationId: billing_plans_read
       parameters:
@@ -1970,12 +1972,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Plan retrieved
           examples:
             application/json:
               amount: 20
-              created: '2017-07-24T15:46:39Z'
+              created: 2017-07-24T15:46:39Z
               currency: usd
               id: d5791ab3-aefb-45af-80fc-2c7a166d78eb
               interval: year
@@ -1983,19 +1985,19 @@ paths:
               livemode: false
               metadata: {}
               name: post_billing_plan
-              statement_descriptor: ''
+              statement_descriptor: ""
               stripe_id: post_billing_plan
               trial_period_days: 7
           schema:
-            $ref: '#/definitions/Plan'
-        '404':
+            $ref: "#/definitions/Plan"
+        "404":
           description: Plan not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a billing plan
       tags:
         - billing
-  '/v1/{namespace}/billing/subscriptions/':
+  "/v1/{namespace}/billing/subscriptions/":
     get:
       operationId: billing_subscriptions_list
       parameters:
@@ -2020,29 +2022,29 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Subscription list.
           examples:
             application/json:
               - application_fee_percent: 0
                 cancel_at_period_end: false
-                canceled_at: ''
-                created: '2017-07-24T17:25:04Z'
-                current_period_end: '2017-07-31T17:25:04Z'
-                current_period_start: '2017-07-24T17:25:04Z'
-                ended_at: ''
+                canceled_at: ""
+                created: 2017-07-24T17:25:04Z
+                current_period_end: 2017-07-31T17:25:04Z
+                current_period_start: 2017-07-24T17:25:04Z
+                ended_at: ""
                 id: 579208c3-4f5c-4b5d-baa3-309a06db681c
                 livemode: false
                 plan: efb36cb0-0ef2-4af3-ae5d-10d9ae73845d
                 quantity: 1
-                start: '2017-07-24T17:25:04Z'
+                start: 2017-07-24T17:25:04Z
                 status: trialing
                 stripe_id: sub_B5KyO9BZ6lUNPP
-                trial_end: '2017-07-31T17:25:04Z'
-                trial_start: '2017-07-24T17:25:04Z'
+                trial_end: 2017-07-31T17:25:04Z
+                trial_start: 2017-07-24T17:25:04Z
           schema:
             items:
-              $ref: '#/definitions/Subscription'
+              $ref: "#/definitions/Subscription"
             type: array
       summary: Get active subscriptons
       tags:
@@ -2058,38 +2060,38 @@ paths:
         - in: body
           name: subscription_data
           schema:
-            $ref: '#/definitions/SubscriptionData'
+            $ref: "#/definitions/SubscriptionData"
       responses:
-        '201':
+        "201":
           description: Subscription created
           examples:
             application/json:
               application_fee_percent: 0
               cancel_at_period_end: false
-              canceled_at: ''
-              created: '2017-07-24T17:25:04Z'
-              current_period_end: '2017-07-31T17:25:04Z'
-              current_period_start: '2017-07-24T17:25:04Z'
-              ended_at: ''
+              canceled_at: ""
+              created: 2017-07-24T17:25:04Z
+              current_period_end: 2017-07-31T17:25:04Z
+              current_period_start: 2017-07-24T17:25:04Z
+              ended_at: ""
               id: 579208c3-4f5c-4b5d-baa3-309a06db681c
               livemode: false
               plan: efb36cb0-0ef2-4af3-ae5d-10d9ae73845d
               quantity: 1
-              start: '2017-07-24T17:25:04Z'
+              start: 2017-07-24T17:25:04Z
               status: trialing
               stripe_id: sub_B5KyO9BZ6lUNPP
-              trial_end: '2017-07-31T17:25:04Z'
-              trial_start: '2017-07-24T17:25:04Z'
+              trial_end: 2017-07-31T17:25:04Z
+              trial_start: 2017-07-24T17:25:04Z
           schema:
-            $ref: '#/definitions/Subscription'
-        '400':
+            $ref: "#/definitions/Subscription"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/SubscriptionError'
+            $ref: "#/definitions/SubscriptionError"
       summary: Create a new subscription
       tags:
         - billing
-  '/v1/{namespace}/billing/subscriptions/{id}/':
+  "/v1/{namespace}/billing/subscriptions/{id}/":
     delete:
       operationId: billing_subscriptions_delete
       parameters:
@@ -2104,12 +2106,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Subscription deleted.
-        '404':
+        "404":
           description: Subscription not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a subscription
       tags:
         - billing
@@ -2127,18 +2129,18 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Subscription retrieved.
           schema:
-            $ref: '#/definitions/Subscription'
-        '404':
+            $ref: "#/definitions/Subscription"
+        "404":
           description: Subscription not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a subscriptions
       tags:
         - billing
-  '/v1/{namespace}/notifications/':
+  "/v1/{namespace}/notifications/":
     get:
       operationId: notifications_list
       parameters:
@@ -2162,17 +2164,17 @@ paths:
           name: ordering
           required: false
           type: string
-        - description: 'When true, get only read notifications. When false, get only unread notifications. Default behavior is to return both read and unread.'
+        - description: When true, get only read notifications. When false, get only unread notifications. Default behavior is to return both read and unread.
           in: query
           name: read
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: List of notifications
           schema:
             items:
-              $ref: '#/definitions/Notification'
+              $ref: "#/definitions/Notification"
             type: array
       summary: Get notifications of all types and entities for the authenticated user.
       tags:
@@ -2189,20 +2191,20 @@ paths:
           name: notification_data
           required: true
           schema:
-            $ref: '#/definitions/NotificationListUpdateData'
+            $ref: "#/definitions/NotificationListUpdateData"
       responses:
-        '200':
+        "200":
           description: Notification updated
           schema:
-            $ref: '#/definitions/Notification'
-        '400':
+            $ref: "#/definitions/Notification"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/NotificationError'
+            $ref: "#/definitions/NotificationError"
       summary: Mark a list of notifications as either read or unread.
       tags:
         - notifications
-  '/v1/{namespace}/notifications/entity/{entity}':
+  "/v1/{namespace}/notifications/entity/{entity}":
     get:
       operationId: notifications_list_entity
       parameters:
@@ -2233,17 +2235,17 @@ paths:
           name: entity
           required: true
           type: string
-        - description: 'When true, get only read notifications. When false, get only unread notifications. Default behavior is to return both read and unread.'
+        - description: When true, get only read notifications. When false, get only unread notifications. Default behavior is to return both read and unread.
           in: query
           name: read
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: List of notifications
           schema:
             items:
-              $ref: '#/definitions/Notification'
+              $ref: "#/definitions/Notification"
             type: array
       summary: Get notifications of all types and entities for the authenticated user.
       tags:
@@ -2267,20 +2269,20 @@ paths:
           name: notification_data
           required: true
           schema:
-            $ref: '#/definitions/NotificationListUpdateData'
+            $ref: "#/definitions/NotificationListUpdateData"
       responses:
-        '200':
+        "200":
           description: Notification updated
           schema:
-            $ref: '#/definitions/Notification'
-        '400':
+            $ref: "#/definitions/Notification"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/NotificationError'
+            $ref: "#/definitions/NotificationError"
       summary: Mark a list of notifications as either read or unread.
       tags:
         - notifications
-  '/v1/{namespace}/notifications/settings/':
+  "/v1/{namespace}/notifications/settings/":
     get:
       operationId: notification_settings_read
       parameters:
@@ -2290,16 +2292,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Global notification settings
           schema:
             items:
-              $ref: '#/definitions/NotificationSettings'
+              $ref: "#/definitions/NotificationSettings"
             type: array
-        '404':
+        "404":
           description: Notification not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve global notification settings for the authenticated user
       tags:
         - notifications
@@ -2314,20 +2316,20 @@ paths:
         - in: body
           name: notification_settings_data
           schema:
-            $ref: '#/definitions/NotificationSettingsData'
+            $ref: "#/definitions/NotificationSettingsData"
       responses:
-        '200':
+        "200":
           description: Notification Settings updated
           schema:
-            $ref: '#/definitions/NotificationSettings'
-        '400':
+            $ref: "#/definitions/NotificationSettings"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/NotificationSettingsError'
-        '404':
+            $ref: "#/definitions/NotificationSettingsError"
+        "404":
           description: Notification Settings not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Modify global notification settings.
       tags:
         - notifications
@@ -2343,20 +2345,20 @@ paths:
           name: notification_settings_data
           required: true
           schema:
-            $ref: '#/definitions/NotificationSettingsData'
+            $ref: "#/definitions/NotificationSettingsData"
       responses:
-        '201':
+        "201":
           description: Global Notification Settings created successfully.
           schema:
-            $ref: '#/definitions/NotificationSettings'
-        '400':
+            $ref: "#/definitions/NotificationSettings"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/NotificationSettingsError'
+            $ref: "#/definitions/NotificationSettingsError"
       summary: Create global notification settings
       tags:
         - notifications
-  '/v1/{namespace}/notifications/settings/entity/{entity}':
+  "/v1/{namespace}/notifications/settings/entity/{entity}":
     get:
       operationId: notification_settings_entity_read
       parameters:
@@ -2373,16 +2375,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Global notification settings
           schema:
             items:
-              $ref: '#/definitions/NotificationSettings'
+              $ref: "#/definitions/NotificationSettings"
             type: array
-        '404':
+        "404":
           description: Notification not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve global notification settings for the authenticated user
       tags:
         - notifications
@@ -2404,20 +2406,20 @@ paths:
         - in: body
           name: notification_settings_data
           schema:
-            $ref: '#/definitions/NotificationSettingsData'
+            $ref: "#/definitions/NotificationSettingsData"
       responses:
-        '200':
+        "200":
           description: Notification Settings updated
           schema:
-            $ref: '#/definitions/NotificationSettings'
-        '400':
+            $ref: "#/definitions/NotificationSettings"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/NotificationSettingsError'
-        '404':
+            $ref: "#/definitions/NotificationSettingsError"
+        "404":
           description: Notification Settings not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Modify global notification settings.
       tags:
         - notifications
@@ -2439,20 +2441,20 @@ paths:
         - in: body
           name: notification_settings_data
           schema:
-            $ref: '#/definitions/NotificationSettingsData'
+            $ref: "#/definitions/NotificationSettingsData"
       responses:
-        '201':
+        "201":
           description: Global Notification Settings created successfully.
           schema:
-            $ref: '#/definitions/NotificationSettings'
-        '400':
+            $ref: "#/definitions/NotificationSettings"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/NotificationSettingsError'
+            $ref: "#/definitions/NotificationSettingsError"
       summary: Create global notification settings
       tags:
         - notifications
-  '/v1/{namespace}/notifications/{notification_id}':
+  "/v1/{namespace}/notifications/{notification_id}":
     get:
       operationId: notification_read
       parameters:
@@ -2467,14 +2469,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Retrieve a notification.
           schema:
-            $ref: '#/definitions/Notification'
-        '404':
+            $ref: "#/definitions/Notification"
+        "404":
           description: Notification not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a specific notification.
       tags:
         - notifications
@@ -2494,24 +2496,24 @@ paths:
         - in: body
           name: notification_data
           schema:
-            $ref: '#/definitions/NotificationUpdateData'
+            $ref: "#/definitions/NotificationUpdateData"
       responses:
-        '200':
+        "200":
           description: Notification updated
           schema:
-            $ref: '#/definitions/Notification'
-        '400':
+            $ref: "#/definitions/Notification"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/NotificationError'
-        '404':
+            $ref: "#/definitions/NotificationError"
+        "404":
           description: Notification not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Mark a specific notification as either read or unread.
       tags:
         - notifications
-  '/v1/{namespace}/oauth/applications/':
+  "/v1/{namespace}/oauth/applications/":
     get:
       operationId: oauth_applications_list
       parameters:
@@ -2536,7 +2538,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OAuth2 application list
           examples:
             application/json:
@@ -2546,16 +2548,16 @@ paths:
                 client_type: confidential
                 id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
                 name: Test
-                redirect_uris: ''
+                redirect_uris: ""
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       summary: Retrieve oauth applications
       tags:
         - oauth
     post:
-      description: ''
+      description: ""
       operationId: oauth_application_create
       parameters:
         - description: User or team name.
@@ -2566,9 +2568,9 @@ paths:
         - in: body
           name: application_data
           schema:
-            $ref: '#/definitions/ApplicationData'
+            $ref: "#/definitions/ApplicationData"
       responses:
-        '201':
+        "201":
           description: Application created.
           examples:
             application/json:
@@ -2578,19 +2580,19 @@ paths:
               client_type: confidential
               id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
               name: Test
-              redirect_uris: ''
+              redirect_uris: ""
           schema:
-            $ref: '#/definitions/Application'
-        '400':
+            $ref: "#/definitions/Application"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/ApplicationError'
+            $ref: "#/definitions/ApplicationError"
       summary: Create a new OAuth2 application
       tags:
         - oauth
-  '/v1/{namespace}/oauth/applications/{application}/':
+  "/v1/{namespace}/oauth/applications/{application}/":
     delete:
-      description: ''
+      description: ""
       operationId: oauth_application_delete
       parameters:
         - description: User or team name.
@@ -2604,12 +2606,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Application deleted.
-        '404':
+        "404":
           description: Application not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an application by id
       tags:
         - oauth
@@ -2627,7 +2629,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Application retrieved.
           examples:
             application/json:
@@ -2637,18 +2639,18 @@ paths:
               client_type: confidential
               id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
               name: Test
-              redirect_uris: ''
+              redirect_uris: ""
           schema:
-            $ref: '#/definitions/Application'
-        '404':
+            $ref: "#/definitions/Application"
+        "404":
           description: Application not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get an application by id
       tags:
         - oauth
     patch:
-      description: ''
+      description: ""
       operationId: oauth_application_update
       parameters:
         - description: User or team name.
@@ -2664,9 +2666,9 @@ paths:
         - in: body
           name: application_data
           schema:
-            $ref: '#/definitions/ApplicationData'
+            $ref: "#/definitions/ApplicationData"
       responses:
-        '200':
+        "200":
           description: Application updated.
           examples:
             application/json:
@@ -2676,22 +2678,22 @@ paths:
               client_type: confidential
               id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
               name: Test
-              redirect_uris: ''
+              redirect_uris: ""
           schema:
-            $ref: '#/definitions/Application'
-        '400':
+            $ref: "#/definitions/Application"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ApplicationError'
-        '404':
+            $ref: "#/definitions/ApplicationError"
+        "404":
           description: Application not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update an application by id
       tags:
         - oauth
     put:
-      description: ''
+      description: ""
       operationId: oauth_application_replace
       parameters:
         - description: User or team name.
@@ -2707,9 +2709,9 @@ paths:
         - in: body
           name: oauth_application_data
           schema:
-            $ref: '#/definitions/ApplicationData'
+            $ref: "#/definitions/ApplicationData"
       responses:
-        '200':
+        "200":
           description: Application replaced.
           examples:
             application/json:
@@ -2719,21 +2721,21 @@ paths:
               client_type: confidential
               id: 7011a6e6-b4ea-4600-8ab1-01127e1ccdda
               name: Test
-              redirect_uris: ''
+              redirect_uris: ""
           schema:
-            $ref: '#/definitions/Application'
-        '400':
+            $ref: "#/definitions/Application"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ApplicationError'
-        '404':
+            $ref: "#/definitions/ApplicationError"
+        "404":
           description: Application not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Replace an application by id
       tags:
         - oauth
-  '/v1/{namespace}/projects/':
+  "/v1/{namespace}/projects/":
     get:
       operationId: projects_list
       parameters:
@@ -2768,13 +2770,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Project list.
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/Project'
+              $ref: "#/definitions/Project"
             type: array
       summary: Get available projects
       tags:
@@ -2790,9 +2792,9 @@ paths:
         - in: body
           name: project_data
           schema:
-            $ref: '#/definitions/ProjectData'
+            $ref: "#/definitions/ProjectData"
       responses:
-        '201':
+        "201":
           description: Project created
           examples:
             application/json:
@@ -2800,20 +2802,20 @@ paths:
                 - johndoe
               description: Project created by me
               id: 79cadd17-5738-4f02-8377-68e67d3eee18
-              last_updated: '2017-07-24T14:54:38.797878Z'
+              last_updated: 2017-07-24T14:54:38.797878Z
               name: myProject
               owner: johndoe
               private: false
           schema:
-            $ref: '#/definitions/Project'
-        '400':
+            $ref: "#/definitions/Project"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/ProjectError'
+            $ref: "#/definitions/ProjectError"
       summary: Create a new project
       tags:
         - projects
-  '/v1/{namespace}/projects/project-copy-check/':
+  "/v1/{namespace}/projects/project-copy-check/":
     head:
       operationId: project_copy_check
       parameters:
@@ -2834,14 +2836,14 @@ paths:
               - project
             type: object
       responses:
-        '200':
+        "200":
           description: The authenticated has permission to copy this project
-        '404':
+        "404":
           description: Project not found.
       summary: Check if you are able to copy a project to your account.
       tags:
         - projects
-  '/v1/{namespace}/projects/project-copy/':
+  "/v1/{namespace}/projects/project-copy/":
     post:
       operationId: project_copy
       parameters:
@@ -2865,22 +2867,22 @@ paths:
               - project
             type: object
       responses:
-        '201':
+        "201":
           description: Project copied
           schema:
-            $ref: '#/definitions/Project'
-        '400':
+            $ref: "#/definitions/Project"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/ProjectError'
-        '404':
+            $ref: "#/definitions/ProjectError"
+        "404":
           description: Project not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Copy a project to your own account.
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/':
+  "/v1/{namespace}/projects/{project}/":
     delete:
       operationId: projects_delete
       parameters:
@@ -2895,12 +2897,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Project deleted.
-        '404':
+        "404":
           description: Project not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a project
       tags:
         - projects
@@ -2918,7 +2920,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Project retrieved.
           examples:
             application/json:
@@ -2926,16 +2928,16 @@ paths:
                 - johndoe
               description: Project created by me
               id: 79cadd17-5738-4f02-8377-68e67d3eee18
-              last_updated: '2017-07-24T14:54:38.797878Z'
+              last_updated: 2017-07-24T14:54:38.797878Z
               name: myProject
               owner: johndoe
               private: false
           schema:
-            $ref: '#/definitions/Project'
-        '404':
+            $ref: "#/definitions/Project"
+        "404":
           description: Project not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a project
       tags:
         - projects
@@ -2955,9 +2957,9 @@ paths:
         - in: body
           name: project_data
           schema:
-            $ref: '#/definitions/ProjectData'
+            $ref: "#/definitions/ProjectData"
       responses:
-        '200':
+        "200":
           description: Project updated
           examples:
             application/json:
@@ -2965,20 +2967,20 @@ paths:
                 - johndoe
               description: My project updated by me using PATCH
               id: 79cadd17-5738-4f02-8377-68e67d3eee18
-              last_updated: '2017-07-24T14:54:43.225603Z'
+              last_updated: 2017-07-24T14:54:43.225603Z
               name: myProject
               owner: johndoe
               private: true
           schema:
-            $ref: '#/definitions/Project'
-        '400':
+            $ref: "#/definitions/Project"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/ProjectError'
-        '404':
+            $ref: "#/definitions/ProjectError"
+        "404":
           description: Project not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a project
       tags:
         - projects
@@ -2998,9 +3000,9 @@ paths:
         - in: body
           name: project_data
           schema:
-            $ref: '#/definitions/ProjectData'
+            $ref: "#/definitions/ProjectData"
       responses:
-        '200':
+        "200":
           description: Project updated.
           examples:
             application/json:
@@ -3008,20 +3010,20 @@ paths:
                 - johndoe
               description: My project updated by me using PUT
               id: 79cadd17-5738-4f02-8377-68e67d3eee18
-              last_updated: '2017-07-24T14:54:43.225603Z'
+              last_updated: 2017-07-24T14:54:43.225603Z
               name: myProject
               owner: johndoe
               private: true
           schema:
-            $ref: '#/definitions/Project'
-        '400':
+            $ref: "#/definitions/Project"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ProjectError'
+            $ref: "#/definitions/ProjectError"
       summary: Replace a project
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/collaborators/':
+  "/v1/{namespace}/projects/{project}/collaborators/":
     get:
       operationId: projects_collaborators_list
       parameters:
@@ -3051,14 +3053,14 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Collaborator list.
           examples:
             application/json:
               - email: johndoe@example.com
                 first_name: John
                 id: 42946cd9-2fb6-4764-944b-e107b972dd97
-                joined: '2017-07-24T14:54:38.819171Z'
+                joined: 2017-07-24T14:54:38.819171Z
                 last_name: Doe
                 owner: true
                 permissions:
@@ -3067,7 +3069,7 @@ paths:
                 username: johndoe
           schema:
             items:
-              $ref: '#/definitions/Collaborator'
+              $ref: "#/definitions/Collaborator"
             type: array
       summary: Get project collaborators
       tags:
@@ -3088,16 +3090,16 @@ paths:
         - in: body
           name: collaborator_data
           schema:
-            $ref: '#/definitions/CollaboratorData'
+            $ref: "#/definitions/CollaboratorData"
       responses:
-        '201':
+        "201":
           description: Collaborator created.
           examples:
             application/json:
               email: collaborator@examples.com
               first_name: John
               id: ef4d3a93-ae36-428c-b00f-5805b496ed95
-              joined: '2017-07-24T14:54:49.205912Z'
+              joined: 2017-07-24T14:54:49.205912Z
               last_name: Doe
               owner: false
               permissions:
@@ -3105,15 +3107,15 @@ paths:
                 - write_project
               username: collaborator
           schema:
-            $ref: '#/definitions/Collaborator'
-        '400':
+            $ref: "#/definitions/Collaborator"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/CollaboratorError'
+            $ref: "#/definitions/CollaboratorError"
       summary: Create project collaborators
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/collaborators/{collaborator}/':
+  "/v1/{namespace}/projects/{project}/collaborators/{collaborator}/":
     delete:
       operationId: projects_collaborators_delete
       parameters:
@@ -3133,12 +3135,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Collaborator deleted.
-        '404':
+        "404":
           description: Collaborator not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a project collaborator
       tags:
         - projects
@@ -3161,14 +3163,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Collaborator retrieved.
           examples:
             application/json:
               email: collaborator@illumidesk.com
               first_name: John
               id: ef4d3a93-ae36-428c-b00f-5805b496ed95
-              joined: '2017-07-24T14:54:49.205912Z'
+              joined: 2017-07-24T14:54:49.205912Z
               last_name: Doe
               owner: false
               permissions:
@@ -3176,18 +3178,18 @@ paths:
                 - write_project
               username: collaborator
           schema:
-            $ref: '#/definitions/Collaborator'
-        '404':
+            $ref: "#/definitions/Collaborator"
+        "404":
           description: Collaborator not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a project collaborator
       tags:
         - projects
     patch:
       operationId: projects_collaborators_update
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: project
           required: true
@@ -3197,7 +3199,7 @@ paths:
           name: namespace
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: path
           name: collaborator
           required: true
@@ -3205,24 +3207,24 @@ paths:
         - in: body
           name: collaborator_data
           schema:
-            $ref: '#/definitions/CollaboratorData'
+            $ref: "#/definitions/CollaboratorData"
       responses:
-        '200':
+        "200":
           description: Collaborator updated
           schema:
-            $ref: '#/definitions/Collaborator'
-        '400':
+            $ref: "#/definitions/Collaborator"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/CollaboratorError'
-        '404':
+            $ref: "#/definitions/CollaboratorError"
+        "404":
           description: Collaborator not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update project collaborator
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/deployments/':
+  "/v1/{namespace}/projects/{project}/deployments/":
     get:
       operationId: projects_deployments_list
       parameters:
@@ -3257,13 +3259,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Deployment list.
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/Deployment'
+              $ref: "#/definitions/Deployment"
             type: array
       summary: Retrieve deployments
       tags:
@@ -3284,20 +3286,20 @@ paths:
         - in: body
           name: deployment_data
           schema:
-            $ref: '#/definitions/DeploymentData'
+            $ref: "#/definitions/DeploymentData"
       responses:
-        '201':
+        "201":
           description: Deployment created.
           schema:
-            $ref: '#/definitions/Deployment'
-        '400':
+            $ref: "#/definitions/Deployment"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/DeploymentError'
+            $ref: "#/definitions/DeploymentError"
       summary: Create a new deployment
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/deployments/{deployment}/':
+  "/v1/{namespace}/projects/{project}/deployments/{deployment}/":
     delete:
       operationId: projects_deployment_delete
       parameters:
@@ -3317,12 +3319,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Deployment deleted
-        '404':
+        "404":
           description: Deployment not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a deployment
       tags:
         - projects
@@ -3345,14 +3347,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Deployment retrieved.
           schema:
-            $ref: '#/definitions/Deployment'
-        '404':
+            $ref: "#/definitions/Deployment"
+        "404":
           description: Deployment not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a deployment
       tags:
         - projects
@@ -3377,20 +3379,20 @@ paths:
         - in: body
           name: deployment_data
           schema:
-            $ref: '#/definitions/DeploymentData'
+            $ref: "#/definitions/DeploymentData"
       responses:
-        '200':
+        "200":
           description: Deployment updated
           schema:
-            $ref: '#/definitions/Deployment'
-        '400':
+            $ref: "#/definitions/Deployment"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/DeploymentData'
-        '404':
+            $ref: "#/definitions/DeploymentData"
+        "404":
           description: Deployment not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a deployment
       tags:
         - projects
@@ -3415,20 +3417,20 @@ paths:
         - in: body
           name: deployment_data
           schema:
-            $ref: '#/definitions/DeploymentData'
+            $ref: "#/definitions/DeploymentData"
       responses:
-        '200':
+        "200":
           description: Deployment updated.
           schema:
-            $ref: '#/definitions/Deployment'
-        '400':
+            $ref: "#/definitions/Deployment"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/DeploymentError'
+            $ref: "#/definitions/DeploymentError"
       summary: Replace a deployment
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/deployments/{deployment}/deploy/':
+  "/v1/{namespace}/projects/{project}/deployments/{deployment}/deploy/":
     post:
       operationId: projects_deployments_deploy
       parameters:
@@ -3448,14 +3450,14 @@ paths:
           required: true
           type: string
       responses:
-        '201':
+        "201":
           description: Deployment successful.
-        '400':
+        "400":
           description: Invalid data supplied.
       summary: Deploy an existing model
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/project_files/':
+  "/v1/{namespace}/projects/{project}/project_files/":
     get:
       operationId: projects_project_files_list
       parameters:
@@ -3484,7 +3486,7 @@ paths:
           name: ordering
           required: false
           type: string
-        - description: 'Exact file name, relative to the project root. If no such file is found, an empty list will be returned.'
+        - description: Exact file name, relative to the project root. If no such file is found, an empty list will be returned.
           in: query
           name: filename
           required: false
@@ -3495,11 +3497,11 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: ProjectFile list
           schema:
             items:
-              $ref: '#/definitions/ProjectFile'
+              $ref: "#/definitions/ProjectFile"
             type: array
       summary: Get project files
       tags:
@@ -3520,12 +3522,12 @@ paths:
           name: namespace
           required: true
           type: string
-        - description: 'File to send, to create new file. This parameter is only used with form data and may include multiple files.'
+        - description: File to send, to create new file. This parameter is only used with form data and may include multiple files.
           in: formData
           name: file
           required: false
           type: file
-        - description: 'Fila data, represented as base64.'
+        - description: Fila data, represented as base64.
           in: formData
           name: base64_data
           required: false
@@ -3541,26 +3543,26 @@ paths:
           required: false
           type: string
       responses:
-        '201':
+        "201":
           description: ProjectFile created
           examples:
             application/json:
-              file: 'http://api.illumidesk.com/media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/foo'
+              file: http://api.illumidesk.com/media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/foo
               id: 592ac8da-dbf5-4654-9127-8df9ba9280a3
               name: myfile
-              path: ''
+              path: ""
               project: 79cadd17-5738-4f02-8377-68e67d3eee18
               public: false
           schema:
-            $ref: '#/definitions/ProjectFile'
-        '400':
+            $ref: "#/definitions/ProjectFile"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/ProjectFileError'
+            $ref: "#/definitions/ProjectFileError"
       summary: Create project files
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/project_files/{id}/':
+  "/v1/{namespace}/projects/{project}/project_files/{id}/":
     delete:
       operationId: projects_project_files_delete
       parameters:
@@ -3580,12 +3582,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: ProjectFile deleted
-        '404':
+        "404":
           description: ProjectFile not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a project file
       tags:
         - projects
@@ -3613,22 +3615,22 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: ProjectFile retrieved
           examples:
             application/json:
-              file: 'http://api.illumidesk.com/media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/myfile'
+              file: http://api.illumidesk.com/media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/myfile
               id: 592ac8da-dbf5-4654-9127-8df9ba9280a3
               name: myfile
-              path: ''
+              path: ""
               project: 79cadd17-5738-4f02-8377-68e67d3eee18
               public: false
           schema:
-            $ref: '#/definitions/ProjectFile'
-        '404':
+            $ref: "#/definitions/ProjectFile"
+        "404":
           description: ProjectFile not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a project file
       tags:
         - projects
@@ -3652,12 +3654,12 @@ paths:
           name: id
           required: true
           type: string
-        - description: 'File to send, to create new file. This parameter is only used with form data and may include multiple files.'
+        - description: File to send, to create new file. This parameter is only used with form data and may include multiple files.
           in: formData
           name: file
           required: false
           type: file
-        - description: 'Fila data, represented as base64.'
+        - description: Fila data, represented as base64.
           in: formData
           name: base64_data
           required: false
@@ -3673,26 +3675,26 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: ProjectFile updated.
           examples:
             application/json:
               file: /media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/myfile
               id: 592ac8da-dbf5-4654-9127-8df9ba9280a3
               name: foo
-              path: ''
+              path: ""
               project: 79cadd17-5738-4f02-8377-68e67d3eee18
               public: false
           schema:
-            $ref: '#/definitions/ProjectFile'
-        '400':
+            $ref: "#/definitions/ProjectFile"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ProjectFileError'
-        '404':
+            $ref: "#/definitions/ProjectFileError"
+        "404":
           description: ProjectFile not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a project file
       tags:
         - projects
@@ -3716,12 +3718,12 @@ paths:
           name: id
           required: true
           type: string
-        - description: 'File to send, to create new file. This parameter is only used with form data and may include multiple files.'
+        - description: File to send, to create new file. This parameter is only used with form data and may include multiple files.
           in: formData
           name: file
           required: false
           type: file
-        - description: 'Fila data, represented as base64.'
+        - description: Fila data, represented as base64.
           in: formData
           name: base64_data
           required: false
@@ -3737,26 +3739,26 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: ProjectFile updated
           examples:
             application/json:
               file: /media/johndoe/79cadd17-5738-4f02-8377-68e67d3eee18/myfile
               id: 592ac8da-dbf5-4654-9127-8df9ba9280a3
               name: myfile
-              path: ''
+              path: ""
               project: 79cadd17-5738-4f02-8377-68e67d3eee18
               public: false
           schema:
-            $ref: '#/definitions/ProjectFile'
-        '400':
+            $ref: "#/definitions/ProjectFile"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ProjectFileError'
+            $ref: "#/definitions/ProjectFileError"
       summary: Replace a project file
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/':
+  "/v1/{namespace}/projects/{project}/servers/":
     get:
       operationId: projects_servers_list
       parameters:
@@ -3791,13 +3793,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Server list.
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/Server'
+              $ref: "#/definitions/Server"
             type: array
       summary: Retrieve servers
       tags:
@@ -3818,36 +3820,36 @@ paths:
         - in: body
           name: server_data
           schema:
-            $ref: '#/definitions/ServerData'
+            $ref: "#/definitions/ServerData"
       responses:
-        '201':
+        "201":
           description: Server created.
           examples:
             application/json:
               config:
                 type: jupyter
               connected: []
-              created_at: '2017-07-24T13:41:57.089722Z'
-              endpoint: 'https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
-              host: ''
+              created_at: 2017-07-24T13:41:57.089722Z
+              endpoint: https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree
+              host: ""
               id: 768f6eef-d07b-40ce-bce1-0dcce5bfbfc3
-              image_name: ''
-              logs_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
+              image_name: ""
+              logs_url: wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/
               name: testPostServer
               server_size: d16e2091-7596-481b-a50f-285812beb98c
-              startup_script: ''
+              startup_script: ""
               status: Stopped
-              status_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
+              status_url: wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/
           schema:
-            $ref: '#/definitions/Server'
-        '400':
+            $ref: "#/definitions/Server"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerError'
+            $ref: "#/definitions/ServerError"
       summary: Create a new server
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/statuses/':
+  "/v1/{namespace}/projects/{project}/servers/statuses/":
     get:
       operationId: projects_servers_statuses
       parameters:
@@ -3862,7 +3864,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Server statuses list.
           examples:
             application/json:
@@ -3872,12 +3874,12 @@ paths:
                 status: Running
           schema:
             items:
-              $ref: '#/definitions/ServerStatus'
+              $ref: "#/definitions/ServerStatus"
             type: array
       summary: Retrieve server statuses
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/":
     delete:
       operationId: projects_servers_delete
       parameters:
@@ -3897,12 +3899,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Server deleted
-        '404':
+        "404":
           description: Server not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a server
       tags:
         - projects
@@ -3925,30 +3927,30 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Server retrieved.
           examples:
             application/json:
               config:
                 type: jupyter
               connected: []
-              created_at: '2017-07-24T13:41:57.089722Z'
-              endpoint: 'https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
-              host: ''
+              created_at: 2017-07-24T13:41:57.089722Z
+              endpoint: https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree
+              host: ""
               id: 768f6eef-d07b-40ce-bce1-0dcce5bfbfc3
-              image_name: ''
-              logs_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
+              image_name: ""
+              logs_url: wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/
               name: testPostServer
               server_size: d16e2091-7596-481b-a50f-285812beb98c
-              startup_script: ''
+              startup_script: ""
               status: Stopped
-              status_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
+              status_url: wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/
           schema:
-            $ref: '#/definitions/Server'
-        '404':
+            $ref: "#/definitions/Server"
+        "404":
           description: Server not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a server
       tags:
         - projects
@@ -3973,36 +3975,36 @@ paths:
         - in: body
           name: server_data
           schema:
-            $ref: '#/definitions/ServerData'
+            $ref: "#/definitions/ServerData"
       responses:
-        '200':
+        "200":
           description: Server updated
           examples:
             application/json:
               config:
                 type: jupyter
               connected: []
-              created_at: '2017-07-24T13:41:57.089722Z'
-              endpoint: 'https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
-              host: ''
+              created_at: 2017-07-24T13:41:57.089722Z
+              endpoint: https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree
+              host: ""
               id: 768f6eef-d07b-40ce-bce1-0dcce5bfbfc3
-              image_name: ''
-              logs_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
+              image_name: ""
+              logs_url: wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/
               name: testPatchServer
               server_size: d16e2091-7596-481b-a50f-285812beb98c
-              startup_script: ''
+              startup_script: ""
               status: Stopped
-              status_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
+              status_url: wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/
           schema:
-            $ref: '#/definitions/Server'
-        '400':
+            $ref: "#/definitions/Server"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/ServerData'
-        '404':
+            $ref: "#/definitions/ServerData"
+        "404":
           description: Server not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a server
       tags:
         - projects
@@ -4027,36 +4029,36 @@ paths:
         - in: body
           name: server_data
           schema:
-            $ref: '#/definitions/ServerData'
+            $ref: "#/definitions/ServerData"
       responses:
-        '200':
+        "200":
           description: Server updated.
           examples:
             application/json:
               config:
                 type: jupyter
               connected: []
-              created_at: '2017-07-24T13:41:57.089722Z'
-              endpoint: 'https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree'
-              host: ''
+              created_at: 2017-07-24T13:41:57.089722Z
+              endpoint: https://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/endpoint/jupyter/tree
+              host: ""
               id: 768f6eef-d07b-40ce-bce1-0dcce5bfbfc3
-              image_name: ''
-              logs_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/'
+              image_name: ""
+              logs_url: wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/logs/
               name: testPutServer
               server_size: d16e2091-7596-481b-a50f-285812beb98c
-              startup_script: ''
+              startup_script: ""
               status: Stopped
-              status_url: 'wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/'
+              status_url: wss://api.illumidesk.com/v1/johndoe/projects/d56271ef-eea7-44ad-8d46-828a288c7a3d/servers/768f6eef-d07b-40ce-bce1-0dcce5bfbfc3/status/
           schema:
-            $ref: '#/definitions/Server'
-        '400':
+            $ref: "#/definitions/Server"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerError'
+            $ref: "#/definitions/ServerError"
       summary: Replace a server
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/api-key/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/api-key/":
     get:
       operationId: projects_servers_api-key
       parameters:
@@ -4076,14 +4078,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Server API key
           schema:
-            $ref: '#/definitions/JWT'
+            $ref: "#/definitions/JWT"
       summary: Get server API key
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/auth/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/auth/":
     post:
       operationId: projects_servers_auth
       parameters:
@@ -4103,14 +4105,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Api key verified
-        '401':
+        "401":
           description: Invalid api key.
       summary: Server api key validation
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/run-stats/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/run-stats/":
     post:
       operationId: projects_servers_run-stats_create
       parameters:
@@ -4132,28 +4134,28 @@ paths:
         - in: body
           name: serverrunstats_data
           schema:
-            $ref: '#/definitions/ServerRunStatisticsData'
+            $ref: "#/definitions/ServerRunStatisticsData"
       responses:
-        '201':
+        "201":
           description: ServerRunStatistics created.
           examples:
             application/json:
               exit_code: 0
               id: 7d55fca5-2ba3-4af4-95ab-26dc141e6bfc
               size: 0
-              stacktrace: ''
-              start: '2017-07-24T13:42:14.883820Z'
-              stop: ''
+              stacktrace: ""
+              start: 2017-07-24T13:42:14.883820Z
+              stop: ""
           schema:
-            $ref: '#/definitions/ServerRunStatistics'
-        '400':
+            $ref: "#/definitions/ServerRunStatistics"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerRunStatisticsError'
+            $ref: "#/definitions/ServerRunStatisticsError"
       summary: Create a new server's run statistics
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/run-stats/{id}/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/run-stats/{id}/":
     delete:
       operationId: projects_servers_run-stats_delete
       parameters:
@@ -4178,12 +4180,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: ServerRunStatistics deleted.
-        '404':
+        "404":
           description: ServerRunStatistics not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a server's statistics
       tags:
         - projects
@@ -4211,14 +4213,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: ServerRunStatistics retrieved.
           schema:
-            $ref: '#/definitions/ServerRunStatistics'
-        '404':
+            $ref: "#/definitions/ServerRunStatistics"
+        "404":
           description: ServerRunStatistics not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve statistics for a server
       tags:
         - projects
@@ -4248,20 +4250,20 @@ paths:
         - in: body
           name: serverrunstats_data
           schema:
-            $ref: '#/definitions/ServerRunStatisticsData'
+            $ref: "#/definitions/ServerRunStatisticsData"
       responses:
-        '200':
+        "200":
           description: ServerRunStatistics updated.
           schema:
-            $ref: '#/definitions/ServerRunStatistics'
-        '400':
+            $ref: "#/definitions/ServerRunStatistics"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerRunStatisticsError'
-        '404':
+            $ref: "#/definitions/ServerRunStatisticsError"
+        "404":
           description: ServerRunStatistics not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a server's statistics
       tags:
         - projects
@@ -4291,20 +4293,20 @@ paths:
         - in: body
           name: serverrunstats_data
           schema:
-            $ref: '#/definitions/ServerRunStatisticsData'
+            $ref: "#/definitions/ServerRunStatisticsData"
       responses:
-        '200':
+        "200":
           description: ServerRunStatistics updated.
           schema:
-            $ref: '#/definitions/ServerRunStatistics'
-        '400':
+            $ref: "#/definitions/ServerRunStatistics"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerRunStatisticsError'
+            $ref: "#/definitions/ServerRunStatisticsError"
       summary: Replace a server's statistics
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/ssh-tunnels/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/ssh-tunnels/":
     get:
       operationId: projects_servers_ssh-tunnels_list
       parameters:
@@ -4339,13 +4341,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: SshTunnel list
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/SshTunnel'
+              $ref: "#/definitions/SshTunnel"
             type: array
       summary: Get SSH Tunnels associated to a server
       tags:
@@ -4371,20 +4373,20 @@ paths:
         - in: body
           name: sshtunnel_data
           schema:
-            $ref: '#/definitions/SshTunnelData'
+            $ref: "#/definitions/SshTunnelData"
       responses:
-        '201':
+        "201":
           description: SSH Tunnel created.
           schema:
-            $ref: '#/definitions/SshTunnel'
-        '400':
+            $ref: "#/definitions/SshTunnel"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/SshTunnelError'
+            $ref: "#/definitions/SshTunnelError"
       summary: Create SSH Tunnel associated to a server
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/ssh-tunnels/{tunnel}/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/ssh-tunnels/{tunnel}/":
     delete:
       operationId: projects_servers_ssh-tunnels_delete
       parameters:
@@ -4409,12 +4411,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: SSH tunnel deleted.
-        '404':
+        "404":
           description: SSH tunnel not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete an SSH Tunnel associated to a server
       tags:
         - projects
@@ -4442,26 +4444,26 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: SSH Tunnel retrieved.
           schema:
-            $ref: '#/definitions/SshTunnel'
-        '404':
+            $ref: "#/definitions/SshTunnel"
+        "404":
           description: SSH Tunnel not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get an SSH Tunnel associated to a server
       tags:
         - projects
     patch:
       operationId: projects_servers_ssh-tunnels_update
       parameters:
-        - description: ''
+        - description: ""
           in: path
           name: server
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: path
           name: project
           required: true
@@ -4471,7 +4473,7 @@ paths:
           name: namespace
           required: true
           type: string
-        - description: ''
+        - description: ""
           in: path
           name: tunnel
           required: true
@@ -4479,20 +4481,20 @@ paths:
         - in: body
           name: sshtunnel_data
           schema:
-            $ref: '#/definitions/SshTunnelData'
+            $ref: "#/definitions/SshTunnelData"
       responses:
-        '200':
-          description: ' SSH Tunnel updated.'
+        "200":
+          description: " SSH Tunnel updated."
           schema:
-            $ref: '#/definitions/SshTunnel'
-        '400':
+            $ref: "#/definitions/SshTunnel"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/SshTunnelError'
-        '404':
+            $ref: "#/definitions/SshTunnelError"
+        "404":
           description: SSH tunnel not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update an SSH Tunnel associated to a server
       tags:
         - projects
@@ -4522,20 +4524,20 @@ paths:
         - in: body
           name: sshtunnel_data
           schema:
-            $ref: '#/definitions/SshTunnelData'
+            $ref: "#/definitions/SshTunnelData"
       responses:
-        '200':
+        "200":
           description: SshTunnel updated
           schema:
-            $ref: '#/definitions/SshTunnel'
-        '400':
+            $ref: "#/definitions/SshTunnel"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/SshTunnelError'
+            $ref: "#/definitions/SshTunnelError"
       summary: Replace SSH Tunnel associated to a server
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/start/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/start/":
     post:
       operationId: projects_servers_start
       parameters:
@@ -4555,14 +4557,14 @@ paths:
           required: true
           type: string
       responses:
-        '201':
+        "201":
           description: Server started.
-        '400':
+        "400":
           description: Invalid data supplied.
       summary: Start a server
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/stats/{id}/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/stats/{id}/":
     delete:
       operationId: projects_servers_stats_delete
       parameters:
@@ -4587,12 +4589,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: ServerStatistics deleted.
-        '404':
+        "404":
           description: ServerStatistics not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a server's statistics
       tags:
         - projects
@@ -4620,14 +4622,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: ServerStatistics retrieved
           schema:
-            $ref: '#/definitions/ServerStatistics'
-        '404':
+            $ref: "#/definitions/ServerStatistics"
+        "404":
           description: ServerStatistics not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Retrieve a server's statistics
       tags:
         - projects
@@ -4657,20 +4659,20 @@ paths:
         - in: body
           name: serverstats_data
           schema:
-            $ref: '#/definitions/ServerStatisticsData'
+            $ref: "#/definitions/ServerStatisticsData"
       responses:
-        '200':
+        "200":
           description: ServerStatistics updated.
           schema:
-            $ref: '#/definitions/ServerStatistics'
-        '400':
+            $ref: "#/definitions/ServerStatistics"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerStatisticsError'
-        '404':
+            $ref: "#/definitions/ServerStatisticsError"
+        "404":
           description: ServerStatistics not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a server's statistics
       tags:
         - projects
@@ -4700,20 +4702,20 @@ paths:
         - in: body
           name: serverstats_data
           schema:
-            $ref: '#/definitions/ServerStatisticsData'
+            $ref: "#/definitions/ServerStatisticsData"
       responses:
-        '200':
+        "200":
           description: ServerStatistics updated
           schema:
-            $ref: '#/definitions/ServerStatistics'
-        '400':
+            $ref: "#/definitions/ServerStatistics"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerStatisticsError'
+            $ref: "#/definitions/ServerStatisticsError"
       summary: Replace a server's statistics
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/stop/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/stop/":
     post:
       operationId: projects_servers_stop
       parameters:
@@ -4733,14 +4735,14 @@ paths:
           required: true
           type: string
       responses:
-        '201':
+        "201":
           description: Server stopped.
-        '400':
+        "400":
           description: Invalid data supplied.
       summary: Stop a server
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/triggers/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/triggers/":
     get:
       operationId: service_trigger_list
       parameters:
@@ -4780,13 +4782,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: ServerAction list
           examples:
             application/json: []
           schema:
             items:
-              $ref: '#/definitions/ServerAction'
+              $ref: "#/definitions/ServerAction"
             type: array
       summary: Retrieve server triggers
       tags:
@@ -4813,9 +4815,9 @@ paths:
           in: body
           name: server_action
           schema:
-            $ref: '#/definitions/ServerActionData'
+            $ref: "#/definitions/ServerActionData"
       responses:
-        '201':
+        "201":
           description: Server action created.
           examples:
             application/json:
@@ -4824,15 +4826,15 @@ paths:
               operation: start
               url: /v1/johndoe/service/ed81aac7-835d-4702-a58e-4eeda89d4a5a/trigger/19938b2c-17f6-46ed-a506-f5b196853951/call/
           schema:
-            $ref: '#/definitions/ServerAction'
-        '400':
+            $ref: "#/definitions/ServerAction"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/ServerActionError'
+            $ref: "#/definitions/ServerActionError"
       summary: Create a new server trigger
       tags:
         - projects
-  '/v1/{namespace}/projects/{project}/servers/{server}/triggers/{trigger}/':
+  "/v1/{namespace}/projects/{project}/servers/{server}/triggers/{trigger}/":
     delete:
       operationId: service_trigger_delete
       parameters:
@@ -4857,12 +4859,12 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: ServerAction deleted
-        '404':
+        "404":
           description: ServerAction not found
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Delete a server trigger
       tags:
         - projects
@@ -4890,7 +4892,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Server action retrieved.
           examples:
             application/json:
@@ -4899,11 +4901,11 @@ paths:
               operation: start
               url: /v1/johndoe/service/ed81aac7-835d-4702-a58e-4eeda89d4a5a/trigger/19938b2c-17f6-46ed-a506-f5b196853951/call/
           schema:
-            $ref: '#/definitions/ServerAction'
-        '404':
+            $ref: "#/definitions/ServerAction"
+        "404":
           description: ServerAction not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Get a server trigger
       tags:
         - projects
@@ -4933,9 +4935,9 @@ paths:
         - in: body
           name: server_action
           schema:
-            $ref: '#/definitions/ServerActionData'
+            $ref: "#/definitions/ServerActionData"
       responses:
-        '200':
+        "200":
           description: Server action updated.
           examples:
             application/json:
@@ -4944,15 +4946,15 @@ paths:
               operation: start
               url: /v1/johndoe/service/ed81aac7-835d-4702-a58e-4eeda89d4a5a/trigger/19938b2c-17f6-46ed-a506-f5b196853951/call/
           schema:
-            $ref: '#/definitions/ServerAction'
-        '400':
+            $ref: "#/definitions/ServerAction"
+        "400":
           description: Invalid data supplied
           schema:
-            $ref: '#/definitions/ServerActionError'
-        '404':
+            $ref: "#/definitions/ServerActionError"
+        "404":
           description: Server action not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Update a server trigger
       tags:
         - projects
@@ -4982,9 +4984,9 @@ paths:
         - in: body
           name: server_action
           schema:
-            $ref: '#/definitions/ServerActionData'
+            $ref: "#/definitions/ServerActionData"
       responses:
-        '200':
+        "200":
           description: ServerAction updated.
           examples:
             application/json:
@@ -4993,19 +4995,19 @@ paths:
               operation: start
               url: /v1/johndoe/service/ed81aac7-835d-4702-a58e-4eeda89d4a5a/trigger/19938b2c-17f6-46ed-a506-f5b196853951/call/
           schema:
-            $ref: '#/definitions/ServerAction'
-        '400':
+            $ref: "#/definitions/ServerAction"
+        "400":
           description: Invalid data supplied.
           schema:
-            $ref: '#/definitions/ServerActionError'
-        '404':
+            $ref: "#/definitions/ServerActionError"
+        "404":
           description: Server action not found.
           schema:
-            $ref: '#/definitions/NotFound'
+            $ref: "#/definitions/NotFound"
       summary: Replace a server trigger
       tags:
         - projects
-  '/v1/{namespace}/search/':
+  "/v1/{namespace}/search/":
     get:
       operationId: search
       parameters:
@@ -5039,11 +5041,11 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Search list.
           schema:
             items:
-              $ref: '#/definitions/Search'
+              $ref: "#/definitions/Search"
             type: array
       summary: Get a search results
       tags:
@@ -5058,22 +5060,22 @@ definitions:
         description: Action name.
         type: string
       can_be_cancelled:
-        description: 'Can action be cancelled, or not.'
+        description: Can action be cancelled, or not.
         type: boolean
       can_be_retried:
-        description: 'May action be retried, or not.'
+        description: May action be retried, or not.
         type: boolean
       end_date:
         description: Action needs to end before a certain date and time.
         type: string
       id:
-        description: 'Action unique identifier, expressed as UUID.'
+        description: Action unique identifier, expressed as UUID.
         type: string
       ip:
         description: IP address that action is related to.
         type: string
       is_user_action:
-        description: 'Is the action related to a user, or not.'
+        description: Is the action related to a user, or not.
         type: boolean
       method:
         description: Action method.
@@ -5131,7 +5133,7 @@ definitions:
           - public
         type: string
       id:
-        description: 'Application unique identifier, expressed as UUID.'
+        description: Application unique identifier, expressed as UUID.
         type: string
       name:
         description: Application name
@@ -5248,7 +5250,7 @@ definitions:
         description: Address line 1.
         type: string
       address_line1_check:
-        description: 'Address line 1 check, when processing card.'
+        description: Address line 1 check, when processing card.
         type: string
       address_line2:
         description: Address line 2.
@@ -5260,7 +5262,7 @@ definitions:
         description: Address zip code.
         type: string
       address_zip_check:
-        description: 'Address check, when processing card.'
+        description: Address check, when processing card.
         type: string
       brand:
         description: Credit or debit card brand.
@@ -5287,7 +5289,7 @@ definitions:
         description: Funding.
         type: string
       id:
-        description: 'Card unique identifier, expressed as UUID.'
+        description: Card unique identifier, expressed as UUID.
         type: string
       last4:
         description: Last four digits of credit or debit card.
@@ -5609,12 +5611,13 @@ definitions:
         description: Collaborator's last name.
         type: string
       owner:
-        description: |
+        description: >
           Boolean that states whether collaborator is project owner, or not.
         type: boolean
       permissions:
-        description: |
+        description: >
           Collaborator permissions. Project creators are assigned owner
+
           priviledges by default. Permissions are write and read.
         items:
           enum:
@@ -5629,8 +5632,9 @@ definitions:
         description: Collaborator user name.
         type: string
       username:
-        description: |
+        description: >
           Collaborator's user name. This must be a valid user name within the
+
           system.
         type: string
     type: object
@@ -5711,7 +5715,7 @@ definitions:
   Deployment:
     properties:
       config:
-        $ref: '#/definitions/DeploymentConfig'
+        $ref: "#/definitions/DeploymentConfig"
         description: TODO
         type: object
       created_at:
@@ -5748,13 +5752,13 @@ definitions:
           type: string
         type: array
       handler:
-        description: 'The filename and handler function defined by the user that will handle requests to the deployment. Ex: handler.predict'
+        description: "The filename and handler function defined by the user that will handle requests to the deployment. Ex: handler.predict"
         type: string
     type: object
   DeploymentData:
     properties:
       config:
-        $ref: '#/definitions/DeploymentConfig'
+        $ref: "#/definitions/DeploymentConfig"
         description: Deployment configuration for included files and handler.
         type: object
       framework:
@@ -5973,10 +5977,10 @@ definitions:
         description: Number of attempts to deliver invoice.
         type: integer
       attempted:
-        description: 'Boolean to determine whether delivery attempt executed, or not.'
+        description: Boolean to determine whether delivery attempt executed, or not.
         type: boolean
       closed:
-        description: 'Invoice closed, or pending.'
+        description: Invoice closed, or pending.
         type: boolean
       created:
         description: Date and time when invoice was created.
@@ -5997,7 +6001,7 @@ definitions:
         description: Invoice issue date.
         type: string
       livemode:
-        description: 'Boolean that determines whether invoice is live, or not.'
+        description: Boolean that determines whether invoice is live, or not.
         type: boolean
       metadata:
         description: Optional metadata object of invoice.
@@ -6006,7 +6010,7 @@ definitions:
         description: Next payment attempt.
         type: string
       paid:
-        description: 'Determines whether invoice has been paid, or not.'
+        description: Determines whether invoice has been paid, or not.
         type: boolean
       period_end:
         description: Invoice end period.
@@ -6033,7 +6037,7 @@ definitions:
         description: Invoice sub total.
         type: integer
       tax:
-        description: 'Tax, if applicable.'
+        description: Tax, if applicable.
         type: integer
       total:
         description: Invoice total.
@@ -6076,7 +6080,7 @@ definitions:
         description: Date the item was added to the invoice.
         type: string
       livemode:
-        description: 'Boolean that determines whether invoice is live, or not.'
+        description: Boolean that determines whether invoice is live, or not.
         type: boolean
       metadata:
         description: Optional metadata object of invoice.
@@ -6164,7 +6168,7 @@ definitions:
         description: Timestamp that the notification was created at.
         type: string
       type:
-        description: 'Type of the notification, e.g. invoice.created, subscription.created, etc.'
+        description: Type of the notification, e.g. invoice.created, subscription.created, etc.
         type: string
       user:
         description: User the notification is for.
@@ -6275,13 +6279,13 @@ definitions:
         description: Plan unique identifier as UUID.
         type: string
       interval:
-        description: 'Interval for plan, such as montly or yearly.'
+        description: Interval for plan, such as montly or yearly.
         type: string
       interval_count:
-        description: ''
+        description: ""
         type: integer
       livemode:
-        description: 'Boolean to determine whether plan is live, or not.'
+        description: Boolean to determine whether plan is live, or not.
         type: boolean
       metadata:
         description: Optional meta data object.
@@ -6296,7 +6300,7 @@ definitions:
         description: Stripe identifier to identify entity charging for plans.
         type: string
       trial_period_days:
-        description: 'Number of days for plan trial, used for try and buy campaigns.'
+        description: Number of days for plan trial, used for try and buy campaigns.
         type: integer
     required:
       - amount
@@ -6344,7 +6348,7 @@ definitions:
         description: Project name.
         type: string
       private:
-        description: 'Private project true, otherwise public.'
+        description: Private project true, otherwise public.
         type: boolean
     required:
       - name
@@ -6395,7 +6399,7 @@ definitions:
   ProjectFile:
     properties:
       content:
-        description: 'Data sent as string, in base64 format.'
+        description: Data sent as string, in base64 format.
         type: string
       id:
         description: File unique identifier in UUID format.
@@ -6485,7 +6489,7 @@ definitions:
   Server:
     properties:
       config:
-        description: 'Server configuration option. Values are jupyter, restful and cron.'
+        description: Server configuration option. Values are jupyter, restful and cron.
         type: object
       connected:
         description: Array that represents what other servers the server is connected to.
@@ -6502,18 +6506,18 @@ definitions:
         description: Server endpoint path.
         type: string
       host:
-        description: |
+        description: >
           Value that represents user defined host, otherwise known as BYON (Bring Your Own Node).
         type: string
       id:
         description: Server unique identifier in UUID format.
         type: string
       image_name:
-        description: |
+        description: >
           Server image source, such as 3blades/tensorflow-notebook.
         type: string
       logs_url:
-        description: |
+        description: >
           A WebSocket URL for streaming stdout and stderr logs from the server.
         type: string
       name:
@@ -6529,14 +6533,14 @@ definitions:
         description: Optional startup script to use when launching server.
         type: string
       status:
-        description: 'Server status, such as Running or Error.'
+        description: Server status, such as Running or Error.
         enum:
           - Stopped
           - Running
           - Error
         type: string
       status_url:
-        description: |
+        description: >
           A WebSocket URL for listening to server status changes.
         type: string
     required:
@@ -6551,7 +6555,7 @@ definitions:
         description: Name for server action.
         type: string
       operation:
-        description: |
+        description: >
           Manage server state. Starting a server changes state from Pending to Running. Terminating a server changes state from Running to Terminated. If the action results in Error, status will change to Error.
         enum:
           - start
@@ -6559,7 +6563,7 @@ definitions:
           - terminate
         type: string
       webhook:
-        $ref: '#/definitions/Webhook'
+        $ref: "#/definitions/Webhook"
     type: object
   ServerActionData:
     properties:
@@ -6567,7 +6571,7 @@ definitions:
         description: Name of server action.
         type: string
       operation:
-        description: |
+        description: >
           Manage server state. Starting a server changes state from Pending to Running. Terminating a server changes state from Running to Terminated. Stopping a server changes state from Running to Stopped. If the action results in Error, status will change to Error.
         enum:
           - start
@@ -6575,7 +6579,7 @@ definitions:
           - terminate
         type: string
       webhook:
-        $ref: '#/definitions/Webhook'
+        $ref: "#/definitions/Webhook"
     type: object
   ServerActionError:
     properties:
@@ -6622,8 +6626,8 @@ definitions:
   ServerData:
     properties:
       config:
-        $ref: '#/definitions/ServerConfig'
-        description: 'Server configuration option. Values are jupyter, restful and cron.'
+        $ref: "#/definitions/ServerConfig"
+        description: Server configuration option. Values are jupyter, restful and cron.
         type: object
       connected:
         description: Array of other servers the server is connected to.
@@ -6724,7 +6728,7 @@ definitions:
   ServerRunStatistics:
     properties:
       exit_code:
-        description: 'Exit code, such as Exit 0 or Exit 1.'
+        description: Exit code, such as Exit 0 or Exit 1.
         type: integer
       id:
         description: Server run statistics object unique identifier in UUID format.
@@ -6736,7 +6740,7 @@ definitions:
         description: Size of server.
         type: integer
       stacktrace:
-        description: 'Stacktrace, if there was one.'
+        description: Stacktrace, if there was one.
         type: string
       start:
         description: Date and time that represents when server started.
@@ -6804,12 +6808,14 @@ definitions:
   ServerSize:
     properties:
       active:
-        description: 'States whether the Server size is active, or not.'
+        description: States whether the Server size is active, or not.
         type: boolean
       cpu:
-        description: |
+        description: >
           CPU availability, equivalent to --cpus=<value>. For example if a host has
+
           2 CPU's, then a value of 1.5 would be limit the container to using all of the
+
           first CPU and half of the second CPU.
         type: integer
       id:
@@ -6891,10 +6897,10 @@ definitions:
         description: Size of statistics.
         type: integer
       start:
-        description: 'Start statistics, such as start time and date.'
+        description: Start statistics, such as start time and date.
         type: string
       stop:
-        description: 'Stop statistics, such as stop time and date.'
+        description: Stop statistics, such as stop time and date.
         type: string
     type: object
   ServerStatisticsData:
@@ -6971,7 +6977,7 @@ definitions:
         description: SSH tunnel destination endpoint.
         type: string
       host:
-        description: 'Host, usually IPv4, for SSH tunnel.'
+        description: Host, usually IPv4, for SSH tunnel.
         type: string
       id:
         description: SSH tunnel unique identifier in UUID format.
@@ -7076,7 +7082,7 @@ definitions:
         description: Application fee percent.
         type: number
       cancel_at_period_end:
-        description: 'Boolean value to determine whether plan cancels at the end of the period, or not.'
+        description: Boolean value to determine whether plan cancels at the end of the period, or not.
         type: boolean
       canceled_at:
         description: Date and time when plan was cancelled.
@@ -7097,7 +7103,7 @@ definitions:
         description: Unique identifier for suscription as UUID.
         type: string
       livemode:
-        description: 'Suscription live, or not.'
+        description: Suscription live, or not.
         type: boolean
       plan:
         description: Plan name.
@@ -7323,20 +7329,20 @@ definitions:
         description: User first name.
         type: string
       id:
-        description: 'User unique identifier, expressed as UUID.'
+        description: User unique identifier, expressed as UUID.
         type: string
       last_name:
         description: User last name.
         type: string
       profile:
-        $ref: '#/definitions/UserProfile'
+        $ref: "#/definitions/UserProfile"
         description: User profile information.
         type: object
       username:
-        description: 'Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'
+        description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
         maxLength: 64
         minLength: 6
-        pattern: '[a-z0-9]{6,64}'
+        pattern: "[a-z0-9]{6,64}"
         type: string
     required:
       - username
@@ -7357,11 +7363,11 @@ definitions:
         description: User password.
         type: string
       profile:
-        $ref: '#/definitions/UserProfile'
-        description: 'User profile information is required, although attribute values may be empty.'
+        $ref: "#/definitions/UserProfile"
+        description: User profile information is required, although attribute values may be empty.
         type: object
       username:
-        description: 'Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.'
+        description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
         type: string
     required:
       - username
@@ -7401,7 +7407,7 @@ definitions:
           type: string
         type: array
       profile:
-        $ref: '#/definitions/UserProfileError'
+        $ref: "#/definitions/UserProfileError"
       username:
         description: Username field errors.
         items:

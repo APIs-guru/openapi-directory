@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: visagecloud.com
@@ -8,21 +8,22 @@ info:
   contact:
     email: office@visagecloud.com
     name: VisageCloud
-    url: 'https://visagecloud.com'
-  description: 'Face search, recognition & classification API. Just make a call to our REST API each time your app needs to access face recognition and classification capabilities.'
+    url: https://visagecloud.com
+  description: Face search, recognition & classification API. Just make a call to our REST API each time your app needs to access face recognition and classification capabilities.
   license:
     name: As per Developer Terms of Use
-    url: 'https://visagecloud.com/developer-terms-of-use'
-  termsOfService: 'https://visagecloud.com/terms-of-use'
+    url: https://visagecloud.com/developer-terms-of-use
+  termsOfService: https://visagecloud.com/terms-of-use
   title: VisageCloud
-  version: '1.1'
+  version: "1.1"
   x-apisguru-categories:
     - search
   x-origin:
     - format: swagger
-      url: 'https://visagecloud.com/v2/api-docs'
-      version: '2.0'
+      url: https://visagecloud.com/v2/api-docs
+      version: "2.0"
   x-providerName: visagecloud.com
+  x-preferred: true
 tags:
   - description: Retrieve analytics for presence and audience
     name: Analytics for presence and audience
@@ -56,17 +57,17 @@ paths:
           required: true
           type: string
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get account information by accessKey and secretKey
       tags:
@@ -105,17 +106,17 @@ paths:
           required: false
           type: string
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get billing information by accessKey and secretKey
       tags:
@@ -142,19 +143,19 @@ paths:
           required: true
           type: string
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Change password for an account using old password
       tags:
@@ -176,19 +177,19 @@ paths:
           required: true
           type: string
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get account information including accessKey and secretKey by email and password
       tags:
@@ -210,7 +211,7 @@ paths:
           required: true
           type: string
         - collectionFormat: multi
-          description: 'The IDs of the faces which you want compared, comma-separated'
+          description: The IDs of the faces which you want compared, comma-separated
           in: query
           items:
             type: string
@@ -226,17 +227,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
-      summary: 'Compare several faces identified by faceHash, without depending on mapping faces to profiles'
+      summary: Compare several faces identified by faceHash, without depending on mapping faces to profiles
       tags:
         - Analysis
   /rest/v1.1/analysis/detection:
@@ -279,12 +280,12 @@ paths:
           name: retentionTime
           required: false
           type: integer
-        - description: 'The URL of the picture, assuming it is served by a third party server. Server should be accesible from the Internet or through another netwoek by VisageCloud infrastructure'
+        - description: The URL of the picture, assuming it is served by a third party server. Server should be accesible from the Internet or through another netwoek by VisageCloud infrastructure
           in: query
           name: pictureURL
           required: false
           type: string
-        - description: 'The multipart/form-data version of the image, in case a direct upload is used. At least one of picture or pictureURL must be present'
+        - description: The multipart/form-data version of the image, in case a direct upload is used. At least one of picture or pictureURL must be present
           in: formData
           name: picture
           required: false
@@ -311,20 +312,20 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: 'Waits until the picture is successfully uploaded, before returning the response back the the client'
+          description: Waits until the picture is successfully uploaded, before returning the response back the the client
           in: query
           name: waitForPictureUpload
           required: false
           type: boolean
         - collectionFormat: multi
-          description: '[For advanced users only] Change feature filters for robustness of feature extraction. Tweaking this parameter may affect per'
+          description: "[For advanced users only] Change feature filters for robustness of feature extraction. Tweaking this parameter may affect per"
           in: query
           items:
             type: string
           name: filters
           required: false
           type: array
-        - description: '[For advanced users only] Options for preprocessing of image.'
+        - description: "[For advanced users only] Options for preprocessing of image."
           in: query
           name: options
           required: false
@@ -332,17 +333,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Perform detection on a given picture or picture URL
       tags:
@@ -373,15 +374,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Retrieve the last *count* operations per current account
       tags:
@@ -487,20 +488,20 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: 'Waits until the picture is successfully uploaded, before returning the response back the the client'
+          description: Waits until the picture is successfully uploaded, before returning the response back the the client
           in: query
           name: waitForPictureUpload
           required: false
           type: boolean
         - collectionFormat: multi
-          description: '[For advanced users only] Change feature filters for robustness of feature extraction. Tweaking this parameter may affect per'
+          description: "[For advanced users only] Change feature filters for robustness of feature extraction. Tweaking this parameter may affect per"
           in: query
           items:
             type: string
           name: filters
           required: false
           type: array
-        - description: '[For advanced users only] Options for preprocessing of image.'
+        - description: "[For advanced users only] Options for preprocessing of image."
           in: query
           name: options
           required: false
@@ -508,17 +509,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Perform labeled recognition on a given picture or picture URL
       tags:
@@ -547,15 +548,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Retrieve a complete analysis object including both detection and recognition information
       tags:
@@ -648,17 +649,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Count individuals in streams or collections
       tags:
@@ -717,19 +718,19 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
-      summary: 'Show audience (based on number of occurrences of each person) breakdown per declared attribute (age, gender).'
+      summary: Show audience (based on number of occurrences of each person) breakdown per declared attribute (age, gender).
       tags:
         - Analytics for presence and audience
   /rest/v1.1/analytics/presence/total:
@@ -779,19 +780,19 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
-      summary: 'Show presence (based on number of occurences of each face) breakdown per declared attribute (age, gender)'
+      summary: Show presence (based on number of occurences of each face) breakdown per declared attribute (age, gender)
       tags:
         - Analytics for presence and audience
   /rest/v1.1/classifier/svm:
@@ -818,15 +819,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Delete existing classifier
       tags:
@@ -854,15 +855,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get classifier full
       tags:
@@ -985,17 +986,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Create new SVM classifier with given name
       tags:
@@ -1024,15 +1025,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get classifer status
       tags:
@@ -1056,15 +1057,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Retrieve all collections
       tags:
@@ -1120,17 +1121,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Create new empty collection with given name
       tags:
@@ -1155,15 +1156,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Retrieve all collections
       tags:
@@ -1193,15 +1194,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Delete existing collection with associated profiles and faces.
       tags:
@@ -1230,15 +1231,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Retrieve existing collection content
       tags:
@@ -1295,17 +1296,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Create new empty collection with given name
       tags:
@@ -1334,15 +1335,15 @@ paths:
       produces:
         - text/plain
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/StreamingResponseBody'
-        '401':
+            $ref: "#/definitions/StreamingResponseBody"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Retrieve collection content for data analysis.
       tags:
@@ -1388,22 +1389,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Change purpose of existing collection
       tags:
         - Collection
-  '/rest/v1.1/collection/{id}':
+  "/rest/v1.1/collection/{id}":
     delete:
       consumes:
         - application/json
@@ -1427,15 +1428,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Delete existing collection with associated profiles and faces.
       tags:
@@ -1463,15 +1464,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Retrieve existing collection content
       tags:
@@ -1520,15 +1521,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Update an existing collection with a given id
       tags:
@@ -1578,22 +1579,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Update an existing collection with a given id
       tags:
         - Collection
-  '/rest/v1.1/collection/{id}/profile':
+  "/rest/v1.1/collection/{id}/profile":
     get:
       consumes:
         - application/json
@@ -1617,15 +1618,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Gets all the profiles associated to a collection
       tags:
@@ -1658,17 +1659,17 @@ paths:
           required: true
           type: string
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Removes classification attributes from a profile
       tags:
@@ -1700,17 +1701,17 @@ paths:
           required: true
           type: string
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Gets classification attributes from a profile
       tags:
@@ -1741,25 +1742,25 @@ paths:
           name: collectionId
           required: true
           type: string
-        - description: 'Comma separated key:value classification attributes'
+        - description: Comma separated key:value classification attributes
           in: query
           name: classificationAttributes
           required: true
           type: string
       produces:
-        - '*/*'
+        - "*/*"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Maps classification attributes to a profile
       tags:
@@ -1793,17 +1794,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
-      summary: 'Gets the enrollment status of a profile: information on whether it is suitable for authentication.'
+      summary: "Gets the enrollment status of a profile: information on whether it is suitable for authentication."
       tags:
         - Profile
   /rest/v1.1/profile/map:
@@ -1822,7 +1823,7 @@ paths:
           name: secretKey
           required: true
           type: string
-        - description: 'Comma separated face hashes, that will be removed from a profile'
+        - description: Comma separated face hashes, that will be removed from a profile
           in: query
           name: faceHashes
           required: true
@@ -1840,17 +1841,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-      summary: 'Removes (unmaps) a list of faces, identified by faceHashes, from a profile, identified by profileId'
+      summary: Removes (unmaps) a list of faces, identified by faceHashes, from a profile, identified by profileId
       tags:
         - Profile
     get:
@@ -1881,15 +1882,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Gets all the faceHashes associated to a profile
       tags:
@@ -1909,7 +1910,7 @@ paths:
           name: secretKey
           required: true
           type: string
-        - description: 'Comma separated face hashes, that will be associated to a profile'
+        - description: Comma separated face hashes, that will be associated to a profile
           in: query
           name: faceHashes
           required: true
@@ -1927,19 +1928,19 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
-      summary: 'Adds (maps) a list of faces, identified by faceHashes, to a profile, identified by profileId'
+      summary: Adds (maps) a list of faces, identified by faceHashes, to a profile, identified by profileId
       tags:
         - Profile
   /rest/v1.1/profile/profile:
@@ -1972,15 +1973,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Deletes a profile and unmaps all its faces
       tags:
@@ -2023,12 +2024,12 @@ paths:
           name: labels
           required: false
           type: array
-        - description: 'Comma separated key:value classification attributes'
+        - description: Comma separated key:value classification attributes
           in: query
           name: classificationAttributes
           required: false
           type: string
-        - description: 'Comma separated key:value details of profile'
+        - description: Comma separated key:value details of profile
           in: query
           name: details
           required: false
@@ -2036,22 +2037,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Creates a new profile with no faces associated to it (empty profile)
       tags:
         - Profile
-  '/rest/v1.1/profile/{id}':
+  "/rest/v1.1/profile/{id}":
     delete:
       consumes:
         - application/json
@@ -2080,15 +2081,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Deletes a profile and unmaps all its faces
       tags:
@@ -2113,7 +2114,7 @@ paths:
           name: collectionId
           required: true
           type: string
-        - default: 'false'
+        - default: "false"
           description: Retrieves the profile with all its associated faces
           in: query
           name: withFaces
@@ -2127,15 +2128,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Retrieves a profile
       tags:
@@ -2183,12 +2184,12 @@ paths:
           name: labels
           required: false
           type: array
-        - description: 'Comma separated key:value classification attributes'
+        - description: Comma separated key:value classification attributes
           in: query
           name: classificationAttributes
           required: false
           type: string
-        - description: 'Comma separated key:value details of profile'
+        - description: Comma separated key:value details of profile
           in: query
           name: details
           required: false
@@ -2196,15 +2197,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Update an existing profile with a given id
       tags:
@@ -2228,15 +2229,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Show status of all streams from account
       tags:
@@ -2275,15 +2276,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get last N recognized individuals from stream
       tags:
@@ -2318,15 +2319,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Cleanup frames older than specified timeframe
       tags:
@@ -2361,18 +2362,18 @@ paths:
       produces:
         - image/jpeg
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
               format: byte
               type: string
             type: array
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get individual frame image
       tags:
@@ -2437,15 +2438,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get last processed N frames from stream
       tags:
@@ -2474,15 +2475,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Start existing stream
       tags:
@@ -2511,15 +2512,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Stop existing stream
       tags:
@@ -2623,22 +2624,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '201':
+            $ref: "#/definitions/RestResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Create new stream with given name
       tags:
         - Stream
-  '/rest/v1.1/stream/{id}':
+  "/rest/v1.1/stream/{id}":
     delete:
       consumes:
         - application/json
@@ -2662,20 +2663,20 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Delete existing stream
       tags:
         - Stream
-  '/rest/v1.1/stream/{streamId}':
+  "/rest/v1.1/stream/{streamId}":
     get:
       consumes:
         - application/json
@@ -2699,15 +2700,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '401':
+            $ref: "#/definitions/RestResponse"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get an existing stream with a given ID
       tags:
@@ -2808,15 +2809,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/RestResponse'
-        '204':
+            $ref: "#/definitions/RestResponse"
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Update an existing stream with a given ID
       tags:

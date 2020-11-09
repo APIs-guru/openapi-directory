@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.redirection.io
@@ -12,12 +12,13 @@ info:
   x-apisguru-categories:
     - hosting
   x-logo:
-    url: 'https://twitter.com/redirectionio/profile_image?size=original'
+    url: https://twitter.com/redirectionio/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://api.redirection.io/docs.json'
-      version: '2.0'
+      url: https://api.redirection.io/docs.json
+      version: "2.0"
   x-providerName: redirection.io
+  x-preferred: true
 securityDefinitions:
   apiKey:
     description: Value for the Authorization header
@@ -40,20 +41,20 @@ paths:
           in: body
           name: agentFlushAggregateRequest
           schema:
-            $ref: '#/definitions/AgentFlushAggregateRequest'
+            $ref: "#/definitions/AgentFlushAggregateRequest"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: AgentFlushAggregateRequest resource created
           schema:
-            $ref: '#/definitions/AgentFlushAggregateRequest'
-        '400':
+            $ref: "#/definitions/AgentFlushAggregateRequest"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a AgentFlushAggregateRequest resource.
       tags:
@@ -70,20 +71,20 @@ paths:
           in: body
           name: agentFlushRequest
           schema:
-            $ref: '#/definitions/AgentFlushRequest'
+            $ref: "#/definitions/AgentFlushRequest"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: AgentFlushRequest resource created
           schema:
-            $ref: '#/definitions/AgentFlushRequest'
-        '400':
+            $ref: "#/definitions/AgentFlushRequest"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a AgentFlushRequest resource.
       tags:
@@ -101,25 +102,25 @@ paths:
           in: body
           name: instance
           schema:
-            $ref: '#/definitions/Instance-Write'
+            $ref: "#/definitions/Instance-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: Instance resource created
           schema:
-            $ref: '#/definitions/Instance-Read'
-        '400':
+            $ref: "#/definitions/Instance-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a Instance resource.
       tags:
         - Instance
-  '/agent-instance-updates/{id}':
+  "/agent-instance-updates/{id}":
     put:
       consumes:
         - application/ld+json
@@ -136,20 +137,20 @@ paths:
           in: body
           name: instance
           schema:
-            $ref: '#/definitions/Instance-Write'
+            $ref: "#/definitions/Instance-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Instance resource updated
           schema:
-            $ref: '#/definitions/Instance-Read'
-        '400':
+            $ref: "#/definitions/Instance-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the Instance resource.
       tags:
@@ -168,11 +169,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Rule collection response
           schema:
             items:
-              $ref: '#/definitions/Rule-Read'
+              $ref: "#/definitions/Rule-Read"
             type: array
       summary: Retrieves the collection of Rule resources.
       tags:
@@ -191,11 +192,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Rule collection response
           schema:
             items:
-              $ref: '#/definitions/Rule-Read'
+              $ref: "#/definitions/Rule-Read"
             type: array
       summary: Retrieves the collection of Rule resources.
       tags:
@@ -214,11 +215,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Rule collection response
           schema:
             items:
-              $ref: '#/definitions/Rule-Read'
+              $ref: "#/definitions/Rule-Read"
             type: array
       summary: Retrieves the collection of Rule resources.
       tags:
@@ -322,16 +323,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: AggregateLog collection response
           schema:
             items:
-              $ref: '#/definitions/AggregateLog-Read'
+              $ref: "#/definitions/AggregateLog-Read"
             type: array
       summary: Retrieves the collection of AggregateLog resources.
       tags:
         - AggregateLog
-  '/aggregate-logs/{id}':
+  "/aggregate-logs/{id}":
     get:
       operationId: getAggregateLogItem
       parameters:
@@ -345,11 +346,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: AggregateLog resource response
           schema:
-            $ref: '#/definitions/AggregateLog-Read'
-        '404':
+            $ref: "#/definitions/AggregateLog-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a AggregateLog resource.
       tags:
@@ -369,16 +370,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: CrawlUrl collection response
           schema:
             items:
-              $ref: '#/definitions/CrawlUrl-Read'
+              $ref: "#/definitions/CrawlUrl-Read"
             type: array
       summary: Retrieves the collection of CrawlUrl resources.
       tags:
         - CrawlUrl
-  '/crawl-urls/{id}':
+  "/crawl-urls/{id}":
     get:
       operationId: getCrawlUrlItem
       parameters:
@@ -392,11 +393,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: CrawlUrl resource response
           schema:
-            $ref: '#/definitions/CrawlUrl-Read'
-        '404':
+            $ref: "#/definitions/CrawlUrl-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a CrawlUrl resource.
       tags:
@@ -414,7 +415,7 @@ paths:
           required: false
           type: string
         - in: query
-          name: 'sort[createdAt]'
+          name: sort[createdAt]
           required: false
           type: string
         - description: The collection page number
@@ -428,11 +429,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Crawl collection response
           schema:
             items:
-              $ref: '#/definitions/Crawl-Read'
+              $ref: "#/definitions/Crawl-Read"
             type: array
       summary: Retrieves the collection of Crawl resources.
       tags:
@@ -449,25 +450,25 @@ paths:
           in: body
           name: crawl
           schema:
-            $ref: '#/definitions/Crawl-Write'
+            $ref: "#/definitions/Crawl-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: Crawl resource created
           schema:
-            $ref: '#/definitions/Crawl'
-        '400':
+            $ref: "#/definitions/Crawl"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a Crawl resource.
       tags:
         - Crawl
-  '/crawls/{id}':
+  "/crawls/{id}":
     get:
       operationId: getCrawlItem
       parameters:
@@ -481,16 +482,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Crawl resource response
           schema:
-            $ref: '#/definitions/Crawl-ReadDetails'
-        '404':
+            $ref: "#/definitions/Crawl-ReadDetails"
+        "404":
           description: Resource not found
       summary: Retrieves a Crawl resource.
       tags:
         - Crawl
-  '/crawls/{id}/cancel':
+  "/crawls/{id}/cancel":
     post:
       consumes:
         - application/ld+json
@@ -507,20 +508,20 @@ paths:
           in: body
           name: crawl
           schema:
-            $ref: '#/definitions/Crawl'
+            $ref: "#/definitions/Crawl"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: Crawl resource created
           schema:
-            $ref: '#/definitions/Crawl-ReadDetails'
-        '400':
+            $ref: "#/definitions/Crawl-ReadDetails"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a Crawl resource.
       tags:
@@ -538,25 +539,25 @@ paths:
           in: body
           name: explainUrl
           schema:
-            $ref: '#/definitions/ExplainUrl-Write'
+            $ref: "#/definitions/ExplainUrl-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: ExplainUrl resource created
           schema:
-            $ref: '#/definitions/ExplainUrl'
-        '400':
+            $ref: "#/definitions/ExplainUrl"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a ExplainUrl resource.
       tags:
         - ExplainUrl
-  '/explain-urls/{id}':
+  "/explain-urls/{id}":
     get:
       operationId: getExplainUrlItem
       parameters:
@@ -570,11 +571,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: ExplainUrl resource response
           schema:
-            $ref: '#/definitions/ExplainUrl'
-        '404':
+            $ref: "#/definitions/ExplainUrl"
+        "404":
           description: Resource not found
       summary: Retrieves a ExplainUrl resource.
       tags:
@@ -588,11 +589,11 @@ paths:
           required: true
           type: string
         - in: query
-          name: 'sort[id]'
+          name: sort[id]
           required: false
           type: string
         - in: query
-          name: 'sort[viewCount]'
+          name: sort[viewCount]
           required: false
           type: string
       produces:
@@ -601,11 +602,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Rule collection response
           schema:
             items:
-              $ref: '#/definitions/Rule-Read'
+              $ref: "#/definitions/Rule-Read"
             type: array
       summary: Retrieves the collection of Rule resources.
       tags:
@@ -623,25 +624,25 @@ paths:
           in: body
           name: impactRuleChange
           schema:
-            $ref: '#/definitions/ImpactRuleChange-Write'
+            $ref: "#/definitions/ImpactRuleChange-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: ImpactRuleChange resource created
           schema:
-            $ref: '#/definitions/ImpactRuleChange-Read'
-        '400':
+            $ref: "#/definitions/ImpactRuleChange-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a ImpactRuleChange resource.
       tags:
         - ImpactRuleChange
-  '/impact-rule-changes/{id}':
+  "/impact-rule-changes/{id}":
     get:
       operationId: getImpactRuleChangeItem
       parameters:
@@ -655,11 +656,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: ImpactRuleChange resource response
           schema:
-            $ref: '#/definitions/ImpactRuleChange-Read'
-        '404':
+            $ref: "#/definitions/ImpactRuleChange-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a ImpactRuleChange resource.
       tags:
@@ -677,25 +678,25 @@ paths:
           in: body
           name: impactSmartList
           schema:
-            $ref: '#/definitions/ImpactSmartList-Write'
+            $ref: "#/definitions/ImpactSmartList-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: ImpactSmartList resource created
           schema:
-            $ref: '#/definitions/ImpactSmartList-Read'
-        '400':
+            $ref: "#/definitions/ImpactSmartList-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a ImpactSmartList resource.
       tags:
         - ImpactSmartList
-  '/impact-smart-lists/{id}':
+  "/impact-smart-lists/{id}":
     get:
       operationId: getImpactSmartListItem
       parameters:
@@ -709,11 +710,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: ImpactSmartList resource response
           schema:
-            $ref: '#/definitions/ImpactSmartList-Read'
-        '404':
+            $ref: "#/definitions/ImpactSmartList-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a ImpactSmartList resource.
       tags:
@@ -737,11 +738,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Import collection response
           schema:
             items:
-              $ref: '#/definitions/Import-Read'
+              $ref: "#/definitions/Import-Read"
             type: array
       summary: Retrieves the collection of Import resources.
       tags:
@@ -758,25 +759,25 @@ paths:
           in: body
           name: import
           schema:
-            $ref: '#/definitions/Import-Write'
+            $ref: "#/definitions/Import-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: Import resource created
           schema:
-            $ref: '#/definitions/Import-Read'
-        '400':
+            $ref: "#/definitions/Import-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a Import resource.
       tags:
         - Import
-  '/imports/{id}':
+  "/imports/{id}":
     get:
       operationId: getImportItem
       parameters:
@@ -790,11 +791,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Import resource response
           schema:
-            $ref: '#/definitions/Import-Read'
-        '404':
+            $ref: "#/definitions/Import-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a Import resource.
       tags:
@@ -813,16 +814,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Instance collection response
           schema:
             items:
-              $ref: '#/definitions/Instance-Read'
+              $ref: "#/definitions/Instance-Read"
             type: array
       summary: Retrieves the collection of Instance resources.
       tags:
         - Instance
-  '/instances/{id}':
+  "/instances/{id}":
     get:
       operationId: getInstanceItem
       parameters:
@@ -836,11 +837,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Instance resource response
           schema:
-            $ref: '#/definitions/Instance-Read'
-        '404':
+            $ref: "#/definitions/Instance-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a Instance resource.
       tags:
@@ -861,25 +862,25 @@ paths:
           in: body
           name: instance
           schema:
-            $ref: '#/definitions/Instance-Write'
+            $ref: "#/definitions/Instance-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Instance resource updated
           schema:
-            $ref: '#/definitions/Instance-Read'
-        '400':
+            $ref: "#/definitions/Instance-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the Instance resource.
       tags:
         - Instance
-  '/instances/{id}/live':
+  "/instances/{id}/live":
     put:
       consumes:
         - application/ld+json
@@ -896,20 +897,20 @@ paths:
           in: body
           name: instance
           schema:
-            $ref: '#/definitions/Instance-Write'
+            $ref: "#/definitions/Instance-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Instance resource updated
           schema:
-            $ref: '#/definitions/Instance-Read'
-        '400':
+            $ref: "#/definitions/Instance-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the Instance resource.
       tags:
@@ -932,11 +933,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Invitation collection response
           schema:
             items:
-              $ref: '#/definitions/Invitation-Read'
+              $ref: "#/definitions/Invitation-Read"
             type: array
       summary: Retrieves the collection of Invitation resources.
       tags:
@@ -953,25 +954,25 @@ paths:
           in: body
           name: invitation
           schema:
-            $ref: '#/definitions/Invitation-Write'
+            $ref: "#/definitions/Invitation-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: Invitation resource created
           schema:
-            $ref: '#/definitions/Invitation-Read'
-        '400':
+            $ref: "#/definitions/Invitation-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a Invitation resource.
       tags:
         - Invitation
-  '/invitations/accept/{token}':
+  "/invitations/accept/{token}":
     post:
       consumes:
         - application/ld+json
@@ -990,25 +991,25 @@ paths:
           name: invitation
           required: true
           schema:
-            $ref: '#/definitions/Invitation'
+            $ref: "#/definitions/Invitation"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: Invitation resource created
           schema:
-            $ref: '#/definitions/Invitation-Read'
-        '400':
+            $ref: "#/definitions/Invitation-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a Invitation resource.
       tags:
         - Invitation
-  '/invitations/{id}':
+  "/invitations/{id}":
     delete:
       operationId: deleteInvitationItem
       parameters:
@@ -1017,9 +1018,9 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Invitation resource deleted
-        '404':
+        "404":
           description: Resource not found
       summary: Removes the Invitation resource.
       tags:
@@ -1037,11 +1038,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Invitation resource response
           schema:
-            $ref: '#/definitions/Invitation-Read'
-        '404':
+            $ref: "#/definitions/Invitation-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a Invitation resource.
       tags:
@@ -1145,16 +1146,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Log collection response
           schema:
             items:
-              $ref: '#/definitions/Log-Read'
+              $ref: "#/definitions/Log-Read"
             type: array
       summary: Retrieves the collection of Log resources.
       tags:
         - Log
-  '/logs/{id}':
+  "/logs/{id}":
     get:
       operationId: getLogItem
       parameters:
@@ -1168,11 +1169,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Log resource response
           schema:
-            $ref: '#/definitions/Log-Read'
-        '404':
+            $ref: "#/definitions/Log-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a Log resource.
       tags:
@@ -1190,25 +1191,25 @@ paths:
           in: body
           name: marker
           schema:
-            $ref: '#/definitions/Marker-Write'
+            $ref: "#/definitions/Marker-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: Marker resource created
           schema:
-            $ref: '#/definitions/Marker'
-        '400':
+            $ref: "#/definitions/Marker"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a Marker resource.
       tags:
         - Marker
-  '/markers/{id}':
+  "/markers/{id}":
     delete:
       operationId: deleteMarkerItem
       parameters:
@@ -1217,9 +1218,9 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Marker resource deleted
-        '404':
+        "404":
           description: Resource not found
       summary: Removes the Marker resource.
       tags:
@@ -1237,11 +1238,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Marker resource response
           schema:
-            $ref: '#/definitions/Marker'
-        '404':
+            $ref: "#/definitions/Marker"
+        "404":
           description: Resource not found
       summary: Retrieves a Marker resource.
       tags:
@@ -1262,20 +1263,20 @@ paths:
           in: body
           name: marker
           schema:
-            $ref: '#/definitions/Marker'
+            $ref: "#/definitions/Marker"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Marker resource updated
           schema:
-            $ref: '#/definitions/Marker'
-        '400':
+            $ref: "#/definitions/Marker"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the Marker resource.
       tags:
@@ -1293,25 +1294,25 @@ paths:
           in: body
           name: matchingUrl
           schema:
-            $ref: '#/definitions/MatchingUrl-Write'
+            $ref: "#/definitions/MatchingUrl-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: MatchingUrl resource created
           schema:
-            $ref: '#/definitions/MatchingUrl-Read'
-        '400':
+            $ref: "#/definitions/MatchingUrl-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a MatchingUrl resource.
       tags:
         - MatchingUrl
-  '/matching-urls/{id}':
+  "/matching-urls/{id}":
     get:
       operationId: getMatchingUrlItem
       parameters:
@@ -1325,11 +1326,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: MatchingUrl resource response
           schema:
-            $ref: '#/definitions/MatchingUrl-Read'
-        '404':
+            $ref: "#/definitions/MatchingUrl-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a MatchingUrl resource.
       tags:
@@ -1349,16 +1350,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Notification collection response
           schema:
             items:
-              $ref: '#/definitions/Notification-Read'
+              $ref: "#/definitions/Notification-Read"
             type: array
       summary: Retrieves the collection of Notification resources.
       tags:
         - Notification
-  '/notifications/{id}':
+  "/notifications/{id}":
     get:
       operationId: getNotificationItem
       parameters:
@@ -1372,11 +1373,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Notification resource response
           schema:
-            $ref: '#/definitions/Notification-Read'
-        '404':
+            $ref: "#/definitions/Notification-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a Notification resource.
       tags:
@@ -1394,25 +1395,25 @@ paths:
           in: body
           name: organization
           schema:
-            $ref: '#/definitions/Organization-Write'
+            $ref: "#/definitions/Organization-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: Organization resource created
           schema:
-            $ref: '#/definitions/Organization-Read'
-        '400':
+            $ref: "#/definitions/Organization-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a Organization resource.
       tags:
         - Organization
-  '/organizations/{id}':
+  "/organizations/{id}":
     delete:
       operationId: deleteOrganizationItem
       parameters:
@@ -1421,9 +1422,9 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Organization resource deleted
-        '404':
+        "404":
           description: Resource not found
       summary: Removes the Organization resource.
       tags:
@@ -1441,11 +1442,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Organization resource response
           schema:
-            $ref: '#/definitions/Organization-Read'
-        '404':
+            $ref: "#/definitions/Organization-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a Organization resource.
       tags:
@@ -1466,20 +1467,20 @@ paths:
           in: body
           name: organization
           schema:
-            $ref: '#/definitions/Organization-Write'
+            $ref: "#/definitions/Organization-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Organization resource updated
           schema:
-            $ref: '#/definitions/Organization-Read'
-        '400':
+            $ref: "#/definitions/Organization-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the Organization resource.
       tags:
@@ -1496,20 +1497,20 @@ paths:
           in: body
           name: agentFlushRequest
           schema:
-            $ref: '#/definitions/AgentFlushRequest'
+            $ref: "#/definitions/AgentFlushRequest"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: AgentFlushRequest resource created
           schema:
-            $ref: '#/definitions/AgentFlushRequest'
-        '400':
+            $ref: "#/definitions/AgentFlushRequest"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a AgentFlushRequest resource.
       tags:
@@ -1524,11 +1525,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Project collection response
           schema:
             items:
-              $ref: '#/definitions/Project-List'
+              $ref: "#/definitions/Project-List"
             type: array
       summary: Retrieves the collection of Project resources.
       tags:
@@ -1545,25 +1546,25 @@ paths:
           in: body
           name: project
           schema:
-            $ref: '#/definitions/Project-CreationWrite'
+            $ref: "#/definitions/Project-CreationWrite"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: Project resource created
           schema:
-            $ref: '#/definitions/Project-Read'
-        '400':
+            $ref: "#/definitions/Project-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a Project resource.
       tags:
         - Project
-  '/projects/{id}':
+  "/projects/{id}":
     delete:
       operationId: deleteProjectItem
       parameters:
@@ -1572,9 +1573,9 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: Project resource deleted
-        '404':
+        "404":
           description: Resource not found
       summary: Removes the Project resource.
       tags:
@@ -1592,11 +1593,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Project resource response
           schema:
-            $ref: '#/definitions/Project-Read'
-        '404':
+            $ref: "#/definitions/Project-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a Project resource.
       tags:
@@ -1617,20 +1618,20 @@ paths:
           in: body
           name: project
           schema:
-            $ref: '#/definitions/Project-Write'
+            $ref: "#/definitions/Project-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Project resource updated
           schema:
-            $ref: '#/definitions/Project-Read'
-        '400':
+            $ref: "#/definitions/Project-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the Project resource.
       tags:
@@ -1644,19 +1645,19 @@ paths:
           required: true
           type: string
         - in: query
-          name: 'createdAt[before]'
+          name: createdAt[before]
           required: false
           type: string
         - in: query
-          name: 'createdAt[strictly_before]'
+          name: createdAt[strictly_before]
           required: false
           type: string
         - in: query
-          name: 'createdAt[after]'
+          name: createdAt[after]
           required: false
           type: string
         - in: query
-          name: 'createdAt[strictly_after]'
+          name: createdAt[strictly_after]
           required: false
           type: string
         - description: The collection page number
@@ -1670,16 +1671,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: PublishHistory collection response
           schema:
             items:
-              $ref: '#/definitions/PublishHistory-Read'
+              $ref: "#/definitions/PublishHistory-Read"
             type: array
       summary: Retrieves the collection of PublishHistory resources.
       tags:
         - PublishHistory
-  '/publish-histories/{id}':
+  "/publish-histories/{id}":
     get:
       operationId: getPublishHistoryItem
       parameters:
@@ -1693,11 +1694,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: PublishHistory resource response
           schema:
-            $ref: '#/definitions/PublishHistory-Read'
-        '404':
+            $ref: "#/definitions/PublishHistory-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a PublishHistory resource.
       tags:
@@ -1721,11 +1722,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: RuleChange collection response
           schema:
             items:
-              $ref: '#/definitions/RuleChange-Read'
+              $ref: "#/definitions/RuleChange-Read"
             type: array
       summary: Retrieves the collection of RuleChange resources.
       tags:
@@ -1742,25 +1743,25 @@ paths:
           in: body
           name: ruleChange
           schema:
-            $ref: '#/definitions/RuleChange-Write'
+            $ref: "#/definitions/RuleChange-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: RuleChange resource created
           schema:
-            $ref: '#/definitions/RuleChange-Read'
-        '400':
+            $ref: "#/definitions/RuleChange-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a RuleChange resource.
       tags:
         - RuleChange
-  '/rule-changes/{id}':
+  "/rule-changes/{id}":
     delete:
       operationId: deleteRuleChangeItem
       parameters:
@@ -1769,9 +1770,9 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: RuleChange resource deleted
-        '404':
+        "404":
           description: Resource not found
       summary: Removes the RuleChange resource.
       tags:
@@ -1789,11 +1790,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: RuleChange resource response
           schema:
-            $ref: '#/definitions/RuleChange-Read'
-        '404':
+            $ref: "#/definitions/RuleChange-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a RuleChange resource.
       tags:
@@ -1807,7 +1808,7 @@ paths:
           required: true
           type: string
         - in: query
-          name: 'sort[createdAt]'
+          name: sort[createdAt]
           required: false
           type: string
         - description: The collection page number
@@ -1821,16 +1822,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: RuleSetVersion collection response
           schema:
             items:
-              $ref: '#/definitions/RuleSetVersion-Read'
+              $ref: "#/definitions/RuleSetVersion-Read"
             type: array
       summary: Retrieves the collection of RuleSetVersion resources.
       tags:
         - RuleSetVersion
-  '/rule-set-versions/{id}':
+  "/rule-set-versions/{id}":
     get:
       operationId: getRuleSetVersionItem
       parameters:
@@ -1844,16 +1845,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: RuleSetVersion resource response
           schema:
-            $ref: '#/definitions/RuleSetVersion-Read'
-        '404':
+            $ref: "#/definitions/RuleSetVersion-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a RuleSetVersion resource.
       tags:
         - RuleSetVersion
-  '/rule-set-versions/{id}/clear':
+  "/rule-set-versions/{id}/clear":
     post:
       consumes:
         - application/ld+json
@@ -1872,25 +1873,25 @@ paths:
           name: ruleSetVersion
           required: true
           schema:
-            $ref: '#/definitions/RuleSetVersion'
+            $ref: "#/definitions/RuleSetVersion"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: RuleSetVersion resource created
           schema:
-            $ref: '#/definitions/RuleSetVersion-Read'
-        '400':
+            $ref: "#/definitions/RuleSetVersion-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Clear a version
       tags:
         - RuleSetVersion
-  '/rule-set-versions/{id}/publish':
+  "/rule-set-versions/{id}/publish":
     post:
       consumes:
         - application/ld+json
@@ -1909,20 +1910,20 @@ paths:
           name: ruleSetVersion
           required: true
           schema:
-            $ref: '#/definitions/RuleSetVersion'
+            $ref: "#/definitions/RuleSetVersion"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: RuleSetVersion resource created
           schema:
-            $ref: '#/definitions/RuleSetVersion-Read'
-        '400':
+            $ref: "#/definitions/RuleSetVersion-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Publish a version
       tags:
@@ -1941,16 +1942,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: RuleStatistic collection response
           schema:
             items:
-              $ref: '#/definitions/RuleStatistic'
+              $ref: "#/definitions/RuleStatistic"
             type: array
       summary: Retrieves the collection of RuleStatistic resources.
       tags:
         - RuleStatistic
-  '/rule-statistics/{id}':
+  "/rule-statistics/{id}":
     get:
       operationId: getRuleStatisticItem
       parameters:
@@ -1964,11 +1965,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: RuleStatistic resource response
           schema:
-            $ref: '#/definitions/RuleStatistic'
-        '404':
+            $ref: "#/definitions/RuleStatistic"
+        "404":
           description: Resource not found
       summary: Retrieves a RuleStatistic resource.
       tags:
@@ -1982,11 +1983,11 @@ paths:
           required: true
           type: string
         - in: query
-          name: 'sort[id]'
+          name: sort[id]
           required: false
           type: string
         - in: query
-          name: 'sort[viewCount]'
+          name: sort[viewCount]
           required: false
           type: string
         - description: The collection page number
@@ -2000,16 +2001,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Rule collection response
           schema:
             items:
-              $ref: '#/definitions/Rule-Read'
+              $ref: "#/definitions/Rule-Read"
             type: array
       summary: Retrieves the collection of Rule resources.
       tags:
         - Rule
-  '/rules/{id}':
+  "/rules/{id}":
     get:
       operationId: getRuleItem
       parameters:
@@ -2023,11 +2024,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: Rule resource response
           schema:
-            $ref: '#/definitions/Rule-Read'
-        '404':
+            $ref: "#/definitions/Rule-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a Rule resource.
       tags:
@@ -2042,16 +2043,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: SmartList collection response
           schema:
             items:
-              $ref: '#/definitions/SmartList'
+              $ref: "#/definitions/SmartList"
             type: array
       summary: Retrieves the collection of SmartList resources.
       tags:
         - SmartList
-  '/smart-lists/{id}':
+  "/smart-lists/{id}":
     get:
       operationId: getSmartListItem
       parameters:
@@ -2065,11 +2066,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: SmartList resource response
           schema:
-            $ref: '#/definitions/SmartList'
-        '404':
+            $ref: "#/definitions/SmartList"
+        "404":
           description: Resource not found
       summary: Retrieves a SmartList resource.
       tags:
@@ -2087,25 +2088,25 @@ paths:
           in: body
           name: userOrganization
           schema:
-            $ref: '#/definitions/UserOrganization-CreationWrite'
+            $ref: "#/definitions/UserOrganization-CreationWrite"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: UserOrganization resource created
           schema:
-            $ref: '#/definitions/UserOrganization-Read'
-        '400':
+            $ref: "#/definitions/UserOrganization-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a UserOrganization resource.
       tags:
         - UserOrganization
-  '/user-organizations/{id}':
+  "/user-organizations/{id}":
     delete:
       operationId: deleteUserOrganizationItem
       parameters:
@@ -2114,9 +2115,9 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: UserOrganization resource deleted
-        '404':
+        "404":
           description: Resource not found
       summary: Removes the UserOrganization resource.
       tags:
@@ -2134,11 +2135,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: UserOrganization resource response
           schema:
-            $ref: '#/definitions/UserOrganization-Read'
-        '404':
+            $ref: "#/definitions/UserOrganization-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a UserOrganization resource.
       tags:
@@ -2159,25 +2160,25 @@ paths:
           in: body
           name: userOrganization
           schema:
-            $ref: '#/definitions/UserOrganization-Write'
+            $ref: "#/definitions/UserOrganization-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: UserOrganization resource updated
           schema:
-            $ref: '#/definitions/UserOrganization-Read'
-        '400':
+            $ref: "#/definitions/UserOrganization-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the UserOrganization resource.
       tags:
         - UserOrganization
-  '/user-project-flatteneds/{id}':
+  "/user-project-flatteneds/{id}":
     get:
       operationId: getUserProjectFlattenedItem
       parameters:
@@ -2191,11 +2192,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: UserProjectFlattened resource response
           schema:
-            $ref: '#/definitions/UserProjectFlattened-Read'
-        '404':
+            $ref: "#/definitions/UserProjectFlattened-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a UserProjectFlattened resource.
       tags:
@@ -2213,25 +2214,25 @@ paths:
           in: body
           name: userProject
           schema:
-            $ref: '#/definitions/UserProject-CreationWrite'
+            $ref: "#/definitions/UserProject-CreationWrite"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: UserProject resource created
           schema:
-            $ref: '#/definitions/UserProject-Read'
-        '400':
+            $ref: "#/definitions/UserProject-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a UserProject resource.
       tags:
         - UserProject
-  '/user-projects/{id}':
+  "/user-projects/{id}":
     delete:
       operationId: deleteUserProjectItem
       parameters:
@@ -2240,9 +2241,9 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: UserProject resource deleted
-        '404':
+        "404":
           description: Resource not found
       summary: Removes the UserProject resource.
       tags:
@@ -2260,11 +2261,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: UserProject resource response
           schema:
-            $ref: '#/definitions/UserProject-Read'
-        '404':
+            $ref: "#/definitions/UserProject-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a UserProject resource.
       tags:
@@ -2285,20 +2286,20 @@ paths:
           in: body
           name: userProject
           schema:
-            $ref: '#/definitions/UserProject-Write'
+            $ref: "#/definitions/UserProject-Write"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: UserProject resource updated
           schema:
-            $ref: '#/definitions/UserProject-Read'
-        '400':
+            $ref: "#/definitions/UserProject-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the UserProject resource.
       tags:
@@ -2321,11 +2322,11 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: User collection response
           schema:
             items:
-              $ref: '#/definitions/User-List'
+              $ref: "#/definitions/User-List"
             type: array
       summary: Retrieves the collection of User resources.
       tags:
@@ -2342,20 +2343,20 @@ paths:
           in: body
           name: user
           schema:
-            $ref: '#/definitions/User-CreationWrite'
+            $ref: "#/definitions/User-CreationWrite"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: User resource created
           schema:
-            $ref: '#/definitions/User-Read'
-        '400':
+            $ref: "#/definitions/User-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a User resource.
       tags:
@@ -2373,25 +2374,25 @@ paths:
           in: body
           name: forgotPasswordRequest
           schema:
-            $ref: '#/definitions/ForgotPasswordRequest'
+            $ref: "#/definitions/ForgotPasswordRequest"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '201':
+        "201":
           description: ForgotPasswordRequest resource created
           schema:
-            $ref: '#/definitions/ForgotPasswordRequest'
-        '400':
+            $ref: "#/definitions/ForgotPasswordRequest"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Creates a ForgotPasswordRequest resource.
       tags:
         - ForgotPasswordRequest
-  '/users/forgot-password/{resetToken}':
+  "/users/forgot-password/{resetToken}":
     put:
       consumes:
         - application/ld+json
@@ -2408,25 +2409,25 @@ paths:
           in: body
           name: user
           schema:
-            $ref: '#/definitions/User-Password'
+            $ref: "#/definitions/User-Password"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: User resource updated
           schema:
-            $ref: '#/definitions/User-Read'
-        '400':
+            $ref: "#/definitions/User-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the User resource.
       tags:
         - User
-  '/users/{id}':
+  "/users/{id}":
     delete:
       operationId: deleteUserItem
       parameters:
@@ -2435,9 +2436,9 @@ paths:
           required: true
           type: string
       responses:
-        '204':
+        "204":
           description: User resource deleted
-        '404':
+        "404":
           description: Resource not found
       summary: Removes the User resource.
       tags:
@@ -2455,16 +2456,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: User resource response
           schema:
-            $ref: '#/definitions/User-Read'
-        '404':
+            $ref: "#/definitions/User-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a User resource.
       tags:
         - User
-  '/users/{id}/confirm-new-email/{newEmailToken}':
+  "/users/{id}/confirm-new-email/{newEmailToken}":
     get:
       operationId: confirm_new_emailUserItem
       parameters:
@@ -2482,16 +2483,16 @@ paths:
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: User resource response
           schema:
-            $ref: '#/definitions/User-Read'
-        '404':
+            $ref: "#/definitions/User-Read"
+        "404":
           description: Resource not found
       summary: Retrieves a User resource.
       tags:
         - User
-  '/users/{id}/edit-email':
+  "/users/{id}/edit-email":
     put:
       consumes:
         - application/ld+json
@@ -2508,25 +2509,25 @@ paths:
           in: body
           name: user
           schema:
-            $ref: '#/definitions/User-EditInfo'
+            $ref: "#/definitions/User-EditInfo"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: User resource updated
           schema:
-            $ref: '#/definitions/User-Read'
-        '400':
+            $ref: "#/definitions/User-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the User resource.
       tags:
         - User
-  '/users/{id}/edit-info':
+  "/users/{id}/edit-info":
     put:
       consumes:
         - application/ld+json
@@ -2543,25 +2544,25 @@ paths:
           in: body
           name: user
           schema:
-            $ref: '#/definitions/User-EditInfo'
+            $ref: "#/definitions/User-EditInfo"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: User resource updated
           schema:
-            $ref: '#/definitions/User-Read'
-        '400':
+            $ref: "#/definitions/User-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the User resource.
       tags:
         - User
-  '/users/{id}/edit-password':
+  "/users/{id}/edit-password":
     put:
       consumes:
         - application/ld+json
@@ -2578,27 +2579,27 @@ paths:
           in: body
           name: user
           schema:
-            $ref: '#/definitions/User-EditInfo'
+            $ref: "#/definitions/User-EditInfo"
       produces:
         - application/ld+json
         - application/json
         - text/html
         - text/csv
       responses:
-        '200':
+        "200":
           description: User resource updated
           schema:
-            $ref: '#/definitions/User-Read'
-        '400':
+            $ref: "#/definitions/User-Read"
+        "400":
           description: Invalid input
-        '404':
+        "404":
           description: Resource not found
       summary: Replaces the User resource.
       tags:
         - User
 definitions:
   AgentFlushAggregateRequest:
-    description: ''
+    description: ""
     properties:
       instanceName: {}
       instanceTime: {}
@@ -2609,7 +2610,7 @@ definitions:
       - instanceTime
     type: object
   AgentFlushRequest:
-    description: ''
+    description: ""
     properties:
       instanceName: {}
       instanceTime:
@@ -2624,7 +2625,7 @@ definitions:
       - instanceTime
     type: object
   AggregateLog-Read:
-    description: ''
+    description: ""
     properties:
       fixed:
         type: boolean
@@ -2642,13 +2643,13 @@ definitions:
         type: integer
     type: object
   Crawl:
-    description: ''
+    description: ""
     properties:
       archived:
         readOnly: true
         type: boolean
       author:
-        $ref: '#/definitions/User'
+        $ref: "#/definitions/User"
       createdAt:
         format: date-time
         readOnly: true
@@ -2685,13 +2686,13 @@ definitions:
         type: string
     type: object
   Crawl-Read:
-    description: ''
+    description: ""
     properties:
       archived:
         readOnly: true
         type: boolean
       author:
-        $ref: '#/definitions/User-Read'
+        $ref: "#/definitions/User-Read"
       createdAt:
         format: date-time
         readOnly: true
@@ -2722,13 +2723,13 @@ definitions:
         type: string
     type: object
   Crawl-ReadDetails:
-    description: ''
+    description: ""
     properties:
       archived:
         readOnly: true
         type: boolean
       author:
-        $ref: '#/definitions/User-ReadDetails'
+        $ref: "#/definitions/User-ReadDetails"
       createdAt:
         format: date-time
         readOnly: true
@@ -2759,7 +2760,7 @@ definitions:
         type: string
     type: object
   Crawl-Write:
-    description: ''
+    description: ""
     properties:
       concurrency:
         type: integer
@@ -2798,7 +2799,7 @@ definitions:
       - maxDuration
     type: object
   CrawlUrl-Read:
-    description: ''
+    description: ""
     properties:
       curlInfo: {}
       depth: {}
@@ -2813,7 +2814,7 @@ definitions:
         type: string
     type: object
   ExplainUrl:
-    description: ''
+    description: ""
     properties:
       explain:
         readOnly: true
@@ -2829,7 +2830,7 @@ definitions:
       - project
     type: object
   ExplainUrl-Write:
-    description: ''
+    description: ""
     properties:
       project:
         type: string
@@ -2840,7 +2841,7 @@ definitions:
       - project
     type: object
   ForgotPasswordRequest:
-    description: ''
+    description: ""
     properties:
       email:
         type: string
@@ -2848,13 +2849,13 @@ definitions:
       - email
     type: object
   ImpactRuleChange-Read:
-    description: ''
+    description: ""
     properties:
       impact:
         readOnly: true
     type: object
   ImpactRuleChange-Write:
-    description: ''
+    description: ""
     properties:
       project:
         type: string
@@ -2865,7 +2866,7 @@ definitions:
       - ruleChange
     type: object
   ImpactSmartList-Read:
-    description: ''
+    description: ""
     properties:
       impact:
         readOnly: true
@@ -2873,7 +2874,7 @@ definitions:
         readOnly: true
     type: object
   ImpactSmartList-Write:
-    description: ''
+    description: ""
     properties:
       project:
         type: string
@@ -2886,7 +2887,7 @@ definitions:
       - smartListId
     type: object
   Import-Read:
-    description: ''
+    description: ""
     properties:
       author:
         readOnly: true
@@ -2926,7 +2927,7 @@ definitions:
       - project
     type: object
   Import-Write:
-    description: ''
+    description: ""
     properties:
       csvContent: {}
       project:
@@ -2936,7 +2937,7 @@ definitions:
       - csvContent
     type: object
   Instance-Read:
-    description: ''
+    description: ""
     properties:
       agentDuration:
         type: integer
@@ -2991,7 +2992,7 @@ definitions:
       - name
     type: object
   Instance-Write:
-    description: ''
+    description: ""
     properties:
       agentDuration:
         type: integer
@@ -3003,7 +3004,7 @@ definitions:
         type: string
     type: object
   Invitation:
-    description: ''
+    description: ""
     properties:
       createdAt:
         format: date-time
@@ -3016,7 +3017,7 @@ definitions:
         type: string
     type: object
   Invitation-Read:
-    description: ''
+    description: ""
     properties:
       createdAt:
         format: date-time
@@ -3029,7 +3030,7 @@ definitions:
         type: string
     type: object
   Invitation-Write:
-    description: ''
+    description: ""
     properties:
       email:
         type: string
@@ -3040,7 +3041,7 @@ definitions:
       - target
     type: object
   Log-Read:
-    description: ''
+    description: ""
     properties:
       createdAt:
         format: date-time
@@ -3077,7 +3078,7 @@ definitions:
       userAgentType: {}
     type: object
   Marker:
-    description: ''
+    description: ""
     properties:
       id:
         type: string
@@ -3104,7 +3105,7 @@ definitions:
       - name
     type: object
   Marker-Read:
-    description: ''
+    description: ""
     properties:
       maximumOccurrence:
         type: integer
@@ -3127,7 +3128,7 @@ definitions:
       - name
     type: object
   Marker-Write:
-    description: ''
+    description: ""
     properties:
       maximumOccurrence:
         type: integer
@@ -3150,13 +3151,13 @@ definitions:
       - name
     type: object
   MatchingUrl-Read:
-    description: ''
+    description: ""
     properties:
       matching:
         readOnly: true
     type: object
   MatchingUrl-Write:
-    description: ''
+    description: ""
     properties:
       project:
         type: string
@@ -3164,7 +3165,7 @@ definitions:
         type: string
     type: object
   Notification-Read:
-    description: ''
+    description: ""
     properties:
       createdAt:
         format: date-time
@@ -3181,7 +3182,7 @@ definitions:
         type: string
     type: object
   Organization:
-    description: ''
+    description: ""
     properties:
       createdAt:
         format: date-time
@@ -3194,7 +3195,7 @@ definitions:
         type: string
       projects:
         items:
-          $ref: '#/definitions/Project'
+          $ref: "#/definitions/Project"
         readOnly: true
         type: array
       slug:
@@ -3206,17 +3207,17 @@ definitions:
         type: string
       userOrganizations:
         items:
-          $ref: '#/definitions/UserOrganization'
+          $ref: "#/definitions/UserOrganization"
         readOnly: true
         type: array
     required:
       - name
     type: object
   Organization-CreationWrite:
-    description: ''
+    description: ""
     type: object
   Organization-List:
-    description: ''
+    description: ""
     properties:
       name:
         type: string
@@ -3227,7 +3228,7 @@ definitions:
       - name
     type: object
   Organization-Read:
-    description: ''
+    description: ""
     properties:
       id:
         readOnly: true
@@ -3241,7 +3242,7 @@ definitions:
       - name
     type: object
   Organization-Write:
-    description: ''
+    description: ""
     properties:
       name:
         type: string
@@ -3249,7 +3250,7 @@ definitions:
       - name
     type: object
   Project:
-    description: ''
+    description: ""
     properties:
       complexRulesCount:
         readOnly: true
@@ -3268,7 +3269,7 @@ definitions:
         readOnly: true
         type: string
       currentVersion:
-        $ref: '#/definitions/RuleSetVersion'
+        $ref: "#/definitions/RuleSetVersion"
         readOnly: true
       id:
         readOnly: true
@@ -3287,7 +3288,7 @@ definitions:
           type: string
         type: array
       organization:
-        $ref: '#/definitions/Organization'
+        $ref: "#/definitions/Organization"
         readOnly: true
       plan:
         readOnly: true
@@ -3314,22 +3315,22 @@ definitions:
         type: string
       userProjects:
         items:
-          $ref: '#/definitions/UserProject'
+          $ref: "#/definitions/UserProject"
         readOnly: true
         type: array
       usersFlattened:
         items:
-          $ref: '#/definitions/UserProjectFlattened'
+          $ref: "#/definitions/UserProjectFlattened"
         readOnly: true
         type: array
       workingVersion:
-        $ref: '#/definitions/RuleSetVersion'
+        $ref: "#/definitions/RuleSetVersion"
         readOnly: true
     required:
       - name
     type: object
   Project-CreationWrite:
-    description: ''
+    description: ""
     properties:
       ignoreProjectTypes:
         items:
@@ -3342,13 +3343,13 @@ definitions:
           type: string
         type: array
       organization:
-        $ref: '#/definitions/Organization-CreationWrite'
+        $ref: "#/definitions/Organization-CreationWrite"
         readOnly: true
     required:
       - name
     type: object
   Project-List:
-    description: ''
+    description: ""
     properties:
       id:
         readOnly: true
@@ -3356,7 +3357,7 @@ definitions:
       name:
         type: string
       organization:
-        $ref: '#/definitions/Organization-List'
+        $ref: "#/definitions/Organization-List"
         readOnly: true
       slug:
         readOnly: true
@@ -3368,7 +3369,7 @@ definitions:
       - name
     type: object
   Project-Read:
-    description: ''
+    description: ""
     properties:
       complexRulesCount:
         readOnly: true
@@ -3387,7 +3388,7 @@ definitions:
         readOnly: true
         type: string
       currentVersion:
-        $ref: '#/definitions/RuleSetVersion-Read'
+        $ref: "#/definitions/RuleSetVersion-Read"
         readOnly: true
       id:
         readOnly: true
@@ -3406,7 +3407,7 @@ definitions:
           type: string
         type: array
       organization:
-        $ref: '#/definitions/Organization-Read'
+        $ref: "#/definitions/Organization-Read"
         readOnly: true
       plan:
         readOnly: true
@@ -3433,22 +3434,22 @@ definitions:
         type: string
       userProjects:
         items:
-          $ref: '#/definitions/UserProject-Read'
+          $ref: "#/definitions/UserProject-Read"
         readOnly: true
         type: array
       usersFlattened:
         items:
-          $ref: '#/definitions/UserProjectFlattened-Read'
+          $ref: "#/definitions/UserProjectFlattened-Read"
         readOnly: true
         type: array
       workingVersion:
-        $ref: '#/definitions/RuleSetVersion-Read'
+        $ref: "#/definitions/RuleSetVersion-Read"
         readOnly: true
     required:
       - name
     type: object
   Project-Write:
-    description: ''
+    description: ""
     properties:
       ignoreProjectTypes:
         items:
@@ -3464,12 +3465,12 @@ definitions:
       - name
     type: object
   PublishHistory-Read:
-    description: ''
+    description: ""
     properties:
       added:
         type: integer
       author:
-        $ref: '#/definitions/User-Read'
+        $ref: "#/definitions/User-Read"
       createdAt:
         format: date-time
         readOnly: true
@@ -3486,10 +3487,10 @@ definitions:
       updated:
         type: integer
       version:
-        $ref: '#/definitions/RuleSetVersion-Read'
+        $ref: "#/definitions/RuleSetVersion-Read"
     type: object
   Rule-Read:
-    description: ''
+    description: ""
     properties:
       actions:
         items:
@@ -3497,10 +3498,10 @@ definitions:
         type: array
       changes:
         items:
-          $ref: '#/definitions/RuleChange-Read'
+          $ref: "#/definitions/RuleChange-Read"
         type: array
       currentChange:
-        $ref: '#/definitions/RuleChange-Read'
+        $ref: "#/definitions/RuleChange-Read"
       examples:
         items:
           type: string
@@ -3511,7 +3512,7 @@ definitions:
         type: string
       markers:
         items:
-          $ref: '#/definitions/Marker-Read'
+          $ref: "#/definitions/Marker-Read"
         type: array
       matchOnResponseStatus:
         type: integer
@@ -3526,7 +3527,7 @@ definitions:
         type: integer
     type: object
   RuleChange-Read:
-    description: ''
+    description: ""
     properties:
       action:
         type: string
@@ -3535,7 +3536,7 @@ definitions:
           type: string
         type: array
       author:
-        $ref: '#/definitions/User-Read'
+        $ref: "#/definitions/User-Read"
         readOnly: true
       createdAt:
         format: date-time
@@ -3552,7 +3553,7 @@ definitions:
         type: string
       markers:
         items:
-          $ref: '#/definitions/Marker-Read'
+          $ref: "#/definitions/Marker-Read"
         type: array
       matchOnResponseStatus:
         type: integer
@@ -3568,7 +3569,7 @@ definitions:
       - rank
     type: object
   RuleChange-Write:
-    description: ''
+    description: ""
     properties:
       action:
         type: string
@@ -3584,7 +3585,7 @@ definitions:
         type: string
       markers:
         items:
-          $ref: '#/definitions/Marker-Write'
+          $ref: "#/definitions/Marker-Write"
         type: array
       matchOnResponseStatus:
         type: integer
@@ -3600,7 +3601,7 @@ definitions:
       - rank
     type: object
   RuleSetVersion:
-    description: ''
+    description: ""
     properties:
       createdAt:
         format: date-time
@@ -3626,7 +3627,7 @@ definitions:
         type: boolean
     type: object
   RuleSetVersion-Read:
-    description: ''
+    description: ""
     properties:
       createdAt:
         format: date-time
@@ -3652,7 +3653,7 @@ definitions:
         type: boolean
     type: object
   RuleStatistic:
-    description: ''
+    description: ""
     properties:
       id:
         type: string
@@ -3660,7 +3661,7 @@ definitions:
         type: string
     type: object
   SmartList:
-    description: ''
+    description: ""
     properties:
       defaultVersion:
         readOnly: true
@@ -3684,11 +3685,11 @@ definitions:
         type: array
     type: object
   User:
-    description: ''
+    description: ""
     properties:
       currentPassword: {}
       defaultOrganization:
-        $ref: '#/definitions/Organization'
+        $ref: "#/definitions/Organization"
       email:
         type: string
       id:
@@ -3719,7 +3720,7 @@ definitions:
         type: string
       userOrganizations:
         items:
-          $ref: '#/definitions/UserOrganization'
+          $ref: "#/definitions/UserOrganization"
         type: array
       userProjects:
         items:
@@ -3730,7 +3731,7 @@ definitions:
       - name
     type: object
   User-CreationWrite:
-    description: ''
+    description: ""
     properties:
       email:
         type: string
@@ -3741,7 +3742,7 @@ definitions:
       - name
     type: object
   User-EditInfo:
-    description: ''
+    description: ""
     properties:
       name:
         type: string
@@ -3749,7 +3750,7 @@ definitions:
       - name
     type: object
   User-List:
-    description: ''
+    description: ""
     properties:
       email:
         type: string
@@ -3763,14 +3764,14 @@ definitions:
       - name
     type: object
   User-Password:
-    description: ''
+    description: ""
     properties:
       plainPassword:
         type: string
       plainPasswordRepeat: {}
     type: object
   User-Read:
-    description: ''
+    description: ""
     properties:
       name:
         type: string
@@ -3778,7 +3779,7 @@ definitions:
       - name
     type: object
   User-ReadDetails:
-    description: ''
+    description: ""
     properties:
       name:
         type: string
@@ -3786,7 +3787,7 @@ definitions:
       - name
     type: object
   UserOrganization:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:
@@ -3805,7 +3806,7 @@ definitions:
       - functionalRoles
     type: object
   UserOrganization-CreationWrite:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:
@@ -3821,7 +3822,7 @@ definitions:
       - functionalRoles
     type: object
   UserOrganization-Read:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:
@@ -3840,7 +3841,7 @@ definitions:
       - functionalRoles
     type: object
   UserOrganization-Write:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:
@@ -3850,7 +3851,7 @@ definitions:
       - functionalRoles
     type: object
   UserProject:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:
@@ -3869,7 +3870,7 @@ definitions:
       - project
     type: object
   UserProject-CreationWrite:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:
@@ -3885,7 +3886,7 @@ definitions:
       - functionalRoles
     type: object
   UserProject-Read:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:
@@ -3901,7 +3902,7 @@ definitions:
       - functionalRoles
     type: object
   UserProject-Write:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:
@@ -3911,7 +3912,7 @@ definitions:
       - functionalRoles
     type: object
   UserProjectFlattened:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:
@@ -3923,7 +3924,7 @@ definitions:
         type: string
     type: object
   UserProjectFlattened-Read:
-    description: ''
+    description: ""
     properties:
       functionalRoles:
         items:

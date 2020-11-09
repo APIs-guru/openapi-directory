@@ -1,22 +1,23 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: live-api.letmc.com
 info:
   contact:
     x-twitter: agentOSSoftware
-  title: 'LetMC Api V2, Customer Login'
+  title: LetMC Api V2, Customer Login
   version: v2-customer
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/agentOSSoftware/profile_image?size=original'
+    url: https://twitter.com/agentOSSoftware/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://live-api.letmc.com/swagger/docs/v2-customer'
-      version: '2.0'
+      url: https://live-api.letmc.com/swagger/docs/v2-customer
+      version: "2.0"
   x-providerName: letmc.com
   x-serviceName: customer
+  x-preferred: true
 consumes: []
 securityDefinitions:
   apiKey:
@@ -28,7 +29,7 @@ securityDefinitions:
     description: Basic HTTP Authentication
     type: basic
 paths:
-  '/v2/customer/{shortName}/branch/branches':
+  "/v2/customer/{shortName}/branch/branches":
     get:
       deprecated: false
       parameters:
@@ -55,14 +56,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BranchModelResults'
+            $ref: "#/definitions/BranchModelResults"
       summary: All branches defined for a company
       tags:
         - BranchController
-  '/v2/customer/{shortName}/branch/branches/{branchID}':
+  "/v2/customer/{shortName}/branch/branches/{branchID}":
     get:
       deprecated: false
       parameters:
@@ -82,14 +83,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/BranchModel'
+            $ref: "#/definitions/BranchModel"
       summary: Get a specific branch given its unique Object ID (OID)
       tags:
         - BranchController
-  '/v2/customer/{shortName}/landlord/accounting':
+  "/v2/customer/{shortName}/landlord/accounting":
     get:
       deprecated: false
       operationId: LandlordController_GetAccounts
@@ -108,14 +109,14 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/LandlordAccountingModel'
+            $ref: "#/definitions/LandlordAccountingModel"
       summary: Get the accounting details for the landlord.
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/document':
+  "/v2/customer/{shortName}/landlord/document":
     get:
       deprecated: false
       operationId: LandlordController_GetDocument
@@ -141,14 +142,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Download a Document
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/inventory':
+  "/v2/customer/{shortName}/landlord/inventory":
     get:
       deprecated: false
       operationId: LandlordController_GetInvetoryReport
@@ -174,14 +175,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Generate a Inventory PDF for a tenancy
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/invoice':
+  "/v2/customer/{shortName}/landlord/invoice":
     get:
       deprecated: false
       operationId: LandlordController_GetInvoice
@@ -207,14 +208,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Get an invoice pdf belonging to the landlord.
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/landlordcrmentries':
+  "/v2/customer/{shortName}/landlord/landlordcrmentries":
     get:
       deprecated: false
       operationId: LandlordController_GetLandlordCrmEntries
@@ -235,16 +236,16 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             items:
-              $ref: '#/definitions/LandlordCrmEntry'
+              $ref: "#/definitions/LandlordCrmEntry"
             type: array
       summary: Retrieve landlord's CRM ID
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/maintenance':
+  "/v2/customer/{shortName}/landlord/maintenance":
     get:
       deprecated: false
       operationId: LandlordController_GetMaintenanceJobs
@@ -263,14 +264,14 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/LandlordMaintenanceModel'
+            $ref: "#/definitions/LandlordMaintenanceModel"
       summary: Get Active maintenance jobs.
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/profitloss':
+  "/v2/customer/{shortName}/landlord/profitloss":
     get:
       deprecated: false
       operationId: LandlordController_GetProfitLossReport
@@ -289,14 +290,14 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/LandlordProfitLossModel'
+            $ref: "#/definitions/LandlordProfitLossModel"
       summary: Generate a Profit and Loss Report
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/rentarrears':
+  "/v2/customer/{shortName}/landlord/rentarrears":
     get:
       deprecated: false
       operationId: LandlordController_GetRentArrears
@@ -315,14 +316,14 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/LandlordRentArrearsModel'
+            $ref: "#/definitions/LandlordRentArrearsModel"
       summary: Rent Arrears
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/sas':
+  "/v2/customer/{shortName}/landlord/sas":
     get:
       deprecated: false
       operationId: LandlordController_GetSASReport
@@ -349,14 +350,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Generate a Self Assessment Tax Report
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/settings':
+  "/v2/customer/{shortName}/landlord/settings":
     get:
       deprecated: false
       operationId: LandlordController_GetSettings
@@ -375,14 +376,14 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/LandlordSettingsModel'
+            $ref: "#/definitions/LandlordSettingsModel"
       summary: Get contact details of all linked landlords.
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/summary':
+  "/v2/customer/{shortName}/landlord/summary":
     get:
       deprecated: false
       operationId: LandlordController_GetSummaryDetails
@@ -401,14 +402,14 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/LandlordSummaryModel'
+            $ref: "#/definitions/LandlordSummaryModel"
       summary: Get the summary details for the landlord.
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/tenancy':
+  "/v2/customer/{shortName}/landlord/tenancy":
     get:
       deprecated: false
       operationId: LandlordController_GetTenancy
@@ -432,14 +433,14 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/LandlordTenancyModel'
+            $ref: "#/definitions/LandlordTenancyModel"
       summary: Get tenancy details.
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/landlord/tenancyagreement':
+  "/v2/customer/{shortName}/landlord/tenancyagreement":
     get:
       deprecated: false
       operationId: LandlordController_GetTenancyAgreementReport
@@ -465,14 +466,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Generate a Tenancy Agreement Copy (PDF)
       tags:
         - LandlordController
-  '/v2/customer/{shortName}/photo/download':
+  "/v2/customer/{shortName}/photo/download":
     get:
       deprecated: false
       operationId: PhotoController_GetPhotoDownload
@@ -510,14 +511,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            $ref: "#/definitions/Object"
       summary: Downloads the photo of a property given the photo ID.
       tags:
         - PhotoController
-  '/v2/customer/{shortName}/property/{propertyID}/photos':
+  "/v2/customer/{shortName}/property/{propertyID}/photos":
     get:
       deprecated: false
       operationId: PropertyController_GetPropertiesPhotos
@@ -555,14 +556,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/LandlordPhotoModelResults'
-      summary: 'A collection showing all the photos linked to a specific block, property or room'
+            $ref: "#/definitions/LandlordPhotoModelResults"
+      summary: A collection showing all the photos linked to a specific block, property or room
       tags:
         - PropertyController
-  '/v2/customer/{shortName}/session':
+  "/v2/customer/{shortName}/session":
     delete:
       deprecated: false
       operationId: SessionController_Logout
@@ -579,7 +580,7 @@ paths:
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Logout a customer previously logged in via the Login endpoint.
       tags:
@@ -604,7 +605,7 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
@@ -636,14 +637,14 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
       summary: Login as a customer given their username and password.
       tags:
         - SessionController
-  '/v2/customer/{shortName}/session/createlandlordlogin':
+  "/v2/customer/{shortName}/session/createlandlordlogin":
     post:
       deprecated: false
       operationId: SessionController_CreateLandlordLogin
@@ -690,12 +691,12 @@ paths:
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Send a request to the in-tray to create a landlord login.
       tags:
         - SessionController
-  '/v2/customer/{shortName}/session/password':
+  "/v2/customer/{shortName}/session/password":
     put:
       deprecated: false
       operationId: SessionController_ChangePassword
@@ -722,12 +723,12 @@ paths:
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Change the password of a customer given their existing and new password.
       tags:
         - SessionController
-  '/v2/customer/{shortName}/session/resetpassword':
+  "/v2/customer/{shortName}/session/resetpassword":
     post:
       deprecated: false
       operationId: SessionController_ResetPassword
@@ -744,7 +745,7 @@ paths:
           type: string
       produces: []
       responses:
-        '204':
+        "204":
           description: No Content
       summary: Reset the customer's password. An email will be sent out to reset.
       tags:
@@ -766,7 +767,7 @@ definitions:
         description: Branch address line 4.
         type: string
       CompanyName:
-        description: 'The relevant company name, if not the one specified on the branch then the one on company.'
+        description: The relevant company name, if not the one specified on the branch then the one on company.
         type: string
       County:
         description: County
@@ -806,10 +807,10 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/BranchModel'
+          $ref: "#/definitions/BranchModel"
         type: array
     type: object
-  'KeyValuePair[String,String]':
+  "KeyValuePair[String,String]":
     properties:
       key:
         type: string
@@ -863,12 +864,12 @@ definitions:
       PaymentHistory:
         description: Payment History
         items:
-          $ref: '#/definitions/LandlordAccountingEntryModel'
+          $ref: "#/definitions/LandlordAccountingEntryModel"
         type: array
       Statements:
         description: Statements
         items:
-          $ref: '#/definitions/LandlordAccountingInvoiceModel'
+          $ref: "#/definitions/LandlordAccountingInvoiceModel"
         type: array
     type: object
   LandlordChaseNoteModel:
@@ -946,7 +947,7 @@ definitions:
       Files:
         description: Files
         items:
-          $ref: '#/definitions/LettingsLandlordDocument'
+          $ref: "#/definitions/LettingsLandlordDocument"
         type: array
       Status:
         description: Status.
@@ -981,7 +982,7 @@ definitions:
       Jobs:
         description: Maintenance Jobs.
         items:
-          $ref: '#/definitions/LandlordMaintenanceJobModel'
+          $ref: "#/definitions/LandlordMaintenanceJobModel"
         type: array
     type: object
   LandlordMaintenancePreferenceModel:
@@ -1029,20 +1030,20 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/LandlordPhotoModel'
+          $ref: "#/definitions/LandlordPhotoModel"
         type: array
     type: object
   LandlordProfitLossModel:
     description: Class to represent proffit loss report.
     properties:
       DirectCosts:
-        $ref: '#/definitions/LandlordProfitLossSectionModel'
+        $ref: "#/definitions/LandlordProfitLossSectionModel"
         description: Direct Costs Section
       GrossProfitLoss:
-        $ref: '#/definitions/LandlordProfitLossSectionModel'
+        $ref: "#/definitions/LandlordProfitLossSectionModel"
         description: Direct Costs Section
       Income:
-        $ref: '#/definitions/LandlordProfitLossSectionModel'
+        $ref: "#/definitions/LandlordProfitLossSectionModel"
         description: Income Section
     type: object
   LandlordProfitLossRowModel:
@@ -1051,7 +1052,7 @@ definitions:
       MonthTotals:
         description: Month Totals
         items:
-          $ref: '#/definitions/KeyValuePair[String,String]'
+          $ref: "#/definitions/KeyValuePair[String,String]"
         type: array
       NominalCode:
         description: Nominal Code
@@ -1069,7 +1070,7 @@ definitions:
       Rows:
         description: Rows.
         items:
-          $ref: '#/definitions/LandlordProfitLossRowModel'
+          $ref: "#/definitions/LandlordProfitLossRowModel"
         type: array
     type: object
   LandlordRentArrearsModel:
@@ -1078,7 +1079,7 @@ definitions:
       ChaseNotes:
         description: Chase Notes
         items:
-          $ref: '#/definitions/LandlordChaseNoteModel'
+          $ref: "#/definitions/LandlordChaseNoteModel"
         type: array
       RentCollected:
         description: Rent Collected
@@ -1087,7 +1088,7 @@ definitions:
       RentOutstanding:
         description: Outstanding Rent
         items:
-          $ref: '#/definitions/LandlordRentOustandingItem'
+          $ref: "#/definitions/LandlordRentOustandingItem"
         type: array
       TotalRentArrears:
         description: Rent Arrears
@@ -1121,7 +1122,7 @@ definitions:
       LinkedAccounts:
         description: Linked Accounts
         items:
-          $ref: '#/definitions/LandlordDetailsModel'
+          $ref: "#/definitions/LandlordDetailsModel"
         type: array
     type: object
   LandlordSummaryModel:
@@ -1138,7 +1139,7 @@ definitions:
       Tenancies:
         description: Tenancies
         items:
-          $ref: '#/definitions/LandlordSummaryTenancyModel'
+          $ref: "#/definitions/LandlordSummaryTenancyModel"
         type: array
       TotalRentArrears:
         description: Rent Arrears
@@ -1207,7 +1208,7 @@ definitions:
       Certificates:
         description: Maintenance Certificates.
         items:
-          $ref: '#/definitions/LandlordMaintenanceCertificateModel'
+          $ref: "#/definitions/LandlordMaintenanceCertificateModel"
         type: array
       FixedDate:
         description: Fixed Date
@@ -1222,7 +1223,7 @@ definitions:
       Inspections:
         description: Inspections
         items:
-          $ref: '#/definitions/LandlordLettingsInspectionModel'
+          $ref: "#/definitions/LandlordLettingsInspectionModel"
         type: array
       ManagedRent:
         description: State of the tenancy
@@ -1230,7 +1231,7 @@ definitions:
       Preferences:
         description: Maintenance Preferences.
         items:
-          $ref: '#/definitions/LandlordMaintenancePreferenceModel'
+          $ref: "#/definitions/LandlordMaintenancePreferenceModel"
         type: array
       PreviousRentAmount:
         description: Previous Rent Amount

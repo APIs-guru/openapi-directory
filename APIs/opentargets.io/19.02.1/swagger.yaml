@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: platform-api.opentargets.io
@@ -7,69 +7,99 @@ info:
   contact:
     email: support@targetvalidation.org
     name: Open Targets Platform team
-  description: |
+  description: >
     ### The Open Targets Platform REST API
+
 
     The Open Targets Platform API ('Application Programming Interface') allows programmatic retrieval of the Open Targets Platform data via a set of [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) services.
 
+
     You can make calls to the latest version of our API using the base URL `https://platform-api.opentargets.io/v3/platform`. Please make sure you use `https` instead of the unencrypted `http` calls, which we do not accept.
+
 
     We list below the methods available to query our data directly from the API, followed by an interactive interface that you can use to try out the parameters and execute the REST-API calls.
 
+
     For every request you create, the interactive interface will display both a [curl](https://curl.haxx.se/) command and a request URL that you can use to ensure you get the expected response before using your application or workflow. 
+
 
     Check our documentation for some [API tutorials](https://docs.targetvalidation.org/tutorials/api-tutorials) and [get in touch](mailto:support@targetvalidation.org) if you have any questions.
 
+
     ### Available Methods
+
 
     The available methods can be grouped in three types:
 
+
     * __public__ - Methods that serve the core set of our data. These are stable and we fully supported them.
+
     * __private__ - Methods used by the web app to serve additional data not specific to our platform. These methods
+
     may change without notice and should be used with caution.
+
     * __utils__ - Methods to get statistics and technical data about our API.
+
 
     ### Supported formats
 
+
     The methods above are all available via a `GET` request, and will serve outputs as `JSON`.
+
 
     Alternative output formats, such `xml`, `csv` and `tab`, are also available for some of the methods. However alternative output formats are not supported in interactive interface below where the response will be always in `JSON.
 
+
     If you have complex queries with large number of parameters, you should use a `POST` request instead of  `GET`. 
+
     `POST` methods require a body encoded as `json`. When querying for a specific disease using the latest version of the API, your call would look like the example below:
 
+
     ```sh
+
     curl -X POST -d '{"disease":["EFO_0000253"]}' --header 'Content-Type: application/json' https://platform-api.opentargets.io/v3/platform/public/evidence/filter
+
     ```
+
     ### How to interpret a response
+
 
     Each HTTPS response will serve data in headers and body. The headers will give you details about your query, such as how long it took to run.
 
+
     In the body of the response, you will find the data you have requested for in `JSON` format. The [jq](https://stedolan.github.io/jq/) program is a useful tool to parse the json response while on the command line.
 
+
     ```sh
+
     curl https://platform-api.opentargets.io/v3/platform/public/association/filter\?target\=ENSG00000157764 | jq
+
     ```
 
+
     We do not analyse the nature of any specific API queries except for the purposes of improving the performance of our API.
+
     Read more in our [privacy section](https://www.targetvalidation.org/terms_of_use#privacy).
 
+
     How can we make the Open Targets Platform API more useful to you? Would you like additional methods to be implemented?
+
     Please [get in touch](mailto:support@targetvalidation.org) and send your suggestions.
   license:
     name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
   title: Open Targets Platform
   version: 19.02.1
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://www.targetvalidation.org/imgs/logo/ot_logo_webheader.svg'
+    url: https://www.targetvalidation.org/imgs/logo/ot_logo_webheader.svg
   x-origin:
     - format: swagger
-      url: 'http://api.opentargets.io/v3/platform/swagger'
-      version: '2.0'
+      url: http://api.opentargets.io/v3/platform/swagger
+      version: "2.0"
   x-providerName: opentargets.io
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -98,7 +128,7 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Redoc API documentation file
       summary: Browse API documentation
       tags:
@@ -110,14 +140,14 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Swagger-UI API documentation file
       summary: Browse interactive API documentation
       tags:
         - private
   /platform/private/autocomplete:
     get:
-      description: |
+      description: >
         Search for the closest term to autocomplete in the search box.
       operationId: getAutocomplete
       parameters:
@@ -132,14 +162,14 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get `autocomplete` objects.
       tags:
         - private
   /platform/private/besthitsearch:
     post:
-      description: |
+      description: >
         Fire the search method for multiple strings
       operationId: postBestHitSearch
       parameters:
@@ -150,14 +180,14 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Find the best hit
       tags:
         - private
   /platform/private/disease:
     post:
-      description: |
+      description: >
         Get `disease` objects.
       operationId: postDiseaseById
       parameters:
@@ -166,19 +196,20 @@ paths:
           name: body
           required: true
           schema:
-            example: |
+            example: >
               {"disease":["disease1", "disease2"],
+
               "facets" = "true"}
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Find information about a list of diseases
       tags:
         - private
-  '/platform/private/disease/{disease}':
+  "/platform/private/disease/{disease}":
     get:
-      description: |
+      description: >
         Get `disease` objects.
       operationId: getDiseaseById
       parameters:
@@ -188,14 +219,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Find information about a disease
       tags:
         - private
-  '/platform/private/drug/{DRUG_ID}':
+  "/platform/private/drug/{DRUG_ID}":
     get:
-      description: |
+      description: >
         Get `drug` objects.
       operationId: getDrugByID
       parameters:
@@ -204,31 +235,31 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get drug by ID
       tags:
         - private
-  '/platform/private/eco/{ECO_ID}':
+  "/platform/private/eco/{ECO_ID}":
     get:
-      description: |
+      description: >
         Get `ECO` objects.
       operationId: getECObyID
       parameters:
-        - description: 'An [evidence code ontology](http://www.ebi.ac.uk/ols/v2/browse.do?ontName=ECO) ID.'
+        - description: An [evidence code ontology](http://www.ebi.ac.uk/ols/v2/browse.do?ontName=ECO) ID.
           in: path
           name: ECO_ID
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get evidence code by ID
       tags:
         - private
   /platform/private/enrichment/targets:
     post:
-      description: |
+      description: >
         Returns an enrichment analysis for a list of targets passed in the body
       operationId: postEnrichmentTarget
       parameters:
@@ -237,20 +268,20 @@ paths:
           name: body
           required: true
           schema:
-            example: |
+            example: >
               {"target" : ["ENSG00000001", "ENSG00000002"],
                "pvalue" : 0.001,
                "size" : 20}
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Enrichment analysis
       tags:
         - private
   /platform/private/quicksearch:
     get:
-      description: |
+      description: >
         Get `search-result` objects. Enables search bar functionality.
       operationId: getQuickSearch
       parameters:
@@ -265,14 +296,14 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Search most relevant results
       tags:
         - private
   /platform/private/relation:
     post:
-      description: |
+      description: >
         Get `relation` objects.
       operationId: postRelation
       parameters:
@@ -281,18 +312,18 @@ paths:
           name: body
           required: true
           schema:
-            example: |
+            example: >
               {"subject":["gene1", "gene2"]}
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Find related entities
       tags:
         - private
-  '/platform/private/relation/disease/{disease}':
+  "/platform/private/relation/disease/{disease}":
     get:
-      description: |
+      description: >
         Get `relation` objects starting from diseases.
       operationId: getRelationByEFOID
       parameters:
@@ -302,14 +333,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Find related entities by disease
       tags:
         - private
-  '/platform/private/relation/target/{target}':
+  "/platform/private/relation/target/{target}":
     get:
-      description: |
+      description: >
         Get `relation` objects starting from diseases.
       operationId: getRelationByENSGID
       parameters:
@@ -319,14 +350,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Find related entities by target
       tags:
         - private
   /platform/private/target:
     post:
-      description: |
+      description: >
         Get `target` objects. Used for the target profile page.
       operationId: postTargetByENSGID
       parameters:
@@ -335,21 +366,24 @@ paths:
           name: body
           required: true
           schema:
-            example: |
+            example: >
               {"target":["target1", "target2"],
+
               "facets" = "true"}
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Find information about a list of targets
       tags:
         - private
       x-code-samples:
         - lang: Python
-          source: |
+          source: >
             import requests
+
             r = requests.get('http://api.opentargets.io/v3/platform/private/target/ENSG00000064687')
+
             for ph in r.json()['mouse_phenotypes'][0]['phenotypes']:
                     try:
                         for link in ph['genotype_phenotype']:
@@ -362,7 +396,7 @@ paths:
                         pass
   /platform/private/target/expression:
     get:
-      description: |
+      description: >
         Get `gene-expression` objects.
       operationId: getTargetExpressionByENSGID
       parameters:
@@ -372,13 +406,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Query expression levels
       tags:
         - private
     post:
-      description: |
+      description: >
         Get `gene-expression` objects.
       operationId: postTargetExpressionByENSGID
       parameters:
@@ -387,18 +421,18 @@ paths:
           name: body
           required: true
           schema:
-            example: |
+            example: >
               {"gene":["gene1", "gene2"]}
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Batch query expression levels
       tags:
         - private
-  '/platform/private/target/{target}':
+  "/platform/private/target/{target}":
     get:
-      description: |
+      description: >
         Get `target` objects.
       operationId: getTargetByENSGID
       parameters:
@@ -408,14 +442,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Find information about a target
       tags:
         - private
   /platform/public/association:
     get:
-      description: |
+      description: >
         Once we integrate all evidence connecting a target to a specific disease, we
          compute an association score by the means of an harmonic sum. This *association score* provides
          an indication of how strong the evidence behind each connection is and can be
@@ -432,7 +466,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get association by id
       tags:
@@ -440,9 +474,11 @@ paths:
         - retrieve
   /platform/public/association/filter:
     get:
-      description: |
+      description: >
         More complex queries for associations scores and objects can be done using
+
         this method, which allows to sort in different order, restrict to a specific class
+
         of diseases or targets, as well as filtering results by score and associated pathways.
       operationId: getAssociationFilter
       parameters:
@@ -486,12 +522,12 @@ paths:
           name: uniprotkw
           required: false
           type: string
-        - description: 'If `true`, it returns associations that have at least one direct evidence connecting the target and the disease. If `false` it only returns associations for which there is no direct evidence connecting the target and the disease, but only evidence connecting the target to a children of the disease in the EFO ontology.'
+        - description: If `true`, it returns associations that have at least one direct evidence connecting the target and the disease. If `false` it only returns associations for which there is no direct evidence connecting the target and the disease, but only evidence connecting the target to a children of the disease in the EFO ontology.
           in: query
           name: direct
           required: false
           type: boolean
-        - description: 'Type of data structure to return. Can be ''full'', ''simple'', ''ids'', or ''count''.'
+        - description: Type of data structure to return. Can be 'full', 'simple', 'ids', or 'count'.
           in: query
           name: datastructure
           required: false
@@ -508,7 +544,7 @@ paths:
           required: false
           type: boolean
         - default: 0
-          description: 'Filter by minimum score value. The default is 0, but using 0.2 is a good trade-off to filter lower quality data points.'
+          description: Filter by minimum score value. The default is 0, but using 0.2 is a good trade-off to filter lower quality data points.
           format: float
           in: query
           name: scorevalue_min
@@ -525,7 +561,7 @@ paths:
           name: scorevalue_types
           required: false
           type: string
-        - description: 'Maximum amount of results to return. Defaults to 10, max is 10000.'
+        - description: Maximum amount of results to return. Defaults to 10, max is 10000.
           format: integer
           in: query
           name: size
@@ -537,28 +573,31 @@ paths:
           name: from
           required: false
           type: number
-        - description: 'Format to get the data back. Can be ''json'', ''xml'', ''tab'' or ''csv''. **Note** that this option can only be used when calling the API directly and will not work in this page. The response here will always be JSON.'
+        - description: Format to get the data back. Can be 'json', 'xml', 'tab' or 'csv'. **Note** that this option can only be used when calling the API directly and will not work in this page. The response here will always be JSON.
           in: query
           name: format
           required: false
           type: string
-        - description: |
+        - description: >
             Sort by the given score type. Defaults to 'overall' and descending order. Use '~' prefix to do ascending
+
             order e.g. '~overall'. You will call a data type score like: 'datatypes.literature', and a data source as
+
             'datasources.gwas'. Supports multiple entries.
           in: query
           name: sort
           required: false
           type: string
-        - description: |
+        - description: >
             Restrict the filtered results to those matching the passed string. The matching is done with a
+
             phrase match prefix.
           in: query
           name: search
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Filter available associations
       tags:
@@ -566,11 +605,12 @@ paths:
         - filter
       x-code-samples:
         - lang: httpie
-          source: |
+          source: >
             http https://www.targetvalidation.org/api/latest/public/association/filter target==ENSG00000167207 disease==EFO_0003767
     post:
-      description: |
+      description: >
         Complex queries and filters for association objects can also be submitted using a JSON
+
         object and the equivalent POST method.
       operationId: postAssociationFilter
       parameters:
@@ -579,11 +619,11 @@ paths:
           name: body
           required: true
           schema:
-            example: |
+            example: >
               {"target":["target1", "target2"]}
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Batch query available associations
       tags:
@@ -591,15 +631,22 @@ paths:
         - filter
   /platform/public/evidence:
     get:
-      description: |
+      description: >
         We call **evidence** a unit of data that support a connection between a target and a disease.
+
         The Open Targets Platform integrates multiple types of evidence including genetic associations,
+
         somatic mutations, RNA expression and target-disease associations mined from the literature.
+
         This method allows you to retrieve a single evidence item or a list of pieces of evidence by using their
+
         targetvalidation.org ID.
 
+
         Evidence IDs are unique within each data release (e.g. `8ed3d7568a8c6cac9c95cfb869bac762` for release 1.2).
+
         You can obtain a list of evidence and their IDs from other API calls such as [/public/evidence/filter](#!/public/get_public_evidence_filter).
+
 
         **Please note** that a specific evidence ID may change between data releases. We can not guarantee that a specific evidence ID will refer to the same piece of evidence connecting a target and its diseases.
       operationId: getEvidenceById
@@ -610,15 +657,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get evidence by ID
       tags:
         - public
         - retrieve
     post:
-      description: |
+      description: >
         This is the POST version of [/public/evidence](#!/public/get_public_evidence).
+
         It allows to query for a list of evidence strings encoded in a `json` object to be passed in the body.
       operationId: postEvidenceById
       parameters:
@@ -627,11 +675,11 @@ paths:
           name: body
           required: true
           schema:
-            example: |
+            example: >
               {"id":["id1", "id2"]}
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get evidence for a list of IDs
       tags:
@@ -639,11 +687,15 @@ paths:
         - retrieve
   /platform/public/evidence/filter:
     get:
-      description: |
+      description: >
         The filter method allows to retrieve the specific data that supports a connection between targets and diseases.
+
         Filters can be used to restrict the results by source and type of data,
+
         or limit results to targets which are part of a particular pathway.
+
         Minimum and maximum scores can be specified as well as the type of evidence linking target and disease.
+
         **Note** that multiple genes and diseases can be specified in the same request.
       operationId: getEvidenceFilter
       parameters:
@@ -677,7 +729,7 @@ paths:
           name: uniprotkw
           required: false
           type: string
-        - description: 'Type of data structure to return. Can be ''full'', ''simple'', ''ids'', or ''count''.'
+        - description: Type of data structure to return. Can be 'full', 'simple', 'ids', or 'count'.
           in: query
           name: datastructure
           required: false
@@ -688,7 +740,7 @@ paths:
           required: false
           type: string
         - default: 0
-          description: 'Filter by minimum score value. The default is 0, but using 0.2 is a good trade-off to filter lower quality data points.'
+          description: Filter by minimum score value. The default is 0, but using 0.2 is a good trade-off to filter lower quality data points.
           format: float
           in: query
           name: scorevalue_min
@@ -700,14 +752,15 @@ paths:
           name: scorevalue_max
           required: false
           type: number
-        - description: |
+        - description: >
             Sort by the given field. The default is 'scores.association_score' in descending order. Use '~' prefix to do ascending
+
             order e.g. '~scores.association_score'. It supports multiple entries.
           in: query
           name: sort
           required: false
           type: string
-        - description: 'Maximum amount of results to return. Defaults to 10, max is 10000.'
+        - description: Maximum amount of results to return. Defaults to 10, max is 10000.
           format: integer
           in: query
           name: size
@@ -719,13 +772,13 @@ paths:
           name: from
           required: false
           type: number
-        - description: 'Format to get the data back. Can be ''json'', ''xml'', ''tab'' or ''csv''. **Note** that this option can only be used when calling the API directly and will not work in this page. The response here will always be JSON.'
+        - description: Format to get the data back. Can be 'json', 'xml', 'tab' or 'csv'. **Note** that this option can only be used when calling the API directly and will not work in this page. The response here will always be JSON.
           in: query
           name: format
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Filter available evidence
       tags:
@@ -733,11 +786,12 @@ paths:
         - filter
       x-code-samples:
         - lang: httpie
-          source: |
+          source: >
             http https://www.targetvalidation.org/api/latest/public/evidence/filter target==ENSG00000167207 disease==EFO_0003767 datastructure==simple
     post:
-      description: |
+      description: >
         POST version of [/public/evidence/filter](#!/public/get_public_evidence_filter).
+
         Filters can be specified as part of a `json` object in the body, simplifying the submission of queries.
       operationId: postEvidenceFilter
       parameters:
@@ -746,11 +800,11 @@ paths:
           name: body
           required: true
           schema:
-            example: |
+            example: >
               {"target":["ENSG00000094755", "ENSG00000167207"], "disease":["EFO_0003767"]}
             type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Batch filter available evidence
       tags:
@@ -758,9 +812,11 @@ paths:
         - filter
   /platform/public/search:
     get:
-      description: |
+      description: >
         This method allows you to look for gene or diseases of interest using a free text search,
+
         replicating the functionality of the search box on our homepage. It should be used to identify
+
         the best match for a disease or target of interest, rather than gathering a specific set of evidence.
       operationId: getSearch
       parameters:
@@ -769,7 +825,7 @@ paths:
           name: q
           required: true
           type: string
-        - description: 'Maximum amount of results to return. Defaults to 10, max is 10000.'
+        - description: Maximum amount of results to return. Defaults to 10, max is 10000.
           in: query
           name: size
           required: false
@@ -785,7 +841,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Search for a disease or a target
       tags:
@@ -793,22 +849,24 @@ paths:
         - search
       x-code-samples:
         - lang: httpie
-          source: |
+          source: >
             http https://api.opentargets.io/api/latest/public/search q==NOD2 size==1 filter==target
         - lang: Python
-          source: |
+          source: >
             import requests
+
             from pprint import pprint
+
             r = requests.get('https://www.targetvalidation.org/api/latest/public/search',
                             params={"q":"NOD2","size":1})
             pprint(r.json())
   /platform/public/utils/metrics:
     get:
-      description: |
+      description: >
         Returns the metrics about associations and evidences, divided by datasource, genes and so on.
       operationId: getDataMetrics
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get metrics about the current data release
       tags:
@@ -816,19 +874,23 @@ paths:
         - utils
       x-code-samples:
         - lang: Python
-          source: |
+          source: >
             import requests
+
             r = requests.get('https://www.targetvalidation.com/api/latest/public/metrics')
+
             assert r.status_code == 200
+
             assert r.headers['content-type'] == 'application/json'
+
             print(r.json())
   /platform/public/utils/ping:
     get:
-      description: |
+      description: >
         Check if the API is up
       operationId: getPing
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Ping service
       tags:
@@ -836,11 +898,11 @@ paths:
         - utils
   /platform/public/utils/stats:
     get:
-      description: |
+      description: >
         Returns the number of associations and evidences, divided by datasource.
       operationId: getDataStats
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get statistics about the current data release
       tags:
@@ -848,19 +910,23 @@ paths:
         - utils
       x-code-samples:
         - lang: Python
-          source: |
+          source: >
             import requests
+
             r = requests.get('https://www.targetvalidation.com/api/latest/public/stats')
+
             assert r.status_code == 200
+
             assert r.headers['content-type'] == 'application/json'
+
             print(r.json())
   /platform/public/utils/therapeuticareas:
     get:
-      description: |
+      description: >
         Returns the list of therapeutic areas for the current data release
       operationId: getTherapeuticAreas
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get the list of therapeutic areas about the current data release
       tags:
@@ -868,19 +934,23 @@ paths:
         - utils
       x-code-samples:
         - lang: Python
-          source: |-
+          source: >-
             import requests
+
             r = requests.get('https://www.targetvalidation.com/api/latest/public/therapeuticareas')
+
             assert r.status_code == 200
+
             assert r.headers['content-type'] == 'application/json'
+
             print(r.json())
   /platform/public/utils/version:
     get:
-      description: |
+      description: >
         Returns current API version.
       operationId: getVersion
       responses:
-        '200':
+        "200":
           description: Successful response
       summary: Get API version
       tags:
@@ -888,7 +958,7 @@ paths:
         - utils
       x-code-samples:
         - lang: Shell
-          source: |
+          source: >
             curl -X GET https://www.targetvalidation.org/api/latest/public/utils/version
   /platform/swagger:
     get:
@@ -897,7 +967,7 @@ paths:
       produces:
         - text/yaml
       responses:
-        '200':
+        "200":
           description: Swagger.yaml file
       summary: Get OpenAPI schema
       tags:

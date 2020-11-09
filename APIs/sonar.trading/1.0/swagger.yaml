@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: sonar.trading
@@ -6,18 +6,19 @@ basePath: /api/v1/
 info:
   contact:
     x-twitter: tradingsonar
-  description: 'Currency Authority: Exchange Rate of 1453 country currencies and crypto currencies'
+  description: "Currency Authority: Exchange Rate of 1453 country currencies and crypto currencies"
   title: Sonar Trading
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - financial
   x-logo:
-    url: 'https://twitter.com/tradingsonar/profile_image?size=original'
+    url: https://twitter.com/tradingsonar/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://sonar.trading/docs/api-docs.json'
-      version: '2.0'
+      url: https://sonar.trading/docs/api-docs.json
+      version: "2.0"
   x-providerName: sonar.trading
+  x-preferred: true
 consumes:
   - string
 produces:
@@ -26,12 +27,12 @@ paths:
   /convert:
     get:
       parameters:
-        - description: 'Currency you want to convert. For example, EUR'
+        - description: Currency you want to convert. For example, EUR
           in: query
           name: from
           required: true
           type: string
-        - description: 'Comma separated list of currencies codes. For example, USD'
+        - description: Comma separated list of currencies codes. For example, USD
           in: query
           name: to
           required: true
@@ -47,9 +48,9 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Command completed successfully
-        '422':
+        "422":
           description: Parameter value syntax error / Parameter value range error
       summary: Convert a currency amount to multiple other currencies
       tags:
@@ -57,49 +58,49 @@ paths:
   /country/currencies:
     get:
       parameters:
-        - description: 'Parameter used to specify the language in which you would like the currency names to be provided. If not specified, EN is used. Now availeble only EN language.'
+        - description: Parameter used to specify the language in which you would like the currency names to be provided. If not specified, EN is used. Now availeble only EN language.
           in: query
           name: language
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Command completed successfully
-        '422':
+        "422":
           description: Parameter value syntax error / Parameter value range error
-      summary: 'Return a list of all currencies of countries, available via service'
+      summary: Return a list of all currencies of countries, available via service
       tags:
         - Currencies
   /digital/currencies:
     get:
       parameters:
-        - description: 'Parameter used to specify the language in which you would like the currency names to be provided. If not specified, EN is used. Now availeble only EN language.'
+        - description: Parameter used to specify the language in which you would like the currency names to be provided. If not specified, EN is used. Now availeble only EN language.
           in: query
           name: language
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Command completed successfully
-        '422':
+        "422":
           description: Parameter value syntax error / Parameter value range error
-      summary: 'Return a list of all digital currencies, available via service'
+      summary: Return a list of all digital currencies, available via service
       tags:
         - Currencies
   /history:
     get:
       parameters:
-        - description: 'Currency you want to convert. For example, EUR'
+        - description: Currency you want to convert. For example, EUR
           in: query
           name: from
           required: true
           type: string
-        - description: 'Comma separated list of currencies codes. For example, USD'
+        - description: Comma separated list of currencies codes. For example, USD
           in: query
           name: to
           required: true
           type: string
-        - description: 'UTC date should be in the form of YYYY-MM-DD, for example, 2018-06-20. Data available from 2018-06-19 only.'
+        - description: UTC date should be in the form of YYYY-MM-DD, for example, 2018-06-20. Data available from 2018-06-19 only.
           in: query
           name: date
           required: true
@@ -115,9 +116,9 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Command completed successfully
-        '422':
+        "422":
           description: Parameter value syntax error / Parameter value range error
       summary: Return a historic rate for a currencies
       tags:

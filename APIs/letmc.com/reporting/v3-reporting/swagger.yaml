@@ -1,22 +1,23 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: live-api.letmc.com
 info:
   contact:
     x-twitter: LetMC
-  title: 'LetMC Api V3, reporting'
+  title: LetMC Api V3, reporting
   version: v3-reporting
   x-apisguru-categories:
     - ecommerce
   x-logo:
-    url: 'https://twitter.com/agentOSSoftware/profile_image?size=original'
+    url: https://twitter.com/agentOSSoftware/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://live-api.letmc.com/swagger/docs/v3-reporting'
-      version: '2.0'
+      url: https://live-api.letmc.com/swagger/docs/v3-reporting
+      version: "2.0"
   x-providerName: letmc.com
   x-serviceName: reporting
+  x-preferred: true
 consumes: []
 produces:
   - application/json
@@ -33,7 +34,7 @@ securityDefinitions:
     description: Basic HTTP Authentication
     type: basic
 paths:
-  '/v3/reporting/{shortName}/mortgagesbycreateddate':
+  "/v3/reporting/{shortName}/mortgagesbycreateddate":
     get:
       deprecated: false
       operationId: ReportingController_MortgagesByCreatedDate
@@ -67,14 +68,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ReportingPropertyMortgageModelResults'
+            $ref: "#/definitions/ReportingPropertyMortgageModelResults"
       summary: Return a collection of mortgages by created date from a specific date
       tags:
         - ReportingController
-  '/v3/reporting/{shortName}/mortgagesbyupdateddate':
+  "/v3/reporting/{shortName}/mortgagesbyupdateddate":
     get:
       deprecated: false
       operationId: ReportingController_MortgagesByUpdatedDate
@@ -108,14 +109,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ReportingPropertyMortgageModelResults'
+            $ref: "#/definitions/ReportingPropertyMortgageModelResults"
       summary: Return a collection of all mortgages updated from a specific date
       tags:
         - ReportingController
-  '/v3/reporting/{shortName}/repossesionsbycreateddate':
+  "/v3/reporting/{shortName}/repossesionsbycreateddate":
     get:
       deprecated: false
       operationId: ReportingController_RepossessionsByCreatedDate
@@ -149,14 +150,14 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ReportingReceivershipCaseModelResults'
+            $ref: "#/definitions/ReportingReceivershipCaseModelResults"
       summary: Return a collection of repossessions by created date from a specific date
       tags:
         - ReportingController
-  '/v3/reporting/{shortName}/repossesionsbyupdateddate':
+  "/v3/reporting/{shortName}/repossesionsbyupdateddate":
     get:
       deprecated: false
       operationId: ReportingController_RepossessionsByUpdatedDate
@@ -190,10 +191,10 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/ReportingReceivershipCaseModelResults'
+            $ref: "#/definitions/ReportingReceivershipCaseModelResults"
       summary: Return a collection of all reposessions updated from a specific date
       tags:
         - ReportingController
@@ -278,7 +279,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/ReportingPropertyMortgageModel'
+          $ref: "#/definitions/ReportingPropertyMortgageModel"
         type: array
     type: object
   ReportingReceivershipCaseDetailsModel:
@@ -366,17 +367,17 @@ definitions:
     description: Represents an receivership case.
     properties:
       CaseDetails:
-        $ref: '#/definitions/ReportingReceivershipCaseDetailsModel'
+        $ref: "#/definitions/ReportingReceivershipCaseDetailsModel"
         description: Case Details
       ExitStrategy:
         description: Exit Strategy
         items:
-          $ref: '#/definitions/ReportingReceivershipExitStrategyModel'
+          $ref: "#/definitions/ReportingReceivershipExitStrategyModel"
         type: array
       Litigation:
         description: Litigation
         items:
-          $ref: '#/definitions/ReportingReceivershipLitigationModel'
+          $ref: "#/definitions/ReportingReceivershipLitigationModel"
         type: array
     type: object
   ReportingReceivershipCaseModelResults:
@@ -389,7 +390,7 @@ definitions:
       Data:
         description: The resulting data returned from the paged query range
         items:
-          $ref: '#/definitions/ReportingReceivershipCaseModel'
+          $ref: "#/definitions/ReportingReceivershipCaseModel"
         type: array
     type: object
   ReportingReceivershipExitStrategyModel:

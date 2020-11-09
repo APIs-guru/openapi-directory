@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: api.ss.solarvps.com
@@ -6,16 +6,17 @@ basePath: /
 info:
   contact:
     email: support@solarvps.com
-  description: 'This is the Solar VPS Public API. You can find more at http://www.solarvps.com'
+  description: This is the Solar VPS Public API. You can find more at http://www.solarvps.com
   title: Solar VPS
   version: 1.0.0
   x-logo:
-    url: 'https://solarvps.com/wp-content/themes/solarvps/images/logo-footer@2x.png'
+    url: https://solarvps.com/wp-content/themes/solarvps/images/logo-footer@2x.png
   x-origin:
     - format: swagger
-      url: 'http://api.ss.solarvps.com/api-docs'
-      version: '1.2'
+      url: http://api.ss.solarvps.com/api-docs
+      version: "1.2"
   x-providerName: solarvps.com
+  x-preferred: true
 produces:
   - application/json
 securityDefinitions:
@@ -43,14 +44,14 @@ paths:
     get:
       description: Shows all contacts under the client account.
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: View all contacts under your account
       tags:
         - contacts
-  '/dns/{domain}':
+  "/dns/{domain}":
     get:
       description: Shows all your records for a specific domain. You can try example.com below.
       parameters:
@@ -60,16 +61,16 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: View all your records for a given domain
       tags:
         - dns
-  '/dns/{domain}/add':
+  "/dns/{domain}/add":
     post:
-      description: 'You can try example.com below. Types allowed are: A CNAME NS TXT MX SRV SPF'
+      description: "You can try example.com below. Types allowed are: A CNAME NS TXT MX SRV SPF"
       parameters:
         - description: Domain you want to add records for
           in: path
@@ -102,14 +103,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: Add dns record for given domain
       tags:
         - dns
-  '/dns/{domain}/delete':
+  "/dns/{domain}/delete":
     post:
       description: Shows all your records for a specific domain. You can try example.com below.
       parameters:
@@ -124,14 +125,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: Delete dns record for a given domain
       tags:
         - dns
-  '/dns/{domain}/update':
+  "/dns/{domain}/update":
     post:
       description: You can try example.com below.
       parameters:
@@ -171,7 +172,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
@@ -182,7 +183,7 @@ paths:
     get:
       description: Shows all your domains
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
@@ -199,7 +200,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
@@ -216,7 +217,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
@@ -238,7 +239,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
@@ -260,7 +261,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
@@ -271,14 +272,14 @@ paths:
     get:
       description: Shows all your pods
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: View all your pods
       tags:
         - pods
-  '/pods/{podId}':
+  "/pods/{podId}":
     get:
       description: Shows details of a specific pod. Enter 1 below to see an example
       parameters:
@@ -288,14 +289,14 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: View information on a specific pod
       tags:
         - pods
-  '/pods/{podId}/ping':
+  "/pods/{podId}/ping":
     get:
       description: Returns the ping response from your server.
       parameters:
@@ -305,16 +306,16 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: Ping your specified pod
       tags:
         - pods
-  '/pods/{podId}/{action}':
+  "/pods/{podId}/{action}":
     get:
-      description: 'Allowed actions are reboot, shutdown, boot'
+      description: Allowed actions are reboot, shutdown, boot
       parameters:
         - description: Id of the pod you want to perform actions on
           in: path
@@ -327,7 +328,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
@@ -338,7 +339,7 @@ paths:
     get:
       description: Shows all your monitors
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
@@ -349,7 +350,7 @@ paths:
     get:
       description: Shows all your critical notifications
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
@@ -360,16 +361,16 @@ paths:
     get:
       description: Shows all your tickets
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: View all your tickets
       tags:
         - tickets
-  '/tickets/{department}/add':
+  "/tickets/{department}/add":
     post:
-      description: 'Available departments are support, billing, sales'
+      description: Available departments are support, billing, sales
       parameters:
         - description: Department you want to open a ticket with
           in: path
@@ -387,14 +388,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: Open ticket with desired department
       tags:
         - tickets
-  '/tickets/{ticketId}':
+  "/tickets/{ticketId}":
     get:
       description: Shows all information of a specific ticketId
       parameters:
@@ -404,14 +405,14 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []
       summary: View details on a specific ticket
       tags:
         - tickets
-  '/tickets/{ticketid}/update':
+  "/tickets/{ticketid}/update":
     post:
       parameters:
         - description: TicketId of the ticket you want to post an update to
@@ -425,7 +426,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       security:
         - apiKey: []

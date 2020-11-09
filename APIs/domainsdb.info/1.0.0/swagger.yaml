@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.domainsdb.info
@@ -10,12 +10,13 @@ info:
   x-apisguru-categories:
     - hosting
   x-logo:
-    url: 'https://pbs.twimg.com/profile_images/769216960504532996/rctG95A0_400x400.jpg'
+    url: https://pbs.twimg.com/profile_images/769216960504532996/rctG95A0_400x400.jpg
   x-origin:
     - format: swagger
-      url: 'https://domains-index.com/apidomainsdb/swagger.json'
-      version: '2.0'
+      url: https://domains-index.com/apidomainsdb/swagger.json
+      version: "2.0"
   x-providerName: domainsdb.info
+  x-preferred: true
 consumes:
   - application/json
 produces:
@@ -26,11 +27,11 @@ securityDefinitions:
     name: api_key
     type: apiKey
   petstore_auth:
-    authorizationUrl: 'http://petstore.swagger.io/oauth/dialog'
+    authorizationUrl: http://petstore.swagger.io/oauth/dialog
     flow: implicit
     scopes:
-      'read:pets': read your pets
-      'write:pets': modify pets in your account
+      read:pets: read your pets
+      write:pets: modify pets in your account
     type: oauth2
 tags:
   - description: Search for registered domains
@@ -38,7 +39,7 @@ tags:
 paths:
   /search:
     get:
-      description: ''
+      description: ""
       operationId: addPet
       parameters:
         - description: Search query for registered domains for ex. facebook
@@ -52,11 +53,11 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/domains'
-        '405':
+            $ref: "#/definitions/domains"
+        "405":
           description: Invalid input
       security: []
       summary: Search for registered domains
@@ -72,17 +73,17 @@ definitions:
           properties:
             name:
               description: Domains name
-              example: 'google.com, facebook--de.com'
+              example: google.com, facebook--de.com
               type: string
         type: array
       time:
         description: Request time
-        example: '5'
+        example: "5"
         format: int32
         type: integer
       total:
         description: Total records found
-        example: '1235'
+        example: "1235"
         format: int32
         type: integer
     type: object

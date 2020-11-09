@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: dropx.io
@@ -11,9 +11,10 @@ info:
     - ecommerce
   x-origin:
     - format: swagger
-      url: 'http://dropx.io/dropx-swagger.yaml'
-      version: '2.0'
+      url: http://dropx.io/dropx-swagger.yaml
+      version: "2.0"
   x-providerName: dropx.io
+  x-preferred: true
 produces:
   - application/json
 securityDefinitions:
@@ -33,21 +34,21 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A list of search details
-        '401':
+        "401":
           description: Invalid authentication
-        '456':
-          description: 'We are sorry, You have reached your limit'
-        '458':
+        "456":
+          description: We are sorry, You have reached your limit
+        "458":
           description: Oops...! we don\'t have enough data to serve your request
-        '459':
+        "459":
           description: Oops...! Missing reqired "pids" parameter to serve your request
-        '464':
+        "464":
           description: Error in finding default plan
-        '490':
+        "490":
           description: Unexpected error occurred while processing your request
-        '500':
+        "500":
           description: internal server error
       security:
         - api_key: []
@@ -63,40 +64,40 @@ paths:
           name: url
           required: true
           type: string
-        - description: 'A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a '','' seperated values to filter response by required e-commerce providers'
+        - description: A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a ',' seperated values to filter response by required e-commerce providers
           in: query
           name: providers
           type: string
       responses:
-        '200':
+        "200":
           description: A list of search details
-        '401':
+        "401":
           description: Invalid authentication
-        '452':
+        "452":
           description: Requested url parameter value is not a valid url
-        '453':
+        "453":
           description: Requested ip is not white listed app token assigned ip list
-        '454':
+        "454":
           description: App does not have any IP
-        '455':
+        "455":
           description: User requested with invalid app token
-        '456':
+        "456":
           description: User reached maximum allow limit according to his plan
-        '458':
+        "458":
           description: Requested search does not have any response
-        '459':
+        "459":
           description: Requested search products api required parameter "term" is missing
-        '460':
+        "460":
           description: Requested similar search products api required parameter "url" is missing
-        '461':
+        "461":
           description: Requested search product api required "term" parameter does not have valid value or empty value passed
-        '462':
+        "462":
           description: Requested similar search product api required "url" parameter does not have valid url or empty value passed
-        '463':
+        "463":
           description: Error in processing search request in elastic search
-        '490':
+        "490":
           description: some unexpected error raised in processing user request
-        '500':
+        "500":
           description: internal server error
       security:
         - api_key: []
@@ -112,40 +113,40 @@ paths:
           name: url
           required: true
           type: string
-        - description: 'A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a '','' seperated values to filter response by required e-commerce providers'
+        - description: A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a ',' seperated values to filter response by required e-commerce providers
           in: query
           name: providers
           type: string
       responses:
-        '200':
+        "200":
           description: A list of search details
-        '401':
+        "401":
           description: Invalid authentication
-        '452':
+        "452":
           description: Requested url parameter value is not a valid url
-        '453':
+        "453":
           description: Requested ip is not white listed app token assigned ip list
-        '454':
+        "454":
           description: App does not have any IP
-        '455':
+        "455":
           description: User requested with invalid app token
-        '456':
+        "456":
           description: User reached maximum allow limit according to his plan
-        '458':
+        "458":
           description: Requested search does not have any response
-        '459':
+        "459":
           description: Requested search products api required parameter "term" is missing
-        '460':
+        "460":
           description: Requested similar search products api required parameter "url" is missing
-        '461':
+        "461":
           description: Requested search product api required "term" parameter does not have valid value or empty value passed
-        '462':
+        "462":
           description: Requested similar search product api required "url" parameter does not have valid url or empty value passed
-        '463':
+        "463":
           description: Error in processing search request in elastic search
-        '490':
+        "490":
           description: some unexpected error raised in processing user request
-        '500':
+        "500":
           description: internal server error
       security:
         - api_key: []
@@ -161,40 +162,40 @@ paths:
           name: term
           required: true
           type: string
-        - description: 'A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a '','' seperated values to filter response by required e-commerce providers'
+        - description: A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a ',' seperated values to filter response by required e-commerce providers
           in: query
           name: providers
           type: string
       responses:
-        '200':
+        "200":
           description: A list of search details
-        '401':
+        "401":
           description: Invalid authentication
-        '452':
+        "452":
           description: Requested url parameter value is not a valid url
-        '453':
+        "453":
           description: Requested ip is not white listed app token assigned ip list
-        '454':
+        "454":
           description: App does not have any IP
-        '455':
+        "455":
           description: User requested with invalid app token
-        '456':
+        "456":
           description: User reached maximum allow limit according to his plan
-        '458':
+        "458":
           description: Requested search does not have any response
-        '459':
+        "459":
           description: Requested search products api required parameter "term" is missing
-        '460':
+        "460":
           description: Requested similar search products api required parameter "url" is missing
-        '461':
+        "461":
           description: Requested search product api required "term" parameter does not have valid value or empty value passed
-        '462':
+        "462":
           description: Requested similar search product api required "url" parameter does not have valid url or empty value passed
-        '463':
+        "463":
           description: Error in processing search request in elastic search
-        '490':
+        "490":
           description: some unexpected error raised in processing user request
-        '500':
+        "500":
           description: internal server error
       security:
         - api_key: []
@@ -210,40 +211,40 @@ paths:
           name: term
           required: true
           type: string
-        - description: 'A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a '','' seperated values to filter response by required e-commerce providers'
+        - description: A valid e commerce website link(eg. www.flipkart.com or http://www.amazon.in) by a ',' seperated values to filter response by required e-commerce providers
           in: query
           name: providers
           type: string
       responses:
-        '200':
+        "200":
           description: A list of search details
-        '401':
+        "401":
           description: Invalid authentication
-        '452':
+        "452":
           description: Requested url parameter value is not a valid url
-        '453':
+        "453":
           description: Requested ip is not white listed app token assigned ip list
-        '454':
+        "454":
           description: App does not have any IP
-        '455':
+        "455":
           description: User requested with invalid app token
-        '456':
+        "456":
           description: User reached maximum allow limit according to his plan
-        '458':
+        "458":
           description: Requested search does not have any response
-        '459':
+        "459":
           description: Requested search products api required parameter "term" is missing
-        '460':
+        "460":
           description: Requested similar search products api required parameter "url" is missing
-        '461':
+        "461":
           description: Requested search product api required "term" parameter does not have valid value or empty value passed
-        '462':
+        "462":
           description: Requested similar search product api required "url" parameter does not have valid url or empty value passed
-        '463':
+        "463":
           description: Error in processing search request in elastic search
-        '490':
+        "490":
           description: some unexpected error raised in processing user request
-        '500':
+        "500":
           description: internal server error
       security:
         - api_key: []
@@ -260,23 +261,23 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: A list of product details
-        '401':
+        "401":
           description: Invalid authentication
-        '456':
-          description: 'We are sorry, You have reached your limit'
-        '458':
+        "456":
+          description: We are sorry, You have reached your limit
+        "458":
           description: Oops...! we don\'t have enough data to serve your request
-        '459':
+        "459":
           description: Oops...! Missing reqired "term" parameter to serve your request
-        '461':
+        "461":
           description: Oops...! Required "term" parameter should not be empty
-        '464':
+        "464":
           description: Error in finding default plan
-        '490':
+        "490":
           description: Unexpected error occurred while processing your request
-        '500':
+        "500":
           description: internal server error
       security:
         - api_key: []
@@ -287,11 +288,11 @@ paths:
     get:
       description: Returns API request consumption details.
       responses:
-        '200':
+        "200":
           description: A list of usage details
-        '401':
+        "401":
           description: Invalid authentication
-        '500':
+        "500":
           description: internal server error
       summary: Get API usuage details
       tags:

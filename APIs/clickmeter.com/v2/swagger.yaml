@@ -1,25 +1,26 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
   - https
-host: 'apiv2.clickmeter.com:80'
+host: apiv2.clickmeter.com:80
 info:
   contact:
     email: api@clickmeter.com
     name: Api Support
-    url: 'http://www.clickmeter.com/api'
+    url: http://www.clickmeter.com/api
   description: Api dashboard for ClickMeter API
   title: ClickMeter
   version: v2
   x-apisguru-categories:
     - marketing
   x-logo:
-    url: 'https://s3.amazonaws.com/clickmeter.com/Web/static/cmlogo.svg'
+    url: https://s3.amazonaws.com/clickmeter.com/Web/static/cmlogo.svg
   x-origin:
     - format: swagger
-      url: 'http://api.v2.clickmeter.com.s3.amazonaws.com/docs/api-docs-v2.json'
-      version: '2.0'
+      url: http://api.v2.clickmeter.com.s3.amazonaws.com/docs/api-docs-v2.json
+      version: "2.0"
   x-providerName: clickmeter.com
+  x-preferred: true
 securityDefinitions:
   api_key:
     description: API Key Authentication
@@ -39,13 +40,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.User'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.User"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve current account data
       tags:
@@ -63,20 +64,20 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.User'
+            $ref: "#/definitions/Api.Core.Dto.Accounting.User"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.User'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.User"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Update current account data
       tags:
@@ -102,13 +103,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Accounting.DomainWhitelistEntry]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Accounting.DomainWhitelistEntry]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve list of a domains allowed to redirect in DDU mode
       tags:
@@ -127,25 +128,25 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.DomainWhitelistEntry'
+            $ref: "#/definitions/Api.Core.Dto.Accounting.DomainWhitelistEntry"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.DomainWhitelistEntry'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.DomainWhitelistEntry"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create an domain entry
       tags:
         - Account
-  '/account/domainwhitelist/{whitelistId}':
+  "/account/domainwhitelist/{whitelistId}":
     delete:
       consumes: []
       deprecated: false
@@ -161,13 +162,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.DomainWhitelistEntry'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.DomainWhitelistEntry"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete an domain entry
       tags:
@@ -211,13 +212,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve list of a guest
       tags:
@@ -236,20 +237,20 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.Guest'
+            $ref: "#/definitions/Api.Core.Dto.Accounting.Guest"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.Guest'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.Guest"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create a guest
       tags:
@@ -270,18 +271,18 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve count of guests
       tags:
         - Account
-  '/account/guests/{guestId}':
+  "/account/guests/{guestId}":
     delete:
       consumes: []
       deprecated: false
@@ -298,13 +299,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete a guest
       tags:
@@ -325,13 +326,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.Guest'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.Guest"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a guest
       tags:
@@ -356,25 +357,25 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.Guest'
+            $ref: "#/definitions/Api.Core.Dto.Accounting.Guest"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.Guest'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.Guest"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Update a guest
       tags:
         - Account
-  '/account/guests/{guestId}/permissions':
+  "/account/guests/{guestId}/permissions":
     get:
       consumes: []
       deprecated: false
@@ -423,18 +424,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Grants.Grant]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Grants.Grant]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve permissions for a guest
       tags:
         - Account
-  '/account/guests/{guestId}/permissions/count':
+  "/account/guests/{guestId}/permissions/count":
     get:
       consumes: []
       deprecated: false
@@ -473,18 +474,18 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve count of the permissions for a guest
       tags:
         - Account
-  '/account/guests/{guestId}/{type}/permissions/patch':
+  "/account/guests/{guestId}/{type}/permissions/patch":
     post:
       consumes:
         - application/json
@@ -513,20 +514,20 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.PermissionPatchRequest'
+            $ref: "#/definitions/Api.Core.Requests.PermissionPatchRequest"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Change the permission on a shared object
       tags:
@@ -559,20 +560,20 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.PermissionPatchRequest'
+            $ref: "#/definitions/Api.Core.Requests.PermissionPatchRequest"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Change the permission on a shared object
       tags:
@@ -598,13 +599,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Accounting.IpBlacklistEntry]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Accounting.IpBlacklistEntry]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve list of a ip to exclude from event tracking
       tags:
@@ -623,25 +624,25 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.IpBlacklistEntry'
+            $ref: "#/definitions/Api.Core.Dto.Accounting.IpBlacklistEntry"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.IpBlacklistEntry'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.IpBlacklistEntry"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create an ip blacklist entry
       tags:
         - Account
-  '/account/ipblacklist/{blacklistId}':
+  "/account/ipblacklist/{blacklistId}":
     delete:
       consumes: []
       deprecated: false
@@ -657,13 +658,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.IpBlacklistEntry'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.IpBlacklistEntry"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete an ip blacklist entry
       tags:
@@ -678,13 +679,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.Plan'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.Plan"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve current account plan
       tags:
@@ -730,7 +731,7 @@ paths:
           name: hourly
           required: false
           type: boolean
-        - description: ''
+        - description: ""
           in: query
           name: onlyFavorites
           required: false
@@ -739,13 +740,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this customer for a timeframe
       tags:
@@ -798,13 +799,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this customer for a timeframe grouped by some temporal entity (day/week/month)
       tags:
@@ -887,13 +888,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedSummaryResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedSummaryResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about a subset of conversions for a timeframe with conversions data
       tags:
@@ -1002,13 +1003,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedSummaryResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedSummaryResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about a subset of datapoints for a timeframe with datapoints data
       tags:
@@ -1101,13 +1102,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedSummaryResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedSummaryResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about a subset of groups for a timeframe with groups data
       tags:
@@ -1144,7 +1145,7 @@ paths:
           type: integer
         - description: Filter event type ("spiders"/"uniques"/"nonuniques"/"conversions")
           enum:
-            - ''
+            - ""
             - spiders
             - uniques
             - nonuniques
@@ -1157,13 +1158,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.ClickStream.Hit]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.ClickStream.Hit]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve the latest list of events of this account. Limited to last 100.
       tags:
@@ -1212,13 +1213,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a list of conversions
       tags:
@@ -1237,22 +1238,22 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Conversions.Conversion'
+            $ref: "#/definitions/Api.Core.Dto.Conversions.Conversion"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create a conversion
       tags:
@@ -1313,13 +1314,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this customer for a timeframe related to a subset of conversions grouped by some temporal entity (day/week/month)
       tags:
@@ -1358,18 +1359,18 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a count of conversions
       tags:
         - Conversions
-  '/conversions/{conversionId}':
+  "/conversions/{conversionId}":
     delete:
       consumes: []
       deprecated: false
@@ -1386,15 +1387,15 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete conversion specified by id
       tags:
@@ -1415,15 +1416,15 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Conversions.Conversion'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Conversions.Conversion"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve conversion specified by id
       tags:
@@ -1448,27 +1449,27 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Conversions.Conversion'
+            $ref: "#/definitions/Api.Core.Dto.Conversions.Conversion"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Update conversion specified by id
       tags:
         - Conversions
-  '/conversions/{conversionId}/aggregated':
+  "/conversions/{conversionId}/aggregated":
     get:
       consumes: []
       deprecated: false
@@ -1529,18 +1530,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this conversion for a timeframe
       tags:
         - Conversions
-  '/conversions/{conversionId}/aggregated/list':
+  "/conversions/{conversionId}/aggregated/list":
     get:
       consumes: []
       deprecated: false
@@ -1594,18 +1595,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this conversion for a timeframe grouped by some temporal entity (day/week/month)
       tags:
         - Conversions
-  '/conversions/{conversionId}/datapoints':
+  "/conversions/{conversionId}/datapoints":
     get:
       consumes: []
       deprecated: false
@@ -1670,18 +1671,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a list of datapoints connected to this conversion
       tags:
         - Conversions
-  '/conversions/{conversionId}/datapoints/batch/patch':
+  "/conversions/{conversionId}/datapoints/batch/patch":
     put:
       consumes:
         - application/json
@@ -1700,27 +1701,27 @@ paths:
           name: data
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.PatchBodyBatch'
+            $ref: "#/definitions/Api.Core.Requests.PatchBodyBatch"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Modify the association between a conversion and multiple datapoints
       tags:
         - Conversions
-  '/conversions/{conversionId}/datapoints/count':
+  "/conversions/{conversionId}/datapoints/count":
     get:
       consumes: []
       deprecated: false
@@ -1767,18 +1768,18 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a count of datapoints connected to this conversion
       tags:
         - Conversions
-  '/conversions/{conversionId}/datapoints/patch':
+  "/conversions/{conversionId}/datapoints/patch":
     put:
       consumes:
         - application/json
@@ -1799,27 +1800,27 @@ paths:
           name: data
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.ConversionPatchBody'
+            $ref: "#/definitions/Api.Core.Requests.ConversionPatchBody"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Modify the association between a conversion and a datapoint
       tags:
         - Conversions
-  '/conversions/{conversionId}/hits':
+  "/conversions/{conversionId}/hits":
     get:
       consumes: []
       deprecated: false
@@ -1881,18 +1882,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.ClickStream.HitListPage'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.ClickStream.HitListPage"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve the list of events related to this conversion.
       tags:
         - Conversions
-  '/conversions/{conversionId}/notes':
+  "/conversions/{conversionId}/notes":
     put:
       consumes:
         - application/json
@@ -1913,29 +1914,29 @@ paths:
           name: note
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.GenericTextPatch'
+            $ref: "#/definitions/Api.Core.Requests.GenericTextPatch"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Fast patch the "notes" field of a conversion
       tags:
         - Conversions
-  '/conversions/{conversionId}/reports':
+  "/conversions/{conversionId}/reports":
     get:
       consumes: []
       deprecated: false
@@ -2004,15 +2005,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Tops.Top'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Tops.Top"
+        "401":
           description: Forbidden
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a top report connected to this conversion
       tags:
@@ -2096,15 +2097,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: List of all the datapoints associated to the user
       tags:
@@ -2121,22 +2122,22 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Datapoints.Datapoint'
+            $ref: "#/definitions/Api.Core.Dto.Datapoints.Datapoint"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create a datapoint
       tags:
@@ -2214,13 +2215,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this customer for a timeframe by groups
       tags:
@@ -2301,13 +2302,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about all datapoints of this customer for a timeframe grouped by some temporal entity (day/week/month)
       tags:
@@ -2325,20 +2326,20 @@ paths:
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.DeleteBatch'
+            $ref: "#/definitions/Api.Core.Requests.DeleteBatch"
       produces:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete multiple datapoints
       tags:
@@ -2355,20 +2356,20 @@ paths:
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.DatapointsBatch'
+            $ref: "#/definitions/Api.Core.Requests.DatapointsBatch"
       produces:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Update multiple datapoints
       tags:
@@ -2385,20 +2386,20 @@ paths:
           name: batch
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.DatapointsBatch'
+            $ref: "#/definitions/Api.Core.Requests.DatapointsBatch"
       produces:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create multiple datapoints
       tags:
@@ -2457,20 +2458,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Count the datapoints associated to the user
       tags:
         - DataPoints
-  '/datapoints/{id}':
+  "/datapoints/{id}":
     delete:
       consumes: []
       deprecated: false
@@ -2487,15 +2488,15 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete a datapoint
       tags:
@@ -2514,15 +2515,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Datapoints.Datapoint'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Datapoints.Datapoint"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get a datapoint
       tags:
@@ -2545,27 +2546,27 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Datapoints.Datapoint'
+            $ref: "#/definitions/Api.Core.Dto.Datapoints.Datapoint"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Update a datapoint
       tags:
         - DataPoints
-  '/datapoints/{id}/aggregated':
+  "/datapoints/{id}/aggregated":
     get:
       consumes: []
       deprecated: false
@@ -2616,18 +2617,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this datapoint for a timeframe
       tags:
         - DataPoints
-  '/datapoints/{id}/aggregated/list':
+  "/datapoints/{id}/aggregated/list":
     get:
       consumes: []
       deprecated: false
@@ -2681,18 +2682,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this datapoint for a timeframe grouped by some temporal entity (day/week/month)
       tags:
         - DataPoints
-  '/datapoints/{id}/favourite':
+  "/datapoints/{id}/favourite":
     put:
       consumes: []
       deprecated: false
@@ -2709,22 +2710,22 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Fast switch the "favourite" field of a datapoint
       tags:
         - DataPoints
-  '/datapoints/{id}/hits':
+  "/datapoints/{id}/hits":
     get:
       consumes: []
       deprecated: false
@@ -2786,18 +2787,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.ClickStream.HitListPage'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.ClickStream.HitListPage"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve the list of events related to this datapoint.
       tags:
         - DataPoints
-  '/datapoints/{id}/notes':
+  "/datapoints/{id}/notes":
     put:
       consumes:
         - application/json
@@ -2818,29 +2819,29 @@ paths:
           name: note
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.GenericTextPatch'
+            $ref: "#/definitions/Api.Core.Requests.GenericTextPatch"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Fast patch the "notes" field of a datapoint
       tags:
         - DataPoints
-  '/datapoints/{id}/reports':
+  "/datapoints/{id}/reports":
     get:
       consumes: []
       deprecated: false
@@ -2902,15 +2903,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Tops.Top'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Tops.Top"
+        "401":
           description: Forbidden
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a top report connected to this datapoint
       tags:
@@ -2952,13 +2953,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a list of domains
       tags:
@@ -2977,20 +2978,20 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Domains.Domain'
+            $ref: "#/definitions/Api.Core.Dto.Domains.Domain"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create a domain
       tags:
@@ -3022,18 +3023,18 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve count of domains
       tags:
         - Domains
-  '/domains/{id}':
+  "/domains/{id}":
     delete:
       consumes: []
       deprecated: false
@@ -3050,13 +3051,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete a domain
       tags:
@@ -3077,13 +3078,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Domains.Domain'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Domains.Domain"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get a domain
       tags:
@@ -3108,20 +3109,20 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Domains.Domain'
+            $ref: "#/definitions/Api.Core.Dto.Domains.Domain"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Update a domain
       tags:
@@ -3182,15 +3183,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: List of all the groups associated to the user.
       tags:
@@ -3207,22 +3208,22 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Groups.Group'
+            $ref: "#/definitions/Api.Core.Dto.Groups.Group"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create a group
       tags:
@@ -3290,13 +3291,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this customer for a timeframe by groups
       tags:
@@ -3364,13 +3365,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about all groups of this customer for a timeframe grouped by some temporal entity (day/week/month)
       tags:
@@ -3419,20 +3420,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Count the groups associated to the user.
       tags:
         - Groups
-  '/groups/{id}':
+  "/groups/{id}":
     delete:
       consumes: []
       deprecated: false
@@ -3449,15 +3450,15 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete group specified by id
       tags:
@@ -3476,15 +3477,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Groups.Group'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Groups.Group"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get a group
       tags:
@@ -3507,27 +3508,27 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Groups.Group'
+            $ref: "#/definitions/Api.Core.Dto.Groups.Group"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Update a group
       tags:
         - Groups
-  '/groups/{id}/aggregated':
+  "/groups/{id}/aggregated":
     get:
       consumes: []
       deprecated: false
@@ -3578,18 +3579,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this group for a timeframe
       tags:
         - Groups
-  '/groups/{id}/aggregated/list':
+  "/groups/{id}/aggregated/list":
     get:
       consumes: []
       deprecated: false
@@ -3643,18 +3644,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about this group for a timeframe grouped by some temporal entity (day/week/month)
       tags:
         - Groups
-  '/groups/{id}/aggregated/summary':
+  "/groups/{id}/aggregated/summary":
     get:
       consumes: []
       deprecated: false
@@ -3758,18 +3759,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedSummaryResult'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedSummaryResult"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve statistics about a subset of datapoints for a timeframe with datapoints data
       tags:
         - Groups
-  '/groups/{id}/datapoints':
+  "/groups/{id}/datapoints":
     get:
       consumes: []
       deprecated: false
@@ -3854,15 +3855,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: List of all the datapoints associated to the user in this group.
       tags:
@@ -3885,27 +3886,27 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Datapoints.Datapoint'
+            $ref: "#/definitions/Api.Core.Dto.Datapoints.Datapoint"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create a datapoint in this group
       tags:
         - Groups
-  '/groups/{id}/datapoints/count':
+  "/groups/{id}/datapoints/count":
     get:
       consumes: []
       deprecated: false
@@ -3965,20 +3966,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Count the datapoints associated to the user in this group.
       tags:
         - Groups
-  '/groups/{id}/favourite':
+  "/groups/{id}/favourite":
     put:
       consumes: []
       deprecated: false
@@ -3995,22 +3996,22 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Fast switch the "favourite" field of a group
       tags:
         - Groups
-  '/groups/{id}/hits':
+  "/groups/{id}/hits":
     get:
       consumes: []
       deprecated: false
@@ -4072,18 +4073,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.ClickStream.HitListPage'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.ClickStream.HitListPage"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve the list of events related to this group.
       tags:
         - Groups
-  '/groups/{id}/notes':
+  "/groups/{id}/notes":
     put:
       consumes:
         - application/json
@@ -4104,29 +4105,29 @@ paths:
           name: note
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.GenericTextPatch'
+            $ref: "#/definitions/Api.Core.Requests.GenericTextPatch"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Fast patch the "notes" field of a group
       tags:
         - Groups
-  '/groups/{id}/reports':
+  "/groups/{id}/reports":
     get:
       consumes: []
       deprecated: false
@@ -4196,15 +4197,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Tops.Top'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Tops.Top"
+        "401":
           description: Forbidden
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a top report connected to this group
       tags:
@@ -4265,13 +4266,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.ClickStream.HitListPage'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.ClickStream.HitListPage"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve the list of events related to this account.
       tags:
@@ -4286,13 +4287,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.User'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.User"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve current account data
       tags:
@@ -4307,13 +4308,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Accounting.Plan'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Accounting.Plan"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve current account plan
       tags:
@@ -4397,15 +4398,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Tops.Top'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Tops.Top"
+        "401":
           description: Forbidden
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a top report
       tags:
@@ -4433,15 +4434,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: List of all the retargeting scripts associated to the user
       tags:
@@ -4460,22 +4461,22 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Retargeting.RetargetingScript'
+            $ref: "#/definitions/Api.Core.Dto.Retargeting.RetargetingScript"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Creates a retargeting script
       tags:
@@ -4490,18 +4491,18 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve count of retargeting scripts
       tags:
         - Retargeting
-  '/retargeting/{id}':
+  "/retargeting/{id}":
     delete:
       consumes: []
       deprecated: false
@@ -4518,15 +4519,15 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Deletes a retargeting script (and remove associations)
       tags:
@@ -4547,15 +4548,15 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Retargeting.RetargetingScript'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Retargeting.RetargetingScript"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get a retargeting script object
       tags:
@@ -4580,27 +4581,27 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Retargeting.RetargetingScript'
+            $ref: "#/definitions/Api.Core.Dto.Retargeting.RetargetingScript"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Updates a retargeting script
       tags:
         - Retargeting
-  '/retargeting/{id}/datapoints':
+  "/retargeting/{id}/datapoints":
     get:
       consumes: []
       deprecated: false
@@ -4677,20 +4678,20 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: List of all the datapoints associated to the retargeting script.
       tags:
         - Retargeting
-  '/retargeting/{id}/datapoints/count':
+  "/retargeting/{id}/datapoints/count":
     get:
       consumes: []
       deprecated: false
@@ -4742,15 +4743,15 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Count the datapoints associated to the retargeting script.
       tags:
@@ -4803,15 +4804,15 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: List of all the groups associated to the user filtered by this tag.
       tags:
@@ -4828,22 +4829,22 @@ paths:
           name: value
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Tags.Tag'
+            $ref: "#/definitions/Api.Core.Dto.Tags.Tag"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Create a tag
       tags:
@@ -4882,20 +4883,20 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/System.Object'
-        '401':
+            $ref: "#/definitions/System.Object"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: List of all the groups associated to the user filtered by this tag.
       tags:
         - Tags
-  '/tags/{tagId}':
+  "/tags/{tagId}":
     delete:
       consumes: []
       deprecated: false
@@ -4910,13 +4911,13 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/System.Object'
-        '401':
+            $ref: "#/definitions/System.Object"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete a tag
       tags:
@@ -4935,18 +4936,18 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Dto.Tags.Tag'
-        '401':
+            $ref: "#/definitions/Api.Core.Dto.Tags.Tag"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Retrieve a tag
       tags:
         - Tags
-  '/tags/{tagId}/datapoints':
+  "/tags/{tagId}/datapoints":
     delete:
       consumes: []
       deprecated: false
@@ -4963,13 +4964,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete the association of this tag with all datapoints
       tags:
@@ -5035,20 +5036,20 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: List of all the datapoints associated to the user filtered by this tag
       tags:
         - Tags
-  '/tags/{tagId}/datapoints/count':
+  "/tags/{tagId}/datapoints/count":
     get:
       consumes: []
       deprecated: false
@@ -5098,20 +5099,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Count the datapoints associated to the user filtered by this tag
       tags:
         - Tags
-  '/tags/{tagId}/datapoints/patch':
+  "/tags/{tagId}/datapoints/patch":
     put:
       consumes:
         - application/json
@@ -5132,27 +5133,27 @@ paths:
           name: data
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.PatchBody'
+            $ref: "#/definitions/Api.Core.Requests.PatchBody"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Associate/Deassociate a tag with a datapoint
       tags:
         - Tags
-  '/tags/{tagId}/groups':
+  "/tags/{tagId}/groups":
     delete:
       consumes: []
       deprecated: false
@@ -5169,13 +5170,13 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Delete the association of this tag with all groups
       tags:
@@ -5231,20 +5232,20 @@ paths:
         - application/json
         - text/json
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: List of all the groups associated to the user filtered by this tag.
       tags:
         - Tags
-  '/tags/{tagId}/groups/count':
+  "/tags/{tagId}/groups/count":
     get:
       consumes: []
       deprecated: false
@@ -5284,20 +5285,20 @@ paths:
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.CountResponce'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.CountResponce"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Count the groups associated to the user filtered by this tag
       tags:
         - Tags
-  '/tags/{tagId}/groups/patch':
+  "/tags/{tagId}/groups/patch":
     put:
       consumes:
         - application/json
@@ -5318,27 +5319,27 @@ paths:
           name: data
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.PatchBody'
+            $ref: "#/definitions/Api.Core.Requests.PatchBody"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not found
-        '500':
+        "500":
           description: Internal Server Error
       summary: Associate/Deassociate a tag with a group
       tags:
         - Tags
-  '/tags/{tagId}/name':
+  "/tags/{tagId}/name":
     put:
       consumes:
         - application/json
@@ -5359,20 +5360,20 @@ paths:
           name: data
           required: true
           schema:
-            $ref: '#/definitions/Api.Core.Requests.GenericTextPatch'
+            $ref: "#/definitions/Api.Core.Requests.GenericTextPatch"
       produces:
         - application/json
         - text/json
         - application/xml
         - text/xml
       responses:
-        '200':
-          description: ''
+        "200":
+          description: ""
           schema:
-            $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
-        '401':
+            $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Internal Server Error
       summary: Fast patch a tag name
       tags:
@@ -5416,13 +5417,13 @@ definitions:
       apiKey:
         type: string
       conversionOptions:
-        $ref: '#/definitions/Api.Core.Dto.Accounting.ConversionOptions'
+        $ref: "#/definitions/Api.Core.Dto.Accounting.ConversionOptions"
       creationDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       currentGrant:
-        $ref: '#/definitions/Api.Core.Dto.Grants.Grant'
+        $ref: "#/definitions/Api.Core.Dto.Grants.Grant"
       dateFormat:
         type: string
       decimalSeparator:
@@ -5430,12 +5431,12 @@ definitions:
       email:
         type: string
       extendedGrants:
-        $ref: '#/definitions/Api.Core.Dto.Accounting.ExtendedGrants'
+        $ref: "#/definitions/Api.Core.Dto.Accounting.ExtendedGrants"
       groupGrants:
         format: int64
         type: integer
       hitOptions:
-        $ref: '#/definitions/Api.Core.Dto.Accounting.HitOptions'
+        $ref: "#/definitions/Api.Core.Dto.Accounting.HitOptions"
       id:
         format: int64
         type: integer
@@ -5464,7 +5465,7 @@ definitions:
         type: integer
       timeframeMinDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       timezonename:
         type: string
@@ -5499,11 +5500,11 @@ definitions:
         type: integer
       billingPeriodEnd:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       billingPeriodStart:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       bonusMonthlyEvents:
         format: int64
@@ -5560,11 +5561,11 @@ definitions:
         type: boolean
       registrationDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       timeframeMinDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       timezone:
         format: int32
@@ -5576,7 +5577,7 @@ definitions:
     properties:
       activityDay:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       commissionsCost:
         format: double
@@ -5591,27 +5592,27 @@ definitions:
         format: int64
         type: integer
       entityData:
-        $ref: '#/definitions/System.Object'
+        $ref: "#/definitions/System.Object"
       entityId:
         type: string
       fromDay:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       hourlyBreakDown:
         additionalProperties:
-          $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedResult'
+          $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
         type: object
       lastHitDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       spiderHitsCount:
         format: int64
         type: integer
       toDay:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       totalClicks:
         format: int64
@@ -5642,35 +5643,35 @@ definitions:
         type: integer
       result:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedResult'
+          $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
         type: array
     type: object
   Api.Core.Dto.ClickStream.Hit:
     properties:
       accessTime:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       browser:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitBrowserInfo'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitBrowserInfo"
       clientLanguage:
         type: string
       conversion1:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
       conversion2:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
       conversion3:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
       conversion4:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
       conversion5:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
       conversions:
         items:
-          $ref: '#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo'
+          $ref: "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
         type: array
       entity:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitDatapointInfo'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitDatapointInfo"
       ip:
         type: string
       isProxy:
@@ -5680,11 +5681,11 @@ definitions:
       isUnique:
         type: string
       location:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitLocationInfo'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitLocationInfo"
       org:
         type: string
       os:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitOsInfo'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitOsInfo"
       queryParams:
         type: string
       realDestinationUrl:
@@ -5692,7 +5693,7 @@ definitions:
       referer:
         type: string
       source:
-        $ref: '#/definitions/Api.Core.Dto.ClickStream.HitSource'
+        $ref: "#/definitions/Api.Core.Dto.ClickStream.HitSource"
       type:
         type: string
     type: object
@@ -5715,7 +5716,7 @@ definitions:
     properties:
       accessTime:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       comcost:
         format: double
@@ -5725,7 +5726,7 @@ definitions:
         type: number
       date:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       deleted:
         type: boolean
@@ -5744,7 +5745,7 @@ definitions:
     properties:
       creationDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       datapointFavourite:
         type: boolean
@@ -5781,7 +5782,7 @@ definitions:
         type: string
       tags:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Tags.Tag'
+          $ref: "#/definitions/Api.Core.Dto.Tags.Tag"
         type: array
       trackingCode:
         type: string
@@ -5790,7 +5791,7 @@ definitions:
     properties:
       hits:
         items:
-          $ref: '#/definitions/Api.Core.Dto.ClickStream.Hit'
+          $ref: "#/definitions/Api.Core.Dto.ClickStream.Hit"
         type: array
       lastKey:
         type: string
@@ -5849,7 +5850,7 @@ definitions:
         type: string
       creationDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       deleted:
         type: boolean
@@ -5882,7 +5883,7 @@ definitions:
     properties:
       creationDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       encodeIp:
         type: boolean
@@ -5937,7 +5938,7 @@ definitions:
         type: string
       tags:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Tags.Tag'
+          $ref: "#/definitions/Api.Core.Dto.Tags.Tag"
         type: array
       thirdConversionId:
         format: int64
@@ -5954,9 +5955,9 @@ definitions:
           - TrackingPixel
         type: string
       typeTL:
-        $ref: '#/definitions/Api.Core.Dto.Datapoints.TrackingLinkSpecifics'
+        $ref: "#/definitions/Api.Core.Dto.Datapoints.TrackingLinkSpecifics"
       typeTP:
-        $ref: '#/definitions/Api.Core.Dto.Datapoints.TrackingPixelSpecifics'
+        $ref: "#/definitions/Api.Core.Dto.Datapoints.TrackingPixelSpecifics"
       writePermited:
         type: boolean
     type: object
@@ -5978,7 +5979,7 @@ definitions:
       appendQuery:
         type: boolean
       browserDestinationItem:
-        $ref: '#/definitions/Api.Core.Dto.Datapoints.BrowserBaseDestinationItem'
+        $ref: "#/definitions/Api.Core.Dto.Datapoints.BrowserBaseDestinationItem"
       destinationMode:
         enum:
           - Simple
@@ -6002,7 +6003,7 @@ definitions:
         type: integer
       expirationDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       firstUrl:
         type: string
@@ -6023,7 +6024,7 @@ definitions:
         type: boolean
       randomDestinationItems:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Datapoints.MultipleDestinationItem'
+          $ref: "#/definitions/Api.Core.Dto.Datapoints.MultipleDestinationItem"
         type: array
       redirectType:
         enum:
@@ -6038,18 +6039,18 @@ definitions:
         type: string
       scripts:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Datapoints.DatapointRetargetingInfo'
+          $ref: "#/definitions/Api.Core.Dto.Datapoints.DatapointRetargetingInfo"
         type: array
       sequentialDestinationItems:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Datapoints.MultipleDestinationItem'
+          $ref: "#/definitions/Api.Core.Dto.Datapoints.MultipleDestinationItem"
         type: array
       spilloverDestinationItems:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Datapoints.MultipleDestinationItem'
+          $ref: "#/definitions/Api.Core.Dto.Datapoints.MultipleDestinationItem"
         type: array
       uniqueDestinationItem:
-        $ref: '#/definitions/Api.Core.Dto.Datapoints.UniqueDestinationItem'
+        $ref: "#/definitions/Api.Core.Dto.Datapoints.UniqueDestinationItem"
       url:
         type: string
       urlAfterClicksExpiration:
@@ -6058,15 +6059,15 @@ definitions:
         type: string
       urlsByLanguage:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Datapoints.UrlByLanguageItem'
+          $ref: "#/definitions/Api.Core.Dto.Datapoints.UrlByLanguageItem"
         type: array
       urlsByNation:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Datapoints.UrlByNationItem'
+          $ref: "#/definitions/Api.Core.Dto.Datapoints.UrlByNationItem"
         type: array
       weightedDestinationItems:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Datapoints.WeightedDestinationItem'
+          $ref: "#/definitions/Api.Core.Dto.Datapoints.WeightedDestinationItem"
         type: array
     type: object
   Api.Core.Dto.Datapoints.TrackingPixelSpecifics:
@@ -6133,7 +6134,7 @@ definitions:
       DatapointType:
         type: string
       Entity:
-        $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
+        $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
       EntityName:
         type: string
       EntityType:
@@ -6145,7 +6146,7 @@ definitions:
     properties:
       creationDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       deleted:
         type: boolean
@@ -6164,7 +6165,7 @@ definitions:
         type: boolean
       tags:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Tags.Tag'
+          $ref: "#/definitions/Api.Core.Dto.Tags.Tag"
         type: array
       writePermited:
         type: boolean
@@ -6201,11 +6202,11 @@ definitions:
     properties:
       createdAt:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       data:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Tops.TopItem'
+          $ref: "#/definitions/Api.Core.Dto.Tops.TopItem"
         type: array
       key:
         type: string
@@ -6213,12 +6214,12 @@ definitions:
   Api.Core.Dto.Tops.TopItem:
     properties:
       entityData:
-        $ref: '#/definitions/System.Object'
+        $ref: "#/definitions/System.Object"
       id:
         type: string
       lastHitDate:
         description: ' (A date in "YmdHis" format)'
-        example: '20120203120530'
+        example: "20120203120530"
         type: string
       spiderClicks:
         format: int64
@@ -6275,14 +6276,14 @@ definitions:
     properties:
       List:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Datapoints.Datapoint'
+          $ref: "#/definitions/Api.Core.Dto.Datapoints.Datapoint"
         type: array
     type: object
   Api.Core.Requests.DeleteBatch:
     properties:
       Entities:
         items:
-          $ref: '#/definitions/Api.Core.Dto.EntityUriLong'
+          $ref: "#/definitions/Api.Core.Dto.EntityUriLong"
         type: array
     type: object
   Api.Core.Requests.GenericTextPatch:
@@ -6302,7 +6303,7 @@ definitions:
     properties:
       PatchRequests:
         items:
-          $ref: '#/definitions/Api.Core.Requests.PatchBody'
+          $ref: "#/definitions/Api.Core.Requests.PatchBody"
         type: array
     type: object
   Api.Core.Requests.PermissionPatchRequest:
@@ -6321,49 +6322,49 @@ definitions:
         format: int64
         type: integer
     type: object
-  'Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Accounting.DomainWhitelistEntry]':
+  "Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Accounting.DomainWhitelistEntry]":
     properties:
       entities:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Accounting.DomainWhitelistEntry'
+          $ref: "#/definitions/Api.Core.Dto.Accounting.DomainWhitelistEntry"
         type: array
     type: object
-  'Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Accounting.IpBlacklistEntry]':
+  "Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Accounting.IpBlacklistEntry]":
     properties:
       entities:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Accounting.IpBlacklistEntry'
+          $ref: "#/definitions/Api.Core.Dto.Accounting.IpBlacklistEntry"
         type: array
     type: object
-  'Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]':
+  "Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]":
     properties:
       entities:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Aggregated.AggregatedResult'
+          $ref: "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
         type: array
     type: object
-  'Api.Core.Responses.EntitiesResponse[Api.Core.Dto.ClickStream.Hit]':
+  "Api.Core.Responses.EntitiesResponse[Api.Core.Dto.ClickStream.Hit]":
     properties:
       entities:
         items:
-          $ref: '#/definitions/Api.Core.Dto.ClickStream.Hit'
+          $ref: "#/definitions/Api.Core.Dto.ClickStream.Hit"
         type: array
     type: object
-  'Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Grants.Grant]':
+  "Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Grants.Grant]":
     properties:
       entities:
         items:
-          $ref: '#/definitions/Api.Core.Dto.Grants.Grant'
+          $ref: "#/definitions/Api.Core.Dto.Grants.Grant"
         type: array
     type: object
-  'Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]':
+  "Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]":
     properties:
       entities:
         items:
-          $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
+          $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
         type: array
     type: object
-  'Api.Core.Responses.EntityUri[System.Int64]':
+  "Api.Core.Responses.EntityUri[System.Int64]":
     properties:
       id:
         format: int64
@@ -6371,27 +6372,27 @@ definitions:
       uri:
         type: string
     type: object
-  'Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]':
+  "Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]":
     properties:
       entityData:
-        $ref: '#/definitions/Api.Core.Dto.Datapoints.Datapoint'
+        $ref: "#/definitions/Api.Core.Dto.Datapoints.Datapoint"
       errors:
         items:
-          $ref: '#/definitions/ClickMeter.Infrastructure.Validation.ValidationFailure'
+          $ref: "#/definitions/ClickMeter.Infrastructure.Validation.ValidationFailure"
         type: array
       result:
-        $ref: '#/definitions/Api.Core.Responses.EntityUri[System.Int64]'
+        $ref: "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
       status:
         type: string
     type: object
   ClickMeter.Infrastructure.Validation.ValidationFailure:
     properties:
       code:
-        $ref: '#/definitions/System.Object'
+        $ref: "#/definitions/System.Object"
       errorMessage:
         type: string
       errorValue:
-        $ref: '#/definitions/System.Object'
+        $ref: "#/definitions/System.Object"
       property:
         type: string
     type: object

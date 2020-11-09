@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.mercedes-benz.com
@@ -9,22 +9,23 @@ info:
     x-twitter: MercedesBenz
   description: The Dealer API provides Dealer search functions.
   title: Dealer
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - transport
   x-logo:
-    url: 'https://twitter.com/MercedesBenz/profile_image?size=original'
+    url: https://twitter.com/MercedesBenz/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://developer.mercedes-benz.com/content/sites/default/files/2018-07/swagger_dealer_api_0.yaml'
-      version: '2.0'
+      url: https://developer.mercedes-benz.com/content/sites/default/files/2018-07/swagger_dealer_api_0.yaml
+      version: "2.0"
   x-providerName: mercedes-benz.com
   x-serviceName: dealer
+  x-preferred: true
 produces:
   - application/json
 parameters:
   activity:
-    description: |-
+    description: >-
       Filter by activity, valid actitvity values are:
         * PARTS: Spare Parts Sales
         * SALES: Sales of new vehicles
@@ -40,7 +41,7 @@ parameters:
     required: false
     type: string
   brand:
-    description: |-
+    description: >-
       Filter by brand, valid values are:
         * MB: Mercedes-Benz
         * SMT: Smart
@@ -58,20 +59,20 @@ parameters:
     required: false
     type: string
   countryIsoCode:
-    description: 'The country of the dealer address defined as ISO two letter ID (e.g. DE, CH, CN, etc.)'
+    description: The country of the dealer address defined as ISO two letter ID (e.g. DE, CH, CN, etc.)
     in: query
     name: countryIsoCode
     required: false
     type: string
   dealerId:
     default: GS0000275
-    description: 'The dealer id is dealer’s business key, also known as GS Id. e.g. GS0000857'
+    description: The dealer id is dealer’s business key, also known as GS Id. e.g. GS0000857
     in: path
     name: dealerId
     required: true
     type: string
   dealerIds:
-    description: |
+    description: >
       Array of dealer ids. The dealer id is dealer’s business key, also known as GS Id. e.g. GS0000857,GS0017621
     in: query
     items:
@@ -80,13 +81,13 @@ parameters:
     required: false
     type: array
   fieldsForDealer:
-    description: 'Specifies which fields should be included in the result. If this filter is not used, per default all fields are returned. e.g. fields=dealerId,address(street,city)'
+    description: Specifies which fields should be included in the result. If this filter is not used, per default all fields are returned. e.g. fields=dealerId,address(street,city)
     in: query
     name: fields
     required: false
     type: string
   fieldsForDealers:
-    description: 'Specifies which fields should be included in the result. If this filter is not used, per default all fields are returned. e.g. fields=dealers(dealerId,address(street,city))'
+    description: Specifies which fields should be included in the result. If this filter is not used, per default all fields are returned. e.g. fields=dealers(dealerId,address(street,city))
     in: query
     name: fields
     required: false
@@ -98,7 +99,7 @@ parameters:
     required: false
     type: number
   legalName:
-    description: 'A name of the dealer, the name filter will be applied to all Dealer names (e.g. legalName, nameAddition). You can also search for parts of Dealer names, e.g. the search term ''Niederlassung'' will also match ''Niederlassung Stuttgart''.'
+    description: A name of the dealer, the name filter will be applied to all Dealer names (e.g. legalName, nameAddition). You can also search for parts of Dealer names, e.g. the search term 'Niederlassung' will also match 'Niederlassung Stuttgart'.
     in: query
     name: name
     required: false
@@ -110,7 +111,7 @@ parameters:
     required: false
     type: number
   page:
-    description: |
+    description: >
       The index of the page to be returned. If this parameter is omitted, the first page will be returned.
     format: int32
     in: query
@@ -118,7 +119,7 @@ parameters:
     required: false
     type: integer
   pageSize:
-    description: |
+    description: >
       The index of the page to be returned. If this parameter is omitted, the first page will be returned.
     format: int32
     in: query
@@ -136,7 +137,7 @@ parameters:
     type: string
   radiusUnit:
     default: KM
-    description: 'The radius unit of the search area. The center of the search area is defined by geo coordinates. (latitude, longitude properties) If radiusValue and radiusUnit parameters are missing, then the default radius is 10 km.'
+    description: The radius unit of the search area. The center of the search area is defined by geo coordinates. (latitude, longitude properties) If radiusValue and radiusUnit parameters are missing, then the default radius is 10 km.
     enum:
       - M
       - KM
@@ -147,13 +148,13 @@ parameters:
     type: string
   radiusValue:
     default: 10
-    description: 'The radius value of the search area. The center of the search area is defined by geo coordinates. (latitude, longitude properties) If radiusValue and radiusUnit parameters are missing, then the default radius is 10 km.'
+    description: The radius value of the search area. The center of the search area is defined by geo coordinates. (latitude, longitude properties) If radiusValue and radiusUnit parameters are missing, then the default radius is 10 km.
     in: query
     name: radiusValue
     required: false
     type: integer
 tags:
-  - description: 'Resources that provide search functions for dealers (dealer, garage, retailer, etc.) based on given attributes.'
+  - description: Resources that provide search functions for dealers (dealer, garage, retailer, etc.) based on given attributes.
     name: Dealer search
   - description: Reference data that is required for the Dealer API.
     name: References
@@ -163,58 +164,58 @@ paths:
       description: This request returns the countries supported by the Dealer API
       operationId: countriesGET
       parameters:
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/pageSize'
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/pageSize"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/HalifiedCountries'
-        '400':
-          description: |-
+            $ref: "#/definitions/HalifiedCountries"
+        "400":
+          description: >-
             Invalid parameter was specified:
              * Page is not valid
              * Page size is not valid
-        '401':
-          description: |-
+        "401":
+          description: >-
             Unauthorized:
               * Failed to resolve API Key query parameter
               * Invalid API Key
-        '429':
+        "429":
           description: Quota limit is exceeded
-        '500':
+        "500":
           description: Internal server error
       tags:
         - References
     x-swagger-router-controller: get_countries
   /dealers:
     get:
-      description: 'This request returns dealers (dealer, garage, retailer, etc.) for given parameters'
+      description: This request returns dealers (dealer, garage, retailer, etc.) for given parameters
       operationId: dealersGET
       parameters:
-        - $ref: '#/parameters/dealerIds'
-        - $ref: '#/parameters/latitude'
-        - $ref: '#/parameters/longitude'
-        - $ref: '#/parameters/radiusValue'
-        - $ref: '#/parameters/radiusUnit'
-        - $ref: '#/parameters/countryIsoCode'
-        - $ref: '#/parameters/city'
-        - $ref: '#/parameters/legalName'
-        - $ref: '#/parameters/brand'
-        - $ref: '#/parameters/productGroup'
-        - $ref: '#/parameters/activity'
-        - $ref: '#/parameters/fieldsForDealers'
-        - $ref: '#/parameters/page'
-        - $ref: '#/parameters/pageSize'
+        - $ref: "#/parameters/dealerIds"
+        - $ref: "#/parameters/latitude"
+        - $ref: "#/parameters/longitude"
+        - $ref: "#/parameters/radiusValue"
+        - $ref: "#/parameters/radiusUnit"
+        - $ref: "#/parameters/countryIsoCode"
+        - $ref: "#/parameters/city"
+        - $ref: "#/parameters/legalName"
+        - $ref: "#/parameters/brand"
+        - $ref: "#/parameters/productGroup"
+        - $ref: "#/parameters/activity"
+        - $ref: "#/parameters/fieldsForDealers"
+        - $ref: "#/parameters/page"
+        - $ref: "#/parameters/pageSize"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/HalifiedDealers'
-        '204':
+            $ref: "#/definitions/HalifiedDealers"
+        "204":
           description: The search did not match any dealers.
-        '400':
-          description: |-
+        "400":
+          description: >-
             Invalid parameter was specified:
              * DealerId is not valid
              * Area search is not valid (latitude or longitude missing or invalid)
@@ -224,42 +225,42 @@ paths:
              * Activity is not valid
              * Page is not valid
              * Page size is not valid
-        '401':
-          description: |-
+        "401":
+          description: >-
             Unauthorized:
               * Failed to resolve API Key query parameter
               * Invalid API Key
-        '429':
+        "429":
           description: Quota limit is exceeded
-        '500':
+        "500":
           description: Internal server error
       tags:
         - Dealer search
     x-swagger-router-controller: get_dealers
-  '/dealers/{dealerId}':
+  "/dealers/{dealerId}":
     get:
       description: This request returns dealers for given parameters
       operationId: dealerGET
       parameters:
-        - $ref: '#/parameters/dealerId'
-        - $ref: '#/parameters/fieldsForDealer'
+        - $ref: "#/parameters/dealerId"
+        - $ref: "#/parameters/fieldsForDealer"
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/Dealer'
-        '400':
+            $ref: "#/definitions/Dealer"
+        "400":
           description: Invalid format for parameter dealerId was specified
-        '401':
-          description: |-
+        "401":
+          description: >-
             Unauthorized:
               * Failed to resolve API Key query parameter
               * Invalid API Key
-        '404':
+        "404":
           description: Dealer not found
-        '429':
+        "429":
           description: Quota limit is exceeded
-        '500':
+        "500":
           description: Internal server error
       tags:
         - Dealer search
@@ -268,7 +269,7 @@ definitions:
   ActivityOfAFunction:
     properties:
       code:
-        description: |-
+        description: >-
           The activity of the dealer, valid actitvity values are:
             * PARTS: Spare Parts Sales
             * SALES: Sales of new vehicles
@@ -294,10 +295,10 @@ definitions:
         description: ISO A2 country code
         type: string
       district:
-        description: 'district, area of city'
+        description: district, area of city
         type: string
       street:
-        description: 'street and house number, if applicable'
+        description: street and house number, if applicable
         type: string
       zipCode:
         description: postal code
@@ -318,14 +319,14 @@ definitions:
   BrandCode:
     properties:
       brand:
-        $ref: '#/definitions/Brand'
+        $ref: "#/definitions/Brand"
     required:
       - brand
     type: object
   CommunicationChannels:
     properties:
       general:
-        $ref: '#/definitions/General'
+        $ref: "#/definitions/General"
     type: object
   Country:
     properties:
@@ -347,45 +348,46 @@ definitions:
     description: the representation of an dealer
     properties:
       _links:
-        $ref: '#/definitions/SelfLink'
+        $ref: "#/definitions/SelfLink"
       address:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       brandCodes:
-        description: 'network brand codes of the dealer, dealer numbers'
+        description: network brand codes of the dealer, dealer numbers
         items:
-          $ref: '#/definitions/BrandCode'
+          $ref: "#/definitions/BrandCode"
         type: array
       communication:
-        $ref: '#/definitions/CommunicationChannels'
+        $ref: "#/definitions/CommunicationChannels"
       dealerId:
-        description: 'GSSN unique ID, main identifier'
+        description: GSSN unique ID, main identifier
         type: string
       distance:
-        $ref: '#/definitions/TheDistance'
+        $ref: "#/definitions/TheDistance"
       functions:
         description: list of functions for the dealer
         items:
-          $ref: '#/definitions/Function'
+          $ref: "#/definitions/Function"
         type: array
         uniqueItems: true
       geoCoordinates:
-        $ref: '#/definitions/GeoCoordinates'
+        $ref: "#/definitions/GeoCoordinates"
       legalName:
         description: legal name of the company
         type: string
       nameAddition:
-        description: 'name addition, country specific use'
+        description: name addition, country specific use
         type: string
       openingHours:
-        description: |
+        description: >
           List of opening hours for each customer relevant function for
+
           each day
         items:
-          $ref: '#/definitions/FunctionOpeningHours'
+          $ref: "#/definitions/FunctionOpeningHours"
         type: array
         uniqueItems: true
       region:
-        $ref: '#/definitions/RegionRepresentation'
+        $ref: "#/definitions/RegionRepresentation"
     required:
       - _links
       - legalName
@@ -395,20 +397,20 @@ definitions:
     description: default links
     properties:
       next:
-        $ref: '#/definitions/Link'
+        $ref: "#/definitions/Link"
       previous:
-        $ref: '#/definitions/Link'
+        $ref: "#/definitions/Link"
       self:
-        $ref: '#/definitions/Link'
+        $ref: "#/definitions/Link"
     type: object
   Function:
     properties:
       activity:
-        $ref: '#/definitions/ActivityOfAFunction'
+        $ref: "#/definitions/ActivityOfAFunction"
       brand:
-        $ref: '#/definitions/Brand'
+        $ref: "#/definitions/Brand"
       productGroup:
-        $ref: '#/definitions/ProductGroupOfAFunction'
+        $ref: "#/definitions/ProductGroupOfAFunction"
     required:
       - activity
       - brand
@@ -417,9 +419,9 @@ definitions:
   FunctionOpeningHours:
     properties:
       function:
-        $ref: '#/definitions/Function'
+        $ref: "#/definitions/Function"
       weekdays:
-        $ref: '#/definitions/Weekdays'
+        $ref: "#/definitions/Weekdays"
     type: object
   General:
     properties:
@@ -466,11 +468,11 @@ definitions:
     description: countries and navigation links for additional results.
     properties:
       _links:
-        $ref: '#/definitions/DefaultLinks'
+        $ref: "#/definitions/DefaultLinks"
       countries:
         description: countries
         items:
-          $ref: '#/definitions/Country'
+          $ref: "#/definitions/Country"
         type: array
     required:
       - _links
@@ -479,11 +481,11 @@ definitions:
     description: dealer with navigation links.
     properties:
       _links:
-        $ref: '#/definitions/DefaultLinks'
+        $ref: "#/definitions/DefaultLinks"
       dealers:
         description: dealers
         items:
-          $ref: '#/definitions/Dealer'
+          $ref: "#/definitions/Dealer"
         type: array
     required:
       - _links
@@ -512,7 +514,7 @@ definitions:
   ProductGroupOfAFunction:
     properties:
       code:
-        description: |-
+        description: >-
           The product group code, valid values are:
             * PASSENGER-CAR
             * VAN
@@ -537,7 +539,7 @@ definitions:
     description: self links
     properties:
       self:
-        $ref: '#/definitions/Link'
+        $ref: "#/definitions/Link"
     type: object
   TheDistance:
     properties:
@@ -560,7 +562,7 @@ definitions:
       periods:
         description: time periods
         items:
-          $ref: '#/definitions/Periods'
+          $ref: "#/definitions/Periods"
         type: array
       status:
         description: status (OPEN or CLOSED)
@@ -570,25 +572,28 @@ definitions:
         type: string
     type: object
   Weekdays:
-    description: |
+    description: >
       opening hours for a week, represented by a map where the key
+
       is a weekday and the value is an object containing the time periods. There
+
       are a maximum of two time slots for each day. If there exists no opening
+
       hours for one day, they will be shown as closed.
     properties:
       FRIDAY:
-        $ref: '#/definitions/WeekdayInfo'
+        $ref: "#/definitions/WeekdayInfo"
       MONDAY:
-        $ref: '#/definitions/WeekdayInfo'
+        $ref: "#/definitions/WeekdayInfo"
       SATURDAY:
-        $ref: '#/definitions/WeekdayInfo'
+        $ref: "#/definitions/WeekdayInfo"
       SUNDAY:
-        $ref: '#/definitions/WeekdayInfo'
+        $ref: "#/definitions/WeekdayInfo"
       THURSDAY:
-        $ref: '#/definitions/WeekdayInfo'
+        $ref: "#/definitions/WeekdayInfo"
       TUESDAY:
-        $ref: '#/definitions/WeekdayInfo'
+        $ref: "#/definitions/WeekdayInfo"
       WEDNESDAY:
-        $ref: '#/definitions/WeekdayInfo'
+        $ref: "#/definitions/WeekdayInfo"
     type: object
 x-default-apikey: Tyt82ndiKG0AdH8TCqe001ROh7RsGOKB

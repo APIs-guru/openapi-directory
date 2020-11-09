@@ -1,22 +1,23 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: posty-api.herokuapp.com
 basePath: /
 info:
-  description: 'The posty_API is the core element of the posty softwarestack. It is developed to administrate a mailserver based on Postfix and Dovecot. It offers an easy REST interface which can be used in own applications or with the posty client applications, posty_CLI and posty_webUI.'
+  description: The posty_API is the core element of the posty softwarestack. It is developed to administrate a mailserver based on Postfix and Dovecot. It offers an easy REST interface which can be used in own applications or with the posty client applications, posty_CLI and posty_webUI.
   title: posty_API
   version: v1
   x-apisguru-categories:
     - email
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.11
       format: swagger
-      url: 'http://posty-api.herokuapp.com/api/v1/swagger_doc.json'
-      version: '1.2'
+      url: http://posty-api.herokuapp.com/api/v1/swagger_doc.json
+      version: "1.2"
   x-providerName: posty-api.herokuapp.com
+  x-preferred: true
 produces:
   - application/json
 tags:
@@ -29,7 +30,7 @@ paths:
     get:
       operationId: GET-api--version-domains---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns all available domains
       tags:
@@ -37,12 +38,12 @@ paths:
     post:
       operationId: POST-api--version-domains---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create new domain
       tags:
         - domains
-  '/api/v1/domains/{domain_name}.json':
+  "/api/v1/domains/{domain_name}.json":
     delete:
       operationId: DELETE-api--version-domains--domain_name---format-
       parameters:
@@ -51,7 +52,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete the specified domain
       tags:
@@ -64,7 +65,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns the information to the specified domain
       tags:
@@ -77,12 +78,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update the specified domain
       tags:
         - domains
-  '/api/v1/domains/{domain_name}/aliases.json':
+  "/api/v1/domains/{domain_name}/aliases.json":
     get:
       operationId: GET-api--version-domains--domain_name-aliases---format-
       parameters:
@@ -91,7 +92,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns all aliases for the specified domain
       tags:
@@ -104,12 +105,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create new domain alias
       tags:
         - domains
-  '/api/v1/domains/{domain_name}/aliases/{alias_name}.json':
+  "/api/v1/domains/{domain_name}/aliases/{alias_name}.json":
     delete:
       operationId: DELETE-api--version-domains--domain_name-aliases--alias_name---format-
       parameters:
@@ -122,7 +123,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete the specified domain alias
       tags:
@@ -139,7 +140,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns the information to the specified domain alias
       tags:
@@ -156,12 +157,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update the specified domain alias
       tags:
         - domains
-  '/api/v1/domains/{domain_name}/users.json':
+  "/api/v1/domains/{domain_name}/users.json":
     get:
       operationId: GET-api--version-domains--domain_name-users---format-
       parameters:
@@ -170,7 +171,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns all users for the specified domain
       tags:
@@ -183,12 +184,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create new user
       tags:
         - domains
-  '/api/v1/domains/{domain_name}/users/{user_name}.json':
+  "/api/v1/domains/{domain_name}/users/{user_name}.json":
     delete:
       operationId: DELETE-api--version-domains--domain_name-users--user_name---format-
       parameters:
@@ -201,7 +202,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete the specified user
       tags:
@@ -218,7 +219,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns the information to the specified user
       tags:
@@ -235,12 +236,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update the specified user
       tags:
         - domains
-  '/api/v1/domains/{domain_name}/users/{user_name}/aliases.json':
+  "/api/v1/domains/{domain_name}/users/{user_name}/aliases.json":
     get:
       operationId: GET-api--version-domains--domain_name-users--user_name-aliases---format-
       parameters:
@@ -253,7 +254,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns all aliases for the specified user
       tags:
@@ -270,12 +271,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create new user alias
       tags:
         - domains
-  '/api/v1/domains/{domain_name}/users/{user_name}/aliases/{alias_name}.json':
+  "/api/v1/domains/{domain_name}/users/{user_name}/aliases/{alias_name}.json":
     delete:
       operationId: DELETE-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-
       parameters:
@@ -292,7 +293,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete the specified user alias
       tags:
@@ -313,7 +314,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns the information to the specified user alias
       tags:
@@ -334,7 +335,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update the specified user alias
       tags:
@@ -343,7 +344,7 @@ paths:
     get:
       operationId: GET-api--version-summary---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns a summary of all Resources
       tags:
@@ -352,12 +353,12 @@ paths:
     get:
       operationId: GET-api-v1-swagger_doc---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Swagger compatible API description
       tags:
         - v1
-  '/api/v1/swagger_doc/{name}.json':
+  "/api/v1/swagger_doc/{name}.json":
     get:
       operationId: GET-api-v1-swagger_doc--name---format-
       parameters:
@@ -367,7 +368,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Swagger compatible API description for specific API
       tags:
@@ -376,7 +377,7 @@ paths:
     get:
       operationId: GET-api--version-transports---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns all available transports
       tags:
@@ -384,12 +385,12 @@ paths:
     post:
       operationId: POST-api--version-transports---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create new transport
       tags:
         - transports
-  '/api/v1/transports/{transport_name}.json':
+  "/api/v1/transports/{transport_name}.json":
     delete:
       operationId: DELETE-api--version-transports--transport_name---format-
       parameters:
@@ -398,7 +399,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete the specified transport
       tags:
@@ -411,7 +412,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Returns the information to the specified transport
       tags:
@@ -424,7 +425,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update the specified transport
       tags:

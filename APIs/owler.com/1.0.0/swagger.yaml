@@ -1,24 +1,25 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.owler.com
 basePath: /
 info:
-  description: 'Search for information on companies using a website or company name and get access to Company Data, News, Blog Posts, Competitor Lists and much more.'
+  description: Search for information on companies using a website or company name and get access to Company Data, News, Blog Posts, Competitor Lists and much more.
   title: Owler
   version: 1.0.0
   x-apisguru-categories:
     - search
   x-logo:
-    url: 'https://twitter.com/owlerinc/profile_image?size=original'
+    url: https://twitter.com/owlerinc/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.11
       format: swagger
-      url: 'https://developers.owler.com/swagger/spec.json'
-      version: '1.2'
+      url: https://developers.owler.com/swagger/spec.json
+      version: "1.2"
   x-providerName: owler.com
+  x-preferred: true
 produces:
   - application/json
   - application/xml
@@ -52,7 +53,7 @@ paths:
           name: q
           required: true
           type: string
-        - description: 'Fields to be searched - name, website, ticker, permid. If not specfied, will be searched against all fields'
+        - description: Fields to be searched - name, website, ticker, permid. If not specfied, will be searched against all fields
           in: query
           items:
             enum:
@@ -64,13 +65,13 @@ paths:
           name: fields
           required: false
           type: array
-        - description: 'Number of results to be displayed - 10 (by default, if not specified) to 30'
+        - description: Number of results to be displayed - 10 (by default, if not specified) to 30
           in: query
           name: limit
           required: false
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -79,22 +80,22 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Search Results
           schema:
-            $ref: '#/definitions/basic_results'
-        '400':
+            $ref: "#/definitions/basic_results"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Basic Search Company by Ticker or Website or Name or PermID
       tags:
         - CompanyAPI
-  '/v1/company/competitor/id/{companyId}':
+  "/v1/company/competitor/id/{companyId}":
     get:
       description: The Competitors API provides basic information about top 3 competitors of a company specified in the Company Id
       parameters:
@@ -104,7 +105,7 @@ paths:
           required: true
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -113,24 +114,24 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Competitors Data
           schema:
-            $ref: '#/definitions/CompanyCompetitorVO'
-        '400':
+            $ref: "#/definitions/CompanyCompetitorVO"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '404':
+        "404":
           description: Resource Not Found
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Competitor information by Id
       tags:
         - CompetitorAPI
-  '/v1/company/competitor/url/{website}':
+  "/v1/company/competitor/url/{website}":
     get:
       description: The Competitors API provides basic information about top 3 competitors of a company specified in the website
       parameters:
@@ -140,7 +141,7 @@ paths:
           required: true
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -149,24 +150,24 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Competitors Data
           schema:
-            $ref: '#/definitions/CompanyCompetitorVO'
-        '400':
+            $ref: "#/definitions/CompanyCompetitorVO"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '404':
+        "404":
           description: Resource Not Found
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Competitor information by URL
       tags:
         - CompetitorAPI
-  '/v1/company/competitorpremium/id/{companyId}':
+  "/v1/company/competitorpremium/id/{companyId}":
     get:
       description: The Competitors API provides basic information about all competitors of a given company Id
       parameters:
@@ -175,13 +176,13 @@ paths:
           name: companyId
           required: true
           type: string
-        - description: 'Pass pagination_id as * in the first API request. The API response will return top competitors along with the next pagination_id which can be passed in the subsequent API request to get the next set of competitors. Repeat this process until needed or till the pagination_id returned is blank. Note:Every response will have maximum of 50 competitors.'
+        - description: Pass pagination_id as * in the first API request. The API response will return top competitors along with the next pagination_id which can be passed in the subsequent API request to get the next set of competitors. Repeat this process until needed or till the pagination_id returned is blank. Note:Every response will have maximum of 50 competitors.
           in: query
           name: pagination_id
           required: false
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -190,24 +191,24 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Competitors Data
           schema:
-            $ref: '#/definitions/competitors'
-        '400':
+            $ref: "#/definitions/competitors"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '404':
+        "404":
           description: Resource Not Found
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Competitor information by Id
       tags:
         - CompetitorPremiumAPI
-  '/v1/company/competitorpremium/url/{website}':
+  "/v1/company/competitorpremium/url/{website}":
     get:
       description: The Competitors API provides basic information about all competitors of a given company Id
       parameters:
@@ -216,13 +217,13 @@ paths:
           name: website
           required: true
           type: string
-        - description: 'Pass pagination_id as * in the first API request. The API response will return top competitors along with the next pagination_id which can be passed in the subsequent API request to get the next set of competitors. Repeat this process until needed or till the pagination_id returned is blank. Note:Every response will have maximum of 50 competitors.'
+        - description: Pass pagination_id as * in the first API request. The API response will return top competitors along with the next pagination_id which can be passed in the subsequent API request to get the next set of competitors. Repeat this process until needed or till the pagination_id returned is blank. Note:Every response will have maximum of 50 competitors.
           in: query
           name: pagination_id
           required: false
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -231,19 +232,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Competitors Data
           schema:
-            $ref: '#/definitions/competitors'
-        '400':
+            $ref: "#/definitions/competitors"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '404':
+        "404":
           description: Resource Not Found
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Competitor information by Url
       tags:
@@ -258,7 +259,7 @@ paths:
           name: q
           required: true
           type: string
-        - description: 'Fields to be searched - name, website, ticker, permid, address, phone. Each field and its corresponding value has to be specified'
+        - description: Fields to be searched - name, website, ticker, permid, address, phone. Each field and its corresponding value has to be specified
           in: query
           items:
             enum:
@@ -272,13 +273,13 @@ paths:
           name: fields
           required: true
           type: array
-        - description: 'Number of results to be displayed - 10 (by default, if not specified) to 30'
+        - description: Number of results to be displayed - 10 (by default, if not specified) to 30
           in: query
           name: limit
           required: false
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -287,24 +288,24 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Search Results
           schema:
-            $ref: '#/definitions/fuzzy_results'
-        '400':
+            $ref: "#/definitions/fuzzy_results"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Fuzzy Search Company by Name or Address or Phone
       tags:
         - CompanyAPI
-  '/v1/company/id/{companyId}':
+  "/v1/company/id/{companyId}":
     get:
-      description: 'The Company Data API provides complete information about a company for the specified Company Id '
+      description: "The Company Data API provides complete information about a company for the specified Company Id "
       parameters:
         - description: Company Id
           in: path
@@ -312,7 +313,7 @@ paths:
           required: true
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -321,19 +322,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Company Data
           schema:
-            $ref: '#/definitions/company'
-        '400':
+            $ref: "#/definitions/company"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '404':
+        "404":
           description: Resource Not Found
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Company by Id
       tags:
@@ -348,7 +349,7 @@ paths:
           name: q
           required: true
           type: string
-        - description: 'Fields to be searched - name, website, ticker. If not specified, will be searched against all fields'
+        - description: Fields to be searched - name, website, ticker. If not specified, will be searched against all fields
           in: query
           items:
             enum:
@@ -360,13 +361,13 @@ paths:
           name: fields
           required: false
           type: array
-        - description: 'Number of results to be displayed - 10 (by default, if not specified) to 30'
+        - description: Number of results to be displayed - 10 (by default, if not specified) to 30
           in: query
           name: limit
           required: false
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -375,24 +376,24 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Search Results
           schema:
-            $ref: '#/definitions/results'
-        '400':
+            $ref: "#/definitions/results"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Search Company by Ticker or Website or Name or PermID
       tags:
         - CompanyAPI
-  '/v1/company/url/{website}':
+  "/v1/company/url/{website}":
     get:
-      description: 'The Company Data API provides complete information about a company for the specified URL '
+      description: "The Company Data API provides complete information about a company for the specified URL "
       parameters:
         - description: Company Domain
           in: path
@@ -400,7 +401,7 @@ paths:
           required: true
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -409,26 +410,26 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Company Data
           schema:
-            $ref: '#/definitions/company'
-        '400':
+            $ref: "#/definitions/company"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '404':
+        "404":
           description: Resource Not Found
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Company by URL
       tags:
         - CompanyAPI
-  '/v1/companypremium/id/{companyId}':
+  "/v1/companypremium/id/{companyId}":
     get:
-      description: 'The Company Premium Data API provides complete information about a company for the specified Company Id '
+      description: "The Company Premium Data API provides complete information about a company for the specified Company Id "
       parameters:
         - description: Company Id
           in: path
@@ -436,7 +437,7 @@ paths:
           required: true
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -445,26 +446,26 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Company Data
           schema:
-            $ref: '#/definitions/company'
-        '400':
+            $ref: "#/definitions/company"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '404':
+        "404":
           description: Resource Not Found
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Complete Company Info by Id
       tags:
         - CompanyPremiumAPI
-  '/v1/companypremium/url/{website}':
+  "/v1/companypremium/url/{website}":
     get:
-      description: 'The Company Data API provides complete information about a company for the specified URL '
+      description: "The Company Data API provides complete information about a company for the specified URL "
       parameters:
         - description: Company Domain
           in: path
@@ -472,7 +473,7 @@ paths:
           required: true
           type: string
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -481,19 +482,19 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Company Data
           schema:
-            $ref: '#/definitions/company'
-        '400':
+            $ref: "#/definitions/company"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '404':
+        "404":
           description: Resource Not Found
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Basic Company Info by Url
       tags:
@@ -503,7 +504,7 @@ paths:
       description: The Feeds API provides a list of feeds and individual feed information for the given Company Ids and Category. By default the API returns the latest 10 feeds available unless the limit is specified. The maximum result is restricted to 100 feeds per API request.
       parameters:
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -518,19 +519,19 @@ paths:
           name: company_id
           required: true
           type: array
-        - default: '10'
-          description: 'Number of results to be displayed - 10 (by default, if not specified) to 100'
+        - default: "10"
+          description: Number of results to be displayed - 10 (by default, if not specified) to 100
           in: query
           name: limit
           required: false
           type: string
-        - default: '*'
+        - default: "*"
           description: Pass pagination_id as blank in the first API request. The API response will return the latest feeds along with the next pagination_id which can be passed in the subsequent API request to get the next set of feeds. Repeat this process until needed or till the pagination_id returned is blank
           in: query
           name: pagination_id
           required: false
           type: string
-        - description: 'Categories separated by comma. If not specified, will search against all categories'
+        - description: Categories separated by comma. If not specified, will search against all categories
           in: query
           items:
             enum:
@@ -546,17 +547,17 @@ paths:
           required: false
           type: array
       responses:
-        '200':
+        "200":
           description: Feeds Data
           schema:
-            $ref: '#/definitions/results'
-        '400':
+            $ref: "#/definitions/results"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Feeds for given Company Ids
       tags:
@@ -566,7 +567,7 @@ paths:
       description: The Feeds API provides a list of feeds and individual feed information for the given Company Websites and Category. By default the API returns the latest 10 feeds available unless the limit is specified. The maximum result is restricted to 100 feeds per API request.
       parameters:
         - default: json
-          description: 'Format of the response content - json (by default if not specified), xml'
+          description: Format of the response content - json (by default if not specified), xml
           enum:
             - xml
             - json
@@ -581,19 +582,19 @@ paths:
           name: domain
           required: true
           type: array
-        - default: '10'
-          description: 'Number of results to be displayed - 10 (by default, if not specified) to 100'
+        - default: "10"
+          description: Number of results to be displayed - 10 (by default, if not specified) to 100
           in: query
           name: limit
           required: false
           type: string
-        - default: '*'
+        - default: "*"
           description: Pass pagination_id as blank in the first API request. The API response will return the latest feeds along with the next pagination_id which can be passed in the subsequent API request to get the next set of feeds. Repeat this process until needed or till the pagination_id returned is blank
           in: query
           name: pagination_id
           required: false
           type: string
-        - description: 'Categories separated by comma. If not specified, will search against all categories'
+        - description: Categories separated by comma. If not specified, will search against all categories
           in: query
           items:
             enum:
@@ -609,17 +610,17 @@ paths:
           required: false
           type: array
       responses:
-        '200':
+        "200":
           description: Feeds Data
           schema:
-            $ref: '#/definitions/results'
-        '400':
+            $ref: "#/definitions/results"
+        "400":
           description: Invalid Parameters
-        '403':
+        "403":
           description: Authentication Failed
-        '429':
+        "429":
           description: Too Many Requests
-        '500':
+        "500":
           description: Internal Server Error
       summary: Get Feeds for given Company Websites
       tags:
@@ -675,7 +676,7 @@ definitions:
         format: int64
         type: integer
       hq_address:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       name:
         type: string
       perm_id:
@@ -711,7 +712,7 @@ definitions:
     properties:
       competitor:
         items:
-          $ref: '#/definitions/CompanyBasicVO'
+          $ref: "#/definitions/CompanyBasicVO"
         type: array
   CompanySearchResultVO:
     properties:
@@ -730,7 +731,7 @@ definitions:
       description:
         type: string
       hq_address:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       logo_url:
         type: string
       name:
@@ -742,7 +743,7 @@ definitions:
       short_name:
         type: string
       stock:
-        $ref: '#/definitions/Stock'
+        $ref: "#/definitions/Stock"
       website:
         type: string
     required:
@@ -781,7 +782,7 @@ definitions:
       category:
         type: string
       company:
-        $ref: '#/definitions/CompanyBasicVO'
+        $ref: "#/definitions/CompanyBasicVO"
       enclosure_image:
         type: string
       feed_date:
@@ -806,7 +807,7 @@ definitions:
         type: string
       investor:
         items:
-          $ref: '#/definitions/Investor'
+          $ref: "#/definitions/Investor"
         type: array
       type:
         type: string
@@ -836,16 +837,16 @@ definitions:
     properties:
       company:
         items:
-          $ref: '#/definitions/CompanyBasicSearchVO'
+          $ref: "#/definitions/CompanyBasicSearchVO"
         type: array
   company:
     properties:
       acquisition:
         items:
-          $ref: '#/definitions/Acquisition'
+          $ref: "#/definitions/Acquisition"
         type: array
       ceo:
-        $ref: '#/definitions/Ceo'
+        $ref: "#/definitions/Ceo"
       company_id:
         format: int64
         type: integer
@@ -868,10 +869,10 @@ definitions:
         type: string
       funding:
         items:
-          $ref: '#/definitions/Funding'
+          $ref: "#/definitions/Funding"
         type: array
       hq_address:
-        $ref: '#/definitions/Address'
+        $ref: "#/definitions/Address"
       industries:
         items:
           type: string
@@ -895,12 +896,12 @@ definitions:
         type: string
       sectors:
         items:
-          $ref: '#/definitions/SectorVO'
+          $ref: "#/definitions/SectorVO"
         type: array
       short_name:
         type: string
       stock:
-        $ref: '#/definitions/Stock'
+        $ref: "#/definitions/Stock"
       twitter_link:
         type: string
       website:
@@ -917,7 +918,7 @@ definitions:
     properties:
       competitor:
         items:
-          $ref: '#/definitions/CompetitorBasicVO'
+          $ref: "#/definitions/CompetitorBasicVO"
         type: array
       pagination_id:
         type: string
@@ -926,7 +927,7 @@ definitions:
     properties:
       feeds:
         items:
-          $ref: '#/definitions/FeedsVO'
+          $ref: "#/definitions/FeedsVO"
         type: array
       pagination_id:
         type: string

@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: www.zoomconnect.com
@@ -6,23 +6,24 @@ basePath: /app
 info:
   description: The world's greatest SMS API
   title: www.zoomconnect.com
-  version: '1'
+  version: "1"
   x-apisguru-categories:
     - messaging
     - marketing
   x-logo:
-    url: 'https://zoomconnect.com/assets/logo.png'
+    url: https://zoomconnect.com/assets/logo.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: swagger
-      url: 'https://www.zoomconnect.com/zoom/api-docs'
-      version: '1.2'
+      url: https://www.zoomconnect.com/zoom/api-docs
+      version: "1.2"
   x-providerName: zoomconnect.com
   x-tags:
     - SMS
     - bulk SMS
+  x-preferred: true
 produces:
   - application/json
   - application/xml
@@ -48,7 +49,7 @@ tags:
     name: sms
   - description: Manage your templates
     name: templates
-  - description: '(BETA) Send, schedule and manage voice messages'
+  - description: (BETA) Send, schedule and manage voice messages
     name: voice
 paths:
   /api/rest/v1/account/balance:
@@ -60,15 +61,15 @@ paths:
       description: Returns your account's credit balance
       operationId: getBalance
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/WebServiceAccount'
-        '401':
+            $ref: "#/definitions/WebServiceAccount"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: balance
       tags:
@@ -79,22 +80,22 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: 'Returns data from the statistics report. Note that by default the statistics shown are based on the number of messages, use the calculateCreditValue should you wish to calculate the statistics based on credit value.'
+      description: Returns data from the statistics report. Note that by default the statistics shown are based on the number of messages, use the calculateCreditValue should you wish to calculate the statistics based on credit value.
       operationId: getStatistics
       parameters:
-        - description: 'date format: dd-MM-yyyy'
+        - description: "date format: dd-MM-yyyy"
           format: date-time
           in: query
           name: from
           required: false
           type: string
-        - description: 'date format: dd-MM-yyyy'
+        - description: "date format: dd-MM-yyyy"
           format: date-time
           in: query
           name: to
           required: false
           type: string
-        - description: 'optional email address of user to return statistics for a single user, default is to return statistics for all users if administrator, or statistics for your own account if not an administrator'
+        - description: optional email address of user to return statistics for a single user, default is to return statistics for all users if administrator, or statistics for your own account if not an administrator
           in: query
           name: userEmailAddress
           required: false
@@ -104,26 +105,26 @@ paths:
           name: campaign
           required: false
           type: string
-        - description: 'optionally include refunded and optout counts, default is false'
+        - description: optionally include refunded and optout counts, default is false
           in: query
           name: includeRefundedAndOptout
           required: false
           type: boolean
-        - description: 'optionally calculate using credit value rather than message count, default is false'
+        - description: optionally calculate using credit value rather than message count, default is false
           in: query
           name: calculateCreditValue
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: Success
           schema:
-            $ref: '#/definitions/WebServiceAccountStatistics'
-        '401':
+            $ref: "#/definitions/WebServiceAccountStatistics"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: statistics
       tags:
@@ -134,7 +135,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: 'Transfers credits between two users in the same team. The <i>account email address</i> fields as well as the <i>number of credits to transfer</i> are required. '
+      description: "Transfers credits between two users in the same team. The <i>account email address</i> fields as well as the <i>number of credits to transfer</i> are required. "
       operationId: transfer
       parameters:
         - description: request
@@ -142,19 +143,19 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceTransferCreditsRequest'
+            $ref: "#/definitions/WebServiceTransferCreditsRequest"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceUser'
-        '201':
+            $ref: "#/definitions/WebServiceUser"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: transfer
       tags:
@@ -174,15 +175,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceUsers'
-        '401':
+            $ref: "#/definitions/WebServiceUsers"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: search
       tags:
@@ -192,31 +193,31 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: 'Creates a new sub-account in your team. The following fields are required <i>firstname, lastname, email address, contact number</i> and <i>password.</i>'
+      description: Creates a new sub-account in your team. The following fields are required <i>firstname, lastname, email address, contact number</i> and <i>password.</i>
       parameters:
         - description: request
           in: body
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceUser'
+            $ref: "#/definitions/WebServiceUser"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceUser'
-        '201':
+            $ref: "#/definitions/WebServiceUser"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: create
       tags:
         - account
-  '/api/rest/v1/account/user/{userId}':
+  "/api/rest/v1/account/user/{userId}":
     get:
       consumes:
         - application/json
@@ -232,15 +233,15 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceUser'
-        '401':
+            $ref: "#/definitions/WebServiceUser"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: getUser
       tags:
@@ -250,7 +251,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: 'Updates a sub-account in your team. The following fields can be updated <i>firstname, lastname, contact number</i> and <i>password.</i>'
+      description: Updates a sub-account in your team. The following fields can be updated <i>firstname, lastname, contact number</i> and <i>password.</i>
       parameters:
         - description: userId
           format: int64
@@ -263,19 +264,19 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceUser'
+            $ref: "#/definitions/WebServiceUser"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceUser'
-        '201':
+            $ref: "#/definitions/WebServiceUser"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: update
       tags:
@@ -288,15 +289,15 @@ paths:
       deprecated: false
       description: Returns all contacts
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceContacts'
-        '401':
+            $ref: "#/definitions/WebServiceContacts"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: all
       tags:
@@ -314,26 +315,26 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceContact'
+            $ref: "#/definitions/WebServiceContact"
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/WebServiceContact'
-        '201':
+            $ref: "#/definitions/WebServiceContact"
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/WebServiceContact'
-        '401':
+            $ref: "#/definitions/WebServiceContact"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: create
       tags:
         - contacts
-  '/api/rest/v1/contacts/{contactId}':
+  "/api/rest/v1/contacts/{contactId}":
     delete:
       consumes:
         - application/json
@@ -347,13 +348,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '204':
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: delete
       tags:
@@ -371,15 +372,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceContact'
-        '401':
+            $ref: "#/definitions/WebServiceContact"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: get
       tags:
@@ -401,24 +402,24 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceContact'
+            $ref: "#/definitions/WebServiceContact"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceContact'
-        '201':
+            $ref: "#/definitions/WebServiceContact"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: update
       tags:
         - contacts
-  '/api/rest/v1/contacts/{contactId}/addFromGroup/{groupId}':
+  "/api/rest/v1/contacts/{contactId}/addFromGroup/{groupId}":
     get:
       consumes:
         - application/json
@@ -437,13 +438,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: removeFromGroup
       tags:
@@ -466,20 +467,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: removeFromGroup
       tags:
         - contacts
-  '/api/rest/v1/contacts/{contactId}/addToGroup/{groupId}':
+  "/api/rest/v1/contacts/{contactId}/addToGroup/{groupId}":
     get:
       consumes:
         - application/json
@@ -498,13 +499,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: addToGroup
       tags:
@@ -527,15 +528,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: addToGroup
       tags:
@@ -548,15 +549,15 @@ paths:
       deprecated: false
       description: Returns all groups
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceGroups'
-        '401':
+            $ref: "#/definitions/WebServiceGroups"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: all
       tags:
@@ -574,26 +575,26 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceGroup'
+            $ref: "#/definitions/WebServiceGroup"
       responses:
-        '200':
+        "200":
           description: No response was specified
           schema:
-            $ref: '#/definitions/WebServiceGroup'
-        '201':
+            $ref: "#/definitions/WebServiceGroup"
+        "201":
           description: Created
           schema:
-            $ref: '#/definitions/WebServiceGroup'
-        '401':
+            $ref: "#/definitions/WebServiceGroup"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: create
       tags:
         - groups
-  '/api/rest/v1/groups/{groupId}':
+  "/api/rest/v1/groups/{groupId}":
     delete:
       consumes:
         - application/json
@@ -607,13 +608,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '204':
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: delete
       tags:
@@ -631,15 +632,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceGroup'
-        '401':
+            $ref: "#/definitions/WebServiceGroup"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: get
       tags:
@@ -661,24 +662,24 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceGroup'
+            $ref: "#/definitions/WebServiceGroup"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceGroup'
-        '201':
+            $ref: "#/definitions/WebServiceGroup"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: update
       tags:
         - groups
-  '/api/rest/v1/groups/{groupId}/addContact/{contactId}':
+  "/api/rest/v1/groups/{groupId}/addContact/{contactId}":
     get:
       consumes:
         - application/json
@@ -697,13 +698,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: addContact
       tags:
@@ -726,20 +727,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: addContact
       tags:
         - groups
-  '/api/rest/v1/groups/{groupId}/removeContact/{contactId}':
+  "/api/rest/v1/groups/{groupId}/removeContact/{contactId}":
     get:
       consumes:
         - application/json
@@ -758,13 +759,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: removeContact
       tags:
@@ -787,15 +788,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: removeContact
       tags:
@@ -843,25 +844,25 @@ paths:
           name: status
           required: false
           type: string
-        - description: 'date format: yyyyMMdd'
+        - description: "date format: yyyyMMdd"
           format: date-time
           in: query
           name: fromDateTimeSent
           required: false
           type: string
-        - description: 'date format: yyyyMMdd'
+        - description: "date format: yyyyMMdd"
           format: date-time
           in: query
           name: toDateTimeSent
           required: false
           type: string
-        - description: 'date format: yyyyMMdd'
+        - description: "date format: yyyyMMdd"
           format: date-time
           in: query
           name: fromDateTimeReceived
           required: false
           type: string
-        - description: 'date format: yyyyMMdd'
+        - description: "date format: yyyyMMdd"
           format: date-time
           in: query
           name: toDateTimeReceived
@@ -908,15 +909,15 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceMessages'
-        '401':
+            $ref: "#/definitions/WebServiceMessages"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: all
       tags:
@@ -935,19 +936,19 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageAndRecipientNumber'
+            $ref: "#/definitions/WebServiceAnalyseMessageRequestMessageAndRecipientNumber"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceAnalyseMessageResponse'
-        '201':
+            $ref: "#/definitions/WebServiceAnalyseMessageResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: analyse-full
       tags:
@@ -966,20 +967,20 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageAndRecipientNumber'
+            $ref: "#/definitions/WebServiceAnalyseMessageRequestMessageAndRecipientNumber"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
             format: double
             type: number
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: analyse-message-credit-cost
       tags:
@@ -998,19 +999,19 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageOnly'
+            $ref: "#/definitions/WebServiceAnalyseMessageRequestMessageOnly"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
             type: string
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: analyse-message-encoding
       tags:
@@ -1029,20 +1030,20 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageOnly'
+            $ref: "#/definitions/WebServiceAnalyseMessageRequestMessageOnly"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
             format: int32
             type: integer
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: analyse-message-length
       tags:
@@ -1061,19 +1062,19 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageOnly'
+            $ref: "#/definitions/WebServiceAnalyseMessageRequestMessageOnly"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
             type: boolean
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: analyse-
       tags:
@@ -1092,25 +1093,25 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceAnalyseMessageRequestMessageOnly'
+            $ref: "#/definitions/WebServiceAnalyseMessageRequestMessageOnly"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
             format: int32
             type: integer
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: analyse-number-of-messages
       tags:
         - messages
-  '/api/rest/v1/messages/{messageId}':
+  "/api/rest/v1/messages/{messageId}":
     delete:
       consumes:
         - application/json
@@ -1124,13 +1125,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '204':
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: delete
       tags:
@@ -1148,20 +1149,20 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceMessage'
-        '401':
+            $ref: "#/definitions/WebServiceMessage"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: get
       tags:
         - messages
-  '/api/rest/v1/messages/{messageId}/markRead':
+  "/api/rest/v1/messages/{messageId}/markRead":
     post:
       consumes:
         - application/json
@@ -1175,17 +1176,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceMessage'
-        '201':
+            $ref: "#/definitions/WebServiceMessage"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: markRead
       tags:
@@ -1203,22 +1204,22 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceMessage'
-        '201':
+            $ref: "#/definitions/WebServiceMessage"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: markRead
       tags:
         - messages
-  '/api/rest/v1/messages/{messageId}/markUnread':
+  "/api/rest/v1/messages/{messageId}/markUnread":
     post:
       consumes:
         - application/json
@@ -1232,17 +1233,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceMessage'
-        '201':
+            $ref: "#/definitions/WebServiceMessage"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: markUnread
       tags:
@@ -1260,17 +1261,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceMessage'
-        '201':
+            $ref: "#/definitions/WebServiceMessage"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: markUnread
       tags:
@@ -1283,15 +1284,15 @@ paths:
       deprecated: false
       description: Returns an example of the data to POST to send a single message.
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceSendSmsRequest'
-        '401':
+            $ref: "#/definitions/WebServiceSendSmsRequest"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: send
       tags:
@@ -1308,23 +1309,23 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceSendSmsRequest'
+            $ref: "#/definitions/WebServiceSendSmsRequest"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceSendSmsResponse'
-        '201':
+            $ref: "#/definitions/WebServiceSendSmsResponse"
+        "201":
           description: Created
-        '400':
-          description: 'Validation error</br></br>Code and message:<ul><li>2 - Invalid mobile number</li><li>3 - Message cannot be empty</li></ul>'
+        "400":
+          description: Validation error</br></br>Code and message:<ul><li>2 - Invalid mobile number</li><li>3 - Message cannot be empty</li></ul>
           schema:
-            $ref: '#/definitions/RestErrorDTO'
-        '401':
+            $ref: "#/definitions/RestErrorDTO"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: send
       tags:
@@ -1337,15 +1338,15 @@ paths:
       deprecated: false
       description: Returns an example of the data to POST to send multiple messages in one transaction.
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceSendSmsRequests'
-        '401':
+            $ref: "#/definitions/WebServiceSendSmsRequests"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: send-bulk
       tags:
@@ -1362,19 +1363,19 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceSendSmsRequests'
+            $ref: "#/definitions/WebServiceSendSmsRequests"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceSendSmsResponses'
-        '201':
+            $ref: "#/definitions/WebServiceSendSmsResponses"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: send-bulk
       tags:
@@ -1397,7 +1398,7 @@ paths:
           name: message
           required: true
           type: string
-        - description: 'date format: yyyyMMddHHmm'
+        - description: "date format: yyyyMMddHHmm"
           format: date-time
           in: query
           name: dateToSend
@@ -1414,15 +1415,15 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: send-url-parameters
       tags:
@@ -1444,7 +1445,7 @@ paths:
           name: message
           required: true
           type: string
-        - description: 'date format: yyyyMMddHHmm'
+        - description: "date format: yyyyMMddHHmm"
           format: date-time
           in: query
           name: dateToSend
@@ -1461,28 +1462,28 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
             type: string
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: send-url-parameters
       tags:
         - sms
-  '/api/rest/v1/sms/send-url/{token}':
+  "/api/rest/v1/sms/send-url/{token}":
     get:
       consumes:
         - application/json
         - application/xml
       deprecated: false
-      description: 'Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is '
+      description: "Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is "
       parameters:
         - description: token
           in: path
@@ -1499,7 +1500,7 @@ paths:
           name: message
           required: true
           type: string
-        - description: 'date format: yyyyMMddHHmm'
+        - description: "date format: yyyyMMddHHmm"
           format: date-time
           in: query
           name: dateToSend
@@ -1516,15 +1517,15 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             type: string
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: send-url
       tags:
@@ -1534,7 +1535,7 @@ paths:
         - application/json
         - application/xml
       deprecated: false
-      description: 'Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is '
+      description: "Send a single message using your unique URL without having to authenticate using your email address or REST API token. The token required is the URL Sending token available on the developer setting page. The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional. Not that the token required here is "
       parameters:
         - description: token
           in: path
@@ -1551,7 +1552,7 @@ paths:
           name: message
           required: true
           type: string
-        - description: 'date format: yyyyMMddHHmm'
+        - description: "date format: yyyyMMddHHmm"
           format: date-time
           in: query
           name: dateToSend
@@ -1568,17 +1569,17 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
             type: string
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: send-url
       tags:
@@ -1591,20 +1592,20 @@ paths:
       deprecated: false
       description: Returns all templates
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceTemplates'
-        '401':
+            $ref: "#/definitions/WebServiceTemplates"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: all
       tags:
         - templates
-  '/api/rest/v1/templates/{templateId}':
+  "/api/rest/v1/templates/{templateId}":
     delete:
       consumes:
         - application/json
@@ -1619,13 +1620,13 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '204':
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: delete
       tags:
@@ -1644,15 +1645,15 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceTemplate'
-        '401':
+            $ref: "#/definitions/WebServiceTemplate"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: get
       tags:
@@ -1692,13 +1693,13 @@ paths:
           name: status
           required: false
           type: string
-        - description: 'date format: yyyyMMdd'
+        - description: "date format: yyyyMMdd"
           format: date-time
           in: query
           name: fromDateTimeSent
           required: false
           type: string
-        - description: 'date format: yyyyMMdd'
+        - description: "date format: yyyyMMdd"
           format: date-time
           in: query
           name: toDateTimeSent
@@ -1730,15 +1731,15 @@ paths:
           required: false
           type: boolean
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceVoiceMessages'
-        '401':
+            $ref: "#/definitions/WebServiceVoiceMessages"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: all
       tags:
@@ -1748,10 +1749,10 @@ paths:
       consumes:
         - multipart/form-data
       deprecated: false
-      description: 'Send a single audio voice message to one recipient. Note, Content-Type header must be set to multipart/form-data for this request.'
+      description: Send a single audio voice message to one recipient. Note, Content-Type header must be set to multipart/form-data for this request.
       operationId: single-audio
       parameters:
-        - description: 'audio file to play, supports MP3 or WAV format'
+        - description: audio file to play, supports MP3 or WAV format
           in: formData
           name: file
           required: true
@@ -1790,17 +1791,17 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceSendVoiceMessageResponse'
-        '201':
+            $ref: "#/definitions/WebServiceSendVoiceMessageResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: single-audio
       tags:
@@ -1819,24 +1820,24 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WebServiceVoiceMessageSendSingleTextRequest'
+            $ref: "#/definitions/WebServiceVoiceMessageSendSingleTextRequest"
       responses:
-        '200':
+        "200":
           description: Description was not specified
           schema:
-            $ref: '#/definitions/WebServiceSendVoiceMessageResponse'
-        '201':
+            $ref: "#/definitions/WebServiceSendVoiceMessageResponse"
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: single-text
       tags:
         - voice
-  '/api/rest/v1/voice/{messageId}':
+  "/api/rest/v1/voice/{messageId}":
     delete:
       consumes:
         - application/json
@@ -1850,13 +1851,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '204':
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: delete
       tags:
@@ -1874,15 +1875,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
-            $ref: '#/definitions/WebServiceVoiceMessage'
-        '401':
+            $ref: "#/definitions/WebServiceVoiceMessage"
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: get
       tags:
@@ -1919,7 +1920,7 @@ definitions:
         type: number
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
   WebServiceAccountStatistics:
     description: WebServiceAccountStatistics
@@ -1928,7 +1929,7 @@ definitions:
         format: date-time
         type: string
       grandTotal:
-        $ref: '#/definitions/WebServiceStatistics'
+        $ref: "#/definitions/WebServiceStatistics"
       showingCreditValue:
         type: boolean
       to:
@@ -1936,7 +1937,7 @@ definitions:
         type: string
       users:
         items:
-          $ref: '#/definitions/WebServiceUserStatistics'
+          $ref: "#/definitions/WebServiceUserStatistics"
         type: array
   WebServiceAnalyseMessageRequestMessageAndRecipientNumber:
     description: WebServiceAnalyseMessageRequest
@@ -1979,7 +1980,7 @@ definitions:
       campaign:
         type: string
       statistics:
-        $ref: '#/definitions/WebServiceStatistics'
+        $ref: "#/definitions/WebServiceStatistics"
   WebServiceContact:
     description: WebServiceContact
     properties:
@@ -1993,7 +1994,7 @@ definitions:
         type: string
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       title:
         type: string
@@ -2004,18 +2005,18 @@ definitions:
         type: string
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
   WebServiceContacts:
     description: WebServiceContacts
     properties:
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       webServiceContacts:
         items:
-          $ref: '#/definitions/WebServiceContact'
+          $ref: "#/definitions/WebServiceContact"
         type: array
   WebServiceGroup:
     description: WebServiceGroup
@@ -2024,7 +2025,7 @@ definitions:
         type: string
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       name:
         type: string
@@ -2033,11 +2034,11 @@ definitions:
     properties:
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       webServiceGroups:
         items:
-          $ref: '#/definitions/WebServiceGroup'
+          $ref: "#/definitions/WebServiceGroup"
         type: array
   WebServiceMessage:
     description: WebServiceMessage
@@ -2045,7 +2046,7 @@ definitions:
       campaign:
         type: string
       contact:
-        $ref: '#/definitions/WebServiceContactLink'
+        $ref: "#/definitions/WebServiceContactLink"
       creditCost:
         format: double
         type: number
@@ -2064,7 +2065,7 @@ definitions:
         type: string
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       message:
         type: string
@@ -2080,7 +2081,7 @@ definitions:
       read:
         type: boolean
       repliedToMessage:
-        $ref: '#/definitions/WebServiceMessageLink'
+        $ref: "#/definitions/WebServiceMessageLink"
       toNumber:
         type: string
       userDataField:
@@ -2090,7 +2091,7 @@ definitions:
     properties:
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       messageId:
         type: string
@@ -2102,7 +2103,7 @@ definitions:
         type: integer
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       page:
         format: int32
@@ -2118,7 +2119,7 @@ definitions:
         type: integer
       webServiceMessages:
         items:
-          $ref: '#/definitions/WebServiceMessage'
+          $ref: "#/definitions/WebServiceMessage"
         type: array
   WebServiceSendSmsRequest:
     description: WebServiceSendSmsRequest
@@ -2145,7 +2146,7 @@ definitions:
         type: integer
       sendSmsRequests:
         items:
-          $ref: '#/definitions/WebServiceSendSmsRequest'
+          $ref: "#/definitions/WebServiceSendSmsRequest"
         type: array
   WebServiceSendSmsResponse:
     description: WebServiceSendSmsResponse
@@ -2159,7 +2160,7 @@ definitions:
     properties:
       sendSmsResponses:
         items:
-          $ref: '#/definitions/WebServiceSendSmsResponse'
+          $ref: "#/definitions/WebServiceSendSmsResponse"
         type: array
   WebServiceSendVoiceMessageResponse:
     description: WebServiceSendVoiceMessageResponse
@@ -2196,7 +2197,7 @@ definitions:
         type: string
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       name:
         type: string
@@ -2208,11 +2209,11 @@ definitions:
     properties:
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       webServiceTemplates:
         items:
-          $ref: '#/definitions/WebServiceTemplate'
+          $ref: "#/definitions/WebServiceTemplate"
         type: array
   WebServiceTransferCreditsRequest:
     description: WebServiceTransferCreditsRequest
@@ -2250,18 +2251,18 @@ definitions:
     properties:
       campaigns:
         items:
-          $ref: '#/definitions/WebServiceCampaignStatistics'
+          $ref: "#/definitions/WebServiceCampaignStatistics"
         type: array
       total:
-        $ref: '#/definitions/WebServiceStatistics'
+        $ref: "#/definitions/WebServiceStatistics"
       user:
-        $ref: '#/definitions/WebServiceUser'
+        $ref: "#/definitions/WebServiceUser"
   WebServiceUsers:
     description: WebServiceUsers
     properties:
       webServiceUserList:
         items:
-          $ref: '#/definitions/WebServiceUser'
+          $ref: "#/definitions/WebServiceUser"
         type: array
   WebServiceVoiceMessage:
     description: WebServiceVoiceMessage
@@ -2279,7 +2280,7 @@ definitions:
         type: string
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       message:
         type: string
@@ -2321,11 +2322,11 @@ definitions:
         type: integer
       links:
         items:
-          $ref: '#/definitions/Link'
+          $ref: "#/definitions/Link"
         type: array
       messages:
         items:
-          $ref: '#/definitions/WebServiceVoiceMessage'
+          $ref: "#/definitions/WebServiceVoiceMessage"
         type: array
       page:
         format: int32

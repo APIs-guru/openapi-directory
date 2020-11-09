@@ -1,24 +1,25 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: api.citysdk.waag.org
 basePath: /
 info:
-  description: 'An API for the distribution and annotation of open data, for small cities and big metropolitan areas.'
+  description: An API for the distribution and annotation of open data, for small cities and big metropolitan areas.
   title: CitySDK Linked Data
   version: v1
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://twitter.com/waag/profile_image?size=original'
+    url: https://twitter.com/waag/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.11
       format: swagger
-      url: 'https://api.citysdk.waag.org/swagger'
-      version: '1.2'
+      url: https://api.citysdk.waag.org/swagger
+      version: "1.2"
   x-providerName: waag.org
+  x-preferred: true
 produces:
   - application/json
   - application/ld+json
@@ -38,7 +39,7 @@ paths:
     get:
       operationId: GET-layers---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return all layers
       tags:
@@ -46,12 +47,12 @@ paths:
     post:
       operationId: POST-layers---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create new layer
       tags:
         - layers
-  '/layers/{layer}':
+  "/layers/{layer}":
     delete:
       operationId: DELETE-layers--layer---format-
       parameters:
@@ -60,7 +61,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete a layer
       tags:
@@ -73,7 +74,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return single layer
       tags:
@@ -86,12 +87,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Edit a layer
       tags:
         - layers
-  '/layers/{layer}/context':
+  "/layers/{layer}/context":
     get:
       operationId: GET-layers--layer-context---format-
       parameters:
@@ -100,7 +101,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return JSON-LD context of single layer
       tags:
@@ -113,12 +114,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Overwrite JSON-LD context of single layer
       tags:
         - layers
-  '/layers/{layer}/fields':
+  "/layers/{layer}/fields":
     get:
       operationId: GET-layers--layer-fields---format-
       parameters:
@@ -127,7 +128,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return all fields of single layer
       tags:
@@ -140,12 +141,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create new field for single layer
       tags:
         - layers
-  '/layers/{layer}/fields/{field}':
+  "/layers/{layer}/fields/{field}":
     delete:
       operationId: DELETE-layers--layer-fields--field---format-
       parameters:
@@ -158,7 +159,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete a single field on single layer
       tags:
@@ -175,7 +176,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return single field of single layer
       tags:
@@ -192,7 +193,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Edit single field on single layer
       tags:
@@ -209,12 +210,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Overwrite single field on single layer
       tags:
         - layers
-  '/layers/{layer}/objects':
+  "/layers/{layer}/objects":
     delete:
       operationId: DELETE-layers--layer-objects---format-
       parameters:
@@ -223,7 +224,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete all objects from a single layer
       tags:
@@ -236,7 +237,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return all objects with data on single layer
       tags:
@@ -249,7 +250,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Edit one or more objects and data on single layer
       tags:
@@ -262,12 +263,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
-      summary: 'Create one or more objects with data on single layer, or add data to existing objects (or a combination thereof)'
+      summary: Create one or more objects with data on single layer, or add data to existing objects (or a combination thereof)
       tags:
         - layers
-  '/layers/{layer}/objects/{cdk_id}':
+  "/layers/{layer}/objects/{cdk_id}":
     get:
       operationId: GET-layers--layer-objects--cdk_id---format-
       parameters:
@@ -280,12 +281,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
-      summary: 'Return metadata of single layer about single object, e.g. the date the data was added/modified, etc.'
+      summary: Return metadata of single layer about single object, e.g. the date the data was added/modified, etc.
       tags:
         - layers
-  '/layers/{layer}/owners':
+  "/layers/{layer}/owners":
     get:
       operationId: GET-layers--layer-owners---format-
       parameters:
@@ -294,12 +295,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return all owners associated with single layer
       tags:
         - layers
-  '/ngsi10/contextEntities/{entity}':
+  "/ngsi10/contextEntities/{entity}":
     get:
       operationId: GET-ngsi10-contextEntities--entity---format-
       parameters:
@@ -308,12 +309,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return single context entity
       tags:
         - ngsi10
-  '/ngsi10/contextEntities/{entity}/attributes':
+  "/ngsi10/contextEntities/{entity}/attributes":
     put:
       operationId: PUT-ngsi10-contextEntities--entity-attributes---format-
       parameters:
@@ -322,12 +323,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update attributes for single context entity
       tags:
         - ngsi10
-  '/ngsi10/contextEntities/{entity}/attributes/{attribute}':
+  "/ngsi10/contextEntities/{entity}/attributes/{attribute}":
     get:
       operationId: GET-ngsi10-contextEntities--entity-attributes--attribute---format-
       parameters:
@@ -340,12 +341,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return single context entity attribute
       tags:
         - ngsi10
-  '/ngsi10/contextEntityTypes/{cetype}':
+  "/ngsi10/contextEntityTypes/{cetype}":
     get:
       operationId: GET-ngsi10-contextEntityTypes--cetype---format-
       parameters:
@@ -354,12 +355,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return objects of particular type
       tags:
         - ngsi10
-  '/ngsi10/contextEntityTypes/{cetype}/attributes/{attribute}':
+  "/ngsi10/contextEntityTypes/{cetype}/attributes/{attribute}":
     get:
       operationId: GET-ngsi10-contextEntityTypes--cetype-attributes--attribute---format-
       parameters:
@@ -372,7 +373,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return objects of particular type
       tags:
@@ -381,7 +382,7 @@ paths:
     post:
       operationId: POST-ngsi10-queryContext---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Query context broker for contextElements
       tags:
@@ -390,7 +391,7 @@ paths:
     post:
       operationId: POST-ngsi10-subscribeContext---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create a new context subscription
       tags:
@@ -399,7 +400,7 @@ paths:
     post:
       operationId: POST-ngsi10-unsubscribeContext---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete a context subscription
       tags:
@@ -408,7 +409,7 @@ paths:
     post:
       operationId: POST-ngsi10-updateContext---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Add or update NGSI contextElements
       tags:
@@ -417,7 +418,7 @@ paths:
     post:
       operationId: POST-ngsi10-updateContextSubscription---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update/edit a context subscription
       tags:
@@ -426,12 +427,12 @@ paths:
     get:
       operationId: GET-objects---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return all objects
       tags:
         - objects
-  '/objects/{cdk_id}':
+  "/objects/{cdk_id}":
     delete:
       operationId: DELETE-objects--cdk_id---format-
       parameters:
@@ -440,7 +441,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete a single object
       tags:
@@ -453,7 +454,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get a single object
       tags:
@@ -466,12 +467,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Edit a single object
       tags:
         - objects
-  '/objects/{cdk_id}/layers':
+  "/objects/{cdk_id}/layers":
     get:
       operationId: GET-objects--cdk_id-layers---format-
       parameters:
@@ -480,12 +481,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get all layers that contain data of single object
       tags:
         - objects
-  '/objects/{cdk_id}/layers/{layer}':
+  "/objects/{cdk_id}/layers/{layer}":
     delete:
       operationId: DELETE-objects--cdk_id-layers--layer---format-
       parameters:
@@ -498,7 +499,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Remove data on layer from single object
       tags:
@@ -515,7 +516,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return all data on single layer of single object
       tags:
@@ -532,7 +533,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Update data on layer to single object
       tags:
@@ -549,7 +550,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Add data on layer to single object
       tags:
@@ -566,7 +567,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Overwrite data on layer to single object
       tags:
@@ -575,7 +576,7 @@ paths:
     get:
       operationId: GET-owners---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return all owners
       tags:
@@ -583,12 +584,12 @@ paths:
     post:
       operationId: POST-owners---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Create new owner
       tags:
         - owners
-  '/owners/{owner}':
+  "/owners/{owner}":
     delete:
       operationId: DELETE-owners--owner---format-
       parameters:
@@ -597,7 +598,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Delete owner - and all layers and data belonging to this owner
       tags:
@@ -610,7 +611,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get a single owner
       tags:
@@ -623,12 +624,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Edit an owner
       tags:
         - owners
-  '/owners/{owner}/layers':
+  "/owners/{owner}/layers":
     get:
       operationId: GET-owners--owner-layers---format-
       parameters:
@@ -637,7 +638,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return all layers belonging to a single owner
       tags:
@@ -646,7 +647,7 @@ paths:
     delete:
       operationId: DELETE-session---format-
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Close session
       tags:
@@ -665,7 +666,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Return a session key
       tags:

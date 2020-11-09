@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.citrixonline.com
@@ -7,29 +7,30 @@ info:
   contact:
     email: developer-support@citrixonline.com
     name: Developer Support
-    url: 'https://developer.citrixonline.com'
-  description: 'The SCIM API lets you manage users in your organization. You can then automate the provisioning of product licenses for these users, and they can use your company''s Single Sign-On solution through an Identity Provider.'
-  termsOfService: 'https://developer.citrixonline.com/terms-use'
+    url: https://developer.citrixonline.com
+  description: The SCIM API lets you manage users in your organization. You can then automate the provisioning of product licenses for these users, and they can use your company's Single Sign-On solution through an Identity Provider.
+  termsOfService: https://developer.citrixonline.com/terms-use
   title: SCIM
   version: N/A
   x-logo:
-    backgroundColor: '#5F6166'
-    url: 'https://twitter.com/citrix/profile_image?size=original'
+    backgroundColor: "#5F6166"
+    url: https://twitter.com/citrix/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://developer.citrixonline.com/sites/default/files/citrix/citrix-apis/scim.json'
-      version: '2.0'
+      url: https://developer.citrixonline.com/sites/default/files/citrix/citrix-apis/scim.json
+      version: "2.0"
   x-providerName: citrixonline.com
   x-serviceName: scim
+  x-preferred: true
 externalDocs:
-  url: 'https://developer.citrixonline.com/'
+  url: https://developer.citrixonline.com/
 consumes:
   - application/json
 produces:
   - application/json
 parameters:
   Authorization:
-    description: 'Access token prefixed with ''Bearer '', e.g. ''Bearer 123456abcdef'''
+    description: Access token prefixed with 'Bearer ', e.g. 'Bearer 123456abcdef'
     in: header
     name: Authorization
     required: true
@@ -58,28 +59,28 @@ tags:
 paths:
   /Groups:
     get:
-      description: 'Queries multiple group identities in the organization domain. Filtering, sorting and pagination are available. This call requires the role ROLE_ORG_READ.'
+      description: Queries multiple group identities in the organization domain. Filtering, sorting and pagination are available. This call requires the role ROLE_ORG_READ.
       operationId: getGroups
       parameters:
-        - $ref: '#/parameters/Authorization'
+        - $ref: "#/parameters/Authorization"
         - description: ' Without a filter, all groups are returned. The filter parameter must be a properly formed SCIM filter using the operator "eq" (equals), "sw" (starts with), or "co" (contains). The filter works for the displayName attribute. Sorting and pagination are supported. For example, GET /Groups?filter=displayName%20eq%20%22Engineering%22&sortBy=displayName&sortOrder=ascending&count=50&startIndex=51'
           in: query
           name: filter
           type: string
       responses:
-        '200':
+        "200":
           description: The request has succeeded
           schema:
-            $ref: '#/definitions/GroupCollection'
-        '400':
+            $ref: "#/definitions/GroupCollection"
+        "400":
           description: Invalid filter syntax
-        '401':
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Get Groups
       tags:
@@ -88,50 +89,50 @@ paths:
       description: Creates a new organization group and adds it to the user domain. Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: createGroup
       parameters:
-        - $ref: '#/parameters/Authorization'
+        - $ref: "#/parameters/Authorization"
         - description: The details of the group to create
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/GroupDefinition'
+            $ref: "#/definitions/GroupDefinition"
       responses:
-        '201':
+        "201":
           description: The group has been created
           schema:
-            $ref: '#/definitions/Group'
-        '400':
-          description: 'Possible reasons are:<br />The displayName field is not set<br />The displayName field is malformed<br />The displayName field exceeds 128 characters<br />The members array exceeds 100 elements<br />'
-        '401':
+            $ref: "#/definitions/Group"
+        "400":
+          description: Possible reasons are:<br />The displayName field is not set<br />The displayName field is malformed<br />The displayName field exceeds 128 characters<br />The members array exceeds 100 elements<br />
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '409':
+        "409":
           description: The displayName is already in use within the organization
-        '502':
+        "502":
           description: An authentication or account gateway error occurred
-        '504':
-          description: 'An authentication or account, or gateway timeout occurred.'
+        "504":
+          description: An authentication or account, or gateway timeout occurred.
       summary: Create Group
       tags:
         - Groups
-  '/Groups/{groupKey}':
+  "/Groups/{groupKey}":
     delete:
       description: Deletes a group from the organization (but not from the account). The group must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: deleteGroup
       parameters:
-        - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/groupKey'
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/groupKey"
       responses:
-        '200':
+        "200":
           description: The request has succeeded
-        '401':
+        "401":
           description: Client is not sufficiently authorized or group does not exist in organization
-        '403':
+        "403":
           description: Invalid token passed
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Delete Group
       tags:
@@ -140,20 +141,20 @@ paths:
       description: Queries group details in the organization domain. This call requires the role ROLE_ORG_READ.
       operationId: getGroup
       parameters:
-        - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/groupKey'
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/groupKey"
       responses:
-        '200':
+        "200":
           description: The request has succeeded
           schema:
-            $ref: '#/definitions/Group'
-        '401':
+            $ref: "#/definitions/Group"
+        "401":
           description: Client is not sufficiently authorized or group does not exist in organization
-        '403':
+        "403":
           description: Invalid token passed
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Get Group
       tags:
@@ -162,102 +163,102 @@ paths:
       description: Updates one or more values of an existing group without sending the full definition. Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: updateGroup
       parameters:
-        - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/groupKey'
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/groupKey"
         - description: The group data to update. It is allowed to update one or more values of the group definition
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/GroupDefinition'
+            $ref: "#/definitions/GroupDefinition"
       responses:
-        '200':
+        "200":
           description: The group has been updated
           schema:
-            $ref: '#/definitions/Group'
-        '400':
-          description: 'Possible reasons are:<br />The displayName field is not set<br />The displayName field is malformed<br />The displayName field exceeds 128 characters<br />The members array exceeds 100 elements<br />'
-        '401':
+            $ref: "#/definitions/Group"
+        "400":
+          description: Possible reasons are:<br />The displayName field is not set<br />The displayName field is malformed<br />The displayName field exceeds 128 characters<br />The members array exceeds 100 elements<br />
+        "401":
           description: Client is not sufficiently authorized or group does not exist in organization
-        '403':
+        "403":
           description: Invalid token passed
-        '409':
+        "409":
           description: The displayName is already in use within the organization
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Update Group
       tags:
         - Groups
     put:
-      description: 'Updates an existing group. The request must include the full group definition. To modify one or more values without sending the full definition, see "Update Group". Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.'
+      description: Updates an existing group. The request must include the full group definition. To modify one or more values without sending the full definition, see "Update Group". Member groups and member users must be in the organization. This call requires the role ROLE_ORG_WRITE.
       operationId: replaceGroup
       parameters:
-        - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/groupKey'
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/groupKey"
         - description: The new group definition
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/GroupDefinition'
+            $ref: "#/definitions/GroupDefinition"
       responses:
-        '200':
+        "200":
           description: The group has been replaced.
           schema:
-            $ref: '#/definitions/Group'
-        '400':
-          description: 'Possible reasons are:<br />The displayName field is not set<br />The displayName field is malformed<br />The displayName field exceeds 128 characters<br />The members array exceeds 100 elements<br />'
-        '401':
+            $ref: "#/definitions/Group"
+        "400":
+          description: Possible reasons are:<br />The displayName field is not set<br />The displayName field is malformed<br />The displayName field exceeds 128 characters<br />The members array exceeds 100 elements<br />
+        "401":
           description: Client is not sufficiently authorized or group does not exist in organization
-        '403':
+        "403":
           description: Invalid token passed
-        '409':
+        "409":
           description: The displayName is already in use within the organization
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Replace Group
       tags:
         - Groups
   /Schemas/Users:
     get:
-      description: 'Queries the user schema. The user schema is defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#resource-schema).'
+      description: Queries the user schema. The user schema is defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#resource-schema).
       operationId: getUserSchema
       parameters:
-        - $ref: '#/parameters/Authorization'
+        - $ref: "#/parameters/Authorization"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           schema:
-            $ref: '#/definitions/ResourceSchema'
-        '403':
+            $ref: "#/definitions/ResourceSchema"
+        "403":
           description: Invalid token passed
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Get User Schema
       tags:
         - Schemas
   /ServiceProviderConfigs:
     get:
-      description: 'Queries service provider configurations. The service provider configurations are defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#anchor6). This call returns a description, a documentationURL, name, and specURL.'
+      description: Queries service provider configurations. The service provider configurations are defined in SCIM Core Schema (http://www.simplecloud.info/specs/draft-scim-core-schema-01.html#anchor6). This call returns a description, a documentationURL, name, and specURL.
       operationId: getServiceProviderConfigs
       parameters:
-        - $ref: '#/parameters/Authorization'
+        - $ref: "#/parameters/Authorization"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           schema:
-            $ref: '#/definitions/ServiceProviderConfigs'
-        '403':
+            $ref: "#/definitions/ServiceProviderConfigs"
+        "403":
           description: Invalid token passed
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Get Service Provider Configurations
       tags:
@@ -267,25 +268,25 @@ paths:
       description: Queries multiple user identities in the organization domain. Filtering is available.
       operationId: getUsers
       parameters:
-        - $ref: '#/parameters/Authorization'
-        - description: ' Without a filter, all users in a user domain are returned. The filter parameter must be a properly formed SCIM filter using either the operator eq (equals) or the operator sw (starts with). The filter works for userName, displayName, name.givenName, and name.familyName attributes. For example, /Users?filter=name.familyName%20eq%20%%22Smith%22'
+        - $ref: "#/parameters/Authorization"
+        - description: " Without a filter, all users in a user domain are returned. The filter parameter must be a properly formed SCIM filter using either the operator eq (equals) or the operator sw (starts with). The filter works for userName, displayName, name.givenName, and name.familyName attributes. For example, /Users?filter=name.familyName%20eq%20%%22Smith%22"
           in: query
           name: filter
           type: string
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           schema:
-            $ref: '#/definitions/UserCollection'
-        '400':
+            $ref: "#/definitions/UserCollection"
+        "400":
           description: Invalid filter syntax
-        '401':
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Get Users
       tags:
@@ -294,30 +295,30 @@ paths:
       description: Creates a new organization user and adds them to the user domain. The user email domain must match an existing organization email domain.
       operationId: createUsers
       parameters:
-        - $ref: '#/parameters/Authorization'
+        - $ref: "#/parameters/Authorization"
         - description: The details of the user to create
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/UserDefinition'
+            $ref: "#/definitions/UserDefinition"
       responses:
-        '201':
+        "201":
           description: The user has been created.
           schema:
-            $ref: '#/definitions/User'
-        '400':
-          description: 'One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.'
-        '401':
+            $ref: "#/definitions/User"
+        "400":
+          description: One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.
+        "401":
           description: Client is not sufficiently authorized.
-        '403':
+        "403":
           description: Invalid token passed
-        '409':
+        "409":
           description: Username is already in use.
-        '502':
-          description: 'Authentication, account, or email verification gateway error occurred.'
-        '504':
-          description: 'Authentication, account, or email verification gateway timeout occurred.'
+        "502":
+          description: Authentication, account, or email verification gateway error occurred.
+        "504":
+          description: Authentication, account, or email verification gateway timeout occurred.
       summary: Create User
       tags:
         - Users
@@ -326,110 +327,110 @@ paths:
       description: Queries the identity of the current authenticated user.
       operationId: getMe
       parameters:
-        - $ref: '#/parameters/Authorization'
+        - $ref: "#/parameters/Authorization"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           schema:
-            $ref: '#/definitions/User'
-        '401':
+            $ref: "#/definitions/User"
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '404':
+        "404":
           description: User not found
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Get Current User
       tags:
         - Users
     patch:
-      description: 'Changes a limited set (or all if you choose) of the current authenticated user''s data. The updated user email domain must be an existing organization email domain. '
+      description: "Changes a limited set (or all if you choose) of the current authenticated user's data. The updated user email domain must be an existing organization email domain. "
       operationId: updateMe
       parameters:
-        - $ref: '#/parameters/Authorization'
+        - $ref: "#/parameters/Authorization"
         - description: The new user data
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/UserDefinition'
+            $ref: "#/definitions/UserDefinition"
       responses:
-        '200':
+        "200":
           description: The current user has been updated.
           schema:
-            $ref: '#/definitions/User'
-        '400':
-          description: 'One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.'
-        '401':
+            $ref: "#/definitions/User"
+        "400":
+          description: One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '404':
+        "404":
           description: User not found
-        '409':
+        "409":
           description: Email address conflict
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Update Current User
       tags:
         - Users
     put:
-      description: 'Changes the current authenticated user''s displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain. '
+      description: "Changes the current authenticated user's displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain. "
       operationId: replaceMe
       parameters:
-        - $ref: '#/parameters/Authorization'
+        - $ref: "#/parameters/Authorization"
         - description: The new user data
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/UserDefinition'
+            $ref: "#/definitions/UserDefinition"
       responses:
-        '200':
+        "200":
           description: The current user has been replaced.
           schema:
-            $ref: '#/definitions/User'
-        '400':
-          description: 'One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.'
-        '401':
+            $ref: "#/definitions/User"
+        "400":
+          description: One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '404':
+        "404":
           description: User not found
-        '409':
+        "409":
           description: Email address conflict
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Replace Current User
       tags:
         - Users
-  '/Users/{userKey}':
+  "/Users/{userKey}":
     delete:
       description: Deletes a user from the organization (but not from the account).
       operationId: deleteUser
       parameters:
-        - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/userKey'
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/userKey"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
-        '401':
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '404':
+        "404":
           description: User not found
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Delete User
       tags:
@@ -438,22 +439,22 @@ paths:
       description: Queries user identity in the organization domain.
       operationId: getUser
       parameters:
-        - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/userKey'
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/userKey"
       responses:
-        '200':
+        "200":
           description: The request has succeeded.
           schema:
-            $ref: '#/definitions/User'
-        '401':
+            $ref: "#/definitions/User"
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '404':
+        "404":
           description: User not found
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Get User
       tags:
@@ -462,66 +463,66 @@ paths:
       description: Changes a limited set (or all if you choose) of the user's data. The updated user email domain must be an existing organization email domain.
       operationId: updateUser
       parameters:
-        - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/userKey'
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/userKey"
         - description: The new user data
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/UserDefinition'
+            $ref: "#/definitions/UserDefinition"
       responses:
-        '200':
+        "200":
           description: The user has been updated.
           schema:
-            $ref: '#/definitions/User'
-        '400':
-          description: 'One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.'
-        '401':
+            $ref: "#/definitions/User"
+        "400":
+          description: One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '404':
+        "404":
           description: User not found
-        '409':
+        "409":
           description: Email address conflict
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Update User
       tags:
         - Users
     put:
-      description: 'Changes an existing user''s displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain.'
+      description: Changes an existing user's displayName, locale, timezone, username and password. The request must include the full user definition (to modify one or more values without sending the full definition, see Update User). The replaced user email domain must be an existing organization email domain.
       operationId: replaceUser
       parameters:
-        - $ref: '#/parameters/Authorization'
-        - $ref: '#/parameters/userKey'
+        - $ref: "#/parameters/Authorization"
+        - $ref: "#/parameters/userKey"
         - description: The new user data
           in: body
           name: body
           required: true
           schema:
-            $ref: '#/definitions/UserDefinition'
+            $ref: "#/definitions/UserDefinition"
       responses:
-        '200':
+        "200":
           description: The user has been replaced.
           schema:
-            $ref: '#/definitions/User'
-        '400':
-          description: 'One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.'
-        '401':
+            $ref: "#/definitions/User"
+        "400":
+          description: One of the following requirements is not met:<br />The userName field is required.<br />The userName field must be non-empty.<br />The userName field cannot exceed 128 characters.<br />The locale field must be composed of 1 or 2 parts.<br />The locale language sub-field must be ISO-639.<br />The locale country sub-field must be ISO-3166.<br />The timezone field must be a valid timezone.<br />The givenName field must not exceed 60 characters.<br />The familyName field must not exceed 60 characters.
+        "401":
           description: Client is not sufficiently authorized
-        '403':
+        "403":
           description: Invalid token passed
-        '404':
+        "404":
           description: User not found
-        '409':
+        "409":
           description: Email address conflict
-        '502':
+        "502":
           description: Authentication or account gateway error occurred
-        '504':
+        "504":
           description: Authentication or account gateway timeout occurred
       summary: Replace User
       tags:
@@ -537,7 +538,7 @@ definitions:
         description: A HTTP addressable URL pointing to the Authentication Scheme's usage documentation
         type: string
       name:
-        description: 'The common authentication scheme name, e.g. HTTP Basic'
+        description: The common authentication scheme name, e.g. HTTP Basic
         type: string
       specUrl:
         description: A HTTP addressable URL pointing to the Authentication Scheme's specification
@@ -591,10 +592,10 @@ definitions:
       members:
         description: An array of members
         items:
-          $ref: '#/definitions/Member'
+          $ref: "#/definitions/Member"
         type: array
       meta:
-        $ref: '#/definitions/GroupMetadata'
+        $ref: "#/definitions/GroupMetadata"
         description: Group metadata
     required:
       - meta
@@ -606,7 +607,7 @@ definitions:
       resources:
         description: An array of groups
         items:
-          $ref: '#/definitions/Group'
+          $ref: "#/definitions/Group"
         type: array
       totalResults:
         description: The number of groups in the collection
@@ -624,7 +625,7 @@ definitions:
       members:
         description: An array of members
         items:
-          $ref: '#/definitions/Member'
+          $ref: "#/definitions/Member"
         type: array
     required:
       - displayName
@@ -670,22 +671,22 @@ definitions:
       attributes:
         description: The resource's attributes
         items:
-          $ref: '#/definitions/SchemaAttribute'
+          $ref: "#/definitions/SchemaAttribute"
         type: array
       description:
         description: The resource's description
         type: string
       endpoint:
-        description: 'The resource''s HTTP addressable endpoint relative to the base URL, e.g. /Users.'
+        description: The resource's HTTP addressable endpoint relative to the base URL, e.g. /Users.
         type: string
       id:
-        description: 'The resource''s id, e.g. urn:scim:schemas:core:1.0:User'
+        description: The resource's id, e.g. urn:scim:schemas:core:1.0:User
         type: string
       name:
-        description: 'The resource''s name, e.g. "User"'
+        description: The resource's name, e.g. "User"
         type: string
       schema:
-        description: 'The resource''s associated schema, e.g. urn:scim:schemas:core:1.0'
+        description: The resource's associated schema, e.g. urn:scim:schemas:core:1.0
         type: string
     required:
       - id
@@ -716,15 +717,15 @@ definitions:
         description: Indicates whether the attribute is required
         type: boolean
       schema:
-        description: 'The attribute''s associated scheme, e.g. urn:scim:schemas:core:1.0'
+        description: The attribute's associated scheme, e.g. urn:scim:schemas:core:1.0
         type: string
       subAttributes:
         description: The attribute's potential sub-attributes
         items:
-          $ref: '#/definitions/SchemaSubAttribute'
+          $ref: "#/definitions/SchemaSubAttribute"
         type: array
       type:
-        description: 'The attribute''s data type, e.g. String'
+        description: The attribute's data type, e.g. String
         type: string
     required:
       - name
@@ -754,7 +755,7 @@ definitions:
         description: Indicates whether the attribute is required
         type: boolean
       type:
-        description: 'The attribute''s data type, e.g. String'
+        description: The attribute's data type, e.g. String
         type: string
     required:
       - name
@@ -767,31 +768,31 @@ definitions:
     description: Represents the Service Provider's configuration
     properties:
       authenticationSchemes:
-        $ref: '#/definitions/AuthenticationSchemes'
+        $ref: "#/definitions/AuthenticationSchemes"
         description: Specifies whether the XML data format is supported
       bulk:
-        $ref: '#/definitions/Bulk'
+        $ref: "#/definitions/Bulk"
         description: Specifies BULK configuration options
       changePassword:
-        $ref: '#/definitions/ChangePassword'
+        $ref: "#/definitions/ChangePassword"
         description: Specifies Change Password configuration options
       documentationUrl:
         description: An HTTP addressable URL pointing to the Service Provider's help documentation
         type: string
       etag:
-        $ref: '#/definitions/Etag'
+        $ref: "#/definitions/Etag"
         description: Specifies Etag configuration options
       filter:
-        $ref: '#/definitions/Filter'
+        $ref: "#/definitions/Filter"
         description: Specifies FILTER options
       patch:
-        $ref: '#/definitions/Patch'
+        $ref: "#/definitions/Patch"
         description: Specifies PATCH configuration options
       sort:
-        $ref: '#/definitions/Sort'
+        $ref: "#/definitions/Sort"
         description: Specifies Sort configuration options
       xmlDataFormat:
-        $ref: '#/definitions/XmlDataFormat'
+        $ref: "#/definitions/XmlDataFormat"
         description: Specifies supported Authentication Scheme properties
     required:
       - documentationUrl
@@ -824,16 +825,16 @@ definitions:
         description: The user's language settings
         type: string
       meta:
-        $ref: '#/definitions/UserMetadata'
+        $ref: "#/definitions/UserMetadata"
         description: User metadata
       name:
-        $ref: '#/definitions/UserFullName'
+        $ref: "#/definitions/UserFullName"
         description: The user's full name
       timezone:
         description: The user's time zone
         type: string
       userName:
-        description: 'The user''s username, usually their email address'
+        description: The user's username, usually their email address
         type: string
     required:
       - displayName
@@ -849,7 +850,7 @@ definitions:
       resources:
         description: The list of users
         items:
-          $ref: '#/definitions/User'
+          $ref: "#/definitions/User"
         type: array
       totalResults:
         description: The number of users in the collection
@@ -868,7 +869,7 @@ definitions:
         description: The user's language settings
         type: string
       name:
-        $ref: '#/definitions/UserFullName'
+        $ref: "#/definitions/UserFullName"
         description: The user's full name
       password:
         description: The user's password
@@ -877,7 +878,7 @@ definitions:
         description: The user's time zone
         type: string
       userName:
-        description: 'The user''s username, usually their email address'
+        description: The user's username, usually their email address
         type: string
   UserFullName:
     description: The full name of the user

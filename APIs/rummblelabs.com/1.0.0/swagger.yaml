@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
   - https
@@ -10,12 +10,13 @@ info:
   x-apisguru-categories:
     - machine_learning
   x-logo:
-    url: 'https://twitter.com/seldon_io/profile_image?size=original'
+    url: https://twitter.com/seldon_io/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'http://recsvm.rummblelabs.com/api-spec/seldon.json'
-      version: '2.0'
+      url: http://recsvm.rummblelabs.com/api-spec/seldon.json
+      version: "2.0"
   x-providerName: rummblelabs.com
+  x-preferred: true
 produces:
   - application/json
 paths:
@@ -23,7 +24,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: ''
+      description: ""
       operationId: postAction
       parameters:
         - description: oauth token
@@ -36,16 +37,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Action'
+            $ref: "#/definitions/Action"
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: post new action between a user and an item
       tags:
         - oauth actions
   /items:
     get:
-      description: ''
+      description: ""
       operationId: getItems
       parameters:
         - description: oauth token
@@ -79,7 +80,7 @@ paths:
           required: false
           type: integer
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: get items
       tags:
@@ -87,7 +88,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: ''
+      description: ""
       operationId: postItem
       parameters:
         - description: oauth token
@@ -100,9 +101,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Item'
+            $ref: "#/definitions/Item"
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: post new item
       tags:
@@ -110,7 +111,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: ''
+      description: ""
       operationId: putItem
       parameters:
         - description: oauth token
@@ -123,16 +124,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Item'
+            $ref: "#/definitions/Item"
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: update item
       tags:
         - oauth items
   /items/type:
     get:
-      description: ''
+      description: ""
       operationId: getItemTypes
       parameters:
         - description: oauth token
@@ -141,14 +142,14 @@ paths:
           required: false
           type: string
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: get item type
       tags:
         - oauth items
-  '/items/{itemId}':
+  "/items/{itemId}":
     get:
-      description: ''
+      description: ""
       operationId: getItem
       parameters:
         - description: oauth token
@@ -167,7 +168,7 @@ paths:
           required: false
           type: boolean
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: get item
       tags:
@@ -176,7 +177,7 @@ paths:
     get:
       consumes:
         - application/json
-      description: ''
+      description: ""
       operationId: addAction
       parameters:
         - default: uggyecofcz
@@ -211,14 +212,14 @@ paths:
           required: false
           type: integer
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: Add a user interaction
       tags:
         - js actions
   /js/recommendations:
     get:
-      description: ''
+      description: ""
       operationId: getRecommendation
       parameters:
         - default: uggyecofcz
@@ -242,7 +243,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'get recommendations for a particular item dimension (e.g., just sports articles)'
+        - description: get recommendations for a particular item dimension (e.g., just sports articles)
           in: query
           name: dimension
           required: false
@@ -264,14 +265,14 @@ paths:
           required: true
           type: string
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: Get recommendations for a user
       tags:
         - js recommendations
   /token:
     get:
-      description: ''
+      description: ""
       operationId: getToken
       parameters:
         - description: consumer key
@@ -285,14 +286,14 @@ paths:
           required: true
           type: string
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: get token
       tags:
         - token
   /users:
     get:
-      description: ''
+      description: ""
       operationId: getUsers
       parameters:
         - description: oauth token
@@ -316,7 +317,7 @@ paths:
           required: false
           type: integer
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: get users
       tags:
@@ -324,7 +325,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: ''
+      description: ""
       operationId: postUser
       parameters:
         - description: oauth token
@@ -337,9 +338,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: post new user
       tags:
@@ -347,7 +348,7 @@ paths:
     put:
       consumes:
         - application/json
-      description: ''
+      description: ""
       operationId: updateUser
       parameters:
         - description: oauth token
@@ -360,16 +361,16 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: update user
       tags:
         - oauth users
-  '/users/{userId}':
+  "/users/{userId}":
     get:
-      description: ''
+      description: ""
       operationId: getUser
       parameters:
         - description: oauth token
@@ -388,14 +389,14 @@ paths:
           required: false
           type: boolean
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: get a user
       tags:
         - oauth users
-  '/users/{userId}/actions':
+  "/users/{userId}/actions":
     get:
-      description: ''
+      description: ""
       operationId: getUserActions
       parameters:
         - description: oauth token
@@ -419,15 +420,15 @@ paths:
           required: false
           type: integer
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: get a user's recent actions
       tags:
         - oauth users
         - oauth actions
-  '/users/{userId}/recommendations':
+  "/users/{userId}/recommendations":
     get:
-      description: ''
+      description: ""
       operationId: getUserRecommendations
       parameters:
         - description: oauth token
@@ -450,7 +451,7 @@ paths:
           name: limit
           required: false
           type: integer
-        - description: 'get recommendations for a particular item dimension (e.g., just sports articles)'
+        - description: get recommendations for a particular item dimension (e.g., just sports articles)
           in: query
           name: dimension
           required: false
@@ -461,7 +462,7 @@ paths:
           required: false
           type: string
       responses:
-        '400':
+        "400":
           description: Invalid parameters
       summary: get recommendations for a user
       tags:
@@ -497,7 +498,7 @@ definitions:
   Item:
     properties:
       attributesName:
-        $ref: '#/definitions/AttributesName'
+        $ref: "#/definitions/AttributesName"
       id:
         example: myid1234
         type: string
@@ -513,7 +514,7 @@ definitions:
         description: whether user is active
         type: boolean
       attributesName:
-        $ref: '#/definitions/AttributesName'
+        $ref: "#/definitions/AttributesName"
       id:
         example: myid1234
         type: string

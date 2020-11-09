@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: event.jirafe.com
@@ -7,36 +7,37 @@ info:
   contact:
     email: support@jirafe.com
   description: API endpoins for sending Jirafe events
-  termsOfService: 'https://jirafe.com/policies/terms/'
+  termsOfService: https://jirafe.com/policies/terms/
   title: Jirafe Events
   version: 2.0.0
   x-apisguru-categories:
     - marketing
   x-logo:
-    backgroundColor: '#4BC9C5'
-    url: 'https://twitter.com/jirafe/profile_image?size=original'
+    backgroundColor: "#4BC9C5"
+    url: https://twitter.com/jirafe/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: swagger
-      url: 'https://event.jirafe.com/api-docs'
-      version: '1.2'
+      url: https://event.jirafe.com/api-docs
+      version: "1.2"
   x-providerName: jirafe.com
+  x-preferred: true
 externalDocs:
-  url: 'https://docs.jirafe.com/api/'
+  url: https://docs.jirafe.com/api/
 produces:
   - application/json
 securityDefinitions:
   oauth2_accessCode:
-    authorizationUrl: 'https://account.jirafe.com/oauth2/auth_token'
+    authorizationUrl: https://account.jirafe.com/oauth2/auth_token
     flow: accessCode
     scopes:
       write: Send events
-    tokenUrl: 'https://account.jirafe.com/oauth2/code'
+    tokenUrl: https://account.jirafe.com/oauth2/code
     type: oauth2
   oauth2_implicit:
-    authorizationUrl: 'https://account.jirafe.com/oauth2/authorize'
+    authorizationUrl: https://account.jirafe.com/oauth2/authorize
     flow: implicit
     scopes:
       write: Send events
@@ -55,7 +56,7 @@ tags:
   - description: Product events
     name: product
 paths:
-  '/{siteId}/batch':
+  "/{siteId}/batch":
     post:
       operationId: postBatch
       parameters:
@@ -69,15 +70,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Batch'
+            $ref: "#/definitions/Batch"
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '400':
+        "400":
           description: validation
-        '403':
+        "403":
           description: authorization
-        '503':
+        "503":
           description: unknown
       security:
         - oauth2_accessCode:
@@ -87,7 +88,7 @@ paths:
       summary: Send a batch for the given site
       tags:
         - batch
-  '/{siteId}/cart':
+  "/{siteId}/cart":
     post:
       operationId: postCart
       parameters:
@@ -101,15 +102,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Cart'
+            $ref: "#/definitions/Cart"
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '400':
+        "400":
           description: validation
-        '403':
+        "403":
           description: authorization
-        '503':
+        "503":
           description: unknown
       security:
         - oauth2_accessCode:
@@ -119,7 +120,7 @@ paths:
       summary: Send a cart for the given site
       tags:
         - cart
-  '/{siteId}/category':
+  "/{siteId}/category":
     post:
       operationId: postCategory
       parameters:
@@ -133,15 +134,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Category'
+            $ref: "#/definitions/Category"
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '400':
+        "400":
           description: validation
-        '403':
+        "403":
           description: authorization
-        '503':
+        "503":
           description: unknown
       security:
         - oauth2_accessCode:
@@ -151,7 +152,7 @@ paths:
       summary: Send a category for the given site
       tags:
         - category
-  '/{siteId}/customer':
+  "/{siteId}/customer":
     post:
       operationId: postCustomer
       parameters:
@@ -165,15 +166,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Customer'
+            $ref: "#/definitions/Customer"
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '400':
+        "400":
           description: validation
-        '403':
+        "403":
           description: authorization
-        '503':
+        "503":
           description: unknown
       security:
         - oauth2_accessCode:
@@ -183,7 +184,7 @@ paths:
       summary: Send a customer for the given site
       tags:
         - customer
-  '/{siteId}/order':
+  "/{siteId}/order":
     post:
       operationId: postOrderCancelled
       parameters:
@@ -197,15 +198,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/OrderCancelled'
+            $ref: "#/definitions/OrderCancelled"
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '400':
+        "400":
           description: validation
-        '403':
+        "403":
           description: authorization
-        '503':
+        "503":
           description: unknown
       security:
         - oauth2_accessCode:
@@ -215,7 +216,7 @@ paths:
       summary: Send a order for the given site
       tags:
         - order
-  '/{siteId}/product':
+  "/{siteId}/product":
     post:
       operationId: postProduct
       parameters:
@@ -229,15 +230,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/Product'
+            $ref: "#/definitions/Product"
       responses:
-        '200':
+        "200":
           description: No response was specified
-        '400':
+        "400":
           description: validation
-        '403':
+        "403":
           description: authorization
-        '503':
+        "503":
           description: unknown
       security:
         - oauth2_accessCode:
@@ -275,27 +276,27 @@ definitions:
     properties:
       cart:
         items:
-          $ref: '#/definitions/Cart'
+          $ref: "#/definitions/Cart"
         type: array
       category:
         items:
-          $ref: '#/definitions/Category'
+          $ref: "#/definitions/Category"
         type: array
       customer:
         items:
-          $ref: '#/definitions/Customer'
+          $ref: "#/definitions/Customer"
         type: array
       employee:
         items:
-          $ref: '#/definitions/Employee'
+          $ref: "#/definitions/Employee"
         type: array
       order:
         items:
-          $ref: '#/definitions/Order'
+          $ref: "#/definitions/Order"
         type: array
       product:
         items:
-          $ref: '#/definitions/Product'
+          $ref: "#/definitions/Product"
         type: array
     type: object
   Cart:
@@ -313,16 +314,16 @@ definitions:
       currency:
         type: string
       customer:
-        $ref: '#/definitions/Customer'
+        $ref: "#/definitions/Customer"
       id:
         type: string
       items:
         items:
-          $ref: '#/definitions/CartItem'
+          $ref: "#/definitions/CartItem"
         type: array
       previous_items:
         items:
-          $ref: '#/definitions/CartItem'
+          $ref: "#/definitions/CartItem"
         type: array
       subtotal:
         type: number
@@ -347,7 +348,7 @@ definitions:
         minimum: 0
         type: number
       visit:
-        $ref: '#/definitions/Visit'
+        $ref: "#/definitions/Visit"
     required:
       - id
       - create_date
@@ -383,7 +384,7 @@ definitions:
         minimum: 0
         type: number
       product:
-        $ref: '#/definitions/Product'
+        $ref: "#/definitions/Product"
       quantity:
         maximum: 9007199254740992
         minimum: -9007199254740992
@@ -472,10 +473,10 @@ definitions:
       currency:
         type: string
       customer:
-        $ref: '#/definitions/Customer'
+        $ref: "#/definitions/Customer"
       items:
         items:
-          $ref: '#/definitions/OrderItem'
+          $ref: "#/definitions/OrderItem"
         minimum: 1
         type: array
       order_date:
@@ -485,7 +486,7 @@ definitions:
         type: string
       previous_items:
         items:
-          $ref: '#/definitions/OrderItem'
+          $ref: "#/definitions/OrderItem"
         type: array
       status:
         default: accepted
@@ -558,7 +559,7 @@ definitions:
         minimum: 0
         type: number
       product:
-        $ref: '#/definitions/Product'
+        $ref: "#/definitions/Product"
       quantity:
         maximum: 9007199254740992
         minimum: -9007199254740992
@@ -593,18 +594,18 @@ definitions:
         type: array
       attributes:
         items:
-          $ref: '#/definitions/Attribute'
+          $ref: "#/definitions/Attribute"
         type: array
         uniqueItems: true
       base_product:
-        $ref: '#/definitions/BaseProduct'
+        $ref: "#/definitions/BaseProduct"
       brand:
         type: string
       catalog:
-        $ref: '#/definitions/Catalog'
+        $ref: "#/definitions/Catalog"
       categories:
         items:
-          $ref: '#/definitions/Category'
+          $ref: "#/definitions/Category"
         type: array
         uniqueItems: true
       change_date:
@@ -619,7 +620,7 @@ definitions:
         type: string
       images:
         items:
-          $ref: '#/definitions/Image'
+          $ref: "#/definitions/Image"
         type: array
       is_order:
         type: boolean
@@ -630,10 +631,10 @@ definitions:
       rating:
         type: number
       urls:
-        $ref: '#/definitions/Url'
+        $ref: "#/definitions/Url"
       vendors:
         items:
-          $ref: '#/definitions/Vendor'
+          $ref: "#/definitions/Vendor"
         type: array
     required:
       - id

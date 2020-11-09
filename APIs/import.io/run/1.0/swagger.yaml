@@ -1,24 +1,25 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: run.import.io
 basePath: /
 info:
   title: import.io
-  version: '1.0'
+  version: "1.0"
   x-apisguru-categories:
     - tools
   x-logo:
-    backgroundColor: '#F6248E'
-    url: 'http://api.docs.import.io/images/import-io-logo.svg'
+    backgroundColor: "#F6248E"
+    url: http://api.docs.import.io/images/import-io-logo.svg
   x-origin:
     - format: swagger
-      url: 'http://api.docs.import.io/run/swagger.json'
-      version: '2.0'
+      url: http://api.docs.import.io/run/swagger.json
+      version: "2.0"
   x-providerName: import.io
   x-serviceName: run
+  x-preferred: true
 externalDocs:
-  url: 'http://api.docs.import.io/'
+  url: http://api.docs.import.io/
 consumes:
   - application/json
 produces:
@@ -51,7 +52,7 @@ tags:
   - name: schedule.import.io
   - name: api.import.io
 paths:
-  '/extractor/{extractorId}/cancel':
+  "/extractor/{extractorId}/cancel":
     post:
       parameters:
         - description: extractorId
@@ -60,30 +61,30 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             additionalProperties:
               type: string
             type: object
-        '400':
+        "400":
           description: No in progress crawl found to cancel.
           schema:
-            $ref: '#/definitions/APIError'
-        '401':
-          description: 'User doesn''t own this extractor, or doesn''t have a valid session.'
+            $ref: "#/definitions/APIError"
+        "401":
+          description: User doesn't own this extractor, or doesn't have a valid session.
           schema:
-            $ref: '#/definitions/APIError'
-        '404':
+            $ref: "#/definitions/APIError"
+        "404":
           description: Unable to find supplied extractor ID.
           schema:
-            $ref: '#/definitions/APIError'
+            $ref: "#/definitions/APIError"
       security:
         - api_key: []
       summary: Cancel an existing crawl.
       tags:
         - run.import.io
-  '/extractor/{extractorId}/start':
+  "/extractor/{extractorId}/start":
     post:
       parameters:
         - description: the id of the extractor to start crawling with
@@ -92,24 +93,24 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: OK
           schema:
             additionalProperties:
               type: string
             type: object
-        '400':
+        "400":
           description: Extractor is archived or a crawl already in progress.
           schema:
-            $ref: '#/definitions/APIError'
-        '401':
-          description: 'User doesn''t own this extractor, or doesn''t have a valid session.'
+            $ref: "#/definitions/APIError"
+        "401":
+          description: User doesn't own this extractor, or doesn't have a valid session.
           schema:
-            $ref: '#/definitions/APIError'
-        '404':
+            $ref: "#/definitions/APIError"
+        "404":
           description: Unable to find supplied extractor ID.
           schema:
-            $ref: '#/definitions/APIError'
+            $ref: "#/definitions/APIError"
       security:
         - api_key: []
       summary: Launch a crawl from an extractor that a user owns.
@@ -183,7 +184,7 @@ definitions:
                 _type:
                   type: string
                 fields:
-                  $ref: '#/definitions/CrawlRun'
+                  $ref: "#/definitions/CrawlRun"
               type: object
             type: array
           total:

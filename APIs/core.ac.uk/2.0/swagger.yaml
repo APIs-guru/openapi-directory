@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: core.ac.uk
@@ -6,16 +6,18 @@ basePath: /api-v2
 info:
   contact:
     x-twitter: oacore
-  description: |-
+  description: >-
     <p style="text-align: justify;">You can use the CORE API to access the 
         resources harvested and enriched by CORE. If you encounter any problems with the API, please <a href="/contact">report them to us</a>.</p>
 
     <h2>Overview</h2>
+
     <p style="text-align: justify;">The API is organised by resource type. The resources are <b>articles</b>, 
         <b>journals</b> and <b>repositories</b> and are represented using JSON data format. Furthermore, 
         each resource has a list of methods. The API also provides two global methods for accessing all resources at once.</p>
 
     <h2>Response format</h2>
+
     <p style="text-align: justify;">Response for each query contains two fields: <b>status</b> and <b>data</b>.
         In case of an error status, the data field is empty. The data field contains a single object
         in case the request is for a specific identifier (e.g. CORE ID, CORE repository ID, etc.), or  
@@ -26,6 +28,7 @@ info:
 
     <h2>Search query syntax</h2>
 
+
     <p style="text-align: justify">Complex search queries can be used in all of the API search methods.
         The query can be a simple string or it can be built using terms and operators described in Elasticsearch
         <a href="http://www.elastic.co/guide/en/elasticsearch/reference/1.4/query-dsl-query-string-query.html#query-string-syntax">documentation</a>.
@@ -35,6 +38,7 @@ info:
         and <strong>year</strong>. Some example queries:
     </p>
 
+
     <ul style="margin-left: 30px;">
         <li><p>title:psychology and language.name:English</p></li>
         <li><p>repositories.id:86 AND year:2014</p></li>
@@ -42,41 +46,48 @@ info:
         <li><p>doi:"10.1186/1471-2458-6-309"</p></li>
     </ul>
 
+
     <h3>Retrieving the latest Articles</h3>
+
     <p style="text-align: justify">
         You can retrieve the harvested items since specific dates using the following queries:
     </p>
+
 
     <ul style="margin-left: 30px;">
         <li><p>repositoryDocument.metadataUpdated:>2017-02-10</p></li>
         <li><p>repositoryDocument.metadataUpdated:>2017-03-01 AND repositoryDocument.metadataUpdated:<2017-03-31</p></li>    
     </ul>
 
+
     <h2>Sort order</h2>
+
 
     <p style="text-align: justify;">For search queries, the results are ordered by relevance score. For batch 
         requests, the results are retrieved in the order of the requests.</p>
 
     <h2>Parameters</h2>
+
     <p style="text-align: justify;">The API methods allow different parameters to be passed. Additionally, there is an API key parameter which is common to all API methods. For all API methods 
         the API key can be provided either as a query parameter or in the request header. If the API key 
         is not provided, the API will return HTTP 401 error. You can register for an API key <a href="/services#api">here</a>.</p>
 
     <h2>API methods</h2>
   title: CORE API v2
-  version: '2.0'
+  version: "2.0"
   x-apisguru-categories:
     - open_data
   x-logo:
-    url: 'https://twitter.com/oacore/profile_image?size=original'
+    url: https://twitter.com/oacore/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: swagger
-      url: 'http://core.ac.uk/api-v2/doc'
-      version: '1.2'
+      url: http://core.ac.uk/api-v2/doc
+      version: "1.2"
   x-providerName: core.ac.uk
+  x-preferred: true
 securityDefinitions:
   apiKey:
     description: Your Api Key. Also accepts apiKey as a header
@@ -110,7 +121,7 @@ paths:
           name: title
           required: false
           type: string
-        - description: 'Year the article was published. Only useful when value for @title is supplied. '
+        - description: "Year the article was published. Only useful when value for @title is supplied. "
           in: query
           name: year
           required: false
@@ -130,7 +141,7 @@ paths:
           name: identifier
           required: false
           type: string
-        - description: 'Limit the duplicates search to particular repository id. '
+        - description: "Limit the duplicates search to particular repository id. "
           in: query
           name: repositoryId
           required: false
@@ -138,15 +149,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ArticleDedupResponse'
-        '400':
+            $ref: "#/definitions/ArticleDedupResponse"
+        "400":
           description: Insufficient/Unsuitable input parameters.
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '503':
+        "503":
           description: Could not run the deduplication service at this time; please try again later.
       summary: Get all near duplicate articles
       tags:
@@ -183,7 +194,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: 'Whether to retrieve lists of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time'
+          description: Whether to retrieve lists of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
           in: query
           name: similar
           required: false
@@ -209,24 +220,24 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/ArticleResponse'
+              $ref: "#/definitions/ArticleResponse"
             type: array
-        '400':
+        "400":
           description: Missing or malformed JSON in request body
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '403':
+        "403":
           description: Too many queries in request body
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Batch operation for retrieving articles by CORE ID
       tags:
         - articles
-  '/articles/get/{coreId}':
+  "/articles/get/{coreId}":
     get:
       description: Method will retrieve an article based on given CORE ID.
       operationId: getArticleByCoreId
@@ -256,7 +267,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: 'Whether to retrieve a list of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time'
+          description: Whether to retrieve a list of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
           in: query
           name: similar
           required: false
@@ -282,20 +293,20 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ArticleResponse'
-        '400':
+            $ref: "#/definitions/ArticleResponse"
+        "400":
           description: Invalid identifier supplied
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Get article by CORE ID
       tags:
         - articles
-  '/articles/get/{coreId}/download/pdf':
+  "/articles/get/{coreId}/download/pdf":
     get:
       description: Method will retrieve an article based on given CORE ID.
       operationId: getArticlePdfByCoreId
@@ -308,20 +319,20 @@ paths:
       produces:
         - application/pdf
       responses:
-        '200':
+        "200":
           description: Successful operation
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '404':
+        "404":
           description: No Article pdf found
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Get fulltext PDF by CORE ID
       tags:
         - articles
-  '/articles/get/{coreId}/history':
+  "/articles/get/{coreId}/history":
     get:
-      description: 'Method accepts a single CORE ID and returns a list of all historical versions of the article, which are stored in CORE database. The results are ordered from the newest one to the oldest one.'
+      description: Method accepts a single CORE ID and returns a list of all historical versions of the article, which are stored in CORE database. The results are ordered from the newest one to the oldest one.
       operationId: getArticleHistoryByCoreId
       parameters:
         - description: CORE ID of the article which history should be fetched
@@ -330,7 +341,7 @@ paths:
           required: true
           type: string
         - default: 1
-          description: 'Which page of the history results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).'
+          description: Which page of the history results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -339,7 +350,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: 'The number of results to return per page. Can be any number between 10 and 100, default is 10.'
+          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -350,22 +361,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ArticleHistoryResponse'
-        '400':
+            $ref: "#/definitions/ArticleHistoryResponse"
+        "400":
           description: Parameter invalid or out of bounds
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Get article history by CORE ID
       tags:
         - articles
   /articles/search:
     post:
-      description: 'Method accepts a JSON array of search queries and parameters. It then searches through all articles and returns a JSON array of search results for each of the queries. Method searches through all article fields (title, authors, subjects, identifiers, etc.).'
+      description: Method accepts a JSON array of search queries and parameters. It then searches through all articles and returns a JSON array of search results for each of the queries. Method searches through all article fields (title, authors, subjects, identifiers, etc.).
       operationId: searchArticlesBatch
       parameters:
         - description: JSON array with search queries and parameters. One request can contain up to 100 queries
@@ -374,7 +385,7 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/SearchRequest'
+              $ref: "#/definitions/SearchRequest"
             type: array
         - default: true
           description: Whether to retrieve the full article metadata or only the ID. The default value is true.
@@ -395,7 +406,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: 'Whether to retrieve a list of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time'
+          description: Whether to retrieve a list of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
           in: query
           name: similar
           required: false
@@ -421,24 +432,24 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/ArticleSearchResponse'
+              $ref: "#/definitions/ArticleSearchResponse"
             type: array
-        '400':
+        "400":
           description: Missing or malformed JSON in request body
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '403':
+        "403":
           description: Too many queries in request body
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Batch operation for search through articles
       tags:
         - articles
-  '/articles/search/{query}':
+  "/articles/search/{query}":
     get:
       description: Searches through all articles and returns a JSON array with search results. Method searches through all article fields.
       operationId: searchArticles
@@ -450,7 +461,7 @@ paths:
           required: true
           type: integer
         - default: 1
-          description: 'Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).'
+          description: Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -459,7 +470,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: 'The number of results to return per page. Can be any number between 10 and 100, default is 10.'
+          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -486,7 +497,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: 'Whether to retrieve a list of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time'
+          description: Whether to retrieve a list of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
           in: query
           name: similar
           required: false
@@ -512,22 +523,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ArticleSearchResponse'
-        '400':
+            $ref: "#/definitions/ArticleSearchResponse"
+        "400":
           description: Parameter invalid or out of bounds
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Search through all documents
       tags:
         - articles
   /articles/similar:
     post:
-      description: 'Method accepts a text and retrieves a JSON array of articles which are similar to the given text. The response array is ordered based on similarity score, starting from the most similar.'
+      description: Method accepts a text and retrieves a JSON array of articles which are similar to the given text. The response array is ordered based on similarity score, starting from the most similar.
       operationId: similarArticles
       parameters:
         - description: The text that requires similar articles to be calculated on
@@ -535,9 +546,9 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/SimilarRequest'
+            $ref: "#/definitions/SimilarRequest"
         - default: 10
-          description: 'How many similar articles to retrieve at most. Can be any number betwen 1 and 100, default is 10'
+          description: How many similar articles to retrieve at most. Can be any number betwen 1 and 100, default is 10
           in: query
           maximum: 100
           minimum: 1
@@ -563,7 +574,7 @@ paths:
           required: false
           type: boolean
         - default: false
-          description: 'Whether to retrieve lists of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time'
+          description: Whether to retrieve lists of similar articles. The default value is false. Because the similar articles are calculated on demand, setting this parameter to true might slightly slow down the response time
           in: query
           name: similar
           required: false
@@ -589,15 +600,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/ArticleSimilarResponse'
-        '400':
+            $ref: "#/definitions/ArticleSimilarResponse"
+        "400":
           description: Missing text in request body or parameter out of bounds or invalid parameter
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Get articles by similarity to a text
       tags:
@@ -618,22 +629,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/JournalResponse'
+              $ref: "#/definitions/JournalResponse"
             type: array
-        '400':
+        "400":
           description: Missing or malformed JSON in request body
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '403':
+        "403":
           description: Too many queries in request body
       summary: Batch operation for retrieving journals by ISSN
       tags:
         - journals
-  '/journals/get/{issn}':
+  "/journals/get/{issn}":
     get:
       description: Returns a journal with given ISSN identifier.
       operationId: getJournalByIssn
@@ -646,20 +657,20 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/JournalResponse'
-        '400':
+            $ref: "#/definitions/JournalResponse"
+        "400":
           description: Invalid ISSN identifier supplied
-        '401':
+        "401":
           description: Invalid or no API key provided
       summary: Find journal by ISSN
       tags:
         - journals
   /journals/search:
     post:
-      description: 'Method accepts a JSON array of search queries and parameters. It then searches through all journals and returns a JSON array of search results for each of the queries. Method searches through all journal fields (title, identifiers, subjects, language, rights and publisher).'
+      description: Method accepts a JSON array of search queries and parameters. It then searches through all journals and returns a JSON array of search results for each of the queries. Method searches through all journal fields (title, identifiers, subjects, language, rights and publisher).
       parameters:
         - description: JSON array with search queries and parameters. One request can contain up to 100 queries.
           in: body
@@ -667,29 +678,29 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/SearchRequest'
+              $ref: "#/definitions/SearchRequest"
             type: array
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/JournalResponse'
+              $ref: "#/definitions/JournalResponse"
             type: array
-        '400':
+        "400":
           description: Missing or malformed JSON in request body
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '403':
+        "403":
           description: Too many queries in request body
       summary: Batch operation for search through journals
       tags:
         - journals
-  '/journals/search/{query}':
+  "/journals/search/{query}":
     get:
-      description: 'Searches through all journals and returns a JSON array of search results. Method searches through all journal fields (title, identifiers, subjects, language, rights and publisher).'
+      description: Searches through all journals and returns a JSON array of search results. Method searches through all journal fields (title, identifiers, subjects, language, rights and publisher).
       parameters:
         - description: Search query
           in: path
@@ -697,7 +708,7 @@ paths:
           required: true
           type: string
         - default: 1
-          description: 'Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).'
+          description: Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -706,7 +717,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: 'The number of results to return per page. Can be any number between 10 and 100, default is 10.'
+          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -717,13 +728,13 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/JournalSearchResponse'
-        '400':
+            $ref: "#/definitions/JournalSearchResponse"
+        "400":
           description: Parameter invalid or out of bounds
-        '401':
+        "401":
           description: Invalid or no API key provided
       summary: Search through journals
       tags:
@@ -762,24 +773,24 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/RepositoryResponse'
+              $ref: "#/definitions/RepositoryResponse"
             type: array
-        '400':
+        "400":
           description: Missing or malformed JSON in request body
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '403':
+        "403":
           description: Too many queries in request body
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Batch operation for retrieving repositories by CORE repository ID
       tags:
         - repositories
-  '/repositories/get/{repositoryId}':
+  "/repositories/get/{repositoryId}":
     get:
       description: Method will retrieve a repository based on given CORE repository ID.
       operationId: getRepositoryById
@@ -810,15 +821,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/RepositoryResponse'
-        '400':
+            $ref: "#/definitions/RepositoryResponse"
+        "400":
           description: Invalid identifier supplied
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Get repository by CORE repository ID
       tags:
@@ -833,7 +844,7 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/SearchRequest'
+              $ref: "#/definitions/SearchRequest"
             type: array
         - default: false
           description: Whether to retrieve statistics about the repository. The default value is false
@@ -856,22 +867,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/RepositorySearchResponse'
-        '400':
+            $ref: "#/definitions/RepositorySearchResponse"
+        "400":
           description: Missing or malformed JSON in request body
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '403':
+        "403":
           description: Too many queries in request body
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Batch operation for searching through repositories
       tags:
         - repositories
-  '/repositories/search/{query}':
+  "/repositories/search/{query}":
     get:
       description: Searches through all repositories and returns a JSON array with search results. Method searches through all repository fields.
       parameters:
@@ -881,7 +892,7 @@ paths:
           required: true
           type: string
         - default: 1
-          description: 'Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).'
+          description: Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -890,7 +901,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: 'The number of results to return per page. Can be any number between 10 and 100, default is 10.'
+          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -919,22 +930,22 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/RepositorySearchResponse'
-        '400':
+            $ref: "#/definitions/RepositorySearchResponse"
+        "400":
           description: Parameter invalid or out of bounds
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Search through all repositories
       tags:
         - repositories
   /search:
     post:
-      description: 'Method accepts a JSON array of search queries. It searches through all resources and returns a JSON array with search results for each of the queries. Method searches through all resources and all fields. The results are ordered by relevance score and contain type of the relevant resource and its ID. Furthermore, the responses are oredered based on the order of the request items. The metadata of each resource need to be obtained through an appropriate method.'
+      description: Method accepts a JSON array of search queries. It searches through all resources and returns a JSON array with search results for each of the queries. Method searches through all resources and all fields. The results are ordered by relevance score and contain type of the relevant resource and its ID. Furthermore, the responses are oredered based on the order of the request items. The metadata of each resource need to be obtained through an appropriate method.
       parameters:
         - description: JSON array with search queries and pagination parameters. One request can contain up to 100 queries
           in: body
@@ -942,29 +953,29 @@ paths:
           required: true
           schema:
             items:
-              $ref: '#/definitions/SearchRequest'
+              $ref: "#/definitions/SearchRequest"
             type: array
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
             items:
-              $ref: '#/definitions/SearchAllResponse'
+              $ref: "#/definitions/SearchAllResponse"
             type: array
-        '400':
+        "400":
           description: Missing or malformed JSON in request body
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '403':
+        "403":
           description: Too many queries in request body
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Batch operation for search through all resources
       tags:
         - all
-  '/search/{query}':
+  "/search/{query}":
     get:
       description: Searches through all resources and returns a JSON array with search results. Method searches through all resources and all fields. The results are ordered by relevance score and contain type of the relevant resource and its ID. The metadata of each resource need to be obtained through an appropriate method.
       parameters:
@@ -974,7 +985,7 @@ paths:
           required: true
           type: string
         - default: 1
-          description: 'Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).'
+          description: Which page of the search results should be retrieved. Can be any number betwen 1 and 100, default is 1 (first page).
           format: int32
           in: query
           maximum: 100
@@ -983,7 +994,7 @@ paths:
           required: false
           type: integer
         - default: 10
-          description: 'The number of results to return per page. Can be any number between 10 and 100, default is 10.'
+          description: The number of results to return per page. Can be any number between 10 and 100, default is 10.
           format: int32
           in: query
           maximum: 100
@@ -994,15 +1005,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Successful operation
           schema:
-            $ref: '#/definitions/SearchAllResponse'
-        '400':
+            $ref: "#/definitions/SearchAllResponse"
+        "400":
           description: Parameter invalid or out of bounds
-        '401':
+        "401":
           description: Invalid or no API key provided
-        '429':
+        "429":
           description: Too many requests in given amount of time
       summary: Search through all resources
       tags:
@@ -1018,7 +1029,7 @@ definitions:
       citations:
         description: Citations found in the article
         items:
-          $ref: '#/definitions/Citation'
+          $ref: "#/definitions/Citation"
         type: array
       contributors:
         description: List of article contributors
@@ -1035,7 +1046,7 @@ definitions:
         description: The DOI of the article
         type: string
       downloadUrl:
-        description: 'The download PDF URL which is displayed on our /display/[ArticleID] page'
+        description: The download PDF URL which is displayed on our /display/[ArticleID] page
         type: string
       fulltext:
         description: Article full text
@@ -1059,10 +1070,10 @@ definitions:
       journals:
         description: List of journals this article belongs to
         items:
-          $ref: '#/definitions/ArticleJournal'
+          $ref: "#/definitions/ArticleJournal"
         type: array
       language:
-        $ref: '#/definitions/Language'
+        $ref: "#/definitions/Language"
         description: Language of the article
       oai:
         description: The OAI of the article
@@ -1071,25 +1082,25 @@ definitions:
         description: Publisher of the article
         type: string
       rawRecordXml:
-        $ref: '#/definitions/RawRecordXml'
+        $ref: "#/definitions/RawRecordXml"
         description: Raw XML metadata
       relations:
-        description: 'URLs of relating articles, etc.'
+        description: URLs of relating articles, etc.
         items:
           type: string
         type: array
       repositories:
         description: List of repositories this article belongs to
         items:
-          $ref: '#/definitions/Repository'
+          $ref: "#/definitions/Repository"
         type: array
       repositoryDocument:
-        $ref: '#/definitions/RepositoryDocument'
+        $ref: "#/definitions/RepositoryDocument"
         description: Information of CORE harvesting
       similarities:
         description: Similar articles
         items:
-          $ref: '#/definitions/Similar'
+          $ref: "#/definitions/Similar"
         type: array
       subjects:
         description: Article subjects
@@ -1105,7 +1116,7 @@ definitions:
           type: string
         type: array
       types:
-        description: 'Types, e.g. conference paper, journal paper, etc.'
+        description: Types, e.g. conference paper, journal paper, etc.
         items:
           type: string
         type: array
@@ -1120,7 +1131,7 @@ definitions:
       data:
         description: List of article versions
         items:
-          $ref: '#/definitions/RawRecordXml'
+          $ref: "#/definitions/RawRecordXml"
         type: array
       status:
         description: Operation status
@@ -1147,7 +1158,7 @@ definitions:
   ArticleResponse:
     properties:
       data:
-        $ref: '#/definitions/Article'
+        $ref: "#/definitions/Article"
         description: The fetched article
       status:
         description: Operation status
@@ -1167,7 +1178,7 @@ definitions:
       data:
         description: Search results
         items:
-          $ref: '#/definitions/Article'
+          $ref: "#/definitions/Article"
         type: array
       status:
         description: Operation status
@@ -1191,7 +1202,7 @@ definitions:
       data:
         description: Similar articles
         items:
-          $ref: '#/definitions/Article'
+          $ref: "#/definitions/Article"
         type: array
       status:
         description: Operation status
@@ -1226,7 +1237,7 @@ definitions:
   Journal:
     properties:
       identifiers:
-        description: 'List of journal identifiers (e.g. URL, OAI or ISSN). The type is prepended to the identifier string (e.g. ''issn:2296-0597'')'
+        description: List of journal identifiers (e.g. URL, OAI or ISSN). The type is prepended to the identifier string (e.g. 'issn:2296-0597')
         items:
           type: string
         type: array
@@ -1252,7 +1263,7 @@ definitions:
   JournalResponse:
     properties:
       data:
-        $ref: '#/definitions/Journal'
+        $ref: "#/definitions/Journal"
         description: The fetched journal
       status:
         description: Operation status
@@ -1270,7 +1281,7 @@ definitions:
       data:
         description: Search results
         items:
-          $ref: '#/definitions/Journal'
+          $ref: "#/definitions/Journal"
         type: array
       status:
         description: Operation status
@@ -1290,14 +1301,14 @@ definitions:
   Language:
     properties:
       deletedStatus:
-        description: 'The deleted status of the document: 0 for allowed, 1 for deleted, 2 for disabled'
+        description: "The deleted status of the document: 0 for allowed, 1 for deleted, 2 for disabled"
         type: integer
       depositedDate:
         description: The date the item was deposited in the Data Provider (repository/Journal)
         format: date
         type: string
       indexed:
-        description: 'The index status of the document: 0 for not indexed, 1 for indexed'
+        description: "The index status of the document: 0 for not indexed, 1 for indexed"
         type: integer
       metadataUpdated:
         description: The last date metadata of this article were updated
@@ -1310,13 +1321,13 @@ definitions:
         description: The size of pdf in bytes
         type: integer
       pdfStatus:
-        description: 'The pdf status flag of article: 0 no pdf, 1 pdf exists'
+        description: "The pdf status flag of article: 0 no pdf, 1 pdf exists"
         type: integer
       tdmOnly:
-        description: 'The tdmOnly flag of the article: 0 normal, 1 tdm only'
+        description: "The tdmOnly flag of the article: 0 normal, 1 tdm only"
         type: boolean
       textStatus:
-        description: 'The text status flag of article: 0 does not exist, 1 exists'
+        description: "The text status flag of article: 0 does not exist, 1 exists"
         type: integer
       timestamp:
         description: The date of article as given by the repository
@@ -1359,10 +1370,10 @@ definitions:
         description: ID of the repository in Open DOAR
         type: integer
       repositoryLocation:
-        $ref: '#/definitions/RepositoryLocation'
+        $ref: "#/definitions/RepositoryLocation"
         description: Location of the repository
       repositoryStats:
-        $ref: '#/definitions/RepositoryStats'
+        $ref: "#/definitions/RepositoryStats"
         description: Statistics about the repository
       uri:
         description: Repository URI
@@ -1395,7 +1406,7 @@ definitions:
   RepositoryResponse:
     properties:
       data:
-        $ref: '#/definitions/Repository'
+        $ref: "#/definitions/Repository"
         description: The fetched repository
       status:
         description: Operation status
@@ -1414,7 +1425,7 @@ definitions:
       data:
         description: Search results
         items:
-          $ref: '#/definitions/Repository'
+          $ref: "#/definitions/Repository"
         type: array
       status:
         description: Operation status
@@ -1463,7 +1474,7 @@ definitions:
       data:
         description: List of relevant resources
         items:
-          $ref: '#/definitions/Resource'
+          $ref: "#/definitions/Resource"
         type: array
       status:
         description: Operation status
@@ -1486,13 +1497,13 @@ definitions:
     properties:
       page:
         default: 1
-        description: 'Which page of the search results should be retrieved. Can be any number from 1 to 100, default is 1 (first page)'
+        description: Which page of the search results should be retrieved. Can be any number from 1 to 100, default is 1 (first page)
         maximum: 100
         minimum: 1
         type: integer
       pageSize:
         default: 10
-        description: 'The number of results to return per page. Can be any number from 10 to 100, default is 10'
+        description: The number of results to return per page. Can be any number from 10 to 100, default is 10
         maximum: 100
         minimum: 10
         type: integer

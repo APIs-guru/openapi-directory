@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: spectrocoin.com
@@ -14,12 +14,13 @@ info:
     - financial
     - payment
   x-logo:
-    url: 'https://twitter.com/spectrocoin/profile_image?size=original'
+    url: https://twitter.com/spectrocoin/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://spectrocoin.com/api-docs/merchant/1/'
-      version: '2.0'
+      url: https://spectrocoin.com/api-docs/merchant/1/
+      version: "2.0"
   x-providerName: spectrocoin.com
+  x-preferred: true
 consumes:
   - application/x-www-form-urlencoded
 produces:
@@ -29,7 +30,7 @@ tags:
 paths:
   /api/createOrder:
     post:
-      description: ''
+      description: ""
       operationId: createOrder
       parameters:
         - description: Request to create order
@@ -37,12 +38,12 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Order_request_class_used_to_provide_order_specific_information'
+            $ref: "#/definitions/Order_request_class_used_to_provide_order_specific_information"
       responses:
-        '200':
+        "200":
           description: successful operation
           schema:
-            $ref: '#/definitions/Order_information_class'
+            $ref: "#/definitions/Order_information_class"
       summary: Create merchant order
       tags:
         - createOrder

@@ -1,22 +1,23 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: firefox.settings.services.mozilla.com
 basePath: /v1
 info:
   title: Remote Settings
-  version: '1.22'
+  version: "1.22"
   x-apisguru-categories:
     - cloud
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://cloud.githubusercontent.com/assets/21603/24036792/23286ed2-0af3-11e7-9353-7a772636dee1.png'
+    backgroundColor: "#FFFFFF"
+    url: https://cloud.githubusercontent.com/assets/21603/24036792/23286ed2-0af3-11e7-9353-7a772636dee1.png
   x-origin:
     - format: swagger
-      url: 'https://firefox.settings.services.mozilla.com/v1/__api__'
-      version: '2.0'
+      url: https://firefox.settings.services.mozilla.com/v1/__api__
+      version: "2.0"
   x-providerName: mozilla.com
   x-serviceName: kinto
+  x-preferred: true
 produces:
   - application/json
 securityDefinitions: {}
@@ -35,7 +36,7 @@ paths:
     get:
       operationId: server_info
       responses:
-        '200':
+        "200":
           description: Return information about the running Instance.
           schema:
             additionalProperties: {}
@@ -48,7 +49,7 @@ paths:
     get:
       operationId: get_openapi_spec
       responses:
-        '200':
+        "200":
           description: Return an OpenAPI description of the running instance.
           schema:
             additionalProperties: {}
@@ -61,13 +62,13 @@ paths:
     get:
       operationId: __heartbeat__
       responses:
-        '200':
+        "200":
           description: Server is working properly.
           schema:
             additionalProperties: {}
             title: SchemaNode
             type: object
-        '503':
+        "503":
           description: One or more subsystems failing.
           schema:
             additionalProperties: {}
@@ -80,7 +81,7 @@ paths:
     get:
       operationId: __lbheartbeat__
       responses:
-        '200':
+        "200":
           description: Returned if server is reachable.
           schema:
             title: SchemaNode
@@ -89,7 +90,7 @@ paths:
       tags:
         - Utilities
   /__user_data__: {}
-  '/__user_data__/{principal}':
+  "/__user_data__/{principal}":
     parameters:
       - in: path
         name: principal
@@ -99,7 +100,7 @@ paths:
     get:
       operationId: __version__
       responses:
-        '200':
+        "200":
           description: Return the running Instance version information.
           schema:
             additionalProperties: {}
@@ -182,7 +183,7 @@ paths:
             title: BatchPayloadSchema
             type: object
       responses:
-        '200':
+        "200":
           description: Return a list of operation responses.
           schema:
             properties:
@@ -213,7 +214,7 @@ paths:
               - responses
             title: BatchResponseBodySchema
             type: object
-        '400':
+        "400":
           description: The request was badly formatted.
           schema:
             properties:
@@ -324,20 +325,20 @@ paths:
           type: array
         - in: header
           name: If-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
         - in: header
           name: If-None-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Return a list of matching objects.
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
@@ -348,28 +349,28 @@ paths:
                   additionalProperties: {}
                   default: {}
                   properties:
-                    'collection:schema':
+                    collection:schema:
                       additionalProperties: {}
                       type: object
-                    'group:schema':
+                    group:schema:
                       additionalProperties: {}
                       type: object
-                    'record:schema':
+                    record:schema:
                       additionalProperties: {}
                       type: object
                   type: object
                 type: array
             title: Schema
             type: object
-        '304':
+        "304":
           description: Reponse has not changed since value in If-None-Match header
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
-        '400':
+        "400":
           description: The request is invalid.
           schema:
             properties:
@@ -395,7 +396,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '401':
+        "401":
           description: The request is missing authentication headers.
           schema:
             properties:
@@ -421,8 +422,8 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '403':
-          description: 'The user is not allowed to perform the operation, or the resource is not accessible.'
+        "403":
+          description: The user is not allowed to perform the operation, or the resource is not accessible.
           schema:
             properties:
               code:
@@ -447,7 +448,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '406':
+        "406":
           description: The client doesn't accept supported responses Content-Type.
           schema:
             properties:
@@ -473,7 +474,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '412':
+        "412":
           description: Object was changed or deleted since value in `If-Match` header.
           schema:
             properties:
@@ -584,20 +585,20 @@ paths:
           type: array
         - in: header
           name: If-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
         - in: header
           name: If-None-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Return a list of matching objects.
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
@@ -623,15 +624,15 @@ paths:
                 type: array
             title: Schema
             type: object
-        '304':
+        "304":
           description: Reponse has not changed since value in If-None-Match header
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
-        '400':
+        "400":
           description: The request is invalid.
           schema:
             properties:
@@ -657,7 +658,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '401':
+        "401":
           description: The request is missing authentication headers.
           schema:
             properties:
@@ -683,8 +684,8 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '403':
-          description: 'The user is not allowed to perform the operation, or the resource is not accessible.'
+        "403":
+          description: The user is not allowed to perform the operation, or the resource is not accessible.
           schema:
             properties:
               code:
@@ -709,7 +710,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '406':
+        "406":
           description: The client doesn't accept supported responses Content-Type.
           schema:
             properties:
@@ -735,7 +736,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '412':
+        "412":
           description: Object was changed or deleted since value in `If-Match` header.
           schema:
             properties:
@@ -790,7 +791,7 @@ paths:
       security: []
       tags:
         - Changess
-  '/buckets/{bucket_id}/collections':
+  "/buckets/{bucket_id}/collections":
     get:
       operationId: get_collections
       parameters:
@@ -846,20 +847,20 @@ paths:
           type: array
         - in: header
           name: If-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
         - in: header
           name: If-None-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Return a list of matching objects.
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
@@ -881,15 +882,15 @@ paths:
                 type: array
             title: Schema
             type: object
-        '304':
+        "304":
           description: Reponse has not changed since value in If-None-Match header
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
-        '400':
+        "400":
           description: The request is invalid.
           schema:
             properties:
@@ -915,7 +916,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '401':
+        "401":
           description: The request is missing authentication headers.
           schema:
             properties:
@@ -941,8 +942,8 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '403':
-          description: 'The user is not allowed to perform the operation, or the resource is not accessible.'
+        "403":
+          description: The user is not allowed to perform the operation, or the resource is not accessible.
           schema:
             properties:
               code:
@@ -967,7 +968,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '406':
+        "406":
           description: The client doesn't accept supported responses Content-Type.
           schema:
             properties:
@@ -993,7 +994,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '412':
+        "412":
           description: Object was changed or deleted since value in `If-Match` header.
           schema:
             properties:
@@ -1053,7 +1054,7 @@ paths:
         name: bucket_id
         required: true
         type: string
-  '/buckets/{bucket_id}/collections/{collection_id}/records':
+  "/buckets/{bucket_id}/collections/{collection_id}/records":
     get:
       operationId: get_records
       parameters:
@@ -1109,20 +1110,20 @@ paths:
           type: array
         - in: header
           name: If-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
         - in: header
           name: If-None-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Return a list of matching objects.
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
@@ -1136,15 +1137,15 @@ paths:
                 type: array
             title: Schema
             type: object
-        '304':
+        "304":
           description: Reponse has not changed since value in If-None-Match header
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
-        '400':
+        "400":
           description: The request is invalid.
           schema:
             properties:
@@ -1170,7 +1171,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '401':
+        "401":
           description: The request is missing authentication headers.
           schema:
             properties:
@@ -1196,8 +1197,8 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '403':
-          description: 'The user is not allowed to perform the operation, or the resource is not accessible.'
+        "403":
+          description: The user is not allowed to perform the operation, or the resource is not accessible.
           schema:
             properties:
               code:
@@ -1222,7 +1223,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '406':
+        "406":
           description: The client doesn't accept supported responses Content-Type.
           schema:
             properties:
@@ -1248,7 +1249,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '412':
+        "412":
           description: Object was changed or deleted since value in `If-Match` header.
           schema:
             properties:
@@ -1312,7 +1313,7 @@ paths:
         name: collection_id
         required: true
         type: string
-  '/buckets/{bucket_id}/collections/{collection_id}/records/{id}':
+  "/buckets/{bucket_id}/collections/{collection_id}/records/{id}":
     get:
       operationId: get_record
       parameters:
@@ -1324,20 +1325,20 @@ paths:
           type: array
         - in: header
           name: If-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
         - in: header
           name: If-None-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Return the target object.
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
@@ -1363,15 +1364,15 @@ paths:
                 type: object
             title: ObjectSchema
             type: object
-        '304':
+        "304":
           description: Reponse has not changed since value in If-None-Match header
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
-        '400':
+        "400":
           description: The request is invalid.
           schema:
             properties:
@@ -1397,7 +1398,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '401':
+        "401":
           description: The request is missing authentication headers.
           schema:
             properties:
@@ -1423,8 +1424,8 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '403':
-          description: 'The user is not allowed to perform the operation, or the resource is not accessible.'
+        "403":
+          description: The user is not allowed to perform the operation, or the resource is not accessible.
           schema:
             properties:
               code:
@@ -1449,7 +1450,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '404':
+        "404":
           description: The object does not exist or was deleted.
           schema:
             properties:
@@ -1475,7 +1476,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '406':
+        "406":
           description: The client doesn't accept supported responses Content-Type.
           schema:
             properties:
@@ -1501,7 +1502,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '412':
+        "412":
           description: Object was changed or deleted since value in `If-Match` header.
           schema:
             properties:
@@ -1569,7 +1570,7 @@ paths:
         name: id
         required: true
         type: string
-  '/buckets/{bucket_id}/collections/{collection_id}/records/{id}/attachment':
+  "/buckets/{bucket_id}/collections/{collection_id}/records/{id}/attachment":
     delete:
       operationId: delete_attachment
       responses:
@@ -1599,7 +1600,7 @@ paths:
       security: []
       tags:
         - Attachment
-  '/buckets/{bucket_id}/collections/{id}':
+  "/buckets/{bucket_id}/collections/{id}":
     get:
       operationId: get_collection
       parameters:
@@ -1611,20 +1612,20 @@ paths:
           type: array
         - in: header
           name: If-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
         - in: header
           name: If-None-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Return the target object.
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
@@ -1649,10 +1650,10 @@ paths:
                       type: string
                     title: Read
                     type: array
-                  'record:create':
+                  record:create:
                     items:
                       type: string
-                    title: 'Record:Create'
+                    title: Record:Create
                     type: array
                   write:
                     items:
@@ -1663,15 +1664,15 @@ paths:
                 type: object
             title: ObjectSchema
             type: object
-        '304':
+        "304":
           description: Reponse has not changed since value in If-None-Match header
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
-        '400':
+        "400":
           description: The request is invalid.
           schema:
             properties:
@@ -1697,7 +1698,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '401':
+        "401":
           description: The request is missing authentication headers.
           schema:
             properties:
@@ -1723,8 +1724,8 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '403':
-          description: 'The user is not allowed to perform the operation, or the resource is not accessible.'
+        "403":
+          description: The user is not allowed to perform the operation, or the resource is not accessible.
           schema:
             properties:
               code:
@@ -1749,7 +1750,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '404':
+        "404":
           description: The object does not exist or was deleted.
           schema:
             properties:
@@ -1775,7 +1776,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '406':
+        "406":
           description: The client doesn't accept supported responses Content-Type.
           schema:
             properties:
@@ -1801,7 +1802,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '412':
+        "412":
           description: Object was changed or deleted since value in `If-Match` header.
           schema:
             properties:
@@ -1865,7 +1866,7 @@ paths:
         name: id
         required: true
         type: string
-  '/buckets/{bucket_id}/groups':
+  "/buckets/{bucket_id}/groups":
     get:
       operationId: get_groups
       parameters:
@@ -1921,20 +1922,20 @@ paths:
           type: array
         - in: header
           name: If-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
         - in: header
           name: If-None-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Return a list of matching objects.
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
@@ -1954,15 +1955,15 @@ paths:
                 type: array
             title: Schema
             type: object
-        '304':
+        "304":
           description: Reponse has not changed since value in If-None-Match header
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
-        '400':
+        "400":
           description: The request is invalid.
           schema:
             properties:
@@ -1988,7 +1989,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '401':
+        "401":
           description: The request is missing authentication headers.
           schema:
             properties:
@@ -2014,8 +2015,8 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '403':
-          description: 'The user is not allowed to perform the operation, or the resource is not accessible.'
+        "403":
+          description: The user is not allowed to perform the operation, or the resource is not accessible.
           schema:
             properties:
               code:
@@ -2040,7 +2041,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '406':
+        "406":
           description: The client doesn't accept supported responses Content-Type.
           schema:
             properties:
@@ -2066,7 +2067,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '412':
+        "412":
           description: Object was changed or deleted since value in `If-Match` header.
           schema:
             properties:
@@ -2126,7 +2127,7 @@ paths:
         name: bucket_id
         required: true
         type: string
-  '/buckets/{bucket_id}/groups/{id}':
+  "/buckets/{bucket_id}/groups/{id}":
     get:
       operationId: get_group
       parameters:
@@ -2138,20 +2139,20 @@ paths:
           type: array
         - in: header
           name: If-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
         - in: header
           name: If-None-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Return the target object.
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
@@ -2183,15 +2184,15 @@ paths:
                 type: object
             title: ObjectSchema
             type: object
-        '304':
+        "304":
           description: Reponse has not changed since value in If-None-Match header
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
-        '400':
+        "400":
           description: The request is invalid.
           schema:
             properties:
@@ -2217,7 +2218,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '401':
+        "401":
           description: The request is missing authentication headers.
           schema:
             properties:
@@ -2243,8 +2244,8 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '403':
-          description: 'The user is not allowed to perform the operation, or the resource is not accessible.'
+        "403":
+          description: The user is not allowed to perform the operation, or the resource is not accessible.
           schema:
             properties:
               code:
@@ -2269,7 +2270,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '404':
+        "404":
           description: The object does not exist or was deleted.
           schema:
             properties:
@@ -2295,7 +2296,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '406':
+        "406":
           description: The client doesn't accept supported responses Content-Type.
           schema:
             properties:
@@ -2321,7 +2322,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '412':
+        "412":
           description: Object was changed or deleted since value in `If-Match` header.
           schema:
             properties:
@@ -2385,7 +2386,7 @@ paths:
         name: id
         required: true
         type: string
-  '/buckets/{id}':
+  "/buckets/{id}":
     get:
       operationId: get_bucket
       parameters:
@@ -2397,20 +2398,20 @@ paths:
           type: array
         - in: header
           name: If-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
         - in: header
           name: If-None-Match
-          pattern: '^"([0-9]+?)"$|\*'
+          pattern: ^"([0-9]+?)"$|\*
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: Return the target object.
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
@@ -2420,27 +2421,27 @@ paths:
                 additionalProperties: {}
                 default: {}
                 properties:
-                  'collection:schema':
+                  collection:schema:
                     additionalProperties: {}
                     type: object
-                  'group:schema':
+                  group:schema:
                     additionalProperties: {}
                     type: object
-                  'record:schema':
+                  record:schema:
                     additionalProperties: {}
                     type: object
                 type: object
               permissions:
                 properties:
-                  'collection:create':
+                  collection:create:
                     items:
                       type: string
-                    title: 'Collection:Create'
+                    title: Collection:Create
                     type: array
-                  'group:create':
+                  group:create:
                     items:
                       type: string
-                    title: 'Group:Create'
+                    title: Group:Create
                     type: array
                   read:
                     items:
@@ -2456,15 +2457,15 @@ paths:
                 type: object
             title: ObjectSchema
             type: object
-        '304':
+        "304":
           description: Reponse has not changed since value in If-None-Match header
           headers:
             Etag:
-              pattern: '^"([0-9]+?)"$|\*'
+              pattern: ^"([0-9]+?)"$|\*
               type: string
             Last-Modified:
               type: string
-        '400':
+        "400":
           description: The request is invalid.
           schema:
             properties:
@@ -2490,7 +2491,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '401':
+        "401":
           description: The request is missing authentication headers.
           schema:
             properties:
@@ -2516,8 +2517,8 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '403':
-          description: 'The user is not allowed to perform the operation, or the resource is not accessible.'
+        "403":
+          description: The user is not allowed to perform the operation, or the resource is not accessible.
           schema:
             properties:
               code:
@@ -2542,7 +2543,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '404':
+        "404":
           description: The object does not exist or was deleted.
           schema:
             properties:
@@ -2568,7 +2569,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '406':
+        "406":
           description: The client doesn't accept supported responses Content-Type.
           schema:
             properties:
@@ -2594,7 +2595,7 @@ paths:
               - error
             title: ErrorSchema
             type: object
-        '412':
+        "412":
           description: Object was changed or deleted since value in `If-Match` header.
           schema:
             properties:
@@ -2658,7 +2659,7 @@ paths:
     get:
       operationId: contribute
       responses:
-        '200':
+        "200":
           description: Return open source contributing information.
           schema:
             additionalProperties: {}
@@ -2667,16 +2668,16 @@ paths:
       security: []
       tags:
         - Utilities
-  '/{prefix}/{api_ver:\d+}/{application_guid}/{application_ver}/{metrics:.*}':
+  "/{prefix}/{api_ver:\\d+}/{application_guid}/{application_ver}/{metrics:.*}":
     get:
       operationId: get_blocklist
       parameters:
         - in: path
-          name: 'api_ver:\d+'
+          name: api_ver:\d+
           required: true
           type: string
         - in: path
-          name: 'metrics:.*'
+          name: metrics:.*
           required: true
           type: string
       responses:

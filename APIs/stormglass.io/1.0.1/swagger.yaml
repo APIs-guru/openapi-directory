@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.stormglass.io
@@ -7,19 +7,20 @@ info:
   contact:
     email: support@stormglass.io
   description: Global marine weather data from multiple sources in one single API with hourly resolution. Get your API key by visiting the Storm Glass web site.
-  termsOfService: 'https://stormglass.io'
+  termsOfService: https://stormglass.io
   title: Storm Glass Marine Weather
   version: 1.0.1
   x-apisguru-categories:
     - location
   x-logo:
-    backgroundColor: '#FFFFFF'
-    url: 'https://stormglass.io/wp-content/uploads/2019/05/Stormglass-Blue-circled-5.svg'
+    backgroundColor: "#FFFFFF"
+    url: https://stormglass.io/wp-content/uploads/2019/05/Stormglass-Blue-circled-5.svg
   x-origin:
     - format: swagger
-      url: 'https://www.stormglass.io/specifications/api-specifications.yaml'
-      version: '2.0'
+      url: https://www.stormglass.io/specifications/api-specifications.yaml
+      version: "2.0"
   x-providerName: stormglass.io
+  x-preferred: true
 produces:
   - application/json
 securityDefinitions:
@@ -31,12 +32,12 @@ tags:
   - description: Get forecast for coordinates
     externalDocs:
       description: Find out more
-      url: 'https://stormglass.io'
+      url: https://stormglass.io
     name: forecast
 paths:
   /forecast:
     get:
-      description: 'Get forecast info for the given coordinates. For every hour and property, you will get a list of weather sources and their values.'
+      description: Get forecast info for the given coordinates. For every hour and property, you will get a list of weather sources and their values.
       operationId: getForecast
       parameters:
         - description: The latitude for a location. Valid input is a number between -90 and 90.
@@ -50,14 +51,14 @@ paths:
           required: true
           type: number
       responses:
-        '200':
+        "200":
           description: Successful request
           schema:
-            $ref: '#/definitions/Forecast'
+            $ref: "#/definitions/Forecast"
             type: object
-        '403':
+        "403":
           description: Unauthorized or API key is invalid
-        '422':
+        "422":
           description: Invalid or missing coordinates
       security:
         - authenticationToken: []
@@ -80,7 +81,7 @@ definitions:
                     example: smhi
                     type: string
                   value:
-                    example: '-2.6'
+                    example: "-2.6"
                     type: string
                 type: object
               type: array
@@ -92,7 +93,7 @@ definitions:
                     example: nooa
                     type: string
                   value:
-                    example: '164.35'
+                    example: "164.35"
                     type: string
                 type: object
               type: array
@@ -104,7 +105,7 @@ definitions:
                     example: nooa
                     type: string
                   value:
-                    example: '2.94'
+                    example: "2.94"
                     type: string
                 type: object
               type: array
@@ -116,13 +117,13 @@ definitions:
                     example: nooa
                     type: string
                   value:
-                    example: '15.88'
+                    example: "15.88"
                     type: string
                 type: object
               type: array
             time:
               description: Timestamp in utc for the hour represented
-              example: '2018-01-19T17:00:00+00:00'
+              example: 2018-01-19T17:00:00+00:00
               type: string
             waterTemperature:
               items:
@@ -132,7 +133,7 @@ definitions:
                     example: fcoo
                     type: string
                   value:
-                    example: '9'
+                    example: "9"
                     type: string
                 type: object
               type: array
@@ -144,7 +145,7 @@ definitions:
                     example: fcoo
                     type: string
                   value:
-                    example: '121.35698599493828'
+                    example: "121.35698599493828"
                     type: number
                 type: object
               type: array
@@ -156,7 +157,7 @@ definitions:
                     example: fmi
                     type: string
                   value:
-                    example: '0.5969999991357327'
+                    example: "0.5969999991357327"
                     type: string
                 type: object
               type: array
@@ -167,7 +168,7 @@ definitions:
                     example: fcoo
                     type: string
                   value:
-                    example: '3.63850457084894'
+                    example: "3.63850457084894"
                     type: string
                 type: object
               type: array
@@ -179,7 +180,7 @@ definitions:
                     example: smhi
                     type: string
                   value:
-                    example: '36.0'
+                    example: "36.0"
                     type: string
                 type: object
               type: array
@@ -191,7 +192,7 @@ definitions:
                     example: smhi
                     type: string
                   value:
-                    example: '36.0'
+                    example: "36.0"
                     type: string
                 type: object
               type: array

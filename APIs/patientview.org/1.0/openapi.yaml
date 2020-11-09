@@ -1,21 +1,22 @@
 openapi: 3.0.0
 servers:
-  - url: 'https://www.patientview.org/'
+  - url: https://www.patientview.org/
 info:
   description: The recommended REST API endpoints to be used when integrating with PatientView
-  termsOfService: 'https://www.patientview.org/#/terms'
+  termsOfService: https://www.patientview.org/#/terms
   title: PatientView
-  version: '1.0'
+  version: "1.0"
   x-logo:
-    url: 'https://www.patientview.org/images/pv-logo.png'
+    url: https://www.patientview.org/images/pv-logo.png
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.31
       format: swagger
-      url: 'https://www.patientview.org/api/api-docs'
-      version: '1.2'
+      url: https://www.patientview.org/api/api-docs
+      version: "1.2"
   x-providerName: patientview.org
+  x-preferred: true
 tags:
   - description: Auth Controller
     name: auth-controller
@@ -31,33 +32,33 @@ paths:
   /auth/login:
     post:
       deprecated: false
-      description: 'Authenticate using username and password, returns token, which must be added to X-Auth-Token in header of all future requests'
+      description: Authenticate using username and password, returns token, which must be added to X-Auth-Token in header of all future requests
       operationId: logIn
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Credentials'
+              $ref: "#/components/schemas/Credentials"
         description: credentials
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/UserToken'
+                $ref: "#/components/schemas/UserToken"
           description: Description was not specified
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Log In
       tags:
         - auth-controller
-  '/auth/logout/{token}':
+  "/auth/logout/{token}":
     delete:
       deprecated: false
       description: Log Out
@@ -70,21 +71,21 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '204':
+        "204":
           description: No Content
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
       summary: Log Out
       tags:
         - auth-controller
-  '/auth/{token}/basicuserinformation':
+  "/auth/{token}/basicuserinformation":
     get:
       deprecated: false
-      description: 'Once logged in and have a token, get basic user information including group role membership'
+      description: Once logged in and have a token, get basic user information including group role membership
       operationId: getBasicUserInformation
       parameters:
         - description: token
@@ -94,25 +95,25 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/User'
+                $ref: "#/components/schemas/User"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get Basic User Information
       tags:
         - auth-controller
-  '/patient/{userId}/basic':
+  "/patient/{userId}/basic":
     get:
       deprecated: false
-      description: 'Given a User ID, get basic patient information for a user from clinical data stored in FHIR'
+      description: Given a User ID, get basic patient information for a user from clinical data stored in FHIR
       operationId: getBasicPatientDetails
       parameters:
         - description: userId
@@ -123,20 +124,20 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
                 items:
-                  $ref: '#/components/schemas/Patient'
+                  $ref: "#/components/schemas/Patient"
                 type: array
                 uniqueItems: false
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get Basic Patient Information
       tags:
@@ -147,20 +148,20 @@ paths:
       description: getPatientManagementDiagnoses
       operationId: getPatientManagementDiagnoses
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/Code'
+                  $ref: "#/components/schemas/Code"
                 type: array
                 uniqueItems: false
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: getPatientManagementDiagnoses
       tags:
@@ -171,20 +172,20 @@ paths:
       description: getPatientManagementLookupTypes
       operationId: getPatientManagementLookupTypes
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/LookupType'
+                  $ref: "#/components/schemas/LookupType"
                 type: array
                 uniqueItems: false
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: getPatientManagementLookupTypes
       tags:
@@ -195,22 +196,22 @@ paths:
       description: validatePatientManagement
       operationId: validatePatientManagement
       requestBody:
-        $ref: '#/components/requestBodies/PatientManagement'
+        $ref: "#/components/requestBodies/PatientManagement"
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: validatePatientManagement
       tags:
         - patient-management-controller
-  '/patientmanagement/{userId}/group/{groupId}/identifier/{identifierId}':
+  "/patientmanagement/{userId}/group/{groupId}/identifier/{identifierId}":
     get:
       deprecated: false
       description: getPatientManagement
@@ -238,17 +239,17 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PatientManagement'
+                $ref: "#/components/schemas/PatientManagement"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: getPatientManagement
       tags:
@@ -283,23 +284,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatientManagement'
+              $ref: "#/components/schemas/PatientManagement"
         description: patientManagement
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: savePatientManagement
       tags:
         - patient-management-controller
-  '/patientmanagement/{userId}/group/{groupId}/identifier/{identifierId}/surgeries':
+  "/patientmanagement/{userId}/group/{groupId}/identifier/{identifierId}/surgeries":
     post:
       deprecated: false
       description: savePatientManagementSurgeries
@@ -330,23 +331,23 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PatientManagement'
+              $ref: "#/components/schemas/PatientManagement"
         description: patientManagement
       responses:
-        '200':
+        "200":
           description: Description was not specified
-        '201':
+        "201":
           description: Created
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: savePatientManagementSurgeries
       tags:
         - patient-management-controller
-  '/user/{userId}/availableobservationheadings':
+  "/user/{userId}/availableobservationheadings":
     get:
       deprecated: false
       description: Given a User ID retrieve a list of available observation types for that user (where they have observation data).
@@ -360,28 +361,28 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ObservationHeading'
+                  $ref: "#/components/schemas/ObservationHeading"
                 type: array
                 uniqueItems: false
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get Available Observations Types For a User
       tags:
         - observation-heading-controller
-  '/user/{userId}/observations':
+  "/user/{userId}/observations":
     get:
       deprecated: false
-      description: 'Given a User ID and search parameters, retrieve a page of observations.'
+      description: Given a User ID and search parameters, retrieve a page of observations.
       operationId: getObservationsByCodes
       parameters:
         - description: userId
@@ -421,25 +422,25 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
-                $ref: '#/components/schemas/FhirObservationPage'
+                $ref: "#/components/schemas/FhirObservationPage"
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get Observations of Multiple Types For a User
       tags:
         - observation-controller
-  '/user/{userId}/observations/{code}':
+  "/user/{userId}/observations/{code}":
     get:
       deprecated: false
-      description: 'Given a User ID and observation code, retrieve all observations.'
+      description: Given a User ID and observation code, retrieve all observations.
       operationId: getObservationsByCode
       parameters:
         - description: userId
@@ -456,28 +457,28 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
                 items:
-                  $ref: '#/components/schemas/FhirObservation'
+                  $ref: "#/components/schemas/FhirObservation"
                 type: array
                 uniqueItems: false
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get Observations of a Certain Type For a User
       tags:
         - observation-controller
-  '/user/{userId}/observations/{code}/patiententered':
+  "/user/{userId}/observations/{code}/patiententered":
     get:
       deprecated: false
-      description: 'Given a User ID and observation code, retrieve patient entered observations.'
+      description: Given a User ID and observation code, retrieve patient entered observations.
       operationId: getPatientEnteredObservationsByCode
       parameters:
         - description: userId
@@ -494,25 +495,25 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           content:
-            '*/*':
+            "*/*":
               schema:
                 items:
-                  $ref: '#/components/schemas/FhirObservation'
+                  $ref: "#/components/schemas/FhirObservation"
                 type: array
                 uniqueItems: false
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get patient entered Observations of a Certain Type For a User
       tags:
         - observation-controller
-  '/user/{userId}/patiententeredobservationheadings':
+  "/user/{userId}/patiententeredobservationheadings":
     get:
       deprecated: false
       description: Given a User ID retrieve a list of available observation types for that user (where they have patient entered observation data).
@@ -526,20 +527,20 @@ paths:
             format: int64
             type: integer
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ObservationHeading'
+                  $ref: "#/components/schemas/ObservationHeading"
                 type: array
                 uniqueItems: false
           description: OK
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '404':
+        "404":
           description: Not Found
       summary: Get Available Patient Entered Observations Types For a User
       tags:
@@ -550,7 +551,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/PatientManagement'
+            $ref: "#/components/schemas/PatientManagement"
       description: patientManagement
   schemas:
     ApiKey:
@@ -568,7 +569,7 @@ components:
         code:
           type: string
         groupType:
-          $ref: '#/components/schemas/Lookup'
+          $ref: "#/components/schemas/Lookup"
         id:
           format: int64
           type: integer
@@ -609,11 +610,11 @@ components:
           type: string
         codeCategories:
           items:
-            $ref: '#/components/schemas/CodeCategory'
+            $ref: "#/components/schemas/CodeCategory"
           type: array
           uniqueItems: true
         codeType:
-          $ref: '#/components/schemas/Lookup'
+          $ref: "#/components/schemas/Lookup"
         created:
           format: date-time
           type: string
@@ -624,7 +625,7 @@ components:
           type: integer
         externalStandards:
           items:
-            $ref: '#/components/schemas/CodeExternalStandard'
+            $ref: "#/components/schemas/CodeExternalStandard"
           type: array
           uniqueItems: true
         fullDescription:
@@ -639,7 +640,7 @@ components:
           type: string
         links:
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           type: array
           uniqueItems: true
         patientFriendlyName:
@@ -652,12 +653,12 @@ components:
             - NHS_CHOICES
           type: string
         standardType:
-          $ref: '#/components/schemas/Lookup'
+          $ref: "#/components/schemas/Lookup"
       type: object
     CodeCategory:
       properties:
         category:
-          $ref: '#/components/schemas/Category'
+          $ref: "#/components/schemas/Category"
         id:
           format: int64
           type: integer
@@ -667,7 +668,7 @@ components:
         codeString:
           type: string
         externalStandard:
-          $ref: '#/components/schemas/ExternalStandard'
+          $ref: "#/components/schemas/ExternalStandard"
         id:
           format: int64
           type: integer
@@ -675,7 +676,7 @@ components:
     ContactPoint:
       properties:
         contactPointType:
-          $ref: '#/components/schemas/ContactPointType'
+          $ref: "#/components/schemas/ContactPointType"
         content:
           type: string
         created:
@@ -696,7 +697,7 @@ components:
           format: int64
           type: integer
         lookupType:
-          $ref: '#/components/schemas/LookupType'
+          $ref: "#/components/schemas/LookupType"
         value:
           enum:
             - UNIT_WEB_ADDRESS
@@ -724,14 +725,14 @@ components:
       properties:
         key:
           items:
-            $ref: '#/components/schemas/Entry_string_List_FhirObservation_'
+            $ref: "#/components/schemas/Entry_string_List_FhirObservation_"
           type: array
       type: object
     Entry_string_List_FhirObservation_:
       properties:
         key:
           items:
-            $ref: '#/components/schemas/FhirObservation'
+            $ref: "#/components/schemas/FhirObservation"
           type: array
       type: object
     ExternalStandard:
@@ -765,7 +766,7 @@ components:
         confidenceLevel:
           type: string
         group:
-          $ref: '#/components/schemas/Group'
+          $ref: "#/components/schemas/Group"
         id:
           format: int64
           type: integer
@@ -801,7 +802,7 @@ components:
         fullDescription:
           type: string
         group:
-          $ref: '#/components/schemas/Group'
+          $ref: "#/components/schemas/Group"
         id:
           format: int64
           type: integer
@@ -809,7 +810,7 @@ components:
           type: string
         links:
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           type: array
           uniqueItems: true
         notes:
@@ -839,7 +840,7 @@ components:
         encounterType:
           type: string
         group:
-          $ref: '#/components/schemas/Group'
+          $ref: "#/components/schemas/Group"
         id:
           format: int64
           type: integer
@@ -847,17 +848,17 @@ components:
           type: string
         links:
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           type: array
           uniqueItems: true
         observations:
           items:
-            $ref: '#/components/schemas/FhirObservation'
+            $ref: "#/components/schemas/FhirObservation"
           type: array
           uniqueItems: true
         procedures:
           items:
-            $ref: '#/components/schemas/FhirProcedure'
+            $ref: "#/components/schemas/FhirProcedure"
           type: array
           uniqueItems: true
         status:
@@ -887,7 +888,7 @@ components:
         diagram:
           type: string
         group:
-          $ref: '#/components/schemas/Group'
+          $ref: "#/components/schemas/Group"
         id:
           format: int64
           type: integer
@@ -908,7 +909,7 @@ components:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/Entry_long_Map_string_List_FhirObservation_'
+            $ref: "#/components/schemas/Entry_long_Map_string_List_FhirObservation_"
           type: array
         totalElements:
           format: int64
@@ -929,7 +930,7 @@ components:
           type: string
         contacts:
           items:
-            $ref: '#/components/schemas/FhirContact'
+            $ref: "#/components/schemas/FhirContact"
           type: array
         dateOfBirth:
           format: date-time
@@ -941,20 +942,20 @@ components:
         gender:
           type: string
         group:
-          $ref: '#/components/schemas/Group'
+          $ref: "#/components/schemas/Group"
         groupCode:
           type: string
         identifier:
           type: string
         identifiers:
           items:
-            $ref: '#/components/schemas/FhirIdentifier'
+            $ref: "#/components/schemas/FhirIdentifier"
           type: array
         postcode:
           type: string
         practitioners:
           items:
-            $ref: '#/components/schemas/FhirPractitioner'
+            $ref: "#/components/schemas/FhirPractitioner"
           type: array
         surname:
           type: string
@@ -973,7 +974,7 @@ components:
           type: boolean
         contacts:
           items:
-            $ref: '#/components/schemas/FhirContact'
+            $ref: "#/components/schemas/FhirContact"
           type: array
         gender:
           type: string
@@ -1011,13 +1012,13 @@ components:
           type: string
         childGroups:
           items:
-            $ref: '#/components/schemas/Group'
+            $ref: "#/components/schemas/Group"
           type: array
         code:
           type: string
         contactPoints:
           items:
-            $ref: '#/components/schemas/ContactPoint'
+            $ref: "#/components/schemas/ContactPoint"
           type: array
           uniqueItems: true
         created:
@@ -1028,11 +1029,11 @@ components:
           type: string
         groupFeatures:
           items:
-            $ref: '#/components/schemas/GroupFeature'
+            $ref: "#/components/schemas/GroupFeature"
           type: array
           uniqueItems: true
         groupType:
-          $ref: '#/components/schemas/Lookup'
+          $ref: "#/components/schemas/Lookup"
         id:
           format: int64
           type: integer
@@ -1044,19 +1045,19 @@ components:
           type: string
         links:
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           type: array
           uniqueItems: true
         locations:
           items:
-            $ref: '#/components/schemas/Location'
+            $ref: "#/components/schemas/Location"
           type: array
           uniqueItems: true
         name:
           type: string
         parentGroups:
           items:
-            $ref: '#/components/schemas/Group'
+            $ref: "#/components/schemas/Group"
           type: array
         postcode:
           type: string
@@ -1075,7 +1076,7 @@ components:
           format: date-time
           type: string
         feature:
-          $ref: '#/components/schemas/Feature'
+          $ref: "#/components/schemas/Feature"
         id:
           format: int64
           type: integer
@@ -1086,12 +1087,12 @@ components:
     GroupRole:
       properties:
         group:
-          $ref: '#/components/schemas/Group'
+          $ref: "#/components/schemas/Group"
         id:
           format: int64
           type: integer
         role:
-          $ref: '#/components/schemas/Role'
+          $ref: "#/components/schemas/Role"
       type: object
     Link:
       properties:
@@ -1110,7 +1111,7 @@ components:
         link:
           type: string
         linkType:
-          $ref: '#/components/schemas/Lookup'
+          $ref: "#/components/schemas/Lookup"
         name:
           type: string
       type: object
@@ -1157,7 +1158,7 @@ components:
           format: date-time
           type: string
         lookupType:
-          $ref: '#/components/schemas/LookupType'
+          $ref: "#/components/schemas/LookupType"
         value:
           type: string
       type: object
@@ -1238,7 +1239,7 @@ components:
           type: string
         observationHeadingGroups:
           items:
-            $ref: '#/components/schemas/ObservationHeadingGroup'
+            $ref: "#/components/schemas/ObservationHeadingGroup"
           type: array
           uniqueItems: true
         units:
@@ -1250,7 +1251,7 @@ components:
           format: date-time
           type: string
         group:
-          $ref: '#/components/schemas/Group'
+          $ref: "#/components/schemas/Group"
         id:
           format: int64
           type: integer
@@ -1265,32 +1266,32 @@ components:
       properties:
         diagnosisCodes:
           items:
-            $ref: '#/components/schemas/Code'
+            $ref: "#/components/schemas/Code"
           type: array
         fhirAllergies:
           items:
-            $ref: '#/components/schemas/FhirAllergy'
+            $ref: "#/components/schemas/FhirAllergy"
           type: array
         fhirConditions:
           items:
-            $ref: '#/components/schemas/FhirCondition'
+            $ref: "#/components/schemas/FhirCondition"
           type: array
         fhirEncounters:
           items:
-            $ref: '#/components/schemas/FhirEncounter'
+            $ref: "#/components/schemas/FhirEncounter"
           type: array
         fhirObservations:
           items:
-            $ref: '#/components/schemas/FhirObservation'
+            $ref: "#/components/schemas/FhirObservation"
           type: array
         fhirPatient:
-          $ref: '#/components/schemas/FhirPatient'
+          $ref: "#/components/schemas/FhirPatient"
         fhirPractitioners:
           items:
-            $ref: '#/components/schemas/FhirPractitioner'
+            $ref: "#/components/schemas/FhirPractitioner"
           type: array
         group:
-          $ref: '#/components/schemas/Group'
+          $ref: "#/components/schemas/Group"
         id:
           format: int64
           type: integer
@@ -1298,10 +1299,10 @@ components:
     PatientManagement:
       properties:
         condition:
-          $ref: '#/components/schemas/FhirCondition'
+          $ref: "#/components/schemas/FhirCondition"
         encounters:
           items:
-            $ref: '#/components/schemas/FhirEncounter'
+            $ref: "#/components/schemas/FhirEncounter"
           type: array
         groupCode:
           type: string
@@ -1309,13 +1310,13 @@ components:
           type: string
         observations:
           items:
-            $ref: '#/components/schemas/FhirObservation'
+            $ref: "#/components/schemas/FhirObservation"
           type: array
         patient:
-          $ref: '#/components/schemas/FhirPatient'
+          $ref: "#/components/schemas/FhirPatient"
         practitioners:
           items:
-            $ref: '#/components/schemas/FhirPractitioner'
+            $ref: "#/components/schemas/FhirPractitioner"
           type: array
       type: object
     Role:
@@ -1356,7 +1357,7 @@ components:
           format: int64
           type: integer
         lookup:
-          $ref: '#/components/schemas/Lookup'
+          $ref: "#/components/schemas/Lookup"
         templateUrl:
           type: string
         title:
@@ -1368,7 +1369,7 @@ components:
     User:
       properties:
         apiKey:
-          $ref: '#/components/schemas/ApiKey'
+          $ref: "#/components/schemas/ApiKey"
         canSwitchUser:
           type: boolean
         changePassword:
@@ -1398,7 +1399,7 @@ components:
           type: string
         groupRoles:
           items:
-            $ref: '#/components/schemas/GroupRole'
+            $ref: "#/components/schemas/GroupRole"
           type: array
           uniqueItems: true
         hideSecretWordNotification:
@@ -1417,7 +1418,7 @@ components:
         lastLoginIpAddress:
           type: string
         latestDataReceivedBy:
-          $ref: '#/components/schemas/BaseGroup'
+          $ref: "#/components/schemas/BaseGroup"
         latestDataReceivedDate:
           format: date-time
           type: string
@@ -1433,7 +1434,7 @@ components:
           type: string
         userFeatures:
           items:
-            $ref: '#/components/schemas/UserFeature'
+            $ref: "#/components/schemas/UserFeature"
           type: array
           uniqueItems: true
         username:
@@ -1445,7 +1446,7 @@ components:
           format: date-time
           type: string
         feature:
-          $ref: '#/components/schemas/Feature'
+          $ref: "#/components/schemas/Feature"
         id:
           format: int64
           type: integer
@@ -1478,11 +1479,11 @@ components:
           type: string
         externalStandards:
           items:
-            $ref: '#/components/schemas/ExternalStandard'
+            $ref: "#/components/schemas/ExternalStandard"
           type: array
         groupFeatures:
           items:
-            $ref: '#/components/schemas/Feature'
+            $ref: "#/components/schemas/Feature"
           type: array
         groupMessagingEnabled:
           type: boolean
@@ -1490,7 +1491,7 @@ components:
           type: boolean
         patientFeatures:
           items:
-            $ref: '#/components/schemas/Feature'
+            $ref: "#/components/schemas/Feature"
           type: array
         patientMessagingFeatureTypes:
           items:
@@ -1498,11 +1499,11 @@ components:
           type: array
         patientRoles:
           items:
-            $ref: '#/components/schemas/Role'
+            $ref: "#/components/schemas/Role"
           type: array
         routes:
           items:
-            $ref: '#/components/schemas/Route'
+            $ref: "#/components/schemas/Route"
           type: array
           uniqueItems: true
         secretWord:
@@ -1519,28 +1520,28 @@ components:
           type: string
         securityRoles:
           items:
-            $ref: '#/components/schemas/Role'
+            $ref: "#/components/schemas/Role"
           type: array
         shouldEnterCondition:
           type: boolean
         staffFeatures:
           items:
-            $ref: '#/components/schemas/Feature'
+            $ref: "#/components/schemas/Feature"
           type: array
         staffRoles:
           items:
-            $ref: '#/components/schemas/Role'
+            $ref: "#/components/schemas/Role"
           type: array
         token:
           type: string
         user:
-          $ref: '#/components/schemas/User'
+          $ref: "#/components/schemas/User"
         userFeatures:
           items:
-            $ref: '#/components/schemas/Feature'
+            $ref: "#/components/schemas/Feature"
           type: array
         userGroups:
           items:
-            $ref: '#/components/schemas/BaseGroup'
+            $ref: "#/components/schemas/BaseGroup"
           type: array
       type: object

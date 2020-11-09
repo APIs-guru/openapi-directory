@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - http
 host: api.thenounproject.com
@@ -11,17 +11,18 @@ info:
   x-apisguru-categories:
     - media
   x-logo:
-    url: 'https://twitter.com/nounproject/profile_image?size=original'
+    url: https://twitter.com/nounproject/profile_image?size=original
   x-origin:
     - converter:
-        url: 'https://github.com/lucybot/api-spec-converter'
+        url: https://github.com/lucybot/api-spec-converter
         version: 2.7.11
       format: swagger
-      url: 'http://api.thenounproject.com/config/api-doc'
-      version: '1.2'
+      url: http://api.thenounproject.com/config/api-doc
+      version: "1.2"
   x-providerName: thenounproject.com
+  x-preferred: true
 externalDocs:
-  url: 'https://thenounproject.com/developers/'
+  url: https://thenounproject.com/developers/
 produces:
   - application/json
 tags:
@@ -38,7 +39,7 @@ tags:
   - description: Operations on user endpoints
     name: user
 paths:
-  '/collection/{id}':
+  "/collection/{id}":
     get:
       description: Returns a single collection
       operationId: getCollectionById
@@ -50,12 +51,12 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get collection by id
       tags:
         - collection
-  '/collection/{id}/icons':
+  "/collection/{id}/icons":
     get:
       description: Returns a list of icons associated with a collection
       operationId: getCollectionIconsById
@@ -85,12 +86,12 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get collection icons by id
       tags:
         - collection
-  '/collection/{slug}':
+  "/collection/{slug}":
     get:
       description: Returns a single collection
       operationId: getCollectionBySlug
@@ -101,12 +102,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get collection by slug
       tags:
         - collection
-  '/collection/{slug}/icons':
+  "/collection/{slug}/icons":
     get:
       description: Returns a list of icons associated with a collection
       operationId: getCollectionIconsBySlug
@@ -135,7 +136,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get collection icons by slug
       tags:
@@ -164,12 +165,12 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get all collections
       tags:
         - collections
-  '/icon/{id}':
+  "/icon/{id}":
     get:
       description: Returns a single icon
       operationId: getIconById
@@ -181,12 +182,12 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get icon by id
       tags:
         - icon
-  '/icon/{term}':
+  "/icon/{term}":
     get:
       description: Returns a single icon
       operationId: getIconByTerm
@@ -197,7 +198,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get icon by term
       tags:
@@ -226,12 +227,12 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get recent icons
       tags:
         - icons
-  '/icons/{term}':
+  "/icons/{term}":
     get:
       description: Returns a list of icons
       operationId: getIconsByTerm
@@ -266,7 +267,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get icons by term
       tags:
@@ -276,12 +277,12 @@ paths:
       description: Returns current oauth usage and limits
       operationId: getApiQuotaStatus
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get api quota status
       tags:
         - oauth
-  '/user/{user_id}/collections':
+  "/user/{user_id}/collections":
     get:
       description: Returns a list of collections associated with a user
       operationId: getUserCollections
@@ -293,12 +294,12 @@ paths:
           required: true
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get user collections
       tags:
         - user
-  '/user/{user_id}/collections/{slug}':
+  "/user/{user_id}/collections/{slug}":
     get:
       description: Returns a single collection associated with a user
       operationId: getUserCollection
@@ -315,12 +316,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get user collection
       tags:
         - user
-  '/user/{username}/uploads':
+  "/user/{username}/uploads":
     get:
       description: Returns a list of uploads associated with a user
       operationId: getUserUploadsWithUser
@@ -349,7 +350,7 @@ paths:
           required: false
           type: integer
       responses:
-        '200':
+        "200":
           description: No response was specified
       summary: Get user uploads with user
       tags:

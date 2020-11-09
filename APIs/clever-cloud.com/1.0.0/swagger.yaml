@@ -1,4 +1,4 @@
-swagger: '2.0'
+swagger: "2.0"
 schemes:
   - https
 host: api.clever-cloud.com
@@ -12,17 +12,18 @@ info:
   x-apisguru-categories:
     - cloud
   x-logo:
-    url: 'https://twitter.com/clever_cloud/profile_image?size=original'
+    url: https://twitter.com/clever_cloud/profile_image?size=original
   x-origin:
     - format: swagger
-      url: 'https://www.clever-cloud.com/doc/api/swagger.json'
-      version: '2.0'
+      url: https://www.clever-cloud.com/doc/api/swagger.json
+      version: "2.0"
   x-providerName: clever-cloud.com
+  x-preferred: true
 tags:
   - description: Default section
     name: Default
 paths:
-  '/application/{appId}/environment':
+  "/application/{appId}/environment":
     get:
       parameters:
         - in: path
@@ -59,7 +60,7 @@ paths:
       operationId: postAuthorize
       parameters: []
       responses:
-        '200':
+        "200":
           description: authorize
       tags:
         - all
@@ -79,10 +80,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: startGithub
           schema:
-            $ref: '#/definitions/Transaction%20Id'
+            $ref: "#/definitions/Transaction%20Id"
       tags:
         - all
         - github
@@ -93,11 +94,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getGithubApplications
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
@@ -132,7 +133,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: githubCallback
       tags:
         - all
@@ -142,7 +143,7 @@ paths:
       operationId: getGithubEmails
       parameters: []
       responses:
-        '200':
+        "200":
           description: getGithubEmails
           schema:
             items:
@@ -158,11 +159,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getGithubKeys
           schema:
             items:
-              $ref: '#/definitions/Key'
+              $ref: "#/definitions/Key"
             type: array
       tags:
         - all
@@ -172,7 +173,7 @@ paths:
       operationId: deleteGithubLink
       parameters: []
       responses:
-        '200':
+        "200":
           description: unlinkGithub
       tags:
         - all
@@ -190,7 +191,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: linkGithub
       tags:
         - all
@@ -208,7 +209,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: githubLogin
       tags:
         - all
@@ -230,7 +231,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: redeployApp
       tags:
         - all
@@ -248,7 +249,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: githubSignup
       tags:
         - all
@@ -285,7 +286,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: finsihGithubSignup
       tags:
         - all
@@ -295,16 +296,16 @@ paths:
       operationId: getGithubUsername
       parameters: []
       responses:
-        '200':
+        "200":
           description: getGithubUsername
           schema:
             type: string
       tags:
         - all
         - github
-  '/logs/logs-chunked/{appId}':
+  "/logs/logs-chunked/{appId}":
     get:
-      description: 'Retrieve logs as they come through a chunked, never-ending response'
+      description: Retrieve logs as they come through a chunked, never-ending response
       parameters:
         - description: Application Id
           in: path
@@ -322,7 +323,7 @@ paths:
       tags:
         - all
         - logs
-  '/logs/logs-socket/{appId}':
+  "/logs/logs-socket/{appId}":
     get:
       description: 'Retrieve logs as they come through a websocket connection. To have authorization, you have to send a `{ "message_type": "oauth", "authorization": "oauth authorization string" }` message'
       parameters:
@@ -353,7 +354,7 @@ paths:
       tags:
         - all
         - logs
-  '/logs/{appId}':
+  "/logs/{appId}":
     get:
       description: Fetch the logs for a given application
       parameters:
@@ -377,13 +378,13 @@ paths:
           name: order
           required: false
           type: string
-        - description: 'Lowest bound for logs date, ISO 8601'
+        - description: Lowest bound for logs date, ISO 8601
           format: date-time
           in: query
           name: after
           required: false
           type: string
-        - description: 'Highest bounds for logs date, ISO 8601'
+        - description: Highest bounds for logs date, ISO 8601
           format: date-time
           in: query
           name: before
@@ -405,7 +406,7 @@ paths:
       tags:
         - all
         - logs
-  '/logs/{appId}/drains':
+  "/logs/{appId}/drains":
     get:
       description: Fetch the logs drains for a given application
       parameters:
@@ -432,7 +433,7 @@ paths:
       tags:
         - all
         - logs
-  '/logs/{appId}/drains/:idOrUrl':
+  "/logs/{appId}/drains/:idOrUrl":
     delete:
       description: Delete the logs drain by id or url for a given application
       parameters:
@@ -464,7 +465,7 @@ paths:
       operationId: getNewsfeedsBlog
       parameters: []
       responses:
-        '200':
+        "200":
           description: getBlogFeed
       tags:
         - all
@@ -473,11 +474,11 @@ paths:
       operationId: getNewsfeedEngineering
       parameters: []
       responses:
-        '200':
+        "200":
           description: getEngineeringFeed
       tags:
         - all
-  '/notifications/emailhooks/{ownerId}':
+  "/notifications/emailhooks/{ownerId}":
     get:
       description: list created e-mail hooks
       parameters:
@@ -502,7 +503,7 @@ paths:
           description: <No description>
       tags:
         - all
-  '/notifications/emailhooks/{ownerId}/:id':
+  "/notifications/emailhooks/{ownerId}/:id":
     delete:
       description: delete an e-mail hook
       parameters:
@@ -544,7 +545,7 @@ paths:
           description: <No description>
       tags:
         - all
-  '/notifications/webhooks/{ownerId}':
+  "/notifications/webhooks/{ownerId}":
     get:
       description: list created hooks
       parameters:
@@ -569,7 +570,7 @@ paths:
           description: <No description>
       tags:
         - all
-  '/notifications/webhooks/{ownerId}/:id':
+  "/notifications/webhooks/{ownerId}/:id":
     delete:
       description: delete a hook
       parameters:
@@ -643,7 +644,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: postAccessTokenRequest
       tags:
         - all
@@ -714,7 +715,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: authorizeForm
       tags:
         - all
@@ -795,7 +796,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: authorizeToken
       tags:
         - all
@@ -849,7 +850,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: postReqTokenRequest
       tags:
         - all
@@ -914,10 +915,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAvailableRights
           schema:
-            $ref: '#/definitions/Rights'
+            $ref: "#/definitions/Rights"
       tags:
         - all
         - oauth
@@ -932,11 +933,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getUserOrganisations
           schema:
             items:
-              $ref: '#/definitions/Organisation'
+              $ref: "#/definitions/Organisation"
             type: array
       tags:
         - all
@@ -950,16 +951,16 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeOrganisation'
+            $ref: "#/definitions/WannabeOrganisation"
       responses:
-        '200':
+        "200":
           description: createOrganisation
           schema:
-            $ref: '#/definitions/Organisation'
+            $ref: "#/definitions/Organisation"
       tags:
         - all
         - organisations
-  '/organisations/{id}':
+  "/organisations/{id}":
     delete:
       operationId: deleteOrganisationsId
       parameters:
@@ -968,7 +969,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteOrganisation
       tags:
         - all
@@ -983,10 +984,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getOrganisation
           schema:
-            $ref: '#/definitions/Organisation'
+            $ref: "#/definitions/Organisation"
       tags:
         - all
         - organisations
@@ -1003,16 +1004,16 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeOrganisation'
+            $ref: "#/definitions/WannabeOrganisation"
       responses:
-        '200':
+        "200":
           description: editOrganisation
           schema:
-            $ref: '#/definitions/Organisation'
+            $ref: "#/definitions/Organisation"
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders':
+  "/organisations/{id}/addonproviders":
     get:
       operationId: getOrganisationsIdAddonproviders
       parameters:
@@ -1023,11 +1024,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Get all informations about all providers.
           schema:
             items:
-              $ref: '#/definitions/Provider'
+              $ref: "#/definitions/Provider"
             type: array
       tags:
         - all
@@ -1045,16 +1046,16 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeAddonProvider'
+            $ref: "#/definitions/WannabeAddonProvider"
       responses:
-        '200':
+        "200":
           description: createProvider
           schema:
-            $ref: '#/definitions/Provider'
+            $ref: "#/definitions/Provider"
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders/{providerId}':
+  "/organisations/{id}/addonproviders/{providerId}":
     get:
       operationId: getOrganisationsIdAddonprovidersProviderId
       parameters:
@@ -1069,10 +1070,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: Get all informations about given provider.
           schema:
-            $ref: '#/definitions/Provider'
+            $ref: "#/definitions/Provider"
       tags:
         - all
         - organisations
@@ -1093,16 +1094,16 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeAddonProvider'
+            $ref: "#/definitions/WannabeAddonProvider"
       responses:
-        '200':
+        "200":
           description: updateProviderInfos
           schema:
-            $ref: '#/definitions/Provider'
+            $ref: "#/definitions/Provider"
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders/{providerId}/features':
+  "/organisations/{id}/addonproviders/{providerId}/features":
     get:
       operationId: getOrganisationsIdAddonprovidersProviderIdFeatures
       parameters:
@@ -1117,11 +1118,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getProviderFeatures
           schema:
             items:
-              $ref: '#/definitions/Feature'
+              $ref: "#/definitions/Feature"
             type: array
       tags:
         - all
@@ -1143,16 +1144,16 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeFeature'
+            $ref: "#/definitions/WannabeFeature"
       responses:
-        '200':
+        "200":
           description: addProviderFeature
           schema:
-            $ref: '#/definitions/Feature'
+            $ref: "#/definitions/Feature"
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders/{providerId}/features/{featureId}':
+  "/organisations/{id}/addonproviders/{providerId}/features/{featureId}":
     delete:
       operationId: deleteOrganisationsIdAddonprovidersProviderIdFeaturesFeatureId
       parameters:
@@ -1169,12 +1170,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteProviderFeature
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders/{providerId}/plans':
+  "/organisations/{id}/addonproviders/{providerId}/plans":
     get:
       operationId: getOrganisationsIdAddonprovidersProviderIdPlans
       parameters:
@@ -1189,11 +1190,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getProviderPlans
           schema:
             items:
-              $ref: '#/definitions/Plan'
+              $ref: "#/definitions/Plan"
             type: array
       tags:
         - all
@@ -1215,16 +1216,16 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabePlan'
+            $ref: "#/definitions/WannabePlan"
       responses:
-        '200':
+        "200":
           description: addProviderPlan
           schema:
-            $ref: '#/definitions/Plan'
+            $ref: "#/definitions/Plan"
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders/{providerId}/plans/{planId}':
+  "/organisations/{id}/addonproviders/{providerId}/plans/{planId}":
     delete:
       operationId: deleteOrganisationsIdAddonprovidersProviderIdPlansPlanId
       parameters:
@@ -1241,7 +1242,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteProviderPlan
       tags:
         - all
@@ -1264,10 +1265,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getProviderPlan
           schema:
-            $ref: '#/definitions/Plan'
+            $ref: "#/definitions/Plan"
       tags:
         - all
         - organisations
@@ -1292,16 +1293,16 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabePlan'
+            $ref: "#/definitions/WannabePlan"
       responses:
-        '200':
+        "200":
           description: editProviderPlan
           schema:
-            $ref: '#/definitions/Plan'
+            $ref: "#/definitions/Plan"
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders/{providerId}/plans/{planId}/features/{featureName}':
+  "/organisations/{id}/addonproviders/{providerId}/plans/{planId}/features/{featureName}":
     delete:
       operationId: deleteOrganisationsIdAddonprovidersProviderIdPlansPlanIdFeaturesFeatureName
       parameters:
@@ -1322,7 +1323,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteProviderPlanFeature
       tags:
         - all
@@ -1352,14 +1353,14 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabePlanFeature'
+            $ref: "#/definitions/WannabePlanFeature"
       responses:
-        '200':
+        "200":
           description: editProviderPlanFeature
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders/{providerId}/sso':
+  "/organisations/{id}/addonproviders/{providerId}/sso":
     get:
       parameters:
         - in: path
@@ -1373,14 +1374,14 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getSSOData
           schema:
-            $ref: '#/definitions/AddonProviderSso'
+            $ref: "#/definitions/AddonProviderSso"
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders/{providerId}/tags':
+  "/organisations/{id}/addonproviders/{providerId}/tags":
     get:
       operationId: getOrganisationsIdAddonprovidersProviderIdTags
       parameters:
@@ -1393,7 +1394,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getProviderTags
           schema:
             items:
@@ -1402,7 +1403,7 @@ paths:
       tags:
         - all
         - organisations
-  '/organisations/{id}/addonproviders/{providerId}/testers':
+  "/organisations/{id}/addonproviders/{providerId}/testers":
     post:
       operationId: postOrganisationsIdAddonprovidersProviderIdTesters
       parameters:
@@ -1415,12 +1416,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: addBetaTester
       tags:
         - all
         - organisations
-  '/organisations/{id}/addons':
+  "/organisations/{id}/addons":
     get:
       operationId: getOrganisationsIdAddons
       parameters:
@@ -1431,11 +1432,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddons
           schema:
             items:
-              $ref: '#/definitions/Addon'
+              $ref: "#/definitions/Addon"
             type: array
       tags:
         - all
@@ -1454,17 +1455,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeAddon'
+            $ref: "#/definitions/WannabeAddon"
       responses:
-        '200':
+        "200":
           description: provisionAddon
           schema:
-            $ref: '#/definitions/Addon'
+            $ref: "#/definitions/Addon"
       tags:
         - all
         - addons
         - organisations
-  '/organisations/{id}/addons/preorders':
+  "/organisations/{id}/addons/preorders":
     post:
       parameters:
         - in: path
@@ -1475,7 +1476,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/WannabeAddon'
+            $ref: "#/definitions/WannabeAddon"
       responses:
         default:
           description: preorderAddon
@@ -1483,7 +1484,7 @@ paths:
         - all
         - addons
         - organisations
-  '/organisations/{id}/addons/{addonId}':
+  "/organisations/{id}/addons/{addonId}":
     delete:
       operationId: deleteOrganisationsIdAddonsAddonId
       parameters:
@@ -1496,7 +1497,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deprovisionAddon
       tags:
         - all
@@ -1516,10 +1517,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddon
           schema:
-            $ref: '#/definitions/Addon'
+            $ref: "#/definitions/Addon"
       tags:
         - all
         - addons
@@ -1541,17 +1542,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeAddon'
+            $ref: "#/definitions/WannabeAddon"
       responses:
-        '200':
+        "200":
           description: Update addon information
           schema:
-            $ref: '#/definitions/Addon'
+            $ref: "#/definitions/Addon"
       tags:
         - all
         - addons
         - organisations
-  '/organisations/{id}/addons/{addonId}/applications':
+  "/organisations/{id}/addons/{addonId}/applications":
     get:
       operationId: getOrganisationsIdAddonsAddonIdApplications
       parameters:
@@ -1566,18 +1567,18 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationsLinkedToAddon
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
         - addons
         - applications
         - organisations
-  '/organisations/{id}/addons/{addonId}/env':
+  "/organisations/{id}/addons/{addonId}/env":
     get:
       operationId: getOrganisationsIdAddonsAddonIdEnv
       parameters:
@@ -1592,17 +1593,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddonEnv
           schema:
             items:
-              $ref: '#/definitions/ListEnv'
+              $ref: "#/definitions/ListEnv"
             type: array
       tags:
         - all
         - addons
         - organisations
-  '/organisations/{id}/addons/{addonId}/plan':
+  "/organisations/{id}/addons/{addonId}/plan":
     put:
       consumes:
         - application/json
@@ -1620,17 +1621,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabePlan'
+            $ref: "#/definitions/WannabePlan"
       responses:
-        '200':
+        "200":
           description: Update plan of an add-on.
           schema:
-            $ref: '#/definitions/Plan'
+            $ref: "#/definitions/Plan"
       tags:
         - all
         - addons
         - organisations
-  '/organisations/{id}/addons/{addonId}/sso':
+  "/organisations/{id}/addons/{addonId}/sso":
     get:
       parameters:
         - in: path
@@ -1644,15 +1645,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getSSOData
           schema:
-            $ref: '#/definitions/Sso'
+            $ref: "#/definitions/Sso"
       tags:
         - all
         - addons
         - organisations
-  '/organisations/{id}/addons/{addonId}/tags':
+  "/organisations/{id}/addons/{addonId}/tags":
     get:
       operationId: getOrganisationsIdAddonsAddonIdTags
       parameters:
@@ -1665,7 +1666,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getAddonTags
           schema:
             items:
@@ -1675,7 +1676,7 @@ paths:
         - all
         - addons
         - organisations
-  '/organisations/{id}/addons/{addonId}/tags/{tag}':
+  "/organisations/{id}/addons/{addonId}/tags/{tag}":
     delete:
       operationId: deleteOrganisationsIdAddonsAddonIdTagsTag
       parameters:
@@ -1692,7 +1693,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteAddonTag
       tags:
         - all
@@ -1717,15 +1718,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '200':
+        "200":
           description: addAddonTag
       tags:
         - all
         - addons
         - organisations
-  '/organisations/{id}/applications':
+  "/organisations/{id}/applications":
     get:
       operationId: getOrganisationsIdApplications
       parameters:
@@ -1736,11 +1737,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAllApplications
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
@@ -1749,7 +1750,7 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Creates an application. If you want to create a Github app, you need to replace the oauthApp field with what you will find here: https://github.com/CleverCloud/doc.clever-cloud.com/issues/179'
+      description: "Creates an application. If you want to create a Github app, you need to replace the oauthApp field with what you will find here: https://github.com/CleverCloud/doc.clever-cloud.com/issues/179"
       operationId: postOrganisationsIdApplications
       parameters:
         - in: path
@@ -1760,17 +1761,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeApplication'
+            $ref: "#/definitions/WannabeApplication"
       responses:
-        '200':
+        "200":
           description: addApplication
           schema:
-            $ref: '#/definitions/Application'
+            $ref: "#/definitions/Application"
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}':
+  "/organisations/{id}/applications/{appId}":
     delete:
       operationId: deleteOrganisationsIdApplicationsAppId
       parameters:
@@ -1783,7 +1784,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteApplication
       tags:
         - all
@@ -1803,10 +1804,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplication
           schema:
-            $ref: '#/definitions/Application'
+            $ref: "#/definitions/Application"
       tags:
         - all
         - applications
@@ -1828,17 +1829,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeApplication'
+            $ref: "#/definitions/WannabeApplication"
       responses:
-        '200':
+        "200":
           description: editApplication
           schema:
-            $ref: '#/definitions/Application'
+            $ref: "#/definitions/Application"
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/addons':
+  "/organisations/{id}/applications/{appId}/addons":
     get:
       operationId: getOrganisationsIdApplicationsAppIdAddons
       parameters:
@@ -1853,11 +1854,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddonsLinkedToApplication
           schema:
             items:
-              $ref: '#/definitions/Addon'
+              $ref: "#/definitions/Addon"
             type: array
       tags:
         - all
@@ -1879,16 +1880,16 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '200':
+        "200":
           description: linkAddonToApplication
       tags:
         - all
         - addons
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/addons/env':
+  "/organisations/{id}/applications/{appId}/addons/env":
     get:
       operationId: getOrganisationsIdApplicationsAppIdAddonsEnv
       parameters:
@@ -1903,18 +1904,18 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getEnvOfAddonsLinkedToApplication
           schema:
             items:
-              $ref: '#/definitions/Env'
+              $ref: "#/definitions/Env"
             type: array
       tags:
         - all
         - addons
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/addons/{addonId}':
+  "/organisations/{id}/applications/{appId}/addons/{addonId}":
     delete:
       operationId: deleteOrganisationsIdApplicationsAppIdAddonsAddonId
       parameters:
@@ -1931,14 +1932,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: unlinkAddonFromApplication
       tags:
         - all
         - addons
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/branch':
+  "/organisations/{id}/applications/{appId}/branch":
     put:
       parameters:
         - in: path
@@ -1956,7 +1957,7 @@ paths:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/branches':
+  "/organisations/{id}/applications/{appId}/branches":
     get:
       parameters:
         - in: path
@@ -1974,7 +1975,7 @@ paths:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/dependencies':
+  "/organisations/{id}/applications/{appId}/dependencies":
     get:
       operationId: getOrganisationsIdApplicationsAppIdDependencies
       parameters:
@@ -1989,17 +1990,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationDependencies
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/dependencies/env':
+  "/organisations/{id}/applications/{appId}/dependencies/env":
     get:
       parameters:
         - in: path
@@ -2011,17 +2012,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Get env variables defined by application dependencies
           schema:
             items:
-              $ref: '#/definitions/LinkedAppEnv'
+              $ref: "#/definitions/LinkedAppEnv"
             type: array
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/dependencies/{dependencyId}':
+  "/organisations/{id}/applications/{appId}/dependencies/{dependencyId}":
     delete:
       operationId: deleteOrganisationsIdApplicationsAppIdDependenciesDependencyId
       parameters:
@@ -2038,7 +2039,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteApplicationDependency
       tags:
         - all
@@ -2063,15 +2064,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '200':
+        "200":
           description: addApplicationDependency
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/dependents':
+  "/organisations/{id}/applications/{appId}/dependents":
     get:
       operationId: getOrganisationsIdApplicationsAppIdDependents
       parameters:
@@ -2086,17 +2087,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationDependents
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/deployments':
+  "/organisations/{id}/applications/{appId}/deployments":
     get:
       operationId: getOrganisationsIdApplicationsAppIdDeployments
       parameters:
@@ -2123,17 +2124,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationDeploymentsForOrga
           schema:
             items:
-              $ref: '#/definitions/Deployment'
+              $ref: "#/definitions/Deployment"
             type: array
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/deployments/{deploymentId}/instances':
+  "/organisations/{id}/applications/{appId}/deployments/{deploymentId}/instances":
     delete:
       operationId: deleteOrganisationsIdApplicationsAppIdDeploymentsDeploymentIdInstances
       parameters:
@@ -2150,13 +2151,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getApplicationDeploymentsForOrga
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/env':
+  "/organisations/{id}/applications/{appId}/env":
     get:
       operationId: getOrganisationsIdApplicationsAppIdEnv
       parameters:
@@ -2171,11 +2172,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationEnv
           schema:
             items:
-              $ref: '#/definitions/ListEnv'
+              $ref: "#/definitions/ListEnv"
             type: array
       tags:
         - all
@@ -2198,17 +2199,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeEnv'
+            $ref: "#/definitions/WannabeEnv"
       responses:
-        '200':
+        "200":
           description: editApplicationEnvironment
           schema:
-            $ref: '#/definitions/ListEnv'
+            $ref: "#/definitions/ListEnv"
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/env/{envName}':
+  "/organisations/{id}/applications/{appId}/env/{envName}":
     delete:
       operationId: deleteOrganisationsIdApplicationsAppIdEnvEnvName
       parameters:
@@ -2225,7 +2226,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: removeApplicationEnv
       tags:
         - all
@@ -2252,17 +2253,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeEnv'
+            $ref: "#/definitions/WannabeEnv"
       responses:
-        '200':
+        "200":
           description: editApplicationEnv
           schema:
-            $ref: '#/definitions/ListEnv'
+            $ref: "#/definitions/ListEnv"
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/exposed_env':
+  "/organisations/{id}/applications/{appId}/exposed_env":
     get:
       parameters:
         - in: path
@@ -2294,12 +2295,12 @@ paths:
         default:
           description: updateExposedEnv
           schema:
-            $ref: '#/definitions/ListEnv'
+            $ref: "#/definitions/ListEnv"
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/instances':
+  "/organisations/{id}/applications/{appId}/instances":
     delete:
       operationId: deleteOrganisationsIdApplicationsAppIdInstances
       parameters:
@@ -2312,7 +2313,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: undeployApplication
       tags:
         - all
@@ -2332,11 +2333,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationInstances
           schema:
             items:
-              $ref: '#/definitions/AppInstance'
+              $ref: "#/definitions/AppInstance"
             type: array
       tags:
         - all
@@ -2358,13 +2359,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: redeployApplication
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/instances/{instanceId}':
+  "/organisations/{id}/applications/{appId}/instances/{instanceId}":
     get:
       parameters:
         - in: path
@@ -2383,12 +2384,12 @@ paths:
         default:
           description: getApplicationInstance
           schema:
-            $ref: '#/definitions/AppInstance'
+            $ref: "#/definitions/AppInstance"
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/tags':
+  "/organisations/{id}/applications/{appId}/tags":
     get:
       operationId: getOrganisationsIdApplicationsAppIdTags
       parameters:
@@ -2401,7 +2402,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getApplicationTags
           schema:
             items:
@@ -2411,7 +2412,7 @@ paths:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/tags/{tag}':
+  "/organisations/{id}/applications/{appId}/tags/{tag}":
     delete:
       operationId: deleteOrganisationsIdApplicationsAppIdTagsTag
       parameters:
@@ -2428,7 +2429,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteApplicationTag
       tags:
         - all
@@ -2453,15 +2454,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '200':
+        "200":
           description: addApplicationTag
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/vhosts':
+  "/organisations/{id}/applications/{appId}/vhosts":
     get:
       operationId: getOrganisationsIdApplicationsAppIdVhosts
       parameters:
@@ -2476,17 +2477,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getVhosts
           schema:
             items:
-              $ref: '#/definitions/Vhost'
+              $ref: "#/definitions/Vhost"
             type: array
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/vhosts/favourite':
+  "/organisations/{id}/applications/{appId}/vhosts/favourite":
     delete:
       operationId: deleteOrganisationsIdApplicationsAppIdVhostsFavourite
       parameters:
@@ -2499,7 +2500,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: unmarkFavouriteVhost
       tags:
         - all
@@ -2519,10 +2520,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getFavouriteVhost
           schema:
-            $ref: '#/definitions/Vhost'
+            $ref: "#/definitions/Vhost"
       tags:
         - all
         - applications
@@ -2544,15 +2545,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Vhost'
+            $ref: "#/definitions/Vhost"
       responses:
-        '200':
+        "200":
           description: markFavouriteVhost
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/applications/{appId}/vhosts/{domain}':
+  "/organisations/{id}/applications/{appId}/vhosts/{domain}":
     delete:
       operationId: deleteOrganisationsIdApplicationsAppIdVhostsDomain
       parameters:
@@ -2569,7 +2570,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: removeVhost
       tags:
         - all
@@ -2596,17 +2597,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Vhost'
+            $ref: "#/definitions/Vhost"
       responses:
-        '200':
+        "200":
           description: addVhost
       tags:
         - all
         - applications
         - organisations
-  '/organisations/{id}/avatar':
+  "/organisations/{id}/avatar":
     put:
-      description: 'If you want to upload an image from your computer, send the image in the body of the request without anything else.'
+      description: If you want to upload an image from your computer, send the image in the body of the request without anything else.
       operationId: putOrganisationsIdAvatar
       parameters:
         - in: path
@@ -2614,14 +2615,15 @@ paths:
           required: true
           type: string
       responses:
-        '200':
-          description: |-
+        "200":
+          description: >-
             setOrgaAvatar
+
             setOrgaAvatarFromSource
       tags:
         - all
         - organisations
-  '/organisations/{id}/consumers':
+  "/organisations/{id}/consumers":
     get:
       operationId: getOrganisationsIdConsumers
       parameters:
@@ -2632,11 +2634,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getConsumers
           schema:
             items:
-              $ref: '#/definitions/Consumer'
+              $ref: "#/definitions/Consumer"
             type: array
       tags:
         - all
@@ -2654,14 +2656,14 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeConsumer'
+            $ref: "#/definitions/WannabeConsumer"
       responses:
-        '200':
+        "200":
           description: createConsumer
       tags:
         - all
         - organisations
-  '/organisations/{id}/consumers/{key}':
+  "/organisations/{id}/consumers/{key}":
     delete:
       operationId: deleteOrganisationsIdConsumersKey
       parameters:
@@ -2674,7 +2676,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteConsumer
       tags:
         - all
@@ -2693,10 +2695,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getConsumer
           schema:
-            $ref: '#/definitions/Consumer'
+            $ref: "#/definitions/Consumer"
       tags:
         - all
         - organisations
@@ -2717,14 +2719,14 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeConsumer'
+            $ref: "#/definitions/WannabeConsumer"
       responses:
-        '200':
+        "200":
           description: PUT the same data as in POST.
       tags:
         - all
         - organisations
-  '/organisations/{id}/consumers/{key}/secret':
+  "/organisations/{id}/consumers/{key}/secret":
     get:
       operationId: getOrganisationsIdConsumersKeySecret
       parameters:
@@ -2739,14 +2741,14 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getConsumerSecret
           schema:
-            $ref: '#/definitions/Secret'
+            $ref: "#/definitions/Secret"
       tags:
         - all
         - organisations
-  '/organisations/{id}/consumptions':
+  "/organisations/{id}/consumptions":
     get:
       operationId: getOrganisationsIdConsumptions
       parameters:
@@ -2769,14 +2771,14 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAmount
           schema:
-            $ref: '#/definitions/Conso'
+            $ref: "#/definitions/Conso"
       tags:
         - all
         - organisations
-  '/organisations/{id}/credits':
+  "/organisations/{id}/credits":
     get:
       operationId: getOrganisationsIdCredits
       parameters:
@@ -2787,14 +2789,14 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAmount
           schema:
-            $ref: '#/definitions/Credits'
+            $ref: "#/definitions/Credits"
       tags:
         - all
         - organisations
-  '/organisations/{id}/instances':
+  "/organisations/{id}/instances":
     get:
       operationId: getOrganisationsIdInstances
       parameters:
@@ -2805,18 +2807,18 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getInstancesForAllApps
           schema:
             additionalProperties:
               items:
-                $ref: '#/definitions/AppInstance'
+                $ref: "#/definitions/AppInstance"
               type: array
             type: object
       tags:
         - all
         - organisations
-  '/organisations/{id}/members':
+  "/organisations/{id}/members":
     get:
       operationId: getOrganisationsIdMembers
       parameters:
@@ -2827,11 +2829,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getOrganisationMembers
           schema:
             items:
-              $ref: '#/definitions/Member'
+              $ref: "#/definitions/Member"
             type: array
       tags:
         - all
@@ -2853,14 +2855,14 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeMember'
+            $ref: "#/definitions/WannabeMember"
       responses:
-        '200':
+        "200":
           description: addOrganisationMember
       tags:
         - all
         - organisations
-  '/organisations/{id}/members/{userId}':
+  "/organisations/{id}/members/{userId}":
     delete:
       operationId: deleteOrganisationsIdMembersUserId
       parameters:
@@ -2873,7 +2875,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: removeOrganisationMember
       tags:
         - all
@@ -2895,14 +2897,14 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeMember'
+            $ref: "#/definitions/WannabeMember"
       responses:
-        '200':
+        "200":
           description: editOrganisationMember
       tags:
         - all
         - organisations
-  '/organisations/{id}/payment-info':
+  "/organisations/{id}/payment-info":
     get:
       operationId: getOrganisationsIdPaymentInfo
       parameters:
@@ -2911,12 +2913,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getPaymentInfo
       tags:
         - all
         - organisations
-  '/organisations/{id}/payments/billings':
+  "/organisations/{id}/payments/billings":
     get:
       operationId: getOrganisationsIdPaymentsBillings
       parameters:
@@ -2925,7 +2927,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getInvoices
       tags:
         - all
@@ -2939,13 +2941,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: buyDrops
       tags:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/billings/unpaid':
+  "/organisations/{id}/payments/billings/unpaid":
     get:
       parameters:
         - in: path
@@ -2959,7 +2961,7 @@ paths:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/billings/{bid}':
+  "/organisations/{id}/payments/billings/{bid}":
     delete:
       operationId: deleteOrganisationsIdPaymentsBillingsBid
       parameters:
@@ -2972,7 +2974,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deletePurchaseOrder
       tags:
         - all
@@ -2990,7 +2992,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getInvoice
       tags:
         - all
@@ -3008,13 +3010,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: choosePaymentProvider
       tags:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/billings/{bid}.pdf':
+  "/organisations/{id}/payments/billings/{bid}.pdf":
     get:
       operationId: getOrganisationsIdPaymentsBillingsBidPdf
       parameters:
@@ -3031,13 +3033,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: getPdfInvoice
       tags:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/fullprice/{price}':
+  "/organisations/{id}/payments/fullprice/{price}":
     get:
       operationId: getOrganisationsIdPaymentsFullPricePrice
       parameters:
@@ -3050,13 +3052,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: priceWithTax
       tags:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/methods':
+  "/organisations/{id}/payments/methods":
     get:
       parameters:
         - in: path
@@ -3065,7 +3067,7 @@ paths:
           type: string
       responses:
         default:
-          description: 'Get the payments methods for the {id} organisation.'
+          description: Get the payments methods for the {id} organisation.
       tags:
         - all
         - organisations
@@ -3082,12 +3084,12 @@ paths:
           schema: {}
       responses:
         default:
-          description: 'Add a payment method to {id} organisation.'
+          description: Add a payment method to {id} organisation.
       tags:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/methods/default':
+  "/organisations/{id}/payments/methods/default":
     get:
       parameters:
         - in: path
@@ -3096,7 +3098,7 @@ paths:
           type: string
       responses:
         default:
-          description: 'Get the default payment method for {id} organisation.'
+          description: Get the default payment method for {id} organisation.
       tags:
         - all
         - organisations
@@ -3111,15 +3113,15 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/PaymentData'
+            $ref: "#/definitions/PaymentData"
       responses:
         default:
-          description: 'Set the default payment method for {id} organisation.'
+          description: Set the default payment method for {id} organisation.
       tags:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/methods/{mId}':
+  "/organisations/{id}/payments/methods/{mId}":
     delete:
       parameters:
         - in: path
@@ -3137,7 +3139,7 @@ paths:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/monthlyinvoice':
+  "/organisations/{id}/payments/monthlyinvoice":
     get:
       parameters:
         - in: path
@@ -3151,7 +3153,7 @@ paths:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/monthlyinvoice/maxcredit':
+  "/organisations/{id}/payments/monthlyinvoice/maxcredit":
     put:
       parameters:
         - in: path
@@ -3165,7 +3167,7 @@ paths:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/recurring':
+  "/organisations/{id}/payments/recurring":
     delete:
       operationId: deleteOrganisationsIdPaymentsRecurring
       parameters:
@@ -3174,7 +3176,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteRecurrentPayment
       tags:
         - all
@@ -3193,7 +3195,7 @@ paths:
         - all
         - organisations
         - payments
-  '/organisations/{id}/payments/tokens/bt':
+  "/organisations/{id}/payments/tokens/bt":
     get:
       parameters:
         - in: path
@@ -3212,7 +3214,7 @@ paths:
       operationId: getPasswordForgotten
       parameters: []
       responses:
-        '200':
+        "200":
           description: getPasswordForgottenForm
       tags:
         - all
@@ -3233,12 +3235,12 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: askForPasswordResetViaForm
       tags:
         - all
         - password_forgotten
-  '/password_forgotten/{key}':
+  "/password_forgotten/{key}":
     get:
       operationId: getPasswordForgottenKey
       parameters:
@@ -3247,7 +3249,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: confirmPasswordResetRequest
       tags:
         - all
@@ -3268,12 +3270,12 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: resetPasswordForgotten
       tags:
         - all
         - password_forgotten
-  '/payments/coupons/{name}':
+  "/payments/coupons/{name}":
     get:
       operationId: getPaymentsCouponsName
       parameters:
@@ -3282,7 +3284,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getCoupon
       tags:
         - all
@@ -3294,11 +3296,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAvailablePaymentProviders
           schema:
             items:
-              $ref: '#/definitions/Payment%20Provider'
+              $ref: "#/definitions/Payment%20Provider"
             type: array
       tags:
         - all
@@ -3308,7 +3310,7 @@ paths:
       operationId: getPaymentsTokensBt
       parameters: []
       responses:
-        '200':
+        "200":
           description: getBraintreeToken
       tags:
         - all
@@ -3322,12 +3324,12 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: subscriptionEventPing
       tags:
         - all
         - payments
-  '/payments/{bid}/end/bt':
+  "/payments/{bid}/end/bt":
     post:
       operationId: postPaymentsBidEndBt
       parameters:
@@ -3336,7 +3338,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: endPaymentWithBraintree
       tags:
         - all
@@ -3348,16 +3350,16 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddonProviders
           schema:
             items:
-              $ref: '#/definitions/Provider'
+              $ref: "#/definitions/Provider"
             type: array
       tags:
         - all
         - products
-  '/products/addonproviders/{provider_id}':
+  "/products/addonproviders/{provider_id}":
     get:
       operationId: getProductsAddonProvidersProviderId
       parameters:
@@ -3368,10 +3370,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddonProvider
           schema:
-            $ref: '#/definitions/Provider'
+            $ref: "#/definitions/Provider"
       tags:
         - all
         - products
@@ -3382,10 +3384,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getCountries
           schema:
-            $ref: '#/definitions/Country'
+            $ref: "#/definitions/Country"
       tags:
         - all
         - products
@@ -3396,10 +3398,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getCountryCodes
           schema:
-            $ref: '#/definitions/Country'
+            $ref: "#/definitions/Country"
       tags:
         - all
         - products
@@ -3414,16 +3416,16 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAvailableInstances
           schema:
             items:
-              $ref: '#/definitions/Instance'
+              $ref: "#/definitions/Instance"
             type: array
       tags:
         - all
         - products
-  '/products/instances/{type: [^-]+}-{version}':
+  "/products/instances/{type: [^-]+}-{version}":
     get:
       operationId: getProductsInstancesTypeVersion
       parameters:
@@ -3440,16 +3442,16 @@ paths:
           required: false
           type: string
         - in: path
-          name: 'type: [^-]+'
+          name: "type: [^-]+"
           required: true
           type: string
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAvailableInstance
           schema:
-            $ref: '#/definitions/Instance'
+            $ref: "#/definitions/Instance"
       tags:
         - all
         - products
@@ -3478,7 +3480,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: getAvailablePackages
       tags:
         - all
@@ -3488,7 +3490,7 @@ paths:
       operationId: getProductsPrices
       parameters: []
       responses:
-        '200':
+        "200":
           description: getExchangeRates
       tags:
         - all
@@ -3500,11 +3502,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getZones
           schema:
             items:
-              $ref: '#/definitions/Zone'
+              $ref: "#/definitions/Zone"
             type: array
       tags:
         - all
@@ -3514,7 +3516,7 @@ paths:
       operationId: deleteSelf
       parameters: []
       responses:
-        '200':
+        "200":
           description: deleteUser
       tags:
         - all
@@ -3526,11 +3528,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getUser
           schema:
-            $ref: '#/definitions/User'
-      summary: ''
+            $ref: "#/definitions/User"
+      summary: ""
       tags:
         - all
         - self
@@ -3543,9 +3545,9 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeUser'
+            $ref: "#/definitions/WannabeUser"
       responses:
-        '200':
+        "200":
           description: editUser
       tags:
         - all
@@ -3558,11 +3560,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddons
           schema:
             items:
-              $ref: '#/definitions/Addon'
+              $ref: "#/definitions/Addon"
             type: array
       summary: Addon
       tags:
@@ -3578,9 +3580,9 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeAddon'
+            $ref: "#/definitions/WannabeAddon"
       responses:
-        '200':
+        "200":
           description: provisionAddon
       tags:
         - all
@@ -3593,7 +3595,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/WannabeAddon'
+            $ref: "#/definitions/WannabeAddon"
       responses:
         default:
           description: preorderAddon
@@ -3601,7 +3603,7 @@ paths:
         - all
         - addons
         - self
-  '/self/addons/{addonId}':
+  "/self/addons/{addonId}":
     delete:
       operationId: deleteSelfAddonsAddonId
       parameters:
@@ -3610,7 +3612,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deprovisionAddon
       tags:
         - all
@@ -3627,10 +3629,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddon
           schema:
-            $ref: '#/definitions/Addon'
+            $ref: "#/definitions/Addon"
       summary: Specific addon
       tags:
         - all
@@ -3649,15 +3651,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeAddon'
+            $ref: "#/definitions/WannabeAddon"
       responses:
-        '200':
+        "200":
           description: Update addon informations
       tags:
         - all
         - addons
         - self
-  '/self/addons/{addonId}/applications':
+  "/self/addons/{addonId}/applications":
     get:
       operationId: getSelfAddonsAddonIdApplications
       parameters:
@@ -3668,18 +3670,18 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationsLinkedToAddon
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
         - addons
         - applications
         - self
-  '/self/addons/{addonId}/env':
+  "/self/addons/{addonId}/env":
     get:
       operationId: getSelfAddonsAddonIdEnv
       parameters:
@@ -3690,17 +3692,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddonEnv
           schema:
             items:
-              $ref: '#/definitions/ListEnv'
+              $ref: "#/definitions/ListEnv"
             type: array
       tags:
         - all
         - addons
         - self
-  '/self/addons/{addonId}/plan':
+  "/self/addons/{addonId}/plan":
     put:
       consumes:
         - application/json
@@ -3714,15 +3716,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabePlan'
+            $ref: "#/definitions/WannabePlan"
       responses:
-        '200':
+        "200":
           description: Update plan of an add-on.
       tags:
         - all
         - addons
         - self
-  '/self/addons/{addonId}/sso':
+  "/self/addons/{addonId}/sso":
     get:
       operationId: getSelfAddonsAddonIdSso
       parameters:
@@ -3733,15 +3735,15 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getSSOData
           schema:
-            $ref: '#/definitions/Sso'
+            $ref: "#/definitions/Sso"
       tags:
         - all
         - addons
         - self
-  '/self/addons/{addonId}/tags':
+  "/self/addons/{addonId}/tags":
     get:
       operationId: getSelfAddonsAddonIdTags
       parameters:
@@ -3750,7 +3752,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getAddonTags
           schema:
             items:
@@ -3760,7 +3762,7 @@ paths:
         - all
         - addons
         - self
-  '/self/addons/{addonId}/tags/{tag}':
+  "/self/addons/{addonId}/tags/{tag}":
     delete:
       operationId: deleteSelfAddonsAddonIdTagsTag
       parameters:
@@ -3773,7 +3775,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteAddonTag
       tags:
         - all
@@ -3794,9 +3796,9 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '200':
+        "200":
           description: addAddonTag
       tags:
         - all
@@ -3809,11 +3811,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplications
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
@@ -3822,22 +3824,22 @@ paths:
     post:
       consumes:
         - application/json
-      description: 'Creates an application. If you want to create a Github app, you need to replace the oauthApp field with what you will find here: https://github.com/CleverCloud/doc.clever-cloud.com/issues/179'
+      description: "Creates an application. If you want to create a Github app, you need to replace the oauthApp field with what you will find here: https://github.com/CleverCloud/doc.clever-cloud.com/issues/179"
       operationId: postSelfApplications
       parameters:
         - in: body
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeApplication'
+            $ref: "#/definitions/WannabeApplication"
       responses:
-        '200':
+        "200":
           description: addApplication
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}':
+  "/self/applications/{appId}":
     delete:
       operationId: deleteSelfApplicationsAppId
       parameters:
@@ -3846,7 +3848,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteApplication
       tags:
         - all
@@ -3862,10 +3864,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplication
           schema:
-            $ref: '#/definitions/Application'
+            $ref: "#/definitions/Application"
       tags:
         - all
         - applications
@@ -3883,15 +3885,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeApplication'
+            $ref: "#/definitions/WannabeApplication"
       responses:
-        '200':
+        "200":
           description: editApplication
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/addons':
+  "/self/applications/{appId}/addons":
     get:
       operationId: getSelfApplicationsAppIdAddons
       parameters:
@@ -3902,11 +3904,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAddonsLinkedToApplication
           schema:
             items:
-              $ref: '#/definitions/Addon'
+              $ref: "#/definitions/Addon"
             type: array
       tags:
         - all
@@ -3924,16 +3926,16 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '200':
+        "200":
           description: linkAddonToApplication
       tags:
         - all
         - addons
         - applications
         - self
-  '/self/applications/{appId}/addons/env':
+  "/self/applications/{appId}/addons/env":
     get:
       operationId: getSelfApplicationsAppIdAddonsEnv
       parameters:
@@ -3944,18 +3946,18 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getEnvOfAddonsLinkedToApplication
           schema:
             items:
-              $ref: '#/definitions/Env'
+              $ref: "#/definitions/Env"
             type: array
       tags:
         - all
         - addons
         - applications
         - self
-  '/self/applications/{appId}/addons/{addonId}':
+  "/self/applications/{appId}/addons/{addonId}":
     delete:
       operationId: deleteSelfApplicationsAppIdAddonsAddonId
       parameters:
@@ -3968,14 +3970,14 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: unlinkAddonFromApplication
       tags:
         - all
         - addons
         - applications
         - self
-  '/self/applications/{appId}/branch':
+  "/self/applications/{appId}/branch":
     put:
       parameters:
         - in: path
@@ -3989,7 +3991,7 @@ paths:
         - all
         - applications
         - self
-  '/self/applications/{appId}/branches':
+  "/self/applications/{appId}/branches":
     get:
       parameters:
         - in: path
@@ -4003,7 +4005,7 @@ paths:
         - all
         - applications
         - self
-  '/self/applications/{appId}/dependencies':
+  "/self/applications/{appId}/dependencies":
     get:
       operationId: getSelfApplicationsAppIdDependencies
       parameters:
@@ -4014,17 +4016,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationDependencies
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/dependencies/env':
+  "/self/applications/{appId}/dependencies/env":
     get:
       parameters:
         - in: path
@@ -4032,17 +4034,17 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: Get env variables defined by application dependencies
           schema:
             items:
-              $ref: '#/definitions/LinkedAppEnv'
+              $ref: "#/definitions/LinkedAppEnv"
             type: array
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/dependencies/{dependencyId}':
+  "/self/applications/{appId}/dependencies/{dependencyId}":
     delete:
       operationId: deleteSelfApplicationsAppIdDependenciesDependencyId
       parameters:
@@ -4055,7 +4057,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteApplicationDependency
       tags:
         - all
@@ -4078,15 +4080,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeApplication'
+            $ref: "#/definitions/WannabeApplication"
       responses:
-        '200':
+        "200":
           description: addApplicationDependency
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/dependents':
+  "/self/applications/{appId}/dependents":
     get:
       operationId: getSelfApplicationsAppIdDependents
       parameters:
@@ -4097,17 +4099,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationDependents
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/deployments':
+  "/self/applications/{appId}/deployments":
     get:
       operationId: getSelfApplicationsAppIdDeployments
       parameters:
@@ -4130,17 +4132,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationDeployments
           schema:
             items:
-              $ref: '#/definitions/Deployment'
+              $ref: "#/definitions/Deployment"
             type: array
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/deployments/{deploymentId}/instances':
+  "/self/applications/{appId}/deployments/{deploymentId}/instances":
     delete:
       operationId: deleteSelfApplicationsAppIdDeploymentsDeploymentIdInstances
       parameters:
@@ -4153,13 +4155,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: cancelDeploy
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/env':
+  "/self/applications/{appId}/env":
     get:
       operationId: getSelfApplicationsAppIdEnv
       parameters:
@@ -4170,11 +4172,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: editApplicationEnv
           schema:
             items:
-              $ref: '#/definitions/ListEnv'
+              $ref: "#/definitions/ListEnv"
             type: array
       tags:
         - all
@@ -4193,15 +4195,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeEnv'
+            $ref: "#/definitions/WannabeEnv"
       responses:
-        '200':
+        "200":
           description: editApplicationEnvironment
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/env/{envName}':
+  "/self/applications/{appId}/env/{envName}":
     delete:
       operationId: deleteSelfApplicationsAppIdEnvEnvName
       parameters:
@@ -4214,7 +4216,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: removeApplicationEnv
       tags:
         - all
@@ -4237,15 +4239,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeEnv'
+            $ref: "#/definitions/WannabeEnv"
       responses:
-        '200':
+        "200":
           description: editApplicationEnv
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/exposed_env':
+  "/self/applications/{appId}/exposed_env":
     get:
       parameters:
         - in: path
@@ -4272,7 +4274,7 @@ paths:
         - all
         - applications
         - self
-  '/self/applications/{appId}/instances':
+  "/self/applications/{appId}/instances":
     delete:
       operationId: deleteSelfApplicationsAppIdInstances
       parameters:
@@ -4281,7 +4283,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: undeployApplication
       tags:
         - all
@@ -4297,11 +4299,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplicationInstances
           schema:
             items:
-              $ref: '#/definitions/Instance'
+              $ref: "#/definitions/Instance"
             type: array
       tags:
         - all
@@ -4319,13 +4321,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: redeployApplication
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/instances/{instanceId}':
+  "/self/applications/{appId}/instances/{instanceId}":
     get:
       parameters:
         - in: path
@@ -4340,12 +4342,12 @@ paths:
         default:
           description: getApplicationInstance
           schema:
-            $ref: '#/definitions/AppInstance'
+            $ref: "#/definitions/AppInstance"
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/tags':
+  "/self/applications/{appId}/tags":
     get:
       operationId: getSelfApplicationsAppIdTags
       parameters:
@@ -4354,7 +4356,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getApplicationTags
           schema:
             items:
@@ -4364,7 +4366,7 @@ paths:
         - all
         - applications
         - self
-  '/self/applications/{appId}/tags/{tag}':
+  "/self/applications/{appId}/tags/{tag}":
     delete:
       operationId: deleteSelfApplicationsAppIdTagsTag
       parameters:
@@ -4377,7 +4379,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteApplicationTag
       tags:
         - all
@@ -4398,15 +4400,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '200':
+        "200":
           description: addApplicationTag
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/vhosts':
+  "/self/applications/{appId}/vhosts":
     get:
       operationId: getSelfApplicationsAppIdVhosts
       parameters:
@@ -4417,17 +4419,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getVhosts
           schema:
             items:
-              $ref: '#/definitions/Vhost'
+              $ref: "#/definitions/Vhost"
             type: array
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/vhosts/favourite':
+  "/self/applications/{appId}/vhosts/favourite":
     delete:
       operationId: deleteSelfApplicationsAppIdVhostsFavourite
       parameters:
@@ -4436,7 +4438,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: unmarkFavouriteVhost
       tags:
         - all
@@ -4452,10 +4454,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getFavouriteVhost
           schema:
-            $ref: '#/definitions/Vhost'
+            $ref: "#/definitions/Vhost"
       tags:
         - all
         - applications
@@ -4473,15 +4475,15 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Vhost'
+            $ref: "#/definitions/Vhost"
       responses:
-        '200':
+        "200":
           description: markFavouriteVhost
       tags:
         - all
         - applications
         - self
-  '/self/applications/{appId}/vhosts/{domain}':
+  "/self/applications/{appId}/vhosts/{domain}":
     delete:
       operationId: deleteSelfApplicationsAppIdVhostsDomain
       parameters:
@@ -4494,7 +4496,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: removeVhost
       tags:
         - all
@@ -4517,9 +4519,9 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Vhost'
+            $ref: "#/definitions/Vhost"
       responses:
-        '200':
+        "200":
           description: addVhost
       tags:
         - all
@@ -4535,11 +4537,12 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Avatar'
+            $ref: "#/definitions/Avatar"
       responses:
-        '200':
-          description: |-
+        "200":
+          description: >-
             setUserAvatar
+
             setUserAvatarFromSource
       tags:
         - all
@@ -4551,10 +4554,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: changeUserPassword
           schema:
-            $ref: '#/definitions/Change%20Password'
+            $ref: "#/definitions/Change%20Password"
       tags:
         - all
         - self
@@ -4563,7 +4566,7 @@ paths:
       operationId: getSelfConfirmationEmail
       parameters: []
       responses:
-        '200':
+        "200":
           description: getConfirmationEmail
       tags:
         - all
@@ -4575,11 +4578,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getConsumers
           schema:
             items:
-              $ref: '#/definitions/Consumer'
+              $ref: "#/definitions/Consumer"
             type: array
       tags:
         - all
@@ -4593,14 +4596,14 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeConsumer'
+            $ref: "#/definitions/WannabeConsumer"
       responses:
-        '200':
+        "200":
           description: createConsumer
       tags:
         - all
         - self
-  '/self/consumers/{key}':
+  "/self/consumers/{key}":
     delete:
       operationId: deleteSelfConsumersKey
       parameters:
@@ -4609,7 +4612,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteConsumer
       tags:
         - all
@@ -4624,10 +4627,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getConsumer
           schema:
-            $ref: '#/definitions/Consumer'
+            $ref: "#/definitions/Consumer"
       tags:
         - all
         - self
@@ -4644,14 +4647,14 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeConsumer'
+            $ref: "#/definitions/WannabeConsumer"
       responses:
-        '200':
+        "200":
           description: PUT same consumer data as in POST.
       tags:
         - all
         - self
-  '/self/consumers/{key}/secret':
+  "/self/consumers/{key}/secret":
     get:
       operationId: getSelfConsumersKeySecret
       parameters:
@@ -4662,10 +4665,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getConsumerSecret
           schema:
-            $ref: '#/definitions/Secret'
+            $ref: "#/definitions/Secret"
       tags:
         - all
         - self
@@ -4688,10 +4691,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getConsumptions
           schema:
-            $ref: '#/definitions/Conso'
+            $ref: "#/definitions/Conso"
       tags:
         - all
         - self
@@ -4702,10 +4705,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getAmount
           schema:
-            $ref: '#/definitions/Credits'
+            $ref: "#/definitions/Credits"
       tags:
         - all
         - self
@@ -4714,7 +4717,7 @@ paths:
       operationId: getSelfEmails
       parameters: []
       responses:
-        '200':
+        "200":
           description: getEmailAddresses
           schema:
             items:
@@ -4723,7 +4726,7 @@ paths:
       tags:
         - all
         - self
-  '/self/emails/{email}':
+  "/self/emails/{email}":
     delete:
       operationId: deleteSelfEmailsEmail
       parameters:
@@ -4732,7 +4735,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: removeEmailAddress
       tags:
         - all
@@ -4748,9 +4751,9 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '200':
+        "200":
           description: addEmailAddress
       tags:
         - all
@@ -4760,7 +4763,7 @@ paths:
       operationId: getSelfId
       parameters: []
       responses:
-        '200':
+        "200":
           description: getId
           schema:
             type: string
@@ -4774,11 +4777,11 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getInstancesForAllApps
           schema:
             items:
-              $ref: '#/definitions/Instance'
+              $ref: "#/definitions/Instance"
             type: array
       tags:
         - all
@@ -4790,16 +4793,16 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getSshKeys
           schema:
             items:
-              $ref: '#/definitions/Key'
+              $ref: "#/definitions/Key"
             type: array
       tags:
         - all
         - self
-  '/self/keys/{key}':
+  "/self/keys/{key}":
     delete:
       operationId: deleteSelfKeysKey
       parameters:
@@ -4808,7 +4811,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: removeSshKey
       tags:
         - all
@@ -4824,14 +4827,14 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/Body'
+            $ref: "#/definitions/Body"
       responses:
-        '200':
+        "200":
           description: addSshKey
       tags:
         - all
         - self
-  '/self/mfa/{kind}':
+  "/self/mfa/{kind}":
     delete:
       parameters:
         - in: path
@@ -4868,7 +4871,7 @@ paths:
       tags:
         - all
         - self
-  '/self/mfa/{kind}/backupcodes':
+  "/self/mfa/{kind}/backupcodes":
     get:
       parameters:
         - in: path
@@ -4881,7 +4884,7 @@ paths:
       tags:
         - all
         - self
-  '/self/mfa/{kind}/confirmation':
+  "/self/mfa/{kind}/confirmation":
     post:
       parameters:
         - in: path
@@ -4899,7 +4902,7 @@ paths:
       operationId: getSelfPaymentInfo
       parameters: []
       responses:
-        '200':
+        "200":
           description: getPaymentInfo
       tags:
         - all
@@ -4909,7 +4912,7 @@ paths:
       operationId: getSelfPaymentsBillings
       parameters: []
       responses:
-        '200':
+        "200":
           description: getInvoices
       tags:
         - all
@@ -4919,13 +4922,13 @@ paths:
       operationId: postSelfPaymentsBillings
       parameters: []
       responses:
-        '200':
+        "200":
           description: buyDrops
       tags:
         - all
         - payments
         - self
-  '/self/payments/billings/{bid}':
+  "/self/payments/billings/{bid}":
     delete:
       operationId: deleteSelfPaymentsBillingsBid
       parameters:
@@ -4934,7 +4937,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deletePurchaseOrder
       tags:
         - all
@@ -4948,7 +4951,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getInvoice
       tags:
         - all
@@ -4962,13 +4965,13 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: choosePaymentProvider
       tags:
         - all
         - payments
         - self
-  '/self/payments/billings/{bid}.pdf':
+  "/self/payments/billings/{bid}.pdf":
     get:
       operationId: getSelfPaymentsBillingsBidPdf
       parameters:
@@ -4981,13 +4984,13 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: getPdfInvoice
       tags:
         - all
         - payments
         - self
-  '/self/payments/fullprice/{price}':
+  "/self/payments/fullprice/{price}":
     get:
       operationId: getSelfPaymentsFullpricePrice
       parameters:
@@ -4996,7 +4999,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: priceWithTax
       tags:
         - all
@@ -5007,7 +5010,7 @@ paths:
       operationId: getSelfPaymentsMethods
       parameters: []
       responses:
-        '200':
+        "200":
           description: getUserPaymentMethods
       tags:
         - all
@@ -5017,7 +5020,7 @@ paths:
       operationId: postSelfPaymentsMethods
       parameters: []
       responses:
-        '200':
+        "200":
           description: addUserMethod
       tags:
         - all
@@ -5040,7 +5043,7 @@ paths:
         - all
         - payments
         - self
-  '/self/payments/methods/{mId}':
+  "/self/payments/methods/{mId}":
     delete:
       operationId: deleteSelfPaymentsMethodsMId
       parameters:
@@ -5049,7 +5052,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: deleteUserCard
       tags:
         - all
@@ -5078,7 +5081,7 @@ paths:
       operationId: deleteSelfPaymentsRecurring
       parameters: []
       responses:
-        '200':
+        "200":
           description: deleteRecurrentPayment
       tags:
         - all
@@ -5106,7 +5109,7 @@ paths:
       operationId: deleteSelfTokens
       parameters: []
       responses:
-        '200':
+        "200":
           description: revokeAllTokens
       tags:
         - all
@@ -5117,16 +5120,16 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getSelfTokens
           schema:
             items:
-              $ref: '#/definitions/Token'
+              $ref: "#/definitions/Token"
             type: array
       tags:
         - all
         - self
-  '/self/tokens/{token}':
+  "/self/tokens/{token}":
     delete:
       operationId: deleteSelfTokensToken
       parameters:
@@ -5135,7 +5138,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: revokeToken
       tags:
         - all
@@ -5149,7 +5152,7 @@ paths:
           required: false
           type: string
       responses:
-        '200':
+        "200":
           description: validateEmail
       tags:
         - all
@@ -5161,10 +5164,10 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getSummary
           schema:
-            $ref: '#/definitions/Summary'
+            $ref: "#/definitions/Summary"
       tags:
         - all
   /users:
@@ -5201,16 +5204,17 @@ paths:
           name: body
           required: false
           schema:
-            $ref: '#/definitions/WannabeUser'
+            $ref: "#/definitions/WannabeUser"
       responses:
-        '200':
-          description: |-
+        "200":
+          description: >-
             createUser
+
             createUserFromForm
       tags:
         - all
         - users
-  '/users/{id}':
+  "/users/{id}":
     get:
       operationId: getUsersId
       parameters:
@@ -5221,14 +5225,14 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getUser
           schema:
-            $ref: '#/definitions/User'
+            $ref: "#/definitions/User"
       tags:
         - all
         - users
-  '/users/{id}/applications':
+  "/users/{id}/applications":
     get:
       operationId: getUsersIdApplications
       parameters:
@@ -5239,17 +5243,17 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: getApplications
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
         - applications
         - users
-  '/users/{userId}/git-info':
+  "/users/{userId}/git-info":
     get:
       operationId: getUsersUserIdGitInfo
       parameters:
@@ -5258,7 +5262,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getGitInfo
       tags:
         - all
@@ -5275,16 +5279,16 @@ paths:
       produces:
         - application/json
       responses:
-        '200':
+        "200":
           description: listApps
           schema:
             items:
-              $ref: '#/definitions/Application'
+              $ref: "#/definitions/Application"
             type: array
       tags:
         - all
         - vendor
-  '/vendor/apps/{addonId}':
+  "/vendor/apps/{addonId}":
     get:
       operationId: getVendorAppsAddonId
       parameters:
@@ -5293,7 +5297,7 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: getApplicationInfo
       tags:
         - all
@@ -5306,12 +5310,12 @@ paths:
           required: true
           type: string
       responses:
-        '200':
+        "200":
           description: editApplicationConfiguration
       tags:
         - all
         - vendor
-  '/vendor/apps/{addonId}/consumptions':
+  "/vendor/apps/{addonId}/consumptions":
     post:
       operationId: postVendorBillingOwnerId
       parameters:
@@ -5323,7 +5327,7 @@ paths:
           name: body
           required: true
           schema:
-            $ref: '#/definitions/WannabeAddonBilling'
+            $ref: "#/definitions/WannabeAddonBilling"
       responses:
         default:
           description: noContent
@@ -5344,16 +5348,16 @@ definitions:
         format: date
         type: string
       id:
-        description: '`addon_${uuid}`'
+        description: "`addon_${uuid}`"
         type: string
       name:
         type: string
       plan:
-        $ref: '#/definitions/Plan'
+        $ref: "#/definitions/Plan"
       provider:
-        $ref: '#/definitions/Provider'
+        $ref: "#/definitions/Provider"
       realId:
-        description: '`${provider}_${uuid2}`'
+        description: "`${provider}_${uuid2}`"
         type: string
       region:
         type: string
@@ -5390,7 +5394,7 @@ definitions:
         format: int32
         type: integer
       flavor:
-        $ref: '#/definitions/Flavor'
+        $ref: "#/definitions/Flavor"
       id:
         type: string
       ip:
@@ -5406,7 +5410,7 @@ definitions:
       branch:
         type: string
       buildFlavor:
-        $ref: '#/definitions/Flavor'
+        $ref: "#/definitions/Flavor"
       cancelOnPush:
         default: false
         type: boolean
@@ -5418,7 +5422,7 @@ definitions:
       deployUrl:
         type: string
       deployment:
-        $ref: '#/definitions/Deployment'
+        $ref: "#/definitions/Deployment"
       description:
         type: string
       favourite:
@@ -5430,7 +5434,7 @@ definitions:
       id:
         type: string
       instance:
-        $ref: '#/definitions/Instance'
+        $ref: "#/definitions/Instance"
       last_deploy:
         format: int32
         type: integer
@@ -5448,14 +5452,14 @@ definitions:
         type: boolean
       vhosts:
         items:
-          $ref: '#/definitions/Vhost'
+          $ref: "#/definitions/Vhost"
         type: array
       webhookSecret:
         type: string
       webhookUrl:
         type: string
       zone:
-        description: '`par` ou `mtl`'
+        description: "`par` ou `mtl`"
         type: string
     required:
       - archived
@@ -5483,16 +5487,16 @@ definitions:
       - zone
     type: object
   Avatar:
-    description: 'If you want to upload an image from your computer, send the image in the body of the request without anything else.'
+    description: If you want to upload an image from your computer, send the image in the body of the request without anything else.
     properties:
       source:
-        description: ''
+        description: ""
         properties:
           source:
             description: github or gravatar
             type: string
           value:
-            $ref: '#/definitions/URL'
+            $ref: "#/definitions/URL"
         required:
           - source
           - value
@@ -5550,7 +5554,7 @@ definitions:
       picture:
         type: string
       rights:
-        $ref: '#/definitions/ConsumerRights'
+        $ref: "#/definitions/ConsumerRights"
       url:
         type: string
     required:
@@ -5675,7 +5679,7 @@ definitions:
         type: string
       env:
         items:
-          $ref: '#/definitions/WannabeEnv'
+          $ref: "#/definitions/WannabeEnv"
         type: array
       provider_id:
         type: string
@@ -5735,14 +5739,14 @@ definitions:
   Instance:
     properties:
       buildFlavor:
-        $ref: '#/definitions/Flavor'
+        $ref: "#/definitions/Flavor"
       comingSoon:
         default: false
         type: boolean
       defaultEnv:
-        $ref: '#/definitions/Map'
+        $ref: "#/definitions/Map"
       defaultFlavor:
-        $ref: '#/definitions/Flavor'
+        $ref: "#/definitions/Flavor"
       deployments:
         items:
           type: string
@@ -5754,7 +5758,7 @@ definitions:
         type: boolean
       flavors:
         items:
-          $ref: '#/definitions/Flavor'
+          $ref: "#/definitions/Flavor"
         type: array
       instanceAndVersion:
         type: string
@@ -5762,12 +5766,12 @@ definitions:
         format: int32
         type: integer
       maxFlavor:
-        $ref: '#/definitions/Flavor'
+        $ref: "#/definitions/Flavor"
       maxInstances:
         format: int32
         type: integer
       minFlavor:
-        $ref: '#/definitions/Flavor'
+        $ref: "#/definitions/Flavor"
       minInstances:
         format: int32
         type: integer
@@ -5780,7 +5784,7 @@ definitions:
       type:
         type: string
       variant:
-        $ref: '#/definitions/Variant'
+        $ref: "#/definitions/Variant"
       version:
         type: string
     required:
@@ -5803,7 +5807,7 @@ definitions:
       key:
         type: string
       name:
-        description: ''
+        description: ""
         type: string
     required:
       - fingerprint
@@ -5818,7 +5822,7 @@ definitions:
         type: string
       env:
         items:
-          $ref: '#/definitions/WannabeEnv'
+          $ref: "#/definitions/WannabeEnv"
         type: array
     required:
       - app_id
@@ -5934,10 +5938,10 @@ definitions:
       features:
         description: The list of the feature in the addon
         items:
-          $ref: '#/definitions/Feature'
+          $ref: "#/definitions/Feature"
         type: array
       id:
-        description: '`plan_${uuid}`'
+        description: "`plan_${uuid}`"
         type: string
       name:
         description: Name of the pan
@@ -5966,7 +5970,7 @@ definitions:
         type: boolean
       features:
         items:
-          $ref: '#/definitions/Feature'
+          $ref: "#/definitions/Feature"
         type: array
       googlePlusName:
         description: The name of the google + page link to this addon (could be empty)
@@ -5988,7 +5992,7 @@ definitions:
         type: boolean
       plans:
         items:
-          $ref: '#/definitions/Plan'
+          $ref: "#/definitions/Plan"
         type: array
       regions:
         description: The differents regions where the addon is available
@@ -5999,7 +6003,7 @@ definitions:
         description: A short description of the addon
         type: string
       status:
-        description: 'The status of this addon (RELEASE, BETA, ...)'
+        description: The status of this addon (RELEASE, BETA, ...)
         type: string
       supportEmail:
         description: The mail to contact in case of issue with this addon
@@ -6008,7 +6012,7 @@ definitions:
         description: The name of the user to contact on twitter for this addon (could be empty)
         type: string
       website:
-        description: 'The website of the provider. If the addon is developped by clever-cloud, the site is "http://www.clever-cloud.com/"'
+        description: The website of the provider. If the addon is developped by clever-cloud, the site is "http://www.clever-cloud.com/"
         type: string
     required:
       - analyticsId
@@ -6209,14 +6213,14 @@ definitions:
   Token:
     properties:
       consumer:
-        $ref: '#/definitions/Consumer'
+        $ref: "#/definitions/Consumer"
       creationDate:
         format: int32
         type: integer
       lastUtilisation:
         type: string
       rights:
-        $ref: '#/definitions/Rights'
+        $ref: "#/definitions/Rights"
       token:
         type: string
     required:
@@ -6282,7 +6286,7 @@ definitions:
         default: false
         type: boolean
       id:
-        description: 'The id of the user : `user_${uuid}`'
+        description: "The id of the user : `user_${uuid}`"
         type: string
       lang:
         description: The lang of the user
@@ -6351,11 +6355,11 @@ definitions:
       name:
         type: string
       payment:
-        $ref: '#/definitions/PaymentData'
+        $ref: "#/definitions/PaymentData"
       plan:
         type: string
       providerId:
-        description: ''
+        description: ""
         type: string
       region:
         type: string
@@ -6377,7 +6381,7 @@ definitions:
   WannabeAddonProvider:
     properties:
       api:
-        $ref: '#/definitions/WannabeAddonProviderAPI'
+        $ref: "#/definitions/WannabeAddonProviderAPI"
       id:
         type: string
       name:
@@ -6396,7 +6400,7 @@ definitions:
       password:
         type: string
       production:
-        $ref: '#/definitions/WannabeAddonProviderAPIUrl'
+        $ref: "#/definitions/WannabeAddonProviderAPIUrl"
       regions:
         items:
           type: string
@@ -6404,7 +6408,7 @@ definitions:
       sso_salt:
         type: string
       test:
-        $ref: '#/definitions/WannabeAddonProviderAPIUrl'
+        $ref: "#/definitions/WannabeAddonProviderAPIUrl"
     required:
       - config_vars
       - password
@@ -6460,7 +6464,7 @@ definitions:
       name:
         type: string
       oauthApp:
-        $ref: '#/definitions/WannabeOauthApp'
+        $ref: "#/definitions/WannabeOauthApp"
       oauthAppId:
         type: string
       oauthService:
@@ -6491,13 +6495,13 @@ definitions:
   WannabeConsumer:
     properties:
       baseUrl:
-        $ref: '#/definitions/URL'
+        $ref: "#/definitions/URL"
       description:
         type: string
       name:
         type: string
       picture:
-        description: ''
+        description: ""
         type: string
       rights:
         properties:
@@ -6511,7 +6515,7 @@ definitions:
           - right
         type: object
       url:
-        $ref: '#/definitions/URL'
+        $ref: "#/definitions/URL"
     required:
       - baseUrl
       - name
@@ -6533,7 +6537,7 @@ definitions:
       name:
         type: string
       type:
-        description: 'BOOLEAN, INTERVAL, FILESIZE, NUMBER, PERCENTAGE'
+        description: BOOLEAN, INTERVAL, FILESIZE, NUMBER, PERCENTAGE
         type: string
     required:
       - name
@@ -6591,7 +6595,7 @@ definitions:
     properties:
       features:
         items:
-          $ref: '#/definitions/WannabePlanFeature'
+          $ref: "#/definitions/WannabePlanFeature"
         type: array
       name:
         type: string
@@ -6620,7 +6624,7 @@ definitions:
       - value
     type: object
   WannabeUser:
-    description: ''
+    description: ""
     properties:
       address:
         type: string
@@ -6629,7 +6633,7 @@ definitions:
       country:
         type: string
       email:
-        description: ''
+        description: ""
         type: string
       lang:
         type: string
