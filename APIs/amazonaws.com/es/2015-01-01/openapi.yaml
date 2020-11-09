@@ -2019,6 +2019,89 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2015-01-01/packages/{PackageID}/history':
+    get:
+      operationId: GetPackageVersionHistory
+      description: 'Returns a list of versions of the package, along with their creation time and commit message.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPackageVersionHistoryResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: PackageID
+          in: path
+          required: true
+          description: Returns an audit history of versions of the package.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: Limits results to a maximum number of versions.
+          schema:
+            type: integer
+            description: ' Set this value to limit the number of results returned. '
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.'
+          schema:
+            type: string
+            description: ' Paginated APIs accepts NextToken input to returns next page results and provides a NextToken output in the response which can be used by the client to retrieve more results. '
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2015-01-01/es/upgradeDomain/{DomainName}/history':
     get:
       operationId: GetUpgradeHistory
@@ -2804,6 +2887,95 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /2015-01-01/packages/update:
+    post:
+      operationId: UpdatePackage
+      description: Updates a package for use with Amazon ES domains.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePackageResponse'
+        '480':
+          description: BaseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - PackageID
+                - PackageSource
+              properties:
+                PackageID:
+                  description: Unique identifier for the package.
+                  type: string
+                PackageSource:
+                  description: The S3 location for importing the package specified as <code>S3BucketName</code> and <code>S3Key</code>
+                  type: object
+                  properties:
+                    S3BucketName:
+                      allOf:
+                        - $ref: '#/components/schemas/S3BucketName'
+                        - description: Name of the bucket containing the package.
+                    S3Key:
+                      allOf:
+                        - $ref: '#/components/schemas/S3Key'
+                        - description: Key (file name) of the package.
+                PackageDescription:
+                  description: New description of the package.
+                  type: string
+                  maxLength: 1024
+                CommitMessage:
+                  description: An info message for the new version which will be shown as part of <code>GetPackageVersionHistoryResponse</code>.
+                  type: string
+                  maxLength: 160
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2015-01-01/es/upgradeDomain:
     post:
       operationId: UpgradeElasticsearchDomain
@@ -3388,6 +3560,18 @@ components:
             - $ref: '#/components/schemas/CompatibleElasticsearchVersionsList'
             - description: ' A map of compatible Elasticsearch versions returned as part of the <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
       description: ' Container for response returned by <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
+    GetPackageVersionHistoryResponse:
+      type: object
+      properties:
+        PackageID:
+          $ref: '#/components/schemas/PackageID'
+        PackageVersionHistoryList:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersionHistoryList'
+            - description: List of <code>PackageVersionHistory</code> objects.
+        NextToken:
+          $ref: '#/components/schemas/String'
+      description: ' Container for response returned by <code> <a>GetPackageVersionHistory</a> </code> operation. '
     GetUpgradeHistoryResponse:
       type: object
       properties:
@@ -3512,6 +3696,14 @@ components:
             - $ref: '#/components/schemas/ElasticsearchDomainConfig'
             - description: 'The status of the updated Elasticsearch domain. '
       description: The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.
+    UpdatePackageResponse:
+      type: object
+      properties:
+        PackageDetails:
+          allOf:
+            - $ref: '#/components/schemas/PackageDetails'
+            - description: Information about the package <code>PackageDetails</code>.
+      description: ' Container for response returned by <code> <a>UpdatePackage</a> </code> operation. '
     UpgradeElasticsearchDomainResponse:
       type: object
       properties:
@@ -3771,6 +3963,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/DomainPackageStatus'
             - description: State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
+        PackageVersion:
+          $ref: '#/components/schemas/PackageVersion'
         ReferencePath:
           allOf:
             - $ref: '#/components/schemas/ReferencePath'
@@ -3869,6 +4063,9 @@ components:
             - $ref: '#/components/schemas/OptionStatus'
             - description: Specifies the status of the Cognito options for the specified Elasticsearch domain.
       description: Status of the Cognito options for the specified Elasticsearch domain.
+    CommitMessage:
+      type: string
+      maxLength: 160
     CompatibleVersionsMap:
       type: object
       properties:
@@ -4306,6 +4503,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreatedAt'
             - description: Timestamp which tells creation date of the package.
+        LastUpdatedAt:
+          $ref: '#/components/schemas/LastUpdated'
+        AvailablePackageVersion:
+          $ref: '#/components/schemas/PackageVersion'
         ErrorDetails:
           allOf:
             - $ref: '#/components/schemas/ErrorDetails'
@@ -4629,6 +4830,8 @@ components:
         - ACTIVE
         - DISSOCIATING
         - DISSOCIATION_FAILED
+    PackageVersion:
+      type: string
     ReferencePath:
       type: string
     ErrorDetails:
@@ -4811,6 +5014,15 @@ components:
       title: GetCompatibleElasticsearchVersionsRequest
       properties: {}
       description: ' Container for request parameters to <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. '
+    GetPackageVersionHistoryRequest:
+      type: object
+      title: GetPackageVersionHistoryRequest
+      properties: {}
+      description: ' Container for request parameters to <code> <a>GetPackageVersionHistory</a> </code> operation. '
+    PackageVersionHistoryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PackageVersionHistory'
     GetUpgradeHistoryRequest:
       type: object
       title: GetUpgradeHistoryRequest
@@ -4991,6 +5203,22 @@ components:
         - DELETING
         - DELETED
         - DELETE_FAILED
+    PackageVersionHistory:
+      type: object
+      properties:
+        PackageVersion:
+          allOf:
+            - $ref: '#/components/schemas/PackageVersion'
+            - description: Version of the package.
+        CommitMessage:
+          allOf:
+            - $ref: '#/components/schemas/CommitMessage'
+            - description: A message associated with the version.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/CreatedAt'
+            - description: Timestamp which tells creation time of the package version.
+      description: Details of a package version.
     ReservationToken:
       type: string
       minLength: 5
@@ -5276,6 +5504,28 @@ components:
             - $ref: '#/components/schemas/AdvancedSecurityOptionsInput'
             - description: Specifies advanced security options.
       description: Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.
+    UpdatePackageRequest:
+      type: object
+      required:
+        - PackageID
+        - PackageSource
+      title: UpdatePackageRequest
+      properties:
+        PackageID:
+          allOf:
+            - $ref: '#/components/schemas/PackageID'
+            - description: Unique identifier for the package.
+        PackageSource:
+          $ref: '#/components/schemas/PackageSource'
+        PackageDescription:
+          allOf:
+            - $ref: '#/components/schemas/PackageDescription'
+            - description: New description of the package.
+        CommitMessage:
+          allOf:
+            - $ref: '#/components/schemas/CommitMessage'
+            - description: An info message for the new version which will be shown as part of <code>GetPackageVersionHistoryResponse</code>.
+      description: ' Container for request parameters to <code> <a>UpdatePackage</a> </code> operation. '
     UpgradeElasticsearchDomainRequest:
       type: object
       required:

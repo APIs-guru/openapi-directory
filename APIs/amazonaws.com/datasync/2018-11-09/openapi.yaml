@@ -1569,6 +1569,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=FmrsService.UpdateTaskExecution:
+    post:
+      operationId: UpdateTaskExecution
+      description: '<p>Updates execution of a task.</p> <p>You can modify bandwidth throttling for a task execution that is running or queued. For more information, see <a href="https://docs.aws.amazon.com/datasync/latest/working-with-task-executions.html#adjust-bandwidth-throttling">Adjusting Bandwidth Throttling for a Task Execution</a>.</p> <note> <p>The only <code>Option</code> that can be modified by <code>UpdateTaskExecution</code> is <code> <a href="https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond">BytesPerSecond</a> </code>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTaskExecutionResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTaskExecutionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - FmrsService.UpdateTaskExecution
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1771,7 +1816,7 @@ components:
         Subdirectory:
           allOf:
             - $ref: '#/components/schemas/NfsSubdirectory'
-            - description: '<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your AWS Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on AWS Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>'
+            - description: '<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that''s exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server, run "<code>showmount -e nfs-server-name</code>" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your AWS Snowcone device, see <a href="https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone">NFS Server on AWS Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>'
         ServerHostname:
           allOf:
             - $ref: '#/components/schemas/ServerHostname'
@@ -1864,17 +1909,17 @@ components:
         S3BucketArn:
           allOf:
             - $ref: '#/components/schemas/S3BucketArn'
-            - description: 'The Amazon Resource Name (ARN) of the Amazon S3 bucket. If the bucket is on an AWS Outpost, this must be an access point ARN.'
+            - description: 'The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost, this must be an access point ARN.'
         S3StorageClass:
           allOf:
             - $ref: '#/components/schemas/S3StorageClass'
-            - description: '<p>The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard. For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts.</p> <p>For more information about S3 storage classes, see <a href="https://aws.amazon.com/s3/storage-classes/">Amazon S3 Storage Classes</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.</p>'
+            - description: '<p>The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard. For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts.</p> <p>For more information about S3 storage classes, see <a href="http://aws.amazon.com/s3/storage-classes/">Amazon S3 Storage Classes</a>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.</p>'
         S3Config:
           $ref: '#/components/schemas/S3Config'
         AgentArns:
           allOf:
             - $ref: '#/components/schemas/AgentArnList'
-            - description: 'If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your AWS Outpost. For more information about launching a DataSync agent on an Amazon Outpost, see <a>outposts-agent</a>.'
+            - description: 'If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see <a>outposts-agent</a>.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/InputTagList'
@@ -1969,7 +2014,7 @@ components:
         Excludes:
           allOf:
             - $ref: '#/components/schemas/FilterList'
-            - description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, <code>"/folder1|/folder2"</code> </p> <p> </p>'
+            - description: '<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by "|" (that is, a pipe), for example, <code>"/folder1|/folder2"</code>. </p> <p> </p>'
         Schedule:
           allOf:
             - $ref: '#/components/schemas/TaskSchedule'
@@ -2220,13 +2265,13 @@ components:
         S3StorageClass:
           allOf:
             - $ref: '#/components/schemas/S3StorageClass'
-            - description: 'The Amazon S3 storage class that you chose to store your files in when this location is used as a task destination. For more information about S3 storage classes, see <a href="https://aws.amazon.com/s3/storage-classes/">Amazon S3 Storage Classes</a> in the <i>Amazon Simple Storage Service Developer Guide</i>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.'
+            - description: 'The Amazon S3 storage class that you chose to store your files in when this location is used as a task destination. For more information about S3 storage classes, see <a href="http://aws.amazon.com/s3/storage-classes/">Amazon S3 Storage Classes</a>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a>using-storage-classes</a>.'
         S3Config:
           $ref: '#/components/schemas/S3Config'
         AgentArns:
           allOf:
             - $ref: '#/components/schemas/AgentArnList'
-            - description: 'If you are using DataSync on an Amazon Outpost, the Amazon Resource Name (ARNs) of the EC2 agents deployed on your AWS Outpost. For more information about launching a DataSync agent on an Amazon Outpost, see <a>outposts-agent</a>.'
+            - description: 'If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of the EC2 agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see <a>outposts-agent</a>.'
         CreationTime:
           allOf:
             - $ref: '#/components/schemas/Time'
@@ -2296,7 +2341,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/TaskStatus'
-            - description: '<p>The status of the task that was described.</p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User Guide.</i> </p>'
+            - description: '<p>The status of the task that was described.</p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User Guide</i>.</p>'
         Name:
           allOf:
             - $ref: '#/components/schemas/TagValue'
@@ -2678,6 +2723,22 @@ components:
             - $ref: '#/components/schemas/LogGroupArn'
             - description: The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.
       description: UpdateTaskResponse
+    UpdateTaskExecutionResponse:
+      type: object
+      properties: {}
+    UpdateTaskExecutionRequest:
+      type: object
+      required:
+        - TaskExecutionArn
+        - Options
+      title: UpdateTaskExecutionRequest
+      properties:
+        TaskExecutionArn:
+          allOf:
+            - $ref: '#/components/schemas/TaskExecutionArn'
+            - description: 'The Amazon Resource Name (ARN) of the specific task execution that is being updated. '
+        Options:
+          $ref: '#/components/schemas/Options'
     ActivationKey:
       type: string
       pattern: '[A-Z0-9]{5}(-[A-Z0-9]{5}){4}'
@@ -3047,7 +3108,7 @@ components:
         TransferStatus:
           allOf:
             - $ref: '#/components/schemas/PhaseStatus'
-            - description: The status of the TRANSFERRING Phase.
+            - description: The status of the TRANSFERRING phase.
         VerifyDuration:
           allOf:
             - $ref: '#/components/schemas/Duration'
@@ -3055,7 +3116,7 @@ components:
         VerifyStatus:
           allOf:
             - $ref: '#/components/schemas/PhaseStatus'
-            - description: The status of the VERIFYING Phase.
+            - description: The status of the VERIFYING phase.
         ErrorCode:
           allOf:
             - $ref: '#/components/schemas/string'

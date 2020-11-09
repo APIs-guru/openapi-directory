@@ -774,6 +774,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DynamoDB_20120810.DescribeExport:
+    post:
+      operationId: DescribeExport
+      description: Describes an existing table export.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeExportOutput'
+        '480':
+          description: ExportNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportNotFoundException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeExportInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DynamoDB_20120810.DescribeExport
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=DynamoDB_20120810.DescribeGlobalTable:
     post:
       operationId: DescribeGlobalTable
@@ -1038,6 +1089,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DynamoDB_20120810.ExportTableToPointInTime:
+    post:
+      operationId: ExportTableToPointInTime
+      description: 'Exports table data to an S3 bucket. The table must have point in time recovery enabled, and you can export data from any time within the point in time recovery window.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportTableToPointInTimeOutput'
+        '480':
+          description: TableNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TableNotFoundException'
+        '481':
+          description: PointInTimeRecoveryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointInTimeRecoveryUnavailableException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: InvalidExportTimeException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidExportTimeException'
+        '484':
+          description: ExportConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExportConflictException'
+        '485':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExportTableToPointInTimeInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DynamoDB_20120810.ExportTableToPointInTime
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=DynamoDB_20120810.GetItem:
     post:
       operationId: GetItem
@@ -1183,6 +1303,63 @@ paths:
             type: string
             enum:
               - DynamoDB_20120810.ListContributorInsights
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DynamoDB_20120810.ListExports:
+    post:
+      operationId: ListExports
+      description: Lists completed exports within the past 90 days.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListExportsOutput'
+        '480':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListExportsInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DynamoDB_20120810.ListExports
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2861,6 +3038,24 @@ components:
       type: object
       title: DescribeEndpointsRequest
       properties: {}
+    DescribeExportOutput:
+      type: object
+      properties:
+        ExportDescription:
+          allOf:
+            - $ref: '#/components/schemas/ExportDescription'
+            - description: Represents the properties of the export.
+    DescribeExportInput:
+      type: object
+      required:
+        - ExportArn
+      title: DescribeExportInput
+      properties:
+        ExportArn:
+          allOf:
+            - $ref: '#/components/schemas/ExportArn'
+            - description: The Amazon Resource Name (ARN) associated with the export.
+    ExportNotFoundException: {}
     DescribeGlobalTableOutput:
       type: object
       properties:
@@ -3004,6 +3199,59 @@ components:
           allOf:
             - $ref: '#/components/schemas/TableName'
             - description: The name of the table to be described.
+    ExportTableToPointInTimeOutput:
+      type: object
+      properties:
+        ExportDescription:
+          allOf:
+            - $ref: '#/components/schemas/ExportDescription'
+            - description: Contains a description of the table export.
+    ExportTableToPointInTimeInput:
+      type: object
+      required:
+        - TableArn
+        - S3Bucket
+      title: ExportTableToPointInTimeInput
+      properties:
+        TableArn:
+          allOf:
+            - $ref: '#/components/schemas/TableArn'
+            - description: The Amazon Resource Name (ARN) associated with the table to export.
+        ExportTime:
+          allOf:
+            - $ref: '#/components/schemas/ExportTime'
+            - description: Time in the past from which to export table data. The table export will be a snapshot of the table's state at this point in time.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: '<p>Providing a <code>ClientToken</code> makes the call to <code>ExportTableToPointInTimeInput</code> idempotent, meaning that multiple identical calls have the same effect as one single call.</p> <p>A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent.</p> <p>If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an <code>IdempotentParameterMismatch</code> exception.</p>'
+        S3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3Bucket'
+            - description: The name of the Amazon S3 bucket to export the snapshot to.
+        S3BucketOwner:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketOwner'
+            - description: The ID of the AWS account that owns the bucket the export will be stored in.
+        S3Prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3Prefix'
+            - description: The Amazon S3 bucket prefix to use as the file name and path of the exported snapshot.
+        S3SseAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/S3SseAlgorithm'
+            - description: '<p>Type of encryption used on the bucket where export data will be stored. Valid values for <code>S3SseAlgorithm</code> are:</p> <ul> <li> <p> <code>AES256</code> - server-side encryption with Amazon S3 managed keys</p> </li> <li> <p> <code>KMS</code> - server-side encryption with AWS KMS managed keys</p> </li> </ul>'
+        S3SseKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/S3SseKmsKeyId'
+            - description: The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
+        ExportFormat:
+          allOf:
+            - $ref: '#/components/schemas/ExportFormat'
+            - description: The format for the exported data. Valid values for <code>ExportFormat</code> are <code>DYNAMODB_JSON</code> or <code>ION</code>.
+    PointInTimeRecoveryUnavailableException: {}
+    InvalidExportTimeException: {}
+    ExportConflictException: {}
     GetItemOutput:
       type: object
       example:
@@ -3124,6 +3372,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/ListContributorInsightsLimit'
             - description: Maximum number of results to return per page.
+    ListExportsOutput:
+      type: object
+      properties:
+        ExportSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ExportSummaries'
+            - description: A list of <code>ExportSummary</code> objects.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/ExportNextToken'
+            - description: 'If this value is returned, there are additional results to be displayed. To retrieve them, call <code>ListExports</code> again, with <code>NextToken</code> set to this value.'
+    ListExportsInput:
+      type: object
+      title: ListExportsInput
+      properties:
+        TableArn:
+          allOf:
+            - $ref: '#/components/schemas/TableArn'
+            - description: The Amazon Resource Name (ARN) associated with the exported table.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListExportsMaxLimit'
+            - description: Maximum number of results to return per page.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/ExportNextToken'
+            - description: 'An optional string that, if supplied, must be copied from the output of a previous call to <code>ListExports</code>. When provided in this manner, the API fetches the next page of results.'
     ListGlobalTablesOutput:
       type: object
       properties:
@@ -3474,7 +3749,6 @@ components:
             - $ref: '#/components/schemas/SSESpecification'
             - description: The new server-side encryption settings for the restored table.
     InvalidRestoreTimeException: {}
-    PointInTimeRecoveryUnavailableException: {}
     ScanOutput:
       type: object
       example:
@@ -4591,6 +4865,9 @@ components:
         $ref: '#/components/schemas/WriteRequest'
       minItems: 1
       maxItems: 25
+    BilledSizeBytes:
+      type: integer
+      minimum: 0
     BillingMode:
       type: string
       enum:
@@ -4631,6 +4908,8 @@ components:
       type: string
       minLength: 1
       maxLength: 36
+    ClientToken:
+      type: string
     ComparisonOperator:
       type: string
       enum:
@@ -4825,7 +5104,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContributorInsightsStatus'
             - description: 'Describes the current status for contributor insights for the given table and index, if applicable.'
-      description: Represents a Contributor Insights summary entry..
+      description: Represents a Contributor Insights summary entry.
     ContributorInsightsSummaries:
       type: array
       items:
@@ -5213,6 +5492,90 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Endpoint'
+    ExportArn:
+      type: string
+      minLength: 37
+      maxLength: 1024
+    ExportDescription:
+      type: object
+      properties:
+        ExportArn:
+          allOf:
+            - $ref: '#/components/schemas/ExportArn'
+            - description: The Amazon Resource Name (ARN) of the table export.
+        ExportStatus:
+          allOf:
+            - $ref: '#/components/schemas/ExportStatus'
+            - description: 'Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.'
+        StartTime:
+          allOf:
+            - $ref: '#/components/schemas/ExportStartTime'
+            - description: The time at which the export task began.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/ExportEndTime'
+            - description: The time at which the export task completed.
+        ExportManifest:
+          allOf:
+            - $ref: '#/components/schemas/ExportManifest'
+            - description: The name of the manifest file for the export task.
+        TableArn:
+          allOf:
+            - $ref: '#/components/schemas/TableArn'
+            - description: The Amazon Resource Name (ARN) of the table that was exported.
+        TableId:
+          allOf:
+            - $ref: '#/components/schemas/TableId'
+            - description: Unique ID of the table that was exported.
+        ExportTime:
+          allOf:
+            - $ref: '#/components/schemas/ExportTime'
+            - description: Point in time from which table data was exported.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'The client token that was provided for the export task. A client token makes calls to <code>ExportTableToPointInTimeInput</code> idempotent, meaning that multiple identical calls have the same effect as one single call.'
+        S3Bucket:
+          allOf:
+            - $ref: '#/components/schemas/S3Bucket'
+            - description: The name of the Amazon S3 bucket containing the export.
+        S3BucketOwner:
+          allOf:
+            - $ref: '#/components/schemas/S3BucketOwner'
+            - description: The ID of the AWS account that owns the bucket containing the export.
+        S3Prefix:
+          allOf:
+            - $ref: '#/components/schemas/S3Prefix'
+            - description: The Amazon S3 bucket prefix used as the file name and path of the exported snapshot.
+        S3SseAlgorithm:
+          allOf:
+            - $ref: '#/components/schemas/S3SseAlgorithm'
+            - description: '<p>Type of encryption used on the bucket where export data is stored. Valid values for <code>S3SseAlgorithm</code> are:</p> <ul> <li> <p> <code>AES256</code> - server-side encryption with Amazon S3 managed keys</p> </li> <li> <p> <code>KMS</code> - server-side encryption with AWS KMS managed keys</p> </li> </ul>'
+        S3SseKmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/S3SseKmsKeyId'
+            - description: The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data is stored (if applicable).
+        FailureCode:
+          allOf:
+            - $ref: '#/components/schemas/FailureCode'
+            - description: Status code for the result of the failed export.
+        FailureMessage:
+          allOf:
+            - $ref: '#/components/schemas/FailureMessage'
+            - description: Export failure reason description.
+        ExportFormat:
+          allOf:
+            - $ref: '#/components/schemas/ExportFormat'
+            - description: The format of the exported data. Valid values for <code>ExportFormat</code> are <code>DYNAMODB_JSON</code> or <code>ION</code>.
+        BilledSizeBytes:
+          allOf:
+            - $ref: '#/components/schemas/BilledSizeBytes'
+            - description: The billable size of the table export.
+        ItemCount:
+          allOf:
+            - $ref: '#/components/schemas/ItemCount'
+            - description: The number of items exported.
+      description: Represents the properties of the exported table.
     ReplicaSettingsDescriptionList:
       type: array
       items:
@@ -5286,6 +5649,68 @@ components:
             - $ref: '#/components/schemas/AttributeValueList'
             - description: '<p>One or more values to evaluate against the supplied attribute. The number of values in the list depends on the <code>ComparisonOperator</code> being used.</p> <p>For type Number, value comparisons are numeric.</p> <p>String value comparisons for greater than, equals, or less than are based on ASCII character code values. For example, <code>a</code> is greater than <code>A</code>, and <code>a</code> is greater than <code>B</code>. For a list of code values, see <a href="http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters">http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters</a>.</p> <p>For Binary, DynamoDB treats each byte of the binary data as unsigned when it compares binary values.</p> <p>For information on specifying data types in JSON, see <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html">JSON Data Format</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>'
       description: '<p>Represents a condition to be compared with an attribute value. This condition can be used with <code>DeleteItem</code>, <code>PutItem</code>, or <code>UpdateItem</code> operations; if the comparison evaluates to true, the operation succeeds; if not, the operation fails. You can use <code>ExpectedAttributeValue</code> in one of two different ways:</p> <ul> <li> <p>Use <code>AttributeValueList</code> to specify one or more values to compare against an attribute. Use <code>ComparisonOperator</code> to specify how you want to perform the comparison. If the comparison evaluates to true, then the conditional operation succeeds.</p> </li> <li> <p>Use <code>Value</code> to specify a value that DynamoDB will compare against an attribute. If the values match, then <code>ExpectedAttributeValue</code> evaluates to true and the conditional operation succeeds. Optionally, you can also set <code>Exists</code> to false, indicating that you <i>do not</i> expect to find the attribute value in the table. In this case, the conditional operation succeeds only if the comparison evaluates to false.</p> </li> </ul> <p> <code>Value</code> and <code>Exists</code> are incompatible with <code>AttributeValueList</code> and <code>ComparisonOperator</code>. Note that if you use both sets of parameters at once, DynamoDB will return a <code>ValidationException</code> exception.</p>'
+    ExportStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+    ExportStartTime:
+      type: string
+      format: date-time
+    ExportEndTime:
+      type: string
+      format: date-time
+    ExportManifest:
+      type: string
+    ExportTime:
+      type: string
+      format: date-time
+    S3Bucket:
+      type: string
+    S3BucketOwner:
+      type: string
+    S3Prefix:
+      type: string
+    S3SseAlgorithm:
+      type: string
+      enum:
+        - AES256
+        - KMS
+    S3SseKmsKeyId:
+      type: string
+      minLength: 1
+      maxLength: 2048
+    FailureCode:
+      type: string
+    FailureMessage:
+      type: string
+    ExportFormat:
+      type: string
+      enum:
+        - DYNAMODB_JSON
+        - ION
+    ItemCount:
+      type: integer
+      minimum: 0
+    ExportNextToken:
+      type: string
+    ExportSummary:
+      type: object
+      properties:
+        ExportArn:
+          allOf:
+            - $ref: '#/components/schemas/ExportArn'
+            - description: The Amazon Resource Name (ARN) of the export.
+        ExportStatus:
+          allOf:
+            - $ref: '#/components/schemas/ExportStatus'
+            - description: 'Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.'
+      description: Summary information about an export task.
+    ExportSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ExportSummary'
     ExpressionAttributeNameVariable:
       type: string
     ExpressionAttributeValueVariable:
@@ -5562,9 +5987,6 @@ components:
     ItemCollectionSizeEstimateBound:
       type: number
       format: double
-    ItemCount:
-      type: integer
-      minimum: 0
     ItemResponse:
       type: object
       properties:
@@ -5624,6 +6046,10 @@ components:
     ListContributorInsightsLimit:
       type: integer
       maximum: 100
+    ListExportsMaxLimit:
+      type: integer
+      minimum: 1
+      maximum: 25
     PositiveIntegerObject:
       type: integer
       minimum: 1

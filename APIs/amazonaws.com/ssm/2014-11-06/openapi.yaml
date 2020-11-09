@@ -10212,7 +10212,7 @@ components:
         AssociationFilterList:
           allOf:
             - $ref: '#/components/schemas/AssociationFilterList'
-            - description: <p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>Filtering associations using the <code>InstanceID</code> attribute only returns legacy associations created using the <code>InstanceID</code> attribute. Associations targeting the instance that are part of the Target Attributes <code>ResourceGroup</code> or <code>Tags</code> are not returned.</p> </note>
+            - description: One or more filters. Use a filter to return a more specific list of results.
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -12502,7 +12502,7 @@ components:
         key:
           allOf:
             - $ref: '#/components/schemas/AssociationFilterKey'
-            - description: <p>The name of the filter.</p> <note> <p> <code>InstanceId</code> has been deprecated.</p> </note>
+            - description: The name of the filter.
         value:
           allOf:
             - $ref: '#/components/schemas/AssociationFilterValue'
@@ -12920,6 +12920,7 @@ components:
         - StartTimeAfter
         - AutomationType
         - TagKey
+        - TargetResourceGroup
     AutomationExecutionFilterValueList:
       type: array
       items:

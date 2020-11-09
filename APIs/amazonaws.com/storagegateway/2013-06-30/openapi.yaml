@@ -1476,6 +1476,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StorageGateway_20130630.DescribeBandwidthRateLimitSchedule:
+    post:
+      operationId: DescribeBandwidthRateLimitSchedule
+      description: '<p> Returns information about the bandwidth rate limit schedule of a gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. This operation is supported only in the volume and tape gateway types. </p> <p>This operation returns information about a gateway''s bandwidth rate limit schedule. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both. </p> <p> A bandwidth rate limit interval consists of one or more days of the week, a start hour and minute, an ending hour and minute, and bandwidth rate limits for uploading and downloading </p> <p> If no bandwidth rate limit schedule intervals are set for the gateway, this operation returns an empty response. To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeBandwidthRateLimitScheduleOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeBandwidthRateLimitScheduleInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.DescribeBandwidthRateLimitSchedule
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=StorageGateway_20130630.DescribeCache:
     post:
       operationId: DescribeCache
@@ -2670,6 +2715,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListTapePoolsInput'
       parameters:
+        - name: Limit
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -3466,6 +3523,51 @@ paths:
             type: string
             enum:
               - StorageGateway_20130630.UpdateBandwidthRateLimit
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StorageGateway_20130630.UpdateBandwidthRateLimitSchedule:
+    post:
+      operationId: UpdateBandwidthRateLimitSchedule
+      description: ' Updates the bandwidth rate limit schedule for a specified gateway. By default, gateways do not have bandwidth rate limit schedules, which means no bandwidth rate limiting is in effect. Use this to initiate or update a gateway''s bandwidth rate limit schedule. This operation is supported in the volume and tape gateway types. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateBandwidthRateLimitScheduleOutput'
+        '480':
+          description: InvalidGatewayRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidGatewayRequestException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBandwidthRateLimitScheduleInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StorageGateway_20130630.UpdateBandwidthRateLimitSchedule
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5047,6 +5149,23 @@ components:
         GatewayARN:
           $ref: '#/components/schemas/GatewayARN'
       description: A JSON object containing the Amazon Resource Name (ARN) of the gateway.
+    DescribeBandwidthRateLimitScheduleOutput:
+      type: object
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+        BandwidthRateLimitIntervals:
+          allOf:
+            - $ref: '#/components/schemas/BandwidthRateLimitIntervals'
+            - description: ' An array that contains the bandwidth rate limit intervals for a tape or volume gateway. '
+    DescribeBandwidthRateLimitScheduleInput:
+      type: object
+      required:
+        - GatewayARN
+      title: DescribeBandwidthRateLimitScheduleInput
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
     DescribeCacheOutput:
       type: object
       example:
@@ -6335,6 +6454,24 @@ components:
             - $ref: '#/components/schemas/BandwidthDownloadRateLimit'
             - description: The average download bandwidth rate limit in bits per second.
       description: '<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateBandwidthRateLimitInput$AverageDownloadRateLimitInBitsPerSec</a> </p> </li> <li> <p> <a>UpdateBandwidthRateLimitInput$AverageUploadRateLimitInBitsPerSec</a> </p> </li> </ul>'
+    UpdateBandwidthRateLimitScheduleOutput:
+      type: object
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+    UpdateBandwidthRateLimitScheduleInput:
+      type: object
+      required:
+        - GatewayARN
+        - BandwidthRateLimitIntervals
+      title: UpdateBandwidthRateLimitScheduleInput
+      properties:
+        GatewayARN:
+          $ref: '#/components/schemas/GatewayARN'
+        BandwidthRateLimitIntervals:
+          allOf:
+            - $ref: '#/components/schemas/BandwidthRateLimitIntervals'
+            - description: ' An array containing bandwidth rate limit schedule intervals for a gateway. When no bandwidth rate limit intervals have been scheduled, the array is empty. '
     UpdateChapCredentialsOutput:
       type: object
       example:
@@ -6881,13 +7018,71 @@ components:
     BandwidthDownloadRateLimit:
       type: integer
       minimum: 102400
+    HourOfDay:
+      type: integer
+      minimum: 0
+      maximum: 23
+    MinuteOfHour:
+      type: integer
+      minimum: 0
+      maximum: 59
+    DaysOfWeek:
+      type: array
+      items:
+        $ref: '#/components/schemas/DayOfWeek'
+      minItems: 1
+      maxItems: 7
+    BandwidthUploadRateLimit:
+      type: integer
+      minimum: 51200
+    BandwidthRateLimitInterval:
+      type: object
+      required:
+        - StartHourOfDay
+        - StartMinuteOfHour
+        - EndHourOfDay
+        - EndMinuteOfHour
+        - DaysOfWeek
+      properties:
+        StartHourOfDay:
+          allOf:
+            - $ref: '#/components/schemas/HourOfDay'
+            - description: ' The hour of the day to start the bandwidth rate limit interval. '
+        StartMinuteOfHour:
+          allOf:
+            - $ref: '#/components/schemas/MinuteOfHour'
+            - description: ' The minute of the hour to start the bandwidth rate limit interval. The interval begins at the start of that minute. To begin an interval exactly at the start of the hour, use the value <code>0</code>. '
+        EndHourOfDay:
+          allOf:
+            - $ref: '#/components/schemas/HourOfDay'
+            - description: ' The hour of the day to end the bandwidth rate limit interval. '
+        EndMinuteOfHour:
+          allOf:
+            - $ref: '#/components/schemas/MinuteOfHour'
+            - description: '<p> The minute of the hour to end the bandwidth rate limit interval. </p> <important> <p> The bandwidth rate limit interval ends at the end of the minute. To end an interval at the end of an hour, use the value <code>59</code>. </p> </important>'
+        DaysOfWeek:
+          allOf:
+            - $ref: '#/components/schemas/DaysOfWeek'
+            - description: ' The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday. '
+        AverageUploadRateLimitInBitsPerSec:
+          allOf:
+            - $ref: '#/components/schemas/BandwidthUploadRateLimit'
+            - description: ' The average upload rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the upload rate limit is not set. '
+        AverageDownloadRateLimitInBitsPerSec:
+          allOf:
+            - $ref: '#/components/schemas/BandwidthDownloadRateLimit'
+            - description: ' The average download rate limit component of the bandwidth rate limit interval, in bits per second. This field does not appear in the response if the download rate limit is not set. '
+      description: ' Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit schedule consists of one or more bandwidth rate limit intervals. A bandwidth rate limit interval defines a period of time on one or more days of the week, during which bandwidth rate limits are specified for uploading, downloading, or both. '
+    BandwidthRateLimitIntervals:
+      type: array
+      items:
+        $ref: '#/components/schemas/BandwidthRateLimitInterval'
+      minItems: 0
+      maxItems: 20
     BandwidthType:
       type: string
       minLength: 3
       maxLength: 25
-    BandwidthUploadRateLimit:
-      type: integer
-      minimum: 51200
     Boolean:
       type: boolean
     CacheStaleTimeoutInSeconds:
@@ -7248,14 +7443,6 @@ components:
       type: string
       minLength: 1
       maxLength: 25
-    HourOfDay:
-      type: integer
-      minimum: 0
-      maximum: 23
-    MinuteOfHour:
-      type: integer
-      minimum: 0
-      maximum: 59
     FileShareARNList:
       type: array
       items:
