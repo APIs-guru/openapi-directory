@@ -7544,6 +7544,12 @@ paths:
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
           schema:
             type: boolean
+        - name: VpcEndpointId
+          in: query
+          required: false
+          description: The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.
+          schema:
+            type: string
         - name: EgressOnlyInternetGatewayId
           in: query
           required: false
@@ -9837,7 +9843,7 @@ paths:
     get:
       x-aws-operation-name: CreateVpcEndpoint
       operationId: GET_CreateVpcEndpoint
-      description: '<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>'
+      description: '<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>A <code>GatewayLoadBalancer</code> endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you''ve configured as a VPC endpoint service.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>'
       responses:
         '200':
           description: Success
@@ -9861,6 +9867,7 @@ paths:
             enum:
               - Interface
               - Gateway
+              - GatewayLoadBalancer
         - name: VpcId
           in: query
           required: true
@@ -9876,7 +9883,7 @@ paths:
         - name: PolicyDocument
           in: query
           required: false
-          description: 'A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.'
+          description: '(Interface and gateway endpoints) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.'
           schema:
             type: string
         - name: RouteTableId
@@ -9893,7 +9900,7 @@ paths:
         - name: SubnetId
           in: query
           required: false
-          description: (Interface endpoint) The ID of one or more subnets in which to create an endpoint network interface.
+          description: '(Interface and Gateway Load Balancer endpoints) The ID of one or more subnets in which to create an endpoint network interface. For a Gateway Load Balancer endpoint, you can specify one subnet only.'
           schema:
             type: array
             items:
@@ -9960,7 +9967,7 @@ paths:
     post:
       x-aws-operation-name: CreateVpcEndpoint
       operationId: POST_CreateVpcEndpoint
-      description: '<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>'
+      description: '<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace Partner, or another AWS account. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint, which will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>A <code>GatewayLoadBalancer</code> endpoint is a network interface in your subnet that serves an endpoint for communicating with a Gateway Load Balancer that you''ve configured as a VPC endpoint service.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>'
       responses:
         '200':
           description: Success
@@ -10099,7 +10106,7 @@ paths:
     get:
       x-aws-operation-name: CreateVpcEndpointServiceConfiguration
       operationId: GET_CreateVpcEndpointServiceConfiguration
-      description: '<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service.</p> <p>To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p> <p>If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect.</p> <p>To create an endpoint service configuration, you must first create one of the following for your service:</p> <ul> <li> <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html">Network Load Balancer</a>. Service consumers connect to your service using an interface endpoint.</p> </li> <li> <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html">Gateway Load Balancer</a>. Service consumers connect to your service using a Gateway Load Balancer endpoint.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p> <p>If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -10123,13 +10130,24 @@ paths:
         - name: PrivateDnsName
           in: query
           required: false
-          description: The private DNS name to assign to the VPC endpoint service.
+          description: (Interface endpoint configuration) The private DNS name to assign to the VPC endpoint service.
           schema:
             type: string
         - name: NetworkLoadBalancerArn
           in: query
-          required: true
+          required: false
           description: The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your service.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: item
+        - name: GatewayLoadBalancerArn
+          in: query
+          required: false
+          description: The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.
           schema:
             type: array
             items:
@@ -10179,7 +10197,7 @@ paths:
     post:
       x-aws-operation-name: CreateVpcEndpointServiceConfiguration
       operationId: POST_CreateVpcEndpointServiceConfiguration
-      description: '<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service.</p> <p>To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p> <p>If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect.</p> <p>To create an endpoint service configuration, you must first create one of the following for your service:</p> <ul> <li> <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html">Network Load Balancer</a>. Service consumers connect to your service using an interface endpoint.</p> </li> <li> <p>A <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html">Gateway Load Balancer</a>. Service consumers connect to your service using a Gateway Load Balancer endpoint.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p> <p>If you set the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -14158,7 +14176,7 @@ paths:
     get:
       x-aws-operation-name: DeleteVpcEndpoints
       operationId: GET_DeleteVpcEndpoints
-      description: Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint deletes the endpoint network interfaces.
+      description: Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint or a Gateway Load Balancer endpoint deletes the endpoint network interfaces. Gateway Load Balancer endpoints can only be deleted if the routes that are associated with the endpoint are deleted.
       responses:
         '200':
           description: Success
@@ -14209,7 +14227,7 @@ paths:
     post:
       x-aws-operation-name: DeleteVpcEndpoints
       operationId: POST_DeleteVpcEndpoints
-      description: Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint deletes the endpoint network interfaces.
+      description: Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes the endpoint routes in the route tables that were associated with the endpoint. Deleting an interface endpoint or a Gateway Load Balancer endpoint deletes the endpoint network interfaces. Gateway Load Balancer endpoints can only be deleted if the routes that are associated with the endpoint are deleted.
       responses:
         '200':
           description: Success
@@ -27670,7 +27688,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
+          description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>vpc-endpoint-type</code> - The type of VPC endpoint (<code>Interface</code> | <code>Gateway</code> | <code>GatewayLoadBalancer</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -37287,7 +37305,7 @@ paths:
     get:
       x-aws-operation-name: ModifyVpcEndpoint
       operationId: GET_ModifyVpcEndpoint
-      description: 'Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
+      description: 'Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -37317,7 +37335,7 @@ paths:
         - name: PolicyDocument
           in: query
           required: false
-          description: A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
+          description: (Interface and gateway endpoints) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
           schema:
             type: string
         - name: AddRouteTableId
@@ -37345,7 +37363,7 @@ paths:
         - name: AddSubnetId
           in: query
           required: false
-          description: (Interface endpoint) One or more subnet IDs in which to serve the endpoint.
+          description: '(Interface and Gateway Load Balancer endpoints) One or more subnet IDs in which to serve the endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.'
           schema:
             type: array
             items:
@@ -37417,7 +37435,7 @@ paths:
     post:
       x-aws-operation-name: ModifyVpcEndpoint
       operationId: POST_ModifyVpcEndpoint
-      description: 'Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
+      description: 'Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface, gateway, or Gateway Load Balancer). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.'
       responses:
         '200':
           description: Success
@@ -37544,7 +37562,7 @@ paths:
     get:
       x-aws-operation-name: ModifyVpcEndpointServiceConfiguration
       operationId: GET_ModifyVpcEndpointServiceConfiguration
-      description: '<p>Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.</p> <p>If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.</p> <p>If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -37568,13 +37586,13 @@ paths:
         - name: PrivateDnsName
           in: query
           required: false
-          description: The private DNS name to assign to the endpoint service.
+          description: (Interface endpoint configuration) The private DNS name to assign to the endpoint service.
           schema:
             type: string
         - name: RemovePrivateDnsName
           in: query
           required: false
-          description: Removes the private DNS name of the endpoint service.
+          description: (Interface endpoint configuration) Removes the private DNS name of the endpoint service.
           schema:
             type: boolean
         - name: AcceptanceRequired
@@ -37598,6 +37616,28 @@ paths:
           in: query
           required: false
           description: The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your service configuration.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: item
+        - name: AddGatewayLoadBalancerArn
+          in: query
+          required: false
+          description: The Amazon Resource Names (ARNs) of Gateway Load Balancers to add to your service configuration.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: item
+        - name: RemoveGatewayLoadBalancerArn
+          in: query
+          required: false
+          description: The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove from your service configuration.
           schema:
             type: array
             items:
@@ -37630,7 +37670,7 @@ paths:
     post:
       x-aws-operation-name: ModifyVpcEndpointServiceConfiguration
       operationId: POST_ModifyVpcEndpointServiceConfiguration
-      description: '<p>Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.</p> <p>If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
+      description: '<p>Modifies the attributes of your VPC endpoint service configuration. You can change the Network Load Balancers or Gateway Load Balancers for your service, and you can specify whether acceptance is required for requests to connect to your endpoint service through an interface VPC endpoint.</p> <p>If you set or modify the private DNS name, you must prove that you own the private DNS domain name. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-services-dns-validation.html">VPC Endpoint Service Private DNS Name Verification</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -40371,6 +40411,12 @@ paths:
           description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
           schema:
             type: boolean
+        - name: VpcEndpointId
+          in: query
+          required: false
+          description: The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.
+          schema:
+            type: string
         - name: EgressOnlyInternetGatewayId
           in: query
           required: false
@@ -58898,6 +58944,10 @@ components:
             - xml:
                 name: dryRun
               description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        VpcEndpointId:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.
         EgressOnlyInternetGatewayId:
           allOf:
             - $ref: '#/components/schemas/EgressOnlyInternetGatewayId'
@@ -60240,6 +60290,7 @@ components:
       enum:
         - Interface
         - Gateway
+        - GatewayLoadBalancer
     VpcEndpointRouteTableIdList:
       type: array
       items:
@@ -60287,7 +60338,7 @@ components:
         PolicyDocument:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.'
+            - description: '(Interface and gateway endpoints) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.'
         RouteTableIds:
           allOf:
             - $ref: '#/components/schemas/VpcEndpointRouteTableIdList'
@@ -60299,7 +60350,7 @@ components:
             - $ref: '#/components/schemas/VpcEndpointSubnetIdList'
             - xml:
                 name: SubnetId
-              description: (Interface endpoint) The ID of one or more subnets in which to create an endpoint network interface.
+              description: '(Interface and Gateway Load Balancer endpoints) The ID of one or more subnets in which to create an endpoint network interface. For a Gateway Load Balancer endpoint, you can specify one subnet only.'
         SecurityGroupIds:
           allOf:
             - $ref: '#/components/schemas/VpcEndpointSecurityGroupIdList'
@@ -60429,8 +60480,6 @@ components:
       description: Describes a VPC endpoint.
     CreateVpcEndpointServiceConfigurationRequest:
       type: object
-      required:
-        - NetworkLoadBalancerArns
       title: CreateVpcEndpointServiceConfigurationRequest
       properties:
         DryRun:
@@ -60444,13 +60493,19 @@ components:
         PrivateDnsName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The private DNS name to assign to the VPC endpoint service.
+            - description: (Interface endpoint configuration) The private DNS name to assign to the VPC endpoint service.
         NetworkLoadBalancerArns:
           allOf:
             - $ref: '#/components/schemas/ValueStringList'
             - xml:
                 name: NetworkLoadBalancerArn
               description: The Amazon Resource Names (ARNs) of one or more Network Load Balancers for your service.
+        GatewayLoadBalancerArns:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - xml:
+                name: GatewayLoadBalancerArn
+              description: The Amazon Resource Names (ARNs) of one or more Gateway Load Balancers.
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -60512,6 +60567,12 @@ components:
             - xml:
                 name: networkLoadBalancerArnSet
               description: The Amazon Resource Names (ARNs) of the Network Load Balancers for the service.
+        GatewayLoadBalancerArns:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - xml:
+                name: gatewayLoadBalancerArnSet
+              description: The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the service.
         BaseEndpointDnsNames:
           allOf:
             - $ref: '#/components/schemas/ValueStringList'
@@ -66761,7 +66822,7 @@ components:
             - $ref: '#/components/schemas/FilterList'
             - xml:
                 name: Filter
-              description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
+              description: '<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code> - The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code> - The state of the endpoint (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code> | <code>rejected</code> | <code>failed</code>).</p> </li> <li> <p> <code>vpc-endpoint-type</code> - The type of VPC endpoint (<code>Interface</code> | <code>Gateway</code> | <code>GatewayLoadBalancer</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -75702,7 +75763,7 @@ components:
         PolicyDocument:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
+            - description: (Interface and gateway endpoints) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format.
         AddRouteTableIds:
           allOf:
             - $ref: '#/components/schemas/VpcEndpointRouteTableIdList'
@@ -75720,7 +75781,7 @@ components:
             - $ref: '#/components/schemas/VpcEndpointSubnetIdList'
             - xml:
                 name: AddSubnetId
-              description: (Interface endpoint) One or more subnet IDs in which to serve the endpoint.
+              description: '(Interface and Gateway Load Balancer endpoints) One or more subnet IDs in which to serve the endpoint. For a Gateway Load Balancer endpoint, you can specify only one subnet.'
         RemoveSubnetIds:
           allOf:
             - $ref: '#/components/schemas/VpcEndpointSubnetIdList'
@@ -75761,11 +75822,11 @@ components:
         PrivateDnsName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The private DNS name to assign to the endpoint service.
+            - description: (Interface endpoint configuration) The private DNS name to assign to the endpoint service.
         RemovePrivateDnsName:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Removes the private DNS name of the endpoint service.
+            - description: (Interface endpoint configuration) Removes the private DNS name of the endpoint service.
         AcceptanceRequired:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -75782,6 +75843,18 @@ components:
             - xml:
                 name: RemoveNetworkLoadBalancerArn
               description: The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your service configuration.
+        AddGatewayLoadBalancerArns:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - xml:
+                name: AddGatewayLoadBalancerArn
+              description: The Amazon Resource Names (ARNs) of Gateway Load Balancers to add to your service configuration.
+        RemoveGatewayLoadBalancerArns:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - xml:
+                name: RemoveGatewayLoadBalancerArn
+              description: The Amazon Resource Names (ARNs) of Gateway Load Balancers to remove from your service configuration.
     ModifyVpcEndpointServicePermissionsRequest:
       type: object
       required:
@@ -77819,6 +77892,10 @@ components:
             - xml:
                 name: dryRun
               description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        VpcEndpointId:
+          allOf:
+            - $ref: '#/components/schemas/VpcEndpointId'
+            - description: The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.
         EgressOnlyInternetGatewayId:
           allOf:
             - $ref: '#/components/schemas/EgressOnlyInternetGatewayId'
@@ -80007,6 +80084,7 @@ components:
       enum:
         - Interface
         - Gateway
+        - GatewayLoadBalancer
     ServiceTypeDetail:
       type: object
       properties:
@@ -82138,6 +82216,12 @@ components:
             - xml:
                 name: networkLoadBalancerArnSet
               description: The Amazon Resource Names (ARNs) of the network load balancers for the service.
+        GatewayLoadBalancerArns:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - xml:
+                name: gatewayLoadBalancerArnSet
+              description: The Amazon Resource Names (ARNs) of the Gateway Load Balancers for the service.
       description: Describes a VPC endpoint connection to a service.
     VpcPeeringConnectionVpcInfo:
       type: object
