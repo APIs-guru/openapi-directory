@@ -1,0 +1,4369 @@
+openapi: 3.0.0
+info:
+  version: '2017-07-25'
+  x-release: v4
+  title: AWS Glue DataBrew
+  description: 'AWS Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew simplifies data preparation tasks, targeting data issues that are hard to spot and time-consuming to fix. DataBrew empowers users of all technical levels to visualize the data and perform one-click data transformations, with no coding required.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: databrew
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/databrew-2017-07-25.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/databrew/'
+servers:
+  - url: 'http://databrew.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Glue DataBrew multi-region endpoint
+  - url: 'https://databrew.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The AWS Glue DataBrew multi-region endpoint
+  - url: 'http://databrew.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Glue DataBrew endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://databrew.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The AWS Glue DataBrew endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  '/recipes/{name}/batchDeleteRecipeVersion':
+    post:
+      operationId: BatchDeleteRecipeVersion
+      description: Deletes one or more versions of a recipe at a time.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchDeleteRecipeVersionResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the recipe to be modified.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - RecipeVersions
+              properties:
+                RecipeVersions:
+                  description: An array of version identifiers to be deleted.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RecipeVersion'
+                  minItems: 1
+                  maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /datasets:
+    post:
+      operationId: CreateDataset
+      description: Creates a new AWS Glue DataBrew dataset for this AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDatasetResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Input
+              properties:
+                Name:
+                  description: The name of the dataset to be created.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                FormatOptions:
+                  description: Options that define how Microsoft Excel input is to be interpreted by DataBrew.
+                  type: object
+                  properties:
+                    Json:
+                      allOf:
+                        - $ref: '#/components/schemas/JsonOptions'
+                        - description: Options that define how JSON input is to be interpreted by DataBrew.
+                    Excel:
+                      allOf:
+                        - $ref: '#/components/schemas/ExcelOptions'
+                        - description: Options that define how Excel input is to be interpreted by DataBrew.
+                Input:
+                  description: 'Information on how AWS Glue DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+                  type: object
+                  properties:
+                    S3InputDefinition:
+                      allOf:
+                        - $ref: '#/components/schemas/S3Location'
+                        - description: The Amazon S3 location where the data is stored.
+                    DataCatalogInputDefinition:
+                      allOf:
+                        - $ref: '#/components/schemas/DataCatalogInputDefinition'
+                        - description: The AWS Glue Data Catalog parameters for the data.
+                Tags:
+                  description: Metadata tags to apply to this dataset.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListDatasets
+      description: Lists all of the AWS Glue DataBrew datasets for the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDatasetsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in this request. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2000
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /profileJobs:
+    post:
+      operationId: CreateProfileJob
+      description: Creates a new job to profile an AWS Glue DataBrew dataset that exists in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProfileJobResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DatasetName
+                - Name
+                - OutputLocation
+                - RoleArn
+              properties:
+                DatasetName:
+                  description: The name of the dataset that this job is to act upon.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                EncryptionKeyArn:
+                  description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                EncryptionMode:
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - para&gt;<code>SSE-KMS</code> - server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  type: string
+                  enum:
+                    - SSE-KMS
+                    - SSE-S3
+                Name:
+                  description: The name of the job to be created.
+                  type: string
+                  minLength: 1
+                  maxLength: 240
+                LogSubscription:
+                  description: 'A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.'
+                  type: string
+                  enum:
+                    - ENABLE
+                    - DISABLE
+                MaxCapacity:
+                  description: The maximum number of nodes that DataBrew can use when the job processes data.
+                  type: integer
+                MaxRetries:
+                  description: The maximum number of times to retry the job after a job run fails.
+                  type: integer
+                  minimum: 0
+                OutputLocation:
+                  description: 'An Amazon S3 location (bucket name an object key) where DataBrew can read input data, or write output from a job.'
+                  type: object
+                  properties:
+                    Bucket:
+                      allOf:
+                        - $ref: '#/components/schemas/Bucket'
+                        - description: The S3 bucket name.
+                    Key:
+                      allOf:
+                        - $ref: '#/components/schemas/Key'
+                        - description: The unique name of the object in the bucket.
+                RoleArn:
+                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                Tags:
+                  description: Metadata tags to apply to this job.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                Timeout:
+                  description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+                  type: integer
+                  minimum: 0
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /projects:
+    post:
+      operationId: CreateProject
+      description: Creates a new AWS Glue DataBrew project in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProjectResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DatasetName
+                - Name
+                - RecipeName
+                - RoleArn
+              properties:
+                DatasetName:
+                  description: The name of the dataset to associate this project with.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                Name:
+                  description: A unique name for the new project.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                RecipeName:
+                  description: The name of an existing recipe to associate with the project.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                Sample:
+                  description: Represents the sample size and sampling type for AWS Glue DataBrew to use for interactive data analysis.
+                  type: object
+                  properties:
+                    Size:
+                      allOf:
+                        - $ref: '#/components/schemas/SampleSize'
+                        - description: The number of rows in the sample.
+                    Type:
+                      allOf:
+                        - $ref: '#/components/schemas/SampleType'
+                        - description: The way in which DataBrew obtains rows from a dataset.
+                RoleArn:
+                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                Tags:
+                  description: Metadata tags to apply to this project.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListProjects
+      description: Lists all of the DataBrew projects in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProjectsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2000
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in this request. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /recipes:
+    post:
+      operationId: CreateRecipe
+      description: Creates a new AWS Glue DataBrew recipe for the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRecipeResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Steps
+              properties:
+                Description:
+                  description: A description for the recipe.
+                  type: string
+                  maxLength: 1024
+                Name:
+                  description: A unique name for the recipe.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                Steps:
+                  description: An array containing the steps to be performed by the recipe. Each recipe step consists of one recipe action and (optionally) an array of condition expressions.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RecipeStep'
+                Tags:
+                  description: Metadata tags to apply to this recipe.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListRecipes
+      description: Lists all of the AWS Glue DataBrew recipes in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecipesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in this request. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2000
+        - name: recipeVersion
+          in: query
+          required: false
+          description: A version identifier. Using this parameter indicates to return only those recipes that have this version identifier.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 16
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  /recipeJobs:
+    post:
+      operationId: CreateRecipeJob
+      description: 'Creates a new job for an existing AWS Glue DataBrew recipe in the current AWS account. You can create a standalone job using either a project, or a combination of a recipe and a dataset.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRecipeJobResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - Outputs
+                - RoleArn
+              properties:
+                DatasetName:
+                  description: The name of the dataset that this job processes.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                EncryptionKeyArn:
+                  description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                EncryptionMode:
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  type: string
+                  enum:
+                    - SSE-KMS
+                    - SSE-S3
+                Name:
+                  description: A unique name for the job.
+                  type: string
+                  minLength: 1
+                  maxLength: 240
+                LogSubscription:
+                  description: 'A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.'
+                  type: string
+                  enum:
+                    - ENABLE
+                    - DISABLE
+                MaxCapacity:
+                  description: The maximum number of nodes that DataBrew can consume when the job processes data.
+                  type: integer
+                MaxRetries:
+                  description: The maximum number of times to retry the job after a job run fails.
+                  type: integer
+                  minimum: 0
+                Outputs:
+                  description: One or more artifacts that represent the output from running the job.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Output'
+                  minItems: 1
+                ProjectName:
+                  description: 'Either the name of an existing project, or a combination of a recipe and a dataset to associate with the recipe.'
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                RecipeReference:
+                  description: Represents all of the attributes of an AWS Glue DataBrew recipe.
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/RecipeName'
+                        - description: The name of the recipe.
+                    RecipeVersion:
+                      allOf:
+                        - $ref: '#/components/schemas/RecipeVersion'
+                        - description: 'The identifier for the version for the recipe. '
+                RoleArn:
+                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                Tags:
+                  description: Metadata tags to apply to this job dataset.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                Timeout:
+                  description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+                  type: integer
+                  minimum: 0
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /schedules:
+    post:
+      operationId: CreateSchedule
+      description: 'Creates a new schedule for one or more AWS Glue DataBrew jobs. Jobs can be run at a specific date and time, or at regular intervals.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateScheduleResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - CronExpression
+                - Name
+              properties:
+                JobNames:
+                  description: The name or names of one or more jobs to be run.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/JobName'
+                  maxItems: 50
+                CronExpression:
+                  description: 'The date or dates and time or times, in <code>cron</code> format, when the jobs are to be run.'
+                  type: string
+                  minLength: 1
+                  maxLength: 512
+                Tags:
+                  description: Metadata tags to apply to this schedule.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                Name:
+                  description: A unique name for the schedule.
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListSchedules
+      description: Lists the AWS Glue DataBrew schedules in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSchedulesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: jobName
+          in: query
+          required: false
+          description: The name of the job that these schedules apply to.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 240
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in this request. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2000
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/datasets/{name}':
+    delete:
+      operationId: DeleteDataset
+      description: Deletes a dataset from AWS Glue DataBrew.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteDatasetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the dataset to be deleted.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeDataset
+      description: Returns the definition of a specific AWS Glue DataBrew dataset that is in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDatasetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the dataset to be described.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    put:
+      operationId: UpdateDataset
+      description: Modifies the definition of an existing AWS Glue DataBrew dataset in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDatasetResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the dataset to be updated.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Input
+              properties:
+                FormatOptions:
+                  description: Options that define how Microsoft Excel input is to be interpreted by DataBrew.
+                  type: object
+                  properties:
+                    Json:
+                      allOf:
+                        - $ref: '#/components/schemas/JsonOptions'
+                        - description: Options that define how JSON input is to be interpreted by DataBrew.
+                    Excel:
+                      allOf:
+                        - $ref: '#/components/schemas/ExcelOptions'
+                        - description: Options that define how Excel input is to be interpreted by DataBrew.
+                Input:
+                  description: 'Information on how AWS Glue DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+                  type: object
+                  properties:
+                    S3InputDefinition:
+                      allOf:
+                        - $ref: '#/components/schemas/S3Location'
+                        - description: The Amazon S3 location where the data is stored.
+                    DataCatalogInputDefinition:
+                      allOf:
+                        - $ref: '#/components/schemas/DataCatalogInputDefinition'
+                        - description: The AWS Glue Data Catalog parameters for the data.
+  '/jobs/{name}':
+    delete:
+      operationId: DeleteJob
+      description: Deletes the specified AWS Glue DataBrew job from the current AWS account. The job can be for a recipe or for a profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the job to be deleted.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 240
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeJob
+      description: Returns the definition of a specific AWS Glue DataBrew job that is in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeJobResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the job to be described.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 240
+  '/projects/{name}':
+    delete:
+      operationId: DeleteProject
+      description: Deletes an existing AWS Glue DataBrew project from the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteProjectResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the project to be deleted.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeProject
+      description: Returns the definition of a specific AWS Glue DataBrew project that is in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeProjectResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the project to be described.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    put:
+      operationId: UpdateProject
+      description: Modifies the definition of an existing AWS Glue DataBrew project in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProjectResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the project to be updated.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - RoleArn
+              properties:
+                Sample:
+                  description: Represents the sample size and sampling type for AWS Glue DataBrew to use for interactive data analysis.
+                  type: object
+                  properties:
+                    Size:
+                      allOf:
+                        - $ref: '#/components/schemas/SampleSize'
+                        - description: The number of rows in the sample.
+                    Type:
+                      allOf:
+                        - $ref: '#/components/schemas/SampleType'
+                        - description: The way in which DataBrew obtains rows from a dataset.
+                RoleArn:
+                  description: The Amazon Resource Name (ARN) of the IAM role to be assumed for this request.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+  '/recipes/{name}/recipeVersion/{recipeVersion}':
+    delete:
+      operationId: DeleteRecipeVersion
+      description: Deletes a single version of an AWS Glue DataBrew recipe.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRecipeVersionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the recipe to be deleted.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: recipeVersion
+          in: path
+          required: true
+          description: The version of the recipe to be deleted.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 16
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/schedules/{name}':
+    delete:
+      operationId: DeleteSchedule
+      description: Deletes the specified AWS Glue DataBrew schedule from the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteScheduleResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the schedule to be deleted.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeSchedule
+      description: Returns the definition of a specific AWS Glue DataBrew schedule that is in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeScheduleResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the schedule to be described.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    put:
+      operationId: UpdateSchedule
+      description: Modifies the definition of an existing AWS Glue DataBrew schedule in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateScheduleResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the schedule to update.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - CronExpression
+              properties:
+                JobNames:
+                  description: The name or names of one or more jobs to be run for this schedule.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/JobName'
+                  maxItems: 50
+                CronExpression:
+                  description: 'The date or dates and time or times, in <code>cron</code> format, when the jobs are to be run.'
+                  type: string
+                  minLength: 1
+                  maxLength: 512
+  '/recipes/{name}':
+    get:
+      operationId: DescribeRecipe
+      description: Returns the definition of a specific AWS Glue DataBrew recipe that is in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRecipeResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the recipe to be described.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: recipeVersion
+          in: query
+          required: false
+          description: 'The recipe version identifier. If this parameter isn''t specified, then the latest published version is returned.'
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 16
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateRecipe
+      description: Modifies the definition of the latest working version of an AWS Glue DataBrew recipe in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRecipeResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the recipe to be updated.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: A description of the recipe.
+                  type: string
+                  maxLength: 1024
+                Steps:
+                  description: 'One or more steps to be performed by the recipe. Each step consists of an action, and the conditions under which the action should succeed.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RecipeStep'
+  '/jobs/{name}/jobRuns':
+    get:
+      operationId: ListJobRuns
+      description: Lists all of the previous runs of a particular AWS Glue DataBrew job in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobRunsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the job.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 240
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in this request. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token generated by AWS Glue DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2000
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /jobs:
+    get:
+      operationId: ListJobs
+      description: Lists the AWS Glue DataBrew jobs in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListJobsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: datasetName
+          in: query
+          required: false
+          description: The name of a dataset. Using this parameter indicates to return only those jobs that act on the specified dataset.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in this request. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2000
+        - name: projectName
+          in: query
+          required: false
+          description: The name of a project. Using this parameter indicates to return only those jobs that are associated with the specified project.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /recipeVersions#name:
+    get:
+      operationId: ListRecipeVersions
+      description: Lists all of the versions of a particular AWS Glue DataBrew recipe in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecipeVersionsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return in this request. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: A pagination token that can be used in a subsequent request.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 2000
+        - name: name
+          in: query
+          required: true
+          description: The name of the recipe for which to return version information.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: 'Lists all the tags for an AWS Glue DataBrew resource. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: 'The Amazon Resource Name (ARN) string that uniquely identifies the DataBrew resource. '
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: 'Adds metadata tags to an AWS Glue DataBrew resource, such as a dataset, job, project, or recipe.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: 'The DataBrew resource to which tags should be added. The value for this parameter is an Amazon Resource Name (ARN). For DataBrew, you can tag a dataset, a job, a project, or a recipe.'
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: One or more tags to be assigned to the resource.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/recipes/{name}/publishRecipe':
+    post:
+      operationId: PublishRecipe
+      description: Publishes a new major version of an AWS Glue DataBrew recipe that exists in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublishRecipeResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the recipe to be published.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: 'A description of the recipe to be published, for this version of the recipe.'
+                  type: string
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/projects/{name}/sendProjectSessionAction':
+    put:
+      operationId: SendProjectSessionAction
+      description: Performs a recipe step within an interactive AWS Glue DataBrew session that's currently open.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SendProjectSessionActionResponse'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the project to apply the action to.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Preview:
+                  description: 'Returns the result of the recipe step, without applying it. The result isn''t added to the view frame stack.'
+                  type: boolean
+                RecipeStep:
+                  description: Represents a single step to be performed in an AWS Glue DataBrew recipe.
+                  type: object
+                  properties:
+                    Action:
+                      allOf:
+                        - $ref: '#/components/schemas/RecipeAction'
+                        - description: The particular action to be performed in the recipe step.
+                    ConditionExpressions:
+                      allOf:
+                        - $ref: '#/components/schemas/ConditionExpressionList'
+                        - description: '<p>One or more conditions that must be met, in order for the recipe step to succeed.</p> <note> <p>All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation.</p> </note>'
+                StepIndex:
+                  description: 'The index from which to preview a step. This index is used to preview the result of steps that have already been applied, so that the resulting view frame is from earlier in the view frame stack.'
+                  type: integer
+                  minimum: 0
+                ClientSessionId:
+                  description: A unique identifier for an interactive session that's currently open and ready for work. The action will be performed on this session.
+                  type: string
+                  pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]*$'
+                  minLength: 1
+                  maxLength: 255
+                ViewFrame:
+                  description: Represents the data being being transformed during an AWS Glue DataBrew project session.
+                  type: object
+                  properties:
+                    StartColumnIndex:
+                      allOf:
+                        - $ref: '#/components/schemas/StartColumnIndex'
+                        - description: The starting index for the range of columns to return in the view frame.
+                    ColumnRange:
+                      allOf:
+                        - $ref: '#/components/schemas/ColumnRange'
+                        - description: 'The number of columns to include in the view frame, beginning with the <code>StartColumnIndex</code> value and ignoring any columns in the <code>HiddenColumns</code> list.'
+                    HiddenColumns:
+                      allOf:
+                        - $ref: '#/components/schemas/HiddenColumnList'
+                        - description: A list of columns to hide in the view frame.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/jobs/{name}/startJobRun':
+    post:
+      operationId: StartJobRun
+      description: Runs an AWS Glue DataBrew job that exists in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartJobRunResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the job to be run.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 240
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/projects/{name}/startProjectSession':
+    put:
+      operationId: StartProjectSession
+      description: 'Creates an interactive session, enabling you to manipulate an AWS Glue DataBrew project.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartProjectSessionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the project to act upon.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                AssumeControl:
+                  description: 'A value that, if true, enables you to take control of a session, even if a different client is currently accessing the project.'
+                  type: boolean
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/jobs/{name}/jobRun/{runId}/stopJobRun':
+    post:
+      operationId: StopJobRun
+      description: Stops the specified job from running in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopJobRunResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the job to be stopped.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 240
+        - name: runId
+          in: path
+          required: true
+          description: The ID of the job run to be stopped.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 255
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes metadata tags from an AWS Glue DataBrew resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: 'An DataBrew resource from which you want to remove a tag or tags. The value for this parameter is an Amazon Resource Name (ARN). '
+          schema:
+            type: string
+            minLength: 20
+            maxLength: 2048
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys (names) of one or more tags to be removed.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/profileJobs/{name}':
+    put:
+      operationId: UpdateProfileJob
+      description: Modifies the definition of an existing AWS Glue DataBrew job in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateProfileJobResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the job to be updated.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 240
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - OutputLocation
+                - RoleArn
+              properties:
+                EncryptionKeyArn:
+                  description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                EncryptionMode:
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  type: string
+                  enum:
+                    - SSE-KMS
+                    - SSE-S3
+                LogSubscription:
+                  description: 'A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.'
+                  type: string
+                  enum:
+                    - ENABLE
+                    - DISABLE
+                MaxCapacity:
+                  description: The maximum number of nodes that DataBrew can use when the job processes data.
+                  type: integer
+                MaxRetries:
+                  description: The maximum number of times to retry the job after a job run fails.
+                  type: integer
+                  minimum: 0
+                OutputLocation:
+                  description: 'An Amazon S3 location (bucket name an object key) where DataBrew can read input data, or write output from a job.'
+                  type: object
+                  properties:
+                    Bucket:
+                      allOf:
+                        - $ref: '#/components/schemas/Bucket'
+                        - description: The S3 bucket name.
+                    Key:
+                      allOf:
+                        - $ref: '#/components/schemas/Key'
+                        - description: The unique name of the object in the bucket.
+                RoleArn:
+                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                Timeout:
+                  description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+                  type: integer
+                  minimum: 0
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/recipeJobs/{name}':
+    put:
+      operationId: UpdateRecipeJob
+      description: Modifies the definition of an existing AWS Glue DataBrew recipe job in the current AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRecipeJobResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: The name of the job to update.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 240
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Outputs
+                - RoleArn
+              properties:
+                EncryptionKeyArn:
+                  description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                EncryptionMode:
+                  description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+                  type: string
+                  enum:
+                    - SSE-KMS
+                    - SSE-S3
+                LogSubscription:
+                  description: 'A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.'
+                  type: string
+                  enum:
+                    - ENABLE
+                    - DISABLE
+                MaxCapacity:
+                  description: The maximum number of nodes that DataBrew can consume when the job processes data.
+                  type: integer
+                MaxRetries:
+                  description: The maximum number of times to retry the job after a job run fails.
+                  type: integer
+                  minimum: 0
+                Outputs:
+                  description: 'One or more artifacts that represent the output from running the job. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Output'
+                  minItems: 1
+                RoleArn:
+                  description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+                  type: string
+                  minLength: 20
+                  maxLength: 2048
+                Timeout:
+                  description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+                  type: integer
+                  minimum: 0
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    BatchDeleteRecipeVersionResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The name of the recipe that was modified.
+        Errors:
+          allOf:
+            - $ref: '#/components/schemas/RecipeErrorList'
+            - description: 'Errors, if any, that were encountered when deleting the recipe versions.'
+    RecipeVersion:
+      type: string
+      minLength: 1
+      maxLength: 16
+    ConflictException: {}
+    ResourceNotFoundException: {}
+    ValidationException: {}
+    CreateDatasetResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset that you created.
+    JsonOptions:
+      type: object
+      properties:
+        MultiLine:
+          allOf:
+            - $ref: '#/components/schemas/MultiLine'
+            - description: A value that specifies whether JSON input contains embedded new line characters.
+      description: Represents the JSON-specific options that define how input is to be interpreted by AWS Glue DataBrew.
+    ExcelOptions:
+      type: object
+      properties:
+        SheetNames:
+          allOf:
+            - $ref: '#/components/schemas/SheetNameList'
+            - description: 'Specifies one or more named sheets in the Excel file, which will be included in the dataset.'
+        SheetIndexes:
+          allOf:
+            - $ref: '#/components/schemas/SheetIndexList'
+            - description: 'Specifies one or more sheet numbers in the Excel file, which will be included in the dataset.'
+      description: 'Options that define how DataBrew will interpret a Microsoft Excel file, when creating a dataset from that file.'
+    S3Location:
+      type: object
+      required:
+        - Bucket
+      properties:
+        Bucket:
+          allOf:
+            - $ref: '#/components/schemas/Bucket'
+            - description: The S3 bucket name.
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/Key'
+            - description: The unique name of the object in the bucket.
+      description: 'An Amazon S3 location (bucket name an object key) where DataBrew can read input data, or write output from a job.'
+    DataCatalogInputDefinition:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+      properties:
+        CatalogId:
+          allOf:
+            - $ref: '#/components/schemas/CatalogId'
+            - description: The unique identifier of the AWS account that holds the Data Catalog that stores the data.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/DatabaseName'
+            - description: The name of a database in the Data Catalog.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/TableName'
+            - description: The name of a database table in the Data Catalog. This table corresponds to a DataBrew dataset.
+        TempDirectory:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: An Amazon location that AWS Glue Data Catalog can use as a temporary directory.
+      description: 'Represents how metadata stored in the AWS Glue Data Catalog is defined in an AWS Glue DataBrew dataset. '
+    TagValue:
+      type: string
+      maxLength: 256
+    AccessDeniedException: {}
+    ServiceQuotaExceededException: {}
+    CreateProfileJobResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the job that was created.
+    Bucket:
+      type: string
+      minLength: 3
+      maxLength: 63
+    Key:
+      type: string
+      minLength: 1
+      maxLength: 1280
+    CreateProjectResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project that you created.
+    SampleSize:
+      type: integer
+      minimum: 1
+      maximum: 5000
+    SampleType:
+      type: string
+      enum:
+        - FIRST_N
+        - LAST_N
+        - RANDOM
+    InternalServerException: {}
+    CreateRecipeResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The name of the recipe that you created.
+    RecipeStep:
+      type: object
+      required:
+        - Action
+      properties:
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/RecipeAction'
+            - description: The particular action to be performed in the recipe step.
+        ConditionExpressions:
+          allOf:
+            - $ref: '#/components/schemas/ConditionExpressionList'
+            - description: '<p>One or more conditions that must be met, in order for the recipe step to succeed.</p> <note> <p>All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation.</p> </note>'
+      description: Represents a single step to be performed in an AWS Glue DataBrew recipe.
+    CreateRecipeJobResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the job that you created.
+    Output:
+      type: object
+      required:
+        - Location
+      properties:
+        CompressionFormat:
+          allOf:
+            - $ref: '#/components/schemas/CompressionFormat'
+            - description: The compression algorithm used to compress the output text of the job.
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/OutputFormat'
+            - description: The data format of the output of the job.
+        PartitionColumns:
+          allOf:
+            - $ref: '#/components/schemas/ColumnNameList'
+            - description: The names of one or more partition columns for the output of the job.
+        Location:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The location in Amazon S3 where the job writes its output.
+        Overwrite:
+          allOf:
+            - $ref: '#/components/schemas/OverwriteOutput'
+            - description: 'A value that, if true, means that any data in the location specified for output is overwritten with new output.'
+      description: Represents individual output from a particular job run.
+    RecipeName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    CreateScheduleResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleName'
+            - description: The name of the schedule that was created.
+    JobName:
+      type: string
+      minLength: 1
+      maxLength: 240
+    DeleteDatasetResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset that you deleted.
+    DeleteJobResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the job that you deleted.
+    DeleteProjectResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project that you deleted.
+    DeleteRecipeVersionResponse:
+      type: object
+      required:
+        - Name
+        - RecipeVersion
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The name of the recipe that was deleted.
+        RecipeVersion:
+          allOf:
+            - $ref: '#/components/schemas/RecipeVersion'
+            - description: The version of the recipe that was deleted.
+    DeleteScheduleResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleName'
+            - description: The name of the schedule that was deleted.
+    DescribeDatasetResponse:
+      type: object
+      required:
+        - Name
+        - Input
+      properties:
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The identifier (user name) of the user who created the dataset.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the dataset was created.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset.
+        FormatOptions:
+          $ref: '#/components/schemas/FormatOptions'
+        Input:
+          $ref: '#/components/schemas/Input'
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the dataset was last modified.
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (user name) of the user who last modified the dataset.
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: 'The location of the data for this dataset, Amazon S3 or the AWS Glue Data Catalog.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags associated with this dataset.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the dataset.
+    DescribeJobResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the job was created.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The identifier (user name) of the user associated with the creation of the job.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The dataset that the job acts upon.
+        EncryptionKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyArn'
+            - description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+        EncryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the job.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: '<p>The job type, which must be one of the following:</p> <ul> <li> <p> <code>PROFILE</code> - The job analyzes the dataset to determine its size, data types, data distribution, and more.</p> </li> <li> <p> <code>RECIPE</code> - The job applies one or more transformations to a dataset.</p> </li> </ul>'
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (user name) of the user who last modified the job.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the job was last modified.
+        LogSubscription:
+          allOf:
+            - $ref: '#/components/schemas/LogSubscription'
+            - description: A value that indicates whether Amazon CloudWatch logging is enabled for this job.
+        MaxCapacity:
+          allOf:
+            - $ref: '#/components/schemas/MaxCapacity'
+            - description: The maximum number of nodes that AWS Glue DataBrew can consume when the job processes data.
+        MaxRetries:
+          allOf:
+            - $ref: '#/components/schemas/MaxRetries'
+            - description: The maximum number of times to retry the job after a job run fails.
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/OutputList'
+            - description: One or more artifacts that represent the output from running the job.
+        ProjectName:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The DataBrew project associated with this job.
+        RecipeReference:
+          $ref: '#/components/schemas/RecipeReference'
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the AWS Identity and Access Management (IAM) role that was assumed for this request.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags associated with this job.
+        Timeout:
+          allOf:
+            - $ref: '#/components/schemas/Timeout'
+            - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+    DescribeProjectResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the project was created.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The identifier (user name) of the user who created the project.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The dataset associated with the project.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the project was last modified.
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (user name) of the user who last modified the project.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project.
+        RecipeName:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The recipe associated with this job.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the project.
+        Sample:
+          $ref: '#/components/schemas/Sample'
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the AWS Identity and Access Management (IAM) role that was assumed for this request.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags associated with this project.
+        SessionStatus:
+          allOf:
+            - $ref: '#/components/schemas/SessionStatus'
+            - description: '<p>Describes the current state of the session:</p> <ul> <li> <p> <code>PROVISIONING</code> - allocating resources for the session.</p> </li> <li> <p> <code>INITIALIZING</code> - getting the session ready for first use.</p> </li> <li> <p> <code>ASSIGNED</code> - the session is ready for use.</p> </li> </ul>'
+        OpenedBy:
+          allOf:
+            - $ref: '#/components/schemas/OpenedBy'
+            - description: 'The identifier (user name) of the user that opened the project for use. '
+        OpenDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: 'The date and time when the project was opened. '
+    DescribeRecipeResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The identifier (user name) of the user who created the recipe.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the recipe was created.
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (user name) of the user who last modified the recipe.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the recipe was last modified.
+        ProjectName:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project associated with this recipe.
+        PublishedBy:
+          allOf:
+            - $ref: '#/components/schemas/PublishedBy'
+            - description: The identifier (user name) of the user who last published the recipe.
+        PublishedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the recipe was last published.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RecipeDescription'
+            - description: The description of the recipe.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The name of the recipe.
+        Steps:
+          allOf:
+            - $ref: '#/components/schemas/RecipeStepList'
+            - description: 'One or more steps to be performed by the recipe. Each step consists of an action, and the conditions under which the action should succeed.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags associated with this project.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the recipe.
+        RecipeVersion:
+          allOf:
+            - $ref: '#/components/schemas/RecipeVersion'
+            - description: The recipe version identifier.
+    DescribeScheduleResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the schedule was created.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: 'The identifier (user name) of the user who created the schedule. '
+        JobNames:
+          allOf:
+            - $ref: '#/components/schemas/JobNameList'
+            - description: The name or names of one or more jobs to be run by using the schedule.
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (user name) of the user who last modified the schedule.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the schedule was last modified.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the schedule.
+        CronExpression:
+          allOf:
+            - $ref: '#/components/schemas/CronExpression'
+            - description: 'The date or dates and time or times, in <code>cron</code> format, when the jobs are to be run for the schedule.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags associated with this schedule.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleName'
+            - description: The name of the schedule.
+    ListDatasetsResponse:
+      type: object
+      required:
+        - Datasets
+      properties:
+        Datasets:
+          allOf:
+            - $ref: '#/components/schemas/DatasetList'
+            - description: A list of datasets that are defined in the current AWS account.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call. '
+    ListJobRunsResponse:
+      type: object
+      required:
+        - JobRuns
+      properties:
+        JobRuns:
+          allOf:
+            - $ref: '#/components/schemas/JobRunList'
+            - description: A list of job runs that have occurred for the specified job.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call. '
+    ListJobsResponse:
+      type: object
+      required:
+        - Jobs
+      properties:
+        Jobs:
+          allOf:
+            - $ref: '#/components/schemas/JobList'
+            - description: A list of jobs that are defined in the current AWS account.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To obtain the next set of pages, pass in the NextToken from the response object of the previous page call. '
+    ListProjectsResponse:
+      type: object
+      required:
+        - Projects
+      properties:
+        Projects:
+          allOf:
+            - $ref: '#/components/schemas/ProjectList'
+            - description: A list of projects that are defined in the current AWS account.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. '
+    ListRecipeVersionsResponse:
+      type: object
+      required:
+        - Recipes
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. '
+        Recipes:
+          allOf:
+            - $ref: '#/components/schemas/RecipeList'
+            - description: A list of versions for the specified recipe.
+    ListRecipesResponse:
+      type: object
+      required:
+        - Recipes
+      properties:
+        Recipes:
+          allOf:
+            - $ref: '#/components/schemas/RecipeList'
+            - description: A list of recipes that are defined in the current AWS account.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. '
+    ListSchedulesResponse:
+      type: object
+      required:
+        - Schedules
+      properties:
+        Schedules:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleList'
+            - description: A list of schedules in the current AWS account.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'A token generated by DataBrew that specifies where to continue pagination if a previous request was truncated. To get the next set of pages, pass in the NextToken value from the response object of the previous page call. '
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A list of tags associated with the DataBrew resource.
+    PublishRecipeResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The name of the recipe that you published.
+    SendProjectSessionActionResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Result:
+          allOf:
+            - $ref: '#/components/schemas/Result'
+            - description: A message indicating the result of performing the action.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project that was affected by the action.
+        ActionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionId'
+            - description: A unique identifier for the action that was performed.
+    RecipeAction:
+      type: object
+      required:
+        - Operation
+      properties:
+        Operation:
+          allOf:
+            - $ref: '#/components/schemas/Operation'
+            - description: The name of a valid DataBrew transformation to be performed on the data.
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/ParameterMap'
+            - description: Contextual parameters for the transformation.
+      description: 'Represents a transformation and associated parameters that are used to apply a change to an AWS Glue DataBrew dataset. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html">Recipe structure</a> and <a href="https://docs.aws.amazon.com/databrew/latest/dg/recipe-actions-reference.html">ecipe actions reference</a> .'
+    ConditionExpressionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ConditionExpression'
+    StartColumnIndex:
+      type: integer
+      minimum: 0
+    ColumnRange:
+      type: integer
+      minimum: 0
+      maximum: 20
+    HiddenColumnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnName'
+    StartJobRunResponse:
+      type: object
+      required:
+        - RunId
+      properties:
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/JobRunId'
+            - description: A system-generated identifier for this particular job run.
+    StartProjectSessionResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project to be acted upon.
+        ClientSessionId:
+          allOf:
+            - $ref: '#/components/schemas/ClientSessionId'
+            - description: A system-generated identifier for the session.
+    StopJobRunResponse:
+      type: object
+      required:
+        - RunId
+      properties:
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/JobRunId'
+            - description: The ID of the job run that you stopped.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      minLength: 1
+      maxLength: 128
+    UpdateDatasetResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset that you updated.
+    UpdateProfileJobResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the job that was updated.
+    UpdateProjectResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the project was last modified.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project that you updated.
+    UpdateRecipeResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The name of the recipe that was updated.
+    UpdateRecipeJobResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the job that you updated.
+    UpdateScheduleResponse:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleName'
+            - description: The name of the schedule that was updated.
+    AccountId:
+      type: string
+      maxLength: 255
+    ActionId:
+      type: integer
+    Arn:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    AssumeControl:
+      type: boolean
+    Attempt:
+      type: integer
+    RecipeVersionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecipeVersion'
+      minItems: 1
+      maxItems: 50
+    BatchDeleteRecipeVersionRequest:
+      type: object
+      required:
+        - RecipeVersions
+      title: BatchDeleteRecipeVersionRequest
+      properties:
+        RecipeVersions:
+          allOf:
+            - $ref: '#/components/schemas/RecipeVersionList'
+            - description: An array of version identifiers to be deleted.
+    RecipeErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecipeVersionErrorDetail'
+    CatalogId:
+      type: string
+      minLength: 1
+      maxLength: 255
+    ClientSessionId:
+      type: string
+      pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]*$'
+      minLength: 1
+      maxLength: 255
+    ColumnName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    ColumnNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnName'
+      maxItems: 200
+    CompressionFormat:
+      type: string
+      enum:
+        - GZIP
+        - LZ4
+        - SNAPPY
+        - BZIP2
+        - DEFLATE
+        - LZO
+        - BROTLI
+        - ZSTD
+        - ZLIB
+    Condition:
+      type: string
+      pattern: '^[A-Z\_]+$'
+      minLength: 1
+      maxLength: 128
+    ConditionValue:
+      type: string
+      maxLength: 1024
+    TargetColumn:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ConditionExpression:
+      type: object
+      required:
+        - Condition
+        - TargetColumn
+      properties:
+        Condition:
+          allOf:
+            - $ref: '#/components/schemas/Condition'
+            - description: 'A specific condition to apply to a recipe action. For more information, see <a href="https://docs.aws.amazon.com/databrew/latest/dg/recipe-structure.html">Recipe structure</a> in the <i>AWS Glue DataBrew Developer Guide</i>.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/ConditionValue'
+            - description: A value that the condition must evaluate to for the condition to succeed.
+        TargetColumn:
+          allOf:
+            - $ref: '#/components/schemas/TargetColumn'
+            - description: 'A column to apply this condition to, within an AWS Glue DataBrew dataset.'
+      description: '<p>Represents an individual condition that evaluates to true or false.</p> <p>Conditions are used with recipe actions: The action is only performed for column values where the condition evaluates to true.</p> <p>If a recipe requires more than one condition, then the recipe must specify multiple <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before the recipe action is performed.</p>'
+    DatasetName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    FormatOptions:
+      type: object
+      properties:
+        Json:
+          allOf:
+            - $ref: '#/components/schemas/JsonOptions'
+            - description: Options that define how JSON input is to be interpreted by DataBrew.
+        Excel:
+          allOf:
+            - $ref: '#/components/schemas/ExcelOptions'
+            - description: Options that define how Excel input is to be interpreted by DataBrew.
+      description: Options that define how Microsoft Excel input is to be interpreted by DataBrew.
+    Input:
+      type: object
+      properties:
+        S3InputDefinition:
+          allOf:
+            - $ref: '#/components/schemas/S3Location'
+            - description: The Amazon S3 location where the data is stored.
+        DataCatalogInputDefinition:
+          allOf:
+            - $ref: '#/components/schemas/DataCatalogInputDefinition'
+            - description: The AWS Glue Data Catalog parameters for the data.
+      description: 'Information on how AWS Glue DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.'
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 200
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
+    CreateDatasetRequest:
+      type: object
+      required:
+        - Name
+        - Input
+      title: CreateDatasetRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset to be created.
+        FormatOptions:
+          $ref: '#/components/schemas/FormatOptions'
+        Input:
+          $ref: '#/components/schemas/Input'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags to apply to this dataset.
+    EncryptionKeyArn:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    EncryptionMode:
+      type: string
+      enum:
+        - SSE-KMS
+        - SSE-S3
+    LogSubscription:
+      type: string
+      enum:
+        - ENABLE
+        - DISABLE
+    MaxCapacity:
+      type: integer
+    MaxRetries:
+      type: integer
+      minimum: 0
+    Timeout:
+      type: integer
+      minimum: 0
+    CreateProfileJobRequest:
+      type: object
+      required:
+        - DatasetName
+        - Name
+        - OutputLocation
+        - RoleArn
+      title: CreateProfileJobRequest
+      properties:
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset that this job is to act upon.
+        EncryptionKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyArn'
+            - description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+        EncryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - para&gt;<code>SSE-KMS</code> - server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the job to be created.
+        LogSubscription:
+          allOf:
+            - $ref: '#/components/schemas/LogSubscription'
+            - description: 'A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.'
+        MaxCapacity:
+          allOf:
+            - $ref: '#/components/schemas/MaxCapacity'
+            - description: The maximum number of nodes that DataBrew can use when the job processes data.
+        MaxRetries:
+          allOf:
+            - $ref: '#/components/schemas/MaxRetries'
+            - description: The maximum number of times to retry the job after a job run fails.
+        OutputLocation:
+          $ref: '#/components/schemas/S3Location'
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags to apply to this job.
+        Timeout:
+          allOf:
+            - $ref: '#/components/schemas/Timeout'
+            - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+    ProjectName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    Sample:
+      type: object
+      required:
+        - Type
+      properties:
+        Size:
+          allOf:
+            - $ref: '#/components/schemas/SampleSize'
+            - description: The number of rows in the sample.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/SampleType'
+            - description: The way in which DataBrew obtains rows from a dataset.
+      description: Represents the sample size and sampling type for AWS Glue DataBrew to use for interactive data analysis.
+    CreateProjectRequest:
+      type: object
+      required:
+        - DatasetName
+        - Name
+        - RecipeName
+        - RoleArn
+      title: CreateProjectRequest
+      properties:
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset to associate this project with.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: A unique name for the new project.
+        RecipeName:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The name of an existing recipe to associate with the project.
+        Sample:
+          $ref: '#/components/schemas/Sample'
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags to apply to this project.
+    OutputList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Output'
+      minItems: 1
+    RecipeReference:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The name of the recipe.
+        RecipeVersion:
+          allOf:
+            - $ref: '#/components/schemas/RecipeVersion'
+            - description: 'The identifier for the version for the recipe. '
+      description: Represents all of the attributes of an AWS Glue DataBrew recipe.
+    CreateRecipeJobRequest:
+      type: object
+      required:
+        - Name
+        - Outputs
+        - RoleArn
+      title: CreateRecipeJobRequest
+      properties:
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset that this job processes.
+        EncryptionKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyArn'
+            - description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+        EncryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: A unique name for the job.
+        LogSubscription:
+          allOf:
+            - $ref: '#/components/schemas/LogSubscription'
+            - description: 'A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.'
+        MaxCapacity:
+          allOf:
+            - $ref: '#/components/schemas/MaxCapacity'
+            - description: The maximum number of nodes that DataBrew can consume when the job processes data.
+        MaxRetries:
+          allOf:
+            - $ref: '#/components/schemas/MaxRetries'
+            - description: The maximum number of times to retry the job after a job run fails.
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/OutputList'
+            - description: One or more artifacts that represent the output from running the job.
+        ProjectName:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: 'Either the name of an existing project, or a combination of a recipe and a dataset to associate with the recipe.'
+        RecipeReference:
+          $ref: '#/components/schemas/RecipeReference'
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags to apply to this job dataset.
+        Timeout:
+          allOf:
+            - $ref: '#/components/schemas/Timeout'
+            - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+    RecipeDescription:
+      type: string
+      maxLength: 1024
+    RecipeStepList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecipeStep'
+    CreateRecipeRequest:
+      type: object
+      required:
+        - Name
+        - Steps
+      title: CreateRecipeRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RecipeDescription'
+            - description: A description for the recipe.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: A unique name for the recipe.
+        Steps:
+          allOf:
+            - $ref: '#/components/schemas/RecipeStepList'
+            - description: An array containing the steps to be performed by the recipe. Each recipe step consists of one recipe action and (optionally) an array of condition expressions.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags to apply to this recipe.
+    JobNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobName'
+      maxItems: 50
+    CronExpression:
+      type: string
+      minLength: 1
+      maxLength: 512
+    ScheduleName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    CreateScheduleRequest:
+      type: object
+      required:
+        - CronExpression
+        - Name
+      title: CreateScheduleRequest
+      properties:
+        JobNames:
+          allOf:
+            - $ref: '#/components/schemas/JobNameList'
+            - description: The name or names of one or more jobs to be run.
+        CronExpression:
+          allOf:
+            - $ref: '#/components/schemas/CronExpression'
+            - description: 'The date or dates and time or times, in <code>cron</code> format, when the jobs are to be run.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags to apply to this schedule.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleName'
+            - description: A unique name for the schedule.
+    CreatedBy:
+      type: string
+    DatabaseName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    TableName:
+      type: string
+      minLength: 1
+      maxLength: 255
+    Date:
+      type: string
+      format: date-time
+    LastModifiedBy:
+      type: string
+    Source:
+      type: string
+      enum:
+        - S3
+        - DATA-CATALOG
+    Dataset:
+      type: object
+      required:
+        - Name
+        - Input
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The ID of the AWS account that owns the dataset.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The identifier (the user name) of the user who created the dataset.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the dataset was created.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The unique name of the dataset.
+        FormatOptions:
+          allOf:
+            - $ref: '#/components/schemas/FormatOptions'
+            - description: Options that define how DataBrew interprets the data in the dataset.
+        Input:
+          allOf:
+            - $ref: '#/components/schemas/Input'
+            - description: 'Information on how DataBrew can find the dataset, in either the AWS Glue Data Catalog or Amazon S3.'
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The last modification date and time of the dataset.
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (the user name) of the user who last modified the dataset.
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/Source'
+            - description: 'The location of the data for the dataset, either Amazon S3 or the AWS Glue Data Catalog.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags that have been applied to the dataset.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The unique Amazon Resource Name (ARN) for the dataset.
+      description: Represents a dataset that can be processed by AWS Glue DataBrew.
+    DatasetList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Dataset'
+    DeleteDatasetRequest:
+      type: object
+      title: DeleteDatasetRequest
+      properties: {}
+    DeleteJobRequest:
+      type: object
+      title: DeleteJobRequest
+      properties: {}
+    DeleteProjectRequest:
+      type: object
+      title: DeleteProjectRequest
+      properties: {}
+    DeleteRecipeVersionRequest:
+      type: object
+      title: DeleteRecipeVersionRequest
+      properties: {}
+    DeleteScheduleRequest:
+      type: object
+      title: DeleteScheduleRequest
+      properties: {}
+    DescribeDatasetRequest:
+      type: object
+      title: DescribeDatasetRequest
+      properties: {}
+    DescribeJobRequest:
+      type: object
+      title: DescribeJobRequest
+      properties: {}
+    JobType:
+      type: string
+      enum:
+        - PROFILE
+        - RECIPE
+    DescribeProjectRequest:
+      type: object
+      title: DescribeProjectRequest
+      properties: {}
+    SessionStatus:
+      type: string
+      enum:
+        - ASSIGNED
+        - FAILED
+        - INITIALIZING
+        - PROVISIONING
+        - READY
+        - RECYCLING
+        - ROTATING
+        - TERMINATED
+        - TERMINATING
+        - UPDATING
+    OpenedBy:
+      type: string
+    DescribeRecipeRequest:
+      type: object
+      title: DescribeRecipeRequest
+      properties: {}
+    PublishedBy:
+      type: string
+    DescribeScheduleRequest:
+      type: object
+      title: DescribeScheduleRequest
+      properties: {}
+    ErrorCode:
+      type: string
+      pattern: '^[1-5][0-9][0-9]$'
+    SheetNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SheetName'
+      minItems: 1
+      maxItems: 1
+    SheetIndexList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SheetIndex'
+      minItems: 1
+      maxItems: 1
+    ExecutionTime:
+      type: integer
+    Job:
+      type: object
+      required:
+        - Name
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The ID of the AWS account that owns the job.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The identifier (the user name) of the user who created the job.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the job was created.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: A dataset that the job is to process.
+        EncryptionKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyArn'
+            - description: The Amazon Resource Name (ARN) of an encryption key that is used to protect a job.
+        EncryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The unique name of the job.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/JobType'
+            - description: '<p>The job type of the job, which must be one of the following:</p> <ul> <li> <p> <code>PROFILE</code> - A job to analyze a dataset, to determine its size, data types, data distribution, and more.</p> </li> <li> <p> <code>RECIPE</code> - A job to apply one or more transformations to a dataset.</p> </li> </ul>'
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (the user name) of the user who last modified the job.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The modification date and time of the job.
+        LogSubscription:
+          allOf:
+            - $ref: '#/components/schemas/LogSubscription'
+            - description: The current status of Amazon CloudWatch logging for the job.
+        MaxCapacity:
+          allOf:
+            - $ref: '#/components/schemas/MaxCapacity'
+            - description: The maximum number of nodes that can be consumed when the job processes data.
+        MaxRetries:
+          allOf:
+            - $ref: '#/components/schemas/MaxRetries'
+            - description: The maximum number of times to retry the job after a job run fails.
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/OutputList'
+            - description: One or more artifacts that represent output from running the job.
+        ProjectName:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project that the job is associated with.
+        RecipeReference:
+          allOf:
+            - $ref: '#/components/schemas/RecipeReference'
+            - description: A set of steps that the job runs.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The unique Amazon Resource Name (ARN) for the job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the role that will be assumed for this job.
+        Timeout:
+          allOf:
+            - $ref: '#/components/schemas/Timeout'
+            - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags that have been applied to the job.
+      description: Represents all of the attributes of an AWS Glue DataBrew job.
+    JobList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Job'
+    JobRunErrorMessage:
+      type: string
+    JobRunId:
+      type: string
+      minLength: 1
+      maxLength: 255
+    JobRunState:
+      type: string
+      enum:
+        - STARTING
+        - RUNNING
+        - STOPPING
+        - STOPPED
+        - SUCCEEDED
+        - FAILED
+        - TIMEOUT
+    LogGroupName:
+      type: string
+      minLength: 1
+      maxLength: 512
+    StartedBy:
+      type: string
+    JobRun:
+      type: object
+      properties:
+        Attempt:
+          allOf:
+            - $ref: '#/components/schemas/Attempt'
+            - description: The number of times that DataBrew has attempted to run the job.
+        CompletedOn:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the job completed processing.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The name of the dataset for the job to process.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/JobRunErrorMessage'
+            - description: A message indicating an error (if any) that was encountered when the job ran.
+        ExecutionTime:
+          allOf:
+            - $ref: '#/components/schemas/ExecutionTime'
+            - description: 'The amount of time, in seconds, during which a job run consumed resources.'
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the job being processed during this run.
+        RunId:
+          allOf:
+            - $ref: '#/components/schemas/JobRunId'
+            - description: The unique identifier of the job run.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/JobRunState'
+            - description: The current state of the job run entity itself.
+        LogSubscription:
+          allOf:
+            - $ref: '#/components/schemas/LogSubscription'
+            - description: The current status of Amazon CloudWatch logging for the job run.
+        LogGroupName:
+          allOf:
+            - $ref: '#/components/schemas/LogGroupName'
+            - description: 'The name of an Amazon CloudWatch log group, where the job writes diagnostic messages when it runs.'
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/OutputList'
+            - description: One or more output artifacts from a job run.
+        RecipeReference:
+          allOf:
+            - $ref: '#/components/schemas/RecipeReference'
+            - description: The set of steps processed by the job.
+        StartedBy:
+          allOf:
+            - $ref: '#/components/schemas/StartedBy'
+            - description: 'The identifier (the user name) of the user who initiated the job run. '
+        StartedOn:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: 'The date and time when the job run began. '
+      description: Represents one run of an AWS Glue DataBrew job.
+    JobRunList:
+      type: array
+      items:
+        $ref: '#/components/schemas/JobRun'
+    MultiLine:
+      type: boolean
+    MaxResults100:
+      type: integer
+      minimum: 1
+      maximum: 100
+    NextToken:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    ListDatasetsRequest:
+      type: object
+      title: ListDatasetsRequest
+      properties: {}
+    ListJobRunsRequest:
+      type: object
+      title: ListJobRunsRequest
+      properties: {}
+    ListJobsRequest:
+      type: object
+      title: ListJobsRequest
+      properties: {}
+    ListProjectsRequest:
+      type: object
+      title: ListProjectsRequest
+      properties: {}
+    ProjectList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Project'
+    ListRecipeVersionsRequest:
+      type: object
+      title: ListRecipeVersionsRequest
+      properties: {}
+    RecipeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Recipe'
+    ListRecipesRequest:
+      type: object
+      title: ListRecipesRequest
+      properties: {}
+    ListSchedulesRequest:
+      type: object
+      title: ListSchedulesRequest
+      properties: {}
+    ScheduleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Schedule'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
+    Operation:
+      type: string
+      pattern: '^[A-Z\_]+$'
+      minLength: 1
+      maxLength: 128
+    OutputFormat:
+      type: string
+      enum:
+        - CSV
+        - JSON
+        - PARQUET
+        - GLUEPARQUET
+        - AVRO
+        - ORC
+        - XML
+    OverwriteOutput:
+      type: boolean
+    ParameterValue:
+      type: string
+      minLength: 1
+      maxLength: 8192
+    ParameterMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ParameterValue'
+    ParameterName:
+      type: string
+      pattern: '^[A-Za-z0-9]+$'
+      minLength: 1
+      maxLength: 128
+    Preview:
+      type: boolean
+    Project:
+      type: object
+      required:
+        - Name
+        - RecipeName
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The ID of the AWS account that owns the project.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the project was created.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The identifier (the user name) of the user who crated the project.
+        DatasetName:
+          allOf:
+            - $ref: '#/components/schemas/DatasetName'
+            - description: The dataset that the project is to act upon.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The last modification date and time for the project.
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (user name) of the user who last modified the project.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The unique name of a project.
+        RecipeName:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The name of a recipe that will be developed during a project session.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the project.
+        Sample:
+          allOf:
+            - $ref: '#/components/schemas/Sample'
+            - description: 'The sample size and sampling type to apply to the data. If this parameter isn''t specified, then the sample will consiste of the first 500 rows from the dataset.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags that have been applied to the project.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the role that will be assumed for this project.
+        OpenedBy:
+          allOf:
+            - $ref: '#/components/schemas/OpenedBy'
+            - description: The identifier (the user name) of the user that opened the project for use.
+        OpenDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the project was opened.
+      description: Represents all of the attributes of an AWS Glue DataBrew project.
+    PublishRecipeRequest:
+      type: object
+      title: PublishRecipeRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RecipeDescription'
+            - description: 'A description of the recipe to be published, for this version of the recipe.'
+    Recipe:
+      type: object
+      required:
+        - Name
+      properties:
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The identifier (the user name) of the user who created the recipe.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the recipe was created.
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (user name) of the user who last modified the recipe.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The last modification date and time of the recipe.
+        ProjectName:
+          allOf:
+            - $ref: '#/components/schemas/ProjectName'
+            - description: The name of the project that the recipe is associated with.
+        PublishedBy:
+          allOf:
+            - $ref: '#/components/schemas/PublishedBy'
+            - description: The identifier (the user name) of the user who published the recipe.
+        PublishedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the recipe was published.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RecipeDescription'
+            - description: The description of the recipe.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/RecipeName'
+            - description: The unique name for the recipe.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for the recipe.
+        Steps:
+          allOf:
+            - $ref: '#/components/schemas/RecipeStepList'
+            - description: A list of steps that are defined by the recipe.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags that have been applied to the recipe.
+        RecipeVersion:
+          allOf:
+            - $ref: '#/components/schemas/RecipeVersion'
+            - description: 'The identifier for the version for the recipe. '
+      description: Represents one or more actions to be performed on an AWS Glue DataBrew dataset.
+    RecipeVersionErrorDetail:
+      type: object
+      properties:
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: The HTTP status code for the error.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/RecipeErrorMessage'
+            - description: The text of the error message.
+        RecipeVersion:
+          allOf:
+            - $ref: '#/components/schemas/RecipeVersion'
+            - description: The identifier for the recipe version associated with this error.
+      description: Represents any errors encountered when attempting to delete multiple recipe versions.
+    RecipeErrorMessage:
+      type: string
+    Result:
+      type: string
+    Schedule:
+      type: object
+      required:
+        - Name
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The ID of the AWS account that owns the schedule.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: The identifier (the user name) of the user who created the schedule.
+        CreateDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time that the schedule was created.
+        JobNames:
+          allOf:
+            - $ref: '#/components/schemas/JobNameList'
+            - description: 'A list of jobs to be run, according to the schedule.'
+        LastModifiedBy:
+          allOf:
+            - $ref: '#/components/schemas/LastModifiedBy'
+            - description: The identifier (the user name) of the user who last modified the schedule.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The date and time when the schedule was last modified.
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the schedule.
+        CronExpression:
+          allOf:
+            - $ref: '#/components/schemas/CronExpression'
+            - description: 'The date(s) and time(s), in <code>cron</code> format, when the job will run.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Metadata tags that have been applied to the schedule.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ScheduleName'
+            - description: The name of the schedule.
+      description: Represents one or more dates and times when a job is to run.
+    StepIndex:
+      type: integer
+      minimum: 0
+    ViewFrame:
+      type: object
+      required:
+        - StartColumnIndex
+      properties:
+        StartColumnIndex:
+          allOf:
+            - $ref: '#/components/schemas/StartColumnIndex'
+            - description: The starting index for the range of columns to return in the view frame.
+        ColumnRange:
+          allOf:
+            - $ref: '#/components/schemas/ColumnRange'
+            - description: 'The number of columns to include in the view frame, beginning with the <code>StartColumnIndex</code> value and ignoring any columns in the <code>HiddenColumns</code> list.'
+        HiddenColumns:
+          allOf:
+            - $ref: '#/components/schemas/HiddenColumnList'
+            - description: A list of columns to hide in the view frame.
+      description: Represents the data being being transformed during an AWS Glue DataBrew project session.
+    SendProjectSessionActionRequest:
+      type: object
+      title: SendProjectSessionActionRequest
+      properties:
+        Preview:
+          allOf:
+            - $ref: '#/components/schemas/Preview'
+            - description: 'Returns the result of the recipe step, without applying it. The result isn''t added to the view frame stack.'
+        RecipeStep:
+          $ref: '#/components/schemas/RecipeStep'
+        StepIndex:
+          allOf:
+            - $ref: '#/components/schemas/StepIndex'
+            - description: 'The index from which to preview a step. This index is used to preview the result of steps that have already been applied, so that the resulting view frame is from earlier in the view frame stack.'
+        ClientSessionId:
+          allOf:
+            - $ref: '#/components/schemas/ClientSessionId'
+            - description: A unique identifier for an interactive session that's currently open and ready for work. The action will be performed on this session.
+        ViewFrame:
+          $ref: '#/components/schemas/ViewFrame'
+    SheetIndex:
+      type: integer
+      minimum: 0
+      maximum: 200
+    SheetName:
+      type: string
+      minLength: 1
+      maxLength: 31
+    StartJobRunRequest:
+      type: object
+      title: StartJobRunRequest
+      properties: {}
+    StartProjectSessionRequest:
+      type: object
+      title: StartProjectSessionRequest
+      properties:
+        AssumeControl:
+          allOf:
+            - $ref: '#/components/schemas/AssumeControl'
+            - description: 'A value that, if true, enables you to take control of a session, even if a different client is currently accessing the project.'
+    StopJobRunRequest:
+      type: object
+      title: StopJobRunRequest
+      properties: {}
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 200
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags to be assigned to the resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
+    UpdateDatasetRequest:
+      type: object
+      required:
+        - Input
+      title: UpdateDatasetRequest
+      properties:
+        FormatOptions:
+          $ref: '#/components/schemas/FormatOptions'
+        Input:
+          $ref: '#/components/schemas/Input'
+    UpdateProfileJobRequest:
+      type: object
+      required:
+        - OutputLocation
+        - RoleArn
+      title: UpdateProfileJobRequest
+      properties:
+        EncryptionKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyArn'
+            - description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+        EncryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+        LogSubscription:
+          allOf:
+            - $ref: '#/components/schemas/LogSubscription'
+            - description: 'A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.'
+        MaxCapacity:
+          allOf:
+            - $ref: '#/components/schemas/MaxCapacity'
+            - description: The maximum number of nodes that DataBrew can use when the job processes data.
+        MaxRetries:
+          allOf:
+            - $ref: '#/components/schemas/MaxRetries'
+            - description: The maximum number of times to retry the job after a job run fails.
+        OutputLocation:
+          $ref: '#/components/schemas/S3Location'
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+        Timeout:
+          allOf:
+            - $ref: '#/components/schemas/Timeout'
+            - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+    UpdateProjectRequest:
+      type: object
+      required:
+        - RoleArn
+      title: UpdateProjectRequest
+      properties:
+        Sample:
+          $ref: '#/components/schemas/Sample'
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the IAM role to be assumed for this request.
+    UpdateRecipeJobRequest:
+      type: object
+      required:
+        - Outputs
+        - RoleArn
+      title: UpdateRecipeJobRequest
+      properties:
+        EncryptionKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyArn'
+            - description: The Amazon Resource Name (ARN) of an encryption key that is used to protect the job.
+        EncryptionMode:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionMode'
+            - description: '<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>'
+        LogSubscription:
+          allOf:
+            - $ref: '#/components/schemas/LogSubscription'
+            - description: 'A value that enables or disables Amazon CloudWatch logging for the current AWS account. If logging is enabled, CloudWatch writes one log stream for each job run.'
+        MaxCapacity:
+          allOf:
+            - $ref: '#/components/schemas/MaxCapacity'
+            - description: The maximum number of nodes that DataBrew can consume when the job processes data.
+        MaxRetries:
+          allOf:
+            - $ref: '#/components/schemas/MaxRetries'
+            - description: The maximum number of times to retry the job after a job run fails.
+        Outputs:
+          allOf:
+            - $ref: '#/components/schemas/OutputList'
+            - description: 'One or more artifacts that represent the output from running the job. '
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+        Timeout:
+          allOf:
+            - $ref: '#/components/schemas/Timeout'
+            - description: The job's timeout in minutes. A job that attempts to run longer than this timeout period ends with a status of <code>TIMEOUT</code>.
+    UpdateRecipeRequest:
+      type: object
+      title: UpdateRecipeRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/RecipeDescription'
+            - description: A description of the recipe.
+        Steps:
+          allOf:
+            - $ref: '#/components/schemas/RecipeStepList'
+            - description: 'One or more steps to be performed by the recipe. Each step consists of an action, and the conditions under which the action should succeed.'
+    UpdateScheduleRequest:
+      type: object
+      required:
+        - CronExpression
+      title: UpdateScheduleRequest
+      properties:
+        JobNames:
+          allOf:
+            - $ref: '#/components/schemas/JobNameList'
+            - description: The name or names of one or more jobs to be run for this schedule.
+        CronExpression:
+          allOf:
+            - $ref: '#/components/schemas/CronExpression'
+            - description: 'The date or dates and time or times, in <code>cron</code> format, when the jobs are to be run.'
+security:
+  - hmac: []

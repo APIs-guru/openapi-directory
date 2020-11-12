@@ -166,7 +166,7 @@ paths:
                 - name
               properties:
                 name:
-                  description: ' The name for the Amplify app. '
+                  description: ' The name for an Amplify app. '
                   type: string
                   minLength: 1
                   maxLength: 255
@@ -235,11 +235,16 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 25000
+                customHeaders:
+                  description: The custom HTTP headers for an Amplify app.
+                  type: string
+                  minLength: 1
+                  maxLength: 25000
                 enableAutoBranchCreation:
-                  description: ' Enables automated branch creation for the Amplify app. '
+                  description: ' Enables automated branch creation for an Amplify app. '
                   type: boolean
                 autoBranchCreationPatterns:
-                  description: ' The automated branch creation glob patterns for the Amplify app. '
+                  description: ' The automated branch creation glob patterns for an Amplify app. '
                   type: array
                   items:
                     $ref: '#/components/schemas/AutoBranchCreationPattern'
@@ -274,7 +279,7 @@ paths:
                     enablePerformanceMode:
                       allOf:
                         - $ref: '#/components/schemas/EnablePerformanceMode'
-                        - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
+                        - description: '<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>'
                     buildSpec:
                       allOf:
                         - $ref: '#/components/schemas/BuildSpec'
@@ -282,7 +287,7 @@ paths:
                     enablePullRequestPreview:
                       allOf:
                         - $ref: '#/components/schemas/EnablePullRequestPreview'
-                        - description: ' Enables pull request preview for the autocreated branch. '
+                        - description: ' Enables pull request previews for the autocreated branch. '
                     pullRequestEnvironmentName:
                       allOf:
                         - $ref: '#/components/schemas/PullRequestEnvironmentName'
@@ -337,7 +342,7 @@ paths:
           description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
-            minimum: 1
+            minimum: 0
             maximum: 100
   '/apps/{appId}/backendenvironments':
     post:
@@ -387,8 +392,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
       requestBody:
         required: true
         content:
@@ -456,8 +462,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: environmentName
           in: query
           required: false
@@ -479,7 +486,7 @@ paths:
           description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
-            minimum: 1
+            minimum: 0
             maximum: 100
   '/apps/{appId}/branches':
     post:
@@ -535,8 +542,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
       requestBody:
         required: true
         content:
@@ -588,7 +596,7 @@ paths:
                   description: ' Enables basic authorization for the branch. '
                   type: boolean
                 enablePerformanceMode:
-                  description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
+                  description: '<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>'
                   type: boolean
                 tags:
                   description: ' The tag for the branch. '
@@ -610,7 +618,7 @@ paths:
                   type: string
                   maxLength: 255
                 enablePullRequestPreview:
-                  description: ' Enables pull request preview for this branch. '
+                  description: ' Enables pull request previews for this branch. '
                   type: boolean
                 pullRequestEnvironmentName:
                   description: ' The Amplify environment name for the pull request. '
@@ -664,8 +672,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: nextToken
           in: query
           required: false
@@ -679,7 +688,7 @@ paths:
           description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
-            minimum: 1
+            minimum: 0
             maximum: 100
   '/apps/{appId}/branches/{branchName}/deployments':
     post:
@@ -723,8 +732,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -807,8 +817,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
       requestBody:
         required: true
         content:
@@ -885,8 +896,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: nextToken
           in: query
           required: false
@@ -900,7 +912,7 @@ paths:
           description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
-            minimum: 1
+            minimum: 0
             maximum: 100
   '/apps/{appId}/webhooks':
     post:
@@ -956,8 +968,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
       requestBody:
         required: true
         content:
@@ -1025,8 +1038,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: nextToken
           in: query
           required: false
@@ -1040,7 +1054,7 @@ paths:
           description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
-            minimum: 1
+            minimum: 0
             maximum: 100
   '/apps/{appId}':
     delete:
@@ -1090,8 +1104,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1141,8 +1156,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
     post:
       operationId: UpdateApp
       description: ' Updates an existing Amplify app. '
@@ -1184,8 +1200,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
       requestBody:
         required: true
         content:
@@ -1241,11 +1258,16 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 25000
+                customHeaders:
+                  description: The custom HTTP headers for an Amplify app.
+                  type: string
+                  minLength: 1
+                  maxLength: 25000
                 enableAutoBranchCreation:
-                  description: ' Enables automated branch creation for the Amplify app. '
+                  description: ' Enables automated branch creation for an Amplify app. '
                   type: boolean
                 autoBranchCreationPatterns:
-                  description: ' Describes the automated branch creation glob patterns for the Amplify app. '
+                  description: ' Describes the automated branch creation glob patterns for an Amplify app. '
                   type: array
                   items:
                     $ref: '#/components/schemas/AutoBranchCreationPattern'
@@ -1280,7 +1302,7 @@ paths:
                     enablePerformanceMode:
                       allOf:
                         - $ref: '#/components/schemas/EnablePerformanceMode'
-                        - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
+                        - description: '<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>'
                     buildSpec:
                       allOf:
                         - $ref: '#/components/schemas/BuildSpec'
@@ -1288,7 +1310,7 @@ paths:
                     enablePullRequestPreview:
                       allOf:
                         - $ref: '#/components/schemas/EnablePullRequestPreview'
-                        - description: ' Enables pull request preview for the autocreated branch. '
+                        - description: ' Enables pull request previews for the autocreated branch. '
                     pullRequestEnvironmentName:
                       allOf:
                         - $ref: '#/components/schemas/PullRequestEnvironmentName'
@@ -1356,8 +1378,9 @@ paths:
           description: ' The unique ID of an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: environmentName
           in: path
           required: true
@@ -1415,8 +1438,9 @@ paths:
           description: ' The unique id for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: environmentName
           in: path
           required: true
@@ -1473,8 +1497,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -1532,8 +1557,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -1589,8 +1615,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -1643,7 +1670,7 @@ paths:
                   description: ' Enables basic authorization for the branch. '
                   type: boolean
                 enablePerformanceMode:
-                  description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
+                  description: '<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>'
                   type: boolean
                 buildSpec:
                   description: ' The build specification (build spec) file for an Amplify app build. '
@@ -1658,7 +1685,7 @@ paths:
                   type: string
                   maxLength: 255
                 enablePullRequestPreview:
-                  description: ' Enables pull request preview for this branch. '
+                  description: ' Enables pull request previews for this branch. '
                   type: boolean
                 pullRequestEnvironmentName:
                   description: ' The Amplify environment name for the pull request. '
@@ -1717,8 +1744,9 @@ paths:
           description: ' The unique id for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: domainName
           in: path
           required: true
@@ -1775,8 +1803,9 @@ paths:
           description: ' The unique id for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: domainName
           in: path
           required: true
@@ -1831,8 +1860,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: domainName
           in: path
           required: true
@@ -1916,8 +1946,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -1988,8 +2019,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -2216,8 +2248,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
       requestBody:
         required: true
         content:
@@ -2346,8 +2379,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -2376,7 +2410,7 @@ paths:
           description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
-            minimum: 1
+            minimum: 0
             maximum: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2428,8 +2462,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -2451,7 +2486,7 @@ paths:
           description: ' The maximum number of records to list in a single response. '
           schema:
             type: integer
-            minimum: 1
+            minimum: 0
             maximum: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -2508,8 +2543,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -2701,8 +2737,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -2782,8 +2819,9 @@ paths:
           description: ' The unique ID for an Amplify app. '
           schema:
             type: string
+            pattern: 'd[a-z0-9]+'
             minLength: 1
-            maxLength: 255
+            maxLength: 20
         - name: branchName
           in: path
           required: true
@@ -3403,8 +3441,9 @@ components:
       maxLength: 1000
     AppId:
       type: string
+      pattern: 'd[a-z0-9]+'
       minLength: 1
-      maxLength: 255
+      maxLength: 20
     AppArn:
       type: string
       maxLength: 1000
@@ -3470,6 +3509,10 @@ components:
             - $ref: '#/components/schemas/BranchName'
             - description: ' The branch name for the production branch. '
       description: ' Describes the information about a production branch for an Amplify app. '
+    CustomHeaders:
+      type: string
+      minLength: 1
+      maxLength: 25000
     EnableAutoBranchCreation:
       type: boolean
     AutoBranchCreationPatterns:
@@ -3506,7 +3549,7 @@ components:
         enablePerformanceMode:
           allOf:
             - $ref: '#/components/schemas/EnablePerformanceMode'
-            - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
+            - description: '<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>'
         buildSpec:
           allOf:
             - $ref: '#/components/schemas/BuildSpec'
@@ -3514,7 +3557,7 @@ components:
         enablePullRequestPreview:
           allOf:
             - $ref: '#/components/schemas/EnablePullRequestPreview'
-            - description: ' Enables pull request preview for the autocreated branch. '
+            - description: ' Enables pull request previews for the autocreated branch. '
         pullRequestEnvironmentName:
           allOf:
             - $ref: '#/components/schemas/PullRequestEnvironmentName'
@@ -3612,6 +3655,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BuildSpec'
             - description: ' Describes the content of the build specification (build spec) for the Amplify app. '
+        customHeaders:
+          allOf:
+            - $ref: '#/components/schemas/CustomHeaders'
+            - description: Describes the custom HTTP headers for the Amplify app.
         enableAutoBranchCreation:
           allOf:
             - $ref: '#/components/schemas/EnableAutoBranchCreation'
@@ -3844,7 +3891,7 @@ components:
         enablePerformanceMode:
           allOf:
             - $ref: '#/components/schemas/EnablePerformanceMode'
-            - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
+            - description: '<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>'
         thumbnailUrl:
           allOf:
             - $ref: '#/components/schemas/ThumbnailUrl'
@@ -3868,7 +3915,7 @@ components:
         enablePullRequestPreview:
           allOf:
             - $ref: '#/components/schemas/EnablePullRequestPreview'
-            - description: ' Enables pull request preview for the branch. '
+            - description: ' Enables pull request previews for the branch. '
         pullRequestEnvironmentName:
           allOf:
             - $ref: '#/components/schemas/PullRequestEnvironmentName'
@@ -3922,7 +3969,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: ' The name for the Amplify app. '
+            - description: ' The name for an Amplify app. '
         description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -3979,18 +4026,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/BuildSpec'
             - description: ' The build specification (build spec) for an Amplify app. '
+        customHeaders:
+          allOf:
+            - $ref: '#/components/schemas/CustomHeaders'
+            - description: The custom HTTP headers for an Amplify app.
         enableAutoBranchCreation:
           allOf:
             - $ref: '#/components/schemas/EnableAutoBranchCreation'
-            - description: ' Enables automated branch creation for the Amplify app. '
+            - description: ' Enables automated branch creation for an Amplify app. '
         autoBranchCreationPatterns:
           allOf:
             - $ref: '#/components/schemas/AutoBranchCreationPatterns'
-            - description: ' The automated branch creation glob patterns for the Amplify app. '
+            - description: ' The automated branch creation glob patterns for an Amplify app. '
         autoBranchCreationConfig:
           allOf:
             - $ref: '#/components/schemas/AutoBranchCreationConfig'
-            - description: ' The automated branch creation configuration for the Amplify app. '
+            - description: ' The automated branch creation configuration for an Amplify app. '
       description: ' The request structure used to create apps in Amplify. '
     CreateBackendEnvironmentRequest:
       type: object
@@ -4056,7 +4107,7 @@ components:
         enablePerformanceMode:
           allOf:
             - $ref: '#/components/schemas/EnablePerformanceMode'
-            - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
+            - description: '<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4076,7 +4127,7 @@ components:
         enablePullRequestPreview:
           allOf:
             - $ref: '#/components/schemas/EnablePullRequestPreview'
-            - description: ' Enables pull request preview for this branch. '
+            - description: ' Enables pull request previews for this branch. '
         pullRequestEnvironmentName:
           allOf:
             - $ref: '#/components/schemas/PullRequestEnvironmentName'
@@ -4503,7 +4554,7 @@ components:
       maxLength: 2000
     MaxResults:
       type: integer
-      minimum: 1
+      minimum: 0
       maximum: 100
     ListAppsRequest:
       type: object
@@ -4765,18 +4816,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/BuildSpec'
             - description: ' The build specification (build spec) for an Amplify app. '
+        customHeaders:
+          allOf:
+            - $ref: '#/components/schemas/CustomHeaders'
+            - description: The custom HTTP headers for an Amplify app.
         enableAutoBranchCreation:
           allOf:
             - $ref: '#/components/schemas/EnableAutoBranchCreation'
-            - description: ' Enables automated branch creation for the Amplify app. '
+            - description: ' Enables automated branch creation for an Amplify app. '
         autoBranchCreationPatterns:
           allOf:
             - $ref: '#/components/schemas/AutoBranchCreationPatterns'
-            - description: ' Describes the automated branch creation glob patterns for the Amplify app. '
+            - description: ' Describes the automated branch creation glob patterns for an Amplify app. '
         autoBranchCreationConfig:
           allOf:
             - $ref: '#/components/schemas/AutoBranchCreationConfig'
-            - description: ' The automated branch creation configuration for the Amplify app. '
+            - description: ' The automated branch creation configuration for an Amplify app. '
         repository:
           allOf:
             - $ref: '#/components/schemas/Repository'
@@ -4829,7 +4884,7 @@ components:
         enablePerformanceMode:
           allOf:
             - $ref: '#/components/schemas/EnablePerformanceMode'
-            - description: ' Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. Enabling performance mode will mean that hosting configuration or code changes can take up to 10 minutes to roll out. '
+            - description: '<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>'
         buildSpec:
           allOf:
             - $ref: '#/components/schemas/BuildSpec'
@@ -4845,7 +4900,7 @@ components:
         enablePullRequestPreview:
           allOf:
             - $ref: '#/components/schemas/EnablePullRequestPreview'
-            - description: ' Enables pull request preview for this branch. '
+            - description: ' Enables pull request previews for this branch. '
         pullRequestEnvironmentName:
           allOf:
             - $ref: '#/components/schemas/PullRequestEnvironmentName'

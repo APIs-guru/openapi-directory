@@ -1662,6 +1662,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/RowLevelPermissionPolicy'
                         - description: Permission policy.
+                ColumnLevelPermissionRules:
+                  description: A set of one or more definitions of a <code> <a>ColumnLevelPermissionRule</a> </code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ColumnLevelPermissionRule'
+                  minItems: 1
                 Tags:
                   description: Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.
                   type: array
@@ -1855,6 +1861,7 @@ paths:
                     - JIRA
                     - MARIADB
                     - MYSQL
+                    - ORACLE
                     - POSTGRESQL
                     - PRESTO
                     - REDSHIFT
@@ -1903,6 +1910,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/MySqlParameters'
                         - description: MySQL parameters.
+                    OracleParameters:
+                      allOf:
+                        - $ref: '#/components/schemas/OracleParameters'
+                        - description: Oracle parameters.
                     PostgreSqlParameters:
                       allOf:
                         - $ref: '#/components/schemas/PostgreSqlParameters'
@@ -2459,7 +2470,7 @@ paths:
   '/accounts/{AwsAccountId}/namespaces/{Namespace}/iam-policy-assignments/':
     post:
       operationId: CreateIAMPolicyAssignment
-      description: 'Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy will be assigned to specified groups or users of Amazon QuickSight. The users and groups need to be in the same namespace. '
+      description: 'Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight. Assignment names are unique per AWS account. To avoid overwriting rules in other namespaces, use assignment names that are unique.'
       responses:
         '200':
           description: Success
@@ -2538,7 +2549,7 @@ paths:
                 - AssignmentStatus
               properties:
                 AssignmentName:
-                  description: The name of the assignment. It must be unique within an AWS account.
+                  description: 'The name of the assignment, also called a rule. It must be unique within an AWS account.'
                   type: string
                   pattern: '(?=^.{2,256}$)(?!.*\s)[0-9a-zA-Z-_.:=+@]*$'
                   minLength: 1
@@ -4451,6 +4462,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/RowLevelPermissionPolicy'
                         - description: Permission policy.
+                ColumnLevelPermissionRules:
+                  description: A set of one or more definitions of a <code> <a>ColumnLevelPermissionRule</a> </code>.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ColumnLevelPermissionRule'
+                  minItems: 1
   '/accounts/{AwsAccountId}/data-sources/{DataSourceId}':
     delete:
       operationId: DeleteDataSource
@@ -4684,6 +4701,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/MySqlParameters'
                         - description: MySQL parameters.
+                    OracleParameters:
+                      allOf:
+                        - $ref: '#/components/schemas/OracleParameters'
+                        - description: Oracle parameters.
                     PostgreSqlParameters:
                       allOf:
                         - $ref: '#/components/schemas/PostgreSqlParameters'
@@ -6398,7 +6419,7 @@ paths:
         - name: AssignmentName
           in: path
           required: true
-          description: 'The name of the assignment. '
+          description: 'The name of the assignment, also called a rule.'
           schema:
             type: string
             pattern: '(?=^.{2,256}$)(?!.*\s)[0-9a-zA-Z-_.:=+@]*$'
@@ -6421,7 +6442,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateIAMPolicyAssignment
-      description: Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request.
+      description: 'Updates an existing IAM policy assignment. This operation updates only the optional parameter or parameters that are specified in the request. This overwrites all of the users included in <code>Identities</code>. '
       responses:
         '200':
           description: Success
@@ -6475,7 +6496,7 @@ paths:
         - name: AwsAccountId
           in: path
           required: true
-          description: The ID of the AWS account that contains the IAM policy assignment.
+          description: 'The ID of the AWS account that contains the IAM policy assignment. '
           schema:
             type: string
             pattern: '^[0-9]{12}$'
@@ -6484,7 +6505,7 @@ paths:
         - name: AssignmentName
           in: path
           required: true
-          description: The name of the assignment. This name must be unique within an AWS account.
+          description: 'The name of the assignment, also called a rule. This name must be unique within an AWS account.'
           schema:
             type: string
             pattern: '(?=^.{2,256}$)(?!.*\s)[0-9a-zA-Z-_.:=+@]*$'
@@ -9475,7 +9496,7 @@ components:
         Actions:
           allOf:
             - $ref: '#/components/schemas/ActionList'
-            - description: 'The IAM action to grant or revoke permissions on, for example <code>"quicksight:DescribeDashboard"</code>.'
+            - description: The IAM action to grant or revoke permissions on.
       description: Permission for the resource.
     AnalysisSourceTemplate:
       type: object
@@ -9639,6 +9660,18 @@ components:
       enum:
         - GRANT_ACCESS
         - DENY_ACCESS
+    ColumnLevelPermissionRule:
+      type: object
+      properties:
+        Principals:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalList'
+            - description: An array of Amazon Resource Names (ARNs) for QuickSight users or groups.
+        ColumnNames:
+          allOf:
+            - $ref: '#/components/schemas/ColumnNameList'
+            - description: An array of column names.
+      description: 'A rule defined to grant access on one or more restricted columns. Each dataset can have multiple rules. To create a restricted column, you add it to one or more rules. Each rule must contain at least one column and at least one user or group. To be able to see a restricted column, a user or group needs to be added to a rule for that column.'
     LimitExceededException: {}
     CreateDataSourceResponse:
       type: object
@@ -9781,6 +9814,25 @@ components:
             - $ref: '#/components/schemas/Database'
             - description: Database.
       description: MySQL parameters.
+    OracleParameters:
+      type: object
+      required:
+        - Host
+        - Port
+        - Database
+      properties:
+        Host:
+          allOf:
+            - $ref: '#/components/schemas/Host'
+            - description: An Oracle host.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - description: Port.
+        Database:
+          allOf:
+            - $ref: '#/components/schemas/Database'
+            - description: Database.
     PostgreSqlParameters:
       type: object
       required:
@@ -11748,7 +11800,7 @@ components:
         AssignmentName:
           allOf:
             - $ref: '#/components/schemas/IAMPolicyAssignmentName'
-            - description: 'The name of the assignment. '
+            - description: The name of the assignment or rule.
         AssignmentId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -12373,6 +12425,22 @@ components:
       items:
         $ref: '#/components/schemas/ColumnGroupSchema'
       maxItems: 500
+    PrincipalList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      minItems: 1
+      maxItems: 100
+    ColumnNameList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      minItems: 1
+    ColumnLevelPermissionRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnLevelPermissionRule'
+      minItems: 1
     ColumnList:
       type: array
       items:
@@ -12670,6 +12738,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RowLevelPermissionDataSet'
             - description: The row-level security configuration for the data that you want to create.
+        ColumnLevelPermissionRules:
+          allOf:
+            - $ref: '#/components/schemas/ColumnLevelPermissionRuleList'
+            - description: A set of one or more definitions of a <code> <a>ColumnLevelPermissionRule</a> </code>.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -12687,6 +12759,7 @@ components:
         - JIRA
         - MARIADB
         - MYSQL
+        - ORACLE
         - POSTGRESQL
         - PRESTO
         - REDSHIFT
@@ -12734,6 +12807,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MySqlParameters'
             - description: MySQL parameters.
+        OracleParameters:
+          allOf:
+            - $ref: '#/components/schemas/OracleParameters'
+            - description: Oracle parameters.
         PostgreSqlParameters:
           allOf:
             - $ref: '#/components/schemas/PostgreSqlParameters'
@@ -12931,7 +13008,7 @@ components:
         AssignmentName:
           allOf:
             - $ref: '#/components/schemas/IAMPolicyAssignmentName'
-            - description: The name of the assignment. It must be unique within an AWS account.
+            - description: 'The name of the assignment, also called a rule. It must be unique within an AWS account.'
         AssignmentStatus:
           allOf:
             - $ref: '#/components/schemas/AssignmentStatus'
@@ -13437,6 +13514,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RowLevelPermissionDataSet'
             - description: The row-level security configuration for the dataset.
+        ColumnLevelPermissionRules:
+          allOf:
+            - $ref: '#/components/schemas/ColumnLevelPermissionRuleList'
+            - description: A set of one or more definitions of a <code> <a>ColumnLevelPermissionRule</a> </code>.
       description: Dataset.
     DataSetSchema:
       type: object
@@ -13513,6 +13594,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RowLevelPermissionDataSet'
             - description: The row-level security configuration for the dataset.
+        ColumnLevelPermissionRulesApplied:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates if the dataset has column level permission configured. '
       description: Dataset summary.
     DataSetSummaryList:
       type: array
@@ -15219,6 +15304,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RowLevelPermissionDataSet'
             - description: The row-level security configuration for the data you want to create.
+        ColumnLevelPermissionRules:
+          allOf:
+            - $ref: '#/components/schemas/ColumnLevelPermissionRuleList'
+            - description: A set of one or more definitions of a <code> <a>ColumnLevelPermissionRule</a> </code>.
     UpdateDataSourcePermissionsRequest:
       type: object
       title: UpdateDataSourcePermissionsRequest
