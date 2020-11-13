@@ -1521,6 +1521,13 @@ paths:
                   maxProperties: 50
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+                worldTags:
+                  description: A map that contains tag keys and tag values that are attached to the generated worlds.
+                  type: object
+                  minProperties: 0
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4903,7 +4910,7 @@ components:
         failureCode:
           allOf:
             - $ref: '#/components/schemas/WorldExportJobErrorCode'
-            - description: '<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>'
+            - description: '<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> <dt>AllWorldGenerationFailed</dt> <dd> <p>All of the worlds in the world generation job failed. This can happen if your <code>worldCount</code> is greater than 50 or less than 1. </p> </dd> </dl> <p>For more information about troubleshooting WorldForge, see <a href="https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html">Troubleshooting Simulation WorldForge</a>. </p>'
         clientRequestToken:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
@@ -4953,6 +4960,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the world generator job.
+        worldTags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A map that contains tag keys and tag values that are attached to the generated worlds.
     FloorplanCount:
       type: integer
     InteriorCountPerFloorplan:
@@ -5450,6 +5461,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the world generation job.
+        worldTags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A map that contains tag keys and tag values that are attached to the generated worlds.
     DescribeWorldTemplateResponse:
       type: object
       properties:
@@ -6574,6 +6589,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A map that contains tag keys and tag values that are attached to the world generator job.
+        worldTags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: A map that contains tag keys and tag values that are attached to the generated worlds.
     WorldGenerationJobStatus:
       type: string
       enum:

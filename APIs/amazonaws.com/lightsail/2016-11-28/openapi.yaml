@@ -3,7 +3,7 @@ info:
   version: '2016-11-28'
   x-release: v4
   title: Amazon Lightsail
-  description: '<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers who need to build websites or web applications. It includes everything you need to launch your project quickly – instances (virtual private servers), managed databases, SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN) distributions, DNS management of registered domains, and snapshots (backups) – for a low, predictable monthly price.</p> <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API, AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts and tasks, see the <a href="http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail Dev Guide</a>.</p> <p>This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service. For more information about the supported AWS Regions, endpoints, and service quotas for the Lightsail service, see <a href="https://docs.aws.amazon.com/general/latest/gr/lightsail.html">Amazon Lightsail Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>'
+  description: '<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers who need to build websites or web applications. It includes everything you need to launch your project quickly - instances (virtual private servers), container services, managed databases, SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN) distributions, DNS management of registered domains, and resource snapshots (backups) - for a low, predictable monthly price.</p> <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API, AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts and tasks, see the <a href="http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli">Lightsail Dev Guide</a>.</p> <p>This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service. For more information about the supported AWS Regions, endpoints, and service quotas of the Lightsail service, see <a href="https://docs.aws.amazon.com/general/latest/gr/lightsail.html">Amazon Lightsail Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -915,6 +915,195 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.CreateContainerService:
+    post:
+      operationId: CreateContainerService
+      description: '<p>Creates an Amazon Lightsail container service.</p> <p>A Lightsail container service is a compute resource to which you can deploy containers. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-containers">Container services in Amazon Lightsail</a> in the <i>Lightsail Dev Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContainerServiceResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContainerServiceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.CreateContainerService
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.CreateContainerServiceDeployment:
+    post:
+      operationId: CreateContainerServiceDeployment
+      description: '<p>Creates a deployment for your Amazon Lightsail container service.</p> <p>A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration.</p> <p>You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images">Creating container images for your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContainerServiceDeploymentResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContainerServiceDeploymentRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.CreateContainerServiceDeployment
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.CreateContainerServiceRegistryLogin:
+    post:
+      operationId: CreateContainerServiceRegistryLogin
+      description: '<p>Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you''re logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.</p> <note> <p>You can only push container images to the container service registry of your Lightsail account. You cannot pull container images perform any other container image management actions on the container service registry of your Lightsail account.</p> </note> <p>After you push your container images to the container image registry of your Lightsail account, use the <code>RegisterContainerImage</code> action to register the pushed images to a specific Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href="amazon-lightsail-pushing-container-images">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContainerServiceRegistryLoginResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateContainerServiceRegistryLoginRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.CreateContainerServiceRegistryLogin
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.CreateDisk:
     post:
       operationId: CreateDisk
@@ -1143,7 +1332,7 @@ paths:
   /#X-Amz-Target=Lightsail_20161128.CreateDistribution:
     post:
       operationId: CreateDistribution
-      description: '<p>Creates an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A distribution is a globally distributed network of caching servers that improve the performance of your website or web application hosted on a Lightsail instance. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-networks">Content delivery networks in Amazon Lightsail</a>.</p>'
+      description: '<p>Creates an Amazon Lightsail content delivery network (CDN) distribution.</p> <p>A distribution is a globally distributed network of caching servers that improve the performance of your website or web application hosted on a Lightsail instance. For more information, see <a href="https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-content-delivery-network-distributions">Content delivery networks in Amazon Lightsail</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1287,7 +1476,7 @@ paths:
   /#X-Amz-Target=Lightsail_20161128.CreateDomainEntry:
     post:
       operationId: CreateDomainEntry
-      description: '<p>Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
+      description: '<p>Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags">Lightsail Dev Guide</a>.</p>'
       responses:
         '200':
           description: Success
@@ -2296,6 +2485,132 @@ paths:
             type: string
             enum:
               - Lightsail_20161128.DeleteContactMethod
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.DeleteContainerImage:
+    post:
+      operationId: DeleteContainerImage
+      description: Deletes a container image that is registered to your Amazon Lightsail container service.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteContainerImageResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteContainerImageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.DeleteContainerImage
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.DeleteContainerService:
+    post:
+      operationId: DeleteContainerService
+      description: Deletes your Amazon Lightsail container service.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteContainerServiceResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteContainerServiceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.DeleteContainerService
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4417,6 +4732,435 @@ paths:
             type: string
             enum:
               - Lightsail_20161128.GetContactMethods
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetContainerAPIMetadata:
+    post:
+      operationId: GetContainerAPIMetadata
+      description: 'Returns information about Amazon Lightsail containers, such as the current version of the Lightsail Control (lightsailctl) plugin.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContainerAPIMetadataResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContainerAPIMetadataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetContainerAPIMetadata
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetContainerImages:
+    post:
+      operationId: GetContainerImages
+      description: '<p>Returns the container images that are registered to your Amazon Lightsail container service.</p> <note> <p>If you created a deployment on your Lightsail container service that uses container images from a public registry like Docker Hub, those images are not returned as part of this action. Those images are not registered to your Lightsail container service.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContainerImagesResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContainerImagesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetContainerImages
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetContainerLog:
+    post:
+      operationId: GetContainerLog
+      description: '<p>Returns the log events of a container of your Amazon Lightsail container service.</p> <p>If your container service has more than one node (i.e., a scale greater than 1), then the log events that are returned for the specified container are merged from all nodes on your container service.</p> <note> <p>Container logs are retained for a certain amount of time. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/lightsail.html">Amazon Lightsail endpoints and quotas</a> in the <i>AWS General Reference</i>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContainerLogResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContainerLogRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetContainerLog
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetContainerServiceDeployments:
+    post:
+      operationId: GetContainerServiceDeployments
+      description: '<p>Returns the deployments for your Amazon Lightsail container service</p> <p>A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service.</p> <p>The deployments are ordered by version in ascending order. The newest version is listed at the top of the response.</p> <note> <p>A set number of deployments are kept before the oldest one is replaced with the newest one. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/lightsail.html">Amazon Lightsail endpoints and quotas</a> in the <i>AWS General Reference</i>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContainerServiceDeploymentsResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContainerServiceDeploymentsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetContainerServiceDeployments
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetContainerServiceMetricData:
+    post:
+      operationId: GetContainerServiceMetricData
+      description: '<p>Returns the data points of a specific metric of your Amazon Lightsail container service.</p> <p>Metrics report the utilization of your resources. Monitor and collect metric data regularly to maintain the reliability, availability, and performance of your resources.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContainerServiceMetricDataResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContainerServiceMetricDataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetContainerServiceMetricData
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetContainerServicePowers:
+    post:
+      operationId: GetContainerServicePowers
+      description: '<p>Returns the list of powers that can be specified for your Amazon Lightsail container services.</p> <p>The power specifies the amount of memory, the number of vCPUs, and the base price of the container service.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContainerServicePowersResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContainerServicePowersRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetContainerServicePowers
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.GetContainerServices:
+    post:
+      operationId: GetContainerServices
+      description: Returns information about one or more of your Amazon Lightsail container services.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContainerServicesListResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetContainerServicesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.GetContainerServices
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -8220,6 +8964,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.RegisterContainerImage:
+    post:
+      operationId: RegisterContainerImage
+      description: '<p>Registers a container image to your Amazon Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href="amazon-lightsail-pushing-container-images">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterContainerImageResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterContainerImageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.RegisterContainerImage
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.ReleaseStaticIp:
     post:
       operationId: ReleaseStaticIp
@@ -9027,6 +9834,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Lightsail_20161128.UpdateContainerService:
+    post:
+      operationId: UpdateContainerService
+      description: 'Updates the configuration of your Amazon Lightsail container service, such as its power, scale, and public domain names.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateContainerServiceResult'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: UnauthenticatedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthenticatedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateContainerServiceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Lightsail_20161128.UpdateContainerService
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Lightsail_20161128.UpdateDistribution:
     post:
       operationId: UpdateDistribution
@@ -9789,6 +10659,81 @@ components:
           allOf:
             - $ref: '#/components/schemas/StringMax256'
             - description: '<p>The destination of the contact method, such as an email address or a mobile phone number.</p> <p>Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the phone number structure used for international telecommunication. Phone numbers that follow this format can have a maximum of 15 digits, and they are prefixed with the plus character (+) and the country code. For example, a U.S. phone number in E.164 format would be specified as +1XXX5550100. For more information, see <a href="https://en.wikipedia.org/wiki/E.164">E.164</a> on <i>Wikipedia</i>.</p>'
+    CreateContainerServiceResult:
+      type: object
+      properties:
+        containerService:
+          allOf:
+            - $ref: '#/components/schemas/ContainerService'
+            - description: An object that describes a container service.
+    CreateContainerServiceRequest:
+      type: object
+      required:
+        - serviceName
+        - power
+        - scale
+      title: CreateContainerServiceRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: '<p>The name for the container service.</p> <p>The name that you specify for your container service will make up part of its default domain. The default domain of a container service is typically <code>https://&lt;ServiceName&gt;.&lt;RandomGUID&gt;.&lt;AWSRegion&gt;.cs.amazonlightsail.com</code>. If the name of your container service is <code>container-service-1</code>, and it''s located in the US East (Ohio) AWS region (<code>us-east-2</code>), then the domain for your container service will be like the following example: <code>https://container-service-1.ur4EXAMPLE2uq.us-east-2.cs.amazonlightsail.com</code> </p> <p>The following are the requirements for container service names:</p> <ul> <li> <p>Must be unique within each AWS Region in your Lightsail account.</p> </li> <li> <p>Must contain 1 to 63 characters.</p> </li> <li> <p>Must contain only alphanumeric characters and hyphens.</p> </li> <li> <p>A hyphen (-) can separate words but cannot be at the start or end of the name.</p> </li> </ul>'
+        power:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServicePowerName'
+            - description: '<p>The power specification for the container service.</p> <p>The power specifies the amount of memory, vCPUs, and base monthly cost of each node of the container service. The <code>power</code> and <code>scale</code> of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the <code>power</code> with the <code>scale</code> (the number of nodes) of the service.</p> <p>Use the <code>GetContainerServicePowers</code> action to get a list of power options that you can specify using this parameter, and their base monthly cost.</p>'
+        scale:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceScale'
+            - description: '<p>The scale specification for the container service.</p> <p>The scale specifies the allocated compute nodes of the container service. The <code>power</code> and <code>scale</code> of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the <code>power</code> with the <code>scale</code> (the number of nodes) of the service.</p>'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>The tag keys and optional values for the container service.</p> <p>For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.</p>'
+        publicDomainNames:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServicePublicDomains'
+            - description: '<p>The public domain names to use with the container service, such as <code>example.com</code> and <code>www.example.com</code>.</p> <p>You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service.</p> <p>If you don''t specify public domain names, then you can use the default domain of the container service.</p> <important> <p>You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the <code>CreateCertificate</code> action to create a certificate for the public domain names you want to use with your container service.</p> </important> <p>You can specify public domain names using a string to array map as shown in the example later on this page.</p>'
+        deployment:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceDeploymentRequest'
+            - description: '<p>An object that describes a deployment for the container service.</p> <p>A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration.</p>'
+    CreateContainerServiceDeploymentResult:
+      type: object
+      properties:
+        containerService:
+          allOf:
+            - $ref: '#/components/schemas/ContainerService'
+            - description: An object that describes a container service.
+    CreateContainerServiceDeploymentRequest:
+      type: object
+      required:
+        - serviceName
+      title: CreateContainerServiceDeploymentRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service for which to create the deployment.
+        containers:
+          allOf:
+            - $ref: '#/components/schemas/ContainerMap'
+            - description: An object that describes the settings of the containers that will be launched on the container service.
+        publicEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/EndpointRequest'
+            - description: An object that describes the settings of the public endpoint for the container service.
+    CreateContainerServiceRegistryLoginResult:
+      type: object
+      properties:
+        registryLogin:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceRegistryLogin'
+            - description: An object that describes the log in information for the container service registry of your Lightsail account.
+    CreateContainerServiceRegistryLoginRequest:
+      type: object
+      title: CreateContainerServiceRegistryLoginRequest
+      properties: {}
     CreateDiskResult:
       type: object
       properties:
@@ -10456,6 +11401,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContactProtocol'
             - description: '<p>The protocol that will be deleted, such as <code>Email</code> or <code>SMS</code> (text messaging).</p> <note> <p>To delete an <code>Email</code> and an <code>SMS</code> contact method if you added both, you must run separate <code>DeleteContactMethod</code> actions to delete each protocol.</p> </note>'
+    DeleteContainerImageResult:
+      type: object
+      properties: {}
+    DeleteContainerImageRequest:
+      type: object
+      required:
+        - serviceName
+        - image
+      title: DeleteContainerImageRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service for which to delete a registered container image.
+        image:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The name of the container image to delete from the container service.</p> <p>Use the <code>GetContainerImages</code> action to get the name of the container images that are registered to a container service.</p> <note> <p>Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (<code>:</code>). For example, <code>:container-service-1.mystaticwebsite.1</code>. Container images sourced from a public registry like Docker Hub don''t start with a colon. For example, <code>nginx:latest</code> or <code>nginx</code>.</p> </note>'
+    DeleteContainerServiceResult:
+      type: object
+      properties: {}
+    DeleteContainerServiceRequest:
+      type: object
+      required:
+        - serviceName
+      title: DeleteContainerServiceRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service to delete.
     DeleteDiskResult:
       type: object
       properties:
@@ -10864,7 +11840,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetActiveNames</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetActiveNames</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetActiveNamesRequest:
       type: object
       title: GetActiveNamesRequest
@@ -10883,7 +11859,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetAlarms</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetAlarms</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetAlarmsRequest:
       type: object
       title: GetAlarmsRequest
@@ -10935,7 +11911,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBlueprints</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBlueprints</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetBlueprintsRequest:
       type: object
       title: GetBlueprintsRequest
@@ -10958,7 +11934,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBundles</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBundles</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetBundlesRequest:
       type: object
       title: GetBundlesRequest
@@ -10985,7 +11961,7 @@ components:
         certificateStatuses:
           allOf:
             - $ref: '#/components/schemas/CertificateStatusList'
-            - description: '<p>The status of the certificates for which to return information.</p> <p>For example, specify <code>ISSUED</code> to return only certificates with an <code>ISSUED</code> status.</p> <p>When omitted, the response includes all of your certificates in the AWS region where the request is made, regardless of their current status.</p>'
+            - description: '<p>The status of the certificates for which to return information.</p> <p>For example, specify <code>ISSUED</code> to return only certificates with an <code>ISSUED</code> status.</p> <p>When omitted, the response includes all of your certificates in the AWS Region where the request is made, regardless of their current status.</p>'
         includeCertificateDetails:
           allOf:
             - $ref: '#/components/schemas/IncludeCertificateDetails'
@@ -10993,7 +11969,7 @@ components:
         certificateName:
           allOf:
             - $ref: '#/components/schemas/CertificateName'
-            - description: '<p>The name for the certificate for which to return information.</p> <p>When omitted, the response includes all of your certificates in the AWS region where the request is made.</p>'
+            - description: '<p>The name for the certificate for which to return information.</p> <p>When omitted, the response includes all of your certificates in the AWS Region where the request is made.</p>'
     GetCloudFormationStackRecordsResult:
       type: object
       properties:
@@ -11004,7 +11980,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetCloudFormationStackRecords</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetCloudFormationStackRecords</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetCloudFormationStackRecordsRequest:
       type: object
       title: GetCloudFormationStackRecordsRequest
@@ -11028,6 +12004,165 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContactProtocolsList'
             - description: '<p>The protocols used to send notifications, such as <code>Email</code>, or <code>SMS</code> (text messaging).</p> <p>Specify a protocol in your request to return information about a specific contact method protocol.</p>'
+    GetContainerAPIMetadataResult:
+      type: object
+      properties:
+        metadata:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceMetadataEntryList'
+            - description: 'Metadata about Lightsail containers, such as the current version of the Lightsail Control (lightsailctl) plugin.'
+    GetContainerAPIMetadataRequest:
+      type: object
+      title: GetContainerAPIMetadataRequest
+      properties: {}
+    GetContainerImagesResult:
+      type: object
+      properties:
+        containerImages:
+          allOf:
+            - $ref: '#/components/schemas/ContainerImageList'
+            - description: An array of objects that describe container images that are registered to the container service.
+    GetContainerImagesRequest:
+      type: object
+      required:
+        - serviceName
+      title: GetContainerImagesRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service for which to return registered container images.
+    GetContainerLogResult:
+      type: object
+      properties:
+        logEvents:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceLogEventList'
+            - description: An array of objects that describe the log events of a container.
+        nextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetContainerLog</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+    GetContainerLogRequest:
+      type: object
+      required:
+        - serviceName
+        - containerName
+      title: GetContainerLogRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service for which to get a container log.
+        containerName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the container that is either running or previously ran on the container service for which to return a log.
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: '<p>The start of the time interval for which to get log data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC, specify <code>1538424000</code> as the start time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href="https://www.epochconverter.com/">Epoch converter</a>.</p>'
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: '<p>The end of the time interval for which to get log data.</p> <p>Constraints:</p> <ul> <li> <p>Specified in Coordinated Universal Time (UTC).</p> </li> <li> <p>Specified in the Unix time format.</p> <p>For example, if you wish to use an end time of October 1, 2018, at 9 PM UTC, specify <code>1538427600</code> as the end time.</p> </li> </ul> <p>You can convert a human-friendly time to Unix time format using a converter like <a href="https://www.epochconverter.com/">Epoch converter</a>.</p>'
+        filterPattern:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The pattern to use to filter the returned log events to a specific term.</p> <p>The following are a few examples of filter patterns that you can specify:</p> <ul> <li> <p>To return all log events, specify a filter pattern of <code>""</code>.</p> </li> <li> <p>To exclude log events that contain the <code>ERROR</code> term, and return all other log events, specify a filter pattern of <code>"-ERROR"</code>.</p> </li> <li> <p>To return log events that contain the <code>ERROR</code> term, specify a filter pattern of <code>"ERROR"</code>.</p> </li> <li> <p>To return log events that contain both the <code>ERROR</code> and <code>Exception</code> terms, specify a filter pattern of <code>"ERROR Exception"</code>.</p> </li> <li> <p>To return log events that contain the <code>ERROR</code> <i>or</i> the <code>Exception</code> term, specify a filter pattern of <code>"?ERROR ?Exception"</code>.</p> </li> </ul>'
+        pageToken:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>To get a page token, perform an initial <code>GetContainerLog</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>'
+    GetContainerServiceDeploymentsResult:
+      type: object
+      properties:
+        deployments:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceDeploymentList'
+            - description: An array of objects that describe deployments for a container service.
+    GetContainerServiceDeploymentsRequest:
+      type: object
+      required:
+        - serviceName
+      title: GetContainerServiceDeploymentsRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service for which to return deployments.
+    GetContainerServiceMetricDataResult:
+      type: object
+      properties:
+        metricName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceMetricName'
+            - description: 'The name of the metric returned. '
+        metricData:
+          allOf:
+            - $ref: '#/components/schemas/MetricDatapointList'
+            - description: An array of objects that describe the metric data returned.
+    GetContainerServiceMetricDataRequest:
+      type: object
+      required:
+        - serviceName
+        - metricName
+        - startTime
+        - endTime
+        - period
+        - statistics
+      title: GetContainerServiceMetricDataRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service for which to get metric data.
+        metricName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceMetricName'
+            - description: '<p>The metric for which you want to return information.</p> <p>Valid container service metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.</p> <ul> <li> <p> <code>CPUUtilization</code> - The average percentage of compute units that are currently in use across all nodes of the container service. This metric identifies the processing power required to run containers on each node of the container service.</p> <p>Statistics: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p>Unit: The published unit is <code>Percent</code>.</p> </li> <li> <p> <code>MemoryUtilization</code> - The average percentage of available memory that is currently in use across all nodes of the container service. This metric identifies the memory required to run containers on each node of the container service.</p> <p>Statistics: The most useful statistics are <code>Maximum</code> and <code>Average</code>.</p> <p>Unit: The published unit is <code>Percent</code>.</p> </li> </ul>'
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: The start time of the time period.
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: The end time of the time period.
+        period:
+          allOf:
+            - $ref: '#/components/schemas/MetricPeriod'
+            - description: '<p>The granularity, in seconds, of the returned data points.</p> <p>All container service metric data is available in 5-minute (300 seconds) granularity.</p>'
+        statistics:
+          allOf:
+            - $ref: '#/components/schemas/MetricStatisticList'
+            - description: '<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - All values submitted for the matching metric added together. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of <code>Sum</code> / <code>SampleCount</code> during the specified period. By comparing this statistic with the <code>Minimum</code> and <code>Maximum</code> values, you can determine the full scope of a metric and how close the average use is to the <code>Minimum</code> and <code>Maximum</code> values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>'
+    GetContainerServicePowersResult:
+      type: object
+      properties:
+        powers:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServicePowerList'
+            - description: An array of objects that describe the powers that can be specified for a container service.
+    GetContainerServicePowersRequest:
+      type: object
+      title: GetContainerServicePowersRequest
+      properties: {}
+    ContainerServicesListResult:
+      type: object
+      properties:
+        containerServices:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceList'
+            - description: An array of objects that describe one or more container services.
+    GetContainerServicesRequest:
+      type: object
+      title: GetContainerServicesRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: '<p>The name of the container service for which to return information.</p> <p>When omitted, the response includes all of your container services in the AWS Region where the request is made.</p>'
     GetDiskResult:
       type: object
       properties:
@@ -11072,7 +12207,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDiskSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDiskSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetDiskSnapshotsRequest:
       type: object
       title: GetDiskSnapshotsRequest
@@ -11091,7 +12226,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDisks</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDisks</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetDisksRequest:
       type: object
       title: GetDisksRequest
@@ -11231,7 +12366,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDomains</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetDomains</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetDomainsRequest:
       type: object
       title: GetDomainsRequest
@@ -11250,7 +12385,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetExportSnapshotRecords</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetExportSnapshotRecords</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetExportSnapshotRecordsRequest:
       type: object
       title: GetExportSnapshotRecordsRequest
@@ -11392,7 +12527,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetInstanceSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetInstanceSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetInstanceSnapshotsRequest:
       type: object
       title: GetInstanceSnapshotsRequest
@@ -11428,7 +12563,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetInstances</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetInstances</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetInstancesRequest:
       type: object
       title: GetInstancesRequest
@@ -11464,7 +12599,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetKeyPairs</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetKeyPairs</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetKeyPairsRequest:
       type: object
       title: GetKeyPairsRequest
@@ -11568,7 +12703,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetLoadBalancers</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetLoadBalancers</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetLoadBalancersRequest:
       type: object
       title: GetLoadBalancersRequest
@@ -11604,7 +12739,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetOperations</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetOperations</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetOperationsRequest:
       type: object
       title: GetOperationsRequest
@@ -11628,7 +12763,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetOperationsForResource</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetOperationsForResource</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetOperationsForResourceRequest:
       type: object
       required:
@@ -11661,7 +12796,7 @@ components:
         includeRelationalDatabaseAvailabilityZones:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: '&gt;A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., <code>us-east-2a</code>).'
+            - description: 'A Boolean value indicating whether to also include Availability Zones for databases in your get regions request. Availability Zones are indicated with a letter (e.g., <code>us-east-2a</code>).'
     GetRelationalDatabaseResult:
       type: object
       properties:
@@ -11689,7 +12824,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseBlueprints</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseBlueprints</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetRelationalDatabaseBlueprintsRequest:
       type: object
       title: GetRelationalDatabaseBlueprintsRequest
@@ -11708,7 +12843,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseBundles</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseBundles</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetRelationalDatabaseBundlesRequest:
       type: object
       title: GetRelationalDatabaseBundlesRequest
@@ -11727,7 +12862,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseEvents</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseEvents</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetRelationalDatabaseEventsRequest:
       type: object
       required:
@@ -11895,7 +13030,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseParameters</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseParameters</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetRelationalDatabaseParametersRequest:
       type: object
       required:
@@ -11937,7 +13072,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabaseSnapshots</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetRelationalDatabaseSnapshotsRequest:
       type: object
       title: GetRelationalDatabaseSnapshotsRequest
@@ -11956,7 +13091,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabases</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetRelationalDatabases</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetRelationalDatabasesRequest:
       type: object
       title: GetRelationalDatabasesRequest
@@ -11992,7 +13127,7 @@ components:
         nextPageToken:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: '<p>The token to advance to the next page of resutls from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetStaticIps</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
+            - description: '<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetStaticIps</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>'
     GetStaticIpsRequest:
       type: object
       title: GetStaticIpsRequest
@@ -12185,6 +13320,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of your database to reboot.
+    RegisterContainerImageResult:
+      type: object
+      properties:
+        containerImage:
+          $ref: '#/components/schemas/ContainerImage'
+    RegisterContainerImageRequest:
+      type: object
+      required:
+        - serviceName
+        - label
+        - digest
+      title: RegisterContainerImageRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service for which to register a container image.
+        label:
+          allOf:
+            - $ref: '#/components/schemas/ContainerLabel'
+            - description: '<p>The label for the container image when it''s registered to the container service.</p> <p>Use a descriptive label that you can use to track the different versions of your registered container images.</p> <p>Use the <code>GetContainerImages</code> action to return the container images registered to a Lightsail container service. The label is the <code>&lt;imagelabel&gt;</code> portion of the following image name example:</p> <ul> <li> <p> <code>:container-service-1.&lt;imagelabel&gt;.1</code> </p> </li> </ul> <p>If the name of your container service is <code>mycontainerservice</code>, and the label that you specify is <code>mystaticwebsite</code>, then the name of the registered container image will be <code>:mycontainerservice.mystaticwebsite.1</code>.</p> <p>The number at the end of these image name examples represents the version of the registered container image. If you push and register another container image to the same Lightsail container service, with the same label, then the version number for the new registered container image will be <code>2</code>. If you push and register another container image, the version number will be <code>3</code>, and so on.</p>'
+        digest:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The digest of the container image to be registered.
     ReleaseStaticIpResult:
       type: object
       properties:
@@ -12403,6 +13563,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The tag keys to delete from the specified resource.
+    UpdateContainerServiceResult:
+      type: object
+      properties:
+        containerService:
+          allOf:
+            - $ref: '#/components/schemas/ContainerService'
+            - description: An object that describes a container service.
+    UpdateContainerServiceRequest:
+      type: object
+      required:
+        - serviceName
+      title: UpdateContainerServiceRequest
+      properties:
+        serviceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service to update.
+        power:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServicePowerName'
+            - description: '<p>The power for the container service.</p> <p>The power specifies the amount of memory, vCPUs, and base monthly cost of each node of the container service. The <code>power</code> and <code>scale</code> of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the <code>power</code> with the <code>scale</code> (the number of nodes) of the service.</p> <p>Use the <code>GetContainerServicePowers</code> action to view the specifications of each power option.</p>'
+        scale:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceScale'
+            - description: '<p>The scale for the container service.</p> <p>The scale specifies the allocated compute nodes of the container service. The <code>power</code> and <code>scale</code> of a container service makes up its configured capacity. To determine the monthly price of your container service, multiply the base price of the <code>power</code> with the <code>scale</code> (the number of nodes) of the service.</p>'
+        isDisabled:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: A Boolean value to indicate whether the container service is disabled.
+        publicDomainNames:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServicePublicDomains'
+            - description: '<p>The public domain names to use with the container service, such as <code>example.com</code> and <code>www.example.com</code>.</p> <p>You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service.</p> <p>If you don''t specify public domain names, then you can use the default domain of the container service.</p> <important> <p>You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the <code>CreateCertificate</code> action to create a certificate for the public domain names you want to use with your container service.</p> </important> <p>You can specify public domain names using a string to array map as shown in the example later on this page.</p>'
     UpdateDistributionResult:
       type: object
       properties:
@@ -12669,6 +13862,7 @@ components:
     ResourceType:
       type: string
       enum:
+        - ContainerService
         - Instance
         - StaticIp
         - KeyPair
@@ -13603,16 +14797,387 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ContactMethod'
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    Environment:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/string'
+    PortMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ContainerServiceProtocol'
+    Container:
+      type: object
+      properties:
+        image:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The name of the image used for the container.</p> <p>Container images sourced from your Lightsail container service, that are registered and stored on your service, start with a colon (<code>:</code>). For example, <code>:container-service-1.mystaticwebsite.1</code>. Container images sourced from a public registry like Docker Hub don''t start with a colon. For example, <code>nginx:latest</code> or <code>nginx</code>.</p>'
+        command:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: The launch command for the container.
+        environment:
+          allOf:
+            - $ref: '#/components/schemas/Environment'
+            - description: The environment variables of the container.
+        ports:
+          allOf:
+            - $ref: '#/components/schemas/PortMap'
+            - description: The open firewall ports of the container.
+      description: 'Describes the settings of a container that will be launched, or that is launched, to an Amazon Lightsail container service.'
+    ContainerImage:
+      type: object
+      properties:
+        image:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the container image.
+        digest:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The digest of the container image.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: The timestamp when the container image was created.
+      description: Describes a container image that is registered to an Amazon Lightsail container service.
+    ContainerImageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerImage'
+    ContainerLabel:
+      type: string
+      pattern: '^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$'
+      minLength: 1
+      maxLength: 53
+    ContainerMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Container'
+    ContainerName:
+      type: string
+      pattern: '^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$'
+      minLength: 1
+      maxLength: 53
+    ContainerServiceName:
+      type: string
+      pattern: '^[a-z0-9]{1,2}|[a-z0-9][a-z0-9-]+[a-z0-9]$'
+      minLength: 1
+      maxLength: 63
+    ContainerServicePowerName:
+      type: string
+      enum:
+        - nano
+        - micro
+        - small
+        - medium
+        - large
+        - xlarge
+    ContainerServiceState:
+      type: string
+      enum:
+        - PENDING
+        - READY
+        - RUNNING
+        - UPDATING
+        - DELETING
+        - DISABLED
+    ContainerServiceScale:
+      type: integer
+      minimum: 1
+      maximum: 20
+    ContainerServiceDeployment:
+      type: object
+      properties:
+        version:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The version number of the deployment.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceDeploymentState'
+            - description: '<p>The state of the deployment.</p> <p>A deployment can be in one of the following states:</p> <ul> <li> <p> <code>Activating</code> - The deployment is being created.</p> </li> <li> <p> <code>Active</code> - The deployment was successfully created, and it''s currently running on the container service. The container service can have only one deployment in an active state at a time.</p> </li> <li> <p> <code>Inactive</code> - The deployment was previously successfully created, but it is not currently running on the container service.</p> </li> <li> <p> <code>Failed</code> - The deployment failed. Use the <code>GetContainerLog</code> action to view the log events for the containers in the deployment to try to determine the reason for the failure.</p> </li> </ul>'
+        containers:
+          allOf:
+            - $ref: '#/components/schemas/ContainerMap'
+            - description: An object that describes the configuration for the containers of the deployment.
+        publicEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceEndpoint'
+            - description: An object that describes the endpoint of the deployment.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: The timestamp when the deployment was created.
+      description: '<p>Describes a container deployment configuration of an Amazon Lightsail container service.</p> <p>A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service.</p>'
+    ContainerServicePublicDomains:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/ContainerServicePublicDomainsList'
+    ContainerService:
+      type: object
+      properties:
+        containerServiceName:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceName'
+            - description: The name of the container service.
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The Amazon Resource Name (ARN) of the container service.
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: The timestamp when the container service was created.
+        location:
+          allOf:
+            - $ref: '#/components/schemas/ResourceLocation'
+            - description: 'An object that describes the location of the container service, such as the AWS Region and Availability Zone.'
+        resourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: 'The Lightsail resource type of the container service (i.e., <code>ContainerService</code>).'
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href="https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags">Lightsail Dev Guide</a>.'
+        power:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServicePowerName'
+            - description: '<p>The power specification of the container service.</p> <p>The power specifies the amount of RAM, the number of vCPUs, and the base price of the container service.</p>'
+        powerId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The ID of the power of the container service.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceState'
+            - description: '<p>The current state of the container service.</p> <p>The state can be:</p> <ul> <li> <p> <code>Pending</code> - The container service is being created.</p> </li> <li> <p> <code>Ready</code> - The container service is created but does not have a container deployment.</p> </li> <li> <p> <code>Disabled</code> - The container service is disabled.</p> </li> <li> <p> <code>Updating</code> - The container service capacity or other setting is being updated.</p> </li> <li> <p> <code>Deploying</code> - The container service is launching a container deployment.</p> </li> <li> <p> <code>Running</code> - The container service is created and it has a container deployment.</p> </li> </ul>'
+        scale:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceScale'
+            - description: <p>The scale specification of the container service.</p> <p>The scale specifies the allocated compute nodes of the container service.</p>
+        currentDeployment:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceDeployment'
+            - description: An object that describes the current container deployment of the container service.
+        nextDeployment:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceDeployment'
+            - description: <p>An object that describes the next deployment of the container service.</p> <p>This value is <code>null</code> when there is no deployment in a <code>pending</code> state.</p>
+        isDisabled:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: A Boolean value indicating whether the container service is disabled.
+        principalArn:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: <p>The principal ARN of the container service.</p> <p>The principal ARN can be used to create a trust relationship between your standard AWS account and your Lightsail container service. This allows you to give your service permission to access resources in your standard AWS account.</p>
+        privateDomainName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: <p>The private domain name of the container service.</p> <p>The private domain name is accessible only by other resources within the default virtual private cloud (VPC) of your Lightsail account.</p>
+        publicDomainNames:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServicePublicDomains'
+            - description: '<p>The public domain name of the container service, such as <code>example.com</code> and <code>www.example.com</code>.</p> <p>You can specify up to four public domain names for a container service. The domain names that you specify are used when you create a deployment with a container configured as the public endpoint of your container service.</p> <p>If you don''t specify public domain names, then you can use the default domain of the container service.</p> <important> <p>You must create and validate an SSL/TLS certificate before you can use public domain names with your container service. Use the <code>CreateCertificate</code> action to create a certificate for the public domain names you want to use with your container service.</p> </important> <p>See <code>CreateContainerService</code> or <code>UpdateContainerService</code> for information about how to specify public domain names for your Lightsail container service.</p>'
+        url:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: '<p>The publicly accessible URL of the container service.</p> <p>If no public endpoint is specified in the <code>currentDeployment</code>, this URL returns a 404 response.</p>'
+      description: Describes an Amazon Lightsail container service.
+    ContainerServiceDeploymentState:
+      type: string
+      enum:
+        - ACTIVATING
+        - ACTIVE
+        - INACTIVE
+        - FAILED
+    ContainerServiceEndpoint:
+      type: object
+      properties:
+        containerName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the container entry of the deployment that the endpoint configuration applies to.
+        containerPort:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The port of the specified container to which traffic is forwarded to.
+        healthCheck:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceHealthCheckConfig'
+            - description: An object that describes the health check configuration of the container.
+      description: Describes the public endpoint configuration of a deployment of an Amazon Lightsail container service.
+    ContainerServiceDeploymentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerServiceDeployment'
+    EndpointRequest:
+      type: object
+      required:
+        - containerName
+        - containerPort
+      properties:
+        containerName:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The name of the container for the endpoint.
+        containerPort:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The port of the container to which traffic is forwarded to.
+        healthCheck:
+          allOf:
+            - $ref: '#/components/schemas/ContainerServiceHealthCheckConfig'
+            - description: An object that describes the health check configuration of the container.
+      description: Describes the settings of a public endpoint for an Amazon Lightsail container service.
+    ContainerServiceDeploymentRequest:
+      type: object
+      properties:
+        containers:
+          allOf:
+            - $ref: '#/components/schemas/ContainerMap'
+            - description: An object that describes the configuration for the containers of the deployment.
+        publicEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/EndpointRequest'
+            - description: An object that describes the endpoint of the deployment.
+      description: '<p>Describes a container deployment configuration of an Amazon Lightsail container service.</p> <p>A deployment specifies the settings, such as the ports and launch command, of containers that are deployed to your container service.</p>'
+    ContainerServiceHealthCheckConfig:
+      type: object
+      properties:
+        healthyThreshold:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The number of consecutive health checks successes required before moving the container to the <code>Healthy</code> state.
+        unhealthyThreshold:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: The number of consecutive health check failures required before moving the container to the <code>Unhealthy</code> state.
+        timeoutSeconds:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: 'The amount of time, in seconds, during which no response means a failed health check. You may specify between 2 and 60 seconds.'
+        intervalSeconds:
+          allOf:
+            - $ref: '#/components/schemas/integer'
+            - description: 'The approximate interval, in seconds, between health checks of an individual container. You may specify between 5 and 300 seconds.'
+        path:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The path on the container on which to perform the health check.
+        successCodes:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499.
+      description: Describes the health check configuration of an Amazon Lightsail container service.
+    ContainerServiceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerService'
+    ContainerServiceLogEvent:
+      type: object
+      properties:
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: The timestamp when the container service log event was created.
+        message:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The message of the container service log event.
+      description: Describes the log events of a container of an Amazon Lightsail container service.
+    ContainerServiceLogEventList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerServiceLogEvent'
+    ContainerServiceMetadataEntry:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/string'
+    ContainerServiceMetadataEntryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerServiceMetadataEntry'
+    ContainerServiceMetricName:
+      type: string
+      enum:
+        - CPUUtilization
+        - MemoryUtilization
+    ContainerServicePower:
+      type: object
+      properties:
+        powerId:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The ID of the power (e.g., <code>nano-1</code>).'
+        price:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: The monthly price of the power in USD.
+        cpuCount:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: The number of vCPUs included in the power.
+        ramSizeInGb:
+          allOf:
+            - $ref: '#/components/schemas/float'
+            - description: The amount of RAM (in GB) of the power.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: 'The friendly name of the power (e.g., <code>nano</code>).'
+        isActive:
+          allOf:
+            - $ref: '#/components/schemas/boolean'
+            - description: A Boolean value indicating whether the power is active and can be specified for container services.
+      description: '<p>Describes the powers that can be specified for an Amazon Lightsail container service.</p> <p>The power specifies the amount of RAM, the number of vCPUs, and the base price of the container service.</p>'
+    ContainerServicePowerList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerServicePower'
+    ContainerServiceProtocol:
+      type: string
+      enum:
+        - HTTP
+        - HTTPS
+        - TCP
+        - UDP
+    ContainerServicePublicDomainsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/string'
+    ContainerServiceRegistryLogin:
+      type: object
+      properties:
+        username:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The container service registry username to use to push container images to the container image registry of a Lightsail account.
+        password:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The container service registry password to use to push container images to the container image registry of a Lightsail account
+        expiresAt:
+          allOf:
+            - $ref: '#/components/schemas/IsoDate'
+            - description: '<p>The timestamp of when the container image registry username and password expire.</p> <p>The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials using the <code>CreateContainerServiceRegistryLogin</code> action.</p>'
+        registry:
+          allOf:
+            - $ref: '#/components/schemas/string'
+            - description: The address to use to push container images to the container image registry of a Lightsail account.
+      description: Describes the login information for the container image registry of an Amazon Lightsail account.
     ForwardValues:
       type: string
       enum:
         - none
         - allow-list
         - all
-    StringList:
-      type: array
-      items:
-        $ref: '#/components/schemas/string'
     RegionName:
       type: string
       enum:
@@ -13752,7 +15317,7 @@ components:
         isAlias:
           allOf:
             - $ref: '#/components/schemas/boolean'
-            - description: 'When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer'
+            - description: 'When <code>true</code>, specifies whether the domain entry is an alias used by the Lightsail load balancer. You can include an alias (A type) record in your request, which points to a load balancer DNS name and routes traffic to your load balancer.'
         type:
           allOf:
             - $ref: '#/components/schemas/DomainEntryType'
@@ -14235,9 +15800,6 @@ components:
       description: Describes an instance snapshot.
     IncludeCertificateDetails:
       type: boolean
-    timestamp:
-      type: string
-      format: date-time
     MetricStatisticList:
       type: array
       items:
@@ -14246,6 +15808,9 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/MetricDatapoint'
+    timestamp:
+      type: string
+      format: date-time
     InstanceAccessProtocol:
       type: string
       enum:
@@ -15513,6 +17078,13 @@ components:
         - UpdateDistributionBundle
         - CreateCertificate
         - DeleteCertificate
+        - CreateContainerService
+        - UpdateContainerService
+        - DeleteContainerService
+        - CreateContainerServiceDeployment
+        - CreateContainerServiceRegistryLogin
+        - RegisterContainerImage
+        - DeleteContainerImage
     OperationStatus:
       type: string
       enum:

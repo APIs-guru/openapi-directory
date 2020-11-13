@@ -169,10 +169,16 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AttributeValue'
                 filterArn:
-                  description: The Amazon Resource Name (ARN) of a filter you created to include or exclude items from recommendations for a given user.
+                  description: 'The Amazon Resource Name (ARN) of a filter you created to include items or exclude items from recommendations for a given user. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering Recommendations</a>.'
                   type: string
                   pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
                   maxLength: 256
+                filterValues:
+                  description: '<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma. </p> <p>For filter expressions that use an <code>INCLUDE</code> element to include items, you must provide values for all parameters that are defined in the expression. For filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn''t use that portion of the expression to filter recommendations.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering Recommendations</a>.</p>'
+                  type: object
+                  maxProperties: 25
+                  additionalProperties:
+                    $ref: '#/components/schemas/FilterAttributeValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -238,10 +244,16 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AttributeValue'
                 filterArn:
-                  description: '<p>The ARN of the filter to apply to the returned recommendations. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filters.html">Using Filters with Amazon Personalize</a>.</p> <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>'
+                  description: '<p>The ARN of the filter to apply to the returned recommendations. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering Recommendations</a>.</p> <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>'
                   type: string
                   pattern: 'arn:([a-z\d-]+):personalize:.*:.*:.+'
                   maxLength: 256
+                filterValues:
+                  description: '<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma. </p> <p>For filter expressions that use an <code>INCLUDE</code> element to include items, you must provide values for all parameters that are defined in the expression. For filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn''t use that portion of the expression to filter recommendations.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering Recommendations</a>.</p>'
+                  type: object
+                  maxProperties: 25
+                  additionalProperties:
+                    $ref: '#/components/schemas/FilterAttributeValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -320,6 +332,10 @@ components:
       type: string
       maxLength: 1000
       format: password
+    FilterAttributeValue:
+      type: string
+      maxLength: 1000
+      format: password
     InvalidInputException: {}
     ResourceNotFoundException: {}
     GetRecommendationsResponse:
@@ -346,6 +362,15 @@ components:
       maxProperties: 150
       additionalProperties:
         $ref: '#/components/schemas/AttributeValue'
+    FilterAttributeName:
+      type: string
+      pattern: '[A-Za-z0-9]+'
+      maxLength: 50
+    FilterValues:
+      type: object
+      maxProperties: 25
+      additionalProperties:
+        $ref: '#/components/schemas/FilterAttributeValue'
     InputList:
       type: array
       items:
@@ -380,7 +405,11 @@ components:
         filterArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) of a filter you created to include or exclude items from recommendations for a given user.
+            - description: 'The Amazon Resource Name (ARN) of a filter you created to include items or exclude items from recommendations for a given user. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering Recommendations</a>.'
+        filterValues:
+          allOf:
+            - $ref: '#/components/schemas/FilterValues'
+            - description: '<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma. </p> <p>For filter expressions that use an <code>INCLUDE</code> element to include items, you must provide values for all parameters that are defined in the expression. For filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn''t use that portion of the expression to filter recommendations.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering Recommendations</a>.</p>'
     ItemList:
       type: array
       items:
@@ -419,7 +448,11 @@ components:
         filterArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: '<p>The ARN of the filter to apply to the returned recommendations. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filters.html">Using Filters with Amazon Personalize</a>.</p> <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>'
+            - description: '<p>The ARN of the filter to apply to the returned recommendations. For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering Recommendations</a>.</p> <p>When using this parameter, be sure the filter resource is <code>ACTIVE</code>.</p>'
+        filterValues:
+          allOf:
+            - $ref: '#/components/schemas/FilterValues'
+            - description: '<p>The values to use when filtering recommendations. For each placeholder parameter in your filter expression, provide the parameter name (in matching case) as a key and the filter value(s) as the corresponding value. Separate multiple values for one parameter with a comma. </p> <p>For filter expressions that use an <code>INCLUDE</code> element to include items, you must provide values for all parameters that are defined in the expression. For filters with expressions that use an <code>EXCLUDE</code> element to exclude items, you can omit the <code>filter-values</code>.In this case, Amazon Personalize doesn''t use that portion of the expression to filter recommendations.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/personalize/latest/dg/filter.html">Filtering Recommendations</a>.</p>'
     PredictedItem:
       type: object
       properties:
