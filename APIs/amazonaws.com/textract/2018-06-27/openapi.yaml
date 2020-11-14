@@ -468,54 +468,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidS3ObjectException'
         '482':
+          description: InvalidKMSKeyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSKeyException'
+        '483':
           description: UnsupportedDocumentException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnsupportedDocumentException'
-        '483':
+        '484':
           description: DocumentTooLargeException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentTooLargeException'
-        '484':
+        '485':
           description: BadDocumentException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadDocumentException'
-        '485':
+        '486':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '486':
+        '487':
           description: ProvisionedThroughputExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProvisionedThroughputExceededException'
-        '487':
+        '488':
           description: InternalServerError
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
-        '488':
+        '489':
           description: IdempotentParameterMismatchException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IdempotentParameterMismatchException'
-        '489':
+        '490':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '490':
+        '491':
           description: LimitExceededException
           content:
             application/json:
@@ -567,54 +573,60 @@ paths:
               schema:
                 $ref: '#/components/schemas/InvalidS3ObjectException'
         '482':
+          description: InvalidKMSKeyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSKeyException'
+        '483':
           description: UnsupportedDocumentException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/UnsupportedDocumentException'
-        '483':
+        '484':
           description: DocumentTooLargeException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/DocumentTooLargeException'
-        '484':
+        '485':
           description: BadDocumentException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadDocumentException'
-        '485':
+        '486':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '486':
+        '487':
           description: ProvisionedThroughputExceededException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProvisionedThroughputExceededException'
-        '487':
+        '488':
           description: InternalServerError
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalServerError'
-        '488':
+        '489':
           description: IdempotentParameterMismatchException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/IdempotentParameterMismatchException'
-        '489':
+        '490':
           description: ThrottlingException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
-        '490':
+        '491':
           description: LimitExceededException
           content:
             application/json:
@@ -904,6 +916,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputConfig'
             - description: 'Sets if the output will go to a customer defined bucket. By default, Amazon Textract will save the results internally to be accessed by the GetDocumentAnalysis operation.'
+        KMSKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KMSKeyId'
+            - description: 'The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.'
+    InvalidKMSKeyException: {}
     IdempotentParameterMismatchException: {}
     LimitExceededException: {}
     StartDocumentTextDetectionResponse:
@@ -939,6 +956,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutputConfig'
             - description: Sets if the output will go to a customer defined bucket. By default Amazon Textract will save the results internally to be accessed with the GetDocumentTextDetection operation.
+        KMSKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KMSKeyId'
+            - description: 'The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.'
     Document:
       type: object
       properties:
@@ -1019,6 +1040,11 @@ components:
       format: float
       minimum: 0
       maximum: 100
+    TextType:
+      type: string
+      enum:
+        - HANDWRITING
+        - PRINTED
     UInteger:
       type: integer
       minimum: 0
@@ -1065,6 +1091,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The word or line of text that''s recognized by Amazon Textract. '
+        TextType:
+          allOf:
+            - $ref: '#/components/schemas/TextType'
+            - description: The kind of text that Amazon Textract has detected. Can check for handwritten text and printed text.
         RowIndex:
           allOf:
             - $ref: '#/components/schemas/UInteger'
@@ -1252,6 +1282,11 @@ components:
       pattern: '[a-zA-Z0-9_.\-:]+'
       minLength: 1
       maxLength: 64
+    KMSKeyId:
+      type: string
+      pattern: '^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$'
+      minLength: 1
+      maxLength: 2048
     SNSTopicArn:
       type: string
       pattern: '(^arn:([a-z\d-]+):sns:[a-zA-Z\d-]{1,20}:\w{12}:.+$)'
