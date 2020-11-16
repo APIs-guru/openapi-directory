@@ -59,6 +59,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/admob.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/admob.report
           Oauth2c:
             - https://www.googleapis.com/auth/admob.report
@@ -96,6 +100,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/admob.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/admob.report
           Oauth2c:
             - https://www.googleapis.com/auth/admob.report
@@ -127,7 +135,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Generates an AdMob Mediation report based on the provided report specification.
+      description: Generates an AdMob Mediation report based on the provided report specification. Returns result of a server-side streaming RPC. The result is returned in a sequence of responses.
       operationId: admob.accounts.mediationReport.generate
       parameters:
         - description: "Resource name of the account to generate the report for. Example: accounts/pub-9876543210987654"
@@ -169,7 +177,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Generates an AdMob Network report based on the provided report specification.
+      description: Generates an AdMob Network report based on the provided report specification. Returns result of a server-side streaming RPC. The result is returned in a sequence of responses.
       operationId: admob.accounts.networkReport.generate
       parameters:
         - description: "Resource name of the account to generate the report for. Example: accounts/pub-9876543210987654"
@@ -717,6 +725,7 @@ components:
         implicit:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/admob.readonly: See your AdMob data
             https://www.googleapis.com/auth/admob.report: See your AdMob data
       type: oauth2
     Oauth2c:
@@ -725,6 +734,7 @@ components:
         authorizationCode:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
+            https://www.googleapis.com/auth/admob.readonly: See your AdMob data
             https://www.googleapis.com/auth/admob.report: See your AdMob data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

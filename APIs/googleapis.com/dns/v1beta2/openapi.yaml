@@ -26,7 +26,6 @@ info:
       version: v1
   x-providerName: googleapis.com
   x-serviceName: dns
-  x-preferred: null
 externalDocs:
   url: https://cloud.google.com/dns/docs
 tags:
@@ -952,6 +951,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResourceRecordSet"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - projects
   "/dns/v1beta2/projects/{project}/managedZones/{managedZone}/rrsets/{name}/{type}":
@@ -995,6 +1003,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResourceRecordSetsDeleteResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - projects
     get:
@@ -1037,6 +1054,23 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResourceRecordSet"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform.read-only
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - projects
     parameters:
@@ -1096,6 +1130,15 @@ paths:
               schema:
                 $ref: "#/components/schemas/ResourceRecordSet"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
+          Oauth2c:
+            - https://www.googleapis.com/auth/ndev.clouddns.readwrite
       tags:
         - projects
   "/dns/v1beta2/projects/{project}/policies":

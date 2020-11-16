@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://area120tables.googleapis.com/$discovery/rest?version=v1alpha1
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: area120tables
-  x-preferred: true
 externalDocs:
   url: https://tables.area120.google.com
 tags:
@@ -63,9 +63,17 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/drive.file
         - Oauth2:
+            - https://www.googleapis.com/auth/drive.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/spreadsheets
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets
+        - Oauth2:
+            - https://www.googleapis.com/auth/spreadsheets.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/spreadsheets.readonly
       tags:
         - tables
     parameters:
@@ -112,9 +120,17 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/drive.file
         - Oauth2:
+            - https://www.googleapis.com/auth/drive.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/drive.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/spreadsheets
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets
+        - Oauth2:
+            - https://www.googleapis.com/auth/spreadsheets.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/spreadsheets.readonly
       tags:
         - workspaces
     parameters:
@@ -197,9 +213,9 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/drive.file
         - Oauth2:
-            - https://www.googleapis.com/auth/spreadsheets
+            - https://www.googleapis.com/auth/drive.readonly
           Oauth2c:
-            - https://www.googleapis.com/auth/spreadsheets
+            - https://www.googleapis.com/auth/drive.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/spreadsheets
           Oauth2c:

@@ -23,9 +23,9 @@ info:
     - format: google
       url: https://apigee.googleapis.com/$discovery/rest?version=v1
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: apigee
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/apigee-api-management/
 tags:
@@ -160,12 +160,12 @@ paths:
               - BASIC
               - FULL
             type: string
-        - description: If customers want to query custom aggregate tables, then this parameter can be used to specify the table name. If this parameter is skipped, then Edge Query will try to retrieve the data from fact tables which will be expensive.
+        - description: Required. The hostname for which the interactive query will be executed.
           in: query
-          name: aggTable
+          name: envgroupHostname
           schema:
             type: string
-        - description: Enables drill-down on specific dimension values
+        - description: Enables drill-down on specific dimension values.
           in: query
           name: filter
           schema:
@@ -185,16 +185,11 @@ paths:
           name: realtime
           schema:
             type: boolean
-        - description: The select parameter contains a comma separated list of metrics. E.g. sum(message_count),sum(error_count)
+        - description: Required. The select parameter contains a comma separated list of metrics. E.g. sum(message_count),sum(error_count)
           in: query
           name: select
           schema:
             type: string
-        - description: This parameter routes the query to api monitoring service for last hour.
-          in: query
-          name: sonar
-          schema:
-            type: boolean
         - description: This parameter specifies if the sort order should be ascending or descending Supported values are DESC and ASC.
           in: query
           name: sort
@@ -205,7 +200,7 @@ paths:
           name: sortby
           schema:
             type: string
-        - description: Time interval for the interactive query. Time range is specified as start~end E.g. 04/15/2017 00:00~05/15/2017 23:59
+        - description: Required. Time interval for the interactive query. Time range is specified as start~end. E.g 04/15/2017 00:00~05/15/2017 23:59.
           in: query
           name: timeRange
           schema:
@@ -896,7 +891,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The password for the private key file, if it exists.
+        - description: 'DEPRECATED: For improved security, send the password in the body instead of using this query param. To send it in the body, use a multipart/form-data part with name "password". The password for the private key file, if it exists.'
           in: query
           name: _password
           schema:
@@ -1872,6 +1867,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. List only Developers that are associated with the app. Note that start_key, count are not applicable for this filter criteria.
+          in: query
+          name: app
+          schema:
+            type: string
         - description: Optional. Number of developers to return in the API call. Use with the `startKey` parameter to provide more targeted filtering. The limit is 1000.
           in: query
           name: count
@@ -2072,6 +2072,107 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+  "/v1/{parent}/hostQueries":
+    get:
+      description: Return a list of Asynchronous Queries at host level.
+      operationId: apigee.organizations.hostQueries.list
+      parameters:
+        - description: Required. The parent resource name. Must be of the form `organizations/{org}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Filter response list by dataset. Example: `api`, `mint`"
+          in: query
+          name: dataset
+          schema:
+            type: string
+        - description: Required. Filter response list by hostname.
+          in: query
+          name: envgroupHostname
+          schema:
+            type: string
+        - description: Filter response list by returning asynchronous queries that created after this date time. Time must be in ISO date-time format like '2011-12-03T10:15:30Z'.
+          in: query
+          name: from
+          schema:
+            type: string
+        - description: Flag to include asynchronous queries that don't have a report denifition.
+          in: query
+          name: inclQueriesWithoutReport
+          schema:
+            type: string
+        - description: Filter response list by asynchronous query status.
+          in: query
+          name: status
+          schema:
+            type: string
+        - description: Filter response list by user who submitted queries.
+          in: query
+          name: submittedBy
+          schema:
+            type: string
+        - description: Filter response list by returning asynchronous queries that created before this date time. Time must be in ISO date-time format like '2011-12-03T10:16:30Z'.
+          in: query
+          name: to
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ListAsyncQueriesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Submit a query at host level to be processed in the background. If the submission of the query succeeds, the API returns a 201 status and an ID that refer to the query. In addition to the HTTP status 201, the `state` of "enqueued" means that the request succeeded.
+      operationId: apigee.organizations.hostQueries.create
+      parameters:
+        - description: Required. The parent resource name. Must be of the form `organizations/{org}`.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1Query"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1AsyncQuery"
           description: Successful response
       security:
         - Oauth2:
@@ -3621,6 +3722,9 @@ components:
         created:
           description: Creation time of the query.
           type: string
+        envgroupHostname:
+          description: Hostname is available only when query is executed at host level.
+          type: string
         error:
           description: Error is set when query fails.
           type: string
@@ -3647,7 +3751,7 @@ components:
           format: int64
           type: string
         self:
-          description: "Self link of the query. Example: `/organizations/myorg/environments/myenv/queries/9cfc0d85-0f30-46d6-ae6f-318d0cb961bd`"
+          description: "Self link of the query. Example: `/organizations/myorg/environments/myenv/queries/9cfc0d85-0f30-46d6-ae6f-318d0cb961bd` or following format if query is running at host level: `/organizations/myorg/hostQueries/9cfc0d85-0f30-46d6-ae6f-318d0cb961bd`"
           type: string
         state:
           description: Query state could be "enqueued", "running", "completed", "failed".
@@ -3662,7 +3766,27 @@ components:
           description: Query result will be unaccessable after this time.
           type: string
         self:
-          description: "Self link of the query results. Example: `/organizations/myorg/environments/myenv/queries/9cfc0d85-0f30-46d6-ae6f-318d0cb961bd/result`"
+          description: "Self link of the query results. Example: `/organizations/myorg/environments/myenv/queries/9cfc0d85-0f30-46d6-ae6f-318d0cb961bd/result` or following format if query is running at host level: `/organizations/myorg/hostQueries/9cfc0d85-0f30-46d6-ae6f-318d0cb961bd/result`"
+          type: string
+      type: object
+    GoogleCloudApigeeV1AsyncQueryResultView:
+      properties:
+        code:
+          description: Error code when there is a failure.
+          format: int32
+          type: integer
+        error:
+          description: Error message when there is a failure.
+          type: string
+        metadata:
+          $ref: "#/components/schemas/GoogleCloudApigeeV1QueryMetadata"
+          description: Metadata contains information like metrics, dimenstions etc of the AsyncQuery.
+        rows:
+          description: 'Rows of query result. Each row is a JSON object. Example: {sum(message_count): 1, developer_app: "(not set)",…}'
+          items: {}
+          type: array
+        state:
+          description: State of retrieving ResultView.
           type: string
       type: object
     GoogleCloudApigeeV1Attribute:
@@ -5374,6 +5498,9 @@ components:
           items:
             type: string
           type: array
+        envgroupHostname:
+          description: Hostname needs to be specified if query intends to run at host level. This field is only allowed when query is submitted by CreateHostAsyncQuery where analytics data will be grouped by organization and hostname.
+          type: string
         filter:
           description: Boolean expression that can be used to filter data. Filter expressions can be combined using AND/OR terms and should be fully parenthesized to avoid ambiguity. See Analytics metrics, dimensions, and filters reference https://docs.apigee.com/api-platform/analytics/analytics-reference for more information on the fields available to filter on. For more information on the tokens that you use to build filter expressions, see Filter expression syntax. https://docs.apigee.com/api-platform/analytics/asynch-reports-api#filter-expression-syntax
           type: string
@@ -5624,17 +5751,17 @@ components:
           description: URI path prefix used to route to the specified environment. May contain one or more wildcards. For example, path segments consisting of a single `*` character will match any string.
           type: string
         envGroupRevision:
-          description: The env group config revision_id when this rule was added or last updated. This value is set when the rule is created and will only update if the the environment_id changes. It is used to determine if the runtime is up to date with respect to this rule. This field is omitted from the IngressConfig unless the GetDeployedIngressConfig API is called with debug=true.
+          description: The env group config revision_id when this rule was added or last updated. This value is set when the rule is created and will only update if the the environment_id changes. It is used to determine if the runtime is up to date with respect to this rule. This field is omitted from the IngressConfig unless the GetDeployedIngressConfig API is called with view=FULL.
           format: int64
           type: string
         environment:
           description: "Name of an environment bound to the environment group in the following format: `organizations/{org}/environments/{env}`."
           type: string
         receiver:
-          description: "The resource name of the proxy revision that is receiving this basepath in the following format: `organizations/{org}/apis/{api}/revisions/{rev}`. This field is omitted from the IngressConfig unless the GetDeployedIngressConfig API is called with debug=true."
+          description: "The resource name of the proxy revision that is receiving this basepath in the following format: `organizations/{org}/apis/{api}/revisions/{rev}`. This field is omitted from the IngressConfig unless the GetDeployedIngressConfig API is called with view=FULL."
           type: string
         updateTime:
-          description: The unix timestamp when this rule was updated. This is updated whenever env_group_revision is updated. This field is omitted from the IngressConfig unless the GetDeployedIngressConfig API is called with debug=true.
+          description: The unix timestamp when this rule was updated. This is updated whenever env_group_revision is updated. This field is omitted from the IngressConfig unless the GetDeployedIngressConfig API is called with view=FULL.
           format: google-datetime
           type: string
       type: object
@@ -5854,6 +5981,11 @@ components:
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1StatsEnvironmentStats"
           type: array
+        hosts:
+          description: This field contains a list of query results grouped by host.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1StatsHostStats"
+          type: array
         metaData:
           $ref: "#/components/schemas/GoogleCloudApigeeV1Metadata"
           description: This field contains the metadata information.
@@ -5872,6 +6004,23 @@ components:
             $ref: "#/components/schemas/GoogleCloudApigeeV1Metric"
           type: array
         name:
+          type: string
+      type: object
+    GoogleCloudApigeeV1StatsHostStats:
+      description: 'This message type encapsulates the hostname wrapper: "hosts": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.52056245E8" ] } ], "name": "example.com" } ]'
+      properties:
+        dimensions:
+          description: This field contains the list of metrics grouped under dimensions.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1DimensionMetric"
+          type: array
+        metrics:
+          description: 'In the final response, only one of the following fields will be present based on the dimensions provided. If no dimensions are provided, then only a top level metrics is provided. If dimensions are included, then there will be a top level dimensions field under hostnames which will contain metrics values and the dimension name. Example: "hosts": [ { "dimensions": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.14049521E8" ] } ], "name": "nit_proxy" } ], "name": "example.com" } ] OR "hosts": [ { "metrics": [ { "name": "sum(message_count)", "values": [ "2.19026331E8" ] } ], "name": "example.com" } ] This field contains the list of metric values.'
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1Metric"
+          type: array
+        name:
+          description: This field contains the hostname used in query.
           type: string
       type: object
     GoogleCloudApigeeV1Subscription:
@@ -6088,8 +6237,6 @@ components:
     GoogleIamV1Binding:
       description: Associates `members` with a `role`.
       properties:
-        bindingId:
-          type: string
         condition:
           $ref: "#/components/schemas/GoogleTypeExpr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the members in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).

@@ -26,7 +26,7 @@ info:
       version: v1
   x-providerName: googleapis.com
   x-serviceName: storage
-  x-preferred: null
+  x-preferred: true
 externalDocs:
   url: https://developers.google.com/storage/docs/json_api/
 tags:
@@ -3592,6 +3592,9 @@ components:
                   format: date-time
                   type: string
               type: object
+            publicAccessPrevention:
+              description: The bucket's Public Access Prevention configuration. Currently, 'unspecified' and 'enforced' are supported.
+              type: string
             uniformBucketLevelAccess:
               description: The bucket's uniform bucket-level access configuration.
               properties:

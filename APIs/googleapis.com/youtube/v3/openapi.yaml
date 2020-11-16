@@ -24,9 +24,9 @@ info:
     - format: google
       url: https://youtube.googleapis.com/$discovery/rest?version=v3
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: youtube
-  x-preferred: true
 externalDocs:
   url: https://developers.google.com/youtube/
 tags:
@@ -232,12 +232,6 @@ paths:
       description: Retrieves a list of resources, possibly filtered.
       operationId: youtube.captions.list
       parameters:
-        - description: Returns the captions for the specified video.
-          in: query
-          name: videoId
-          required: true
-          schema:
-            type: string
         - description: The *part* parameter specifies a comma-separated list of one or more caption resource parts that the API response will include. The part names that you can include in the parameter value are id and snippet.
           explode: true
           in: query
@@ -248,6 +242,12 @@ paths:
               type: string
             type: array
           style: form
+        - description: Returns the captions for the specified video.
+          in: query
+          name: videoId
+          required: true
+          schema:
+            type: string
         - description: Returns the captions with the given IDs for Stubby or Apiary.
           explode: true
           in: query
@@ -1823,12 +1823,6 @@ paths:
       description: Transition a broadcast to a given status.
       operationId: youtube.liveBroadcasts.transition
       parameters:
-        - description: Broadcast to transition.
-          in: query
-          name: id
-          required: true
-          schema:
-            type: string
         - description: The status to which the broadcast is going to transition.
           in: query
           name: broadcastStatus
@@ -1839,6 +1833,12 @@ paths:
               - testing
               - live
               - complete
+            type: string
+        - description: Broadcast to transition.
+          in: query
+          name: id
+          required: true
+          schema:
             type: string
         - description: The *part* parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.
           explode: true

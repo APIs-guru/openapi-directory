@@ -24,9 +24,9 @@ info:
     - format: google
       url: https://doubleclickbidmanager.googleapis.com/$discovery/rest?version=v1.1
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: doubleclickbidmanager
-  x-preferred: true
 externalDocs:
   url: https://developers.google.com/bid-manager/
 tags:
@@ -820,6 +820,8 @@ components:
             - FILTER_PATH_EVENT_INDEX
             - FILTER_EVENT_TYPE
             - FILTER_CHANNEL_GROUPING
+            - FILTER_OM_SDK_AVAILABLE
+            - FILTER_DATA_SOURCE
           type: string
         value:
           description: Filter value.
@@ -1138,6 +1140,8 @@ components:
               - FILTER_PATH_EVENT_INDEX
               - FILTER_EVENT_TYPE
               - FILTER_CHANNEL_GROUPING
+              - FILTER_OM_SDK_AVAILABLE
+              - FILTER_DATA_SOURCE
             type: string
           type: array
         includeInviteData:
@@ -1918,6 +1922,8 @@ components:
             - FILTER_PATH_EVENT_INDEX
             - FILTER_EVENT_TYPE
             - FILTER_CHANNEL_GROUPING
+            - FILTER_OM_SDK_AVAILABLE
+            - FILTER_DATA_SOURCE
           type: string
         match:
           description: Indicates how the filter should be matched to the value.

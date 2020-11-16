@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v3beta1
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: dialogflow
-  x-preferred: true
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -5196,29 +5196,6 @@ components:
           type: array
         source:
           description: Optional. A custom field used to identify the webhook source. Arbitrary strings are supported. When provided, Dialogflow uses this field to populate QueryResult.webhook_source sent to the integration or API caller.
-          type: string
-      type: object
-    GoogleCloudKnowledgeV1alpha1OperationMetadata:
-      description: Metadata in google::longrunning::Operation.
-      properties:
-        errorCode:
-          description: The error codes from Manifold endpoints' last failures.
-          items:
-            format: int32
-            type: integer
-          type: array
-        message:
-          description: The failure messages from Manifold endpoints' last failures.
-          items:
-            type: string
-          type: array
-        state:
-          description: Required. The current state of this operation.
-          enum:
-            - STATE_UNSPECIFIED
-            - PENDING
-            - RUNNING
-            - DONE
           type: string
       type: object
     GoogleLongrunningListOperationsResponse:

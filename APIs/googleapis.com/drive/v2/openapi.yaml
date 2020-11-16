@@ -5296,7 +5296,7 @@ components:
           description: The final component of fullFileExtension with trailing text that does not appear to be part of the extension removed. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
           type: string
         fileSize:
-          description: The size of the file in bytes. This field is only populated for files with content stored in Google Drive; it is not populated for Docs Editors or shortcut files.
+          description: The size of the file in bytes. This field is populated for files with content stored in Google Drive and for files in Docs Editors; it is not populated for shortcut files.
           format: int64
           type: string
         folderColorRgb:

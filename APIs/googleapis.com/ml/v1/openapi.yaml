@@ -917,6 +917,48 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
+  "/v1/{parent}/trials:listOptimalTrials":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Lists the pareto-optimal trials for multi-objective study or the optimal trials for single-objective study. The definition of pareto-optimal can be checked in wiki page. https://en.wikipedia.org/wiki/Pareto_efficiency
+      operationId: ml.projects.locations.studies.trials.listOptimalTrials
+      parameters:
+        - description: Required. The name of the study that the pareto-optimal trial belongs to.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudMlV1__ListOptimalTrialsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudMlV1__ListOptimalTrialsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
   "/v1/{parent}/trials:suggest":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1463,6 +1505,7 @@ components:
             - NVIDIA_TESLA_V100
             - NVIDIA_TESLA_P4
             - NVIDIA_TESLA_T4
+            - NVIDIA_TESLA_A100
             - TPU_V2
             - TPU_V3
           type: string
@@ -1531,6 +1574,7 @@ components:
               - NVIDIA_TESLA_V100
               - NVIDIA_TESLA_P4
               - NVIDIA_TESLA_T4
+              - NVIDIA_TESLA_A100
               - TPU_V2
               - TPU_V3
             type: string
@@ -1867,6 +1911,19 @@ components:
         nextPageToken:
           description: Optional. Pass this token as the `page_token` field of the request for a subsequent call.
           type: string
+      type: object
+    GoogleCloudMlV1__ListOptimalTrialsRequest:
+      description: The request message for the ListTrials service method.
+      properties: {}
+      type: object
+    GoogleCloudMlV1__ListOptimalTrialsResponse:
+      description: The response message for the ListOptimalTrials method.
+      properties:
+        trials:
+          description: The pareto-optimal trials for multiple objective study or the optimal trial for single objective study. The definition of pareto-optimal can be checked in wiki page. https://en.wikipedia.org/wiki/Pareto_efficiency
+          items:
+            $ref: "#/components/schemas/GoogleCloudMlV1__Trial"
+          type: array
       type: object
     GoogleCloudMlV1__ListStudiesResponse:
       properties:
@@ -2641,7 +2698,6 @@ components:
       description: Associates `members` with a `role`.
       properties:
         bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
           type: string
         condition:
           $ref: "#/components/schemas/GoogleType__Expr"

@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://shoppingcontent.googleapis.com/$discovery/rest?version=v2
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: shoppingcontent
-  x-preferred: true
 externalDocs:
   url: https://developers.google.com/shopping-content/v2/
 tags:
@@ -1321,7 +1321,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Invokes a fetch for the datafeed in your Merchant Center account.
+      description: Invokes a fetch for the datafeed in your Merchant Center account. If you need to call this method more than once per day, we recommend you use the Products service to update your product data.
       operationId: content.datafeeds.fetchnow
       parameters:
         - description: The ID of the account that manages the datafeed. This account cannot be a multi-client account.

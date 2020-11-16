@@ -24,9 +24,9 @@ info:
     - format: google
       url: https://androidenterprise.googleapis.com/$discovery/rest?version=v1
       version: v1
+  x-preferred: true
   x-providerName: googleapis.com
   x-serviceName: androidenterprise
-  x-preferred: true
 externalDocs:
   url: https://developers.google.com/android/work/play/emm-api
 tags:
@@ -4154,6 +4154,14 @@ components:
         autoInstallPolicy:
           $ref: "#/components/schemas/AutoInstallPolicy"
           description: The auto-install policy for the product.
+        autoUpdateMode:
+          description: The auto-update mode for the product.
+          enum:
+            - autoUpdateModeUnspecified
+            - autoUpdateDefault
+            - autoUpdatePostponed
+            - autoUpdateHighPriority
+          type: string
         managedConfiguration:
           $ref: "#/components/schemas/ManagedConfiguration"
           description: The managed configuration for the product.

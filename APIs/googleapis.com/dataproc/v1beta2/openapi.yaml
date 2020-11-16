@@ -1470,7 +1470,6 @@ components:
       description: Associates members with a role.
       properties:
         bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
           type: string
         condition:
           $ref: "#/components/schemas/Expr"
@@ -2210,13 +2209,13 @@ components:
           description: Optional. The Cloud Storage URI of the keystore file used for SSL encryption. If not provided, Dataproc will provide a self-signed certificate.
           type: string
         kmsKeyUri:
-          description: Required. The uri of the KMS key used to encrypt various sensitive files.
+          description: Optional. The uri of the KMS key used to encrypt various sensitive files.
           type: string
         realm:
           description: Optional. The name of the on-cluster Kerberos realm. If not specified, the uppercased domain of hostnames will be the realm.
           type: string
         rootPrincipalPasswordUri:
-          description: Required. The Cloud Storage URI of a KMS encrypted file containing the root principal password.
+          description: Optional. The Cloud Storage URI of a KMS encrypted file containing the root principal password.
           type: string
         tgtLifetimeHours:
           description: Optional. The lifetime of the ticket granting ticket, in hours. If not specified, or user specifies 0, then default value 10 will be used.

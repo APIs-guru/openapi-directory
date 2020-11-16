@@ -709,7 +709,7 @@ paths:
         - projects
   "/v2/{parent}/buckets":
     get:
-      description: Lists buckets (Beta).
+      description: Lists buckets.
       operationId: logging.projects.locations.buckets.list
       parameters:
         - description: 'Required. The parent resource whose buckets are to be listed: "projects/[PROJECT_ID]/locations/[LOCATION_ID]" "organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]" "billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]" "folders/[FOLDER_ID]/locations/[LOCATION_ID]" Note: The locations portion of the resource must be specified, but supplying the character - in place of LOCATION_ID will return all buckets.'
@@ -1159,7 +1159,7 @@ paths:
         - sinks
   "/v2/{parent}/views":
     get:
-      description: Lists views on a bucket..
+      description: Lists views on a bucket.
       operationId: logging.projects.locations.buckets.views.list
       parameters:
         - description: 'Required. The bucket whose views are to be listed: "projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]" '
@@ -1650,7 +1650,7 @@ components:
           type: number
       type: object
     ListBucketsResponse:
-      description: The response from ListBuckets (Beta).
+      description: The response from ListBuckets.
       properties:
         buckets:
           description: A list of buckets.
@@ -1808,7 +1808,7 @@ components:
           type: string
       type: object
     LogBucket:
-      description: Describes a repository of logs (Beta).
+      description: Describes a repository of logs.
       properties:
         createTime:
           description: Output only. The creation timestamp of the bucket. This is not set for any of the default buckets.
@@ -2106,7 +2106,7 @@ components:
           description: Describes this view.
           type: string
         filter:
-          description: "Filter that restricts which log entries in a bucket are visible in this view. Filters are restricted to be a logical AND of ==/!= of any of the following: originating project/folder/organization/billing account. resource type log id"
+          description: 'Filter that restricts which log entries in a bucket are visible in this view. Filters are restricted to be a logical AND of ==/!= of any of the following: originating project/folder/organization/billing account. resource type log id Example: SOURCE("projects/myproject") AND resource.type = "gce_instance" AND LOG_ID("stdout")'
           type: string
         name:
           description: The resource name of the view. For example "projects/my-project-id/locations/my-location/buckets/my-bucket-id/views/my-view

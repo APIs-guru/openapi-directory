@@ -28130,7 +28130,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     post:
-      description: Specifies the instance template to use when creating new instances in this group. The templates for existing instances in the group do not change unless you recreate them.
+      description: Specifies the instance template to use when creating new instances in this group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE.
       operationId: compute.instanceGroupManagers.setInstanceTemplate
       parameters:
         - description: Project ID for this request.
@@ -35015,7 +35015,7 @@ components:
         Google Compute Engine has two Autoscaler resources:
 
 
-        * [Global](/compute/docs/reference/rest/{$api_version}/autoscalers) * [Regional](/compute/docs/reference/rest/{$api_version}/regionAutoscalers)
+        * [Zonal](/compute/docs/reference/rest/{$api_version}/autoscalers) * [Regional](/compute/docs/reference/rest/{$api_version}/regionAutoscalers)
 
 
         Use autoscalers to automatically add or delete instances from a managed instance group according to your defined autoscaling policy. For more information, read Autoscaling Groups of Instances.
@@ -37654,7 +37654,7 @@ components:
     DistributionPolicy:
       properties:
         zones:
-          description: Zones where the regional managed instance group will create and manage instances.
+          description: Zones where the regional managed instance group will create and manage its instances.
           items:
             $ref: "#/components/schemas/DistributionPolicyZoneConfiguration"
           type: array
@@ -40992,7 +40992,7 @@ components:
           type: string
         distributionPolicy:
           $ref: "#/components/schemas/DistributionPolicy"
-          description: Policy specifying intended distribution of instances in regional managed instance group.
+          description: Policy specifying the intended distribution of managed instances across zones in a regional managed instance group.
         fingerprint:
           description: >-
             Fingerprint of this resource. This field may be used in optimistic locking. It will be ignored when inserting an InstanceGroupManager. An up-to-date fingerprint must be provided in order to update the InstanceGroupManager, otherwise the request will fail with error 412 conditionNotMet.
@@ -41009,7 +41009,7 @@ components:
           description: "[Output Only] The URL of the Instance Group resource."
           type: string
         instanceTemplate:
-          description: The URL of the instance template that is specified for this managed instance group. The group uses this template to create all new instances in the managed instance group.
+          description: The URL of the instance template that is specified for this managed instance group. The group uses this template to create all new instances in the managed instance group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE.
           type: string
         kind:
           default: compute#instanceGroupManager
@@ -41058,7 +41058,7 @@ components:
             $ref: "#/components/schemas/InstanceGroupManagerVersion"
           type: array
         zone:
-          description: "[Output Only] The URL of the zone where the managed instance group is located (for zonal resources)."
+          description: "[Output Only] The URL of a zone where the managed instance group is located (for zonal resources)."
           type: string
       type: object
     InstanceGroupManagerActionsSummary:
@@ -41358,7 +41358,7 @@ components:
     InstanceGroupManagerVersion:
       properties:
         instanceTemplate:
-          description: The URL of the instance template that is specified for this managed instance group. The group uses this template to create new instances in the managed instance group until the `targetSize` for this version is reached.
+          description: The URL of the instance template that is specified for this managed instance group. The group uses this template to create new instances in the managed instance group until the `targetSize` for this version is reached. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE; in those cases, existing instances are updated until the `targetSize` for this version is reached.
           type: string
         name:
           description: Name of the version. Unique among all versions in the scope of this managed instance group.
@@ -41615,7 +41615,7 @@ components:
     InstanceGroupManagersSetInstanceTemplateRequest:
       properties:
         instanceTemplate:
-          description: The URL of the instance template that is specified for this managed instance group. The group uses this template to create all new instances in the managed instance group.
+          description: The URL of the instance template that is specified for this managed instance group. The group uses this template to create all new instances in the managed instance group. The templates for existing instances in the group do not change unless you run recreateInstances, run applyUpdatesToInstances, or set the group's updatePolicy.type to PROACTIVE.
           type: string
       type: object
     InstanceGroupManagersSetTargetPoolsRequest:
@@ -46551,6 +46551,13 @@ components:
           items:
             type: string
           type: array
+        direction:
+          description: Direction of traffic to mirror, either INGRESS, EGRESS, or BOTH. The default is BOTH.
+          enum:
+            - BOTH
+            - EGRESS
+            - INGRESS
+          type: string
       type: object
     PacketMirroringForwardingRuleInfo:
       properties:
@@ -47209,6 +47216,7 @@ components:
             - URL_MAPS
             - VPN_GATEWAYS
             - VPN_TUNNELS
+            - XPN_SERVICE_PROJECTS
           type: string
         owner:
           description: "[Output Only] Owning resource. This is the resource on which this quota is applied."
@@ -49262,6 +49270,8 @@ components:
           items:
             type: string
           type: array
+        enableEndpointIndependentMapping:
+          type: boolean
         icmpIdleTimeoutSec:
           description: Timeout (in seconds) for ICMP connections. Defaults to 30s if not set.
           format: int32
@@ -50588,10 +50598,10 @@ components:
       type: object
     SslPolicy:
       description: >-
-        Represents a Google Cloud Armor security policy resource.
+        Represents an SSL Policy resource.
 
 
-        Only external backend services used by HTTP or HTTPS load balancers can reference a security policy. For more information, see  Google Cloud Armor security policy overview. (== resource_for {$api_version}.sslPolicies ==)
+        Use SSL policies to control the SSL features, such as versions and cipher suites, offered by an HTTPS or SSL Proxy load balancer. For more information, read  SSL Policy Concepts. (== resource_for {$api_version}.sslPolicies ==)
       properties:
         creationTimestamp:
           description: "[Output Only] Creation timestamp in RFC3339 text format."

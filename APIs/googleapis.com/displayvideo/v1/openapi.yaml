@@ -2254,7 +2254,7 @@ paths:
         - advertisers
   "/v1/advertisers/{advertiserId}/manualTriggers":
     get:
-      description: Lists manual triggers that are accessible to the current user for a given advertiser id. The order is defined by the order_by parameter. A single advertiser_id is required.
+      description: Lists manual triggers that are accessible to the current user for a given advertiser ID. The order is defined by the order_by parameter. A single advertiser_id is required.
       operationId: displayvideo.advertisers.manualTriggers.list
       parameters:
         - description: Required. The ID of the advertiser that the fetched manual triggers belong to.
@@ -7572,7 +7572,7 @@ components:
           $ref: "#/components/schemas/DoubleVerifyBrandSafetyCategories"
           description: DV Brand Safety Controls.
         customSegmentId:
-          description: 'The custom segment ID provided by DoubleVerify. The ID must start with "51" and consist of eight digits. Custom segment id cannot be specified along with any of the following fields: * brand_safety_categories * avoided_age_ratings * app_star_rating * fraud_invalid_traffic'
+          description: 'The custom segment ID provided by DoubleVerify. The ID must start with "51" and consist of eight digits. Custom segment ID cannot be specified along with any of the following fields: * brand_safety_categories * avoided_age_ratings * app_star_rating * fraud_invalid_traffic'
           format: int64
           type: string
         displayViewability:
@@ -8501,7 +8501,7 @@ components:
           type: string
         bidStrategy:
           $ref: "#/components/schemas/BiddingStrategy"
-          description: Optional. The bidding strategy of the insertion order. By default, fixed_bid is set.
+          description: The bidding strategy of the insertion order. By default, fixed_bid is set.
         budget:
           $ref: "#/components/schemas/InsertionOrderBudget"
           description: Required. The budget allocation settings of the insertion order.
@@ -9062,7 +9062,7 @@ components:
           description: Required. The partner revenue model setting of the line item.
         targetingExpansion:
           $ref: "#/components/schemas/TargetingExpansionConfig"
-          description: The targeting expansion settings of the line item.
+          description: The [targeting expansion](https://support.google.com/displayvideo/answer/10191558) settings of the line item. This config is only applicable when eligible audience list targeting is assigned to the line item.
         updateTime:
           description: Output only. The timestamp when the line item was last updated. Assigned by the system.
           format: google-datetime
@@ -9132,7 +9132,7 @@ components:
             - LINE_ITEM_FLIGHT_DATE_TYPE_TRIGGER
           type: string
         triggerId:
-          description: The ID of the manual trigger associated with the line item. * Required when flight_date_type is `LINE_ITEM_FLIGHT_DATE_TYPE_TRIGGER`. Must not be set otherwise. * A line item's flight dates are inherited from its parent insertion order. * Active line items will spend when the selected trigger is activated within the parent insertion order's flight dates.
+          description: The ID of the manual trigger associated with the line item. * Required when flight_date_type is `LINE_ITEM_FLIGHT_DATE_TYPE_TRIGGER`. Must not be set otherwise. * When set, the line item's flight dates are inherited from its parent insertion order. * Active line items will spend when the selected trigger is activated within the parent insertion order's flight dates.
           format: int64
           type: string
       type: object
@@ -9471,7 +9471,7 @@ components:
           type: integer
       type: object
     ManualTrigger:
-      description: A single manual trigger in Display & Video 360 (DV360).
+      description: A single manual trigger in Display & Video 360.
       properties:
         activationDurationMinutes:
           description: Required. The maximum duration of each activation in minutes. Must be between 1 and 360 inclusive. After this duration, the trigger will be automatically deactivated.
