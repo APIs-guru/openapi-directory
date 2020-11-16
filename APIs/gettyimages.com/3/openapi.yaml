@@ -11,8 +11,8 @@ info:
     - format: openapi
       url: https://api.gettyimages.com/swagger/v3/swagger.json
       version: "3.0"
-  x-providerName: gettyimages.com
   x-preferred: true
+  x-providerName: gettyimages.com
 security:
   - Api-Key: []
   - OAuth2: []
@@ -802,7 +802,6 @@ paths:
 
         You'll need an API key and access token to use this resource.
          
-
 
         	
         This endpoint requires being a Getty Images customer to limit your results to only assets that you have a license to use, 
@@ -2301,6 +2300,13 @@ paths:
             format: date-time
             nullable: true
             type: string
+        - description: If specified, returns the list of previously purchased assets for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
+          in: query
+          name: company_purchases
+          schema:
+            default: false
+            description: If specified, returns the list of previously purchased assets for all users in your company. Your account must be enabled for this functionality. Contact your Getty Images account rep for more information. Default is false.
+            type: boolean
       responses:
         "200":
           content:
@@ -2312,6 +2318,8 @@ paths:
           description: PageNumberLessThanOne
         "401":
           description: Unauthorized
+        "403":
+          description: InsufficientPermissions
       summary: Get Previously Purchased Images and Video
       tags:
         - Purchases
@@ -2697,6 +2705,13 @@ paths:
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
+        - description: Specifies whether or not to include related searches in the response. The default is false.
+          in: query
+          name: include_related_searches
+          schema:
+            default: false
+            description: Specifies whether or not to include related searches in the response. The default is false.
+            type: boolean
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
@@ -3069,6 +3084,13 @@ paths:
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
+        - description: Specifies whether or not to include related searches in the response. The default is false.
+          in: query
+          name: include_related_searches
+          schema:
+            default: false
+            description: Specifies whether or not to include related searches in the response. The default is false.
+            type: boolean
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
@@ -3640,6 +3662,13 @@ paths:
           name: graphical_styles_filter_type
           schema:
             $ref: "#/components/schemas/GraphicalStylesFilterType"
+        - description: Specifies whether or not to include related searches in the response. The default is false.
+          in: query
+          name: include_related_searches
+          schema:
+            default: false
+            description: Specifies whether or not to include related searches in the response. The default is false.
+            type: boolean
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
@@ -4001,6 +4030,13 @@ paths:
             nullable: true
             type: array
           style: form
+        - description: Specifies whether or not to include related searches in the response. The default is false.
+          in: query
+          name: include_related_searches
+          schema:
+            default: false
+            description: Specifies whether or not to include related searches in the response. The default is false.
+            type: boolean
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
@@ -4376,6 +4412,13 @@ paths:
             nullable: true
             type: array
           style: form
+        - description: Specifies whether or not to include related searches in the response. The default is false.
+          in: query
+          name: include_related_searches
+          schema:
+            default: false
+            description: Specifies whether or not to include related searches in the response. The default is false.
+            type: boolean
         - description: Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.
           explode: false
           in: query
@@ -6045,6 +6088,11 @@ components:
             $ref: "#/components/schemas/ImageSearchItemCreative"
           nullable: true
           type: array
+        related_searches:
+          items:
+            $ref: "#/components/schemas/RelatedSearch"
+          nullable: true
+          type: array
         result_count:
           format: int32
           type: integer
@@ -6101,6 +6149,11 @@ components:
           $ref: "#/components/schemas/AutoCorrections"
         facets:
           $ref: "#/components/schemas/SearchFacetsResponse"
+        related_searches:
+          items:
+            $ref: "#/components/schemas/RelatedSearch"
+          nullable: true
+          type: array
         result_count:
           format: int32
           type: integer
@@ -6293,6 +6346,11 @@ components:
             $ref: "#/components/schemas/ImageSearchItemEditorial"
           nullable: true
           type: array
+        related_searches:
+          items:
+            $ref: "#/components/schemas/RelatedSearch"
+          nullable: true
+          type: array
         result_count:
           format: int32
           type: integer
@@ -6367,6 +6425,11 @@ components:
       properties:
         facets:
           $ref: "#/components/schemas/SearchFacetsResponse"
+        related_searches:
+          items:
+            $ref: "#/components/schemas/RelatedSearch"
+          nullable: true
+          type: array
         result_count:
           format: int32
           type: integer
@@ -6983,6 +7046,11 @@ components:
             $ref: "#/components/schemas/ImageSearchItem"
           nullable: true
           type: array
+        related_searches:
+          items:
+            $ref: "#/components/schemas/RelatedSearch"
+          nullable: true
+          type: array
         result_count:
           format: int32
           type: integer
@@ -7259,6 +7327,9 @@ components:
         order_id:
           nullable: true
           type: string
+        purchased_by:
+          nullable: true
+          type: string
         size_name:
           nullable: true
           type: string
@@ -7414,6 +7485,16 @@ components:
           nullable: true
           type: string
       type: object
+    RelatedSearch:
+      additionalProperties: false
+      properties:
+        phrase:
+          nullable: true
+          type: string
+        url:
+          nullable: true
+          type: string
+      type: object
     ReleaseStatus:
       enum:
         - release_not_important
@@ -7433,6 +7514,12 @@ components:
           additionalProperties: false
           nullable: true
           type: object
+        related_searches:
+          deprecated: true
+          items:
+            $ref: "#/components/schemas/RelatedSearch"
+          nullable: true
+          type: array
         result_count:
           format: int32
           type: integer
@@ -7715,6 +7802,11 @@ components:
       properties:
         facets:
           $ref: "#/components/schemas/SearchFacetsResponse"
+        related_searches:
+          items:
+            $ref: "#/components/schemas/RelatedSearch"
+          nullable: true
+          type: array
         result_count:
           format: int32
           type: integer

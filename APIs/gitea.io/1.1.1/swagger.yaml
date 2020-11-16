@@ -20,8 +20,8 @@ info:
     - format: swagger
       url: https://try.gitea.io/swagger.v1.json
       version: "2.0"
-  x-providerName: gitea.io
   x-preferred: true
+  x-providerName: gitea.io
 consumes:
   - application/json
   - text/plain
@@ -2231,6 +2231,8 @@ paths:
           $ref: "#/responses/empty"
         "403":
           $ref: "#/responses/error"
+        "404":
+          $ref: "#/responses/notFound"
       summary: Delete a specific branch from a repository
       tags:
         - repository
@@ -2257,6 +2259,8 @@ paths:
       responses:
         "200":
           $ref: "#/responses/Branch"
+        "404":
+          $ref: "#/responses/notFound"
       summary: Retrieve a specific branch from a repository, including its effective branch protection
       tags:
         - repository

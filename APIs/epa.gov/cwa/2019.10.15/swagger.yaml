@@ -11,17 +11,17 @@ info:
 
     \ CWA Rest Services provides multiple service endpoints, each with specific capabilities, to search and retrieve data on facilities regulated under the Clean Water Act (CWA) and managed under the National Pollutant Discharge Elimination System (NPDES) program. The returned results reflect data drawn from EPA's ICIS-NPDES database.
 
-    \\
+    \\ 
 
     The get_facilities, get_map, get_qid, and get_download end points are meant to be used together, while the enhanced get_facility_info end point is self contained.
 
     \  The get_facility_info end point returns either an array of state, county or zip clusters with summary statistics per cluster or an array of facilities.
 
-    \\
+    \\ 
 
     The recommended use scenario for get_facilities, get_qid, get_map, and get_downoad is:
 
-    \\
+    \\ 
 
     \ <b>1)</b>  Use get_facilities to validate passed query parameters, obtain summary statistics and to obtain a query_id (QID).  QIDs are time sensitive and will be valid for approximately 30 minutes.
 
@@ -31,13 +31,13 @@ info:
 
     \ <b>4)</b>  Use get_download, with the returned QID, to generate a Comma Separated Value (CSV) file of facility information that meets the QID query criteria.
 
-    \\
+    \\ 
 
-    \\
+    \\ 
 
     Use the qcolumns parameter to customize your search results.  Use the Metadata service endpoint for a list of available output objects, their Column Ids, and their definitions to help you build your customized output.\ 
 
-    \\
+    \\ 
 
     Additional ECHO Resources:   <a href=\"https://echo.epa.gov/tools/web-services\">Web Services</a>, <a href=\"https://echo.epa.gov/resources/echo-data/about-the-data\">About ECHO's Data</a>, <a href=\"https://echo.epa.gov/tools/data-downloads\">Data Downloads</a>
 
@@ -56,9 +56,9 @@ info:
     - format: swagger
       url: https://ofmpub.epa.gov/echo/swaggerx.swagger_json?p_prefix=CWA
       version: "2.0"
+  x-preferred: true
   x-providerName: epa.gov
   x-serviceName: cwa
-  x-preferred: true
 consumes:
   - application/x-www-form-urlencoded
 produces:

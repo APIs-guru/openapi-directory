@@ -19,8 +19,8 @@ info:
     - format: swagger
       url: https://app.api2cart.com/default/index/swagger-json
       version: "2.0"
-  x-providerName: api2cart.com
   x-preferred: true
+  x-providerName: api2cart.com
 externalDocs:
   description: Find out more about API2Cart
   url: http://docs.api2cart.com
@@ -7924,6 +7924,11 @@ paths:
           name: status
           required: false
           type: string
+        - description: Set backorder status
+          in: query
+          name: backorder_status
+          required: false
+          type: string
         - default: 0
           description: Weight
           in: query
@@ -10452,6 +10457,8 @@ definitions:
     properties:
       additional_fields:
         type: object
+      barcode:
+        type: string
       custom_fields:
         type: object
       discount_amount:

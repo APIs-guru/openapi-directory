@@ -17,9 +17,9 @@ info:
     - format: openapi
       url: https://raw.githubusercontent.com/LufthansaOpenAPI/Swagger/master/LH_public_API_swagger_2_0.json
       version: "3.0"
+  x-preferred: true
   x-providerName: lufthansa.com
   x-serviceName: public
-  x-preferred: true
 paths:
   "/cargo/getRoute/{origin}-{destination}/{fromDate}/{productCode}":
     get:

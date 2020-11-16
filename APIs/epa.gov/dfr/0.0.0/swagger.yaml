@@ -13,7 +13,7 @@ info:
 
     There is one primary service end point, get_dfr, that provides all available DFR data.  All other service end points that are exposed, will return data on a single section of the DFR.   \ 
 
-    \\
+    \\ 
 
     Additional ECHO Resources:   <a href=\"https://echo.epa.gov/tools/web-services\">Web Services</a>, <a href=\"https://echo.epa.gov/resources/echo-data/about-the-data\">About ECHO's Data</a>, <a href=\"https://echo.epa.gov/tools/data-downloads\">Data Downloads</a>
 
@@ -32,9 +32,9 @@ info:
     - format: swagger
       url: https://ofmpub.epa.gov/echo/swaggerx.swagger_json?p_prefix=DFR
       version: "2.0"
+  x-preferred: true
   x-providerName: epa.gov
   x-serviceName: dfr
-  x-preferred: true
 consumes:
   - application/x-www-form-urlencoded
 produces:

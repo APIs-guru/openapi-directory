@@ -24,9 +24,9 @@ info:
     - format: openapi
       url: https://developer.ebay.com/api-docs/master/commerce/catalog/openapi/3/commerce_catalog_v1_beta_oas3.json
       version: "3.0"
+  x-preferred: true
   x-providerName: ebay.com
   x-serviceName: commerce-catalog
-  x-preferred: true
 paths:
   "/product/{epid}":
     get:

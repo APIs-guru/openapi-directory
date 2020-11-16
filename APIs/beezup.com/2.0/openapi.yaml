@@ -103,8 +103,8 @@ info:
     - format: openapi
       url: https://api-docs.beezup.com/swagger.json
       version: "3.0"
-  x-providerName: beezup.com
   x-preferred: true
+  x-providerName: beezup.com
 externalDocs:
   description: Find the documentation for BeezUP's API here
   url: https://api-docs.beezup.com/
@@ -6071,7 +6071,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
+                $ref: "#/components/schemas/errorResponseMessage"
           description: Invalid subscription request.
         "404":
           $ref: "#/components/responses/subscriptionNotFoundResponse"
@@ -6108,7 +6108,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
+                $ref: "#/components/schemas/errorResponseMessage"
           description: Activation subscription request is invalid
         "404":
           $ref: "#/components/responses/subscriptionNotFoundResponse"
@@ -10783,7 +10783,7 @@ components:
         name:
           $ref: "#/components/schemas/subscriptionName"
         targetUrl:
-          $ref: "#/components/schemas/BeezUP.Common.HttpUrl"
+          $ref: "#/components/schemas/httpUrl"
       required:
         - targetUrl
         - name
@@ -12403,6 +12403,9 @@ components:
           $ref: "#/components/schemas/operationId"
         parameters:
           $ref: "#/components/schemas/linkParameter3Types"
+        rel:
+          description: Indicate the relation name related to the link
+          type: string
         urlTemplated:
           description: indicates whether the href is templated or not
           type: boolean
@@ -12441,9 +12444,6 @@ components:
           additionalProperties:
             $ref: "#/components/schemas/linkParameterProperty3"
           description: If the parameter is an object with flexible properties (additionProperties/dictionary), we will describe the properties of the object.
-          example:
-            shipOrder:
-              type: ​string
         required:
           default: "false"
           example: "true"

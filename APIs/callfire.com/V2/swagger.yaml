@@ -24,8 +24,8 @@ info:
     - format: swagger
       url: https://www.callfire.com/v2/api-docs/swagger.json
       version: "2.0"
-  x-providerName: callfire.com
   x-preferred: true
+  x-providerName: callfire.com
 consumes:
   - application/json
 produces:
@@ -7921,6 +7921,12 @@ definitions:
         $ref: "#/definitions/Duration"
         description: "~"
       agency:
+        description: "~"
+        type: boolean
+      agencyManagedAccounts:
+        description: "~"
+        type: boolean
+      agencyTeammateManager:
         description: "~"
         type: boolean
       allowedToCreateCampaign:

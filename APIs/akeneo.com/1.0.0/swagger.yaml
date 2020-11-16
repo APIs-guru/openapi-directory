@@ -15,8 +15,8 @@ info:
     - format: swagger
       url: https://raw.githubusercontent.com/akeneo/pim-api-docs/master/content/swagger/akeneo-web-api.json
       version: "2.0"
-  x-providerName: akeneo.com
   x-preferred: true
+  x-providerName: akeneo.com
 produces:
   - application/json
 parameters:
@@ -18225,7 +18225,7 @@ paths:
                                             description: Product value
                                             type: object
                                           linked_data:
-                                            description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                                            description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                                             properties:
                                               attribute:
                                                 type: string
@@ -18537,7 +18537,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -18873,7 +18873,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -19283,7 +19283,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -19594,7 +19594,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -19923,7 +19923,7 @@ paths:
                           description: Product value
                           type: object
                         linked_data:
-                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                          description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                           properties:
                             attribute:
                               type: string
@@ -25932,7 +25932,7 @@ definitions:
                   description: Product value
                   type: object
                 linked_data:
-                  description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                  description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                   properties:
                     attribute:
                       type: string
@@ -26173,7 +26173,7 @@ definitions:
                       description: Product value
                       type: object
                     linked_data:
-                      description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true")
+                      description: Object containing labels of attribute options (only available in Serenity and when query parameter "with_attribute_options" is set to "true"). See <a href='/concepts/products.html#the-linked_data-format'>the `linked_data` format</a> section for more details.
                       properties:
                         attribute:
                           type: string

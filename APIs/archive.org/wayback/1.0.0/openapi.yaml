@@ -15,9 +15,9 @@ info:
     - format: openapi
       url: https://raw.githubusercontent.com/ArchiveLabs/api.archive.org/master/swagger/wayback.json
       version: "3.0"
+  x-preferred: true
   x-providerName: archive.org
   x-serviceName: wayback
-  x-preferred: true
 paths:
   /wayback/v1/available:
     get:

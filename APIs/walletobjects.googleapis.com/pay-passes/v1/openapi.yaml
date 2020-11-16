@@ -16,9 +16,9 @@ info:
     - format: google
       url: https://walletobjects.googleapis.com/$discovery/rest?version=v1
       version: v1
+  x-preferred: true
   x-providerName: walletobjects.googleapis.com
   x-serviceName: pay-passes
-  x-preferred: true
 externalDocs:
   url: https://developers.google.com/pay/passes
 tags:
@@ -4512,10 +4512,10 @@ components:
       properties:
         firstRowOption:
           $ref: "#/components/schemas/FirstRowOption"
-          description: Specifies from a predefined set of options what the will be displayed in the first row.
+          description: Specifies from a predefined set of options or from a reference to the field what will be displayed in the first row.
         secondRowOption:
           $ref: "#/components/schemas/FieldSelector"
-          description: A reference to the field to be displayed in the second row. This option is only displayed if there are not multiple user objects in a group. If there is a group, the second row will always display the departure date shared by all objects.
+          description: A reference to the field to be displayed in the second row. This option is only displayed if there are not multiple user objects in a group. If there is a group, the second row will always display a field shared by all objects.
         thirdRowOption:
           $ref: "#/components/schemas/FieldSelector"
           description: 'A reference to the field to be displayed in the third row. This option is only displayed if there are not multiple user objects in a group. If there is a group, the third row will always display the number of objects in the group. Eg: "3 passes"'

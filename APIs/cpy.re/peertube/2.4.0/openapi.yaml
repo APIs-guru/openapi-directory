@@ -86,9 +86,9 @@ info:
       format: openapi
       url: https://raw.githubusercontent.com/Chocobozzz/PeerTube/develop/support/doc/api/openapi.yaml
       version: "3.0"
+  x-preferred: true
   x-providerName: cpy.re
   x-serviceName: peertube
-  x-preferred: true
 externalDocs:
   url: https://docs.joinpeertube.org/api-rest-reference.html
 tags:
@@ -2619,6 +2619,127 @@ paths:
       summary: List available video licences
       tags:
         - Video
+  /videos/live:
+    post:
+      requestBody:
+        content:
+          multipart/form-data:
+            encoding:
+              previewfile:
+                contentType: image/jpeg
+              thumbnailfile:
+                contentType: image/jpeg
+            schema:
+              properties:
+                category:
+                  description: Live video/replay category
+                  type: string
+                channelId:
+                  description: Channel id that will contain this live video
+                  type: integer
+                commentsEnabled:
+                  description: Enable or disable comments for this live video/replay
+                  type: boolean
+                description:
+                  description: Live video/replay description
+                  type: string
+                downloadEnabled:
+                  description: Enable or disable downloading for the replay of this live
+                  type: boolean
+                language:
+                  description: Live video/replay language
+                  type: string
+                licence:
+                  description: Live video/replay licence
+                  type: string
+                name:
+                  description: Live video/replay name
+                  type: string
+                nsfw:
+                  description: Whether or not this live video/replay contains sensitive content
+                  type: boolean
+                previewfile:
+                  description: Live video/replay preview file
+                  format: binary
+                  type: string
+                privacy:
+                  $ref: "#/components/schemas/VideoPrivacySet"
+                saveReplay:
+                  type: boolean
+                support:
+                  description: A text tell the audience how to support the creator
+                  example: Please support my work on <insert crowdfunding plateform>! <3
+                  type: string
+                tags:
+                  description: Live video/replay tags (maximum 5 tags each between 2 and 30 characters)
+                  items:
+                    maxLength: 30
+                    minLength: 2
+                    type: string
+                  maxItems: 5
+                  minItems: 1
+                  type: array
+                thumbnailfile:
+                  description: Live video/replay thumbnail file
+                  format: binary
+                  type: string
+              required:
+                - channelId
+                - name
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VideoUploadResponse"
+          description: successful operation
+        "403":
+          description: Live is not enabled, allow replay is not enabled, or max instance/user live videos limit is exceeded
+      security:
+        - OAuth2: []
+      summary: Create a live
+      tags:
+        - Live Videos
+        - Video
+  "/videos/live/{id}":
+    get:
+      parameters:
+        - $ref: "#/components/parameters/idOrUUID"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LiveVideoResponse"
+          description: successful operation
+      security:
+        - OAuth2: []
+      summary: Get a live information
+      tags:
+        - Live Videos
+        - Video
+    put:
+      parameters:
+        - $ref: "#/components/parameters/idOrUUID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LiveVideoUpdate"
+      responses:
+        "204":
+          description: Successful operation
+        "400":
+          description: Bad parameters or trying to update a live that has already started
+        "403":
+          description: Trying to save replay of the live but saving replay is not enabled on the instance
+      security:
+        - OAuth2: []
+      summary: Update a live information
+      tags:
+        - Live Videos
+        - Video
   /videos/ownership:
     get:
       responses:
@@ -3891,6 +4012,19 @@ components:
             - activitypub-refresher
             - video-redundancy
           type: string
+    LiveVideoResponse:
+      properties:
+        rtmpUrl:
+          type: string
+        saveReplay:
+          type: boolean
+        streamKey:
+          description: RTMP stream key to use to stream into this live video
+          type: string
+    LiveVideoUpdate:
+      properties:
+        saveReplay:
+          type: boolean
     MRSSGroupContent:
       properties:
         duration:
@@ -4744,6 +4878,8 @@ components:
         id:
           example: 8
           type: integer
+        isLive:
+          type: boolean
         isLocal:
           type: boolean
         language:
@@ -5420,6 +5556,7 @@ x-tagGroups:
       - Video Playlists
       - Video Ownership Change
       - Video Mirroring
+      - Live Videos
       - Feeds
   - name: Search
     tags:

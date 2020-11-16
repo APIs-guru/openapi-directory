@@ -19,8 +19,8 @@ info:
     - format: openapi
       url: https://developers.edrv.io/openapi/5f15c43c87b0d6001ea97414
       version: "3.0"
-  x-providerName: edrv.io
   x-preferred: true
+  x-providerName: edrv.io
 security:
   - oauth2: []
 paths:
@@ -655,6 +655,7 @@ paths:
         - $ref: "#/components/parameters/parameter4"
         - $ref: "#/components/parameters/include_evse1"
         - $ref: "#/components/parameters/include_organization1"
+        - $ref: "#/components/parameters/include_rate1"
       responses:
         "200":
           description: Returns an array of connector objects
@@ -675,6 +676,8 @@ paths:
                 power:
                   type: integer
                 power_type:
+                  type: string
+                rate:
                   type: string
                 type:
                   type: string
@@ -725,16 +728,9 @@ paths:
           required: true
           schema:
             type: string
-        - description: Populate evse
-          in: query
-          name: include_evse
-          schema:
-            type: boolean
-        - description: Populate organization
-          in: query
-          name: include_organization
-          schema:
-            type: boolean
+        - $ref: "#/components/parameters/include_evse1"
+        - $ref: "#/components/parameters/include_organization1"
+        - $ref: "#/components/parameters/include_rate1"
       responses:
         "200":
           description: Returns a connector object
@@ -762,6 +758,8 @@ paths:
                 power:
                   type: integer
                 power_type:
+                  type: string
+                rate:
                   type: string
                 type:
                   type: string
@@ -1292,6 +1290,17 @@ paths:
                     basicAuthPassword:
                       type: boolean
                   type: object
+                links:
+                  properties:
+                    about:
+                      type: string
+                    contact:
+                      type: string
+                    privacy:
+                      type: string
+                    support:
+                      type: string
+                  type: object
                 locations:
                   items: {}
                   type: array
@@ -1301,6 +1310,13 @@ paths:
                   type: string
                 otp:
                   type: string
+                supportChat:
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+                  type: object
                 theme:
                   properties:
                     colors:
@@ -1308,8 +1324,6 @@ paths:
                         primary:
                           type: string
                         secondary:
-                          type: string
-                        tertiary:
                           type: string
                       type: object
                   type: object
@@ -1635,19 +1649,12 @@ paths:
         - $ref: "#/components/parameters/parameter4"
         - $ref: "#/components/parameters/include_chargestation1"
         - $ref: "#/components/parameters/include_evse1"
-        - description: Populate connector
-          in: query
-          name: include_connector
-          schema:
-            type: boolean
+        - $ref: "#/components/parameters/include_connector1"
         - $ref: "#/components/parameters/include_driver1"
         - $ref: "#/components/parameters/include_token1"
-        - description: Populate reservation
-          in: query
-          name: include_reservation
-          schema:
-            type: boolean
+        - $ref: "#/components/parameters/include_reservation1"
         - $ref: "#/components/parameters/include_organization1"
+        - $ref: "#/components/parameters/include_rate1"
       responses:
         "200":
           content:
@@ -1676,50 +1683,41 @@ paths:
       description: Get a specific transaction
       operationId: getTransaction
       parameters:
-        - description: BSON
+        - description: The transaction id that needs to be fetched
           in: path
           name: id
           required: true
           schema:
             type: string
-        - description: Populate chargestation
-          in: query
-          name: include_chargestation
-          schema:
-            type: boolean
-        - description: Populate evse
-          in: query
-          name: include_evse
-          schema:
-            type: boolean
-        - description: Populate connector
-          in: query
-          name: include_connector
-          schema:
-            type: boolean
-        - description: Populate driver
-          in: query
-          name: include_driver
-          schema:
-            type: boolean
-        - description: Populate token
-          in: query
-          name: include_token
-          schema:
-            type: boolean
-        - description: Populate reservation
-          in: query
-          name: include_reservation
-          schema:
-            type: boolean
-        - description: Populate organization
-          in: query
-          name: include_organization
-          schema:
-            type: boolean
+        - $ref: "#/components/parameters/include_chargestation1"
+        - $ref: "#/components/parameters/include_evse1"
+        - $ref: "#/components/parameters/include_connector1"
+        - $ref: "#/components/parameters/include_driver1"
+        - $ref: "#/components/parameters/include_token1"
+        - $ref: "#/components/parameters/include_reservation1"
+        - $ref: "#/components/parameters/include_organization1"
+        - $ref: "#/components/parameters/include_rate1"
       responses:
         "200":
           description: Returns a transaction object
+        "401":
+          description: Not Found
+      tags:
+        - Transactions
+  "/v1/transactions/{id}/cost":
+    get:
+      description: Get a specific transaction's cost
+      operationId: getTransactionCost
+      parameters:
+        - description: The transaction id that needs to be fetched
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Returns a transaction's cost object
         "401":
           description: Not Found
       tags:
@@ -1770,7 +1768,7 @@ paths:
       description: Get a vehicle's data
       operationId: getVehicle
       parameters:
-        - description: The driver id that needs to be fetched
+        - description: The vehicule id that needs to be fetched
           in: path
           name: id
           required: true
@@ -1899,6 +1897,12 @@ components:
       name: include_chargestation
       schema:
         type: boolean
+    include_connector1:
+      description: Populate connector
+      in: query
+      name: include_connector
+      schema:
+        type: boolean
     include_driver1:
       description: Populate driver
       in: query
@@ -1915,6 +1919,18 @@ components:
       description: Populate organization
       in: query
       name: include_organization
+      schema:
+        type: boolean
+    include_rate1:
+      description: Populate rate
+      in: query
+      name: include_rate
+      schema:
+        type: boolean
+    include_reservation1:
+      description: Populate reservation
+      in: query
+      name: include_reservation
       schema:
         type: boolean
     include_token1:
@@ -2053,7 +2069,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: 15f5ab9c17326899c95e0813f874be79bf7b50ae
+x-github-sha: ab5e48dd5fdf823c4cba16d7f321aa0ddfe47fc8
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

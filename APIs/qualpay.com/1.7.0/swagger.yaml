@@ -18,8 +18,8 @@ info:
     - format: swagger
       url: https://api-test.qualpay.com/pg/doc
       version: "2.0"
-  x-providerName: qualpay.com
   x-preferred: true
+  x-providerName: qualpay.com
 securityDefinitions:
   basicAuth:
     type: basic
@@ -1562,7 +1562,7 @@ definitions:
         example: "PO # abc123"
         type: string
       customer_email:
-        description: "<strong>Format: </strong>Variable length<br><strong>Description: </strong>Comma-separated list of e-mail addresses to which a receipt should be sent."
+        description: "<strong>Format: </strong>Variable length<br><strong>Description: </strong><strong>[Deprecated use email_address]</strong> Comma-separated list of e-mail addresses to which a receipt should be sent."
         example: testme@qualpay.com
         type: string
       customer_id:
@@ -1599,6 +1599,12 @@ definitions:
         description: "<strong>Format: </strong>Variable length<br><strong>Description: </strong>This field contains a JSON array of field data that will be echoed back in the response message."
         example: '[ {"product" : "lawnmower"},{"purchase" : "1 yr maintenance"} ]'
         type: string
+      email_address:
+        description: " AN<br><strong>Description: </strong>An array of email addresses to which the transaction receipt should be sent to. "
+        example: '["jdoe@qualpay.com", "john.doe@qualpay.com"]'
+        items:
+          type: string
+        type: array
       email_receipt:
         description: "<br><strong>Default: </strong>false<br><strong>Description: </strong>When this field is provided and set to true, a customer_email must also be provided. When these two fields are provided, a transaction receipt will be sent via e-mail to the address(es) provided in the customer_email field."
         example: true

@@ -277,8 +277,8 @@ info:
     - format: openapi
       url: https://api.jumpseller.com/swagger.json
       version: "3.0"
-  x-providerName: jumpseller.com
   x-preferred: true
+  x-providerName: jumpseller.com
 consumes:
   - application/json
 produces:
@@ -4046,7 +4046,7 @@ definitions:
         format: int32
         type: integer
       name:
-        description: Name of the category that the tax is associated with
+        description: Name of the category that the tax is associated with or the tax name
         type: string
       rate:
         description: Tax rate
@@ -4070,6 +4070,9 @@ definitions:
         description: Unique identifier of the Order Shipping Tax
         format: int32
         type: integer
+      name:
+        description: Tax name
+        type: string
       rate:
         description: Tax rate
         format: float
@@ -4805,6 +4808,9 @@ definitions:
         default: false
         description: True if the tax has a fixed valued amount
         type: boolean
+      name:
+        description: Name that identifies tax
+        type: string
       region:
         description: Region where the Tax applies
         type: string
@@ -4834,6 +4840,9 @@ definitions:
         description: Unique identifier of the Tax
         format: int32
         type: integer
+      name:
+        description: Name that identifies tax
+        type: string
       region:
         description: Region name where the Tax applies
         type: string

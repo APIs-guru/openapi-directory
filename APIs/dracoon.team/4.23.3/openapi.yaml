@@ -15,8 +15,8 @@ info:
     - format: openapi
       url: https://dracoon.team/api/spec_v4/
       version: "3.0"
-  x-providerName: dracoon.team
   x-preferred: true
+  x-providerName: dracoon.team
 security:
   - oauth2: []
 tags:
@@ -59304,7 +59304,6 @@ components:
         - items
       type: object
     CustomerData:
-      deprecated: true
       description: Customer information
       properties:
         accountsLimit:

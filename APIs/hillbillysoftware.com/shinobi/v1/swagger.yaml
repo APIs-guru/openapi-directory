@@ -11,9 +11,9 @@ info:
     - format: swagger
       url: https://api.hillbillysoftware.com/swagger/docs/v1
       version: "2.0"
+  x-preferred: true
   x-providerName: hillbillysoftware.com
   x-serviceName: shinobi
-  x-preferred: true
 paths:
   "/Actors/Search/{accesstoken}/{Query}":
     get:
