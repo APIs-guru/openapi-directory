@@ -17,6 +17,7 @@ info:
       url: https://raw.githubusercontent.com/team-telnyx/openapi/master/openapi/spec3.yml
       version: "3.0"
   x-providerName: telnyx.com
+  x-preferred: null
 security:
   - bearerAuth: []
 tags:
@@ -8372,6 +8373,7 @@ components:
 
           * The first request for this API will return an empty mobile_operator_networks_preferences with an in-progress OTA update resource in the ota_updates node containing the exact sent parameters to indicate the operation progress. The value will be applied to the principal object when the OTA update finishes its processing, thus indicating the SIM card network preference current state. 
           * The subsequent requests will contain the current state, that is what's applied to the SIM card settings, and return the related OTA update in the ota_updates node.
+
 
           
         The returned OTA updated (present in the ota_updates node) will, by default, be the resource related to the operation, not all of them.

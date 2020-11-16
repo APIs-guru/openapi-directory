@@ -16,7 +16,7 @@ info:
     - format: swagger
       url: http://docs.deeparteffects.com/swagger.json
       version: "2.0"
-  x-preferred: true
+  x-preferred: null
   x-providerName: deeparteffects.com
 securityDefinitions:
   api_key:
@@ -118,6 +118,7 @@ paths:
                       "url" : "$style.url",
                       "description" : "$style.description"
                     }#if($foreach.hasNext),#end
+
 
                 		
                 #end

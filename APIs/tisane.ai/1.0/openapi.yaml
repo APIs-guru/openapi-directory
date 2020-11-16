@@ -19,7 +19,7 @@ info:
       format: openapi
       url: https://dev.tisane.ai/docs/services/5a3b6668a3511b11cc292655/export?DocumentFormat=openapi
       version: "3.0"
-  x-preferred: true
+  x-preferred: null
   x-providerName: tisane.ai
 security:
   - apiKeyHeader: []
@@ -858,6 +858,7 @@ paths:
 
            * `topic_stats` (boolean) - include coverage statistics in the topic output (default: `false`). When set, the topic is an object containing the attributes `topic` (string) and `coverage` (floating-point number). The coverage indicates a share of sentences touching the topic among all the sentences. 
            * `optimize_topics` (boolean) - if `true`, the less specific topics are removed if they are parts of the more specific topics. For example, when the topic is `cryptocurrency`, the optimization removes `finance`.  
+
 
            
           `words` (boolean) - output the lexical chunks / words for every sentence (default: `false`). In languages without white spaces (Chinese, Japanese, Thai), the tokens are tokenized words. In languages with compounds (e.g. German, Dutch, Norwegian), the compounds are split. 

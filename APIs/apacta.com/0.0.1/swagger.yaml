@@ -255,6 +255,7 @@ info:
       $ curl --request GET --url 'https://app.apacta.com/api/v1/forms?extended=true&sort=Forms.created&direction=DESC&include=Products%2CCreatedBy&limit=5' --header 'accept: application/json' --header 'x-auth-token: {INSERT_YOUR_TOKEN}'
 
 
+
       
     ```
   title: Apacta
@@ -269,7 +270,7 @@ info:
       url: http://apidoc.apacta.com/swagger.yaml
       version: "2.0"
   x-providerName: apacta.com
-  x-preferred: false
+  x-preferred: null
 consumes:
   - application/json
 produces:
