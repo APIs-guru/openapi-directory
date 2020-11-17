@@ -3,7 +3,7 @@ info:
   version: '2015-12-10'
   x-release: v4
   title: AWS Service Catalog
-  description: '<fullname>AWS Service Catalog</fullname> <p> <a href="https://aws.amazon.com/servicecatalog/">AWS Service Catalog</a> enables organizations to create and manage catalogs of IT services that are approved for use on AWS. To get the most out of this documentation, you should be familiar with the terminology discussed in <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html">AWS Service Catalog Concepts</a>.</p>'
+  description: '<fullname>AWS Service Catalog</fullname> <p> <a href="https://aws.amazon.com/servicecatalog/">AWS Service Catalog</a> enables organizations to create and manage catalogs of IT services that are approved for AWS. To get the most out of this documentation, you should be familiar with the terminology discussed in <a href="http://docs.aws.amazon.com/servicecatalog/latest/adminguide/what-is_concepts.html">AWS Service Catalog Concepts</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -2571,6 +2571,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWS242ServiceCatalogService.ImportAsProvisionedProduct:
+    post:
+      operationId: ImportAsProvisionedProduct
+      description: '<p>Requests the import of a resource as a Service Catalog provisioned product that is associated to a Service Catalog product and provisioning artifact. Once imported all supported Service Catalog governance actions are supported on the provisioned product.</p> <p>Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported.</p> <p>The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE.</p> <p>Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportAsProvisionedProductOutput'
+        '480':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '481':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImportAsProvisionedProductInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWS242ServiceCatalogService.ImportAsProvisionedProduct
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWS242ServiceCatalogService.ListAcceptedPortfolioShares:
     post:
       operationId: ListAcceptedPortfolioShares
@@ -4681,7 +4738,7 @@ components:
         ProvisioningArtifactDetail:
           allOf:
             - $ref: '#/components/schemas/ProvisioningArtifactDetail'
-            - description: Information about the provisioning artifact.
+            - description: 'Information about the provisioning artifact. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -4739,7 +4796,7 @@ components:
         ProvisioningArtifactParameters:
           allOf:
             - $ref: '#/components/schemas/ProvisioningArtifactProperties'
-            - description: The configuration of the provisioning artifact.
+            - description: The configuration of the provisioning artifact. The <code>info</code> field accepts <code>ImportFromPhysicalID</code>.
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
@@ -4856,7 +4913,7 @@ components:
         Parameters:
           allOf:
             - $ref: '#/components/schemas/ProvisioningArtifactProperties'
-            - description: The configuration for the provisioning artifact.
+            - description: 'The configuration for the provisioning artifact. The <code>info</code> field accepts <code>ImportFromPhysicalID</code>. '
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
@@ -5800,6 +5857,45 @@ components:
           allOf:
             - $ref: '#/components/schemas/PageToken'
             - description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+    ImportAsProvisionedProductOutput:
+      type: object
+      properties:
+        RecordDetail:
+          $ref: '#/components/schemas/RecordDetail'
+    ImportAsProvisionedProductInput:
+      type: object
+      required:
+        - ProductId
+        - ProvisioningArtifactId
+        - ProvisionedProductName
+        - PhysicalId
+        - IdempotencyToken
+      title: ImportAsProvisionedProductInput
+      properties:
+        AcceptLanguage:
+          allOf:
+            - $ref: '#/components/schemas/AcceptLanguage'
+            - description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+        ProductId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The product identifier.
+        ProvisioningArtifactId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The identifier of the provisioning artifact.
+        ProvisionedProductName:
+          allOf:
+            - $ref: '#/components/schemas/ProvisionedProductName'
+            - description: 'The user-friendly name of the provisioned product. The value must be unique for the AWS account. The name cannot be updated after the product is provisioned. '
+        PhysicalId:
+          allOf:
+            - $ref: '#/components/schemas/PhysicalId'
+            - description: The unique identifier of the resource to be imported. It only currently supports CloudFormation stack IDs.
+        IdempotencyToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.'
     ListAcceptedPortfolioSharesOutput:
       type: object
       properties:
@@ -6676,6 +6772,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AcceptLanguage'
             - description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+        RetainPhysicalResources:
+          allOf:
+            - $ref: '#/components/schemas/RetainPhysicalResources'
+            - description: 'When this boolean parameter is set to true, the TerminateProvisionedProduct API deletes the Service Catalog provisioned product. However, it does not remove the CloudFormation stack, stack set, or the underlying resources of the deleted provisioned product. The default value is false.'
     UpdateConstraintOutput:
       type: object
       properties:
@@ -6922,7 +7022,7 @@ components:
         ProvisionedProductProperties:
           allOf:
             - $ref: '#/components/schemas/ProvisionedProductProperties'
-            - description: '<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>LAUNCH_ROLE</code> key accepts role ARNs. This key allows an administrator to call <code>UpdateProvisionedProductProperties</code> to update the launch role that is associated with a provisioned product. This role is used when an end user calls a provisioning operation such as <code>UpdateProvisionedProduct</code>, <code>TerminateProvisionedProduct</code>, or <code>ExecuteProvisionedProductServiceAction</code>. Only a role ARN or an empty string <code>""</code> is valid. A user ARN is invalid. if an admin user passes an empty string <code>""</code> as the value for the key <code>LAUNCH_ROLE</code>, the admin removes the launch role that is associated with the provisioned product. As a result, the end user operations use the credentials of the end user.</p> <p>The <code>OWNER</code> key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product''s history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>'
+            - description: '<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>LAUNCH_ROLE</code> key accepts role ARNs. This key allows an administrator to call <code>UpdateProvisionedProductProperties</code> to update the launch role that is associated with a provisioned product. This role is used when an end user calls a provisioning operation such as <code>UpdateProvisionedProduct</code>, <code>TerminateProvisionedProduct</code>, or <code>ExecuteProvisionedProductServiceAction</code>. Only a role ARN is valid. A user ARN is invalid. </p> <p>The <code>OWNER</code> key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product''s history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>'
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
@@ -7945,6 +8045,8 @@ components:
       maxItems: 60
     HasDefaultPath:
       type: boolean
+    PhysicalId:
+      type: string
     InstructionType:
       type: string
     InstructionValue:
@@ -8114,8 +8216,6 @@ components:
     ParameterValue:
       type: string
       maxLength: 4096
-    PhysicalId:
-      type: string
     PhysicalResourceId:
       type: string
     PlanResourceType:
@@ -8788,6 +8888,8 @@ components:
             - $ref: '#/components/schemas/ResourceDetailCreatedTime'
             - description: The creation time of the resource.
       description: Information about a resource.
+    RetainPhysicalResources:
+      type: boolean
     SortOrder:
       type: string
       enum:

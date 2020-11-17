@@ -1819,24 +1819,30 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
           description: PipelineNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
-        '482':
+        '483':
           description: StageNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StageNotFoundException'
-        '483':
+        '484':
           description: StageNotRetryableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/StageNotRetryableException'
-        '484':
+        '485':
           description: NotLatestPipelineExecutionException
           content:
             application/json:
@@ -1882,6 +1888,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
           description: PipelineNotFoundException
           content:
             application/json:
@@ -1927,18 +1939,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
           description: PipelineNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineNotFoundException'
-        '482':
+        '483':
           description: PipelineExecutionNotStoppableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/PipelineExecutionNotStoppableException'
-        '483':
+        '484':
           description: DuplicatedStopRequestException
           content:
             application/json:
@@ -2303,7 +2321,7 @@ components:
         category:
           allOf:
             - $ref: '#/components/schemas/ActionCategory'
-            - description: '<p>The category of the custom action, such as a build action or a test action.</p> <note> <p>Although <code>Source</code> and <code>Approval</code> are listed as valid values, they are not currently functional. These values are reserved for future use.</p> </note>'
+            - description: 'The category of the custom action, such as a build action or a test action.'
         provider:
           allOf:
             - $ref: '#/components/schemas/ActionProvider'
@@ -3067,6 +3085,7 @@ components:
             - $ref: '#/components/schemas/StageRetryMode'
             - description: 'The scope of the retry attempt. Currently, the only supported value is FAILED_ACTIONS.'
       description: Represents the input of a <code>RetryStageExecution</code> action.
+    ConflictException: {}
     StageNotRetryableException: {}
     NotLatestPipelineExecutionException: {}
     StartPipelineExecutionOutput:
@@ -3355,11 +3374,11 @@ components:
         category:
           allOf:
             - $ref: '#/components/schemas/ActionCategory'
-            - description: 'A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values. '
+            - description: '<p>A category defines what kind of action can be taken in the stage, and constrains the provider type for the action. Valid categories are limited to one of the following values. </p> <ul> <li> <p>Source</p> </li> <li> <p>Build</p> </li> <li> <p>Test</p> </li> <li> <p>Deploy</p> </li> <li> <p>Invoke</p> </li> <li> <p>Approval</p> </li> </ul>'
         owner:
           allOf:
             - $ref: '#/components/schemas/ActionOwner'
-            - description: The creator of the action being called.
+            - description: 'The creator of the action being called. There are three valid values for the <code>Owner</code> field in the action category section within your pipeline structure: <code>AWS</code>, <code>ThirdParty</code>, and <code>Custom</code>. For more information, see <a href="https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#actions-valid-providers">Valid Action Types and Providers in CodePipeline</a>.'
         provider:
           allOf:
             - $ref: '#/components/schemas/ActionProvider'
@@ -3478,6 +3497,10 @@ components:
     ActionExecution:
       type: object
       properties:
+        actionExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/ActionExecutionId'
+            - description: '<p>ID of the workflow action execution in the current stage. Use the <a>GetPipelineState</a> action to retrieve the current action execution details of the current stage.</p> <note> <p>For older executions, this field might be empty. The action execution ID is available for executions run on or after March 2020.</p> </note>'
         status:
           allOf:
             - $ref: '#/components/schemas/ActionExecutionStatus'
@@ -4052,7 +4075,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/PipelineName'
-            - description: The name of the action to be performed.
+            - description: The name of the pipeline.
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -4125,7 +4148,7 @@ components:
     EncryptionKeyId:
       type: string
       minLength: 1
-      maxLength: 100
+      maxLength: 400
     EncryptionKeyType:
       type: string
       enum:
@@ -4725,6 +4748,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/StageName'
             - description: The name of the stage.
+        inboundExecution:
+          $ref: '#/components/schemas/StageExecution'
         inboundTransitionState:
           allOf:
             - $ref: '#/components/schemas/TransitionState'

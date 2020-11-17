@@ -221,6 +221,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/NullableBoolean'
                         - description: '<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
+                    EnvironmentVariables:
+                      allOf:
+                        - $ref: '#/components/schemas/EnvironmentVariablesMap'
+                        - description: '<p>Specifies the keys and values to use for any environment variables used in the canary script. Use the following format:</p> <p>{ "key1" : "value1", "key2" : "value2", ...}</p> <p>Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can''t specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime"> Runtime environment variables</a>.</p>'
                 SuccessRetentionPeriodInDays:
                   description: 'The number of days to retain data about successful runs of this canary. If you omit this field, the default of 31 days is used. The valid range is 1 to 455 days.'
                   type: integer
@@ -232,7 +236,7 @@ paths:
                   minimum: 1
                   maximum: 1024
                 RuntimeVersion:
-                  description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+                  description: 'Specifies the runtime version to use for the canary. For a list of valid runtime versions and more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -430,7 +434,7 @@ paths:
                   minLength: 1
                   maxLength: 2048
                 RuntimeVersion:
-                  description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+                  description: 'Specifies the runtime version to use for the canary. For a list of valid runtime versions and for more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
                   type: string
                   minLength: 1
                   maxLength: 1024
@@ -462,6 +466,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/NullableBoolean'
                         - description: '<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
+                    EnvironmentVariables:
+                      allOf:
+                        - $ref: '#/components/schemas/EnvironmentVariablesMap'
+                        - description: '<p>Specifies the keys and values to use for any environment variables used in the canary script. Use the following format:</p> <p>{ "key1" : "value1", "key2" : "value2", ...}</p> <p>Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can''t specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime"> Runtime environment variables</a>.</p>'
                 SuccessRetentionPeriodInDays:
                   description: The number of days to retain data about successful runs of this canary.
                   type: integer
@@ -1088,6 +1096,10 @@ components:
       maximum: 3008
     NullableBoolean:
       type: boolean
+    EnvironmentVariablesMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/EnvironmentVariableValue'
     SubnetIds:
       type: array
       items:
@@ -1238,7 +1250,7 @@ components:
         RuntimeVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+            - description: 'Specifies the runtime version to use for the canary. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
         VpcConfig:
           $ref: '#/components/schemas/VpcConfigOutput'
         Tags:
@@ -1484,6 +1496,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/NullableBoolean'
             - description: '<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>'
+        EnvironmentVariables:
+          allOf:
+            - $ref: '#/components/schemas/EnvironmentVariablesMap'
+            - description: '<p>Specifies the keys and values to use for any environment variables used in the canary script. Use the following format:</p> <p>{ "key1" : "value1", "key2" : "value2", ...}</p> <p>Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can''t specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-runtime"> Runtime environment variables</a>.</p>'
       description: A structure that contains input information for a canary run.
     CanaryRunState:
       type: string
@@ -1591,7 +1607,7 @@ components:
         RuntimeVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+            - description: 'Specifies the runtime version to use for the canary. For a list of valid runtime versions and more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
         VpcConfig:
           allOf:
             - $ref: '#/components/schemas/VpcConfigInput'
@@ -1656,6 +1672,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RuntimeVersion'
+    EnvironmentVariableName:
+      type: string
+      pattern: '[a-zA-Z]([a-zA-Z0-9_])+'
+    EnvironmentVariableValue:
+      type: string
     GetCanaryRequest:
       type: object
       title: GetCanaryRequest
@@ -1682,7 +1703,7 @@ components:
         VersionName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The name of the runtime version. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>.'
+            - description: 'The name of the runtime version. For a list of valid runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1743,7 +1764,7 @@ components:
         RuntimeVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specifies the runtime version to use for the canary. Currently, the only valid values are <code>syn-nodejs-2.0</code>, <code>syn-nodejs-2.0-beta</code>, and <code>syn-1.0</code>. For more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
+            - description: 'Specifies the runtime version to use for the canary. For a list of valid runtime versions and for more information about runtime versions, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html"> Canary Runtime Versions</a>.'
         Schedule:
           allOf:
             - $ref: '#/components/schemas/CanaryScheduleInput'

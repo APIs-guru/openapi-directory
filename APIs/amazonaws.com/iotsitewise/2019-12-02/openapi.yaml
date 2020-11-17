@@ -1341,6 +1341,61 @@ paths:
             type: integer
             minimum: 1
             maximum: 250
+  '/portals/{portalId}/presigned-url':
+    get:
+      operationId: CreatePresignedPortalUrl
+      description: Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePresignedPortalUrlResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: portalId
+          in: path
+          required: true
+          description: The ID of the portal to access.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: sessionDurationSeconds
+          in: query
+          required: false
+          description: '<p>The duration (in seconds) for which the session at the URL is valid.</p> <p>Default: 900 seconds (15 minutes)</p>'
+          schema:
+            type: integer
+            minimum: 900
+            maximum: 43200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /projects:
     post:
       operationId: CreateProject
@@ -4378,6 +4433,15 @@ components:
       type: string
       enum:
         - PNG
+    CreatePresignedPortalUrlResponse:
+      type: object
+      required:
+        - presignedPortalUrl
+      properties:
+        presignedPortalUrl:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: '<p>The pre-signed URL to the portal. The URL contains the portal ID and a session token that lets you access the portal. The URL has the following format.</p> <p> <code>https://&lt;portal-id&gt;.app.iotsitewise.aws/auth?token=&lt;encrypted-token&gt;</code> </p>'
     CreateProjectResponse:
       type: object
       required:
@@ -6079,6 +6143,14 @@ components:
       pattern: '^[!-~]*'
       minLength: 1
       maxLength: 64
+    SessionDurationSeconds:
+      type: integer
+      minimum: 900
+      maximum: 43200
+    CreatePresignedPortalUrlRequest:
+      type: object
+      title: CreatePresignedPortalUrlRequest
+      properties: {}
     CreateProjectRequest:
       type: object
       required:
@@ -6301,7 +6373,6 @@ components:
         - INTERNAL_FAILURE
     Expression:
       type: string
-      pattern: '^[a-z0-9._+\-*%/^, ()]+$'
       minLength: 1
       maxLength: 1024
     VariableName:

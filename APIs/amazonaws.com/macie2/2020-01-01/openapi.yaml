@@ -4198,6 +4198,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobType'
             - description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job runs only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis. The scheduleFrequency property indicates the recurrence pattern for the job.</p></li></ul>'
+        lastRunErrorStatus:
+          allOf:
+            - $ref: '#/components/schemas/LastRunErrorStatus'
+            - description: 'Specifies whether any account- or bucket-level access errors occurred when the job ran. For a recurring job, this value indicates the error status of the job''s most recent run.'
         lastRunTime:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -5211,7 +5215,7 @@ components:
         additionalOccurrences:
           allOf:
             - $ref: '#/components/schemas/__boolean'
-            - description: <p>Specifies whether Amazon Macie detected additional occurrences of sensitive data in the S3 object. A finding includes location data for a maximum of 15 occurrences of sensitive data.</p> <p>This value can help you to determine whether to investigate additional occurrences of sensitive data in an object. You can do this by referring to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation).</p>
+            - description: <p>Specifies whether Amazon Macie detected additional occurrences of sensitive data in the S3 object. A finding includes location data for a maximum of 15 occurrences of sensitive data.</p> <p>This value can help you determine whether to investigate additional occurrences of sensitive data in an object. You can do this by referring to the corresponding sensitive data discovery result for the finding (ClassificationDetails.detailedResultsLocation).</p>
         customDataIdentifiers:
           allOf:
             - $ref: '#/components/schemas/CustomDataIdentifiers'
@@ -5284,7 +5288,7 @@ components:
         code:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: ' <p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to.</p></li> <li><p>PARTIAL - Macie was able to analyze only a subset of the data in the object that the finding applies to. For example, the object is a compressed or archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn''t able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that uses an unsupported format.</p></li></ul>'
+            - description: ' <p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to.</p></li> <li><p>PARTIAL - Macie analyzed only a subset of the data in the object that the finding applies to. For example, the object is an archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn''t able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that uses an unsupported format.</p></li></ul>'
         reason:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -5524,7 +5528,7 @@ components:
         eqExactMatch:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: 'A condition that requires an array field of a finding to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.'
+            - description: 'A condition that requires an array field on a finding to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.'
         gt:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -5594,7 +5598,7 @@ components:
         offsetRanges:
           allOf:
             - $ref: '#/components/schemas/Ranges'
-            - description: '<p>An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file.</p> <p>This value is typically null. For binary text files, Macie adds location data to a lineRanges.Range or Page object, depending on the file type.</p>'
+            - description: '<p>An array of objects, one for each occurrence of sensitive data in a binary text file. Each object specifies the position of the data relative to the beginning of the file.</p> <p>This value is typically null. For binary text files, Amazon Macie adds location data to a lineRanges.Range or Page object, depending on the file type.</p>'
         pages:
           allOf:
             - $ref: '#/components/schemas/Pages'
@@ -5602,7 +5606,7 @@ components:
         records:
           allOf:
             - $ref: '#/components/schemas/Records'
-            - description: 'An array of objects, one for each occurrence of sensitive data in an Apache Avro object container or Apache Parquet file. Each object specifies the field or record that contains the data. This value is null for all other types of files.'
+            - description: 'An array of objects, one for each occurrence of sensitive data in an Apache Avro object container or Apache Parquet file. Each object specifies the record index and the path to the field in the record that contains the data. This value is null for all other types of files.'
       description: Provides the location of 1-15 occurrences of sensitive data that was detected by managed data identifiers or a custom data identifier and produced a sensitive data finding.
     CustomDetection:
       type: object
@@ -5725,6 +5729,14 @@ components:
         - IDLE
         - USER_PAUSED
       description: 'The status of a classification job. Possible values are:'
+    LastRunErrorStatus:
+      type: object
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/LastRunErrorStatusCode'
+            - description: '<p>Specifies whether any account- or bucket-level access errors occurred when the job ran. For a recurring job, this value indicates the error status of the job''s most recent run. Possible values are:</p> <ul><li><p>ERROR - One or more errors occurred. Amazon Macie didn''t process all the data specified for the job.</p></li> <li><p>NONE - No errors occurred. Macie processed all the data specified for the job.</p></li></ul>'
+      description: 'Specifies whether any account- or bucket-level access errors occurred when a classification job ran. For example, the job is configured to analyze data for a member account that was suspended, or the job is configured to analyze an S3 bucket that Amazon Macie isn''t allowed to access.'
     Statistics:
       type: object
       properties:
@@ -5926,7 +5938,7 @@ components:
         count:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of occurrences of the finding.
+            - description: 'The total number of occurrences of the finding. For sensitive data findings, this value is always 1. All sensitive data findings are considered new (unique) because they derive from individual classification jobs.'
         createdAt:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -6467,6 +6479,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobType'
             - description: '<p>The schedule for running the job. Possible values are:</p> <ul><li><p>ONE_TIME - The job runs only once.</p></li> <li><p>SCHEDULED - The job runs on a daily, weekly, or monthly basis.</p></li></ul>'
+        lastRunErrorStatus:
+          allOf:
+            - $ref: '#/components/schemas/LastRunErrorStatus'
+            - description: 'Specifies whether any account- or bucket-level access errors occurred when the job ran. For a recurring job, this value indicates the error status of the job''s most recent run.'
         name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -6486,13 +6502,19 @@ components:
         value:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: One part of a key-value pair that comprises a tag. A tag value acts as a descriptor for a tag key. A tag value can be empty or null.
+            - description: One part of a key-value pair that comprises a tag. A tag value acts as a descriptor for a tag key. A tag value can be an empty string.
       description: Provides information about the tags that are associated with an S3 bucket or object. Each tag consists of a required tag key and an associated tag value.
     KeyValuePairList:
       type: array
       description: Provides information about the tags that are associated with an S3 bucket or object. Each tag consists of a required tag key and an associated tag value.
       items:
         $ref: '#/components/schemas/KeyValuePair'
+    LastRunErrorStatusCode:
+      type: string
+      enum:
+        - NONE
+        - ERROR
+      description: 'Specifies whether any account- or bucket-level access errors occurred during the run of a one-time classification job ran or the most recent run of a recurring classification job. Possible values are:'
     ListJobsFilterCriteria:
       type: object
       properties:
@@ -6740,7 +6762,7 @@ components:
         jsonPath:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: '<p>The path, as a JSONPath expression, to the field (in an Apache Avro object container) or record (in an Apache Parquet file) that contains the data.</p> <p>If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>'
+            - description: '<p>The path, as a JSONPath expression, to the field in the record that contains the data.</p> <p>If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>'
         recordIndex:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -6892,7 +6914,7 @@ components:
         category:
           allOf:
             - $ref: '#/components/schemas/SensitiveDataItemCategory'
-            - description: 'The category of sensitive data that was detected. For example: FINANCIAL_INFORMATION, for financial information such as credit card numbers; PERSONAL_INFORMATION, for personally identifiable information, such as full names and mailing addresses, or personal health information; or, CUSTOM_IDENTIFIER, for data that was detected by a custom data identifier.'
+            - description: 'The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or AWS secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as driver''s license identification numbers.'
         detections:
           allOf:
             - $ref: '#/components/schemas/DefaultDetections'

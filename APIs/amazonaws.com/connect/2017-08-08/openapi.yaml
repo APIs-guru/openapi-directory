@@ -571,6 +571,91 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/user-hierarchy-groups/{InstanceId}':
+    put:
+      operationId: CreateUserHierarchyGroup
+      description: Creates a new user hierarchy group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUserHierarchyGroupResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+              properties:
+                Name:
+                  description: The name of the user hierarchy group. Must not be more than 100 characters.
+                  type: string
+                ParentGroupId:
+                  description: The identifier for the parent hierarchy group. The user hierarchy is created at level one if the parent group ID is null.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/users/{InstanceId}/{UserId}':
     delete:
       operationId: DeleteUser
@@ -676,6 +761,127 @@ paths:
           in: path
           required: true
           description: The identifier of the user account.
+          schema:
+            type: string
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+  '/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}':
+    delete:
+      operationId: DeleteUserHierarchyGroup
+      description: Deletes an existing user hierarchy group. It must not be associated with any agents or have any active child groups.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: HierarchyGroupId
+          in: path
+          required: true
+          description: The identifier of the hierarchy group.
+          schema:
+            type: string
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeUserHierarchyGroup
+      description: Describes the specified hierarchy group.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeUserHierarchyGroupResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: HierarchyGroupId
+          in: path
+          required: true
+          description: The identifier of the hierarchy group.
           schema:
             type: string
         - name: InstanceId
@@ -821,70 +1027,6 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
-  '/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}':
-    get:
-      operationId: DescribeUserHierarchyGroup
-      description: Describes the specified hierarchy group.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DescribeUserHierarchyGroupResponse'
-        '480':
-          description: InvalidRequestException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestException'
-        '481':
-          description: InvalidParameterException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidParameterException'
-        '482':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '483':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '484':
-          description: InternalServiceException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServiceException'
-      parameters:
-        - name: HierarchyGroupId
-          in: path
-          required: true
-          description: The identifier of the hierarchy group.
-          schema:
-            type: string
-        - name: InstanceId
-          in: path
-          required: true
-          description: The identifier of the Amazon Connect instance.
-          schema:
-            type: string
-            minLength: 1
-            maxLength: 100
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/user-hierarchy-structure/{InstanceId}':
     get:
       operationId: DescribeUserHierarchyStructure
@@ -943,6 +1085,90 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateUserHierarchyStructure
+      description: 'Updates the user hierarchy structure: add, remove, and rename user hierarchy levels.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - HierarchyStructure
+              properties:
+                HierarchyStructure:
+                  description: Contains information about the level hierarchy to update.
+                  type: object
+                  properties:
+                    LevelOne:
+                      allOf:
+                        - $ref: '#/components/schemas/HierarchyLevelUpdate'
+                        - description: The update for level one.
+                    LevelTwo:
+                      allOf:
+                        - $ref: '#/components/schemas/HierarchyLevelUpdate'
+                        - description: The update for level two.
+                    LevelThree:
+                      allOf:
+                        - $ref: '#/components/schemas/HierarchyLevelUpdate'
+                        - description: The update for level three.
+                    LevelFour:
+                      allOf:
+                        - $ref: '#/components/schemas/HierarchyLevelUpdate'
+                        - description: The update for level four.
+                    LevelFive:
+                      allOf:
+                        - $ref: '#/components/schemas/HierarchyLevelUpdate'
+                        - description: The update for level five.
   '/routing-profiles/{InstanceId}/{RoutingProfileId}/disassociate-queues':
     post:
       operationId: DisassociateRoutingProfileQueues
@@ -3036,7 +3262,7 @@ paths:
   /contact/attributes:
     post:
       operationId: UpdateContactAttributes
-      description: '<p>Creates or updates the contact attributes associated with the specified contact.</p> <p>You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer''s name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers.</p> <p>Contact attributes are available in Amazon Connect for 24 months, and are then deleted.</p> <p>This operation is also available in the Amazon Connect Flow language. See <a href="https://docs.aws.amazon.com/connect/latest/adminguide/contact-actions-updatecontactattributes.html">UpdateContactAttributes</a>.</p> <p> <b>Important:</b> You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.</p>'
+      description: '<p>Creates or updates the contact attributes associated with the specified contact.</p> <p>You can add or update attributes for both ongoing and completed contacts. For example, you can update the customer''s name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers.</p> <p>Contact attributes are available in Amazon Connect for 24 months, and are then deleted.</p> <p> <b>Important:</b> You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.</p>'
       responses:
         '200':
           description: Success
@@ -3185,7 +3411,7 @@ paths:
   '/contact-flows/{InstanceId}/{ContactFlowId}/name':
     post:
       operationId: UpdateContactFlowName
-      description: The name of the contact flow.
+      description: '<p>The name of the contact flow.</p> <p>You can also create and update contact flows using the <a href="https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html">Amazon Connect Flow language</a>.</p>'
       responses:
         '200':
           description: Success
@@ -3553,6 +3779,84 @@ paths:
               properties:
                 HierarchyGroupId:
                   description: The identifier of the hierarchy group.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/user-hierarchy-groups/{InstanceId}/{HierarchyGroupId}/name':
+    post:
+      operationId: UpdateUserHierarchyGroupName
+      description: 'Updates the name of the user hierarchy group. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: HierarchyGroupId
+          in: path
+          required: true
+          description: The identifier of the hierarchy group.
+          schema:
+            type: string
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+              properties:
+                Name:
+                  description: The name of the hierarchy group. Must not be more than 100 characters.
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -4039,6 +4343,18 @@ components:
       type: string
     SecurityProfileId:
       type: string
+    CreateUserHierarchyGroupResponse:
+      type: object
+      properties:
+        HierarchyGroupId:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupId'
+            - description: The identifier of the hierarchy group.
+        HierarchyGroupArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'The Amazon Resource Name (ARN) of the hierarchy group. '
+    ResourceInUseException: {}
     DescribeContactFlowResponse:
       type: object
       properties:
@@ -4628,6 +4944,16 @@ components:
     UpdateContactAttributesResponse:
       type: object
       properties: {}
+    HierarchyLevelUpdate:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevelName'
+            - description: The name of the user hierarchy level. Must not be more than 50 characters.
+      description: Contains information about the hierarchy level to update.
     ARN:
       type: string
     AgentUsername:
@@ -4851,6 +5177,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: One or more tags.
+    HierarchyGroupName:
+      type: string
+    HierarchyGroupId:
+      type: string
+    CreateUserHierarchyGroupRequest:
+      type: object
+      required:
+        - Name
+      title: CreateUserHierarchyGroupRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupName'
+            - description: The name of the user hierarchy group. Must not be more than 100 characters.
+        ParentGroupId:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupId'
+            - description: The identifier for the parent hierarchy group. The user hierarchy is created at level one if the parent group ID is null.
     Password:
       type: string
       pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\S]{8,64}$/'
@@ -4900,8 +5244,6 @@ components:
         $ref: '#/components/schemas/SecurityProfileId'
       minItems: 1
       maxItems: 10
-    HierarchyGroupId:
-      type: string
     CreateUserRequest:
       type: object
       required:
@@ -5053,6 +5395,10 @@ components:
       type: integer
       minimum: 0
       maximum: 9999
+    DeleteUserHierarchyGroupRequest:
+      type: object
+      title: DeleteUserHierarchyGroupRequest
+      properties: {}
     DeleteUserRequest:
       type: object
       title: DeleteUserRequest
@@ -5334,8 +5680,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/HistoricalMetricResult'
-    HierarchyGroupName:
-      type: string
     HierarchyLevelId:
       type: string
     HierarchyPath:
@@ -5400,6 +5744,30 @@ components:
             - $ref: '#/components/schemas/HierarchyLevelName'
             - description: The name of the hierarchy level.
       description: Contains information about a hierarchy level.
+    HierarchyStructureUpdate:
+      type: object
+      properties:
+        LevelOne:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevelUpdate'
+            - description: The update for level one.
+        LevelTwo:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevelUpdate'
+            - description: The update for level two.
+        LevelThree:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevelUpdate'
+            - description: The update for level three.
+        LevelFour:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevelUpdate'
+            - description: The update for level four.
+        LevelFive:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyLevelUpdate'
+            - description: The update for level five.
+      description: Contains information about the level hierarchy to update.
     HistoricalMetricName:
       type: string
       enum:
@@ -6038,6 +6406,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoutingProfileQueueConfigList'
             - description: The queues to be updated for this routing profile.
+    UpdateUserHierarchyGroupNameRequest:
+      type: object
+      required:
+        - Name
+      title: UpdateUserHierarchyGroupNameRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyGroupName'
+            - description: The name of the hierarchy group. Must not be more than 100 characters.
     UpdateUserHierarchyRequest:
       type: object
       title: UpdateUserHierarchyRequest
@@ -6046,6 +6424,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/HierarchyGroupId'
             - description: The identifier of the hierarchy group.
+    UpdateUserHierarchyStructureRequest:
+      type: object
+      required:
+        - HierarchyStructure
+      title: UpdateUserHierarchyStructureRequest
+      properties:
+        HierarchyStructure:
+          allOf:
+            - $ref: '#/components/schemas/HierarchyStructureUpdate'
+            - description: The hierarchy levels to update.
     UpdateUserIdentityInfoRequest:
       type: object
       required:

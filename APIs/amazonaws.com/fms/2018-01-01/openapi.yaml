@@ -3,7 +3,7 @@ info:
   version: '2018-01-01'
   x-release: v4
   title: Firewall Management Service
-  description: '<fullname>AWS Firewall Manager</fullname> <p>This is the <i>AWS Firewall Manager API Reference</i>. This guide is for developers who need detailed information about the AWS Firewall Manager API actions, data types, and errors. For detailed information about AWS Firewall Manager features, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html">AWS Firewall Manager Developer Guide</a>.</p>'
+  description: '<fullname>AWS Firewall Manager</fullname> <p>This is the <i>AWS Firewall Manager API Reference</i>. This guide is for developers who need detailed information about the AWS Firewall Manager API actions, data types, and errors. For detailed information about AWS Firewall Manager features, see the <a href="https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html">AWS Firewall Manager Developer Guide</a>.</p> <p>Some API actions require explicit resource permissions. For information, see the developer guide topic <a href="https://docs.aws.amazon.com/waf/latest/developerguide/fms-api-permissions-ref.html">Firewall Manager required permissions for API actions</a>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -286,6 +286,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/InternalErrorException'
+        '483':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
       requestBody:
         required: true
         content:
@@ -507,7 +519,7 @@ paths:
   /#X-Amz-Target=AWSFMS_20180101.GetComplianceDetail:
     post:
       operationId: GetComplianceDetail
-      description: 'Returns detailed compliance information about the specified member account. Details include resources that are in and out of compliance with the specified policy. Resources are considered noncompliant for AWS WAF and Shield Advanced policies if the specified policy has not been applied to them. Resources are considered noncompliant for security group policies if they are in scope of the policy, they violate one or more of the policy rules, and remediation is disabled or not possible. '
+      description: 'Returns detailed compliance information about the specified member account. Details include resources that are in and out of compliance with the specified policy. Resources are considered noncompliant for AWS WAF and Shield Advanced policies if the specified policy has not been applied to them. Resources are considered noncompliant for security group policies if they are in scope of the policy, they violate one or more of the policy rules, and remediation is disabled or not possible. Resources are considered noncompliant for Network Firewall policies if a firewall is missing in the VPC, if the firewall endpoint isn''t set up in an expected Availability Zone and subnet, if a subnet created by the Firewall Manager doesn''t have the expected route table, and for modifications to a firewall policy that violate the Firewall Manager policy''s rules. '
       responses:
         '200':
           description: Success
@@ -1236,7 +1248,7 @@ paths:
   /#X-Amz-Target=AWSFMS_20180101.PutNotificationChannel:
     post:
       operationId: PutNotificationChannel
-      description: Designates the IAM role and Amazon Simple Notification Service (SNS) topic that AWS Firewall Manager uses to record SNS logs.
+      description: '<p>Designates the IAM role and Amazon Simple Notification Service (SNS) topic that AWS Firewall Manager uses to record SNS logs.</p> <p>To perform this action outside of the console, you must configure the SNS topic to allow the Firewall Manager role <code>AWSServiceRoleForFMS</code> to publish SNS logs. For more information, see <a href="https://docs.aws.amazon.com/waf/latest/developerguide/fms-api-permissions-ref.html">Firewall Manager required permissions for API actions</a> in the <i>AWS Firewall Manager Developer Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -1283,7 +1295,7 @@ paths:
   /#X-Amz-Target=AWSFMS_20180101.PutPolicy:
     post:
       operationId: PutPolicy
-      description: '<p>Creates an AWS Firewall Manager policy.</p> <p>Firewall Manager provides the following types of policies: </p> <ul> <li> <p>A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources</p> </li> <li> <p>An AWS WAF policy (type WAFV2), which defines rule groups to run first in the corresponding AWS WAF web ACL and rule groups to run last in the web ACL.</p> </li> <li> <p>An AWS WAF Classic policy (type WAF), which defines a rule group. </p> </li> <li> <p>A security group policy, which manages VPC security groups across your AWS organization. </p> </li> </ul> <p>Each policy is specific to one of the types. If you want to enforce more than one policy type across accounts, create multiple policies. You can create multiple policies for each type.</p> <p>You must be subscribed to Shield Advanced to create a Shield Advanced policy. For more information about subscribing to Shield Advanced, see <a href="https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html">CreateSubscription</a>.</p>'
+      description: '<p>Creates an AWS Firewall Manager policy.</p> <p>Firewall Manager provides the following types of policies: </p> <ul> <li> <p>An AWS WAF policy (type WAFV2), which defines rule groups to run first in the corresponding AWS WAF web ACL and rule groups to run last in the web ACL.</p> </li> <li> <p>An AWS WAF Classic policy (type WAF), which defines a rule group. </p> </li> <li> <p>A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources.</p> </li> <li> <p>A security group policy, which manages VPC security groups across your AWS organization. </p> </li> <li> <p>An AWS Network Firewall policy, which provides firewall rules to filter network traffic in specified Amazon VPCs.</p> </li> </ul> <p>Each policy is specific to one of the types. If you want to enforce more than one policy type across accounts, create multiple policies. You can create multiple policies for each type.</p> <p>You must be subscribed to Shield Advanced to create a Shield Advanced policy. For more information about subscribing to Shield Advanced, see <a href="https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html">CreateSubscription</a>.</p>'
       responses:
         '200':
           description: Success
@@ -1626,6 +1638,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: '<p>If <code>True</code>, the request performs cleanup according to the policy type. </p> <p>For AWS WAF and Shield Advanced policies, the cleanup does the following:</p> <ul> <li> <p>Deletes rule groups created by AWS Firewall Manager</p> </li> <li> <p>Removes web ACLs from in-scope resources</p> </li> <li> <p>Deletes web ACLs that contain no rules or rule groups</p> </li> </ul> <p>For security group policies, the cleanup does the following for each security group in the policy:</p> <ul> <li> <p>Disassociates the security group from in-scope resources </p> </li> <li> <p>Deletes the security group if it was created through Firewall Manager and if it''s no longer associated with any resources through another policy</p> </li> </ul> <p>After the cleanup, in-scope resources are no longer protected by web ACLs in this policy. Protection of out-of-scope resources remains unchanged. Scope is determined by tags that you create and accounts that you associate with the policy. When creating the policy, if you specify that only resources in specific accounts or with specific tags are in scope of the policy, those accounts and resources are handled by the policy. All others are out of scope. If you don''t specify tags or accounts, all resources are in scope. </p>'
+    LimitExceededException: {}
     DeleteProtocolsListRequest:
       type: object
       required:
@@ -1844,7 +1857,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The resource type. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. Supported resource types are: <code>AWS::EC2::Instance</code>, <code>AWS::EC2::NetworkInterface</code>, or <code>AWS::EC2::SecurityGroup</code>. '
+            - description: 'The resource type. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. Supported resource types are: <code>AWS::EC2::Instance</code>, <code>AWS::EC2::NetworkInterface</code>, <code>AWS::EC2::SecurityGroup</code>, <code>AWS::NetworkFirewall::FirewallPolicy</code>, and <code>AWS::EC2::Subnet</code>. '
     ListAppsListsResponse:
       type: object
       properties:
@@ -1874,7 +1887,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationMaxResults'
             - description: '<p>The maximum number of objects that you want AWS Firewall Manager to return for this request. If more objects are available, in the response, AWS Firewall Manager provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don''t specify this, AWS Firewall Manager returns all available objects.</p>'
-    LimitExceededException: {}
     ListComplianceStatusResponse:
       type: object
       properties:
@@ -2347,6 +2359,10 @@ components:
         - RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP
         - SECURITY_GROUP_UNUSED
         - SECURITY_GROUP_REDUNDANT
+        - MISSING_FIREWALL
+        - MISSING_FIREWALL_SUBNET_IN_AZ
+        - MISSING_EXPECTED_ROUTE_TABLE
+        - NETWORK_FIREWALL_POLICY_MODIFIED
     ResourceType:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -2366,7 +2382,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The resource type. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For example: <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.'
+            - description: 'The resource type. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For example: <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code>, <code>AWS::CloudFront::Distribution</code>, or <code>AWS::NetworkFirewall::FirewallPolicy</code>.'
       description: Details of the resource that is not protected by the policy.
     ComplianceViolators:
       type: array
@@ -2404,7 +2420,7 @@ components:
         - AWSVPC
     DetailedInfo:
       type: string
-      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=,+\-@]*)$'
       minLength: 1
       maxLength: 1024
     PolicyComplianceStatusType:
@@ -2495,7 +2511,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of resource protected by or in scope of the policy. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For AWS WAF and Shield Advanced, examples include <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> and <code>AWS::CloudFront::Distribution</code>. For a security group common policy, valid values are <code>AWS::EC2::NetworkInterface</code> and <code>AWS::EC2::Instance</code>. For a security group content audit policy, valid values are <code>AWS::EC2::SecurityGroup</code>, <code>AWS::EC2::NetworkInterface</code>, and <code>AWS::EC2::Instance</code>. For a security group usage audit policy, the value is <code>AWS::EC2::SecurityGroup</code>. '
+            - description: 'The type of resource protected by or in scope of the policy. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For AWS WAF and Shield Advanced, examples include <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> and <code>AWS::CloudFront::Distribution</code>. For a security group common policy, valid values are <code>AWS::EC2::NetworkInterface</code> and <code>AWS::EC2::Instance</code>. For a security group content audit policy, valid values are <code>AWS::EC2::SecurityGroup</code>, <code>AWS::EC2::NetworkInterface</code>, and <code>AWS::EC2::Instance</code>. For a security group usage audit policy, the value is <code>AWS::EC2::SecurityGroup</code>. For an AWS Network Firewall policy, the value is <code>AWS::EC2::VPC</code>.'
         ResourceTypeList:
           allOf:
             - $ref: '#/components/schemas/ResourceTypeList'
@@ -2539,6 +2555,7 @@ components:
         - SECURITY_GROUPS_COMMON
         - SECURITY_GROUPS_CONTENT_AUDIT
         - SECURITY_GROUPS_USAGE_AUDIT
+        - NETWORK_FIREWALL
     ProtectionData:
       type: string
     ProtocolsListData:
@@ -2645,6 +2662,137 @@ components:
       pattern: .*
       minLength: 1
       maxLength: 4096
+    NetworkFirewallAction:
+      type: string
+      pattern: '^[a-zA-Z0-9]+$'
+      minLength: 1
+      maxLength: 128
+    NetworkFirewallActionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NetworkFirewallAction'
+    NetworkFirewallMissingExpectedRTViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          allOf:
+            - $ref: '#/components/schemas/ViolationTarget'
+            - description: The ID of the AWS Network Firewall or VPC resource that's in violation.
+        VPC:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The resource ID of the VPC associated with a violating subnet.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/LengthBoundedString'
+            - description: 'The Availability Zone of a violating subnet. '
+        CurrentRouteTable:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: 'The resource ID of the current route table that''s associated with the subnet, if one is available.'
+        ExpectedRouteTable:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The resource ID of the route table that should be associated with the subnet.
+      description: Violation details for AWS Network Firewall for a subnet that's not associated to the expected Firewall Manager managed route table.
+    TargetViolationReason:
+      type: string
+      pattern: \w+
+      minLength: 0
+      maxLength: 256
+    NetworkFirewallMissingFirewallViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          allOf:
+            - $ref: '#/components/schemas/ViolationTarget'
+            - description: The ID of the AWS Network Firewall or VPC resource that's in violation.
+        VPC:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The resource ID of the VPC associated with a violating subnet.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/LengthBoundedString'
+            - description: 'The Availability Zone of a violating subnet. '
+        TargetViolationReason:
+          allOf:
+            - $ref: '#/components/schemas/TargetViolationReason'
+            - description: 'The reason the resource has this violation, if one is available. '
+      description: 'Violation details for AWS Network Firewall for a subnet that doesn''t have a Firewall Manager managed firewall in its VPC. '
+    NetworkFirewallMissingSubnetViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          allOf:
+            - $ref: '#/components/schemas/ViolationTarget'
+            - description: The ID of the AWS Network Firewall or VPC resource that's in violation.
+        VPC:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The resource ID of the VPC associated with a violating subnet.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/LengthBoundedString'
+            - description: 'The Availability Zone of a violating subnet. '
+        TargetViolationReason:
+          allOf:
+            - $ref: '#/components/schemas/TargetViolationReason'
+            - description: 'The reason the resource has this violation, if one is available. '
+      description: Violation details for AWS Network Firewall for an Availability Zone that's missing the expected Firewall Manager managed subnet.
+    StatelessRuleGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StatelessRuleGroup'
+    StatefulRuleGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StatefulRuleGroup'
+    NetworkFirewallPolicyDescription:
+      type: object
+      properties:
+        StatelessRuleGroups:
+          allOf:
+            - $ref: '#/components/schemas/StatelessRuleGroupList'
+            - description: 'The stateless rule groups that are used in the Network Firewall firewall policy. '
+        StatelessDefaultActions:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallActionList'
+            - description: 'The actions to take on packets that don''t match any of the stateless rule groups. '
+        StatelessFragmentDefaultActions:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallActionList'
+            - description: 'The actions to take on packet fragments that don''t match any of the stateless rule groups. '
+        StatelessCustomActions:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallActionList'
+            - description: Names of custom actions that are available for use in the stateless default actions settings.
+        StatefulRuleGroups:
+          allOf:
+            - $ref: '#/components/schemas/StatefulRuleGroupList'
+            - description: 'The stateful rule groups that are used in the Network Firewall firewall policy. '
+      description: The definition of the AWS Network Firewall firewall policy.
+    NetworkFirewallPolicyModifiedViolation:
+      type: object
+      properties:
+        ViolationTarget:
+          allOf:
+            - $ref: '#/components/schemas/ViolationTarget'
+            - description: The ID of the AWS Network Firewall or VPC resource that's in violation.
+        CurrentPolicyDescription:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallPolicyDescription'
+            - description: 'The policy that''s currently in use in the individual account. '
+        ExpectedPolicyDescription:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallPolicyDescription'
+            - description: 'The policy that should be in use in the individual account in order to be compliant. '
+      description: 'Violation details for AWS Network Firewall for a firewall policy that has a different <a>NetworkFirewallPolicyDescription</a> than is required by the Firewall Manager policy. '
+    NetworkFirewallResourceName:
+      type: string
+      pattern: '^[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 128
     ReferenceRule:
       type: string
     TargetViolationReasons:
@@ -2680,7 +2828,7 @@ components:
         ManagedServiceData:
           allOf:
             - $ref: '#/components/schemas/ManagedServiceData'
-            - description: '<p>Details about the service that are specific to the service type, in JSON format. For service type <code>SHIELD_ADVANCED</code>, this is an empty string.</p> <ul> <li> <p>Example: <code>WAFV2</code> </p> <p> <code>"ManagedServiceData": "{\"type\":\"WAFV2\",\"defaultAction\":{\"type\":\"ALLOW\"},\"preProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":null,\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"COUNT\"},\"excludeRules\":[{\"name\":\"EntityName\"}],\"ruleGroupType\":\"RuleGroup\"}],\"postProcessRuleGroups\":[{\"managedRuleGroupIdentifier\":{\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\",\"vendorName\":\"AWS\"},\"ruleGroupArn\":\"rulegrouparn\",\"overrideAction\":{\"type\":\"NONE\"},\"excludeRules\":[],\"ruleGroupType\":\"ManagedRuleGroup\"}],\"overrideCustomerWebACLAssociation\":false}"</code> </p> </li> <li> <p>Example: <code>WAF Classic</code> </p> <p> <code>"ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}</code> </p> </li> <li> <p>Example: <code>SECURITY_GROUPS_COMMON</code> </p> <p> <code>"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_COMMON","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}</code> </p> </li> <li> <p>Example: <code>SECURITY_GROUPS_CONTENT_AUDIT</code> </p> <p> <code>"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_CONTENT_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd \"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"},"RemediationEnabled":false,"ResourceType":"AWS::EC2::NetworkInterface"}</code> </p> <p>The security group action for content audit can be <code>ALLOW</code> or <code>DENY</code>. For <code>ALLOW</code>, all in-scope security group rules must be within the allowed range of the policy''s security group rules. For <code>DENY</code>, all in-scope security group rules must not contain a value or a range that matches a rule value or range in the policy security group.</p> </li> <li> <p>Example: <code>SECURITY_GROUPS_USAGE_AUDIT</code> </p> <p> <code>"SecurityServicePolicyData":{"Type":"SECURITY_GROUPS_USAGE_AUDIT","ManagedServiceData":"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"},"RemediationEnabled":false,"Resou rceType":"AWS::EC2::SecurityGroup"}</code> </p> </li> </ul>'
+            - description: '<p>Details about the service that are specific to the service type, in JSON format. For service type <code>SHIELD_ADVANCED</code>, this is an empty string.</p> <ul> <li> <p>Example: <code>NETWORK_FIREWALL</code> </p> <p> <code>"{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateless-rulegroup/rulegroup2\",\"priority\":10}],\"networkFirewallStatelessDefaultActions\":[\"aws:pass\",\"custom1\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"custom2\",\"aws:pass\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"custom1\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension1\"}]}}},{\"actionName\":\"custom2\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension2\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateful-rulegroup/rulegroup1\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":true,\"allowedIPV4CidrList\":[\"10.24.34.0/28\"]} }"</code> </p> </li> <li> <p>Example: <code>WAFV2</code> </p> <p> <code>"{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAmazonIpReputationList\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"</code> </p> <p>In the <code>loggingConfiguration</code>, you can specify one <code>logDestinationConfigs</code>, you can optionally provide up to 20 <code>redactedFields</code>, and the <code>RedactedFieldType</code> must be one of <code>URI</code>, <code>QUERY_STRING</code>, <code>HEADER</code>, or <code>METHOD</code>.</p> </li> <li> <p>Example: <code>WAF Classic</code> </p> <p> <code>"{\"type\": \"WAF\", \"ruleGroups\": [{\"id\":\"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}"</code> </p> </li> <li> <p>Example: <code>SECURITY_GROUPS_COMMON</code> </p> <p> <code>"{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false, \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\" sg-000e55995d61a06bd\"}]}"</code> </p> </li> <li> <p>Example: <code>SECURITY_GROUPS_CONTENT_AUDIT</code> </p> <p> <code>"{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"</code> </p> <p>The security group action for content audit can be <code>ALLOW</code> or <code>DENY</code>. For <code>ALLOW</code>, all in-scope security group rules must be within the allowed range of the policy''s security group rules. For <code>DENY</code>, all in-scope security group rules must not contain a value or a range that matches a rule value or range in the policy security group.</p> </li> <li> <p>Example: <code>SECURITY_GROUPS_USAGE_AUDIT</code> </p> <p> <code>"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"</code> </p> </li> </ul>'
       description: Details about the security service that is being used to protect the resources.
     ResourceTypeList:
       type: array
@@ -2742,7 +2890,7 @@ components:
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
-            - description: 'The type of resource protected by or in scope of the policy. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For AWS WAF and Shield Advanced, examples include <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> and <code>AWS::CloudFront::Distribution</code>. For a security group common policy, valid values are <code>AWS::EC2::NetworkInterface</code> and <code>AWS::EC2::Instance</code>. For a security group content audit policy, valid values are <code>AWS::EC2::SecurityGroup</code>, <code>AWS::EC2::NetworkInterface</code>, and <code>AWS::EC2::Instance</code>. For a security group usage audit policy, the value is <code>AWS::EC2::SecurityGroup</code>. '
+            - description: 'The type of resource protected by or in scope of the policy. This is in the format shown in the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html">AWS Resource Types Reference</a>. For AWS WAF and Shield Advanced, examples include <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> and <code>AWS::CloudFront::Distribution</code>. For a security group common policy, valid values are <code>AWS::EC2::NetworkInterface</code> and <code>AWS::EC2::Instance</code>. For a security group content audit policy, valid values are <code>AWS::EC2::SecurityGroup</code>, <code>AWS::EC2::NetworkInterface</code>, and <code>AWS::EC2::Instance</code>. For a security group usage audit policy, the value is <code>AWS::EC2::SecurityGroup</code>. For an AWS Network Firewall policy, the value is <code>AWS::EC2::VPC</code>.'
         SecurityServiceType:
           allOf:
             - $ref: '#/components/schemas/SecurityServiceType'
@@ -2833,6 +2981,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/AwsEc2InstanceViolation'
             - description: Violation details for an EC2 instance.
+        NetworkFirewallMissingFirewallViolation:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallMissingFirewallViolation'
+            - description: 'Violation detail for an Network Firewall policy that indicates that a subnet has no Firewall Manager managed firewall in its VPC. '
+        NetworkFirewallMissingSubnetViolation:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallMissingSubnetViolation'
+            - description: Violation detail for an Network Firewall policy that indicates that an Availability Zone is missing the expected Firewall Manager managed subnet.
+        NetworkFirewallMissingExpectedRTViolation:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallMissingExpectedRTViolation'
+            - description: 'Violation detail for an Network Firewall policy that indicates that a subnet is not associated with the expected Firewall Manager managed route table. '
+        NetworkFirewallPolicyModifiedViolation:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallPolicyModifiedViolation'
+            - description: 'Violation detail for an Network Firewall policy that indicates that a firewall policy in an individual account has been modified in a way that makes it noncompliant. For example, the individual account owner might have deleted a rule group, changed the priority of a stateless rule group, or changed a policy default action.'
       description: Violation detail based on resource type.
     ResourceViolations:
       type: array
@@ -2886,6 +3050,38 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Indicates if the current action is the default action.
       description: Remediation option for the rule specified in the <code>ViolationTarget</code>.
+    StatefulRuleGroup:
+      type: object
+      properties:
+        RuleGroupName:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallResourceName'
+            - description: The name of the rule group.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The resource ID of the rule group.
+      description: 'AWS Network Firewall stateful rule group, used in a <a>NetworkFirewallPolicyDescription</a>. '
+    StatelessRuleGroupPriority:
+      type: integer
+      minimum: 1
+      maximum: 65535
+    StatelessRuleGroup:
+      type: object
+      properties:
+        RuleGroupName:
+          allOf:
+            - $ref: '#/components/schemas/NetworkFirewallResourceName'
+            - description: The name of the rule group.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The resource ID of the rule group.
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/StatelessRuleGroupPriority'
+            - description: 'The priority of the rule group. AWS Network Firewall evaluates the stateless rule groups in a firewall policy starting from the lowest priority setting. '
+      description: 'AWS Network Firewall stateless rule group, used in a <a>NetworkFirewallPolicyDescription</a>. '
     TagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
@@ -2917,10 +3113,5 @@ components:
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200
-    TargetViolationReason:
-      type: string
-      pattern: \w+
-      minLength: 0
-      maxLength: 256
 security:
   - hmac: []

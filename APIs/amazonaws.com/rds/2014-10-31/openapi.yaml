@@ -1573,6 +1573,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: CustomAvailabilityZoneNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomAvailabilityZoneNotFoundFault'
       parameters:
         - name: SourceDBSnapshotIdentifier
           in: query
@@ -1620,6 +1626,12 @@ paths:
           in: query
           required: false
           description: '<p>The name of an option group to associate with the copy of the snapshot.</p> <p>Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a nondefault option group. If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across AWS Regions. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options">Option Group Considerations</a> in the <i>Amazon RDS User Guide.</i> </p>'
+          schema:
+            type: string
+        - name: TargetCustomAvailabilityZone
+          in: query
+          required: false
+          description: '<p>The external custom Availability Zone (CAZ) identifier for the target CAZ.</p> <p>Example: <code>rds-caz-aiqhTgQv</code>.</p>'
           schema:
             type: string
         - name: SourceRegion
@@ -1691,6 +1703,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '485':
+          description: CustomAvailabilityZoneNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CustomAvailabilityZoneNotFoundFault'
       requestBody:
         content:
           text/xml:
@@ -20859,6 +20877,7 @@ components:
           $ref: '#/components/schemas/DBSnapshot'
     DBSnapshotAlreadyExistsFault: {}
     InvalidDBSnapshotStateFault: {}
+    CustomAvailabilityZoneNotFoundFault: {}
     CopyOptionGroupResult:
       type: object
       properties:
@@ -21072,7 +21091,6 @@ components:
       properties:
         CustomAvailabilityZone:
           $ref: '#/components/schemas/CustomAvailabilityZone'
-    CustomAvailabilityZoneNotFoundFault: {}
     DeleteDBClusterResult:
       type: object
       properties:
@@ -22676,6 +22694,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>The name of an option group to associate with the copy of the snapshot.</p> <p>Specify this option if you are copying a snapshot from one AWS Region to another, and your DB instance uses a nondefault option group. If your source DB instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server, you must specify this option when copying across AWS Regions. For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options">Option Group Considerations</a> in the <i>Amazon RDS User Guide.</i> </p>'
+        TargetCustomAvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The external custom Availability Zone (CAZ) identifier for the target CAZ.</p> <p>Example: <code>rds-caz-aiqhTgQv</code>.</p>'
         SourceRegion:
           allOf:
             - $ref: '#/components/schemas/String'

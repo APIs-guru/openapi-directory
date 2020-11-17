@@ -290,6 +290,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedFault'
+        '486':
+          description: S3AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/S3AccessDeniedFault'
       requestBody:
         required: true
         content:
@@ -2490,6 +2496,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonDMSv20160101.MoveReplicationTask:
+    post:
+      operationId: MoveReplicationTask
+      description: Moves a replication task from its current replication instance to a different target replication instance using the specified parameters. The target replication instance must be created with the same or later AWS DMS version as the current replication instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveReplicationTaskResponse'
+        '480':
+          description: AccessDeniedFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedFault'
+        '481':
+          description: InvalidResourceStateFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidResourceStateFault'
+        '482':
+          description: ResourceNotFoundFault
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundFault'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveReplicationTaskMessage'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonDMSv20160101.MoveReplicationTask
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonDMSv20160101.RebootReplicationInstance:
     post:
       operationId: RebootReplicationInstance
@@ -3258,6 +3315,7 @@ components:
     KMSKeyNotAccessibleFault: {}
     ResourceAlreadyExistsFault: {}
     ResourceQuotaExceededFault: {}
+    S3AccessDeniedFault: {}
     CreateEventSubscriptionResponse:
       type: object
       properties:
@@ -4851,6 +4909,30 @@ components:
             - $ref: '#/components/schemas/String'
             - description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration Service User Guide.</i> '
       description: <p/>
+    MoveReplicationTaskResponse:
+      type: object
+      properties:
+        ReplicationTask:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationTask'
+            - description: The replication task that was moved.
+      description: <p/>
+    MoveReplicationTaskMessage:
+      type: object
+      required:
+        - ReplicationTaskArn
+        - TargetReplicationInstanceArn
+      title: MoveReplicationTaskMessage
+      properties:
+        ReplicationTaskArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the task that you want to move.
+        TargetReplicationInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ARN of the replication instance where you want to move the task to.
+      description: <p/>
     RebootReplicationInstanceResponse:
       type: object
       properties:
@@ -5067,7 +5149,6 @@ components:
             - description: '<p>Space-separated list of names for specific individual assessments that you want to exclude. These names come from the default list of individual assessments that AWS DMS supports for the associated migration task. This task is specified by <code>ReplicationTaskArn</code>.</p> <note> <p>You can''t set a value for <code>Exclude</code> if you also set a value for <code>IncludeOnly</code> in the API operation.</p> <p>To identify the names of the default individual assessments that AWS DMS supports for the associated migration task, run the <code>DescribeApplicableIndividualAssessments</code> operation using its own <code>ReplicationTaskArn</code> request parameter.</p> </note>'
       description: <p/>
     KMSFault: {}
-    S3AccessDeniedFault: {}
     S3ResourceNotFoundFault: {}
     StopReplicationTaskResponse:
       type: object
@@ -6486,15 +6567,15 @@ components:
         SourceEndpointArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+            - description: The Amazon Resource Name (ARN) that uniquely identifies the endpoint.
         TargetEndpointArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+            - description: The ARN that uniquely identifies the endpoint.
         ReplicationInstanceArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) of the replication instance.
+            - description: The ARN of the replication instance.
         MigrationType:
           allOf:
             - $ref: '#/components/schemas/MigrationTypeValue'
@@ -6510,7 +6591,7 @@ components:
         Status:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The status of the replication task.
+            - description: '<p>The status of the replication task. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>"moving"</code> – The task is being moved in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html"> <code>MoveReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"creating"</code> – The task is being created in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html"> <code>CreateReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"deleting"</code> – The task is being deleted in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html"> <code>DeleteReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"failed"</code> – The task failed to successfully complete the database migration in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html"> <code>StartReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"failed-move"</code> – The task failed to move in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html"> <code>MoveReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"modifying"</code> – The task definition is being modified in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html"> <code>ModifyReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"ready"</code> – The task is in a <code>ready</code> state where it can respond to other task operations, such as <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html"> <code>StartReplicationTask</code> </a> or <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_DeleteReplicationTask.html"> <code>DeleteReplicationTask</code> </a>. </p> </li> <li> <p> <code>"running"</code> – The task is performing a database migration in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html"> <code>StartReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"starting"</code> – The task is preparing to perform a database migration in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html"> <code>StartReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"stopped"</code> – The task has stopped in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html"> <code>StopReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"stopping"</code> – The task is preparing to stop in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StopReplicationTask.html"> <code>StopReplicationTask</code> </a> operation.</p> </li> <li> <p> <code>"testing"</code> – The database migration specified for this task is being tested in response to running either the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html"> <code>StartReplicationTaskAssessmentRun</code> </a> or the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html"> <code>StartReplicationTaskAssessment</code> </a> operation.</p> <note> <p> <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html"> <code>StartReplicationTaskAssessmentRun</code> </a> is an improved premigration task assessment operation. The <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessment.html"> <code>StartReplicationTaskAssessment</code> </a> operation assesses data type compatibility only between the source and target database of a given migration task. In contrast, <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTaskAssessmentRun.html"> <code>StartReplicationTaskAssessmentRun</code> </a> enables you to specify a variety of premigration task assessments in addition to data type compatibility. These assessments include ones for the validity of primary key definitions and likely issues with database migration performance, among others.</p> </note> </li> </ul>'
         LastFailureMessage:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -6518,7 +6599,7 @@ components:
         StopReason:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The reason the replication task was stopped. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>"STOP_REASON_FULL_LOAD_COMPLETED"</code> – Full-load migration completed.</p> </li> <li> <p> <code>"STOP_REASON_CACHED_CHANGES_APPLIED"</code> – Change data capture (CDC) load completed.</p> </li> <li> <p> <code>"STOP_REASON_CACHED_CHANGES_NOT_APPLIED"</code> – In a full-load and CDC migration, the full-load stopped as specified before starting the CDC migration.</p> </li> <li> <p> <code>"STOP_REASON_SERVER_TIME"</code> – The migration stopped at the specified server time.</p> </li> </ul>'
+            - description: '<p>The reason the replication task was stopped. This response parameter can return one of the following values:</p> <ul> <li> <p> <code>"STOP_REASON_FULL_LOAD_COMPLETED"</code> – Full-load migration completed.</p> </li> <li> <p> <code>"STOP_REASON_CACHED_CHANGES_APPLIED"</code> – Change data capture (CDC) load completed.</p> </li> <li> <p> <code>"STOP_REASON_CACHED_CHANGES_NOT_APPLIED"</code> – In a full-load and CDC migration, the full load stopped as specified before starting the CDC migration.</p> </li> <li> <p> <code>"STOP_REASON_SERVER_TIME"</code> – The migration stopped at the specified server time.</p> </li> </ul>'
         ReplicationTaskCreationDate:
           allOf:
             - $ref: '#/components/schemas/TStamp'
@@ -6551,6 +6632,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'Supplemental information that the task requires to migrate the data for certain source and target endpoints. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html">Specifying Supplemental Data for Task Settings</a> in the <i>AWS Database Migration Service User Guide.</i> '
+        TargetReplicationInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The ARN of the replication instance to which this task is moved in response to running the <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_MoveReplicationTask.html"> <code>MoveReplicationTask</code> </a> operation. Otherwise, this response parameter isn''t a member of the <code>ReplicationTask</code> object.'
       description: Provides information that describes a replication task created by the <code>CreateReplicationTask</code> operation.
     DataFormatValue:
       type: string

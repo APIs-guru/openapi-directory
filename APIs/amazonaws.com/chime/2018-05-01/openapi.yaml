@@ -3,7 +3,7 @@ info:
   version: '2018-05-01'
   x-release: v4
   title: Amazon Chime
-  description: '<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p>You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>.</p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>.</p> </dd> <dt>Using REST API</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports signature version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
+  description: '<p>The Amazon Chime API (application programming interface) is designed for developers to perform key tasks, such as creating and managing Amazon Chime accounts, users, and Voice Connectors. This guide provides detailed information about the Amazon Chime API, including operations, types, inputs and outputs, and error codes. It also includes some server-side API actions to use with the Amazon Chime SDK. For more information about the Amazon Chime SDK, see <a href="https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p> <p>You can use an AWS SDK, the AWS Command Line Interface (AWS CLI), or the REST API to make API calls. We recommend using an AWS SDK or the AWS CLI. Each API operation includes links to information about using it with a language-specific AWS SDK or the AWS CLI.</p> <dl> <dt>Using an AWS SDK</dt> <dd> <p>You don''t need to write code to calculate a signature for request authentication. The SDK clients authenticate your requests by using access keys that you provide. For more information about AWS SDKs, see the <a href="http://aws.amazon.com/developer/">AWS Developer Center</a>.</p> </dd> <dt>Using the AWS CLI</dt> <dd> <p>Use your access keys with the AWS CLI to make API calls. For information about setting up the AWS CLI, see <a href="https://docs.aws.amazon.com/cli/latest/userguide/installing.html">Installing the AWS Command Line Interface</a> in the <i>AWS Command Line Interface User Guide</i>. For a list of available Amazon Chime commands, see the <a href="https://docs.aws.amazon.com/cli/latest/reference/chime/index.html">Amazon Chime commands</a> in the <i>AWS CLI Command Reference</i>.</p> </dd> <dt>Using REST API</dt> <dd> <p>If you use REST to make API calls, you must authenticate your request by providing a signature. Amazon Chime supports Signature Version 4. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>When making REST API calls, use the service name <code>chime</code> and REST endpoint <code>https://service.chime.aws.amazon.com</code>.</p> </dd> </dl> <p>Administrative permissions are controlled using AWS Identity and Access Management (IAM). For more information, see <a href="https://docs.aws.amazon.com/chime/latest/ag/security-iam.html">Identity and Access Management for Amazon Chime</a> in the <i>Amazon Chime Administration Guide</i>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -1429,7 +1429,7 @@ paths:
                 - ExternalUserId
               properties:
                 ExternalUserId:
-                  description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+                  description: 'The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.'
                   type: string
                   minLength: 2
                   maxLength: 64
@@ -1898,6 +1898,103 @@ paths:
             type: string
           description: Pagination token
           required: false
+  '/meetings/{meetingId}/dial-outs':
+    post:
+      operationId: CreateMeetingDialOut
+      description: '<p>Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and joins them into Chime meeting. Also ensures that the From number belongs to the customer.</p> <p>To play welcome audio or implement an interactive voice response (IVR), use the <code>CreateSipMediaApplicationCall</code> API with the corresponding SIP media application ID.</p>'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMeetingDialOutResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: meetingId
+          in: path
+          required: true
+          description: '<p>The Amazon Chime SDK meeting ID.</p> <p>Type: String</p> <p>Pattern: [a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}</p> <p>Required: No</p>'
+          schema:
+            type: string
+            pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - FromPhoneNumber
+                - ToPhoneNumber
+                - JoinToken
+              properties:
+                FromPhoneNumber:
+                  description: Phone number used as the caller ID when the remote party receives a call.
+                  type: string
+                  pattern: '^\+?[1-9]\d{1,14}$'
+                  format: password
+                ToPhoneNumber:
+                  description: Phone number called when inviting someone to a meeting.
+                  type: string
+                  pattern: '^\+?[1-9]\d{1,14}$'
+                  format: password
+                JoinToken:
+                  description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.html"> CreateAttendee API</a> to get a join token. '
+                  type: string
+                  pattern: '^[a-zA-Z0-9+/]+$'
+                  minLength: 2
+                  maxLength: 2048
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /meetings#operation=create-attendees:
     post:
       operationId: CreateMeetingWithAttendees
@@ -2798,6 +2895,433 @@ paths:
             type: string
           description: Pagination token
           required: false
+  /sip-media-applications:
+    post:
+      operationId: CreateSipMediaApplication
+      description: Creates a SIP media application.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSipMediaApplicationResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AwsRegion
+                - Endpoints
+              properties:
+                AwsRegion:
+                  description: AWS Region assigned to the SIP media application.
+                  type: string
+                Name:
+                  description: The SIP media application name.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                Endpoints:
+                  description: 'List of endpoints (Lambda Amazon Resource Names) specified for the SIP media application. Currently, only one endpoint is supported.'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SipMediaApplicationEndpoint'
+                  minItems: 1
+                  maxItems: 1
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListSipMediaApplications
+      description: Lists the SIP media applications under the administrator's AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSipMediaApplicationsResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call. Defaults to 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 99
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          schema:
+            type: string
+            maxLength: 65535
+  '/sip-media-applications/{sipMediaApplicationId}/calls':
+    post:
+      operationId: CreateSipMediaApplicationCall
+      description: 'Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified <code>sipMediaApplicationId</code>.'
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSipMediaApplicationCallResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipMediaApplicationId
+          in: path
+          required: true
+          description: The ID of the SIP media application.
+          schema:
+            type: string
+            pattern: .*\S.*
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                FromPhoneNumber:
+                  description: The phone number that a user calls from.
+                  type: string
+                  pattern: '^\+?[1-9]\d{1,14}$'
+                  format: password
+                ToPhoneNumber:
+                  description: The phone number that the user dials in order to connect to a meeting
+                  type: string
+                  pattern: '^\+?[1-9]\d{1,14}$'
+                  format: password
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /sip-rules:
+    post:
+      operationId: CreateSipRule
+      description: Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSipRuleResponse'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - TriggerType
+                - TriggerValue
+                - TargetApplications
+              properties:
+                Name:
+                  description: The name of the SIP rule.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                TriggerType:
+                  description: The type of trigger whose value is assigned to the SIP rule in <code>TriggerValue</code>. Allowed trigger values are <code>RequestUriHostname</code> and <code>ToPhoneNumber</code>.
+                  type: string
+                  enum:
+                    - ToPhoneNumber
+                    - RequestUriHostname
+                TriggerValue:
+                  description: 'If <code>TriggerType</code> is <code>RequestUriHostname</code> then the value can be the outbound host name of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code> then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a If <code>TriggerType</code> is <code>RequestUriHostname</code>, then the value can be the outbound hostname of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a <code>ToPhoneNumber</code> value matches the incoming SIP request.'
+                  type: string
+                  pattern: .*\S.*
+                Disabled:
+                  description: Enables or disables a rule. You must disable rules before you can delete them.
+                  type: boolean
+                TargetApplications:
+                  description: List of SIP media applications with priority and AWS Region. Only one SIP application per AWS Region can be used.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SipRuleTargetApplication'
+                  minItems: 1
+                  maxItems: 25
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListSipRules
+      description: Lists the SIP rules under the administrator's AWS account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSipRulesResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '483':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '484':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '485':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sip-media-application
+          in: query
+          required: false
+          description: The SIP media application ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+        - name: max-results
+          in: query
+          required: false
+          description: The maximum number of results to return in a single call. Defaults to 100.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 99
+        - name: next-token
+          in: query
+          required: false
+          description: The token to use to retrieve the next page of results.
+          schema:
+            type: string
+            maxLength: 65535
   '/accounts/{accountId}/users#operation=create':
     post:
       operationId: CreateUser
@@ -4732,6 +5256,449 @@ paths:
                   enum:
                     - Administrator
                     - Member
+  '/sip-media-applications/{sipMediaApplicationId}':
+    delete:
+      operationId: DeleteSipMediaApplication
+      description: Deletes a SIP media application.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipMediaApplicationId
+          in: path
+          required: true
+          description: The SIP media application ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetSipMediaApplication
+      description: 'Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSipMediaApplicationResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipMediaApplicationId
+          in: path
+          required: true
+          description: The SIP media application ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+    put:
+      operationId: UpdateSipMediaApplication
+      description: Updates the details for the specified SIP media application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSipMediaApplicationResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipMediaApplicationId
+          in: path
+          required: true
+          description: The SIP media application ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The new name for the specified SIP media application.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                Endpoints:
+                  description: The new set of endpoints for the specified SIP media application.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SipMediaApplicationEndpoint'
+                  minItems: 1
+                  maxItems: 1
+  '/sip-rules/{sipRuleId}':
+    delete:
+      operationId: DeleteSipRule
+      description: Deletes a SIP rule. You must disable a SIP rule before you can delete it.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '487':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipRuleId
+          in: path
+          required: true
+          description: The SIP rule ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetSipRule
+      description: 'Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSipRuleResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipRuleId
+          in: path
+          required: true
+          description: The SIP rule ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+    put:
+      operationId: UpdateSipRule
+      description: Updates the details for the specified SIP rule.
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSipRuleResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '486':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '487':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '488':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipRuleId
+          in: path
+          required: true
+          description: The SIP rule ID.
+          schema:
+            type: string
+            pattern: .*\S.*
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+              properties:
+                Name:
+                  description: The new name for the specified SIP rule.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                Disabled:
+                  description: The new value specified to indicate whether the rule is disabled.
+                  type: boolean
+                TargetApplications:
+                  description: The new value of the list of target applications.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/SipRuleTargetApplication'
+                  minItems: 1
+                  maxItems: 25
   '/voice-connectors/{voiceConnectorId}':
     delete:
       operationId: DeleteVoiceConnector
@@ -7433,6 +8400,150 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/ConversationRetentionSettings'
                         - description: The chat conversation retention settings.
+  '/sip-media-applications/{sipMediaApplicationId}/logging-configuration':
+    get:
+      operationId: GetSipMediaApplicationLoggingConfiguration
+      description: Returns the logging configuration for the specified SIP media application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSipMediaApplicationLoggingConfigurationResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipMediaApplicationId
+          in: path
+          required: true
+          description: The ID of the SIP media application.
+          schema:
+            type: string
+            pattern: .*\S.*
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: PutSipMediaApplicationLoggingConfiguration
+      description: Updates the logging configuration for the specified SIP media application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutSipMediaApplicationLoggingConfigurationResponse'
+        '480':
+          description: UnauthorizedClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedClientException'
+        '481':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '482':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '483':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '484':
+          description: ThrottledClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottledClientException'
+        '485':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '486':
+          description: ServiceFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceFailureException'
+      parameters:
+        - name: sipMediaApplicationId
+          in: path
+          required: true
+          description: The ID of the specified SIP media application
+          schema:
+            type: string
+            pattern: .*\S.*
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SipMediaApplicationLoggingConfiguration:
+                  description: Logging configuration of the SIP media application.
+                  type: object
+                  properties:
+                    EnableSipMediaApplicationMessageLogs:
+                      allOf:
+                        - $ref: '#/components/schemas/Boolean'
+                        - description: Enables application message logs for the SIP media application.
   '/accounts/{accountId}/users/{userId}':
     get:
       operationId: GetUser
@@ -8301,6 +9412,7 @@ paths:
               - UserId
               - VoiceConnectorId
               - VoiceConnectorGroupId
+              - SipRuleId
         - name: filter-value
           in: query
           required: false
@@ -9842,7 +10954,7 @@ components:
         ExternalUserId:
           allOf:
             - $ref: '#/components/schemas/ExternalUserIdType'
-            - description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+            - description: 'The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/AttendeeTagList'
@@ -9952,9 +11064,7 @@ components:
       type: object
       properties:
         Account:
-          allOf:
-            - $ref: '#/components/schemas/Account'
-            - description: The Amazon Chime account details.
+          $ref: '#/components/schemas/Account'
     CreateAttendeeResponse:
       type: object
       properties:
@@ -9997,6 +11107,13 @@ components:
       minLength: 1
       maxLength: 1024
       format: password
+    CreateMeetingDialOutResponse:
+      type: object
+      properties:
+        TransactionId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: Unique ID that tracks API calls.
     CreateMeetingWithAttendeesResponse:
       type: object
       properties:
@@ -10050,6 +11167,51 @@ components:
             - $ref: '#/components/schemas/RoomMembership'
             - description: The room membership details.
     ConflictException: {}
+    CreateSipMediaApplicationResponse:
+      type: object
+      properties:
+        SipMediaApplication:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplication'
+            - description: The Sip media application details.
+    SipMediaApplicationEndpoint:
+      type: object
+      properties:
+        LambdaArn:
+          allOf:
+            - $ref: '#/components/schemas/FunctionArn'
+            - description: Valid Amazon Resource Name (ARN) of the Lambda function of the same AWS Region where the SIP media application is created.
+      description: Endpoints to specify as part of a SIP media application.
+    CreateSipMediaApplicationCallResponse:
+      type: object
+      properties:
+        SipMediaApplicationCall:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationCall'
+            - description: The actual call.
+    CreateSipRuleResponse:
+      type: object
+      properties:
+        SipRule:
+          allOf:
+            - $ref: '#/components/schemas/SipRule'
+            - description: 'Returns the SIP rule information, including the rule ID, triggers, and target applications.'
+    SipRuleTargetApplication:
+      type: object
+      properties:
+        SipMediaApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The SIP media application ID.
+        Priority:
+          allOf:
+            - $ref: '#/components/schemas/SipApplicationPriority'
+            - description: Priority of the SIP media application in the target list.
+        AwsRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: AWS Region of target application.
+      description: Target SIP media application along with other details like priority and AWS Region to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.
     CreateUserResponse:
       type: object
       properties:
@@ -10115,9 +11277,7 @@ components:
       type: object
       properties:
         Account:
-          allOf:
-            - $ref: '#/components/schemas/Account'
-            - description: The Amazon Chime account details.
+          $ref: '#/components/schemas/Account'
     GetAccountSettingsResponse:
       type: object
       properties:
@@ -10214,6 +11374,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/Room'
             - description: The room details.
+    GetSipMediaApplicationResponse:
+      type: object
+      properties:
+        SipMediaApplication:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplication'
+            - description: The SIP media application details.
+    GetSipMediaApplicationLoggingConfigurationResponse:
+      type: object
+      properties:
+        SipMediaApplicationLoggingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationLoggingConfiguration'
+            - description: The actual logging configuration.
+    GetSipRuleResponse:
+      type: object
+      properties:
+        SipRule:
+          allOf:
+            - $ref: '#/components/schemas/SipRule'
+            - description: The SIP rule details.
     GetUserResponse:
       type: object
       properties:
@@ -10308,11 +11489,11 @@ components:
         Accounts:
           allOf:
             - $ref: '#/components/schemas/AccountList'
-            - description: List of Amazon Chime accounts and account details.
+            - description: The list of accounts.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The token to use to retrieve the next page of results.
+            - description: The account's user token.
     ListAttendeeTagsResponse:
       type: object
       properties:
@@ -10415,6 +11596,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The token to use to retrieve the next page of results.
+    ListSipMediaApplicationsResponse:
+      type: object
+      properties:
+        SipMediaApplications:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationList'
+            - description: List of SIP media applications and application details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextTokenString'
+            - description: The token to use to retrieve the next page of results.
+    ListSipRulesResponse:
+      type: object
+      properties:
+        SipRules:
+          allOf:
+            - $ref: '#/components/schemas/SipRuleList'
+            - description: List of SIP rules and rule details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextTokenString'
+            - description: The token to use to retrieve the next page of results.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -10497,6 +11700,15 @@ components:
             - $ref: '#/components/schemas/RetentionDays'
             - description: The number of days for which to retain chat conversation messages.
       description: The retention settings that determine how long to retain chat conversation messages for an Amazon Chime Enterprise account.
+    PutSipMediaApplicationLoggingConfigurationResponse:
+      type: object
+      properties:
+        SipMediaApplicationLoggingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationLoggingConfiguration'
+            - description: The actual logging configuration.
+    Boolean:
+      type: boolean
     PutVoiceConnectorEmergencyCallingConfigurationResponse:
       type: object
       properties:
@@ -10515,8 +11727,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/LoggingConfiguration'
             - description: The updated logging configuration details.
-    Boolean:
-      type: boolean
     PutVoiceConnectorOriginationResponse:
       type: object
       properties:
@@ -10622,9 +11832,7 @@ components:
       type: object
       properties:
         Account:
-          allOf:
-            - $ref: '#/components/schemas/Account'
-            - description: The updated Amazon Chime account details.
+          $ref: '#/components/schemas/Account'
     UpdateAccountSettingsResponse:
       type: object
       properties: {}
@@ -10663,6 +11871,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoomMembership'
             - description: The room membership details.
+    UpdateSipMediaApplicationResponse:
+      type: object
+      properties:
+        SipMediaApplication:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplication'
+            - description: The updated SIP media application details.
+    UpdateSipRuleResponse:
+      type: object
+      properties:
+        SipRule:
+          allOf:
+            - $ref: '#/components/schemas/SipRule'
+            - description: Updated SIP rule details.
     UpdateUserResponse:
       type: object
       properties:
@@ -10873,6 +12095,7 @@ components:
       pattern: '[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}'
     JoinTokenString:
       type: string
+      pattern: '^[a-zA-Z0-9+/]+$'
       minLength: 2
       maxLength: 2048
       format: password
@@ -10882,7 +12105,7 @@ components:
         ExternalUserId:
           allOf:
             - $ref: '#/components/schemas/ExternalUserIdType'
-            - description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+            - description: 'The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.'
         AttendeeId:
           allOf:
             - $ref: '#/components/schemas/GuidString'
@@ -10914,7 +12137,7 @@ components:
         ExternalUserId:
           allOf:
             - $ref: '#/components/schemas/ExternalUserIdType'
-            - description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+            - description: 'The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.'
         ErrorCode:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -11142,7 +12365,7 @@ components:
         ExternalUserId:
           allOf:
             - $ref: '#/components/schemas/ExternalUserIdType'
-            - description: The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+            - description: 'The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application. If you create an attendee with the same external user id, the service returns the existing record.'
         Tags:
           allOf:
             - $ref: '#/components/schemas/AttendeeTagList'
@@ -11161,6 +12384,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The domain of the Amazon Chime Enterprise account.
+    CreateMeetingDialOutRequest:
+      type: object
+      required:
+        - FromPhoneNumber
+        - ToPhoneNumber
+        - JoinToken
+      title: CreateMeetingDialOutRequest
+      properties:
+        FromPhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: Phone number used as the caller ID when the remote party receives a call.
+        ToPhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: Phone number called when inviting someone to a meeting.
+        JoinToken:
+          allOf:
+            - $ref: '#/components/schemas/JoinTokenString'
+            - description: 'Token used by the Amazon Chime SDK attendee. Call the <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.html"> CreateAttendee API</a> to get a join token. '
     ExternalMeetingIdType:
       type: string
       minLength: 2
@@ -11537,6 +12780,163 @@ components:
             - $ref: '#/components/schemas/Iso8601Timestamp'
             - description: 'The room update timestamp, in ISO 8601 format.'
       description: The Amazon Chime chat room details.
+    CreateSipMediaApplicationCallRequest:
+      type: object
+      title: CreateSipMediaApplicationCallRequest
+      properties:
+        FromPhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: The phone number that a user calls from.
+        ToPhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/E164PhoneNumber'
+            - description: The phone number that the user dials in order to connect to a meeting
+    SipMediaApplicationCall:
+      type: object
+      properties:
+        TransactionId:
+          allOf:
+            - $ref: '#/components/schemas/GuidString'
+            - description: The transaction ID of a call.
+      description: A <code>Call</code> instance for a SIP media application.
+    SipMediaApplicationName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    SipMediaApplicationEndpointList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SipMediaApplicationEndpoint'
+      minItems: 1
+      maxItems: 1
+    CreateSipMediaApplicationRequest:
+      type: object
+      required:
+        - AwsRegion
+        - Endpoints
+      title: CreateSipMediaApplicationRequest
+      properties:
+        AwsRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: AWS Region assigned to the SIP media application.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationName'
+            - description: The SIP media application name.
+        Endpoints:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationEndpointList'
+            - description: 'List of endpoints (Lambda Amazon Resource Names) specified for the SIP media application. Currently, only one endpoint is supported.'
+    SipMediaApplication:
+      type: object
+      properties:
+        SipMediaApplicationId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The SIP media application ID.
+        AwsRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS Region in which the SIP media application is created.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationName'
+            - description: The name of the SIP media application.
+        Endpoints:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationEndpointList'
+            - description: 'List of endpoints for SIP media application. Currently, only one endpoint per SIP media application is permitted.'
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The SIP media application creation timestamp, in ISO 8601 format.'
+        UpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The SIP media application updated timestamp, in ISO 8601 format.'
+      description: 'The SIP media application details, including name and endpoints. An AWS account can have multiple SIP media applications.'
+    SipRuleName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    SipRuleTriggerType:
+      type: string
+      enum:
+        - ToPhoneNumber
+        - RequestUriHostname
+    SipRuleTargetApplicationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SipRuleTargetApplication'
+      minItems: 1
+      maxItems: 25
+    CreateSipRuleRequest:
+      type: object
+      required:
+        - Name
+        - TriggerType
+        - TriggerValue
+        - TargetApplications
+      title: CreateSipRuleRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SipRuleName'
+            - description: The name of the SIP rule.
+        TriggerType:
+          allOf:
+            - $ref: '#/components/schemas/SipRuleTriggerType'
+            - description: The type of trigger whose value is assigned to the SIP rule in <code>TriggerValue</code>. Allowed trigger values are <code>RequestUriHostname</code> and <code>ToPhoneNumber</code>.
+        TriggerValue:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'If <code>TriggerType</code> is <code>RequestUriHostname</code> then the value can be the outbound host name of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code> then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a If <code>TriggerType</code> is <code>RequestUriHostname</code>, then the value can be the outbound hostname of an Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered if the SIP application requests a host name, or a <code>ToPhoneNumber</code> value matches the incoming SIP request.'
+        Disabled:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Enables or disables a rule. You must disable rules before you can delete them.
+        TargetApplications:
+          allOf:
+            - $ref: '#/components/schemas/SipRuleTargetApplicationList'
+            - description: List of SIP media applications with priority and AWS Region. Only one SIP application per AWS Region can be used.
+    SipRule:
+      type: object
+      properties:
+        SipRuleId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The SIP rule ID.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SipRuleName'
+            - description: The name of the SIP rule.
+        Disabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates if the SIP rule is enabled or disabled. You must disable a rule before you can delete it.
+        TriggerType:
+          allOf:
+            - $ref: '#/components/schemas/SipRuleTriggerType'
+            - description: The type of trigger whose value is assigned to the SIP rule in <code>TriggerValue</code>.
+        TriggerValue:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'If <code>TriggerType</code> is <code>RequestUriHostname</code>, then the value can be the outbound host name of the Amazon Chime Voice Connector. If <code>TriggerType</code> is <code>ToPhoneNumber</code>, then the value can be a customer-owned phone number in E164 format. <code>SipRule</code> is triggered when a SIP rule requests host name or <code>ToPhoneNumber</code> matches in the incoming SIP request.'
+        TargetApplications:
+          allOf:
+            - $ref: '#/components/schemas/SipRuleTargetApplicationList'
+            - description: List of SIP media applications with priority and AWS Region. You can only use one SIP application per AWS Region and priority combination.
+        CreatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The SIP rule created timestamp, in ISO 8601 format.'
+        UpdatedTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/Iso8601Timestamp'
+            - description: 'The SIP rule updated timestamp, in ISO 8601 format.'
+      description: 'The SIP rule details, including name, triggers, and target applications. An AWS account can have multiple SIP rules.'
     UserType:
       type: string
       enum:
@@ -11777,6 +13177,14 @@ components:
       type: object
       title: DeleteRoomRequest
       properties: {}
+    DeleteSipMediaApplicationRequest:
+      type: object
+      title: DeleteSipMediaApplicationRequest
+      properties: {}
+    DeleteSipRuleRequest:
+      type: object
+      title: DeleteSipRuleRequest
+      properties: {}
     DeleteVoiceConnectorEmergencyCallingConfigurationRequest:
       type: object
       title: DeleteVoiceConnectorEmergencyCallingConfigurationRequest
@@ -11901,6 +13309,11 @@ components:
             - $ref: '#/components/schemas/SensitiveString'
             - description: Lambda function ARN that allows a bot to receive outgoing events.
       description: The configuration that allows a bot to receive outgoing events. Can be either an HTTPS endpoint or a Lambda function ARN.
+    FunctionArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+      maxLength: 10000
+      format: password
     GetAccountRequest:
       type: object
       title: GetAccountRequest
@@ -12016,6 +13429,26 @@ components:
     GetRoomRequest:
       type: object
       title: GetRoomRequest
+      properties: {}
+    GetSipMediaApplicationLoggingConfigurationRequest:
+      type: object
+      title: GetSipMediaApplicationLoggingConfigurationRequest
+      properties: {}
+    SipMediaApplicationLoggingConfiguration:
+      type: object
+      properties:
+        EnableSipMediaApplicationMessageLogs:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Enables application message logs for the SIP media application.
+      description: Logging configuration of the SIP media application.
+    GetSipMediaApplicationRequest:
+      type: object
+      title: GetSipMediaApplicationRequest
+      properties: {}
+    GetSipRuleRequest:
+      type: object
+      title: GetSipRuleRequest
       properties: {}
     GetUserRequest:
       type: object
@@ -12284,6 +13717,7 @@ components:
         - UserId
         - VoiceConnectorId
         - VoiceConnectorGroupId
+        - SipRuleId
     ListPhoneNumbersRequest:
       type: object
       title: ListPhoneNumbersRequest
@@ -12325,6 +13759,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Room'
+    ListSipMediaApplicationsRequest:
+      type: object
+      title: ListSipMediaApplicationsRequest
+      properties: {}
+    SipMediaApplicationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SipMediaApplication'
+    ListSipRulesRequest:
+      type: object
+      title: ListSipRulesRequest
+      properties: {}
+    SipRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SipRule'
     ListTagsForResourceRequest:
       type: object
       title: ListTagsForResourceRequest
@@ -12638,6 +14088,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/RetentionSettings'
             - description: The retention settings.
+    PutSipMediaApplicationLoggingConfigurationRequest:
+      type: object
+      title: PutSipMediaApplicationLoggingConfigurationRequest
+      properties:
+        SipMediaApplicationLoggingConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationLoggingConfiguration'
+            - description: The actual logging configuration.
     PutVoiceConnectorEmergencyCallingConfigurationRequest:
       type: object
       required:
@@ -12754,6 +14212,9 @@ components:
       type: object
       title: SearchAvailablePhoneNumbersRequest
       properties: {}
+    SipApplicationPriority:
+      type: integer
+      minimum: 1
     StreamingNotificationTarget:
       type: object
       required:
@@ -12938,6 +14399,36 @@ components:
           allOf:
             - $ref: '#/components/schemas/SensitiveString'
             - description: The room name.
+    UpdateSipMediaApplicationRequest:
+      type: object
+      title: UpdateSipMediaApplicationRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationName'
+            - description: The new name for the specified SIP media application.
+        Endpoints:
+          allOf:
+            - $ref: '#/components/schemas/SipMediaApplicationEndpointList'
+            - description: The new set of endpoints for the specified SIP media application.
+    UpdateSipRuleRequest:
+      type: object
+      required:
+        - Name
+      title: UpdateSipRuleRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SipRuleName'
+            - description: The new name for the specified SIP rule.
+        Disabled:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: The new value specified to indicate whether the rule is disabled.
+        TargetApplications:
+          allOf:
+            - $ref: '#/components/schemas/SipRuleTargetApplicationList'
+            - description: The new value of the list of target applications.
     UpdateUserRequest:
       type: object
       title: UpdateUserRequest

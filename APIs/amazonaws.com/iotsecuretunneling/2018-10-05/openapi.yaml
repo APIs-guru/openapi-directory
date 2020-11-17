@@ -3,7 +3,7 @@ info:
   version: '2018-10-05'
   x-release: v4
   title: AWS IoT Secure Tunneling
-  description: '<fullname>AWS IoT Secure Tunneling</fullname> <p>AWS IoT Secure Tunnling enables you to create remote connections to devices deployed in the field.</p> <p>For more information about how AWS IoT Secure Tunneling works, see the <a href="https://docs.aws.amazon.com/secure-tunneling/latest/ug/what-is-secure-tunneling.html">User Guide</a>.</p>'
+  description: '<fullname>AWS IoT Secure Tunneling</fullname> <p>AWS IoT Secure Tunnling enables you to create remote connections to devices deployed in the field.</p> <p>For more information about how AWS IoT Secure Tunneling works, see <a href="https://docs.aws.amazon.com/iot/latest/developerguide/secure-tunneling.html">AWS IoT Secure Tunneling</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -279,7 +279,7 @@ paths:
   /#X-Amz-Target=IoTSecuredTunneling.OpenTunnel:
     post:
       operationId: OpenTunnel
-      description: 'Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server. .'
+      description: 'Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server.'
       responses:
         '200':
           description: Success
@@ -693,11 +693,9 @@ components:
       items:
         $ref: '#/components/schemas/Service'
       minItems: 1
-      maxItems: 1
     DestinationConfig:
       type: object
       required:
-        - thingName
         - services
       properties:
         thingName:
@@ -707,7 +705,7 @@ components:
         services:
           allOf:
             - $ref: '#/components/schemas/ServiceList'
-            - description: 'A list of service names that identity the target application. Currently, you can only specify a single name. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.'
+            - description: A list of service names that identity the target application. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.
       description: The destination configuration.
     TagList:
       type: array
@@ -742,7 +740,7 @@ components:
       type: string
       pattern: '[a-zA-Z0-9:_-]+'
       minLength: 1
-      maxLength: 8
+      maxLength: 128
     TagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
