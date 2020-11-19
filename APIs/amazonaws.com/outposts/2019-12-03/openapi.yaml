@@ -162,6 +162,7 @@ paths:
             schema:
               type: object
               required:
+                - Name
                 - SiteId
               properties:
                 Name:
@@ -669,6 +670,7 @@ components:
     CreateOutpostInput:
       type: object
       required:
+        - Name
         - SiteId
       title: CreateOutpostInput
       properties:

@@ -1403,6 +1403,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /global-settings:
+    get:
+      operationId: DescribeGlobalSettings
+      description: The current feature settings for the AWS Account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeGlobalSettingsOutput'
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateGlobalSettings
+      description: Updates the current global settings for the AWS Account. Use the <code>DescribeGlobalSettings</code> API to determine the current settings.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '481':
+          description: MissingParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingParameterValueException'
+        '482':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                GlobalSettings:
+                  description: A list of resources along with the opt-in preferences for the account.
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/GlobalSettingsValue'
   '/resources/{resourceArn}':
     get:
       operationId: DescribeProtectedResource
@@ -1456,7 +1525,7 @@ paths:
   /account-settings:
     get:
       operationId: DescribeRegionSettings
-      description: 'Returns the current service opt-in settings for the Region. If the service has a value set to <code>true</code>, AWS Backup tries to protect that service''s resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to <code>false</code> for a service, AWS Backup does not try to protect that service''s resources in this Region.'
+      description: 'Returns the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service''s resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service''s resources in this Region, AWS Backup does not try to protect that service''s resources in this Region.'
       responses:
         '200':
           description: Success
@@ -1481,7 +1550,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateRegionSettings
-      description: 'Updates the current service opt-in settings for the Region. If the service has a value set to <code>true</code>, AWS Backup tries to protect that service''s resources in this Region, when included in an on-demand backup or scheduled backup plan. If the value is set to <code>false</code> for a service, AWS Backup does not try to protect that service''s resources in this Region.'
+      description: 'Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service''s resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service''s resources in this Region. Use the <code>DescribeRegionSettings</code> API to determine the resource types that are supported.'
       responses:
         '200':
           description: Success
@@ -2764,12 +2833,18 @@ paths:
               schema:
                 $ref: '#/components/schemas/MissingParameterValueException'
         '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
           description: ServiceUnavailableException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServiceUnavailableException'
-        '484':
+        '485':
           description: LimitExceededException
           content:
             application/json:
@@ -3363,7 +3438,7 @@ components:
         BackupType:
           allOf:
             - $ref: '#/components/schemas/string'
-            - description: 'Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, <code>BackupType</code> returns “WindowsVSS”. If <code>BackupType</code> is empty, then it is a regular backup.'
+            - description: 'Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, <code>BackupType</code> returns "WindowsVSS". If <code>BackupType</code> is empty, then the backup type that was is a regular backup.'
     DependencyFailureException: {}
     DescribeBackupVaultOutput:
       type: object
@@ -3399,6 +3474,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/CopyJob'
             - description: Contains detailed information about a copy job.
+    DescribeGlobalSettingsOutput:
+      type: object
+      properties:
+        GlobalSettings:
+          allOf:
+            - $ref: '#/components/schemas/GlobalSettings'
+            - description: A list of resources along with the opt-in preferences for the account.
+        LastUpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: 'The date and time that the global settings was last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.'
     DescribeProtectedResourceOutput:
       type: object
       properties:
@@ -3429,6 +3515,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+        SourceBackupVaultArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'An Amazon Resource Name (ARN) that uniquely identifies the source vault where the resource was originally backed up in; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:BackupVault</code>. If the recovery is restored to the same AWS account or Region, this value will be <code>null</code>.'
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -3901,6 +3991,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdvancedBackupSettings'
             - description: Contains a list of <code>BackupOptions</code> for each resource type.
+    GlobalSettingsValue:
+      type: string
     UpdateRecoveryPointLifecycleOutput:
       type: object
       properties:
@@ -3944,7 +4036,7 @@ components:
         BackupOptions:
           allOf:
             - $ref: '#/components/schemas/BackupOptions'
-            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: Set to <code>"WindowsVSS”:“enabled"</code> to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default.</p> <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p> <p>For more information about Windows VSS backups, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html">Creating a VSS-Enabled Windows Backup</a>.</p>'
+            - description: '<p>Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs.</p> <p>Valid values: </p> <p>Set to <code>"WindowsVSS":"enabled"</code> to enable the WindowsVSS backup option and create a VSS Windows backup. </p> <p>Set to <code>"WindowsVSS":"disabled"</code> to create a regular backup. The WindowsVSS option is not enabled by default.</p> <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code> exception.</p> <p>For more information about Windows VSS backups, see <a href="https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html">Creating a VSS-Enabled Windows Backup</a>.</p>'
       description: A list of backup options for each resource type.
     BackupVaultName:
       type: string
@@ -4593,6 +4685,14 @@ components:
       type: object
       title: DescribeCopyJobInput
       properties: {}
+    DescribeGlobalSettingsInput:
+      type: object
+      title: DescribeGlobalSettingsInput
+      properties: {}
+    GlobalSettings:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/GlobalSettingsValue'
     DescribeProtectedResourceInput:
       type: object
       title: DescribeProtectedResourceInput
@@ -4686,6 +4786,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResourceType'
+    GlobalSettingsName:
+      type: string
     MaxResults:
       type: integer
       minimum: 1
@@ -4810,6 +4912,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: 'An ARN that uniquely identifies a backup vault; for example, <code>arn:aws:backup:us-east-1:123456789012:vault:aBackupVault</code>.'
+        SourceBackupVaultArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The backup vault where the recovery point was originally copied from. If the recovery point is restored to the same account this value will be <code>null</code>.
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/ARN'
@@ -5090,6 +5196,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/BackupPlanInput'
             - description: Specifies the body of a backup plan. Includes a <code>BackupPlanName</code> and one or more sets of <code>Rules</code>.
+    UpdateGlobalSettingsInput:
+      type: object
+      title: UpdateGlobalSettingsInput
+      properties:
+        GlobalSettings:
+          allOf:
+            - $ref: '#/components/schemas/GlobalSettings'
+            - description: A list of resources along with the opt-in preferences for the account.
     UpdateRecoveryPointLifecycleInput:
       type: object
       title: UpdateRecoveryPointLifecycleInput

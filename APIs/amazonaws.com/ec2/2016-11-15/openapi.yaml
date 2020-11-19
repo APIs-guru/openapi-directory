@@ -11122,7 +11122,7 @@ paths:
     get:
       x-aws-operation-name: DeleteFleets
       operationId: GET_DeleteFleets
-      description: '<p>Deletes the specified EC2 Fleet.</p> <p>After you delete an EC2 Fleet, it launches no new instances. You must specify whether an EC2 Fleet should also terminate its instances. If you terminate the instances, the EC2 Fleet enters the <code>deleted_terminating</code> state. Otherwise, the EC2 Fleet enters the <code>deleted_running</code> state, and the instances continue to run until they are interrupted or you terminate them manually. </p>'
+      description: '<p>Deletes the specified EC2 Fleet.</p> <p>After you delete an EC2 Fleet, it launches no new instances.</p> <p>You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the <code>deleted_terminating</code> state. Otherwise, the EC2 Fleet enters the <code>deleted_running</code> state, and the instances continue to run until they are interrupted or you terminate them manually.</p> <p>For <code>instant</code> fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted <code>instant</code> fleet with running instances is not supported.</p> <p class="title"> <b>Restrictions</b> </p> <ul> <li> <p>You can delete up to 25 <code>instant</code> fleets in a single request. If you exceed this number, no <code>instant</code> fleets are deleted and an error is returned. There is no restriction on the number of fleets of type <code>maintain</code> or <code>request</code> that can be deleted in a single request.</p> </li> <li> <p>Up to 1000 instances can be terminated in a single request to delete <code>instant</code> fleets.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#delete-fleet">Deleting an EC2 Fleet</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -11148,7 +11148,7 @@ paths:
         - name: TerminateInstances
           in: query
           required: true
-          description: Indicates whether to terminate instances for an EC2 Fleet if it is deleted successfully.
+          description: '<p>Indicates whether to terminate the instances when the EC2 Fleet is deleted. The default is to terminate the instances.</p> <p>To let the instances continue to run after the EC2 Fleet is deleted, specify <code>NoTerminateInstances</code>. Supported only for fleets of type <code>maintain</code> and <code>request</code>.</p> <p>For <code>instant</code> fleets, you cannot specify <code>NoTerminateInstances</code>. A deleted <code>instant</code> fleet with running instances is not supported.</p>'
           schema:
             type: boolean
         - name: Action
@@ -11176,7 +11176,7 @@ paths:
     post:
       x-aws-operation-name: DeleteFleets
       operationId: POST_DeleteFleets
-      description: '<p>Deletes the specified EC2 Fleet.</p> <p>After you delete an EC2 Fleet, it launches no new instances. You must specify whether an EC2 Fleet should also terminate its instances. If you terminate the instances, the EC2 Fleet enters the <code>deleted_terminating</code> state. Otherwise, the EC2 Fleet enters the <code>deleted_running</code> state, and the instances continue to run until they are interrupted or you terminate them manually. </p>'
+      description: '<p>Deletes the specified EC2 Fleet.</p> <p>After you delete an EC2 Fleet, it launches no new instances.</p> <p>You must specify whether a deleted EC2 Fleet should also terminate its instances. If you choose to terminate the instances, the EC2 Fleet enters the <code>deleted_terminating</code> state. Otherwise, the EC2 Fleet enters the <code>deleted_running</code> state, and the instances continue to run until they are interrupted or you terminate them manually.</p> <p>For <code>instant</code> fleets, EC2 Fleet must terminate the instances when the fleet is deleted. A deleted <code>instant</code> fleet with running instances is not supported.</p> <p class="title"> <b>Restrictions</b> </p> <ul> <li> <p>You can delete up to 25 <code>instant</code> fleets in a single request. If you exceed this number, no <code>instant</code> fleets are deleted and an error is returned. There is no restriction on the number of fleets of type <code>maintain</code> or <code>request</code> that can be deleted in a single request.</p> </li> <li> <p>Up to 1000 instances can be terminated in a single request to delete <code>instant</code> fleets.</p> </li> </ul> <p>For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#delete-fleet">Deleting an EC2 Fleet</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -61181,7 +61181,7 @@ components:
         TerminateInstances:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: Indicates whether to terminate instances for an EC2 Fleet if it is deleted successfully.
+            - description: '<p>Indicates whether to terminate the instances when the EC2 Fleet is deleted. The default is to terminate the instances.</p> <p>To let the instances continue to run after the EC2 Fleet is deleted, specify <code>NoTerminateInstances</code>. Supported only for fleets of type <code>maintain</code> and <code>request</code>.</p> <p>For <code>instant</code> fleets, you cannot specify <code>NoTerminateInstances</code>. A deleted <code>instant</code> fleet with running instances is not supported.</p>'
     FlowLogIdList:
       type: array
       items:
@@ -69076,7 +69076,7 @@ components:
             - $ref: '#/components/schemas/FleetReplacementStrategy'
             - xml:
                 name: replacementStrategy
-              description: '<p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify <code>launch</code>. Only available for fleets of type <code>maintain</code>.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for both instances while they are running.</p> </note>'
+              description: '<p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify <code>launch</code>. Only available for fleets of type <code>maintain</code>.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can leave it running. You are charged for both instances while they are running.</p> </note>'
       description: The strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted.
     FleetSpotCapacityRebalanceRequest:
       type: object
@@ -69084,7 +69084,7 @@ components:
         ReplacementStrategy:
           allOf:
             - $ref: '#/components/schemas/FleetReplacementStrategy'
-            - description: '<p>The replacement strategy to use. Only available for fleets of type <code>maintain</code>.</p> <p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify <code>launch</code>. You must specify a value, otherwise you get an error.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for all instances while they are running.</p> </note>'
+            - description: '<p>The replacement strategy to use. Only available for fleets of type <code>maintain</code>.</p> <p>To allow EC2 Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for an existing Spot Instance in the fleet, specify <code>launch</code>. You must specify a value, otherwise you get an error.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can leave it running. You are charged for all instances while they are running.</p> </note>'
       description: 'The Spot Instance replacement strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-capacity-rebalance">Capacity rebalancing</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
     FleetSpotMaintenanceStrategies:
       type: object
@@ -80253,7 +80253,7 @@ components:
             - $ref: '#/components/schemas/ReplacementStrategy'
             - xml:
                 name: replacementStrategy
-              description: '<p>The replacement strategy to use. Only available for fleets of type <code>maintain</code>. You must specify a value, otherwise you get an error.</p> <p>To allow Spot Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for a Spot Instance in the fleet, specify <code>launch</code>.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can wait until Amazon EC2 interrupts it. You are charged for all instances while they are running.</p> </note>'
+              description: '<p>The replacement strategy to use. Only available for fleets of type <code>maintain</code>. You must specify a value, otherwise you get an error.</p> <p>To allow Spot Fleet to launch a replacement Spot Instance when an instance rebalance notification is emitted for a Spot Instance in the fleet, specify <code>launch</code>.</p> <note> <p>When a replacement instance is launched, the instance marked for rebalance is not automatically terminated. You can terminate it, or you can leave it running. You are charged for all instances while they are running.</p> </note>'
       description: 'The Spot Instance replacement strategy to use when Amazon EC2 emits a signal that your Spot Instance is at an elevated risk of being interrupted. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#spot-fleet-capacity-rebalance">Capacity rebalancing</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.'
     SpotInstanceStateFault:
       type: object
