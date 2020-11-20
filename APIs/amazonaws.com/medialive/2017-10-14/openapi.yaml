@@ -6082,6 +6082,12 @@ components:
             - xml:
                 name: deviceSettingsSyncState
               description: 'The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.'
+        DeviceUpdateStatus:
+          allOf:
+            - $ref: '#/components/schemas/DeviceUpdateStatus'
+            - xml:
+                name: deviceUpdateStatus
+              description: The status of software on the input device.
         HdDeviceSettings:
           allOf:
             - $ref: '#/components/schemas/InputDeviceHdSettings'
@@ -7024,6 +7030,12 @@ components:
             - xml:
                 name: deviceSettingsSyncState
               description: 'The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.'
+        DeviceUpdateStatus:
+          allOf:
+            - $ref: '#/components/schemas/DeviceUpdateStatus'
+            - xml:
+                name: deviceUpdateStatus
+              description: The status of software on the input device.
         HdDeviceSettings:
           allOf:
             - $ref: '#/components/schemas/InputDeviceHdSettings'
@@ -10462,6 +10474,12 @@ components:
         - SYNCED
         - SYNCING
       description: 'The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.'
+    DeviceUpdateStatus:
+      type: string
+      enum:
+        - UP_TO_DATE
+        - NOT_UP_TO_DATE
+      description: The status of software on the input device.
     InputDeviceHdSettings:
       type: object
       properties:
@@ -13198,6 +13216,12 @@ components:
             - xml:
                 name: deviceSettingsSyncState
               description: 'The status of the action to synchronize the device configuration. If you change the configuration of the input device (for example, the maximum bitrate), MediaLive sends the new data to the device. The device might not update itself immediately. SYNCED means the device has updated its configuration. SYNCING means that it has not updated its configuration.'
+        DeviceUpdateStatus:
+          allOf:
+            - $ref: '#/components/schemas/DeviceUpdateStatus'
+            - xml:
+                name: deviceUpdateStatus
+              description: The status of software on the input device.
         HdDeviceSettings:
           allOf:
             - $ref: '#/components/schemas/InputDeviceHdSettings'

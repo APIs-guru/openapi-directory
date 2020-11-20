@@ -321,6 +321,13 @@ paths:
                     $ref: '#/components/schemas/IntentSummary'
                   minItems: 0
                   maxItems: 3
+                activeContexts:
+                  description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request,</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ActiveContext'
+                  minItems: 0
+                  maxItems: 20
   '/bot/{botName}/alias/{botAlias}/user/{userId}/session/':
     get:
       operationId: GetSession
@@ -520,6 +527,13 @@ paths:
           description: '<p> You pass this value as the <code>Accept</code> HTTP header. </p> <p> The message Amazon Lex returns in the response can be either text or speech based on the <code>Accept</code> HTTP header value in the request. </p> <ul> <li> <p> If the value is <code>text/plain; charset=utf-8</code>, Amazon Lex returns text in the response. </p> </li> <li> <p> If the value begins with <code>audio/</code>, Amazon Lex returns speech in the response. Amazon Lex uses Amazon Polly to generate the speech (using the configuration you specified in the <code>Accept</code> header). For example, if you specify <code>audio/mpeg</code> as the value, Amazon Lex returns speech in the MPEG format.</p> </li> <li> <p>If the value is <code>audio/pcm</code>, the speech returned is <code>audio/pcm</code> in 16-bit, little endian format. </p> </li> <li> <p>The following are the accepted values:</p> <ul> <li> <p>audio/mpeg</p> </li> <li> <p>audio/ogg</p> </li> <li> <p>audio/pcm</p> </li> <li> <p>text/plain; charset=utf-8</p> </li> <li> <p>audio/* (defaults to mpeg)</p> </li> </ul> </li> </ul>'
           schema:
             type: string
+        - name: x-amz-lex-active-contexts
+          in: header
+          required: false
+          description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request,</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.</p>'
+          schema:
+            type: string
+            format: password
       requestBody:
         required: true
         content:
@@ -646,6 +660,13 @@ paths:
                   minLength: 1
                   maxLength: 1024
                   format: password
+                activeContexts:
+                  description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request,</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.</p>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ActiveContext'
+                  minItems: 0
+                  maxItems: 20
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -749,6 +770,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DialogAction'
             - description: Describes the current state of the bot.
+        activeContexts:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextsList'
+            - description: '<p>A list of active contexts for the session. A context can be set when an intent is fulfilled or by calling the <code>PostContent</code>, <code>PostText</code>, or <code>PutSession</code> operation.</p> <p>You can use a context to control the intents that can follow up an intent, or to modify the operation of your application.</p>'
     PostContentResponse:
       type: object
       properties:
@@ -772,7 +797,7 @@ components:
         nluIntentConfidence:
           allOf:
             - $ref: '#/components/schemas/IntentConfidence'
-            - description: '<p>Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user''s intent. The score is between 0.0 and 1.0. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html">Confidence Scores</a>.</p> <p>The score is a relative score, not an absolute score. The score may change based on improvements to the Amazon Lex natural language understanding (NLU) model.</p>'
+            - description: '<p>Provides a score that indicates how confident Amazon Lex is that the returned intent is the one that matches the user''s intent. The score is between 0.0 and 1.0. For more information, see <a href="https://docs.aws.amazon.com/lex/latest/dg/confidence-scores.html">Confidence Scores</a>.</p> <p>The score is a relative score, not an absolute score. The score may change based on improvements to Amazon Lex.</p>'
         alternativeIntents:
           allOf:
             - $ref: '#/components/schemas/IntentList'
@@ -816,9 +841,33 @@ components:
         botVersion:
           allOf:
             - $ref: '#/components/schemas/BotVersion'
-            - description: '<p>The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version.</p> <p>If you have enabled the new natural language understanding (NLU) model, you can use this to determine if the improvement is due to changes to the bot or changes to the NLU.</p> <p>For more information about enabling the new NLU, see the <a href="https://docs.aws.amazon.com/lex/latest/dg/API_PutBot.html#lex-PutBot-request-enableModelImprovements">enableModelImprovements</a> parameter of the <code>PutBot</code> operation.</p>'
+            - description: The version of the bot that responded to the conversation. You can use this information to help determine if one version of a bot is performing better than another version.
+        activeContexts:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextsList'
+            - description: '<p>A list of active contexts for the session. A context can be set when an intent is fulfilled or by calling the <code>PostContent</code>, <code>PostText</code>, or <code>PutSession</code> operation.</p> <p>You can use a context to control the intents that can follow up an intent, or to modify the operation of your application.</p>'
     String:
       type: string
+    ActiveContext:
+      type: object
+      required:
+        - name
+        - timeToLive
+        - parameters
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextName'
+            - description: The name of the context.
+        timeToLive:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextTimeToLive'
+            - description: The length of time or number of turns that a context remains active.
+        parameters:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextParametersMap'
+            - description: State variables for the current context. You can use these values as default values for slots in subsequent events.
+      description: 'A context is a variable that contains information about the current state of the conversation between a user and Amazon Lex. Context can be set automatically by Amazon Lex when an intent is fulfilled, or it can be set at runtime using the <code>PutContent</code>, <code>PutText</code>, or <code>PutSession</code> operation.'
     PutSessionResponse:
       type: object
       properties:
@@ -894,6 +943,46 @@ components:
       description: 'Provides information about the state of an intent. You can use this information to get the current state of an intent so that you can process the intent, or so that you can return the intent to its previous state.'
     Accept:
       type: string
+    ActiveContextName:
+      type: string
+      pattern: '^([A-Za-z]_?)+$'
+      minLength: 1
+      maxLength: 100
+    ActiveContextTimeToLive:
+      type: object
+      properties:
+        timeToLiveInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextTimeToLiveInSeconds'
+            - description: 'The number of seconds that the context should be active after it is first sent in a <code>PostContent</code> or <code>PostText</code> response. You can set the value between 5 and 86,400 seconds (24 hours).'
+        turnsToLive:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextTurnsToLive'
+            - description: The number of conversation turns that the context should be active. A conversation turn is one <code>PostContent</code> or <code>PostText</code> request and the corresponding response from Amazon Lex.
+      description: The length of time or number of turns that a context remains active.
+    ActiveContextParametersMap:
+      type: object
+      minProperties: 0
+      maxProperties: 10
+      additionalProperties:
+        $ref: '#/components/schemas/Text'
+    ActiveContextTimeToLiveInSeconds:
+      type: integer
+      minimum: 5
+      maximum: 86400
+    ActiveContextTurnsToLive:
+      type: integer
+      minimum: 1
+      maximum: 20
+    ActiveContextsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ActiveContext'
+      minItems: 0
+      maxItems: 20
+    ActiveContextsString:
+      type: string
+      format: password
     AttributesString:
       type: string
       format: password
@@ -1080,6 +1169,10 @@ components:
       items:
         $ref: '#/components/schemas/PredictedIntent'
       maxItems: 4
+    ParameterName:
+      type: string
+      minLength: 1
+      maxLength: 100
     PostContentRequest:
       type: object
       required:
@@ -1108,6 +1201,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Text'
             - description: The text that the user entered (Amazon Lex interprets this text).
+        activeContexts:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextsList'
+            - description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request,</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.</p>'
     SentimentResponse:
       type: object
       properties:
@@ -1152,6 +1249,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntentSummaryList'
             - description: '<p>A summary of the recent intents for the bot. You can use the intent summary view to set a checkpoint label on an intent and modify attributes of intents. You can also use it to remove or add intent summary objects to the list.</p> <p>An intent that you modify or add to the list must make sense for the bot. For example, the intent name must be valid for the bot. You must provide valid values for:</p> <ul> <li> <p> <code>intentName</code> </p> </li> <li> <p>slot names</p> </li> <li> <p> <code>slotToElict</code> </p> </li> </ul> <p>If you send the <code>recentIntentSummaryView</code> parameter in a <code>PutSession</code> request, the contents of the new summary view replaces the old summary view. For example, if a <code>GetSession</code> request returns three intents in the summary view and you call <code>PutSession</code> with one intent in the summary view, the next call to <code>GetSession</code> will only return one intent.</p>'
+        activeContexts:
+          allOf:
+            - $ref: '#/components/schemas/ActiveContextsList'
+            - description: '<p>A list of contexts active for the request. A context can be activated when a previous intent is fulfilled, or by including the context in the request,</p> <p>If you don''t specify a list of contexts, Amazon Lex will use the current list of contexts for the session. If you specify an empty list, all contexts for the session are cleared.</p>'
     genericAttachmentList:
       type: array
       items:

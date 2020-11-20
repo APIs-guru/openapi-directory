@@ -894,6 +894,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.CheckSchemaVersionValidity:
+    post:
+      operationId: CheckSchemaVersionValidity
+      description: 'Validates the supplied schema. This call has no side effects, it simply validates using the supplied schema using <code>DataFormat</code> as the format. Since it does not take a schema set name, no compatibility checks are performed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckSchemaVersionValidityResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckSchemaVersionValidityInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.CheckSchemaVersionValidity
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.CreateClassifier:
     post:
       operationId: CreateClassifier
@@ -1432,6 +1483,138 @@ paths:
             type: string
             enum:
               - AWSGlue.CreatePartition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.CreateRegistry:
+    post:
+      operationId: CreateRegistry
+      description: Creates a new registry which may be used to hold a collection of schemas.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateRegistryResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '483':
+          description: ResourceNumberLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNumberLimitExceededException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRegistryInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.CreateRegistry
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.CreateSchema:
+    post:
+      operationId: CreateSchema
+      description: '<p>Creates a new schema set and registers the schema definition. Returns an error if the schema set already exists without actually registering the version.</p> <p>When the schema set is created, a version checkpoint will be set to the first version. Compatibility mode "DISABLED" restricts any additional schema versions from being added after the first schema version. For all other compatibility modes, validation of compatibility settings will be applied only from the second version onwards when the <code>RegisterSchemaVersion</code> API is used.</p> <p>When this API is called without a <code>RegistryId</code>, this will create an entry for a "default-registry" in the registry database tables, if it is not already present.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSchemaResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '484':
+          description: ResourceNumberLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNumberLimitExceededException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSchemaInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.CreateSchema
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2406,6 +2589,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.DeleteRegistry:
+    post:
+      operationId: DeleteRegistry
+      description: 'Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the <code>GetRegistry</code> API after the asynchronous call. Deleting a registry will disable all online operations for the registry such as the <code>UpdateRegistry</code>, <code>CreateSchema</code>, <code>UpdateSchema</code>, and <code>RegisterSchemaVersion</code> APIs. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRegistryResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRegistryInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.DeleteRegistry
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.DeleteResourcePolicy:
     post:
       operationId: DeleteResourcePolicy
@@ -2461,6 +2701,120 @@ paths:
             type: string
             enum:
               - AWSGlue.DeleteResourcePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.DeleteSchema:
+    post:
+      operationId: DeleteSchema
+      description: 'Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call <code>GetSchema</code> API after the asynchronous call. Deleting a registry will disable all online operations for the schema, such as the <code>GetSchemaByDefinition</code>, and <code>RegisterSchemaVersion</code> APIs.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSchemaResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSchemaInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.DeleteSchema
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.DeleteSchemaVersions:
+    post:
+      operationId: DeleteSchemaVersions
+      description: '<p>Remove versions from the specified schema. A version number or range may be supplied. If the compatibility mode forbids deleting of a version that is necessary, such as BACKWARDS_FULL, an error is returned. Calling the <code>GetSchemaVersions</code> API after this call will list the status of the deleted versions.</p> <p>When the range of version numbers contain check pointed version, the API will return a 409 conflict and will not proceed with the deletion. You have to remove the checkpoint first using the <code>DeleteSchemaCheckpoint</code> API before using this API.</p> <p>You cannot use the <code>DeleteSchemaVersions</code> API to delete the first schema version in the schema set. The first schema version can only be deleted by the <code>DeleteSchema</code> API. This operation will also delete the attached <code>SchemaVersionMetadata</code> under the schema versions. Hard deletes will be enforced on the database.</p> <p>If the compatibility mode forbids deleting of a version that is necessary, such as BACKWARDS_FULL, an error is returned.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteSchemaVersionsResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteSchemaVersionsInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.DeleteSchemaVersions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4593,6 +4947,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.GetRegistry:
+    post:
+      operationId: GetRegistry
+      description: Describes the specified registry in detail.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRegistryResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRegistryInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetRegistry
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.GetResourcePolicies:
     post:
       operationId: GetResourcePolicies
@@ -4635,6 +5046,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetResourcePoliciesRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -4699,6 +5122,234 @@ paths:
             type: string
             enum:
               - AWSGlue.GetResourcePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.GetSchema:
+    post:
+      operationId: GetSchema
+      description: Describes the specified schema in detail.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchemaResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSchemaInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetSchema
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.GetSchemaByDefinition:
+    post:
+      operationId: GetSchemaByDefinition
+      description: 'Retrieves a schema by the <code>SchemaDefinition</code>. The schema definition is sent to the Schema Registry, canonicalized, and hashed. If the hash is matched within the scope of the <code>SchemaName</code> or ARN (or the default registry, if none is supplied), that schema’s metadata is returned. Otherwise, a 404 or NotFound error is returned. Schema versions in <code>Deleted</code> statuses will not be included in the results.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchemaByDefinitionResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSchemaByDefinitionInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetSchemaByDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.GetSchemaVersion:
+    post:
+      operationId: GetSchemaVersion
+      description: Get the specified schema by its unique ID assigned when a version of the schema is created or registered. Schema versions in Deleted status will not be included in the results.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchemaVersionResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSchemaVersionInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetSchemaVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.GetSchemaVersionsDiff:
+    post:
+      operationId: GetSchemaVersionsDiff
+      description: <p>Fetches the schema version difference in the specified difference type between two stored schema versions in the Schema Registry.</p> <p>This API allows you to compare two schema versions between two schema definitions under the same schema.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSchemaVersionsDiffResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSchemaVersionsDiffInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.GetSchemaVersionsDiff
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5973,6 +6624,207 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.ListRegistries:
+    post:
+      operationId: ListRegistries
+      description: 'Returns a list of registries that you have created, with minimal registry information. Registries in the <code>Deleting</code> status will not be included in the results. Empty results will be returned if there are no registries available.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRegistriesResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListRegistriesInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.ListRegistries
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.ListSchemaVersions:
+    post:
+      operationId: ListSchemaVersions
+      description: 'Returns a list of schema versions that you have created, with minimal information. Schema versions in Deleted status will not be included in the results. Empty results will be returned if there are no schema versions available.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSchemaVersionsResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSchemaVersionsInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.ListSchemaVersions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.ListSchemas:
+    post:
+      operationId: ListSchemas
+      description: '<p>Returns a list of schemas with minimal details. Schemas in Deleting status will not be included in the results. Empty results will be returned if there are no schemas available.</p> <p>When the <code>RegistryId</code> is not provided, all the schemas across registries will be part of the API response.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSchemasResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListSchemasInput'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.ListSchemas
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.ListTriggers:
     post:
       operationId: ListTriggers
@@ -6219,6 +7071,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.PutSchemaVersionMetadata:
+    post:
+      operationId: PutSchemaVersionMetadata
+      description: Puts the metadata key value pair for a specified schema version ID. A maximum of 10 key value pairs will be allowed per schema version. They can be added over one or more calls.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutSchemaVersionMetadataResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '484':
+          description: ResourceNumberLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNumberLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutSchemaVersionMetadataInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.PutSchemaVersionMetadata
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.PutWorkflowRunProperties:
     post:
       operationId: PutWorkflowRunProperties
@@ -6286,6 +7201,177 @@ paths:
             type: string
             enum:
               - AWSGlue.PutWorkflowRunProperties
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.QuerySchemaVersionMetadata:
+    post:
+      operationId: QuerySchemaVersionMetadata
+      description: 'Queries for the schema version metadata information. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuerySchemaVersionMetadataResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QuerySchemaVersionMetadataInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.QuerySchemaVersionMetadata
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.RegisterSchemaVersion:
+    post:
+      operationId: RegisterSchemaVersion
+      description: '<p>Adds a new version to the existing schema. Returns an error if new version of schema does not meet the compatibility requirements of the schema set. This API will not create a new schema set and will return a 404 error if the schema set is not already present in the Schema Registry.</p> <p>If this is the first schema definition to be registered in the Schema Registry, this API will store the schema version and return immediately. Otherwise, this call has the potential to run longer than other operations due to compatibility modes. You can call the <code>GetSchemaVersion</code> API with the <code>SchemaVersionId</code> to check compatibility modes.</p> <p>If the same schema definition is already stored in Schema Registry as a version, the schema ID of the existing schema is returned to the caller.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterSchemaVersionResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: ResourceNumberLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNumberLimitExceededException'
+        '484':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterSchemaVersionInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.RegisterSchemaVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.RemoveSchemaVersionMetadata:
+    post:
+      operationId: RemoveSchemaVersionMetadata
+      description: Removes a key value pair from the schema version metadata for the specified schema version ID.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveSchemaVersionMetadataResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveSchemaVersionMetadataInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.RemoveSchemaVersionMetadata
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -8097,6 +9183,132 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.UpdateRegistry:
+    post:
+      operationId: UpdateRegistry
+      description: 'Updates an existing registry which is used to hold a collection of schemas. The updated properties relate to the registry, and do not modify any of the schemas within the registry. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateRegistryResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateRegistryInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.UpdateRegistry
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.UpdateSchema:
+    post:
+      operationId: UpdateSchema
+      description: '<p>Updates the description, compatibility setting, or version checkpoint for a schema set.</p> <p>For updating the compatibility setting, the call will not validate compatibility for the entire set of schema versions with the new compatibility setting. If the value for <code>Compatibility</code> is provided, the <code>VersionNumber</code> (a checkpoint) is also required. The API will validate the checkpoint version number for consistency.</p> <p>If the value for the <code>VersionNumber</code> (checkpoint) is provided, <code>Compatibility</code> is optional and this can be used to set/reset a checkpoint for the schema.</p> <p>This update will happen only if the schema is in the AVAILABLE state.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateSchemaResponse'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSchemaInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.UpdateSchema
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.UpdateTable:
     post:
       operationId: UpdateTable
@@ -8796,6 +10008,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/HashString'
             - description: A unique identifier for the task run.
+    CheckSchemaVersionValidityResponse:
+      type: object
+      properties:
+        Valid:
+          allOf:
+            - $ref: '#/components/schemas/IsVersionValid'
+            - description: 'Return true, if the schema is valid and false otherwise.'
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/SchemaValidationError'
+            - description: A validation failure error message.
+    CheckSchemaVersionValidityInput:
+      type: object
+      required:
+        - DataFormat
+        - SchemaDefinition
+      title: CheckSchemaVersionValidityInput
+      properties:
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/DataFormat'
+            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+        SchemaDefinition:
+          allOf:
+            - $ref: '#/components/schemas/SchemaDefinitionString'
+            - description: The definition of the schema that has to be validated.
     CreateClassifierResponse:
       type: object
       properties: {}
@@ -9252,6 +10490,137 @@ components:
           allOf:
             - $ref: '#/components/schemas/PartitionInput'
             - description: A <code>PartitionInput</code> structure defining the partition to be created.
+    CreateRegistryResponse:
+      type: object
+      properties:
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the newly created registry.
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the registry.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: A description of the registry.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The tags for the registry.
+    CreateRegistryInput:
+      type: object
+      required:
+        - RegistryName
+      title: CreateRegistryInput
+      properties:
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: 'Name of the registry to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark. No whitespace.'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: 'A description of the registry. If description is not provided, there will not be any default value for this.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: 'AWS tags that contain a key value pair and may be searched by console, command line, or API.'
+    CreateSchemaResponse:
+      type: object
+      properties:
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the registry.
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the registry.
+        SchemaName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the schema.
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the schema.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: A description of the schema if specified when created.
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/DataFormat'
+            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+        Compatibility:
+          allOf:
+            - $ref: '#/components/schemas/Compatibility'
+            - description: The schema compatibility mode.
+        SchemaCheckpoint:
+          allOf:
+            - $ref: '#/components/schemas/SchemaCheckpointNumber'
+            - description: The version number of the checkpoint (the last time the compatibility mode was changed).
+        LatestSchemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The latest version of the schema associated with the returned schema definition.
+        NextSchemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The next version of the schema associated with the returned schema definition.
+        SchemaStatus:
+          allOf:
+            - $ref: '#/components/schemas/SchemaStatus'
+            - description: 'The status of the schema. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: The tags for the schema.
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The unique identifier of the first schema version.
+        SchemaVersionStatus:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionStatus'
+            - description: The status of the first schema version created.
+    CreateSchemaInput:
+      type: object
+      required:
+        - SchemaName
+        - DataFormat
+      title: CreateSchemaInput
+      properties:
+        RegistryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: ' This is a wrapper shape to contain the registry identity fields. If this is not provided, the default registry will be used. The ARN format for the same will be: <code>arn:aws:glue:us-east-2:&lt;customer id&gt;:registry/default-registry:random-5-letter-id</code>.'
+        SchemaName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: 'Name of the schema to be created of max length of 255, and may only contain letters, numbers, hyphen, underscore, dollar sign, or hash mark. No whitespace.'
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/DataFormat'
+            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+        Compatibility:
+          allOf:
+            - $ref: '#/components/schemas/Compatibility'
+            - description: '<p>The compatibility mode of the schema. The possible values are:</p> <ul> <li> <p> <i>NONE</i>: No compatibility mode applies. You can use this choice in development scenarios or if you do not know the compatibility mode that you want to apply to schemas. Any new version added will be accepted without undergoing a compatibility check.</p> </li> <li> <p> <i>DISABLED</i>: This compatibility choice prevents versioning for a particular schema. You can use this choice to prevent future versioning of a schema.</p> </li> <li> <p> <i>BACKWARD</i>: This compatibility choice is recommended as it allows data receivers to read both the current and one previous schema version. This means that for instance, a new schema version cannot drop data fields or change the type of these fields, so they can''t be read by readers using the previous version.</p> </li> <li> <p> <i>BACKWARD_ALL</i>: This compatibility choice allows data receivers to read both the current and all previous schema versions. You can use this choice when you need to delete fields or add optional fields, and check compatibility against all previous schema versions. </p> </li> <li> <p> <i>FORWARD</i>: This compatibility choice allows data receivers to read both the current and one next schema version, but not necessarily later versions. You can use this choice when you need to add fields or delete optional fields, but only check compatibility against the last schema version.</p> </li> <li> <p> <i>FORWARD_ALL</i>: This compatibility choice allows data receivers to read written by producers of any new registered schema. You can use this choice when you need to add fields or delete optional fields, and check compatibility against all previous schema versions.</p> </li> <li> <p> <i>FULL</i>: This compatibility choice allows data receivers to read data written by producers using the previous or next version of the schema, but not necessarily earlier or later versions. You can use this choice when you need to add or remove optional fields, but only check compatibility against the last schema version.</p> </li> <li> <p> <i>FULL_ALL</i>: This compatibility choice allows data receivers to read data written by producers using all previous schema versions. You can use this choice when you need to add or remove optional fields, and check compatibility against all previous schema versions.</p> </li> </ul>'
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: 'An optional description of the schema. If description is not provided, there will not be any automatic default value for this.'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsMap'
+            - description: 'AWS tags that contain a key value pair and may be searched by console, command line, or API. If specified, follows the AWS tags-on-create pattern.'
+        SchemaDefinition:
+          allOf:
+            - $ref: '#/components/schemas/SchemaDefinitionString'
+            - description: The schema definition using the <code>DataFormat</code> setting for <code>SchemaName</code>.
     CreateScriptResponse:
       type: object
       properties:
@@ -9632,6 +11001,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/ValueStringList'
             - description: The values that define the partition.
+    DeleteRegistryResponse:
+      type: object
+      properties:
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the registry being deleted.
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the registry being deleted.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/RegistryStatus'
+            - description: The status of the registry. A successful operation will return the <code>Deleting</code> status.
+    DeleteRegistryInput:
+      type: object
+      required:
+        - RegistryId
+      title: DeleteRegistryInput
+      properties:
+        RegistryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
     DeleteResourcePolicyResponse:
       type: object
       properties: {}
@@ -9648,6 +11042,53 @@ components:
             - $ref: '#/components/schemas/GlueResourceArn'
             - description: The ARN of the AWS Glue resource for the resource policy to be deleted.
     ConditionCheckFailureException: {}
+    DeleteSchemaResponse:
+      type: object
+      properties:
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the schema being deleted.
+        SchemaName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the schema being deleted.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SchemaStatus'
+            - description: The status of the schema.
+    DeleteSchemaInput:
+      type: object
+      required:
+        - SchemaId
+      title: DeleteSchemaInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: This is a wrapper structure that may contain the schema name and Amazon Resource Name (ARN).
+    DeleteSchemaVersionsResponse:
+      type: object
+      properties:
+        SchemaVersionErrors:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionErrorList'
+            - description: 'A list of <code>SchemaVersionErrorItem</code> objects, each containing an error and schema version.'
+    DeleteSchemaVersionsInput:
+      type: object
+      required:
+        - SchemaId
+        - Versions
+      title: DeleteSchemaVersionsInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: This is a wrapper structure that may contain the schema name and Amazon Resource Name (ARN).
+        Versions:
+          allOf:
+            - $ref: '#/components/schemas/VersionsString'
+            - description: '<p>A version range may be supplied which may be of the format:</p> <ul> <li> <p>a single version number, 5</p> </li> <li> <p>a range, 5-8 : deletes versions 5, 6, 7, 8</p> </li> </ul>'
     DeleteSecurityConfigurationResponse:
       type: object
       properties: {}
@@ -10665,6 +12106,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdditionalPlanOptionsMap'
             - description: "<p>A map to hold additional optional key-value parameters.</p> <p>Currently, these key-value pairs are supported:</p> <ul> <li> <p> <code>inferSchema</code>\_ — \_Specifies whether to set <code>inferSchema</code> to true or false for the default script generated by an AWS Glue job. For example, to set <code>inferSchema</code> to true, pass the following key value pair:</p> <p> <code>--additional-plan-options-map '{\"inferSchema\":\"true\"}'</code> </p> </li> </ul>"
+    GetRegistryResponse:
+      type: object
+      properties:
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the registry.
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the registry.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: A description of the registry.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/RegistryStatus'
+            - description: The status of the registry.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTimestamp'
+            - description: The date and time the registry was created.
+        UpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/UpdatedTimestamp'
+            - description: The date and time the registry was updated.
+    GetRegistryInput:
+      type: object
+      required:
+        - RegistryId
+      title: GetRegistryInput
+      properties:
+        RegistryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
     GetResourcePoliciesResponse:
       type: object
       properties:
@@ -10715,6 +12193,188 @@ components:
           allOf:
             - $ref: '#/components/schemas/GlueResourceArn'
             - description: 'The ARN of the AWS Glue resource for the resource policy to be retrieved. For more information about AWS Glue resource ARNs, see the <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id">AWS Glue ARN string pattern</a> '
+    GetSchemaResponse:
+      type: object
+      properties:
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the registry.
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the registry.
+        SchemaName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the schema.
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the schema.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: A description of schema if specified when created
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/DataFormat'
+            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+        Compatibility:
+          allOf:
+            - $ref: '#/components/schemas/Compatibility'
+            - description: The compatibility mode of the schema.
+        SchemaCheckpoint:
+          allOf:
+            - $ref: '#/components/schemas/SchemaCheckpointNumber'
+            - description: The version number of the checkpoint (the last time the compatibility mode was changed).
+        LatestSchemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The latest version of the schema associated with the returned schema definition.
+        NextSchemaVersion:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The next version of the schema associated with the returned schema definition.
+        SchemaStatus:
+          allOf:
+            - $ref: '#/components/schemas/SchemaStatus'
+            - description: The status of the schema.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTimestamp'
+            - description: The date and time the schema was created.
+        UpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/UpdatedTimestamp'
+            - description: The date and time the schema was updated.
+    GetSchemaInput:
+      type: object
+      required:
+        - SchemaId
+      title: GetSchemaInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: '<p>This is a wrapper structure to contain schema identity fields. The structure contains:</p> <ul> <li> <p>SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either <code>SchemaArn</code> or <code>SchemaName</code> and <code>RegistryName</code> has to be provided.</p> </li> <li> <p>SchemaId$SchemaName: The name of the schema. Either <code>SchemaArn</code> or <code>SchemaName</code> and <code>RegistryName</code> has to be provided.</p> </li> </ul>'
+    GetSchemaByDefinitionResponse:
+      type: object
+      properties:
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The schema ID of the schema version.
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the schema.
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/DataFormat'
+            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionStatus'
+            - description: The status of the schema version.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTimestamp'
+            - description: The date and time the schema was created.
+    GetSchemaByDefinitionInput:
+      type: object
+      required:
+        - SchemaId
+        - SchemaDefinition
+      title: GetSchemaByDefinitionInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: '<p>This is a wrapper structure to contain schema identity fields. The structure contains:</p> <ul> <li> <p>SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of <code>SchemaArn</code> or <code>SchemaName</code> has to be provided.</p> </li> <li> <p>SchemaId$SchemaName: The name of the schema. One of <code>SchemaArn</code> or <code>SchemaName</code> has to be provided.</p> </li> </ul>'
+        SchemaDefinition:
+          allOf:
+            - $ref: '#/components/schemas/SchemaDefinitionString'
+            - description: The definition of the schema for which schema details are required.
+    GetSchemaVersionResponse:
+      type: object
+      properties:
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The <code>SchemaVersionId</code> of the schema version.
+        SchemaDefinition:
+          allOf:
+            - $ref: '#/components/schemas/SchemaDefinitionString'
+            - description: The schema definition for the schema ID.
+        DataFormat:
+          allOf:
+            - $ref: '#/components/schemas/DataFormat'
+            - description: The data format of the schema definition. Currently only <code>AVRO</code> is supported.
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the schema.
+        VersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The version number of the schema.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionStatus'
+            - description: 'The status of the schema version. '
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTimestamp'
+            - description: The date and time the schema version was created.
+    GetSchemaVersionInput:
+      type: object
+      title: GetSchemaVersionInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: '<p>This is a wrapper structure to contain schema identity fields. The structure contains:</p> <ul> <li> <p>SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either <code>SchemaArn</code> or <code>SchemaName</code> and <code>RegistryName</code> has to be provided.</p> </li> <li> <p>SchemaId$SchemaName: The name of the schema. Either <code>SchemaArn</code> or <code>SchemaName</code> and <code>RegistryName</code> has to be provided.</p> </li> </ul>'
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The <code>SchemaVersionId</code> of the schema version. This field is required for fetching by schema ID. Either this or the <code>SchemaId</code> wrapper has to be provided.
+        SchemaVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionNumber'
+            - description: The version number of the schema.
+    GetSchemaVersionsDiffResponse:
+      type: object
+      properties:
+        Diff:
+          allOf:
+            - $ref: '#/components/schemas/SchemaDefinitionDiff'
+            - description: The difference between schemas as a string in JsonPatch format.
+    GetSchemaVersionsDiffInput:
+      type: object
+      required:
+        - SchemaId
+        - FirstSchemaVersionNumber
+        - SecondSchemaVersionNumber
+        - SchemaDiffType
+      title: GetSchemaVersionsDiffInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: '<p>This is a wrapper structure to contain schema identity fields. The structure contains:</p> <ul> <li> <p>SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of <code>SchemaArn</code> or <code>SchemaName</code> has to be provided.</p> </li> <li> <p>SchemaId$SchemaName: The name of the schema. One of <code>SchemaArn</code> or <code>SchemaName</code> has to be provided.</p> </li> </ul>'
+        FirstSchemaVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionNumber'
+            - description: The first of the two schema versions to be compared.
+        SecondSchemaVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionNumber'
+            - description: The second of the two schema versions to be compared.
+        SchemaDiffType:
+          allOf:
+            - $ref: '#/components/schemas/SchemaDiffType'
+            - description: 'Refers to <code>SYNTAX_DIFF</code>, which is the currently supported diff type.'
     GetSecurityConfigurationResponse:
       type: object
       properties:
@@ -11241,6 +12901,85 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagsMap'
             - description: Specifies to return only these tagged resources.
+    ListRegistriesResponse:
+      type: object
+      properties:
+        Registries:
+          allOf:
+            - $ref: '#/components/schemas/RegistryListDefinition'
+            - description: An array of <code>RegistryDetailedListItem</code> objects containing minimal details of each registry.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryTokenString'
+            - description: 'A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.'
+    ListRegistriesInput:
+      type: object
+      title: ListRegistriesInput
+      properties:
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsNumber'
+            - description: 'Maximum number of results required per page. If the value is not supplied, this will be defaulted to 25 per page.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryTokenString'
+            - description: 'A continuation token, if this is a continuation call.'
+    ListSchemaVersionsResponse:
+      type: object
+      properties:
+        Schemas:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionList'
+            - description: An array of <code>SchemaVersionList</code> objects containing details of each schema version.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryTokenString'
+            - description: 'A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.'
+    ListSchemaVersionsInput:
+      type: object
+      required:
+        - SchemaId
+      title: ListSchemaVersionsInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: '<p>This is a wrapper structure to contain schema identity fields. The structure contains:</p> <ul> <li> <p>SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either <code>SchemaArn</code> or <code>SchemaName</code> and <code>RegistryName</code> has to be provided.</p> </li> <li> <p>SchemaId$SchemaName: The name of the schema. Either <code>SchemaArn</code> or <code>SchemaName</code> and <code>RegistryName</code> has to be provided.</p> </li> </ul>'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsNumber'
+            - description: 'Maximum number of results required per page. If the value is not supplied, this will be defaulted to 25 per page.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryTokenString'
+            - description: 'A continuation token, if this is a continuation call.'
+    ListSchemasResponse:
+      type: object
+      properties:
+        Schemas:
+          allOf:
+            - $ref: '#/components/schemas/SchemaListDefinition'
+            - description: An array of <code>SchemaListItem</code> objects containing details of each schema.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryTokenString'
+            - description: 'A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.'
+    ListSchemasInput:
+      type: object
+      title: ListSchemasInput
+      properties:
+        RegistryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: A wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsNumber'
+            - description: 'Maximum number of results required per page. If the value is not supplied, this will be defaulted to 25 per page.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryTokenString'
+            - description: 'A continuation token, if this is a continuation call.'
     ListTriggersResponse:
       type: object
       properties:
@@ -11345,6 +13084,63 @@ components:
           allOf:
             - $ref: '#/components/schemas/EnableHybridValues'
             - description: <p>Allows you to specify if you want to use both resource-level and account/catalog-level resource policies. A resource-level policy is a policy attached to an individual resource such as a database or a table.</p> <p>The default value of <code>NO</code> indicates that resource-level policies cannot co-exist with an account-level policy. A value of <code>YES</code> means the use of both resource-level and account/catalog-level resource policies is allowed.</p>
+    PutSchemaVersionMetadataResponse:
+      type: object
+      properties:
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) for the schema.
+        SchemaName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name for the schema.
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name for the registry.
+        LatestVersion:
+          allOf:
+            - $ref: '#/components/schemas/LatestSchemaVersionBoolean'
+            - description: The latest version of the schema.
+        VersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The version number of the schema.
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The unique version ID of the schema version.
+        MetadataKey:
+          allOf:
+            - $ref: '#/components/schemas/MetadataKeyString'
+            - description: The metadata key.
+        MetadataValue:
+          allOf:
+            - $ref: '#/components/schemas/MetadataValueString'
+            - description: The value of the metadata key.
+    PutSchemaVersionMetadataInput:
+      type: object
+      required:
+        - MetadataKeyValue
+      title: PutSchemaVersionMetadataInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: The unique ID for the schema.
+        SchemaVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionNumber'
+            - description: The version number of the schema.
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The unique version ID of the schema version.
+        MetadataKeyValue:
+          allOf:
+            - $ref: '#/components/schemas/MetadataKeyValuePair'
+            - description: The metadata key's corresponding value.
     PutWorkflowRunPropertiesResponse:
       type: object
       properties: {}
@@ -11368,6 +13164,136 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkflowRunProperties'
             - description: The properties to put for the specified run.
+    QuerySchemaVersionMetadataResponse:
+      type: object
+      properties:
+        MetadataInfoMap:
+          allOf:
+            - $ref: '#/components/schemas/MetadataInfoMap'
+            - description: A map of a metadata key and associated values.
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The unique version ID of the schema version.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryTokenString'
+            - description: 'A continuation token for paginating the returned list of tokens, returned if the current segment of the list is not the last.'
+    QuerySchemaVersionMetadataInput:
+      type: object
+      title: QuerySchemaVersionMetadataInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: A wrapper structure that may contain the schema name and Amazon Resource Name (ARN).
+        SchemaVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionNumber'
+            - description: The version number of the schema.
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The unique version ID of the schema version.
+        MetadataList:
+          allOf:
+            - $ref: '#/components/schemas/MetadataList'
+            - description: 'Search key-value pairs for metadata, if they are not provided all the metadata information will be fetched.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/QuerySchemaVersionMetadataMaxResults'
+            - description: 'Maximum number of results required per page. If the value is not supplied, this will be defaulted to 25 per page.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryTokenString'
+            - description: 'A continuation token, if this is a continuation call.'
+    RegisterSchemaVersionResponse:
+      type: object
+      properties:
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The unique ID that represents the version of this schema.
+        VersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: 'The version of this schema (for sync flow only, in case this is the first version).'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionStatus'
+            - description: The status of the schema version.
+    RegisterSchemaVersionInput:
+      type: object
+      required:
+        - SchemaId
+        - SchemaDefinition
+      title: RegisterSchemaVersionInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: '<p>This is a wrapper structure to contain schema identity fields. The structure contains:</p> <ul> <li> <p>SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either <code>SchemaArn</code> or <code>SchemaName</code> and <code>RegistryName</code> has to be provided.</p> </li> <li> <p>SchemaId$SchemaName: The name of the schema. Either <code>SchemaArn</code> or <code>SchemaName</code> and <code>RegistryName</code> has to be provided.</p> </li> </ul>'
+        SchemaDefinition:
+          allOf:
+            - $ref: '#/components/schemas/SchemaDefinitionString'
+            - description: The schema definition using the <code>DataFormat</code> setting for the <code>SchemaName</code>.
+    RemoveSchemaVersionMetadataResponse:
+      type: object
+      properties:
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the schema.
+        SchemaName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the schema.
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the registry.
+        LatestVersion:
+          allOf:
+            - $ref: '#/components/schemas/LatestSchemaVersionBoolean'
+            - description: The latest version of the schema.
+        VersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The version number of the schema.
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The version ID for the schema version.
+        MetadataKey:
+          allOf:
+            - $ref: '#/components/schemas/MetadataKeyString'
+            - description: The metadata key.
+        MetadataValue:
+          allOf:
+            - $ref: '#/components/schemas/MetadataValueString'
+            - description: The value of the metadata key.
+    RemoveSchemaVersionMetadataInput:
+      type: object
+      required:
+        - MetadataKeyValue
+      title: RemoveSchemaVersionMetadataInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: A wrapper structure that may contain the schema name and Amazon Resource Name (ARN).
+        SchemaVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionNumber'
+            - description: The version number of the schema.
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The unique version ID of the schema version.
+        MetadataKeyValue:
+          allOf:
+            - $ref: '#/components/schemas/MetadataKeyValuePair'
+            - description: The value of the metadata key.
     ResetJobBookmarkResponse:
       type: object
       properties:
@@ -12130,6 +14056,69 @@ components:
           allOf:
             - $ref: '#/components/schemas/PartitionInput'
             - description: '<p>The new partition object to update the partition to.</p> <p>The <code>Values</code> property can''t be changed. If you want to change the partition key values for a partition, delete and recreate the partition.</p>'
+    UpdateRegistryResponse:
+      type: object
+      properties:
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the updated registry.
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource name (ARN) of the updated registry.
+    UpdateRegistryInput:
+      type: object
+      required:
+        - RegistryId
+        - Description
+      title: UpdateRegistryInput
+      properties:
+        RegistryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: This is a wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: 'A description of the registry. If description is not provided, this field will not be updated.'
+    UpdateSchemaResponse:
+      type: object
+      properties:
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the schema.
+        SchemaName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the schema.
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the registry that contains the schema.
+    UpdateSchemaInput:
+      type: object
+      required:
+        - SchemaId
+      title: UpdateSchemaInput
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: '<p>This is a wrapper structure to contain schema identity fields. The structure contains:</p> <ul> <li> <p>SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of <code>SchemaArn</code> or <code>SchemaName</code> has to be provided.</p> </li> <li> <p>SchemaId$SchemaName: The name of the schema. One of <code>SchemaArn</code> or <code>SchemaName</code> has to be provided.</p> </li> </ul>'
+        SchemaVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionNumber'
+            - description: Version number required for check pointing. One of <code>VersionNumber</code> or <code>Compatibility</code> has to be provided.
+        Compatibility:
+          allOf:
+            - $ref: '#/components/schemas/Compatibility'
+            - description: The new compatibility setting for the schema.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: The new description for the schema.
     UpdateTableResponse:
       type: object
       properties: {}
@@ -12690,6 +14679,21 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CatalogTarget'
+    DataFormat:
+      type: string
+      enum:
+        - AVRO
+    SchemaDefinitionString:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 170000
+    IsVersionValid:
+      type: boolean
+    SchemaValidationError:
+      type: string
+      minLength: 1
+      maxLength: 5000
     Classification:
       type: string
     GrokClassifier:
@@ -13251,6 +15255,17 @@ components:
         - LESS_THAN
         - GREATER_THAN_EQUALS
         - LESS_THAN_EQUALS
+    Compatibility:
+      type: string
+      enum:
+        - NONE
+        - DISABLED
+        - BACKWARD
+        - BACKWARD_ALL
+        - FORWARD
+        - FORWARD_ALL
+        - FULL
+        - FULL_ALL
     LogicalOperator:
       type: string
       enum:
@@ -14048,6 +16063,54 @@ components:
             - $ref: '#/components/schemas/NameString'
             - description: The name of the security configuration.
       description: '<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p> <p>Additionally, imported labels and trained transforms can now be encrypted using a customer provided KMS key.</p>'
+    SchemaRegistryNameString:
+      type: string
+      pattern: '[a-zA-Z0-9-_$#]+'
+      minLength: 1
+      maxLength: 255
+    GlueResourceArn:
+      type: string
+      pattern: 'arn:aws:glue:.*'
+      minLength: 1
+      maxLength: 10240
+    RegistryId:
+      type: object
+      properties:
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: 'Name of the registry. Used only for lookup. One of <code>RegistryArn</code> or <code>RegistryName</code> has to be provided. '
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: Arn of the registry to be updated. One of <code>RegistryArn</code> or <code>RegistryName</code> has to be provided.
+      description: A wrapper structure that may contain the registry name and Amazon Resource Name (ARN).
+    SchemaCheckpointNumber:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    VersionLongNumber:
+      type: integer
+      minimum: 1
+      maximum: 100000
+    SchemaStatus:
+      type: string
+      enum:
+        - AVAILABLE
+        - PENDING
+        - DELETING
+    SchemaVersionIdString:
+      type: string
+      pattern: '[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'
+      minLength: 36
+      maxLength: 36
+    SchemaVersionStatus:
+      type: string
+      enum:
+        - AVAILABLE
+        - PENDING
+        - FAILURE
+        - DELETING
     DagNodes:
       type: array
       items:
@@ -14192,6 +16255,8 @@ components:
         $ref: '#/components/schemas/GenericString'
     RowTag:
       type: string
+    CreatedTimestamp:
+      type: string
     EncryptionAtRest:
       type: object
       required:
@@ -14318,11 +16383,29 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ValueString'
-    GlueResourceArn:
+    RegistryStatus:
       type: string
-      pattern: 'arn:aws:glue:.*'
+      enum:
+        - AVAILABLE
+        - DELETING
+    SchemaId:
+      type: object
+      properties:
+        SchemaArn:
+          $ref: '#/components/schemas/GlueResourceArn'
+        SchemaName:
+          $ref: '#/components/schemas/SchemaRegistryNameString'
+        RegistryName:
+          $ref: '#/components/schemas/SchemaRegistryNameString'
+    VersionsString:
+      type: string
+      pattern: '[1-9][0-9]*|[1-9][0-9]*-[1-9][0-9]*'
       minLength: 1
-      maxLength: 10240
+      maxLength: 100000
+    SchemaVersionErrorList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaVersionErrorItem'
     DescriptionStringRemovable:
       type: string
       minLength: 0
@@ -14506,6 +16589,22 @@ components:
             - $ref: '#/components/schemas/KmsKeyArn'
             - description: The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
       description: Specifies how job bookmark data should be encrypted.
+    ErrorCodeString:
+      type: string
+    ErrorMessageString:
+      type: string
+    ErrorDetails:
+      type: object
+      properties:
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCodeString'
+            - description: The error code for an error.
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessageString'
+            - description: The error message for an error.
+      description: An object containing error details.
     ErrorString:
       type: string
     TransformType:
@@ -15088,6 +17187,8 @@ components:
             - $ref: '#/components/schemas/TotalSegmentsInteger'
             - description: The total number of segments.
       description: 'Defines a non-overlapping region of a table''s partitions, allowing multiple requests to be executed in parallel.'
+    UpdatedTimestamp:
+      type: string
     GetResourcePoliciesResponseList:
       type: array
       items:
@@ -15116,6 +17217,22 @@ components:
       type: string
       minLength: 2
       maxLength: 10240
+    SchemaVersionNumber:
+      type: object
+      properties:
+        LatestVersion:
+          $ref: '#/components/schemas/LatestSchemaVersionBoolean'
+        VersionNumber:
+          $ref: '#/components/schemas/VersionLongNumber'
+    SchemaDiffType:
+      type: string
+      enum:
+        - SYNTAX_DIFF
+    SchemaDefinitionDiff:
+      type: string
+      pattern: .*\S.*
+      minLength: 1
+      maxLength: 340000
     SecurityConfiguration:
       type: object
       properties:
@@ -15611,10 +17728,30 @@ components:
       minLength: 1
       maxLength: 255
       x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
+    LatestSchemaVersionBoolean:
+      type: boolean
     TransformIdList:
       type: array
       items:
         $ref: '#/components/schemas/HashString'
+    MaxResultsNumber:
+      type: integer
+      minimum: 1
+      maximum: 100
+    SchemaRegistryTokenString:
+      type: string
+    RegistryListDefinition:
+      type: array
+      items:
+        $ref: '#/components/schemas/RegistryListItem'
+    SchemaVersionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaVersionListItem'
+    SchemaListDefinition:
+      type: array
+      items:
+        $ref: '#/components/schemas/SchemaListItem'
     LocationMap:
       type: object
       additionalProperties:
@@ -15761,6 +17898,48 @@ components:
             - $ref: '#/components/schemas/FieldType'
             - description: The target type.
       description: Defines a mapping.
+    MetadataValueString:
+      type: string
+      pattern: '[a-zA-Z0-9+-=._./@]+'
+      minLength: 1
+      maxLength: 256
+    MetadataInfo:
+      type: object
+      properties:
+        MetadataValue:
+          allOf:
+            - $ref: '#/components/schemas/MetadataValueString'
+            - description: The metadata key’s corresponding value.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTimestamp'
+            - description: The time at which the entry was created.
+      description: A structure containing metadata information for a schema version.
+    MetadataInfoMap:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/MetadataInfo'
+    MetadataKeyString:
+      type: string
+      pattern: '[a-zA-Z0-9+-=._./@]+'
+      minLength: 1
+      maxLength: 128
+    MetadataKeyValuePair:
+      type: object
+      properties:
+        MetadataKey:
+          allOf:
+            - $ref: '#/components/schemas/MetadataKeyString'
+            - description: A metadata key.
+        MetadataValue:
+          allOf:
+            - $ref: '#/components/schemas/MetadataValueString'
+            - description: A metadata key’s corresponding value.
+      description: A structure containing a key value pair for metadata.
+    MetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataKeyValuePair'
     MongoDBTarget:
       type: object
       properties:
@@ -15903,6 +18082,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: ' <code>True</code> if the table data is stored in subdirectories, or <code>False</code> if not.'
+        SchemaReference:
+          allOf:
+            - $ref: '#/components/schemas/SchemaReference'
+            - description: '<p>An object that references a schema stored in the AWS Glue Schema Registry.</p> <p>When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference.</p>'
       description: Describes the physical storage of table data.
     PartitionError:
       type: object
@@ -16023,11 +18206,43 @@ components:
             - $ref: '#/components/schemas/Comparator'
             - description: The comparator used to compare this property to others.
       description: Defines a property predicate.
+    QuerySchemaVersionMetadataMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
     RecrawlBehavior:
       type: string
       enum:
         - CRAWL_EVERYTHING
         - CRAWL_NEW_FOLDERS_ONLY
+    RegistryListItem:
+      type: object
+      properties:
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the registry.
+        RegistryArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the registry.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: A description of the registry.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/RegistryStatus'
+            - description: The status of the registry.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTimestamp'
+            - description: The data the registry was created.
+        UpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/UpdatedTimestamp'
+            - description: The date the registry was updated.
+      description: A structure containing the details for a registry.
     ResourceType:
       type: string
       enum:
@@ -16109,6 +18324,90 @@ components:
             - $ref: '#/components/schemas/ColumnTypeString'
             - description: The type of data in the column.
       description: A key-value pair representing a column and data type that this transform can run against. The <code>Schema</code> parameter of the <code>MLTransform</code> may contain up to 100 of these structures.
+    SchemaListItem:
+      type: object
+      properties:
+        RegistryName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: the name of the registry where the schema resides.
+        SchemaName:
+          allOf:
+            - $ref: '#/components/schemas/SchemaRegistryNameString'
+            - description: The name of the schema.
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) for the schema.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionString'
+            - description: A description for the schema.
+        SchemaStatus:
+          allOf:
+            - $ref: '#/components/schemas/SchemaStatus'
+            - description: The status of the schema.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTimestamp'
+            - description: The date and time that a schema was created.
+        UpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/UpdatedTimestamp'
+            - description: The date and time that a schema was updated.
+      description: An object that contains minimal details for a schema.
+    SchemaReference:
+      type: object
+      properties:
+        SchemaId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaId'
+            - description: A structure that contains schema identity fields. Either this or the <code>SchemaVersionId</code> has to be provided.
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The unique ID assigned to a version of the schema. Either this or the <code>SchemaId</code> has to be provided.
+        SchemaVersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The version number of the schema.
+      description: An object that references a schema stored in the AWS Glue Schema Registry.
+    SchemaVersionErrorItem:
+      type: object
+      properties:
+        VersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The version number of the schema.
+        ErrorDetails:
+          allOf:
+            - $ref: '#/components/schemas/ErrorDetails'
+            - description: The details of the error for the schema version.
+      description: An object that contains the error details for an operation on a schema version.
+    SchemaVersionListItem:
+      type: object
+      properties:
+        SchemaArn:
+          allOf:
+            - $ref: '#/components/schemas/GlueResourceArn'
+            - description: The Amazon Resource Name (ARN) of the schema.
+        SchemaVersionId:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionIdString'
+            - description: The unique identifier of the schema version.
+        VersionNumber:
+          allOf:
+            - $ref: '#/components/schemas/VersionLongNumber'
+            - description: The version number of the schema.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SchemaVersionStatus'
+            - description: The status of the schema version.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/CreatedTimestamp'
+            - description: The date and time the schema version was created.
+      description: An object containing the details about a schema version.
     SearchPropertyPredicates:
       type: array
       items:

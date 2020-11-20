@@ -233,7 +233,7 @@ paths:
   /#X-Amz-Target=AWSEvents.CreateArchive:
     post:
       operationId: CreateArchive
-      description: 'Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect.'
+      description: 'Creates an archive of events with the specified settings. When you create an archive, incoming events might not immediately start being sent to the archive. Allow a short period of time for changes to take effect. If you do not specify a pattern to filter events sent to the archive, all events are sent to the archive except replayed events. Replayed events are not sent to an archive.'
       responses:
         '200':
           description: Success
@@ -1641,6 +1641,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
+        '484':
+          description: OperationDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationDisabledException'
       requestBody:
         required: true
         content:
@@ -1820,6 +1826,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ConcurrentModificationException'
+        '483':
+          description: OperationDisabledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationDisabledException'
       requestBody:
         required: true
         content:
@@ -2433,8 +2445,8 @@ components:
             - description: The name of the rule.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.'
         Force:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -2518,8 +2530,8 @@ components:
       properties:
         Name:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: 'The name of the event bus to show details for. If you omit this, the default event bus is displayed.'
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus to show details for. If you omit this, the default event bus is displayed.'
     DescribeEventSourceResponse:
       type: object
       properties:
@@ -2677,7 +2689,11 @@ components:
         EventBusName:
           allOf:
             - $ref: '#/components/schemas/EventBusName'
-            - description: The event bus associated with the rule.
+            - description: The name of the event bus associated with the rule.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/CreatedBy'
+            - description: 'The account ID of the user that created the rule. If you use <code>PutRule</code> to put a rule on an event bus in another account, the other account is the owner of the rule, and the rule ARN includes the account ID for that account. However, the value for <code>CreatedBy</code> is the account ID as the account that created the rule in the other account.'
     DescribeRuleRequest:
       type: object
       required:
@@ -2690,8 +2706,8 @@ components:
             - description: The name of the rule.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.'
     DisableRuleRequest:
       type: object
       required:
@@ -2704,8 +2720,8 @@ components:
             - description: The name of the rule.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.'
     EnableRuleRequest:
       type: object
       required:
@@ -2718,8 +2734,8 @@ components:
             - description: The name of the rule.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.'
     ListArchivesResponse:
       type: object
       properties:
@@ -2885,7 +2901,7 @@ components:
         NamePrefix:
           allOf:
             - $ref: '#/components/schemas/ReplayName'
-            - description: A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.
+            - description: A name prefix to filter the replays returned. Only replays with name that match the prefix are returned.
         State:
           allOf:
             - $ref: '#/components/schemas/ReplayState'
@@ -2925,8 +2941,8 @@ components:
             - description: The Amazon Resource Name (ARN) of the target resource.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: Limits the results to show only the rules associated with the specified event bus.
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus to list rules for. If you omit this, the default event bus is used.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -2956,8 +2972,8 @@ components:
             - description: The prefix matching the rule name.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: Limits the results to show only the rules associated with the specified event bus.
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus to list the rules for. If you omit this, the default event bus is used.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -3006,8 +3022,8 @@ components:
             - description: The name of the rule.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -3060,16 +3076,12 @@ components:
             - description: The list of events to write to the event bus.
     PutPermissionRequest:
       type: object
-      required:
-        - Action
-        - Principal
-        - StatementId
       title: PutPermissionRequest
       properties:
         EventBusName:
           allOf:
             - $ref: '#/components/schemas/NonPartnerEventBusName'
-            - description: 'The event bus associated with the rule. If you omit this, the default event bus is used.'
+            - description: 'The name of the event bus associated with the rule. If you omit this, the default event bus is used.'
         Action:
           allOf:
             - $ref: '#/components/schemas/Action'
@@ -3086,6 +3098,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Condition'
             - description: '<p>This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization. For more information about AWS Organizations, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html">What Is AWS Organizations</a> in the <i>AWS Organizations User Guide</i>.</p> <p>If you specify <code>Condition</code> with an AWS organization ID, and specify "*" as the value for <code>Principal</code>, you grant permission to all the accounts in the named organization.</p> <p>The <code>Condition</code> is a JSON string which must contain <code>Type</code>, <code>Key</code>, and <code>Value</code> fields.</p>'
+        Policy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A JSON string that describes the permission policy statement. You can include a <code>Policy</code> parameter in the request instead of using the <code>StatementId</code>, <code>Action</code>, <code>Principal</code>, or <code>Condition</code> parameters.'
     PolicyLengthExceededException: {}
     PutRuleResponse:
       type: object
@@ -3130,8 +3146,8 @@ components:
             - description: The list of key-value pairs to associate with the rule.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: 'The event bus to associate with this rule. If you omit this, the default event bus is used.'
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus to associate with this rule. If you omit this, the default event bus is used.'
     PutTargetsResponse:
       type: object
       properties:
@@ -3156,22 +3172,24 @@ components:
             - description: The name of the rule.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: 'The name of the event bus associated with the rule. If you omit this, the default event bus is used.'
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.'
         Targets:
           allOf:
             - $ref: '#/components/schemas/TargetList'
             - description: The targets to update or add to the rule.
     RemovePermissionRequest:
       type: object
-      required:
-        - StatementId
       title: RemovePermissionRequest
       properties:
         StatementId:
           allOf:
             - $ref: '#/components/schemas/StatementId'
             - description: The statement ID corresponding to the account that is no longer allowed to put events to the default event bus.
+        RemoveAllPermissions:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether to remove all permissions.
         EventBusName:
           allOf:
             - $ref: '#/components/schemas/NonPartnerEventBusName'
@@ -3200,8 +3218,8 @@ components:
             - description: The name of the rule.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/EventBusName'
-            - description: The name of the event bus associated with the rule.
+            - $ref: '#/components/schemas/EventBusNameOrArn'
+            - description: 'The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.'
         Ids:
           allOf:
             - $ref: '#/components/schemas/TargetIdList'
@@ -3582,6 +3600,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Tag'
+    CreatedBy:
+      type: string
+      minLength: 1
+      maxLength: 128
     Database:
       type: string
       pattern: '([a-zA-Z0-9]+)|(\$(\.[\w_-]+(\[(\d+|\*)\])*)*)'
@@ -3609,6 +3631,11 @@ components:
       pattern: '[\.\-_A-Za-z0-9]+'
       minLength: 1
       maxLength: 64
+    EventBusNameOrArn:
+      type: string
+      pattern: '(arn:aws[\w-]*:events:[a-z]{2}-[a-z]+-[\w-]+:[0-9]{12}:event-bus\/)?[/\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 1600
     EventSourceState:
       type: string
       enum:
@@ -3909,6 +3936,11 @@ components:
       pattern: '[\.\-_A-Za-z0-9]+'
       minLength: 1
       maxLength: 256
+    NonPartnerEventBusNameOrArn:
+      type: string
+      pattern: '(arn:aws[\w-]*:events:[a-z]{2}-[a-z]+-[\w-]+:[0-9]{12}:event-bus\/)?[\.\-_A-Za-z0-9]+'
+      minLength: 1
+      maxLength: 1600
     PartnerEventSource:
       type: object
       properties:
@@ -3980,8 +4012,8 @@ components:
             - description: A valid JSON string. There is no other schema imposed. The JSON string may contain fields and nested subobjects.
         EventBusName:
           allOf:
-            - $ref: '#/components/schemas/NonPartnerEventBusName'
-            - description: The event bus that will receive the event. Only the rules that are associated with this event bus will be able to match the event.
+            - $ref: '#/components/schemas/NonPartnerEventBusNameOrArn'
+            - description: 'The name or ARN of the event bus to receive the event. Only the rules that are associated with this event bus are used to match the event. If you omit this, the default event bus is used.'
       description: Represents an event to be submitted.
     PutEventsResultEntryList:
       type: array
@@ -4255,7 +4287,7 @@ components:
         EventBusName:
           allOf:
             - $ref: '#/components/schemas/EventBusName'
-            - description: The event bus associated with the rule.
+            - description: 'The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.'
       description: Contains information about a rule in Amazon EventBridge.
     RunCommandTargets:
       type: array

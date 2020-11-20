@@ -579,6 +579,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=KinesisAnalytics_20180523.CreateApplicationPresignedUrl:
+    post:
+      operationId: CreateApplicationPresignedUrl
+      description: '<p>Creates and returns a URL that you can use to connect to an application''s extension. Currently, the only available extension is the Apache Flink dashboard.</p> <p>The IAM role or user used to call this API defines the permissions to access the extension. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension. </p> <note> <p>The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationPresignedUrlResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '482':
+          description: InvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArgumentException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateApplicationPresignedUrlRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - KinesisAnalytics_20180523.CreateApplicationPresignedUrl
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=KinesisAnalytics_20180523.CreateApplicationSnapshot:
     post:
       operationId: CreateApplicationSnapshot
@@ -1473,7 +1524,7 @@ paths:
   /#X-Amz-Target=KinesisAnalytics_20180523.StopApplication:
     post:
       operationId: StopApplication
-      description: 'Stops the application from processing data. You can stop an application only if it is in the running state. You can use the <a>DescribeApplication</a> operation to find the application state. '
+      description: '<p>Stops the application from processing data. You can stop an application only if it is in the running status, unless you set the <code>Force</code> parameter to <code>true</code>.</p> <p>You can use the <a>DescribeApplication</a> operation to find the application status. </p> <p>Kinesis Data Analytics takes a snapshot when the application is stopped, unless <code>Force</code> is set to <code>true</code>.</p>'
       responses:
         '200':
           description: Success
@@ -2065,6 +2116,32 @@ components:
             - description: 'A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href="https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html">Using Tagging</a>.'
     LimitExceededException: {}
     TooManyTagsException: {}
+    CreateApplicationPresignedUrlResponse:
+      type: object
+      properties:
+        AuthorizedUrl:
+          allOf:
+            - $ref: '#/components/schemas/AuthorizedUrl'
+            - description: The URL of the extension.
+    CreateApplicationPresignedUrlRequest:
+      type: object
+      required:
+        - ApplicationName
+        - UrlType
+      title: CreateApplicationPresignedUrlRequest
+      properties:
+        ApplicationName:
+          allOf:
+            - $ref: '#/components/schemas/ApplicationName'
+            - description: The name of the application.
+        UrlType:
+          allOf:
+            - $ref: '#/components/schemas/UrlType'
+            - description: 'The type of the extension for which to create and return a URL. Currently, the only valid extension URL type is <code>FLINK_DASHBOARD_URL</code>. '
+        SessionExpirationDurationInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/SessionExpirationDurationInSeconds'
+            - description: The duration in seconds for which the returned URL will be valid.
     CreateApplicationSnapshotResponse:
       type: object
       properties: {}
@@ -2484,7 +2561,7 @@ components:
         Force:
           allOf:
             - $ref: '#/components/schemas/BooleanObject'
-            - description: '<p>Set to <code>true</code> to force the application to stop. If you set <code>Force</code> to <code>true</code>, Kinesis Data Analytics stops the application without taking a snapshot.</p> <p>You can only force stop a Flink-based Kinesis Data Analytics application. You can''t force stop a SQL-based Kinesis Data Analytics application.</p> <p>The application must be in the <code>STARTING</code>, <code>UPDATING</code>, <code>STOPPING</code>, <code>AUTOSCALING</code>, or <code>RUNNING</code> state. </p>'
+            - description: '<p>Set to <code>true</code> to force the application to stop. If you set <code>Force</code> to <code>true</code>, Kinesis Data Analytics stops the application without taking a snapshot. </p> <note> <p>Force-stopping your application may lead to data loss or duplication. To prevent data loss or duplicate processing of data during application restarts, we recommend you to take frequent snapshots of your application.</p> </note> <p>You can only force stop a Flink-based Kinesis Data Analytics application. You can''t force stop a SQL-based Kinesis Data Analytics application.</p> <p>The application must be in the <code>STARTING</code>, <code>UPDATING</code>, <code>STOPPING</code>, <code>AUTOSCALING</code>, or <code>RUNNING</code> status. </p>'
     TagResourceResponse:
       type: object
       properties: {}
@@ -3118,6 +3195,7 @@ components:
         - SQL-1_0
         - FLINK-1_6
         - FLINK-1_8
+        - FLINK-1_11
     RoleARN:
       type: string
       pattern: 'arn:.*'
@@ -3252,6 +3330,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ApplicationSummary'
+    AuthorizedUrl:
+      type: string
+      minLength: 1
+      maxLength: 2048
     BucketARN:
       type: string
       pattern: 'arn:.*'
@@ -3468,6 +3550,14 @@ components:
             - $ref: '#/components/schemas/ObjectVersion'
             - description: The new version of the object containing the application code.
       description: Describes an update for the Amazon S3 code content location for a Flink-based Kinesis Data Analytics application.
+    UrlType:
+      type: string
+      enum:
+        - FLINK_DASHBOARD_URL
+    SessionExpirationDurationInSeconds:
+      type: integer
+      minimum: 1800
+      maximum: 43200
     Tags:
       type: array
       items:

@@ -252,6 +252,99 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DirectoryService_20150416.AddRegion:
+    post:
+      operationId: AddRegion
+      description: Adds two domain controllers in the specified Region for the specified directory.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddRegionResult'
+        '480':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: EntityDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDoesNotExistException'
+        '483':
+          description: DirectoryAlreadyInRegionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryAlreadyInRegionException'
+        '484':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '485':
+          description: DirectoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryDoesNotExistException'
+        '486':
+          description: RegionLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionLimitExceededException'
+        '487':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '488':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '489':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRegionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DirectoryService_20150416.AddRegion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=DirectoryService_20150416.AddTagsToResource:
     post:
       operationId: AddTagsToResource
@@ -489,7 +582,7 @@ paths:
   /#X-Amz-Target=DirectoryService_20150416.CreateComputer:
     post:
       operationId: CreateComputer
-      description: 'Creates a computer account in the specified directory, and joins the computer to the directory.'
+      description: Creates an Active Directory computer object in the specified directory.
       responses:
         '200':
           description: Success
@@ -1806,6 +1899,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DirectoryService_20150416.DescribeRegions:
+    post:
+      operationId: DescribeRegions
+      description: Provides information about the Regions that are configured for multi-Region replication.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRegionsResult'
+        '480':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '481':
+          description: DirectoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryDoesNotExistException'
+        '482':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '483':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '486':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeRegionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DirectoryService_20150416.DescribeRegions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=DirectoryService_20150416.DescribeSharedDirectories:
     post:
       operationId: DescribeSharedDirectories
@@ -3084,6 +3252,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DirectoryService_20150416.RemoveRegion:
+    post:
+      operationId: RemoveRegion
+      description: 'Stops all replication and removes the domain controllers from the specified Region. You cannot remove the primary Region with this operation. Instead, use the <code>DeleteDirectory</code> API.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveRegionResult'
+        '480':
+          description: DirectoryUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryUnavailableException'
+        '481':
+          description: DirectoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryDoesNotExistException'
+        '482':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '485':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveRegionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DirectoryService_20150416.RemoveRegion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=DirectoryService_20150416.RemoveTagsFromResource:
     post:
       operationId: RemoveTagsFromResource
@@ -3918,6 +4155,32 @@ components:
     EntityAlreadyExistsException: {}
     DirectoryUnavailableException: {}
     IpRouteLimitExceededException: {}
+    AddRegionResult:
+      type: object
+      properties: {}
+    AddRegionRequest:
+      type: object
+      required:
+        - DirectoryId
+        - RegionName
+        - VPCSettings
+      title: AddRegionRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory to which you want to add Region replication.
+        RegionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: 'The name of the Region where you want to add domain controllers for replication. For example, <code>us-east-1</code>.'
+        VPCSettings:
+          $ref: '#/components/schemas/DirectoryVpcSettings'
+    DirectoryAlreadyInRegionException: {}
+    UnsupportedOperationException: {}
+    DirectoryDoesNotExistException: {}
+    RegionLimitExceededException: {}
+    AccessDeniedException: {}
     AddTagsToResourceResult:
       type: object
       properties: {}
@@ -4068,7 +4331,6 @@ components:
             - description: An array of <a>Attribute</a> objects that contain any LDAP attributes to apply to the computer account.
       description: Contains the inputs for the <a>CreateComputer</a> operation.
     AuthenticationFailedException: {}
-    UnsupportedOperationException: {}
     CreateConditionalForwarderResult:
       type: object
       properties: {}
@@ -4121,7 +4383,7 @@ components:
         Password:
           allOf:
             - $ref: '#/components/schemas/Password'
-            - description: '<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p>'
+            - description: '<p>The password for the directory administrator. The directory creation process creates a directory administrator account with the user name <code>Administrator</code> and this password.</p> <p>If you need to change the password for the administrator account, you can use the <a>ResetUserPassword</a> API call.</p> <p>The regex pattern for this string is made up of the following conditions:</p> <ul> <li> <p>Length (?=^.{8,64}$) – Must be between 8 and 64 characters</p> </li> </ul> <p>AND any 3 of the following password complexity rules required by Active Directory:</p> <ul> <li> <p>Numbers and upper case and lowercase (?=.*\d)(?=.*[A-Z])(?=.*[a-z])</p> </li> <li> <p>Numbers and special characters and lower case (?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])</p> </li> <li> <p>Special characters and upper case and lower case (?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])</p> </li> <li> <p>Numbers and upper case and special characters (?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s])</p> </li> </ul> <p>For additional information about how Active Directory passwords are enforced, see <a href="https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements">Password must meet complexity requirements</a> on the Microsoft website.</p>'
         Description:
           allOf:
             - $ref: '#/components/schemas/Description'
@@ -4385,7 +4647,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/CertificateId'
             - description: The identifier of the certificate.
-    DirectoryDoesNotExistException: {}
     CertificateDoesNotExistException: {}
     CertificateInUseException: {}
     DeregisterEventTopicResult:
@@ -4570,6 +4831,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/PageLimit'
             - description: Specifies the number of items that should be displayed on one page.
+    DescribeRegionsResult:
+      type: object
+      properties:
+        RegionsDescription:
+          allOf:
+            - $ref: '#/components/schemas/RegionsDescription'
+            - description: List of regional information related to the directory per replicated Region.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set of items.'
+    DescribeRegionsRequest:
+      type: object
+      required:
+        - DirectoryId
+      title: DescribeRegionsRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory.
+        RegionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: 'The name of the Region. For example, <code>us-east-1</code>.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The <i>DescribeRegionsResult.NextToken</i> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.
     DescribeSharedDirectoriesResult:
       type: object
       properties:
@@ -5043,6 +5333,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/CidrIps'
             - description: IP address blocks that you want to remove.
+    RemoveRegionResult:
+      type: object
+      properties: {}
+    RemoveRegionRequest:
+      type: object
+      required:
+        - DirectoryId
+      title: RemoveRegionRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory for which you want to remove Region replication.
     RemoveTagsFromResourceResult:
       type: object
       properties: {}
@@ -5135,7 +5438,6 @@ components:
     InvalidTargetException: {}
     ShareLimitExceededException: {}
     OrganizationsException: {}
-    AccessDeniedException: {}
     StartSchemaExtensionResult:
       type: object
       properties:
@@ -5350,6 +5652,25 @@ components:
         $ref: '#/components/schemas/IpRoute'
     UpdateSecurityGroupForDirectoryControllers:
       type: boolean
+    RegionName:
+      type: string
+      minLength: 8
+      maxLength: 32
+    DirectoryVpcSettings:
+      type: object
+      required:
+        - VpcId
+        - SubnetIds
+      properties:
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The identifier of the VPC in which to create the directory.
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service creates a directory server and a DNS server in each of these subnets.
+      description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
     ResourceId:
       type: string
       pattern: '^[d]-[0-9a-f]{10}$'
@@ -5360,6 +5681,10 @@ components:
     AddedDateTime:
       type: string
       format: date-time
+    AdditionalRegions:
+      type: array
+      items:
+        $ref: '#/components/schemas/RegionName'
     AliasName:
       type: string
       pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*'
@@ -5549,7 +5874,7 @@ components:
       pattern: '^([a-zA-Z0-9]+[\\.-])+([a-zA-Z0-9])+$'
     DirectoryShortName:
       type: string
-      pattern: '^[^\\/:*?\"\<\>|.]+[^\\/:*?\"<>|]*$'
+      pattern: '^[^\\/:*?"<>|.]+[^\\/:*?"<>|]*$'
     ConnectPassword:
       type: string
       minLength: 1
@@ -5600,21 +5925,6 @@ components:
       type: string
       pattern: '(?=^.{8,64}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9\s])(?=.*[a-z])|(?=.*[^A-Za-z0-9\s])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9\s]))^.*'
       format: password
-    DirectoryVpcSettings:
-      type: object
-      required:
-        - VpcId
-        - SubnetIds
-      properties:
-        VpcId:
-          allOf:
-            - $ref: '#/components/schemas/VpcId'
-            - description: The identifier of the VPC in which to create the directory.
-        SubnetIds:
-          allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: The identifiers of the subnets for the directory servers. The two subnets must be in different Availability Zones. AWS Directory Service creates a directory server and a DNS server in each of these subnets.
-      description: Contains VPC information for the <a>CreateDirectory</a> or <a>CreateMicrosoftAD</a> operation.
     LogGroupName:
       type: string
       pattern: '[-._/#A-Za-z0-9]+'
@@ -5725,6 +6035,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LDAPSSettingInfo'
+    RegionsDescription:
+      type: array
+      items:
+        $ref: '#/components/schemas/RegionDescription'
     SharedDirectories:
       type: array
       items:
@@ -5870,7 +6184,7 @@ components:
         RadiusServers:
           allOf:
             - $ref: '#/components/schemas/Servers'
-            - description: 'An array of strings that contains the IP addresses of the RADIUS server endpoints, or the IP addresses of your RADIUS server load balancer.'
+            - description: 'An array of strings that contains the fully qualified domain name (FQDN) or IP addresses of the RADIUS server endpoints, or the FQDN or IP addresses of your RADIUS server load balancer.'
         RadiusPort:
           allOf:
             - $ref: '#/components/schemas/PortNumber'
@@ -5938,6 +6252,18 @@ components:
             - $ref: '#/components/schemas/RadiusStatus'
             - description: Information about the status of the RADIUS server.
       description: Describes the directory owner account details that have been shared to the directory consumer account.
+    RegionsInfo:
+      type: object
+      properties:
+        PrimaryRegion:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: The Region from where the AWS Managed Microsoft AD directory was originally created.
+        AdditionalRegions:
+          allOf:
+            - $ref: '#/components/schemas/AdditionalRegions'
+            - description: 'Lists the Regions where the directory has been replicated, excluding the primary Region.'
+      description: Provides information about the Regions that are configured for multi-Region replication.
     DirectoryDescription:
       type: object
       properties:
@@ -6037,6 +6363,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OwnerDirectoryDescription'
             - description: Describes the AWS Managed Microsoft AD directory in the directory owner account.
+        RegionsInfo:
+          allOf:
+            - $ref: '#/components/schemas/RegionsInfo'
+            - description: Lists the Regions where the directory has replicated.
       description: Contains information about an AWS Directory Service directory.
     DirectoryLimits:
       type: object
@@ -6342,6 +6672,52 @@ components:
       format: password
     UseSameUsername:
       type: boolean
+    RegionType:
+      type: string
+      enum:
+        - Primary
+        - Additional
+    StateLastUpdatedDateTime:
+      type: string
+      format: date-time
+    RegionDescription:
+      type: object
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier of the directory.
+        RegionName:
+          allOf:
+            - $ref: '#/components/schemas/RegionName'
+            - description: 'The name of the Region. For example, <code>us-east-1</code>.'
+        RegionType:
+          allOf:
+            - $ref: '#/components/schemas/RegionType'
+            - description: Specifies if the Region is the primary Region or an additional Region.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryStage'
+            - description: The status of the replication process for the specified Region.
+        VpcSettings:
+          $ref: '#/components/schemas/DirectoryVpcSettings'
+        DesiredNumberOfDomainControllers:
+          allOf:
+            - $ref: '#/components/schemas/DesiredNumberOfDomainControllers'
+            - description: The desired number of domain controllers in the specified Region for the specified directory.
+        LaunchTime:
+          allOf:
+            - $ref: '#/components/schemas/LaunchTime'
+            - description: Specifies when the Region replication began.
+        StatusLastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/StateLastUpdatedDateTime'
+            - description: The date and time that the Region status was last updated.
+        LastUpdatedDateTime:
+          allOf:
+            - $ref: '#/components/schemas/LastUpdatedDateTime'
+            - description: The date and time that the Region description was last updated.
+      description: The replicated regional information for a directory.
     TagKeys:
       type: array
       items:
@@ -6473,9 +6849,6 @@ components:
             - $ref: '#/components/schemas/StartTime'
             - description: The date and time that the snapshot was taken.
       description: Describes a directory snapshot.
-    StateLastUpdatedDateTime:
-      type: string
-      format: date-time
     TagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'

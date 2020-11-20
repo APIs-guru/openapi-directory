@@ -5051,6 +5051,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeClusterDbRevisionsMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -5902,6 +5914,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeClusterTracksMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -7870,6 +7894,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeSnapshotCopyGrantsMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -7982,6 +8018,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeSnapshotSchedulesMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -8157,6 +8205,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeTableRestoreStatusMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -8293,6 +8353,18 @@ paths:
             schema:
               $ref: '#/components/schemas/DescribeTagsMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -9325,6 +9397,18 @@ paths:
             schema:
               $ref: '#/components/schemas/GetReservedNodeExchangeOfferingsInputMessage'
       parameters:
+        - name: MaxRecords
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: Action
           in: query
           required: true
@@ -15226,6 +15310,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResizeInfo'
             - description: '<p>Returns the following:</p> <ul> <li> <p>AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.</p> </li> <li> <p>ResizeType: Returns ClassicResize</p> </li> </ul>'
+        ClusterNamespaceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The namespace Amazon Resource Name (ARN) of the cluster.
       description: Describes a cluster.
     SensitiveString:
       type: string
