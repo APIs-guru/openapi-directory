@@ -114,6 +114,364 @@ servers:
     description: The Amazon Connect endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/instance/{InstanceId}/approved-origin':
+    put:
+      operationId: AssociateApprovedOrigin
+      description: Associates an approved origin to an Amazon Connect instance.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Origin
+              properties:
+                Origin:
+                  description: The domain to add to your allow list.
+                  type: string
+                  maxLength: 267
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/storage-config':
+    put:
+      operationId: AssociateInstanceStorageConfig
+      description: '<p>Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can''t define an instance with multiple S3 buckets for storing chat transcripts.</p> <p>This API does not create a resource that doesn''t exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateInstanceStorageConfigResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ResourceType
+                - StorageConfig
+              properties:
+                ResourceType:
+                  description: A valid resource type.
+                  type: string
+                  enum:
+                    - CHAT_TRANSCRIPTS
+                    - CALL_RECORDINGS
+                    - SCHEDULED_REPORTS
+                    - MEDIA_STREAMS
+                    - CONTACT_TRACE_RECORDS
+                    - AGENT_EVENTS
+                StorageConfig:
+                  description: The storage configuration for the instance.
+                  type: object
+                  properties:
+                    AssociationId:
+                      allOf:
+                        - $ref: '#/components/schemas/AssociationId'
+                        - description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+                    StorageType:
+                      allOf:
+                        - $ref: '#/components/schemas/StorageType'
+                        - description: A valid storage type.
+                    S3Config:
+                      allOf:
+                        - $ref: '#/components/schemas/S3Config'
+                        - description: The S3 configuration.
+                    KinesisVideoStreamConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/KinesisVideoStreamConfig'
+                        - description: The configuration of the Kinesis video stream.
+                    KinesisStreamConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/KinesisStreamConfig'
+                        - description: The configuration of the Kinesis data stream.
+                    KinesisFirehoseConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/KinesisFirehoseConfig'
+                        - description: The configuration of the Kinesis Firehose delivery stream.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/lambda-function':
+    put:
+      operationId: AssociateLambdaFunction
+      description: Allows the specified Amazon Connect instance to access the specified Lambda function.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - FunctionArn
+              properties:
+                FunctionArn:
+                  description: The Amazon Resource Name (ARN) for the Lambda function being associated. Maximum number of characters allowed is 140.
+                  type: string
+                  minLength: 1
+                  maxLength: 140
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/lex-bot':
+    put:
+      operationId: AssociateLexBot
+      description: Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - LexBot
+              properties:
+                LexBot:
+                  description: Configuration information of an Amazon Lex bot.
+                  type: object
+                  properties:
+                    Name:
+                      allOf:
+                        - $ref: '#/components/schemas/BotName'
+                        - description: The name of the Amazon Lex bot.
+                    LexRegion:
+                      allOf:
+                        - $ref: '#/components/schemas/LexRegion'
+                        - description: The Region the Amazon Lex bot was created in.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/routing-profiles/{InstanceId}/{RoutingProfileId}/associate-queues':
     post:
       operationId: AssociateRoutingProfileQueues
@@ -182,6 +540,90 @@ paths:
                     $ref: '#/components/schemas/RoutingProfileQueueConfig'
                   minItems: 1
                   maxItems: 10
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/security-key':
+    put:
+      operationId: AssociateSecurityKey
+      description: Associates a security key to the instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateSecurityKeyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '485':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Key
+              properties:
+                Key:
+                  description: A valid security key in PEM format.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -307,6 +749,146 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /instance:
+    put:
+      operationId: CreateInstance
+      description: 'Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInstanceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IdentityManagementType
+                - InboundCallsEnabled
+                - OutboundCallsEnabled
+              properties:
+                ClientToken:
+                  description: The idempotency token.
+                  type: string
+                  maxLength: 500
+                IdentityManagementType:
+                  description: The type of identity management for your Amazon Connect users.
+                  type: string
+                  enum:
+                    - SAML
+                    - CONNECT_MANAGED
+                    - EXISTING_DIRECTORY
+                InstanceAlias:
+                  description: The name for your instance.
+                  type: string
+                  pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*$'
+                  minLength: 1
+                  maxLength: 62
+                  format: password
+                DirectoryId:
+                  description: The identifier for the directory.
+                  type: string
+                  pattern: '^d-[0-9a-f]{10}$'
+                  minLength: 12
+                  maxLength: 12
+                InboundCallsEnabled:
+                  description: Whether your contact center handles incoming contacts.
+                  type: boolean
+                OutboundCallsEnabled:
+                  description: Whether your contact center allows outbound calls.
+                  type: boolean
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListInstances
+      description: 'Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances that aren''t successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance API was invoked.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInstancesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   '/routing-profiles/{InstanceId}':
     put:
       operationId: CreateRoutingProfile
@@ -656,6 +1238,85 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}':
+    delete:
+      operationId: DeleteInstance
+      description: Deletes the Amazon Connect instance.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeInstance
+      description: '<p>Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable. </p> <p>If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInstanceResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
   '/users/{InstanceId}/{UserId}':
     delete:
       operationId: DeleteUser
@@ -963,6 +1624,399 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/attribute/{AttributeType}':
+    get:
+      operationId: DescribeInstanceAttribute
+      description: Describes the specified instance attribute.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInstanceAttributeResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: AttributeType
+          in: path
+          required: true
+          description: The type of attribute.
+          schema:
+            type: string
+            enum:
+              - INBOUND_CALLS
+              - OUTBOUND_CALLS
+              - CONTACTFLOW_LOGS
+              - CONTACT_LENS
+              - AUTO_RESOLVE_BEST_VOICES
+              - USE_CUSTOM_TTS_VOICES
+              - EARLY_MEDIA
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateInstanceAttribute
+      description: Updates the value for the specified attribute type.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: AttributeType
+          in: path
+          required: true
+          description: The type of attribute.
+          schema:
+            type: string
+            enum:
+              - INBOUND_CALLS
+              - OUTBOUND_CALLS
+              - CONTACTFLOW_LOGS
+              - CONTACT_LENS
+              - AUTO_RESOLVE_BEST_VOICES
+              - USE_CUSTOM_TTS_VOICES
+              - EARLY_MEDIA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Value
+              properties:
+                Value:
+                  description: 'The value for the attribute. Maximum character limit is 100. '
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+  '/instance/{InstanceId}/storage-config/{AssociationId}#resourceType':
+    get:
+      operationId: DescribeInstanceStorageConfig
+      description: 'Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInstanceStorageConfigResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: AssociationId
+          in: path
+          required: true
+          description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: resourceType
+          in: query
+          required: true
+          description: A valid resource type.
+          schema:
+            type: string
+            enum:
+              - CHAT_TRANSCRIPTS
+              - CALL_RECORDINGS
+              - SCHEDULED_REPORTS
+              - MEDIA_STREAMS
+              - CONTACT_TRACE_RECORDS
+              - AGENT_EVENTS
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DisassociateInstanceStorageConfig
+      description: Removes the storage type configurations for the specified resource type and association ID.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: AssociationId
+          in: path
+          required: true
+          description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: resourceType
+          in: query
+          required: true
+          description: A valid resource type.
+          schema:
+            type: string
+            enum:
+              - CHAT_TRANSCRIPTS
+              - CALL_RECORDINGS
+              - SCHEDULED_REPORTS
+              - MEDIA_STREAMS
+              - CONTACT_TRACE_RECORDS
+              - AGENT_EVENTS
+    post:
+      operationId: UpdateInstanceStorageConfig
+      description: Updates an existing configuration for a resource type. This API is idempotent.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: AssociationId
+          in: path
+          required: true
+          description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: resourceType
+          in: query
+          required: true
+          description: A valid resource type.
+          schema:
+            type: string
+            enum:
+              - CHAT_TRANSCRIPTS
+              - CALL_RECORDINGS
+              - SCHEDULED_REPORTS
+              - MEDIA_STREAMS
+              - CONTACT_TRACE_RECORDS
+              - AGENT_EVENTS
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StorageConfig
+              properties:
+                StorageConfig:
+                  description: The storage configuration for the instance.
+                  type: object
+                  properties:
+                    AssociationId:
+                      allOf:
+                        - $ref: '#/components/schemas/AssociationId'
+                        - description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+                    StorageType:
+                      allOf:
+                        - $ref: '#/components/schemas/StorageType'
+                        - description: A valid storage type.
+                    S3Config:
+                      allOf:
+                        - $ref: '#/components/schemas/S3Config'
+                        - description: The S3 configuration.
+                    KinesisVideoStreamConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/KinesisVideoStreamConfig'
+                        - description: The configuration of the Kinesis video stream.
+                    KinesisStreamConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/KinesisStreamConfig'
+                        - description: The configuration of the Kinesis data stream.
+                    KinesisFirehoseConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/KinesisFirehoseConfig'
+                        - description: The configuration of the Kinesis Firehose delivery stream.
   '/routing-profiles/{InstanceId}/{RoutingProfileId}':
     get:
       operationId: DescribeRoutingProfile
@@ -1169,6 +2223,197 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/HierarchyLevelUpdate'
                         - description: The update for level five.
+  '/instance/{InstanceId}/approved-origin#origin':
+    delete:
+      operationId: DisassociateApprovedOrigin
+      description: Revokes access to integrated applications from Amazon Connect.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: origin
+          in: query
+          required: true
+          description: The domain URL of the integrated application.
+          schema:
+            type: string
+            maxLength: 267
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/lambda-function#functionArn':
+    delete:
+      operationId: DisassociateLambdaFunction
+      description: Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance..
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: functionArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the Lambda function being disassociated.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 140
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/lex-bot#botName&lexRegion':
+    delete:
+      operationId: DisassociateLexBot
+      description: Revokes authorization from the specified instance to access the specified Amazon Lex bot.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: botName
+          in: query
+          required: true
+          description: The name of the Amazon Lex bot. Maximum character limit of 50.
+          schema:
+            type: string
+            maxLength: 50
+        - name: lexRegion
+          in: query
+          required: true
+          description: The Region in which the Amazon Lex bot has been created.
+          schema:
+            type: string
+            maxLength: 60
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/routing-profiles/{InstanceId}/{RoutingProfileId}/disassociate-queues':
     post:
       operationId: DisassociateRoutingProfileQueues
@@ -1235,6 +2480,68 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/RoutingProfileQueueReference'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/security-key/{AssociationId}':
+    delete:
+      operationId: DisassociateSecurityKey
+      description: Deletes the specified security key.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: AssociationId
+          in: path
+          required: true
+          description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1593,6 +2900,90 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/approved-origins':
+    get:
+      operationId: ListApprovedOrigins
+      description: Returns a paginated list of all approved origins associated with the instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListApprovedOriginsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/contact-flows-summary/{InstanceId}':
     get:
       operationId: ListContactFlows
@@ -1750,6 +3141,355 @@ paths:
             type: integer
             minimum: 1
             maximum: 1000
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/attributes':
+    get:
+      operationId: ListInstanceAttributes
+      description: Returns a paginated list of all attribute types for the given instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInstanceAttributesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 7
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/storage-configs#resourceType':
+    get:
+      operationId: ListInstanceStorageConfigs
+      description: Returns a paginated list of storage configs for the identified instance and resource type.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInstanceStorageConfigsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: resourceType
+          in: query
+          required: true
+          description: A valid resource type.
+          schema:
+            type: string
+            enum:
+              - CHAT_TRANSCRIPTS
+              - CALL_RECORDINGS
+              - SCHEDULED_REPORTS
+              - MEDIA_STREAMS
+              - CONTACT_TRACE_RECORDS
+              - AGENT_EVENTS
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/lambda-functions':
+    get:
+      operationId: ListLambdaFunctions
+      description: Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLambdaFunctionsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/lex-bots':
+    get:
+      operationId: ListLexBots
+      description: Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLexBotsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 25
         - name: MaxResults
           in: query
           schema:
@@ -2270,6 +4010,90 @@ paths:
             type: integer
             minimum: 1
             maximum: 1000
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/security-keys':
+    get:
+      operationId: ListSecurityKeys
+      description: Returns a paginated list of all security keys associated with the instance.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListSecurityKeysResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 2
         - name: MaxResults
           in: query
           schema:
@@ -4240,6 +6064,96 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    ResourceNotFoundException: {}
+    ResourceConflictException: {}
+    InternalServiceException: {}
+    InvalidRequestException: {}
+    InvalidParameterException: {}
+    ServiceQuotaExceededException: {}
+    ThrottlingException: {}
+    AssociateInstanceStorageConfigResponse:
+      type: object
+      properties:
+        AssociationId:
+          allOf:
+            - $ref: '#/components/schemas/AssociationId'
+            - description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+    AssociationId:
+      type: string
+      minLength: 1
+      maxLength: 100
+    StorageType:
+      type: string
+      enum:
+        - S3
+        - KINESIS_VIDEO_STREAM
+        - KINESIS_STREAM
+        - KINESIS_FIREHOSE
+    S3Config:
+      type: object
+      required:
+        - BucketName
+        - BucketPrefix
+      properties:
+        BucketName:
+          allOf:
+            - $ref: '#/components/schemas/BucketName'
+            - description: The S3 bucket name.
+        BucketPrefix:
+          allOf:
+            - $ref: '#/components/schemas/Prefix'
+            - description: The S3 bucket prefix.
+        EncryptionConfig:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfig'
+            - description: The S3 encryption configuration.
+      description: Information about the S3 storage type.
+    KinesisVideoStreamConfig:
+      type: object
+      required:
+        - Prefix
+        - RetentionPeriodHours
+        - EncryptionConfig
+      properties:
+        Prefix:
+          allOf:
+            - $ref: '#/components/schemas/Prefix'
+            - description: The prefix of the video stream.
+        RetentionPeriodHours:
+          allOf:
+            - $ref: '#/components/schemas/Hours'
+            - description: '<p>The number of hours data is retained in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream.</p> <p>The default value is 0, indicating that the stream does not persist data.</p>'
+        EncryptionConfig:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfig'
+            - description: The encryption configuration.
+      description: Configuration information of a Kinesis video stream.
+    KinesisStreamConfig:
+      type: object
+      required:
+        - StreamArn
+      properties:
+        StreamArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the data stream.
+      description: Configuration information of a Kinesis data stream.
+    KinesisFirehoseConfig:
+      type: object
+      required:
+        - FirehoseArn
+      properties:
+        FirehoseArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the delivery stream.
+      description: Configuration information of a Kinesis Firehose delivery stream.
+    BotName:
+      type: string
+      maxLength: 50
+    LexRegion:
+      type: string
+      maxLength: 60
     RoutingProfileQueueConfig:
       type: object
       required:
@@ -4260,11 +6174,13 @@ components:
             - $ref: '#/components/schemas/Delay'
             - description: 'The delay, in seconds, a contact should be in the queue before they are routed to an available agent. For more information, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html">Queues: priority and delay</a> in the <i>Amazon Connect Administrator Guide</i>.'
       description: Contains information about the queue and channel for which priority and delay can be set.
-    InvalidRequestException: {}
-    InvalidParameterException: {}
-    ResourceNotFoundException: {}
-    ThrottlingException: {}
-    InternalServiceException: {}
+    AssociateSecurityKeyResponse:
+      type: object
+      properties:
+        AssociationId:
+          allOf:
+            - $ref: '#/components/schemas/AssociationId'
+            - description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
     CreateContactFlowResponse:
       type: object
       properties:
@@ -4282,6 +6198,17 @@ components:
     InvalidContactFlowException: {}
     DuplicateResourceException: {}
     LimitExceededException: {}
+    CreateInstanceResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier for the instance.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the instance.
     CreateRoutingProfileResponse:
       type: object
       properties:
@@ -4363,6 +6290,27 @@ components:
             - $ref: '#/components/schemas/ContactFlow'
             - description: Information about the contact flow.
     ContactFlowNotPublishedException: {}
+    DescribeInstanceResponse:
+      type: object
+      properties:
+        Instance:
+          allOf:
+            - $ref: '#/components/schemas/Instance'
+            - description: The name of the instance.
+    DescribeInstanceAttributeResponse:
+      type: object
+      properties:
+        Attribute:
+          allOf:
+            - $ref: '#/components/schemas/Attribute'
+            - description: The type of attribute.
+    DescribeInstanceStorageConfigResponse:
+      type: object
+      properties:
+        StorageConfig:
+          allOf:
+            - $ref: '#/components/schemas/InstanceStorageConfig'
+            - description: A valid storage type.
     DescribeRoutingProfileResponse:
       type: object
       properties:
@@ -4495,6 +6443,17 @@ components:
             - $ref: '#/components/schemas/Unit'
             - description: The unit for the metric.
       description: 'Contains information about a historical metric. For a description of each metric, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.'
+    ListApprovedOriginsResponse:
+      type: object
+      properties:
+        Origins:
+          allOf:
+            - $ref: '#/components/schemas/OriginsList'
+            - description: The approved origins.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListContactFlowsResponse:
       type: object
       properties:
@@ -4525,6 +6484,61 @@ components:
           allOf:
             - $ref: '#/components/schemas/HoursOfOperationSummaryList'
             - description: Information about the hours of operation.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+    ListInstanceAttributesResponse:
+      type: object
+      properties:
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/AttributesList'
+            - description: The attribute types.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+    ListInstanceStorageConfigsResponse:
+      type: object
+      properties:
+        StorageConfigs:
+          allOf:
+            - $ref: '#/components/schemas/InstanceStorageConfigs'
+            - description: A valid storage type.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+    ListInstancesResponse:
+      type: object
+      properties:
+        InstanceSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/InstanceSummaryList'
+            - description: Information about the instances.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+    ListLambdaFunctionsResponse:
+      type: object
+      properties:
+        LambdaFunctions:
+          allOf:
+            - $ref: '#/components/schemas/FunctionArnsList'
+            - description: The Lambdafunction ARNs associated with the specified instance.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+    ListLexBotsResponse:
+      type: object
+      properties:
+        LexBots:
+          allOf:
+            - $ref: '#/components/schemas/LexBotsList'
+            - description: The the names and regions of the Amazon Lex bots associated with the specified instance.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -4834,6 +6848,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'If there are additional results, this is the token for the next set of results.'
+    ListSecurityKeysResponse:
+      type: object
+      properties:
+        SecurityKeys:
+          allOf:
+            - $ref: '#/components/schemas/SecurityKeysList'
+            - description: The security keys.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListSecurityProfilesResponse:
       type: object
       properties:
@@ -4964,6 +6989,109 @@ components:
       type: string
       minLength: 1
       maxLength: 100
+    Origin:
+      type: string
+      maxLength: 267
+    AssociateApprovedOriginRequest:
+      type: object
+      required:
+        - Origin
+      title: AssociateApprovedOriginRequest
+      properties:
+        Origin:
+          allOf:
+            - $ref: '#/components/schemas/Origin'
+            - description: The domain to add to your allow list.
+    InstanceStorageResourceType:
+      type: string
+      enum:
+        - CHAT_TRANSCRIPTS
+        - CALL_RECORDINGS
+        - SCHEDULED_REPORTS
+        - MEDIA_STREAMS
+        - CONTACT_TRACE_RECORDS
+        - AGENT_EVENTS
+    InstanceStorageConfig:
+      type: object
+      required:
+        - StorageType
+      properties:
+        AssociationId:
+          allOf:
+            - $ref: '#/components/schemas/AssociationId'
+            - description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+        StorageType:
+          allOf:
+            - $ref: '#/components/schemas/StorageType'
+            - description: A valid storage type.
+        S3Config:
+          allOf:
+            - $ref: '#/components/schemas/S3Config'
+            - description: The S3 configuration.
+        KinesisVideoStreamConfig:
+          allOf:
+            - $ref: '#/components/schemas/KinesisVideoStreamConfig'
+            - description: The configuration of the Kinesis video stream.
+        KinesisStreamConfig:
+          allOf:
+            - $ref: '#/components/schemas/KinesisStreamConfig'
+            - description: The configuration of the Kinesis data stream.
+        KinesisFirehoseConfig:
+          allOf:
+            - $ref: '#/components/schemas/KinesisFirehoseConfig'
+            - description: The configuration of the Kinesis Firehose delivery stream.
+      description: The storage configuration for the instance.
+    AssociateInstanceStorageConfigRequest:
+      type: object
+      required:
+        - ResourceType
+        - StorageConfig
+      title: AssociateInstanceStorageConfigRequest
+      properties:
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/InstanceStorageResourceType'
+            - description: A valid resource type.
+        StorageConfig:
+          allOf:
+            - $ref: '#/components/schemas/InstanceStorageConfig'
+            - description: A valid storage type.
+    FunctionArn:
+      type: string
+      minLength: 1
+      maxLength: 140
+    AssociateLambdaFunctionRequest:
+      type: object
+      required:
+        - FunctionArn
+      title: AssociateLambdaFunctionRequest
+      properties:
+        FunctionArn:
+          allOf:
+            - $ref: '#/components/schemas/FunctionArn'
+            - description: The Amazon Resource Name (ARN) for the Lambda function being associated. Maximum number of characters allowed is 140.
+    LexBot:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/BotName'
+            - description: The name of the Amazon Lex bot.
+        LexRegion:
+          allOf:
+            - $ref: '#/components/schemas/LexRegion'
+            - description: The Region the Amazon Lex bot was created in.
+      description: Configuration information of an Amazon Lex bot.
+    AssociateLexBotRequest:
+      type: object
+      required:
+        - LexBot
+      title: AssociateLexBotRequest
+      properties:
+        LexBot:
+          allOf:
+            - $ref: '#/components/schemas/LexBot'
+            - description: The Amazon Lex box to associate with the instance.
     RoutingProfileId:
       type: string
     RoutingProfileQueueConfigList:
@@ -4982,6 +7110,46 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoutingProfileQueueConfigList'
             - description: The queues to associate with this routing profile.
+    PEM:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    AssociateSecurityKeyRequest:
+      type: object
+      required:
+        - Key
+      title: AssociateSecurityKeyRequest
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/PEM'
+            - description: A valid security key in PEM format.
+    InstanceAttributeType:
+      type: string
+      enum:
+        - INBOUND_CALLS
+        - OUTBOUND_CALLS
+        - CONTACTFLOW_LOGS
+        - CONTACT_LENS
+        - AUTO_RESOLVE_BEST_VOICES
+        - USE_CUSTOM_TTS_VOICES
+        - EARLY_MEDIA
+    InstanceAttributeValue:
+      type: string
+      minLength: 1
+      maxLength: 100
+    Attribute:
+      type: object
+      properties:
+        AttributeType:
+          allOf:
+            - $ref: '#/components/schemas/InstanceAttributeType'
+            - description: The type of attribute.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/InstanceAttributeValue'
+            - description: The value of the attribute.
+      description: A toggle for an individual feature at the instance level.
     AttributeName:
       type: string
       minLength: 1
@@ -4990,6 +7158,14 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/AttributeValue'
+    AttributesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribute'
+    BucketName:
+      type: string
+      minLength: 1
+      maxLength: 128
     Channel:
       type: string
       enum:
@@ -5130,6 +7306,59 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: One or more tags.
+    DirectoryType:
+      type: string
+      enum:
+        - SAML
+        - CONNECT_MANAGED
+        - EXISTING_DIRECTORY
+    DirectoryAlias:
+      type: string
+      pattern: '^(?!d-)([\da-zA-Z]+)([-]*[\da-zA-Z])*$'
+      minLength: 1
+      maxLength: 62
+      format: password
+    DirectoryId:
+      type: string
+      pattern: '^d-[0-9a-f]{10}$'
+      minLength: 12
+      maxLength: 12
+    InboundCallsEnabled:
+      type: boolean
+    OutboundCallsEnabled:
+      type: boolean
+    CreateInstanceRequest:
+      type: object
+      required:
+        - IdentityManagementType
+        - InboundCallsEnabled
+        - OutboundCallsEnabled
+      title: CreateInstanceRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The idempotency token.
+        IdentityManagementType:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryType'
+            - description: The type of identity management for your Amazon Connect users.
+        InstanceAlias:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryAlias'
+            - description: The name for your instance.
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: The identifier for the directory.
+        InboundCallsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/InboundCallsEnabled'
+            - description: Whether your contact center handles incoming contacts.
+        OutboundCallsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/OutboundCallsEnabled'
+            - description: Whether your contact center allows outbound calls.
     RoutingProfileName:
       type: string
       minLength: 1
@@ -5395,6 +7624,10 @@ components:
       type: integer
       minimum: 0
       maximum: 9999
+    DeleteInstanceRequest:
+      type: object
+      title: DeleteInstanceRequest
+      properties: {}
     DeleteUserHierarchyGroupRequest:
       type: object
       title: DeleteUserHierarchyGroupRequest
@@ -5406,6 +7639,62 @@ components:
     DescribeContactFlowRequest:
       type: object
       title: DescribeContactFlowRequest
+      properties: {}
+    DescribeInstanceAttributeRequest:
+      type: object
+      title: DescribeInstanceAttributeRequest
+      properties: {}
+    DescribeInstanceRequest:
+      type: object
+      title: DescribeInstanceRequest
+      properties: {}
+    Instance:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the instance.
+        IdentityManagementType:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryType'
+            - description: The identity management type.
+        InstanceAlias:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryAlias'
+            - description: The alias of instance.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the instance was created.
+        ServiceRole:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The service role of the instance.
+        InstanceStatus:
+          allOf:
+            - $ref: '#/components/schemas/InstanceStatus'
+            - description: The state of the instance.
+        StatusReason:
+          allOf:
+            - $ref: '#/components/schemas/InstanceStatusReason'
+            - description: 'Relevant details why the instance was not successfully created. '
+        InboundCallsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/InboundCallsEnabled'
+            - description: Whether inbound calls are enabled.
+        OutboundCallsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/OutboundCallsEnabled'
+            - description: Whether outbound calls are enabled.
+      description: The Amazon Connect instance.
+    DescribeInstanceStorageConfigRequest:
+      type: object
+      title: DescribeInstanceStorageConfigRequest
       properties: {}
     DescribeRoutingProfileRequest:
       type: object
@@ -5563,6 +7852,22 @@ components:
             - $ref: '#/components/schemas/ARN'
             - description: The Amazon Resource Name (ARN) of the queue.
       description: Contains information about a queue resource for which metrics are returned.
+    DisassociateApprovedOriginRequest:
+      type: object
+      title: DisassociateApprovedOriginRequest
+      properties: {}
+    DisassociateInstanceStorageConfigRequest:
+      type: object
+      title: DisassociateInstanceStorageConfigRequest
+      properties: {}
+    DisassociateLambdaFunctionRequest:
+      type: object
+      title: DisassociateLambdaFunctionRequest
+      properties: {}
+    DisassociateLexBotRequest:
+      type: object
+      title: DisassociateLexBotRequest
+      properties: {}
     RoutingProfileQueueReferenceList:
       type: array
       items:
@@ -5577,6 +7882,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/RoutingProfileQueueReferenceList'
             - description: The queues to disassociate from this routing profile.
+    DisassociateSecurityKeyRequest:
+      type: object
+      title: DisassociateSecurityKeyRequest
+      properties: {}
+    EncryptionType:
+      type: string
+      enum:
+        - KMS
+    KeyId:
+      type: string
+      minLength: 1
+      maxLength: 128
+    EncryptionConfig:
+      type: object
+      required:
+        - EncryptionType
+        - KeyId
+      properties:
+        EncryptionType:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionType'
+            - description: The type of encryption.
+        KeyId:
+          allOf:
+            - $ref: '#/components/schemas/KeyId'
+            - description: The identifier of the encryption key.
+      description: The encryption configuration.
     Filters:
       type: object
       properties:
@@ -5589,6 +7921,10 @@ components:
             - $ref: '#/components/schemas/Channels'
             - description: The channel to use to filter the metrics.
       description: Contains the filter to apply when retrieving metrics.
+    FunctionArnsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FunctionArn'
     GetContactAttributesRequest:
       type: object
       title: GetContactAttributesRequest
@@ -5843,6 +8179,10 @@ components:
             - $ref: '#/components/schemas/HistoricalMetricDataCollections'
             - description: The set of metrics.
       description: Contains information about the historical metrics retrieved.
+    Hours:
+      type: integer
+      minimum: 0
+      maximum: 87600
     HoursOfOperationId:
       type: string
     HoursOfOperationName:
@@ -5867,6 +8207,93 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/HoursOfOperationSummary'
+    Timestamp:
+      type: string
+      format: date-time
+    InstanceStatus:
+      type: string
+      enum:
+        - CREATION_IN_PROGRESS
+        - ACTIVE
+        - CREATION_FAILED
+    InstanceStatusReason:
+      type: object
+      properties:
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The message.
+      description: Relevant details why the instance was not successfully created.
+    String:
+      type: string
+    InstanceStorageConfigs:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceStorageConfig'
+    InstanceSummary:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the instance.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the instance.
+        IdentityManagementType:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryType'
+            - description: The identity management type of the instance.
+        InstanceAlias:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryAlias'
+            - description: The alias of the instance.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: When the instance was created.
+        ServiceRole:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The service role of the instance.
+        InstanceStatus:
+          allOf:
+            - $ref: '#/components/schemas/InstanceStatus'
+            - description: The state of the instance.
+        InboundCallsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/InboundCallsEnabled'
+            - description: Whether inbound calls are enabled.
+        OutboundCallsEnabled:
+          allOf:
+            - $ref: '#/components/schemas/OutboundCallsEnabled'
+            - description: Whether outbound calls are enabled.
+      description: Information about the instance.
+    InstanceSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/InstanceSummary'
+    Prefix:
+      type: string
+      minLength: 1
+      maxLength: 128
+    LexBotsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/LexBot'
+    MaxResult25:
+      type: integer
+      minimum: 1
+      maximum: 25
+    ListApprovedOriginsRequest:
+      type: object
+      title: ListApprovedOriginsRequest
+      properties: {}
+    OriginsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Origin'
     MaxResult1000:
       type: integer
       minimum: 1
@@ -5878,6 +8305,34 @@ components:
     ListHoursOfOperationsRequest:
       type: object
       title: ListHoursOfOperationsRequest
+      properties: {}
+    MaxResult7:
+      type: integer
+      minimum: 1
+      maximum: 7
+    ListInstanceAttributesRequest:
+      type: object
+      title: ListInstanceAttributesRequest
+      properties: {}
+    MaxResult10:
+      type: integer
+      minimum: 1
+      maximum: 10
+    ListInstanceStorageConfigsRequest:
+      type: object
+      title: ListInstanceStorageConfigsRequest
+      properties: {}
+    ListInstancesRequest:
+      type: object
+      title: ListInstancesRequest
+      properties: {}
+    ListLambdaFunctionsRequest:
+      type: object
+      title: ListLambdaFunctionsRequest
+      properties: {}
+    ListLexBotsRequest:
+      type: object
+      title: ListLexBotsRequest
       properties: {}
     PhoneNumberTypes:
       type: array
@@ -5934,6 +8389,18 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/RoutingProfileSummary'
+    MaxResult2:
+      type: integer
+      minimum: 1
+      maximum: 2
+    ListSecurityKeysRequest:
+      type: object
+      title: ListSecurityKeysRequest
+      properties: {}
+    SecurityKeysList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityKey'
     ListSecurityProfilesRequest:
       type: object
       title: ListSecurityProfilesRequest
@@ -6125,6 +8592,22 @@ components:
             - $ref: '#/components/schemas/RoutingProfileName'
             - description: The name of the routing profile.
       description: Contains summary information about a routing profile.
+    SecurityKey:
+      type: object
+      properties:
+        AssociationId:
+          allOf:
+            - $ref: '#/components/schemas/AssociationId'
+            - description: The existing association identifier that uniquely identifies the resource type and storage config for the given instance ID.
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/PEM'
+            - description: The key of the security key.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/timestamp'
+            - description: When the security key was created.
+      description: Configuration information of the security key.
     SecurityProfileName:
       type: string
     SecurityProfileSummary:
@@ -6364,6 +8847,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/ContactFlowDescription'
             - description: The description of the contact flow.
+    UpdateInstanceAttributeRequest:
+      type: object
+      required:
+        - Value
+      title: UpdateInstanceAttributeRequest
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/InstanceAttributeValue'
+            - description: 'The value for the attribute. Maximum character limit is 100. '
+    UpdateInstanceStorageConfigRequest:
+      type: object
+      required:
+        - StorageConfig
+      title: UpdateInstanceStorageConfigRequest
+      properties:
+        StorageConfig:
+          $ref: '#/components/schemas/InstanceStorageConfig'
     UpdateRoutingProfileConcurrencyRequest:
       type: object
       required:

@@ -810,6 +810,132 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BaldrApiService.ModifyBackupAttributes:
+    post:
+      operationId: ModifyBackupAttributes
+      description: Modifies attributes for AWS CloudHSM backup.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyBackupAttributesResponse'
+        '480':
+          description: CloudHsmAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyBackupAttributesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BaldrApiService.ModifyBackupAttributes
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=BaldrApiService.ModifyCluster:
+    post:
+      operationId: ModifyCluster
+      description: Modifies AWS CloudHSM cluster.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyClusterResponse'
+        '480':
+          description: CloudHsmAccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmAccessDeniedException'
+        '481':
+          description: CloudHsmInternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmInternalFailureException'
+        '482':
+          description: CloudHsmInvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmInvalidRequestException'
+        '483':
+          description: CloudHsmResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmResourceNotFoundException'
+        '484':
+          description: CloudHsmServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudHsmServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyClusterRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - BaldrApiService.ModifyCluster
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=BaldrApiService.RestoreBackup:
     post:
       operationId: RestoreBackup
@@ -1105,14 +1231,14 @@ components:
     CreateClusterRequest:
       type: object
       required:
-        - SubnetIds
         - HsmType
+        - SubnetIds
       title: CreateClusterRequest
       properties:
-        SubnetIds:
+        BackupRetentionPolicy:
           allOf:
-            - $ref: '#/components/schemas/SubnetIds'
-            - description: '<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:</p> <ul> <li> <p>All subnets must be in the same virtual private cloud (VPC).</p> </li> <li> <p>You can specify only one subnet per Availability Zone.</p> </li> </ul>'
+            - $ref: '#/components/schemas/BackupRetentionPolicy'
+            - description: A policy that defines how the service retains backups.
         HsmType:
           allOf:
             - $ref: '#/components/schemas/HsmType'
@@ -1121,6 +1247,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BackupId'
             - description: 'The identifier (ID) of the cluster backup to restore. Use this value to restore the cluster from a backup instead of creating a new cluster. To find the backup ID, use <a>DescribeBackups</a>.'
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIds'
+            - description: '<p>The identifiers (IDs) of the subnets where you are creating the cluster. You must specify at least one subnet. If you specify multiple subnets, they must meet the following criteria:</p> <ul> <li> <p>All subnets must be in the same virtual private cloud (VPC).</p> </li> <li> <p>You can specify only one subnet per Availability Zone.</p> </li> </ul>'
         TagList:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -1235,12 +1365,12 @@ components:
             - description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more backups.
         MaxResults:
           allOf:
-            - $ref: '#/components/schemas/MaxSize'
+            - $ref: '#/components/schemas/BackupsMaxSize'
             - description: 'The maximum number of backups to return in the response. When there are more backups than the number you specify, the response contains a <code>NextToken</code> value.'
         Filters:
           allOf:
             - $ref: '#/components/schemas/Filters'
-            - description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>sourceBackupIds</code> filter to return only the backups created from a source backup. The <code>sourceBackupID</code> of a source backup is returned by the <a>CopyBackupToRegion</a> operation.</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p>
+            - description: <p>One or more filters to limit the items returned in the response.</p> <p>Use the <code>backupIds</code> filter to return only the specified backups. Specify backups by their backup identifier (ID).</p> <p>Use the <code>sourceBackupIds</code> filter to return only the backups created from a source backup. The <code>sourceBackupID</code> of a source backup is returned by the <a>CopyBackupToRegion</a> operation.</p> <p>Use the <code>clusterIds</code> filter to return only the backups for the specified clusters. Specify clusters by their cluster identifier (ID).</p> <p>Use the <code>states</code> filter to return only backups that match the specified state.</p> <p>Use the <code>neverExpires</code> filter to return backups filtered by the value in the <code>neverExpires</code> parameter. <code>True</code> returns all backups exempt from the backup retention policy. <code>False</code> returns all backups with a backup retention policy defined at the cluster.</p>
         SortAscending:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -1270,7 +1400,7 @@ components:
             - description: The <code>NextToken</code> value that you received in the previous response. Use this value to get more clusters.
         MaxResults:
           allOf:
-            - $ref: '#/components/schemas/MaxSize'
+            - $ref: '#/components/schemas/ClustersMaxSize'
             - description: 'The maximum number of clusters to return in the response. When there are more clusters than the number you specify, the response contains a <code>NextToken</code> value.'
     InitializeClusterResponse:
       type: object
@@ -1334,6 +1464,46 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxSize'
             - description: 'The maximum number of tags to return in the response. When there are more tags than the number you specify, the response contains a <code>NextToken</code> value.'
+    ModifyBackupAttributesResponse:
+      type: object
+      properties:
+        Backup:
+          $ref: '#/components/schemas/Backup'
+    ModifyBackupAttributesRequest:
+      type: object
+      required:
+        - BackupId
+        - NeverExpires
+      title: ModifyBackupAttributesRequest
+      properties:
+        BackupId:
+          allOf:
+            - $ref: '#/components/schemas/BackupId'
+            - description: 'The identifier (ID) of the backup to modify. To find the ID of a backup, use the <a>DescribeBackups</a> operation.'
+        NeverExpires:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the service should exempt a backup from the retention policy for the cluster. <code>True</code> exempts a backup from the retention policy. <code>False</code> means the service applies the backup retention policy defined at the cluster.
+    ModifyClusterResponse:
+      type: object
+      properties:
+        Cluster:
+          $ref: '#/components/schemas/Cluster'
+    ModifyClusterRequest:
+      type: object
+      required:
+        - BackupRetentionPolicy
+        - ClusterId
+      title: ModifyClusterRequest
+      properties:
+        BackupRetentionPolicy:
+          allOf:
+            - $ref: '#/components/schemas/BackupRetentionPolicy'
+            - description: A policy that defines how the service retains backups.
+        ClusterId:
+          allOf:
+            - $ref: '#/components/schemas/ClusterId'
+            - description: 'The identifier (ID) of the cluster that you want to modify. To find the cluster ID, use <a>DescribeClusters</a>.'
     RestoreBackupResponse:
       type: object
       properties:
@@ -1403,6 +1573,8 @@ components:
     Timestamp:
       type: string
       format: date-time
+    Boolean:
+      type: boolean
     Region:
       type: string
       pattern: '[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d'
@@ -1437,6 +1609,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The date and time when the backup was copied from a source backup.
+        NeverExpires:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Specifies whether the service should exempt a backup from the retention policy for the cluster. <code>True</code> exempts a backup from the retention policy. <code>False</code> means the service applies the backup retention policy defined at the cluster.
         SourceRegion:
           allOf:
             - $ref: '#/components/schemas/Region'
@@ -1457,17 +1633,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The list of tags for the backup.
-      description: 'Contains information about a backup of an AWS CloudHSM cluster. All backup objects contain the BackupId, BackupState, ClusterId, and CreateTimestamp parameters. Backups that were copied into a destination region additionally contain the CopyTimestamp, SourceBackup, SourceCluster, and SourceRegion paramters. A backup that is pending deletion will include the DeleteTimestamp parameter.'
+      description: 'Contains information about a backup of an AWS CloudHSM cluster. All backup objects contain the <code>BackupId</code>, <code>BackupState</code>, <code>ClusterId</code>, and <code>CreateTimestamp</code> parameters. Backups that were copied into a destination region additionally contain the <code>CopyTimestamp</code>, <code>SourceBackup</code>, <code>SourceCluster</code>, and <code>SourceRegion</code> parameters. A backup that is pending deletion will include the <code>DeleteTimestamp</code> parameter.'
     BackupPolicy:
       type: string
       enum:
         - DEFAULT
+    BackupRetentionType:
+      type: string
+      enum:
+        - DAYS
+    BackupRetentionValue:
+      type: string
+      pattern: '[0-9]+'
+      minLength: 1
+      maxLength: 3
+    BackupRetentionPolicy:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/BackupRetentionType'
+            - description: 'The type of backup retention policy. For the <code>DAYS</code> type, the value is the number of days to retain backups.'
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/BackupRetentionValue'
+            - description: Use a value between 7 - 379.
+      description: A policy that defines the number of days to retain backups.
     Backups:
       type: array
       items:
         $ref: '#/components/schemas/Backup'
-    Boolean:
-      type: boolean
+    BackupsMaxSize:
+      type: integer
+      minimum: 1
+      maximum: 50
     Cert:
       type: string
       pattern: '[a-zA-Z0-9+-/=\s]*'
@@ -1540,6 +1739,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BackupPolicy'
             - description: The cluster's backup policy.
+        BackupRetentionPolicy:
+          allOf:
+            - $ref: '#/components/schemas/BackupRetentionPolicy'
+            - description: A policy that defines how the service retains backups.
         ClusterId:
           allOf:
             - $ref: '#/components/schemas/ClusterId'
@@ -1597,6 +1800,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Cluster'
+    ClustersMaxSize:
+      type: integer
+      minimum: 1
+      maximum: 25
     DestinationBackup:
       type: object
       properties:
@@ -1677,10 +1884,6 @@ components:
       type: string
       pattern: .*
       maxLength: 256
-    MaxSize:
-      type: integer
-      minimum: 1
-      maximum: 100
     Filters:
       type: object
       additionalProperties:
@@ -1708,6 +1911,10 @@ components:
     ResourceId:
       type: string
       pattern: '(?:cluster|backup)-[2-7a-zA-Z]{11,16}'
+    MaxSize:
+      type: integer
+      minimum: 1
+      maximum: 100
     TagKey:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'

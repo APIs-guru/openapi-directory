@@ -911,6 +911,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListIdentityPoolsInput'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -2410,6 +2422,7 @@ components:
       type: string
       pattern: '[\S]+'
       minLength: 1
+      maxLength: 65535
     MappingRuleMatchType:
       type: string
       enum:
@@ -2447,7 +2460,7 @@ components:
       items:
         $ref: '#/components/schemas/MappingRule'
       minItems: 1
-      maxItems: 25
+      maxItems: 400
     RoleMappingType:
       type: string
       enum:
@@ -2484,6 +2497,8 @@ components:
     RoleType:
       type: string
       pattern: (un)?authenticated
+      minLength: 1
+      maxLength: 128
     UnprocessedIdentityId:
       type: object
       properties:

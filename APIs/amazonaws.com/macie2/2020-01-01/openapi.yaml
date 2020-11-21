@@ -362,7 +362,7 @@ paths:
                     bucketDefinitions:
                       allOf:
                         - $ref: '#/components/schemas/__listOfS3BucketDefinitionForJob'
-                        - description: 'An array of objects, one for each bucket that contains objects to analyze.'
+                        - description: 'An array of objects, one for each AWS account that owns buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for the account.'
                     scoping:
                       allOf:
                         - $ref: '#/components/schemas/Scoping'
@@ -4193,7 +4193,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job, or you paused the job and didn''t resume it within 30 days of pausing it.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing all the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you don''t resume the job within 30 days of pausing it, the job will expire and be cancelled.</p></li></ul>'
+            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job, or you paused the job while it had a status of RUNNING and you didn''t resume it within 30 days of pausing it.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume the job within 30 days of pausing it, the job expires and is cancelled. To check the job''s expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
         jobType:
           allOf:
             - $ref: '#/components/schemas/JobType'
@@ -4205,7 +4205,7 @@ components:
         lastRunTime:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
-            - description: 'The date and time, in UTC and extended ISO 8601 format, when the job last ran.'
+            - description: 'The date and time, in UTC and extended ISO 8601 format, when the job started. If the job is a recurring job, this value indicates when the most recent run started.'
         name:
           allOf:
             - $ref: '#/components/schemas/__string'
@@ -4936,11 +4936,11 @@ components:
         kmsManaged:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: ' <p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt objects. These buckets use AWS KMS AWS-managed (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.</p>'
+            - description: ' <p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt objects. These buckets use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.</p>'
         s3Managed:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of buckets that use an Amazon S3-managed key to encrypt objects. These buckets use Amazon S3-managed (SSE-S3) encryption.
+            - description: The total number of buckets that use an Amazon S3 managed key to encrypt objects. These buckets use Amazon S3 managed (SSE-S3) encryption.
         unencrypted:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -4999,6 +4999,26 @@ components:
             - $ref: '#/components/schemas/BucketPolicy'
             - description: The permissions settings of the bucket policy for the bucket. This value is null if a bucket policy hasn't been defined for the bucket.
       description: Provides information about the bucket-level permissions settings for an S3 bucket.
+    JobDetails:
+      type: object
+      properties:
+        isDefinedInJob:
+          allOf:
+            - $ref: '#/components/schemas/IsDefinedInJob'
+            - description: '<p>Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - One or more jobs is configured to analyze data in the bucket, and at least one of those jobs has a status other than CANCELLED.</p></li> <li><p>FALSE - No jobs are configured to analyze data in the bucket, or all the jobs that are configured to analyze data in the bucket have a status of CANCELLED.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul> <p></p>'
+        isMonitoredByJob:
+          allOf:
+            - $ref: '#/components/schemas/IsMonitoredByJob'
+            - description: '<p>Specifies whether any recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - One or more recurring jobs is configured to analyze data in the bucket, and at least one of those jobs has a status other than CANCELLED.</p></li> <li><p>FALSE - No recurring jobs are configured to analyze data in the bucket, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul>'
+        lastJobId:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - description: <p>The unique identifier for the job that ran most recently (either the latest run of a recurring job or the only run of a one-time job) and is configured to analyze data in the bucket.</p> <p>This value is null if the value for the isDefinedInJob property is FALSE or UNKNOWN.</p>
+        lastJobRunTime:
+          allOf:
+            - $ref: '#/components/schemas/__timestampIso8601'
+            - description: '<p>The date and time, in UTC and extended ISO 8601 format, when the job (lastJobId) started. If the job is a recurring job, this value indicates when the most recent run started.</p> <p>This value is null if the value for the isDefinedInJob property is FALSE or UNKNOWN.</p>'
+      description: 'Specifies whether any one-time or recurring classification jobs are configured to analyze data in an S3 bucket, and, if so, the details of the job that ran most recently.'
     ObjectCountByEncryptionType:
       type: object
       properties:
@@ -5009,11 +5029,11 @@ components:
         kmsManaged:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS KMS AWS-managed (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.
+            - description: The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.
         s3Managed:
           allOf:
             - $ref: '#/components/schemas/__long'
-            - description: The total number of objects that are encrypted using an Amazon S3-managed key. The objects use Amazon S3-managed (SSE-S3) encryption.
+            - description: The total number of objects that are encrypted using an Amazon S3 managed key. The objects use Amazon S3 managed (SSE-S3) encryption.
         unencrypted:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -5101,6 +5121,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/__long'
             - description: 'The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.'
+        jobDetails:
+          allOf:
+            - $ref: '#/components/schemas/JobDetails'
+            - description: 'Specifies whether any one-time or recurring classification jobs are configured to analyze data in the bucket, and, if so, the details of the job that ran most recently.'
         lastUpdated:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
@@ -5306,7 +5330,7 @@ components:
         bucketDefinitions:
           allOf:
             - $ref: '#/components/schemas/__listOfS3BucketDefinitionForJob'
-            - description: 'An array of objects, one for each bucket that contains objects to analyze.'
+            - description: 'An array of objects, one for each AWS account that owns buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for the account.'
         scoping:
           allOf:
             - $ref: '#/components/schemas/Scoping'
@@ -5528,7 +5552,7 @@ components:
         eqExactMatch:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
-            - description: 'A condition that requires an array field on a finding to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.'
+            - description: 'A condition that requires an array field to exactly match the specified property values. You can use this operator with the following properties: customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value, sensitiveData.category, and sensitiveData.detections.type.'
         gt:
           allOf:
             - $ref: '#/components/schemas/__long'
@@ -5764,7 +5788,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/__timestampIso8601'
             - description: 'The date and time, in UTC and extended ISO 8601 format, when you paused the job.'
-      description: Provides information about when a classification job was paused and when it will expire and be cancelled if it isn't resumed. This object is present only if a job's current status (jobStatus) is USER_PAUSED.
+      description: Provides information about when a classification job was paused and when it will expire and be cancelled if it isn't resumed. This object is present only if a job's current status (jobStatus) is USER_PAUSED. The information in this object applies only to a job that was paused while it had a status of RUNNING.
     DescribeOrganizationConfigurationRequest:
       type: object
       title: DescribeOrganizationConfigurationRequest
@@ -6385,6 +6409,18 @@ components:
     __double:
       type: number
       format: double
+    IsDefinedInJob:
+      type: string
+      enum:
+        - 'TRUE'
+        - 'FALSE'
+        - UNKNOWN
+    IsMonitoredByJob:
+      type: string
+      enum:
+        - 'TRUE'
+        - 'FALSE'
+        - UNKNOWN
     JobComparator:
       type: string
       enum:
@@ -6474,7 +6510,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job, or you paused the job and didn''t resume it within 30 days of pausing it.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing all the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but completion of the job would exceed one or more quotas for your account.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you don''t resume the job within 30 days of pausing it, the job will expire and be cancelled.</p></li></ul>'
+            - description: '<p>The current status of the job. Possible values are:</p> <ul><li><p>CANCELLED - You cancelled the job, or you paused the job while it had a status of RUNNING and you didn''t resume it within 30 days of pausing it.</p></li> <li><p>COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn''t apply to recurring jobs.</p></li> <li><p>IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn''t apply to one-time jobs.</p></li> <li><p>PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for.</p></li> <li><p>RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress.</p></li> <li><p>USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don''t resume the job within 30 days of pausing it, the job expires and is cancelled. To check the job''s expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>'
         jobType:
           allOf:
             - $ref: '#/components/schemas/JobType'
@@ -6514,7 +6550,7 @@ components:
       enum:
         - NONE
         - ERROR
-      description: 'Specifies whether any account- or bucket-level access errors occurred during the run of a one-time classification job ran or the most recent run of a recurring classification job. Possible values are:'
+      description: 'Specifies whether any account- or bucket-level access errors occurred during the run of a one-time classification job or the most recent run of a recurring classification job. Possible values are:'
     ListJobsFilterCriteria:
       type: object
       properties:
@@ -6882,12 +6918,12 @@ components:
         accountId:
           allOf:
             - $ref: '#/components/schemas/__string'
-            - description: 'The unique identifier for the AWS account that owns one or more of the buckets. If specified, the job analyzes objects in all the buckets that are owned by the account and meet other conditions specified for the job.'
+            - description: 'The unique identifier for the AWS account that owns the buckets. If you specify this value and don''t specify a value for the buckets array, the job analyzes objects in all the buckets that are owned by the account and meet other conditions specified for the job.'
         buckets:
           allOf:
             - $ref: '#/components/schemas/__listOf__string'
             - description: An array that lists the names of the buckets.
-      description: Specifies which S3 buckets contain the objects that a classification job analyzes.
+      description: 'Specifies which AWS account owns the S3 buckets that a classification job analyzes, and the buckets to analyze for the account.'
     StorageClass:
       type: string
       enum:
@@ -7082,7 +7118,7 @@ components:
         jobStatus:
           allOf:
             - $ref: '#/components/schemas/JobStatus'
-            - description: '<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. You can''t resume a job after you cancel it. This value is valid only if the job''s current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job''s current status is USER_PAUSED. If you specify this value, Amazon Macie immediately resumes the job.</p></li> <li><p>USER_PAUSED - Pauses the job. This value is valid only if the job''s current status is IDLE or RUNNING. If you specify this value and the job is currently running, Macie immediately stops running the job.</p> <p>To resume a job after you pause it, change the job''s status to RUNNING. If you don''t resume a job within 30 days of pausing it, the job expires and Macie cancels it. You can''t resume a job after it''s cancelled.</p></li></ul>'
+            - description: '<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. You can''t resume a job after you cancel it. This value is valid only if the job''s current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job''s current status is USER_PAUSED. If you specify this value, Amazon Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other configuration settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job. This value is valid only if the job''s current status is IDLE or RUNNING. If you specify this value and the job''s current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a job when its status is RUNNING and you don''t resume the job within 30 days, the job expires and Macie cancels it. You can''t resume a job after it''s cancelled.</p></li></ul>'
     UpdateFindingsFilterRequest:
       type: object
       title: UpdateFindingsFilterRequest

@@ -116,7 +116,7 @@ paths:
   '/applications/{application}/attribute-groups/{attributeGroup}':
     put:
       operationId: AssociateAttributeGroup
-      description: Associates an attribute group with an application to augment the application's metadata with the group's attributes. This way applications can be described with user-defined details which are machine-readable (e.g. for third-party integrations).
+      description: 'Associates an attribute group with an application to augment the application''s metadata with the group''s attributes. This feature enables applications to be described with user-defined details that are machine-readable, such as third-party integrations.'
       responses:
         '200':
           description: Success
@@ -177,7 +177,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DisassociateAttributeGroup
-      description: Disassociates an attribute group from an application to remove the extra attributes contained in the attribute group from the application's metadata. This operation reverts AssociateAttributeGroup.
+      description: Disassociates an attribute group from an application to remove the extra attributes contained in the attribute group from the application's metadata. This operation reverts <code>AssociateAttributeGroup</code>.
       responses:
         '200':
           description: Success
@@ -270,7 +270,7 @@ paths:
         - name: resourceType
           in: path
           required: true
-          description: ''
+          description: The type of resource of which the application will be associated.
           schema:
             type: string
             enum:
@@ -327,7 +327,7 @@ paths:
         - name: resourceType
           in: path
           required: true
-          description: The type of the resource that's being disassociated.
+          description: The type of the resource that is being disassociated.
           schema:
             type: string
             enum:
@@ -335,7 +335,7 @@ paths:
         - name: resource
           in: path
           required: true
-          description: The name or ID of the resource of which the application will be associated.
+          description: The name or ID of the resource.
           schema:
             type: string
             pattern: \S+
@@ -399,7 +399,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the clientToken, the same response is returned for each repeated request.'
+                  description: 'A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.'
                   type: string
                   pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
                   minLength: 1
@@ -455,7 +455,7 @@ paths:
   /attribute-groups:
     post:
       operationId: CreateAttributeGroup
-      description: Creates a new attribute group as a container for user-defined attributes. This approach enables users to have full control over their cloud application's metadata in a rich machine-readable format to facilitate integration with automated workflows and third-party tools.
+      description: Creates a new attribute group as a container for user-defined attributes. This feature enables users to have full control over their cloud application's metadata in a rich machine-readable format to facilitate integration with automated workflows and third-party tools.
       responses:
         '201':
           description: Success
@@ -523,7 +523,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
-                  description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the clientToken, the same response is returned for each repeated request.'
+                  description: 'A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.'
                   type: string
                   pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
                   minLength: 1
@@ -579,7 +579,7 @@ paths:
   '/applications/{application}':
     delete:
       operationId: DeleteApplication
-      description: 'Delete an application, specified either by its application ID or name.'
+      description: Deletes an application that is specified either by its application ID or name. All associated attribute groups and resources must be disassociated from it before deleting an application.
       responses:
         '200':
           description: Success
@@ -625,7 +625,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetApplication
-      description: 'Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a ResourceNotFoundException is thrown, avoiding the ABA addressing problem.'
+      description: 'Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem.'
       responses:
         '200':
           description: Success
@@ -693,7 +693,7 @@ paths:
         - name: application
           in: path
           required: true
-          description: The name or ID of the application. The name must be unique in the region in which you are updating the attribute group.
+          description: The name or ID of the application that will be updated.
           schema:
             type: string
             pattern: \w+
@@ -707,13 +707,13 @@ paths:
               type: object
               properties:
                 name:
-                  description: The anme of the application. The name must be unique in the region in which you are creating the application.
+                  description: The new name of the application. The name must be unique in the region in which you are updating the application.
                   type: string
                   pattern: \w+
                   minLength: 1
                   maxLength: 256
                 description:
-                  description: The description of the application.
+                  description: The new description of the application.
                   type: string
                   maxLength: 1024
   '/attribute-groups/{attributeGroup}':
@@ -765,7 +765,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetAttributeGroup
-      description: 'Retrieves an attribute group, either by its name or its ID.'
+      description: 'Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.'
       responses:
         '200':
           description: Success
@@ -1081,7 +1081,7 @@ components:
         application:
           allOf:
             - $ref: '#/components/schemas/Application'
-            - description: The name or ID of the application.
+            - description: Information about the application.
     TagValue:
       type: string
       pattern: '[\p{L}\p{Z}\p{N}_.:/=+\-@]*'
@@ -1092,39 +1092,39 @@ components:
         attributeGroup:
           allOf:
             - $ref: '#/components/schemas/AttributeGroup'
-            - description: The name or ID of the attribute group that holds the attributes to describe the application.
+            - description: Information about the attribute group.
     DeleteApplicationResponse:
       type: object
       properties:
         application:
           allOf:
             - $ref: '#/components/schemas/ApplicationSummary'
-            - description: The name or ID of the application.
+            - description: Information about the deleted application.
     DeleteAttributeGroupResponse:
       type: object
       properties:
         attributeGroup:
           allOf:
             - $ref: '#/components/schemas/AttributeGroupSummary'
-            - description: The name or ID of the attribute group that holds the attributes to describe the application.
+            - description: Information about the deleted attribute group.
     DisassociateAttributeGroupResponse:
       type: object
       properties:
         applicationArn:
           allOf:
             - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) of the application that was augmented with attributes.
+            - description: The Amazon resource name (ARN) that specifies the application.
         attributeGroupArn:
           allOf:
             - $ref: '#/components/schemas/AttributeGroupArn'
-            - description: The Amazon resource name (ARN) of the attribute group that contains the application's new attributes.
+            - description: The Amazon resource name (ARN) that specifies the attribute group.
     DisassociateResourceResponse:
       type: object
       properties:
         applicationArn:
           allOf:
             - $ref: '#/components/schemas/ApplicationArn'
-            - description: The Amazon resource name (ARN) of the application that was augmented with attributes.
+            - description: The Amazon resource name (ARN) that specifies the application.
         resourceArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -1163,18 +1163,18 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs you can use to associate with the application.
+            - description: Key-value pairs associated with the application.
     GetAttributeGroupResponse:
       type: object
       properties:
         id:
           allOf:
             - $ref: '#/components/schemas/AttributeGroupId'
-            - description: The identifier of the application.
+            - description: The identifier of the attribute group.
         arn:
           allOf:
             - $ref: '#/components/schemas/AttributeGroupArn'
-            - description: The Amazon resource name (ARN) that specifies the application across services.
+            - description: The Amazon resource name (ARN) that specifies the attribute group across services.
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -1198,14 +1198,14 @@ components:
         tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
-            - description: Key-value pairs you can use to associate with the attribute group.
+            - description: Key-value pairs associated with the attribute group.
     ListApplicationsResponse:
       type: object
       properties:
         applications:
           allOf:
             - $ref: '#/components/schemas/ApplicationSummaries'
-            - description: The name or ID of the application.
+            - description: This list of applications.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1227,7 +1227,7 @@ components:
         resources:
           allOf:
             - $ref: '#/components/schemas/Resources'
-            - description: The name or ID of the resource of which the application will be associated.
+            - description: Information about the resources.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1238,7 +1238,7 @@ components:
         attributeGroups:
           allOf:
             - $ref: '#/components/schemas/AttributeGroupSummaries'
-            - description: A list of attribute group IDs.
+            - description: This list of attribute groups.
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1249,14 +1249,14 @@ components:
         application:
           allOf:
             - $ref: '#/components/schemas/Application'
-            - description: The name or ID of the application.
+            - description: The updated information of the application.
     UpdateAttributeGroupResponse:
       type: object
       properties:
         attributeGroup:
           allOf:
             - $ref: '#/components/schemas/AttributeGroup'
-            - description: The name or ID of the attribute group that holds the attributes to describe the application.
+            - description: The updated information of the attribute group.
     ApplicationId:
       type: string
       pattern: '[a-z0-9]{12}'
@@ -1397,7 +1397,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/AttributeGroupArn'
-            - description: The Amazon resource name (ARN) that specifies the application across services.
+            - description: The Amazon resource name (ARN) that specifies the attribute group across services.
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -1433,7 +1433,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/AttributeGroupArn'
-            - description: The Amazon resource name (ARN) that specifies the application across services.
+            - description: The Amazon resource name (ARN) that specifies the attribute group across services.
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
@@ -1487,7 +1487,7 @@ components:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the clientToken, the same response is returned for each repeated request.'
+            - description: 'A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.'
     CreateAttributeGroupRequest:
       type: object
       required:
@@ -1515,7 +1515,7 @@ components:
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
-            - description: 'A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the clientToken, the same response is returned for each repeated request.'
+            - description: 'A unique identifier that you provide to ensure idempotency. If you retry a request that completed successfully using the same client token and the same parameters, the retry succeeds without performing any further actions. If you retry a successful request using the same client token, but one or more of the parameters are different, the retry fails.'
     DeleteApplicationRequest:
       type: object
       title: DeleteApplicationRequest
@@ -1582,7 +1582,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/StackArn'
-            - description: The Amazon resource name (ARN) that specifies the application across services.
+            - description: The Amazon resource name (ARN) that specifies the resource across services.
       description: Information about the resource.
     TagKey:
       type: string
@@ -1596,11 +1596,11 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/Name'
-            - description: The anme of the application. The name must be unique in the region in which you are creating the application.
+            - description: The new name of the application. The name must be unique in the region in which you are updating the application.
         description:
           allOf:
             - $ref: '#/components/schemas/Description'
-            - description: The description of the application.
+            - description: The new description of the application.
     UpdateAttributeGroupRequest:
       type: object
       title: UpdateAttributeGroupRequest
