@@ -103,8 +103,8 @@ info:
     - format: openapi
       url: https://api-docs.beezup.com/swagger.json
       version: "3.0"
-  x-preferred: null
   x-providerName: beezup.com
+  x-preferred: null
 externalDocs:
   description: Find the documentation for BeezUP's API here
   url: https://api-docs.beezup.com/
@@ -191,6 +191,10 @@ tags:
     x-displayName: List
   - name: Marketplaces - Orders V3 - Order
     x-displayName: Order
+  - name: Marketplaces - Orders V3 - Batches
+    x-displayName: Batches
+  - name: Marketplaces - Orders V3 - Exports
+    x-displayName: Exports
   - name: Marketplaces - Orders - Subscriptions - Subscriptions
     x-displayName: Subscriptions
   - name: OM Invoice - API - Settings
@@ -242,6 +246,178 @@ paths:
       summary: "Send a batch of operations to change your marketplace Order information: accept, ship, etc.  (max 100 items per call)"
       tags:
         - Marketplaces - Orders V3 - Batches
+  /orders/v3/batches/clearMerchantOrderInfos:
+    post:
+      deprecated: false
+      description: The purpose of this operation is to reduce the amount of request to the API.
+      operationId: ClearMerchantOrderInfoListV3
+      requestBody:
+        $ref: "#/components/requestBodies/clearMerchantOrderInfoListRequest"
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/batchOrderOperationResponse"
+          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Requested too many batch operations
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Send a batch of operations to clear an Order's merchant information (max 100 items per call)
+      tags:
+        - Marketplaces - Orders V3 - Batches
+  /orders/v3/batches/setMerchantOrderInfos:
+    post:
+      description: The purpose of this operation is to reduce the amount of request to the API.
+      operationId: SetMerchantOrderInfoListV3
+      requestBody:
+        $ref: "#/components/requestBodies/setMerchantOrderInfoListRequest"
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/batchOrderOperationResponse"
+          description: Succesfully received and processed batched operations. Please check response to see the status per operation.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Requested too many batch operations
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Send a batch of operations to set an Order's merchant information  (max 100 items per call)
+      tags:
+        - Marketplaces - Orders V3 - Batches
+  /orders/v3/exportations:
+    get:
+      operationId: GetOrderExportationsV3
+      parameters:
+        - description: The page number you want to get
+          example: "1"
+          in: query
+          name: pageNumber
+          required: true
+          schema:
+            format: PageNumber
+            minimum: 1
+            type: integer
+          x-minimum: "1"
+        - description: The entry count you want to get
+          example: "25"
+          in: query
+          name: pageSize
+          required: true
+          schema:
+            format: PageSize
+            maximum: 100
+            minimum: 25
+            type: integer
+          x-maximum: "100"
+          x-minimum: "25"
+        - description: The store identifier to regroup the order exportations
+          in: query
+          name: storeId
+          required: true
+          schema:
+            format: StoreId
+            type: string
+        - $ref: "#/components/parameters/ifNoneMatchParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/orderExportationsWithLinks"
+          description: Successfully fetched the list of Order report exportations
+        "304":
+          $ref: "#/components/responses/304_NotModified"
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Could not process request for given parameters values. Please check error message for more details.
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Get a paginated list of Order report exportations
+      tags:
+        - Marketplaces - Orders V3 - Exports
+    post:
+      deprecated: false
+      description: A new file will be generated containing a summary of all the Orders matching the requested filter settings.
+      operationId: ExportOrdersV3
+      requestBody:
+        $ref: "#/components/requestBodies/exportOrderListRequest"
+      responses:
+        "202":
+          description: Successfully requested new Order report exportation generation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Could not process request for given parameters values. Please check error message for more details.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: No orders have been found for this request.
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Request a new Order report exportation to be generated
+      tags:
+        - Marketplaces - Orders V3 - Exports
+  /orders/v3/harvest:
+    post:
+      deprecated: false
+      operationId: HarvestAllV3
+      parameters:
+        - description: The StoreId to filter by
+          example: 04730364-9826-4ff3-92e4-51fccd02bf10
+          in: query
+          name: storeId
+          required: false
+          schema:
+            format: StoreId
+            type: string
+      responses:
+        "202":
+          description: Successfully sent harvest request to all marketplaces
+          headers:
+            Retry-After:
+              description: Indicates the duration in seconds to wait to be able to make this request again
+              schema:
+                type: integer
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Requested Store could not be found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Failed to send harvest request because allowed rate limits have been exceeded
+          headers:
+            Retry-After:
+              description: Indicates the duration in seconds to wait to be able to make this request again
+              schema:
+                type: integer
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Send harvest request to all your marketplaces
+      tags:
+        - Marketplaces - Orders V3 - Global
   /orders/v3/list/full:
     post:
       deprecated: false
@@ -472,6 +648,44 @@ paths:
       summary: Clear an Order's merchant information
       tags:
         - Marketplaces - Orders V3 - Order
+  "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/harvest":
+    post:
+      deprecated: false
+      operationId: HarvestOrderV3
+      parameters:
+        - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
+        - $ref: "#/components/parameters/accountIdParameter"
+        - $ref: "#/components/parameters/beezUPOrderIdParameter"
+      responses:
+        "202":
+          description: Successfully sent Order harvest request
+          headers:
+            Retry-After:
+              description: Indicates the duration in seconds to wait to be able to make this request again
+              schema:
+                type: integer
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Requested Order could not be found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/errorResponseMessage"
+          description: Failed to send harvest request because allowed rate limits have been exceeded
+          headers:
+            Retry-After:
+              description: Indicates the duration in seconds to wait to be able to make this request again
+              schema:
+                type: integer
+        default:
+          $ref: "#/components/responses/GeneralError"
+      summary: Send harvest request for a single Order
+      tags:
+        - Marketplaces - Orders V3 - Order
   "/orders/v3/{marketplaceTechnicalCode}/{accountId}/{beezUPOrderId}/history":
     get:
       deprecated: false
@@ -504,7 +718,7 @@ paths:
     get:
       deprecated: false
       description: This operation will help you to know the status of your order change operation
-      operationId: GetOrderChangeReporting
+      operationId: GetOrderChangeReportingV3
       parameters:
         - $ref: "#/components/parameters/marketplaceTechnicalCodeParameter"
         - $ref: "#/components/parameters/accountIdParameter"
@@ -5537,11 +5751,7 @@ paths:
       description: The purpose of this operation is to reduce the amount of request to the API.
       operationId: ClearMerchantOrderInfoList
       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/clearMerchantOrderInfoListRequest"
-        required: true
+        $ref: "#/components/requestBodies/clearMerchantOrderInfoListRequest"
       responses:
         "202":
           content:
@@ -5566,11 +5776,7 @@ paths:
       description: The purpose of this operation is to reduce the amount of request to the API.
       operationId: SetMerchantOrderInfoList
       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/setMerchantOrderInfoListRequest"
-        required: true
+        $ref: "#/components/requestBodies/setMerchantOrderInfoListRequest"
       responses:
         "202":
           content:
@@ -5629,11 +5835,7 @@ paths:
       description: A new file will be generated containing a summary of all the Orders matching the requested filter settings.
       operationId: ExportOrders
       requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/exportOrderListRequest"
-        required: true
+        $ref: "#/components/requestBodies/exportOrderListRequest"
       responses:
         "202":
           description: Successfully requested new Order report exportation generation
@@ -6758,6 +6960,18 @@ components:
           schema:
             $ref: "#/components/schemas/changeUserColumnNameRequest"
       required: true
+    clearMerchantOrderInfoListRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/clearMerchantOrderInfoListRequest"
+      required: true
+    exportOrderListRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/exportOrderListRequest"
+      required: true
     getChannelCatalogProductInfoListRequest:
       content:
         application/json:
@@ -6782,6 +6996,12 @@ components:
         application/json:
           schema:
             $ref: "#/components/schemas/orderListRequest"
+      required: true
+    setMerchantOrderInfoListRequest:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/setMerchantOrderInfoListRequest"
       required: true
     setMerchantOrderInfoRequest:
       content:
@@ -6938,7 +7158,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
+            $ref: "#/components/schemas/errorResponseMessage"
       description: The target url is not available
       x-exceptions:
         - OrderSubscriptionTargetNotAvailableException
@@ -6963,7 +7183,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
+            $ref: "#/components/schemas/errorResponseMessage"
       description: The subscription is deactivated or your subscription consumption availability status is available.
       x-exceptions:
         - OrderSubscriptionRetryRejectedException
@@ -6989,7 +7209,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/BeezUP.Common.ErrorResponseMessage"
+            $ref: "#/components/schemas/errorResponseMessage"
       description: The subscription id is already used.
       x-exceptions:
         - OrderSubscriptionAlreadyExistsException
@@ -10031,18 +10251,6 @@ components:
       description: Your address city
       example: New-York
       type: string
-    clearMerchantOrderInfoLink:
-      allOf:
-        - $ref: "#/components/schemas/link3"
-        - example:
-            href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/clearMerchantOrderInfo
-            method: POST
-    clearMerchantOrderInfoListLink:
-      allOf:
-        - $ref: "#/components/schemas/link3"
-        - example:
-            href: /v2/user/marketplaces/orders/clearMerchantOrderInfos
-            method: POST
     clearMerchantOrderInfoListRequest:
       properties:
         orders:
@@ -11211,6 +11419,25 @@ components:
         type:
           type: string
       type: object
+    exchangedMessagesItem:
+      properties:
+        operationName:
+          type: string
+        requestUri:
+          format: uri
+          type: string
+        requestUtcDate:
+          format: date-time
+          type: string
+        responseUri:
+          format: uri
+          type: string
+        responseUtcDate:
+          format: date-time
+          type: string
+      required:
+        - operationName
+      type: object
     exclusionFilter:
       description: The exclusion filter
       properties:
@@ -11352,18 +11579,6 @@ components:
         - storeId
         - orderListRequestWithoutPagination
       type: object
-    exportOrdersLink:
-      allOf:
-        - $ref: "#/components/schemas/link3"
-        - example:
-            href: /v2/user/marketplaces/orders/exportations
-            method: POST
-            properties:
-              request:
-                in: body
-                required: true
-                schema: exportOrderListRequest
-                type: object
     externalLinks.Catalog_GetBeezUPColumnsLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
@@ -11669,12 +11884,6 @@ components:
         - failedCount
         - activeCount
       type: object
-    getOrderHistoryLink:
-      allOf:
-        - $ref: "#/components/schemas/link3"
-        - example:
-            href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/history
-            method: GET
     getOrderInvoiceDesignPreviewResponse:
       properties:
         invoiceHtmlContent:
@@ -11751,18 +11960,6 @@ components:
       example: https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?d=mm
       pattern: ^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$
       type: string
-    harvestAllLink:
-      allOf:
-        - $ref: "#/components/schemas/link3"
-        - example:
-            href: /v2/user/marketplaces/orders/harvest
-            method: POST
-    harvestOrderLink:
-      allOf:
-        - $ref: "#/components/schemas/link3"
-        - example:
-            href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/harvest
-            method: POST
     harvestOrderReporting:
       description: The reporting related to a harvest order operation
       properties:
@@ -12739,6 +12936,58 @@ components:
                 type: string
             rel: ShipOrder
             templated: "true"
+    links.ChangeOrderV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - properties:
+            rel:
+              description: Indicate the relation name related to the link
+              example: self
+              type: string
+          type: object
+        - example:
+            href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/ShipOrder
+            method: POST
+            parameters:
+              If-Match:
+                in: header
+                required: true
+                type: string
+                value: '"ca071a4580129f932a03971968ffef69"'
+              request:
+                in: body
+                properties:
+                  order_Shipping_CarrierName:
+                    lovLink:
+                      href: /v2/user/PriceMinisterCarrierName
+                    lovRequired: "true"
+                    required: true
+                    type: string
+                  order_Shipping_FulfillmentDate:
+                    required: true
+                    type: date-time
+                  order_Shipping_Method:
+                    lovLink:
+                      href: /v2/user/ShippingMethod_PriceMinister
+                    lovRequired: "false"
+                    required: true
+                    type: string
+                  order_Shipping_ShipperTrackingNumber:
+                    required: true
+                    type: string
+                schema: changeOrderRequest
+                type: object
+              testMode:
+                in: query
+                required: false
+                type: boolean
+                value: "false"
+              userName:
+                in: query
+                required: true
+                type: string
+            rel: ShipOrder
+            templated: "true"
     links.ClearChannelCatalogExportationCacheLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
@@ -12756,6 +13005,18 @@ components:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
         - example:
             href: /v2/user/marketplaces/orders/clearMerchantOrderInfos
+            method: POST
+    links.ClearMerchantOrderInfoListV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/clearMerchantOrderInfos
+            method: POST
+    links.ClearMerchantOrderInfoV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/clearMerchantOrderInfo
             method: POST
     links.ConfigureAutomaticTransitionsLink:
       allOf:
@@ -12905,6 +13166,18 @@ components:
                 required: true
                 schema: exportOrderListRequest
                 type: object
+    links.ExportOrdersV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/exportations
+            method: POST
+            properties:
+              request:
+                in: body
+                required: true
+                schema: exportOrderListRequest
+                type: object
     links.GetAutomaticTransitionsLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
@@ -13018,6 +13291,12 @@ components:
         - example:
             href: /v2/user/marketplaces/orders/status
             method: GET
+    links.GetMarketplaceAccountsSynchronizationV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/status
+            method: GET
     links.GetMarketplaceChannelCatalogsLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
@@ -13029,9 +13308,18 @@ components:
         - example:
             href: /v2/user/marketplaces/orders/exportations
             method: GET
+    links.GetOrderExportationsV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
     links.GetOrderHistoryLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
+        - example:
+            href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/history
+            method: GET
+    links.GetOrderHistoryV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
         - example:
             href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/history
             method: GET
@@ -13064,6 +13352,22 @@ components:
                 required: false
                 schema: orderListRequest
                 type: object
+    links.GetOrderListFullV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/list/full
+            method: POST
+            properties:
+              Accept-Encoding:
+                in: header
+                required: true
+                type: string
+              request:
+                in: body
+                required: false
+                schema: orderListRequest
+                type: object
     links.GetOrderListLightLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
@@ -13076,6 +13380,24 @@ components:
                 required: false
                 schema: orderListRequest
                 type: object
+    links.GetOrderListLightV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/list/light
+            method: POST
+            properties:
+              request:
+                in: body
+                required: false
+                schema: orderListRequest
+                type: object
+    links.GetOrderV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000
+            method: GET
     links.GetPublicListOfValuesLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
@@ -13215,11 +13537,23 @@ components:
         - example:
             href: /v2/user/marketplaces/orders/harvest
             method: POST
+    links.HarvestAllV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/harvest
+            method: POST
     links.HarvestOrderLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
         - example:
             href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/harvest
+            method: POST
+    links.HarvestOrderV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/Amazon/1001#/00000000000000000000000000000000000000000000000/harvest
             method: POST
     links.Importation_ActivateAutoImportLink:
       allOf:
@@ -13622,6 +13956,29 @@ components:
                 required: true
                 schema: setMerchantOrderInfoRequest
                 type: object
+    links.SetMerchantOrderInfoListV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/setMerchantOrderInfos
+            method: POST
+            parameters:
+              request:
+                in: body
+                required: true
+                schema: setMerchantOrderInfoRequest
+                type: object
+    links.SetMerchantOrderInfoV3Link:
+      allOf:
+        - $ref: "#/components/schemas/link3"
+        - example:
+            href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/setMerchantOrderInfo
+            method: POST
+            parameters:
+              request:
+                in: body
+                schema: setMerchantOrderInfoRequest
+                type: object
     links.UpdateRuleLink:
       allOf:
         - $ref: "#/components/schemas/BeezUP.Common.Link3"
@@ -13843,6 +14200,27 @@ components:
         - example:
             href: /v2/user/customer/stores/51afae05-277e-4902-8b17-5a811a23a2c6
             method: PATCH
+    listOfValueItem:
+      description: This object is used by LOV apis
+      properties:
+        codeIdentifier:
+          example: FRA
+          type: string
+        intIdentifier:
+          example: "1"
+          format: int32
+          type: integer
+        position:
+          example: "1"
+          format: int32
+          type: integer
+        translationText:
+          example: France
+          type: string
+      required:
+        - codeIdentifier
+        - intIdentifier
+      type: object
     loginRequest:
       properties:
         login:
@@ -14020,7 +14398,7 @@ components:
       type: object
     oMReadyMarketplaceBusinessCodeResponse:
       items:
-        $ref: "#/components/schemas/BeezUP.Common.ListOfValueItem"
+        $ref: "#/components/schemas/listOfValueItem"
       type: array
     offer:
       properties:
@@ -14517,6 +14895,21 @@ components:
           $ref: "#/components/schemas/links.GetOrderExportationsLink"
       required:
         - self
+      type: object
+    orderExportationsWithLinks:
+      properties:
+        exportations:
+          items:
+            $ref: "#/components/schemas/orderExportationReporting"
+          type: array
+        links:
+          $ref: "#/components/schemas/orderExportationsLinks"
+        paginationResult:
+          $ref: "#/components/schemas/paginationResult"
+      required:
+        - paginationResult
+        - exportations
+        - links
       type: object
     orderHeader:
       description: Describe the basic information related to an order. All properties with the prefix order_ are translated in the list of values /user/lov/OrderMetaInfoOrderDetails
@@ -16956,29 +17349,6 @@ components:
       required:
         - settings
       type: object
-    setMerchantOrderInfoLink:
-      allOf:
-        - $ref: "#/components/schemas/link3"
-        - example:
-            href: /v2/user/marketplaces/orders/Amazon/1001/00000000000000000000000000000000000000000000000/setMerchantOrderInfo
-            method: POST
-            parameters:
-              request:
-                in: body
-                schema: setMerchantOrderInfoRequest
-                type: object
-    setMerchantOrderInfoListLink:
-      allOf:
-        - $ref: "#/components/schemas/link3"
-        - example:
-            href: /v2/user/marketplaces/orders/setMerchantOrderInfos
-            method: POST
-            parameters:
-              request:
-                in: body
-                required: true
-                schema: setMerchantOrderInfoRequest
-                type: object
     setMerchantOrderInfoListRequest:
       properties:
         order_MerchantECommerceSoftwareName:
@@ -17516,7 +17886,7 @@ components:
         status:
           $ref: "#/components/schemas/subscriptionStatus"
         targetUrl:
-          $ref: "#/components/schemas/BeezUP.Common.HttpUrl"
+          $ref: "#/components/schemas/httpUrl"
       required:
         - id
         - targetUrl
@@ -18001,6 +18371,12 @@ components:
         - countryIsoCodeAlpha3
         - company
       type: object
+    userId:
+      description: The user identifier
+      example: 8a7fbdec-9e71-472e-9974-27d5c1d57cf8
+      format: guid
+      type: string
+      x-exclude: true
     userListOfValuesResponse:
       properties:
         items:
@@ -18155,6 +18531,8 @@ x-tagGroups:
       - Marketplaces - Orders V3 - Global
       - Marketplaces - Orders V3 - List
       - Marketplaces - Orders V3 - Order
+      - Marketplaces - Orders V3 - Batches
+      - Marketplaces - Orders V3 - Exports
   - name: Marketplaces - Orders - Subscriptions
     tags:
       - Marketplaces - Orders - Subscriptions - Subscriptions

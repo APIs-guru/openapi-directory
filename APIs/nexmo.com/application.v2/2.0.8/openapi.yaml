@@ -12,14 +12,14 @@ info:
 
     This API is backwards compatible with version 1. Applications created using version 1 of the API can also be managed using version 2 (this version) of the API.
   title: Application API
-  version: 2.0.6
+  version: 2.0.8
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/application.v2.yml
       version: "3.0"
-  x-preferred: null
   x-providerName: nexmo.com
   x-serviceName: application.v2
+  x-preferred: null
 security:
   - basicAuth: []
 paths:
@@ -208,12 +208,26 @@ paths:
                                 address:
                                   example: https://example.com/webhooks/answer
                                   type: string
+                                connection_timeout:
+                                  default: 1000
+                                  description: Connection timeout in milliseconds
+                                  example: 500
+                                  maximum: 1000
+                                  minimum: 300
+                                  type: integer
                                 http_method:
                                   enum:
                                     - GET
                                     - POST
                                   example: GET
                                   type: string
+                                socket_timeout:
+                                  default: 5000
+                                  description: Reading timeout in milliseconds
+                                  example: 3000
+                                  maximum: 5000
+                                  minimum: 1000
+                                  type: integer
                               type: object
                               x-nexmo-developer-collection-description-shown: true
                             event_url:
@@ -222,12 +236,26 @@ paths:
                                 address:
                                   example: https://example.com/webhooks/event
                                   type: string
+                                connection_timeout:
+                                  default: 1000
+                                  description: Connection timeout in milliseconds
+                                  example: 500
+                                  maximum: 1000
+                                  minimum: 300
+                                  type: integer
                                 http_method:
                                   enum:
                                     - GET
                                     - POST
                                   example: POST
                                   type: string
+                                socket_timeout:
+                                  default: 10000
+                                  description: Reading timeout in milliseconds
+                                  example: 3000
+                                  maximum: 10000
+                                  minimum: 1000
+                                  type: integer
                               type: object
                               x-nexmo-developer-collection-description-shown: true
                             fallback_answer_url:
@@ -239,12 +267,26 @@ paths:
                                 address:
                                   example: https://fallback.example.com/webhooks/answer
                                   type: string
+                                connection_timeout:
+                                  default: 1000
+                                  description: Connection timeout in milliseconds
+                                  example: 500
+                                  maximum: 1000
+                                  minimum: 300
+                                  type: integer
                                 http_method:
                                   enum:
                                     - GET
                                     - POST
                                   example: GET
                                   type: string
+                                socket_timeout:
+                                  default: 5000
+                                  description: Reading timeout in milliseconds
+                                  example: 3000
+                                  maximum: 5000
+                                  minimum: 1000
+                                  type: integer
                               type: object
                               x-nexmo-developer-collection-description-shown: true
                           type: object
@@ -504,12 +546,26 @@ paths:
                                 address:
                                   example: https://example.com/webhooks/answer
                                   type: string
+                                connection_timeout:
+                                  default: 1000
+                                  description: Connection timeout in milliseconds
+                                  example: 500
+                                  maximum: 1000
+                                  minimum: 300
+                                  type: integer
                                 http_method:
                                   enum:
                                     - GET
                                     - POST
                                   example: GET
                                   type: string
+                                socket_timeout:
+                                  default: 5000
+                                  description: Reading timeout in milliseconds
+                                  example: 3000
+                                  maximum: 5000
+                                  minimum: 1000
+                                  type: integer
                               type: object
                               x-nexmo-developer-collection-description-shown: true
                             event_url:
@@ -518,12 +574,26 @@ paths:
                                 address:
                                   example: https://example.com/webhooks/event
                                   type: string
+                                connection_timeout:
+                                  default: 1000
+                                  description: Connection timeout in milliseconds
+                                  example: 500
+                                  maximum: 1000
+                                  minimum: 300
+                                  type: integer
                                 http_method:
                                   enum:
                                     - GET
                                     - POST
                                   example: POST
                                   type: string
+                                socket_timeout:
+                                  default: 10000
+                                  description: Reading timeout in milliseconds
+                                  example: 3000
+                                  maximum: 10000
+                                  minimum: 1000
+                                  type: integer
                               type: object
                               x-nexmo-developer-collection-description-shown: true
                             fallback_answer_url:
@@ -535,12 +605,26 @@ paths:
                                 address:
                                   example: https://fallback.example.com/webhooks/answer
                                   type: string
+                                connection_timeout:
+                                  default: 1000
+                                  description: Connection timeout in milliseconds
+                                  example: 500
+                                  maximum: 1000
+                                  minimum: 300
+                                  type: integer
                                 http_method:
                                   enum:
                                     - GET
                                     - POST
                                   example: GET
                                   type: string
+                                socket_timeout:
+                                  default: 5000
+                                  description: Reading timeout in milliseconds
+                                  example: 3000
+                                  maximum: 5000
+                                  minimum: 1000
+                                  type: integer
                               type: object
                               x-nexmo-developer-collection-description-shown: true
                           type: object
@@ -743,10 +827,18 @@ components:
                           description: The URL that Vonage requests when a call is placed/received. Must return an NCCO
                           example: https://example.com/webhooks/answer
                           type: string
+                        connection_timeout:
+                          description: Connection timeout in milliseconds
+                          example: 500
+                          type: integer
                         http_method:
                           description: The HTTP method used to fetch your NCCO from your `answer_url`
                           example: POST
                           type: string
+                        socket_timeout:
+                          description: Reading timeout in milliseconds
+                          example: 3000
+                          type: integer
                       type: object
                     event_url:
                       properties:
@@ -754,10 +846,18 @@ components:
                           description: The URL that Vonage sends events related to your call to
                           example: https://example.com/webhooks/event
                           type: string
+                        connection_timeout:
+                          description: Connection timeout in milliseconds
+                          example: 500
+                          type: integer
                         http_method:
                           description: The HTTP method used to send events to your server
                           example: POST
                           type: string
+                        socket_timeout:
+                          description: Reading timeout in milliseconds
+                          example: 3000
+                          type: integer
                       type: object
                     fallback_answer_url:
                       properties:
@@ -768,10 +868,18 @@ components:
                             `fallback_answer_url` if it is set. This URL must return an NCCO.
                           example: https://fallback.example.com/webhooks/answer
                           type: string
+                        connection_timeout:
+                          description: Connection timeout in milliseconds
+                          example: 500
+                          type: integer
                         http_method:
                           description: The HTTP method used to fetch your NCCO from your `answer_url`
                           example: POST
                           type: string
+                        socket_timeout:
+                          description: Reading timeout in milliseconds
+                          example: 3000
+                          type: integer
                       type: object
                   type: object
               type: object

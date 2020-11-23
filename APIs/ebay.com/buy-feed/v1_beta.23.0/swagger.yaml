@@ -12,7 +12,7 @@ info:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
   title: Item Feed Service
-  version: v1_beta.22.0
+  version: v1_beta.23.0
   x-apisguru-categories:
     - ecommerce
   x-logo:
@@ -22,9 +22,9 @@ info:
     - format: swagger
       url: https://developer.ebay.com/api-docs/master/buy/feed/openapi/2/buy_feed_v1_beta_oas2.json
       version: "2.0"
-  x-preferred: null
   x-providerName: ebay.com
   x-serviceName: buy-feed
+  x-preferred: null
 securityDefinitions:
   Client Credentials:
     description: The security definitions for this API. Please check individual operations for applicable scopes.
@@ -183,7 +183,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal Server Error
+          description: Internal server error
           x-response-codes:
             errors:
               "13006":
@@ -344,7 +344,7 @@ paths:
         "416":
           description: Range not satisfiable
         "500":
-          description: Internal server error
+          description: Internal Server Error
           x-response-codes:
             errors:
               "13006":
@@ -410,7 +410,7 @@ paths:
           schema:
             $ref: "#/definitions/ItemSnapshotResponse"
         "400":
-          description: Bad Request
+          description: Bad request
           x-response-codes:
             errors:
               "13000":

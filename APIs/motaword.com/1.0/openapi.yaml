@@ -17,8 +17,8 @@ info:
     - format: openapi
       url: https://api.motaword.com/swagger
       version: "3.0"
-  x-preferred: null
   x-providerName: motaword.com
+  x-preferred: null
 externalDocs:
   url: https://www.motaword.com/developer
 security:
@@ -319,6 +319,17 @@ paths:
             default: 1
             format: int64
             type: integer
+        - description: Attach further information. Possible values 'preview' to fetch temporary preview URLs for Box.com or native PDF. This is NOT recommended to be used with list calls. Only use with[]=preview for single document/style guide calls.
+          in: query
+          name: with[]
+          required: false
+          schema:
+            items:
+              enum:
+                - preview
+                - editors
+              type: string
+            type: array
       responses:
         "200":
           content:
@@ -327,6 +338,60 @@ paths:
                 $ref: "#/components/schemas/DocumentList"
           description: Document list
       summary: Find documents similar to this document.
+      tags:
+        - Document
+  "/documents/{documentId}/use_as_draft":
+    post:
+      description: Use the translation of given source manual document as manual draft source for the given target document.
+      operationId: useAsDraft
+      parameters:
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UseAsDraftPayload"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Operation status
+      summary: Use the translation of given source manual document as manual draft source for the given target document.
+      tags:
+        - Document
+  "/documents/{documentId}/use_as_regular":
+    post:
+      description: Use the translation of the given manual document as a regular file.
+      operationId: useAsRegular
+      parameters:
+        - description: Document ID
+          in: path
+          name: documentId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UseAsRegularPayload"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationStatus"
+          description: Operation status
+      summary: Use the translation of the given manual document as a regular file.
       tags:
         - Document
   /downgrade-proofreader:
@@ -4960,8 +5025,12 @@ components:
           type: integer
         links:
           $ref: "#/components/schemas/DocumentLinks"
+        manual_files:
+          $ref: "#/components/schemas/ManualFiles"
         name:
           type: string
+        review_in_manual_editor:
+          type: boolean
         scheme:
           type: object
         source_language:
@@ -5298,6 +5367,28 @@ components:
             $ref: "#/components/schemas/ClientStringWithTranslations"
           type: array
       type: object
+    ManualFile:
+      properties:
+        driveFileId:
+          format: int64
+          type: integer
+        isProofread:
+          type: boolean
+        isTranslated:
+          type: boolean
+        language:
+          type: string
+        proofreadingFileId:
+          format: int64
+          type: integer
+        translationFileId:
+          format: int64
+          type: integer
+      type: object
+    ManualFiles:
+      items:
+        $ref: "#/components/schemas/ManualFile"
+      type: array
     Monetary:
       properties:
         amount:
@@ -5871,6 +5962,28 @@ components:
             stripeToken:
               type: string
           type: object
+    UseAsDraftPayload:
+      properties:
+        fromFileId:
+          type: number
+        fromManualTranslationFileId:
+          type: number
+        toManualTranslationFileId:
+          type: number
+      type: object
+    UseAsRegularPayload:
+      properties:
+        allowReviewInManualEditor:
+          type: boolean
+        disableInvitations:
+          type: boolean
+        fromManualTranslationFileId:
+          type: number
+        hideNumbers:
+          type: boolean
+        recreate:
+          type: boolean
+      type: object
     User:
       properties:
         billing:

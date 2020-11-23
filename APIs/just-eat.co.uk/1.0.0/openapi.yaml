@@ -109,8 +109,8 @@ info:
     - format: openapi
       url: https://uk.api.just-eat.io/docs/openapi.json
       version: "3.0"
-  x-preferred: null
   x-providerName: just-eat.co.uk
+  x-preferred: null
 paths:
   /acceptance-requested:
     post:
@@ -1154,7 +1154,8 @@ paths:
     post:
       description: Create order
       parameters:
-        - example:
+        - description: The api version to use. Version 2.0 is the only available version.
+          example:
             x-je-api-version: 2
           in: header
           name: x-je-api-version
@@ -1179,7 +1180,7 @@ paths:
                 type: object
           description: Created
         "400":
-          description: Request has failed validation in some way - see response body for details
+          description: Bad Request - Request is for deprecated API version or has failed validation in some way - see response body for details
         "409":
           content:
             application/json:
@@ -1259,6 +1260,46 @@ paths:
       tags:
         - Order Acceptance API
         - publicly-accessible
+  "/orders/{orderId}/complete":
+    post:
+      description: Call when an order is complete. An order can only be marked as complete if it hasn't already been marked as cancelled or complete.
+      parameters:
+        - description: The ID of the order to mark as complete
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No content - status updated successfully
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Order could not be found
+                faultId: b6a1d658-dda4-41b6-a9a5-dbfb7ba7b2aa
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Not found - order could not be found
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Order cannot be marked as complete because it is already marked as cancelled
+                faultId: 9c63827b-6fad-46bf-9e9a-9aafec941824
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Conflict - this order has already been marked as cancelled or complete
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+      summary: Complete order
+      tags:
+        - Order Acceptance API
+        - publicly-accessible
+    x-status: Draft
   "/orders/{orderId}/deliverystate/atdeliveryaddress":
     put:
       description: <p>The _at delivery address_ callback should be sent when the driver thinks that they have arrived at the specified delivery address.</p><p>NB&semi; This callback should be distinct from the delivered callback, as Just Eat use this callback to understand how much time is spent locating the customer's address.</p>
@@ -1498,6 +1539,56 @@ paths:
       tags:
         - Order Acceptance API
         - publicly-accessible
+  "/orders/{orderId}/readyforcollection":
+    post:
+      description: Call when a collection order is ready to be collected by the customer. An order can only be marked as ready for collection if it is a collection order in the accepted state.
+      parameters:
+        - description: The ID of the order to mark as ready for collection
+          in: path
+          name: orderId
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: No content - status updated successfully
+        "400":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Order cannot be marked as ready for collection because it is not a collection order
+                faultId: aa5d282c-498e-47dd-acca-d4bb811a8f9d
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Bad request - order cannot be marked as ready for collection because it is not a collection order
+        "404":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Order could not be found
+                faultId: 15c27f5b-5121-4c1f-bea3-34378dff2a79
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Not found - order could not be found
+        "409":
+          content:
+            application/json:
+              example:
+                errors:
+                  - description: Order cannot be marked as ready for collection because it is already marked as complete
+                faultId: 9c63827b-6fad-46bf-9e9a-9aafec941824
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Conflict - this order is not in the accepted state
+        "500":
+          $ref: "#/components/responses/500ErrorResponse"
+      summary: Mark order as ready for collection
+      tags:
+        - Order Acceptance API
+        - publicly-accessible
+    x-status: Draft
   "/orders/{orderId}/reject":
     put:
       description: Call when an order has been rejected. An order can only be rejected if it hasn't previously been accepted, rejected, cancelled or ignored
@@ -2081,6 +2172,28 @@ paths:
         - Restaurants
         - publicly-accessible
       x-status: Deprecated
+  /restaurants/driver/eta:
+    put:
+      description: Set the average amount of time it will take a driver to collect a new order from a restaurant.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RestaurantETAs"
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IgnoredRestaurantIds"
+          description: Update will take effect shortly
+        "400":
+          description: There was something invalid in your request - check response body for details
+      summary: Set ETA for pickup
+      tags:
+        - Restaurants
+        - publicly-accessible
   "/restaurants/{tenant}/{restaurantId}/catalogue":
     get:
       description: Get details of the restaurant's product catalogue
@@ -6034,6 +6147,310 @@ components:
         - type
         - data
       type: object
+    CheckoutGetResponse:
+      properties:
+        customer:
+          description: Details of the customer creating a checkout
+          nullable: false
+          properties:
+            emailAddress:
+              description: Customer's email address
+              nullable: true
+              type: string
+            firstName:
+              description: Customer's first name
+              nullable: true
+              type: string
+            lastName:
+              description: Customer's last name
+              nullable: true
+              type: string
+            phoneNumber:
+              description: Customer's phone number
+              nullable: true
+              type: string
+          type: object
+        fulfilment:
+          description: Details required to for an order to be fulfilled
+          nullable: false
+          properties:
+            address:
+              description: The address where the customer would like to receive the order
+              nullable: false
+              properties:
+                lines:
+                  description: Ordered list of address parts where the customer would like to receive the order
+                  items:
+                    description: Part of the address where the customer would like to receive the order
+                    nullable: false
+                    type: string
+                  maxItems: 8
+                  minItems: 0
+                  nullable: false
+                  type: array
+                postalCode:
+                  description: Postcode for where the customer would like to receive the order
+                  nullable: true
+                  type: string
+              required:
+                - lines
+              type: object
+            time:
+              description: An individual time-band that can be chosen by the customer
+              nullable: false
+              properties:
+                from:
+                  description: Earliest time within time-band (ISO 8601 Date Time UTC)
+                  nullable: false
+                  type: string
+                to:
+                  description: Latest time within time-band (ISO 8601 Date Time UTC)
+                  nullable: false
+                  type: string
+              required:
+                - from
+                - to
+              type: object
+          required:
+            - times
+            - address
+          type: object
+        isFulfillable:
+          description: Whether we are able to process the checkout
+          nullable: false
+          type: boolean
+        issues:
+          description: Information about the current issues of a checkout
+          items:
+            $ref: "#/components/schemas/CheckoutIssue"
+            description: Information about a single issue of a checkout
+            nullable: false
+          maxItems: 10
+          minItems: 0
+          nullable: false
+          type: array
+        notes:
+          description: Notes that the customer wants to submit as part of their order
+          items:
+            description: Note that the customer wants to submit as part of their order
+            nullable: false
+            properties:
+              note:
+                description: The note previously submitted by the customer
+                maxLength: 250
+                minLength: 0
+                nullable: false
+                type: string
+              type:
+                description: The type of note
+                enum:
+                  - delivery
+                nullable: false
+                type: string
+            required:
+              - type
+              - note
+            type: object
+          maxItems: 1
+          minItems: 0
+          nullable: false
+          type: array
+        restaurant:
+          description: The restaurant associated with the checkout
+          nullable: false
+          properties:
+            displayName:
+              description: Display name for the restaurant
+              nullable: false
+              type: string
+            id:
+              description: Unique identifier for a restaurant
+              nullable: false
+              type: string
+            menuId:
+              description: Unique identifier for the menu being ordered from
+              nullable: false
+              type: string
+            seoName:
+              description: Unique seo name for the restaurant
+              nullable: false
+              type: string
+          required:
+            - id
+            - seoName
+            - displayName
+            - menuId
+          type: object
+        serviceType:
+          description: The dispatch method for the order
+          enum:
+            - delivery
+            - collection
+          nullable: false
+          type: string
+      required:
+        - restaurant
+        - serviceType
+        - customer
+        - fulfilment
+        - notes
+        - isFulfillable
+        - issues
+      type: object
+    CheckoutIssue:
+      discriminator:
+        mapping:
+          ADDRESS_LINES_REQUIRED: "#/components/schemas/CheckoutIssue_AddressLinesRequired"
+          AGE_VERIFICATION_FAILED: "#/components/schemas/CheckoutIssue_AgeVerificationFailed"
+          DATE_OF_BIRTH_REQUIRED: "#/components/schemas/CheckoutIssue_DateOfBirthRequired"
+          EMAIL_ADDRESS_REQUIRED: "#/components/schemas/CheckoutIssue_EmailAddressRequired"
+          FIRST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_FirstNameRequired"
+          FULFILMENT_TIME_REQUIRED: "#/components/schemas/CheckoutIssue_FulfilmentTimeRequired"
+          FULFILMENT_TIME_UNAVAILABLE: "#/components/schemas/CheckoutIssue_FulfilmentTimeUnavailable"
+          GEOLOCATION_REQUIRED: "#/components/schemas/CheckoutIssue_GeolocationRequired"
+          ITEMS_UNORDERABLE: "#/components/schemas/CheckoutIssue_ItemsUnorderable"
+          LAST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_LastNameRequired"
+          LOCATION_UNDELIVERABLE: "#/components/schemas/CheckoutIssue_LocationUndeliverable"
+          MENU_UNAVAILABLE: "#/components/schemas/CheckoutIssue_MenuUnavailable"
+          MINIMUM_ORDER_VALUE_NOT_MET: "#/components/schemas/CheckoutIssue_MinumumOrderValueNotMet"
+          PHONE_NUMBER_REQUIRED: "#/components/schemas/CheckoutIssue_PhoneNumberRequired"
+          POSTAL_CODE_REQUIRED: "#/components/schemas/CheckoutIssue_PostalCodeRequired"
+          RESTAURANT_UNAVAILABLE: "#/components/schemas/CheckoutIssue_RestaurantUnavailable"
+        propertyName: code
+      properties:
+        code:
+          description: The issue code
+          enum:
+            - RESTAURANT_UNAVAILABLE
+            - MENU_UNAVAILABLE
+            - ITEMS_UNORDERABLE
+            - MINIMUM_ORDER_VALUE_NOT_MET
+            - FULFILMENT_TIME_UNAVAILABLE
+            - LOCATION_UNDELIVERABLE
+            - AGE_VERIFICATION_FAILED
+            - FIRST_NAME_REQUIRED
+            - LAST_NAME_REQUIRED
+            - PHONE_NUMBER_REQUIRED
+            - DATE_OF_BIRTH_REQUIRED
+            - EMAIL_ADDRESS_REQUIRED
+            - FULFILMENT_TIME_REQUIRED
+            - ADDRESS_LINES_REQUIRED
+            - POSTAL_CODE_REQUIRED
+            - GEOLOCATION_REQUIRED
+          nullable: false
+          type: string
+      required:
+        - code
+      type: object
+    CheckoutIssue_AddressLinesRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the fulfilment address lines is required to fulfil an order.
+          type: object
+    CheckoutIssue_AgeVerificationFailed:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The order cannot proceed because the customer has failed the required age verification check.
+          type: object
+    CheckoutIssue_DateOfBirthRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the customer's date of birth is required to fulfil an order.
+          type: object
+    CheckoutIssue_EmailAddressRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the customer's email address is required to fulfil an order.
+          type: object
+    CheckoutIssue_FirstNameRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the fulfilment geolocation is required to fulfil an order.
+          type: object
+    CheckoutIssue_FulfilmentTimeRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that a fulfilment time is required to fulfil an order.
+          type: object
+    CheckoutIssue_FulfilmentTimeUnavailable:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The selected fulfilment time is no longer available. A new fulfilment time may be available for selection.
+          type: object
+    CheckoutIssue_GeolocationRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The order cannot proceed because the customer has failed the required age verification check.
+          type: object
+    CheckoutIssue_ItemsUnorderable:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The collection of items are not orderable in their current state. The customer will need to amend their collection of items.
+          type: object
+    CheckoutIssue_LastNameRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the customer's last name is required to fulfil an order.
+          type: object
+    CheckoutIssue_LocationUndeliverable:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The restaurant is unable to deliver to this location.
+          type: object
+    CheckoutIssue_MenuUnavailable:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The menu being ordered from is no longer available. The restaurant may still be available to order from.
+          type: object
+    CheckoutIssue_MinumumOrderValueNotMet:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The checkout does not meet the minimum order value.
+          properties:
+            additionalSpendRequired:
+              description: The amount the customer needs to spend to meet minimum order value. This is in the smallest unit of local currency (e.g. pence).
+              nullable: false
+              type: number
+            currency:
+              description: The currency in which the value amounts are returned in (ISO-4217 format)
+              nullable: false
+              type: string
+            minimumOrderValue:
+              description: The minimum order value required to complete an order. This is in the smallest unit of local currency (e.g. pence).
+              nullable: false
+              type: number
+          type: object
+    CheckoutIssue_PhoneNumberRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the customer's phone number is required to fulfil an order.
+          type: object
+    CheckoutIssue_PostalCodeRequired:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: Indicates that the fulfilment postal code is required to fulfil an order.
+          type: object
+    CheckoutIssue_RestaurantUnavailable:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The restaurant being ordered from is no longer available.
+          type: object
     CheckoutRequest:
       description: Details needed to make a payment.
       example:
@@ -6096,6 +6513,185 @@ components:
           format: date-time
           type: string
           x-api-version-from: 2019-04
+      type: object
+    CheckoutUpdate400Error:
+      description: A HTTP 4xx error response
+      properties:
+        fault:
+          description: A list of values that helps identify this response back to logs, so we can easily find faults
+          properties:
+            errors:
+              description: List of errors that may assist you in resolving the issues
+              items:
+                description: Details about the error that may assist you in resolving the issue
+                properties:
+                  description:
+                    description: Specific details about the error that may assist you in resolving the issue
+                    type: string
+                  errorCode:
+                    description: A code that identifies the problem type. It will be supported by human-readable documentation that identifies how to resolve the error
+                    enum:
+                      - FIRST_NAME_INVALID
+                      - LAST_NAME_INVALID
+                      - PHONE_NUMBER_INVALID
+                      - DATE_OF_BIRTH_INVALID
+                      - EMAIL_ADDRESS_INVALID
+                      - FULFILMENT_TIME_INVALID
+                      - ADDRESS_LINES_INVALID
+                      - POSTAL_CODE_INVALID
+                      - GEOLOCATION_INVALID
+                      - DELIVERY_NOTE_INVALID
+                    type: string
+                type: object
+              type: array
+            faultId:
+              description: A value that helps identify this response back to logs, so we can easily find this specific fault
+              type: string
+            traceId:
+              description: A value that helps identify the trace back to logs, so that we can easily find what was happening on our system when the fault was generated
+              type: string
+          required:
+            - faultId
+          type: object
+      type: object
+    CheckoutUpdateRequest:
+      properties:
+        customer:
+          description: Details of the customer creating a checkout
+          nullable: true
+          properties:
+            dateOfBirth:
+              description: Customer's date of birth (ISO 8601 Date)
+              nullable: true
+              type: string
+            emailAddress:
+              description: Customer's email address for guest login
+              nullable: true
+              type: string
+            firstName:
+              description: Customer's first name
+              nullable: true
+              type: string
+            lastName:
+              description: Customer's last name
+              nullable: true
+              type: string
+            phoneNumber:
+              description: Customer's phone number
+              nullable: true
+              type: string
+          type: object
+        fulfilment:
+          description: Details required to for an order to be fulfilled
+          nullable: true
+          properties:
+            location:
+              description: The destinaton for where the customer would like to receive the order
+              nullable: true
+              properties:
+                address:
+                  description: The address where the customer would like to receive the order
+                  nullable: true
+                  properties:
+                    lines:
+                      description: Ordered list of address parts where the customer would like to receive the order
+                      items:
+                        description: Part of the address where the customer would like to receive the order
+                        nullable: false
+                        type: string
+                      maxItems: 8
+                      minItems: 0
+                      nullable: false
+                      type: array
+                    postalCode:
+                      description: Postcode for where the customer would like to receive the order
+                      nullable: true
+                      type: string
+                  required:
+                    - lines
+                  type: object
+                geolocation:
+                  description: The coordinates for where the customer would like to receive the order
+                  nullable: true
+                  properties:
+                    latitude:
+                      description: The latitude for where the customer would like to receive the order
+                      format: decimal
+                      nullable: false
+                      type: number
+                    longitude:
+                      description: The longitude for where the customer would like to receive the order
+                      format: decimal
+                      nullable: false
+                      type: number
+                  required:
+                    - latitude
+                    - longitude
+                  type: object
+              type: object
+            time:
+              description: Time-band for when the customer would like the order to be fulfilled (ready for collection/delivered)
+              nullable: true
+              properties:
+                from:
+                  description: Earliest time the customer wants the order to be fulfilled (ISO 8601 Date Time UTC)
+                  nullable: false
+                  type: string
+                to:
+                  description: Latest time the customer wants the order to be fulfilled (ISO 8601 Date Time UTC)
+                  nullable: false
+                  type: string
+              required:
+                - from
+                - to
+              type: object
+          type: object
+        notes:
+          description: Notes that the customer wants to submit as part of their order
+          items:
+            description: Note that the customer wants to submit as part of their order
+            nullable: false
+            properties:
+              note:
+                description: The note the customer wants to submit as part of their order
+                maxLength: 250
+                minLength: 0
+                nullable: false
+                type: string
+              type:
+                description: The type of note that the customer wants to submit as part of their order
+                enum:
+                  - delivery
+                nullable: false
+                type: string
+            required:
+              - type
+              - note
+            type: object
+          maxItems: 1
+          minItems: 0
+          nullable: true
+          type: array
+      type: object
+    CheckoutUpdateResponse:
+      properties:
+        isFulfillable:
+          description: Whether we are able to process the checkout
+          nullable: false
+          type: boolean
+        issues:
+          description: Information about the current issues of a checkout
+          items:
+            $ref: "#/components/schemas/CheckoutIssue"
+            description: Information about a single issue of a checkout
+            nullable: false
+          maxItems: 10
+          minItems: 0
+          nullable: false
+          type: array
+      required:
+        - isFulfillable
+        - issues
       type: object
     Claim:
       description: Claim representation
@@ -9827,6 +10423,18 @@ components:
             - CloseModal
             - NoAction
           type: string
+      type: object
+    IgnoredRestaurantIds:
+      example:
+        ignoredRestaurantIds:
+          - 123
+          - 456
+      properties:
+        ignoredRestaurantIds:
+          description: A list of restaurant ids that were present in a request but were ignored.
+          items:
+            type: string
+          type: array
       type: object
     InternalServerErrorMarketingResponse:
       allOf:
@@ -14260,6 +14868,21 @@ components:
           description: The name of the restaurant.
           type: string
       type: object
+    RestaurantETAs:
+      items:
+        example:
+          etaAtRestaurant: 1
+          restaurantId: 1
+        properties:
+          etaAtRestaurant:
+            description: Your best estimation in minutes
+            format: int32
+            type: number
+          restaurantId:
+            description: The unique identifier of the restaurant.
+            type: string
+        type: object
+      type: array
     RestaurantErrorResponse:
       example:
         errorCode: InvalidCountryCode
@@ -17727,8 +18350,11 @@ components:
       type: string
     applicationSubmitResponse:
       properties:
-        state:
+        applicationState:
           $ref: "#/components/schemas/applicationState"
+          description: The current application state i.e. Open, Approved etc.
+        state:
+          $ref: "#/components/schemas/state"
           description: The current application state i.e. Open, Approved etc.
       type: object
     assessmentStatusTypes:
@@ -19091,6 +19717,9 @@ components:
       type: string
     documentReviews:
       properties:
+        documentState:
+          $ref: "#/components/schemas/documentState"
+          description: An enum describing the current status of the document
         rejectionReasons:
           description: An array of rejection reasons
           items:
@@ -19105,7 +19734,8 @@ components:
           minItems: 0
           type: array
         state:
-          $ref: "#/components/schemas/documentState"
+          $ref: "#/components/schemas/documentStateDeprecated"
+          deprecated: true
           description: An enum describing the current status of the document
       type: object
     documentState:
@@ -19123,12 +19753,32 @@ components:
         - FinalReviewRejected
         - Approved
       type: string
+    documentStateDeprecated:
+      deprecated: true
+      description: The state of a document
+      enum:
+        - NotAvailable
+        - Received
+        - ReadyForInitialReview
+        - InitialToBeRejected
+        - InitialNoIssuesFound
+        - InitialReviewRejected
+        - ReadyForFinalReview
+        - FinalReviewNoIssuesFound
+        - FinalReviewToBeRejected
+        - FinalReviewRejected
+        - Approved
+      type: string
     documentStateUpdate:
       properties:
-        state:
+        documentState:
+          $ref: "#/components/schemas/documentState"
           description: The new state of the document
-          enum:
-            - NotAvailable
+          type: string
+        state:
+          $ref: "#/components/schemas/documentStateDeprecated"
+          deprecated: true
+          description: The new state of the document
           type: string
       type: object
     documentType:
@@ -19689,10 +20339,30 @@ components:
       example:
         Event: OrderCancelled
         OrderId: ijdhpy7bdusgtc28bapspa
+        Reason: system_cancelled_other
       properties:
         Event:
           type: string
         OrderId:
+          type: string
+        Reason:
+          description: The reason the order was cancelled.
+          enum:
+            - cust_cancelled_changed_mind
+            - cust_cancelled_delivery_too_long
+            - cust_cancelled_made_mistake
+            - cust_cancelled_other
+            - delivery_partner_cancelled
+            - rest_cancelled_customer_absent
+            - rest_cancelled_customer_requested
+            - rest_cancelled_declined
+            - rest_cancelled_drivers_unavailable
+            - rest_cancelled_fake_order
+            - rest_cancelled_other
+            - rest_cancelled_out_of_stock
+            - rest_cancelled_too_busy
+            - system_cancelled_other
+            - system_cancelled_test_order
           type: string
       type: object
     order-due-date-request:
@@ -20339,6 +21009,7 @@ components:
             - Fleet Place House
             - Fleet Place
           postalCode: EC4M 7RF
+        applicationState: OpenApplication
         bankDetails:
           accountHolderName: John Doe
           bankAccountNumber: "12345678"
@@ -20361,7 +21032,6 @@ components:
           familyName: Doe
           givenName: John
           phoneNumber: "0791231234"
-        state: OpenApplication
       properties:
         address:
           description: The address of the restaurant
@@ -20380,6 +21050,9 @@ components:
               description: The post code the restaurant is located
               type: string
           type: object
+        applicationState:
+          $ref: "#/components/schemas/applicationState"
+          description: The current application state of the restaurant
         bankDetails:
           description: Account holder information for the restaurant
           properties:
@@ -20453,7 +21126,7 @@ components:
               type: string
           type: object
         state:
-          $ref: "#/components/schemas/applicationState"
+          $ref: "#/components/schemas/state"
           description: The current application state of the restaurant
       type: object
     restaurant-details:
@@ -20865,6 +21538,18 @@ components:
         OrderId:
           type: string
       type: object
+    state:
+      deprecated: true
+      description: The application state i.e. Open, Approved etc.
+      enum:
+        - OpenApplication
+        - ManualInterventionRequired
+        - ReadyForInitialReview
+        - InitialReviewRejected
+        - ReadyForFinalReview
+        - FinalReviewRejected
+        - Approved
+      type: string
     supportRequest:
       properties:
         body:
@@ -20979,6 +21664,7 @@ x-tagGroups:
       - Delivery Pools API
       - Attempted Delivery API
       - Attempted Delivery Webhooks
+      - Checkout
   - name: Restaurant Management
     tags:
       - Restaurants

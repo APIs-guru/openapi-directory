@@ -15,8 +15,8 @@ info:
     - format: swagger
       url: https://vocadb.net/swagger/docs/v1
       version: "2.0"
-  x-preferred: null
   x-providerName: vocadb.net
+  x-preferred: null
 paths:
   /api/activityEntries:
     get:
@@ -498,24 +498,19 @@ paths:
         - AlbumApi
   /api/albums/top:
     get:
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
+      consumes: []
       deprecated: false
       description: Output is cached for 1 hour.
       operationId: AlbumApi_GetTopAlbums
       parameters:
-        - in: body
+        - collectionFormat: multi
+          in: query
+          items:
+            format: int32
+            type: integer
           name: ignoreIds
-          required: true
-          schema:
-            items:
-              format: int32
-              type: integer
-            type: array
+          required: false
+          type: array
         - enum:
             - Default
             - Japanese

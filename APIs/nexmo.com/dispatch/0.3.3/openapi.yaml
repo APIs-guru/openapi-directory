@@ -3,20 +3,20 @@ servers:
   - url: https://api.nexmo.com/v0.1/dispatch
 info:
   contact:
-    email: devrel@nexmo.com
-    name: Nexmo DevRel
+    email: devrel@vonage.com
+    name: Vonage DevRel
     url: https://developer.nexmo.com/
   description: The Dispatch API enables the developer to specify a multiple message workflow. A workflow follows a template. The first one we are adding is the failover template. The failover template instructs the Messages API to first send a message to the specified channel. If that message fails immediately or if the condition_status is not reached within the given time period the next message is sent. The developer will also receive status webhooks from the messages resource for each delivery and read event. This API is currently in Beta.
   title: Dispatch API
-  version: 0.3.2
+  version: 0.3.3
   x-label: Beta
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/dispatch.yml
       version: "3.0"
-  x-preferred: null
   x-providerName: nexmo.com
   x-serviceName: dispatch
+  x-preferred: null
 paths:
   /:
     post:
@@ -159,7 +159,7 @@ components:
             **Messenger**: This value should be the `to.id` value you received in the inbound messenger event.
 
 
-            **Viber**: This is your Service Message ID given to you by Nexmo Account Manager. To find out more please visit [nexmo.com/products/messages](https://www.nexmo.com/products/messages).
+            **Viber**: This is your Service Message ID given to you by your Vonage Account Manager. To find out more please visit [vonage.com](https://www.vonage.com/communications-apis/messages/).
 
 
             **SMS**: **MMS**: or **WhatsApp** This value is not required.
@@ -172,7 +172,7 @@ components:
             **SMS**: or **MMS**: The phone number of the message sender in the [E.164](https://en.wikipedia.org/wiki/E.164) format.
 
 
-            **WhatsApp**: This is your WhatsApp Business Number  given to you by Nexmo Account Manager. To find out more please visit [nexmo.com/products/messages](https://www.nexmo.com/products/messages).
+            **WhatsApp**: This is your WhatsApp Business Number given to you by your Vonage Account Manager. To find out more please visit [vonage.com](https://www.vonage.com/communications-apis/messages/).
 
 
             **Messenger**: or **Viber**: This value is not required.
@@ -231,7 +231,7 @@ components:
 
 
                 **WhatsApp**: is 4096 characters
-              example: "Nexmo Verification code: 64873. Valid for 10 minutes."
+              example: "Vonage Verification code: 64873. Valid for 10 minutes."
               maxLength: 4096
               minLength: 1
               type: string
@@ -268,7 +268,7 @@ components:
         messenger:
           properties:
             category:
-              description: The use of different category tags enables the business to send messages for different use cases. For Facebook Messenger they need to comply with their [Messaging Types policy]( https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types). Nexmo maps our `category` to their `messaging_type`. If `message_tag` is used, then an additional `tag` for that type is mandatory. By default Nexmo sends the `response` category to Facebook Messenger.
+              description: The use of different category tags enables the business to send messages for different use cases. For Facebook Messenger they need to comply with their [Messaging Types policy]( https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types). Vonage maps our `category` to their `messaging_type`. If `message_tag` is used, then an additional `tag` for that type is mandatory. By default Vonage sends the `response` category to Facebook Messenger.
               enum:
                 - response
                 - update
@@ -283,7 +283,7 @@ components:
         viber_service_msg:
           properties:
             category:
-              description: The use of different category tags enables the business to send messages for different use cases. For Viber Service Messages the first message sent from a business to a user must be personal, informative and a targeted message - not promotional. By default Nexmo sends the `transaction` category to Viber Service Messages.
+              description: The use of different category tags enables the business to send messages for different use cases. For Viber Service Messages the first message sent from a business to a user must be personal, informative and a targeted message - not promotional. By default Vonage sends the `transaction` category to Viber Service Messages.
               enum:
                 - transaction
                 - promotion
@@ -332,11 +332,11 @@ components:
         error:
           properties:
             code:
-              description: The error code. See [our errors list](https://developer.nexmo.com/api-errors/messages-olympus) for a list of possible errors
+              description: The error code. See [our errors list](/api-errors/messages-olympus) for a list of possible errors
               example: 1300
               type: integer
             reason:
-              description: Text describing the error. See [our errors list](https://developer.nexmo.com/api-errors/messages-olympus) for a list of possible errors
+              description: Text describing the error. See [our errors list](/api-errors/messages-olympus) for a list of possible errors
               example: Not part of the provider network
               type: string
           type: object
@@ -386,7 +386,7 @@ components:
       properties:
         name:
           description: The name of the template.
-          example: whatsapp:hsm:technology:nexmo:verify
+          example: whatsapp:hsm:technology:vonage:verify
           type: string
         parameters:
           items:

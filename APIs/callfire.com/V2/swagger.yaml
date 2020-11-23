@@ -24,8 +24,8 @@ info:
     - format: swagger
       url: https://www.callfire.com/v2/api-docs/swagger.json
       version: "2.0"
-  x-preferred: null
   x-providerName: callfire.com
+  x-preferred: null
 consumes:
   - application/json
 produces:
@@ -9379,26 +9379,25 @@ definitions:
   Duration:
     description: "~"
     properties:
-      millis:
+      nano:
+        description: "~"
+        format: int32
+        type: integer
+      negative:
+        description: "~"
+        type: boolean
+      seconds:
         description: "~"
         format: int64
         type: integer
-      standardDays:
+      units:
         description: "~"
-        format: int64
-        type: integer
-      standardHours:
+        items:
+          $ref: "#/definitions/TemporalUnit"
+        type: array
+      zero:
         description: "~"
-        format: int64
-        type: integer
-      standardMinutes:
-        description: "~"
-        format: int64
-        type: integer
-      standardSeconds:
-        description: "~"
-        format: int64
-        type: integer
+        type: boolean
     type: object
   ErrorResponse:
     description: Error response containing error info

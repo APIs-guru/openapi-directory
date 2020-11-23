@@ -19,8 +19,8 @@ info:
     - format: swagger
       url: https://app.api2cart.com/default/index/swagger-json
       version: "2.0"
-  x-preferred: null
   x-providerName: api2cart.com
+  x-preferred: null
 externalDocs:
   description: Find out more about API2Cart
   url: http://docs.api2cart.com
@@ -9951,6 +9951,8 @@ definitions:
         type: array
       finished_time:
         $ref: "#/definitions/A2CDateTime"
+      gift_message:
+        type: string
       id:
         type: string
       modified_at:

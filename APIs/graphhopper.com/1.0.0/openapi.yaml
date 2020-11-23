@@ -248,8 +248,8 @@ info:
     - format: openapi
       url: https://docs.graphhopper.com/openapi.json
       version: "3.0"
-  x-preferred: null
   x-providerName: graphhopper.com
+  x-preferred: null
 security:
   - api_key: []
 tags:
@@ -456,7 +456,7 @@ tags:
     name: Geocoding API
   - description: Everything about isochrones
     name: Isochrone API
-  - description: Everything about map matching
+  - description: Everything about map matching aka "snap to road"
     name: Map Matching API
   - description: >
       
@@ -1687,7 +1687,7 @@ paths:
         - description: >
             Specify which road classes and environments you would like to avoid. 
 
-            Possible values are `motorway`, `primary`, `secondary`, `tertiary`, `trunk`, `residential`, `steps`, `living_street`, `track`, `toll`, `ferry`, `tunnel`, `bridge` and `ford`.
+            Possible values are `motorway`, `steps`, `track`, `toll`, `ferry`, `tunnel` and `bridge`.
 
             Separate several values with `;`. Obviously not all the values make sense for all vehicle profiles e.g. `bike` is already forbidden on a `motorway`. Requires `ch.disable=true`.
           in: query
@@ -4910,7 +4910,7 @@ components:
           description: >
             Specify which road classes and environments you would like to avoid.
 
-            Possible values are `motorway`, `primary`, `secondary`, `tertiary`, `trunk`, `residential`, `steps`, `living_street`, `track`, `toll`, `ferry`, `tunnel`, `bridge` and `ford`.
+            Possible values are `motorway`, `steps`, `track`, `toll`, `ferry`, `tunnel` and `bridge`.
 
             Separate several values with `;`. Obviously not all the values make sense for all vehicle profiles e.g. `bike` is already forbidden on a `motorway`. Requires `ch.disable=true`.
           type: string

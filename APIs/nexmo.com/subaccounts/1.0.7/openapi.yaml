@@ -3,19 +3,19 @@ servers:
   - url: https://api.nexmo.com/accounts
 info:
   contact:
-    email: devrel@nexmo.com
-    name: Nexmo DevRel
+    email: devrel@vonage.com
+    name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The Nexmo Subaccounts API enables you to create subaccounts under your primary account. Subaccounts facilitate differential product configuration, reporting, and billing. The Subaccounts API is released initially with restricted availability. You can read more about the API in the [Subaccounts documentation](/account/subaccounts/overview).
+  description: The Subaccounts API enables you to create subaccounts under your primary account. Subaccounts facilitate differential product configuration, reporting, and billing. The Subaccounts API is released initially with restricted availability. You can read more about the API in the [Subaccounts documentation](/account/subaccounts/overview).
   title: Subaccounts API
-  version: 1.0.6
+  version: 1.0.7
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/subaccounts.yml
       version: "3.0"
-  x-preferred: null
   x-providerName: nexmo.com
   x-serviceName: subaccounts
+  x-preferred: null
 tags:
   - description: This section shows how you can create, retrieve and modify subaccounts of a primary account.
     name: Subaccount Management
@@ -497,6 +497,9 @@ components:
           type: object
     ModifySubaccountRequest:
       properties:
+        name:
+          example: Subaccount department B
+          type: string
         suspended:
           example: true
           type: boolean

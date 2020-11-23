@@ -3,20 +3,20 @@ servers:
   - url: https://api.nexmo.com/v0.1/messages
 info:
   contact:
-    email: devrel@nexmo.com
-    name: Nexmo DevRel
+    email: devrel@vonage.com
+    name: Vonage DevRel
     url: https://developer.nexmo.com/
-  description: The Messaging API is a new API that consolidates all messaging channels. It encapsulates a user (developer) from having to use multiple APIs to interact with our various channels such as SMS, MMS, Viber, Facebook Messenger, etc. The API normalises information across all channels to abstracted to, from and content. This API is currently in Beta.
+  description: The Messages API enables you to send messages to customers via their preferred channels (currently Facebook Messenger, WhatsApp, Viber, and SMS/MMS) using a single API. The Messages API is currently in Beta.
   title: Messages API
-  version: 0.3.11
+  version: 0.3.12
   x-label: Beta
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/messages-olympus.yml
       version: "3.0"
-  x-preferred: null
   x-providerName: nexmo.com
   x-serviceName: messages-olympus
+  x-preferred: null
 paths:
   /:
     post:
@@ -111,7 +111,7 @@ components:
             **Messenger**: This value should be the `to.id` value you received in the inbound messenger event.
 
 
-            **Viber**: This is your Service Message ID given to you by Nexmo Account Manager. To find out more please visit [nexmo.com/products/messages](https://www.nexmo.com/products/messages).
+            **Viber**: This is your Service Message ID given to you by your Vonage Account Manager. To find out more please visit [vonage.com](https://www.vonage.com/communications-apis/messages/).
           example: "0123456789012345"
           maxLength: 50
           minLength: 1
@@ -121,7 +121,7 @@ components:
             **SMS**: The phone number of the message recipient in the [E.164](https://en.wikipedia.org/wiki/E.164) format. Don't use a leading + or 00 when entering a phone number, start with the country code, for example, 447700900000.
 
 
-            **WhatsApp**: This is your WhatsApp Business Number  given to you by Nexmo Account Manager. To find out more please visit [nexmo.com/products/messages](https://www.nexmo.com/products/messages).
+            **WhatsApp**: This is your WhatsApp Business Number given to you by your Vonage Account Manager. To find out more please visit [vonage.com](https://www.vonage.com/communications-apis/messages/).
 
 
             **MMS**: US shortcode
@@ -151,11 +151,11 @@ components:
         error:
           properties:
             code:
-              description: The error code. See [our errors list](https://developer.nexmo.com/api-errors/messages-olympus) for a list of possible errors
+              description: The error code. See [our errors list](/api-errors/messages-olympus) for a list of possible errors
               example: 1300
               type: integer
             reason:
-              description: Text describing the error. See [our errors list](https://developer.nexmo.com/api-errors/messages-olympus) for a list of possible errors
+              description: Text describing the error. See [our errors list](/api-errors/messages-olympus) for a list of possible errors
               example: Not part of the provider network
               type: string
           type: object
@@ -462,7 +462,7 @@ components:
         to:
           properties:
             id:
-              description: This is your Service Message ID given to you by Nexmo Account Manager. To find out more please visit [nexmo.com/products/messages](https://www.vonage.com/communications-apis/messages/).
+              description: This is your Service Message ID given to you by Vonage Account Manager. To find out more please visit [vonage.com/products/messages](https://www.vonage.com/communications-apis/messages/).
               example: "654321"
               type: string
             type:
@@ -491,7 +491,7 @@ components:
         from:
           properties:
             id:
-              description: This is your Service Message ID given to you by Nexmo Account Manager. To find out more please visit [nexmo.com/products/messages](https://www.vonage.com/communications-apis/messages/).
+              description: This is your Service Message ID given to you by your Vonage Account Manager. To find out more please visit [vonage.com](https://www.vonage.com/communications-apis/messages/).
               example: "654321"
               type: string
             type:
@@ -1052,7 +1052,7 @@ components:
     messenger:
       properties:
         category:
-          description: The use of different category tags enables the business to send messages for different use cases. For Facebook Messenger they need to comply with their [Messaging Types policy](https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types). Nexmo maps our `category` to their `messaging_type`. If `message_tag` is used, then an additional `tag` for that type is mandatory. By default Nexmo sends the `response` category to Facebook Messenger.
+          description: The use of different category tags enables the business to send messages for different use cases. For Facebook Messenger they need to comply with their [Messaging Types policy](https://developers.facebook.com/docs/messenger-platform/send-messages#messaging_types). Vonage maps our `category` to their `messaging_type`. If `message_tag` is used, then an additional `tag` for that type is mandatory. By default Vonage sends the `response` category to Facebook Messenger.
           enum:
             - response
             - update
@@ -1404,7 +1404,7 @@ components:
     viber_service_msg:
       properties:
         category:
-          description: The use of different category tags enables the business to send messages for different use cases. For Viber Service Messages the first message sent from a business to a user must be personal, informative & a targeted message - not promotional. By default Nexmo sends the `transaction` category to Viber Service Messages.
+          description: The use of different category tags enables the business to send messages for different use cases. For Viber Service Messages the first message sent from a business to a user must be personal, informative & a targeted message - not promotional. By default Vonage sends the `transaction` category to Viber Service Messages.
           enum:
             - transaction
             - promotion
@@ -1417,7 +1417,7 @@ components:
           minimum: 30
           type: integer
         type:
-          description: Viber-specific type definition. To use "template", please contact Nexmo Account Manager to setup your templates. To find out more please visit [nexmo.com/products/messages](https://www.nexmo.com/products/messages).
+          description: Viber-specific type definition. To use "template", please contact Vonage Account Manager to setup your templates. To find out more please visit [vonage.com/products/messages](https://www.vonage.com/communications-apis/messages/).
           example: template
           type: string
       type: object
@@ -1598,7 +1598,7 @@ x-errors:
   "1360":
     description: TTL was activated  -  TTL was activated, no callbacks and no charge will be issued.
   "1370":
-    description: Expired access Token - Please reauthenticate your Facebook Page with Nexmo.
+    description: Expired access Token - Please reauthenticate your Facebook Page with Vonage.
   "1380":
     description: Invalid resource - Please check that the URL your provided to your resrouce is accesible and valid.
   "1381":

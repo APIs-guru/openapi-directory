@@ -15,7 +15,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://launchdarkly.com/terms
   title: LaunchDarkly REST API
-  version: 3.8.0
+  version: 3.9.0
   x-apisguru-categories:
     - developer_tools
   x-logo:
@@ -24,8 +24,8 @@ info:
     - format: swagger
       url: https://launchdarkly.github.io/ld-openapi/openapi.json
       version: "2.0"
-  x-preferred: null
   x-providerName: launchdarkly.com
+  x-preferred: null
 consumes:
   - application/json
 produces:
@@ -200,6 +200,71 @@ parameters:
     name: type
     required: true
     type: string
+  FeatureFlagChangeRequestApplyPostRequest:
+    description: Apply a new feature flag change request
+    in: body
+    name: featureFlagChangeRequestApplyConfigBody
+    required: true
+    schema:
+      properties:
+        comment:
+          description: comment will be included in audit log item for change.
+          example: Applying approved changes
+          type: string
+      type: object
+  FeatureFlagChangeRequestId:
+    description: The feature flag change request ID
+    in: path
+    name: featureFlagChangeRequestId
+    required: true
+    type: string
+  FeatureFlagChangeRequestPostRequest:
+    description: Create a new feature flag change request
+    in: body
+    name: featureFlagChangeRequestConfigBody
+    schema:
+      properties:
+        comment:
+          description: comment will be included in audit log item for change.
+          type: string
+        description:
+          description: A name that describes the changes you would like to apply to a feature flag configuration
+          type: string
+        instructions:
+          $ref: "#/definitions/SemanticPatchInstruction"
+        notifyMemberIds:
+          example:
+            - memberId
+            - memberId2
+          items:
+            type: string
+          type: array
+      required:
+        - description
+        - instructions
+        - notifyMemberIds
+      type: object
+  FeatureFlagChangeRequestReviewPostRequest:
+    description: Review a feature flag change request
+    in: body
+    name: featureFlagChangeRequestReviewConfigBody
+    required: true
+    schema:
+      properties:
+        comment:
+          description: comment will be included in audit log item for change.
+          example: This is a comment string
+          type: string
+        kind:
+          description: Either approve or decline change request
+          enum:
+            - approve
+            - decline
+          example: approve
+          type: string
+      required:
+        - kind
+      type: object
   FeatureFlagCopyBody:
     description: Copy feature flag configurations between environments.
     in: body
@@ -1617,6 +1682,68 @@ paths:
       summary: Reset an environment's mobile key. The optional expiry for the old key is deprecated for this endpoint, so the old key will always expire immediately.
       tags:
         - Environments
+  "/projects/{projectKey}/flags/{featureFlagKey}/environments/{environmentKey}/approval-requests/{featureFlagChangeRequestId}":
+    get:
+      operationId: getFeatureFlagChangeRequest
+      parameters:
+        - $ref: "#/parameters/ProjectKey"
+        - $ref: "#/parameters/FeatureFlagKey"
+        - $ref: "#/parameters/EnvironmentKey"
+        - $ref: "#/parameters/FeatureFlagChangeRequestId"
+      responses:
+        "200":
+          description: Feature flag change request response
+          schema:
+            $ref: "#/definitions/FeatureFlagChangeRequests"
+        "401":
+          $ref: "#/responses/Standard401"
+        "404":
+          $ref: "#/responses/Standard404"
+      summary: Get a single change request for a feature flag
+      tags:
+        - Feature flags
+  "/projects/{projectKey}/flags/{featureFlagKey}/environments/{environmentKey}/approval-requests/{featureFlagChangeRequestId}/apply":
+    post:
+      operationId: postApplyFeatureFlagChangeRequest
+      parameters:
+        - $ref: "#/parameters/ProjectKey"
+        - $ref: "#/parameters/FeatureFlagKey"
+        - $ref: "#/parameters/EnvironmentKey"
+        - $ref: "#/parameters/FeatureFlagChangeRequestId"
+        - $ref: "#/parameters/FeatureFlagChangeRequestApplyPostRequest"
+      responses:
+        "200":
+          description: Feature flag change request applied response
+          schema:
+            $ref: "#/definitions/FeatureFlagChangeRequests"
+        "401":
+          $ref: "#/responses/Standard401"
+        "404":
+          $ref: "#/responses/Standard404"
+      summary: Apply change request for a feature flag
+      tags:
+        - Feature flags
+  "/projects/{projectKey}/flags/{featureFlagKey}/environments/{environmentKey}/approval-requests/{featureFlagChangeRequestId}/review":
+    post:
+      operationId: postReviewFeatureFlagChangeRequest
+      parameters:
+        - $ref: "#/parameters/ProjectKey"
+        - $ref: "#/parameters/FeatureFlagKey"
+        - $ref: "#/parameters/EnvironmentKey"
+        - $ref: "#/parameters/FeatureFlagChangeRequestId"
+        - $ref: "#/parameters/FeatureFlagChangeRequestReviewPostRequest"
+      responses:
+        "200":
+          description: Feature flag change request reviewed response
+          schema:
+            $ref: "#/definitions/FeatureFlagChangeRequests"
+        "401":
+          $ref: "#/responses/Standard401"
+        "404":
+          $ref: "#/responses/Standard404"
+      summary: Review change request for a feature flag
+      tags:
+        - Feature flags
   /roles:
     get:
       operationId: getCustomRoles
@@ -2339,6 +2466,43 @@ paths:
       summary: Modify a webhook by ID.
       tags:
         - Webhooks
+  "/{projectKey}/flags/{featureFlagKey}/environments/{environmentKey}/approval-requests":
+    get:
+      operationId: getFeatureFlagChangeRequests
+      parameters:
+        - $ref: "#/parameters/ProjectKey"
+        - $ref: "#/parameters/FeatureFlagKey"
+        - $ref: "#/parameters/EnvironmentKey"
+      responses:
+        "200":
+          description: Feature flag change requests response
+          schema:
+            $ref: "#/definitions/FeatureFlagChangeRequests"
+        "401":
+          $ref: "#/responses/Standard401"
+        "404":
+          $ref: "#/responses/Standard404"
+      summary: Get all change requests for a feature flag
+      tags:
+        - Feature flags
+    post:
+      operationId: postFeatureFlagChangeRequest
+      parameters:
+        - $ref: "#/parameters/ProjectKey"
+        - $ref: "#/parameters/FeatureFlagKey"
+        - $ref: "#/parameters/EnvironmentKey"
+        - $ref: "#/parameters/FeatureFlagChangeRequestPostRequest"
+      responses:
+        "200":
+          description: Feature flag change request response
+          schema:
+            $ref: "#/definitions/FeatureFlagChangeRequest"
+        "401":
+          $ref: "#/responses/Standard401"
+        "404":
+          $ref: "#/responses/Standard404"
+      tags:
+        - Feature flags
 definitions:
   AuditLogEntries:
     properties:
@@ -2802,6 +2966,95 @@ definitions:
           - value: b
         items:
           $ref: "#/definitions/Variation"
+        type: array
+    type: object
+  FeatureFlagChangeRequest:
+    properties:
+      _id:
+        $ref: "#/definitions/Id"
+      _version:
+        type: integer
+      allReviews:
+        items:
+          $ref: "#/definitions/FeatureFlagChangeRequestReview"
+        type: array
+      appliedByMemberID:
+        description: The id of the member that applied the change request
+        type: string
+      appliedDate:
+        description: A unix epoch time in milliseconds specifying the date the change request was applied
+        type: integer
+      creationDate:
+        description: A unix epoch time in milliseconds specifying the date the change request was requested
+        type: integer
+      currentReviewsByMemberId:
+        $ref: "#/definitions/FeatureFlagChangeRequestReview"
+      instructions:
+        $ref: "#/definitions/SemanticPatchInstruction"
+      notifyMemberIds:
+        example:
+          - memberId
+          - memberId2
+        items:
+          type: string
+        type: array
+      requestorId:
+        description: The id of the member that requested the change
+        type: string
+      reviewStatus:
+        $ref: "#/definitions/FeatureFlagChangeRequestReviewStatus"
+      status:
+        description: >
+          | Name     | Description |
+
+          | --------:| ----------- |
+
+          | pending  | the feature flag change request has not been applied yet |
+
+          | completed| the feature flag change request has been applied successfully |
+
+          | failed   | the feature flag change request has been applied but the changes were not applied successfully |
+        enum:
+          - pending
+          - completed
+          - failed
+        type: string
+    type: object
+  FeatureFlagChangeRequestReview:
+    properties:
+      _id:
+        $ref: "#/definitions/Id"
+      creationDate:
+        description: A unix epoch time in milliseconds specifying the date the change request was reviewed
+        type: integer
+      kind:
+        $ref: "#/definitions/FeatureFlagChangeRequestReviewStatus"
+      memberId:
+        $ref: "#/definitions/Id"
+    type: object
+  FeatureFlagChangeRequestReviewStatus:
+    description: >
+      | Name     | Description |
+
+      | --------:| ----------- |
+
+      | pending  | the feature flag change request has not been reviewed yet |
+
+      | approved | the feature flag change request has been approved and can now be applied |
+
+      | declined | the feature flag change request has been declined and cannot be applied |
+    enum:
+      - pending
+      - approved
+      - declined
+    type: string
+  FeatureFlagChangeRequests:
+    properties:
+      _links:
+        $ref: "#/definitions/Links"
+      items:
+        items:
+          $ref: "#/definitions/FeatureFlagChangeRequest"
         type: array
     type: object
   FeatureFlagConfig:
@@ -3331,6 +3584,8 @@ definitions:
         items:
           $ref: "#/definitions/Clause"
         type: array
+      description:
+        type: string
       rollout:
         $ref: "#/definitions/Rollout"
       trackEvents:

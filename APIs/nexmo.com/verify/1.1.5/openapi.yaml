@@ -22,14 +22,14 @@ info:
     url: https://opensource.org/licenses/MIT
   termsOfService: https://www.nexmo.com/terms-of-use
   title: Verify API
-  version: 1.1.4
+  version: 1.1.5
   x-origin:
     - format: openapi
       url: https://raw.githubusercontent.com/nexmo/api-specification/master/definitions/verify.yml
       version: "3.0"
-  x-preferred: null
   x-providerName: nexmo.com
   x-serviceName: verify
+  x-preferred: null
 externalDocs:
   description: More information on the Verify product on our Developer Portal
   url: https://developer.nexmo.com/verify
@@ -53,32 +53,7 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              properties:
-                api_key:
-                  $ref: "#/components/schemas/api_key"
-                api_secret:
-                  $ref: "#/components/schemas/api_secret"
-                code:
-                  description: The verification code entered by your user.
-                  example: "1234"
-                  maxLength: 6
-                  minLength: 4
-                  type: string
-                ip_address:
-                  description: (This field is no longer used)
-                  example: 123.0.0.255
-                  type: string
-                request_id:
-                  description: The Verify request to check. This is the `request_id` you received in the response to the Verify request.
-                  example: abcdef0123456789abcdef0123456789
-                  maxLength: 32
-                  type: string
-              required:
-                - api_key
-                - api_secret
-                - request_id
-                - code
-              type: object
+              $ref: "#/components/schemas/checkRequest"
         required: true
       responses:
         "200":
@@ -167,28 +142,7 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              properties:
-                api_key:
-                  $ref: "#/components/schemas/api_key"
-                api_secret:
-                  $ref: "#/components/schemas/api_secret"
-                cmd:
-                  description: The possible commands are `cancel` to request cancellation of the verification process, or `trigger_next_event` to advance  to the next verification event (if any). Cancellation is only possible 30 seconds after the start of the verification request and before the second event (either TTS or SMS) has taken place.
-                  enum:
-                    - cancel
-                    - trigger_next_event
-                  example: cancel
-                  type: string
-                request_id:
-                  description: The `request_id` you received in the response to the Verify request.
-                  example: abcdef0123456789abcdef0123456789
-                  type: string
-              required:
-                - api_key
-                - api_secret
-                - request_id
-                - cmd
-              type: object
+              $ref: "#/components/schemas/controlRequest"
         required: true
       responses:
         "200":
@@ -275,101 +229,7 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              properties:
-                amount:
-                  description: The decimal amount of the payment to be confirmed, in Euros
-                  example: "48.00"
-                  format: float
-                  type: number
-                api_key:
-                  $ref: "#/components/schemas/api_key"
-                api_secret:
-                  $ref: "#/components/schemas/api_secret"
-                code_length:
-                  default: 4
-                  description: The length of the verification code.
-                  enum:
-                    - 4
-                    - 6
-                  example: 6
-                  type: integer
-                country:
-                  description: If you do not provide `number` in international format or you are not sure if `number` is correctly formatted, specify the two-character country code in `country`. Verify will then format the number for you.
-                  example: GB
-                  type: string
-                lg:
-                  default: en-gb
-                  description: >-
-                    By default, the SMS or text-to-speech (TTS) message is generated in the locale that matches the `number`. For example, the text message or TTS message for a `33*` number is sent in French. Use this parameter to explicitly control the language used.
-
-                    *Note: Voice calls in English for `bg-bg`, `ee-et`, `ga-ie`, `lv-lv`, `lt-lt`, `mt-mt`, `sk-sk`, `sk-si`
-                  enum:
-                    - en-gb
-                    - bg-bg
-                    - cs-cz
-                    - da-dk
-                    - de-de
-                    - ee-et
-                    - el-gr
-                    - es-es
-                    - fi-fi
-                    - fr-fr
-                    - ga-ie
-                    - hu-hu
-                    - it-it
-                    - lv-lv
-                    - lt-lt
-                    - mt-mt
-                    - nl-nl
-                    - pl-pl
-                    - sk-sk
-                    - sl-si
-                    - sv-se
-                  example: es-es
-                  type: string
-                next_event_wait:
-                  default: 300
-                  description: Specifies the wait time in seconds between attempts to deliver the verification code.
-                  example: 120
-                  maximum: 900
-                  minimum: 60
-                  type: integer
-                number:
-                  description: The mobile or landline phone number to verify. Unless you are setting `country` explicitly, this number must be in [E.164](https://en.wikipedia.org/wiki/E.164) format.
-                  example: "447700900000"
-                  type: string
-                payee:
-                  description: An alphanumeric string to indicate to the user the name of the recipient that they are confirming a payment to.
-                  example: Acme Inc
-                  maxLength: 18
-                  type: string
-                pin_expiry:
-                  default: 300
-                  description: How long the generated verification code is valid for, in seconds. When you specify both `pin_expiry` and `next_event_wait` then `pin_expiry` must be an integer multiple of `next_event_wait` otherwise `pin_expiry` is defaulted to equal next_event_wait. See [changing the event timings](https://developer.nexmo.com/verify/guides/changing-default-timings).
-                  example: 240
-                  maximum: 3600
-                  minimum: 60
-                  type: integer
-                workflow_id:
-                  default: 1
-                  description: Selects the predefined sequence of SMS and TTS (Text To Speech) actions to use in order to convey the PIN to your user. For example, an id of 1 identifies the workflow SMS - TTS - TTS. For a list of all workflows and their associated ids, please visit the [developer portal](https://developer.nexmo.com/verify/guides/workflows-and-events).
-                  enum:
-                    - 1
-                    - 2
-                    - 3
-                    - 4
-                    - 5
-                    - 6
-                    - 7
-                  example: 4
-                  type: integer
-              required:
-                - api_key
-                - api_secret
-                - number
-                - payee
-                - amount
-              type: object
+              $ref: "#/components/schemas/psd2Request"
         required: true
       responses:
         "200":
@@ -515,116 +375,7 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
-              properties:
-                api_key:
-                  $ref: "#/components/schemas/api_key"
-                api_secret:
-                  $ref: "#/components/schemas/api_secret"
-                brand:
-                  description: 'An 18-character alphanumeric string you can use to personalize the verification request SMS body, to help users identify your company or application name. For example: "Your `Acme Inc` PIN is ..."'
-                  example: Acme Inc
-                  maxLength: 18
-                  type: string
-                code_length:
-                  default: 4
-                  description: The length of the verification code.
-                  enum:
-                    - 4
-                    - 6
-                  example: 6
-                  type: integer
-                country:
-                  description: If you do not provide `number` in international format or you are not sure if `number` is correctly formatted, specify the two-character country code in `country`. Verify will then format the number for you.
-                  example: GB
-                  type: string
-                lg:
-                  default: en-us
-                  description: "By default, the SMS or text-to-speech (TTS) message is generated in the locale that matches the `number`. For example, the text message or TTS message for a `33*` number is sent in French. Use this parameter to explicitly control the language used for the Verify request. A list of languages is available: <https://developer.nexmo.com/verify/guides/verify-languages>"
-                  enum:
-                    - ar-xa
-                    - cs-cz
-                    - cy-cy
-                    - cy-gb
-                    - da-dk
-                    - de-de
-                    - el-gr
-                    - en-au
-                    - en-gb
-                    - en-in
-                    - en-us
-                    - es-es
-                    - es-mx
-                    - es-us
-                    - fi-fi
-                    - fil-ph
-                    - fr-ca
-                    - fr-fr
-                    - hi-in
-                    - hu-hu
-                    - id-id
-                    - is-is
-                    - it-it
-                    - ja-jp
-                    - ko-kr
-                    - nb-no
-                    - nl-nl
-                    - pl-pl
-                    - pt-br
-                    - pt-pt
-                    - ro-ro
-                    - ru-ru
-                    - sv-se
-                    - th-th
-                    - tr-tr
-                    - vi-vn
-                    - yue-cn
-                    - zh-cn
-                    - zh-tw
-                  example: en-us
-                  type: string
-                next_event_wait:
-                  default: 300
-                  description: Specifies the wait time in seconds between attempts to deliver the verification code.
-                  example: 120
-                  maximum: 900
-                  minimum: 60
-                  type: integer
-                number:
-                  description: The mobile or landline phone number to verify. Unless you are setting `country` explicitly, this number must be in [E.164](https://en.wikipedia.org/wiki/E.164) format.
-                  example: "447700900000"
-                  type: string
-                pin_expiry:
-                  default: 300
-                  description: How long the generated verification code is valid for, in seconds. When you specify both `pin_expiry` and `next_event_wait` then `pin_expiry` must be an integer multiple of `next_event_wait` otherwise `pin_expiry` is defaulted to equal next_event_wait. See [changing the event timings](https://developer.nexmo.com/verify/guides/changing-default-timings).
-                  example: 240
-                  maximum: 3600
-                  minimum: 60
-                  type: integer
-                sender_id:
-                  default: VERIFY
-                  description: An 11-character alphanumeric string that represents the [identity of the sender](https://developer.nexmo.com/messaging/sms/guides/custom-sender-id) of the verification request. Depending on the destination of the phone number you are sending the verification SMS to, restrictions might apply.
-                  example: ACME
-                  maxLength: 11
-                  type: string
-                workflow_id:
-                  default: 1
-                  description: Selects the predefined sequence of SMS and TTS (Text To Speech) actions to use in order to convey the PIN to your user. For example, an id of 1 identifies the workflow SMS - TTS - TTS. For a list of all workflows and their associated ids, please visit the [developer portal](https://developer.nexmo.com/verify/guides/workflows-and-events).
-                  enum:
-                    - 1
-                    - 2
-                    - 3
-                    - 4
-                    - 5
-                    - 6
-                    - 7
-                  example: 4
-                  type: integer
-              required:
-                - api_key
-                - api_secret
-                - number
-                - brand
-              type: object
+              $ref: "#/components/schemas/verifyRequest"
         required: true
       responses:
         "200":
@@ -786,6 +537,34 @@ components:
       type: object
       xml:
         name: verify_response
+    checkRequest:
+      properties:
+        api_key:
+          $ref: "#/components/schemas/api_key"
+        api_secret:
+          $ref: "#/components/schemas/api_secret"
+        code:
+          description: The verification code entered by your user.
+          example: "1234"
+          maxLength: 6
+          minLength: 4
+          type: string
+        ip_address:
+          deprecated: true
+          description: (This field is no longer used)
+          example: 123.0.0.255
+          type: string
+        request_id:
+          description: The Verify request to check. This is the `request_id` you received in the response to the Verify request.
+          example: abcdef0123456789abcdef0123456789
+          maxLength: 32
+          type: string
+      required:
+        - api_key
+        - api_secret
+        - request_id
+        - code
+      type: object
     checkResponse:
       description: Success
       properties:
@@ -862,6 +641,29 @@ components:
       type: object
       xml:
         name: response
+    controlRequest:
+      properties:
+        api_key:
+          $ref: "#/components/schemas/api_key"
+        api_secret:
+          $ref: "#/components/schemas/api_secret"
+        cmd:
+          description: The possible commands are `cancel` to request cancellation of the verification process, or `trigger_next_event` to advance  to the next verification event (if any). Cancellation is only possible 30 seconds after the start of the verification request and before the second event (either TTS or SMS) has taken place.
+          enum:
+            - cancel
+            - trigger_next_event
+          example: cancel
+          type: string
+        request_id:
+          description: The `request_id` you received in the response to the Verify request.
+          example: abcdef0123456789abcdef0123456789
+          type: string
+      required:
+        - api_key
+        - api_secret
+        - request_id
+        - cmd
+      type: object
     controlResponse:
       description: Success
       properties:
@@ -899,6 +701,102 @@ components:
         cost of the verification is the sum of this field and the `price` field.
       example: "0.03330000"
       type: string
+    psd2Request:
+      properties:
+        amount:
+          description: The decimal amount of the payment to be confirmed, in Euros
+          example: "48.00"
+          format: float
+          type: number
+        api_key:
+          $ref: "#/components/schemas/api_key"
+        api_secret:
+          $ref: "#/components/schemas/api_secret"
+        code_length:
+          default: 4
+          description: The length of the verification code.
+          enum:
+            - 4
+            - 6
+          example: 6
+          type: integer
+        country:
+          description: If you do not provide `number` in international format or you are not sure if `number` is correctly formatted, specify the two-character country code in `country`. Verify will then format the number for you.
+          example: GB
+          type: string
+        lg:
+          default: en-gb
+          description: >-
+            By default, the SMS or text-to-speech (TTS) message is generated in the locale that matches the `number`. For example, the text message or TTS message for a `33*` number is sent in French. Use this parameter to explicitly control the language used.
+
+            *Note: Voice calls in English for `bg-bg`, `ee-et`, `ga-ie`, `lv-lv`, `lt-lt`, `mt-mt`, `sk-sk`, `sk-si`
+          enum:
+            - en-gb
+            - bg-bg
+            - cs-cz
+            - da-dk
+            - de-de
+            - ee-et
+            - el-gr
+            - es-es
+            - fi-fi
+            - fr-fr
+            - ga-ie
+            - hu-hu
+            - it-it
+            - lv-lv
+            - lt-lt
+            - mt-mt
+            - nl-nl
+            - pl-pl
+            - sk-sk
+            - sl-si
+            - sv-se
+          example: es-es
+          type: string
+        next_event_wait:
+          default: 300
+          description: Specifies the wait time in seconds between attempts to deliver the verification code.
+          example: 120
+          maximum: 900
+          minimum: 60
+          type: integer
+        number:
+          description: The mobile or landline phone number to verify. Unless you are setting `country` explicitly, this number must be in [E.164](https://en.wikipedia.org/wiki/E.164) format.
+          example: "447700900000"
+          type: string
+        payee:
+          description: An alphanumeric string to indicate to the user the name of the recipient that they are confirming a payment to.
+          example: Acme Inc
+          maxLength: 18
+          type: string
+        pin_expiry:
+          default: 300
+          description: How long the generated verification code is valid for, in seconds. When you specify both `pin_expiry` and `next_event_wait` then `pin_expiry` must be an integer multiple of `next_event_wait` otherwise `pin_expiry` is defaulted to equal next_event_wait. See [changing the event timings](https://developer.nexmo.com/verify/guides/changing-default-timings).
+          example: 240
+          maximum: 3600
+          minimum: 60
+          type: integer
+        workflow_id:
+          default: 1
+          description: Selects the predefined sequence of SMS and TTS (Text To Speech) actions to use in order to convey the PIN to your user. For example, an id of 1 identifies the workflow SMS - TTS - TTS. For a list of all workflows and their associated ids, please visit the [developer portal](https://developer.nexmo.com/verify/guides/workflows-and-events).
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+          example: 4
+          type: integer
+      required:
+        - api_key
+        - api_secret
+        - number
+        - payee
+        - amount
+      type: object
     requestErrorResponse:
       description: Error
       properties:
@@ -1035,6 +933,7 @@ components:
                 example: 2020-01-01 12:00:00
                 type: string
               ip_address:
+                deprecated: true
                 description: The IP address, if available (this field is no longer used).
                 example: 123.0.0.255
                 type: string
@@ -1131,3 +1030,114 @@ components:
       type: object
       xml:
         name: verify_request
+    verifyRequest:
+      properties:
+        api_key:
+          $ref: "#/components/schemas/api_key"
+        api_secret:
+          $ref: "#/components/schemas/api_secret"
+        brand:
+          description: 'An 18-character alphanumeric string you can use to personalize the verification request SMS body, to help users identify your company or application name. For example: "Your `Acme Inc` PIN is ..."'
+          example: Acme Inc
+          maxLength: 18
+          type: string
+        code_length:
+          default: 4
+          description: The length of the verification code.
+          enum:
+            - 4
+            - 6
+          example: 6
+          type: integer
+        country:
+          description: If you do not provide `number` in international format or you are not sure if `number` is correctly formatted, specify the two-character country code in `country`. Verify will then format the number for you.
+          example: GB
+          type: string
+        lg:
+          default: en-us
+          description: "By default, the SMS or text-to-speech (TTS) message is generated in the locale that matches the `number`. For example, the text message or TTS message for a `33*` number is sent in French. Use this parameter to explicitly control the language used for the Verify request. A list of languages is available: <https://developer.nexmo.com/verify/guides/verify-languages>"
+          enum:
+            - ar-xa
+            - cs-cz
+            - cy-cy
+            - cy-gb
+            - da-dk
+            - de-de
+            - el-gr
+            - en-au
+            - en-gb
+            - en-in
+            - en-us
+            - es-es
+            - es-mx
+            - es-us
+            - fi-fi
+            - fil-ph
+            - fr-ca
+            - fr-fr
+            - hi-in
+            - hu-hu
+            - id-id
+            - is-is
+            - it-it
+            - ja-jp
+            - ko-kr
+            - nb-no
+            - nl-nl
+            - pl-pl
+            - pt-br
+            - pt-pt
+            - ro-ro
+            - ru-ru
+            - sv-se
+            - th-th
+            - tr-tr
+            - vi-vn
+            - yue-cn
+            - zh-cn
+            - zh-tw
+          example: en-us
+          type: string
+        next_event_wait:
+          default: 300
+          description: Specifies the wait time in seconds between attempts to deliver the verification code.
+          example: 120
+          maximum: 900
+          minimum: 60
+          type: integer
+        number:
+          description: The mobile or landline phone number to verify. Unless you are setting `country` explicitly, this number must be in [E.164](https://en.wikipedia.org/wiki/E.164) format.
+          example: "447700900000"
+          type: string
+        pin_expiry:
+          default: 300
+          description: How long the generated verification code is valid for, in seconds. When you specify both `pin_expiry` and `next_event_wait` then `pin_expiry` must be an integer multiple of `next_event_wait` otherwise `pin_expiry` is defaulted to equal next_event_wait. See [changing the event timings](https://developer.nexmo.com/verify/guides/changing-default-timings).
+          example: 240
+          maximum: 3600
+          minimum: 60
+          type: integer
+        sender_id:
+          default: VERIFY
+          description: An 11-character alphanumeric string that represents the [identity of the sender](https://developer.nexmo.com/messaging/sms/guides/custom-sender-id) of the verification request. Depending on the destination of the phone number you are sending the verification SMS to, restrictions might apply.
+          example: ACME
+          maxLength: 11
+          type: string
+        workflow_id:
+          default: 1
+          description: Selects the predefined sequence of SMS and TTS (Text To Speech) actions to use in order to convey the PIN to your user. For example, an id of 1 identifies the workflow SMS - TTS - TTS. For a list of all workflows and their associated ids, please visit the [developer portal](https://developer.nexmo.com/verify/guides/workflows-and-events).
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+          example: 4
+          type: integer
+      required:
+        - api_key
+        - api_secret
+        - number
+        - brand
+      type: object

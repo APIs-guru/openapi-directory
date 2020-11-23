@@ -69,8 +69,8 @@ info:
     - format: openapi
       url: https://api.configcat.com/docs/v1/swagger.json
       version: "3.0"
-  x-preferred: null
   x-providerName: configcat.com
+  x-preferred: null
 security:
   - Basic: []
 tags:
@@ -136,15 +136,27 @@ tags:
       <a href="https://configcat.com/docs/organization/" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the Organizations.
     name: Organizations
   - description: >-
-      With these endpoints you can get useful information about your Products.
+      With these endpoints you can manage your Members.
 
-      This also can be used to manage [Environments](#tag/Environments) and [Configs](#tag/Configs) through this API.
+
+      <a href="https://configcat.com/docs/advanced/team-collaboration" target="_blank" rel="noopener noreferrer">Here</a> you can read more about Team Collaboration.
+    name: Members
+  - description: >-
+      With these endpoints you can manage your Permission Groups.
+
+
+      <a href="https://configcat.com/docs/advanced/team-collaboration#permissions--groups" target="_blank" rel="noopener noreferrer">Here</a> you can read more about Permissions.
+    name: Permission Groups
+  - description: >-
+      With these endpoints you can manage your Products.
+
+      This also can be used to manage [Environments](#tag/Environments), [Configs](#tag/Configs), [Tags](#tag/Tags) and [Permission Groups](#tag/Permission-Groups) through this API.
 
 
       <a href="https://configcat.com/docs/main-concepts/#product" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Products.
     name: Products
   - description: >-
-      With these endpoints you can get useful information about your Configs.
+      With these endpoints you can manage your Configs.
 
       This also can be used to manage [Feature Flags and Settings](#tag/Feature-Flags-and-Settings) and their 
 
@@ -159,6 +171,8 @@ tags:
 
       <a href="https://configcat.com/docs/main-concepts/#environment" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Environments.
     name: Environments
+  - description: With these endpoints you can manage your SDK Keys.
+    name: SDK Keys
   - description: With these endpoints you can manage Tags. Tags are stored under a Product. You can  and add a Tag to a Feature Flag or Setting using the [Update Flag](#operation/update-setting) endpoint.
     name: Tags
   - description: Access audit log entries.
@@ -271,6 +285,46 @@ paths:
       summary: Update Config
       tags:
         - Configs
+  "/v1/configs/{configId}/environments/{environmentId}":
+    get:
+      description: This endpoint returns the SDK Key for your Config in a specified Environment.
+      operationId: get-sdk-keys
+      parameters:
+        - description: The identifier of the Config.
+          in: path
+          name: configId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The identifier of the Environment.
+          in: path
+          name: environmentId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/SdkKeysModel"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SdkKeysModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Get SDK Key
+      tags:
+        - SDK Keys
   "/v1/configs/{configId}/settings":
     get:
       description: >-
@@ -1191,6 +1245,81 @@ paths:
       summary: List Organizations
       tags:
         - Organizations
+  "/v1/organizations/{organizationId}/members":
+    get:
+      description: >-
+        This endpoint returns the list of Members that belongs 
+
+        to the given Organization, identified by the `organizationId` parameter.
+      operationId: get-organization-members
+      parameters:
+        - description: The identifier of the Organization.
+          in: path
+          name: organizationId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MemberModel"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MemberModel"
+                type: array
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: List Organization Members
+      tags:
+        - Members
+  "/v1/organizations/{organizationId}/members/{userId}":
+    delete:
+      description: >-
+        This endpoint removes a Member identified by the `userId` from the 
+
+        given Organization identified by the `organizationId` parameter.
+      operationId: delete-organization-member
+      parameters:
+        - description: The identifier of the Organization.
+          in: path
+          name: organizationId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The identifier of the Member.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Delete Member from Organization
+      tags:
+        - Members
   "/v1/organizations/{organizationId}/products":
     post:
       description: >-
@@ -1239,6 +1368,111 @@ paths:
       summary: Create Product
       tags:
         - Products
+  "/v1/permissions/{permissionGroupId}":
+    delete:
+      description: This endpoint removes a Permission Group identified by the `permissionGroupId` parameter.
+      operationId: delete-permission-group
+      parameters:
+        - description: The identifier of the Permission Group.
+          in: path
+          name: permissionGroupId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Delete Permission Group
+      tags:
+        - Permission Groups
+    get:
+      description: >-
+        This endpoint returns the metadata of a Permission Group 
+
+        identified by the `permissionGroupId`.
+      operationId: get-permission-group
+      parameters:
+        - description: The identifier of the Permission Group.
+          in: path
+          name: permissionGroupId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PermissionGroupModel"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionGroupModel"
+          description: When everything is ok, the permission group data returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Get Permission Group
+      tags:
+        - Permission Groups
+    put:
+      description: This endpoint updates a Permission Group identified by the `permissionGroupId` parameter.
+      operationId: update-permission-group
+      parameters:
+        - description: The identifier of the Permission Group.
+          in: path
+          name: permissionGroupId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateMemberGroupRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateMemberGroupRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateMemberGroupRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PermissionGroupModel"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionGroupModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Update Permission Group
+      tags:
+        - Permission Groups
   /v1/products:
     get:
       description: This endpoint returns the list of the Products that belongs to the user.
@@ -1618,6 +1852,206 @@ paths:
       summary: Create Environment
       tags:
         - Environments
+  "/v1/products/{productId}/members":
+    get:
+      description: >-
+        This endpoint returns the list of Members that belongs 
+
+        to the given Product, identified by the `productId` parameter.
+      operationId: get-product-members
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MemberModel"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/MemberModel"
+                type: array
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: List Product Members
+      tags:
+        - Members
+  "/v1/products/{productId}/members/invite":
+    post:
+      description: This endpoint invites a Member into the given Product identified by the `productId` parameter.
+      operationId: invite-member
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/InviteMembersRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/InviteMembersRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/InviteMembersRequest"
+        required: true
+      responses:
+        "200":
+          description: When the invite was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Invite Member
+      tags:
+        - Members
+  "/v1/products/{productId}/members/{userId}":
+    delete:
+      description: >-
+        This endpoint removes a Member identified by the `userId` from the 
+
+        given Product identified by the `productId` parameter.
+      operationId: delete-product-member
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The identifier of the Member.
+          in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Delete Member from Product
+      tags:
+        - Members
+  "/v1/products/{productId}/permissions":
+    get:
+      description: >-
+        This endpoint returns the list of the Permission Groups that belongs to the given Product identified by the
+
+        `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      operationId: get-permission-groups
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PermissionGroupModel"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/PermissionGroupModel"
+                type: array
+          description: ""
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: List Permission Groups
+      tags:
+        - Permission Groups
+    post:
+      description: >-
+        This endpoint creates a new Permission Group in a specified Product 
+
+        identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      operationId: create-permission-group
+      parameters:
+        - description: The identifier of the Product.
+          in: path
+          name: productId
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateMemberGroupRequest"
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMemberGroupRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateMemberGroupRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PermissionGroupModel"
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PermissionGroupModel"
+          description: When the creation was successful.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: Create Permission Group
+      tags:
+        - Permission Groups
   "/v1/products/{productId}/tags":
     get:
       description: >-
@@ -2532,8 +2966,54 @@ paths:
       summary: Update Tag
       tags:
         - Tags
+  "/v1/tags/{tagId}/settings":
+    get:
+      description: >-
+        This endpoint returns the list of the Settings that 
+
+        has the specified Tag, identified by the `tagId` parameter.
+      operationId: get-settings-by-tag
+      parameters:
+        - description: The identifier of the Tag.
+          in: path
+          name: tagId
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SettingModel-haljson"
+                type: array
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/SettingModel"
+                type: array
+          description: When everything is ok, the settings data returned.
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials are invalid.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the rate limits.
+      summary: List Settings by Tag
+      tags:
+        - Tags
 components:
   schemas:
+    AccessType:
+      enum:
+        - readOnly
+        - full
+        - custom
+      type: string
     AddOrUpdateIntegrationLinkModel:
       additionalProperties: false
       properties:
@@ -2609,6 +3089,7 @@ components:
         - memberGroupCreated
         - memberGroupChanged
         - memberGroupDeleted
+        - memberGroupDefault
         - apiKeyAdded
         - apiKeyRemoved
         - integrationAdded
@@ -2657,6 +3138,8 @@ components:
                       properties:
                         _links:
                           properties:
+                            members:
+                              type: string
                             products:
                               type: string
                           type: object
@@ -2673,6 +3156,10 @@ components:
                     configs:
                       type: string
                     environments:
+                      type: string
+                    members:
+                      type: string
+                    permission-groups:
                       type: string
                     self:
                       type: string
@@ -2718,6 +3205,31 @@ components:
           maxLength: 255
           minLength: 0
           type: string
+      required:
+        - name
+      type: object
+    CreateMemberGroupRequest:
+      additionalProperties: false
+      properties:
+        accessType:
+          $ref: "#/components/schemas/AccessType"
+        canManageMembers:
+          type: boolean
+        canManageResources:
+          type: boolean
+        environmentAccesses:
+          items:
+            $ref: "#/components/schemas/EnvironmentAccessModel"
+          nullable: true
+          type: array
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        newEnvironmentAccessType:
+          $ref: "#/components/schemas/EnvironmentAccessType"
+        showDeveloperInfo:
+          type: boolean
       required:
         - name
       type: object
@@ -2786,6 +3298,24 @@ components:
         hasRemainingIntegrationLink:
           type: boolean
       type: object
+    EnvironmentAccessModel:
+      additionalProperties: false
+      properties:
+        environmentAccessType:
+          $ref: "#/components/schemas/EnvironmentAccessType"
+        environmentId:
+          format: uuid
+          type: string
+        name:
+          nullable: true
+          type: string
+      type: object
+    EnvironmentAccessType:
+      enum:
+        - full
+        - readOnly
+        - none
+      type: string
     EnvironmentModel:
       additionalProperties: false
       properties:
@@ -2810,6 +3340,8 @@ components:
                       properties:
                         _links:
                           properties:
+                            members:
+                              type: string
                             products:
                               type: string
                           type: object
@@ -2826,6 +3358,10 @@ components:
                     configs:
                       type: string
                     environments:
+                      type: string
+                    members:
+                      type: string
+                    permission-groups:
                       type: string
                     self:
                       type: string
@@ -2902,6 +3438,20 @@ components:
         - trello
         - jira
       type: string
+    InviteMembersRequest:
+      additionalProperties: false
+      properties:
+        emails:
+          items:
+            type: string
+          type: array
+        permissionGroupId:
+          format: int64
+          type: integer
+      required:
+        - emails
+        - permissionGroupId
+      type: object
     MeModel:
       additionalProperties: false
       properties:
@@ -2912,6 +3462,25 @@ components:
         fullName:
           nullable: true
           readOnly: true
+          type: string
+      type: object
+    MemberModel:
+      additionalProperties: false
+      properties:
+        email:
+          nullable: true
+          type: string
+        fullName:
+          nullable: true
+          type: string
+        permissionGroupId:
+          format: int64
+          type: integer
+        productId:
+          format: uuid
+          type: string
+        userId:
+          nullable: true
           type: string
       type: object
     Operation:
@@ -2945,6 +3514,8 @@ components:
       properties:
         _links:
           properties:
+            members:
+              type: string
             products:
               type: string
           type: object
@@ -2954,6 +3525,31 @@ components:
         organizationId:
           format: uuid
           type: string
+      type: object
+    PermissionGroupModel:
+      additionalProperties: false
+      properties:
+        accessType:
+          $ref: "#/components/schemas/AccessType"
+        canManageMembers:
+          type: boolean
+        canManageResources:
+          type: boolean
+        environmentAccesses:
+          items:
+            $ref: "#/components/schemas/EnvironmentAccessModel"
+          nullable: true
+          type: array
+        name:
+          nullable: true
+          type: string
+        newEnvironmentAccessType:
+          $ref: "#/components/schemas/EnvironmentAccessType"
+        permissionGroupId:
+          format: int64
+          type: integer
+        showDeveloperInfo:
+          type: boolean
       type: object
     ProductModel:
       additionalProperties: false
@@ -2975,6 +3571,8 @@ components:
               properties:
                 _links:
                   properties:
+                    members:
+                      type: string
                     products:
                       type: string
                   type: object
@@ -2991,6 +3589,10 @@ components:
             configs:
               type: string
             environments:
+              type: string
+            members:
+              type: string
+            permission-groups:
               type: string
             self:
               type: string
@@ -3063,6 +3665,16 @@ components:
         - comparisonAttribute
         - comparisonValue
         - value
+      type: object
+    SdkKeysModel:
+      additionalProperties: false
+      properties:
+        primary:
+          nullable: true
+          type: string
+        secondary:
+          nullable: true
+          type: string
       type: object
     SettingDataModel:
       additionalProperties: false
@@ -3174,6 +3786,8 @@ components:
                                 properties:
                                   _links:
                                     properties:
+                                      members:
+                                        type: string
                                       products:
                                         type: string
                                     type: object
@@ -3190,6 +3804,10 @@ components:
                               configs:
                                 type: string
                               environments:
+                                type: string
+                              members:
+                                type: string
+                              permission-groups:
                                 type: string
                               self:
                                 type: string
@@ -3354,6 +3972,8 @@ components:
                               properties:
                                 _links:
                                   properties:
+                                    members:
+                                      type: string
                                     products:
                                       type: string
                                   type: object
@@ -3370,6 +3990,10 @@ components:
                             configs:
                               type: string
                             environments:
+                              type: string
+                            members:
+                              type: string
+                            permission-groups:
                               type: string
                             self:
                               type: string
@@ -3410,6 +4034,8 @@ components:
                               properties:
                                 _links:
                                   properties:
+                                    members:
+                                      type: string
                                     products:
                                       type: string
                                   type: object
@@ -3426,6 +4052,10 @@ components:
                             configs:
                               type: string
                             environments:
+                              type: string
+                            members:
+                              type: string
+                            permission-groups:
                               type: string
                             self:
                               type: string
@@ -3595,6 +4225,8 @@ components:
                       properties:
                         _links:
                           properties:
+                            members:
+                              type: string
                             products:
                               type: string
                           type: object
@@ -3611,6 +4243,10 @@ components:
                     configs:
                       type: string
                     environments:
+                      type: string
+                    members:
+                      type: string
+                    permission-groups:
                       type: string
                     self:
                       type: string
@@ -3657,6 +4293,33 @@ components:
           minLength: 0
           nullable: true
           type: string
+      type: object
+    UpdateMemberGroupRequest:
+      additionalProperties: false
+      properties:
+        accessType:
+          $ref: "#/components/schemas/AccessType"
+        canManageMembers:
+          nullable: true
+          type: boolean
+        canManageResources:
+          nullable: true
+          type: boolean
+        environmentAccesses:
+          items:
+            $ref: "#/components/schemas/EnvironmentAccessModel"
+          nullable: true
+          type: array
+        name:
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        newEnvironmentAccessType:
+          $ref: "#/components/schemas/EnvironmentAccessType"
+        showDeveloperInfo:
+          nullable: true
+          type: boolean
       type: object
     UpdateProductRequest:
       additionalProperties: false
@@ -3723,10 +4386,15 @@ x-tagGroups:
       - Tags
   - name: General
     tags:
-      - Organizations
       - Products
       - Configs
       - Environments
+      - SDK Keys
+  - name: Membership
+    tags:
+      - Organizations
+      - Members
+      - Permission Groups
   - name: Diagnostics
     tags:
       - Audit logs

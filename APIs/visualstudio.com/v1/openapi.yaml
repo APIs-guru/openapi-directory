@@ -13,8 +13,8 @@ info:
     - format: openapi
       url: https://online.visualstudio.com/api/v1/swagger
       version: "3.0"
-  x-preferred: null
   x-providerName: visualstudio.com
+  x-preferred: null
 security:
   - Bearer: []
 paths:
@@ -310,6 +310,10 @@ paths:
           schema:
             format: uuid
             type: string
+        - in: query
+          name: connect
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -2583,6 +2587,20 @@ components:
         connectionSessionPath:
           nullable: true
           type: string
+        hostPublicKeys:
+          items:
+            type: string
+          nullable: true
+          type: array
+        relayEndpoint:
+          nullable: true
+          type: string
+        relaySasToken:
+          nullable: true
+          type: string
+        sessionToken:
+          nullable: true
+          type: string
       type: object
     CreateCloudEnvironmentBody:
       additionalProperties: false
@@ -2606,6 +2624,9 @@ components:
           nullable: true
           type: object
         friendlyName:
+          type: string
+        label:
+          nullable: true
           type: string
         location:
           deprecated: true

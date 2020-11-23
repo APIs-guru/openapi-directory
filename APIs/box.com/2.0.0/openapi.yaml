@@ -26,8 +26,8 @@ info:
       format: openapi
       url: https://opensource.box.com/box-openapi/openapi.json
       version: "3.0"
-  x-preferred: null
   x-providerName: box.com
+  x-preferred: null
 externalDocs:
   description: Box Developer Documentation
   url: https://developer.box.com
@@ -7720,7 +7720,7 @@ paths:
                   type: object
                 locked_operations:
                   description: >-
-                    The operations to lock on the folder. If `locked_operations` is
+                    The operations to lock for the folder. If `locked_operations` is
 
                     included in the request, both `move` and `delete` must also be
 
@@ -26698,12 +26698,28 @@ components:
           example: xxxxx.yyyyy.zzzzz
           format: jwt
           type: string
+        box_subject_id:
+          description: >-
+            Used in combination with `client_credentials` as the `grant_type`.
+
+            Value is determined by `box_subject_type`. If `user` use user ID and if
+
+            `enterprise` use enterprise ID.
+          example: "123456789"
+          type: string
+        box_subject_type:
+          description: Used in combination with `client_credentials` as the `grant_type`.
+          enum:
+            - enterprise
+            - user
+          example: enterprise
+          type: string
         client_id:
           description: >-
             The Client ID of the application requesting an access token.
 
 
-            Used in combination with `authorization_code` or
+            Used in combination with `authorization_code`, `client_credentials`, or
 
             `urn:ietf:params:oauth:grant-type:jwt-bearer` as the `grant_type`.
           example: ly1nj6n11vionaie65emwzk575hnnmrk
@@ -26713,7 +26729,7 @@ components:
             The client secret of the application requesting an access token.
 
 
-            Used in combination with `authorization_code` or
+            Used in combination with `authorization_code`, `client_credentials`, or
 
             `urn:ietf:params:oauth:grant-type:jwt-bearer` as the `grant_type`.
           example: hOzsTeFlT6ko0dme22uGbQal04SBPYc1
@@ -26737,12 +26753,13 @@ components:
           description: >-
             The type of request being made, either using a client-side obtained
 
-            authorization code, a refresh token, a JWT assertion, or another access
+            authorization code, a refresh token, a JWT assertion, client credentials
 
-            token for the purpose of downscoping a token.
+            grant or another access token for the purpose of downscoping a token.
           enum:
             - authorization_code
             - refresh_token
+            - client_credentials
             - urn:ietf:params:oauth:grant-type:jwt-bearer
             - urn:ietf:params:oauth:grant-type:token-exchange
           example: authorization_code

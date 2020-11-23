@@ -15,8 +15,8 @@ info:
     - format: openapi
       url: https://docspring.com/api-docs/v1/swagger.json
       version: "3.0"
-  x-preferred: null
   x-providerName: formapi.io
+  x-preferred: null
 paths:
   /authentication:
     get:
@@ -4778,6 +4778,8 @@ components:
           type: string
         order:
           type: integer
+        sort_order:
+          type: integer
         state:
           enum:
             - pending
@@ -4794,6 +4796,7 @@ components:
         - name
         - email
         - order
+        - sort_order
         - fields
         - metadata
         - state

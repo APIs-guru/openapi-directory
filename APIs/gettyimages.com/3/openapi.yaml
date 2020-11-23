@@ -11,8 +11,8 @@ info:
     - format: openapi
       url: https://api.gettyimages.com/swagger/v3/swagger.json
       version: "3.0"
-  x-preferred: null
   x-providerName: gettyimages.com
+  x-preferred: null
 security:
   - Api-Key: []
   - OAuth2: []
@@ -907,7 +907,7 @@ paths:
         - Downloads
   "/v3/downloads/images/{id}":
     post:
-      description: >-
+      description: >+
         Use this endpoint to generate download URLs and related data for images you are authorized to download.
 
 
@@ -975,6 +975,30 @@ paths:
         }
 
         ```
+
+        ## Downloading Via the Returned URI
+
+
+        The URI returned by this call should be considered opaque and the format could change at any time.
+
+        In order to get the filename, length or file type, the response headers must be inspected. An example
+
+        response follows:
+
+
+        ```
+
+        content-length: 33959979
+
+        content-type: image/jpeg
+
+        content-disposition: attachment; filename=GettyImages-1167612765.jpg
+
+        ```
+
+
+        The `content-disposition` header must be parsed to get a usable filename.
+
       parameters:
         - in: header
           name: Accept-Language
@@ -1111,7 +1135,7 @@ paths:
         - Downloads
   "/v3/downloads/videos/{id}":
     post:
-      description: >-
+      description: >
         Use this endpoint to generate download URLs and related data for videos you are authorized to download.
 
 
@@ -1179,6 +1203,30 @@ paths:
         }
 
         ```
+
+
+        ## Downloading Via the Returned URI
+
+
+        The URI returned by this call should be considered opaque and the format could change at any time.
+
+        In order to get the filename, length or file type, the response headers must be inspected. An example
+
+        response follows:
+
+
+        ```
+
+        content-length: 283925783
+
+        content-type: video/quicktime
+
+        content-disposition: attachment; filename=GettyImages-690773579.mov
+
+        ```
+
+
+        The `content-disposition` header must be parsed to get a usable filename.
       parameters:
         - in: header
           name: Accept-Language
@@ -3982,6 +4030,17 @@ paths:
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
+        - description: Filter based on video composition.
+          explode: false
+          in: query
+          name: compositions
+          schema:
+            description: Filter based on video composition.
+            items:
+              $ref: "#/components/schemas/CompositionsFilterType"
+            nullable: true
+            type: array
+          style: form
         - description: "Filters based on which product the asset will download against.\r
 
             \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
@@ -4028,6 +4087,17 @@ paths:
             description: Specifies fields to return. Defaults to 'summary_set'.
             items:
               $ref: "#/components/schemas/CreativeVideosFieldValues"
+            nullable: true
+            type: array
+          style: form
+        - description: Filter based on image technique.
+          explode: false
+          in: query
+          name: image_techniques
+          schema:
+            description: Filter based on image technique.
+            items:
+              $ref: "#/components/schemas/ImageTechniquesFilterType"
             nullable: true
             type: array
           style: form
@@ -4138,6 +4208,17 @@ paths:
             description: Specifies whether or not to include facets in the result set. Default is "false".
             nullable: true
             type: boolean
+        - description: Filter based on viewpoint.
+          explode: false
+          in: query
+          name: viewpoints
+          schema:
+            description: Filter based on viewpoint.
+            items:
+              $ref: "#/components/schemas/ViewpointsFilterType"
+            nullable: true
+            type: array
+          style: form
       responses:
         "200":
           content:
@@ -4331,6 +4412,17 @@ paths:
           name: collections_filter_type
           schema:
             $ref: "#/components/schemas/CollectionsFilterType"
+        - description: Filter based on video composition.
+          explode: false
+          in: query
+          name: compositions
+          schema:
+            description: Filter based on video composition.
+            items:
+              $ref: "#/components/schemas/CompositionsFilterType"
+            nullable: true
+            type: array
+          style: form
         - description: "Filters based on which product the asset will download against.\r
 
             \                    Allowed values are easyaccess, editorialsubscription, imagepack, premiumaccess and royaltyfreesubscription.\r
@@ -4410,6 +4502,17 @@ paths:
             description: Specifies fields to return. Defaults to 'summary_set'.
             items:
               $ref: "#/components/schemas/VideosFieldValues"
+            nullable: true
+            type: array
+          style: form
+        - description: Filter based on image technique.
+          explode: false
+          in: query
+          name: image_techniques
+          schema:
+            description: Filter based on image technique.
+            items:
+              $ref: "#/components/schemas/ImageTechniquesFilterType"
             nullable: true
             type: array
           style: form
@@ -4509,6 +4612,17 @@ paths:
             description: Specifies the maximum number of facets to return per type. Default is 300.
             format: int32
             type: integer
+        - description: Filter based on viewpoint.
+          explode: false
+          in: query
+          name: viewpoints
+          schema:
+            description: Filter based on viewpoint.
+            items:
+              $ref: "#/components/schemas/ViewpointsFilterType"
+            nullable: true
+            type: array
+          style: form
       responses:
         "200":
           content:
@@ -7056,6 +7170,16 @@ components:
           format: int32
           type: integer
       type: object
+    ImageTechniquesFilterType:
+      enum:
+        - realtime
+        - time_lapse
+        - slow_motion
+        - color
+        - black_and_white
+        - animation
+        - selective_focus
+      type: string
     ImagesDetailResults:
       additionalProperties: false
       properties:
@@ -7857,6 +7981,17 @@ components:
         - thumb
         - title
         - istock_licenses
+      type: string
+    ViewpointsFilterType:
+      enum:
+        - lockdown
+        - panning
+        - tracking_shot
+        - aerial_view
+        - high_angle_view
+        - low_angle_view
+        - tilt
+        - point_of_view
       type: string
     asset_usage:
       additionalProperties: false

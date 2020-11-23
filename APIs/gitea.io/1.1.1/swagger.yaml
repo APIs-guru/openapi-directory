@@ -20,8 +20,8 @@ info:
     - format: swagger
       url: https://try.gitea.io/swagger.v1.json
       version: "2.0"
-  x-preferred: null
   x-providerName: gitea.io
+  x-preferred: null
 consumes:
   - application/json
   - text/plain
@@ -9553,7 +9553,8 @@ definitions:
         type: string
         x-go-name: Website
     required:
-      - email
+      - source_id
+      - login_name
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   Email:

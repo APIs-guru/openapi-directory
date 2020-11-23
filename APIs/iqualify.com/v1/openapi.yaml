@@ -37,8 +37,8 @@ info:
     - format: openapi
       url: https://api.iqualify.com/v1/management.json
       version: "3.0"
-  x-preferred: null
   x-providerName: iqualify.com
+  x-preferred: null
 security:
   - Authorization: []
 tags: []
@@ -2949,10 +2949,20 @@ components:
       value:
         details: The user (john.doe@test.te) has been suspended.
         name: UserSuspendedError
+    ValidationAllowTasksError:
+      summary: The specified parameter offeringId does not have tasks enabled
+      value:
+        details: The specified parameter offeringId has an invalid value 'The specified parameter offeringId does not have tasks enabled'.
+        name: ValidationError
     ValidationError:
       summary: The specified parameter dueDate has an invalid value
       value:
         details: The specified parameter dueDate has an invalid value "Thu Apr 16 2020 19:15:00 GMT-0300 is before the openDate".
+        name: ValidationError
+    ValidationTaskNotInOfferingError:
+      summary: The specified parameter taskId is not in the offering
+      value:
+        details: The specified parameter taskId has an invalid value 'The specified parameter taskId is not in the offering'.
         name: ValidationError
   parameters:
     assessmentId:

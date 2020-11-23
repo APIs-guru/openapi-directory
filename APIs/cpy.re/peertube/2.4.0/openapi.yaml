@@ -86,9 +86,9 @@ info:
       format: openapi
       url: https://raw.githubusercontent.com/Chocobozzz/PeerTube/develop/support/doc/api/openapi.yaml
       version: "3.0"
-  x-preferred: null
   x-providerName: cpy.re
   x-serviceName: peertube
+  x-preferred: null
 externalDocs:
   url: https://docs.joinpeertube.org/api-rest-reference.html
 tags:
@@ -3105,6 +3105,9 @@ paths:
           description: successful operation
         "404":
           description: video or language or caption for that language not found
+      security:
+        - OAuth2:
+            - user
       summary: Delete a video caption
       tags:
         - Video Captions
@@ -3130,6 +3133,9 @@ paths:
           description: successful operation
         "404":
           description: video or language not found
+      security:
+        - OAuth2:
+            - user
       summary: Add or replace a video caption
       tags:
         - Video Captions
@@ -3436,9 +3442,10 @@ components:
         type: integer
     filter:
       description: >
-        Special filters (local for instance) which might require special rights:
+        Special filters which might require special rights:
          * `local` - only videos local to the instance
          * `all-local` - only videos local to the instance, but showing private and unlisted videos (requires Admin privileges)
+         * `all` - all videos, showing private and unlisted videos (requires Admin privileges)
       in: query
       name: filter
       required: false

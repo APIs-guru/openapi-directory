@@ -19,8 +19,8 @@ info:
     - format: openapi
       url: https://developers.edrv.io/openapi/5f15c43c87b0d6001ea97414
       version: "3.0"
-  x-preferred: null
   x-providerName: edrv.io
+  x-preferred: null
 security:
   - oauth2: []
 paths:
@@ -1310,6 +1310,14 @@ paths:
                   type: string
                 otp:
                   type: string
+                stripe_connected_account_id:
+                  type: string
+                stripe_country:
+                  type: string
+                stripe_currency:
+                  type: string
+                stripe_reserve_amount:
+                  type: integer
                 supportChat:
                   properties:
                     id:
@@ -2069,7 +2077,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: ab5e48dd5fdf823c4cba16d7f321aa0ddfe47fc8
+x-github-sha: 598c919edc2fbad74a6a86d5167ecaa85bc0ed14
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:
