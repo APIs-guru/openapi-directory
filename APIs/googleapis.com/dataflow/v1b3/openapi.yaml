@@ -27,9 +27,9 @@ info:
       format: google
       url: https://dataflow.googleapis.com/$discovery/rest?version=v1b3
       version: v1
-  x-preferred: null
   x-providerName: googleapis.com
   x-serviceName: dataflow
+  x-preferred: null
 externalDocs:
   url: https://cloud.google.com/dataflow
 tags:
@@ -4347,7 +4347,7 @@ components:
           $ref: "#/components/schemas/FlexTemplateRuntimeEnvironment"
           description: The runtime environment for the FlexTemplate job
         jobName:
-          description: Required. The job name to use for the created job.
+          description: Required. The job name to use for the created job. For update job request, job name should be same as the existing running job.
           type: string
         launchOptions:
           additionalProperties:
@@ -4359,6 +4359,14 @@ components:
             type: string
           description: The parameters for FlexTemplate. Ex. {"num_workers":"5"}
           type: object
+        transformNameMappings:
+          additionalProperties:
+            type: string
+          description: Users need to set transform_name_mappings Ex:{"oldTransformName":"newTransformName",...}'
+          type: object
+        update:
+          description: Set this to true if you are sending a request to update a running streaming job. When set, the job name should be the same as the running job.
+          type: boolean
       type: object
     LaunchFlexTemplateRequest:
       description: A request to launch a Cloud Dataflow job from a FlexTemplate.

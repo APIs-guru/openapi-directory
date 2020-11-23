@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://assuredworkloads.googleapis.com/$discovery/rest?version=v1beta1
       version: v1
-  x-preferred: null
   x-providerName: googleapis.com
   x-serviceName: assuredworkloads
+  x-preferred: null
 externalDocs:
   url: https://cloud.google.com
 tags:
@@ -373,9 +373,6 @@ components:
         billingAccount:
           description: Required. Input only. The billing account used for the resources which are direct children of workload. This billing account is initially associated with the resources created as part of Workload creation. After the initial creation of these resources, the customer can change the assigned billing account. The resource name has the form `billingAccounts/{billing_account_id}`. For example, `billingAccounts/012345-567890-ABCDEF`.
           type: string
-        cjisSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadCJISSettings"
-          description: Required. Input only. Immutable. Settings specific to resources needed for CJIS.
         complianceRegime:
           description: Required. Immutable. Compliance Regime associated with this workload.
           enum:
@@ -396,15 +393,9 @@ components:
         etag:
           description: Optional. ETag of the workload, it is calculated on the basis of the Workload contents. It will be used in Update & Delete operations.
           type: string
-        fedrampHighSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadFedrampHighSettings"
-          description: Required. Input only. Immutable. Settings specific to resources needed for FedRAMP High.
-        fedrampModerateSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadFedrampModerateSettings"
-          description: Required. Input only. Immutable. Settings specific to resources needed for FedRAMP Moderate.
-        il4Settings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadIL4Settings"
-          description: Required. Input only. Immutable. Settings specific to resources needed for IL4.
+        kmsSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
+          description: Input only. Settings used to create a CMEK crypto key. When set a project with a KMS CMEK key is provisioned. This field is mandatory for a subset of Compliance Regimes.
         labels:
           additionalProperties:
             type: string
@@ -422,34 +413,6 @@ components:
             $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadResourceInfo"
           readOnly: true
           type: array
-      type: object
-    GoogleCloudAssuredworkloadsV1WorkloadCJISSettings:
-      description: Settings specific to resources needed for CJIS.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
-          description: Required. Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsV1WorkloadFedrampHighSettings:
-      description: Settings specific to resources needed for FedRAMP High.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
-          description: Required. Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsV1WorkloadFedrampModerateSettings:
-      description: Settings specific to resources needed for FedRAMP Moderate.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
-          description: Required. Input only. Immutable. Settings used to create a CMEK crypto key.
-      type: object
-    GoogleCloudAssuredworkloadsV1WorkloadIL4Settings:
-      description: Settings specific to resources needed for IL4.
-      properties:
-        kmsSettings:
-          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1WorkloadKMSSettings"
-          description: Required. Input only. Immutable. Settings used to create a CMEK crypto key.
       type: object
     GoogleCloudAssuredworkloadsV1WorkloadKMSSettings:
       description: Settings specific to the Key Management Service.
@@ -551,6 +514,9 @@ components:
         il4Settings:
           $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadIL4Settings"
           description: Required. Input only. Immutable. Settings specific to resources needed for IL4.
+        kmsSettings:
+          $ref: "#/components/schemas/GoogleCloudAssuredworkloadsV1beta1WorkloadKMSSettings"
+          description: Input only. Settings used to create a CMEK crypto key. When set a project with a KMS CMEK key is provisioned. This field is mandatory for a subset of Compliance Regimes.
         labels:
           additionalProperties:
             type: string

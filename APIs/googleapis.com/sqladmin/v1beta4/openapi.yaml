@@ -27,9 +27,9 @@ info:
       format: google
       url: https://www.googleapis.com/discovery/v1/apis/sqladmin/v1beta4/rest
       version: v1
-  x-preferred: null
   x-providerName: googleapis.com
   x-serviceName: sqladmin
+  x-preferred: null
 externalDocs:
   url: https://developers.google.com/cloud-sql/
 tags:
@@ -1692,7 +1692,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: External sync mode
+        - description: External sync mode.
           in: query
           name: syncMode
           schema:
@@ -2387,6 +2387,17 @@ components:
           format: int32
           type: integer
       type: object
+    BackupContext:
+      description: Backup context.
+      properties:
+        backupId:
+          description: The identifier of the backup.
+          format: int64
+          type: string
+        kind:
+          description: This is always *sql#backupContext*.
+          type: string
+      type: object
     BackupRetentionSettings:
       description: We currently only support backup retention by specifying the number of backups we will retain.
       properties:
@@ -2816,7 +2827,7 @@ components:
       description: Database instance export context.
       properties:
         csvExportOptions:
-          description: Options for exporting data as CSV.
+          description: Options for exporting data as CSV. *MySQL* and *PostgreSQL* instances only.
           properties:
             selectQuery:
               description: The select query used to extract the data.
@@ -2828,7 +2839,7 @@ components:
             type: string
           type: array
         fileType:
-          description: "The file type for the specified uri. *SQL*: The file contains SQL statements. *CSV*: The file contains CSV data."
+          description: "The file type for the specified uri. *SQL*: The file contains SQL statements. *CSV*: The file contains CSV data. *BAK*: The file contains backup data for a SQL Server instance."
           enum:
             - SQL_FILE_TYPE_UNSPECIFIED
             - SQL
@@ -2848,7 +2859,7 @@ components:
               description: Options for exporting from MySQL.
               properties:
                 masterData:
-                  description: Option to include SQL statement required to set up replication. If set to *1*, the dump file includes a CHANGE MASTER TO statement with the binary log coordinates. If set to *2*, the CHANGE MASTER TO statement is written as a SQL comment, and has no effect. All other values are ignored.
+                  description: Option to include SQL statement required to set up replication. If set to *1*, the dump file includes a CHANGE MASTER TO statement with the binary log coordinates, and --set-gtid-purged is set to ON. If set to *2*, the CHANGE MASTER TO statement is written as a SQL comment and has no effect. If set to any value other than *1*, --set-gtid-purged is set to OFF.
                   format: int32
                   type: integer
               type: object
@@ -3007,6 +3018,23 @@ components:
         uri:
           description: "Path to the import file in Cloud Storage, in the form *gs: //bucketName/fileName*. Compressed gzip files (.gz) are supported // when *fileType* is *SQL*. The instance must have // write permissions to the bucket and read access to the file."
           type: string
+      type: object
+    InsightsConfig:
+      description: Insights configuration. This specifies when Cloud SQL Insights feature is enabled and optional configuration.
+      properties:
+        queryInsightsEnabled:
+          description: Whether Query Insights feature is enabled.
+          type: boolean
+        queryStringLength:
+          description: "Maximum query length stored in bytes. Default value: 1024 bytes. Range: 256-4500 bytes. Query length more than this field value will be truncated to this value. When unset, query length will be the default value."
+          format: int32
+          type: integer
+        recordApplicationTags:
+          description: Whether Query Insights will record application tags from query when enabled.
+          type: boolean
+        recordClientAddress:
+          description: Whether Query Insights will record client address when enabled.
+          type: boolean
       type: object
     InstancesCloneRequest:
       description: Database instance clone request.
@@ -3242,8 +3270,11 @@ components:
           type: string
       type: object
     Operation:
-      description: An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource.
+      description: "An Operation resource. For successful operations that return an Operation resource, only the fields relevant to the operation are populated in the resource. Next field: 18"
       properties:
+        backupContext:
+          $ref: "#/components/schemas/BackupContext"
+          description: The context for backup operation, if applicable.
         endTime:
           description: The time this operation finished in UTC timezone in RFC 3339 format, for example *2012-11-15T16:19:00.094Z*.
           format: google-datetime
@@ -3488,6 +3519,9 @@ components:
           items:
             $ref: "#/components/schemas/DenyMaintenancePeriod"
           type: array
+        insightsConfig:
+          $ref: "#/components/schemas/InsightsConfig"
+          description: Insights configuration, for now relevant only for Postgres.
         ipConfiguration:
           $ref: "#/components/schemas/IpConfiguration"
           description: The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance. The IPv4 address cannot be disabled for Second Generation instances.
@@ -3577,6 +3611,7 @@ components:
             - UNSUPPORTED_GTID_MODE
             - SQLSERVER_AGENT_NOT_RUNNING
             - UNSUPPORTED_TABLE_DEFINITION
+            - UNSUPPORTED_DEFINER
           type: string
       type: object
     SqlInstancesRescheduleMaintenanceRequestBody:

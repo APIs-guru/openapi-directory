@@ -27,9 +27,9 @@ info:
       format: google
       url: https://people.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: null
   x-providerName: googleapis.com
   x-serviceName: people
+  x-preferred: null
 externalDocs:
   url: https://developers.google.com/people/
 tags:
@@ -1730,12 +1730,12 @@ components:
       description: A request to modify an existing contact group's members. Contacts can be removed from any group but they can only be added to a user group or "myContacts" or "starred" system groups.
       properties:
         resourceNamesToAdd:
-          description: Optional. The resource names of the contact people to add in the form of `people/{person_id}`.
+          description: Optional. The resource names of the contact people to add in the form of `people/{person_id}`. The total number of resource names in `resource_names_to_add` and `resource_names_to_remove` must be less than or equal to 1000.
           items:
             type: string
           type: array
         resourceNamesToRemove:
-          description: Optional. The resource names of the contact people to remove in the form of `people/{person_id}`.
+          description: Optional. The resource names of the contact people to remove in the form of `people/{person_id}`. The total number of resource names in `resource_names_to_add` and `resource_names_to_remove` must be less than or equal to 1000.
           items:
             type: string
           type: array

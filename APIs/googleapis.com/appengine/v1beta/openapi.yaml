@@ -3166,6 +3166,9 @@ components:
         apiConfig:
           $ref: "#/components/schemas/ApiConfigHandler"
           description: Serving configuration for Google Cloud Endpoints (https://cloud.google.com/appengine/docs/python/endpoints/).Only returned in GET requests if view=FULL is set.
+        appEngineApis:
+          description: app_engine_apis allows Second Generation runtimes to access the App Engine APIs.
+          type: boolean
         automaticScaling:
           $ref: "#/components/schemas/AutomaticScaling"
           description: Automatic scaling is based on request rate, response latencies, and other application metrics. Instances are dynamically created and destroyed as needed in order to handle traffic.

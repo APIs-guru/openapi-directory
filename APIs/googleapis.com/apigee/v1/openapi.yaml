@@ -23,9 +23,9 @@ info:
     - format: google
       url: https://apigee.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: null
   x-providerName: googleapis.com
   x-serviceName: apigee
+  x-preferred: null
 externalDocs:
   url: https://cloud.google.com/apigee-api-management/
 tags:
@@ -1657,13 +1657,13 @@ paths:
       description: Lists all data collectors.
       operationId: apigee.organizations.datacollectors.list
       parameters:
-        - description: "Required. Name of the organization for which to list Data Collectors in the following format: `organizations/{org}`."
+        - description: "Required. Name of the organization for which to list data collectors in the following format: `organizations/{org}`."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Maximum number of Data Collectors to return. The page size defaults to 25.
+        - description: Maximum number of data collectors to return. The page size defaults to 25.
           in: query
           name: pageSize
           schema:
@@ -1703,13 +1703,13 @@ paths:
       description: Creates a new data collector.
       operationId: apigee.organizations.datacollectors.create
       parameters:
-        - description: "Required. Name of the organization in which to create the Data Collector in the following format: `organizations/{org}`."
+        - description: "Required. Name of the organization in which to create the data collector in the following format: `organizations/{org}`."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: ID of the Data Collector. Overrides any ID in the Data Collector resource.
+        - description: ID of the data collector. Overrides any ID in the data collector resource. Must begin with `dc_`.
           in: query
           name: dataCollectorId
           schema:
@@ -4071,15 +4071,15 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1DataCollector:
-      description: Data Collector configuration.
+      description: Data collector configuration.
       properties:
         createdAt:
-          description: Output only. The time at which the Data Collector was created in milliseconds since the epoch.
+          description: Output only. The time at which the data collector was created in milliseconds since the epoch.
           format: int64
           readOnly: true
           type: string
         description:
-          description: A description of the Data Collector.
+          description: A description of the data collector.
           type: string
         lastModifiedAt:
           description: Output only. The time at which the Data Collector was last updated in milliseconds since the epoch.
@@ -4087,10 +4087,10 @@ components:
           readOnly: true
           type: string
         name:
-          description: ID of the Data Collector.
+          description: ID of the data collector. Must begin with `dc_`.
           type: string
         type:
-          description: Immutable. The type of data this DataCollector will collect.
+          description: Immutable. The type of data this data collector will collect.
           enum:
             - TYPE_UNSPECIFIED
             - INTEGER
@@ -4915,7 +4915,7 @@ components:
             $ref: "#/components/schemas/GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRevision"
           type: array
         deployedRoutes:
-          description: The current routes deployed in the ingress routing table. A route which is missing will be shown with no destination environment.
+          description: The current routes deployed in the ingress routing table. A route which is missing will appear in missing_routes.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1InstanceDeploymentStatusDeployedRoute"
           type: array
@@ -5058,7 +5058,7 @@ components:
       description: Response for ListDataCollectors.
       properties:
         dataCollectors:
-          description: Data Collectors in the specified organization.
+          description: Data collectors in the specified organization.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1DataCollector"
           type: array

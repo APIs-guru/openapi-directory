@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://dialogflow.googleapis.com/$discovery/rest?version=v2
       version: v1
+  x-preferred: false
   x-providerName: googleapis.com
   x-serviceName: dialogflow
-  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/dialogflow/
 tags:
@@ -3274,6 +3274,11 @@ components:
         timeZone:
           description: The time zone of this conversational query from the [time zone database](https://www.iana.org/time-zones), e.g., America/New_York, Europe/Paris. If not provided, the time zone specified in agent settings is used.
           type: string
+        webhookHeaders:
+          additionalProperties:
+            type: string
+          description: "This field can be used to pass HTTP headers for a webhook call. These headers will be sent to webhook along with the headers that have been configured through Dialogflow web console. The headers defined within this field will overwrite the headers configured through Dialogflow console if there is a conflict. Header names are case-insensitive. Google's specified headers are not allowed. Including: \"Host\", \"Content-Length\", \"Connection\", \"From\", \"User-Agent\", \"Accept-Encoding\", \"If-Modified-Since\", \"If-None-Match\", \"X-Forwarded-For\", etc."
+          type: object
       type: object
     GoogleCloudDialogflowV2QueryResult:
       description: Represents the result of conversational query or event processing.

@@ -22,9 +22,9 @@ info:
     - format: google
       url: https://adexchangebuyer.googleapis.com/$discovery/rest?version=v2beta1
       version: v1
-  x-preferred: null
   x-providerName: googleapis.com
   x-serviceName: adexchangebuyer2
+  x-preferred: null
 externalDocs:
   url: https://developers.google.com/authorized-buyers/apis/reference/rest/
 tags:
@@ -4146,6 +4146,11 @@ components:
         mediaKitUrl:
           description: URL to additional marketing and sales materials.
           type: string
+        mobileApps:
+          description: The list of apps represented in this publisher profile. Empty if this is a parent profile.
+          items:
+            $ref: "#/components/schemas/PublisherProfileMobileApplication"
+          type: array
         overview:
           description: Overview of the publisher.
           type: string
@@ -4169,6 +4174,33 @@ components:
           items:
             type: string
           type: array
+      type: object
+    PublisherProfileMobileApplication:
+      description: A mobile application that contains a external app ID, name, and app store.
+      properties:
+        appStore:
+          description: The app store the app belongs to.
+          enum:
+            - APP_STORE_TYPE_UNSPECIFIED
+            - APPLE_ITUNES
+            - GOOGLE_PLAY
+            - ROKU
+            - AMAZON_FIRETV
+            - PLAYSTATION
+            - XBOX
+            - SAMSUNG_TV
+            - AMAZON
+            - OPPO
+            - SAMSUNG
+            - VIVO
+            - XIAOMI
+          type: string
+        externalAppId:
+          description: The external ID for the app from its app store.
+          type: string
+        name:
+          description: The name of the app.
+          type: string
       type: object
     RealtimeTimeRange:
       description: An open-ended realtime time range specified by the start timestamp. For filter sets that specify a realtime time range RTB metrics continue to be aggregated throughout the lifetime of the filter set.

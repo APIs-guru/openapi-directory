@@ -1318,9 +1318,9 @@ components:
           readOnly: true
           type: string
         reservedRanges:
-          description: Output only. The name of the allocated IP address ranges for this private service access connection.
+          description: Output only. The reserved ranges associated with this private service access connection.
           items:
-            type: string
+            $ref: "#/components/schemas/GoogleCloudServicenetworkingV1ConsumerConfigReservedRange"
           readOnly: true
           type: array
       type: object
@@ -1624,6 +1624,20 @@ components:
           type: boolean
         typeUrl:
           description: 'The field type URL, without the scheme, for message or enumeration types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.'
+          type: string
+      type: object
+    GoogleCloudServicenetworkingV1ConsumerConfigReservedRange:
+      description: Allocated IP address ranges for this private service access connection.
+      properties:
+        address:
+          description: The starting address of the reserved range. The address must be a valid IPv4 address in the x.x.x.x format. This value combined with the IP prefix length is the CIDR range for the reserved range.
+          type: string
+        ipPrefixLength:
+          description: The prefix length of the reserved range.
+          format: int32
+          type: integer
+        name:
+          description: The name of the reserved range.
           type: string
       type: object
     GoogleCloudServicenetworkingV1betaSubnetwork:

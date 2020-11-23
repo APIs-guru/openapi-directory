@@ -28,9 +28,9 @@ info:
       format: google
       url: https://logging.googleapis.com/$discovery/rest?version=v2
       version: v1
-  x-preferred: null
   x-providerName: googleapis.com
   x-serviceName: logging
+  x-preferred: null
 externalDocs:
   url: https://cloud.google.com/logging/docs/
 tags:
@@ -1830,7 +1830,8 @@ components:
           description: Whether the bucket has been locked. The retention period on a locked bucket may not be changed. Locked buckets may only be deleted if they are empty.
           type: boolean
         name:
-          description: 'The resource name of the bucket. For example: "projects/my-project-id/locations/my-location/buckets/my-bucket-id The supported locations are: "global"For the location of global it is unspecified where logs are actually stored. Once a bucket has been created, the location can not be changed.'
+          description: 'Output only. The resource name of the bucket. For example: "projects/my-project-id/locations/my-location/buckets/my-bucket-id The supported locations are: "global"For the location of global it is unspecified where logs are actually stored. Once a bucket has been created, the location can not be changed.'
+          readOnly: true
           type: string
         retentionDays:
           description: Logs will be retained by default for this amount of time, after which they will automatically be deleted. The minimum retention period is 1 day. If this value is set to zero at bucket creation time, the default time of 30 days will be used.

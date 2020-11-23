@@ -22,11 +22,11 @@ info:
     - format: google
       url: https://analyticsdata.googleapis.com/$discovery/rest?version=v1alpha
       version: v1
-  x-preferred: null
   x-providerName: googleapis.com
   x-serviceName: analyticsdata
+  x-preferred: null
 externalDocs:
-  url: https://developers.google.com/analytics/trusted-testing/analytics-data/
+  url: https://developers.google.com/analytics/devguides/reporting/data/v1/
 tags:
   - name: properties
   - name: v1alpha
@@ -36,7 +36,7 @@ paths:
       description: Returns metadata for dimensions and metrics available in reporting methods. Used to explore the dimensions and metrics. In this method, a Google Analytics GA4 Property Identifier is specified in the request, and the metadata response includes Custom dimensions and metrics as well as Universal metadata. For example if a custom metric with parameter name `levels_unlocked` is registered to a property, the Metadata response will contain `customEvent:levels_unlocked`. Universal metadata are dimensions and metrics applicable to any property such as `country` and `totalUsers`.
       operationId: analyticsdata.properties.getMetadata
       parameters:
-        - description: "Required. The resource name of the metadata to retrieve. This name field is specified in the URL path and not URL parameters. Property is a numeric Google Analytics GA4 Property identifier. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id). Example: properties/1234/metadata Set the Property ID to 0 for dimensions and metrics common to all properties. In this special mode, this method will not return custom dimensions and metrics."
+        - description: "Required. The resource name of the metadata to retrieve. This name field is specified in the URL path and not URL parameters. Property is a numeric Google Analytics GA4 Property identifier. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id). Example: properties/1234/metadata Set the Property ID to 0 for dimensions and metrics common to all properties. In this special mode, this method will not return custom dimensions and metrics."
           in: path
           name: name
           required: true
@@ -89,7 +89,7 @@ paths:
       description: The Google Analytics Realtime API returns a customized report of realtime event data for your property. These reports show events and usage from the last 30 minutes.
       operationId: analyticsdata.properties.runRealtimeReport
       parameters:
-        - description: "A Google Analytics GA4 property identifier whose events are tracked. Specified in the URL path and not the body. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id). Example: properties/1234"
+        - description: "A Google Analytics GA4 property identifier whose events are tracked. Specified in the URL path and not the body. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id). Example: properties/1234"
           in: path
           name: property
           required: true
@@ -496,7 +496,7 @@ components:
           $ref: "#/components/schemas/DimensionExpression"
           description: 'One dimension can be the result of an expression of multiple dimensions. For example, dimension "country, city": concatenate(country, ", ", city).'
         name:
-          description: The name of the dimension. See the [API Dimensions](https://developers.google.com/analytics/trusted-testing/analytics-data/api-schema#dimensions) for the list of dimension names. If `dimensionExpression` is specified, `name` can be any string that you would like. For example if a `dimensionExpression` concatenates `country` and `city`, you could call that dimension `countryAndCity`. Dimensions are referenced by `name` in `dimensionFilter`, `orderBys`, `dimensionExpression`, and `pivots`.
+          description: The name of the dimension. See the [API Dimensions](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#dimensions) for the list of dimension names. If `dimensionExpression` is specified, `name` can be any string that you would like. For example if a `dimensionExpression` concatenates `country` and `city`, you could call that dimension `countryAndCity`. Dimensions are referenced by `name` in `dimensionFilter`, `orderBys`, `dimensionExpression`, and `pivots`.
           type: string
       type: object
     DimensionExpression:
@@ -525,6 +525,9 @@ components:
         apiName:
           description: This dimension's name. Useable in [Dimension](#Dimension)'s `name`. For example, `eventName`.
           type: string
+        customDefinition:
+          description: True if the dimension is a custom dimension for this property.
+          type: boolean
         deprecatedApiNames:
           description: Still usable but deprecated names for this dimension. If populated, this dimension is available by either `apiName` or one of `deprecatedApiNames` for a period of time. After the deprecation period, the dimension will be available only by `apiName`.
           items:
@@ -563,7 +566,7 @@ components:
       description: The unique identifier of the property whose events are tracked.
       properties:
         propertyId:
-          description: A Google Analytics GA4 property id. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/trusted-testing/analytics-data/property-id).
+          description: A Google Analytics GA4 property id. To learn more, see [where to find your Property ID](https://developers.google.com/analytics/devguides/reporting/data/v1/property-id).
           type: string
       type: object
     Filter:
@@ -652,7 +655,7 @@ components:
           description: Indicates if a metric is invisible in the report response. If a metric is invisible, the metric will not produce a column in the response, but can be used in `metricFilter`, `orderBys`, or a metric `expression`.
           type: boolean
         name:
-          description: The name of the metric. See the [API Metrics](https://developers.google.com/analytics/trusted-testing/analytics-data/api-schema#metrics) for the list of metric names. If `expression` is specified, `name` can be any string that you would like. For example if `expression` is `screenPageViews/sessions`, you could call that metric's name = `viewsPerSession`. Metrics are referenced by `name` in `metricFilter`, `orderBys`, and metric `expression`.
+          description: The name of the metric. See the [API Metrics](https://developers.google.com/analytics/devguides/reporting/data/v1/api-schema#metrics) for the list of metric names. If `expression` is specified, `name` can be any string that you would like. For example if `expression` is `screenPageViews/sessions`, you could call that metric's name = `viewsPerSession`. Metrics are referenced by `name` in `metricFilter`, `orderBys`, and metric `expression`.
           type: string
       type: object
     MetricHeader:
@@ -685,6 +688,9 @@ components:
         apiName:
           description: A metric name. Useable in [Metric](#Metric)'s `name`. For example, `eventCount`.
           type: string
+        customDefinition:
+          description: True if the metric is a custom metric for this property.
+          type: boolean
         deprecatedApiNames:
           description: Still usable but deprecated names for this metric. If populated, this metric is available by either `apiName` or one of `deprecatedApiNames` for a period of time. After the deprecation period, the metric will be available only by `apiName`.
           items:
@@ -1095,7 +1101,7 @@ components:
           description: If false or unspecified, each row with all metrics equal to 0 will not be returned. If true, these rows will be returned if they are not separately removed by a filter.
           type: boolean
         limit:
-          description: The number of rows to return. If unspecified, 10 rows are returned. If -1, all rows are returned. To learn more about this pagination parameter, see [Pagination](basics#pagination).
+          description: The number of rows to return. If unspecified, 10 rows are returned. If -1, all rows are returned. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
           format: int64
           type: string
         metricAggregations:
@@ -1118,7 +1124,7 @@ components:
             $ref: "#/components/schemas/Metric"
           type: array
         offset:
-          description: The row count of the start row. The first row is counted as row 0. To learn more about this pagination parameter, see [Pagination](basics#pagination).
+          description: The row count of the start row. The first row is counted as row 0. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
           format: int64
           type: string
         orderBys:
@@ -1160,7 +1166,7 @@ components:
           $ref: "#/components/schemas/PropertyQuota"
           description: This Analytics Property's quota state including this request.
         rowCount:
-          description: The total number of rows in the query result, regardless of the number of rows returned in the response. For example if a query returns 175 rows and includes limit = 50 in the API request, the response will contain row_count = 175 but only 50 rows. To learn more about this pagination parameter, see [Pagination](basics#pagination).
+          description: The total number of rows in the query result, regardless of the number of rows returned in the response. For example if a query returns 175 rows and includes limit = 50 in the API request, the response will contain row_count = 175 but only 50 rows. To learn more about this pagination parameter, see [Pagination](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#pagination).
           format: int32
           type: integer
         rows:

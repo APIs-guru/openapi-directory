@@ -27,9 +27,9 @@ info:
       format: google
       url: https://cloudsearch.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: null
   x-providerName: googleapis.com
   x-serviceName: cloudsearch
+  x-preferred: null
 externalDocs:
   url: https://developers.google.com/cloud-search/docs/guides/
 tags:
@@ -2235,7 +2235,7 @@ components:
       description: Datasource is a logical namespace for items to be indexed. All items must belong to a datasource. This is the prerequisite before items can be indexed into Cloud Search.
       properties:
         disableModifications:
-          description: If true, Indexing API rejects any modification calls to this datasource such as create, update, and delete. Disabling this does not imply halting process of previously accepted data.
+          description: If true, sets the datasource to read-only mode. In read-only mode, the Indexing API rejects any requests to index or delete items in this source. Enabling read-only mode does not stop the processing of previously accepted data.
           type: boolean
         disableServing:
           description: Disable serving any search or assist results.
@@ -2849,7 +2849,7 @@ components:
           type: array
       type: object
     ItemContent:
-      description: Content of an item to be indexed and surfaced by Cloud Search.
+      description: Content of an item to be indexed and surfaced by Cloud Search. Only UTF-8 encoded strings are allowed as inlineContent. If the content is uploaded and not binary, it must be UTF-8 encoded.
       properties:
         contentDataRef:
           $ref: "#/components/schemas/UploadItemRef"

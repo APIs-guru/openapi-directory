@@ -33,7 +33,9 @@ info:
 externalDocs:
   url: https://console.cloud.google.com/apis/api/securitycenter.googleapis.com/overview
 tags:
+  - name: folders
   - name: organizations
+  - name: projects
 paths:
   "/v1p1beta1/{name}":
     delete:
@@ -113,7 +115,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     patch:
       description: Updates security marks.
-      operationId: securitycenter.organizations.sources.findings.updateSecurityMarks
+      operationId: securitycenter.projects.sources.findings.updateSecurityMarks
       parameters:
         - description: 'The relative resource name of the SecurityMarks. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Examples: "organizations/{organization_id}/assets/{asset_id}/securityMarks" "organizations/{organization_id}/sources/{source_id}/findings/{finding_id}/securityMarks".'
           in: path
@@ -149,7 +151,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
   "/v1p1beta1/{name}:cancel":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -202,7 +204,7 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Updates the state of a finding.
-      operationId: securitycenter.organizations.sources.findings.setState
+      operationId: securitycenter.projects.sources.findings.setState
       parameters:
         - description: 'Required. The relative resource name of the finding. See: https://cloud.google.com/apis/design/resource_names#relative_resource_name Example: "organizations/{organization_id}/sources/{source_id}/finding/{finding_id}".'
           in: path
@@ -228,13 +230,13 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
   "/v1p1beta1/{parent}/assets":
     get:
       description: Lists an organization's assets.
-      operationId: securitycenter.organizations.assets.list
+      operationId: securitycenter.projects.assets.list
       parameters:
-        - description: Required. Name of the organization assets should belong to. Its format is "organizations/[organization_id]".
+        - description: Required. Name of the organization assets should belong to. Its format is "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -288,7 +290,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -316,9 +318,9 @@ paths:
       - $ref: "#/components/parameters/uploadType"
     post:
       description: Filters an organization's assets and groups them by their specified properties.
-      operationId: securitycenter.organizations.assets.group
+      operationId: securitycenter.projects.assets.group
       parameters:
-        - description: Required. Name of the organization to groupBy. Its format is "organizations/[organization_id]".
+        - description: Required. Name of the organization to groupBy. Its format is "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -342,7 +344,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
   "/v1p1beta1/{parent}/assets:runDiscovery":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -388,9 +390,9 @@ paths:
   "/v1p1beta1/{parent}/findings":
     get:
       description: "Lists an organization or source's findings. To list across all sources provide a `-` as the source id. Example: /v1p1beta1/organizations/{organization_id}/sources/-/findings"
-      operationId: securitycenter.organizations.sources.findings.list
+      operationId: securitycenter.projects.sources.findings.list
       parameters:
-        - description: 'Required. Name of the source the findings belong to. Its format is "organizations/[organization_id]/sources/[source_id]". To list across all sources provide a source_id of `-`. For example: organizations/{organization_id}/sources/-'
+        - description: 'Required. Name of the source the findings belong to. Its format is "organizations/[organization_id]/sources/[source_id], folders/[folder_id]/sources/[source_id], or projects/[project_id]/sources/[source_id]". To list across all sources provide a source_id of `-`. For example: organizations/{organization_id}/sources/-, folders/{folder_id}/sources/- or projects/{projects_id}/sources/-'
           in: path
           name: parent
           required: true
@@ -444,7 +446,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -505,10 +507,10 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Filters an organization or source's findings and groups them by their specified properties. To group across all sources provide a `-` as the source id. Example: /v1p1beta1/organizations/{organization_id}/sources/-/findings"
-      operationId: securitycenter.organizations.sources.findings.group
+      description: "Filters an organization or source's findings and groups them by their specified properties. To group across all sources provide a `-` as the source id. Example: /v1/organizations/{organization_id}/sources/-/findings, /v1/folders/{folder_id}/sources/-/findings, /v1/projects/{project_id}/sources/-/findings"
+      operationId: securitycenter.projects.sources.findings.group
       parameters:
-        - description: 'Required. Name of the source to groupBy. Its format is "organizations/[organization_id]/sources/[source_id]". To groupBy across all sources provide a source_id of `-`. For example: organizations/{organization_id}/sources/-'
+        - description: 'Required. Name of the source to groupBy. Its format is "organizations/[organization_id]/sources/[source_id]", folders/[folder_id]/sources/[source_id], or projects/[project_id]/sources/[source_id]. To groupBy across all sources provide a source_id of `-`. For example: organizations/{organization_id}/sources/-, folders/{folder_id}/sources/-, or projects/{project_id}/sources/-'
           in: path
           name: parent
           required: true
@@ -532,7 +534,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
   "/v1p1beta1/{parent}/notificationConfigs":
     get:
       description: Lists notification configs.
@@ -617,9 +619,9 @@ paths:
   "/v1p1beta1/{parent}/sources":
     get:
       description: Lists all sources belonging to an organization.
-      operationId: securitycenter.organizations.sources.list
+      operationId: securitycenter.projects.sources.list
       parameters:
-        - description: Required. Resource name of the parent of sources to list. Its format should be "organizations/[organization_id]".
+        - description: Required. Resource name of the parent of sources to list. Its format should be "organizations/[organization_id], folders/[folder_id], or projects/[project_id]".
           in: path
           name: parent
           required: true
@@ -648,7 +650,7 @@ paths:
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
-        - organizations
+        - projects
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -895,6 +897,11 @@ components:
     AssetDiscoveryConfig:
       description: The configuration used for Asset Discovery runs.
       properties:
+        folderIds:
+          description: The folder ids to use for filtering asset discovery. It consists of only digits, e.g., 756619654966.
+          items:
+            type: string
+          type: array
         inclusionMode:
           description: The mode to use for filtering asset discovery.
           enum:
@@ -1014,6 +1021,16 @@ components:
             - INACTIVE
           type: string
       type: object
+    Folder:
+      description: Message that contains the resource name and display name of a folder resource.
+      properties:
+        resourceFolder:
+          description: "Full resource name of this folder. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
+          type: string
+        resourceFolderDisplayName:
+          description: The user defined display name for this folder.
+          type: string
+      type: object
     GetIamPolicyRequest:
       description: Request message for `GetIamPolicy` method.
       properties:
@@ -1045,6 +1062,12 @@ components:
     GoogleCloudSecuritycenterV1Resource:
       description: Information related to the Google Cloud resource.
       properties:
+        folders:
+          description: Output only. Contains a Folder message for each folder in the assets ancestry. The first folder is the deepest nested folder, and the last folder is the folder directly under the Organization.
+          items:
+            $ref: "#/components/schemas/Folder"
+          readOnly: true
+          type: array
         name:
           description: "The full resource name of the resource. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
           type: string
@@ -1172,6 +1195,16 @@ components:
             - INACTIVE
           type: string
       type: object
+    GoogleCloudSecuritycenterV1p1beta1Folder:
+      description: Message that contains the resource name and display name of a folder resource.
+      properties:
+        resourceFolder:
+          description: "Full resource name of this folder. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
+          type: string
+        resourceFolderDisplayName:
+          description: The user defined display name for this folder.
+          type: string
+      type: object
     GoogleCloudSecuritycenterV1p1beta1IamPolicy:
       description: Cloud IAM Policy information associated with the Google Cloud resource described by the Security Command Center asset. This information is managed and defined by the Google Cloud resource and cannot be modified by the user.
       properties:
@@ -1195,6 +1228,12 @@ components:
     GoogleCloudSecuritycenterV1p1beta1Resource:
       description: Information related to the Google Cloud resource.
       properties:
+        folders:
+          description: Output only. Contains a Folder message for each folder in the assets ancestry. The first folder is the deepest nested folder, and the last folder is the folder directly under the Organization.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Folder"
+          readOnly: true
+          type: array
         name:
           description: "The full resource name of the resource. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
           type: string
@@ -1230,6 +1269,11 @@ components:
     GoogleCloudSecuritycenterV1p1beta1SecurityCenterProperties:
       description: Security Command Center managed properties. These properties are managed by Security Command Center and cannot be modified by the user.
       properties:
+        folders:
+          description: Contains a Folder message for each folder in the assets ancestry. The first folder is the deepest nested folder, and the last folder is the folder directly under the Organization.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Folder"
+          type: array
         resourceDisplayName:
           description: The user defined display name for this resource.
           type: string
@@ -1567,8 +1611,13 @@ components:
           type: integer
       type: object
     Resource:
-      description: Information related to the Google Cloud resource that is associated with this finding.
+      description: Information related to the Google Cloud resource that is associated with this finding. LINT.IfChange
       properties:
+        folders:
+          description: Contains a Folder message for each folder in the assets ancestry. The first folder is the deepest nested folder, and the last folder is the folder directly under the Organization.
+          items:
+            $ref: "#/components/schemas/GoogleCloudSecuritycenterV1p1beta1Folder"
+          type: array
         name:
           description: "The full resource name of the resource. See: https://cloud.google.com/apis/design/resource_names#full_resource_name"
           type: string

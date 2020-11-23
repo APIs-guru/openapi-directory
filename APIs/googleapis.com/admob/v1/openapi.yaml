@@ -158,6 +158,10 @@ paths:
           description: Successful response
       security:
         - Oauth2:
+            - https://www.googleapis.com/auth/admob.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.readonly
+        - Oauth2:
             - https://www.googleapis.com/auth/admob.report
           Oauth2c:
             - https://www.googleapis.com/auth/admob.report
@@ -199,6 +203,10 @@ paths:
                 $ref: "#/components/schemas/GenerateNetworkReportResponse"
           description: Successful response
       security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/admob.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/admob.readonly
         - Oauth2:
             - https://www.googleapis.com/auth/admob.report
           Oauth2c:
