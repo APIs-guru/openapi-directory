@@ -5968,7 +5968,7 @@ paths:
         - name: OfferingType
           in: query
           required: false
-          description: '<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid Values: <code>"Light Utilization"|"Medium Utilization"|"Heavy Utilization"</code> </p>'
+          description: '<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid Values: <code>"Light Utilization"|"Medium Utilization"|"Heavy Utilization" |"All Upfront"|"Partial Upfront"| "No Upfront"</code> </p>'
           schema:
             type: string
         - name: MaxRecords
@@ -13265,7 +13265,7 @@ components:
         OfferingType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid Values: <code>"Light Utilization"|"Medium Utilization"|"Heavy Utilization"</code> </p>'
+            - description: '<p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.</p> <p>Valid Values: <code>"Light Utilization"|"Medium Utilization"|"Heavy Utilization" |"All Upfront"|"Partial Upfront"| "No Upfront"</code> </p>'
         MaxRecords:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'

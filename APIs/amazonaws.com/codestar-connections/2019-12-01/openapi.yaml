@@ -3,7 +3,7 @@ info:
   version: '2019-12-01'
   x-release: v4
   title: AWS CodeStar connections
-  description: '<fullname>AWS CodeStar Connections</fullname> <important> <p>The CodeStar Connections feature is in preview release and is subject to change.</p> </important> <p>This AWS CodeStar Connections API Reference provides descriptions and usage examples of the operations and data types for the AWS CodeStar Connections API. You can use the connections API to work with connections and installations.</p> <p> <i>Connections</i> are configurations that you use to connect AWS resources to external code repositories. Each connection is a resource that can be given to services such as CodePipeline to connect to a third-party repository such as Bitbucket. For example, you can add the connection in CodePipeline so that it triggers your pipeline when a code change is made to your third-party code repository. Each connection is named and associated with a unique ARN that is used to reference the connection.</p> <p>When you create a connection, the console initiates a third-party connection handshake. <i>Installations</i> are the apps that are used to conduct this handshake. For example, the installation for the Bitbucket provider type is the Bitbucket Cloud app. When you create a connection, you can choose an existing installation or create one.</p> <p>When you want to create a connection to an installed provider type such as GitHub Enterprise Server, you create a <i>host</i> for your connections.</p> <p>You can work with connections by calling:</p> <ul> <li> <p> <a>CreateConnection</a>, which creates a uniquely named connection that can be referenced by services such as CodePipeline.</p> </li> <li> <p> <a>DeleteConnection</a>, which deletes the specified connection.</p> </li> <li> <p> <a>GetConnection</a>, which returns information about the connection, including the connection status.</p> </li> <li> <p> <a>ListConnections</a>, which lists the connections associated with your account.</p> </li> </ul> <p>You can work with hosts by calling:</p> <ul> <li> <p> <a>CreateHost</a>, which creates a host that represents the infrastructure where your provider is installed.</p> </li> <li> <p> <a>DeleteHost</a>, which deletes the specified host.</p> </li> <li> <p> <a>GetHost</a>, which returns information about the host, including the setup status.</p> </li> <li> <p> <a>ListHosts</a>, which lists the hosts associated with your account.</p> </li> </ul> <p>You can work with tags in AWS CodeStar Connections by calling the following:</p> <ul> <li> <p> <a>ListTagsForResource</a>, which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeStar Connections.</p> </li> <li> <p> <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeStar Connections.</p> </li> <li> <p> <a>UntagResource</a>, which removes tags for a resource in AWS CodeStar Connections.</p> </li> </ul> <p>For information about how to use AWS CodeStar Connections, see the <a href="https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html">Developer Tools User Guide</a>.</p>'
+  description: '<fullname>AWS CodeStar Connections</fullname> <p>This AWS CodeStar Connections API Reference provides descriptions and usage examples of the operations and data types for the AWS CodeStar Connections API. You can use the connections API to work with connections and installations.</p> <p> <i>Connections</i> are configurations that you use to connect AWS resources to external code repositories. Each connection is a resource that can be given to services such as CodePipeline to connect to a third-party repository such as Bitbucket. For example, you can add the connection in CodePipeline so that it triggers your pipeline when a code change is made to your third-party code repository. Each connection is named and associated with a unique ARN that is used to reference the connection.</p> <p>When you create a connection, the console initiates a third-party connection handshake. <i>Installations</i> are the apps that are used to conduct this handshake. For example, the installation for the Bitbucket provider type is the Bitbucket app. When you create a connection, you can choose an existing installation or create one.</p> <p>When you want to create a connection to an installed provider type such as GitHub Enterprise Server, you create a <i>host</i> for your connections.</p> <p>You can work with connections by calling:</p> <ul> <li> <p> <a>CreateConnection</a>, which creates a uniquely named connection that can be referenced by services such as CodePipeline.</p> </li> <li> <p> <a>DeleteConnection</a>, which deletes the specified connection.</p> </li> <li> <p> <a>GetConnection</a>, which returns information about the connection, including the connection status.</p> </li> <li> <p> <a>ListConnections</a>, which lists the connections associated with your account.</p> </li> </ul> <p>You can work with hosts by calling:</p> <ul> <li> <p> <a>CreateHost</a>, which creates a host that represents the infrastructure where your provider is installed.</p> </li> <li> <p> <a>DeleteHost</a>, which deletes the specified host.</p> </li> <li> <p> <a>GetHost</a>, which returns information about the host, including the setup status.</p> </li> <li> <p> <a>ListHosts</a>, which lists the hosts associated with your account.</p> </li> </ul> <p>You can work with tags in AWS CodeStar Connections by calling the following:</p> <ul> <li> <p> <a>ListTagsForResource</a>, which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeStar Connections.</p> </li> <li> <p> <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeStar Connections.</p> </li> <li> <p> <a>UntagResource</a>, which removes tags for a resource in AWS CodeStar Connections.</p> </li> </ul> <p>For information about how to use AWS CodeStar Connections, see the <a href="https://docs.aws.amazon.com/dtconsole/latest/userguide/welcome-connections.html">Developer Tools User Guide</a>.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -350,6 +350,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
       requestBody:
         required: true
         content:
@@ -585,6 +591,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=com.amazonaws.codestar.connections.CodeStar_connections_20191201.UpdateHost:
+    post:
+      operationId: UpdateHost
+      description: Updates a specified host with the provided configurations.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateHostOutput'
+        '480':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ResourceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceUnavailableException'
+        '483':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHostInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - com.amazonaws.codestar.connections.CodeStar_connections_20191201.UpdateHost
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -659,7 +722,7 @@ components:
         ProviderType:
           allOf:
             - $ref: '#/components/schemas/ProviderType'
-            - description: The name of the external provider where your third-party code repository is configured. The valid provider type is Bitbucket.
+            - description: The name of the external provider where your third-party code repository is configured.
         ConnectionName:
           allOf:
             - $ref: '#/components/schemas/ConnectionName'
@@ -889,6 +952,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The list of keys for the tags to be removed from the resource.
+    UpdateHostOutput:
+      type: object
+      properties: {}
+    UpdateHostInput:
+      type: object
+      required:
+        - HostArn
+      title: UpdateHostInput
+      properties:
+        HostArn:
+          allOf:
+            - $ref: '#/components/schemas/HostArn'
+            - description: The Amazon Resource Name (ARN) of the host to be updated.
+        ProviderEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/Url'
+            - description: The URL or endpoint of the host to be updated.
+        VpcConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/VpcConfiguration'
+            - description: The VPC configuration of the host to be updated. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
+    ConflictException: {}
+    UnsupportedOperationException: {}
     AccountId:
       type: string
       pattern: '[0-9]{12}'
@@ -896,10 +982,12 @@ components:
       maxLength: 12
     AmazonResourceName:
       type: string
+      pattern: 'arn:aws(-[\w]+)*:.+:.+:[0-9]{12}:.+'
       minLength: 1
       maxLength: 1011
     ConnectionName:
       type: string
+      pattern: '[\s\S]*'
       minLength: 1
       maxLength: 32
     ConnectionArn:
@@ -938,7 +1026,7 @@ components:
         ProviderType:
           allOf:
             - $ref: '#/components/schemas/ProviderType'
-            - description: The name of the external provider where your third-party code repository is configured. The valid provider type is Bitbucket.
+            - description: The name of the external provider where your third-party code repository is configured.
         OwnerAccountId:
           allOf:
             - $ref: '#/components/schemas/AccountId'
@@ -964,10 +1052,12 @@ components:
       maxItems: 200
     HostName:
       type: string
+      pattern: .*
       minLength: 1
-      maxLength: 32
+      maxLength: 64
     Url:
       type: string
+      pattern: .*
       minLength: 1
       maxLength: 512
     VpcConfiguration:
@@ -1040,11 +1130,14 @@ components:
       maximum: 100
     NextToken:
       type: string
+      pattern: .*
       minLength: 1
       maxLength: 1024
     SecurityGroupId:
       type: string
       pattern: 'sg-\w{8}(\w{9})?'
+      minLength: 11
+      maxLength: 20
     SecurityGroupIds:
       type: array
       items:
@@ -1054,6 +1147,8 @@ components:
     SubnetId:
       type: string
       pattern: 'subnet-\w{8}(\w{9})?'
+      minLength: 15
+      maxLength: 24
     SubnetIds:
       type: array
       items:
@@ -1062,10 +1157,12 @@ components:
       maxItems: 10
     TagKey:
       type: string
+      pattern: .*
       minLength: 1
       maxLength: 128
     TagValue:
       type: string
+      pattern: .*
       minLength: 0
       maxLength: 256
     Tag:
@@ -1091,10 +1188,13 @@ components:
       maxItems: 200
     TlsCertificate:
       type: string
+      pattern: '[\s\S]*'
       minLength: 1
       maxLength: 16384
     VpcId:
       type: string
       pattern: 'vpc-\w{8}(\w{9})?'
+      minLength: 12
+      maxLength: 21
 security:
   - hmac: []

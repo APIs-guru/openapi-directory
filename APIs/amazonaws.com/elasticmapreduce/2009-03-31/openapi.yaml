@@ -3,7 +3,7 @@ info:
   version: '2009-03-31'
   x-release: v4
   title: Amazon Elastic MapReduce
-  description: 'Amazon EMR is a web service that makes it easy to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several AWS products to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehousing.'
+  description: 'Amazon EMR is a web service that makes it easier to process large amounts of data efficiently. Amazon EMR uses Hadoop processing combined with several AWS services to do tasks such as web indexing, data mining, log file analysis, machine learning, scientific simulation, and data warehouse management.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -291,7 +291,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.CancelSteps:
     post:
       operationId: CancelSteps
-      description: 'Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a <code>PENDING</code> state.'
+      description: 'Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee that a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a <code>PENDING</code> state.'
       responses:
         '200':
           description: Success
@@ -378,6 +378,92 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.CreateStudio:
+    post:
+      operationId: CreateStudio
+      description: <note> <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.</p> </note> <p>Creates a new Amazon EMR Studio.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateStudioOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudioInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.CreateStudio
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.CreateStudioSessionMapping:
+    post:
+      operationId: CreateStudioSessionMapping
+      description: '<note> <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.</p> </note> <p>Maps a user or group to the Amazon EMR Studio specified by <code>StudioId</code>, and applies a session policy to refine Studio permissions for that user or group.</p>'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStudioSessionMappingInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.CreateStudioSessionMapping
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ElasticMapReduce.DeleteSecurityConfiguration:
     post:
       operationId: DeleteSecurityConfiguration
@@ -415,6 +501,88 @@ paths:
             type: string
             enum:
               - ElasticMapReduce.DeleteSecurityConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.DeleteStudio:
+    post:
+      operationId: DeleteStudio
+      description: <note> <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.</p> </note> <p>Removes an Amazon EMR Studio from the Studio metadata store.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStudioInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.DeleteStudio
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.DeleteStudioSessionMapping:
+    post:
+      operationId: DeleteStudioSessionMapping
+      description: <note> <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.</p> </note> <p>Removes a user or group from an Amazon EMR Studio.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStudioSessionMappingInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.DeleteStudioSessionMapping
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -472,7 +640,7 @@ paths:
     post:
       deprecated: true
       operationId: DescribeJobFlows
-      description: '<p>This API is deprecated and will eventually be removed. We recommend you use <a>ListClusters</a>, <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a> instead.</p> <p>DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p>Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p>If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li> <p>Job flows created and completed in the last two weeks</p> </li> <li> <p> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </p> </li> </ul> <p>Amazon EMR can return a maximum of 512 job flow descriptions.</p>'
+      description: '<p>This API is no longer supported and will eventually be removed. We recommend you use <a>ListClusters</a>, <a>DescribeCluster</a>, <a>ListSteps</a>, <a>ListInstanceGroups</a> and <a>ListBootstrapActions</a> instead.</p> <p>DescribeJobFlows returns a list of job flows that match all of the supplied parameters. The parameters can include a list of job flow IDs, job flow states, and restrictions on job flow creation date and time.</p> <p>Regardless of supplied parameters, only job flows created within the last two months are returned.</p> <p>If no parameters are supplied, then job flows matching either of the following criteria are returned:</p> <ul> <li> <p>Job flows created and completed in the last two weeks</p> </li> <li> <p> Job flows created within the last two months that are in one of the following states: <code>RUNNING</code>, <code>WAITING</code>, <code>SHUTTING_DOWN</code>, <code>STARTING</code> </p> </li> </ul> <p>Amazon EMR can return a maximum of 512 job flow descriptions.</p>'
       responses:
         '200':
           description: Success
@@ -643,6 +811,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.DescribeStudio:
+    post:
+      operationId: DescribeStudio
+      description: '<note> <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.</p> </note> <p>Returns details for the specified Amazon EMR Studio including ID, Name, VPC, Studio access URL, and so on.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeStudioOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeStudioInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.DescribeStudio
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ElasticMapReduce.GetBlockPublicAccessConfiguration:
     post:
       operationId: GetBlockPublicAccessConfiguration
@@ -691,7 +904,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.GetManagedScalingPolicy:
     post:
       operationId: GetManagedScalingPolicy
-      description: ' Fetches the attached managed scaling policy for an Amazon EMR cluster. '
+      description: 'Fetches the attached managed scaling policy for an Amazon EMR cluster. '
       responses:
         '200':
           description: Success
@@ -713,6 +926,51 @@ paths:
             type: string
             enum:
               - ElasticMapReduce.GetManagedScalingPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.GetStudioSessionMapping:
+    post:
+      operationId: GetStudioSessionMapping
+      description: <note> <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.</p> </note> <p>Fetches mapping details for the specified Amazon EMR Studio and identity (user or group).</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStudioSessionMappingOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetStudioSessionMappingInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.GetStudioSessionMapping
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1129,6 +1387,108 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.ListStudioSessionMappings:
+    post:
+      operationId: ListStudioSessionMappings
+      description: <note> <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.</p> </note> <p>Returns a list of all user or group session mappings for the EMR Studio specified by <code>StudioId</code>.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStudioSessionMappingsOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStudioSessionMappingsInput'
+      parameters:
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.ListStudioSessionMappings
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.ListStudios:
+    post:
+      operationId: ListStudios
+      description: '<note> <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.</p> </note> <p>Returns a list of all Amazon EMR Studios associated with the AWS account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStudiosOutput'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStudiosInput'
+      parameters:
+        - name: Marker
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.ListStudios
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ElasticMapReduce.ModifyCluster:
     post:
       operationId: ModifyCluster
@@ -1331,7 +1691,7 @@ paths:
   /#X-Amz-Target=ElasticMapReduce.PutManagedScalingPolicy:
     post:
       operationId: PutManagedScalingPolicy
-      description: ' Creates or updates a managed scaling policy for an Amazon EMR cluster. The managed scaling policy defines the limits for resources, such as EC2 instances that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+      description: 'Creates or updates a managed scaling policy for an Amazon EMR cluster. The managed scaling policy defines the limits for resources, such as EC2 instances that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
       responses:
         '200':
           description: Success
@@ -1702,6 +2062,47 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ElasticMapReduce.UpdateStudioSessionMapping:
+    post:
+      operationId: UpdateStudioSessionMapping
+      description: <note> <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to change.</p> </note> <p>Updates the session policy attached to the user or group for the specified Amazon EMR Studio.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateStudioSessionMappingInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ElasticMapReduce.UpdateStudioSessionMapping
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -1861,7 +2262,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: 'A list of tags to associate with a cluster and propagate to EC2 instances. Tags are user-defined key/value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.'
+            - description: 'A list of tags to associate with a cluster and propagate to EC2 instances. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.'
       description: This input identifies a cluster and a list of tags to attach.
     CancelStepsOutput:
       type: object
@@ -1881,7 +2282,7 @@ components:
         ClusterId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The <code>ClusterID</code> for which specified steps will be canceled. Use <a>RunJobFlow</a> and <a>ListClusters</a> to get ClusterIDs. '
+            - description: 'The <code>ClusterID</code> for the specified steps that will be canceled. Use <a>RunJobFlow</a> and <a>ListClusters</a> to get ClusterIDs. '
         StepIds:
           allOf:
             - $ref: '#/components/schemas/StepIdsList'
@@ -1889,7 +2290,7 @@ components:
         StepCancellationOption:
           allOf:
             - $ref: '#/components/schemas/StepCancellationOption'
-            - description: 'The option to choose for cancelling <code>RUNNING</code> steps. By default, the value is <code>SEND_INTERRUPT</code>.'
+            - description: 'The option to choose to cancel <code>RUNNING</code> steps. By default, the value is <code>SEND_INTERRUPT</code>.'
       description: The input argument to the <a>CancelSteps</a> operation.
     CreateSecurityConfigurationOutput:
       type: object
@@ -1920,6 +2321,102 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The security configuration details in JSON format. For JSON parameters and examples, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html">Use Security Configurations to Set Up Cluster Security</a> in the <i>Amazon EMR Management Guide</i>.'
+    CreateStudioOutput:
+      type: object
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon EMR Studio.
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The unique Studio access URL.
+    CreateStudioInput:
+      type: object
+      required:
+        - Name
+        - AuthMode
+        - VpcId
+        - SubnetIds
+        - ServiceRole
+        - UserRole
+        - WorkspaceSecurityGroupId
+        - EngineSecurityGroupId
+      title: CreateStudioInput
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: A descriptive name for the Amazon EMR Studio.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: A detailed description of the Studio.
+        AuthMode:
+          allOf:
+            - $ref: '#/components/schemas/AuthMode'
+            - description: Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the Studio.
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: A list of subnet IDs to associate with the Studio. The subnets must belong to the VPC specified by <code>VpcId</code>. Studio users can create a Workspace in any of the specified subnets.
+        ServiceRole:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.
+        UserRole:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The IAM user role that will be assumed by users and groups logged in to a Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.
+        WorkspaceSecurityGroupId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by <code>VpcId</code>.'
+        EngineSecurityGroupId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The ID of the Amazon EMR Studio Engine security group. The Engine security group allows inbound network traffic from the Workspace security group, and it must be in the same VPC specified by <code>VpcId</code>.'
+        DefaultS3Location:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A Studio user can select an alternative Amazon S3 location when creating a Workspace.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of tags to associate with the Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.'
+    CreateStudioSessionMappingInput:
+      type: object
+      required:
+        - StudioId
+        - IdentityType
+        - SessionPolicyArn
+      title: CreateStudioSessionMappingInput
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon EMR Studio to which the user or group will be mapped.
+        IdentityId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The globally unique identifier (GUID) of the user or group from the AWS SSO Identity Store. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+        IdentityName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+        IdentityType:
+          allOf:
+            - $ref: '#/components/schemas/IdentityType'
+            - description: Specifies whether the identity to map to the Studio is a user or a group.
+        SessionPolicyArn:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.
     DeleteSecurityConfigurationOutput:
       type: object
       properties: {}
@@ -1933,6 +2430,39 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlString'
             - description: The name of the security configuration.
+    DeleteStudioInput:
+      type: object
+      required:
+        - StudioId
+      title: DeleteStudioInput
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon EMR Studio.
+    DeleteStudioSessionMappingInput:
+      type: object
+      required:
+        - StudioId
+        - IdentityType
+      title: DeleteStudioSessionMappingInput
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon EMR Studio.
+        IdentityId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The globally unique identifier (GUID) of the user or group to remove from the Amazon EMR Studio. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+        IdentityName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The name of the user name or group to remove from the Studio. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+        IdentityType:
+          allOf:
+            - $ref: '#/components/schemas/IdentityType'
+            - description: Specifies whether the identity to delete from the Studio is a user or a group.
     DescribeClusterOutput:
       type: object
       properties:
@@ -2047,6 +2577,23 @@ components:
             - $ref: '#/components/schemas/StepId'
             - description: The identifier of the step to describe.
       description: This input determines which step to describe.
+    DescribeStudioOutput:
+      type: object
+      properties:
+        Studio:
+          allOf:
+            - $ref: '#/components/schemas/Studio'
+            - description: The Amazon EMR Studio details.
+    DescribeStudioInput:
+      type: object
+      required:
+        - StudioId
+      title: DescribeStudioInput
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon EMR Studio ID.
     GetBlockPublicAccessConfigurationOutput:
       type: object
       required:
@@ -2071,7 +2618,7 @@ components:
         ManagedScalingPolicy:
           allOf:
             - $ref: '#/components/schemas/ManagedScalingPolicy'
-            - description: ' Specifies the managed scaling policy that is attached to an Amazon EMR cluster. '
+            - description: 'Specifies the managed scaling policy that is attached to an Amazon EMR cluster. '
     GetManagedScalingPolicyInput:
       type: object
       required:
@@ -2081,7 +2628,37 @@ components:
         ClusterId:
           allOf:
             - $ref: '#/components/schemas/ClusterId'
-            - description: ' Specifies the ID of the cluster for which the managed scaling policy will be fetched. '
+            - description: 'Specifies the ID of the cluster for which the managed scaling policy will be fetched. '
+    GetStudioSessionMappingOutput:
+      type: object
+      properties:
+        SessionMapping:
+          allOf:
+            - $ref: '#/components/schemas/SessionMappingDetail'
+            - description: 'The session mapping details for the specified Amazon EMR Studio and identity, including session policy ARN and creation time.'
+    GetStudioSessionMappingInput:
+      type: object
+      required:
+        - StudioId
+        - IdentityType
+      title: GetStudioSessionMappingInput
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon EMR Studio.
+        IdentityId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The globally unique identifier (GUID) of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+        IdentityName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The name of the user or group to fetch. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+        IdentityType:
+          allOf:
+            - $ref: '#/components/schemas/IdentityType'
+            - description: Specifies whether the identity to fetch is a user or a group.
     ListBootstrapActionsOutput:
       type: object
       properties:
@@ -2330,6 +2907,52 @@ components:
             - $ref: '#/components/schemas/Marker'
             - description: The pagination token that indicates the next set of results to retrieve.
       description: This input determines which steps to list.
+    ListStudioSessionMappingsOutput:
+      type: object
+      properties:
+        SessionMappings:
+          allOf:
+            - $ref: '#/components/schemas/SessionMappingSummaryList'
+            - description: 'A list of session mapping summary objects. Each object includes session mapping details such as creation time, identity type (user or group), and Studio ID.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: The pagination token that indicates the next set of results to retrieve.
+    ListStudioSessionMappingsInput:
+      type: object
+      title: ListStudioSessionMappingsInput
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon EMR Studio.
+        IdentityType:
+          allOf:
+            - $ref: '#/components/schemas/IdentityType'
+            - description: 'Specifies whether to return session mappings for users or groups. If not specified, the results include session mapping details for both users and groups.'
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: The pagination token that indicates the set of results to retrieve.
+    ListStudiosOutput:
+      type: object
+      properties:
+        Studios:
+          allOf:
+            - $ref: '#/components/schemas/StudioSummaryList'
+            - description: The list of Studio summary objects.
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: The pagination token that indicates the next set of results to retrieve.
+    ListStudiosInput:
+      type: object
+      title: ListStudiosInput
+      properties:
+        Marker:
+          allOf:
+            - $ref: '#/components/schemas/Marker'
+            - description: The pagination token that indicates the set of results to retrieve.
     ModifyClusterOutput:
       type: object
       properties:
@@ -2444,11 +3067,11 @@ components:
         ClusterId:
           allOf:
             - $ref: '#/components/schemas/ClusterId'
-            - description: ' Specifies the ID of an EMR cluster where the managed scaling policy is attached. '
+            - description: 'Specifies the ID of an EMR cluster where the managed scaling policy is attached. '
         ManagedScalingPolicy:
           allOf:
             - $ref: '#/components/schemas/ManagedScalingPolicy'
-            - description: ' Specifies the constraints for the managed scaling policy. '
+            - description: 'Specifies the constraints for the managed scaling policy. '
     RemoveAutoScalingPolicyOutput:
       type: object
       properties: {}
@@ -2530,7 +3153,7 @@ components:
         LogEncryptionKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: 'The AWS KMS customer master key (CMK) used for encrypting log files. If a value is not provided, the logs will remain encrypted by AES-256. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.'
+            - description: 'The AWS KMS customer master key (CMK) used for encrypting log files. If a value is not provided, the logs remain encrypted by AES-256. This attribute is only available with Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.'
         AdditionalInfo:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -2598,7 +3221,7 @@ components:
         ScaleDownBehavior:
           allOf:
             - $ref: '#/components/schemas/ScaleDownBehavior'
-            - description: 'Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
+            - description: 'Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
         CustomAmiId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -2606,7 +3229,7 @@ components:
         EbsRootVolumeSize:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.'
+            - description: 'The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.'
         RepoUpgradeOnBoot:
           allOf:
             - $ref: '#/components/schemas/RepoUpgradeOnBoot'
@@ -2614,7 +3237,7 @@ components:
         KerberosAttributes:
           allOf:
             - $ref: '#/components/schemas/KerberosAttributes'
-            - description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
+            - description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>Amazon EMR Management Guide</i>.'
         StepConcurrencyLevel:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -2707,7 +3330,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: A list of tags associated with a notebook execution. Tags are user-defined key value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.
+            - description: A list of tags associated with a notebook execution. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.
     StopNotebookExecutionInput:
       type: object
       required:
@@ -2727,8 +3350,36 @@ components:
         JobFlowIds:
           allOf:
             - $ref: '#/components/schemas/XmlStringList'
-            - description: A list of job flows to be shutdown.
+            - description: A list of job flows to be shut down.
       description: ' Input to the <a>TerminateJobFlows</a> operation. '
+    UpdateStudioSessionMappingInput:
+      type: object
+      required:
+        - StudioId
+        - IdentityType
+        - SessionPolicyArn
+      title: UpdateStudioSessionMappingInput
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the EMR Studio.
+        IdentityId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The globally unique identifier (GUID) of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserId</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+        IdentityName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The name of the user or group to update. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>. Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.'
+        IdentityType:
+          allOf:
+            - $ref: '#/components/schemas/IdentityType'
+            - description: Specifies whether the identity to update is a user or a group.
+        SessionPolicyArn:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon Resource Name (ARN) of the session policy to associate with the specified user or group.
     ActionOnFailure:
       type: string
       enum:
@@ -2757,11 +3408,11 @@ components:
         TargetOnDemandCapacity:
           allOf:
             - $ref: '#/components/schemas/WholeNumber'
-            - description: '<p>The target capacity of On-Demand units for the instance fleet, which determines how many On-Demand instances to provision. When the instance fleet launches, Amazon EMR tries to provision On-Demand instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When an On-Demand instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.</p> <note> <p>If not specified or set to 0, only Spot instances are provisioned for the instance fleet using <code>TargetSpotCapacity</code>. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
+            - description: '<p>The target capacity of On-Demand units for the instance fleet, which determines how many On-Demand Instances to provision. When the instance fleet launches, Amazon EMR tries to provision On-Demand Instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When an On-Demand Instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.</p> <note> <p>If not specified or set to 0, only Spot Instances are provisioned for the instance fleet using <code>TargetSpotCapacity</code>. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
         TargetSpotCapacity:
           allOf:
             - $ref: '#/components/schemas/WholeNumber'
-            - description: '<p>The target capacity of Spot units for the instance fleet, which determines how many Spot instances to provision. When the instance fleet launches, Amazon EMR tries to provision Spot instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When a Spot instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.</p> <note> <p>If not specified or set to 0, only On-Demand instances are provisioned for the instance fleet. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
+            - description: '<p>The target capacity of Spot units for the instance fleet, which determines how many Spot Instances to provision. When the instance fleet launches, Amazon EMR tries to provision Spot Instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When a Spot Instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units.</p> <note> <p>If not specified or set to 0, only On-Demand Instances are provisioned for the instance fleet. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
         InstanceTypeConfigs:
           allOf:
             - $ref: '#/components/schemas/InstanceTypeConfigList'
@@ -2839,6 +3490,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Application'
+    AuthMode:
+      type: string
+      enum:
+        - SSO
+        - IAM
     ScalingConstraints:
       type: object
       required:
@@ -2942,7 +3598,7 @@ components:
         BlockPublicSecurityGroupRules:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Indicates whether EMR block public access is enabled (<code>true</code>) or disabled (<code>false</code>). By default, the value is <code>false</code> for accounts that have created EMR clusters before July 2019. For accounts created after this, the default is <code>true</code>.'
+            - description: 'Indicates whether Amazon EMR block public access is enabled (<code>true</code>) or disabled (<code>false</code>). By default, the value is <code>false</code> for accounts that have created EMR clusters before July 2019. For accounts created after this, the default is <code>true</code>.'
         PermittedPublicSecurityGroupRuleRanges:
           allOf:
             - $ref: '#/components/schemas/PortRanges'
@@ -3261,7 +3917,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
             - description: The Active Directory password for <code>ADDomainJoinUser</code>.
-      description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
+      description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>Amazon EMR Management Guide</i>.'
     OptionalArnType:
       type: string
       minLength: 0
@@ -3360,7 +4016,7 @@ components:
         ScaleDownBehavior:
           allOf:
             - $ref: '#/components/schemas/ScaleDownBehavior'
-            - description: 'The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
+            - description: 'The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
         CustomAmiId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -3368,7 +4024,7 @@ components:
         EbsRootVolumeSize:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.'
+            - description: 'The size, in GiB, of the Amazon EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.'
         RepoUpgradeOnBoot:
           allOf:
             - $ref: '#/components/schemas/RepoUpgradeOnBoot'
@@ -3376,7 +4032,7 @@ components:
         KerberosAttributes:
           allOf:
             - $ref: '#/components/schemas/KerberosAttributes'
-            - description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.'
+            - description: 'Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html">Use Kerberos Authentication</a> in the <i>Amazon EMR Management Guide</i>.'
         ClusterArn:
           allOf:
             - $ref: '#/components/schemas/ArnType'
@@ -3441,7 +4097,7 @@ components:
         ReadyDateTime:
           allOf:
             - $ref: '#/components/schemas/Date'
-            - description: The date and time when the cluster was ready to execute steps.
+            - description: The date and time when the cluster was ready to run steps.
         EndDateTime:
           allOf:
             - $ref: '#/components/schemas/Date'
@@ -3519,19 +4175,19 @@ components:
         MinimumCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The lower boundary of EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+            - description: ' The lower boundary of EC2 units. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
         MaximumCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The upper boundary of EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+            - description: ' The upper boundary of EC2 units. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. Managed scaling activities are not allowed beyond this boundary. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
         MaximumOnDemandCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The upper boundary of On-Demand EC2 units. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. The On-Demand units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between On-Demand and Spot instances. '
+            - description: ' The upper boundary of On-Demand EC2 units. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. The On-Demand units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between On-Demand and Spot Instances. '
         MaximumCoreCapacityUnits:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: ' The upper boundary of EC2 units for core node type in a cluster. It is measured through VCPU cores or instances for instance groups and measured through units for instance fleets. The core units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between core and task nodes. '
+            - description: ' The upper boundary of EC2 units for core node type in a cluster. It is measured through vCPU cores or instances for instance groups and measured through units for instance fleets. The core units are not allowed to scale beyond this boundary. The parameter is used to split capacity allocation between core and task nodes. '
       description: ' The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster can not be above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
     Configuration:
       type: object
@@ -3549,6 +4205,15 @@ components:
             - $ref: '#/components/schemas/StringMap'
             - description: A set of properties specified within a configuration classification.
       description: '<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>An optional configuration specification to be used when provisioning cluster instances, which can include configurations for applications and software bundled with Amazon EMR. A configuration consists of a classification, properties, and optional nested configurations. A classification refers to an application-specific configuration file. Properties are the settings you want to change in that file. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-configure-apps.html">Configuring Applications</a>.</p>'
+    SubnetIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+    IdentityType:
+      type: string
+      enum:
+        - USER
+        - GROUP
     XmlStringList:
       type: array
       items:
@@ -3615,7 +4280,7 @@ components:
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
-            - description: A list of tags associated with a notebook execution. Tags are user-defined key value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.
+            - description: A list of tags associated with a notebook execution. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.
       description: A notebook execution. An execution is a specific instance that an EMR Notebook is run using the <code>StartNotebookExecution</code> action.
     Step:
       type: object
@@ -3641,6 +4306,70 @@ components:
             - $ref: '#/components/schemas/StepStatus'
             - description: The current execution status details of the cluster step.
       description: This represents a step in a cluster.
+    Studio:
+      type: object
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the EMR Studio.
+        StudioArn:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon Resource Name (ARN) of the EMR Studio.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The name of the EMR Studio.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The detailed description of the EMR Studio.
+        AuthMode:
+          allOf:
+            - $ref: '#/components/schemas/AuthMode'
+            - description: Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the VPC associated with the EMR Studio.
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: The list of IDs of the subnets associated with the Amazon EMR Studio.
+        ServiceRole:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The name of the IAM role assumed by the Amazon EMR Studio.
+        UserRole:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The name of the IAM role assumed by users logged in to the Amazon EMR Studio.
+        WorkspaceSecurityGroupId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Workspace security group associated with the Amazon EMR Studio. The Workspace security group allows outbound network traffic to resources in the Engine security group and to the internet.
+        EngineSecurityGroupId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Engine security group associated with the Amazon EMR Studio. The Engine security group allows inbound network traffic from resources in the Workspace security group.
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The unique access URL of the Amazon EMR Studio.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time the Amazon EMR Studio was created.
+        DefaultS3Location:
+          allOf:
+            - $ref: '#/components/schemas/XmlString'
+            - description: The default Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: A list of tags associated with the Amazon EMR Studio.
+      description: 'Details for an Amazon EMR Studio including ID, creation time, name, and so on.'
     InstanceId:
       type: string
     EC2InstanceIdsList:
@@ -3768,7 +4497,7 @@ components:
         Message:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The descriptive message including the error the EMR service has identified as the cause of step failure. This is text from an error log that describes the root cause of the failure.
+            - description: The descriptive message including the error the Amazon EMR service has identified as the cause of step failure. This is text from an error log that describes the root cause of the failure.
         LogFile:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3782,6 +4511,38 @@ components:
             - $ref: '#/components/schemas/ComputeLimits'
             - description: The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration.
       description: ' Managed scaling policy for an Amazon EMR cluster. The policy specifies the limits for resources that can be added or terminated from a cluster. The policy only applies to the core and task nodes. The master node cannot be scaled after initial configuration. '
+    SessionMappingDetail:
+      type: object
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon EMR Studio.
+        IdentityId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The globally unique identifier (GUID) of the user or group.
+        IdentityName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.'
+        IdentityType:
+          allOf:
+            - $ref: '#/components/schemas/IdentityType'
+            - description: Specifies whether the identity mapped to the Studio is a user or a group.
+        SessionPolicyArn:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon Resource Name (ARN) of the session policy associated with the user or group.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time the session mapping was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time the session mapping was last modified.
+      description: 'Details for an Amazon EMR Studio session mapping including creation time, user or group ID, Studio ID, and so on.'
     KeyValueList:
       type: array
       items:
@@ -3818,7 +4579,7 @@ components:
         Properties:
           allOf:
             - $ref: '#/components/schemas/StringMap'
-            - description: The list of Java properties that are set when the step runs. You can use these properties to pass key value pairs to your main function.
+            - description: The list of Java properties that are set when the step runs. You can use these properties to pass key-value pairs to your main function.
         MainClass:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3941,12 +4702,12 @@ components:
         SpotSpecification:
           allOf:
             - $ref: '#/components/schemas/SpotProvisioningSpecification'
-            - description: 'The launch specification for Spot instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.'
+            - description: 'The launch specification for Spot Instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.'
         OnDemandSpecification:
           allOf:
             - $ref: '#/components/schemas/OnDemandProvisioningSpecification'
-            - description: '<p> The launch specification for On-Demand instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
-      description: '<p>The launch specification for Spot instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot instance allocation strategies are available in Amazon EMR version 5.12.1 and later.</p> </note>'
+            - description: '<p> The launch specification for On-Demand Instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
+      description: '<p>The launch specification for Spot Instances in the fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand and Spot Instance allocation strategies are available in Amazon EMR version 5.12.1 and later.</p> </note>'
     InstanceFleet:
       type: object
       properties:
@@ -3969,7 +4730,7 @@ components:
         TargetOnDemandCapacity:
           allOf:
             - $ref: '#/components/schemas/WholeNumber'
-            - description: '<p>The target capacity of On-Demand units for the instance fleet, which determines how many On-Demand instances to provision. When the instance fleet launches, Amazon EMR tries to provision On-Demand instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When an On-Demand instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units. You can use <a>InstanceFleet$ProvisionedOnDemandCapacity</a> to determine the Spot capacity units that have been provisioned for the instance fleet.</p> <note> <p>If not specified or set to 0, only Spot instances are provisioned for the instance fleet using <code>TargetSpotCapacity</code>. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
+            - description: '<p>The target capacity of On-Demand units for the instance fleet, which determines how many On-Demand Instances to provision. When the instance fleet launches, Amazon EMR tries to provision On-Demand Instances as specified by <a>InstanceTypeConfig</a>. Each instance configuration has a specified <code>WeightedCapacity</code>. When an On-Demand Instance is provisioned, the <code>WeightedCapacity</code> units count toward the target capacity. Amazon EMR provisions instances until the target capacity is totally fulfilled, even if this results in an overage. For example, if there are 2 units remaining to fulfill capacity, and Amazon EMR can only provision an instance with a <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target capacity is exceeded by 3 units. You can use <a>InstanceFleet$ProvisionedOnDemandCapacity</a> to determine the Spot capacity units that have been provisioned for the instance fleet.</p> <note> <p>If not specified or set to 0, only Spot Instances are provisioned for the instance fleet using <code>TargetSpotCapacity</code>. At least one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance fleet, only one of <code>TargetSpotCapacity</code> and <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p> </note>'
         TargetSpotCapacity:
           allOf:
             - $ref: '#/components/schemas/WholeNumber'
@@ -3990,7 +4751,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceFleetProvisioningSpecifications'
             - description: 'Describes the launch specification for an instance fleet. '
-      description: '<p>Describes an instance fleet, which is a group of EC2 instances that host a particular node type (master, core, or task) in an Amazon EMR cluster. Instance fleets can consist of a mix of instance types and On-Demand and Spot instances, which are provisioned to meet a defined target capacity. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>Describes an instance fleet, which is a group of EC2 instances that host a particular node type (master, core, or task) in an Amazon EMR cluster. Instance fleets can consist of a mix of instance types and On-Demand and Spot Instances, which are provisioned to meet a defined target capacity. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceTypeConfigList:
       type: array
       items:
@@ -4030,20 +4791,20 @@ components:
         TimeoutDurationMinutes:
           allOf:
             - $ref: '#/components/schemas/WholeNumber'
-            - description: 'The spot provisioning timeout period in minutes. If Spot instances are not provisioned within this time period, the <code>TimeOutAction</code> is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.'
+            - description: 'The spot provisioning timeout period in minutes. If Spot Instances are not provisioned within this time period, the <code>TimeOutAction</code> is taken. Minimum value is 5 and maximum value is 1440. The timeout applies only during initial provisioning, when the cluster is first created.'
         TimeoutAction:
           allOf:
             - $ref: '#/components/schemas/SpotProvisioningTimeoutAction'
-            - description: 'The action to take when <code>TargetSpotCapacity</code> has not been fulfilled when the <code>TimeoutDurationMinutes</code> has expired; that is, when all Spot instances could not be provisioned within the Spot provisioning timeout. Valid values are <code>TERMINATE_CLUSTER</code> and <code>SWITCH_TO_ON_DEMAND</code>. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.'
+            - description: 'The action to take when <code>TargetSpotCapacity</code> has not been fulfilled when the <code>TimeoutDurationMinutes</code> has expired; that is, when all Spot Instances could not be provisioned within the Spot provisioning timeout. Valid values are <code>TERMINATE_CLUSTER</code> and <code>SWITCH_TO_ON_DEMAND</code>. SWITCH_TO_ON_DEMAND specifies that if no Spot Instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.'
         BlockDurationMinutes:
           allOf:
             - $ref: '#/components/schemas/WholeNumber'
-            - description: 'The defined duration for Spot instances (also known as Spot blocks) in minutes. When specified, the Spot instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot instance for termination and provides a Spot instance termination notice, which gives the instance a two-minute warning before it terminates. '
+            - description: 'The defined duration for Spot Instances (also known as Spot blocks) in minutes. When specified, the Spot Instance does not terminate before the defined duration expires, and defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot Instance receives its instance ID. At the end of the duration, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates. '
         AllocationStrategy:
           allOf:
             - $ref: '#/components/schemas/SpotProvisioningAllocationStrategy'
-            - description: ' Specifies the strategy to use in launching Spot instance fleets. Currently, the only option is capacity-optimized (the default), which launches instances from Spot instance pools with optimal capacity for the number of instances that are launching. '
-      description: '<p>The launch specification for Spot instances in the instance fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. Spot instance allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
+            - description: ' Specifies the strategy to use in launching Spot Instance fleets. Currently, the only option is capacity-optimized (the default), which launches instances from Spot Instance pools with optimal capacity for the number of instances that are launching. '
+      description: '<p>The launch specification for Spot Instances in the instance fleet, which determines the defined duration, provisioning timeout behavior, and allocation strategy.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. Spot Instance allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
     OnDemandProvisioningSpecification:
       type: object
       required:
@@ -4052,8 +4813,8 @@ components:
         AllocationStrategy:
           allOf:
             - $ref: '#/components/schemas/OnDemandProvisioningAllocationStrategy'
-            - description: ' Specifies the strategy to use in launching On-Demand instance fleets. Currently, the only option is lowest-price (the default), which launches the lowest price first. '
-      description: '<p> The launch specification for On-Demand instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
+            - description: ' Specifies the strategy to use in launching On-Demand Instance fleets. Currently, the only option is lowest-price (the default), which launches the lowest price first. '
+      description: '<p> The launch specification for On-Demand Instances in the instance fleet, which determines the allocation strategy. </p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. On-Demand Instances allocation strategy is available in Amazon EMR version 5.12.1 and later.</p> </note>'
     InstanceFleetState:
       type: string
       enum:
@@ -4159,7 +4920,7 @@ components:
         BidPrice:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
+            - description: 'The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
@@ -4237,7 +4998,7 @@ components:
         BidPrice:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
+            - description: 'The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
@@ -4303,7 +5064,7 @@ components:
         BidPrice:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
+            - description: 'The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/InstanceType'
@@ -4357,7 +5118,7 @@ components:
         InstanceGroupId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: Unique ID of the instance group to expand or shrink.
+            - description: Unique ID of the instance group to modify.
         InstanceCount:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -4502,20 +5263,20 @@ components:
         BidPrice:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%. '
+            - description: 'The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>. Expressed in USD. If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%. '
         BidPriceAsPercentageOfOnDemandPrice:
           allOf:
             - $ref: '#/components/schemas/NonNegativeDouble'
-            - description: 'The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%). If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
+            - description: 'The bid price, as a percentage of On-Demand price, for each EC2 Spot Instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%). If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.'
         EbsConfiguration:
           allOf:
             - $ref: '#/components/schemas/EbsConfiguration'
-            - description: 'The configuration of Amazon Elastic Block Storage (EBS) attached to each instance as defined by <code>InstanceType</code>. '
+            - description: 'The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance as defined by <code>InstanceType</code>. '
         Configurations:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
             - description: 'A configuration classification that applies when provisioning cluster instances, which can include configurations for applications and software that run on the cluster.'
-      description: '<p>An instance type configuration for each instance type in an instance fleet, which determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities. There can be a maximum of 5 instance type configurations in a fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
+      description: '<p>An instance type configuration for each instance type in an instance fleet, which determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot target capacities. There can be a maximum of five instance type configurations in a fleet.</p> <note> <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.</p> </note>'
     InstanceTypeSpecification:
       type: object
       properties:
@@ -4530,11 +5291,11 @@ components:
         BidPrice:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The bid price for each EC2 Spot instance type as defined by <code>InstanceType</code>. Expressed in USD.
+            - description: The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>. Expressed in USD.
         BidPriceAsPercentageOfOnDemandPrice:
           allOf:
             - $ref: '#/components/schemas/NonNegativeDouble'
-            - description: 'The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%).'
+            - description: 'The bid price, as a percentage of On-Demand price, for each EC2 Spot Instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%).'
         Configurations:
           allOf:
             - $ref: '#/components/schemas/ConfigurationList'
@@ -4542,7 +5303,7 @@ components:
         EbsBlockDevices:
           allOf:
             - $ref: '#/components/schemas/EbsBlockDeviceList'
-            - description: The configuration of Amazon Elastic Block Storage (EBS) attached to each instance as defined by <code>InstanceType</code>.
+            - description: The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance as defined by <code>InstanceType</code>.
         EbsOptimized:
           allOf:
             - $ref: '#/components/schemas/BooleanObject'
@@ -4613,11 +5374,11 @@ components:
         NormalizedInstanceHours:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: 'An approximation of the cost of the cluster, represented in m1.small/hours. This value is incremented one time for every hour that an m1.small runs. Larger instances are weighted more, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being incremented by four. This result is only an approximation and does not reflect the actual billing rate.'
+            - description: 'An approximation of the cost of the cluster, represented in m1.small/hours. This value is increased one time for every hour that an m1.small instance runs. Larger instances are weighted more heavily, so an Amazon EC2 instance that is roughly four times more expensive would result in the normalized instance hours being increased incrementally four times. This result is only an approximation and does not reflect the actual billing rate.'
         Ec2KeyName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The name of an Amazon EC2 key pair that can be used to ssh to the master node.
+            - description: The name of an Amazon EC2 key pair that can be used to connect to the master node using SSH.
         Ec2SubnetId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -4694,7 +5455,7 @@ components:
         SupportedProducts:
           allOf:
             - $ref: '#/components/schemas/SupportedProductsList'
-            - description: A list of strings set by third party software when the job flow is launched. If you are not using third party software to manage the job flow this value is empty.
+            - description: 'A list of strings set by third-party software when the job flow is launched. If you are not using third-party software to manage the job flow, this value is empty.'
         VisibleToAllUsers:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -4706,7 +5467,7 @@ components:
         ServiceRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.
+            - description: The IAM role that is assumed by the Amazon EMR service to access AWS resources on your behalf.
         AutoScalingRole:
           allOf:
             - $ref: '#/components/schemas/XmlString'
@@ -4714,7 +5475,7 @@ components:
         ScaleDownBehavior:
           allOf:
             - $ref: '#/components/schemas/ScaleDownBehavior'
-            - description: 'The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
+            - description: 'The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR adds nodes to a deny list and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.'
       description: A description of a cluster (job flow).
     JobFlowExecutionState:
       type: string
@@ -4770,7 +5531,7 @@ components:
         Ec2KeyName:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: The name of the EC2 key pair that can be used to ssh to the master node as the user called "hadoop."
+            - description: The name of the EC2 key pair that can be used to connect to the master node using SSH as the user called "hadoop."
         Placement:
           allOf:
             - $ref: '#/components/schemas/PlacementType'
@@ -4786,7 +5547,7 @@ components:
         HadoopVersion:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
-            - description: 'Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the <code>AmiVersion</code> parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.'
+            - description: 'Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version for the cluster. Valid inputs are "0.18" (no longer maintained), "0.20" (no longer maintained), "0.20.205" (no longer maintained), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the <code>AmiVersion</code> parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.'
         Ec2SubnetId:
           allOf:
             - $ref: '#/components/schemas/XmlStringMaxLen256'
@@ -4815,19 +5576,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecurityGroupsList'
             - description: A list of additional Amazon EC2 security group IDs for the core and task nodes.
-      description: 'A description of the Amazon EC2 instance on which the cluster (job flow) runs. A valid JobFlowInstancesConfig must contain either InstanceGroups or InstanceFleets, which is the recommended configuration. They cannot be used together. You may also have MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be present), but we don''t recommend this configuration.'
+      description: 'A description of the Amazon EC2 instance on which the cluster (job flow) runs. A valid JobFlowInstancesConfig must contain either InstanceGroups or InstanceFleets. They cannot be used together. You may also have MasterInstanceType, SlaveInstanceType, and InstanceCount (all three must be present), but we don''t recommend this configuration.'
     KeyValue:
       type: object
       properties:
         Key:
           allOf:
             - $ref: '#/components/schemas/XmlString'
-            - description: The unique identifier of a key value pair.
+            - description: The unique identifier of a key-value pair.
         Value:
           allOf:
             - $ref: '#/components/schemas/XmlString'
             - description: The value part of the identified key.
-      description: A key value pair.
+      description: A key-value pair.
     Marker:
       type: string
     NotebookExecutionStatus:
@@ -4859,6 +5620,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/StepSummary'
+    SessionMappingSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SessionMappingSummary'
+    StudioSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StudioSummary'
     MetricDimension:
       type: object
       properties:
@@ -5036,6 +5805,34 @@ components:
             - $ref: '#/components/schemas/Date'
             - description: The date and time the security configuration was created.
       description: 'The creation date and time, and name, of a security configuration.'
+    SessionMappingSummary:
+      type: object
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon EMR Studio.
+        IdentityId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The globally unique identifier (GUID) of the user or group from the AWS SSO Identity Store.
+        IdentityName:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: 'The name of the user or group. For more information, see <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId">UserName</a> and <a href="https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.'
+        IdentityType:
+          allOf:
+            - $ref: '#/components/schemas/IdentityType'
+            - description: Specifies whether the identity mapped to the Studio is a user or a group.
+        SessionPolicyArn:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The Amazon Resource Name (ARN) of the session policy associated with the user or group.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time the session mapping was created.
+      description: Details for an Amazon EMR Studio session mapping. The details do not include the time the session mapping was last modified.
     SpotProvisioningAllocationStrategy:
       type: string
       enum:
@@ -5202,6 +5999,34 @@ components:
             - $ref: '#/components/schemas/StepStatus'
             - description: The current execution status details of the cluster step.
       description: The summary of the cluster step.
+    StudioSummary:
+      type: object
+      properties:
+        StudioId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Amazon EMR Studio.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The name of the Amazon EMR Studio.
+        VpcId:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The ID of the Virtual Private Cloud (Amazon VPC) associated with the Amazon EMR Studio.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The detailed description of the EMR Studio.
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/XmlStringMaxLen256'
+            - description: The unique access URL of the Amazon EMR Studio.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Date'
+            - description: The time when the Amazon EMR Studio was created.
+      description: 'Details for an Amazon EMR Studio, including ID, Name, VPC, and Description. The details do not include subnets, IAM roles, security groups, or tags associated with the Studio.'
     Tag:
       type: object
       properties:
@@ -5213,6 +6038,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'A user-defined value, which is optional in a tag. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. '
-      description: 'A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. '
+      description: 'A key-value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href="https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html">Tag Clusters</a>. '
 security:
   - hmac: []

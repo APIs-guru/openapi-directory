@@ -76922,6 +76922,23 @@ components:
                 name: statusSet
               description: PrincipalIdFormatStatuses description
       description: PrincipalIdFormat description
+    PrivateDnsDetails:
+      type: object
+      properties:
+        PrivateDnsName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: privateDnsName
+              description: The private DNS name assigned to the VPC endpoint service.
+      description: Information about the Private DNS name for interface endpoints.
+    PrivateDnsDetailsSet:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/PrivateDnsDetails'
+          - xml:
+              name: item
     PrivateDnsNameConfiguration:
       type: object
       properties:
@@ -80048,6 +80065,12 @@ components:
             - xml:
                 name: privateDnsName
               description: The private DNS name for the service.
+        PrivateDnsNames:
+          allOf:
+            - $ref: '#/components/schemas/PrivateDnsDetailsSet'
+            - xml:
+                name: privateDnsNameSet
+              description: 'The private DNS names assigned to the VPC endpoint service. '
         VpcEndpointPolicySupported:
           allOf:
             - $ref: '#/components/schemas/Boolean'

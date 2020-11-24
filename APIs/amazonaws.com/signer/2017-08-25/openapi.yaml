@@ -3,7 +3,7 @@ info:
   version: '2017-08-25'
   x-release: v4
   title: AWS Signer
-  description: 'With code signing for IoT, you can sign code that you create for any IoT device that is supported by Amazon Web Services (AWS). Code signing is available through <a href="http://docs.aws.amazon.com/freertos/latest/userguide/">Amazon FreeRTOS</a> and <a href="http://docs.aws.amazon.com/iot/latest/developerguide/">AWS IoT Device Management</a>, and integrated with <a href="http://docs.aws.amazon.com/acm/latest/userguide/">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code signing certificate with ACM that is used to sign updates in Amazon FreeRTOS and AWS IoT Device Management. For general information about using code signing, see the <a href="http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html">Code Signing for IoT Developer Guide</a>.'
+  description: '<p>AWS Signer is a fully managed code signing service to help you ensure the trust and integrity of your code. </p> <p>AWS Signer supports the following applications:</p> <p>With <i>code signing for AWS Lambda</i>, you can sign AWS Lambda deployment packages. Integrated support is provided for Amazon S3, Amazon CloudWatch, and AWS CloudTrail. In order to sign code, you create a signing profile and then use Signer to sign Lambda zip files in S3. </p> <p>With <i>code signing for IoT</i>, you can sign code for any IoT device that is supported by AWS. IoT code signing is available for <a href="http://docs.aws.amazon.com/freertos/latest/userguide/">Amazon FreeRTOS</a> and <a href="http://docs.aws.amazon.com/iot/latest/developerguide/">AWS IoT Device Management</a>, and is integrated with <a href="http://docs.aws.amazon.com/acm/latest/userguide/">AWS Certificate Manager (ACM)</a>. In order to sign code, you import a third-party code signing certificate using ACM, and use that to sign updates in Amazon FreeRTOS and AWS IoT Device Management. </p> <p>For more information about AWS Signer, see the <a href="http://docs.aws.amazon.com/signer/latest/developerguide/Welcome.html">AWS Signer Developer Guide</a>.</p> <p/>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -114,6 +114,162 @@ servers:
     description: The signer endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  '/signing-profiles/{profileName}/permissions':
+    post:
+      operationId: AddProfilePermission
+      description: Adds cross-account permissions to a signing profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddProfilePermissionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ServiceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceLimitExceededException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '486':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: profileName
+          in: path
+          required: true
+          description: The human-readable name of the signing profile.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_]{2,}'
+            minLength: 2
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - action
+                - principal
+                - statementId
+              properties:
+                profileVersion:
+                  description: The version of the signing profile.
+                  type: string
+                  pattern: '^[a-zA-Z0-9]{10}$'
+                  minLength: 10
+                  maxLength: 10
+                action:
+                  description: The AWS Signer action permitted as part of cross-account permissions.
+                  type: string
+                principal:
+                  description: The AWS principal receiving cross-account permissions. This may be an IAM role or another AWS account ID.
+                  type: string
+                revisionId:
+                  description: A unique identifier for the current profile revision.
+                  type: string
+                statementId:
+                  description: A unique identifier for the cross-account permission statement.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListProfilePermissions
+      description: Lists the cross-account permissions associated with a signing profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProfilePermissionsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: profileName
+          in: path
+          required: true
+          description: Name of the signing profile containing the cross-account permissions.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_]{2,}'
+            minLength: 2
+            maxLength: 64
+        - name: nextToken
+          in: query
+          required: false
+          description: String for specifying the next set of paginated results.
+          schema:
+            type: string
   '/signing-profiles/{profileName}':
     delete:
       operationId: CancelSigningProfile
@@ -134,11 +290,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ThrottlingException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/TooManyRequestsException'
         '483':
           description: InternalServiceErrorException
           content:
@@ -186,11 +342,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ThrottlingException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/TooManyRequestsException'
         '483':
           description: InternalServiceErrorException
           content:
@@ -207,6 +363,15 @@ paths:
             pattern: '^[a-zA-Z0-9_]{2,}'
             minLength: 2
             maxLength: 64
+        - name: profileOwner
+          in: query
+          required: false
+          description: The AWS account ID of the profile owner.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
     put:
       operationId: PutSigningProfile
       description: 'Creates a signing profile. A signing profile is a code signing template that can be used to carry out a pre-defined signing job. For more information, see <a href="http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html">http://docs.aws.amazon.com/signer/latest/developerguide/gs-profile.html</a> '
@@ -236,11 +401,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationException'
         '483':
-          description: ThrottlingException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/TooManyRequestsException'
         '484':
           description: InternalServiceErrorException
           content:
@@ -264,7 +429,6 @@ paths:
             schema:
               type: object
               required:
-                - signingMaterial
                 - platformId
               properties:
                 signingMaterial:
@@ -275,6 +439,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/CertificateArn'
                         - description: The Amazon Resource Name (ARN) of the certificates that is used to sign your code.
+                signatureValidityPeriod:
+                  description: The validity period for a signing job.
+                  type: object
+                  properties:
+                    value:
+                      allOf:
+                        - $ref: '#/components/schemas/Integer'
+                        - description: The numerical value of the time unit for signature validity.
+                    type:
+                      allOf:
+                        - $ref: '#/components/schemas/ValidityType'
+                        - description: The time unit for signature validity.
                 platformId:
                   description: The ID of the signing platform to be created.
                   type: string
@@ -326,6 +502,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
           description: InternalServiceErrorException
           content:
             application/json:
@@ -370,6 +552,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
           description: InternalServiceErrorException
           content:
             application/json:
@@ -414,11 +602,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ThrottlingException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/TooManyRequestsException'
         '483':
           description: InternalServiceErrorException
           content:
@@ -462,6 +650,35 @@ paths:
           description: 'String for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of <code>nextToken</code> from the response that you just received.'
           schema:
             type: string
+        - name: isRevoked
+          in: query
+          required: false
+          description: Filters results to return only signing jobs with revoked signatures.
+          schema:
+            type: boolean
+        - name: signatureExpiresBefore
+          in: query
+          required: false
+          description: Filters results to return only signing jobs with signatures expiring before a specified timestamp.
+          schema:
+            type: string
+            format: date-time
+        - name: signatureExpiresAfter
+          in: query
+          required: false
+          description: Filters results to return only signing jobs with signatures expiring after a specified timestamp.
+          schema:
+            type: string
+            format: date-time
+        - name: jobInvoker
+          in: query
+          required: false
+          description: Filters results to return only signing jobs initiated by a specified IAM entity.
+          schema:
+            type: string
+            pattern: '^[0-9]{12}$'
+            minLength: 12
+            maxLength: 12
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -505,6 +722,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
           description: InternalServiceErrorException
           content:
             application/json:
@@ -520,6 +743,7 @@ paths:
               required:
                 - source
                 - destination
+                - profileName
                 - clientRequestToken
               properties:
                 source:
@@ -547,6 +771,12 @@ paths:
                 clientRequestToken:
                   description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
                   type: string
+                profileOwner:
+                  description: The AWS account ID of the signing profile owner.
+                  type: string
+                  pattern: '^[0-9]{12}$'
+                  minLength: 12
+                  maxLength: 12
   /signing-platforms:
     get:
       operationId: ListSigningPlatforms
@@ -571,11 +801,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '482':
-          description: ThrottlingException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/TooManyRequestsException'
         '483':
           description: InternalServiceErrorException
           content:
@@ -641,11 +871,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
         '481':
-          description: ThrottlingException
+          description: TooManyRequestsException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/TooManyRequestsException'
         '482':
           description: InternalServiceErrorException
           content:
@@ -673,6 +903,20 @@ paths:
           description: 'Value for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of <code>nextToken</code> from the response that you just received.'
           schema:
             type: string
+        - name: platformId
+          in: query
+          required: false
+          description: Filters results to return only signing jobs initiated for a specified signing platform.
+          schema:
+            type: string
+        - name: statuses
+          in: query
+          required: false
+          description: Filters results to return only signing jobs with statuses in the specified list.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/SigningProfileStatus'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -710,6 +954,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: resourceArn
           in: path
@@ -753,6 +1003,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: resourceArn
           in: path
@@ -776,6 +1032,236 @@ paths:
                   maxProperties: 200
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
+  '/signing-profiles/{profileName}/permissions/{statementId}#revisionId':
+    delete:
+      operationId: RemoveProfilePermission
+      description: Removes cross-account permissions from a signing profile.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveProfilePermissionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: profileName
+          in: path
+          required: true
+          description: A human-readable name for the signing profile with permissions to be removed.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_]{2,}'
+            minLength: 2
+            maxLength: 64
+        - name: revisionId
+          in: query
+          required: true
+          description: An identifier for the current revision of the signing profile permissions.
+          schema:
+            type: string
+        - name: statementId
+          in: path
+          required: true
+          description: A unique identifier for the cross-account permissions statement.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/signing-jobs/{jobId}/revoke':
+    put:
+      operationId: RevokeSignature
+      description: Changes the state of a signing job to REVOKED. This indicates that the signature is no longer valid.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: ID of the signing job to be revoked.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - reason
+              properties:
+                jobOwner:
+                  description: AWS account ID of the job owner.
+                  type: string
+                  pattern: '^[0-9]{12}$'
+                  minLength: 12
+                  maxLength: 12
+                reason:
+                  description: The reason for revoking the signing job.
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/signing-profiles/{profileName}/revoke':
+    put:
+      operationId: RevokeSigningProfile
+      description: Changes the state of a signing profile to REVOKED. This indicates that signatures generated using the signing profile after an effective start date are no longer valid.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: InternalServiceErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceErrorException'
+      parameters:
+        - name: profileName
+          in: path
+          required: true
+          description: The name of the signing profile to be revoked.
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9_]{2,}'
+            minLength: 2
+            maxLength: 64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - profileVersion
+                - reason
+                - effectiveTime
+              properties:
+                profileVersion:
+                  description: The version of the signing profile to be revoked.
+                  type: string
+                  pattern: '^[a-zA-Z0-9]{10}$'
+                  minLength: 10
+                  maxLength: 10
+                reason:
+                  description: The reason for revoking a signing profile.
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+                effectiveTime:
+                  description: A timestamp for when revocation of a Signing Profile should become effective. Signatures generated using the signing profile after this timestamp are not trusted.
+                  type: string
+                  format: date-time
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/tags/{resourceArn}#tagKeys':
     delete:
       operationId: UntagResource
@@ -805,6 +1291,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
       parameters:
         - name: resourceArn
           in: path
@@ -882,9 +1374,19 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AddProfilePermissionResponse:
+      type: object
+      properties:
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique identifier for the current profile revision.
+    ValidationException: {}
     ResourceNotFoundException: {}
     AccessDeniedException: {}
-    ThrottlingException: {}
+    ServiceLimitExceededException: {}
+    ConflictException: {}
+    TooManyRequestsException: {}
     InternalServiceErrorException: {}
     DescribeSigningJobResponse:
       type: object
@@ -905,10 +1407,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/PlatformId'
             - description: The microcontroller platform to which your signed code image will be distributed.
+        platformDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: A human-readable name for the signing platform associated with the signing job.
         profileName:
           allOf:
             - $ref: '#/components/schemas/ProfileName'
             - description: The name of the profile that initiated the signing operation.
+        profileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The version of the signing profile used to initiate the signing job.
         overrides:
           allOf:
             - $ref: '#/components/schemas/SigningPlatformOverrides'
@@ -919,12 +1429,16 @@ components:
             - description: 'Map of user-assigned key-value pairs used during signing. These values contain any information that you specified for use in your signing job. '
         createdAt:
           allOf:
-            - $ref: '#/components/schemas/CreatedAt'
+            - $ref: '#/components/schemas/Timestamp'
             - description: Date and time that the signing job was created.
         completedAt:
           allOf:
-            - $ref: '#/components/schemas/CompletedAt'
+            - $ref: '#/components/schemas/Timestamp'
             - description: Date and time that the signing job was completed.
+        signatureExpiresAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Thr expiration timestamp for the signature generated by the signing job.
         requestedBy:
           allOf:
             - $ref: '#/components/schemas/RequestedBy'
@@ -937,10 +1451,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/StatusReason'
             - description: String value that contains the status reason.
+        revocationRecord:
+          allOf:
+            - $ref: '#/components/schemas/SigningJobRevocationRecord'
+            - description: A revocation record if the signature generated by the signing job has been revoked. Contains a timestamp and the ID of the IAM entity that revoked the signature.
         signedObject:
           allOf:
             - $ref: '#/components/schemas/SignedObject'
             - description: Name of the S3 bucket where the signed code image is saved by code signing.
+        jobOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the job owner.
+        jobInvoker:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The IAM entity that initiated the signing job.
     GetSigningPlatformResponse:
       type: object
       properties:
@@ -976,6 +1502,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxSizeInMB'
             - description: The maximum size (in MB) of the payload that can be signed by the target platform.
+        revocationSupported:
+          allOf:
+            - $ref: '#/components/schemas/bool'
+            - description: A flag indicating whether signatures generated for the signing platform can be revoked.
     GetSigningProfileResponse:
       type: object
       properties:
@@ -983,6 +1513,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProfileName'
             - description: The name of the target signing profile.
+        profileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The current version of the signing profile.
+        profileVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The signing profile ARN, including the profile version.'
+        revocationRecord:
+          $ref: '#/components/schemas/SigningProfileRevocationRecord'
         signingMaterial:
           allOf:
             - $ref: '#/components/schemas/SigningMaterial'
@@ -991,6 +1531,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/PlatformId'
             - description: The ID of the platform that is used by the target signing profile.
+        platformDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: A human-readable name for the signing platform associated with the signing profile.
+        signatureValidityPeriod:
+          $ref: '#/components/schemas/SignatureValidityPeriod'
         overrides:
           allOf:
             - $ref: '#/components/schemas/SigningPlatformOverrides'
@@ -1003,6 +1549,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SigningProfileStatus'
             - description: The status of the target signing profile.
+        statusReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Reason for the status of the target signing profile.
         arn:
           allOf:
             - $ref: '#/components/schemas/string'
@@ -1011,6 +1561,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: A list of tags associated with the signing profile.
+    ListProfilePermissionsResponse:
+      type: object
+      properties:
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identifier for the current revision of profile permissions.
+        policySizeBytes:
+          allOf:
+            - $ref: '#/components/schemas/PolicySizeBytes'
+            - description: Total size of the policy associated with the Signing Profile in bytes.
+        permissions:
+          allOf:
+            - $ref: '#/components/schemas/Permissions'
+            - description: List of permissions associated with the Signing Profile.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: String for specifying the next set of paginated results.
     ListSigningJobsResponse:
       type: object
       properties:
@@ -1022,7 +1591,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: String for specifying the next set of paginated results.
-    ValidationException: {}
     ListSigningPlatformsResponse:
       type: object
       properties:
@@ -1045,6 +1613,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: Value for specifying the next set of paginated results to return.
+    SigningProfileStatus:
+      type: string
+      enum:
+        - Active
+        - Canceled
+        - Revoked
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -1061,8 +1635,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/string'
             - description: The Amazon Resource Name (ARN) of the signing profile created.
+        profileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The version of the signing profile being created.
+        profileVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The signing profile ARN, including the profile version.'
     CertificateArn:
       type: string
+    Integer:
+      type: integer
+    ValidityType:
+      type: string
+      enum:
+        - DAYS
+        - MONTHS
+        - YEARS
     SigningConfigurationOverrides:
       type: object
       properties:
@@ -1086,6 +1676,13 @@ components:
     TagValue:
       type: string
       maxLength: 256
+    RemoveProfilePermissionResponse:
+      type: object
+      properties:
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An identifier for the current revision of the profile permissions.
     StartSigningJobResponse:
       type: object
       properties:
@@ -1093,6 +1690,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The ID of your signing job.
+        jobOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the signing job owner.
     S3Source:
       type: object
       required:
@@ -1125,6 +1726,7 @@ components:
             - $ref: '#/components/schemas/Prefix'
             - description: An Amazon S3 prefix that you can use to limit responses to those that begin with the specified prefix.
       description: The name and prefix of the S3 bucket where code signing saves your signed objects.
+    ThrottlingException: {}
     TagResourceResponse:
       type: object
       properties: {}
@@ -1136,15 +1738,57 @@ components:
       pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
       minLength: 1
       maxLength: 128
-    key:
+    AccountId:
       type: string
-    BucketName:
-      type: string
+      pattern: '^[0-9]{12}$'
+      minLength: 12
+      maxLength: 12
     ProfileName:
       type: string
       pattern: '^[a-zA-Z0-9_]{2,}'
       minLength: 2
       maxLength: 64
+    ProfileVersion:
+      type: string
+      pattern: '^[a-zA-Z0-9]{10}$'
+      minLength: 10
+      maxLength: 10
+    String:
+      type: string
+    AddProfilePermissionRequest:
+      type: object
+      required:
+        - action
+        - principal
+        - statementId
+      title: AddProfilePermissionRequest
+      properties:
+        profileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The version of the signing profile.
+        action:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS Signer action permitted as part of cross-account permissions.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS principal receiving cross-account permissions. This may be an IAM role or another AWS account ID.
+        revisionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique identifier for the current profile revision.
+        statementId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique identifier for the cross-account permission statement.
+    Arn:
+      type: string
+      minLength: 20
+      maxLength: 2048
+    BucketName:
+      type: string
     CancelSigningProfileRequest:
       type: object
       title: CancelSigningProfileRequest
@@ -1155,12 +1799,6 @@ components:
         - AWSIoT
     ClientRequestToken:
       type: string
-    CompletedAt:
-      type: string
-      format: date-time
-    CreatedAt:
-      type: string
-      format: date-time
     JobId:
       type: string
     DescribeSigningJobRequest:
@@ -1187,6 +1825,8 @@ components:
       description: The ACM certificate that is used to sign your code.
     PlatformId:
       type: string
+    DisplayName:
+      type: string
     SigningPlatformOverrides:
       type: object
       properties:
@@ -1203,6 +1843,9 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/SigningParameterValue'
+    Timestamp:
+      type: string
+      format: date-time
     RequestedBy:
       type: string
     SigningStatus:
@@ -1213,6 +1856,22 @@ components:
         - Succeeded
     StatusReason:
       type: string
+    SigningJobRevocationRecord:
+      type: object
+      properties:
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A caller-supplied reason for revocation.
+        revokedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time of revocation.
+        revokedBy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identity of the revoker.
+      description: Revocation information for a signing job.
     SignedObject:
       type: object
       properties:
@@ -1229,8 +1888,6 @@ components:
             - $ref: '#/components/schemas/S3Destination'
             - description: The <code>S3Destination</code> object.
       description: Points to an <code>S3Destination</code> object that contains information about your S3 bucket.
-    DisplayName:
-      type: string
     EncryptionAlgorithm:
       type: string
       enum:
@@ -1259,8 +1916,6 @@ components:
       type: object
       title: GetSigningPlatformRequest
       properties: {}
-    String:
-      type: string
     SigningConfiguration:
       type: object
       required:
@@ -1293,15 +1948,40 @@ components:
       description: The image format of a code signing platform or profile.
     MaxSizeInMB:
       type: integer
+    bool:
+      type: boolean
     GetSigningProfileRequest:
       type: object
       title: GetSigningProfileRequest
       properties: {}
-    SigningProfileStatus:
-      type: string
-      enum:
-        - Active
-        - Canceled
+    SigningProfileRevocationRecord:
+      type: object
+      properties:
+        revocationEffectiveFrom:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when revocation becomes effective.
+        revokedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the signing profile was revoked.
+        revokedBy:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The identity of the revoker.
+      description: Revocation information for a signing profile.
+    SignatureValidityPeriod:
+      type: object
+      properties:
+        value:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The numerical value of the time unit for signature validity.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ValidityType'
+            - description: The time unit for signature validity.
+      description: The validity period for a signing job.
     string:
       type: string
     TagMap:
@@ -1340,6 +2020,16 @@ components:
         $ref: '#/components/schemas/ImageFormat'
     Key:
       type: string
+    ListProfilePermissionsRequest:
+      type: object
+      title: ListProfilePermissionsRequest
+      properties: {}
+    PolicySizeBytes:
+      type: integer
+    Permissions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Permission'
     MaxResults:
       type: integer
       minimum: 1
@@ -1362,8 +2052,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/SigningPlatform'
-    bool:
-      type: boolean
+    Statuses:
+      type: array
+      items:
+        $ref: '#/components/schemas/SigningProfileStatus'
     ListSigningProfilesRequest:
       type: object
       title: ListSigningProfilesRequest
@@ -1376,12 +2068,31 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    Permission:
+      type: object
+      properties:
+        action:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: An AWS Signer action permitted as part of cross-account permissions.
+        principal:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS principal that has been granted a cross-account permission.
+        statementId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A unique identifier for a cross-account permission statement.
+        profileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The signing profile version that a permission applies to.
+      description: A cross-account permission for a signing profile.
     Prefix:
       type: string
     PutSigningProfileRequest:
       type: object
       required:
-        - signingMaterial
         - platformId
       title: PutSigningProfileRequest
       properties:
@@ -1389,6 +2100,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SigningMaterial'
             - description: The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
+        signatureValidityPeriod:
+          allOf:
+            - $ref: '#/components/schemas/SignatureValidityPeriod'
+            - description: 'The default validity period override for any signature generated using this signing profile. If unspecified, the default is 135 months.'
         platformId:
           allOf:
             - $ref: '#/components/schemas/PlatformId'
@@ -1405,6 +2120,48 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: Tags to be associated with the signing profile that is being created.
+    RemoveProfilePermissionRequest:
+      type: object
+      title: RemoveProfilePermissionRequest
+      properties: {}
+    RevocationReasonString:
+      type: string
+      minLength: 1
+      maxLength: 500
+    RevokeSignatureRequest:
+      type: object
+      required:
+        - reason
+      title: RevokeSignatureRequest
+      properties:
+        jobOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: AWS account ID of the job owner.
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/RevocationReasonString'
+            - description: The reason for revoking the signing job.
+    RevokeSigningProfileRequest:
+      type: object
+      required:
+        - profileVersion
+        - reason
+        - effectiveTime
+      title: RevokeSigningProfileRequest
+      properties:
+        profileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The version of the signing profile to be revoked.
+        reason:
+          allOf:
+            - $ref: '#/components/schemas/RevocationReasonString'
+            - description: The reason for revoking a signing profile.
+        effectiveTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A timestamp for when revocation of a Signing Profile should become effective. Signatures generated using the signing profile after this timestamp are not trusted.
     S3SignedObject:
       type: object
       properties:
@@ -1414,7 +2171,7 @@ components:
             - description: Name of the S3 bucket.
         key:
           allOf:
-            - $ref: '#/components/schemas/key'
+            - $ref: '#/components/schemas/Key'
             - description: Key name that uniquely identifies a signed code image in your bucket.
       description: The S3 bucket name and key where code signing saved your signed code image.
     Version:
@@ -1440,12 +2197,44 @@ components:
             - description: A <code>SigningMaterial</code> object that contains the Amazon Resource Name (ARN) of the certificate used for the signing job.
         createdAt:
           allOf:
-            - $ref: '#/components/schemas/CreatedAt'
+            - $ref: '#/components/schemas/Timestamp'
             - description: The date and time that the signing job was created.
         status:
           allOf:
             - $ref: '#/components/schemas/SigningStatus'
             - description: The status of the signing job.
+        isRevoked:
+          allOf:
+            - $ref: '#/components/schemas/bool'
+            - description: Indicates whether the signing job is revoked.
+        profileName:
+          allOf:
+            - $ref: '#/components/schemas/ProfileName'
+            - description: The name of the signing profile that created a signing job.
+        profileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The version of the signing profile that created a signing job.
+        platformId:
+          allOf:
+            - $ref: '#/components/schemas/PlatformId'
+            - description: The unique identifier for a signing platform.
+        platformDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name of a signing platform.
+        signatureExpiresAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time when the signature of a signing job expires.
+        jobOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the job owner.
+        jobInvoker:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the job invoker.
       description: Contains information about a signing job.
     SigningParameterKey:
       type: string
@@ -1482,6 +2271,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxSizeInMB'
             - description: The maximum size (in MB) of code that can be signed by a code signing platform.
+        revocationSupported:
+          allOf:
+            - $ref: '#/components/schemas/bool'
+            - description: Indicates whether revocation is supported for the platform.
       description: Contains information about the signing configurations and parameters that are used to perform a code signing job.
     SigningProfile:
       type: object
@@ -1490,14 +2283,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProfileName'
             - description: The name of the signing profile.
+        profileVersion:
+          allOf:
+            - $ref: '#/components/schemas/ProfileVersion'
+            - description: The version of a signing profile.
+        profileVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: 'The ARN of a signing profile, including the profile version.'
         signingMaterial:
           allOf:
             - $ref: '#/components/schemas/SigningMaterial'
             - description: The ACM certificate that is available for use by a signing profile.
+        signatureValidityPeriod:
+          allOf:
+            - $ref: '#/components/schemas/SignatureValidityPeriod'
+            - description: The validity period for a signing job created using this signing profile.
         platformId:
           allOf:
             - $ref: '#/components/schemas/PlatformId'
             - description: The ID of a platform that is available for use by a signing profile.
+        platformDisplayName:
+          allOf:
+            - $ref: '#/components/schemas/DisplayName'
+            - description: The name of the signing platform.
         signingParameters:
           allOf:
             - $ref: '#/components/schemas/SigningParameters'
@@ -1520,6 +2329,7 @@ components:
       required:
         - source
         - destination
+        - profileName
         - clientRequestToken
       title: StartSigningJobRequest
       properties:
@@ -1539,6 +2349,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
+        profileOwner:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the signing profile owner.
     TagKeyList:
       type: array
       items:

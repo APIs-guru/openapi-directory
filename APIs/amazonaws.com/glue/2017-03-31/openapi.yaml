@@ -1491,6 +1491,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.CreatePartitionIndex:
+    post:
+      operationId: CreatePartitionIndex
+      description: Creates a specified partition index in an existing table.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePartitionIndexResponse'
+        '480':
+          description: AlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlreadyExistsException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '483':
+          description: ResourceNumberLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNumberLimitExceededException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '485':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '486':
+          description: GlueEncryptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlueEncryptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePartitionIndexRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.CreatePartitionIndex
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSGlue.CreateRegistry:
     post:
       operationId: CreateRegistry
@@ -2581,6 +2656,75 @@ paths:
             type: string
             enum:
               - AWSGlue.DeletePartition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSGlue.DeletePartitionIndex:
+    post:
+      operationId: DeletePartitionIndex
+      description: Deletes a specified partition index from an existing table.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeletePartitionIndexResponse'
+        '480':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '481':
+          description: OperationTimeoutException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationTimeoutException'
+        '482':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '483':
+          description: EntityNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityNotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: GlueEncryptionException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GlueEncryptionException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeletePartitionIndexRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSGlue.DeletePartitionIndex
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -10125,6 +10269,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecrawlPolicy'
             - description: 'A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.'
+        LineageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LineageConfiguration'
+            - description: Specifies data lineage configuration settings for the crawler.
         Configuration:
           allOf:
             - $ref: '#/components/schemas/CrawlerConfiguration'
@@ -10490,6 +10638,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/PartitionInput'
             - description: A <code>PartitionInput</code> structure defining the partition to be created.
+    CreatePartitionIndexResponse:
+      type: object
+      properties: {}
+    CreatePartitionIndexRequest:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+        - PartitionIndex
+      title: CreatePartitionIndexRequest
+      properties:
+        CatalogId:
+          allOf:
+            - $ref: '#/components/schemas/CatalogIdString'
+            - description: The catalog ID where the table resides.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: Specifies the name of a database in which you want to create a partition index.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: Specifies the name of a table in which you want to create a partition index.
+        PartitionIndex:
+          allOf:
+            - $ref: '#/components/schemas/PartitionIndex'
+            - description: Specifies a <code>PartitionIndex</code> structure to create a partition index in an existing table.
     CreateRegistryResponse:
       type: object
       properties:
@@ -11001,6 +11176,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/ValueStringList'
             - description: The values that define the partition.
+    DeletePartitionIndexResponse:
+      type: object
+      properties: {}
+    DeletePartitionIndexRequest:
+      type: object
+      required:
+        - DatabaseName
+        - TableName
+        - IndexName
+      title: DeletePartitionIndexRequest
+      properties:
+        CatalogId:
+          allOf:
+            - $ref: '#/components/schemas/CatalogIdString'
+            - description: The catalog ID where the table resides.
+        DatabaseName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: Specifies the name of a database from which you want to delete a partition index.
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: Specifies the name of a table from which you want to delete a partition index.
+        IndexName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the partition index to be deleted.
+    ConflictException: {}
     DeleteRegistryResponse:
       type: object
       properties:
@@ -12017,7 +12220,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/Token'
             - description: 'A continuation token, included if this is a continuation call.'
-    ConflictException: {}
     GetPartitionsResponse:
       type: object
       properties:
@@ -13857,6 +14059,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/RecrawlPolicy'
             - description: 'A policy that specifies whether to crawl the entire dataset again, or to crawl only folders that were added since the last crawler run.'
+        LineageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LineageConfiguration'
+            - description: Specifies data lineage configuration settings for the crawler.
         Configuration:
           allOf:
             - $ref: '#/components/schemas/CrawlerConfiguration'
@@ -14283,6 +14489,44 @@ components:
         $ref: '#/components/schemas/GenericString'
     AttemptCount:
       type: integer
+    BackfillErrorCode:
+      type: string
+      enum:
+        - ENCRYPTED_PARTITION_ERROR
+        - INTERNAL_ERROR
+        - INVALID_PARTITION_TYPE_DATA_ERROR
+        - MISSING_PARTITION_VALUE_ERROR
+        - UNSUPPORTED_PARTITION_CHARACTER_ERROR
+    BackfillErroredPartitionsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PartitionValueList'
+    BackfillError:
+      type: object
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/BackfillErrorCode'
+            - description: The error code for an error that occurred when registering partition indexes for an existing table.
+        Partitions:
+          allOf:
+            - $ref: '#/components/schemas/BackfillErroredPartitionsList'
+            - description: A list of a limited number of partitions in the response.
+      description: '<p>A list of errors that can occur when registering partition indexes for an existing table.</p> <p>These errors give the details about why an index registration failed and provide a limited number of partitions in the response, so that you can fix the partitions at fault and try registering the index again. The most common set of errors that can occur are categorized as follows:</p> <ul> <li> <p>EncryptedPartitionError: The partitions are encrypted.</p> </li> <li> <p>InvalidPartitionTypeDataError: The partition value doesn''t match the data type for that partition column.</p> </li> <li> <p>MissingPartitionValueError: The partitions are encrypted.</p> </li> <li> <p>UnsupportedPartitionCharacterError: Characters inside the partition value are not supported. For example: U+0000 , U+0001, U+0002.</p> </li> <li> <p>InternalError: Any error which does not belong to other error codes.</p> </li> </ul>'
+    PartitionValueList:
+      type: object
+      required:
+        - Values
+      properties:
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - description: The list of values.
+      description: Contains a list of values defining partitions.
+    BackfillErrors:
+      type: array
+      items:
+        $ref: '#/components/schemas/BackfillError'
     CatalogIdString:
       type: string
       minLength: 1
@@ -14318,16 +14562,6 @@ components:
         $ref: '#/components/schemas/PartitionValueList'
       minItems: 0
       maxItems: 25
-    PartitionValueList:
-      type: object
-      required:
-        - Values
-      properties:
-        Values:
-          allOf:
-            - $ref: '#/components/schemas/ValueStringList'
-            - description: The list of values.
-      description: Contains a list of values defining partitions.
     BatchDeleteTableNameList:
       type: array
       items:
@@ -15600,6 +15834,14 @@ components:
             - $ref: '#/components/schemas/DeleteBehavior'
             - description: The deletion behavior when the crawler finds a deleted object.
       description: A policy that specifies update and deletion behaviors for the crawler.
+    LineageConfiguration:
+      type: object
+      properties:
+        CrawlerLineageSettings:
+          allOf:
+            - $ref: '#/components/schemas/CrawlerLineageSettings'
+            - description: '<p>Specifies whether data lineage is enabled for the crawler. Valid values are:</p> <ul> <li> <p>ENABLE: enables data lineage for the crawler</p> </li> <li> <p>DISABLE: disables data lineage for the crawler</p> </li> </ul>'
+      description: Specifies data lineage configuration settings for the crawler.
     CrawlerState:
       type: string
       enum:
@@ -15695,6 +15937,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/SchemaChangePolicy'
             - description: The policy that specifies update and delete behaviors for the crawler.
+        LineageConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/LineageConfiguration'
+            - description: A configuration that specifies whether data lineage is enabled for the crawler.
         State:
           allOf:
             - $ref: '#/components/schemas/CrawlerState'
@@ -15736,6 +15982,11 @@ components:
             - $ref: '#/components/schemas/CrawlerSecurityConfiguration'
             - description: The name of the <code>SecurityConfiguration</code> structure to be used by this crawler.
       description: 'Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.'
+    CrawlerLineageSettings:
+      type: string
+      enum:
+        - ENABLE
+        - DISABLE
     NonNegativeInteger:
       type: integer
       minimum: 0
@@ -16063,6 +16314,21 @@ components:
             - $ref: '#/components/schemas/NameString'
             - description: The name of the security configuration.
       description: '<p>The encryption-at-rest settings of the transform that apply to accessing user data. Machine learning transforms can access user data encrypted in Amazon S3 using KMS.</p> <p>Additionally, imported labels and trained transforms can now be encrypted using a customer provided KMS key.</p>'
+    PartitionIndex:
+      type: object
+      required:
+        - Keys
+        - IndexName
+      properties:
+        Keys:
+          allOf:
+            - $ref: '#/components/schemas/KeyList'
+            - description: The keys for the partition index.
+        IndexName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of the partition index.
+      description: A structure for a partition index.
     SchemaRegistryNameString:
       type: string
       pattern: '[a-zA-Z0-9-_$#]+'
@@ -18099,25 +18365,13 @@ components:
             - $ref: '#/components/schemas/ErrorDetail'
             - description: The details about the partition error.
       description: Contains information about a partition error.
-    PartitionIndex:
-      type: object
-      required:
-        - Keys
-        - IndexName
-      properties:
-        Keys:
-          allOf:
-            - $ref: '#/components/schemas/KeyList'
-            - description: The keys for the partition index.
-        IndexName:
-          allOf:
-            - $ref: '#/components/schemas/NameString'
-            - description: The name of the partition index.
-      description: A structure for a partition index.
     PartitionIndexStatus:
       type: string
       enum:
+        - CREATING
         - ACTIVE
+        - DELETING
+        - FAILED
     PartitionIndexDescriptor:
       type: object
       required:
@@ -18136,7 +18390,11 @@ components:
         IndexStatus:
           allOf:
             - $ref: '#/components/schemas/PartitionIndexStatus'
-            - description: 'The status of the partition index. '
+            - description: '<p>The status of the partition index. </p> <p>The possible statuses are:</p> <ul> <li> <p>CREATING: The index is being created. When an index is in a CREATING state, the index or its table cannot be deleted.</p> </li> <li> <p>ACTIVE: The index creation succeeds.</p> </li> <li> <p>FAILED: The index creation fails. </p> </li> <li> <p>DELETING: The index is deleted from the list of indexes.</p> </li> </ul>'
+        BackfillErrors:
+          allOf:
+            - $ref: '#/components/schemas/BackfillErrors'
+            - description: A list of errors that can occur when registering partition indexes for an existing table.
       description: A descriptor for a partition index in a table.
     Permission:
       type: string

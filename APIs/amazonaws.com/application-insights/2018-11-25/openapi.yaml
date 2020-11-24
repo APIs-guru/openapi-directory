@@ -3,7 +3,7 @@ info:
   version: '2018-11-25'
   x-release: v4
   title: Amazon CloudWatch Application Insights
-  description: '<fullname>Amazon CloudWatch Application Insights for .NET and SQL Server</fullname> <p> Amazon CloudWatch Application Insights for .NET and SQL Server is a service that helps you detect common problems with your .NET and SQL Server-based applications. It enables you to pinpoint the source of issues in your applications (built with technologies such as Microsoft IIS, .NET, and Microsoft SQL Server), by providing key insights into detected problems.</p> <p>After you onboard your application, CloudWatch Application Insights for .NET and SQL Server identifies, recommends, and sets up metrics and logs. It continuously analyzes and correlates your metrics and logs for unusual behavior to surface actionable problems with your application. For example, if your application is slow and unresponsive and leading to HTTP 500 errors in your Application Load Balancer (ALB), Application Insights informs you that a memory pressure problem with your SQL Server database is occurring. It bases this analysis on impactful metrics and log errors. </p>'
+  description: '<fullname>Amazon CloudWatch Application Insights</fullname> <p> Amazon CloudWatch Application Insights is a service that helps you detect common problems with your applications. It enables you to pinpoint the source of issues in your applications (built with technologies such as Microsoft IIS, .NET, and Microsoft SQL Server), by providing key insights into detected problems.</p> <p>After you onboard your application, CloudWatch Application Insights identifies, recommends, and sets up metrics and logs. It continuously analyzes and correlates your metrics and logs for unusual behavior to surface actionable problems with your application. For example, if your application is slow and unresponsive and leading to HTTP 500 errors in your Application Load Balancer (ALB), Application Insights informs you that a memory pressure problem with your SQL Server database is occurring. It bases this analysis on impactful metrics and log errors. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -155,6 +155,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TagsAlreadyExistException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
       requestBody:
         required: true
         content:
@@ -1683,6 +1689,7 @@ components:
     ValidationException: {}
     InternalServerException: {}
     TagsAlreadyExistException: {}
+    AccessDeniedException: {}
     CreateComponentResponse:
       type: object
       properties: {}
@@ -1700,7 +1707,7 @@ components:
             - description: The name of the resource group.
         ComponentName:
           allOf:
-            - $ref: '#/components/schemas/ComponentName'
+            - $ref: '#/components/schemas/CustomComponentName'
             - description: The name of the component.
         ResourceList:
           allOf:
@@ -1742,11 +1749,11 @@ components:
         Pattern:
           allOf:
             - $ref: '#/components/schemas/LogPatternRegex'
-            - description: The log pattern.
+            - description: The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.
         Rank:
           allOf:
             - $ref: '#/components/schemas/LogPatternRank'
-            - description: Rank of the log pattern.
+            - description: 'Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. '
     DeleteApplicationResponse:
       type: object
       properties: {}
@@ -1777,7 +1784,7 @@ components:
             - description: The name of the resource group.
         ComponentName:
           allOf:
-            - $ref: '#/components/schemas/ComponentName'
+            - $ref: '#/components/schemas/CustomComponentName'
             - description: The name of the component.
     DeleteLogPatternResponse:
       type: object
@@ -2281,11 +2288,11 @@ components:
             - description: The name of the resource group.
         ComponentName:
           allOf:
-            - $ref: '#/components/schemas/ComponentName'
+            - $ref: '#/components/schemas/CustomComponentName'
             - description: The name of the component.
         NewComponentName:
           allOf:
-            - $ref: '#/components/schemas/NewComponentName'
+            - $ref: '#/components/schemas/CustomComponentName'
             - description: The new name of the component.
         ResourceList:
           allOf:
@@ -2355,33 +2362,58 @@ components:
         Pattern:
           allOf:
             - $ref: '#/components/schemas/LogPatternRegex'
-            - description: The log pattern.
+            - description: The log pattern. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.
         Rank:
           allOf:
             - $ref: '#/components/schemas/LogPatternRank'
-            - description: Rank of the log pattern.
+            - description: 'Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. '
     AffectedResource:
       type: string
     AmazonResourceName:
       type: string
+      pattern: '^arn:aws(-\w+)*:[\w\d-]+:([\w\d-]*)?:[\w\d_-]*([:/].+)*$'
       minLength: 1
       maxLength: 1011
     ComponentName:
       type: string
+      pattern: '(?:^[\d\w\-_\.+]*$)|(?:^arn:aws(-\w+)*:[\w\d-]+:([\w\d-]*)?:[\w\d_-]*([:/].+)*$)'
+      minLength: 1
+      maxLength: 1011
+    Remarks:
+      type: string
     ResourceType:
       type: string
+      pattern: '[0-9a-zA-Z:_]*'
+      minLength: 1
+      maxLength: 50
+    OsType:
+      type: string
+      enum:
+        - WINDOWS
+        - LINUX
     Tier:
       type: string
       enum:
+        - CUSTOM
         - DEFAULT
         - DOT_NET_CORE
         - DOT_NET_WORKER
+        - DOT_NET_WEB_TIER
         - DOT_NET_WEB
         - SQL_SERVER
+        - SQL_SERVER_ALWAYSON_AVAILABILITY_GROUP
+        - MYSQL
+        - POSTGRESQL
+        - JAVA_JMX
+        - ORACLE
       minLength: 1
       maxLength: 50
     Monitor:
       type: boolean
+    DetectedWorkload:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/WorkloadMetaData'
     ApplicationComponent:
       type: object
       properties:
@@ -2389,10 +2421,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/ComponentName'
             - description: The name of the component.
+        ComponentRemarks:
+          allOf:
+            - $ref: '#/components/schemas/Remarks'
+            - description: ' If logging is supported for the resource type, indicates whether the component has configured logs to be monitored. '
         ResourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
             - description: 'The resource type. Supported resource types include EC2 instances, Auto Scaling group, Classic ELB, Application ELB, and SQS Queue.'
+        OsType:
+          allOf:
+            - $ref: '#/components/schemas/OsType'
+            - description: ' The operating system of the component. '
         Tier:
           allOf:
             - $ref: '#/components/schemas/Tier'
@@ -2401,6 +2441,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Monitor'
             - description: 'Indicates whether the application component is monitored. '
+        DetectedWorkload:
+          allOf:
+            - $ref: '#/components/schemas/DetectedWorkload'
+            - description: ' Workloads detected in the application component. '
       description: Describes a standalone resource or similarly grouped resources that the application is made up of.
     ApplicationComponentList:
       type: array
@@ -2415,14 +2459,13 @@ components:
       type: string
     OpsItemSNSTopicArn:
       type: string
+      pattern: '^arn:aws(-\w+)*:[\w\d-]+:([\w\d-]*)?:[\w\d_-]*([:/].+)*$'
       minLength: 20
       maxLength: 300
     OpsCenterEnabled:
       type: boolean
     CWEMonitorEnabled:
       type: boolean
-    Remarks:
-      type: string
     ApplicationInfo:
       type: object
       properties:
@@ -2465,6 +2508,7 @@ components:
         - EC2
         - CODE_DEPLOY
         - HEALTH
+        - RDS
     CodeDeployApplication:
       type: string
     CodeDeployDeploymentGroup:
@@ -2477,6 +2521,7 @@ components:
       type: string
     ComponentConfiguration:
       type: string
+      pattern: '[\S\s]+'
       minLength: 1
       maxLength: 10000
     ConfigurationEventMonitoredResourceARN:
@@ -2491,6 +2536,7 @@ components:
       type: string
       enum:
         - CLOUDWATCH_ALARM
+        - CLOUDWATCH_LOG
         - CLOUDFORMATION
         - SSM_ASSOCIATION
     ConfigurationEventTime:
@@ -2538,6 +2584,11 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 200
+    CustomComponentName:
+      type: string
+      pattern: '^[\d\w\-_\.+]*$'
+      minLength: 1
+      maxLength: 128
     ResourceList:
       type: array
       items:
@@ -2554,6 +2605,7 @@ components:
       maxLength: 50
     LogPatternRegex:
       type: string
+      pattern: '[\S\s]+'
       minLength: 1
       maxLength: 50
     LogPatternRank:
@@ -2564,19 +2616,19 @@ components:
         PatternSetName:
           allOf:
             - $ref: '#/components/schemas/LogPatternSetName'
-            - description: 'The name of the log pattern. A log pattern name can contains at many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.'
+            - description: 'The name of the log pattern. A log pattern name can contain as many as 30 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.'
         PatternName:
           allOf:
             - $ref: '#/components/schemas/LogPatternName'
-            - description: 'The name of the log pattern. A log pattern name can contains at many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits or one of the following symbols: period, dash, underscore.'
+            - description: 'The name of the log pattern. A log pattern name can contain as many as 50 characters, and it cannot be empty. The characters can be Unicode letters, digits, or one of the following symbols: period, dash, underscore.'
         Pattern:
           allOf:
             - $ref: '#/components/schemas/LogPatternRegex'
-            - description: 'A regular expression that defines the log pattern. A log pattern can contains at many as 50 characters, and it cannot be empty.'
+            - description: 'A regular expression that defines the log pattern. A log pattern can contain as many as 50 characters, and it cannot be empty. The pattern must be DFA compatible. Patterns that utilize forward lookahead or backreference constructions are not supported.'
         Rank:
           allOf:
             - $ref: '#/components/schemas/LogPatternRank'
-            - description: Rank of the log pattern.
+            - description: 'Rank of the log pattern. Must be a value between <code>1</code> and <code>1,000,000</code>. The patterns are sorted by rank, so we recommend that you set your highest priority patterns with the lowest rank. A pattern of rank <code>1</code> will be the first to get matched to a log line. A pattern of rank <code>1,000,000</code> will be last to get matched. When you configure custom log patterns from the console, a <code>Low</code> severity pattern translates to a <code>750,000</code> rank. A <code>Medium</code> severity pattern translates to a <code>500,000</code> rank. And a <code>High</code> severity pattern translates to a <code>250,000</code> rank. Rank values less than <code>1</code> or greater than <code>1,000,000</code> are reserved for AWS-provided patterns. '
       description: An object that defines the log patterns that belongs to a <code>LogPatternSet</code>.
     ObservationId:
       type: string
@@ -2694,6 +2746,50 @@ components:
           allOf:
             - $ref: '#/components/schemas/Ec2State'
             - description: ' The state of the instance, such as <code>STOPPING</code> or <code>TERMINATING</code>. '
+        RdsEventCategories:
+          allOf:
+            - $ref: '#/components/schemas/RdsEventCategories'
+            - description: ' The category of an RDS event. '
+        RdsEventMessage:
+          allOf:
+            - $ref: '#/components/schemas/RdsEventMessage'
+            - description: ' The message of an RDS event. '
+        S3EventName:
+          allOf:
+            - $ref: '#/components/schemas/S3EventName'
+            - description: ' The name of the S3 CloudWatch Event-based observation. '
+        StatesExecutionArn:
+          allOf:
+            - $ref: '#/components/schemas/StatesExecutionArn'
+            - description: ' The Amazon Resource Name (ARN) of the step function execution-based observation. '
+        StatesArn:
+          allOf:
+            - $ref: '#/components/schemas/StatesArn'
+            - description: ' The Amazon Resource Name (ARN) of the step function-based observation. '
+        StatesStatus:
+          allOf:
+            - $ref: '#/components/schemas/StatesStatus'
+            - description: ' The status of the step function-related observation. '
+        StatesInput:
+          allOf:
+            - $ref: '#/components/schemas/StatesInput'
+            - description: ' The input to the step function-based observation. '
+        EbsEvent:
+          allOf:
+            - $ref: '#/components/schemas/EbsEvent'
+            - description: ' The type of EBS CloudWatch event, such as <code>createVolume</code>, <code>deleteVolume</code> or <code>attachVolume</code>. '
+        EbsResult:
+          allOf:
+            - $ref: '#/components/schemas/EbsResult'
+            - description: ' The result of an EBS CloudWatch event, such as <code>failed</code> or <code>succeeded</code>. '
+        EbsCause:
+          allOf:
+            - $ref: '#/components/schemas/EbsCause'
+            - description: ' The cause of an EBS CloudWatch event. '
+        EbsRequestId:
+          allOf:
+            - $ref: '#/components/schemas/EbsRequestId'
+            - description: ' The request ID of an EBS CloudWatch event. '
         XRayFaultPercent:
           allOf:
             - $ref: '#/components/schemas/XRayFaultPercent'
@@ -2780,6 +2876,18 @@ components:
             - $ref: '#/components/schemas/Feedback'
             - description: Feedback provided by the user about the problem.
       description: Describes a problem that is detected by correlating observations.
+    WorkloadMetaData:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/MetaDataValue'
+    EbsCause:
+      type: string
+    EbsEvent:
+      type: string
+    EbsRequestId:
+      type: string
+    EbsResult:
+      type: string
     Ec2State:
       type: string
     EndTime:
@@ -2821,6 +2929,9 @@ components:
       maximum: 40
     PaginationToken:
       type: string
+      pattern: .+
+      minLength: 1
+      maxLength: 1024
     StartTime:
       type: string
       format: date-time
@@ -2846,11 +2957,13 @@ components:
       type: string
     LogText:
       type: string
+    MetaDataKey:
+      type: string
+    MetaDataValue:
+      type: string
     MetricName:
       type: string
     MetricNamespace:
-      type: string
-    NewComponentName:
       type: string
     SourceType:
       type: string
@@ -2861,6 +2974,20 @@ components:
     Value:
       type: number
       format: double
+    RdsEventCategories:
+      type: string
+    RdsEventMessage:
+      type: string
+    S3EventName:
+      type: string
+    StatesExecutionArn:
+      type: string
+    StatesArn:
+      type: string
+    StatesStatus:
+      type: string
+    StatesInput:
+      type: string
     XRayFaultPercent:
       type: integer
     XRayThrottlePercent:
@@ -2897,14 +3024,17 @@ components:
       type: boolean
     ResourceARN:
       type: string
+      pattern: '^arn:aws(-\w+)*:[\w\d-]+:([\w\d-]*)?:[\w\d_-]*([:/].+)*$'
       minLength: 1
       maxLength: 1011
     TagKey:
       type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
       minLength: 1
       maxLength: 128
     TagValue:
       type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$'
       minLength: 0
       maxLength: 256
     Tag:

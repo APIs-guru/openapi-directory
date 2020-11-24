@@ -114,6 +114,51 @@ servers:
     description: The DynamoDB endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=DynamoDB_20120810.BatchExecuteStatement:
+    post:
+      operationId: BatchExecuteStatement
+      description: ' This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchExecuteStatementOutput'
+        '480':
+          description: RequestLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceeded'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchExecuteStatementInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DynamoDB_20120810.BatchExecuteStatement
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=DynamoDB_20120810.BatchGetItem:
     post:
       operationId: BatchGetItem
@@ -915,6 +960,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DynamoDB_20120810.DescribeKinesisStreamingDestination:
+    post:
+      operationId: DescribeKinesisStreamingDestination
+      description: Returns information about the status of Kinesis streaming.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeKinesisStreamingDestinationOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeKinesisStreamingDestinationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DynamoDB_20120810.DescribeKinesisStreamingDestination
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=DynamoDB_20120810.DescribeLimits:
     post:
       operationId: DescribeLimits
@@ -1081,6 +1171,276 @@ paths:
             type: string
             enum:
               - DynamoDB_20120810.DescribeTimeToLive
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DynamoDB_20120810.DisableKinesisStreamingDestination:
+    post:
+      operationId: DisableKinesisStreamingDestination
+      description: Stops replication from the DynamoDB table to the Kinesis data stream. This is done without deleting either of the resources.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KinesisStreamingDestinationOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KinesisStreamingDestinationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DynamoDB_20120810.DisableKinesisStreamingDestination
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DynamoDB_20120810.EnableKinesisStreamingDestination:
+    post:
+      operationId: EnableKinesisStreamingDestination
+      description: 'Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow. If this operation doesn''t return results immediately, use DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is ACTIVE.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KinesisStreamingDestinationOutput'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KinesisStreamingDestinationInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DynamoDB_20120810.EnableKinesisStreamingDestination
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DynamoDB_20120810.ExecuteStatement:
+    post:
+      operationId: ExecuteStatement
+      description: ' This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteStatementOutput'
+        '480':
+          description: ConditionalCheckFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConditionalCheckFailedException'
+        '481':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ItemCollectionSizeLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemCollectionSizeLimitExceededException'
+        '484':
+          description: TransactionConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionConflictException'
+        '485':
+          description: RequestLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceeded'
+        '486':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '487':
+          description: DuplicateItemException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateItemException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteStatementInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DynamoDB_20120810.ExecuteStatement
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DynamoDB_20120810.ExecuteTransaction:
+    post:
+      operationId: ExecuteTransaction
+      description: ' This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteTransactionOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: TransactionCanceledException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionCanceledException'
+        '482':
+          description: TransactionInProgressException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionInProgressException'
+        '483':
+          description: IdempotentParameterMismatchException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '484':
+          description: ProvisionedThroughputExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProvisionedThroughputExceededException'
+        '485':
+          description: RequestLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestLimitExceeded'
+        '486':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExecuteTransactionInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DynamoDB_20120810.ExecuteTransaction
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2630,6 +2990,25 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    BatchExecuteStatementOutput:
+      type: object
+      properties:
+        Responses:
+          allOf:
+            - $ref: '#/components/schemas/PartiQLBatchResponse'
+            - description: ' The response to each PartiQL statement in the batch. '
+    BatchExecuteStatementInput:
+      type: object
+      required:
+        - Statements
+      title: BatchExecuteStatementInput
+      properties:
+        Statements:
+          allOf:
+            - $ref: '#/components/schemas/PartiQLBatchRequest'
+            - description: ' The list of PartiQL statements representing the batch to run. '
+    RequestLimitExceeded: {}
+    InternalServerError: {}
     BatchGetItemOutput:
       type: object
       example:
@@ -2670,8 +3049,6 @@ components:
       description: Represents the input of a <code>BatchGetItem</code> operation.
     ProvisionedThroughputExceededException: {}
     ResourceNotFoundException: {}
-    RequestLimitExceeded: {}
-    InternalServerError: {}
     BatchWriteItemOutput:
       type: object
       example: {}
@@ -3095,6 +3472,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/TableName'
             - description: The name of the global table to describe.
+    DescribeKinesisStreamingDestinationOutput:
+      type: object
+      properties:
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/TableName'
+            - description: The name of the table being described.
+        KinesisDataStreamDestinations:
+          allOf:
+            - $ref: '#/components/schemas/KinesisDataStreamDestinations'
+            - description: The list of replica structures for the table being described.
+    DescribeKinesisStreamingDestinationInput:
+      type: object
+      required:
+        - TableName
+      title: DescribeKinesisStreamingDestinationInput
+      properties:
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/TableName'
+            - description: The name of the table being described.
     DescribeLimitsOutput:
       type: object
       example:
@@ -3199,6 +3597,94 @@ components:
           allOf:
             - $ref: '#/components/schemas/TableName'
             - description: The name of the table to be described.
+    KinesisStreamingDestinationOutput:
+      type: object
+      properties:
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/TableName'
+            - description: The name of the table being modified.
+        StreamArn:
+          allOf:
+            - $ref: '#/components/schemas/StreamArn'
+            - description: The ARN for the specific Kinesis data stream.
+        DestinationStatus:
+          allOf:
+            - $ref: '#/components/schemas/DestinationStatus'
+            - description: The current status of the replication.
+    KinesisStreamingDestinationInput:
+      type: object
+      required:
+        - TableName
+        - StreamArn
+      title: KinesisStreamingDestinationInput
+      properties:
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/TableName'
+            - description: The name of the DynamoDB table.
+        StreamArn:
+          allOf:
+            - $ref: '#/components/schemas/StreamArn'
+            - description: The ARN for a Kinesis data stream.
+    ExecuteStatementOutput:
+      type: object
+      properties:
+        Items:
+          allOf:
+            - $ref: '#/components/schemas/ItemList'
+            - description: ' If a read operation was used, this property will contain the result of the reade operation; a map of attribute names and their values. For the write operations this value will be empty. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PartiQLNextToken'
+            - description: ' If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results. '
+    ExecuteStatementInput:
+      type: object
+      required:
+        - Statement
+      title: ExecuteStatementInput
+      properties:
+        Statement:
+          allOf:
+            - $ref: '#/components/schemas/PartiQLStatement'
+            - description: ' The PartiQL statement representing the operation to run. '
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/PreparedStatementParameters'
+            - description: ' The parameters for the PartiQL statement, if any. '
+        ConsistentRead:
+          allOf:
+            - $ref: '#/components/schemas/ConsistentRead'
+            - description: ' The consistency of a read operation. If set to <code>true</code>, then a strongly consistent read is used; otherwise, an eventually consistent read is used. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/PartiQLNextToken'
+            - description: ' Set this value to get remaining results, if <code>NextToken</code> was returned in the statement response. '
+    DuplicateItemException: {}
+    ExecuteTransactionOutput:
+      type: object
+      properties:
+        Responses:
+          allOf:
+            - $ref: '#/components/schemas/ItemResponseList'
+            - description: ' The response to a PartiQL transaction. '
+    ExecuteTransactionInput:
+      type: object
+      required:
+        - TransactStatements
+      title: ExecuteTransactionInput
+      properties:
+        TransactStatements:
+          allOf:
+            - $ref: '#/components/schemas/ParameterizedStatements'
+            - description: ' The list of PartiQL statements representing the transaction to run. '
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: ' Set this value to get remaining results, if <code>NextToken</code> was returned in the statement response. '
+    TransactionCanceledException: {}
+    TransactionInProgressException: {}
+    IdempotentParameterMismatchException: {}
     ExportTableToPointInTimeOutput:
       type: object
       properties:
@@ -3895,7 +4381,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReturnConsumedCapacity'
             - description: 'A value of <code>TOTAL</code> causes consumed capacity information to be returned, and a value of <code>NONE</code> prevents that information from being returned. No other value is valid.'
-    TransactionCanceledException: {}
     TransactWriteItemsOutput:
       type: object
       properties:
@@ -3927,8 +4412,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: '<p>Providing a <code>ClientRequestToken</code> makes the call to <code>TransactWriteItems</code> idempotent, meaning that multiple identical calls have the same effect as one single call.</p> <p>Although multiple identical calls using the same client request token produce the same result on the server (no side effects), the responses to the calls might not be the same. If the <code>ReturnConsumedCapacity&gt;</code> parameter is set, then the initial <code>TransactWriteItems</code> call returns the amount of write capacity units consumed in making the changes. Subsequent <code>TransactWriteItems</code> calls with the same client token return the number of read capacity units consumed in reading the item.</p> <p>A client request token is valid for 10 minutes after the first request that uses it is completed. After 10 minutes, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 10 minutes, or the result might not be idempotent.</p> <p>If you submit a request with the same client token but a change in other parameters within the 10-minute idempotency window, DynamoDB returns an <code>IdempotentParameterMismatch</code> exception.</p>'
-    TransactionInProgressException: {}
-    IdempotentParameterMismatchException: {}
     UntagResourceInput:
       type: object
       required:
@@ -4793,6 +5276,16 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    PartiQLBatchRequest:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchStatementRequest'
+      minItems: 1
+      maxItems: 25
+    PartiQLBatchResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/BatchStatementResponse'
     BatchGetRequestMap:
       type: object
       minProperties: 1
@@ -4844,6 +5337,77 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AttributeMap'
+    BatchStatementErrorCodeEnum:
+      type: string
+      enum:
+        - ConditionalCheckFailed
+        - ItemCollectionSizeLimitExceeded
+        - RequestLimitExceeded
+        - ValidationError
+        - ProvisionedThroughputExceeded
+        - TransactionConflict
+        - ThrottlingError
+        - InternalServerError
+        - ResourceNotFound
+        - AccessDenied
+        - DuplicateItem
+    BatchStatementError:
+      type: object
+      properties:
+        Code:
+          allOf:
+            - $ref: '#/components/schemas/BatchStatementErrorCodeEnum'
+            - description: ' The error code associated with the failed PartiQL batch statement. '
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: ' The error message associated with the PartiQL batch resposne. '
+      description: ' An error associated with a statement in a PartiQL batch that was run. '
+    PartiQLStatement:
+      type: string
+      minLength: 1
+      maxLength: 8192
+    PreparedStatementParameters:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttributeValue'
+      minItems: 1
+    ConsistentRead:
+      type: boolean
+    BatchStatementRequest:
+      type: object
+      required:
+        - Statement
+      properties:
+        Statement:
+          allOf:
+            - $ref: '#/components/schemas/PartiQLStatement'
+            - description: ' A valid PartiQL statement. '
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/PreparedStatementParameters'
+            - description: ' The parameters associated with a PartiQL statement in the batch request. '
+        ConsistentRead:
+          allOf:
+            - $ref: '#/components/schemas/ConsistentRead'
+            - description: ' The read consistency of the PartiQL batch request. '
+      description: ' A PartiQL batch statement request. '
+    BatchStatementResponse:
+      type: object
+      properties:
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/BatchStatementError'
+            - description: ' The error associated with a failed PartiQL batch statement. '
+        TableName:
+          allOf:
+            - $ref: '#/components/schemas/TableName'
+            - description: ' The table name associated with a failed PartiQL batch statement. '
+        Item:
+          allOf:
+            - $ref: '#/components/schemas/AttributeMap'
+            - description: ' A DynamoDB item associated with a BatchStatementResponse '
+      description: ' A PartiQL batch statement response.. '
     BatchWriteItemRequestMap:
       type: object
       minProperties: 1
@@ -4996,8 +5560,6 @@ components:
       enum:
         - AND
         - OR
-    ConsistentRead:
-      type: boolean
     SecondaryIndexesCapacityMap:
       type: object
       additionalProperties:
@@ -5580,6 +6142,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ReplicaSettingsDescription'
+    KinesisDataStreamDestinations:
+      type: array
+      items:
+        $ref: '#/components/schemas/KinesisDataStreamDestination'
     TableAutoScalingDescription:
       type: object
       properties:
@@ -5608,6 +6174,14 @@ components:
             - $ref: '#/components/schemas/TimeToLiveAttributeName'
             - description: ' The name of the TTL attribute for items in the table.'
       description: 'The description of the Time to Live (TTL) status on the specified table. '
+    DestinationStatus:
+      type: string
+      enum:
+        - ENABLING
+        - ACTIVE
+        - DISABLING
+        - DISABLED
+        - ENABLE_FAILED
     Long:
       type: integer
     Endpoint:
@@ -5629,6 +6203,22 @@ components:
       type: string
     ExceptionName:
       type: string
+    PartiQLNextToken:
+      type: string
+      minLength: 1
+      maxLength: 32768
+    ParameterizedStatements:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParameterizedStatement'
+      minItems: 1
+      maxItems: 25
+    ItemResponseList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ItemResponse'
+      minItems: 1
+      maxItems: 25
     ExpectedAttributeValue:
       type: object
       properties:
@@ -5995,12 +6585,6 @@ components:
             - $ref: '#/components/schemas/AttributeMap'
             - description: Map of attribute data consisting of the data type and attribute value.
       description: Details for the requested item.
-    ItemResponseList:
-      type: array
-      items:
-        $ref: '#/components/schemas/ItemResponse'
-      minItems: 1
-      maxItems: 25
     KMSMasterKeyArn:
       type: string
     KeyConditions:
@@ -6035,6 +6619,26 @@ components:
       enum:
         - HASH
         - RANGE
+    StreamArn:
+      type: string
+      minLength: 37
+      maxLength: 1024
+    KinesisDataStreamDestination:
+      type: object
+      properties:
+        StreamArn:
+          allOf:
+            - $ref: '#/components/schemas/StreamArn'
+            - description: The ARN for a specific Kinesis data stream.
+        DestinationStatus:
+          allOf:
+            - $ref: '#/components/schemas/DestinationStatus'
+            - description: The current status of replication.
+        DestinationStatusDescription:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The human-readable string that corresponds to the replica status.
+      description: Describes a Kinesis data stream destination.
     TimeRangeLowerBound:
       type: string
       format: date-time
@@ -6150,6 +6754,20 @@ components:
     NonNegativeLongObject:
       type: integer
       minimum: 0
+    ParameterizedStatement:
+      type: object
+      required:
+        - Statement
+      properties:
+        Statement:
+          allOf:
+            - $ref: '#/components/schemas/PartiQLStatement'
+            - description: ' A PartiQL statment that uses parameters. '
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/PreparedStatementParameters'
+            - description: ' The parameter values. '
+      description: ' Represents a PartiQL statment that uses parameters. '
     PointInTimeRecoveryStatus:
       type: string
       enum:
@@ -6644,10 +7262,6 @@ components:
     TableCreationDateTime:
       type: string
       format: date-time
-    StreamArn:
-      type: string
-      minLength: 37
-      maxLength: 1024
     StreamEnabled:
       type: boolean
     StreamViewType:

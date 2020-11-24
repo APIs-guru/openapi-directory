@@ -114,6 +114,132 @@ servers:
     description: The Amazon Translate endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=AWSShineFrontendService_20170701.CreateParallelData:
+    post:
+      operationId: CreateParallelData
+      description: 'Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateParallelDataResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateParallelDataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.CreateParallelData
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShineFrontendService_20170701.DeleteParallelData:
+    post:
+      operationId: DeleteParallelData
+      description: Deletes a parallel data resource in Amazon Translate.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteParallelDataResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteParallelDataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.DeleteParallelData
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSShineFrontendService_20170701.DeleteTerminology:
     post:
       operationId: DeleteTerminology
@@ -210,6 +336,63 @@ paths:
             type: string
             enum:
               - AWSShineFrontendService_20170701.DescribeTextTranslationJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShineFrontendService_20170701.GetParallelData:
+    post:
+      operationId: GetParallelData
+      description: Provides information about a parallel data resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetParallelDataResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetParallelDataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.GetParallelData
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -324,6 +507,69 @@ paths:
             type: string
             enum:
               - AWSShineFrontendService_20170701.ImportTerminology
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShineFrontendService_20170701.ListParallelData:
+    post:
+      operationId: ListParallelData
+      description: Provides a list of your parallel data resources in Amazon Translate.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListParallelDataResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListParallelDataRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.ListParallelData
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -659,6 +905,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSShineFrontendService_20170701.UpdateParallelData:
+    post:
+      operationId: UpdateParallelData
+      description: Updates a previously created parallel data resource by importing a new input file from Amazon S3.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateParallelDataResponse'
+        '480':
+          description: ConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModificationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '487':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateParallelDataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSShineFrontendService_20170701.UpdateParallelData
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -711,6 +1038,72 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    CreateParallelDataResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The custom name that you assigned to the parallel data resource.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataStatus'
+            - description: 'The status of the parallel data resource. When the resource is ready for you to use, the status is <code>ACTIVE</code>.'
+    CreateParallelDataRequest:
+      type: object
+      required:
+        - Name
+        - ParallelDataConfig
+        - ClientToken
+      title: CreateParallelDataRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: A custom name for the parallel data resource in Amazon Translate. You must assign a name that is unique in the account and region.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A custom description for the parallel data resource in Amazon Translate.
+        ParallelDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataConfig'
+            - description: Specifies the format and S3 location of the parallel data input file.
+        EncryptionKey:
+          $ref: '#/components/schemas/EncryptionKey'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenString'
+            - description: A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
+    InvalidParameterValueException: {}
+    InvalidRequestException: {}
+    LimitExceededException: {}
+    TooManyRequestsException: {}
+    ConflictException: {}
+    InternalServerException: {}
+    DeleteParallelDataResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the parallel data resource that is being deleted.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataStatus'
+            - description: The status of the parallel data deletion.
+    DeleteParallelDataRequest:
+      type: object
+      required:
+        - Name
+      title: DeleteParallelDataRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the parallel data resource that is being deleted.
+    ConcurrentModificationException: {}
+    ResourceNotFoundException: {}
     DeleteTerminologyRequest:
       type: object
       required:
@@ -721,10 +1114,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: 'The name of the custom terminology being deleted. '
-    ResourceNotFoundException: {}
-    TooManyRequestsException: {}
-    InvalidParameterValueException: {}
-    InternalServerException: {}
     DescribeTextTranslationJobResponse:
       type: object
       properties:
@@ -742,6 +1131,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier that Amazon Translate generated for the job. The <a>StartTextTranslationJob</a> operation returns this identifier in its response.
+    GetParallelDataResponse:
+      type: object
+      properties:
+        ParallelDataProperties:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataProperties'
+            - description: The properties of the parallel data resource that is being retrieved.
+        DataLocation:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataDataLocation'
+            - description: The location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.
+        AuxiliaryDataLocation:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataDataLocation'
+            - description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+        LatestUpdateAttemptAuxiliaryDataLocation:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataDataLocation'
+            - description: The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to update a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.
+    GetParallelDataRequest:
+      type: object
+      required:
+        - Name
+      title: GetParallelDataRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the parallel data resource that is being retrieved.
     GetTerminologyResponse:
       type: object
       properties:
@@ -803,7 +1221,29 @@ components:
           allOf:
             - $ref: '#/components/schemas/EncryptionKey'
             - description: The encryption key for the custom terminology being imported.
-    LimitExceededException: {}
+    ListParallelDataResponse:
+      type: object
+      properties:
+        ParallelDataPropertiesList:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataPropertiesList'
+            - description: The properties of the parallel data resources returned by this request.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+    ListParallelDataRequest:
+      type: object
+      title: ListParallelDataRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A string that specifies the next page of results to return in a paginated response.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsInteger'
+            - description: The maximum number of parallel data resources returned for each request.
     ListTerminologiesResponse:
       type: object
       properties:
@@ -854,7 +1294,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultsInteger'
             - description: The maximum number of results to return in each page. The default value is 100.
-    InvalidRequestException: {}
     InvalidFilterException: {}
     StartTextTranslationJobResponse:
       type: object
@@ -906,6 +1345,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceNameList'
             - description: 'The name of the terminology to use in the batch translation job. For a list of available terminologies, use the <a>ListTerminologies</a> operation.'
+        ParallelDataNames:
+          allOf:
+            - $ref: '#/components/schemas/ResourceNameList'
+            - description: 'The names of the parallel data resources to use in the batch translation job. For a list of available parallel data resources, use the <a>ListParallelData</a> operation.'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientTokenString'
@@ -982,6 +1425,49 @@ components:
     TextSizeLimitExceededException: {}
     DetectedLanguageLowConfidenceException: {}
     ServiceUnavailableException: {}
+    UpdateParallelDataResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the parallel data resource being updated.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataStatus'
+            - description: The status of the parallel data resource that you are attempting to update. Your update request is accepted only if this status is either <code>ACTIVE</code> or <code>FAILED</code>.
+        LatestUpdateAttemptStatus:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataStatus'
+            - description: 'The status of the parallel data update attempt. When the updated parallel data resource is ready for you to use, the status is <code>ACTIVE</code>.'
+        LatestUpdateAttemptAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the most recent update was attempted.
+    UpdateParallelDataRequest:
+      type: object
+      required:
+        - Name
+        - ParallelDataConfig
+        - ClientToken
+      title: UpdateParallelDataRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the parallel data resource being updated.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A custom description for the parallel data resource in Amazon Translate.
+        ParallelDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataConfig'
+            - description: Specifies the format and S3 location of the parallel data input file.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenString'
+            - description: A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.
     ResourceName:
       type: string
       pattern: '^([A-Za-z0-9-]_?)+$'
@@ -1021,6 +1507,48 @@ components:
       type: string
       pattern: '^[-\w.]+\/[-\w.+]+$'
       maxLength: 256
+    Description:
+      type: string
+      pattern: '[\P{M}\p{M}]{0,256}'
+      maxLength: 256
+    ParallelDataConfig:
+      type: object
+      required:
+        - S3Uri
+        - Format
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.
+        Format:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataFormat'
+            - description: The format of the parallel data input file.
+      description: Specifies the format and S3 location of the parallel data input file.
+    EncryptionKey:
+      type: object
+      required:
+        - Type
+        - Id
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyType'
+            - description: The type of encryption key used by Amazon Translate to encrypt custom terminologies.
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionKeyID'
+            - description: The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
+      description: The encryption key used to encrypt this object.
+    ParallelDataStatus:
+      type: string
+      enum:
+        - CREATING
+        - UPDATING
+        - ACTIVE
+        - DELETING
+        - FAILED
     JobId:
       type: string
       pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
@@ -1057,6 +1585,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceNameList'
             - description: A list containing the names of the terminologies applied to a translation job. Only one terminology can be applied per <a>StartTextTranslationJob</a> request at this time.
+        ParallelDataNames:
+          allOf:
+            - $ref: '#/components/schemas/ResourceNameList'
+            - description: A list containing the names of the parallel data resources applied to the translation job.
         Message:
           allOf:
             - $ref: '#/components/schemas/UnboundedLengthString'
@@ -1082,10 +1614,6 @@ components:
             - $ref: '#/components/schemas/IamRoleArn'
             - description: The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role that granted Amazon Translate read access to the job's input data.
       description: Provides information about a translation job.
-    Description:
-      type: string
-      pattern: '[\P{M}\p{M}]{0,256}'
-      maxLength: 256
     EncryptionKeyType:
       type: string
       enum:
@@ -1095,21 +1623,91 @@ components:
       pattern: '(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\d:)?(\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))'
       minLength: 1
       maxLength: 400
-    EncryptionKey:
+    ParallelDataProperties:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The custom name assigned to the parallel data resource.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataArn'
+            - description: The Amazon Resource Name (ARN) of the parallel data resource.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description assigned to the parallel data resource.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataStatus'
+            - description: 'The status of the parallel data resource. When the parallel data is ready for you to use, the status is <code>ACTIVE</code>.'
+        SourceLanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCodeString'
+            - description: The source language of the translations in the parallel data file.
+        TargetLanguageCodes:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCodeStringList'
+            - description: The language codes for the target languages available in the parallel data file. All possible target languages are returned as an array.
+        ParallelDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataConfig'
+            - description: Specifies the format and S3 location of the parallel data input file.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/UnboundedLengthString'
+            - description: 'Additional information from Amazon Translate about the parallel data resource. '
+        ImportedDataSize:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The number of UTF-8 characters that Amazon Translate imported from the parallel data input file. This number includes only the characters in your translation examples. It does not include characters that are used to format your file. For example, if you provided a Translation Memory Exchange (.tmx) file, this number does not include the tags.'
+        ImportedRecordCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of records successfully imported from the parallel data input file.
+        FailedRecordCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of records unsuccessfully imported from the parallel data input file.
+        SkippedRecordCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The number of items in the input file that Amazon Translate skipped when you created or updated the parallel data resource. For example, Amazon Translate skips empty records, empty target texts, and empty lines.'
+        EncryptionKey:
+          $ref: '#/components/schemas/EncryptionKey'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the parallel data resource was created.
+        LastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the parallel data resource was last updated.
+        LatestUpdateAttemptStatus:
+          allOf:
+            - $ref: '#/components/schemas/ParallelDataStatus'
+            - description: The status of the most recent update attempt for the parallel data resource.
+        LatestUpdateAttemptAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the most recent update was attempted.
+      description: The properties of a parallel data resource.
+    ParallelDataDataLocation:
       type: object
       required:
-        - Type
-        - Id
+        - RepositoryType
+        - Location
       properties:
-        Type:
+        RepositoryType:
           allOf:
-            - $ref: '#/components/schemas/EncryptionKeyType'
-            - description: The type of encryption key used by Amazon Translate to encrypt custom terminologies.
-        Id:
+            - $ref: '#/components/schemas/String'
+            - description: Describes the repository that contains the parallel data input file.
+        Location:
           allOf:
-            - $ref: '#/components/schemas/EncryptionKeyID'
-            - description: The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.
-      description: The encryption key used to encrypt the custom terminologies used by Amazon Translate.
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.
+      description: The location of the most recent parallel data input file that was successfully imported into Amazon Translate.
     TerminologyDataFormat:
       type: string
       enum:
@@ -1266,6 +1864,10 @@ components:
       type: integer
       minimum: 1
       maximum: 500
+    ParallelDataPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ParallelDataProperties'
     TerminologyPropertiesList:
       type: array
       items:
@@ -1294,6 +1896,8 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TextTranslationJobProperties'
+    Long:
+      type: integer
     OutputDataConfig:
       type: object
       required:
@@ -1304,6 +1908,25 @@ components:
             - $ref: '#/components/schemas/S3Uri'
             - description: The URI of the S3 folder that contains a translation job's output file. The folder must be in the same Region as the API endpoint that you are calling.
       description: The output configuration properties for a batch translation job.
+    ParallelDataArn:
+      type: string
+      minLength: 1
+      maxLength: 512
+    ParallelDataFormat:
+      type: string
+      enum:
+        - TSV
+        - CSV
+        - TMX
+    String:
+      type: string
+      pattern: '[\P{M}\p{M}]{0,10000}'
+      maxLength: 10000
+    UnboundedLengthString:
+      type: string
+    Timestamp:
+      type: string
+      format: date-time
     ResourceNameList:
       type: array
       items:
@@ -1314,10 +1937,6 @@ components:
         $ref: '#/components/schemas/LanguageCodeString'
       minItems: 1
       maxItems: 1
-    String:
-      type: string
-      pattern: '[\P{M}\p{M}]{0,10000}'
-      maxLength: 10000
     Term:
       type: object
       properties:
@@ -1338,10 +1957,5 @@ components:
       type: string
       maxLength: 10485760
       format: password
-    Timestamp:
-      type: string
-      format: date-time
-    UnboundedLengthString:
-      type: string
 security:
   - hmac: []

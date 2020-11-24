@@ -612,6 +612,105 @@ paths:
             type: integer
             minimum: 1
             maximum: 10000
+  /2020-04-22/code-signing-configs/:
+    post:
+      operationId: CreateCodeSigningConfig
+      description: 'Creates a code signing configuration. A <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html">code signing configuration</a> defines a list of allowed signing profiles and defines the code-signing validation policy (action to be taken if deployment validation checks fail). '
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCodeSigningConfigResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AllowedPublishers
+              properties:
+                Description:
+                  description: Descriptive name for this code signing configuration.
+                  type: string
+                  minLength: 0
+                  maxLength: 256
+                AllowedPublishers:
+                  description: 'List of signing profiles that can sign a code package. '
+                  type: object
+                  properties:
+                    SigningProfileVersionArns:
+                      allOf:
+                        - $ref: '#/components/schemas/SigningProfileVersionArns'
+                        - description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
+                CodeSigningPolicies:
+                  description: Code signing configuration policies specifies the validation failure action for signature mismatch or expiry.
+                  type: object
+                  properties:
+                    UntrustedArtifactOnDeployment:
+                      allOf:
+                        - $ref: '#/components/schemas/CodeSigningPolicy'
+                        - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListCodeSigningConfigs
+      description: 'Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html">code signing configurations</a> for the specified function. A request returns up to 10,000 configurations per call. You can use the <code>MaxItems</code> parameter to return fewer configurations per call. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCodeSigningConfigsResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+      parameters:
+        - name: Marker
+          in: query
+          required: false
+          description: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+          schema:
+            type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: Maximum number of items to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
   /2015-03-31/event-source-mappings/:
     post:
       operationId: CreateEventSourceMapping
@@ -825,7 +924,7 @@ paths:
   /2015-03-31/functions:
     post:
       operationId: CreateFunction
-      description: '<p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can''t invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function''s code and configuration. A published version is a snapshot of your function code and configuration that can''t be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html">Invoking Functions</a>.</p>'
+      description: '<p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can''t invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function''s code and configuration. A published version is a snapshot of your function code and configuration that can''t be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with <a>UpdateFunctionCode</a>, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html">Invoking Functions</a>.</p>'
       responses:
         '201':
           description: Success
@@ -869,6 +968,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CodeStorageExceededException'
+        '486':
+          description: CodeVerificationFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeVerificationFailedException'
+        '487':
+          description: InvalidCodeSignatureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCodeSignatureException'
+        '488':
+          description: CodeSigningConfigNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeSigningConfigNotFoundException'
       parameters: []
       requestBody:
         required: true
@@ -1018,6 +1135,11 @@ paths:
                   items:
                     $ref: '#/components/schemas/FileSystemConfig'
                   maxItems: 1
+                CodeSigningConfigArn:
+                  description: 'To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.'
+                  type: string
+                  pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}'
+                  maxLength: 200
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1231,6 +1353,160 @@ paths:
                 RevisionId:
                   description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
                   type: string
+  '/2020-04-22/code-signing-configs/{CodeSigningConfigArn}':
+    delete:
+      operationId: DeleteCodeSigningConfig
+      description: 'Deletes the code signing configuration. You can delete the code signing configuration only if no function is using it. '
+      responses:
+        '204':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCodeSigningConfigResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+      parameters:
+        - name: CodeSigningConfigArn
+          in: path
+          required: true
+          description: The The Amazon Resource Name (ARN) of the code signing configuration.
+          schema:
+            type: string
+            pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}'
+            maxLength: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetCodeSigningConfig
+      description: Returns information about the specified code signing configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCodeSigningConfigResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: CodeSigningConfigArn
+          in: path
+          required: true
+          description: 'The The Amazon Resource Name (ARN) of the code signing configuration. '
+          schema:
+            type: string
+            pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}'
+            maxLength: 200
+    put:
+      operationId: UpdateCodeSigningConfig
+      description: 'Update the code signing configuration. Changes to the code signing configuration take effect the next time a user tries to deploy a code package to the function. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCodeSigningConfigResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: CodeSigningConfigArn
+          in: path
+          required: true
+          description: The The Amazon Resource Name (ARN) of the code signing configuration.
+          schema:
+            type: string
+            pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}'
+            maxLength: 200
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Description:
+                  description: Descriptive name for this code signing configuration.
+                  type: string
+                  minLength: 0
+                  maxLength: 256
+                AllowedPublishers:
+                  description: 'List of signing profiles that can sign a code package. '
+                  type: object
+                  properties:
+                    SigningProfileVersionArns:
+                      allOf:
+                        - $ref: '#/components/schemas/SigningProfileVersionArns'
+                        - description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
+                CodeSigningPolicies:
+                  description: Code signing configuration policies specifies the validation failure action for signature mismatch or expiry.
+                  type: object
+                  properties:
+                    UntrustedArtifactOnDeployment:
+                      allOf:
+                        - $ref: '#/components/schemas/CodeSigningPolicy'
+                        - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
   '/2015-03-31/event-source-mappings/{UUID}':
     delete:
       operationId: DeleteEventSourceMapping
@@ -1561,6 +1837,181 @@ paths:
             pattern: '(|[a-zA-Z0-9$_-]+)'
             minLength: 1
             maxLength: 128
+  '/2020-06-30/functions/{FunctionName}/code-signing-config':
+    delete:
+      operationId: DeleteFunctionCodeSigningConfig
+      description: Removes the code signing configuration from the function.
+      responses:
+        '204':
+          description: Success
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: CodeSigningConfigNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeSigningConfigNotFoundException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          schema:
+            type: string
+            pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+            minLength: 1
+            maxLength: 140
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetFunctionCodeSigningConfig
+      description: Returns the code signing configuration for the specified function.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetFunctionCodeSigningConfigResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          schema:
+            type: string
+            pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+            minLength: 1
+            maxLength: 140
+    put:
+      operationId: PutFunctionCodeSigningConfig
+      description: 'Update the code signing configuration for the function. Changes to the code signing configuration take effect the next time a user tries to deploy a code package to the function. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutFunctionCodeSigningConfigResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '484':
+          description: ResourceConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConflictException'
+        '485':
+          description: CodeSigningConfigNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeSigningConfigNotFoundException'
+      parameters:
+        - name: FunctionName
+          in: path
+          required: true
+          description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
+          schema:
+            type: string
+            pattern: '(arn:(aws[a-zA-Z-]*)?:lambda:)?([a-z]{2}(-gov)?-[a-z]+-\d{1}:)?(\d{12}:)?(function:)?([a-zA-Z0-9-_]+)(:(\$LATEST|[a-zA-Z0-9-_]+))?'
+            minLength: 1
+            maxLength: 140
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - CodeSigningConfigArn
+              properties:
+                CodeSigningConfigArn:
+                  description: The The Amazon Resource Name (ARN) of the code signing configuration.
+                  type: string
+                  pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}'
+                  maxLength: 200
   '/2017-10-31/functions/{FunctionName}/concurrency':
     delete:
       operationId: DeleteFunctionConcurrency
@@ -2435,6 +2886,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PreconditionFailedException'
+        '486':
+          description: CodeVerificationFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeVerificationFailedException'
+        '487':
+          description: InvalidCodeSignatureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCodeSignatureException'
+        '488':
+          description: CodeSigningConfigNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeSigningConfigNotFoundException'
       parameters:
         - name: FunctionName
           in: path
@@ -3052,6 +3521,66 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2020-04-22/code-signing-configs/{CodeSigningConfigArn}/functions':
+    get:
+      operationId: ListFunctionsByCodeSigningConfig
+      description: 'List the functions that use the specified code signing configuration. You can use this method prior to deleting a code signing configuration, to verify that no functions are using it.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFunctionsByCodeSigningConfigResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: CodeSigningConfigArn
+          in: path
+          required: true
+          description: The The Amazon Resource Name (ARN) of the code signing configuration.
+          schema:
+            type: string
+            pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}'
+            maxLength: 200
+        - name: Marker
+          in: query
+          required: false
+          description: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+          schema:
+            type: string
+        - name: MaxItems
+          in: query
+          required: false
+          description: Maximum number of items to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2018-10-31/layers/{LayerName}/versions':
     get:
       operationId: ListLayerVersions
@@ -3238,7 +3767,7 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/Runtime'
-                  maxItems: 5
+                  maxItems: 15
                 LicenseInfo:
                   description: '<p>The layer''s software license. It can be any of the following:</p> <ul> <li> <p>An <a href="https://spdx.org/licenses/">SPDX license identifier</a>. For example, <code>MIT</code>.</p> </li> <li> <p>The URL of a license hosted on the internet. For example, <code>https://opensource.org/licenses/MIT</code>.</p> </li> <li> <p>The full text of the license.</p> </li> </ul>'
                   type: string
@@ -3874,7 +4403,7 @@ paths:
   '/2015-03-31/functions/{FunctionName}/code':
     put:
       operationId: UpdateFunctionCode
-      description: '<p>Updates a Lambda function''s code.</p> <p>The function''s code is locked when you publish a version. You can''t modify the code of a published version, only the unpublished version.</p>'
+      description: '<p>Updates a Lambda function''s code. If code signing is enabled for the function, the code package must be signed by a trusted publisher. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html">Configuring code signing</a>.</p> <p>The function''s code is locked when you publish a version. You can''t modify the code of a published version, only the unpublished version.</p>'
       responses:
         '200':
           description: Success
@@ -3924,6 +4453,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceConflictException'
+        '487':
+          description: CodeVerificationFailedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeVerificationFailedException'
+        '488':
+          description: InvalidCodeSignatureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidCodeSignatureException'
+        '489':
+          description: CodeSigningConfigNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeSigningConfigNotFoundException'
       parameters:
         - name: FunctionName
           in: path
@@ -4101,6 +4648,26 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/Weight'
+    CreateCodeSigningConfigResponse:
+      type: object
+      required:
+        - CodeSigningConfig
+      properties:
+        CodeSigningConfig:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfig'
+            - description: The code signing configuration.
+    SigningProfileVersionArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+      minItems: 1
+      maxItems: 20
+    CodeSigningPolicy:
+      type: string
+      enum:
+        - Warn
+        - Enforce
     EventSourceMappingConfiguration:
       type: object
       example:
@@ -4355,6 +4922,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/FileSystemConfigList'
             - description: Connection settings for an Amazon EFS file system.
+        SigningProfileVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the signing profile version.
+        SigningJobArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The ARN of the signing job.
       description: Details about a function's configuration.
     Blob:
       type: string
@@ -4417,6 +4992,12 @@ components:
             - description: 'The path where the function can access the file system, starting with <code>/mnt/</code>.'
       description: Details about the connection between a Lambda function and an Amazon EFS file system.
     CodeStorageExceededException: {}
+    CodeVerificationFailedException: {}
+    InvalidCodeSignatureException: {}
+    CodeSigningConfigNotFoundException: {}
+    DeleteCodeSigningConfigResponse:
+      type: object
+      properties: {}
     ResourceInUseException: {}
     GetAccountSettingsResponse:
       type: object
@@ -4439,6 +5020,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/AccountUsage'
             - description: The number of functions and amount of storage in use.
+    GetCodeSigningConfigResponse:
+      type: object
+      required:
+        - CodeSigningConfig
+      properties:
+        CodeSigningConfig:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfig'
+            - description: The code signing configuration
     GetFunctionResponse:
       type: object
       example:
@@ -4487,6 +5077,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/Concurrency'
             - description: 'The function''s <a href="https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html">reserved concurrency</a>.'
+    GetFunctionCodeSigningConfigResponse:
+      type: object
+      required:
+        - CodeSigningConfigArn
+        - FunctionName
+      properties:
+        CodeSigningConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfigArn'
+            - description: The The Amazon Resource Name (ARN) of the code signing configuration.
+        FunctionName:
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+            - description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
     GetFunctionConcurrencyResponse:
       type: object
       example:
@@ -4706,6 +5310,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/AliasList'
             - description: A list of aliases.
+    ListCodeSigningConfigsResponse:
+      type: object
+      properties:
+        NextMarker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token that's included if more results are available.
+        CodeSigningConfigs:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfigList'
+            - description: The code signing configurations
     ListEventSourceMappingsResponse:
       type: object
       example:
@@ -4796,6 +5411,17 @@ components:
             - $ref: '#/components/schemas/FunctionList'
             - description: A list of Lambda functions.
       description: A list of Lambda functions.
+    ListFunctionsByCodeSigningConfigResponse:
+      type: object
+      properties:
+        NextMarker:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The pagination token that's included if more results are available.
+        FunctionArns:
+          allOf:
+            - $ref: '#/components/schemas/FunctionArnList'
+            - description: 'The function ARNs. '
     ListLayerVersionsResponse:
       type: object
       example:
@@ -5008,6 +5634,20 @@ components:
         - ruby2.7
         - provided
         - provided.al2
+    PutFunctionCodeSigningConfigResponse:
+      type: object
+      required:
+        - CodeSigningConfigArn
+        - FunctionName
+      properties:
+        CodeSigningConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfigArn'
+            - description: The The Amazon Resource Name (ARN) of the code signing configuration.
+        FunctionName:
+          allOf:
+            - $ref: '#/components/schemas/FunctionName'
+            - description: '<p>The name of the Lambda function.</p> <p class="title"> <b>Name formats</b> </p> <ul> <li> <p> <b>Function name</b> - <code>MyFunction</code>.</p> </li> <li> <p> <b>Function ARN</b> - <code>arn:aws:lambda:us-west-2:123456789012:function:MyFunction</code>.</p> </li> <li> <p> <b>Partial ARN</b> - <code>123456789012:function:MyFunction</code>.</p> </li> </ul> <p>The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.</p>'
     Concurrency:
       type: object
       example:
@@ -5051,6 +5691,15 @@ components:
             - description: 'The date and time that a user last updated the configuration, in <a href="https://www.iso.org/iso-8601-date-and-time-format.html">ISO 8601 format</a>.'
     TagKey:
       type: string
+    UpdateCodeSigningConfigResponse:
+      type: object
+      required:
+        - CodeSigningConfig
+      properties:
+        CodeSigningConfig:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfig'
+            - description: The code signing configuration
     Long:
       type: integer
     Integer:
@@ -5243,6 +5892,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AliasConfiguration'
+    AllowedPublishers:
+      type: object
+      required:
+        - SigningProfileVersionArns
+      properties:
+        SigningProfileVersionArns:
+          allOf:
+            - $ref: '#/components/schemas/SigningProfileVersionArns'
+            - description: 'The Amazon Resource Name (ARN) for each of the signing profiles. A signing profile defines a trusted user who can sign a code package. '
+      description: 'List of signing profiles that can sign a code package. '
     BatchSize:
       type: integer
       minimum: 1
@@ -5253,11 +5912,66 @@ components:
       type: string
     Boolean:
       type: boolean
+    CodeSigningConfigId:
+      type: string
+      pattern: 'csc-[a-zA-Z0-9-_\.]{17}'
+    CodeSigningConfigArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}'
+      maxLength: 200
+    CodeSigningPolicies:
+      type: object
+      properties:
+        UntrustedArtifactOnDeployment:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningPolicy'
+            - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
+      description: Code signing configuration policies specifies the validation failure action for signature mismatch or expiry.
+    Timestamp:
+      type: string
+    CodeSigningConfig:
+      type: object
+      required:
+        - CodeSigningConfigId
+        - CodeSigningConfigArn
+        - AllowedPublishers
+        - CodeSigningPolicies
+        - LastModified
+      properties:
+        CodeSigningConfigId:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfigId'
+            - description: Unique identifer for the Code signing configuration.
+        CodeSigningConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfigArn'
+            - description: The Amazon Resource Name (ARN) of the Code signing configuration.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: Code signing configuration description.
+        AllowedPublishers:
+          allOf:
+            - $ref: '#/components/schemas/AllowedPublishers'
+            - description: List of allowed publishers.
+        CodeSigningPolicies:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningPolicies'
+            - description: The code signing policy controls the validation failure action for signature mismatch or expiry.
+        LastModified:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The date and time that the Code signing configuration was last modified, in ISO-8601 format (YYYY-MM-DDThh:mm:ss.sTZD). '
+      description: 'Details about a Code signing configuration. '
+    CodeSigningConfigList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CodeSigningConfig'
     CompatibleRuntimes:
       type: array
       items:
         $ref: '#/components/schemas/Runtime'
-      maxItems: 5
+      maxItems: 15
     ReservedConcurrentExecutions:
       type: integer
       minimum: 0
@@ -5284,6 +5998,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/AliasRoutingConfiguration'
             - description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing">routing configuration</a> of the alias.'
+    CreateCodeSigningConfigRequest:
+      type: object
+      required:
+        - AllowedPublishers
+      title: CreateCodeSigningConfigRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: Descriptive name for this code signing configuration.
+        AllowedPublishers:
+          allOf:
+            - $ref: '#/components/schemas/AllowedPublishers'
+            - description: Signing profiles for this code signing configuration.
+        CodeSigningPolicies:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningPolicies'
+            - description: 'The code signing policies define the actions to take if the validation checks fail. '
     Enabled:
       type: boolean
     MaximumBatchingWindowInSeconds:
@@ -5572,13 +6304,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/FileSystemConfigList'
             - description: Connection settings for an Amazon EFS file system.
+        CodeSigningConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfigArn'
+            - description: 'To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.'
     DeleteAliasRequest:
       type: object
       title: DeleteAliasRequest
       properties: {}
+    DeleteCodeSigningConfigRequest:
+      type: object
+      title: DeleteCodeSigningConfigRequest
+      properties: {}
     DeleteEventSourceMappingRequest:
       type: object
       title: DeleteEventSourceMappingRequest
+      properties: {}
+    DeleteFunctionCodeSigningConfigRequest:
+      type: object
+      title: DeleteFunctionCodeSigningConfigRequest
       properties: {}
     DeleteFunctionConcurrencyRequest:
       type: object
@@ -5651,6 +6395,10 @@ components:
       type: string
       pattern: '^/mnt/[a-zA-Z0-9-_.]+$'
       maxLength: 160
+    FunctionArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FunctionArn'
     FunctionCodeLocation:
       type: object
       properties:
@@ -5671,8 +6419,6 @@ components:
     NameSpacedFunctionArn:
       type: string
       pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_\.]+(:(\$LATEST|[a-zA-Z0-9-_]+))?'
-    Timestamp:
-      type: string
     VpcConfigResponse:
       type: object
       properties:
@@ -5769,9 +6515,17 @@ components:
       type: object
       title: GetAliasRequest
       properties: {}
+    GetCodeSigningConfigRequest:
+      type: object
+      title: GetCodeSigningConfigRequest
+      properties: {}
     GetEventSourceMappingRequest:
       type: object
       title: GetEventSourceMappingRequest
+      properties: {}
+    GetFunctionCodeSigningConfigRequest:
+      type: object
+      title: GetFunctionCodeSigningConfigRequest
       properties: {}
     GetFunctionConcurrencyRequest:
       type: object
@@ -5816,6 +6570,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Long'
             - description: The size of the layer archive in bytes.
+        SigningProfileVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for a signing profile version.
+        SigningJobArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of a signing job.
       description: 'Details about a version of an <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>.'
     LayerArn:
       type: string
@@ -5888,6 +6650,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/Long'
             - description: The size of the layer archive in bytes.
+        SigningProfileVersionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) for a signing profile version.
+        SigningJobArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of a signing job.
       description: 'An <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html">AWS Lambda layer</a>.'
     LayerVersionContentInput:
       type: object
@@ -5969,6 +6739,10 @@ components:
       type: object
       title: ListAliasesRequest
       properties: {}
+    ListCodeSigningConfigsRequest:
+      type: object
+      title: ListCodeSigningConfigsRequest
+      properties: {}
     ListEventSourceMappingsRequest:
       type: object
       title: ListEventSourceMappingsRequest
@@ -5980,6 +6754,10 @@ components:
     ListFunctionEventInvokeConfigsRequest:
       type: object
       title: ListFunctionEventInvokeConfigsRequest
+      properties: {}
+    ListFunctionsByCodeSigningConfigRequest:
+      type: object
+      title: ListFunctionsByCodeSigningConfigRequest
       properties: {}
     MasterRegion:
       type: string
@@ -6095,6 +6873,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Only update the function if the revision ID matches the ID that's specified. Use this option to avoid publishing a version if the function configuration has changed since you last updated it.
+    PutFunctionCodeSigningConfigRequest:
+      type: object
+      required:
+        - CodeSigningConfigArn
+      title: PutFunctionCodeSigningConfigRequest
+      properties:
+        CodeSigningConfigArn:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningConfigArn'
+            - description: The The Amazon Resource Name (ARN) of the code signing configuration.
     PutFunctionConcurrencyRequest:
       type: object
       required:
@@ -6185,6 +6973,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
+    UpdateCodeSigningConfigRequest:
+      type: object
+      title: UpdateCodeSigningConfigRequest
+      properties:
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: Descriptive name for this code signing configuration.
+        AllowedPublishers:
+          allOf:
+            - $ref: '#/components/schemas/AllowedPublishers'
+            - description: Signing profiles for this code signing configuration.
+        CodeSigningPolicies:
+          allOf:
+            - $ref: '#/components/schemas/CodeSigningPolicies'
+            - description: The code signing policy.
     UpdateEventSourceMappingRequest:
       type: object
       title: UpdateEventSourceMappingRequest

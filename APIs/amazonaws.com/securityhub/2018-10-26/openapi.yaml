@@ -117,7 +117,7 @@ paths:
   /master:
     post:
       operationId: AcceptInvitation
-      description: '<p>Accepts the invitation to be a member account and be monitored by the Security Hub master account that the invitation was sent from.</p> <p>When the member account accepts the invitation, permission is granted to the master account to view findings generated in the member account.</p>'
+      description: '<p>Accepts the invitation to be a member account and be monitored by the Security Hub master account that the invitation was sent from.</p> <p>This operation is only used by member accounts that are not added through Organizations.</p> <p>When the member account accepts the invitation, permission is granted to the master account to view findings generated in the member account.</p>'
       responses:
         '200':
           description: Success
@@ -184,7 +184,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetMasterAccount
-      description: 'Provides the details for the Security Hub master account for the current member account. '
+      description: <p>Provides the details for the Security Hub master account for the current member account.</p> <p>Can be used by both member accounts that are in an organization and accounts that were invited manually.</p>
       responses:
         '200':
           description: Success
@@ -1013,7 +1013,7 @@ paths:
   /members:
     post:
       operationId: CreateMembers
-      description: '<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. To enable Security Hub, you can use the <code> <a>EnableSecurityHub</a> </code> operation.</p> <p>After you use <code>CreateMembers</code> to create member account associations in Security Hub, you must use the <code> <a>InviteMembers</a> </code> operation to invite the accounts to enable Security Hub and become member accounts in Security Hub.</p> <p>If the account owner accepts the invitation, the account becomes a member account in Security Hub. A permissions policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start to be sent to both the member and master accounts.</p> <p>To remove the association between the master and member accounts, use the <code> <a>DisassociateFromMasterAccount</a> </code> or <code> <a>DisassociateMembers</a> </code> operation.</p>'
+      description: '<p>Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. If you are integrated with Organizations, then the master account is the Security Hub administrator account that is designated by the organization management account.</p> <p> <code>CreateMembers</code> is always used to add accounts that are not organization members.</p> <p>For accounts that are part of an organization, <code>CreateMembers</code> is only used in the following cases:</p> <ul> <li> <p>Security Hub is not configured to automatically add new accounts in an organization.</p> </li> <li> <p>The account was disassociated or deleted in Security Hub.</p> </li> </ul> <p>This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the <code> <a>EnableSecurityHub</a> </code> operation.</p> <p>For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the <code> <a>InviteMembers</a> </code> operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub.</p> <p>Accounts that are part of an organization do not receive an invitation. They automatically become a member account in Security Hub.</p> <p>A permissions policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in a member account, findings are sent to both the member and master accounts. </p> <p>To remove the association between the master and member accounts, use the <code> <a>DisassociateFromMasterAccount</a> </code> or <code> <a>DisassociateMembers</a> </code> operation.</p>'
       responses:
         '200':
           description: Success
@@ -1058,9 +1058,11 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - AccountDetails
               properties:
                 AccountDetails:
-                  description: 'The list of accounts to associate with the Security Hub master account. For each account, the list includes the account ID and the email address.'
+                  description: 'The list of accounts to associate with the Security Hub master account. For each account, the list includes the account ID and optionally the email address.'
                   type: array
                   items:
                     $ref: '#/components/schemas/AccountDetails'
@@ -1074,7 +1076,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMembers
-      description: Lists details about all member accounts for the current Security Hub master account.
+      description: <p>Lists details about all member accounts for the current Security Hub master account.</p> <p>The results include both member accounts that belong to an organization and member accounts that were invited manually.</p>
       responses:
         '200':
           description: Success
@@ -1110,7 +1112,7 @@ paths:
         - name: OnlyAssociated
           in: query
           required: false
-          description: '<p>Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is <code>TRUE</code>.</p> <p>If <code>OnlyAssociated</code> is set to <code>TRUE</code>, the response includes member accounts whose relationship status with the master is set to <code>ENABLED</code> or <code>DISABLED</code>.</p> <p>If <code>OnlyAssociated</code> is set to <code>FALSE</code>, the response includes all existing member accounts. </p>'
+          description: '<p>Specifies which member accounts to include in the response based on their relationship status with the master account. The default value is <code>TRUE</code>.</p> <p>If <code>OnlyAssociated</code> is set to <code>TRUE</code>, the response includes member accounts whose relationship status with the master is set to <code>ENABLED</code>.</p> <p>If <code>OnlyAssociated</code> is set to <code>FALSE</code>, the response includes all existing member accounts. </p>'
           schema:
             type: boolean
         - name: MaxResults
@@ -1120,7 +1122,7 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 50
         - name: NextToken
           in: query
           required: false
@@ -1130,7 +1132,7 @@ paths:
   /invitations/decline:
     post:
       operationId: DeclineInvitations
-      description: Declines invitations to become a member account.
+      description: <p>Declines invitations to become a member account.</p> <p>This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.</p>
       responses:
         '200':
           description: Success
@@ -1762,7 +1764,7 @@ paths:
   /invitations/delete:
     post:
       operationId: DeleteInvitations
-      description: Deletes invitations received by the AWS account to become a member account.
+      description: <p>Deletes invitations received by the AWS account to become a member account.</p> <p>This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.</p>
       responses:
         '200':
           description: Success
@@ -1826,7 +1828,7 @@ paths:
   /members/delete:
     post:
       operationId: DeleteMembers
-      description: Deletes the specified member accounts from Security Hub.
+      description: <p>Deletes the specified member accounts from Security Hub.</p> <p>Can be used to delete member accounts that belong to an organization as well as member accounts that were invited manually.</p>
       responses:
         '200':
           description: Success
@@ -1871,6 +1873,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - AccountIds
               properties:
                 AccountIds:
                   description: The list of account IDs for the member accounts to delete.
@@ -2162,6 +2166,97 @@ paths:
                 AutoEnableControls:
                   description: '<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>By default, this is set to <code>true</code>, and new controls are enabled automatically. To not automatically enable new controls, set this to <code>false</code>. </p>'
                   type: boolean
+  /organization/configuration:
+    get:
+      operationId: DescribeOrganizationConfiguration
+      description: Returns information about the Organizations configuration for Security Hub. Can only be called from a Security Hub administrator account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeOrganizationConfigurationResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: UpdateOrganizationConfiguration
+      description: Used to update the configuration related to Organizations. Can only be called from a Security Hub administrator account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOrganizationConfigurationResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AutoEnable
+              properties:
+                AutoEnable:
+                  description: '<p>Whether to automatically enable Security Hub for new accounts in the organization.</p> <p>By default, this is <code>false</code>, and new accounts are not added automatically.</p> <p>To automatically enable Security Hub for new accounts, set this to <code>true</code>.</p>'
+                  type: boolean
   /products:
     get:
       operationId: DescribeProducts
@@ -2311,7 +2406,7 @@ paths:
         - name: StandardsSubscriptionArn
           in: path
           required: true
-          description: The ARN of a resource that represents your subscription to a supported standard.
+          description: 'The ARN of a resource that represents your subscription to a supported standard. To get the subscription ARNs of the standards you have enabled, use the <code> <a>GetEnabledStandards</a> </code> operation.'
           schema:
             type: string
             pattern: .*\S.*
@@ -2394,10 +2489,67 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /organization/admin/disable:
+    post:
+      operationId: DisableOrganizationAdminAccount
+      description: Disables a Security Hub administrator account. Can only be called by the organization management account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableOrganizationAdminAccountResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AdminAccountId
+              properties:
+                AdminAccountId:
+                  description: The AWS account identifier of the Security Hub administrator account.
+                  type: string
+                  pattern: .*\S.*
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /master/disassociate:
     post:
       operationId: DisassociateFromMasterAccount
-      description: Disassociates the current Security Hub member account from the associated master account.
+      description: '<p>Disassociates the current Security Hub member account from the associated master account.</p> <p>This operation is only used by accounts that are not part of an organization. For organization accounts, only the master account (the designated Security Hub administrator) can disassociate a member account.</p>'
       responses:
         '200':
           description: Success
@@ -2447,7 +2599,7 @@ paths:
   /members/disassociate:
     post:
       operationId: DisassociateMembers
-      description: Disassociates the specified member accounts from the associated master account.
+      description: <p>Disassociates the specified member accounts from the associated master account.</p> <p>Can be used to disassociate both accounts that are in an organization and accounts that were invited manually.</p>
       responses:
         '200':
           description: Success
@@ -2492,6 +2644,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - AccountIds
               properties:
                 AccountIds:
                   description: The account IDs of the member accounts to disassociate from the master account.
@@ -2612,6 +2766,63 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+  /organization/admin/enable:
+    post:
+      operationId: EnableOrganizationAdminAccount
+      description: Designates the Security Hub administrator account for an organization. Can only be called by the organization management account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableOrganizationAdminAccountResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AdminAccountId
+              properties:
+                AdminAccountId:
+                  description: The AWS account identifier of the account to designate as the Security Hub administrator account.
+                  type: string
+                  pattern: .*\S.*
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /standards/get:
     post:
       operationId: GetEnabledStandards
@@ -3700,7 +3911,7 @@ paths:
   /members/get:
     post:
       operationId: GetMembers
-      description: Returns the details for the Security Hub member accounts for the specified account IDs.
+      description: <p>Returns the details for the Security Hub member accounts for the specified account IDs.</p> <p>A master account can be either a delegated Security Hub administrator account for an organization or a master account that enabled Security Hub manually.</p> <p>The results include both member accounts that are in an organization and accounts that were invited manually.</p>
       responses:
         '200':
           description: Success
@@ -3764,7 +3975,7 @@ paths:
   /members/invite:
     post:
       operationId: InviteMembers
-      description: '<p>Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from.</p> <p>Before you can use this action to invite a member, you must first use the <code> <a>CreateMembers</a> </code> action to create the member account in Security Hub.</p> <p>When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from the member account.</p>'
+      description: '<p>Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from.</p> <p>This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations.</p> <p>Before you can use this action to invite a member, you must first use the <code> <a>CreateMembers</a> </code> action to create the member account in Security Hub.</p> <p>When the account owner enables Security Hub and accepts the invitation to become a member account, the master account can view the findings generated from the member account.</p>'
       responses:
         '200':
           description: Success
@@ -3809,6 +4020,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - AccountIds
               properties:
                 AccountIds:
                   description: 'The list of account IDs of the AWS accounts to invite to Security Hub as members. '
@@ -3826,7 +4039,7 @@ paths:
   /invitations:
     get:
       operationId: ListInvitations
-      description: 'Lists all Security Hub membership invitations that were sent to the current AWS account. '
+      description: <p>Lists all Security Hub membership invitations that were sent to the current AWS account.</p> <p>This operation is only used by accounts that do not belong to an organization. Organization accounts do not receive invitations.</p>
       responses:
         '200':
           description: Success
@@ -3866,11 +4079,69 @@ paths:
           schema:
             type: integer
             minimum: 1
-            maximum: 100
+            maximum: 50
         - name: NextToken
           in: query
           required: false
           description: '<p>The token that is required for pagination. On your first call to the <code>ListInvitations</code> operation, set the value of this parameter to <code>NULL</code>.</p> <p>For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response.</p>'
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /organization/admin:
+    get:
+      operationId: ListOrganizationAdminAccounts
+      description: Lists the Security Hub administrator accounts. Can only be called by the organization management account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOrganizationAdminAccountsResponse'
+        '480':
+          description: InternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalException'
+        '481':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '482':
+          description: InvalidAccessException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAccessException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      parameters:
+        - name: MaxResults
+          in: query
+          required: false
+          description: The maximum number of items to return in the response.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The token that is required for pagination. On your first call to the <code>ListOrganizationAdminAccounts</code> operation, set the value of this parameter to <code>NULL</code>. For subsequent calls to the operation, to continue listing data, set the value of this parameter to the value returned from the previous response. '
           schema:
             type: string
     parameters:
@@ -4481,6 +4752,8 @@ components:
             - description: 'The list of AWS accounts that were not processed. For each account, the list includes the account ID and the email address.'
     AccountDetails:
       type: object
+      required:
+        - AccountId
       properties:
         AccountId:
           allOf:
@@ -4558,6 +4831,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: '<p>Whether to automatically enable new controls when they are added to standards that are enabled.</p> <p>If set to <code>true</code>, then new controls for enabled standards are enabled automatically. If set to <code>false</code>, then new controls are not enabled.</p>'
+    DescribeOrganizationConfigurationResponse:
+      type: object
+      properties:
+        AutoEnable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Whether to automatically enable Security Hub for new accounts in the organization.</p> <p>If set to <code>true</code>, then Security Hub is enabled for new accounts. If set to false, then new accounts are not added automatically.</p>'
+        MemberAccountLimitReached:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the maximum number of allowed member accounts are already associated with the Security Hub administrator account.
     DescribeProductsResponse:
       type: object
       required:
@@ -4596,6 +4880,9 @@ components:
     DisableImportFindingsForProductResponse:
       type: object
       properties: {}
+    DisableOrganizationAdminAccountResponse:
+      type: object
+      properties: {}
     DisableSecurityHubResponse:
       type: object
       properties: {}
@@ -4612,6 +4899,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The ARN of your subscription to the product to enable integrations for.
+    EnableOrganizationAdminAccountResponse:
+      type: object
+      properties: {}
     EnableSecurityHubResponse:
       type: object
       properties: {}
@@ -4742,6 +5032,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The pagination token to use to request the next page of results.
+    ListOrganizationAdminAccountsResponse:
+      type: object
+      properties:
+        AdminAccounts:
+          allOf:
+            - $ref: '#/components/schemas/AdminAccounts'
+            - description: The list of Security Hub administrator accounts.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The pagination token to use to request the next page of results.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -4767,6 +5068,9 @@ components:
       type: object
       properties: {}
     UpdateInsightResponse:
+      type: object
+      properties: {}
+    UpdateOrganizationConfigurationResponse:
       type: object
       properties: {}
     UpdateSecurityHubConfigurationResponse:
@@ -4824,6 +5128,31 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ActionTarget'
+    AdminStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLE_IN_PROGRESS
+    AdminAccount:
+      type: object
+      properties:
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The AWS account identifier of the Security Hub administrator account.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/AdminStatus'
+            - description: The current status of the Security Hub administrator account. Indicates whether the account is currently enabled as a Security Hub administrator.
+      description: Represents a Security Hub administrator account designated by an organization management account.
+    AdminAccounts:
+      type: array
+      items:
+        $ref: '#/components/schemas/AdminAccount'
+    AdminsMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 10
     ArnList:
       type: array
       items:
@@ -10020,16 +10349,22 @@ components:
             - description: 'The attribute used to group the findings for the insight. The grouping attribute identifies the type of item that the insight applies to. For example, if an insight is grouped by resource identifier, then the insight produces a list of resource identifiers.'
     CreateMembersRequest:
       type: object
+      required:
+        - AccountDetails
       title: CreateMembersRequest
       properties:
         AccountDetails:
           allOf:
             - $ref: '#/components/schemas/AccountDetailsList'
-            - description: 'The list of accounts to associate with the Security Hub master account. For each account, the list includes the account ID and the email address.'
+            - description: 'The list of accounts to associate with the Security Hub master account. For each account, the list includes the account ID and optionally the email address.'
     ResultList:
       type: array
       items:
         $ref: '#/components/schemas/Result'
+    CrossAccountMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
     Cvss:
       type: object
       properties:
@@ -10112,6 +10447,8 @@ components:
             - description: The list of the account IDs that sent the invitations to delete.
     DeleteMembersRequest:
       type: object
+      required:
+        - AccountIds
       title: DeleteMembersRequest
       properties:
         AccountIds:
@@ -10144,6 +10481,10 @@ components:
       type: object
       title: DescribeHubRequest
       properties: {}
+    DescribeOrganizationConfigurationRequest:
+      type: object
+      title: DescribeOrganizationConfigurationRequest
+      properties: {}
     DescribeProductsRequest:
       type: object
       title: DescribeProductsRequest
@@ -10172,6 +10513,16 @@ components:
       type: object
       title: DisableImportFindingsForProductRequest
       properties: {}
+    DisableOrganizationAdminAccountRequest:
+      type: object
+      required:
+        - AdminAccountId
+      title: DisableOrganizationAdminAccountRequest
+      properties:
+        AdminAccountId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The AWS account identifier of the Security Hub administrator account.
     DisableSecurityHubRequest:
       type: object
       title: DisableSecurityHubRequest
@@ -10182,6 +10533,8 @@ components:
       properties: {}
     DisassociateMembersRequest:
       type: object
+      required:
+        - AccountIds
       title: DisassociateMembersRequest
       properties:
         AccountIds:
@@ -10198,6 +10551,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The ARN of the product to enable the integration for.
+    EnableOrganizationAdminAccountRequest:
+      type: object
+      required:
+        - AdminAccountId
+      title: EnableOrganizationAdminAccountRequest
+      properties:
+        AdminAccountId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The AWS account identifier of the account to designate as the Security Hub administrator account.
     TagMap:
       type: object
       minProperties: 1
@@ -10424,6 +10787,8 @@ components:
         $ref: '#/components/schemas/Invitation'
     InviteMembersRequest:
       type: object
+      required:
+        - AccountIds
       title: InviteMembersRequest
       properties:
         AccountIds:
@@ -10477,6 +10842,10 @@ components:
     ListMembersRequest:
       type: object
       title: ListMembersRequest
+      properties: {}
+    ListOrganizationAdminAccountsRequest:
+      type: object
+      title: ListOrganizationAdminAccountsRequest
       properties: {}
     ResourceArn:
       type: string
@@ -10570,7 +10939,7 @@ components:
         MemberStatus:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
-            - description: '<p>The status of the relationship between the member account and its master account. </p> <p>The status can have one of the following values:</p> <ul> <li> <p> <code>CREATED</code> - Indicates that the master account added the member account, but has not yet invited the member account.</p> </li> <li> <p> <code>INVITED</code> - Indicates that the master account invited the member account. The member account has not yet responded to the invitation.</p> </li> <li> <p> <code>ASSOCIATED</code> - Indicates that the member account accepted the invitation.</p> </li> <li> <p> <code>REMOVED</code> - Indicates that the master account disassociated the member account.</p> </li> <li> <p> <code>RESIGNED</code> - Indicates that the member account disassociated themselves from the master account.</p> </li> <li> <p> <code>DELETED</code> - Indicates that the master account deleted the member account.</p> </li> </ul>'
+            - description: '<p>The status of the relationship between the member account and its master account. </p> <p>The status can have one of the following values:</p> <ul> <li> <p> <code>CREATED</code> - Indicates that the master account added the member account, but has not yet invited the member account.</p> </li> <li> <p> <code>INVITED</code> - Indicates that the master account invited the member account. The member account has not yet responded to the invitation.</p> </li> <li> <p> <code>ENABLED</code> - Indicates that the member account is currently active. For manually invited member accounts, indicates that the member account accepted the invitation.</p> </li> <li> <p> <code>REMOVED</code> - Indicates that the master account disassociated the member account.</p> </li> <li> <p> <code>RESIGNED</code> - Indicates that the member account disassociated themselves from the master account.</p> </li> <li> <p> <code>DELETED</code> - Indicates that the master account deleted the member account.</p> </li> </ul>'
         InvitedAt:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -11227,6 +11596,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/NonEmptyString'
             - description: The updated <code>GroupBy</code> attribute that defines this insight.
+    UpdateOrganizationConfigurationRequest:
+      type: object
+      required:
+        - AutoEnable
+      title: UpdateOrganizationConfigurationRequest
+      properties:
+        AutoEnable:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: '<p>Whether to automatically enable Security Hub for new accounts in the organization.</p> <p>By default, this is <code>false</code>, and new accounts are not added automatically.</p> <p>To automatically enable Security Hub for new accounts, set this to <code>true</code>.</p>'
     UpdateSecurityHubConfigurationRequest:
       type: object
       title: UpdateSecurityHubConfigurationRequest

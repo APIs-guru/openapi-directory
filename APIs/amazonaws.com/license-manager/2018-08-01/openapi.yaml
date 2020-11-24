@@ -1920,6 +1920,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTime'
             - description: Time when the license configuration was associated with the resource.
+        AmiAssociationScope:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Scope of AMI associations.
       description: Describes an association with a license configuration.
     LicenseConfigurationAssociations:
       type: array
@@ -2019,6 +2023,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Amazon Resource Name (ARN) of the license configuration.
+        AmiAssociationScope:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Scope of AMI associations.
       description: Details for associating a license configuration with a resource.
     LicenseSpecifications:
       type: array

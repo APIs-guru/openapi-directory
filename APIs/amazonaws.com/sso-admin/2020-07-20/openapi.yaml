@@ -263,6 +263,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SWBExternalService.CreateInstanceAccessControlAttributeConfiguration:
+    post:
+      operationId: CreateInstanceAccessControlAttributeConfiguration
+      description: 'Enables the attributes-based access control (ABAC) feature for the specified AWS SSO instance. You can also specify new attributes to add to your ABAC configuration during the enabling process. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateInstanceAccessControlAttributeConfigurationResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstanceAccessControlAttributeConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.CreateInstanceAccessControlAttributeConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SWBExternalService.CreatePermissionSet:
     post:
       operationId: CreatePermissionSet
@@ -476,6 +545,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SWBExternalService.DeleteInstanceAccessControlAttributeConfiguration:
+    post:
+      operationId: DeleteInstanceAccessControlAttributeConfiguration
+      description: 'Disables the attributes-based access control (ABAC) feature for the specified AWS SSO instance and deletes all of the attribute mappings that have been configured. Once deleted, any attributes that are received from an identity source and any custom attributes you have previously configured will not be passed. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteInstanceAccessControlAttributeConfigurationResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteInstanceAccessControlAttributeConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.DeleteInstanceAccessControlAttributeConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SWBExternalService.DeletePermissionSet:
     post:
       operationId: DeletePermissionSet
@@ -663,6 +801,69 @@ paths:
             type: string
             enum:
               - SWBExternalService.DescribeAccountAssignmentDeletionStatus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SWBExternalService.DescribeInstanceAccessControlAttributeConfiguration:
+    post:
+      operationId: DescribeInstanceAccessControlAttributeConfiguration
+      description: 'Returns the list of AWS SSO identity store attributes that have been configured to work with attributes-based access control (ABAC) for the specified AWS SSO instance. This will not return attributes configured and sent by an external identity provider. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInstanceAccessControlAttributeConfigurationResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeInstanceAccessControlAttributeConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.DescribeInstanceAccessControlAttributeConfiguration
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1955,6 +2156,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SWBExternalService.UpdateInstanceAccessControlAttributeConfiguration:
+    post:
+      operationId: UpdateInstanceAccessControlAttributeConfiguration
+      description: 'Updates the AWS SSO identity store attributes to use with the AWS SSO instance for attributes-based access control (ABAC). When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store. For more information about ABAC, see <a href="/singlesignon/latest/userguide/abac.html">Attribute-Based Access Control</a> in the <i>AWS SSO User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateInstanceAccessControlAttributeConfigurationResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInstanceAccessControlAttributeConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SWBExternalService.UpdateInstanceAccessControlAttributeConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SWBExternalService.UpdatePermissionSet:
     post:
       operationId: UpdatePermissionSet
@@ -2148,6 +2418,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/PrincipalId'
             - description: 'An identifier for an object in AWS SSO, such as a user or group. PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more information about PrincipalIds in AWS SSO, see the <a href="/singlesignon/latest/IdentityStoreAPIReference/welcome.html">AWS SSO Identity Store API Reference</a>.'
+    CreateInstanceAccessControlAttributeConfigurationResponse:
+      type: object
+      properties: {}
+    CreateInstanceAccessControlAttributeConfigurationRequest:
+      type: object
+      required:
+        - InstanceArn
+        - InstanceAccessControlAttributeConfiguration
+      title: CreateInstanceAccessControlAttributeConfigurationRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: The ARN of the SSO instance under which the operation will be executed.
+        InstanceAccessControlAttributeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InstanceAccessControlAttributeConfiguration'
+            - description: 'Specifies the AWS SSO identity store attributes to add to your ABAC configuration. When using an external identity provider as an identity source, you can pass attributes through the SAML assertion as an alternative to configuring attributes from the AWS SSO identity store. If a SAML assertion passes any of these attributes, AWS SSO will replace the attribute value with the value from the AWS SSO identity store.'
     CreatePermissionSetResponse:
       type: object
       properties:
@@ -2246,6 +2534,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/PermissionSetArn'
             - description: The ARN of the permission set that will be used to remove access.
+    DeleteInstanceAccessControlAttributeConfigurationResponse:
+      type: object
+      properties: {}
+    DeleteInstanceAccessControlAttributeConfigurationRequest:
+      type: object
+      required:
+        - InstanceArn
+      title: DeleteInstanceAccessControlAttributeConfigurationRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: The ARN of the SSO instance under which the operation will be executed.
     DeletePermissionSetResponse:
       type: object
       properties: {}
@@ -2308,6 +2609,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/UUId'
             - description: The identifier that is used to track the request operation progress.
+    DescribeInstanceAccessControlAttributeConfigurationResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/InstanceAccessControlAttributeConfigurationStatus'
+            - description: The status of the attribute configuration process.
+        StatusReason:
+          allOf:
+            - $ref: '#/components/schemas/InstanceAccessControlAttributeConfigurationStatusReason'
+            - description: Provides more details about the current status of the specified attribute.
+        InstanceAccessControlAttributeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InstanceAccessControlAttributeConfiguration'
+            - description: Gets the list of AWS SSO identity store attributes added to your ABAC configuration.
+    DescribeInstanceAccessControlAttributeConfigurationRequest:
+      type: object
+      required:
+        - InstanceArn
+      title: DescribeInstanceAccessControlAttributeConfigurationRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: The ARN of the SSO instance under which the operation will be executed.
     DescribePermissionSetResponse:
       type: object
       properties:
@@ -2827,6 +3153,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeyList'
             - description: The keys of tags that are attached to the resource.
+    UpdateInstanceAccessControlAttributeConfigurationResponse:
+      type: object
+      properties: {}
+    UpdateInstanceAccessControlAttributeConfigurationRequest:
+      type: object
+      required:
+        - InstanceArn
+        - InstanceAccessControlAttributeConfiguration
+      title: UpdateInstanceAccessControlAttributeConfigurationRequest
+      properties:
+        InstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/InstanceArn'
+            - description: The ARN of the SSO instance under which the operation will be executed.
+        InstanceAccessControlAttributeConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/InstanceAccessControlAttributeConfiguration'
+            - description: Updates the attributes for your ABAC configuration.
     UpdatePermissionSetResponse:
       type: object
       properties: {}
@@ -2857,6 +3201,53 @@ components:
           allOf:
             - $ref: '#/components/schemas/RelayState'
             - description: Used to redirect users within the application during the federation authentication process.
+    AccessControlAttributeKey:
+      type: string
+      pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@]+'
+      minLength: 1
+      maxLength: 128
+    AccessControlAttributeValue:
+      type: object
+      required:
+        - Source
+      properties:
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/AccessControlAttributeValueSourceList'
+            - description: The identity source to use when mapping a specified attribute to AWS SSO.
+      description: The value used for mapping a specified attribute to an identity source.
+    AccessControlAttribute:
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/AccessControlAttributeKey'
+            - description: The name of the attribute associated with your identities in your identity source. This is used to map a specified attribute in your identity source with an attribute in AWS SSO.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/AccessControlAttributeValue'
+            - description: The value used for mapping a specified attribute to an identity source.
+      description: 'These are AWS SSO identity store attributes that you can configure for use in attributes-based access control (ABAC). You can create permission policies that determine who can access your AWS resources based upon the configured attribute value(s). When you enable ABAC and specify AccessControlAttributes, AWS SSO passes the attribute(s) value of the authenticated user into IAM for use in policy evaluation.'
+    AccessControlAttributeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessControlAttribute'
+      minItems: 0
+      maxItems: 50
+    AccessControlAttributeValueSourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AccessControlAttributeValueSource'
+      minItems: 1
+      maxItems: 1
+    AccessControlAttributeValueSource:
+      type: string
+      pattern: '[\p{L}\p{Z}\p{N}_.:\/=+\-@\[\]\{\}\$\\"]*'
+      minLength: 0
+      maxLength: 256
     AccountId:
       type: string
       pattern: '\d{12}'
@@ -3014,6 +3405,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AttachedManagedPolicy'
+    InstanceAccessControlAttributeConfiguration:
+      type: object
+      required:
+        - AccessControlAttributes
+      properties:
+        AccessControlAttributes:
+          allOf:
+            - $ref: '#/components/schemas/AccessControlAttributeList'
+            - description: Lists the attributes that are configured for ABAC in the specified AWS SSO instance.
+      description: Specifies the attributes to add to your attribute-based access control (ABAC) configuration.
     PermissionSetName:
       type: string
       pattern: '[\w+=,.@-]+'
@@ -3068,6 +3469,14 @@ components:
             - $ref: '#/components/schemas/RelayState'
             - description: Used to redirect users within the application during the federation authentication process.
       description: An entity that contains IAM policies.
+    InstanceAccessControlAttributeConfigurationStatus:
+      type: string
+      enum:
+        - ENABLED
+        - CREATION_IN_PROGRESS
+        - CREATION_FAILED
+    InstanceAccessControlAttributeConfigurationStatusReason:
+      type: string
     PermissionSetProvisioningStatus:
       type: object
       properties:

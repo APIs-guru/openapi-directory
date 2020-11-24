@@ -15875,6 +15875,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FileName'
             - description: The name of the file.
+        fileType:
+          allOf:
+            - $ref: '#/components/schemas/FileType'
+            - description: An integer value you can include in the job document to allow your devices to identify the type of file received from the cloud.
         fileVersion:
           allOf:
             - $ref: '#/components/schemas/OTAUpdateFileVersion'
@@ -22156,6 +22160,10 @@ components:
       description: The location of the OTA update.
     FileName:
       type: string
+    FileType:
+      type: integer
+      minimum: 0
+      maximum: 255
     FirehoseSeparator:
       type: string
       pattern: '([\n\t])|(\r\n)|(,)'

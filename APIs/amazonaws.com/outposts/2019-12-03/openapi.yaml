@@ -195,6 +195,13 @@ paths:
                   pattern: '[a-z]+[0-9]+-az[0-9]+'
                   minLength: 1
                   maxLength: 255
+                Tags:
+                  description: The tags to apply to the Outpost.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -591,6 +598,10 @@ components:
       properties:
         Outpost:
           $ref: '#/components/schemas/Outpost'
+    TagValue:
+      type: string
+      pattern: '^[\S \n]+$'
+      maxLength: 256
     ValidationException: {}
     NotFoundException: {}
     AccessDeniedException: {}
@@ -667,6 +678,12 @@ components:
       description: The ID of the site.
       minLength: 1
       maxLength: 255
+    TagMap:
+      type: object
+      minProperties: 1
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/TagValue'
     CreateOutpostInput:
       type: object
       required:
@@ -684,6 +701,10 @@ components:
           $ref: '#/components/schemas/AvailabilityZone'
         AvailabilityZoneId:
           $ref: '#/components/schemas/AvailabilityZoneId'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to apply to the Outpost.
     Outpost:
       type: object
       properties:
@@ -705,6 +726,10 @@ components:
           $ref: '#/components/schemas/AvailabilityZone'
         AvailabilityZoneId:
           $ref: '#/components/schemas/AvailabilityZoneId'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The Outpost tags.
       description: Information about an Outpost.
     OutpostId:
       type: string
@@ -809,6 +834,15 @@ components:
           $ref: '#/components/schemas/SiteName'
         Description:
           $ref: '#/components/schemas/SiteDescription'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The site tags.
       description: Information about a site.
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      minLength: 1
+      maxLength: 128
 security:
   - hmac: []
