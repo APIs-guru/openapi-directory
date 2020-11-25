@@ -6928,6 +6928,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/UnsupportedUserEditionException'
         '490':
+          description: UnsupportedPricingPlanException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedPricingPlanException'
+        '491':
           description: InternalFailureException
           content:
             application/json:
@@ -6961,6 +6967,7 @@ paths:
             enum:
               - IAM
               - QUICKSIGHT
+              - ANONYMOUS
         - name: session-lifetime
           in: query
           required: false
@@ -6993,6 +7000,24 @@ paths:
           description: '<p>The Amazon QuickSight user''s Amazon Resource Name (ARN), for use with <code>QUICKSIGHT</code> identity type. You can use this for any Amazon QuickSight users in your account (readers, authors, or admins) authenticated as one of the following:</p> <ul> <li> <p>Active Directory (AD) users or group members</p> </li> <li> <p>Invited nonfederated users</p> </li> <li> <p>IAM users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation.</p> </li> </ul> <p>Omit this parameter for users in the third group – IAM users and IAM role-based sessions.</p>'
           schema:
             type: string
+        - name: namespace
+          in: query
+          required: false
+          description: 'The QuickSight namespace that contains the dashboard IDs in this request. If you''re not using a custom namespace, set this to "<code>default</code>".'
+          schema:
+            type: string
+            pattern: '^[a-zA-Z0-9._-]*$'
+            maxLength: 64
+        - name: additional-dashboard-ids
+          in: query
+          required: false
+          description: 'A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. <code>IdentityType</code> must be set to ANONYMOUS for this to work, because other other identity types authenticate as QuickSight users. For example, if you set "<code>--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>", the session can access all three dashboards. '
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/RestrictiveResourceId'
+            minItems: 1
+            maxItems: 20
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -11014,10 +11039,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The AWS request ID for this operation.
+      description: Output returned from the <code>GetDashboardEmbedUrl</code> operation.
+    RestrictiveResourceId:
+      type: string
+      pattern: '[\w\-]+'
+      minLength: 1
+      maxLength: 2048
     DomainNotWhitelistedException: {}
     QuickSightUserNotFoundException: {}
     IdentityTypeNotSupportedException: {}
     SessionLifetimeInMinutesInvalidException: {}
+    UnsupportedPricingPlanException: {}
     GetSessionEmbedUrlResponse:
       type: object
       properties:
@@ -12043,6 +12075,12 @@ components:
       enum:
         - ENABLED
         - DISABLED
+    AdditionalDashboardIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/RestrictiveResourceId'
+      minItems: 1
+      maxItems: 20
     AliasName:
       type: string
       pattern: '[\w\-]+|(\$LATEST)|(\$PUBLISHED)'
@@ -12052,11 +12090,6 @@ components:
       type: string
       minLength: 1
       maxLength: 64
-    RestrictiveResourceId:
-      type: string
-      pattern: '[\w\-]+'
-      minLength: 1
-      maxLength: 2048
     AnalysisName:
       type: string
       pattern: '[\u0020-\u00FF]+'
@@ -13604,7 +13637,7 @@ components:
         ColumnLevelPermissionRulesApplied:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Indicates if the dataset has column level permission configured. '
+            - description: Indicates if the dataset has column level permission configured.
       description: Dataset summary.
     DataSetSummaryList:
       type: array
@@ -14085,6 +14118,12 @@ components:
     Double:
       type: number
       format: double
+    EmbeddingIdentityType:
+      type: string
+      enum:
+        - IAM
+        - QUICKSIGHT
+        - ANONYMOUS
     EmbeddingUrl:
       type: string
       format: password
@@ -14170,11 +14209,6 @@ components:
       type: string
       enum:
         - US
-    IdentityType:
-      type: string
-      enum:
-        - IAM
-        - QUICKSIGHT
     SessionLifetimeInMinutes:
       type: integer
       minimum: 15
@@ -14183,6 +14217,7 @@ components:
       type: object
       title: GetDashboardEmbedUrlRequest
       properties: {}
+      description: Parameter input for the <code>GetDashboardEmbedUrl</code> operation.
     GetSessionEmbedUrlRequest:
       type: object
       title: GetSessionEmbedUrlRequest
@@ -14223,6 +14258,11 @@ components:
       type: string
       pattern: '[\u0020-\u00FF]+'
       minLength: 1
+    IdentityType:
+      type: string
+      enum:
+        - IAM
+        - QUICKSIGHT
     RowInfo:
       type: object
       properties:

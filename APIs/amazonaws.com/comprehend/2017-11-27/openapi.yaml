@@ -1266,6 +1266,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.DescribeEventsDetectionJob:
+    post:
+      operationId: DescribeEventsDetectionJob
+      description: Gets the status and details of an events detection job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEventsDetectionJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: JobNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobNotFoundException'
+        '482':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEventsDetectionJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.DescribeEventsDetectionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.DescribeKeyPhrasesDetectionJob:
     post:
       operationId: DescribeKeyPhrasesDetectionJob
@@ -2232,6 +2289,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.ListEventsDetectionJobs:
+    post:
+      operationId: ListEventsDetectionJobs
+      description: Gets a list of the events detection jobs that you have submitted.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEventsDetectionJobsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: InvalidFilterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidFilterException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEventsDetectionJobsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.ListEventsDetectionJobs
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.ListKeyPhrasesDetectionJobs:
     post:
       operationId: ListKeyPhrasesDetectionJobs
@@ -2742,6 +2868,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.StartEventsDetectionJob:
+    post:
+      operationId: StartEventsDetectionJob
+      description: Starts an asynchronous event detection job for a collection of documents.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartEventsDetectionJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '482':
+          description: KmsKeyValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KmsKeyValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartEventsDetectionJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.StartEventsDetectionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=Comprehend_20171127.StartKeyPhrasesDetectionJob:
     post:
       operationId: StartKeyPhrasesDetectionJob
@@ -3064,6 +3247,57 @@ paths:
             type: string
             enum:
               - Comprehend_20171127.StopEntitiesDetectionJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=Comprehend_20171127.StopEventsDetectionJob:
+    post:
+      operationId: StopEventsDetectionJob
+      description: Stops an events detection job in progress.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StopEventsDetectionJobResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: JobNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobNotFoundException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopEventsDetectionJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - Comprehend_20171127.StopEventsDetectionJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3747,7 +3981,7 @@ components:
         Labels:
           allOf:
             - $ref: '#/components/schemas/ListOfLabels'
-            - description: 'The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not multually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. '
+            - description: 'The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not mutually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. '
     ClassifyDocumentRequest:
       type: object
       required:
@@ -4051,6 +4285,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityRecognizerArn'
             - description: The Amazon Resource Name (ARN) that identifies the entity recognizer.
+    DescribeEventsDetectionJobResponse:
+      type: object
+      properties:
+        EventsDetectionJobProperties:
+          allOf:
+            - $ref: '#/components/schemas/EventsDetectionJobProperties'
+            - description: An object that contains the properties associated with an event detection job.
+    DescribeEventsDetectionJobRequest:
+      type: object
+      required:
+        - JobId
+      title: DescribeEventsDetectionJobRequest
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier of the events detection job.
     DescribeKeyPhrasesDetectionJobResponse:
       type: object
       properties:
@@ -4414,6 +4665,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResultsInteger'
             - description: ' The maximum number of results to return on each page. The default is 100.'
+    ListEventsDetectionJobsResponse:
+      type: object
+      properties:
+        EventsDetectionJobPropertiesList:
+          allOf:
+            - $ref: '#/components/schemas/EventsDetectionJobPropertiesList'
+            - description: A list containing the properties of each job that is returned.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the next page of results to return.
+    ListEventsDetectionJobsRequest:
+      type: object
+      title: ListEventsDetectionJobsRequest
+      properties:
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/EventsDetectionJobFilter'
+            - description: 'Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Identifies the next page of results to return.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsInteger'
+            - description: The maximum number of results to return in each page.
     ListKeyPhrasesDetectionJobsResponse:
       type: object
       properties:
@@ -4698,6 +4976,55 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: 'Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your entity detection job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+    StartEventsDetectionJobResponse:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: 'An unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The status of the events detection job.
+    StartEventsDetectionJobRequest:
+      type: object
+      required:
+        - InputDataConfig
+        - OutputDataConfig
+        - DataAccessRoleArn
+        - LanguageCode
+        - TargetEventTypes
+      title: StartEventsDetectionJobRequest
+      properties:
+        InputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputDataConfig'
+            - description: Specifies the format and location of the input data for the job.
+        OutputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputDataConfig'
+            - description: Specifies where to send the output files.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The identifier of the events detection job.
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - description: The language code of the input documents.
+        ClientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestTokenString'
+            - description: 'An unique identifier for the request. If you don''t set the client request token, Amazon Comprehend generates one.'
+        TargetEventTypes:
+          allOf:
+            - $ref: '#/components/schemas/TargetEventTypes'
+            - description: The types of events to detect in the input documents.
     StartKeyPhrasesDetectionJobResponse:
       type: object
       properties:
@@ -4948,6 +5275,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/JobId'
             - description: The identifier of the entities detection job to stop.
+    StopEventsDetectionJobResponse:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier of the events detection job to stop.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The status of the events detection job.
+    StopEventsDetectionJobRequest:
+      type: object
+      required:
+        - JobId
+      title: StopEventsDetectionJobRequest
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier of the events detection job to stop.
     StopKeyPhrasesDetectionJobResponse:
       type: object
       properties:
@@ -5461,7 +5809,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Subnets'
             - description: 'The ID for each subnet being used in your private VPC. This subnet is a subset of the a range of IPv4 addresses used by the VPC and is specific to a given availability zone in the VPC’s region. This ID number is preceded by "subnet-", for instance: "subnet-04ccf456919e69055". For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html">VPCs and Subnets</a>. '
-      description: ' Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for the job. For For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
+      description: ' Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for the job. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
     DocumentClassifierMode:
       type: string
       enum:
@@ -5825,6 +6173,54 @@ components:
             - $ref: '#/components/schemas/VpcConfig'
             - description: ' Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html">Amazon VPC</a>. '
       description: Describes information about an entity recognizer.
+    EventsDetectionJobProperties:
+      type: object
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The identifier assigned to the events detection job.
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name you assigned the events detection job.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The current status of the events detection job.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/AnyLengthString'
+            - description: A description of the status of the events detection job.
+        SubmitTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the events detection job was submitted for processing.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the events detection job completed.
+        InputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputDataConfig'
+            - description: The input data configuration that you supplied when you created the events detection job.
+        OutputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/OutputDataConfig'
+            - description: The output data configuration that you supplied when you created the events detection job.
+        LanguageCode:
+          allOf:
+            - $ref: '#/components/schemas/LanguageCode'
+            - description: The language code of the input documents.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identify and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+        TargetEventTypes:
+          allOf:
+            - $ref: '#/components/schemas/TargetEventTypes'
+            - description: The types of events that are detected by the job.
+      description: Provides information about an events detection job.
     KeyPhrasesDetectionJobProperties:
       type: object
       properties:
@@ -6244,7 +6640,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: Specifies a date after which the returned endpoint or endpoints were created.
-      description: 'The filter used to determine which endpoints are are returned. You can filter jobs on their name, model, status, or the date and time that they were created. You can only set one filter at a time. '
+      description: 'The filter used to determine which endpoints are returned. You can filter jobs on their name, model, status, or the date and time that they were created. You can only set one filter at a time. '
     EndpointPropertiesList:
       type: array
       items:
@@ -6438,7 +6834,7 @@ components:
         F1Score:
           allOf:
             - $ref: '#/components/schemas/Double'
-            - description: 'A measure of how accurate the recognizer results are for for a specific entity type in the test data. It is derived from the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. '
+            - description: 'A measure of how accurate the recognizer results are for a specific entity type in the test data. It is derived from the <code>Precision</code> and <code>Recall</code> values. The <code>F1Score</code> is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. '
       description: 'Detailed information about the accuracy of an entity recognizer for a specific entity type. '
     EntityRecognizerPropertiesList:
       type: array
@@ -6458,6 +6854,40 @@ components:
             - $ref: '#/components/schemas/EntityTypeName'
             - description: '<p>An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer.</p> <p>Entity types must not contain the following invalid characters: \n (line break), \\n (escaped line break, \r (carriage return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and , (comma).</p>'
       description: An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer.
+    EventTypeString:
+      type: string
+      pattern: '[A-Z_]*'
+      minLength: 1
+      maxLength: 40
+    EventsDetectionJobFilter:
+      type: object
+      properties:
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: Filters on the name of the events detection job.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: Filters the list of jobs based on job status. Returns only jobs with the specified status.
+        SubmitTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.'
+        SubmitTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.'
+      description: Provides information for filtering a list of event detection jobs.
+    TargetEventTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventTypeString'
+      minItems: 1
+    EventsDetectionJobPropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventsDetectionJobProperties'
     InputFormat:
       type: string
       enum:

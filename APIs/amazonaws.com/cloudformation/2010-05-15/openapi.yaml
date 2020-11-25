@@ -890,7 +890,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
                   - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization master account, even if the master account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
         - name: Regions
           in: query
           required: true
@@ -1508,7 +1508,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
                   - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization master account, even if the master account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
         - name: Regions
           in: query
           required: true
@@ -1780,15 +1780,16 @@ paths:
             type: string
             enum:
               - RESOURCE
+              - MODULE
         - name: TypeName
           in: query
           required: false
           description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
-            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
             minLength: 10
-            maxLength: 196
+            maxLength: 204
         - name: VersionId
           in: query
           required: false
@@ -2898,15 +2899,16 @@ paths:
             type: string
             enum:
               - RESOURCE
+              - MODULE
         - name: TypeName
           in: query
           required: false
           description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
-            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
             minLength: 10
-            maxLength: 196
+            maxLength: 204
         - name: Arn
           in: query
           required: false
@@ -4835,15 +4837,16 @@ paths:
             type: string
             enum:
               - RESOURCE
+              - MODULE
         - name: TypeName
           in: query
           required: false
           description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
-            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
             minLength: 10
-            maxLength: 196
+            maxLength: 204
         - name: TypeArn
           in: query
           required: false
@@ -4976,15 +4979,16 @@ paths:
             type: string
             enum:
               - RESOURCE
+              - MODULE
         - name: TypeName
           in: query
           required: false
           description: '<p>The name of the type for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
-            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
             minLength: 10
-            maxLength: 196
+            maxLength: 204
         - name: Arn
           in: query
           required: false
@@ -5136,6 +5140,15 @@ paths:
             enum:
               - LIVE
               - DEPRECATED
+        - name: Type
+          in: query
+          required: false
+          description: The type of extension.
+          schema:
+            type: string
+            enum:
+              - RESOURCE
+              - MODULE
         - name: MaxResults
           in: query
           required: false
@@ -5415,15 +5428,16 @@ paths:
             type: string
             enum:
               - RESOURCE
+              - MODULE
         - name: TypeName
           in: query
           required: true
           description: '<p>The name of the type being registered.</p> <p>We recommend that type names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your resource type names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>'
           schema:
             type: string
-            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
             minLength: 10
-            maxLength: 196
+            maxLength: 204
         - name: SchemaHandlerPackage
           in: query
           required: true
@@ -5649,15 +5663,16 @@ paths:
             type: string
             enum:
               - RESOURCE
+              - MODULE
         - name: TypeName
           in: query
           required: false
           description: '<p>The name of the type.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>'
           schema:
             type: string
-            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+            pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
             minLength: 10
-            maxLength: 196
+            maxLength: 204
         - name: VersionId
           in: query
           required: false
@@ -6241,7 +6256,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
                   - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization master account, even if the master account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
         - name: Regions
           in: query
           required: true
@@ -6553,7 +6568,7 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/OrganizationalUnitIdList'
                   - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization master account, even if the master account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+            description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
         - name: PermissionModel
           in: query
           required: false
@@ -7876,6 +7891,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ChangeSetId'
             - description: The change set ID of the nested change set.
+        ModuleInfo:
+          allOf:
+            - $ref: '#/components/schemas/ModuleInfo'
+            - description: 'Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.'
       description: The <code>ResourceChange</code> structure describes the resource and the action that AWS CloudFormation will perform on it if you execute this change set.
     Change:
       type: object
@@ -8286,7 +8305,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/OrganizationalUnitIdList'
             - description: The organization root ID or organizational unit (OU) IDs to which StackSets deploys.
-      description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization master account, even if the master account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
+      description: '<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p> <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>'
     StackSetOperationPreferences:
       type: object
       properties:
@@ -8518,11 +8537,12 @@ components:
       type: string
       enum:
         - RESOURCE
+        - MODULE
     TypeName:
       type: string
-      pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}'
+      pattern: '[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}'
       minLength: 10
-      maxLength: 196
+      maxLength: 204
     TypeVersionId:
       type: string
       pattern: '[A-Za-z0-9-]+'
@@ -8797,6 +8817,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackResourceDriftInformation'
             - description: 'Information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.'
+        ModuleInfo:
+          allOf:
+            - $ref: '#/components/schemas/ModuleInfo'
+            - description: 'Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.'
       description: Contains detailed information about the specified stack resource.
     PhysicalResourceId:
       type: string
@@ -9143,6 +9167,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: Time at which AWS CloudFormation performed drift detection on the stack resource.
+        ModuleInfo:
+          allOf:
+            - $ref: '#/components/schemas/ModuleInfo'
+            - description: 'Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.'
       description: '<p>Contains the drift information for a resource that has been checked for drift. This includes actual and expected property values for resources in which AWS CloudFormation has detected drift. Only resource properties explicitly defined in the stack template are checked for drift. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.</p> <p>Resources that do not currently support drift detection cannot be checked. For a list of resources that support drift detection, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html">Resources that Support Drift Detection</a>.</p> <p>Use <a>DetectStackResourceDrift</a> to detect drift on individual resources, or <a>DetectStackDrift</a> to detect drift on all resources in a given stack that support drift detection.</p>'
     StackSetNameOrId:
       type: string
@@ -9624,6 +9652,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DeprecatedStatus'
             - description: '<p>The deprecation status of the types that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The type is registered for use in CloudFormation operations.</p> </li> <li> <p> <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/RegistryType'
+            - description: The type of extension.
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -9636,6 +9668,22 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/TypeSummary'
+    LogicalIdHierarchy:
+      type: string
+    TypeHierarchy:
+      type: string
+    ModuleInfo:
+      type: object
+      properties:
+        TypeHierarchy:
+          allOf:
+            - $ref: '#/components/schemas/TypeHierarchy'
+            - description: '<p>A concantenated list of the the module type or types containing the resource. Module types are listed starting with the inner-most nested module, and separated by <code>/</code>.</p> <p>In the following example, the resource was created from a module of type <code>AWS::First::Example::MODULE</code>, that is nested inside a parent module of type <code>AWS::Second::Example::MODULE</code>.</p> <p> <code>AWS::First::Example::MODULE/AWS::Second::Example::MODULE</code> </p>'
+        LogicalIdHierarchy:
+          allOf:
+            - $ref: '#/components/schemas/LogicalIdHierarchy'
+            - description: '<p>A concantenated list of the logical IDs of the module or modules containing the resource. Modules are listed starting with the inner-most nested module, and separated by <code>/</code>.</p> <p>In the following example, the resource was created from a module, <code>moduleA</code>, that is nested inside a parent module, <code>moduleB</code>.</p> <p> <code>moduleA/moduleB</code> </p> <p>For more information, see <a href="AWSCloudFormation/latest/UserGuide/modules.html#module-ref-resources">Referencing resources in a module</a> in the <i>CloudFormation User Guide</i>.</p>'
+      description: '<p>Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.</p> <p>For more information on modules, see <a href="AWSCloudFormation/latest/UserGuide/modules.html">Using modules to encapsulate and reuse resource configurations</a> in the <i>CloudFormation User Guide</i>.</p>'
     NoEcho:
       type: boolean
     OperationStatus:
@@ -10402,6 +10450,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackResourceDriftInformation'
             - description: 'Information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.'
+        ModuleInfo:
+          allOf:
+            - $ref: '#/components/schemas/ModuleInfo'
+            - description: 'Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.'
       description: The StackResource data type.
     StackResourceDriftInformationSummary:
       type: object
@@ -10453,6 +10505,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackResourceDriftInformationSummary'
             - description: 'Information about whether the resource''s actual configuration differs, or has <i>drifted</i>, from its expected configuration, as defined in the stack template and any values specified as template parameters. For more information, see <a href="http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html">Detecting Unregulated Configuration Changes to Stacks and Resources</a>.'
+        ModuleInfo:
+          allOf:
+            - $ref: '#/components/schemas/ModuleInfo'
+            - description: 'Contains information about the module from which the resource was created, if the resource was created from a module included in the stack template.'
       description: Contains high-level information about the specified stack resource.
     StackSetARN:
       type: string

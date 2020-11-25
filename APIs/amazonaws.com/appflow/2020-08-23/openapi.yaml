@@ -200,6 +200,7 @@ paths:
                     - Amplitude
                     - Veeva
                     - EventBridge
+                    - Upsolver
                 connectionMode:
                   description: ' Indicates the connection mode and specifies whether it is public or private. Private flows use AWS PrivateLink to route data over AWS infrastructure without exposing it to the public internet. '
                   type: string
@@ -553,6 +554,7 @@ paths:
                     - Amplitude
                     - Veeva
                     - EventBridge
+                    - Upsolver
                 connectorProfileName:
                   description: ' The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. '
                   type: string
@@ -637,6 +639,7 @@ paths:
                     - Amplitude
                     - Veeva
                     - EventBridge
+                    - Upsolver
                 maxResults:
                   description: ' Specifies the maximum number of items that should be returned in the result set. The default for <code>maxResults</code> is 20 (for all paginated API operations). '
                   type: integer
@@ -907,6 +910,7 @@ paths:
                     - Amplitude
                     - Veeva
                     - EventBridge
+                    - Upsolver
                 entitiesPath:
                   description: ' This optional parameter is specific to connector implementation. Some connectors support multiple levels or categories of entities. You can find out the list of roots for such providers by sending a request without the <code>entitiesPath</code> parameter. If the connector supports entities at different roots, this initial request returns the list of roots. Otherwise, this request returns all entities supported by the provider. '
                   type: string
@@ -1699,6 +1703,7 @@ components:
         - Amplitude
         - Veeva
         - EventBridge
+        - Upsolver
     ConnectorProfileName:
       type: string
       pattern: '[\w/!@#+=.-]+'
@@ -2231,6 +2236,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EventBridgeMetadata'
             - description: ' The connector metadata specific to Amazon EventBridge. '
+        Upsolver:
+          allOf:
+            - $ref: '#/components/schemas/UpsolverMetadata'
+            - description: ' The connector metadata specific to Upsolver. '
       description: ' A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. '
     ConnectorConfiguration:
       type: object
@@ -2478,6 +2487,10 @@ components:
       type: object
       properties: {}
       description: ' The connector metadata specific to Amazon EventBridge. '
+    UpsolverMetadata:
+      type: object
+      properties: {}
+      description: ' The connector metadata specific to Upsolver. '
     RedirectUri:
       type: string
       pattern: \S+
@@ -3695,6 +3708,25 @@ components:
         errorHandlingConfig:
           $ref: '#/components/schemas/ErrorHandlingConfig'
       description: ' The properties that are applied when Amazon EventBridge is being used as a destination. '
+    UpsolverDestinationProperties:
+      type: object
+      required:
+        - bucketName
+        - s3OutputFormatConfig
+      properties:
+        bucketName:
+          allOf:
+            - $ref: '#/components/schemas/UpsolverBucketName'
+            - description: ' The Upsolver Amazon S3 bucket name in which Amazon AppFlow places the transferred data. '
+        bucketPrefix:
+          allOf:
+            - $ref: '#/components/schemas/BucketPrefix'
+            - description: ' The object key for the destination Upsolver Amazon S3 bucket in which Amazon AppFlow places the files. '
+        s3OutputFormatConfig:
+          allOf:
+            - $ref: '#/components/schemas/UpsolverS3OutputFormatConfig'
+            - description: ' The configuration that determines how data is formatted when Upsolver is used as the flow destination. '
+      description: ' The properties that are applied when Upsolver is used as a destination. '
     DestinationConnectorProperties:
       type: object
       properties:
@@ -3718,6 +3750,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/EventBridgeDestinationProperties'
             - description: ' The properties required to query Amazon EventBridge. '
+        Upsolver:
+          allOf:
+            - $ref: '#/components/schemas/UpsolverDestinationProperties'
+            - description: ' The properties required to query Upsolver. '
       description: ' This stores the information that is required to query a particular connector. '
     DestinationField:
       type: string
@@ -4191,7 +4227,7 @@ components:
         scheduleExpression:
           allOf:
             - $ref: '#/components/schemas/ScheduleExpression'
-            - description: ' The scheduling expression that determines when and how often the rule runs. '
+            - description: ' The scheduling expression that determines the rate at which the schedule will run, for example <code>rate(5minutes)</code>. '
         dataPullMode:
           allOf:
             - $ref: '#/components/schemas/DataPullMode'
@@ -4394,5 +4430,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/Tasks'
             - description: ' A list of tasks that Amazon AppFlow performs while transferring the data in the flow run. '
+    UpsolverBucketName:
+      type: string
+      pattern: ^(upsolver-appflow)\S*
+      minLength: 16
+      maxLength: 63
+    UpsolverS3OutputFormatConfig:
+      type: object
+      required:
+        - prefixConfig
+      properties:
+        fileType:
+          allOf:
+            - $ref: '#/components/schemas/FileType'
+            - description: ' Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3 bucket. '
+        prefixConfig:
+          $ref: '#/components/schemas/PrefixConfig'
+        aggregationConfig:
+          $ref: '#/components/schemas/AggregationConfig'
+      description: ' The configuration that determines how Amazon AppFlow formats the flow output data when Upsolver is used as the destination. '
 security:
   - hmac: []

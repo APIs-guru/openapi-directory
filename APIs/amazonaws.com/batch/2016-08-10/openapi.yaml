@@ -243,7 +243,8 @@ paths:
                     imageId:
                       allOf:
                         - $ref: '#/components/schemas/String'
-                        - description: The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
+                        - deprecated: true
+                          description: 'The Amazon Machine Image (AMI) ID used for instances launched in the compute environment. This parameter is overridden by the <code>imageIdOverride</code> member of the <code>Ec2Configuration</code> structure.This field is deprecated, use ec2Configuration[].imageIdOverride instead.'
                     subnets:
                       allOf:
                         - $ref: '#/components/schemas/StringList'
@@ -280,6 +281,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/LaunchTemplateSpecification'
                         - description: 'The launch template to use for your compute resources. Any other compute resource parameters that you specify in a <a>CreateComputeEnvironment</a> API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html">Launch Template Support</a> in the <i>AWS Batch User Guide</i>.'
+                    ec2Configuration:
+                      allOf:
+                        - $ref: '#/components/schemas/Ec2ConfigurationList'
+                        - description: Provides additional details used to selecting the AMI to use for instances in a compute environment.
                 serviceRole:
                   description: '<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN may contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN does not use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>'
                   type: string
@@ -1541,6 +1546,10 @@ components:
             - $ref: '#/components/schemas/String'
             - description: '<p>The version number of the launch template, <code>$Latest</code>, or <code>$Default</code>.</p> <p>If the value is <code>$Latest</code>, the latest version of the launch template is used. If the value is <code>$Default</code>, the default version of the launch template is used.</p> <p>Default: <code>$Default</code>.</p>'
       description: 'An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both.'
+    Ec2ConfigurationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Ec2Configuration'
     TagValue:
       type: string
       maxLength: 256
@@ -2102,7 +2111,8 @@ components:
         imageId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Machine Image (AMI) ID used for instances launched in the compute environment.
+            - deprecated: true
+              description: 'The Amazon Machine Image (AMI) ID used for instances launched in the compute environment. This parameter is overridden by the <code>imageIdOverride</code> member of the <code>Ec2Configuration</code> structure.This field is deprecated, use ec2Configuration[].imageIdOverride instead.'
         subnets:
           allOf:
             - $ref: '#/components/schemas/StringList'
@@ -2139,6 +2149,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LaunchTemplateSpecification'
             - description: 'The launch template to use for your compute resources. Any other compute resource parameters that you specify in a <a>CreateComputeEnvironment</a> API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html">Launch Template Support</a> in the <i>AWS Batch User Guide</i>.'
+        ec2Configuration:
+          allOf:
+            - $ref: '#/components/schemas/Ec2ConfigurationList'
+            - description: Provides additional details used to selecting the AMI to use for instances in a compute environment.
       description: An object representing an AWS Batch compute resource.
     ComputeEnvironmentDetail:
       type: object
@@ -2633,6 +2647,28 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Device'
+    ImageType:
+      type: string
+      minLength: 1
+      maxLength: 256
+    ImageIdOverride:
+      type: string
+      minLength: 1
+      maxLength: 256
+    Ec2Configuration:
+      type: object
+      required:
+        - imageType
+      properties:
+        imageType:
+          allOf:
+            - $ref: '#/components/schemas/ImageType'
+            - description: '<p>The image type to match with the instance type to pick an AMI. If the <code>imageIdOverride</code> parameter is not specified, then a recent <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html">Amazon ECS-optimized AMI</a> will be used.</p> <dl> <dt>ECS_AL2</dt> <dd> <p> <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami">Amazon Linux 2</a>− Default for all AWS Graviton-based instance families (for example, <code>C6g</code>, <code>M6g</code>, <code>R6g</code>, and <code>T4g</code>) and can be used for all non-GPU instance types.</p> </dd> <dt>ECS_AL2_NVIDIA</dt> <dd> <p> <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami">Amazon Linux 2 (GPU)</a>−Default for all GPU instance families (for example <code>P4</code> and <code>G4</code>) and can be used for all non-AWS Graviton-based instance types.</p> </dd> <dt>ECS_AL1</dt> <dd> <p> <a href="https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami">Amazon Linux</a>−Default for all non-GPU, non-AWS-Graviton instance families. Amazon Linux is reaching the end-of-life of standard support. For more information, see <a href="https://aws.amazon.com/amazon-linux-ami/">Amazon Linux AMI</a>.</p> </dd> </dl>'
+        imageIdOverride:
+          allOf:
+            - $ref: '#/components/schemas/ImageIdOverride'
+            - description: The AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the <code>imageId</code> set in the <code>computeResource</code> object.
+      description: 'Provides information used to select Amazon Machine Images (AMIs) for instances in the compute environment. If the <code>Ec2Configuration</code> is not specified, the default is <code>ECS_AL1</code>.'
     KeyValuePair:
       type: object
       properties:

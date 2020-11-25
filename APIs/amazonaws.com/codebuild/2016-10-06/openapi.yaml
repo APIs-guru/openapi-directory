@@ -906,6 +906,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=CodeBuild_20161006.GetReportGroupTrend:
+    post:
+      operationId: GetReportGroupTrend
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetReportGroupTrendOutput'
+        '480':
+          description: InvalidInputException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidInputException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetReportGroupTrendInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - CodeBuild_20161006.GetReportGroupTrend
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=CodeBuild_20161006.GetResourcePolicy:
     post:
       operationId: GetResourcePolicy
@@ -2791,6 +2836,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/TestCaseFilter'
             - description: ' A <code>TestCaseFilter</code> object used to filter the returned reports. '
+    GetReportGroupTrendOutput:
+      type: object
+      properties:
+        stats:
+          $ref: '#/components/schemas/ReportGroupTrendStats'
+        rawData:
+          $ref: '#/components/schemas/ReportGroupTrendRawDataList'
+    GetReportGroupTrendInput:
+      type: object
+      required:
+        - reportGroupArn
+        - trendField
+      title: GetReportGroupTrendInput
+      properties:
+        reportGroupArn:
+          $ref: '#/components/schemas/NonEmptyString'
+        numOfReports:
+          $ref: '#/components/schemas/PageSize'
+        trendField:
+          $ref: '#/components/schemas/ReportGroupTrendFieldType'
     GetResourcePolicyOutput:
       type: object
       properties:
@@ -5091,6 +5156,31 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/WebhookFilter'
+    ReportGroupTrendFieldType:
+      type: string
+      enum:
+        - PASS_RATE
+        - DURATION
+        - TOTAL
+        - LINE_COVERAGE
+        - LINES_COVERED
+        - LINES_MISSED
+        - BRANCH_COVERAGE
+        - BRANCHES_COVERED
+        - BRANCHES_MISSED
+    ReportGroupTrendStats:
+      type: object
+      properties:
+        average:
+          $ref: '#/components/schemas/String'
+        max:
+          $ref: '#/components/schemas/String'
+        min:
+          $ref: '#/components/schemas/String'
+    ReportGroupTrendRawDataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReportWithRawData'
     GitCloneDepth:
       type: integer
       minimum: 0
@@ -5397,6 +5487,13 @@ components:
       enum:
         - ACTIVE
         - DELETING
+    ReportWithRawData:
+      type: object
+      properties:
+        reportArn:
+          $ref: '#/components/schemas/NonEmptyString'
+        data:
+          $ref: '#/components/schemas/String'
     ReportPackagingType:
       type: string
       enum:

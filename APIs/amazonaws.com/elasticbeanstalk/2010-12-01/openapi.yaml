@@ -2688,6 +2688,8 @@ paths:
           description: The maximum number of items to return for a single request.
           schema:
             type: integer
+            minimum: 1
+            maximum: 100
         - name: Action
           in: query
           required: true
@@ -7532,8 +7534,10 @@ components:
     RefreshedAt:
       type: string
       format: date-time
-    Integer:
+    ManagedActionHistoryMaxItems:
       type: integer
+      minimum: 1
+      maximum: 100
     DescribeEnvironmentManagedActionHistoryRequest:
       type: object
       title: DescribeEnvironmentManagedActionHistoryRequest
@@ -7552,7 +7556,7 @@ components:
             - description: The pagination token returned by a previous request.
         MaxItems:
           allOf:
-            - $ref: '#/components/schemas/Integer'
+            - $ref: '#/components/schemas/ManagedActionHistoryMaxItems'
             - description: The maximum number of items to return for a single request.
       description: Request to list completed and failed managed actions.
     ManagedActionHistoryItems:
@@ -8145,6 +8149,8 @@ components:
       type: string
       minLength: 1
       maxLength: 255
+    Integer:
+      type: integer
     LaunchConfiguration:
       type: object
       properties:

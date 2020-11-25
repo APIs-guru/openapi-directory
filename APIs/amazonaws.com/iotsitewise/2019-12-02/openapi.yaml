@@ -1344,7 +1344,7 @@ paths:
   '/portals/{portalId}/presigned-url':
     get:
       operationId: CreatePresignedPortalUrl
-      description: Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains a session token that lets the IAM user access the portal.
+      description: Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains an authentication token that lets the IAM user access the portal.
       responses:
         '200':
           description: Success
@@ -1383,7 +1383,7 @@ paths:
         - name: sessionDurationSeconds
           in: query
           required: false
-          description: '<p>The duration (in seconds) for which the session at the URL is valid.</p> <p>Default: 900 seconds (15 minutes)</p>'
+          description: '<p>The duration (in seconds) for which the session at the URL is valid.</p> <p>Default: 43,200 seconds (12 hours)</p>'
           schema:
             type: integer
             minimum: 900
@@ -2957,6 +2957,105 @@ paths:
                   pattern: '\S{36,64}'
                   minLength: 36
                   maxLength: 64
+  /configuration/account/encryption:
+    get:
+      operationId: DescribeDefaultEncryptionConfiguration
+      description: 'Retrieves information about the default encryption configuration for the AWS account in the default or specified region. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html">Key management</a> in the <i>AWS IoT SiteWise User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDefaultEncryptionConfigurationResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: PutDefaultEncryptionConfiguration
+      description: 'Sets the default encryption configuration for the AWS account. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html">Key management</a> in the <i>AWS IoT SiteWise User Guide</i>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutDefaultEncryptionConfigurationResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '484':
+          description: ConflictingOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingOperationException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - encryptionType
+              properties:
+                encryptionType:
+                  description: The type of encryption used for the encryption configuration.
+                  type: string
+                  enum:
+                    - SITEWISE_DEFAULT_ENCRYPTION
+                    - KMS_BASED_ENCRYPTION
+                kmsKeyId:
+                  description: The Key ID of the customer managed customer master key (CMK) used for AWS KMS encryption. This is required if you use <code>KMS_BASED_ENCRYPTION</code>.
+                  type: string
+                  minLength: 1
+                  maxLength: 2048
   '/20200301/gateways/{gatewayId}/capability/{capabilityNamespace}':
     get:
       operationId: DescribeGatewayCapabilityConfiguration
@@ -4441,7 +4540,7 @@ components:
         presignedPortalUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: '<p>The pre-signed URL to the portal. The URL contains the portal ID and a session token that lets you access the portal. The URL has the following format.</p> <p> <code>https://&lt;portal-id&gt;.app.iotsitewise.aws/auth?token=&lt;encrypted-token&gt;</code> </p>'
+            - description: '<p>The pre-signed URL to the portal. The URL contains the portal ID and an authentication token that lets you access the portal. The URL has the following format.</p> <p> <code>https://&lt;portal-id&gt;.app.iotsitewise.aws/iam?token=&lt;encrypted-token&gt;</code> </p>'
     CreateProjectResponse:
       type: object
       required:
@@ -4696,6 +4795,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: 'The date the dashboard was last updated, in Unix epoch time.'
+    DescribeDefaultEncryptionConfigurationResponse:
+      type: object
+      required:
+        - encryptionType
+        - configurationStatus
+      properties:
+        encryptionType:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionType'
+            - description: The type of encryption used for the encryption configuration.
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The key ARN of the customer managed customer master key (CMK) used for AWS KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.
+        configurationStatus:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationStatus'
+            - description: 'The status of the account configuration. This contains the <code>ConfigurationState</code>. If there''s an error, it also contains the <code>ErrorDetails</code>.'
     DescribeGatewayResponse:
       type: object
       required:
@@ -5040,6 +5157,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your AWS IoT SiteWise resources</a> in the <i>AWS IoT SiteWise User Guide</i>.'
+    PutDefaultEncryptionConfigurationResponse:
+      type: object
+      required:
+        - encryptionType
+        - configurationStatus
+      properties:
+        encryptionType:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionType'
+            - description: The type of encryption used for the encryption configuration.
+        kmsKeyArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Key ARN of the AWS KMS CMK used for AWS KMS encryption if you use <code>KMS_BASED_ENCRYPTION</code>.
+        configurationStatus:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationStatus'
+            - description: 'The status of the account configuration. This contains the <code>ConfigurationState</code>. If there is an error, it also contains the <code>ErrorDetails</code>.'
     PutLoggingOptionsResponse:
       type: object
       properties: {}
@@ -5921,6 +6056,46 @@ components:
         - IN_SYNC
         - OUT_OF_SYNC
         - SYNC_FAILED
+    ErrorCode:
+      type: string
+      enum:
+        - VALIDATION_ERROR
+        - INTERNAL_FAILURE
+    ConfigurationErrorDetails:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          allOf:
+            - $ref: '#/components/schemas/ErrorCode'
+            - description: <p/>
+        message:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: <p/>
+      description: <p/>
+    ConfigurationState:
+      type: string
+      enum:
+        - ACTIVE
+        - UPDATE_IN_PROGRESS
+        - UPDATE_FAILED
+    ConfigurationStatus:
+      type: object
+      required:
+        - state
+      properties:
+        state:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationState'
+            - description: <p/>
+        error:
+          allOf:
+            - $ref: '#/components/schemas/ConfigurationErrorDetails'
+            - description: <p/>
+      description: <p/>
     TagMap:
       type: object
       minProperties: 1
@@ -6293,6 +6468,15 @@ components:
       type: object
       title: DescribeDashboardRequest
       properties: {}
+    DescribeDefaultEncryptionConfigurationRequest:
+      type: object
+      title: DescribeDefaultEncryptionConfigurationRequest
+      properties: {}
+    EncryptionType:
+      type: string
+      enum:
+        - SITEWISE_DEFAULT_ENCRYPTION
+        - KMS_BASED_ENCRYPTION
     DescribeGatewayCapabilityConfigurationRequest:
       type: object
       title: DescribeGatewayCapabilityConfigurationRequest
@@ -6366,11 +6550,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
-    ErrorCode:
-      type: string
-      enum:
-        - VALIDATION_ERROR
-        - INTERNAL_FAILURE
     Expression:
       type: string
       minLength: 1
@@ -6524,6 +6703,10 @@ components:
       pattern: 1w|1d|1h|15m|5m|1m
       minLength: 2
       maxLength: 3
+    KmsKeyId:
+      type: string
+      minLength: 1
+      maxLength: 2048
     ResourceType:
       type: string
       enum:
@@ -6766,6 +6949,20 @@ components:
       pattern: '[^\u0000-\u001F\u007F]+'
       minLength: 1
       maxLength: 1024
+    PutDefaultEncryptionConfigurationRequest:
+      type: object
+      required:
+        - encryptionType
+      title: PutDefaultEncryptionConfigurationRequest
+      properties:
+        encryptionType:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionType'
+            - description: The type of encryption used for the encryption configuration.
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: The Key ID of the customer managed customer master key (CMK) used for AWS KMS encryption. This is required if you use <code>KMS_BASED_ENCRYPTION</code>.
     PutLoggingOptionsRequest:
       type: object
       required:

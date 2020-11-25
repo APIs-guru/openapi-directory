@@ -1080,6 +1080,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSStepFunctions.StartSyncExecution:
+    post:
+      operationId: StartSyncExecution
+      description: Starts a Synchronous Express state machine execution.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartSyncExecutionOutput'
+        '480':
+          description: InvalidArn
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidArn'
+        '481':
+          description: InvalidExecutionInput
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidExecutionInput'
+        '482':
+          description: InvalidName
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidName'
+        '483':
+          description: StateMachineDoesNotExist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDoesNotExist'
+        '484':
+          description: StateMachineDeleting
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineDeleting'
+        '485':
+          description: StateMachineTypeNotSupported
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StateMachineTypeNotSupported'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartSyncExecutionInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSStepFunctions.StartSyncExecution
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSStepFunctions.StopExecution:
     post:
       operationId: StopExecution
@@ -1504,7 +1573,7 @@ components:
         executionArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) that id entifies the execution.
+            - description: The Amazon Resource Name (ARN) that identifies the execution.
         stateMachineArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -1540,7 +1609,7 @@ components:
         traceHeader:
           allOf:
             - $ref: '#/components/schemas/TraceHeader'
-            - description: The AWS X-Ray trace header which was passed to the execution.
+            - description: The AWS X-Ray trace header that was passed to the execution.
     DescribeExecutionInput:
       type: object
       required:
@@ -1883,7 +1952,7 @@ components:
         executionArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) that id entifies the execution.
+            - description: The Amazon Resource Name (ARN) that identifies the execution.
         startDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -1913,6 +1982,88 @@ components:
     ExecutionLimitExceeded: {}
     ExecutionAlreadyExists: {}
     InvalidExecutionInput: {}
+    StartSyncExecutionOutput:
+      type: object
+      required:
+        - executionArn
+        - startDate
+        - stopDate
+        - status
+      properties:
+        executionArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that identifies the execution.
+        stateMachineArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) that identifies the state machine.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the execution.
+        startDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The date the execution is started.
+        stopDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'If the execution has already ended, the date the execution stopped.'
+        status:
+          allOf:
+            - $ref: '#/components/schemas/SyncExecutionStatus'
+            - description: The current status of the execution.
+        error:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveError'
+            - description: The error code of the failure.
+        cause:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveCause'
+            - description: A more detailed explanation of the cause of the failure.
+        input:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: 'The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.'
+        inputDetails:
+          $ref: '#/components/schemas/CloudWatchEventsExecutionDataDetails'
+        output:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: '<p>The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>'
+        outputDetails:
+          $ref: '#/components/schemas/CloudWatchEventsExecutionDataDetails'
+        traceHeader:
+          allOf:
+            - $ref: '#/components/schemas/TraceHeader'
+            - description: The AWS X-Ray trace header that was passed to the execution.
+        billingDetails:
+          allOf:
+            - $ref: '#/components/schemas/BillingDetails'
+            - description: 'An object that describes workflow billing details, including billed duration and memory use.'
+    StartSyncExecutionInput:
+      type: object
+      required:
+        - stateMachineArn
+      title: StartSyncExecutionInput
+      properties:
+        stateMachineArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the state machine to execute.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the execution.
+        input:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveData'
+            - description: '<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>"input": "{\"first_name\" : \"test\"}"</code> </p> <note> <p>If you don''t include any JSON input data, you still must include the two braces, for example: <code>"input": "{}"</code> </p> </note> <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>'
+        traceHeader:
+          allOf:
+            - $ref: '#/components/schemas/TraceHeader'
+            - description: Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
     StopExecutionOutput:
       type: object
       required:
@@ -2156,14 +2307,32 @@ components:
             - $ref: '#/components/schemas/SensitiveCause'
             - description: A more detailed explanation of the cause of the timeout.
       description: Contains details about an activity timeout that occurred during an execution.
-    included:
+    BilledDuration:
+      type: integer
+      minimum: 0
+    BilledMemoryUsed:
+      type: integer
+      minimum: 0
+    BillingDetails:
+      type: object
+      properties:
+        billedMemoryUsedInMB:
+          allOf:
+            - $ref: '#/components/schemas/BilledMemoryUsed'
+            - description: 'Billed memory consumption of your workflow, in MB.'
+        billedDurationInMilliseconds:
+          allOf:
+            - $ref: '#/components/schemas/BilledDuration'
+            - description: 'Billed duration of your workflow, in milliseconds.'
+      description: An object that describes workflow billing details.
+    includedDetails:
       type: boolean
     CloudWatchEventsExecutionDataDetails:
       type: object
       properties:
         included:
           allOf:
-            - $ref: '#/components/schemas/included'
+            - $ref: '#/components/schemas/includedDetails'
             - description: 'Indicates whether input or output was included in the response. Always <code>true</code> for API calls. '
       description: Provides details about execution input or output.
     CloudWatchLogsLogGroup:
@@ -2275,7 +2444,7 @@ components:
         executionArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
-            - description: The Amazon Resource Name (ARN) that id entifies the execution.
+            - description: The Amazon Resource Name (ARN) that identifies the execution.
         stateMachineArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -2902,6 +3071,12 @@ components:
     UnsignedInteger:
       type: integer
       minimum: 0
+    SyncExecutionStatus:
+      type: string
+      enum:
+        - SUCCEEDED
+        - FAILED
+        - TIMED_OUT
     StateMachineListItem:
       type: object
       required:
