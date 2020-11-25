@@ -105,6 +105,9 @@ async function buildApiList(specs) {
         swagger.info['x-logo'].url = cachedLogo[logoUrl];
     }
 
+    if (swagger.info['x-preferred'] === null) {
+      delete swagger.info['x-preferred']; // hack for yaml behaviour
+    }
     _.defaults(swagger.info, {'x-preferred': true});
 
     addSwagger(apiList, swagger, filename);
