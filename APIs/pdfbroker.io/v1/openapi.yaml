@@ -332,6 +332,29 @@ paths:
         - Pdf
   /api/pdf/wkhtmltopdf:
     post:
+      requestBody:
+        content:
+          application/json:
+            example: "{\r
+
+              \  \"url\": \"https://www.pdfbroker.io\",\r
+
+              \  \"htmlBase64String\": null,\r
+
+              \  \"wkHtmlToPdfArguments\": {\r
+
+              \    \"grayscale\": \"\",\r
+
+              \    \"viewport-size\": \"1280x1024\"\r
+
+              \  },\r
+
+              \  \"resources\": null\r
+
+              }"
+            schema:
+              $ref: "#/components/schemas/WkHtmlToPdfRequestDto"
+        description: WkHtmlToPdf Request. Generate pdf from html, either from url or base64 encoded html string
       responses:
         "200":
           content:
@@ -763,8 +786,16 @@ components:
       additionalProperties: false
       description: WkHtmlToPdfRequestDto is the data transfer object for generating a pdf using wkhtmltopdf;
       properties:
+        htmlBase64String:
+          description: Base64 encoded string with html. If property Url is set, it will be used, not HtmlBase64String.
+          type: string
+        resources:
+          additionalProperties:
+            type: string
+          description: This is a set of key-value pairs of digital resources like images that is referenced in the HtmlBase64String document. It uses the filename including relative path as key and the data is provided as a Base64 encoded string.
+          type: object
         url:
-          description: The url to generate pdf from
+          description: The url to generate pdf from. Url has precedence over HtmlBase64String value if both are set.
           type: string
         wkHtmlToPdfArguments:
           additionalProperties:

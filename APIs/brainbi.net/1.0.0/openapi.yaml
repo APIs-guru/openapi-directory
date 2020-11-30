@@ -26,6 +26,7 @@ tags:
   - name: Customers
   - name: Orders
   - name: OrderLines
+  - name: SEO
 paths:
   /api/customers:
     get:
@@ -197,3 +198,19 @@ paths:
       summary: Rule Data Latest
       tags:
         - Pricing Rules
+  /api/seo/ranking/latest:
+    get:
+      description: This resource lists all pricing rules that are currently saved in you account.
+      operationId: seoLatestRankings
+      parameters:
+        - in: query
+          name: ""
+          schema:
+            example: ""
+            type: string
+      responses:
+        "200":
+          description: ""
+      summary: SEO Latest Rankings
+      tags:
+        - SEO

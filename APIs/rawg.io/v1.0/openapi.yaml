@@ -875,7 +875,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/GameSingle"
           description: ""
-      summary: Get a list of visually similar games.
+      summary: Get a list of visually similar games, available only for business and enterprise API users.
       tags:
         - games
     parameters:
@@ -903,7 +903,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Twitch"
           description: ""
-      summary: Get streams on Twitch associated with the game .
+      summary: Get streams on Twitch associated with the game, available only for business and enterprise API users.
       tags:
         - games
     parameters:
@@ -931,7 +931,7 @@ paths:
               schema:
                 $ref: "#/components/schemas/Youtube"
           description: ""
-      summary: Get videos from YouTube associated with the game.
+      summary: Get videos from YouTube associated with the game, available only for business and enterprise API users.
       tags:
         - games
     parameters:

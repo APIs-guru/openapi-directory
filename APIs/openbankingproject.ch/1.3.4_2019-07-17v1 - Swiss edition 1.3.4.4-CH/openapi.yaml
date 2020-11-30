@@ -1782,11 +1782,9 @@ paths:
             - ***sepa-credit-transfers***
             - ***cross-border-credit-transfers***
           - Payment products with payment information in *SIX pain.001* XML format:
-            - ***domestic-swiss-credit-transfers-isr***
-            - ***domestic-swiss-credit-transfers***
-            - ***domestic-swiss-foreign-credit-transfers***
-            - ***sepa-credit-transfers***
-            - ***cross-border-credit-transfers***
+            - ***pain.001-sepa-credit-transfers***
+            - ***pain.001-cross-border-credit-transfers***
+            - ***pain.001-swiss-six-credit-transfers***
 
         Furthermore the request body depends on the **payment-service**
           * ***payments***: A single payment initiation request.

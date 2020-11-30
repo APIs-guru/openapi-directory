@@ -1785,9 +1785,35 @@ paths:
           in: query
           name: type
           type: string
-        - description: page number of requested issues
+        - description: Only show notifications updated after the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: since
+          type: string
+        - description: Only show notifications updated before the given time. This is a timestamp in RFC 3339 format
+          format: date-time
+          in: query
+          name: before
+          type: string
+        - description: filter (issues / pulls) assigned to you, default is false
+          in: query
+          name: assigned
+          type: boolean
+        - description: filter (issues / pulls) created by you, default is false
+          in: query
+          name: created
+          type: boolean
+        - description: filter (issues / pulls) mentioning you, default is false
+          in: query
+          name: mentioned
+          type: boolean
+        - description: page number of results to return (1-based)
           in: query
           name: page
+          type: integer
+        - description: page size of results
+          in: query
+          name: limit
           type: integer
       produces:
         - application/json
@@ -8130,6 +8156,9 @@ definitions:
           type: string
         type: array
         x-go-name: ApprovalsWhitelistUsernames
+      block_on_official_review_requests:
+        type: boolean
+        x-go-name: BlockOnOfficialReviewRequests
       block_on_outdated_branch:
         type: boolean
         x-go-name: BlockOnOutdatedBranch
@@ -8380,6 +8409,9 @@ definitions:
           type: string
         type: array
         x-go-name: ApprovalsWhitelistUsernames
+      block_on_official_review_requests:
+        type: boolean
+        x-go-name: BlockOnOfficialReviewRequests
       block_on_outdated_branch:
         type: boolean
         x-go-name: BlockOnOutdatedBranch
@@ -9101,6 +9133,9 @@ definitions:
           type: string
         type: array
         x-go-name: ApprovalsWhitelistUsernames
+      block_on_official_review_requests:
+        type: boolean
+        x-go-name: BlockOnOfficialReviewRequests
       block_on_outdated_branch:
         type: boolean
         x-go-name: BlockOnOutdatedBranch

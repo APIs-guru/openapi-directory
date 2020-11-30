@@ -6153,10 +6153,6 @@ components:
           description: Details of the customer creating a checkout
           nullable: false
           properties:
-            emailAddress:
-              description: Customer's email address
-              nullable: true
-              type: string
             firstName:
               description: Customer's first name
               nullable: true
@@ -6259,27 +6255,17 @@ components:
           description: The restaurant associated with the checkout
           nullable: false
           properties:
-            displayName:
-              description: Display name for the restaurant
+            availabilityId:
+              description: Unique identifier for the availability being ordered from (this is the Menu ID or Menu Group ID).
               nullable: false
               type: string
             id:
               description: Unique identifier for a restaurant
               nullable: false
               type: string
-            menuId:
-              description: Unique identifier for the menu being ordered from
-              nullable: false
-              type: string
-            seoName:
-              description: Unique seo name for the restaurant
-              nullable: false
-              type: string
           required:
             - id
-            - seoName
-            - displayName
-            - menuId
+            - availabilityId
           type: object
         serviceType:
           description: The dispatch method for the order
@@ -6302,8 +6288,8 @@ components:
         mapping:
           ADDRESS_LINES_REQUIRED: "#/components/schemas/CheckoutIssue_AddressLinesRequired"
           AGE_VERIFICATION_FAILED: "#/components/schemas/CheckoutIssue_AgeVerificationFailed"
+          AVAILABILITY_UNAVAILABLE: "#/components/schemas/CheckoutIssue_AvailabilityUnavailable"
           DATE_OF_BIRTH_REQUIRED: "#/components/schemas/CheckoutIssue_DateOfBirthRequired"
-          EMAIL_ADDRESS_REQUIRED: "#/components/schemas/CheckoutIssue_EmailAddressRequired"
           FIRST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_FirstNameRequired"
           FULFILMENT_TIME_REQUIRED: "#/components/schemas/CheckoutIssue_FulfilmentTimeRequired"
           FULFILMENT_TIME_UNAVAILABLE: "#/components/schemas/CheckoutIssue_FulfilmentTimeUnavailable"
@@ -6311,7 +6297,6 @@ components:
           ITEMS_UNORDERABLE: "#/components/schemas/CheckoutIssue_ItemsUnorderable"
           LAST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_LastNameRequired"
           LOCATION_UNDELIVERABLE: "#/components/schemas/CheckoutIssue_LocationUndeliverable"
-          MENU_UNAVAILABLE: "#/components/schemas/CheckoutIssue_MenuUnavailable"
           MINIMUM_ORDER_VALUE_NOT_MET: "#/components/schemas/CheckoutIssue_MinumumOrderValueNotMet"
           PHONE_NUMBER_REQUIRED: "#/components/schemas/CheckoutIssue_PhoneNumberRequired"
           POSTAL_CODE_REQUIRED: "#/components/schemas/CheckoutIssue_PostalCodeRequired"
@@ -6322,7 +6307,7 @@ components:
           description: The issue code
           enum:
             - RESTAURANT_UNAVAILABLE
-            - MENU_UNAVAILABLE
+            - AVAILABILITY_UNAVAILABLE
             - ITEMS_UNORDERABLE
             - MINIMUM_ORDER_VALUE_NOT_MET
             - FULFILMENT_TIME_UNAVAILABLE
@@ -6332,7 +6317,6 @@ components:
             - LAST_NAME_REQUIRED
             - PHONE_NUMBER_REQUIRED
             - DATE_OF_BIRTH_REQUIRED
-            - EMAIL_ADDRESS_REQUIRED
             - FULFILMENT_TIME_REQUIRED
             - ADDRESS_LINES_REQUIRED
             - POSTAL_CODE_REQUIRED
@@ -6354,17 +6338,17 @@ components:
         - additionalProperties: false
           description: The order cannot proceed because the customer has failed the required age verification check.
           type: object
+    CheckoutIssue_AvailabilityUnavailable:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutIssue"
+        - additionalProperties: false
+          description: The availability being ordered from is no longer available. The restaurant may still be available to order from.
+          type: object
     CheckoutIssue_DateOfBirthRequired:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
           description: Indicates that the customer's date of birth is required to fulfil an order.
-          type: object
-    CheckoutIssue_EmailAddressRequired:
-      allOf:
-        - $ref: "#/components/schemas/CheckoutIssue"
-        - additionalProperties: false
-          description: Indicates that the customer's email address is required to fulfil an order.
           type: object
     CheckoutIssue_FirstNameRequired:
       allOf:
@@ -6408,12 +6392,6 @@ components:
         - additionalProperties: false
           description: The restaurant is unable to deliver to this location.
           type: object
-    CheckoutIssue_MenuUnavailable:
-      allOf:
-        - $ref: "#/components/schemas/CheckoutIssue"
-        - additionalProperties: false
-          description: The menu being ordered from is no longer available. The restaurant may still be available to order from.
-          type: object
     CheckoutIssue_MinumumOrderValueNotMet:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
@@ -6453,18 +6431,6 @@ components:
           type: object
     CheckoutRequest:
       description: Details needed to make a payment.
-      example:
-        action:
-          data:
-            braintreeDeviceData: someescapedjson
-            deviceId: somedeviceid
-            nonce: acbd2334
-            payerEmail: someemail@paypal.com
-            payerId: somepaypalpayerid12345
-          type: BraintreePayPal
-        paymentOptionId: abdse2355
-        paymentOptionType: PayPal
-        voucherCode: FOOTBALL10
       properties:
         action:
           $ref: "#/components/schemas/CheckoutAction"
@@ -6535,7 +6501,6 @@ components:
                       - LAST_NAME_INVALID
                       - PHONE_NUMBER_INVALID
                       - DATE_OF_BIRTH_INVALID
-                      - EMAIL_ADDRESS_INVALID
                       - FULFILMENT_TIME_INVALID
                       - ADDRESS_LINES_INVALID
                       - POSTAL_CODE_INVALID
@@ -6562,10 +6527,6 @@ components:
           properties:
             dateOfBirth:
               description: Customer's date of birth (ISO 8601 Date)
-              nullable: true
-              type: string
-            emailAddress:
-              description: Customer's email address for guest login
               nullable: true
               type: string
             firstName:
@@ -7063,13 +7024,11 @@ components:
         type: otac
       properties:
         token:
-          description: The access code or token
+          description: The One Time Access Code (OTAC)
           type: string
         type:
           description: >
-            The type of access code or token. 
-
-            * otac - One Time Access Code
+            The type of token. At the moment, this will only ever be a One Time Access Code (OTAC)
           enum:
             - otac
           type: string
@@ -12374,6 +12333,77 @@ components:
         name:
           description: A name for the modifier group, usually phrased as a question, e.g. Would you like any extras?
           type: string
+      type: object
+    MenuRecommendationsRequest:
+      description: Describes a request for dish recommendations for a particular restaurant menu.
+      properties:
+        orderRequestDetails:
+          description: Defines the time and service type for which the order is requested.
+          properties:
+            dayOfWeek:
+              description: The day of the week that the order is placed for.
+              enum:
+                - sunday
+                - monday
+                - tuesday
+                - wednesday
+                - thursday
+                - friday
+                - saturday
+              type: string
+            orderedForTime:
+              description: >
+                The time, local to restaurant, in ISO 8601 format, that the order is requested for. If the ordered for time is not known at the point of this request then the time should be the current local time.
+              format: time
+              type: string
+            serviceType:
+              description: The service type, "collection" or "delivery".
+              enum:
+                - collection
+                - delivery
+              type: string
+          type: object
+        restaurantId:
+          description: The id of the restaurant that the recommendations are for.
+          type: string
+      required:
+        - restaurantId
+        - orderRequestDetails
+      type: object
+    MenuRecommendationsResponse:
+      description: Contains menu dish recommendations.
+      properties:
+        themes:
+          description: List of the themes of the recommendations, i.e. personal favourites, most popular, etc.
+          items:
+            properties:
+              id:
+                description: Unique identifier for the theme.
+                type: string
+              recommendations:
+                description: List of dish recommendations for the theme.
+                items:
+                  properties:
+                    confidence:
+                      description: Recommendation confidence score.
+                      format: double
+                      type: number
+                    productId:
+                      description: ID of a product/dish being recommended.
+                      type: string
+                    type:
+                      description: Describes the type of recommendation, i.e. popular, healthy.
+                      type: string
+                  type: object
+                maxItems: 20
+                minItems: 0
+                type: array
+            type: object
+          maxItems: 10
+          minItems: 0
+          type: array
+      required:
+        - themes
       type: object
     MissingItem:
       additionalProperties: false
@@ -18353,9 +18383,6 @@ components:
         applicationState:
           $ref: "#/components/schemas/applicationState"
           description: The current application state i.e. Open, Approved etc.
-        state:
-          $ref: "#/components/schemas/state"
-          description: The current application state i.e. Open, Approved etc.
       type: object
     assessmentStatusTypes:
       description: Denotes the type of segmentation status that restaurant can have
@@ -19717,9 +19744,6 @@ components:
       type: string
     documentReviews:
       properties:
-        documentState:
-          $ref: "#/components/schemas/documentState"
-          description: An enum describing the current status of the document
         rejectionReasons:
           description: An array of rejection reasons
           items:
@@ -19733,28 +19757,8 @@ components:
           maxItems: 10
           minItems: 0
           type: array
-        state:
-          $ref: "#/components/schemas/documentStateDeprecated"
-          deprecated: true
-          description: An enum describing the current status of the document
       type: object
     documentState:
-      description: The state of a document
-      enum:
-        - NotAvailable
-        - Received
-        - ReadyForInitialReview
-        - InitialToBeRejected
-        - InitialNoIssuesFound
-        - InitialReviewRejected
-        - ReadyForFinalReview
-        - FinalReviewNoIssuesFound
-        - FinalReviewToBeRejected
-        - FinalReviewRejected
-        - Approved
-      type: string
-    documentStateDeprecated:
-      deprecated: true
       description: The state of a document
       enum:
         - NotAvailable
@@ -19773,11 +19777,6 @@ components:
       properties:
         documentState:
           $ref: "#/components/schemas/documentState"
-          description: The new state of the document
-          type: string
-        state:
-          $ref: "#/components/schemas/documentStateDeprecated"
-          deprecated: true
           description: The new state of the document
           type: string
       type: object
@@ -21125,9 +21124,6 @@ components:
               description: The phone number of the restaurant owner
               type: string
           type: object
-        state:
-          $ref: "#/components/schemas/state"
-          description: The current application state of the restaurant
       type: object
     restaurant-details:
       properties:
@@ -21538,18 +21534,6 @@ components:
         OrderId:
           type: string
       type: object
-    state:
-      deprecated: true
-      description: The application state i.e. Open, Approved etc.
-      enum:
-        - OpenApplication
-        - ManualInterventionRequired
-        - ReadyForInitialReview
-        - InitialReviewRejected
-        - ReadyForFinalReview
-        - FinalReviewRejected
-        - Approved
-      type: string
     supportRequest:
       properties:
         body:
@@ -21651,6 +21635,8 @@ x-tagGroups:
       - Experiments
       - Vouchers
       - Promoted Placement
+      - Menu
+      - Recommendations
   - name: Manage Order Journey
     tags:
       - Order Acceptance API

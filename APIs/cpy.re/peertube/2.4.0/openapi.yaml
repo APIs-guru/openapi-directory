@@ -107,6 +107,9 @@ tags:
       Operations related to your subscriptions to video channels, their new videos, and how to keep up to date with their latest publications!
     name: My Subscriptions
   - description: >
+      Operations related to your watch history. 
+    name: My History
+  - description: >
       Notifications following new videos, follows or reports. They allow you to keep track of the interactions and overall important information that concerns you. You MAY set per-notification type delivery preference, to receive the info either by mail, by in-browser notification or both.
     name: My Notifications
   - description: >
@@ -1636,6 +1639,43 @@ paths:
       summary: Update my user avatar
       tags:
         - My User
+  /users/me/history/videos:
+    get:
+      parameters:
+        - $ref: "#/components/parameters/start"
+        - $ref: "#/components/parameters/count"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VideoListResponse"
+          description: successful operation
+      security:
+        - OAuth2: []
+      summary: List watched videos history
+      tags:
+        - My History
+  /users/me/history/videos/remove:
+    post:
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                beforeDate:
+                  description: history before this date will be deleted
+                  format: date-time
+                  type: string
+              type: object
+      responses:
+        "204":
+          description: successful operation
+      security:
+        - OAuth2: []
+      summary: Clear video history
+      tags:
+        - My History
   /users/me/notification-settings:
     put:
       requestBody:
@@ -5553,6 +5593,7 @@ x-tagGroups:
       - My User
       - My Subscriptions
       - My Notifications
+      - My History
   - name: Videos
     tags:
       - Video

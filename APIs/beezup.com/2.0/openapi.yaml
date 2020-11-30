@@ -6257,6 +6257,7 @@ paths:
       tags:
         - Marketplaces - Orders - Subscriptions - Subscriptions
     post:
+      description: Please take a look at this sequence diagram to understand the subscription process to follow [here](https://www.websequencediagrams.com/files/render?link=SBYbeIc8NGshk6ooCbmjoBLIMl4fIGO1xjJbPBQAglBo0n6BwEReh7NXQiPSjOTX)
       operationId: CreateSubscription
       parameters:
         - $ref: "#/components/parameters/subscriptionIdPathParameter"
@@ -17910,7 +17911,7 @@ components:
       properties:
         activate:
           $ref: "#/components/schemas/link3"
-        deacivate:
+        deactivate:
           $ref: "#/components/schemas/link3"
         delete:
           $ref: "#/components/schemas/link3"

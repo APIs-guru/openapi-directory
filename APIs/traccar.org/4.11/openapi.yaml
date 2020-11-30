@@ -259,7 +259,7 @@ paths:
       x-codegen-request-body-name: body
   /commands:
     get:
-      description: Without params, it returns a list of Drivers the user has access to
+      description: Without params, it returns a list of Saved Commands the user has access to
       parameters:
         - description: Can only be used by admins or managers to fetch all entities
           in: query

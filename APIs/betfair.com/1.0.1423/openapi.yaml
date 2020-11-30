@@ -383,6 +383,10 @@ components:
           description: BSP Liability - the BSP liability of the order (null if the order is not a BSP order)
           format: double
           type: number
+        cd:
+          description: Cancelled Date - the date the order was cancelled (null if the order is not cancelled)
+          format: int64
+          type: integer
         id:
           description: Bet Id - the id of the order
           type: string

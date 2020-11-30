@@ -2091,6 +2091,62 @@ paths:
       summary: Generate a user jwt token
       tags:
         - Authentication
+  /auth/renew:
+    post:
+      description: ""
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                client_id:
+                  description: ID of the client
+                  type: string
+                client_secret:
+                  description: secret of the client
+                  type: string
+                grant_type:
+                  description: default is "client_credentials"
+                  type: string
+                id_user:
+                  description: id of the user to generate a token for
+                  type: integer
+                revoke_previous:
+                  description: if true, all other permanent tokens for the user will be deleted
+                  type: boolean
+              required:
+                - client_id
+                - client_secret
+                - id_user
+              type: object
+      responses:
+        "200":
+          content:
+            access_token:
+              examples:
+                response:
+                  value: A37mwXNCblbWX0LrvpRq60sZ6NBft/t5tsHhADie56/TJscwSi8NSjVmUIf6iLqpDwPe6lyFXM3z7E/zKf9eRHUWzx4QryEgmCtwZ0XgQb9SE+HwaenwqwTuv1gHZD+n
+            application/json:
+              schema:
+                properties:
+                  access_token:
+                    description: the access token transformed from the temporary one
+                    type: string
+                  token_type:
+                    description: the access token type
+                    type: string
+                required:
+                  - access_token
+                  - token_type
+                type: object
+            token_type:
+              examples:
+                response:
+                  value: Bearer
+          description: ""
+      summary: Get a new access token given an user id and client credentials
+      tags:
+        - Authentication
   /auth/token:
     delete:
       description: This endpoint removes the token in use.<br><br>
@@ -8202,8 +8258,8 @@ components:
         coming: 0
         company_name: ""
         currency: ""
-        deleted: 2020-11-23 15:54:16.810451
-        disabled: 2020-11-23 15:54:16.810497
+        deleted: 2020-11-27 15:49:03.412562
+        disabled: 2020-11-27 15:49:03.412605
         display: true
         error: ""
         iban: ""
@@ -8213,10 +8269,10 @@ components:
         id_source: 0
         id_type: 0
         id_user: 0
-        last_update: 2020-11-23 15:54:16.810406
+        last_update: 2020-11-27 15:49:03.412514
         name: ""
         number: ""
-        opening_date: 2020-11-23
+        opening_date: 2020-11-27
         original_name: ""
         ownership: ""
         usage: ""
@@ -8524,7 +8580,7 @@ components:
       type: object
     Certificate:
       example:
-        created: 2020-11-23 15:54:16.733723
+        created: 2020-11-27 15:49:03.338252
         id: 0
         id_private_key_file: 0
         id_public_key_file: 0
@@ -8622,20 +8678,20 @@ components:
     Connection:
       example:
         active: true
-        created: <function datetime.now at 0x7f86d2cfb950>
+        created: <function datetime.now at 0x7f7039063bf8>
         id: 0
         id_connector: 0
         id_user: 0
-        last_push: 2020-11-23 15:54:16.705540
-        last_update: 2020-11-23 15:54:16.705373
-        next_try: 2020-11-23 15:54:16.705597
+        last_push: 2020-11-27 15:49:03.313732
+        last_update: 2020-11-27 15:49:03.313580
+        next_try: 2020-11-27 15:49:03.313786
       properties:
         active:
           default: true
           description: This connection is active and will be automatically synced
           type: boolean
         created:
-          default: <function datetime.now at 0x7f86d2cfb950>
+          default: <function datetime.now at 0x7f7039063bf8>
           description: Creation date
           format: date-time
           type: string
@@ -8677,9 +8733,9 @@ components:
         id_user: 0
         login: ""
         nb_accounts: 0
-        next_try: 2020-11-23 15:54:16.814641
+        next_try: 2020-11-27 15:49:03.416940
         session_folder_id: ""
-        start: 2020-11-23 15:54:16.815359
+        start: 2020-11-27 15:49:03.417622
         statut: 0
         timestamp: CURRENT_TIMESTAMP
         worker: ""
@@ -8746,16 +8802,16 @@ components:
       type: object
     ConnectionSource:
       example:
-        access_expire: 2020-11-23 15:54:16.791955
-        created: <function datetime.now at 0x7f86d2ca4400>
-        disabled: 2020-11-23 15:54:16.791767
-        expire: 2020-11-23 15:54:16.791999
+        access_expire: 2020-11-27 15:49:03.394190
+        created: <function datetime.now at 0x7f703900e6a8>
+        disabled: 2020-11-27 15:49:03.394037
+        expire: 2020-11-27 15:49:03.394233
         id: 0
         id_connection: 0
         id_connector_source: 0
-        last_update: 2020-11-23 15:54:16.791725
+        last_update: 2020-11-27 15:49:03.393992
         name: ""
-        next_try: 2020-11-23 15:54:16.792130
+        next_try: 2020-11-27 15:49:03.394374
         state: ""
       properties:
         access_expire:
@@ -8763,7 +8819,7 @@ components:
           format: date-time
           type: string
         created:
-          default: <function datetime.now at 0x7f86d2ca4400>
+          default: <function datetime.now at 0x7f703900e6a8>
           description: Creation date of the connection source
           format: date-time
           type: string
@@ -8918,7 +8974,7 @@ components:
     ConnectorSource:
       example:
         auth_mechanism: ""
-        disabled: 2020-11-23 15:54:16.706494
+        disabled: 2020-11-27 15:49:03.314678
         fallback: ""
         id: 0
         id_connector: 0
@@ -8998,7 +9054,7 @@ components:
     Currency:
       example:
         crypto: false
-        datetime: 2020-11-23 15:54:16.711777
+        datetime: 2020-11-27 15:49:03.319632
         id: ""
         marketcap: 0
         precision: 2
@@ -9075,8 +9131,8 @@ components:
     Document:
       example:
         currency: ""
-        date: 2020-11-23 15:54:16.740483
-        duedate: 2020-11-23
+        date: 2020-11-27 15:49:03.345315
+        duedate: 2020-11-27
         has_file_on_website: true
         id: 0
         id_category: 0
@@ -9087,7 +9143,7 @@ components:
         id_user: 0
         income: true
         issuer: ""
-        last_update: 2020-11-23 15:54:16.741523
+        last_update: 2020-11-27 15:49:03.346119
         name: ""
         number: ""
         readonly: true
@@ -9314,7 +9370,7 @@ components:
       example:
         code: ""
         code_type: ""
-        deleted: 2020-11-23 15:54:16.788001
+        deleted: 2020-11-27 15:49:03.390595
         description: ""
         diff: 0
         diff_percent: 0
@@ -9322,7 +9378,7 @@ components:
         id_account: 0
         id_security: 0
         label: ""
-        last_update: 2020-11-23 15:54:16.787958
+        last_update: 2020-11-27 15:49:03.390551
         original_currency: ""
         original_diff: 0
         original_unitprice: 0
@@ -9330,13 +9386,13 @@ components:
         original_valuation: 0
         portfolio_share: 0
         prev_diff: 0
-        prev_vdate: 2020-11-23
+        prev_vdate: 2020-11-27
         quantity: 0
         source: ""
         unitprice: 0
         unitvalue: 0
         valuation: 0
-        vdate: 2020-11-23
+        vdate: 2020-11-27
       properties:
         code:
           description: Investment code
@@ -9447,7 +9503,7 @@ components:
         original_currency: ""
         original_unitvalue: 0
         unitvalue: 0
-        vdate: 2020-11-23
+        vdate: 2020-11-27
       properties:
         id:
           description: ID of the value
@@ -9523,14 +9579,14 @@ components:
       example:
         amount: 0
         code: ""
-        created: 2020-11-23 15:54:16.785173
-        date: 2020-11-23
-        deleted: 2020-11-23 15:54:16.785234
-        execution_date: 2020-11-23
+        created: 2020-11-27 15:49:03.387716
+        date: 2020-11-27
+        deleted: 2020-11-27 15:49:03.387765
+        execution_date: 2020-11-27
         id: 0
         id_account: 0
         label: ""
-        last_update: 2020-11-23 15:54:16.785114
+        last_update: 2020-11-27 15:49:03.387654
         ordervalue: 0
         payment_method: ""
         quantity: 0
@@ -9538,7 +9594,7 @@ components:
         stock_market: ""
         unitprice: 0
         unitvalue: 0
-        validity_date: 2020-11-23
+        validity_date: 2020-11-27
         webid: ""
       properties:
         amount:
@@ -9640,7 +9696,7 @@ components:
         error_code: ""
         error_description: ""
         id: 0
-        register_date: 2020-11-23 15:54:16.722515
+        register_date: 2020-11-27 15:49:03.329579
         state: ""
         validate_uri: ""
       properties:
@@ -9706,14 +9762,14 @@ components:
       type: object
     Pocket:
       example:
-        availability_date: 2020-11-23
+        availability_date: 2020-11-27
         condition: inconnu
-        deleted: 2020-11-23 15:54:16.757956
+        deleted: 2020-11-27 15:49:03.362521
         id: 0
         id_account: 0
         id_investment: 0
         label: ""
-        last_update: 2020-11-23 15:54:16.757896
+        last_update: 2020-11-27 15:49:03.362461
         quantity: 0
         value: 0
       properties:
@@ -9870,18 +9926,18 @@ components:
         bank_name: ""
         category: ""
         currency: ""
-        deleted: 2020-11-23 15:54:16.789092
-        enabled_at: 2020-11-23 15:54:16.789177
+        deleted: 2020-11-27 15:49:03.391577
+        enabled_at: 2020-11-27 15:49:03.391662
         error: ""
-        expire: 2020-11-23 15:54:16.789134
+        expire: 2020-11-27 15:49:03.391621
         iban: ""
         id: 0
         id_account: 0
         id_target_account: 0
         label: ""
-        last_update: 2020-11-23 15:54:16.788974
+        last_update: 2020-11-27 15:49:03.391480
         state: ""
-        time_scraped: 2020-11-23 15:54:16.789040
+        time_scraped: 2020-11-27 15:49:03.391522
         webid: ""
       properties:
         add_verified:
@@ -9994,7 +10050,7 @@ components:
         code: ""
         id: 0
         id_type: 0
-        last_update: 2020-11-23 15:54:16.721363
+        last_update: 2020-11-27 15:49:03.328411
         name: ""
       properties:
         code:
@@ -10019,19 +10075,19 @@ components:
       type: object
     Subscription:
       example:
-        deleted: 2020-11-23 15:54:16.805158
-        disabled: 2020-11-23 15:54:16.805243
+        deleted: 2020-11-27 15:49:03.407149
+        disabled: 2020-11-27 15:49:03.407197
         error: ""
         id: 0
         id_connection: 0
         id_source: 0
         id_user: 0
         label: ""
-        last_update: 2020-11-23 15:54:16.805095
+        last_update: 2020-11-27 15:49:03.407087
         number: ""
-        renewdate: 2020-11-23
+        renewdate: 2020-11-27
         subscriber: ""
-        validity: 2020-11-23
+        validity: 2020-11-27
       properties:
         deleted:
           description: This subscription is not found on the website anymore
@@ -10126,8 +10182,8 @@ components:
       type: object
     TermsOfService:
       example:
-        created: 2020-11-23 15:54:16.695120
-        deleted: 2020-11-23 15:54:16.695169
+        created: 2020-11-27 15:49:03.303023
+        deleted: 2020-11-27 15:49:03.303076
         id: 0
         version: ""
       properties:
@@ -10149,8 +10205,8 @@ components:
     Transaction:
       example:
         active: true
-        application_date: 2020-11-23
-        bdate: 2020-11-23
+        application_date: 2020-11-27
+        bdate: 2020-11-27
         card: ""
         coming: false
         comment: ""
@@ -10158,23 +10214,23 @@ components:
         commission_currency: ""
         counterparty: ""
         country: ""
-        date: 2020-11-23
-        date_scraped: 2020-11-23 15:54:16.754130
-        deleted: 2020-11-23 15:54:16.755283
+        date: 2020-11-27
+        date_scraped: 2020-11-27 15:49:03.358851
+        deleted: 2020-11-27 15:49:03.359958
         gross_value: 0
         id: 0
         id_account: 0
         id_category: 0
         id_cluster: 0
-        last_update: 2020-11-23 15:54:16.755233
+        last_update: 2020-11-27 15:49:03.359915
         nature: inconnu
         original_currency: ""
         original_gross_value: 0
         original_value: 0
-        rdate: 2020-11-23
+        rdate: 2020-11-27
         state: new
         value: 0
-        vdate: 2020-11-23
+        vdate: 2020-11-27
         webid: ""
         wording: ""
       properties:
@@ -10337,7 +10393,7 @@ components:
         id_category: 0
         mean_amount: 0
         median_increment: 0
-        next_date: 2020-11-23
+        next_date: 2020-11-27
         wording: ""
       properties:
         created_by:
@@ -10379,7 +10435,7 @@ components:
         beneficiary_type: recipient
         currency: ""
         error: ""
-        exec_date: 2020-11-23
+        exec_date: 2020-11-27
         fees: 0
         id: 0
         id_account: 0
@@ -10388,7 +10444,7 @@ components:
         id_user: 0
         label: ""
         recipient_iban: ""
-        register_date: 2020-11-23 15:54:16.759389
+        register_date: 2020-11-27 15:49:03.363897
         state: ""
         validate_mechanism: ""
         webid: ""
@@ -10612,14 +10668,14 @@ components:
       type: object
     Webhook:
       example:
-        created: 2020-11-23 15:54:16.715806
-        deleted: 2020-11-23 15:54:16.715926
+        created: 2020-11-27 15:49:03.323114
+        deleted: 2020-11-27 15:49:03.323235
         id: 0
         id_auth: 0
         id_event: 0
         id_service: 0
         id_user: 0
-        updated: 2020-11-23 15:54:16.715869
+        updated: 2020-11-27 15:49:03.323174
         url: ""
       properties:
         add_to_data:
@@ -10662,14 +10718,14 @@ components:
       type: object
     WebhookData:
       example:
-        created: 2020-11-23 15:54:16.717871
+        created: 2020-11-27 15:49:03.325068
         id: 0
         id_resource: 0
         id_service: 0
         id_user: 0
         id_webhook: 0
         mimetype: ""
-        success: 2020-11-23 15:54:16.717925
+        success: 2020-11-27 15:49:03.325118
       properties:
         created:
           description: Timestamp when the hook data was generated
@@ -10710,10 +10766,10 @@ components:
         id_service: 0
         id_user: 0
         id_webhook_data: 0
-        next_try: 2020-11-23 15:54:16.718849
+        next_try: 2020-11-27 15:49:03.326024
         response_code: 0
-        response_date: 2020-11-23 15:54:16.718448
-        timestamp: 2020-11-23 15:54:16.718400
+        response_date: 2020-11-27 15:49:03.325626
+        timestamp: 2020-11-27 15:49:03.325580
       properties:
         id:
           description: ID of the log

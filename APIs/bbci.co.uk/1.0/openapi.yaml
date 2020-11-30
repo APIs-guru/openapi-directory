@@ -23,7 +23,7 @@ info:
       url: https://raw.githubusercontent.com/Mermade/bbcparse/master/iblApi/openapi.yaml
       version: "3.0"
   x-providerName: bbci.co.uk
-  x-release: 1.0.0-487
+  x-release: 1.0.0-490
   x-schema-id: https://ibl.api.bbci.co.uk/ibl/v1/schema/ibl.json
   x-unofficialSpec: true
   x-preferred: null
@@ -1211,6 +1211,8 @@ components:
               type: string
             live:
               type: string
+            portrait:
+              type: string
             programme_logo:
               type: string
             promotional:
@@ -1306,6 +1308,17 @@ components:
           type: string
         release_date_time:
           type: string
+        requires_ab:
+          items:
+            enum:
+              - u13
+              - u16
+              - u18
+              - o18
+            type: string
+          minItems: 1
+          type: array
+          uniqueItems: true
         requires_sign_in:
           type: boolean
         requires_tv_licence:

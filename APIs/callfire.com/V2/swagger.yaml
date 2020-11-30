@@ -7976,6 +7976,10 @@ definitions:
         description: "~"
         format: int64
         type: integer
+      defaultNumberId:
+        description: "~"
+        format: int64
+        type: integer
       ez:
         description: "~"
         type: boolean
@@ -10065,27 +10069,6 @@ definitions:
         description: "~"
         items:
           $ref: "#/definitions/Text"
-        type: array
-      limit:
-        description: "~"
-        format: int32
-        type: integer
-      offset:
-        description: "~"
-        format: int32
-        type: integer
-      totalCount:
-        description: "~"
-        format: int32
-        type: integer
-    type: object
-  PageTextBroadcast:
-    description: "~"
-    properties:
-      items:
-        description: "~"
-        items:
-          $ref: "#/definitions/TextBroadcast"
         type: array
       limit:
         description: "~"

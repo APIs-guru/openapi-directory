@@ -10,7 +10,7 @@ info:
     x-twitter: listennotes
   description: >
     Simple & no-nonsense podcast search & directory API. Search all podcasts and episodes by people, places, or topics.
-  termsOfService: https://www.listennotes.com/api/#terms
+  termsOfService: https://www.listennotes.com/api/terms/
   title: "Listen API: Podcast Search & Directory API"
   version: "2.0"
   x-apisguru-categories:
@@ -56,7 +56,7 @@ paths:
           name: genre_id
           required: false
           schema:
-            example: "93"
+            example: 93
             type: string
           style: form
         - description: Page number of those podcasts in this genre.
@@ -1434,7 +1434,7 @@ components:
       name: genre_id
       required: false
       schema:
-        example: "93"
+        example: 93
         type: string
       style: form
     queryParam:
@@ -1852,7 +1852,31 @@ components:
         listennotes_url:
           $ref: "#/components/schemas/EpisodeLNUrlField"
         podcast:
-          $ref: "#/components/schemas/EpisodeSearchResult_podcast"
+          description: The podcast that this episode belongs to.
+          properties:
+            genre_ids:
+              $ref: "#/components/schemas/GenreIdsField"
+            id:
+              $ref: "#/components/schemas/PodcastIdField"
+            image:
+              $ref: "#/components/schemas/ImageField"
+            listen_score:
+              $ref: "#/components/schemas/ListenScoreField"
+            listen_score_global_rank:
+              $ref: "#/components/schemas/ListenScoreGlobalRankField"
+            listennotes_url:
+              $ref: "#/components/schemas/PodcastLNUrlField"
+            publisher_highlighted:
+              $ref: "#/components/schemas/PublisherHighlightedField"
+            publisher_original:
+              $ref: "#/components/schemas/PublisherOriginalField"
+            thumbnail:
+              $ref: "#/components/schemas/ThumbnailField"
+            title_highlighted:
+              $ref: "#/components/schemas/PodcastTitleHighlightedField"
+            title_original:
+              $ref: "#/components/schemas/PodcastTitleOriginalField"
+          type: object
         pub_date_ms:
           $ref: "#/components/schemas/EpisodePubDateMsField"
         rss:
@@ -1874,28 +1898,6 @@ components:
               00:21:27  when Disney bought the <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> franchise from George Lucas they had a plan lots of <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> movies new <span class="ln-search-highlight">Star</span> <span class="ln-search-highlight">Wars</span> movies every month another one was just released while I was talking
             type: string
           type: array
-      type: object
-    EpisodeSearchResult_podcast:
-      description: The podcast that this episode belongs to.
-      properties:
-        genre_ids:
-          $ref: "#/components/schemas/GenreIdsField"
-        id:
-          $ref: "#/components/schemas/PodcastIdField"
-        image:
-          $ref: "#/components/schemas/ImageField"
-        listennotes_url:
-          $ref: "#/components/schemas/PodcastLNUrlField"
-        publisher_highlighted:
-          $ref: "#/components/schemas/PublisherHighlightedField"
-        publisher_original:
-          $ref: "#/components/schemas/PublisherOriginalField"
-        thumbnail:
-          $ref: "#/components/schemas/ThumbnailField"
-        title_highlighted:
-          $ref: "#/components/schemas/PodcastTitleHighlightedField"
-        title_original:
-          $ref: "#/components/schemas/PodcastTitleOriginalField"
       type: object
     EpisodeSimple:
       properties:
@@ -1920,28 +1922,13 @@ components:
         maybe_audio_invalid:
           $ref: "#/components/schemas/MaybeAudioInvalidField"
         podcast:
-          $ref: "#/components/schemas/EpisodeSimple_podcast"
+          $ref: "#/components/schemas/PodcastMinimum"
         pub_date_ms:
           $ref: "#/components/schemas/EpisodePubDateMsField"
         thumbnail:
           $ref: "#/components/schemas/EpisodeThumbnailField"
         title:
           $ref: "#/components/schemas/EpisodeNameField"
-      type: object
-    EpisodeSimple_podcast:
-      properties:
-        id:
-          $ref: "#/components/schemas/PodcastIdField"
-        image:
-          $ref: "#/components/schemas/ImageField"
-        listennotes_url:
-          $ref: "#/components/schemas/PodcastLNUrlField"
-        publisher:
-          $ref: "#/components/schemas/PublisherField"
-        thumbnail:
-          $ref: "#/components/schemas/ThumbnailField"
-        title:
-          $ref: "#/components/schemas/PodcastNameField"
       type: object
     EpisodeThumbnailField:
       description: >
@@ -2184,6 +2171,22 @@ components:
       description: Web link of this episode.
       example: https://www.npr.org/2020/01/22/798532179/soleimanis-iran
       type: string
+    ListenScoreField:
+      description: >
+        The estimated popularity score of a podcast compared to all other rss-based public podcasts in the world on a scale from 0 to 100.
+
+        If the score is not available, it'll be null. Learn more at listennotes.com/listen-score
+      example: 81
+      type: integer
+    ListenScoreGlobalRankField:
+      description: >
+        The estimated popularity ranking of a podcast compared to all other rss-based public podcasts in the world.
+
+        For example, if the value is 0.5%, then this podcast is one of the top 0.5% most popular shows out of all podcasts globally, ranked by Listen Score.
+
+        If the ranking is not available, it'll be null. Learn more at listennotes.com/listen-score
+      example: 0.5%
+      type: string
     MaybeAudioInvalidField:
       description: Whether or not this episode's audio is invalid. Podcasters may delete the original audio.
       example: false
@@ -2316,7 +2319,33 @@ components:
           type: integer
         playlists:
           items:
-            $ref: "#/components/schemas/PlaylistsResponse_playlists"
+            description: A playlist
+            properties:
+              description:
+                $ref: "#/components/schemas/PlaylistDescriptionField"
+              episode_count:
+                description: The number of episodes (including custom audio) in this playlist.
+                example: 23
+                type: integer
+              id:
+                $ref: "#/components/schemas/PlaylistIdField"
+              image:
+                $ref: "#/components/schemas/PlaylistImageField"
+              last_timestamp_ms:
+                $ref: "#/components/schemas/PlaylistLastTimestampMsField"
+              listennotes_url:
+                $ref: "#/components/schemas/PlaylistListennotesUrlField"
+              name:
+                $ref: "#/components/schemas/PlaylistNameField"
+              podcast_count:
+                description: The number of podcasts in this playlist.
+                example: 10
+                type: integer
+              thumbnail:
+                $ref: "#/components/schemas/PlaylistThumbnailField"
+              visibility:
+                $ref: "#/components/schemas/PlaylistVisibilityField"
+            type: object
           type: array
         previous_page_number:
           example: 1
@@ -2324,34 +2353,6 @@ components:
         total:
           example: 325
           type: integer
-      type: object
-    PlaylistsResponse_playlists:
-      description: A playlist
-      properties:
-        description:
-          $ref: "#/components/schemas/PlaylistDescriptionField"
-        episode_count:
-          description: The number of episodes (including custom audio) in this playlist.
-          example: 23
-          type: integer
-        id:
-          $ref: "#/components/schemas/PlaylistIdField"
-        image:
-          $ref: "#/components/schemas/PlaylistImageField"
-        last_timestamp_ms:
-          $ref: "#/components/schemas/PlaylistLastTimestampMsField"
-        listennotes_url:
-          $ref: "#/components/schemas/PlaylistListennotesUrlField"
-        name:
-          $ref: "#/components/schemas/PlaylistNameField"
-        podcast_count:
-          description: The number of podcasts in this playlist.
-          example: 10
-          type: integer
-        thumbnail:
-          $ref: "#/components/schemas/PlaylistThumbnailField"
-        visibility:
-          $ref: "#/components/schemas/PlaylistVisibilityField"
       type: object
     PodcastDescriptionField:
       description: Html of this episode's full description
@@ -2435,6 +2436,10 @@ components:
           $ref: "#/components/schemas/LanguageField"
         latest_pub_date_ms:
           $ref: "#/components/schemas/LatestPubDateMsField"
+        listen_score:
+          $ref: "#/components/schemas/ListenScoreField"
+        listen_score_global_rank:
+          $ref: "#/components/schemas/ListenScoreGlobalRankField"
         listennotes_url:
           $ref: "#/components/schemas/PodcastLNUrlField"
         looking_for:
@@ -2489,6 +2494,10 @@ components:
           $ref: "#/components/schemas/PodcastIdField"
         image:
           $ref: "#/components/schemas/ImageField"
+        listen_score:
+          $ref: "#/components/schemas/ListenScoreField"
+        listen_score_global_rank:
+          $ref: "#/components/schemas/ListenScoreGlobalRankField"
         listennotes_url:
           $ref: "#/components/schemas/PodcastLNUrlField"
         publisher:
@@ -2531,6 +2540,10 @@ components:
           $ref: "#/components/schemas/iTunesIdField"
         latest_pub_date_ms:
           $ref: "#/components/schemas/LatestPubDateMsField"
+        listen_score:
+          $ref: "#/components/schemas/ListenScoreField"
+        listen_score_global_rank:
+          $ref: "#/components/schemas/ListenScoreGlobalRankField"
         listennotes_url:
           $ref: "#/components/schemas/PodcastLNUrlField"
         publisher_highlighted:
@@ -2578,6 +2591,10 @@ components:
           $ref: "#/components/schemas/LanguageField"
         latest_pub_date_ms:
           $ref: "#/components/schemas/LatestPubDateMsField"
+        listen_score:
+          $ref: "#/components/schemas/ListenScoreField"
+        listen_score_global_rank:
+          $ref: "#/components/schemas/ListenScoreGlobalRankField"
         listennotes_url:
           $ref: "#/components/schemas/PodcastLNUrlField"
         looking_for:
