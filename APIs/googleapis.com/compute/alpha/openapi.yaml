@@ -30409,7 +30409,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Patches the specified subnetwork with the data included in the request. Only certain fields can up updated with a patch request as indicated in the field descriptions. You must specify the current fingerprint of the subnetwork resource being patched.
+      description: Patches the specified subnetwork with the data included in the request. Only certain fields can be updated with a patch request as indicated in the field descriptions. You must specify the current fingerprint of the subnetwork resource being patched.
       operationId: compute.subnetworks.patch
       parameters:
         - description: Project ID for this request.
@@ -47676,7 +47676,7 @@ components:
       description: Associates `members` with a `role`.
       properties:
         bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
+          description: ""
           type: string
         condition:
           $ref: "#/components/schemas/Expr"
@@ -49918,10 +49918,12 @@ components:
         direction:
           description: The direction in which this rule applies.
           enum:
-            - DIRECTION_UNSPECIFIED
             - EGRESS
             - INGRESS
           type: string
+        disabled:
+          description: Denotes whether the firewall policy rule is disabled. When set to true, the firewall policy rule is not enforced and traffic behaves as if it did not exist. If this is unspecified, the firewall policy rule will be enabled.
+          type: boolean
         enableLogging:
           description: 'Denotes whether to enable logging for a particular rule. If logging is enabled, logs will be exported to the configured export destination in Stackdriver. Logs may be exported to BigQuery or Pub/Sub. Note: you cannot enable logging on "goto_next" rules.'
           type: boolean
@@ -49932,9 +49934,6 @@ components:
         match:
           $ref: "#/components/schemas/FirewallPolicyRuleMatcher"
           description: A match condition that incoming traffic is evaluated against. If it evaluates to true, the corresponding ?action? is enforced.
-        preview:
-          description: If set to true, the specified action is not enforced.
-          type: boolean
         priority:
           description: An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 2147483647. Rules are evaluated from highest to lowest priority where 0 is the highest priority and 2147483647 is the lowest prority.
           format: int32
@@ -52735,6 +52734,11 @@ components:
           items:
             type: string
           type: array
+        secureTags:
+          description: Secure tags to apply to this instance. These can be later modified by the update method. Maximum number of secure tags allowed is 300.
+          items:
+            type: string
+          type: array
         selfLink:
           description: "[Output Only] Server-defined URL for this resource."
           type: string
@@ -53529,6 +53533,14 @@ components:
           type: integer
         minimalAction:
           description: Minimal action to be taken on an instance. You can specify either RESTART to restart existing instances or REPLACE to delete and create new instances from the target template. If you specify a RESTART, the Updater will attempt to perform that action only. However, if the Updater determines that the minimal action you specify is not enough to perform the update, it might perform a more disruptive action.
+          enum:
+            - NONE
+            - REFRESH
+            - REPLACE
+            - RESTART
+          type: string
+        mostDisruptiveAllowedAction:
+          description: Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to allow actions that do not need instance restart, RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
           enum:
             - NONE
             - REFRESH
@@ -54496,6 +54508,11 @@ components:
       type: object
     InstancesGetEffectiveFirewallsResponse:
       properties:
+        firewallPolicys:
+          description: Effective firewalls from firewall policies.
+          items:
+            $ref: "#/components/schemas/InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy"
+          type: array
         firewalls:
           description: Effective firewalls on the instance.
           items:
@@ -54506,6 +54523,27 @@ components:
           items:
             $ref: "#/components/schemas/InstancesGetEffectiveFirewallsResponseOrganizationFirewallPolicy"
           type: array
+      type: object
+    InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy:
+      properties:
+        displayName:
+          description: "[Output Only] The display name of the firewall policy."
+          type: string
+        name:
+          description: "[Output Only] The name of the firewall policy."
+          type: string
+        rules:
+          description: The rules that apply to the network.
+          items:
+            $ref: "#/components/schemas/FirewallPolicyRule"
+          type: array
+        type:
+          description: "[Output Only] The type of the firewall policy."
+          enum:
+            - HIERARCHY
+            - NETWORK
+            - UNSPECIFIED
+          type: string
       type: object
     InstancesGetEffectiveFirewallsResponseOrganizationFirewallPolicy:
       description: A pruned SecurityPolicy containing ID and any applicable firewall rules.
@@ -57944,6 +57982,11 @@ components:
       type: object
     NetworksGetEffectiveFirewallsResponse:
       properties:
+        firewallPolicys:
+          description: Effective firewalls from firewall policy.
+          items:
+            $ref: "#/components/schemas/NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy"
+          type: array
         firewalls:
           description: Effective firewalls on the network.
           items:
@@ -57954,6 +57997,27 @@ components:
           items:
             $ref: "#/components/schemas/NetworksGetEffectiveFirewallsResponseOrganizationFirewallPolicy"
           type: array
+      type: object
+    NetworksGetEffectiveFirewallsResponseEffectiveFirewallPolicy:
+      properties:
+        displayName:
+          description: "[Output Only] The display name of the firewall policy."
+          type: string
+        name:
+          description: "[Output Only] The name of the firewall policy."
+          type: string
+        rules:
+          description: The rules that apply to the network.
+          items:
+            $ref: "#/components/schemas/FirewallPolicyRule"
+          type: array
+        type:
+          description: "[Output Only] The type of the firewall policy."
+          enum:
+            - HIERARCHY
+            - NETWORK
+            - UNSPECIFIED
+          type: string
       type: object
     NetworksGetEffectiveFirewallsResponseOrganizationFirewallPolicy:
       description: A pruned SecurityPolicy containing ID and any applicable firewall rules.
@@ -60988,6 +61052,7 @@ components:
             - PREEMPTIBLE_NVIDIA_V100_GPUS
             - PRIVATE_V6_ACCESS_SUBNETWORKS
             - PSC_GOOGLE_APIS_FORWARDING_RULES_PER_NETWORK
+            - PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK
             - PUBLIC_ADVERTISED_PREFIXES
             - PUBLIC_DELEGATED_PREFIXES
             - REGIONAL_AUTOSCALERS
@@ -63964,6 +64029,8 @@ components:
 
         Only external backend services that use load balancers can reference a security policy. For more information, see  Google Cloud Armor security policy overview. (== resource_for {$api_version}.securityPolicies ==)
       properties:
+        adaptiveProtectionConfig:
+          $ref: "#/components/schemas/SecurityPolicyAdaptiveProtectionConfig"
         associations:
           description: A list of associations that belong to this policy.
           items:
@@ -64038,6 +64105,26 @@ components:
             - CLOUD_ARMOR
             - CLOUD_ARMOR_EDGE
             - FIREWALL
+          type: string
+      type: object
+    SecurityPolicyAdaptiveProtectionConfig:
+      description: Configuration options for Cloud Armor Adaptive Protection (CAAP).
+      properties:
+        layer7DdosDefenseConfig:
+          $ref: "#/components/schemas/SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig"
+          description: If set to true, enables Cloud Armor Machine Learning.
+      type: object
+    SecurityPolicyAdaptiveProtectionConfigLayer7DdosDefenseConfig:
+      description: Configuration options for L7 DDoS detection.
+      properties:
+        enable:
+          description: If set to true, enables CAAP for L7 DDoS detection.
+          type: boolean
+        ruleVisibility:
+          description: "Rule visibility can be one of the following: STANDARD - opaque rules. (default) PREMIUM - transparent rules."
+          enum:
+            - PREMIUM
+            - STANDARD
           type: string
       type: object
     SecurityPolicyAssociation:
@@ -64175,6 +64262,10 @@ components:
         rateLimitOptions:
           $ref: "#/components/schemas/SecurityPolicyRuleRateLimitOptions"
           description: Must be specified if the action is "rate_based_blacklist" or "throttle". Cannot be specified for any other actions.
+        ruleNumber:
+          description: Identifier for the rule. This is only unique within the given security policy. This can only be set during rule creation, if rule number is not specified it will be generated by the server.
+          format: int64
+          type: string
         ruleTupleCount:
           description: "[Output Only] Calculation of the complexity of a single firewall security policy rule."
           format: int32
@@ -64438,12 +64529,13 @@ components:
         A service attachment represents a service that a producer has exposed. It encapsulates the load balancer which fronts the service runs and a list of NAT IP ranges that the producers uses to represent the consumers connecting to the service.
       properties:
         connectionPreference:
+          description: The connection preference of service attachment. The value can be set to ACCEPT_AUTOMATIC. An ACCEPT_AUTOMATIC service attachment is one that always accepts the connection from consumer forwarding rules.
           enum:
             - ACCEPT_AUTOMATIC
             - CONNECTION_PREFERENCE_UNSPECIFIED
           type: string
         consumerForwardingRules:
-          description: An array of forwarding rules for all the consumers connected to this service attachment.
+          description: "[Output Only] An array of forwarding rules for all the consumers connected to this service attachment."
           items:
             $ref: "#/components/schemas/ServiceAttachmentConsumerForwardingRule"
           type: array

@@ -779,6 +779,14 @@ components:
           items:
             type: string
           type: array
+        autoUpdateMode:
+          description: This feature is not generally available.
+          enum:
+            - AUTO_UPDATE_MODE_UNSPECIFIED
+            - AUTO_UPDATE_DEFAULT
+            - AUTO_UPDATE_POSTPONED
+            - AUTO_UPDATE_HIGH_PRIORITY
+          type: string
         connectedWorkAndPersonalApp:
           description: Controls whether the app can communicate with itself across a device’s work and personal profiles, subject to user consent.
           enum:
@@ -1993,8 +2001,15 @@ components:
           items:
             $ref: "#/components/schemas/ApplicationPolicy"
           type: array
+        autoDateAndTimeZone:
+          description: Whether auto date, time, and time zone are enabled on a company-owned device. If this is set, then autoTimeRequired is ignored.
+          enum:
+            - AUTO_DATE_AND_TIME_ZONE_UNSPECIFIED
+            - AUTO_DATE_AND_TIME_ZONE_USER_CHOICE
+            - AUTO_DATE_AND_TIME_ZONE_ENFORCED
+          type: string
         autoTimeRequired:
-          description: Whether auto time is required, which prevents the user from manually setting the date and time.
+          description: Whether auto time is required, which prevents the user from manually setting the date and time. If autoDateAndTimeZone is set, this field is ignored.
           type: boolean
         blockApplicationsEnabled:
           description: Whether applications other than the ones configured in applications are blocked from being installed. When set, applications that were installed under a previous policy but no longer appear in the policy are automatically uninstalled.
@@ -2101,13 +2116,16 @@ components:
           $ref: "#/components/schemas/KioskCustomization"
           description: Settings controlling the behavior of a device in kiosk mode. To enable kiosk mode, set kioskCustomLauncherEnabled to true or specify an app in the policy with installType KIOSK.
         locationMode:
-          description: The degree of location detection enabled. The user may change the value unless the user is otherwise blocked from accessing device settings.
+          description: The degree of location detection enabled.
           enum:
             - LOCATION_MODE_UNSPECIFIED
             - HIGH_ACCURACY
             - SENSORS_ONLY
             - BATTERY_SAVING
             - OFF
+            - LOCATION_USER_CHOICE
+            - LOCATION_ENFORCED
+            - LOCATION_DISABLED
           type: string
         longSupportMessage:
           $ref: "#/components/schemas/UserFacingMessage"

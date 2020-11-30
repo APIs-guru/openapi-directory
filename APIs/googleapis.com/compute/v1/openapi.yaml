@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-  - url: https://compute.googleapis.com/compute/v1/projects
+  - url: https://compute.googleapis.com/compute/v1
 info:
   contact:
     name: Google
@@ -47,6 +47,7 @@ tags:
   - name: globalForwardingRules
   - name: globalNetworkEndpointGroups
   - name: globalOperations
+  - name: globalOrganizationOperations
   - name: healthChecks
   - name: httpHealthChecks
   - name: httpsHealthChecks
@@ -108,7 +109,165 @@ tags:
   - name: zoneOperations
   - name: zones
 paths:
-  "/{project}":
+  /locations/global/operations:
+    get:
+      description: Retrieves a list of Operation resources contained within the specified organization.
+      operationId: compute.globalOrganizationOperations.list
+      parameters:
+        - description: >-
+            A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+
+
+            For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+
+
+            You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+
+
+            To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: "The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)"
+          in: query
+          name: maxResults
+          schema:
+            minimum: 0
+            type: integer
+        - description: >-
+            Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+
+
+            You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+
+
+            Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Parent ID for this request.
+          in: query
+          name: parentId
+          schema:
+            type: string
+        - description: Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
+          in: query
+          name: returnPartialSuccess
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OperationList"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - globalOrganizationOperations
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/locations/global/operations/{operation}":
+    delete:
+      description: Deletes the specified Operations resource.
+      operationId: compute.globalOrganizationOperations.delete
+      parameters:
+        - description: Name of the Operations resource to delete.
+          in: path
+          name: operation
+          required: true
+          schema:
+            type: string
+        - description: Parent ID for this request.
+          in: query
+          name: parentId
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+      tags:
+        - globalOrganizationOperations
+    get:
+      description: Retrieves the specified Operations resource. Gets a list of operations by making a `list()` request.
+      operationId: compute.globalOrganizationOperations.get
+      parameters:
+        - description: Name of the Operations resource to return.
+          in: path
+          name: operation
+          required: true
+          schema:
+            type: string
+        - description: Parent ID for this request.
+          in: query
+          name: parentId
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute
+        - Oauth2:
+            - https://www.googleapis.com/auth/compute.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/compute.readonly
+      tags:
+        - globalOrganizationOperations
+    parameters:
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/userIp"
+  "/projects/{project}":
     get:
       description: Returns the specified Project resource.
       operationId: compute.projects.get
@@ -149,7 +308,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/acceleratorTypes":
+  "/projects/{project}/aggregated/acceleratorTypes":
     get:
       description: Retrieves an aggregated list of accelerator types.
       operationId: compute.acceleratorTypes.aggregatedList
@@ -238,7 +397,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/addresses":
+  "/projects/{project}/aggregated/addresses":
     get:
       description: Retrieves an aggregated list of addresses.
       operationId: compute.addresses.aggregatedList
@@ -327,7 +486,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/autoscalers":
+  "/projects/{project}/aggregated/autoscalers":
     get:
       description: Retrieves an aggregated list of autoscalers.
       operationId: compute.autoscalers.aggregatedList
@@ -416,7 +575,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/backendServices":
+  "/projects/{project}/aggregated/backendServices":
     get:
       description: Retrieves the list of all BackendService resources, regional and global, available to the specified project.
       operationId: compute.backendServices.aggregatedList
@@ -505,7 +664,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/commitments":
+  "/projects/{project}/aggregated/commitments":
     get:
       description: Retrieves an aggregated list of commitments.
       operationId: compute.regionCommitments.aggregatedList
@@ -594,7 +753,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/diskTypes":
+  "/projects/{project}/aggregated/diskTypes":
     get:
       description: Retrieves an aggregated list of disk types.
       operationId: compute.diskTypes.aggregatedList
@@ -683,7 +842,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/disks":
+  "/projects/{project}/aggregated/disks":
     get:
       description: Retrieves an aggregated list of persistent disks.
       operationId: compute.disks.aggregatedList
@@ -772,7 +931,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/forwardingRules":
+  "/projects/{project}/aggregated/forwardingRules":
     get:
       description: Retrieves an aggregated list of forwarding rules.
       operationId: compute.forwardingRules.aggregatedList
@@ -861,7 +1020,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/healthChecks":
+  "/projects/{project}/aggregated/healthChecks":
     get:
       description: Retrieves the list of all HealthCheck resources, regional and global, available to the specified project.
       operationId: compute.healthChecks.aggregatedList
@@ -950,7 +1109,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/instanceGroupManagers":
+  "/projects/{project}/aggregated/instanceGroupManagers":
     get:
       description: Retrieves the list of managed instance groups and groups them by zone.
       operationId: compute.instanceGroupManagers.aggregatedList
@@ -1039,7 +1198,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/instanceGroups":
+  "/projects/{project}/aggregated/instanceGroups":
     get:
       description: Retrieves the list of instance groups and sorts them by zone.
       operationId: compute.instanceGroups.aggregatedList
@@ -1128,7 +1287,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/instances":
+  "/projects/{project}/aggregated/instances":
     get:
       description: Retrieves aggregated list of all of the instances in your project across all regions and zones.
       operationId: compute.instances.aggregatedList
@@ -1217,7 +1376,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/interconnectAttachments":
+  "/projects/{project}/aggregated/interconnectAttachments":
     get:
       description: Retrieves an aggregated list of interconnect attachments.
       operationId: compute.interconnectAttachments.aggregatedList
@@ -1306,7 +1465,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/machineTypes":
+  "/projects/{project}/aggregated/machineTypes":
     get:
       description: Retrieves an aggregated list of machine types.
       operationId: compute.machineTypes.aggregatedList
@@ -1395,7 +1554,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/networkEndpointGroups":
+  "/projects/{project}/aggregated/networkEndpointGroups":
     get:
       description: Retrieves the list of network endpoint groups and sorts them by zone.
       operationId: compute.networkEndpointGroups.aggregatedList
@@ -1484,7 +1643,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/nodeGroups":
+  "/projects/{project}/aggregated/nodeGroups":
     get:
       description: "Retrieves an aggregated list of node groups. Note: use nodeGroups.listNodes for more details about each group."
       operationId: compute.nodeGroups.aggregatedList
@@ -1573,7 +1732,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/nodeTemplates":
+  "/projects/{project}/aggregated/nodeTemplates":
     get:
       description: Retrieves an aggregated list of node templates.
       operationId: compute.nodeTemplates.aggregatedList
@@ -1662,7 +1821,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/nodeTypes":
+  "/projects/{project}/aggregated/nodeTypes":
     get:
       description: Retrieves an aggregated list of node types.
       operationId: compute.nodeTypes.aggregatedList
@@ -1751,7 +1910,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/operations":
+  "/projects/{project}/aggregated/operations":
     get:
       description: Retrieves an aggregated list of all operations.
       operationId: compute.globalOperations.aggregatedList
@@ -1840,7 +1999,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/packetMirrorings":
+  "/projects/{project}/aggregated/packetMirrorings":
     get:
       description: Retrieves an aggregated list of packetMirrorings.
       operationId: compute.packetMirrorings.aggregatedList
@@ -1929,7 +2088,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/reservations":
+  "/projects/{project}/aggregated/reservations":
     get:
       description: Retrieves an aggregated list of reservations.
       operationId: compute.reservations.aggregatedList
@@ -2018,7 +2177,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/resourcePolicies":
+  "/projects/{project}/aggregated/resourcePolicies":
     get:
       description: Retrieves an aggregated list of resource policies.
       operationId: compute.resourcePolicies.aggregatedList
@@ -2107,7 +2266,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/routers":
+  "/projects/{project}/aggregated/routers":
     get:
       description: Retrieves an aggregated list of routers.
       operationId: compute.routers.aggregatedList
@@ -2196,7 +2355,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/sslCertificates":
+  "/projects/{project}/aggregated/sslCertificates":
     get:
       description: Retrieves the list of all SslCertificate resources, regional and global, available to the specified project.
       operationId: compute.sslCertificates.aggregatedList
@@ -2285,7 +2444,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/subnetworks":
+  "/projects/{project}/aggregated/subnetworks":
     get:
       description: Retrieves an aggregated list of subnetworks.
       operationId: compute.subnetworks.aggregatedList
@@ -2374,7 +2533,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/subnetworks/listUsable":
+  "/projects/{project}/aggregated/subnetworks/listUsable":
     get:
       description: Retrieves an aggregated list of all usable subnetworks in the project.
       operationId: compute.subnetworks.listUsable
@@ -2458,7 +2617,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/targetHttpProxies":
+  "/projects/{project}/aggregated/targetHttpProxies":
     get:
       description: Retrieves the list of all TargetHttpProxy resources, regional and global, available to the specified project.
       operationId: compute.targetHttpProxies.aggregatedList
@@ -2547,7 +2706,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/targetHttpsProxies":
+  "/projects/{project}/aggregated/targetHttpsProxies":
     get:
       description: Retrieves the list of all TargetHttpsProxy resources, regional and global, available to the specified project.
       operationId: compute.targetHttpsProxies.aggregatedList
@@ -2636,7 +2795,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/targetInstances":
+  "/projects/{project}/aggregated/targetInstances":
     get:
       description: Retrieves an aggregated list of target instances.
       operationId: compute.targetInstances.aggregatedList
@@ -2725,7 +2884,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/targetPools":
+  "/projects/{project}/aggregated/targetPools":
     get:
       description: Retrieves an aggregated list of target pools.
       operationId: compute.targetPools.aggregatedList
@@ -2814,7 +2973,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/targetVpnGateways":
+  "/projects/{project}/aggregated/targetVpnGateways":
     get:
       description: Retrieves an aggregated list of target VPN gateways.
       operationId: compute.targetVpnGateways.aggregatedList
@@ -2903,7 +3062,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/urlMaps":
+  "/projects/{project}/aggregated/urlMaps":
     get:
       description: Retrieves the list of all UrlMap resources, regional and global, available to the specified project.
       operationId: compute.urlMaps.aggregatedList
@@ -2992,7 +3151,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/vpnGateways":
+  "/projects/{project}/aggregated/vpnGateways":
     get:
       description: Retrieves an aggregated list of VPN gateways.
       operationId: compute.vpnGateways.aggregatedList
@@ -3081,7 +3240,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/aggregated/vpnTunnels":
+  "/projects/{project}/aggregated/vpnTunnels":
     get:
       description: Retrieves an aggregated list of VPN tunnels.
       operationId: compute.vpnTunnels.aggregatedList
@@ -3170,7 +3329,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/disableXpnHost":
+  "/projects/{project}/disableXpnHost":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -3219,7 +3378,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - projects
-  "/{project}/disableXpnResource":
+  "/projects/{project}/disableXpnResource":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -3273,7 +3432,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - projects
-  "/{project}/enableXpnHost":
+  "/projects/{project}/enableXpnHost":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -3322,7 +3481,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - projects
-  "/{project}/enableXpnResource":
+  "/projects/{project}/enableXpnResource":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -3376,7 +3535,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - projects
-  "/{project}/getXpnHost":
+  "/projects/{project}/getXpnHost":
     get:
       description: Gets the shared VPC host project that this project links to. May be empty if no link exists.
       operationId: compute.projects.getXpnHost
@@ -3413,7 +3572,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/getXpnResources":
+  "/projects/{project}/getXpnResources":
     get:
       description: Gets service resources (a.k.a service project) associated with this host project.
       operationId: compute.projects.getXpnResources
@@ -3493,7 +3652,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/addresses":
+  "/projects/{project}/global/addresses":
     get:
       description: Retrieves a list of global addresses.
       operationId: compute.globalAddresses.list
@@ -3622,7 +3781,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - globalAddresses
-  "/{project}/global/addresses/{address}":
+  "/projects/{project}/global/addresses/{address}":
     delete:
       description: Deletes the specified address resource.
       operationId: compute.globalAddresses.delete
@@ -3715,7 +3874,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/backendBuckets":
+  "/projects/{project}/global/backendBuckets":
     get:
       description: Retrieves the list of BackendBucket resources available to the specified project.
       operationId: compute.backendBuckets.list
@@ -3844,7 +4003,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendBuckets
-  "/{project}/global/backendBuckets/{backendBucket}":
+  "/projects/{project}/global/backendBuckets/{backendBucket}":
     delete:
       description: Deletes the specified BackendBucket resource.
       operationId: compute.backendBuckets.delete
@@ -4039,7 +4198,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendBuckets
-  "/{project}/global/backendBuckets/{backendBucket}/addSignedUrlKey":
+  "/projects/{project}/global/backendBuckets/{backendBucket}/addSignedUrlKey":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -4099,7 +4258,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendBuckets
-  "/{project}/global/backendBuckets/{backendBucket}/deleteSignedUrlKey":
+  "/projects/{project}/global/backendBuckets/{backendBucket}/deleteSignedUrlKey":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -4160,7 +4319,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendBuckets
-  "/{project}/global/backendServices":
+  "/projects/{project}/global/backendServices":
     get:
       description: Retrieves the list of BackendService resources available to the specified project.
       operationId: compute.backendServices.list
@@ -4289,7 +4448,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendServices
-  "/{project}/global/backendServices/{backendService}":
+  "/projects/{project}/global/backendServices/{backendService}":
     delete:
       description: Deletes the specified BackendService resource.
       operationId: compute.backendServices.delete
@@ -4484,7 +4643,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendServices
-  "/{project}/global/backendServices/{backendService}/addSignedUrlKey":
+  "/projects/{project}/global/backendServices/{backendService}/addSignedUrlKey":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -4544,7 +4703,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendServices
-  "/{project}/global/backendServices/{backendService}/deleteSignedUrlKey":
+  "/projects/{project}/global/backendServices/{backendService}/deleteSignedUrlKey":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -4605,7 +4764,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendServices
-  "/{project}/global/backendServices/{backendService}/getHealth":
+  "/projects/{project}/global/backendServices/{backendService}/getHealth":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -4663,7 +4822,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - backendServices
-  "/{project}/global/backendServices/{backendService}/setSecurityPolicy":
+  "/projects/{project}/global/backendServices/{backendService}/setSecurityPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -4723,7 +4882,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - backendServices
-  "/{project}/global/externalVpnGateways":
+  "/projects/{project}/global/externalVpnGateways":
     get:
       description: Retrieves the list of ExternalVpnGateway available to the specified project.
       operationId: compute.externalVpnGateways.list
@@ -4852,7 +5011,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - externalVpnGateways
-  "/{project}/global/externalVpnGateways/{externalVpnGateway}":
+  "/projects/{project}/global/externalVpnGateways/{externalVpnGateway}":
     delete:
       description: Deletes the specified externalVpnGateway.
       operationId: compute.externalVpnGateways.delete
@@ -4945,7 +5104,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/externalVpnGateways/{resource}/setLabels":
+  "/projects/{project}/global/externalVpnGateways/{resource}/setLabels":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -4993,7 +5152,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - externalVpnGateways
-  "/{project}/global/externalVpnGateways/{resource}/testIamPermissions":
+  "/projects/{project}/global/externalVpnGateways/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -5045,7 +5204,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - externalVpnGateways
-  "/{project}/global/firewalls":
+  "/projects/{project}/global/firewalls":
     get:
       description: Retrieves the list of firewall rules available to the specified project.
       operationId: compute.firewalls.list
@@ -5174,7 +5333,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - firewalls
-  "/{project}/global/firewalls/{firewall}":
+  "/projects/{project}/global/firewalls/{firewall}":
     delete:
       description: Deletes the specified firewall.
       operationId: compute.firewalls.delete
@@ -5369,7 +5528,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - firewalls
-  "/{project}/global/forwardingRules":
+  "/projects/{project}/global/forwardingRules":
     get:
       description: Retrieves a list of GlobalForwardingRule resources available to the specified project.
       operationId: compute.globalForwardingRules.list
@@ -5498,7 +5657,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - globalForwardingRules
-  "/{project}/global/forwardingRules/{forwardingRule}":
+  "/projects/{project}/global/forwardingRules/{forwardingRule}":
     delete:
       description: Deletes the specified GlobalForwardingRule resource.
       operationId: compute.globalForwardingRules.delete
@@ -5642,7 +5801,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - globalForwardingRules
-  "/{project}/global/forwardingRules/{forwardingRule}/setTarget":
+  "/projects/{project}/global/forwardingRules/{forwardingRule}/setTarget":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -5702,7 +5861,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - globalForwardingRules
-  "/{project}/global/healthChecks":
+  "/projects/{project}/global/healthChecks":
     get:
       description: Retrieves the list of HealthCheck resources available to the specified project.
       operationId: compute.healthChecks.list
@@ -5831,7 +5990,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - healthChecks
-  "/{project}/global/healthChecks/{healthCheck}":
+  "/projects/{project}/global/healthChecks/{healthCheck}":
     delete:
       description: Deletes the specified HealthCheck resource.
       operationId: compute.healthChecks.delete
@@ -6026,7 +6185,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - healthChecks
-  "/{project}/global/httpHealthChecks":
+  "/projects/{project}/global/httpHealthChecks":
     get:
       description: Retrieves the list of HttpHealthCheck resources available to the specified project.
       operationId: compute.httpHealthChecks.list
@@ -6155,7 +6314,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - httpHealthChecks
-  "/{project}/global/httpHealthChecks/{httpHealthCheck}":
+  "/projects/{project}/global/httpHealthChecks/{httpHealthCheck}":
     delete:
       description: Deletes the specified HttpHealthCheck resource.
       operationId: compute.httpHealthChecks.delete
@@ -6350,7 +6509,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - httpHealthChecks
-  "/{project}/global/httpsHealthChecks":
+  "/projects/{project}/global/httpsHealthChecks":
     get:
       description: Retrieves the list of HttpsHealthCheck resources available to the specified project.
       operationId: compute.httpsHealthChecks.list
@@ -6479,7 +6638,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - httpsHealthChecks
-  "/{project}/global/httpsHealthChecks/{httpsHealthCheck}":
+  "/projects/{project}/global/httpsHealthChecks/{httpsHealthCheck}":
     delete:
       description: Deletes the specified HttpsHealthCheck resource.
       operationId: compute.httpsHealthChecks.delete
@@ -6674,7 +6833,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - httpsHealthChecks
-  "/{project}/global/images":
+  "/projects/{project}/global/images":
     get:
       description: Retrieves the list of custom images available to the specified project. Custom images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 8. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.
       operationId: compute.images.list
@@ -6820,7 +6979,7 @@ paths:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - images
-  "/{project}/global/images/family/{family}":
+  "/projects/{project}/global/images/family/{family}":
     get:
       description: Returns the latest image that is part of an image family and is not deprecated.
       operationId: compute.images.getFromFamily
@@ -6867,7 +7026,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/images/{image}":
+  "/projects/{project}/global/images/{image}":
     delete:
       description: Deletes the specified image.
       operationId: compute.images.delete
@@ -7011,7 +7170,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - images
-  "/{project}/global/images/{image}/deprecate":
+  "/projects/{project}/global/images/{image}/deprecate":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -7075,7 +7234,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - images
-  "/{project}/global/images/{resource}/getIamPolicy":
+  "/projects/{project}/global/images/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.images.getIamPolicy
@@ -7127,7 +7286,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/images/{resource}/setIamPolicy":
+  "/projects/{project}/global/images/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -7175,7 +7334,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - images
-  "/{project}/global/images/{resource}/setLabels":
+  "/projects/{project}/global/images/{resource}/setLabels":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -7223,7 +7382,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - images
-  "/{project}/global/images/{resource}/testIamPermissions":
+  "/projects/{project}/global/images/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -7275,7 +7434,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - images
-  "/{project}/global/instanceTemplates":
+  "/projects/{project}/global/instanceTemplates":
     get:
       description: Retrieves a list of instance templates that are contained within the specified project.
       operationId: compute.instanceTemplates.list
@@ -7404,7 +7563,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceTemplates
-  "/{project}/global/instanceTemplates/{instanceTemplate}":
+  "/projects/{project}/global/instanceTemplates/{instanceTemplate}":
     delete:
       description: Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It is not possible to delete templates that are already in use by a managed instance group.
       operationId: compute.instanceTemplates.delete
@@ -7497,7 +7656,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/instanceTemplates/{resource}/getIamPolicy":
+  "/projects/{project}/global/instanceTemplates/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.instanceTemplates.getIamPolicy
@@ -7549,7 +7708,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/instanceTemplates/{resource}/setIamPolicy":
+  "/projects/{project}/global/instanceTemplates/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -7597,7 +7756,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceTemplates
-  "/{project}/global/instanceTemplates/{resource}/testIamPermissions":
+  "/projects/{project}/global/instanceTemplates/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -7649,7 +7808,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - instanceTemplates
-  "/{project}/global/interconnectLocations":
+  "/projects/{project}/global/interconnectLocations":
     get:
       description: Retrieves the list of interconnect locations available to the specified project.
       operationId: compute.interconnectLocations.list
@@ -7733,7 +7892,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/interconnectLocations/{interconnectLocation}":
+  "/projects/{project}/global/interconnectLocations/{interconnectLocation}":
     get:
       description: Returns the details for the specified interconnect location. Gets a list of available interconnect locations by making a list() request.
       operationId: compute.interconnectLocations.get
@@ -7780,7 +7939,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/interconnects":
+  "/projects/{project}/global/interconnects":
     get:
       description: Retrieves the list of interconnect available to the specified project.
       operationId: compute.interconnects.list
@@ -7909,7 +8068,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - interconnects
-  "/{project}/global/interconnects/{interconnect}":
+  "/projects/{project}/global/interconnects/{interconnect}":
     delete:
       description: Deletes the specified interconnect.
       operationId: compute.interconnects.delete
@@ -8053,7 +8212,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - interconnects
-  "/{project}/global/interconnects/{interconnect}/getDiagnostics":
+  "/projects/{project}/global/interconnects/{interconnect}/getDiagnostics":
     get:
       description: Returns the interconnectDiagnostics for the specified interconnect.
       operationId: compute.interconnects.getDiagnostics
@@ -8100,7 +8259,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/licenseCodes/{licenseCode}":
+  "/projects/{project}/global/licenseCodes/{licenseCode}":
     get:
       description: Return a specified license code. License codes are mirrored across all projects that have permissions to read the License Code.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
       operationId: compute.licenseCodes.get
@@ -8147,7 +8306,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/licenseCodes/{resource}/testIamPermissions":
+  "/projects/{project}/global/licenseCodes/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -8199,7 +8358,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - licenseCodes
-  "/{project}/global/licenses":
+  "/projects/{project}/global/licenses":
     get:
       description: Retrieves the list of licenses available in the specified project. This method does not get any licenses that belong to other projects, including licenses attached to publicly-available images, like Debian 9. If you want to get a list of publicly-available licenses, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
       operationId: compute.licenses.list
@@ -8340,7 +8499,7 @@ paths:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - licenses
-  "/{project}/global/licenses/{license}":
+  "/projects/{project}/global/licenses/{license}":
     delete:
       description: Deletes the specified license.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
       operationId: compute.licenses.delete
@@ -8433,7 +8592,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/licenses/{resource}/getIamPolicy":
+  "/projects/{project}/global/licenses/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.  Caution This resource is intended for use only by third-party partners who are creating Cloud Marketplace images.
       operationId: compute.licenses.getIamPolicy
@@ -8485,7 +8644,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/licenses/{resource}/setIamPolicy":
+  "/projects/{project}/global/licenses/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -8533,7 +8692,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - licenses
-  "/{project}/global/licenses/{resource}/testIamPermissions":
+  "/projects/{project}/global/licenses/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -8585,7 +8744,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - licenses
-  "/{project}/global/networkEndpointGroups":
+  "/projects/{project}/global/networkEndpointGroups":
     get:
       description: Retrieves the list of network endpoint groups that are located in the specified project.
       operationId: compute.globalNetworkEndpointGroups.list
@@ -8714,7 +8873,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - globalNetworkEndpointGroups
-  "/{project}/global/networkEndpointGroups/{networkEndpointGroup}":
+  "/projects/{project}/global/networkEndpointGroups/{networkEndpointGroup}":
     delete:
       description: Deletes the specified network endpoint group.Note that the NEG cannot be deleted if there are backend services referencing it.
       operationId: compute.globalNetworkEndpointGroups.delete
@@ -8807,7 +8966,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/networkEndpointGroups/{networkEndpointGroup}/attachNetworkEndpoints":
+  "/projects/{project}/global/networkEndpointGroups/{networkEndpointGroup}/attachNetworkEndpoints":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -8867,7 +9026,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - globalNetworkEndpointGroups
-  "/{project}/global/networkEndpointGroups/{networkEndpointGroup}/detachNetworkEndpoints":
+  "/projects/{project}/global/networkEndpointGroups/{networkEndpointGroup}/detachNetworkEndpoints":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -8927,7 +9086,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - globalNetworkEndpointGroups
-  "/{project}/global/networkEndpointGroups/{networkEndpointGroup}/listNetworkEndpoints":
+  "/projects/{project}/global/networkEndpointGroups/{networkEndpointGroup}/listNetworkEndpoints":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -9017,7 +9176,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - globalNetworkEndpointGroups
-  "/{project}/global/networks":
+  "/projects/{project}/global/networks":
     get:
       description: Retrieves the list of networks available to the specified project.
       operationId: compute.networks.list
@@ -9146,7 +9305,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - networks
-  "/{project}/global/networks/{network}":
+  "/projects/{project}/global/networks/{network}":
     delete:
       description: Deletes the specified network.
       operationId: compute.networks.delete
@@ -9290,7 +9449,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - networks
-  "/{project}/global/networks/{network}/addPeering":
+  "/projects/{project}/global/networks/{network}/addPeering":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -9350,7 +9509,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - networks
-  "/{project}/global/networks/{network}/listPeeringRoutes":
+  "/projects/{project}/global/networks/{network}/listPeeringRoutes":
     get:
       description: Lists the peering routes exchanged over peering connection.
       operationId: compute.networks.listPeeringRoutes
@@ -9458,7 +9617,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/networks/{network}/removePeering":
+  "/projects/{project}/global/networks/{network}/removePeering":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -9518,7 +9677,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - networks
-  "/{project}/global/networks/{network}/switchToCustomMode":
+  "/projects/{project}/global/networks/{network}/switchToCustomMode":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -9573,7 +9732,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - networks
-  "/{project}/global/networks/{network}/updatePeering":
+  "/projects/{project}/global/networks/{network}/updatePeering":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -9633,7 +9792,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - networks
-  "/{project}/global/operations":
+  "/projects/{project}/global/operations":
     get:
       description: Retrieves a list of Operation resources contained within the specified project.
       operationId: compute.globalOperations.list
@@ -9717,7 +9876,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/operations/{operation}":
+  "/projects/{project}/global/operations/{operation}":
     delete:
       description: Deletes the specified Operations resource.
       operationId: compute.globalOperations.delete
@@ -9794,7 +9953,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/operations/{operation}/wait":
+  "/projects/{project}/global/operations/{operation}/wait":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -9849,7 +10008,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - globalOperations
-  "/{project}/global/routes":
+  "/projects/{project}/global/routes":
     get:
       description: Retrieves the list of Route resources available to the specified project.
       operationId: compute.routes.list
@@ -9978,7 +10137,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - routes
-  "/{project}/global/routes/{route}":
+  "/projects/{project}/global/routes/{route}":
     delete:
       description: Deletes the specified Route resource.
       operationId: compute.routes.delete
@@ -10071,7 +10230,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/securityPolicies":
+  "/projects/{project}/global/securityPolicies":
     get:
       description: List all the policies that have been configured for the specified project.
       operationId: compute.securityPolicies.list
@@ -10200,7 +10359,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - securityPolicies
-  "/{project}/global/securityPolicies/listPreconfiguredExpressionSets":
+  "/projects/{project}/global/securityPolicies/listPreconfiguredExpressionSets":
     get:
       description: Gets the current list of preconfigured Web Application Firewall (WAF) expressions.
       operationId: compute.securityPolicies.listPreconfiguredExpressionSets
@@ -10280,7 +10439,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/securityPolicies/{securityPolicy}":
+  "/projects/{project}/global/securityPolicies/{securityPolicy}":
     delete:
       description: Deletes the specified policy.
       operationId: compute.securityPolicies.delete
@@ -10424,7 +10583,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - securityPolicies
-  "/{project}/global/securityPolicies/{securityPolicy}/addRule":
+  "/projects/{project}/global/securityPolicies/{securityPolicy}/addRule":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -10472,7 +10631,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - securityPolicies
-  "/{project}/global/securityPolicies/{securityPolicy}/getRule":
+  "/projects/{project}/global/securityPolicies/{securityPolicy}/getRule":
     get:
       description: Gets a rule at the specified priority.
       operationId: compute.securityPolicies.getRule
@@ -10524,7 +10683,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/securityPolicies/{securityPolicy}/patchRule":
+  "/projects/{project}/global/securityPolicies/{securityPolicy}/patchRule":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -10577,7 +10736,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - securityPolicies
-  "/{project}/global/securityPolicies/{securityPolicy}/removeRule":
+  "/projects/{project}/global/securityPolicies/{securityPolicy}/removeRule":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -10625,7 +10784,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - securityPolicies
-  "/{project}/global/snapshots":
+  "/projects/{project}/global/snapshots":
     get:
       description: Retrieves the list of Snapshot resources contained within the specified project.
       operationId: compute.snapshots.list
@@ -10709,7 +10868,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/snapshots/{resource}/getIamPolicy":
+  "/projects/{project}/global/snapshots/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.snapshots.getIamPolicy
@@ -10761,7 +10920,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/snapshots/{resource}/setIamPolicy":
+  "/projects/{project}/global/snapshots/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -10809,7 +10968,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - snapshots
-  "/{project}/global/snapshots/{resource}/setLabels":
+  "/projects/{project}/global/snapshots/{resource}/setLabels":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -10857,7 +11016,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - snapshots
-  "/{project}/global/snapshots/{resource}/testIamPermissions":
+  "/projects/{project}/global/snapshots/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -10909,7 +11068,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - snapshots
-  "/{project}/global/snapshots/{snapshot}":
+  "/projects/{project}/global/snapshots/{snapshot}":
     delete:
       description: >-
         Deletes the specified Snapshot resource. Keep in mind that deleting a single snapshot might not necessarily delete all the data on that snapshot. If any data on the snapshot that is marked for deletion is needed for subsequent snapshots, the data will be moved to the next corresponding snapshot.
@@ -11006,7 +11165,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/sslCertificates":
+  "/projects/{project}/global/sslCertificates":
     get:
       description: Retrieves the list of SslCertificate resources available to the specified project.
       operationId: compute.sslCertificates.list
@@ -11135,7 +11294,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - sslCertificates
-  "/{project}/global/sslCertificates/{sslCertificate}":
+  "/projects/{project}/global/sslCertificates/{sslCertificate}":
     delete:
       description: Deletes the specified SslCertificate resource.
       operationId: compute.sslCertificates.delete
@@ -11228,7 +11387,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/sslPolicies":
+  "/projects/{project}/global/sslPolicies":
     get:
       description: Lists all the SSL policies that have been configured for the specified project.
       operationId: compute.sslPolicies.list
@@ -11357,7 +11516,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - sslPolicies
-  "/{project}/global/sslPolicies/listAvailableFeatures":
+  "/projects/{project}/global/sslPolicies/listAvailableFeatures":
     get:
       description: Lists all features that can be specified in the SSL policy when using custom profile.
       operationId: compute.sslPolicies.listAvailableFeatures
@@ -11441,7 +11600,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/sslPolicies/{sslPolicy}":
+  "/projects/{project}/global/sslPolicies/{sslPolicy}":
     delete:
       description: Deletes the specified SSL policy. The SSL policy resource can be deleted only if it is not in use by any TargetHttpsProxy or TargetSslProxy resources.
       operationId: compute.sslPolicies.delete
@@ -11585,7 +11744,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - sslPolicies
-  "/{project}/global/targetGrpcProxies":
+  "/projects/{project}/global/targetGrpcProxies":
     get:
       description: Lists the TargetGrpcProxies for a project in the given scope.
       operationId: compute.targetGrpcProxies.list
@@ -11714,7 +11873,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetGrpcProxies
-  "/{project}/global/targetGrpcProxies/{targetGrpcProxy}":
+  "/projects/{project}/global/targetGrpcProxies/{targetGrpcProxy}":
     delete:
       description: Deletes the specified TargetGrpcProxy in the given scope
       operationId: compute.targetGrpcProxies.delete
@@ -11858,7 +12017,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetGrpcProxies
-  "/{project}/global/targetHttpProxies":
+  "/projects/{project}/global/targetHttpProxies":
     get:
       description: Retrieves the list of TargetHttpProxy resources available to the specified project.
       operationId: compute.targetHttpProxies.list
@@ -11987,7 +12146,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetHttpProxies
-  "/{project}/global/targetHttpProxies/{targetHttpProxy}":
+  "/projects/{project}/global/targetHttpProxies/{targetHttpProxy}":
     delete:
       description: Deletes the specified TargetHttpProxy resource.
       operationId: compute.targetHttpProxies.delete
@@ -12131,7 +12290,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetHttpProxies
-  "/{project}/global/targetHttpsProxies":
+  "/projects/{project}/global/targetHttpsProxies":
     get:
       description: Retrieves the list of TargetHttpsProxy resources available to the specified project.
       operationId: compute.targetHttpsProxies.list
@@ -12260,7 +12419,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetHttpsProxies
-  "/{project}/global/targetHttpsProxies/{targetHttpsProxy}":
+  "/projects/{project}/global/targetHttpsProxies/{targetHttpsProxy}":
     delete:
       description: Deletes the specified TargetHttpsProxy resource.
       operationId: compute.targetHttpsProxies.delete
@@ -12353,7 +12512,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/targetHttpsProxies/{targetHttpsProxy}/setQuicOverride":
+  "/projects/{project}/global/targetHttpsProxies/{targetHttpsProxy}/setQuicOverride":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -12413,7 +12572,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetHttpsProxies
-  "/{project}/global/targetHttpsProxies/{targetHttpsProxy}/setSslPolicy":
+  "/projects/{project}/global/targetHttpsProxies/{targetHttpsProxy}/setSslPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -12473,7 +12632,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetHttpsProxies
-  "/{project}/global/targetSslProxies":
+  "/projects/{project}/global/targetSslProxies":
     get:
       description: Retrieves the list of TargetSslProxy resources available to the specified project.
       operationId: compute.targetSslProxies.list
@@ -12602,7 +12761,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetSslProxies
-  "/{project}/global/targetSslProxies/{targetSslProxy}":
+  "/projects/{project}/global/targetSslProxies/{targetSslProxy}":
     delete:
       description: Deletes the specified TargetSslProxy resource.
       operationId: compute.targetSslProxies.delete
@@ -12695,7 +12854,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/targetSslProxies/{targetSslProxy}/setBackendService":
+  "/projects/{project}/global/targetSslProxies/{targetSslProxy}/setBackendService":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -12755,7 +12914,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetSslProxies
-  "/{project}/global/targetSslProxies/{targetSslProxy}/setProxyHeader":
+  "/projects/{project}/global/targetSslProxies/{targetSslProxy}/setProxyHeader":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -12815,7 +12974,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetSslProxies
-  "/{project}/global/targetSslProxies/{targetSslProxy}/setSslCertificates":
+  "/projects/{project}/global/targetSslProxies/{targetSslProxy}/setSslCertificates":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -12875,7 +13034,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetSslProxies
-  "/{project}/global/targetSslProxies/{targetSslProxy}/setSslPolicy":
+  "/projects/{project}/global/targetSslProxies/{targetSslProxy}/setSslPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -12935,7 +13094,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetSslProxies
-  "/{project}/global/targetTcpProxies":
+  "/projects/{project}/global/targetTcpProxies":
     get:
       description: Retrieves the list of TargetTcpProxy resources available to the specified project.
       operationId: compute.targetTcpProxies.list
@@ -13064,7 +13223,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetTcpProxies
-  "/{project}/global/targetTcpProxies/{targetTcpProxy}":
+  "/projects/{project}/global/targetTcpProxies/{targetTcpProxy}":
     delete:
       description: Deletes the specified TargetTcpProxy resource.
       operationId: compute.targetTcpProxies.delete
@@ -13157,7 +13316,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/global/targetTcpProxies/{targetTcpProxy}/setBackendService":
+  "/projects/{project}/global/targetTcpProxies/{targetTcpProxy}/setBackendService":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -13217,7 +13376,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetTcpProxies
-  "/{project}/global/targetTcpProxies/{targetTcpProxy}/setProxyHeader":
+  "/projects/{project}/global/targetTcpProxies/{targetTcpProxy}/setProxyHeader":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -13277,7 +13436,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetTcpProxies
-  "/{project}/global/urlMaps":
+  "/projects/{project}/global/urlMaps":
     get:
       description: Retrieves the list of UrlMap resources available to the specified project.
       operationId: compute.urlMaps.list
@@ -13406,7 +13565,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - urlMaps
-  "/{project}/global/urlMaps/{urlMap}":
+  "/projects/{project}/global/urlMaps/{urlMap}":
     delete:
       description: Deletes the specified UrlMap resource.
       operationId: compute.urlMaps.delete
@@ -13601,7 +13760,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - urlMaps
-  "/{project}/global/urlMaps/{urlMap}/invalidateCache":
+  "/projects/{project}/global/urlMaps/{urlMap}/invalidateCache":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -13665,7 +13824,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - urlMaps
-  "/{project}/global/urlMaps/{urlMap}/validate":
+  "/projects/{project}/global/urlMaps/{urlMap}/validate":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -13713,7 +13872,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - urlMaps
-  "/{project}/listXpnHosts":
+  "/projects/{project}/listXpnHosts":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -13798,7 +13957,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - projects
-  "/{project}/moveDisk":
+  "/projects/{project}/moveDisk":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -13852,7 +14011,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - projects
-  "/{project}/moveInstance":
+  "/projects/{project}/moveInstance":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -13906,7 +14065,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - projects
-  "/{project}/regions":
+  "/projects/{project}/regions":
     get:
       description: Retrieves the list of region resources available to the specified project.
       operationId: compute.regions.list
@@ -13990,7 +14149,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}":
+  "/projects/{project}/regions/{region}":
     get:
       description: Returns the specified Region resource. Gets a list of available regions by making a list() request.
       operationId: compute.regions.get
@@ -14037,7 +14196,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/addresses":
+  "/projects/{project}/regions/{region}/addresses":
     get:
       description: Retrieves a list of addresses contained within the specified region.
       operationId: compute.addresses.list
@@ -14178,7 +14337,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - addresses
-  "/{project}/regions/{region}/addresses/{address}":
+  "/projects/{project}/regions/{region}/addresses/{address}":
     delete:
       description: Deletes the specified address resource.
       operationId: compute.addresses.delete
@@ -14283,7 +14442,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/autoscalers":
+  "/projects/{project}/regions/{region}/autoscalers":
     get:
       description: Retrieves a list of autoscalers contained within the specified region.
       operationId: compute.regionAutoscalers.list
@@ -14536,7 +14695,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionAutoscalers
-  "/{project}/regions/{region}/autoscalers/{autoscaler}":
+  "/projects/{project}/regions/{region}/autoscalers/{autoscaler}":
     delete:
       description: Deletes the specified autoscaler.
       operationId: compute.regionAutoscalers.delete
@@ -14641,7 +14800,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/backendServices":
+  "/projects/{project}/regions/{region}/backendServices":
     get:
       description: Retrieves the list of regional BackendService resources available to the specified project in the given region.
       operationId: compute.regionBackendServices.list
@@ -14782,7 +14941,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionBackendServices
-  "/{project}/regions/{region}/backendServices/{backendService}":
+  "/projects/{project}/regions/{region}/backendServices/{backendService}":
     delete:
       description: Deletes the specified regional BackendService resource.
       operationId: compute.regionBackendServices.delete
@@ -15001,7 +15160,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionBackendServices
-  "/{project}/regions/{region}/backendServices/{backendService}/getHealth":
+  "/projects/{project}/regions/{region}/backendServices/{backendService}/getHealth":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -15058,7 +15217,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionBackendServices
-  "/{project}/regions/{region}/commitments":
+  "/projects/{project}/regions/{region}/commitments":
     get:
       description: Retrieves a list of commitments contained within the specified region.
       operationId: compute.regionCommitments.list
@@ -15199,7 +15358,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionCommitments
-  "/{project}/regions/{region}/commitments/{commitment}":
+  "/projects/{project}/regions/{region}/commitments/{commitment}":
     get:
       description: Returns the specified commitment resource. Gets a list of available commitments by making a list() request.
       operationId: compute.regionCommitments.get
@@ -15252,7 +15411,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/diskTypes":
+  "/projects/{project}/regions/{region}/diskTypes":
     get:
       description: Retrieves a list of regional disk types available to the specified project.
       operationId: compute.regionDiskTypes.list
@@ -15342,7 +15501,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/diskTypes/{diskType}":
+  "/projects/{project}/regions/{region}/diskTypes/{diskType}":
     get:
       description: Returns the specified regional disk type. Gets a list of available disk types by making a list() request.
       operationId: compute.regionDiskTypes.get
@@ -15395,7 +15554,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/disks":
+  "/projects/{project}/regions/{region}/disks":
     get:
       description: Retrieves the list of persistent disks contained within the specified region.
       operationId: compute.regionDisks.list
@@ -15541,7 +15700,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionDisks
-  "/{project}/regions/{region}/disks/{disk}":
+  "/projects/{project}/regions/{region}/disks/{disk}":
     delete:
       description: Deletes the specified regional persistent disk. Deleting a regional disk removes all the replicas of its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
       operationId: compute.regionDisks.delete
@@ -15646,7 +15805,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/disks/{disk}/addResourcePolicies":
+  "/projects/{project}/regions/{region}/disks/{disk}/addResourcePolicies":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -15712,7 +15871,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionDisks
-  "/{project}/regions/{region}/disks/{disk}/createSnapshot":
+  "/projects/{project}/regions/{region}/disks/{disk}/createSnapshot":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -15778,7 +15937,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionDisks
-  "/{project}/regions/{region}/disks/{disk}/removeResourcePolicies":
+  "/projects/{project}/regions/{region}/disks/{disk}/removeResourcePolicies":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -15844,7 +16003,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionDisks
-  "/{project}/regions/{region}/disks/{disk}/resize":
+  "/projects/{project}/regions/{region}/disks/{disk}/resize":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -15910,7 +16069,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionDisks
-  "/{project}/regions/{region}/disks/{resource}/getIamPolicy":
+  "/projects/{project}/regions/{region}/disks/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.regionDisks.getIamPolicy
@@ -15968,7 +16127,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/disks/{resource}/setIamPolicy":
+  "/projects/{project}/regions/{region}/disks/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -16022,7 +16181,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionDisks
-  "/{project}/regions/{region}/disks/{resource}/setLabels":
+  "/projects/{project}/regions/{region}/disks/{resource}/setLabels":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -16088,7 +16247,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionDisks
-  "/{project}/regions/{region}/disks/{resource}/testIamPermissions":
+  "/projects/{project}/regions/{region}/disks/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -16146,7 +16305,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionDisks
-  "/{project}/regions/{region}/forwardingRules":
+  "/projects/{project}/regions/{region}/forwardingRules":
     get:
       description: Retrieves a list of ForwardingRule resources available to the specified project and region.
       operationId: compute.forwardingRules.list
@@ -16287,7 +16446,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - forwardingRules
-  "/{project}/regions/{region}/forwardingRules/{forwardingRule}":
+  "/projects/{project}/regions/{region}/forwardingRules/{forwardingRule}":
     delete:
       description: Deletes the specified ForwardingRule resource.
       operationId: compute.forwardingRules.delete
@@ -16449,7 +16608,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - forwardingRules
-  "/{project}/regions/{region}/forwardingRules/{forwardingRule}/setTarget":
+  "/projects/{project}/regions/{region}/forwardingRules/{forwardingRule}/setTarget":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -16515,7 +16674,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - forwardingRules
-  "/{project}/regions/{region}/healthCheckServices":
+  "/projects/{project}/regions/{region}/healthCheckServices":
     get:
       description: Lists all the HealthCheckService resources that have been configured for the specified project in the given region.
       operationId: compute.regionHealthCheckServices.list
@@ -16656,7 +16815,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionHealthCheckServices
-  "/{project}/regions/{region}/healthCheckServices/{healthCheckService}":
+  "/projects/{project}/regions/{region}/healthCheckServices/{healthCheckService}":
     delete:
       description: Deletes the specified regional HealthCheckService.
       operationId: compute.regionHealthCheckServices.delete
@@ -16818,7 +16977,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionHealthCheckServices
-  "/{project}/regions/{region}/healthChecks":
+  "/projects/{project}/regions/{region}/healthChecks":
     get:
       description: Retrieves the list of HealthCheck resources available to the specified project.
       operationId: compute.regionHealthChecks.list
@@ -16959,7 +17118,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionHealthChecks
-  "/{project}/regions/{region}/healthChecks/{healthCheck}":
+  "/projects/{project}/regions/{region}/healthChecks/{healthCheck}":
     delete:
       description: Deletes the specified HealthCheck resource.
       operationId: compute.regionHealthChecks.delete
@@ -17178,7 +17337,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionHealthChecks
-  "/{project}/regions/{region}/instanceGroupManagers":
+  "/projects/{project}/regions/{region}/instanceGroupManagers":
     get:
       description: Retrieves the list of managed instance groups that are contained within the specified region.
       operationId: compute.regionInstanceGroupManagers.list
@@ -17323,7 +17482,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}":
     delete:
       description: Deletes the specified managed instance group and all of the instances in that group.
       operationId: compute.regionInstanceGroupManagers.delete
@@ -17485,7 +17644,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/abandonInstances":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/abandonInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -17558,7 +17717,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/applyUpdatesToInstances":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/applyUpdatesToInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -17612,7 +17771,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/createInstances":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/createInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -17678,7 +17837,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/deleteInstances":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/deleteInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -17751,7 +17910,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/deletePerInstanceConfigs":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/deletePerInstanceConfigs":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -17805,7 +17964,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/listErrors":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/listErrors":
     get:
       description: Lists all errors thrown by actions on instances for a given regional managed instance group. The filter and orderBy query parameters are not supported.
       operationId: compute.regionInstanceGroupManagers.listErrors
@@ -17901,7 +18060,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/listManagedInstances":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/listManagedInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -17997,7 +18156,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/listPerInstanceConfigs":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/listPerInstanceConfigs":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -18093,7 +18252,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/patchPerInstanceConfigs":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/patchPerInstanceConfigs":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -18159,7 +18318,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/recreateInstances":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/recreateInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -18232,7 +18391,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resize":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/resize":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -18307,7 +18466,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/setInstanceTemplate":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/setInstanceTemplate":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -18373,7 +18532,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/setTargetPools":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/setTargetPools":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -18439,7 +18598,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/updatePerInstanceConfigs":
+  "/projects/{project}/regions/{region}/instanceGroupManagers/{instanceGroupManager}/updatePerInstanceConfigs":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -18505,7 +18664,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroupManagers
-  "/{project}/regions/{region}/instanceGroups":
+  "/projects/{project}/regions/{region}/instanceGroups":
     get:
       description: Retrieves the list of instance group resources contained within the specified region.
       operationId: compute.regionInstanceGroups.list
@@ -18595,7 +18754,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/instanceGroups/{instanceGroup}":
+  "/projects/{project}/regions/{region}/instanceGroups/{instanceGroup}":
     get:
       description: Returns the specified instance group resource.
       operationId: compute.regionInstanceGroups.get
@@ -18648,7 +18807,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/instanceGroups/{instanceGroup}/listInstances":
+  "/projects/{project}/regions/{region}/instanceGroups/{instanceGroup}/listInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -18749,7 +18908,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionInstanceGroups
-  "/{project}/regions/{region}/instanceGroups/{instanceGroup}/setNamedPorts":
+  "/projects/{project}/regions/{region}/instanceGroups/{instanceGroup}/setNamedPorts":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -18815,7 +18974,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionInstanceGroups
-  "/{project}/regions/{region}/interconnectAttachments":
+  "/projects/{project}/regions/{region}/interconnectAttachments":
     get:
       description: Retrieves the list of interconnect attachments contained within the specified region.
       operationId: compute.interconnectAttachments.list
@@ -18961,7 +19120,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - interconnectAttachments
-  "/{project}/regions/{region}/interconnectAttachments/{interconnectAttachment}":
+  "/projects/{project}/regions/{region}/interconnectAttachments/{interconnectAttachment}":
     delete:
       description: Deletes the specified interconnect attachment.
       operationId: compute.interconnectAttachments.delete
@@ -19123,7 +19282,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - interconnectAttachments
-  "/{project}/regions/{region}/networkEndpointGroups":
+  "/projects/{project}/regions/{region}/networkEndpointGroups":
     get:
       description: Retrieves the list of regional network endpoint groups available to the specified project in the given region.
       operationId: compute.regionNetworkEndpointGroups.list
@@ -19264,7 +19423,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionNetworkEndpointGroups
-  "/{project}/regions/{region}/networkEndpointGroups/{networkEndpointGroup}":
+  "/projects/{project}/regions/{region}/networkEndpointGroups/{networkEndpointGroup}":
     delete:
       description: Deletes the specified network endpoint group. Note that the NEG cannot be deleted if it is configured as a backend of a backend service.
       operationId: compute.regionNetworkEndpointGroups.delete
@@ -19369,7 +19528,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/nodeTemplates":
+  "/projects/{project}/regions/{region}/nodeTemplates":
     get:
       description: Retrieves a list of node templates available to the specified project.
       operationId: compute.nodeTemplates.list
@@ -19510,7 +19669,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeTemplates
-  "/{project}/regions/{region}/nodeTemplates/{nodeTemplate}":
+  "/projects/{project}/regions/{region}/nodeTemplates/{nodeTemplate}":
     delete:
       description: Deletes the specified NodeTemplate resource.
       operationId: compute.nodeTemplates.delete
@@ -19615,7 +19774,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/nodeTemplates/{resource}/getIamPolicy":
+  "/projects/{project}/regions/{region}/nodeTemplates/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.nodeTemplates.getIamPolicy
@@ -19673,7 +19832,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/nodeTemplates/{resource}/setIamPolicy":
+  "/projects/{project}/regions/{region}/nodeTemplates/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -19727,7 +19886,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeTemplates
-  "/{project}/regions/{region}/nodeTemplates/{resource}/testIamPermissions":
+  "/projects/{project}/regions/{region}/nodeTemplates/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -19785,7 +19944,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - nodeTemplates
-  "/{project}/regions/{region}/notificationEndpoints":
+  "/projects/{project}/regions/{region}/notificationEndpoints":
     get:
       description: Lists the NotificationEndpoints for a project in the given region.
       operationId: compute.regionNotificationEndpoints.list
@@ -19926,7 +20085,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionNotificationEndpoints
-  "/{project}/regions/{region}/notificationEndpoints/{notificationEndpoint}":
+  "/projects/{project}/regions/{region}/notificationEndpoints/{notificationEndpoint}":
     delete:
       description: Deletes the specified NotificationEndpoint in the given region
       operationId: compute.regionNotificationEndpoints.delete
@@ -20031,7 +20190,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/operations":
+  "/projects/{project}/regions/{region}/operations":
     get:
       description: Retrieves a list of Operation resources contained within the specified region.
       operationId: compute.regionOperations.list
@@ -20121,7 +20280,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/operations/{operation}":
+  "/projects/{project}/regions/{region}/operations/{operation}":
     delete:
       description: Deletes the specified region-specific Operations resource.
       operationId: compute.regionOperations.delete
@@ -20210,7 +20369,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/operations/{operation}/wait":
+  "/projects/{project}/regions/{region}/operations/{operation}/wait":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -20271,7 +20430,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - regionOperations
-  "/{project}/regions/{region}/packetMirrorings":
+  "/projects/{project}/regions/{region}/packetMirrorings":
     get:
       description: Retrieves a list of PacketMirroring resources available to the specified project and region.
       operationId: compute.packetMirrorings.list
@@ -20412,7 +20571,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - packetMirrorings
-  "/{project}/regions/{region}/packetMirrorings/{packetMirroring}":
+  "/projects/{project}/regions/{region}/packetMirrorings/{packetMirroring}":
     delete:
       description: Deletes the specified PacketMirroring resource.
       operationId: compute.packetMirrorings.delete
@@ -20574,7 +20733,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - packetMirrorings
-  "/{project}/regions/{region}/packetMirrorings/{resource}/testIamPermissions":
+  "/projects/{project}/regions/{region}/packetMirrorings/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -20632,7 +20791,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - packetMirrorings
-  "/{project}/regions/{region}/resourcePolicies":
+  "/projects/{project}/regions/{region}/resourcePolicies":
     get:
       description: A list all the resource policies that have been configured for the specified project in specified region.
       operationId: compute.resourcePolicies.list
@@ -20773,7 +20932,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - resourcePolicies
-  "/{project}/regions/{region}/resourcePolicies/{resourcePolicy}":
+  "/projects/{project}/regions/{region}/resourcePolicies/{resourcePolicy}":
     delete:
       description: Deletes the specified resource policy.
       operationId: compute.resourcePolicies.delete
@@ -20878,7 +21037,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/resourcePolicies/{resource}/getIamPolicy":
+  "/projects/{project}/regions/{region}/resourcePolicies/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.resourcePolicies.getIamPolicy
@@ -20936,7 +21095,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/resourcePolicies/{resource}/setIamPolicy":
+  "/projects/{project}/regions/{region}/resourcePolicies/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -20990,7 +21149,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - resourcePolicies
-  "/{project}/regions/{region}/resourcePolicies/{resource}/testIamPermissions":
+  "/projects/{project}/regions/{region}/resourcePolicies/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -21048,7 +21207,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - resourcePolicies
-  "/{project}/regions/{region}/routers":
+  "/projects/{project}/regions/{region}/routers":
     get:
       description: Retrieves a list of Router resources available to the specified project.
       operationId: compute.routers.list
@@ -21189,7 +21348,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - routers
-  "/{project}/regions/{region}/routers/{router}":
+  "/projects/{project}/regions/{region}/routers/{router}":
     delete:
       description: Deletes the specified Router resource.
       operationId: compute.routers.delete
@@ -21408,7 +21567,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - routers
-  "/{project}/regions/{region}/routers/{router}/getNatMappingInfo":
+  "/projects/{project}/regions/{region}/routers/{router}/getNatMappingInfo":
     get:
       description: Retrieves runtime Nat mapping information of VM endpoints.
       operationId: compute.routers.getNatMappingInfo
@@ -21504,7 +21663,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/routers/{router}/getRouterStatus":
+  "/projects/{project}/regions/{region}/routers/{router}/getRouterStatus":
     get:
       description: Retrieves runtime information of the specified router.
       operationId: compute.routers.getRouterStatus
@@ -21557,7 +21716,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/routers/{router}/preview":
+  "/projects/{project}/regions/{region}/routers/{router}/preview":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -21615,7 +21774,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - routers
-  "/{project}/regions/{region}/sslCertificates":
+  "/projects/{project}/regions/{region}/sslCertificates":
     get:
       description: Retrieves the list of SslCertificate resources available to the specified project in the specified region.
       operationId: compute.regionSslCertificates.list
@@ -21756,7 +21915,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionSslCertificates
-  "/{project}/regions/{region}/sslCertificates/{sslCertificate}":
+  "/projects/{project}/regions/{region}/sslCertificates/{sslCertificate}":
     delete:
       description: Deletes the specified SslCertificate resource in the region.
       operationId: compute.regionSslCertificates.delete
@@ -21861,7 +22020,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/subnetworks":
+  "/projects/{project}/regions/{region}/subnetworks":
     get:
       description: Retrieves a list of subnetworks available to the specified project.
       operationId: compute.subnetworks.list
@@ -22002,7 +22161,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - subnetworks
-  "/{project}/regions/{region}/subnetworks/{resource}/getIamPolicy":
+  "/projects/{project}/regions/{region}/subnetworks/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.subnetworks.getIamPolicy
@@ -22060,7 +22219,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/subnetworks/{resource}/setIamPolicy":
+  "/projects/{project}/regions/{region}/subnetworks/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -22114,7 +22273,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - subnetworks
-  "/{project}/regions/{region}/subnetworks/{resource}/testIamPermissions":
+  "/projects/{project}/regions/{region}/subnetworks/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -22172,7 +22331,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - subnetworks
-  "/{project}/regions/{region}/subnetworks/{subnetwork}":
+  "/projects/{project}/regions/{region}/subnetworks/{subnetwork}":
     delete:
       description: Deletes the specified subnetwork.
       operationId: compute.subnetworks.delete
@@ -22278,7 +22437,7 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
     patch:
-      description: Patches the specified subnetwork with the data included in the request. Only certain fields can up updated with a patch request as indicated in the field descriptions. You must specify the current fingerprint of the subnetwork resource being patched.
+      description: Patches the specified subnetwork with the data included in the request. Only certain fields can be updated with a patch request as indicated in the field descriptions. You must specify the current fingerprint of the subnetwork resource being patched.
       operationId: compute.subnetworks.patch
       parameters:
         - description: Project ID for this request.
@@ -22339,7 +22498,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - subnetworks
-  "/{project}/regions/{region}/subnetworks/{subnetwork}/expandIpCidrRange":
+  "/projects/{project}/regions/{region}/subnetworks/{subnetwork}/expandIpCidrRange":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -22405,7 +22564,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - subnetworks
-  "/{project}/regions/{region}/subnetworks/{subnetwork}/setPrivateIpGoogleAccess":
+  "/projects/{project}/regions/{region}/subnetworks/{subnetwork}/setPrivateIpGoogleAccess":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -22471,7 +22630,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - subnetworks
-  "/{project}/regions/{region}/targetHttpProxies":
+  "/projects/{project}/regions/{region}/targetHttpProxies":
     get:
       description: Retrieves the list of TargetHttpProxy resources available to the specified project in the specified region.
       operationId: compute.regionTargetHttpProxies.list
@@ -22612,7 +22771,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionTargetHttpProxies
-  "/{project}/regions/{region}/targetHttpProxies/{targetHttpProxy}":
+  "/projects/{project}/regions/{region}/targetHttpProxies/{targetHttpProxy}":
     delete:
       description: Deletes the specified TargetHttpProxy resource.
       operationId: compute.regionTargetHttpProxies.delete
@@ -22717,7 +22876,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/targetHttpProxies/{targetHttpProxy}/setUrlMap":
+  "/projects/{project}/regions/{region}/targetHttpProxies/{targetHttpProxy}/setUrlMap":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -22783,7 +22942,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionTargetHttpProxies
-  "/{project}/regions/{region}/targetHttpsProxies":
+  "/projects/{project}/regions/{region}/targetHttpsProxies":
     get:
       description: Retrieves the list of TargetHttpsProxy resources available to the specified project in the specified region.
       operationId: compute.regionTargetHttpsProxies.list
@@ -22924,7 +23083,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionTargetHttpsProxies
-  "/{project}/regions/{region}/targetHttpsProxies/{targetHttpsProxy}":
+  "/projects/{project}/regions/{region}/targetHttpsProxies/{targetHttpsProxy}":
     delete:
       description: Deletes the specified TargetHttpsProxy resource.
       operationId: compute.regionTargetHttpsProxies.delete
@@ -23029,7 +23188,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/targetHttpsProxies/{targetHttpsProxy}/setSslCertificates":
+  "/projects/{project}/regions/{region}/targetHttpsProxies/{targetHttpsProxy}/setSslCertificates":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -23095,7 +23254,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionTargetHttpsProxies
-  "/{project}/regions/{region}/targetHttpsProxies/{targetHttpsProxy}/setUrlMap":
+  "/projects/{project}/regions/{region}/targetHttpsProxies/{targetHttpsProxy}/setUrlMap":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -23161,7 +23320,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionTargetHttpsProxies
-  "/{project}/regions/{region}/targetPools":
+  "/projects/{project}/regions/{region}/targetPools":
     get:
       description: Retrieves a list of target pools available to the specified project and region.
       operationId: compute.targetPools.list
@@ -23302,7 +23461,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetPools
-  "/{project}/regions/{region}/targetPools/{targetPool}":
+  "/projects/{project}/regions/{region}/targetPools/{targetPool}":
     delete:
       description: Deletes the specified target pool.
       operationId: compute.targetPools.delete
@@ -23407,7 +23566,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/targetPools/{targetPool}/addHealthCheck":
+  "/projects/{project}/regions/{region}/targetPools/{targetPool}/addHealthCheck":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -23473,7 +23632,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetPools
-  "/{project}/regions/{region}/targetPools/{targetPool}/addInstance":
+  "/projects/{project}/regions/{region}/targetPools/{targetPool}/addInstance":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -23539,7 +23698,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetPools
-  "/{project}/regions/{region}/targetPools/{targetPool}/getHealth":
+  "/projects/{project}/regions/{region}/targetPools/{targetPool}/getHealth":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -23597,7 +23756,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - targetPools
-  "/{project}/regions/{region}/targetPools/{targetPool}/removeHealthCheck":
+  "/projects/{project}/regions/{region}/targetPools/{targetPool}/removeHealthCheck":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -23663,7 +23822,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetPools
-  "/{project}/regions/{region}/targetPools/{targetPool}/removeInstance":
+  "/projects/{project}/regions/{region}/targetPools/{targetPool}/removeInstance":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -23729,7 +23888,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetPools
-  "/{project}/regions/{region}/targetPools/{targetPool}/setBackup":
+  "/projects/{project}/regions/{region}/targetPools/{targetPool}/setBackup":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -23800,7 +23959,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetPools
-  "/{project}/regions/{region}/targetVpnGateways":
+  "/projects/{project}/regions/{region}/targetVpnGateways":
     get:
       description: Retrieves a list of target VPN gateways available to the specified project and region.
       operationId: compute.targetVpnGateways.list
@@ -23941,7 +24100,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetVpnGateways
-  "/{project}/regions/{region}/targetVpnGateways/{targetVpnGateway}":
+  "/projects/{project}/regions/{region}/targetVpnGateways/{targetVpnGateway}":
     delete:
       description: Deletes the specified target VPN gateway.
       operationId: compute.targetVpnGateways.delete
@@ -24046,7 +24205,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/urlMaps":
+  "/projects/{project}/regions/{region}/urlMaps":
     get:
       description: Retrieves the list of UrlMap resources available to the specified project in the specified region.
       operationId: compute.regionUrlMaps.list
@@ -24180,7 +24339,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionUrlMaps
-  "/{project}/regions/{region}/urlMaps/{urlMap}":
+  "/projects/{project}/regions/{region}/urlMaps/{urlMap}":
     delete:
       description: Deletes the specified UrlMap resource.
       operationId: compute.regionUrlMaps.delete
@@ -24378,7 +24537,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionUrlMaps
-  "/{project}/regions/{region}/urlMaps/{urlMap}/validate":
+  "/projects/{project}/regions/{region}/urlMaps/{urlMap}/validate":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -24432,7 +24591,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - regionUrlMaps
-  "/{project}/regions/{region}/vpnGateways":
+  "/projects/{project}/regions/{region}/vpnGateways":
     get:
       description: Retrieves a list of VPN gateways available to the specified project and region.
       operationId: compute.vpnGateways.list
@@ -24573,7 +24732,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - vpnGateways
-  "/{project}/regions/{region}/vpnGateways/{resource}/setLabels":
+  "/projects/{project}/regions/{region}/vpnGateways/{resource}/setLabels":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -24639,7 +24798,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - vpnGateways
-  "/{project}/regions/{region}/vpnGateways/{resource}/testIamPermissions":
+  "/projects/{project}/regions/{region}/vpnGateways/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -24697,7 +24856,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - vpnGateways
-  "/{project}/regions/{region}/vpnGateways/{vpnGateway}":
+  "/projects/{project}/regions/{region}/vpnGateways/{vpnGateway}":
     delete:
       description: Deletes the specified VPN gateway.
       operationId: compute.vpnGateways.delete
@@ -24802,7 +24961,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/vpnGateways/{vpnGateway}/getStatus":
+  "/projects/{project}/regions/{region}/vpnGateways/{vpnGateway}/getStatus":
     get:
       description: Returns the status for the specified VPN gateway.
       operationId: compute.vpnGateways.getStatus
@@ -24855,7 +25014,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/regions/{region}/vpnTunnels":
+  "/projects/{project}/regions/{region}/vpnTunnels":
     get:
       description: Retrieves a list of VpnTunnel resources contained in the specified project and region.
       operationId: compute.vpnTunnels.list
@@ -24996,7 +25155,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - vpnTunnels
-  "/{project}/regions/{region}/vpnTunnels/{vpnTunnel}":
+  "/projects/{project}/regions/{region}/vpnTunnels/{vpnTunnel}":
     delete:
       description: Deletes the specified VpnTunnel resource.
       operationId: compute.vpnTunnels.delete
@@ -25101,7 +25260,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/setCommonInstanceMetadata":
+  "/projects/{project}/setCommonInstanceMetadata":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -25155,7 +25314,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - projects
-  "/{project}/setDefaultNetworkTier":
+  "/projects/{project}/setDefaultNetworkTier":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -25209,7 +25368,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - projects
-  "/{project}/setUsageExportBucket":
+  "/projects/{project}/setUsageExportBucket":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -25275,7 +25434,7 @@ paths:
             - https://www.googleapis.com/auth/devstorage.read_write
       tags:
         - projects
-  "/{project}/targetHttpProxies/{targetHttpProxy}/setUrlMap":
+  "/projects/{project}/targetHttpProxies/{targetHttpProxy}/setUrlMap":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -25335,7 +25494,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetHttpProxies
-  "/{project}/targetHttpsProxies/{targetHttpsProxy}/setSslCertificates":
+  "/projects/{project}/targetHttpsProxies/{targetHttpsProxy}/setSslCertificates":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -25395,7 +25554,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetHttpsProxies
-  "/{project}/targetHttpsProxies/{targetHttpsProxy}/setUrlMap":
+  "/projects/{project}/targetHttpsProxies/{targetHttpsProxy}/setUrlMap":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -25455,7 +25614,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetHttpsProxies
-  "/{project}/zones":
+  "/projects/{project}/zones":
     get:
       description: Retrieves the list of Zone resources available to the specified project.
       operationId: compute.zones.list
@@ -25539,7 +25698,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}":
+  "/projects/{project}/zones/{zone}":
     get:
       description: Returns the specified Zone resource. Gets a list of available zones by making a list() request.
       operationId: compute.zones.get
@@ -25586,7 +25745,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/acceleratorTypes":
+  "/projects/{project}/zones/{zone}/acceleratorTypes":
     get:
       description: Retrieves a list of accelerator types that are available to the specified project.
       operationId: compute.acceleratorTypes.list
@@ -25676,7 +25835,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/acceleratorTypes/{acceleratorType}":
+  "/projects/{project}/zones/{zone}/acceleratorTypes/{acceleratorType}":
     get:
       description: Returns the specified accelerator type.
       operationId: compute.acceleratorTypes.get
@@ -25729,7 +25888,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/autoscalers":
+  "/projects/{project}/zones/{zone}/autoscalers":
     get:
       description: Retrieves a list of autoscalers contained within the specified zone.
       operationId: compute.autoscalers.list
@@ -25982,7 +26141,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - autoscalers
-  "/{project}/zones/{zone}/autoscalers/{autoscaler}":
+  "/projects/{project}/zones/{zone}/autoscalers/{autoscaler}":
     delete:
       description: Deletes the specified autoscaler.
       operationId: compute.autoscalers.delete
@@ -26087,7 +26246,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/diskTypes":
+  "/projects/{project}/zones/{zone}/diskTypes":
     get:
       description: Retrieves a list of disk types available to the specified project.
       operationId: compute.diskTypes.list
@@ -26177,7 +26336,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/diskTypes/{diskType}":
+  "/projects/{project}/zones/{zone}/diskTypes/{diskType}":
     get:
       description: Returns the specified disk type. Gets a list of available disk types by making a list() request.
       operationId: compute.diskTypes.get
@@ -26230,7 +26389,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/disks":
+  "/projects/{project}/zones/{zone}/disks":
     get:
       description: Retrieves a list of persistent disks contained within the specified zone.
       operationId: compute.disks.list
@@ -26376,7 +26535,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - disks
-  "/{project}/zones/{zone}/disks/{disk}":
+  "/projects/{project}/zones/{zone}/disks/{disk}":
     delete:
       description: Deletes the specified persistent disk. Deleting a disk removes its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
       operationId: compute.disks.delete
@@ -26481,7 +26640,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/disks/{disk}/addResourcePolicies":
+  "/projects/{project}/zones/{zone}/disks/{disk}/addResourcePolicies":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -26547,7 +26706,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - disks
-  "/{project}/zones/{zone}/disks/{disk}/createSnapshot":
+  "/projects/{project}/zones/{zone}/disks/{disk}/createSnapshot":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -26618,7 +26777,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - disks
-  "/{project}/zones/{zone}/disks/{disk}/removeResourcePolicies":
+  "/projects/{project}/zones/{zone}/disks/{disk}/removeResourcePolicies":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -26684,7 +26843,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - disks
-  "/{project}/zones/{zone}/disks/{disk}/resize":
+  "/projects/{project}/zones/{zone}/disks/{disk}/resize":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -26750,7 +26909,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - disks
-  "/{project}/zones/{zone}/disks/{resource}/getIamPolicy":
+  "/projects/{project}/zones/{zone}/disks/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.disks.getIamPolicy
@@ -26808,7 +26967,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/disks/{resource}/setIamPolicy":
+  "/projects/{project}/zones/{zone}/disks/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -26862,7 +27021,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - disks
-  "/{project}/zones/{zone}/disks/{resource}/setLabels":
+  "/projects/{project}/zones/{zone}/disks/{resource}/setLabels":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -26928,7 +27087,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - disks
-  "/{project}/zones/{zone}/disks/{resource}/testIamPermissions":
+  "/projects/{project}/zones/{zone}/disks/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -26986,7 +27145,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - disks
-  "/{project}/zones/{zone}/instanceGroupManagers":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers":
     get:
       description: Retrieves a list of managed instance groups that are contained within the specified project and zone.
       operationId: compute.instanceGroupManagers.list
@@ -27131,7 +27290,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}":
     delete:
       description: Deletes the specified managed instance group and all of the instances in that group. Note that the instance group must not belong to a backend service. Read  Deleting an instance group for more information.
       operationId: compute.instanceGroupManagers.delete
@@ -27293,7 +27452,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/abandonInstances":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/abandonInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -27366,7 +27525,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/applyUpdatesToInstances":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/applyUpdatesToInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -27420,7 +27579,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/createInstances":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/createInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -27486,7 +27645,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/deleteInstances":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/deleteInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -27559,7 +27718,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/deletePerInstanceConfigs":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/deletePerInstanceConfigs":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -27613,7 +27772,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/listErrors":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/listErrors":
     get:
       description: Lists all errors thrown by actions on instances for a given managed instance group. The filter and orderBy query parameters are not supported.
       operationId: compute.instanceGroupManagers.listErrors
@@ -27709,7 +27868,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/listManagedInstances":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/listManagedInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -27805,7 +27964,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/listPerInstanceConfigs":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/listPerInstanceConfigs":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -27901,7 +28060,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/patchPerInstanceConfigs":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/patchPerInstanceConfigs":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -27967,7 +28126,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/recreateInstances":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/recreateInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -28040,7 +28199,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resize":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resize":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -28120,7 +28279,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/setInstanceTemplate":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/setInstanceTemplate":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -28186,7 +28345,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/setTargetPools":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/setTargetPools":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -28252,7 +28411,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/updatePerInstanceConfigs":
+  "/projects/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/updatePerInstanceConfigs":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -28318,7 +28477,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroupManagers
-  "/{project}/zones/{zone}/instanceGroups":
+  "/projects/{project}/zones/{zone}/instanceGroups":
     get:
       description: >-
         Retrieves the list of zonal instance group resources contained within the specified zone.
@@ -28463,7 +28622,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroups
-  "/{project}/zones/{zone}/instanceGroups/{instanceGroup}":
+  "/projects/{project}/zones/{zone}/instanceGroups/{instanceGroup}":
     delete:
       description: Deletes the specified instance group. The instances in the group are not deleted. Note that instance group must not belong to a backend service. Read  Deleting an instance group for more information.
       operationId: compute.instanceGroups.delete
@@ -28572,7 +28731,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/instanceGroups/{instanceGroup}/addInstances":
+  "/projects/{project}/zones/{zone}/instanceGroups/{instanceGroup}/addInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -28638,7 +28797,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroups
-  "/{project}/zones/{zone}/instanceGroups/{instanceGroup}/listInstances":
+  "/projects/{project}/zones/{zone}/instanceGroups/{instanceGroup}/listInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -28739,7 +28898,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - instanceGroups
-  "/{project}/zones/{zone}/instanceGroups/{instanceGroup}/removeInstances":
+  "/projects/{project}/zones/{zone}/instanceGroups/{instanceGroup}/removeInstances":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -28809,7 +28968,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroups
-  "/{project}/zones/{zone}/instanceGroups/{instanceGroup}/setNamedPorts":
+  "/projects/{project}/zones/{zone}/instanceGroups/{instanceGroup}/setNamedPorts":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -28875,7 +29034,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instanceGroups
-  "/{project}/zones/{zone}/instances":
+  "/projects/{project}/zones/{zone}/instances":
     get:
       description: Retrieves the list of instances contained within the specified zone.
       operationId: compute.instances.list
@@ -29031,7 +29190,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}":
+  "/projects/{project}/zones/{zone}/instances/{instance}":
     delete:
       description: Deletes the specified Instance resource. For more information, see Stopping or Deleting an Instance.
       operationId: compute.instances.delete
@@ -29213,7 +29372,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/addAccessConfig":
+  "/projects/{project}/zones/{zone}/instances/{instance}/addAccessConfig":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -29285,7 +29444,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/addResourcePolicies":
+  "/projects/{project}/zones/{zone}/instances/{instance}/addResourcePolicies":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -29351,7 +29510,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/attachDisk":
+  "/projects/{project}/zones/{zone}/instances/{instance}/attachDisk":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -29422,7 +29581,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/deleteAccessConfig":
+  "/projects/{project}/zones/{zone}/instances/{instance}/deleteAccessConfig":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -29495,7 +29654,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/detachDisk":
+  "/projects/{project}/zones/{zone}/instances/{instance}/detachDisk":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -29562,7 +29721,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/getGuestAttributes":
+  "/projects/{project}/zones/{zone}/instances/{instance}/getGuestAttributes":
     get:
       description: Returns the specified guest attributes entry.
       operationId: compute.instances.getGuestAttributes
@@ -29625,7 +29784,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/instances/{instance}/getShieldedInstanceIdentity":
+  "/projects/{project}/zones/{zone}/instances/{instance}/getShieldedInstanceIdentity":
     get:
       description: Returns the Shielded Instance Identity of an instance
       operationId: compute.instances.getShieldedInstanceIdentity
@@ -29678,7 +29837,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/instances/{instance}/referrers":
+  "/projects/{project}/zones/{zone}/instances/{instance}/referrers":
     get:
       description: Retrieves a list of resources that refer to the VM instance specified in the request. For example, if the VM instance is part of a managed or unmanaged instance group, the referrers list includes the instance group. For more information, read Viewing referrers to VM instances.
       operationId: compute.instances.listReferrers
@@ -29774,7 +29933,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/instances/{instance}/removeResourcePolicies":
+  "/projects/{project}/zones/{zone}/instances/{instance}/removeResourcePolicies":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -29840,7 +29999,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/reset":
+  "/projects/{project}/zones/{zone}/instances/{instance}/reset":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -29901,7 +30060,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/screenshot":
+  "/projects/{project}/zones/{zone}/instances/{instance}/screenshot":
     get:
       description: Returns the screenshot from the specified instance.
       operationId: compute.instances.getScreenshot
@@ -29954,7 +30113,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/instances/{instance}/serialPort":
+  "/projects/{project}/zones/{zone}/instances/{instance}/serialPort":
     get:
       description: Returns the last 1 MB of serial port output from the specified instance.
       operationId: compute.instances.getSerialPortOutput
@@ -30026,7 +30185,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/instances/{instance}/setDiskAutoDelete":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setDiskAutoDelete":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30099,7 +30258,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/setLabels":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setLabels":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30165,7 +30324,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/setMachineResources":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setMachineResources":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30231,7 +30390,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/setMachineType":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setMachineType":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30297,7 +30456,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/setMetadata":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setMetadata":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30363,7 +30522,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/setMinCpuPlatform":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setMinCpuPlatform":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30429,7 +30588,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/setScheduling":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setScheduling":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30495,7 +30654,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/setServiceAccount":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setServiceAccount":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30561,7 +30720,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/setShieldedInstanceIntegrityPolicy":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setShieldedInstanceIntegrityPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30627,7 +30786,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/setTags":
+  "/projects/{project}/zones/{zone}/instances/{instance}/setTags":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30693,7 +30852,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/simulateMaintenanceEvent":
+  "/projects/{project}/zones/{zone}/instances/{instance}/simulateMaintenanceEvent":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30742,7 +30901,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/start":
+  "/projects/{project}/zones/{zone}/instances/{instance}/start":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30803,7 +30962,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/startWithEncryptionKey":
+  "/projects/{project}/zones/{zone}/instances/{instance}/startWithEncryptionKey":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30869,7 +31028,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/stop":
+  "/projects/{project}/zones/{zone}/instances/{instance}/stop":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -30930,7 +31089,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/updateAccessConfig":
+  "/projects/{project}/zones/{zone}/instances/{instance}/updateAccessConfig":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -31002,7 +31161,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/updateDisplayDevice":
+  "/projects/{project}/zones/{zone}/instances/{instance}/updateDisplayDevice":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -31068,7 +31227,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/updateNetworkInterface":
+  "/projects/{project}/zones/{zone}/instances/{instance}/updateNetworkInterface":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -31140,7 +31299,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{instance}/updateShieldedInstanceConfig":
+  "/projects/{project}/zones/{zone}/instances/{instance}/updateShieldedInstanceConfig":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -31206,7 +31365,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{resource}/getIamPolicy":
+  "/projects/{project}/zones/{zone}/instances/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.instances.getIamPolicy
@@ -31264,7 +31423,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/instances/{resource}/setDeletionProtection":
+  "/projects/{project}/zones/{zone}/instances/{resource}/setDeletionProtection":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -31330,7 +31489,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{resource}/setIamPolicy":
+  "/projects/{project}/zones/{zone}/instances/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -31384,7 +31543,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - instances
-  "/{project}/zones/{zone}/instances/{resource}/testIamPermissions":
+  "/projects/{project}/zones/{zone}/instances/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -31442,7 +31601,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - instances
-  "/{project}/zones/{zone}/machineTypes":
+  "/projects/{project}/zones/{zone}/machineTypes":
     get:
       description: Retrieves a list of machine types available to the specified project.
       operationId: compute.machineTypes.list
@@ -31532,7 +31691,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/machineTypes/{machineType}":
+  "/projects/{project}/zones/{zone}/machineTypes/{machineType}":
     get:
       description: Returns the specified machine type. Gets a list of available machine types by making a list() request.
       operationId: compute.machineTypes.get
@@ -31585,7 +31744,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/networkEndpointGroups":
+  "/projects/{project}/zones/{zone}/networkEndpointGroups":
     get:
       description: Retrieves the list of network endpoint groups that are located in the specified project and zone.
       operationId: compute.networkEndpointGroups.list
@@ -31726,7 +31885,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - networkEndpointGroups
-  "/{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}":
+  "/projects/{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}":
     delete:
       description: Deletes the specified network endpoint group. The network endpoints in the NEG and the VM instances they belong to are not terminated when the NEG is deleted. Note that the NEG cannot be deleted if there are backend services referencing it.
       operationId: compute.networkEndpointGroups.delete
@@ -31831,7 +31990,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}/attachNetworkEndpoints":
+  "/projects/{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}/attachNetworkEndpoints":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -31897,7 +32056,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - networkEndpointGroups
-  "/{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}/detachNetworkEndpoints":
+  "/projects/{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}/detachNetworkEndpoints":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -31963,7 +32122,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - networkEndpointGroups
-  "/{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}/listNetworkEndpoints":
+  "/projects/{project}/zones/{zone}/networkEndpointGroups/{networkEndpointGroup}/listNetworkEndpoints":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -32064,7 +32223,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - networkEndpointGroups
-  "/{project}/zones/{zone}/networkEndpointGroups/{resource}/testIamPermissions":
+  "/projects/{project}/zones/{zone}/networkEndpointGroups/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -32122,7 +32281,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - networkEndpointGroups
-  "/{project}/zones/{zone}/nodeGroups":
+  "/projects/{project}/zones/{zone}/nodeGroups":
     get:
       description: "Retrieves a list of node groups available to the specified project. Note: use nodeGroups.listNodes for more details about each group."
       operationId: compute.nodeGroups.list
@@ -32269,7 +32428,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeGroups
-  "/{project}/zones/{zone}/nodeGroups/{nodeGroup}":
+  "/projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}":
     delete:
       description: Deletes the specified NodeGroup resource.
       operationId: compute.nodeGroups.delete
@@ -32431,7 +32590,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeGroups
-  "/{project}/zones/{zone}/nodeGroups/{nodeGroup}/addNodes":
+  "/projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/addNodes":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -32497,7 +32656,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeGroups
-  "/{project}/zones/{zone}/nodeGroups/{nodeGroup}/deleteNodes":
+  "/projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/deleteNodes":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -32563,7 +32722,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeGroups
-  "/{project}/zones/{zone}/nodeGroups/{nodeGroup}/listNodes":
+  "/projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/listNodes":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -32659,7 +32818,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - nodeGroups
-  "/{project}/zones/{zone}/nodeGroups/{nodeGroup}/setNodeTemplate":
+  "/projects/{project}/zones/{zone}/nodeGroups/{nodeGroup}/setNodeTemplate":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -32725,7 +32884,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeGroups
-  "/{project}/zones/{zone}/nodeGroups/{resource}/getIamPolicy":
+  "/projects/{project}/zones/{zone}/nodeGroups/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.nodeGroups.getIamPolicy
@@ -32783,7 +32942,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/nodeGroups/{resource}/setIamPolicy":
+  "/projects/{project}/zones/{zone}/nodeGroups/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -32837,7 +32996,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - nodeGroups
-  "/{project}/zones/{zone}/nodeGroups/{resource}/testIamPermissions":
+  "/projects/{project}/zones/{zone}/nodeGroups/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -32895,7 +33054,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - nodeGroups
-  "/{project}/zones/{zone}/nodeTypes":
+  "/projects/{project}/zones/{zone}/nodeTypes":
     get:
       description: Retrieves a list of node types available to the specified project.
       operationId: compute.nodeTypes.list
@@ -32985,7 +33144,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/nodeTypes/{nodeType}":
+  "/projects/{project}/zones/{zone}/nodeTypes/{nodeType}":
     get:
       description: Returns the specified node type. Gets a list of available node types by making a list() request.
       operationId: compute.nodeTypes.get
@@ -33038,7 +33197,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/operations":
+  "/projects/{project}/zones/{zone}/operations":
     get:
       description: Retrieves a list of Operation resources contained within the specified zone.
       operationId: compute.zoneOperations.list
@@ -33128,7 +33287,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/operations/{operation}":
+  "/projects/{project}/zones/{zone}/operations/{operation}":
     delete:
       description: Deletes the specified zone-specific Operations resource.
       operationId: compute.zoneOperations.delete
@@ -33217,7 +33376,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/operations/{operation}/wait":
+  "/projects/{project}/zones/{zone}/operations/{operation}/wait":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -33278,7 +33437,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - zoneOperations
-  "/{project}/zones/{zone}/reservations":
+  "/projects/{project}/zones/{zone}/reservations":
     get:
       description: A list of all the reservations that have been configured for the specified project in specified zone.
       operationId: compute.reservations.list
@@ -33419,7 +33578,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - reservations
-  "/{project}/zones/{zone}/reservations/{reservation}":
+  "/projects/{project}/zones/{zone}/reservations/{reservation}":
     delete:
       description: Deletes the specified reservation.
       operationId: compute.reservations.delete
@@ -33524,7 +33683,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/reservations/{reservation}/resize":
+  "/projects/{project}/zones/{zone}/reservations/{reservation}/resize":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -33590,7 +33749,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - reservations
-  "/{project}/zones/{zone}/reservations/{resource}/getIamPolicy":
+  "/projects/{project}/zones/{zone}/reservations/{resource}/getIamPolicy":
     get:
       description: Gets the access control policy for a resource. May be empty if no such policy or resource exists.
       operationId: compute.reservations.getIamPolicy
@@ -33648,7 +33807,7 @@ paths:
       - $ref: "#/components/parameters/prettyPrint"
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/userIp"
-  "/{project}/zones/{zone}/reservations/{resource}/setIamPolicy":
+  "/projects/{project}/zones/{zone}/reservations/{resource}/setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -33702,7 +33861,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - reservations
-  "/{project}/zones/{zone}/reservations/{resource}/testIamPermissions":
+  "/projects/{project}/zones/{zone}/reservations/{resource}/testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/alt"
       - $ref: "#/components/parameters/fields"
@@ -33760,7 +33919,7 @@ paths:
             - https://www.googleapis.com/auth/compute.readonly
       tags:
         - reservations
-  "/{project}/zones/{zone}/targetInstances":
+  "/projects/{project}/zones/{zone}/targetInstances":
     get:
       description: Retrieves a list of TargetInstance resources available to the specified project and zone.
       operationId: compute.targetInstances.list
@@ -33901,7 +34060,7 @@ paths:
             - https://www.googleapis.com/auth/compute
       tags:
         - targetInstances
-  "/{project}/zones/{zone}/targetInstances/{targetInstance}":
+  "/projects/{project}/zones/{zone}/targetInstances/{targetInstance}":
     delete:
       description: Deletes the specified TargetInstance resource.
       operationId: compute.targetInstances.delete
@@ -36309,7 +36468,7 @@ components:
       description: Associates `members` with a `role`.
       properties:
         bindingId:
-          description: A client-specified ID for this binding. Expected to be globally unique to support the internal bindings-by-ID API.
+          description: ""
           type: string
         condition:
           $ref: "#/components/schemas/Expr"
@@ -42567,6 +42726,10 @@ components:
         customerRouterIpAddress:
           description: "[Output Only] IPv4 address + prefix length to be configured on the customer router subinterface for this interconnect attachment."
           type: string
+        dataplaneVersion:
+          description: "[Output Only] Dataplane version for this InterconnectAttachment."
+          format: int32
+          type: integer
         description:
           description: An optional description of this resource.
           type: string
@@ -47189,6 +47352,7 @@ components:
             - PREEMPTIBLE_NVIDIA_T4_GPUS
             - PREEMPTIBLE_NVIDIA_T4_VWS_GPUS
             - PREEMPTIBLE_NVIDIA_V100_GPUS
+            - PSC_ILB_CONSUMER_FORWARDING_RULES_PER_PRODUCER_NETWORK
             - PUBLIC_ADVERTISED_PREFIXES
             - PUBLIC_DELEGATED_PREFIXES
             - REGIONAL_AUTOSCALERS

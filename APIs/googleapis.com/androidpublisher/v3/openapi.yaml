@@ -2551,7 +2551,7 @@ paths:
       description: Returns the list of previously created system APK variants.
       operationId: androidpublisher.systemapks.variants.list
       parameters:
-        - description: Unique identifier of the Android app.
+        - description: Package name of the app.
           in: path
           name: packageName
           required: true
@@ -2593,7 +2593,7 @@ paths:
       description: Creates an APK which is suitable for inclusion in a system image from an already uploaded Android App Bundle.
       operationId: androidpublisher.systemapks.variants.create
       parameters:
-        - description: Unique identifier of the Android app.
+        - description: Package name of the app.
           in: path
           name: packageName
           required: true
@@ -2629,7 +2629,7 @@ paths:
       description: Returns a previously created system APK variant.
       operationId: androidpublisher.systemapks.variants.get
       parameters:
-        - description: Unique identifier of the Android app.
+        - description: Package name of the app.
           in: path
           name: packageName
           required: true
@@ -2678,7 +2678,7 @@ paths:
       description: Downloads a previously created system APK which is suitable for inclusion in a system image.
       operationId: androidpublisher.systemapks.variants.download
       parameters:
-        - description: Unique identifier of the Android app.
+        - description: Package name of the app.
           in: path
           name: packageName
           required: true
