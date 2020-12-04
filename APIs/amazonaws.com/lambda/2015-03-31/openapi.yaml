@@ -665,7 +665,7 @@ paths:
                     UntrustedArtifactOnDeployment:
                       allOf:
                         - $ref: '#/components/schemas/CodeSigningPolicy'
-                        - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
+                        - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -676,7 +676,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListCodeSigningConfigs
-      description: 'Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html">code signing configurations</a> for the specified function. A request returns up to 10,000 configurations per call. You can use the <code>MaxItems</code> parameter to return fewer configurations per call. '
+      description: 'Returns a list of <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html">code signing configurations</a>. A request returns up to 10,000 configurations per call. You can use the <code>MaxItems</code> parameter to return fewer configurations per call. '
       responses:
         '200':
           description: Success
@@ -924,7 +924,7 @@ paths:
   /2015-03-31/functions:
     post:
       operationId: CreateFunction
-      description: '<p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/deployment-package-v2.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can''t invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function''s code and configuration. A published version is a snapshot of your function code and configuration that can''t be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with <a>UpdateFunctionCode</a>, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html">Invoking Functions</a>.</p>'
+      description: '<p>Creates a Lambda function. To create a function, you need a <a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html">deployment package</a> and an <a href="https://docs.aws.amazon.com/lambda/latest/dg/intro-permission-model.html#lambda-intro-execution-role">execution role</a>. The deployment package is a ZIP archive or image container that contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing.</p> <p>When you create a function, Lambda provisions an instance of the function and its supporting resources. If your function connects to a VPC, this process can take a minute or so. During this time, you can''t invoke or modify the function. The <code>State</code>, <code>StateReason</code>, and <code>StateReasonCode</code> fields in the response from <a>GetFunctionConfiguration</a> indicate when the function is ready to invoke. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html">Function States</a>.</p> <p>A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function''s code and configuration. A published version is a snapshot of your function code and configuration that can''t be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the <code>Publish</code> parameter to create version <code>1</code> of your function from its initial configuration.</p> <p>The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with <a>UpdateFunctionConfiguration</a>. Function-level settings apply to both the unpublished and published versions of the function, and include tags (<a>TagResource</a>) and per-function concurrency limits (<a>PutFunctionConcurrency</a>).</p> <p>You can use code signing if your deployment package is a ZIP archive. To enable code signing for this function, specify the ARN of a code-signing configuration. When a user attempts to deploy a code package with <a>UpdateFunctionCode</a>, Lambda checks that the code package has a valid signature from a trusted publisher. The code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.</p> <p>If another account or an AWS service invokes your function, use <a>AddPermission</a> to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias.</p> <p>To invoke your function directly, use <a>Invoke</a>. To invoke your function in response to events in other AWS services, create an event source mapping (<a>CreateEventSourceMapping</a>), or configure a function trigger in the other service. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html">Invoking Functions</a>.</p>'
       responses:
         '201':
           description: Success
@@ -995,9 +995,7 @@ paths:
               type: object
               required:
                 - FunctionName
-                - Runtime
                 - Role
-                - Handler
                 - Code
               properties:
                 FunctionName:
@@ -1043,7 +1041,7 @@ paths:
                   pattern: '[^\s]+'
                   maxLength: 128
                 Code:
-                  description: 'The code for the Lambda function. You can specify either an object in Amazon S3, or upload a deployment package directly.'
+                  description: 'The code for the Lambda function. You can specify either an object in Amazon S3, upload a ZIP archive deployment package directly, or specify the URI of a container image.'
                   type: object
                   properties:
                     ZipFile:
@@ -1062,6 +1060,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/S3ObjectVersion'
                         - description: 'For versioned objects, the version of the deployment package object to use.'
+                    ImageUri:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: URI of a container image in the Amazon ECR registry.
                 Description:
                   description: A description of the function.
                   type: string
@@ -1075,7 +1077,7 @@ paths:
                   description: The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
                   type: integer
                   minimum: 128
-                  maximum: 3008
+                  maximum: 10240
                 Publish:
                   description: Set to true to publish the first version of the function during creation.
                   type: boolean
@@ -1091,6 +1093,12 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/SecurityGroupIds'
                         - description: A list of VPC security groups IDs.
+                PackageType:
+                  description: The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for ZIP archive.
+                  type: string
+                  enum:
+                    - Zip
+                    - Image
                 DeadLetterConfig:
                   description: 'The <a href="https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq">dead-letter queue</a> for failed asynchronous invocations.'
                   type: object
@@ -1135,8 +1143,24 @@ paths:
                   items:
                     $ref: '#/components/schemas/FileSystemConfig'
                   maxItems: 1
+                ImageConfig:
+                  description: 'Configuration values that override the container image Dockerfile. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html">Override Container settings</a>. '
+                  type: object
+                  properties:
+                    EntryPoint:
+                      allOf:
+                        - $ref: '#/components/schemas/StringList'
+                        - description: 'Specifies the entry point to their application, which is typically the location of the runtime executable.'
+                    Command:
+                      allOf:
+                        - $ref: '#/components/schemas/StringList'
+                        - description: 'Specifies parameters that you want to pass in with ENTRYPOINT. '
+                    WorkingDirectory:
+                      allOf:
+                        - $ref: '#/components/schemas/WorkingDirectory'
+                        - description: Specifies the working directory.
                 CodeSigningConfigArn:
-                  description: 'To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.'
+                  description: 'To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.'
                   type: string
                   pattern: 'arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\d{1}:\d{12}:code-signing-config:csc-[a-z0-9]{17}'
                   maxLength: 200
@@ -1506,7 +1530,7 @@ paths:
                     UntrustedArtifactOnDeployment:
                       allOf:
                         - $ref: '#/components/schemas/CodeSigningPolicy'
-                        - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
+                        - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
   '/2015-03-31/event-source-mappings/{UUID}':
     delete:
       operationId: DeleteEventSourceMapping
@@ -2943,7 +2967,7 @@ paths:
                   description: The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
                   type: integer
                   minimum: 128
-                  maximum: 3008
+                  maximum: 10240
                 VpcConfig:
                   description: 'The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
                   type: object
@@ -3025,6 +3049,22 @@ paths:
                   items:
                     $ref: '#/components/schemas/FileSystemConfig'
                   maxItems: 1
+                ImageConfig:
+                  description: 'Configuration values that override the container image Dockerfile. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html">Override Container settings</a>. '
+                  type: object
+                  properties:
+                    EntryPoint:
+                      allOf:
+                        - $ref: '#/components/schemas/StringList'
+                        - description: 'Specifies the entry point to their application, which is typically the location of the runtime executable.'
+                    Command:
+                      allOf:
+                        - $ref: '#/components/schemas/StringList'
+                        - description: 'Specifies parameters that you want to pass in with ENTRYPOINT. '
+                    WorkingDirectory:
+                      allOf:
+                        - $ref: '#/components/schemas/WorkingDirectory'
+                        - description: Specifies the working directory.
   /2018-10-31/layers#find=LayerVersion&Arn:
     get:
       operationId: GetLayerVersionByArn
@@ -4508,6 +4548,9 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 1024
+                ImageUri:
+                  description: URI of a container image in the Amazon ECR registry.
+                  type: string
                 Publish:
                   description: Set to true to publish a new version of the function after updating the code. This has the same effect as calling <a>PublishVersion</a> separately.
                   type: boolean
@@ -4922,6 +4965,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/FileSystemConfigList'
             - description: Connection settings for an Amazon EFS file system.
+        PackageType:
+          allOf:
+            - $ref: '#/components/schemas/PackageType'
+            - description: The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for ZIP archive.
+        ImageConfigResponse:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfigResponse'
+            - description: The function's image configuration values.
         SigningProfileVersionArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -4947,6 +4998,8 @@ components:
       type: string
       minLength: 1
       maxLength: 1024
+    String:
+      type: string
     SubnetIds:
       type: array
       items:
@@ -4991,6 +5044,14 @@ components:
             - $ref: '#/components/schemas/LocalMountPath'
             - description: 'The path where the function can access the file system, starting with <code>/mnt/</code>.'
       description: Details about the connection between a Lambda function and an Amazon EFS file system.
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      maxItems: 1500
+    WorkingDirectory:
+      type: string
+      maxLength: 1000
     CodeStorageExceededException: {}
     CodeVerificationFailedException: {}
     InvalidCodeSignatureException: {}
@@ -5767,8 +5828,6 @@ components:
     OrganizationId:
       type: string
       pattern: 'o-[a-z0-9]{10,32}'
-    String:
-      type: string
     AddLayerVersionPermissionRequest:
       type: object
       required:
@@ -5925,7 +5984,7 @@ components:
         UntrustedArtifactOnDeployment:
           allOf:
             - $ref: '#/components/schemas/CodeSigningPolicy'
-            - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if code-signing validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
+            - description: '<p>Code signing configuration policy for deployment validation failure. If you set the policy to <code>Enforce</code>, Lambda blocks the deployment request if signature validation checks fail. If you set the policy to <code>Warn</code>, Lambda allows the deployment and creates a CloudWatch log. </p> <p>Default value: <code>Warn</code> </p>'
       description: Code signing configuration policies specifies the validation failure action for signature mismatch or expiry.
     Timestamp:
       type: string
@@ -6166,14 +6225,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3ObjectVersion'
             - description: 'For versioned objects, the version of the deployment package object to use.'
-      description: 'The code for the Lambda function. You can specify either an object in Amazon S3, or upload a deployment package directly.'
+        ImageUri:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: URI of a container image in the Amazon ECR registry.
+      description: 'The code for the Lambda function. You can specify either an object in Amazon S3, upload a ZIP archive deployment package directly, or specify the URI of a container image.'
     Timeout:
       type: integer
       minimum: 1
     MemorySize:
       type: integer
       minimum: 128
-      maximum: 3008
+      maximum: 10240
     VpcConfig:
       type: object
       properties:
@@ -6186,6 +6249,11 @@ components:
             - $ref: '#/components/schemas/SecurityGroupIds'
             - description: A list of VPC security groups IDs.
       description: 'The VPC security groups and subnets that are attached to a Lambda function. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
+    PackageType:
+      type: string
+      enum:
+        - Zip
+        - Image
     DeadLetterConfig:
       type: object
       properties:
@@ -6226,13 +6294,27 @@ components:
       items:
         $ref: '#/components/schemas/FileSystemConfig'
       maxItems: 1
+    ImageConfig:
+      type: object
+      properties:
+        EntryPoint:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: 'Specifies the entry point to their application, which is typically the location of the runtime executable.'
+        Command:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: 'Specifies parameters that you want to pass in with ENTRYPOINT. '
+        WorkingDirectory:
+          allOf:
+            - $ref: '#/components/schemas/WorkingDirectory'
+            - description: Specifies the working directory.
+      description: 'Configuration values that override the container image Dockerfile. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html">Override Container settings</a>. '
     CreateFunctionRequest:
       type: object
       required:
         - FunctionName
-        - Runtime
         - Role
-        - Handler
         - Code
       title: CreateFunctionRequest
       properties:
@@ -6276,6 +6358,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/VpcConfig'
             - description: 'For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html">VPC Settings</a>.'
+        PackageType:
+          allOf:
+            - $ref: '#/components/schemas/PackageType'
+            - description: The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for ZIP archive.
         DeadLetterConfig:
           allOf:
             - $ref: '#/components/schemas/DeadLetterConfig'
@@ -6304,10 +6390,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/FileSystemConfigList'
             - description: Connection settings for an Amazon EFS file system.
+        ImageConfig:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfig'
+            - description: Configuration values that override the container image Dockerfile.
         CodeSigningConfigArn:
           allOf:
             - $ref: '#/components/schemas/CodeSigningConfigArn'
-            - description: 'To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes set set of signing profiles, which define the trusted publishers for this function.'
+            - description: 'To enable code signing for this function, specify the ARN of a code-signing configuration. A code-signing configuration includes a set of signing profiles, which define the trusted publishers for this function.'
     DeleteAliasRequest:
       type: object
       title: DeleteAliasRequest
@@ -6410,6 +6500,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A presigned URL that you can use to download the deployment package.
+        ImageUri:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: URI of a container image in the Amazon ECR registry.
+        ResolvedImageUri:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The resolved URI for the image.
       description: Details about a function's deployment package.
     NamespacedFunctionName:
       type: string
@@ -6469,6 +6567,8 @@ components:
         - SubnetOutOfIPAddresses
         - InvalidSubnet
         - InvalidSecurityGroup
+        - ImageDeleted
+        - ImageAccessDenied
     LastUpdateStatus:
       type: string
       enum:
@@ -6487,6 +6587,20 @@ components:
         - SubnetOutOfIPAddresses
         - InvalidSubnet
         - InvalidSecurityGroup
+        - ImageDeleted
+        - ImageAccessDenied
+    ImageConfigResponse:
+      type: object
+      properties:
+        ImageConfig:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfig'
+            - description: Configuration values that override the container image Dockerfile.
+        Error:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfigError'
+            - description: Error response to GetFunctionConfiguration.
+      description: Response to GetFunctionConfiguration request.
     MaximumRetryAttempts:
       type: integer
       minimum: 0
@@ -6609,6 +6723,18 @@ components:
         - FAILED
     HttpStatus:
       type: integer
+    ImageConfigError:
+      type: object
+      properties:
+        ErrorCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Error code.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/SensitiveString'
+            - description: Error message.
+      description: Error response to GetFunctionConfiguration.
     InvocationType:
       type: string
       enum:
@@ -7053,6 +7179,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3ObjectVersion'
             - description: 'For versioned objects, the version of the deployment package object to use.'
+        ImageUri:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: URI of a container image in the Amazon ECR registry.
         Publish:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -7125,6 +7255,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FileSystemConfigList'
             - description: Connection settings for an Amazon EFS file system.
+        ImageConfig:
+          allOf:
+            - $ref: '#/components/schemas/ImageConfig'
+            - description: Configuration values that override the container image Dockerfile.
     UpdateFunctionEventInvokeConfigRequest:
       type: object
       title: UpdateFunctionEventInvokeConfigRequest

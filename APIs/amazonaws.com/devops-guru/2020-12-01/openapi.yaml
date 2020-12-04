@@ -1,0 +1,2339 @@
+openapi: 3.0.0
+info:
+  version: '2020-12-01'
+  x-release: v4
+  title: Amazon DevOps Guru
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: devops-guru
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/devops-guru-2020-12-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/devops-guru/'
+servers:
+  - url: 'http://devops-guru.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon DevOps Guru multi-region endpoint
+  - url: 'https://devops-guru.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The Amazon DevOps Guru multi-region endpoint
+  - url: 'http://devops-guru.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon DevOps Guru endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://devops-guru.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The Amazon DevOps Guru endpoint for China (Beijing) and China (Ningxia)
+paths:
+  /channels:
+    put:
+      operationId: AddNotificationChannel
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddNotificationChannelResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Config
+              properties:
+                Config:
+                  description: ''
+                  type: object
+                  properties:
+                    Sns:
+                      $ref: '#/components/schemas/SnsChannelConfig'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: ListNotificationChannels
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListNotificationChannelsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NextToken:
+                  description: ''
+                  type: string
+                  pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+                  minLength: 36
+                  maxLength: 36
+  /accounts/health:
+    get:
+      operationId: DescribeAccountHealth
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAccountHealthResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /accounts/overview:
+    post:
+      operationId: DescribeAccountOverview
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAccountOverviewResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - FromTime
+              properties:
+                FromTime:
+                  description: ''
+                  type: string
+                  format: date-time
+                ToTime:
+                  description: ''
+                  type: string
+                  format: date-time
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/anomalies/{Id}':
+    get:
+      operationId: DescribeAnomaly
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeAnomalyResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/insights/{Id}':
+    get:
+      operationId: DescribeInsight
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeInsightResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/accounts/health/resource-collection/{ResourceCollectionType}':
+    get:
+      operationId: DescribeResourceCollectionHealth
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeResourceCollectionHealthResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+        - name: ResourceCollectionType
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /service-integrations:
+    get:
+      operationId: DescribeServiceIntegration
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeServiceIntegrationResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: UpdateServiceIntegration
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateServiceIntegrationResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ServiceIntegration
+              properties:
+                ServiceIntegration:
+                  description: ''
+                  type: object
+                  properties:
+                    OpsCenter:
+                      $ref: '#/components/schemas/OpsCenterIntegrationConfig'
+  '/resource-collections/{ResourceCollectionType}':
+    get:
+      operationId: GetResourceCollection
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetResourceCollectionResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: NextToken
+          in: query
+          required: false
+          description: ''
+          schema:
+            type: string
+        - name: ResourceCollectionType
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/anomalies/insight/{InsightId}':
+    post:
+      operationId: ListAnomaliesForInsight
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAnomaliesForInsightResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: InsightId
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                MaxResults:
+                  description: ''
+                  type: integer
+                  minimum: 1
+                  maximum: 500
+                NextToken:
+                  description: ''
+                  type: string
+                  pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+                  minLength: 36
+                  maxLength: 36
+                StartTimeRange:
+                  description: ''
+                  type: object
+                  properties:
+                    FromTime:
+                      $ref: '#/components/schemas/__timestampUnix'
+                    ToTime:
+                      $ref: '#/components/schemas/__timestampUnix'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /events:
+    post:
+      operationId: ListEvents
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEventsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Filters
+              properties:
+                Filters:
+                  description: ''
+                  type: object
+                  properties:
+                    DataSource:
+                      $ref: '#/components/schemas/EventDataSource'
+                    EventClass:
+                      $ref: '#/components/schemas/EventClass'
+                    EventSource:
+                      $ref: '#/components/schemas/__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents'
+                    EventTimeRange:
+                      $ref: '#/components/schemas/EventTimeRange'
+                    InsightId:
+                      $ref: '#/components/schemas/__stringMin1Max100PatternW'
+                    ResourceCollection:
+                      $ref: '#/components/schemas/ResourceCollection'
+                MaxResults:
+                  description: ''
+                  type: integer
+                  minimum: 1
+                  maximum: 200
+                NextToken:
+                  description: ''
+                  type: string
+                  pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+                  minLength: 36
+                  maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /insights:
+    post:
+      operationId: ListInsights
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListInsightsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StatusFilter
+              properties:
+                MaxResults:
+                  description: ''
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                NextToken:
+                  description: ''
+                  type: string
+                  pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+                  minLength: 36
+                  maxLength: 36
+                StatusFilter:
+                  description: ''
+                  type: object
+                  properties:
+                    Any:
+                      $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
+                    Closed:
+                      $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
+                    Ongoing:
+                      $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /recommendations:
+    post:
+      operationId: ListRecommendations
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListRecommendationsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - InsightId
+              properties:
+                InsightId:
+                  description: ''
+                  type: string
+                  pattern: '^[\w-]*$'
+                  minLength: 1
+                  maxLength: 100
+                NextToken:
+                  description: ''
+                  type: string
+                  pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+                  minLength: 36
+                  maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /feedback:
+    put:
+      operationId: PutFeedback
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutFeedbackResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                InsightFeedback:
+                  description: ''
+                  type: object
+                  properties:
+                    Feedback:
+                      $ref: '#/components/schemas/InsightFeedbackOption'
+                    Id:
+                      $ref: '#/components/schemas/__stringMin1Max100PatternW'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/channels/{Id}':
+    delete:
+      operationId: RemoveNotificationChannel
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveNotificationChannelResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /insights/search:
+    post:
+      operationId: SearchInsights
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchInsightsResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - StartTimeRange
+                - Type
+              properties:
+                Filters:
+                  description: ''
+                  type: object
+                  properties:
+                    ResourceCollection:
+                      $ref: '#/components/schemas/ResourceCollection'
+                    Severities:
+                      $ref: '#/components/schemas/__listOfInsightSeverity'
+                    Statuses:
+                      $ref: '#/components/schemas/__listOfInsightStatus'
+                MaxResults:
+                  description: ''
+                  type: integer
+                  minimum: 1
+                  maximum: 100
+                NextToken:
+                  description: ''
+                  type: string
+                  pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+                  minLength: 36
+                  maxLength: 36
+                StartTimeRange:
+                  description: ''
+                  type: object
+                  properties:
+                    FromTime:
+                      $ref: '#/components/schemas/__timestampUnix'
+                    ToTime:
+                      $ref: '#/components/schemas/__timestampUnix'
+                Type:
+                  description: ''
+                  type: string
+                  enum:
+                    - REACTIVE
+                    - PROACTIVE
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /resource-collections:
+    put:
+      operationId: UpdateResourceCollection
+      description: ''
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateResourceCollectionResponse'
+        '480':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Action
+                - ResourceCollection
+              properties:
+                Action:
+                  description: ''
+                  type: string
+                  enum:
+                    - ADD
+                    - REMOVE
+                ResourceCollection:
+                  description: ''
+                  type: object
+                  properties:
+                    CloudFormation:
+                      $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    AddNotificationChannelResponse:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+    SnsChannelConfig:
+      type: object
+      properties:
+        TopicArn:
+          $ref: '#/components/schemas/__stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12'
+    ValidationException: {}
+    InternalServerException: {}
+    ServiceQuotaExceededException: {}
+    AccessDeniedException: {}
+    ResourceNotFoundException: {}
+    ThrottlingException: {}
+    ConflictException: {}
+    DescribeAccountHealthResponse:
+      type: object
+      properties:
+        MetricsAnalyzed:
+          $ref: '#/components/schemas/__integer'
+        OpenProactiveInsights:
+          $ref: '#/components/schemas/__integer'
+        OpenReactiveInsights:
+          $ref: '#/components/schemas/__integer'
+    DescribeAccountOverviewResponse:
+      type: object
+      properties:
+        MeanTimeToRecoverInMilliseconds:
+          $ref: '#/components/schemas/__long'
+        ProactiveInsights:
+          $ref: '#/components/schemas/__integer'
+        ReactiveInsights:
+          $ref: '#/components/schemas/__integer'
+    DescribeAnomalyResponse:
+      type: object
+      properties:
+        ProactiveAnomaly:
+          $ref: '#/components/schemas/ProactiveAnomaly'
+        ReactiveAnomaly:
+          $ref: '#/components/schemas/ReactiveAnomaly'
+    DescribeInsightResponse:
+      type: object
+      properties:
+        ProactiveInsight:
+          $ref: '#/components/schemas/ProactiveInsight'
+        ReactiveInsight:
+          $ref: '#/components/schemas/ReactiveInsight'
+    DescribeResourceCollectionHealthResponse:
+      type: object
+      properties:
+        CloudFormation:
+          $ref: '#/components/schemas/__listOfCloudFormationHealth'
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+    DescribeServiceIntegrationResponse:
+      type: object
+      properties:
+        ServiceIntegration:
+          $ref: '#/components/schemas/ServiceIntegrationConfig'
+    GetResourceCollectionResponse:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollectionFilter'
+    ListAnomaliesForInsightResponse:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+        ProactiveAnomalies:
+          $ref: '#/components/schemas/__listOfProactiveAnomalySummary'
+        ReactiveAnomalies:
+          $ref: '#/components/schemas/__listOfReactiveAnomalySummary'
+    __timestampUnix:
+      type: string
+      format: date-time
+    ListEventsResponse:
+      type: object
+      properties:
+        Events:
+          $ref: '#/components/schemas/__listOfEvent'
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+    EventDataSource:
+      type: string
+      enum:
+        - AWS_CLOUD_TRAIL
+        - AWS_CODE_DEPLOY
+    EventClass:
+      type: string
+      enum:
+        - INFRASTRUCTURE
+        - DEPLOYMENT
+        - SECURITY_CHANGE
+        - CONFIG_CHANGE
+        - SCHEMA_CHANGE
+    __stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents:
+      type: string
+      pattern: '^[a-z]+[a-z0-9]*\.amazonaws\.com|aws\.events$'
+      minLength: 10
+      maxLength: 50
+    EventTimeRange:
+      type: object
+      required:
+        - ToTime
+        - FromTime
+      properties:
+        FromTime:
+          $ref: '#/components/schemas/__timestampUnix'
+        ToTime:
+          $ref: '#/components/schemas/__timestampUnix'
+    __stringMin1Max100PatternW:
+      type: string
+      pattern: '^[\w-]*$'
+      minLength: 1
+      maxLength: 100
+    ResourceCollection:
+      type: object
+      properties:
+        CloudFormation:
+          $ref: '#/components/schemas/CloudFormationCollection'
+    ListInsightsResponse:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+        ProactiveInsights:
+          $ref: '#/components/schemas/__listOfProactiveInsightSummary'
+        ReactiveInsights:
+          $ref: '#/components/schemas/__listOfReactiveInsightSummary'
+    ListInsightsAnyStatusFilter:
+      type: object
+      required:
+        - Type
+        - StartTimeRange
+      properties:
+        StartTimeRange:
+          $ref: '#/components/schemas/StartTimeRange'
+        Type:
+          $ref: '#/components/schemas/InsightType'
+    ListInsightsClosedStatusFilter:
+      type: object
+      required:
+        - Type
+        - EndTimeRange
+      properties:
+        EndTimeRange:
+          $ref: '#/components/schemas/EndTimeRange'
+        Type:
+          $ref: '#/components/schemas/InsightType'
+    ListInsightsOngoingStatusFilter:
+      type: object
+      required:
+        - Type
+      properties:
+        Type:
+          $ref: '#/components/schemas/InsightType'
+    ListNotificationChannelsResponse:
+      type: object
+      properties:
+        Channels:
+          $ref: '#/components/schemas/__listOfNotificationChannel'
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+    ListRecommendationsResponse:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+        Recommendations:
+          $ref: '#/components/schemas/__listOfRecommendation'
+    PutFeedbackResponse:
+      type: object
+      properties: {}
+    InsightFeedbackOption:
+      type: string
+      enum:
+        - VALID_COLLECTION
+        - RECOMMENDATION_USEFUL
+        - ALERT_TOO_SENSITIVE
+        - DATA_NOISY_ANOMALY
+        - DATA_INCORRECT
+    RemoveNotificationChannelResponse:
+      type: object
+      properties: {}
+    SearchInsightsResponse:
+      type: object
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+        ProactiveInsights:
+          $ref: '#/components/schemas/__listOfProactiveInsightSummary'
+        ReactiveInsights:
+          $ref: '#/components/schemas/__listOfReactiveInsightSummary'
+    __listOfInsightSeverity:
+      type: array
+      items:
+        $ref: '#/components/schemas/InsightSeverity'
+    __listOfInsightStatus:
+      type: array
+      items:
+        $ref: '#/components/schemas/InsightStatus'
+    UpdateResourceCollectionResponse:
+      type: object
+      properties: {}
+    UpdateCloudFormationCollectionFilter:
+      type: object
+      properties:
+        StackNames:
+          $ref: '#/components/schemas/__listOf__stringMin1Max128PatternAZAZAZAZ09'
+    UpdateServiceIntegrationResponse:
+      type: object
+      properties: {}
+    OpsCenterIntegrationConfig:
+      type: object
+      properties:
+        OptInStatus:
+          $ref: '#/components/schemas/OptInStatus'
+    NotificationChannelConfig:
+      type: object
+      required:
+        - Sns
+      properties:
+        Sns:
+          $ref: '#/components/schemas/SnsChannelConfig'
+    AddNotificationChannelRequest:
+      type: object
+      required:
+        - Config
+      title: AddNotificationChannelRequest
+      properties:
+        Config:
+          $ref: '#/components/schemas/NotificationChannelConfig'
+    __stringMin36Max36PatternAF098AF094AF094AF094AF0912:
+      type: string
+      pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+      minLength: 36
+      maxLength: 36
+    AnomalySeverity:
+      type: string
+      enum:
+        - LOW
+        - MEDIUM
+        - HIGH
+    __listOfCloudWatchMetricsDetail:
+      type: array
+      items:
+        $ref: '#/components/schemas/CloudWatchMetricsDetail'
+    AnomalySourceDetails:
+      type: object
+      properties:
+        CloudWatchMetrics:
+          $ref: '#/components/schemas/__listOfCloudWatchMetricsDetail'
+    AnomalyStatus:
+      type: string
+      enum:
+        - ONGOING
+        - CLOSED
+    AnomalyTimeRange:
+      type: object
+      required:
+        - StartTime
+      properties:
+        EndTime:
+          $ref: '#/components/schemas/__timestampUnix'
+        StartTime:
+          $ref: '#/components/schemas/__timestampUnix'
+    __listOf__stringMin1Max128PatternAZAZAZAZ09:
+      type: array
+      items:
+        $ref: '#/components/schemas/__stringMin1Max128PatternAZAZAZAZ09'
+    CloudFormationCollection:
+      type: object
+      properties:
+        StackNames:
+          $ref: '#/components/schemas/__listOf__stringMin1Max128PatternAZAZAZAZ09'
+    CloudFormationCollectionFilter:
+      type: object
+      properties:
+        StackNames:
+          $ref: '#/components/schemas/__listOf__stringMin1Max128PatternAZAZAZAZ09'
+    InsightHealth:
+      type: object
+      properties:
+        MeanTimeToRecoverInMilliseconds:
+          $ref: '#/components/schemas/__long'
+        OpenProactiveInsights:
+          $ref: '#/components/schemas/__integer'
+        OpenReactiveInsights:
+          $ref: '#/components/schemas/__integer'
+    __stringMin1Max128PatternAZAZAZAZ09:
+      type: string
+      pattern: '^[a-zA-Z*]+[a-zA-Z0-9-]*$'
+      minLength: 1
+      maxLength: 128
+    CloudFormationHealth:
+      type: object
+      properties:
+        Insight:
+          $ref: '#/components/schemas/InsightHealth'
+        StackName:
+          $ref: '#/components/schemas/__stringMin1Max128PatternAZAZAZAZ09'
+    __listOfCloudWatchMetricsDimension:
+      type: array
+      items:
+        $ref: '#/components/schemas/CloudWatchMetricsDimension'
+    __string:
+      type: string
+    __integer:
+      type: integer
+    CloudWatchMetricsStat:
+      type: string
+      enum:
+        - Sum
+        - Average
+        - SampleCount
+        - Minimum
+        - Maximum
+        - p99
+        - p90
+        - p50
+    CloudWatchMetricsDetail:
+      type: object
+      properties:
+        Dimensions:
+          $ref: '#/components/schemas/__listOfCloudWatchMetricsDimension'
+        MetricName:
+          $ref: '#/components/schemas/__string'
+        Namespace:
+          $ref: '#/components/schemas/__string'
+        Period:
+          $ref: '#/components/schemas/__integer'
+        Stat:
+          $ref: '#/components/schemas/CloudWatchMetricsStat'
+        Unit:
+          $ref: '#/components/schemas/__string'
+    CloudWatchMetricsDimension:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/__string'
+        Value:
+          $ref: '#/components/schemas/__string'
+    DescribeAccountHealthRequest:
+      type: object
+      title: DescribeAccountHealthRequest
+      properties: {}
+    DescribeAccountOverviewRequest:
+      type: object
+      required:
+        - FromTime
+      title: DescribeAccountOverviewRequest
+      properties:
+        FromTime:
+          $ref: '#/components/schemas/__timestampUnix'
+        ToTime:
+          $ref: '#/components/schemas/__timestampUnix'
+    __long:
+      type: integer
+    DescribeAnomalyRequest:
+      type: object
+      title: DescribeAnomalyRequest
+      properties: {}
+    ProactiveAnomaly:
+      type: object
+      properties:
+        AnomalyTimeRange:
+          $ref: '#/components/schemas/AnomalyTimeRange'
+        AssociatedInsightId:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        Id:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        Limit:
+          $ref: '#/components/schemas/__double'
+        PredictionTimeRange:
+          $ref: '#/components/schemas/PredictionTimeRange'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Severity:
+          $ref: '#/components/schemas/AnomalySeverity'
+        SourceDetails:
+          $ref: '#/components/schemas/AnomalySourceDetails'
+        Status:
+          $ref: '#/components/schemas/AnomalyStatus'
+        UpdateTime:
+          $ref: '#/components/schemas/__timestampUnix'
+    ReactiveAnomaly:
+      type: object
+      properties:
+        AnomalyTimeRange:
+          $ref: '#/components/schemas/AnomalyTimeRange'
+        AssociatedInsightId:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        Id:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Severity:
+          $ref: '#/components/schemas/AnomalySeverity'
+        SourceDetails:
+          $ref: '#/components/schemas/AnomalySourceDetails'
+        Status:
+          $ref: '#/components/schemas/AnomalyStatus'
+    DescribeInsightRequest:
+      type: object
+      title: DescribeInsightRequest
+      properties: {}
+    ProactiveInsight:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        InsightTimeRange:
+          $ref: '#/components/schemas/InsightTimeRange'
+        Name:
+          $ref: '#/components/schemas/__stringMin1Max530PatternSS'
+        PredictionTimeRange:
+          $ref: '#/components/schemas/PredictionTimeRange'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Severity:
+          $ref: '#/components/schemas/InsightSeverity'
+        SsmOpsItemId:
+          $ref: '#/components/schemas/__stringMin1Max100Pattern'
+        Status:
+          $ref: '#/components/schemas/InsightStatus'
+    ReactiveInsight:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        InsightTimeRange:
+          $ref: '#/components/schemas/InsightTimeRange'
+        Name:
+          $ref: '#/components/schemas/__stringMin1Max530PatternSS'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Severity:
+          $ref: '#/components/schemas/InsightSeverity'
+        SsmOpsItemId:
+          $ref: '#/components/schemas/__stringMin1Max100Pattern'
+        Status:
+          $ref: '#/components/schemas/InsightStatus'
+    DescribeResourceCollectionHealthRequest:
+      type: object
+      title: DescribeResourceCollectionHealthRequest
+      properties: {}
+    __listOfCloudFormationHealth:
+      type: array
+      items:
+        $ref: '#/components/schemas/CloudFormationHealth'
+    DescribeServiceIntegrationRequest:
+      type: object
+      title: DescribeServiceIntegrationRequest
+      properties: {}
+    ServiceIntegrationConfig:
+      type: object
+      properties:
+        OpsCenter:
+          $ref: '#/components/schemas/OpsCenterIntegration'
+    EndTimeRange:
+      type: object
+      properties:
+        FromTime:
+          $ref: '#/components/schemas/__timestampUnix'
+        ToTime:
+          $ref: '#/components/schemas/__timestampUnix'
+    __stringMin0Max50:
+      type: string
+      minLength: 0
+      maxLength: 50
+    __listOfEventResource:
+      type: array
+      items:
+        $ref: '#/components/schemas/EventResource'
+    Event:
+      type: object
+      properties:
+        DataSource:
+          $ref: '#/components/schemas/EventDataSource'
+        EventClass:
+          $ref: '#/components/schemas/EventClass'
+        EventSource:
+          $ref: '#/components/schemas/__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents'
+        Id:
+          $ref: '#/components/schemas/__string'
+        Name:
+          $ref: '#/components/schemas/__stringMin0Max50'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Resources:
+          $ref: '#/components/schemas/__listOfEventResource'
+        Time:
+          $ref: '#/components/schemas/__timestampUnix'
+    __stringMin36Max2048PatternArnAwsAZAZ09AZ09D12:
+      type: string
+      pattern: '^arn:aws[-a-z]*:[a-z0-9-]*:[a-z0-9-]*:\d{12}:.*$'
+      minLength: 36
+      maxLength: 2048
+    __stringMin0Max2048Pattern:
+      type: string
+      pattern: ^.*$
+      minLength: 0
+      maxLength: 2048
+    EventResource:
+      type: object
+      properties:
+        Arn:
+          $ref: '#/components/schemas/__stringMin36Max2048PatternArnAwsAZAZ09AZ09D12'
+        Name:
+          $ref: '#/components/schemas/__stringMin0Max2048Pattern'
+        Type:
+          $ref: '#/components/schemas/__stringMin0Max2048Pattern'
+    GetResourceCollectionRequest:
+      type: object
+      title: GetResourceCollectionRequest
+      properties: {}
+    ResourceCollectionFilter:
+      type: object
+      properties:
+        CloudFormation:
+          $ref: '#/components/schemas/CloudFormationCollectionFilter'
+    InsightFeedback:
+      type: object
+      properties:
+        Feedback:
+          $ref: '#/components/schemas/InsightFeedbackOption'
+        Id:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+    InsightSeverity:
+      type: string
+      enum:
+        - LOW
+        - MEDIUM
+        - HIGH
+    InsightStatus:
+      type: string
+      enum:
+        - ONGOING
+        - CLOSED
+    InsightTimeRange:
+      type: object
+      required:
+        - StartTime
+      properties:
+        EndTime:
+          $ref: '#/components/schemas/__timestampUnix'
+        StartTime:
+          $ref: '#/components/schemas/__timestampUnix'
+    InsightType:
+      type: string
+      enum:
+        - REACTIVE
+        - PROACTIVE
+    __integerMin1Max500:
+      type: integer
+      minimum: 1
+      maximum: 500
+    StartTimeRange:
+      type: object
+      properties:
+        FromTime:
+          $ref: '#/components/schemas/__timestampUnix'
+        ToTime:
+          $ref: '#/components/schemas/__timestampUnix'
+    ListAnomaliesForInsightRequest:
+      type: object
+      title: ListAnomaliesForInsightRequest
+      properties:
+        MaxResults:
+          $ref: '#/components/schemas/__integerMin1Max500'
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+        StartTimeRange:
+          $ref: '#/components/schemas/StartTimeRange'
+    __listOfProactiveAnomalySummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProactiveAnomalySummary'
+    __listOfReactiveAnomalySummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReactiveAnomalySummary'
+    ListEventsFilters:
+      type: object
+      properties:
+        DataSource:
+          $ref: '#/components/schemas/EventDataSource'
+        EventClass:
+          $ref: '#/components/schemas/EventClass'
+        EventSource:
+          $ref: '#/components/schemas/__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents'
+        EventTimeRange:
+          $ref: '#/components/schemas/EventTimeRange'
+        InsightId:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+    __integerMin1Max200:
+      type: integer
+      minimum: 1
+      maximum: 200
+    ListEventsRequest:
+      type: object
+      required:
+        - Filters
+      title: ListEventsRequest
+      properties:
+        Filters:
+          $ref: '#/components/schemas/ListEventsFilters'
+        MaxResults:
+          $ref: '#/components/schemas/__integerMin1Max200'
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+    __listOfEvent:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    __integerMin1Max100:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ListInsightsStatusFilter:
+      type: object
+      properties:
+        Any:
+          $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
+        Closed:
+          $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
+        Ongoing:
+          $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
+    ListInsightsRequest:
+      type: object
+      required:
+        - StatusFilter
+      title: ListInsightsRequest
+      properties:
+        MaxResults:
+          $ref: '#/components/schemas/__integerMin1Max100'
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+        StatusFilter:
+          $ref: '#/components/schemas/ListInsightsStatusFilter'
+    __listOfProactiveInsightSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProactiveInsightSummary'
+    __listOfReactiveInsightSummary:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReactiveInsightSummary'
+    ListNotificationChannelsRequest:
+      type: object
+      title: ListNotificationChannelsRequest
+      properties:
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+    __listOfNotificationChannel:
+      type: array
+      items:
+        $ref: '#/components/schemas/NotificationChannel'
+    ListRecommendationsRequest:
+      type: object
+      required:
+        - InsightId
+      title: ListRecommendationsRequest
+      properties:
+        InsightId:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+    __listOfRecommendation:
+      type: array
+      items:
+        $ref: '#/components/schemas/Recommendation'
+    NotificationChannel:
+      type: object
+      properties:
+        Config:
+          $ref: '#/components/schemas/NotificationChannelConfig'
+        Id:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+    OptInStatus:
+      type: string
+      enum:
+        - ENABLED
+        - DISABLED
+    OpsCenterIntegration:
+      type: object
+      properties:
+        OptInStatus:
+          $ref: '#/components/schemas/OptInStatus'
+    PredictionTimeRange:
+      type: object
+      required:
+        - StartTime
+      properties:
+        EndTime:
+          $ref: '#/components/schemas/__timestampUnix'
+        StartTime:
+          $ref: '#/components/schemas/__timestampUnix'
+    __double:
+      type: number
+      format: double
+    ProactiveAnomalySummary:
+      type: object
+      properties:
+        AnomalyTimeRange:
+          $ref: '#/components/schemas/AnomalyTimeRange'
+        AssociatedInsightId:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        Id:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        Limit:
+          $ref: '#/components/schemas/__double'
+        PredictionTimeRange:
+          $ref: '#/components/schemas/PredictionTimeRange'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Severity:
+          $ref: '#/components/schemas/AnomalySeverity'
+        SourceDetails:
+          $ref: '#/components/schemas/AnomalySourceDetails'
+        Status:
+          $ref: '#/components/schemas/AnomalyStatus'
+        UpdateTime:
+          $ref: '#/components/schemas/__timestampUnix'
+    __stringMin1Max530PatternSS:
+      type: string
+      pattern: '^[\s\S]*$'
+      minLength: 1
+      maxLength: 530
+    __stringMin1Max100Pattern:
+      type: string
+      pattern: ^.*$
+      minLength: 1
+      maxLength: 100
+    ProactiveInsightSummary:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        InsightTimeRange:
+          $ref: '#/components/schemas/InsightTimeRange'
+        Name:
+          $ref: '#/components/schemas/__stringMin1Max530PatternSS'
+        PredictionTimeRange:
+          $ref: '#/components/schemas/PredictionTimeRange'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Severity:
+          $ref: '#/components/schemas/InsightSeverity'
+        Status:
+          $ref: '#/components/schemas/InsightStatus'
+    PutFeedbackRequest:
+      type: object
+      title: PutFeedbackRequest
+      properties:
+        InsightFeedback:
+          $ref: '#/components/schemas/InsightFeedback'
+    ReactiveAnomalySummary:
+      type: object
+      properties:
+        AnomalyTimeRange:
+          $ref: '#/components/schemas/AnomalyTimeRange'
+        AssociatedInsightId:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        Id:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Severity:
+          $ref: '#/components/schemas/AnomalySeverity'
+        SourceDetails:
+          $ref: '#/components/schemas/AnomalySourceDetails'
+        Status:
+          $ref: '#/components/schemas/AnomalyStatus'
+    ReactiveInsightSummary:
+      type: object
+      properties:
+        Id:
+          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+        InsightTimeRange:
+          $ref: '#/components/schemas/InsightTimeRange'
+        Name:
+          $ref: '#/components/schemas/__stringMin1Max530PatternSS'
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Severity:
+          $ref: '#/components/schemas/InsightSeverity'
+        Status:
+          $ref: '#/components/schemas/InsightStatus'
+    __listOfRecommendationRelatedAnomaly:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationRelatedAnomaly'
+    __listOfRecommendationRelatedEvent:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationRelatedEvent'
+    Recommendation:
+      type: object
+      properties:
+        Description:
+          $ref: '#/components/schemas/__string'
+        Link:
+          $ref: '#/components/schemas/__string'
+        Name:
+          $ref: '#/components/schemas/__string'
+        Reason:
+          $ref: '#/components/schemas/__string'
+        RelatedAnomalies:
+          $ref: '#/components/schemas/__listOfRecommendationRelatedAnomaly'
+        RelatedEvents:
+          $ref: '#/components/schemas/__listOfRecommendationRelatedEvent'
+    __listOfRecommendationRelatedAnomalyResource:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationRelatedAnomalyResource'
+    __listOfRecommendationRelatedAnomalySourceDetail:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationRelatedAnomalySourceDetail'
+    RecommendationRelatedAnomaly:
+      type: object
+      properties:
+        Resources:
+          $ref: '#/components/schemas/__listOfRecommendationRelatedAnomalyResource'
+        SourceDetails:
+          $ref: '#/components/schemas/__listOfRecommendationRelatedAnomalySourceDetail'
+    RecommendationRelatedAnomalyResource:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/__string'
+        Type:
+          $ref: '#/components/schemas/__string'
+    __listOfRecommendationRelatedCloudWatchMetricsSourceDetail:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceDetail'
+    RecommendationRelatedAnomalySourceDetail:
+      type: object
+      properties:
+        CloudWatchMetrics:
+          $ref: '#/components/schemas/__listOfRecommendationRelatedCloudWatchMetricsSourceDetail'
+    RecommendationRelatedCloudWatchMetricsSourceDetail:
+      type: object
+      properties:
+        MetricName:
+          $ref: '#/components/schemas/__string'
+        Namespace:
+          $ref: '#/components/schemas/__string'
+    __listOfRecommendationRelatedEventResource:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationRelatedEventResource'
+    RecommendationRelatedEvent:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/__string'
+        Resources:
+          $ref: '#/components/schemas/__listOfRecommendationRelatedEventResource'
+    RecommendationRelatedEventResource:
+      type: object
+      properties:
+        Name:
+          $ref: '#/components/schemas/__string'
+        Type:
+          $ref: '#/components/schemas/__string'
+    RemoveNotificationChannelRequest:
+      type: object
+      title: RemoveNotificationChannelRequest
+      properties: {}
+    SearchInsightsFilters:
+      type: object
+      properties:
+        ResourceCollection:
+          $ref: '#/components/schemas/ResourceCollection'
+        Severities:
+          $ref: '#/components/schemas/__listOfInsightSeverity'
+        Statuses:
+          $ref: '#/components/schemas/__listOfInsightStatus'
+    SearchInsightsRequest:
+      type: object
+      required:
+        - Type
+        - StartTimeRange
+      title: SearchInsightsRequest
+      properties:
+        Filters:
+          $ref: '#/components/schemas/SearchInsightsFilters'
+        MaxResults:
+          $ref: '#/components/schemas/__integerMin1Max100'
+        NextToken:
+          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+        StartTimeRange:
+          $ref: '#/components/schemas/StartTimeRange'
+        Type:
+          $ref: '#/components/schemas/InsightType'
+    __stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12:
+      type: string
+      pattern: '^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\d{12}:[^:]+$'
+      minLength: 36
+      maxLength: 1024
+    UpdateResourceCollectionAction:
+      type: string
+      enum:
+        - ADD
+        - REMOVE
+    UpdateResourceCollectionFilter:
+      type: object
+      properties:
+        CloudFormation:
+          $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
+    UpdateResourceCollectionRequest:
+      type: object
+      required:
+        - Action
+        - ResourceCollection
+      title: UpdateResourceCollectionRequest
+      properties:
+        Action:
+          $ref: '#/components/schemas/UpdateResourceCollectionAction'
+        ResourceCollection:
+          $ref: '#/components/schemas/UpdateResourceCollectionFilter'
+    UpdateServiceIntegrationConfig:
+      type: object
+      properties:
+        OpsCenter:
+          $ref: '#/components/schemas/OpsCenterIntegrationConfig'
+    UpdateServiceIntegrationRequest:
+      type: object
+      required:
+        - ServiceIntegration
+      title: UpdateServiceIntegrationRequest
+      properties:
+        ServiceIntegration:
+          $ref: '#/components/schemas/UpdateServiceIntegrationConfig'
+security:
+  - hmac: []

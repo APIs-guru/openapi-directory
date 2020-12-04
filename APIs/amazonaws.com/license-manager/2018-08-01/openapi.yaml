@@ -114,6 +114,561 @@ servers:
     description: The AWS License Manager endpoint for China (Beijing) and China (Ningxia)
 x-hasEquivalentPaths: true
 paths:
+  /#X-Amz-Target=AWSLicenseManager.AcceptGrant:
+    post:
+      operationId: AcceptGrant
+      description: Accepts the specified grant.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptGrantResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '485':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '486':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptGrantRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.AcceptGrant
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.CheckInLicense:
+    post:
+      operationId: CheckInLicense
+      description: Checks in the specified license. Check in a license when it is no longer in use.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckInLicenseResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '483':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '486':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckInLicenseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.CheckInLicense
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.CheckoutBorrowLicense:
+    post:
+      operationId: CheckoutBorrowLicense
+      description: Checks out the specified license for offline use.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutBorrowLicenseResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: NoEntitlementsAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoEntitlementsAllowedException'
+        '483':
+          description: EntitlementNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitlementNotAllowedException'
+        '484':
+          description: UnsupportedDigitalSignatureMethodException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedDigitalSignatureMethodException'
+        '485':
+          description: RedirectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectException'
+        '486':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '487':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '488':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '489':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutBorrowLicenseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.CheckoutBorrowLicense
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.CheckoutLicense:
+    post:
+      operationId: CheckoutLicense
+      description: Checks out the specified license.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutLicenseResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: NoEntitlementsAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoEntitlementsAllowedException'
+        '483':
+          description: UnsupportedDigitalSignatureMethodException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedDigitalSignatureMethodException'
+        '484':
+          description: RedirectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectException'
+        '485':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '488':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutLicenseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.CheckoutLicense
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.CreateGrant:
+    post:
+      operationId: CreateGrant
+      description: Creates a grant for the specified license. A grant shares the use of license entitlements with specific AWS accounts.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGrantResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '484':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '485':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGrantRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.CreateGrant
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.CreateGrantVersion:
+    post:
+      operationId: CreateGrantVersion
+      description: Creates a new version of the specified grant.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateGrantVersionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '484':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateGrantVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.CreateGrantVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.CreateLicense:
+    post:
+      operationId: CreateLicense
+      description: Creates a license.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLicenseResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: RedirectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectException'
+        '483':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '486':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLicenseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.CreateLicense
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLicenseManager.CreateLicenseConfiguration:
     post:
       operationId: CreateLicenseConfiguration
@@ -175,6 +730,324 @@ paths:
             type: string
             enum:
               - AWSLicenseManager.CreateLicenseConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.CreateLicenseVersion:
+    post:
+      operationId: CreateLicenseVersion
+      description: Creates a new version of the specified license.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLicenseVersionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: RedirectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '486':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '487':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLicenseVersionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.CreateLicenseVersion
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.CreateToken:
+    post:
+      operationId: CreateToken
+      description: '<p>Creates a long-lived token.</p> <p>A refresh token is a JWT token used to get an access token. With an access token, you can call AssumeRoleWithWebIdentity to get role credentials that you can use to call License Manager to manage the specified license.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTokenResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '484':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '485':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '487':
+          description: RedirectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTokenRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.CreateToken
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.DeleteGrant:
+    post:
+      operationId: DeleteGrant
+      description: Deletes the specified grant.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteGrantResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '485':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '486':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteGrantRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.DeleteGrant
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.DeleteLicense:
+    post:
+      operationId: DeleteLicense
+      description: Deletes the specified license.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteLicenseResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: RedirectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '485':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '486':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '487':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteLicenseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.DeleteLicense
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -246,6 +1119,363 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.DeleteToken:
+    post:
+      operationId: DeleteToken
+      description: Deletes the specified token. Must be called in the license home Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteTokenResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '484':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: RedirectException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RedirectException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteTokenRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.DeleteToken
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.ExtendLicenseConsumption:
+    post:
+      operationId: ExtendLicenseConsumption
+      description: Extends the expiration date for license consumption.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExtendLicenseConsumptionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '485':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '486':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExtendLicenseConsumptionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.ExtendLicenseConsumption
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.GetAccessToken:
+    post:
+      operationId: GetAccessToken
+      description: Gets a temporary access token to use with AssumeRoleWithWebIdentity. Access tokens are valid for one hour.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAccessTokenResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '484':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetAccessTokenRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.GetAccessToken
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.GetGrant:
+    post:
+      operationId: GetGrant
+      description: Gets detailed information about the specified grant.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGrantResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '484':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetGrantRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.GetGrant
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.GetLicense:
+    post:
+      operationId: GetLicense
+      description: Gets detailed information about the specified license.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLicenseResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '485':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetLicenseRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.GetLicense
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLicenseManager.GetLicenseConfiguration:
     post:
       operationId: GetLicenseConfiguration
@@ -301,6 +1531,75 @@ paths:
             type: string
             enum:
               - AWSLicenseManager.GetLicenseConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.GetLicenseUsage:
+    post:
+      operationId: GetLicenseUsage
+      description: Gets detailed information about the usage of the specified license.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLicenseUsageResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '485':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetLicenseUsageRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.GetLicenseUsage
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -427,6 +1726,81 @@ paths:
             type: string
             enum:
               - AWSLicenseManager.ListAssociationsForLicenseConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.ListDistributedGrants:
+    post:
+      operationId: ListDistributedGrants
+      description: Lists the grants distributed for the specified license.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDistributedGrantsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '484':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDistributedGrantsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.ListDistributedGrants
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -630,6 +2004,288 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.ListLicenseVersions:
+    post:
+      operationId: ListLicenseVersions
+      description: Lists all versions of the specified license.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLicenseVersionsResponse'
+        '480':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '481':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '484':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListLicenseVersionsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.ListLicenseVersions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.ListLicenses:
+    post:
+      operationId: ListLicenses
+      description: Lists the licenses for your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListLicensesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '485':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListLicensesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.ListLicenses
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.ListReceivedGrants:
+    post:
+      operationId: ListReceivedGrants
+      description: Lists grants that are received but not accepted.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReceivedGrantsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '484':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListReceivedGrantsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.ListReceivedGrants
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.ListReceivedLicenses:
+    post:
+      operationId: ListReceivedLicenses
+      description: Lists received licenses.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListReceivedLicensesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '483':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+        '484':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListReceivedLicensesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.ListReceivedLicenses
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLicenseManager.ListResourceInventory:
     post:
       operationId: ListResourceInventory
@@ -768,6 +2424,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.ListTokens:
+    post:
+      operationId: ListTokens
+      description: Lists your tokens.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTokensResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '484':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListTokensRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.ListTokens
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSLicenseManager.ListUsageForLicenseConfiguration:
     post:
       operationId: ListUsageForLicenseConfiguration
@@ -829,6 +2548,81 @@ paths:
             type: string
             enum:
               - AWSLicenseManager.ListUsageForLicenseConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSLicenseManager.RejectGrant:
+    post:
+      operationId: RejectGrant
+      description: Rejects the specified grant.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RejectGrantResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '482':
+          description: AuthorizationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizationException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: RateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RateLimitExceededException'
+        '485':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
+        '486':
+          description: ServerInternalException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerInternalException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RejectGrantRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSLicenseManager.RejectGrant
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1004,6 +2798,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RateLimitExceededException'
+        '485':
+          description: ResourceLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceededException'
       requestBody:
         required: true
         content:
@@ -1216,6 +3016,368 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    AcceptGrantResponse:
+      type: object
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Grant ARN.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/GrantStatus'
+            - description: Grant status.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant version.
+    AcceptGrantRequest:
+      type: object
+      required:
+        - GrantArn
+      title: AcceptGrantRequest
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the grant.
+    ValidationException: {}
+    InvalidParameterValueException: {}
+    AuthorizationException: {}
+    AccessDeniedException: {}
+    RateLimitExceededException: {}
+    ResourceLimitExceededException: {}
+    ServerInternalException: {}
+    CheckInLicenseResponse:
+      type: object
+      properties: {}
+    CheckInLicenseRequest:
+      type: object
+      required:
+        - LicenseConsumptionToken
+      title: CheckInLicenseRequest
+      properties:
+        LicenseConsumptionToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License consumption token.
+        Beneficiary:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License beneficiary.
+    ResourceNotFoundException: {}
+    ConflictException: {}
+    CheckoutBorrowLicenseResponse:
+      type: object
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
+        LicenseConsumptionToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License consumption token.
+        EntitlementsAllowed:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementDataList'
+            - description: Allowed license entitlements.
+        NodeId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Node ID.
+        SignedToken:
+          allOf:
+            - $ref: '#/components/schemas/SignedToken'
+            - description: Signed token.
+        IssuedAt:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: Date and time at which the license checkout is issued.
+        Expiration:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: Date and time at which the license checkout expires.
+        CheckoutMetadata:
+          allOf:
+            - $ref: '#/components/schemas/MetadataList'
+            - description: Information about constraints.
+    CheckoutBorrowLicenseRequest:
+      type: object
+      required:
+        - LicenseArn
+        - Entitlements
+        - DigitalSignatureMethod
+        - ClientToken
+      title: CheckoutBorrowLicenseRequest
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license. The license must use the borrow consumption configuration.
+        Entitlements:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementDataList'
+            - description: License entitlements. Partial checkouts are not supported.
+        DigitalSignatureMethod:
+          allOf:
+            - $ref: '#/components/schemas/DigitalSignatureMethod'
+            - description: 'Digital signature method. The possible value is JSON Web Signature (JWS) algorithm PS384. For more information, see <a href="https://tools.ietf.org/html/rfc7518#section-3.5">RFC 7518 Digital Signature with RSASSA-PSS</a>.'
+        NodeId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Node ID.
+        CheckoutMetadata:
+          allOf:
+            - $ref: '#/components/schemas/MetadataList'
+            - description: Information about constraints.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+    NoEntitlementsAllowedException: {}
+    EntitlementNotAllowedException: {}
+    UnsupportedDigitalSignatureMethodException: {}
+    RedirectException: {}
+    CheckoutLicenseResponse:
+      type: object
+      properties:
+        CheckoutType:
+          allOf:
+            - $ref: '#/components/schemas/CheckoutType'
+            - description: Checkout type.
+        LicenseConsumptionToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License consumption token.
+        EntitlementsAllowed:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementDataList'
+            - description: Allowed license entitlements.
+        SignedToken:
+          allOf:
+            - $ref: '#/components/schemas/SignedToken'
+            - description: Signed token.
+        NodeId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Node ID.
+        IssuedAt:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: Date and time at which the license checkout is issued.
+        Expiration:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: Date and time at which the license checkout expires.
+    CheckoutLicenseRequest:
+      type: object
+      required:
+        - ProductSKU
+        - CheckoutType
+        - KeyFingerprint
+        - Entitlements
+        - ClientToken
+      title: CheckoutLicenseRequest
+      properties:
+        ProductSKU:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Product SKU.
+        CheckoutType:
+          allOf:
+            - $ref: '#/components/schemas/CheckoutType'
+            - description: Checkout type.
+        KeyFingerprint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Key fingerprint identifying the license.
+        Entitlements:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementDataList'
+            - description: License entitlements.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        Beneficiary:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License beneficiary.
+        NodeId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Node ID.
+    CreateGrantResponse:
+      type: object
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Grant ARN.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/GrantStatus'
+            - description: Grant status.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant version.
+    CreateGrantRequest:
+      type: object
+      required:
+        - ClientToken
+        - GrantName
+        - LicenseArn
+        - Principals
+        - HomeRegion
+        - AllowedOperations
+      title: CreateGrantRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        GrantName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant name.
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
+        Principals:
+          allOf:
+            - $ref: '#/components/schemas/PrincipalArnList'
+            - description: The grant principals.
+        HomeRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Home Region of the grant.
+        AllowedOperations:
+          allOf:
+            - $ref: '#/components/schemas/AllowedOperationList'
+            - description: Allowed operations for the grant.
+    CreateGrantVersionResponse:
+      type: object
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Grant ARN.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/GrantStatus'
+            - description: Grant status.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: New version of the grant.
+    CreateGrantVersionRequest:
+      type: object
+      required:
+        - ClientToken
+        - GrantArn
+      title: CreateGrantVersionRequest
+      properties:
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the grant.
+        GrantName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant name.
+        AllowedOperations:
+          allOf:
+            - $ref: '#/components/schemas/AllowedOperationList'
+            - description: Allowed operations for the grant.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/GrantStatus'
+            - description: Grant status.
+        SourceVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Current version of the grant.
+    CreateLicenseResponse:
+      type: object
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/LicenseStatus'
+            - description: License status.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License version.
+    CreateLicenseRequest:
+      type: object
+      required:
+        - LicenseName
+        - ProductName
+        - ProductSKU
+        - Issuer
+        - HomeRegion
+        - Validity
+        - Entitlements
+        - Beneficiary
+        - ConsumptionConfiguration
+        - ClientToken
+      title: CreateLicenseRequest
+      properties:
+        LicenseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License name.
+        ProductName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Product name.
+        ProductSKU:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Product SKU.
+        Issuer:
+          allOf:
+            - $ref: '#/components/schemas/Issuer'
+            - description: License issuer.
+        HomeRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Home Region for the license.
+        Validity:
+          allOf:
+            - $ref: '#/components/schemas/DatetimeRange'
+            - description: 'Date and time range during which the license is valid, in ISO8601-UTC format.'
+        Entitlements:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementList'
+            - description: License entitlements.
+        Beneficiary:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License beneficiary.
+        ConsumptionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ConsumptionConfiguration'
+            - description: Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
+        LicenseMetadata:
+          allOf:
+            - $ref: '#/components/schemas/MetadataList'
+            - description: Information about the license.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     CreateLicenseConfigurationResponse:
       type: object
       properties:
@@ -1262,12 +3424,182 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProductInformationList'
             - description: Product information.
-    InvalidParameterValueException: {}
-    ServerInternalException: {}
-    ResourceLimitExceededException: {}
-    AuthorizationException: {}
-    AccessDeniedException: {}
-    RateLimitExceededException: {}
+    CreateLicenseVersionResponse:
+      type: object
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: License ARN.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: New version of the license.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/LicenseStatus'
+            - description: License status.
+    CreateLicenseVersionRequest:
+      type: object
+      required:
+        - LicenseArn
+        - LicenseName
+        - ProductName
+        - Issuer
+        - HomeRegion
+        - Validity
+        - Entitlements
+        - ConsumptionConfiguration
+        - Status
+        - ClientToken
+      title: CreateLicenseVersionRequest
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
+        LicenseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License name.
+        ProductName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Product name.
+        Issuer:
+          allOf:
+            - $ref: '#/components/schemas/Issuer'
+            - description: License issuer.
+        HomeRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Home Region of the license.
+        Validity:
+          allOf:
+            - $ref: '#/components/schemas/DatetimeRange'
+            - description: 'Date and time range during which the license is valid, in ISO8601-UTC format.'
+        LicenseMetadata:
+          allOf:
+            - $ref: '#/components/schemas/MetadataList'
+            - description: Information about the license.
+        Entitlements:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementList'
+            - description: License entitlements.
+        ConsumptionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ConsumptionConfiguration'
+            - description: Configuration for consumption of the license. Choose a provisional configuration for workloads running with continuous connectivity. Choose a borrow configuration for workloads with offline usage.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/LicenseStatus'
+            - description: License status.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+        SourceVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Current version of the license.
+    CreateTokenResponse:
+      type: object
+      properties:
+        TokenId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token ID.
+        TokenType:
+          allOf:
+            - $ref: '#/components/schemas/TokenType'
+            - description: Token type.
+        Token:
+          allOf:
+            - $ref: '#/components/schemas/TokenString'
+            - description: 'Refresh token, encoded as a JWT token.'
+    CreateTokenRequest:
+      type: object
+      required:
+        - LicenseArn
+        - ClientToken
+      title: CreateTokenRequest
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license. The ARN is mapped to the aud claim of the JWT token.
+        RoleArns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - description: Amazon Resource Name (ARN) of the IAM roles to embed in the token. License Manager does not check whether the roles are in use.
+        ExpirationInDays:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: 'Token expiration, in days, counted from token creation. The default is 365 days.'
+        TokenProperties:
+          allOf:
+            - $ref: '#/components/schemas/MaxSize3StringList'
+            - description: Data specified by the caller to be included in the JWT token. The data is mapped to the amr claim of the JWT token.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'Idempotency token, valid for 10 minutes.'
+    DeleteGrantResponse:
+      type: object
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Grant ARN.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/GrantStatus'
+            - description: Grant status.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant version.
+    DeleteGrantRequest:
+      type: object
+      required:
+        - GrantArn
+        - Version
+      title: DeleteGrantRequest
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the grant.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Current version of the grant.
+    DeleteLicenseResponse:
+      type: object
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/LicenseDeletionStatus'
+            - description: License status.
+        DeletionDate:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: Date on which the license is deleted.
+    DeleteLicenseRequest:
+      type: object
+      required:
+        - LicenseArn
+        - SourceVersion
+      title: DeleteLicenseRequest
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
+        SourceVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Current version of the license.
     DeleteLicenseConfigurationResponse:
       type: object
       properties: {}
@@ -1281,6 +3613,107 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: ID of the license configuration.
+    DeleteTokenResponse:
+      type: object
+      properties: {}
+    DeleteTokenRequest:
+      type: object
+      required:
+        - TokenId
+      title: DeleteTokenRequest
+      properties:
+        TokenId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token ID.
+    ExtendLicenseConsumptionResponse:
+      type: object
+      properties:
+        LicenseConsumptionToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License consumption token.
+        Expiration:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: Date and time at which the license consumption expires.
+    ExtendLicenseConsumptionRequest:
+      type: object
+      required:
+        - LicenseConsumptionToken
+      title: ExtendLicenseConsumptionRequest
+      properties:
+        LicenseConsumptionToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License consumption token.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request. Provides an error response if you do not have the required permissions.'
+    GetAccessTokenResponse:
+      type: object
+      properties:
+        AccessToken:
+          allOf:
+            - $ref: '#/components/schemas/TokenString'
+            - description: Temporary access token.
+    GetAccessTokenRequest:
+      type: object
+      required:
+        - Token
+      title: GetAccessTokenRequest
+      properties:
+        Token:
+          allOf:
+            - $ref: '#/components/schemas/TokenString'
+            - description: 'Refresh token, encoded as a JWT token.'
+        TokenProperties:
+          allOf:
+            - $ref: '#/components/schemas/MaxSize3StringList'
+            - description: Token properties to validate against those present in the JWT token.
+    GetGrantResponse:
+      type: object
+      properties:
+        Grant:
+          allOf:
+            - $ref: '#/components/schemas/Grant'
+            - description: Grant details.
+    GetGrantRequest:
+      type: object
+      required:
+        - GrantArn
+      title: GetGrantRequest
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the grant.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant version.
+    GetLicenseResponse:
+      type: object
+      properties:
+        License:
+          allOf:
+            - $ref: '#/components/schemas/License'
+            - description: License details.
+    GetLicenseRequest:
+      type: object
+      required:
+        - LicenseArn
+      title: GetLicenseRequest
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License version.
     GetLicenseConfigurationResponse:
       type: object
       properties:
@@ -1358,6 +3791,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Amazon Resource Name (ARN) of the license configuration.
+    GetLicenseUsageResponse:
+      type: object
+      properties:
+        LicenseUsage:
+          allOf:
+            - $ref: '#/components/schemas/LicenseUsage'
+            - description: License usage details.
+    GetLicenseUsageRequest:
+      type: object
+      required:
+        - LicenseArn
+      title: GetLicenseUsageRequest
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
     GetServiceSettingsResponse:
       type: object
       properties:
@@ -1372,11 +3822,11 @@ components:
         OrganizationConfiguration:
           allOf:
             - $ref: '#/components/schemas/OrganizationConfiguration'
-            - description: Indicates whether AWS Organizations has been integrated with License Manager for cross-account discovery.
+            - description: Indicates whether AWS Organizations is integrated with License Manager for cross-account discovery.
         EnableCrossAccountsDiscovery:
           allOf:
             - $ref: '#/components/schemas/BoxBoolean'
-            - description: Indicates whether cross-account discovery has been enabled.
+            - description: Indicates whether cross-account discovery is enabled.
         LicenseManagerResourceShareArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -1415,6 +3865,37 @@ components:
             - $ref: '#/components/schemas/String'
             - description: Token for the next set of results.
     FilterLimitExceededException: {}
+    ListDistributedGrantsResponse:
+      type: object
+      properties:
+        Grants:
+          allOf:
+            - $ref: '#/components/schemas/GrantList'
+            - description: Distributed grant details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ListDistributedGrantsRequest:
+      type: object
+      title: ListDistributedGrantsRequest
+      properties:
+        GrantArns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - description: Amazon Resource Names (ARNs) of the grants.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>LicenseARN</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>PrincipalARN</code> </p> </li> <li> <p> <code>ParentARN</code> </p> </li> </ul>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxSize100'
+            - description: Maximum number of results to return in a single call.
     ListFailuresForLicenseConfigurationOperationsResponse:
       type: object
       properties:
@@ -1504,6 +3985,128 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Token for the next set of results.
+    ListLicenseVersionsResponse:
+      type: object
+      properties:
+        Licenses:
+          allOf:
+            - $ref: '#/components/schemas/LicenseList'
+            - description: License details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ListLicenseVersionsRequest:
+      type: object
+      required:
+        - LicenseArn
+      title: ListLicenseVersionsRequest
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxSize100'
+            - description: Maximum number of results to return in a single call.
+    ListLicensesResponse:
+      type: object
+      properties:
+        Licenses:
+          allOf:
+            - $ref: '#/components/schemas/LicenseList'
+            - description: License details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ListLicensesRequest:
+      type: object
+      title: ListLicensesRequest
+      properties:
+        LicenseArns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - description: Amazon Resource Names (ARNs) of the licenses.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>Beneficiary</code> </p> </li> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>KeyFingerprint</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxSize100'
+            - description: Maximum number of results to return in a single call.
+    ListReceivedGrantsResponse:
+      type: object
+      properties:
+        Grants:
+          allOf:
+            - $ref: '#/components/schemas/GrantList'
+            - description: Received grant details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ListReceivedGrantsRequest:
+      type: object
+      title: ListReceivedGrantsRequest
+      properties:
+        GrantArns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - description: Amazon Resource Names (ARNs) of the grants.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>LicenseARN</code> </p> </li> <li> <p> <code>Status</code> </p> </li> </ul>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxSize100'
+            - description: Maximum number of results to return in a single call.
+    ListReceivedLicensesResponse:
+      type: object
+      properties:
+        Licenses:
+          allOf:
+            - $ref: '#/components/schemas/GrantedLicenseList'
+            - description: Received license details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ListReceivedLicensesRequest:
+      type: object
+      title: ListReceivedLicensesRequest
+      properties:
+        LicenseArns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - description: Amazon Resource Names (ARNs) of the licenses.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: '<p>Filters to scope the results. The following filters are supported:</p> <ul> <li> <p> <code>ProductSKU</code> </p> </li> <li> <p> <code>Status</code> </p> </li> <li> <p> <code>KeyFingerprint</code> </p> </li> <li> <p> <code>Issuer</code> </p> </li> </ul>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxSize100'
+            - description: Maximum number of results to return in a single call.
     ListResourceInventoryResponse:
       type: object
       properties:
@@ -1549,6 +4152,37 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Amazon Resource Name (ARN) of the license configuration.
+    ListTokensResponse:
+      type: object
+      properties:
+        Tokens:
+          allOf:
+            - $ref: '#/components/schemas/TokenList'
+            - description: Received token details.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+    ListTokensRequest:
+      type: object
+      title: ListTokensRequest
+      properties:
+        TokenIds:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Token IDs.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: '<p>Filters to scope the results. The following filter is supported:</p> <ul> <li> <p> <code>licenseArns</code> </p> </li> </ul>'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token for the next set of results.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxSize100'
+            - description: Maximum number of results to return in a single call.
     ListUsageForLicenseConfigurationResponse:
       type: object
       properties:
@@ -1581,7 +4215,32 @@ components:
         Filters:
           allOf:
             - $ref: '#/components/schemas/Filters'
-            - description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>resourceArn</code> - The ARN of the license configuration resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceType</code> - The resource type (EC2_INSTANCE | EC2_HOST | EC2_AMI | SYSTEMS_MANAGER_MANAGED_INSTANCE). Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceAccount</code> - The ID of the account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>'
+            - description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>resourceArn</code> - The ARN of the license configuration resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceType</code> - The resource type (<code>EC2_INSTANCE</code> | <code>EC2_HOST</code> | <code>EC2_AMI</code> | <code>SYSTEMS_MANAGER_MANAGED_INSTANCE</code>). Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>resourceAccount</code> - The ID of the account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>'
+    RejectGrantResponse:
+      type: object
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Grant ARN.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/GrantStatus'
+            - description: Grant status.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant version.
+    RejectGrantRequest:
+      type: object
+      required:
+        - GrantArn
+      title: RejectGrantRequest
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the grant.
     TagResourceResponse:
       type: object
       properties: {}
@@ -1705,6 +4364,43 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxBoolean'
             - description: Activates cross-account discovery.
+    Arn:
+      type: string
+      pattern: '^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$'
+      maxLength: 2048
+    GrantStatus:
+      type: string
+      enum:
+        - PENDING_WORKFLOW
+        - PENDING_ACCEPT
+        - REJECTED
+        - ACTIVE
+        - FAILED_WORKFLOW
+        - DELETED
+        - PENDING_DELETE
+        - DISABLED
+    String:
+      type: string
+    AllowedOperation:
+      type: string
+      enum:
+        - CreateGrant
+        - CheckoutLicense
+        - CheckoutBorrowLicense
+        - CheckInLicense
+        - ExtendConsumptionLicense
+        - ListPurchasedLicenses
+        - CreateToken
+    AllowedOperationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AllowedOperation'
+      minItems: 1
+      maxItems: 7
+    ArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
     DateTime:
       type: string
       format: date-time
@@ -1722,8 +4418,50 @@ components:
       type: boolean
     BoxInteger:
       type: integer
+    BorrowConfiguration:
+      type: object
+      required:
+        - AllowEarlyCheckIn
+        - MaxTimeToLiveInMinutes
+      properties:
+        AllowEarlyCheckIn:
+          allOf:
+            - $ref: '#/components/schemas/BoxBoolean'
+            - description: Indicates whether early check-ins are allowed.
+        MaxTimeToLiveInMinutes:
+          allOf:
+            - $ref: '#/components/schemas/BoxInteger'
+            - description: 'Maximum time for the borrow configuration, in minutes.'
+      description: Details about a borrow configuration.
     BoxLong:
       type: integer
+    EntitlementDataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntitlementData'
+    DigitalSignatureMethod:
+      type: string
+      enum:
+        - JWT_PS384
+    MetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Metadata'
+    ClientToken:
+      type: string
+      pattern: '[a-zA-Z0-9]*'
+      maxLength: 64
+    SignedToken:
+      type: string
+      minLength: 4096
+    ISO8601DateTime:
+      type: string
+      pattern: '^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[ 0-3]|[0-1][0-9]):[0-5][0-9])+$'
+      maxLength: 50
+    CheckoutType:
+      type: string
+      enum:
+        - PROVISIONAL
     ResourceType:
       type: string
       enum:
@@ -1748,8 +4486,44 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ConsumedLicenseSummary'
-    String:
+    RenewType:
       type: string
+      enum:
+        - None
+        - Weekly
+        - Monthly
+    ProvisionalConfiguration:
+      type: object
+      required:
+        - MaxTimeToLiveInMinutes
+      properties:
+        MaxTimeToLiveInMinutes:
+          allOf:
+            - $ref: '#/components/schemas/BoxInteger'
+            - description: 'Maximum time for the provisional configuration, in minutes.'
+      description: Details about a provisional configuration.
+    ConsumptionConfiguration:
+      type: object
+      properties:
+        RenewType:
+          allOf:
+            - $ref: '#/components/schemas/RenewType'
+            - description: Renewal frequency.
+        ProvisionalConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ProvisionalConfiguration'
+            - description: Details about a provisional configuration.
+        BorrowConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/BorrowConfiguration'
+            - description: Details about a borrow configuration.
+      description: Details about a consumption configuration.
+    PrincipalArnList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Arn'
+      minItems: 1
+      maxItems: 1
     LicenseCountingType:
       type: string
       enum:
@@ -1769,6 +4543,212 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ProductInformation'
+    Issuer:
+      type: object
+      required:
+        - Name
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Issuer name.
+        SignKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.'
+      description: Details about the issuer of a license.
+    DatetimeRange:
+      type: object
+      required:
+        - Begin
+      properties:
+        Begin:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: Start of the time range.
+        End:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: End of the time range.
+      description: 'Describes a time range, in ISO8601-UTC format.'
+    EntitlementList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Entitlement'
+    LicenseStatus:
+      type: string
+      enum:
+        - AVAILABLE
+        - PENDING_AVAILABLE
+        - DEACTIVATED
+        - SUSPENDED
+        - EXPIRED
+        - PENDING_DELETE
+        - DELETED
+    Integer:
+      type: integer
+    MaxSize3StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/String'
+      maxItems: 3
+    IdempotencyToken:
+      type: string
+      pattern: \S+
+      maxLength: 60
+    TokenType:
+      type: string
+      enum:
+        - REFRESH_TOKEN
+    TokenString:
+      type: string
+      pattern: \S+
+      maxLength: 4096
+    LicenseDeletionStatus:
+      type: string
+      enum:
+        - PENDING_DELETE
+        - DELETED
+    Long:
+      type: integer
+    EntitlementUnit:
+      type: string
+      enum:
+        - Count
+        - None
+        - Seconds
+        - Microseconds
+        - Milliseconds
+        - Bytes
+        - Kilobytes
+        - Megabytes
+        - Gigabytes
+        - Terabytes
+        - Bits
+        - Kilobits
+        - Megabits
+        - Gigabits
+        - Terabits
+        - Percent
+        - Bytes/Second
+        - Kilobytes/Second
+        - Megabytes/Second
+        - Gigabytes/Second
+        - Terabytes/Second
+        - Bits/Second
+        - Kilobits/Second
+        - Megabits/Second
+        - Gigabits/Second
+        - Terabits/Second
+        - Count/Second
+    Entitlement:
+      type: object
+      required:
+        - Name
+        - Unit
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Entitlement name.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Entitlement resource. Use only if the unit is None.
+        MaxCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: Maximum entitlement count. Use if the unit is not None.
+        Overage:
+          allOf:
+            - $ref: '#/components/schemas/BoxBoolean'
+            - description: Indicates whether overages are allowed.
+        Unit:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementUnit'
+            - description: Entitlement unit.
+        AllowCheckIn:
+          allOf:
+            - $ref: '#/components/schemas/BoxBoolean'
+            - description: Indicates whether check-ins are allowed.
+      description: Describes a resource entitled for use with a license.
+    EntitlementDataUnit:
+      type: string
+      enum:
+        - Count
+        - None
+        - Seconds
+        - Microseconds
+        - Milliseconds
+        - Bytes
+        - Kilobytes
+        - Megabytes
+        - Gigabytes
+        - Terabytes
+        - Bits
+        - Kilobits
+        - Megabits
+        - Gigabits
+        - Terabits
+        - Percent
+        - Bytes/Second
+        - Kilobytes/Second
+        - Megabytes/Second
+        - Gigabytes/Second
+        - Terabytes/Second
+        - Bits/Second
+        - Kilobits/Second
+        - Megabits/Second
+        - Gigabits/Second
+        - Terabits/Second
+        - Count/Second
+    EntitlementData:
+      type: object
+      required:
+        - Name
+        - Unit
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Entitlement data name.
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Entitlement data value.
+        Unit:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementDataUnit'
+            - description: Entitlement data unit.
+      description: Data associated with an entitlement resource.
+    EntitlementUsage:
+      type: object
+      required:
+        - Name
+        - ConsumedValue
+        - Unit
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Entitlement usage name.
+        ConsumedValue:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Resource usage consumed.
+        MaxCount:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Maximum entitlement usage count.
+        Unit:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementDataUnit'
+            - description: Entitlement usage unit.
+      description: Usage associated with an entitlement resource.
+    EntitlementUsageList:
+      type: array
+      items:
+        $ref: '#/components/schemas/EntitlementUsage'
     FilterName:
       type: string
     FilterValues:
@@ -1787,16 +4767,142 @@ components:
             - $ref: '#/components/schemas/FilterValues'
             - description: Filter values. Filter values are case-sensitive.
       description: 'A filter name and value pair that is used to return more specific results from a describe operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.'
+    FilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Filter'
     FilterValue:
       type: string
     Filters:
       type: array
       items:
         $ref: '#/components/schemas/Filter'
+    Grant:
+      type: object
+      required:
+        - GrantArn
+        - GrantName
+        - ParentArn
+        - LicenseArn
+        - GranteePrincipalArn
+        - HomeRegion
+        - GrantStatus
+        - Version
+        - GrantedOperations
+      properties:
+        GrantArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the grant.
+        GrantName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant name.
+        ParentArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Parent ARN.
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: License ARN.
+        GranteePrincipalArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The grantee principal ARN.
+        HomeRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Home Region of the grant.
+        GrantStatus:
+          allOf:
+            - $ref: '#/components/schemas/GrantStatus'
+            - description: Grant status.
+        StatusReason:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant status reason.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Grant version.
+        GrantedOperations:
+          allOf:
+            - $ref: '#/components/schemas/AllowedOperationList'
+            - description: Granted operations.
+      description: Describes a grant.
     ManagedResourceSummaryList:
       type: array
       items:
         $ref: '#/components/schemas/ManagedResourceSummary'
+    License:
+      type: object
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
+        LicenseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License name.
+        ProductName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Product name.
+        ProductSKU:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Product SKU.
+        Issuer:
+          allOf:
+            - $ref: '#/components/schemas/IssuerDetails'
+            - description: License issuer.
+        HomeRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Home Region of the license.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/LicenseStatus'
+            - description: License status.
+        Validity:
+          allOf:
+            - $ref: '#/components/schemas/DatetimeRange'
+            - description: 'Date and time range during which the license is valid, in ISO8601-UTC format.'
+        Beneficiary:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License beneficiary.
+        Entitlements:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementList'
+            - description: License entitlements.
+        ConsumptionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ConsumptionConfiguration'
+            - description: Configuration for consumption of the license.
+        LicenseMetadata:
+          allOf:
+            - $ref: '#/components/schemas/MetadataList'
+            - description: License metadata.
+        CreateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: License creation time.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License version.
+      description: Software license that is managed in AWS License Manager.
+    LicenseUsage:
+      type: object
+      properties:
+        EntitlementUsages:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementUsageList'
+            - description: License entitlement usages.
+      description: Describes the entitlement usage associated with a license.
     OrganizationConfiguration:
       type: object
       required:
@@ -1807,6 +4913,106 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: Enables AWS Organization integration.
       description: Configuration information for AWS Organizations.
+    GrantList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Grant'
+    IssuerDetails:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Issuer name.
+        SignKey:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Asymmetric CMK from AWS Key Management Service. The CMK must have a key usage of sign and verify, and support the RSASSA-PSS SHA-256 signing algorithm.'
+        KeyFingerprint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Issuer key fingerprint.
+      description: Details associated with the issuer of a license.
+    ReceivedMetadata:
+      type: object
+      properties:
+        ReceivedStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReceivedStatus'
+            - description: Received status.
+        AllowedOperations:
+          allOf:
+            - $ref: '#/components/schemas/AllowedOperationList'
+            - description: Allowed operations.
+      description: Metadata associated with received licenses and grants.
+    GrantedLicense:
+      type: object
+      properties:
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: Amazon Resource Name (ARN) of the license.
+        LicenseName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: License name.
+        ProductName:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Product name.
+        ProductSKU:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Product SKU.
+        Issuer:
+          allOf:
+            - $ref: '#/components/schemas/IssuerDetails'
+            - description: Granted license issuer.
+        HomeRegion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Home Region of the granted license.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/LicenseStatus'
+            - description: Granted license status.
+        Validity:
+          allOf:
+            - $ref: '#/components/schemas/DatetimeRange'
+            - description: 'Date and time range during which the granted license is valid, in ISO8601-UTC format.'
+        Beneficiary:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Granted license beneficiary.
+        Entitlements:
+          allOf:
+            - $ref: '#/components/schemas/EntitlementList'
+            - description: License entitlements.
+        ConsumptionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ConsumptionConfiguration'
+            - description: Configuration for consumption of the license.
+        LicenseMetadata:
+          allOf:
+            - $ref: '#/components/schemas/MetadataList'
+            - description: Granted license metadata.
+        CreateTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: Creation time of the granted license.
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Version of the granted license.
+        ReceivedMetadata:
+          allOf:
+            - $ref: '#/components/schemas/ReceivedMetadata'
+            - description: Granted license received metadata.
+      description: Describes a license that is granted to a grantee.
+    GrantedLicenseList:
+      type: array
+      items:
+        $ref: '#/components/schemas/GrantedLicense'
     InventoryFilterCondition:
       type: string
       enum:
@@ -1923,7 +5129,7 @@ components:
         AmiAssociationScope:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Scope of AMI associations.
+            - description: Scope of AMI associations. The possible value is <code>cross-account</code>.
       description: Describes an association with a license configuration.
     LicenseConfigurationAssociations:
       type: array
@@ -1970,10 +5176,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/LicenseConfiguration'
-    MetadataList:
+    LicenseList:
       type: array
       items:
-        $ref: '#/components/schemas/Metadata'
+        $ref: '#/components/schemas/License'
     LicenseOperationFailure:
       type: object
       properties:
@@ -2026,16 +5232,24 @@ components:
         AmiAssociationScope:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Scope of AMI associations.
+            - description: Scope of AMI associations. The possible value is <code>cross-account</code>.
       description: Details for associating a license configuration with a resource.
     LicenseSpecifications:
       type: array
       items:
         $ref: '#/components/schemas/LicenseSpecification'
+    MaxSize100:
+      type: integer
+      minimum: 1
+      maximum: 100
     ResourceInventoryList:
       type: array
       items:
         $ref: '#/components/schemas/ResourceInventory'
+    TokenList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TokenData'
     ManagedResourceSummary:
       type: object
       properties:
@@ -2054,12 +5268,12 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Reserved.
+            - description: The key name.
         Value:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Reserved.
-      description: Reserved.
+            - description: The value.
+      description: Describes key/value pairs.
     ProductInformationFilterList:
       type: array
       items:
@@ -2099,6 +5313,16 @@ components:
             - $ref: '#/components/schemas/String'
             - description: Logical operator.
       description: Describes product information filters.
+    ReceivedStatus:
+      type: string
+      enum:
+        - PENDING_WORKFLOW
+        - PENDING_ACCEPT
+        - REJECTED
+        - ACTIVE
+        - FAILED_WORKFLOW
+        - DELETED
+        - DISABLED
     ResourceInventory:
       type: object
       properties:
@@ -2143,5 +5367,37 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/String'
+    TokenData:
+      type: object
+      properties:
+        TokenId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token ID.
+        TokenType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Type of token generated. The supported value is <code>REFRESH_TOKEN</code>.
+        LicenseArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Amazon Resource Name (ARN) of the license.
+        ExpirationTime:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601DateTime'
+            - description: 'Token expiration time, in ISO8601-UTC format.'
+        TokenProperties:
+          allOf:
+            - $ref: '#/components/schemas/MaxSize3StringList'
+            - description: Data specified by the caller.
+        RoleArns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - description: Amazon Resource Names (ARN) of the roles included in the token.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Token status. The possible values are <code>AVAILABLE</code> and <code>DELETED</code>.
+      description: Describes a token.
 security:
   - hmac: []

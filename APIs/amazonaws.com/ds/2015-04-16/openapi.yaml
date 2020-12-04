@@ -2175,6 +2175,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DirectoryService_20150416.DisableClientAuthentication:
+    post:
+      operationId: DisableClientAuthentication
+      description: Disable client authentication for smart cards.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisableClientAuthenticationResult'
+        '480':
+          description: DirectoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryDoesNotExistException'
+        '481':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '482':
+          description: InvalidClientAuthStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidClientAuthStatusException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '485':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisableClientAuthenticationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DirectoryService_20150416.DisableClientAuthentication
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=DirectoryService_20150416.DisableLDAPS:
     post:
       operationId: DisableLDAPS
@@ -2356,6 +2425,81 @@ paths:
             type: string
             enum:
               - DirectoryService_20150416.DisableSso
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=DirectoryService_20150416.EnableClientAuthentication:
+    post:
+      operationId: EnableClientAuthentication
+      description: Enable client authentication for smardtcards.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnableClientAuthenticationResult'
+        '480':
+          description: DirectoryDoesNotExistException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectoryDoesNotExistException'
+        '481':
+          description: UnsupportedOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnsupportedOperationException'
+        '482':
+          description: InvalidClientAuthStatusException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidClientAuthStatusException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: NoAvailableCertificateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoAvailableCertificateException'
+        '485':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '486':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnableClientAuthenticationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - DirectoryService_20150416.EnableClientAuthentication
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4837,11 +4981,11 @@ components:
         RegionsDescription:
           allOf:
             - $ref: '#/components/schemas/RegionsDescription'
-            - description: List of regional information related to the directory per replicated Region.
+            - description: List of Region information related to the directory for each replicated Region.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'If not null, more results are available. Pass this value for the <i>NextToken</i> parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set of items.'
+            - description: 'If not null, more results are available. Pass this value for the <code>NextToken</code> parameter in a subsequent call to <a>DescribeRegions</a> to retrieve the next set of items.'
     DescribeRegionsRequest:
       type: object
       required:
@@ -4859,7 +5003,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: The <i>DescribeRegionsResult.NextToken</i> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.
+            - description: The <code>DescribeRegionsResult.NextToken</code> value from a previous call to <a>DescribeRegions</a>. Pass null if this is the first call.
     DescribeSharedDirectoriesResult:
       type: object
       properties:
@@ -4959,6 +5103,25 @@ components:
             - $ref: '#/components/schemas/Limit'
             - description: The maximum number of objects to return.
       description: 'Describes the trust relationships for a particular AWS Managed Microsoft AD directory. If no input parameters are are provided, such as directory ID or trust ID, this request describes all the trust relationships.'
+    DisableClientAuthenticationResult:
+      type: object
+      properties: {}
+    DisableClientAuthenticationRequest:
+      type: object
+      required:
+        - DirectoryId
+        - Type
+      title: DisableClientAuthenticationRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: 'Disable client authentication in a specified directory for smart cards. '
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ClientAuthenticationType'
+            - description: 'Disable the type of client authentication request. '
+    InvalidClientAuthStatusException: {}
     DisableLDAPSResult:
       type: object
       properties: {}
@@ -5016,6 +5179,25 @@ components:
             - $ref: '#/components/schemas/ConnectPassword'
             - description: 'The password of an alternate account to use to disable single-sign on. This is only used for AD Connector directories. For more information, see the <i>UserName</i> parameter.'
       description: Contains the inputs for the <a>DisableSso</a> operation.
+    EnableClientAuthenticationResult:
+      type: object
+      properties: {}
+    EnableClientAuthenticationRequest:
+      type: object
+      required:
+        - DirectoryId
+        - Type
+      title: EnableClientAuthenticationRequest
+      properties:
+        DirectoryId:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryId'
+            - description: 'Enable client authentication in a specified directory for smart cards. '
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ClientAuthenticationType'
+            - description: 'Enable the type of client authentication request. '
+    NoAvailableCertificateException: {}
     EnableLDAPSResult:
       type: object
       properties: {}
@@ -5034,7 +5216,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/LDAPSType'
             - description: The type of LDAP security to enable. Currently only the value <code>Client</code> is supported.
-    NoAvailableCertificateException: {}
     EnableRadiusResult:
       type: object
       properties: {}
@@ -5275,6 +5456,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/CertificateData'
             - description: The certificate PEM string that needs to be registered.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/CertificateType'
+            - description: The certificate type to register for the request.
+        ClientCertAuthSettings:
+          $ref: '#/components/schemas/ClientCertAuthSettings'
     InvalidCertificateException: {}
     CertificateLimitExceededException: {}
     CertificateAlreadyExistsException: {}
@@ -5742,6 +5929,19 @@ components:
     CertificateExpiryDateTime:
       type: string
       format: date-time
+    CertificateType:
+      type: string
+      enum:
+        - ClientCertAuth
+        - ClientLDAPS
+    ClientCertAuthSettings:
+      type: object
+      properties:
+        OCSPUrl:
+          allOf:
+            - $ref: '#/components/schemas/OCSPUrl'
+            - description: Specifies the URL of the default OCSP server used to check for revocation status.
+      description: 'Contains information about the client certificate authentication settings, such as <code>ClientLDAPS</code> or <code>ClientCertAuth</code>.'
     Certificate:
       type: object
       properties:
@@ -5769,6 +5969,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/CertificateExpiryDateTime'
             - description: The date and time when the certificate will expire.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/CertificateType'
+            - description: Select <code>ClientCertAuth</code> for smart card integration.
+        ClientCertAuthSettings:
+          allOf:
+            - $ref: '#/components/schemas/ClientCertAuthSettings'
+            - description: Provides information about the client certificate authentication settings. The default value is <code>ClientLDAPS</code>.
       description: Information about the certificate.
     CertificateData:
       type: string
@@ -5793,6 +6001,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/CertificateExpiryDateTime'
             - description: The date and time when the certificate will expire.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/CertificateType'
+            - description: Displays the type of certificate.
       description: Contains general information about a certificate.
     CertificatesInfo:
       type: array
@@ -5805,6 +6017,15 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CidrIp'
+    ClientAuthenticationType:
+      type: string
+      enum:
+        - SmartCard
+    OCSPUrl:
+      type: string
+      pattern: '^(https?|ftp|file|ldaps?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;()]*[-a-zA-Z0-9+&@#/%=~_|()]'
+      minLength: 1
+      maxLength: 1024
     CloudOnlyDirectoriesLimitReached:
       type: boolean
     SID:
@@ -6258,7 +6479,7 @@ components:
         PrimaryRegion:
           allOf:
             - $ref: '#/components/schemas/RegionName'
-            - description: The Region from where the AWS Managed Microsoft AD directory was originally created.
+            - description: The Region where the AWS Managed Microsoft AD directory was originally created.
         AdditionalRegions:
           allOf:
             - $ref: '#/components/schemas/AdditionalRegions'
@@ -6694,7 +6915,7 @@ components:
         RegionType:
           allOf:
             - $ref: '#/components/schemas/RegionType'
-            - description: Specifies if the Region is the primary Region or an additional Region.
+            - description: Specifies whether the Region is the primary Region or an additional Region.
         Status:
           allOf:
             - $ref: '#/components/schemas/DirectoryStage'
@@ -6717,7 +6938,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/LastUpdatedDateTime'
             - description: The date and time that the Region description was last updated.
-      description: The replicated regional information for a directory.
+      description: The replicated Region information for a directory.
     TagKeys:
       type: array
       items:

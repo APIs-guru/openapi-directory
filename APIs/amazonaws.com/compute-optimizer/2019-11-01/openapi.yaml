@@ -3,7 +3,7 @@ info:
   version: '2019-11-01'
   x-release: v4
   title: AWS Compute Optimizer
-  description: 'AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS resources, such as EC2 instances and Auto Scaling groups. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">AWS Compute Optimizer User Guide</a>.'
+  description: 'AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS compute resources, such as EC2 instances, Auto Scaling groups, and Amazon EBS volumes. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">AWS Compute Optimizer User Guide</a>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -438,6 +438,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.GetEBSVolumeRecommendations:
+    post:
+      operationId: GetEBSVolumeRecommendations
+      description: '<p>Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations.</p> <p>AWS Compute Optimizer generates recommendations for Amazon EBS volumes that meet a specific set of requirements. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and requirements</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetEBSVolumeRecommendationsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '487':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetEBSVolumeRecommendationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.GetEBSVolumeRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ComputeOptimizerService.GetEC2InstanceRecommendations:
     post:
       operationId: GetEC2InstanceRecommendations
@@ -603,7 +684,7 @@ paths:
   /#X-Amz-Target=ComputeOptimizerService.GetEnrollmentStatus:
     post:
       operationId: GetEnrollmentStatus
-      description: '<p>Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is the master account of an organization, this action also confirms the enrollment status of member accounts within the organization.</p>'
+      description: '<p>Returns the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is the management account of an organization, this action also confirms the enrollment status of member accounts within the organization.</p>'
       responses:
         '200':
           description: Success
@@ -747,7 +828,7 @@ paths:
   /#X-Amz-Target=ComputeOptimizerService.UpdateEnrollmentStatus:
     post:
       operationId: UpdateEnrollmentStatus
-      description: '<p>Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a master account of an organization, this action can also be used to enroll member accounts within the organization.</p>'
+      description: '<p>Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p> <p>If the account is a management account of an organization, this action can also be used to enroll member accounts within the organization.</p>'
       responses:
         '200':
           description: Success
@@ -924,7 +1005,7 @@ components:
         accountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIds'
-            - description: '<p>The IDs of the AWS accounts for which to export Auto Scaling group recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>'
+            - description: '<p>The IDs of the AWS accounts for which to export Auto Scaling group recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>'
         filters:
           allOf:
             - $ref: '#/components/schemas/Filters'
@@ -944,7 +1025,7 @@ components:
         includeMemberAccounts:
           allOf:
             - $ref: '#/components/schemas/IncludeMemberAccounts'
-            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
+            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>This parameter cannot be specified together with the account IDs parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
     LimitExceededException: {}
     ExportEC2InstanceRecommendationsResponse:
       type: object
@@ -966,7 +1047,7 @@ components:
         accountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIds'
-            - description: '<p>The IDs of the AWS accounts for which to export instance recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>'
+            - description: '<p>The IDs of the AWS accounts for which to export instance recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to export recommendations.</p> <p>This parameter cannot be specified together with the include member accounts parameter. The parameters are mutually exclusive.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the include member accounts parameter, is omitted.</p> <p>You can specify multiple account IDs per request.</p>'
         filters:
           allOf:
             - $ref: '#/components/schemas/Filters'
@@ -986,7 +1067,7 @@ components:
         includeMemberAccounts:
           allOf:
             - $ref: '#/components/schemas/IncludeMemberAccounts'
-            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the master account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
+            - description: '<p>Indicates whether to include recommendations for resources in all member accounts of the organization if your account is the management account of an organization.</p> <p>The member accounts must also be opted in to Compute Optimizer.</p> <p>Recommendations for member accounts of the organization are not included in the export file if this parameter is omitted.</p> <p>Recommendations for member accounts are not included in the export if this parameter, or the account IDs parameter, is omitted.</p>'
     GetAutoScalingGroupRecommendationsResponse:
       type: object
       properties:
@@ -1009,7 +1090,7 @@ components:
         accountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIds'
-            - description: '<p>The IDs of the AWS accounts for which to return Auto Scaling group recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations.</p> <p>Only one account ID can be specified per request.</p>'
+            - description: '<p>The IDs of the AWS accounts for which to return Auto Scaling group recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return Auto Scaling group recommendations.</p> <p>Only one account ID can be specified per request.</p>'
         autoScalingGroupArns:
           allOf:
             - $ref: '#/components/schemas/AutoScalingGroupArns'
@@ -1026,6 +1107,45 @@ components:
           allOf:
             - $ref: '#/components/schemas/Filters'
             - description: An array of objects that describe a filter that returns a more specific list of Auto Scaling group recommendations.
+    GetEBSVolumeRecommendationsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token to use to advance to the next page of volume recommendations.</p> <p>This value is null when there are no more pages of volume recommendations to return.</p>
+        volumeRecommendations:
+          allOf:
+            - $ref: '#/components/schemas/VolumeRecommendations'
+            - description: An array of objects that describe volume recommendations.
+        errors:
+          allOf:
+            - $ref: '#/components/schemas/GetRecommendationErrors'
+            - description: '<p>An array of objects that describe errors of the request.</p> <p>For example, an error is returned if you request recommendations for an unsupported volume.</p>'
+    GetEBSVolumeRecommendationsRequest:
+      type: object
+      title: GetEBSVolumeRecommendationsRequest
+      properties:
+        volumeArns:
+          allOf:
+            - $ref: '#/components/schemas/VolumeArns'
+            - description: The Amazon Resource Name (ARN) of the volumes for which to return recommendations.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to advance to the next page of volume recommendations.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p>The maximum number of volume recommendations to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/EBSFilters'
+            - description: An array of objects that describe a filter that returns a more specific list of volume recommendations.
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/AccountIds'
+            - description: '<p>The IDs of the AWS accounts for which to return volume recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return volume recommendations.</p> <p>Only one account ID can be specified per request.</p>'
     GetEC2InstanceRecommendationsResponse:
       type: object
       properties:
@@ -1064,7 +1184,7 @@ components:
         accountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIds'
-            - description: '<p>The IDs of the AWS accounts for which to return instance recommendations.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return instance recommendations.</p> <p>Only one account ID can be specified per request.</p>'
+            - description: '<p>The IDs of the AWS accounts for which to return instance recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return instance recommendations.</p> <p>Only one account ID can be specified per request.</p>'
     GetEC2RecommendationProjectedMetricsResponse:
       type: object
       properties:
@@ -1116,7 +1236,7 @@ components:
         memberAccountsEnrolled:
           allOf:
             - $ref: '#/components/schemas/MemberAccountsEnrolled'
-            - description: 'Confirms the enrollment status of member accounts within the organization, if the account is a master account of an organization.'
+            - description: 'Confirms the enrollment status of member accounts within the organization, if the account is a management account of an organization.'
     GetEnrollmentStatusRequest:
       type: object
       title: GetEnrollmentStatusRequest
@@ -1139,7 +1259,7 @@ components:
         accountIds:
           allOf:
             - $ref: '#/components/schemas/AccountIds'
-            - description: '<p>The IDs of the AWS accounts for which to return recommendation summaries.</p> <p>If your account is the master account of an organization, use this parameter to specify the member accounts for which you want to return recommendation summaries.</p> <p>Only one account ID can be specified per request.</p>'
+            - description: '<p>The IDs of the AWS accounts for which to return recommendation summaries.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return recommendation summaries.</p> <p>Only one account ID can be specified per request.</p>'
         nextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1172,7 +1292,7 @@ components:
         includeMemberAccounts:
           allOf:
             - $ref: '#/components/schemas/IncludeMemberAccounts'
-            - description: Indicates whether to enroll member accounts of the organization if the your account is the master account of an organization.
+            - description: Indicates whether to enroll member accounts of the organization if the your account is the management account of an organization.
     AccountId:
       type: string
     AccountIds:
@@ -1254,7 +1374,7 @@ components:
         finding:
           allOf:
             - $ref: '#/components/schemas/Finding'
-            - description: '<p>The finding classification for the Auto Scaling group.</p> <p>Findings for Auto Scaling groups include:</p> <ul> <li> <p> <b> <code>NotOptimized</code> </b>—An Auto Scaling group is considered not optimized when AWS Compute Optimizer identifies a recommendation that can provide better performance for your workload.</p> </li> <li> <p> <b> <code>Optimized</code> </b>—An Auto Scaling group is considered optimized when Compute Optimizer determines that the group is correctly provisioned to run your workload based on the chosen instance type. For optimized resources, Compute Optimizer might recommend a new generation instance type.</p> </li> </ul> <note> <p>The values that are returned might be <code>NOT_OPTIMIZED</code> or <code>OPTIMIZED</code>.</p> </note>'
+            - description: '<p>The finding classification for the Auto Scaling group.</p> <p>Findings for Auto Scaling groups include:</p> <ul> <li> <p> <b> <code>NotOptimized</code> </b>—An Auto Scaling group is considered not optimized when AWS Compute Optimizer identifies a recommendation that can provide better performance for your workload.</p> </li> <li> <p> <b> <code>Optimized</code> </b>—An Auto Scaling group is considered optimized when Compute Optimizer determines that the group is correctly provisioned to run your workload based on the chosen instance type. For optimized resources, Compute Optimizer might recommend a new generation instance type.</p> </li> </ul>'
         utilizationMetrics:
           allOf:
             - $ref: '#/components/schemas/UtilizationMetrics'
@@ -1340,6 +1460,70 @@ components:
       type: string
     DestinationKeyPrefix:
       type: string
+    EBSFilterName:
+      type: string
+      enum:
+        - Finding
+    FilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/FilterValue'
+    EBSFilter:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/EBSFilterName'
+            - description: '<p>The name of the filter.</p> <p>Specify <code>Finding</code> to return recommendations with a specific finding classification (e.g., <code>Optimized</code>).</p>'
+        values:
+          allOf:
+            - $ref: '#/components/schemas/FilterValues'
+            - description: '<p>The value of the filter.</p> <p>The valid values are <code>Optimized</code>, or <code>NotOptimized</code>.</p>'
+      description: <p>Describes a filter that returns a more specific list of Amazon Elastic Block Store (Amazon EBS) volume recommendations.</p> <p>This filter is used with the <code>GetEBSVolumeRecommendations</code> action.</p>
+    EBSFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/EBSFilter'
+    EBSFinding:
+      type: string
+      enum:
+        - Optimized
+        - NotOptimized
+    EBSMetricName:
+      type: string
+      enum:
+        - VolumeReadOpsPerSecond
+        - VolumeWriteOpsPerSecond
+        - VolumeReadBytesPerSecond
+        - VolumeWriteBytesPerSecond
+    MetricStatistic:
+      type: string
+      enum:
+        - Maximum
+        - Average
+    MetricValue:
+      type: number
+      format: double
+    EBSUtilizationMetric:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/EBSMetricName'
+            - description: '<p>The name of the utilization metric.</p> <p>The following utilization metrics are available:</p> <ul> <li> <p> <code>VolumeReadOpsPerSecond</code> - The completed read operations per second from the volume in a specified period of time.</p> <p>Unit: Count</p> </li> <li> <p> <code>VolumeWriteOpsPerSecond</code> - The completed write operations per second to the volume in a specified period of time.</p> <p>Unit: Count</p> </li> <li> <p> <code>VolumeReadBytesPerSecond</code> - The bytes read per second from the volume in a specified period of time.</p> <p>Unit: Bytes</p> </li> <li> <p> <code>VolumeWriteBytesPerSecond</code> - The bytes written to the volume in a specified period of time.</p> <p>Unit: Bytes</p> </li> </ul>'
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/MetricStatistic'
+            - description: '<p>The statistic of the utilization metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Average</code> - This is the value of Sum / SampleCount during the specified period, or the average value observed during the specified period.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> </ul>'
+        value:
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: The value of the utilization metric.
+      description: <p>Describes a utilization metric of an Amazon Elastic Block Store (Amazon EBS) volume.</p> <p>Compare the utilization metric data of your resource against its projected utilization metric data to determine the performance difference between your current resource and the recommended option.</p>
+    EBSUtilizationMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/EBSUtilizationMetric'
     Filters:
       type: array
       items:
@@ -1479,28 +1663,32 @@ components:
       enum:
         - Finding
         - RecommendationSourceType
-    FilterValues:
-      type: array
-      items:
-        $ref: '#/components/schemas/FilterValue'
     Filter:
       type: object
       properties:
         name:
           allOf:
             - $ref: '#/components/schemas/FilterName'
-            - description: '<p>The name of the filter.</p> <p>Specify <code>Finding</code> to return recommendations with a specific findings classification (e.g., <code>Overprovisioned</code>).</p> <p>Specify <code>RecommendationSourceType</code> to return recommendations of a specific resource type (e.g., <code>AutoScalingGroup</code>).</p>'
+            - description: '<p>The name of the filter.</p> <p>Specify <code>Finding</code> to return recommendations with a specific finding classification (e.g., <code>Overprovisioned</code>).</p> <p>Specify <code>RecommendationSourceType</code> to return recommendations of a specific resource type (e.g., <code>AutoScalingGroup</code>).</p>'
         values:
           allOf:
             - $ref: '#/components/schemas/FilterValues'
-            - description: '<p>The value of the filter.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you request recommendations for an <i>instance</i>, then the valid values are <code>Underprovisioned</code>, <code>Overprovisioned</code>, <code>NotOptimized</code>, or <code>Optimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>Finding</code>, and you request recommendations for an <i>Auto Scaling group</i>, then the valid values are <code>Optimized</code>, or <code>NotOptimized</code>.</p> <p>If you specify the <code>name</code> parameter as <code>RecommendationSourceType</code>, then the valid values are <code>Ec2Instance</code>, or <code>AutoScalingGroup</code>.</p>'
-      description: Describes a filter that returns a more specific list of recommendations.
+            - description: '<p>The value of the filter.</p> <p>The valid values for this parameter are as follows, depending on what you specify for the <code>name</code> parameter and the resource type that you wish to filter results for:</p> <ul> <li> <p>Specify <code>Optimized</code> or <code>NotOptimized</code> if you specified the <code>name</code> parameter as <code>Finding</code> and you want to filter results for Auto Scaling groups.</p> </li> <li> <p>Specify <code>Underprovisioned</code>, <code>Overprovisioned</code>, or <code>Optimized</code> if you specified the <code>name</code> parameter as <code>Finding</code> and you want to filter results for EC2 instances.</p> </li> <li> <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you specified the <code>name</code> parameter as <code>RecommendationSourceType</code>.</p> </li> </ul>'
+      description: <p>Describes a filter that returns a more specific list of recommendations.</p> <p>This filter is used with the <code>GetAutoScalingGroupRecommendations</code> and <code>GetEC2InstanceRecommendations</code> actions.</p>
     FilterValue:
       type: string
     GetRecommendationErrors:
       type: array
       items:
         $ref: '#/components/schemas/GetRecommendationError'
+    VolumeArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/VolumeArn'
+    VolumeRecommendations:
+      type: array
+      items:
+        $ref: '#/components/schemas/VolumeRecommendation'
     InstanceArns:
       type: array
       items:
@@ -1511,11 +1699,6 @@ components:
         $ref: '#/components/schemas/InstanceRecommendation'
     InstanceArn:
       type: string
-    MetricStatistic:
-      type: string
-      enum:
-        - Maximum
-        - Average
     Period:
       type: integer
     Timestamp:
@@ -1592,7 +1775,7 @@ components:
         finding:
           allOf:
             - $ref: '#/components/schemas/Finding'
-            - description: '<p>The finding classification for the instance.</p> <p>Findings for instances include:</p> <ul> <li> <p> <b> <code>Underprovisioned</code> </b>—An instance is considered under-provisioned when at least one specification of your instance, such as CPU, memory, or network, does not meet the performance requirements of your workload. Under-provisioned instances may lead to poor application performance.</p> </li> <li> <p> <b> <code>Overprovisioned</code> </b>—An instance is considered over-provisioned when at least one specification of your instance, such as CPU, memory, or network, can be sized down while still meeting the performance requirements of your workload, and no specification is under-provisioned. Over-provisioned instances may lead to unnecessary infrastructure cost.</p> </li> <li> <p> <b> <code>Optimized</code> </b>—An instance is considered optimized when all specifications of your instance, such as CPU, memory, and network, meet the performance requirements of your workload and is not over provisioned. An optimized instance runs your workloads with optimal performance and infrastructure cost. For optimized resources, AWS Compute Optimizer might recommend a new generation instance type.</p> </li> </ul> <note> <p>The values that are returned might be <code>UNDER_PROVISIONED</code>, <code>OVER_PROVISIONED</code>, or <code>OPTIMIZED</code>.</p> </note>'
+            - description: '<p>The finding classification for the instance.</p> <p>Findings for instances include:</p> <ul> <li> <p> <b> <code>Underprovisioned</code> </b>—An instance is considered under-provisioned when at least one specification of your instance, such as CPU, memory, or network, does not meet the performance requirements of your workload. Under-provisioned instances may lead to poor application performance.</p> </li> <li> <p> <b> <code>Overprovisioned</code> </b>—An instance is considered over-provisioned when at least one specification of your instance, such as CPU, memory, or network, can be sized down while still meeting the performance requirements of your workload, and no specification is under-provisioned. Over-provisioned instances may lead to unnecessary infrastructure cost.</p> </li> <li> <p> <b> <code>Optimized</code> </b>—An instance is considered optimized when all specifications of your instance, such as CPU, memory, and network, meet the performance requirements of your workload and is not over provisioned. An optimized instance runs your workloads with optimal performance and infrastructure cost. For optimized resources, AWS Compute Optimizer might recommend a new generation instance type.</p> </li> </ul>'
         utilizationMetrics:
           allOf:
             - $ref: '#/components/schemas/UtilizationMetrics'
@@ -1649,7 +1832,7 @@ components:
         values:
           allOf:
             - $ref: '#/components/schemas/FilterValues'
-            - description: '<p>The value of the filter.</p> <p>If you specify the <code>name</code> parameter as <code>ResourceType</code>, the valid values are <code>Ec2Instance</code> or <code>AutoScalingGroup</code>.</p> <p>If you specify the <code>name</code> parameter as <code>JobStatus</code>, the valid values are <code>Queued</code>, <code>InProgress</code>, <code>Complete</code>, or <code>Failed</code>.</p>'
+            - description: '<p>The value of the filter.</p> <p>The valid values for this parameter are as follows, depending on what you specify for the <code>name</code> parameter:</p> <ul> <li> <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you specified the <code>name</code> parameter as <code>ResourceType</code>. There is no filter for EBS volumes because volume recommendations cannot be exported at this time.</p> </li> <li> <p>Specify <code>Queued</code>, <code>InProgress</code>, <code>Complete</code>, or <code>Failed</code> if you specified the <code>name</code> parameter as <code>JobStatus</code>.</p> </li> </ul>'
       description: <p>Describes a filter that returns a more specific list of recommendation export jobs.</p> <p>This filter is used with the <code>DescribeRecommendationExportJobs</code> action.</p>
     JobStatus:
       type: string
@@ -1672,9 +1855,6 @@ components:
         - EBS_WRITE_OPS_PER_SECOND
         - EBS_READ_BYTES_PER_SECOND
         - EBS_WRITE_BYTES_PER_SECOND
-    MetricValue:
-      type: number
-      format: double
     MetricValues:
       type: array
       items:
@@ -1689,7 +1869,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/MetricName'
-            - description: The name of the projected utilization metric.
+            - description: '<p>The name of the projected utilization metric.</p> <p>The following projected utilization metrics are returned:</p> <ul> <li> <p> <code>Cpu</code> - The projected percentage of allocated EC2 compute units that would be in use on the recommendation option had you used that resource during the analyzed period. This metric identifies the processing power required to run an application on the recommendation option.</p> <p>Depending on the instance type, tools in your operating system can show a lower percentage than CloudWatch when the instance is not allocated a full processor core.</p> <p>Units: Percent</p> </li> <li> <p> <code>Memory</code> - The percentage of memory that would be in use on the recommendation option had you used that resource during the analyzed period. This metric identifies the amount of memory required to run an application on the recommendation option.</p> <p>Units: Percent</p> <note> <p>The <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note> </li> </ul>'
         timestamps:
           allOf:
             - $ref: '#/components/schemas/Timestamps'
@@ -1698,7 +1878,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/MetricValues'
             - description: The values of the projected utilization metrics.
-      description: '<p>Describes a projected utilization metric of a recommendation option, such as an Amazon EC2 instance.</p> <note> <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected utilization metrics returned when you run the <code>GetEC2RecommendationProjectedMetrics</code> action. Additionally, the <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
+      description: '<p>Describes a projected utilization metric of a recommendation option, such as an Amazon EC2 instance. This represents the projected utilization of a recommendation option had you used that resource during the analyzed period.</p> <p>Compare the utilization metric data of your resource against its projected utilization metric data to determine the performance difference between your current resource and the recommended option.</p> <note> <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected utilization metrics returned when you run the <code>GetEC2RecommendationProjectedMetrics</code> action. Additionally, the <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
     ProjectedMetrics:
       type: array
       items:
@@ -1709,16 +1889,16 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/MetricName'
-            - description: '<p>The name of the utilization metric.</p> <note> <p>The <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note>'
+            - description: '<p>The name of the utilization metric.</p> <p>The following utilization metrics are available:</p> <ul> <li> <p> <code>Cpu</code> - The percentage of allocated EC2 compute units that are currently in use on the instance. This metric identifies the processing power required to run an application on the instance.</p> <p>Depending on the instance type, tools in your operating system can show a lower percentage than CloudWatch when the instance is not allocated a full processor core.</p> <p>Units: Percent</p> </li> <li> <p> <code>Memory</code> - The percentage of memory that is currently in use on the instance. This metric identifies the amount of memory required to run an application on the instance.</p> <p>Units: Percent</p> <note> <p>The <code>Memory</code> metric is returned only for resources that have the unified CloudWatch agent installed on them. For more information, see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent">Enabling Memory Utilization with the CloudWatch Agent</a>.</p> </note> </li> <li> <p> <code>EBS_READ_OPS_PER_SECOND</code> - The completed read operations from all EBS volumes attached to the instance in a specified period of time.</p> <p>Unit: Count</p> </li> <li> <p> <code>EBS_WRITE_OPS_PER_SECOND</code> - The completed write operations to all EBS volumes attached to the instance in a specified period of time.</p> <p>Unit: Count</p> </li> <li> <p> <code>EBS_READ_BYTES_PER_SECOND</code> - The bytes read from all EBS volumes attached to the instance in a specified period of time.</p> <p>Unit: Bytes</p> </li> <li> <p> <code>EBS_WRITE_BYTES_PER_SECOND</code> - The bytes written to all EBS volumes attached to the instance in a specified period of time.</p> <p>Unit: Bytes</p> </li> </ul>'
         statistic:
           allOf:
             - $ref: '#/components/schemas/MetricStatistic'
-            - description: The statistic of the utilization metric.
+            - description: '<p>The statistic of the utilization metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Average</code> - This is the value of Sum / SampleCount during the specified period, or the average value observed during the specified period.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> </ul>'
         value:
           allOf:
             - $ref: '#/components/schemas/MetricValue'
             - description: The value of the utilization metric.
-      description: 'Describes a utilization metric of a resource, such as an Amazon EC2 instance.'
+      description: '<p>Describes a utilization metric of a resource, such as an Amazon EC2 instance.</p> <p>Compare the utilization metric data of your resource against its projected utilization metric data to determine the performance difference between your current resource and the recommended option.</p>'
     ResourceType:
       type: string
       enum:
@@ -1763,6 +1943,7 @@ components:
       enum:
         - Ec2Instance
         - AutoScalingGroup
+        - EbsVolume
     RecommendationSource:
       type: object
       properties:
@@ -1828,5 +2009,103 @@ components:
     SummaryValue:
       type: number
       format: double
+    VolumeArn:
+      type: string
+    VolumeBaselineIOPS:
+      type: integer
+    VolumeBaselineThroughput:
+      type: integer
+    VolumeBurstIOPS:
+      type: integer
+    VolumeBurstThroughput:
+      type: integer
+    VolumeType:
+      type: string
+    VolumeSize:
+      type: integer
+    VolumeConfiguration:
+      type: object
+      properties:
+        volumeType:
+          allOf:
+            - $ref: '#/components/schemas/VolumeType'
+            - description: '<p>The volume type.</p> <p>This can be <code>gp2</code> for General Purpose SSD, <code>io1</code> or <code>io2</code> for Provisioned IOPS SSD, <code>st1</code> for Throughput Optimized HDD, <code>sc1</code> for Cold HDD, or <code>standard</code> for Magnetic volumes.</p>'
+        volumeSize:
+          allOf:
+            - $ref: '#/components/schemas/VolumeSize'
+            - description: 'The size of the volume, in GiB.'
+        volumeBaselineIOPS:
+          allOf:
+            - $ref: '#/components/schemas/VolumeBaselineIOPS'
+            - description: The baseline IOPS of the volume.
+        volumeBurstIOPS:
+          allOf:
+            - $ref: '#/components/schemas/VolumeBurstIOPS'
+            - description: The burst IOPS of the volume.
+        volumeBaselineThroughput:
+          allOf:
+            - $ref: '#/components/schemas/VolumeBaselineThroughput'
+            - description: The baseline throughput of the volume.
+        volumeBurstThroughput:
+          allOf:
+            - $ref: '#/components/schemas/VolumeBurstThroughput'
+            - description: The burst throughput of the volume.
+      description: Describes the configuration of an Amazon Elastic Block Store (Amazon EBS) volume.
+    VolumeRecommendationOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/VolumeRecommendationOption'
+    VolumeRecommendation:
+      type: object
+      properties:
+        volumeArn:
+          allOf:
+            - $ref: '#/components/schemas/VolumeArn'
+            - description: The Amazon Resource Name (ARN) of the current volume.
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the volume.
+        currentConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/VolumeConfiguration'
+            - description: An array of objects that describe the current configuration of the volume.
+        finding:
+          allOf:
+            - $ref: '#/components/schemas/EBSFinding'
+            - description: '<p>The finding classification for the volume.</p> <p>Findings for volumes include:</p> <ul> <li> <p> <b> <code>NotOptimized</code> </b>—A volume is considered not optimized when AWS Compute Optimizer identifies a recommendation that can provide better performance for your workload.</p> </li> <li> <p> <b> <code>Optimized</code> </b>—An volume is considered optimized when Compute Optimizer determines that the volume is correctly provisioned to run your workload based on the chosen volume type. For optimized resources, Compute Optimizer might recommend a new generation volume type.</p> </li> </ul>'
+        utilizationMetrics:
+          allOf:
+            - $ref: '#/components/schemas/EBSUtilizationMetrics'
+            - description: An array of objects that describe the utilization metrics of the volume.
+        lookBackPeriodInDays:
+          allOf:
+            - $ref: '#/components/schemas/LookBackPeriodInDays'
+            - description: The number of days for which utilization metrics were analyzed for the volume.
+        volumeRecommendationOptions:
+          allOf:
+            - $ref: '#/components/schemas/VolumeRecommendationOptions'
+            - description: An array of objects that describe the recommendation options for the volume.
+        lastRefreshTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/LastRefreshTimestamp'
+            - description: The time stamp of when the volume recommendation was last refreshed.
+      description: Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.
+    VolumeRecommendationOption:
+      type: object
+      properties:
+        configuration:
+          allOf:
+            - $ref: '#/components/schemas/VolumeConfiguration'
+            - description: An array of objects that describe a volume configuration.
+        performanceRisk:
+          allOf:
+            - $ref: '#/components/schemas/PerformanceRisk'
+            - description: '<p>The performance risk of the volume recommendation option.</p> <p>Performance risk is the likelihood of the recommended volume type not meeting the performance requirement of your workload.</p> <p>The lowest performance risk is categorized as <code>0</code>, and the highest as <code>5</code>.</p>'
+        rank:
+          allOf:
+            - $ref: '#/components/schemas/Rank'
+            - description: <p>The rank of the volume recommendation option.</p> <p>The top recommendation option is ranked as <code>1</code>.</p>
+      description: Describes a recommendation option for an Amazon Elastic Block Store (Amazon EBS) instance.
 security:
   - hmac: []

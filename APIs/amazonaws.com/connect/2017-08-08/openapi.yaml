@@ -752,7 +752,7 @@ paths:
   /instance:
     put:
       operationId: CreateInstance
-      description: 'Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. '
+      description: '<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage (such as Amazon S3, or Kinesis) or allow for any configurations on features such as Contact Lens for Amazon Connect. </p>'
       responses:
         '200':
           description: Success
@@ -842,7 +842,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListInstances
-      description: 'Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances that aren''t successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance API was invoked.'
+      description: '<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Return a list of instances which are in active state, creation-in-progress state, and failed state. Instances that aren''t successfully created (they are in a failed state) are returned only for 24 hours after the CreateInstance API was invoked.</p>'
       responses:
         '200':
           description: Success
@@ -877,6 +877,171 @@ paths:
             type: integer
             minimum: 1
             maximum: 10
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/instance/{InstanceId}/integration-associations':
+    put:
+      operationId: CreateIntegrationAssociation
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Create an AppIntegration association with anAmazon Connect instance.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateIntegrationAssociationResponse'
+        '480':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - IntegrationType
+                - IntegrationArn
+                - SourceApplicationUrl
+                - SourceApplicationName
+                - SourceType
+              properties:
+                IntegrationType:
+                  description: The type of information to be ingested.
+                  type: string
+                  enum:
+                    - EVENT
+                IntegrationArn:
+                  description: The Amazon Resource Name (ARN) of the integration.
+                  type: string
+                SourceApplicationUrl:
+                  description: The URL for the external application.
+                  type: string
+                  minLength: 1
+                  maxLength: 2000
+                SourceApplicationName:
+                  description: The name of the external application.
+                  type: string
+                  pattern: '^[a-zA-Z0-9_ -]+$'
+                  minLength: 1
+                  maxLength: 100
+                SourceType:
+                  description: The type of the data source.
+                  type: string
+                  enum:
+                    - SALESFORCE
+                    - ZENDESK
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListIntegrationAssociations
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListIntegrationAssociationsResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
         - name: MaxResults
           in: query
           schema:
@@ -1003,6 +1168,163 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}/use-cases':
+    put:
+      operationId: CreateUseCase
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates a use case for an AppIntegration association.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateUseCaseResponse'
+        '480':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: IntegrationAssociationId
+          in: path
+          required: true
+          description: The identifier for the AppIntegration association.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 200
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - UseCaseType
+              properties:
+                UseCaseType:
+                  description: The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.
+                  type: string
+                  enum:
+                    - RULES_EVALUATION
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListUseCases
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>List the use cases. </p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListUseCasesResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: IntegrationAssociationId
+          in: path
+          required: true
+          description: The identifier for the integration association.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 200
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   '/users/{InstanceId}':
     put:
       operationId: CreateUser
@@ -1241,7 +1563,7 @@ paths:
   '/instance/{InstanceId}':
     delete:
       operationId: DeleteInstance
-      description: Deletes the Amazon Connect instance.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes the Amazon Connect instance.</p>
       responses:
         '200':
           description: Success
@@ -1317,6 +1639,126 @@ paths:
             type: string
             minLength: 1
             maxLength: 100
+  '/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}':
+    delete:
+      operationId: DeleteIntegrationAssociation
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: IntegrationAssociationId
+          in: path
+          required: true
+          description: The identifier for the AppIntegration association.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}/use-cases/{UseCaseId}':
+    delete:
+      operationId: DeleteUseCase
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes a use case from an AppIntegration association.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: IntegrationAssociationId
+          in: path
+          required: true
+          description: The identifier for the AppIntegration association.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 200
+        - name: UseCaseId
+          in: path
+          required: true
+          description: The identifier for the use case.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 200
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/users/{InstanceId}/{UserId}':
     delete:
       operationId: DeleteUser
@@ -1698,7 +2140,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: UpdateInstanceAttribute
-      description: Updates the value for the specified attribute type.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the value for the specified attribute type.</p>
       responses:
         '200':
           description: Success
@@ -1916,7 +2358,7 @@ paths:
               - AGENT_EVENTS
     post:
       operationId: UpdateInstanceStorageConfig
-      description: Updates an existing configuration for a resource type. This API is idempotent.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates an existing configuration for a resource type. This API is idempotent.</p>
       responses:
         '200':
           description: Success
@@ -2689,7 +3131,7 @@ paths:
                         - $ref: '#/components/schemas/Channels'
                         - description: The channel to use to filter the metrics.
                 Groupings:
-                  description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. Both <code>VOICE</code> and <code>CHAT</code> channels are supported.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
+                  description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. VOICE, CHAT, and TASK channels are supported.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
                   type: array
                   items:
                     $ref: '#/components/schemas/Grouping'
@@ -3164,7 +3606,7 @@ paths:
   '/instance/{InstanceId}/attributes':
     get:
       operationId: ListInstanceAttributes
-      description: Returns a paginated list of all attribute types for the given instance.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all attribute types for the given instance.</p>
       responses:
         '200':
           description: Success
@@ -3248,7 +3690,7 @@ paths:
   '/instance/{InstanceId}/storage-configs#resourceType':
     get:
       operationId: ListInstanceStorageConfigs
-      description: Returns a paginated list of storage configs for the identified instance and resource type.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of storage configs for the identified instance and resource type.</p>
       responses:
         '200':
           description: Success
@@ -3940,7 +4382,7 @@ paths:
                 - QueueConfigs
               properties:
                 QueueConfigs:
-                  description: The queues to be updated for this routing profile.
+                  description: The queues to be updated for this routing profile. Queues must first be associated to the routing profile. You can do this using AssociateRoutingProfileQueues.
                   type: array
                   items:
                     $ref: '#/components/schemas/RoutingProfileQueueConfig'
@@ -4815,6 +5257,111 @@ paths:
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/AttributeValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /contact/task:
+    put:
+      operationId: StartTaskContact
+      description: Initiates a contact flow to start a new task.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartTaskContactResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - InstanceId
+                - ContactFlowId
+                - Name
+              properties:
+                InstanceId:
+                  description: The identifier of the Amazon Connect instance.
+                  type: string
+                  minLength: 1
+                  maxLength: 100
+                PreviousContactId:
+                  description: 'The identifier of the previous chat, voice, or task contact. '
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                ContactFlowId:
+                  description: '<p>The identifier of the contact flow for initiating the tasks. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose <b>Show additional flow information</b>. The ContactFlowId is the last part of the ARN, shown here in bold: </p> <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b> </p>'
+                  type: string
+                  maxLength: 500
+                Attributes:
+                  description: '<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.</p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/AttributeValue'
+                Name:
+                  description: The name of a task that is shown to an agent in the Contact Control Panel (CCP).
+                  type: string
+                  minLength: 0
+                  maxLength: 512
+                References:
+                  description: A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+                  type: object
+                  additionalProperties:
+                    $ref: '#/components/schemas/Reference'
+                Description:
+                  description: A description of the task that is shown to an agent in the Contact Control Panel (CCP).
+                  type: string
+                  minLength: 0
+                  maxLength: 4096
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  maxLength: 500
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6209,6 +6756,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: The Amazon Resource Name (ARN) of the instance.
+    CreateIntegrationAssociationResponse:
+      type: object
+      properties:
+        IntegrationAssociationId:
+          allOf:
+            - $ref: '#/components/schemas/IntegrationAssociationId'
+            - description: The identifier for the association.
+        IntegrationAssociationArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) for the association.
     CreateRoutingProfileResponse:
       type: object
       properties:
@@ -6235,6 +6793,17 @@ components:
             - $ref: '#/components/schemas/Concurrency'
             - description: The number of contacts an agent can have on a channel simultaneously.
       description: 'Contains information about which channels are supported, and how many contacts an agent can have on a channel simultaneously.'
+    CreateUseCaseResponse:
+      type: object
+      properties:
+        UseCaseId:
+          allOf:
+            - $ref: '#/components/schemas/UseCaseId'
+            - description: The identifier of the use case.
+        UseCaseArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) for the use case.
     CreateUserResponse:
       type: object
       properties:
@@ -6386,7 +6955,7 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Channel'
-      maxItems: 1
+      maxItems: 3
     Grouping:
       type: string
       enum:
@@ -6517,6 +7086,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceSummaryList'
             - description: Information about the instances.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
+    ListIntegrationAssociationsResponse:
+      type: object
+      properties:
+        IntegrationAssociationSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/IntegrationAssociationSummaryList'
+            - description: The AppIntegration associations.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -6877,6 +7457,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: Information about the tags.
+    ListUseCasesResponse:
+      type: object
+      properties:
+        UseCaseSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/UseCaseSummaryList'
+            - description: The use cases.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListUserHierarchyGroupsResponse:
       type: object
       properties:
@@ -6951,6 +7542,28 @@ components:
             - description: The identifier of this contact within the Amazon Connect instance.
     DestinationNotAllowedException: {}
     OutboundContactNotPermittedException: {}
+    StartTaskContactResponse:
+      type: object
+      properties:
+        ContactId:
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: The identifier of this contact within the Amazon Connect instance.
+    Reference:
+      type: object
+      required:
+        - Value
+        - Type
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/ReferenceValue'
+            - description: A formatted URL that will be shown to an agent in the Contact Control Panel (CCP)
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/ReferenceType'
+            - description: A valid URL.
+      description: 'A link that an agent selects to complete a given task. You can have up to 4,096 UTF-8 bytes across all references for a contact.'
     StopContactResponse:
       type: object
       properties: {}
@@ -7171,6 +7784,7 @@ components:
       enum:
         - VOICE
         - CHAT
+        - TASK
     ChatMessage:
       type: object
       required:
@@ -7278,6 +7892,10 @@ components:
       type: string
       minLength: 1
       maxLength: 256
+    ContactReferences:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/Reference'
     CreateContactFlowRequest:
       type: object
       required:
@@ -7359,6 +7977,58 @@ components:
           allOf:
             - $ref: '#/components/schemas/OutboundCallsEnabled'
             - description: Whether your contact center allows outbound calls.
+    IntegrationType:
+      type: string
+      enum:
+        - EVENT
+    URI:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    SourceApplicationName:
+      type: string
+      pattern: '^[a-zA-Z0-9_ -]+$'
+      minLength: 1
+      maxLength: 100
+    SourceType:
+      type: string
+      enum:
+        - SALESFORCE
+        - ZENDESK
+    CreateIntegrationAssociationRequest:
+      type: object
+      required:
+        - IntegrationType
+        - IntegrationArn
+        - SourceApplicationUrl
+        - SourceApplicationName
+        - SourceType
+      title: CreateIntegrationAssociationRequest
+      properties:
+        IntegrationType:
+          allOf:
+            - $ref: '#/components/schemas/IntegrationType'
+            - description: The type of information to be ingested.
+        IntegrationArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the integration.
+        SourceApplicationUrl:
+          allOf:
+            - $ref: '#/components/schemas/URI'
+            - description: The URL for the external application.
+        SourceApplicationName:
+          allOf:
+            - $ref: '#/components/schemas/SourceApplicationName'
+            - description: The name of the external application.
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/SourceType'
+            - description: The type of the data source.
+    IntegrationAssociationId:
+      type: string
+      minLength: 1
+      maxLength: 200
     RoutingProfileName:
       type: string
       minLength: 1
@@ -7406,6 +8076,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: One or more tags.
+    UseCaseType:
+      type: string
+      enum:
+        - RULES_EVALUATION
+    CreateUseCaseRequest:
+      type: object
+      required:
+        - UseCaseType
+      title: CreateUseCaseRequest
+      properties:
+        UseCaseType:
+          allOf:
+            - $ref: '#/components/schemas/UseCaseType'
+            - description: The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.
+    UseCaseId:
+      type: string
+      minLength: 1
+      maxLength: 200
     HierarchyGroupName:
       type: string
     HierarchyGroupId:
@@ -7628,6 +8316,14 @@ components:
       type: object
       title: DeleteInstanceRequest
       properties: {}
+    DeleteIntegrationAssociationRequest:
+      type: object
+      title: DeleteIntegrationAssociationRequest
+      properties: {}
+    DeleteUseCaseRequest:
+      type: object
+      title: DeleteUseCaseRequest
+      properties: {}
     DeleteUserHierarchyGroupRequest:
       type: object
       title: DeleteUserHierarchyGroupRequest
@@ -7840,6 +8536,10 @@ components:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags.
       description: Contains information about a user account for a Amazon Connect instance.
+    Description:
+      type: string
+      minLength: 0
+      maxLength: 4096
     QueueReference:
       type: object
       properties:
@@ -7950,11 +8650,11 @@ components:
         Filters:
           allOf:
             - $ref: '#/components/schemas/Filters'
-            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. Both <code>VOICE</code> and <code>CHAT</code> channels are supported.'
+            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.'
         Groupings:
           allOf:
             - $ref: '#/components/schemas/Groupings'
-            - description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. Both <code>VOICE</code> and <code>CHAT</code> channels are supported.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
+            - description: '<p>The grouping applied to the metrics returned. For example, when grouped by <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all queues. If you group by <code>CHANNEL</code>, you should include a Channels filter. VOICE, CHAT, and TASK channels are supported.</p> <p>If no <code>Grouping</code> is included in the request, a summary of metrics is returned.</p>'
         CurrentMetrics:
           allOf:
             - $ref: '#/components/schemas/CurrentMetrics'
@@ -7995,7 +8695,7 @@ components:
         Filters:
           allOf:
             - $ref: '#/components/schemas/Filters'
-            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. Both <code>VOICE</code> and <code>CHAT</code> channels are supported.'
+            - description: 'The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.'
         Groupings:
           allOf:
             - $ref: '#/components/schemas/Groupings'
@@ -8274,6 +8974,46 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/InstanceSummary'
+    IntegrationAssociationSummary:
+      type: object
+      properties:
+        IntegrationAssociationId:
+          allOf:
+            - $ref: '#/components/schemas/IntegrationAssociationId'
+            - description: The identifier for the AppIntegration association.
+        IntegrationAssociationArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) for the AppIntegration association.
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
+        IntegrationType:
+          allOf:
+            - $ref: '#/components/schemas/IntegrationType'
+            - description: The integration type.
+        IntegrationArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) for the AppIntegration.
+        SourceApplicationUrl:
+          allOf:
+            - $ref: '#/components/schemas/URI'
+            - description: The URL for the external application.
+        SourceApplicationName:
+          allOf:
+            - $ref: '#/components/schemas/SourceApplicationName'
+            - description: 'The user-provided, friendly name for the external application.'
+        SourceType:
+          allOf:
+            - $ref: '#/components/schemas/SourceType'
+            - description: The name of the source.
+      description: Contains summary information about the associated AppIntegrations.
+    IntegrationAssociationSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/IntegrationAssociationSummary'
     Prefix:
       type: string
       minLength: 1
@@ -8325,6 +9065,10 @@ components:
     ListInstancesRequest:
       type: object
       title: ListInstancesRequest
+      properties: {}
+    ListIntegrationAssociationsRequest:
+      type: object
+      title: ListIntegrationAssociationsRequest
       properties: {}
     ListLambdaFunctionsRequest:
       type: object
@@ -8413,6 +9157,15 @@ components:
       type: object
       title: ListTagsForResourceRequest
       properties: {}
+    ListUseCasesRequest:
+      type: object
+      title: ListUseCasesRequest
+      properties: {}
+      description: Provides summary information about the use cases for the specified Amazon Connect AppIntegration association.
+    UseCaseSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UseCase'
     ListUserHierarchyGroupsRequest:
       type: object
       title: ListUserHierarchyGroupsRequest
@@ -8425,6 +9178,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/UserSummary'
+    Name:
+      type: string
+      minLength: 0
+      maxLength: 512
     ParticipantDetails:
       type: object
       required:
@@ -8521,6 +9278,18 @@ components:
             - $ref: '#/components/schemas/QueueType'
             - description: The type of queue.
       description: Contains summary information about a queue.
+    ReferenceValue:
+      type: string
+      minLength: 0
+      maxLength: 4096
+    ReferenceType:
+      type: string
+      enum:
+        - URL
+    ReferenceKey:
+      type: string
+      minLength: 1
+      maxLength: 4096
     ResumeContactRecordingRequest:
       type: object
       required:
@@ -8727,6 +9496,46 @@ components:
           allOf:
             - $ref: '#/components/schemas/Attributes'
             - description: '<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.</p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
+    StartTaskContactRequest:
+      type: object
+      required:
+        - InstanceId
+        - ContactFlowId
+        - Name
+      title: StartTaskContactRequest
+      properties:
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/InstanceId'
+            - description: The identifier of the Amazon Connect instance.
+        PreviousContactId:
+          allOf:
+            - $ref: '#/components/schemas/ContactId'
+            - description: 'The identifier of the previous chat, voice, or task contact. '
+        ContactFlowId:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowId'
+            - description: '<p>The identifier of the contact flow for initiating the tasks. To see the ContactFlowId in the Amazon Connect console user interface, on the navigation menu go to <b>Routing</b>, <b>Contact Flows</b>. Choose the contact flow. On the contact flow page, under the name of the contact flow, choose <b>Show additional flow information</b>. The ContactFlowId is the last part of the ARN, shown here in bold: </p> <p>arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/<b>846ec553-a005-41c0-8341-xxxxxxxxxxxx</b> </p>'
+        Attributes:
+          allOf:
+            - $ref: '#/components/schemas/Attributes'
+            - description: '<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.</p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of a task that is shown to an agent in the Contact Control Panel (CCP).
+        References:
+          allOf:
+            - $ref: '#/components/schemas/ContactReferences'
+            - description: A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: A description of the task that is shown to an agent in the Contact Control Panel (CCP).
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     StopContactRecordingRequest:
       type: object
       required:
@@ -8906,7 +9715,7 @@ components:
         QueueConfigs:
           allOf:
             - $ref: '#/components/schemas/RoutingProfileQueueConfigList'
-            - description: The queues to be updated for this routing profile.
+            - description: The queues to be updated for this routing profile. Queues must first be associated to the routing profile. You can do this using AssociateRoutingProfileQueues.
     UpdateUserHierarchyGroupNameRequest:
       type: object
       required:
@@ -8975,6 +9784,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/SecurityProfileIds'
             - description: The identifiers of the security profiles for the user.
+    UseCase:
+      type: object
+      properties:
+        UseCaseId:
+          allOf:
+            - $ref: '#/components/schemas/UseCaseId'
+            - description: The identifier for the use case.
+        UseCaseArn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) for the use case.
+        UseCaseType:
+          allOf:
+            - $ref: '#/components/schemas/UseCaseType'
+            - description: The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.
+      description: Contains the use case.
     UserSummary:
       type: object
       properties:
