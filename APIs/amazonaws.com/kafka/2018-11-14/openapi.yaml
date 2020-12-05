@@ -2758,7 +2758,7 @@ components:
                 name: state
               description: |2-
 
-                            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>
+                            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>
                          
     BrokerAZDistribution:
       type: string
@@ -2989,7 +2989,7 @@ components:
                 name: state
               description: |2-
 
-                            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>
+                            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>
                          
     DeleteConfigurationResponse:
       type: object
@@ -3884,6 +3884,7 @@ components:
         - CREATING
         - DELETING
         - FAILED
+        - HEALING
         - MAINTENANCE
         - REBOOTING_BROKER
         - UPDATING
@@ -4031,7 +4032,7 @@ components:
                 name: state
               description: |2-
 
-                            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>
+                            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>
                          
         StateInfo:
           allOf:

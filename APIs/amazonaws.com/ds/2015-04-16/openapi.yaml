@@ -1356,7 +1356,7 @@ paths:
   /#X-Amz-Target=DirectoryService_20150416.DeregisterCertificate:
     post:
       operationId: DeregisterCertificate
-      description: Deletes from the system the certificate that was registered for a secured LDAP connection.
+      description: Deletes from the system the certificate that was registered for secure LDAP or client certificate authentication.
       responses:
         '200':
           description: Success
@@ -1494,7 +1494,7 @@ paths:
   /#X-Amz-Target=DirectoryService_20150416.DescribeCertificate:
     post:
       operationId: DescribeCertificate
-      description: Displays information about the certificate registered for a secured LDAP connection.
+      description: Displays information about the certificate registered for secure LDAP or client certificate authentication.
       responses:
         '200':
           description: Success
@@ -2178,7 +2178,7 @@ paths:
   /#X-Amz-Target=DirectoryService_20150416.DisableClientAuthentication:
     post:
       operationId: DisableClientAuthentication
-      description: Disable client authentication for smart cards.
+      description: 'Disables alternative client authentication methods for the specified directory. '
       responses:
         '200':
           description: Success
@@ -2436,7 +2436,7 @@ paths:
   /#X-Amz-Target=DirectoryService_20150416.EnableClientAuthentication:
     post:
       operationId: EnableClientAuthentication
-      description: Enable client authentication for smardtcards.
+      description: Enables alternative client authentication methods for the specified directory.
       responses:
         '200':
           description: Success
@@ -2820,7 +2820,7 @@ paths:
   /#X-Amz-Target=DirectoryService_20150416.ListCertificates:
     post:
       operationId: ListCertificates
-      description: 'For the specified directory, lists all the certificates registered for a secured LDAP connection.'
+      description: 'For the specified directory, lists all the certificates registered for a secure LDAP or client certificate authentication.'
       responses:
         '200':
           description: Success
@@ -3129,7 +3129,7 @@ paths:
   /#X-Amz-Target=DirectoryService_20150416.RegisterCertificate:
     post:
       operationId: RegisterCertificate
-      description: Registers a certificate for secured LDAP connection.
+      description: Registers a certificate for a secure LDAP or client certificate authentication.
       responses:
         '200':
           description: Success
@@ -5116,11 +5116,11 @@ components:
         DirectoryId:
           allOf:
             - $ref: '#/components/schemas/DirectoryId'
-            - description: 'Disable client authentication in a specified directory for smart cards. '
+            - description: 'The identifier of the directory '
         Type:
           allOf:
             - $ref: '#/components/schemas/ClientAuthenticationType'
-            - description: 'Disable the type of client authentication request. '
+            - description: 'The type of client authentication to disable. Currently, only the parameter, <code>SmartCard</code> is supported.'
     InvalidClientAuthStatusException: {}
     DisableLDAPSResult:
       type: object
@@ -5192,11 +5192,11 @@ components:
         DirectoryId:
           allOf:
             - $ref: '#/components/schemas/DirectoryId'
-            - description: 'Enable client authentication in a specified directory for smart cards. '
+            - description: 'The identifier of the specified directory. '
         Type:
           allOf:
             - $ref: '#/components/schemas/ClientAuthenticationType'
-            - description: 'Enable the type of client authentication request. '
+            - description: 'The type of client authentication to enable. Currently only the value <code>SmartCard</code> is supported. Smart card authentication in AD Connector requires that you enable Kerberos Constrained Delegation for the Service User to the LDAP service in the on-premises AD. '
     NoAvailableCertificateException: {}
     EnableLDAPSResult:
       type: object
@@ -5459,9 +5459,11 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/CertificateType'
-            - description: The certificate type to register for the request.
+            - description: The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.
         ClientCertAuthSettings:
-          $ref: '#/components/schemas/ClientCertAuthSettings'
+          allOf:
+            - $ref: '#/components/schemas/ClientCertAuthSettings'
+            - description: A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.
     InvalidCertificateException: {}
     CertificateLimitExceededException: {}
     CertificateAlreadyExistsException: {}
@@ -5940,8 +5942,8 @@ components:
         OCSPUrl:
           allOf:
             - $ref: '#/components/schemas/OCSPUrl'
-            - description: Specifies the URL of the default OCSP server used to check for revocation status.
-      description: 'Contains information about the client certificate authentication settings, such as <code>ClientLDAPS</code> or <code>ClientCertAuth</code>.'
+            - description: Specifies the URL of the default OCSP server used to check for revocation status. A secondary value to any OCSP address found in the AIA extension of the user certificate.
+      description: 'Contains information about the client certificate authentication settings for the <code>RegisterCertificate</code> and <code>DescribeCertificate</code> operations. '
     Certificate:
       type: object
       properties:
@@ -5972,11 +5974,11 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/CertificateType'
-            - description: Select <code>ClientCertAuth</code> for smart card integration.
+            - description: The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.
         ClientCertAuthSettings:
           allOf:
             - $ref: '#/components/schemas/ClientCertAuthSettings'
-            - description: Provides information about the client certificate authentication settings. The default value is <code>ClientLDAPS</code>.
+            - description: A <code>ClientCertAuthSettings</code> object that contains client certificate authentication settings.
       description: Information about the certificate.
     CertificateData:
       type: string
@@ -6004,7 +6006,7 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/CertificateType'
-            - description: Displays the type of certificate.
+            - description: The function that the registered certificate performs. Valid values include <code>ClientLDAPS</code> or <code>ClientCertAuth</code>. The default value is <code>ClientLDAPS</code>.
       description: Contains general information about a certificate.
     CertificatesInfo:
       type: array

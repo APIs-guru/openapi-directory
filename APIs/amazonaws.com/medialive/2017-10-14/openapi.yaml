@@ -3641,6 +3641,22 @@ paths:
                 name:
                   description: Placeholder documentation for __string
                   type: string
+                uhdDeviceSettings:
+                  description: Configurable settings for the input device.
+                  type: object
+                  properties:
+                    ConfiguredInput:
+                      allOf:
+                        - $ref: '#/components/schemas/InputDeviceConfiguredInput'
+                        - xml:
+                            name: configuredInput
+                          description: 'The input source that you want to use. If the device has a source connected to only one of its input ports, or if you don''t care which source the device sends, specify Auto. If the device has sources connected to both its input ports, and you want to use a specific source, specify the source.'
+                    MaxBitrate:
+                      allOf:
+                        - $ref: '#/components/schemas/__integer'
+                        - xml:
+                            name: maxBitrate
+                          description: The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video.
   '/prod/inputDevices/{inputDeviceId}/thumbnailData#accept':
     get:
       operationId: DescribeInputDeviceThumbnail
@@ -6130,6 +6146,12 @@ components:
             - xml:
                 name: type
               description: The type of the input device.
+        UhdDeviceSettings:
+          allOf:
+            - $ref: '#/components/schemas/InputDeviceUhdSettings'
+            - xml:
+                name: uhdDeviceSettings
+              description: Settings that describe an input device that is type UHD.
       description: Placeholder documentation for DescribeInputDeviceResponse
     DescribeInputDeviceThumbnailResponse:
       type: object
@@ -7078,6 +7100,12 @@ components:
             - xml:
                 name: type
               description: The type of the input device.
+        UhdDeviceSettings:
+          allOf:
+            - $ref: '#/components/schemas/InputDeviceUhdSettings'
+            - xml:
+                name: uhdDeviceSettings
+              description: Settings that describe an input device that is type UHD.
       description: Placeholder documentation for UpdateInputDeviceResponse
     InputDeviceConfiguredInput:
       type: string
@@ -8298,6 +8326,28 @@ components:
                 name: tracks
               description: Selects one or more unique audio tracks from within a source.
       description: Audio Track Selection
+    __integerMin1000:
+      type: integer
+      description: Placeholder documentation for __integerMin1000
+      minimum: 1000
+    AudioSilenceFailoverSettings:
+      type: object
+      required:
+        - AudioSelectorName
+      properties:
+        AudioSelectorName:
+          allOf:
+            - $ref: '#/components/schemas/__string'
+            - xml:
+                name: audioSelectorName
+              description: 'The name of the audio selector in the input that MediaLive should monitor to detect silence. Select your most important rendition. If you didn''t create an audio selector in this input, leave blank.'
+        AudioSilenceThresholdMsec:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1000'
+            - xml:
+                name: audioSilenceThresholdMsec
+              description: The amount of time (in milliseconds) that the active input must be silent before automatic input failover occurs. Silence is defined as audio loss or audio quieter than -50 dBFS.
+      description: Placeholder documentation for AudioSilenceFailoverSettings
     AudioTrack:
       type: object
       required:
@@ -10571,6 +10621,58 @@ components:
       enum:
         - HD
       description: 'The type of the input device. For an AWS Elemental Link device that outputs resolutions up to 1080, choose "HD".'
+    InputDeviceUhdSettings:
+      type: object
+      properties:
+        ActiveInput:
+          allOf:
+            - $ref: '#/components/schemas/InputDeviceActiveInput'
+            - xml:
+                name: activeInput
+              description: 'If you specified Auto as the configured input, specifies which of the sources is currently active (SDI or HDMI).'
+        ConfiguredInput:
+          allOf:
+            - $ref: '#/components/schemas/InputDeviceConfiguredInput'
+            - xml:
+                name: configuredInput
+              description: The source at the input device that is currently active. You can specify this source.
+        DeviceState:
+          allOf:
+            - $ref: '#/components/schemas/InputDeviceState'
+            - xml:
+                name: deviceState
+              description: The state of the input device.
+        Framerate:
+          allOf:
+            - $ref: '#/components/schemas/__double'
+            - xml:
+                name: framerate
+              description: The frame rate of the video source.
+        Height:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: height
+              description: 'The height of the video source, in pixels.'
+        MaxBitrate:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: maxBitrate
+              description: 'The current maximum bitrate for ingesting this source, in bits per second. You can specify this maximum.'
+        ScanType:
+          allOf:
+            - $ref: '#/components/schemas/InputDeviceScanType'
+            - xml:
+                name: scanType
+              description: The scan type of the video source.
+        Width:
+          allOf:
+            - $ref: '#/components/schemas/__integer'
+            - xml:
+                name: width
+              description: 'The width of the video source, in pixels.'
+      description: 'Settings that describe the active source from the input device, and the video characteristics of that source.'
     AcceptHeader:
       type: string
       enum:
@@ -10963,12 +11065,24 @@ components:
     FailoverConditionSettings:
       type: object
       properties:
+        AudioSilenceSettings:
+          allOf:
+            - $ref: '#/components/schemas/AudioSilenceFailoverSettings'
+            - xml:
+                name: audioSilenceSettings
+              description: MediaLive will perform a failover if the specified audio selector is silent for the specified period.
         InputLossSettings:
           allOf:
             - $ref: '#/components/schemas/InputLossFailoverSettings'
             - xml:
                 name: inputLossSettings
               description: MediaLive will perform a failover if content is not detected in this input for the specified period.
+        VideoBlackSettings:
+          allOf:
+            - $ref: '#/components/schemas/VideoBlackFailoverSettings'
+            - xml:
+                name: videoBlackSettings
+              description: MediaLive will perform a failover if content is considered black for the specified period.
       description: Settings for one failover condition.
     FailoverCondition:
       type: object
@@ -10990,6 +11104,22 @@ components:
                 name: inputLossThresholdMsec
               description: 'The amount of time (in milliseconds) that no input is detected. After that time, an input failover will occur.'
       description: MediaLive will perform a failover if content is not detected in this input for the specified period.
+    VideoBlackFailoverSettings:
+      type: object
+      properties:
+        BlackDetectThreshold:
+          allOf:
+            - $ref: '#/components/schemas/__doubleMin0Max1'
+            - xml:
+                name: blackDetectThreshold
+              description: 'A value used in calculating the threshold below which MediaLive considers a pixel to be ''black''. For the input to be considered black, every pixel in a frame must be below this threshold. The threshold is calculated as a percentage (expressed as a decimal) of white. Therefore .1 means 10% white (or 90% black). Note how the formula works for any color depth. For example, if you set this field to 0.1 in 10-bit color depth: (1023*0.1=102.3), which means a pixel value of 102 or less is ''black''. If you set this field to .1 in an 8-bit color depth: (255*0.1=25.5), which means a pixel value of 25 or less is ''black''. The range is 0.0 to 1.0, with any number of decimal places.'
+        VideoBlackThresholdMsec:
+          allOf:
+            - $ref: '#/components/schemas/__integerMin1000'
+            - xml:
+                name: videoBlackThresholdMsec
+              description: The amount of time (in milliseconds) that the active input must be black before automatic input failover occurs.
+      description: Placeholder documentation for VideoBlackFailoverSettings
     FeatureActivationsInputPrepareScheduleActions:
       type: string
       enum:
@@ -11411,10 +11541,6 @@ components:
         - DISABLED
         - ENABLED
       description: H264 Scene Change Detect
-    __integerMin1000:
-      type: integer
-      description: Placeholder documentation for __integerMin1000
-      minimum: 1000
     __integerMin0Max100:
       type: integer
       description: Placeholder documentation for __integerMin0Max100
@@ -13264,6 +13390,12 @@ components:
             - xml:
                 name: type
               description: The type of the input device.
+        UhdDeviceSettings:
+          allOf:
+            - $ref: '#/components/schemas/InputDeviceUhdSettings'
+            - xml:
+                name: uhdDeviceSettings
+              description: Settings that describe an input device that is type UHD.
       description: Details of the input device.
     InputDeviceTransferType:
       type: string
@@ -15853,13 +15985,19 @@ components:
             - $ref: '#/components/schemas/InputDeviceConfigurableSettings'
             - xml:
                 name: hdDeviceSettings
-              description: The settings that you want to apply to the input device.
+              description: The settings that you want to apply to the HD input device.
         Name:
           allOf:
             - $ref: '#/components/schemas/__string'
             - xml:
                 name: name
               description: The name that you assigned to this input device (not the unique ID).
+        UhdDeviceSettings:
+          allOf:
+            - $ref: '#/components/schemas/InputDeviceConfigurableSettings'
+            - xml:
+                name: uhdDeviceSettings
+              description: The settings that you want to apply to the UHD input device.
       description: A request to update an input device.
     __listOfInputDeviceRequest:
       type: array
@@ -15975,6 +16113,10 @@ components:
                 name: name
               description: Name of the reservation
       description: Request to update a reservation
+    __doubleMin0Max1:
+      type: number
+      description: Placeholder documentation for __doubleMin0Max1
+      format: double
     VideoCodecSettings:
       type: object
       properties:

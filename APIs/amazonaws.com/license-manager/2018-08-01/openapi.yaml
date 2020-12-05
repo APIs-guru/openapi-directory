@@ -3420,6 +3420,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: Tags to add to the license configuration.
+        DisassociateWhenNotFound:
+          allOf:
+            - $ref: '#/components/schemas/BoxBoolean'
+            - description: 'When true, disassociates a resource when software is uninstalled.'
         ProductInformationList:
           allOf:
             - $ref: '#/components/schemas/ProductInformationList'
@@ -3781,6 +3785,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutomatedDiscoveryInformation'
             - description: Automated discovery information.
+        DisassociateWhenNotFound:
+          allOf:
+            - $ref: '#/components/schemas/BoxBoolean'
+            - description: 'When true, disassociates a resource when software is uninstalled.'
     GetLicenseConfigurationRequest:
       type: object
       required:
@@ -4133,7 +4141,7 @@ components:
         Filters:
           allOf:
             - $ref: '#/components/schemas/InventoryFilterList'
-            - description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>account_id</code> - The ID of the AWS account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>application_name</code> - The name of the application. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>license_included</code> - The type of license included. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>. Possible values are <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> <li> <p> <code>platform</code> - The platform of the resource. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>resource_id</code> - The ID of the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> </ul>'
+            - description: '<p>Filters to scope the results. The following filters and logical operators are supported:</p> <ul> <li> <p> <code>account_id</code> - The ID of the AWS account that owns the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>application_name</code> - The name of the application. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>license_included</code> - The type of license included. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>. Possible values are <code>sql-server-enterprise</code> | <code>sql-server-standard</code> | <code>sql-server-web</code> | <code>windows-server-datacenter</code>.</p> </li> <li> <p> <code>platform</code> - The platform of the resource. Logical operators are <code>EQUALS</code> | <code>BEGINS_WITH</code>.</p> </li> <li> <p> <code>resource_id</code> - The ID of the resource. Logical operators are <code>EQUALS</code> | <code>NOT_EQUALS</code>.</p> </li> <li> <p> <code>tag:&lt;key&gt;</code> - The key/value combination of a tag assigned to the resource. Logical operators are <code>EQUALS</code> (single account) or <code>EQUALS</code> | <code>NOT_EQUALS</code> (cross account).</p> </li> </ul>'
     FailedDependencyException: {}
     ListTagsForResourceResponse:
       type: object
@@ -4318,6 +4326,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProductInformationList'
             - description: New product information.
+        DisassociateWhenNotFound:
+          allOf:
+            - $ref: '#/components/schemas/BoxBoolean'
+            - description: 'When true, disassociates a resource when software is uninstalled.'
     UpdateLicenseSpecificationsForResourceResponse:
       type: object
       properties: {}
@@ -5078,6 +5090,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BoxBoolean'
             - description: Number of available licenses as a hard limit.
+        DisassociateWhenNotFound:
+          allOf:
+            - $ref: '#/components/schemas/BoxBoolean'
+            - description: 'When true, disassociates a resource when software is uninstalled.'
         ConsumedLicenses:
           allOf:
             - $ref: '#/components/schemas/BoxLong'

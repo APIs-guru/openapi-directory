@@ -162,7 +162,7 @@ paths:
         - name: RoleArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB cluster, for example <code>arn:aws:iam::123456789012:role/AuroraAccessRole</code>.'
+          description: 'The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB cluster, for example, <code>arn:aws:iam::123456789012:role/AuroraAccessRole</code>.'
           schema:
             type: string
         - name: FeatureName
@@ -1217,7 +1217,7 @@ paths:
     get:
       x-aws-operation-name: CopyDBClusterSnapshot
       operationId: GET_CopyDBClusterSnapshot
-      description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the <code>CopyDBClusterSnapshot</code> action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>PreSignedUrl</code> - A URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note> </li> <li> <p> <code>TargetDBClusterSnapshotIdentifier</code> - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the <code>SourceDBClusterSnapshotIdentifier</code> in the pre-signed URL. </p> </li> </ul> <p>To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in "copying" status.</p> <p>For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html"> Copying a Snapshot</a> in the <i>Amazon Aurora User Guide.</i> </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the <code>CopyDBClusterSnapshot</code> action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>PreSignedUrl</code> - A URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the customer master key (CMK) to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note> </li> <li> <p> <code>TargetDBClusterSnapshotIdentifier</code> - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the <code>SourceDBClusterSnapshotIdentifier</code> in the pre-signed URL. </p> </li> </ul> <p>To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in "copying" status.</p> <p>For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html"> Copying a Snapshot</a> in the <i>Amazon Aurora User Guide.</i> </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1277,13 +1277,13 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. </p> <p>If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you don''t specify a value for <code>KmsKeyId</code>, then the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot. </p> <p>If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for <code>KmsKeyId</code>. </p> <p>To copy an encrypted DB cluster snapshot to another AWS Region, you must set <code>KmsKeyId</code> to the KMS key ID you want to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. KMS encryption keys are specific to the AWS Region that they are created in, and you can''t use encryption keys from one AWS Region in another AWS Region.</p> <p>If you copy an unencrypted DB cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>'
+          description: '<p>The AWS KMS key identifier for an encrypted DB cluster snapshot. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new AWS KMS CMK. If you don''t specify a value for <code>KmsKeyId</code>, then the copy of the DB cluster snapshot is encrypted with the same AWS KMS key as the source DB cluster snapshot. </p> <p>If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for <code>KmsKeyId</code>. </p> <p>To copy an encrypted DB cluster snapshot to another AWS Region, you must set <code>KmsKeyId</code> to the AWS KMS key identifier you want to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region.</p> <p>If you copy an unencrypted DB cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>'
           schema:
             type: string
         - name: PreSignedUrl
           in: query
           required: false
-          description: '<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> API action in the AWS Region that contains the source DB cluster snapshot to copy. The <code>PreSignedUrl</code> parameter must be used when copying an encrypted DB cluster snapshot from another AWS Region. Don''t specify <code>PreSignedUrl</code> when you are copying an encrypted DB cluster snapshot in the same AWS Region.</p> <p>The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
+          description: '<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> API action in the AWS Region that contains the source DB cluster snapshot to copy. The <code>PreSignedUrl</code> parameter must be used when copying an encrypted DB cluster snapshot from another AWS Region. Don''t specify <code>PreSignedUrl</code> when you are copying an encrypted DB cluster snapshot in the same AWS Region.</p> <p>The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the customer master key (CMK) to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
           schema:
             type: string
         - name: CopyTags
@@ -1335,7 +1335,7 @@ paths:
     post:
       x-aws-operation-name: CopyDBClusterSnapshot
       operationId: POST_CopyDBClusterSnapshot
-      description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the <code>CopyDBClusterSnapshot</code> action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>PreSignedUrl</code> - A URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note> </li> <li> <p> <code>TargetDBClusterSnapshotIdentifier</code> - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the <code>SourceDBClusterSnapshotIdentifier</code> in the pre-signed URL. </p> </li> </ul> <p>To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in "copying" status.</p> <p>For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html"> Copying a Snapshot</a> in the <i>Amazon Aurora User Guide.</i> </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
+      description: '<p>Copies a snapshot of a DB cluster.</p> <p>To copy a DB cluster snapshot from a shared manual DB cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot.</p> <p>You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the <code>CopyDBClusterSnapshot</code> action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>PreSignedUrl</code> - A URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the customer master key (CMK) to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note> </li> <li> <p> <code>TargetDBClusterSnapshotIdentifier</code> - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the <code>SourceDBClusterSnapshotIdentifier</code> in the pre-signed URL. </p> </li> </ul> <p>To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in "copying" status.</p> <p>For more information on copying encrypted DB cluster snapshots from one AWS Region to another, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_CopySnapshot.html"> Copying a Snapshot</a> in the <i>Amazon Aurora User Guide.</i> </p> <p>For more information on Amazon Aurora, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html"> What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i> </p> <note> <p>This action only applies to Aurora DB clusters.</p> </note>'
       responses:
         '200':
           description: Success
@@ -1595,7 +1595,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. </p> <p>If you copy an encrypted DB snapshot from your AWS account, you can specify a value for this parameter to encrypt the copy with a new KMS encryption key. If you don''t specify a value for this parameter, then the copy of the DB snapshot is encrypted with the same KMS key as the source DB snapshot. </p> <p>If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter. </p> <p>If you specify this parameter when you copy an unencrypted snapshot, the copy is encrypted. </p> <p>If you copy an encrypted snapshot to a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the AWS Region that they are created in, and you can''t use encryption keys from one AWS Region in another AWS Region. </p>'
+          description: '<p>The AWS KMS key identifier for an encrypted DB snapshot. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). </p> <p>If you copy an encrypted DB snapshot from your AWS account, you can specify a value for this parameter to encrypt the copy with a new AWS KMS CMK. If you don''t specify a value for this parameter, then the copy of the DB snapshot is encrypted with the same AWS KMS key as the source DB snapshot. </p> <p>If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter. </p> <p>If you specify this parameter when you copy an unencrypted snapshot, the copy is encrypted. </p> <p>If you copy an encrypted snapshot to a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region. </p>'
           schema:
             type: string
         - name: Tags
@@ -1619,7 +1619,7 @@ paths:
         - name: PreSignedUrl
           in: query
           required: false
-          description: '<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBSnapshot</code> API action in the source AWS Region that contains the source DB snapshot to copy. </p> <p>You must specify this parameter when you copy an encrypted DB snapshot from another AWS Region by using the Amazon RDS API. Don''t specify <code>PreSignedUrl</code> when you are copying an encrypted DB snapshot in the same AWS Region.</p> <p>The presigned URL must be a valid request for the <code>CopyDBSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB snapshot to be copied. The presigned URL request must contain the following parameter values: </p> <ul> <li> <p> <code>DestinationRegion</code> - The AWS Region that the encrypted DB snapshot is copied to. This AWS Region is the same one where the <code>CopyDBSnapshot</code> action is called that contains this presigned URL. </p> <p>For example, if you copy an encrypted DB snapshot from the us-west-2 AWS Region to the us-east-1 AWS Region, then you call the <code>CopyDBSnapshot</code> action in the us-east-1 AWS Region and provide a presigned URL that contains a call to the <code>CopyDBSnapshot</code> action in the us-west-2 AWS Region. For this example, the <code>DestinationRegion</code> in the presigned URL must be set to the us-east-1 AWS Region. </p> </li> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the DB snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBSnapshot</code> action that is called in the destination AWS Region, and the action contained in the presigned URL. </p> </li> <li> <p> <code>SourceDBSnapshotIdentifier</code> - The DB snapshot identifier for the encrypted snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB snapshot from the us-west-2 AWS Region, then your <code>SourceDBSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115</code>. </p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html">Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>. </p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
+          description: '<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBSnapshot</code> API action in the source AWS Region that contains the source DB snapshot to copy. </p> <p>You must specify this parameter when you copy an encrypted DB snapshot from another AWS Region by using the Amazon RDS API. Don''t specify <code>PreSignedUrl</code> when you are copying an encrypted DB snapshot in the same AWS Region.</p> <p>The presigned URL must be a valid request for the <code>CopyDBSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB snapshot to be copied. The presigned URL request must contain the following parameter values: </p> <ul> <li> <p> <code>DestinationRegion</code> - The AWS Region that the encrypted DB snapshot is copied to. This AWS Region is the same one where the <code>CopyDBSnapshot</code> action is called that contains this presigned URL. </p> <p>For example, if you copy an encrypted DB snapshot from the us-west-2 AWS Region to the us-east-1 AWS Region, then you call the <code>CopyDBSnapshot</code> action in the us-east-1 AWS Region and provide a presigned URL that contains a call to the <code>CopyDBSnapshot</code> action in the us-west-2 AWS Region. For this example, the <code>DestinationRegion</code> in the presigned URL must be set to the us-east-1 AWS Region. </p> </li> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the customer master key (CMK) to use to encrypt the copy of the DB snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBSnapshot</code> action that is called in the destination AWS Region, and the action contained in the presigned URL. </p> </li> <li> <p> <code>SourceDBSnapshotIdentifier</code> - The DB snapshot identifier for the encrypted snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB snapshot from the us-west-2 AWS Region, then your <code>SourceDBSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115</code>. </p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html">Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>. </p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
           schema:
             type: string
         - name: OptionGroupName
@@ -2241,13 +2241,13 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier for an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>If an encryption key isn''t specified in <code>KmsKeyId</code>:</p> <ul> <li> <p>If <code>ReplicationSourceIdentifier</code> identifies an encrypted source, then Amazon RDS will use the encryption key used to encrypt the source. Otherwise, Amazon RDS will use your default encryption key. </p> </li> <li> <p>If the <code>StorageEncrypted</code> parameter is enabled and <code>ReplicationSourceIdentifier</code> isn''t specified, then Amazon RDS will use your default encryption key.</p> </li> </ul> <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p> <p>If you create a read replica of an encrypted DB cluster in another AWS Region, you must set <code>KmsKeyId</code> to a KMS key ID that is valid in the destination AWS Region. This key is used to encrypt the read replica in that AWS Region.</p>'
+          description: '<p>The AWS KMS key identifier for an encrypted DB cluster.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>When a CMK isn''t specified in <code>KmsKeyId</code>:</p> <ul> <li> <p>If <code>ReplicationSourceIdentifier</code> identifies an encrypted source, then Amazon RDS will use the CMK used to encrypt the source. Otherwise, Amazon RDS will use your default CMK. </p> </li> <li> <p>If the <code>StorageEncrypted</code> parameter is enabled and <code>ReplicationSourceIdentifier</code> isn''t specified, then Amazon RDS will use your default CMK.</p> </li> </ul> <p>There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p> <p>If you create a read replica of an encrypted DB cluster in another AWS Region, you must set <code>KmsKeyId</code> to a AWS KMS key identifier that is valid in the destination AWS Region. This CMK is used to encrypt the read replica in that AWS Region.</p>'
           schema:
             type: string
         - name: PreSignedUrl
           in: query
           required: false
-          description: '<p>A URL that contains a Signature Version 4 signed request for the <code>CreateDBCluster</code> action to be called in the source AWS Region where the DB cluster is replicated from. You only need to specify <code>PreSignedUrl</code> when you are performing cross-region replication from an encrypted DB cluster.</p> <p>The pre-signed URL must be a valid request for the <code>CreateDBCluster</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster in the destination AWS Region. This should refer to the same KMS key for both the <code>CreateDBCluster</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that Aurora read replica will be created in.</p> </li> <li> <p> <code>ReplicationSourceIdentifier</code> - The DB cluster identifier for the encrypted DB cluster to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster from the us-west-2 AWS Region, then your <code>ReplicationSourceIdentifier</code> would look like Example: <code>arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
+          description: '<p>A URL that contains a Signature Version 4 signed request for the <code>CreateDBCluster</code> action to be called in the source AWS Region where the DB cluster is replicated from. You only need to specify <code>PreSignedUrl</code> when you are performing cross-region replication from an encrypted DB cluster.</p> <p>The pre-signed URL must be a valid request for the <code>CreateDBCluster</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster in the destination AWS Region. This should refer to the same AWS KMS CMK for both the <code>CreateDBCluster</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that Aurora read replica will be created in.</p> </li> <li> <p> <code>ReplicationSourceIdentifier</code> - The DB cluster identifier for the encrypted DB cluster to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster from the us-west-2 AWS Region, then your <code>ReplicationSourceIdentifier</code> would look like Example: <code>arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
           schema:
             type: string
         - name: EnableIAMDatabaseAuthentication
@@ -3299,7 +3299,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier for an encrypted DB instance.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same AWS account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The KMS key identifier is managed by the DB cluster. For more information, see <code>CreateDBCluster</code>.</p> <p>If <code>StorageEncrypted</code> is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+          description: '<p>The AWS KMS key identifier for an encrypted DB instance.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The AWS KMS key identifier is managed by the DB cluster. For more information, see <code>CreateDBCluster</code>.</p> <p>If <code>StorageEncrypted</code> is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
           schema:
             type: string
         - name: Domain
@@ -3359,7 +3359,7 @@ paths:
         - name: PerformanceInsightsKMSKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+          description: '<p>The AWS KMS key identifier for encryption of Performance Insights data.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
           schema:
             type: string
         - name: PerformanceInsightsRetentionPeriod
@@ -3815,7 +3815,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key ID for an encrypted read replica. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then you do not have to specify a value for this parameter. The read replica is encrypted with the same KMS key as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the AWS Region that they are created in, and you can''t use encryption keys from one AWS Region in another AWS Region.</p> <p>You can''t create an encrypted read replica from an unencrypted DB instance.</p>'
+          description: '<p>The AWS KMS key identifier for an encrypted read replica.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then you do not have to specify a value for this parameter. The read replica is encrypted with the same AWS KMS CMK as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region.</p> <p>You can''t create an encrypted read replica from an unencrypted DB instance.</p>'
           schema:
             type: string
         - name: PreSignedUrl
@@ -3839,7 +3839,7 @@ paths:
         - name: PerformanceInsightsKMSKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+          description: '<p>The AWS KMS key identifier for encryption of Performance Insights data.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
           schema:
             type: string
         - name: PerformanceInsightsRetentionPeriod
@@ -4506,7 +4506,7 @@ paths:
     get:
       x-aws-operation-name: CreateDBSnapshot
       operationId: GET_CreateDBSnapshot
-      description: Creates a snapshot of a DB instance. The source DB instance must be in the <code>available</code> or <code>storage-optimization</code>state.
+      description: Creates a snapshot of a DB instance. The source DB instance must be in the <code>available</code> or <code>storage-optimization</code> state.
       responses:
         '200':
           description: Success
@@ -4588,7 +4588,7 @@ paths:
     post:
       x-aws-operation-name: CreateDBSnapshot
       operationId: POST_CreateDBSnapshot
-      description: Creates a snapshot of a DB instance. The source DB instance must be in the <code>available</code> or <code>storage-optimization</code>state.
+      description: Creates a snapshot of a DB instance. The source DB instance must be in the <code>available</code> or <code>storage-optimization</code> state.
       responses:
         '200':
           description: Success
@@ -5989,7 +5989,7 @@ paths:
     get:
       x-aws-operation-name: DeleteDBInstanceAutomatedBackup
       operationId: GET_DeleteDBInstanceAutomatedBackup
-      description: Deletes automated backups based on the source instance's <code>DbiResourceId</code> value or the restorable instance's resource ID.
+      description: Deletes automated backups using the <code>DbiResourceId</code> value of the source DB instance or the Amazon Resource Name (ARN) of the automated backups.
       responses:
         '200':
           description: Success
@@ -6012,8 +6012,14 @@ paths:
       parameters:
         - name: DbiResourceId
           in: query
-          required: true
+          required: false
           description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an AWS Region.'
+          schema:
+            type: string
+        - name: DBInstanceAutomatedBackupsArn
+          in: query
+          required: false
+          description: 'The Amazon Resource Name (ARN) of the automated backups to delete, for example, <code>arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE</code>.'
           schema:
             type: string
         - name: Action
@@ -6041,7 +6047,7 @@ paths:
     post:
       x-aws-operation-name: DeleteDBInstanceAutomatedBackup
       operationId: POST_DeleteDBInstanceAutomatedBackup
-      description: Deletes automated backups based on the source instance's <code>DbiResourceId</code> value or the restorable instance's resource ID.
+      description: Deletes automated backups using the <code>DbiResourceId</code> value of the source DB instance or the Amazon Resource Name (ARN) of the automated backups.
       responses:
         '200':
           description: Success
@@ -8412,6 +8418,12 @@ paths:
           in: query
           required: false
           description: 'The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to <code>MaxRecords</code>.'
+          schema:
+            type: string
+        - name: DBInstanceAutomatedBackupsArn
+          in: query
+          required: false
+          description: 'The Amazon Resource Name (ARN) of the replicated automated backups, for example, <code>arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE</code>.'
           schema:
             type: string
         - name: Action
@@ -13675,7 +13687,7 @@ paths:
         - name: PerformanceInsightsKMSKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+          description: '<p>The AWS KMS key identifier for encryption of Performance Insights data.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
           schema:
             type: string
         - name: PerformanceInsightsRetentionPeriod
@@ -16005,7 +16017,7 @@ paths:
         - name: RoleArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB instance, for example <code>arn:aws:iam::123456789012:role/AccessRole</code>.'
+          description: 'The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB instance, for example, <code>arn:aws:iam::123456789012:role/AccessRole</code>.'
           schema:
             type: string
         - name: FeatureName
@@ -16765,7 +16777,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier for an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KM encryption key.</p> <p>If the StorageEncrypted parameter is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+          description: '<p>The AWS KMS key identifier for an encrypted DB cluster.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>If the StorageEncrypted parameter is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
           schema:
             type: string
         - name: EnableIAMDatabaseAuthentication
@@ -17191,7 +17203,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>If you don''t specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB snapshot or DB cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the DB snapshot or DB cluster snapshot.</p> </li> <li> <p>If the DB snapshot or DB cluster snapshot in <code>SnapshotIdentifier</code> isn''t encrypted, then the restored DB cluster isn''t encrypted.</p> </li> </ul>'
+          description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>When you don''t specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB snapshot or DB cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored DB cluster is encrypted using the AWS KMS CMK that was used to encrypt the DB snapshot or DB cluster snapshot.</p> </li> <li> <p>If the DB snapshot or DB cluster snapshot in <code>SnapshotIdentifier</code> isn''t encrypted, then the restored DB cluster isn''t encrypted.</p> </li> </ul>'
           schema:
             type: string
         - name: EnableIAMDatabaseAuthentication
@@ -17641,7 +17653,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>You can restore to a new DB cluster and encrypt the new DB cluster with a KMS key that is different than the KMS key used to encrypt the source DB cluster. The new DB cluster is encrypted with the KMS key identified by the <code>KmsKeyId</code> parameter.</p> <p>If you don''t specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB cluster is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the source DB cluster.</p> </li> <li> <p>If the DB cluster isn''t encrypted, then the restored DB cluster isn''t encrypted.</p> </li> </ul> <p>If <code>DBClusterIdentifier</code> refers to a DB cluster that isn''t encrypted, then the restore request is rejected.</p>'
+          description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>You can restore to a new DB cluster and encrypt the new DB cluster with a AWS KMS CMK that is different than the AWS KMS key used to encrypt the source DB cluster. The new DB cluster is encrypted with the AWS KMS CMK identified by the <code>KmsKeyId</code> parameter.</p> <p>If you don''t specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB cluster is encrypted, then the restored DB cluster is encrypted using the AWS KMS CMK that was used to encrypt the source DB cluster.</p> </li> <li> <p>If the DB cluster isn''t encrypted, then the restored DB cluster isn''t encrypted.</p> </li> </ul> <p>If <code>DBClusterIdentifier</code> refers to a DB cluster that isn''t encrypted, then the restore request is rejected.</p>'
           schema:
             type: string
         - name: EnableIAMDatabaseAuthentication
@@ -17859,7 +17871,7 @@ paths:
     get:
       x-aws-operation-name: RestoreDBInstanceFromDBSnapshot
       operationId: GET_RestoreDBInstanceFromDBSnapshot
-      description: '<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration with the default security group and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment.</p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS doesn''t allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterFromSnapshot</code>.</p> </note>'
+      description: '<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with most of the source''s original configuration, including the default security group and DB parameter group. By default, the new DB instance is created as a Single-AZ deployment, except when the instance is a SQL Server instance that has an option group associated with mirroring. In this case, the instance becomes a Multi-AZ deployment, not a Single-AZ deployment.</p> <p>If you want to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS doesn''t allow two DB instances with the same name. After you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterFromSnapshot</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -18199,7 +18211,7 @@ paths:
     post:
       x-aws-operation-name: RestoreDBInstanceFromDBSnapshot
       operationId: POST_RestoreDBInstanceFromDBSnapshot
-      description: '<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with the most of original configuration with the default security group and the default DB parameter group. By default, the new DB instance is created as a single-AZ deployment except when the instance is a SQL Server instance that has an option group that is associated with mirroring; in this case, the instance becomes a mirrored AZ deployment and not a single-AZ deployment.</p> <p>If your intent is to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS doesn''t allow two DB instances with the same name. Once you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you will replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterFromSnapshot</code>.</p> </note>'
+      description: '<p>Creates a new DB instance from a DB snapshot. The target database is created from the source database restore point with most of the source''s original configuration, including the default security group and DB parameter group. By default, the new DB instance is created as a Single-AZ deployment, except when the instance is a SQL Server instance that has an option group associated with mirroring. In this case, the instance becomes a Multi-AZ deployment, not a Single-AZ deployment.</p> <p>If you want to replace your original DB instance with the new, restored DB instance, then rename your original DB instance before you call the RestoreDBInstanceFromDBSnapshot action. RDS doesn''t allow two DB instances with the same name. After you have renamed your original DB instance with a different identifier, then you can pass the original name of the DB instance as the DBInstanceIdentifier in the call to the RestoreDBInstanceFromDBSnapshot action. The result is that you replace the original DB instance with the DB instance created from the snapshot.</p> <p>If you are restoring from a shared manual DB snapshot, the <code>DBSnapshotIdentifier</code> must be the ARN of the shared DB snapshot.</p> <note> <p>This command doesn''t apply to Aurora MySQL and Aurora PostgreSQL. For Aurora, use <code>RestoreDBClusterFromSnapshot</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -18637,7 +18649,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier for an encrypted DB instance. </p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same AWS account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key. </p> <p>If the <code>StorageEncrypted</code> parameter is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region. </p>'
+          description: '<p>The AWS KMS key identifier for an encrypted DB instance. </p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>If the <code>StorageEncrypted</code> parameter is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region. </p>'
           schema:
             type: string
         - name: CopyTagsToSnapshot
@@ -18703,7 +18715,7 @@ paths:
         - name: PerformanceInsightsKMSKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. </p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+          description: '<p>The AWS KMS key identifier for encryption of Performance Insights data.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
           schema:
             type: string
         - name: PerformanceInsightsRetentionPeriod
@@ -19260,6 +19272,12 @@ paths:
           description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
           schema:
             type: integer
+        - name: SourceDBInstanceAutomatedBackupsArn
+          in: query
+          required: false
+          description: 'The Amazon Resource Name (ARN) of the replicated automated backups from which to restore, for example, <code>arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE</code>.'
+          schema:
+            type: string
         - name: Action
           in: query
           required: true
@@ -19629,7 +19647,7 @@ paths:
         - name: ResourceArn
           in: query
           required: true
-          description: 'The Amazon Resource Name (ARN) of the DB cluster, for example <code>arn:aws:rds:us-east-1:12345667890:cluster:das-cluster</code>.'
+          description: 'The Amazon Resource Name (ARN) of the DB cluster, for example, <code>arn:aws:rds:us-east-1:12345667890:cluster:das-cluster</code>.'
           schema:
             type: string
         - name: Mode
@@ -19644,7 +19662,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: true
-          description: 'The AWS KMS key identifier for encrypting messages in the database activity stream. The key identifier can be either a key ID, a key ARN, or a key alias.'
+          description: 'The AWS KMS key identifier for encrypting messages in the database activity stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).'
           schema:
             type: string
         - name: ApplyImmediately
@@ -20054,6 +20072,156 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=StartDBInstanceAutomatedBackupsReplication:
+    get:
+      x-aws-operation-name: StartDBInstanceAutomatedBackupsReplication
+      operationId: GET_StartDBInstanceAutomatedBackupsReplication
+      description: '<p>Enables replication of automated backups to a different AWS Region.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html"> Replicating Automated Backups to Another AWS Region</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StartDBInstanceAutomatedBackupsReplicationResult'
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '481':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+        '482':
+          description: KMSKeyNotAccessibleFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '483':
+          description: DBInstanceAutomatedBackupQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceAutomatedBackupQuotaExceededFault'
+        '484':
+          description: StorageTypeNotSupportedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StorageTypeNotSupportedFault'
+      parameters:
+        - name: SourceDBInstanceArn
+          in: query
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the source DB instance for the replicated automated backups, for example, <code>arn:aws:rds:us-west-2:123456789012:db:mydatabase</code>.'
+          schema:
+            type: string
+        - name: BackupRetentionPeriod
+          in: query
+          required: false
+          description: The retention period for the replicated automated backups.
+          schema:
+            type: integer
+        - name: KmsKeyId
+          in: query
+          required: false
+          description: 'The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS Region, for example, <code>arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE</code>.'
+          schema:
+            type: string
+        - name: PreSignedUrl
+          in: query
+          required: false
+          description: A URL that contains a Signature Version 4 signed request for the StartDBInstanceAutomatedBackupsReplication action to be called in the AWS Region of the source DB instance. The presigned URL must be a valid request for the StartDBInstanceAutomatedBackupsReplication API action that can be executed in the AWS Region that contains the source DB instance.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StartDBInstanceAutomatedBackupsReplication
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StartDBInstanceAutomatedBackupsReplication
+      operationId: POST_StartDBInstanceAutomatedBackupsReplication
+      description: '<p>Enables replication of automated backups to a different AWS Region.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html"> Replicating Automated Backups to Another AWS Region</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StartDBInstanceAutomatedBackupsReplicationResult'
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '481':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+        '482':
+          description: KMSKeyNotAccessibleFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KMSKeyNotAccessibleFault'
+        '483':
+          description: DBInstanceAutomatedBackupQuotaExceededFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceAutomatedBackupQuotaExceededFault'
+        '484':
+          description: StorageTypeNotSupportedFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StorageTypeNotSupportedFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/StartDBInstanceAutomatedBackupsReplicationMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StartDBInstanceAutomatedBackupsReplication
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
   /#Action=StartExportTask:
     get:
       x-aws-operation-name: StartExportTask
@@ -20148,7 +20316,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: true
-          description: '<p>The ID of the AWS KMS key to use to encrypt the snapshot exported to Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. The caller of this operation must be authorized to execute the following operations. These can be set in the KMS key policy: </p> <ul> <li> <p>GrantOperation.Encrypt</p> </li> <li> <p>GrantOperation.Decrypt</p> </li> <li> <p>GrantOperation.GenerateDataKey</p> </li> <li> <p>GrantOperation.GenerateDataKeyWithoutPlaintext</p> </li> <li> <p>GrantOperation.ReEncryptFrom</p> </li> <li> <p>GrantOperation.ReEncryptTo</p> </li> <li> <p>GrantOperation.CreateGrant</p> </li> <li> <p>GrantOperation.DescribeKey</p> </li> <li> <p>GrantOperation.RetireGrant</p> </li> </ul>'
+          description: '<p>The ID of the AWS KMS customer master key (CMK) to use to encrypt the snapshot exported to Amazon S3. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). The caller of this operation must be authorized to execute the following operations. These can be set in the AWS KMS key policy: </p> <ul> <li> <p>GrantOperation.Encrypt</p> </li> <li> <p>GrantOperation.Decrypt</p> </li> <li> <p>GrantOperation.GenerateDataKey</p> </li> <li> <p>GrantOperation.GenerateDataKeyWithoutPlaintext</p> </li> <li> <p>GrantOperation.ReEncryptFrom</p> </li> <li> <p>GrantOperation.ReEncryptTo</p> </li> <li> <p>GrantOperation.CreateGrant</p> </li> <li> <p>GrantOperation.DescribeKey</p> </li> <li> <p>GrantOperation.RetireGrant</p> </li> </ul>'
           schema:
             type: string
         - name: S3Prefix
@@ -20656,6 +20824,102 @@ paths:
             type: string
             enum:
               - '2014-10-31'
+  /#Action=StopDBInstanceAutomatedBackupsReplication:
+    get:
+      x-aws-operation-name: StopDBInstanceAutomatedBackupsReplication
+      operationId: GET_StopDBInstanceAutomatedBackupsReplication
+      description: '<p>Stops automated backup replication for a DB instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html"> Replicating Automated Backups to Another AWS Region</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StopDBInstanceAutomatedBackupsReplicationResult'
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '481':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+      parameters:
+        - name: SourceDBInstanceArn
+          in: query
+          required: true
+          description: 'The Amazon Resource Name (ARN) of the source DB instance for which to stop replicating automated backups, for example, <code>arn:aws:rds:us-west-2:123456789012:db:mydatabase</code>.'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StopDBInstanceAutomatedBackupsReplication
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StopDBInstanceAutomatedBackupsReplication
+      operationId: POST_StopDBInstanceAutomatedBackupsReplication
+      description: '<p>Stops automated backup replication for a DB instance.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html"> Replicating Automated Backups to Another AWS Region</a> in the <i>Amazon RDS User Guide.</i> </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StopDBInstanceAutomatedBackupsReplicationResult'
+        '480':
+          description: DBInstanceNotFoundFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DBInstanceNotFoundFault'
+        '481':
+          description: InvalidDBInstanceStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidDBInstanceStateFault'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/StopDBInstanceAutomatedBackupsReplicationMessage'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StopDBInstanceAutomatedBackupsReplication
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2014-10-31'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -20823,7 +21087,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The ID of the AWS KMS key that is used to encrypt the snapshot when it''s exported to Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. The IAM role used for the snapshot export must have encryption and decryption permissions to use this KMS key. '
+            - description: 'The key identifier of the AWS KMS customer master key (CMK) that is used to encrypt the snapshot when it''s exported to Amazon S3. The AWS KMS CMK identifier is its key ARN, key ID, alias ARN, or alias name. The IAM role used for the snapshot export must have encryption and decryption permissions to use this AWS KMS CMK. '
         Status:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -21957,6 +22221,11 @@ components:
       properties:
         DBInstance:
           $ref: '#/components/schemas/DBInstance'
+    StartDBInstanceAutomatedBackupsReplicationResult:
+      type: object
+      properties:
+        DBInstanceAutomatedBackup:
+          $ref: '#/components/schemas/DBInstanceAutomatedBackup'
     ExportTaskAlreadyExistsFault: {}
     IamRoleNotFoundFault: {}
     IamRoleMissingPermissionsFault: {}
@@ -21968,7 +22237,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The AWS KMS key identifier used for encrypting messages in the database activity stream.
+            - description: '<p>The AWS KMS key identifier used for encrypting messages in the database activity stream.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p>'
         KinesisStreamName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -21987,6 +22256,11 @@ components:
       properties:
         DBInstance:
           $ref: '#/components/schemas/DBInstance'
+    StopDBInstanceAutomatedBackupsReplicationResult:
+      type: object
+      properties:
+        DBInstanceAutomatedBackup:
+          $ref: '#/components/schemas/DBInstanceAutomatedBackup'
     AccountQuotaList:
       type: array
       items:
@@ -22038,7 +22312,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB cluster, for example <code>arn:aws:iam::123456789012:role/AuroraAccessRole</code>.'
+            - description: 'The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB cluster, for example, <code>arn:aws:iam::123456789012:role/AuroraAccessRole</code>.'
         FeatureName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22516,11 +22790,11 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. </p> <p>If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you don''t specify a value for <code>KmsKeyId</code>, then the copy of the DB cluster snapshot is encrypted with the same KMS key as the source DB cluster snapshot. </p> <p>If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for <code>KmsKeyId</code>. </p> <p>To copy an encrypted DB cluster snapshot to another AWS Region, you must set <code>KmsKeyId</code> to the KMS key ID you want to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. KMS encryption keys are specific to the AWS Region that they are created in, and you can''t use encryption keys from one AWS Region in another AWS Region.</p> <p>If you copy an unencrypted DB cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>'
+            - description: '<p>The AWS KMS key identifier for an encrypted DB cluster snapshot. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you copy an encrypted DB cluster snapshot from your AWS account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new AWS KMS CMK. If you don''t specify a value for <code>KmsKeyId</code>, then the copy of the DB cluster snapshot is encrypted with the same AWS KMS key as the source DB cluster snapshot. </p> <p>If you copy an encrypted DB cluster snapshot that is shared from another AWS account, then you must specify a value for <code>KmsKeyId</code>. </p> <p>To copy an encrypted DB cluster snapshot to another AWS Region, you must set <code>KmsKeyId</code> to the AWS KMS key identifier you want to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region.</p> <p>If you copy an unencrypted DB cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>'
         PreSignedUrl:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> API action in the AWS Region that contains the source DB cluster snapshot to copy. The <code>PreSignedUrl</code> parameter must be used when copying an encrypted DB cluster snapshot from another AWS Region. Don''t specify <code>PreSignedUrl</code> when you are copying an encrypted DB cluster snapshot in the same AWS Region.</p> <p>The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
+            - description: '<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> API action in the AWS Region that contains the source DB cluster snapshot to copy. The <code>PreSignedUrl</code> parameter must be used when copying an encrypted DB cluster snapshot from another AWS Region. Don''t specify <code>PreSignedUrl</code> when you are copying an encrypted DB cluster snapshot in the same AWS Region.</p> <p>The pre-signed URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the customer master key (CMK) to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot is to be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:aurora-cluster1-snapshot-20161115</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
         CopyTags:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -22602,7 +22876,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'If <code>StorageEncrypted</code> is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.'
+            - description: '<p>If <code>StorageEncrypted</code> is true, the AWS KMS key identifier for the encrypted DB cluster snapshot.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p>'
         DBClusterSnapshotArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22679,7 +22953,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. </p> <p>If you copy an encrypted DB snapshot from your AWS account, you can specify a value for this parameter to encrypt the copy with a new KMS encryption key. If you don''t specify a value for this parameter, then the copy of the DB snapshot is encrypted with the same KMS key as the source DB snapshot. </p> <p>If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter. </p> <p>If you specify this parameter when you copy an unencrypted snapshot, the copy is encrypted. </p> <p>If you copy an encrypted snapshot to a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the AWS Region that they are created in, and you can''t use encryption keys from one AWS Region in another AWS Region. </p>'
+            - description: '<p>The AWS KMS key identifier for an encrypted DB snapshot. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). </p> <p>If you copy an encrypted DB snapshot from your AWS account, you can specify a value for this parameter to encrypt the copy with a new AWS KMS CMK. If you don''t specify a value for this parameter, then the copy of the DB snapshot is encrypted with the same AWS KMS key as the source DB snapshot. </p> <p>If you copy an encrypted DB snapshot that is shared from another AWS account, then you must specify a value for this parameter. </p> <p>If you specify this parameter when you copy an unencrypted snapshot, the copy is encrypted. </p> <p>If you copy an encrypted snapshot to a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region. </p>'
         Tags:
           $ref: '#/components/schemas/TagList'
         CopyTags:
@@ -22689,7 +22963,7 @@ components:
         PreSignedUrl:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBSnapshot</code> API action in the source AWS Region that contains the source DB snapshot to copy. </p> <p>You must specify this parameter when you copy an encrypted DB snapshot from another AWS Region by using the Amazon RDS API. Don''t specify <code>PreSignedUrl</code> when you are copying an encrypted DB snapshot in the same AWS Region.</p> <p>The presigned URL must be a valid request for the <code>CopyDBSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB snapshot to be copied. The presigned URL request must contain the following parameter values: </p> <ul> <li> <p> <code>DestinationRegion</code> - The AWS Region that the encrypted DB snapshot is copied to. This AWS Region is the same one where the <code>CopyDBSnapshot</code> action is called that contains this presigned URL. </p> <p>For example, if you copy an encrypted DB snapshot from the us-west-2 AWS Region to the us-east-1 AWS Region, then you call the <code>CopyDBSnapshot</code> action in the us-east-1 AWS Region and provide a presigned URL that contains a call to the <code>CopyDBSnapshot</code> action in the us-west-2 AWS Region. For this example, the <code>DestinationRegion</code> in the presigned URL must be set to the us-east-1 AWS Region. </p> </li> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the DB snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBSnapshot</code> action that is called in the destination AWS Region, and the action contained in the presigned URL. </p> </li> <li> <p> <code>SourceDBSnapshotIdentifier</code> - The DB snapshot identifier for the encrypted snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB snapshot from the us-west-2 AWS Region, then your <code>SourceDBSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115</code>. </p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html">Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>. </p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
+            - description: '<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBSnapshot</code> API action in the source AWS Region that contains the source DB snapshot to copy. </p> <p>You must specify this parameter when you copy an encrypted DB snapshot from another AWS Region by using the Amazon RDS API. Don''t specify <code>PreSignedUrl</code> when you are copying an encrypted DB snapshot in the same AWS Region.</p> <p>The presigned URL must be a valid request for the <code>CopyDBSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB snapshot to be copied. The presigned URL request must contain the following parameter values: </p> <ul> <li> <p> <code>DestinationRegion</code> - The AWS Region that the encrypted DB snapshot is copied to. This AWS Region is the same one where the <code>CopyDBSnapshot</code> action is called that contains this presigned URL. </p> <p>For example, if you copy an encrypted DB snapshot from the us-west-2 AWS Region to the us-east-1 AWS Region, then you call the <code>CopyDBSnapshot</code> action in the us-east-1 AWS Region and provide a presigned URL that contains a call to the <code>CopyDBSnapshot</code> action in the us-west-2 AWS Region. For this example, the <code>DestinationRegion</code> in the presigned URL must be set to the us-east-1 AWS Region. </p> </li> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the customer master key (CMK) to use to encrypt the copy of the DB snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBSnapshot</code> action that is called in the destination AWS Region, and the action contained in the presigned URL. </p> </li> <li> <p> <code>SourceDBSnapshotIdentifier</code> - The DB snapshot identifier for the encrypted snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB snapshot from the us-west-2 AWS Region, then your <code>SourceDBSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:snapshot:mysql-instance1-snapshot-20161115</code>. </p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html">Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 Signing Process</a>. </p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
         OptionGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -22797,7 +23071,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' If <code>Encrypted</code> is true, the AWS KMS key identifier for the encrypted DB snapshot. '
+            - description: '<p> If <code>Encrypted</code> is true, the AWS KMS key identifier for the encrypted DB snapshot. </p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p>'
         DBSnapshotArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23074,11 +23348,11 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier for an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>If an encryption key isn''t specified in <code>KmsKeyId</code>:</p> <ul> <li> <p>If <code>ReplicationSourceIdentifier</code> identifies an encrypted source, then Amazon RDS will use the encryption key used to encrypt the source. Otherwise, Amazon RDS will use your default encryption key. </p> </li> <li> <p>If the <code>StorageEncrypted</code> parameter is enabled and <code>ReplicationSourceIdentifier</code> isn''t specified, then Amazon RDS will use your default encryption key.</p> </li> </ul> <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p> <p>If you create a read replica of an encrypted DB cluster in another AWS Region, you must set <code>KmsKeyId</code> to a KMS key ID that is valid in the destination AWS Region. This key is used to encrypt the read replica in that AWS Region.</p>'
+            - description: '<p>The AWS KMS key identifier for an encrypted DB cluster.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>When a CMK isn''t specified in <code>KmsKeyId</code>:</p> <ul> <li> <p>If <code>ReplicationSourceIdentifier</code> identifies an encrypted source, then Amazon RDS will use the CMK used to encrypt the source. Otherwise, Amazon RDS will use your default CMK. </p> </li> <li> <p>If the <code>StorageEncrypted</code> parameter is enabled and <code>ReplicationSourceIdentifier</code> isn''t specified, then Amazon RDS will use your default CMK.</p> </li> </ul> <p>There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p> <p>If you create a read replica of an encrypted DB cluster in another AWS Region, you must set <code>KmsKeyId</code> to a AWS KMS key identifier that is valid in the destination AWS Region. This CMK is used to encrypt the read replica in that AWS Region.</p>'
         PreSignedUrl:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>A URL that contains a Signature Version 4 signed request for the <code>CreateDBCluster</code> action to be called in the source AWS Region where the DB cluster is replicated from. You only need to specify <code>PreSignedUrl</code> when you are performing cross-region replication from an encrypted DB cluster.</p> <p>The pre-signed URL must be a valid request for the <code>CreateDBCluster</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster in the destination AWS Region. This should refer to the same KMS key for both the <code>CreateDBCluster</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that Aurora read replica will be created in.</p> </li> <li> <p> <code>ReplicationSourceIdentifier</code> - The DB cluster identifier for the encrypted DB cluster to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster from the us-west-2 AWS Region, then your <code>ReplicationSourceIdentifier</code> would look like Example: <code>arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
+            - description: '<p>A URL that contains a Signature Version 4 signed request for the <code>CreateDBCluster</code> action to be called in the source AWS Region where the DB cluster is replicated from. You only need to specify <code>PreSignedUrl</code> when you are performing cross-region replication from an encrypted DB cluster.</p> <p>The pre-signed URL must be a valid request for the <code>CreateDBCluster</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster to be copied.</p> <p>The pre-signed URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the DB cluster in the destination AWS Region. This should refer to the same AWS KMS CMK for both the <code>CreateDBCluster</code> action that is called in the destination AWS Region, and the action contained in the pre-signed URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that Aurora read replica will be created in.</p> </li> <li> <p> <code>ReplicationSourceIdentifier</code> - The DB cluster identifier for the encrypted DB cluster to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster from the us-west-2 AWS Region, then your <code>ReplicationSourceIdentifier</code> would look like Example: <code>arn:aws:rds:us-west-2:123456789012:cluster:aurora-cluster1</code>.</p> </li> </ul> <p>To learn how to generate a Signature Version 4 signed request, see <a href="https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html"> Authenticating Requests: Using Query Parameters (AWS Signature Version 4)</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html"> Signature Version 4 Signing Process</a>.</p> <note> <p>If you are using an AWS SDK tool or the AWS CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the AWS CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source AWS Region.</p> </note><note><p>If you supply a value for this operation''s <code>SourceRegion</code> parameter, a pre-signed URL will be calculated on your behalf.</p></note>'
         EnableIAMDatabaseAuthentication:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -23279,11 +23553,11 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'If <code>StorageEncrypted</code> is enabled, the AWS KMS key identifier for the encrypted DB cluster.'
+            - description: '<p>If <code>StorageEncrypted</code> is enabled, the AWS KMS key identifier for the encrypted DB cluster.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p>'
         DbClusterResourceId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The AWS Region-unique, immutable identifier for the DB cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed.'
+            - description: 'The AWS Region-unique, immutable identifier for the DB cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS CMK for the DB cluster is accessed.'
         DBClusterArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23349,7 +23623,7 @@ components:
         ActivityStreamKmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The AWS KMS key identifier used for encrypting messages in the database activity stream.
+            - description: '<p>The AWS KMS key identifier used for encrypting messages in the database activity stream.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p>'
         ActivityStreamKinesisStreamName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23546,7 +23820,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier for an encrypted DB instance.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same AWS account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The KMS key identifier is managed by the DB cluster. For more information, see <code>CreateDBCluster</code>.</p> <p>If <code>StorageEncrypted</code> is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+            - description: '<p>The AWS KMS key identifier for an encrypted DB instance.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p> <b>Amazon Aurora</b> </p> <p>Not applicable. The AWS KMS key identifier is managed by the DB cluster. For more information, see <code>CreateDBCluster</code>.</p> <p>If <code>StorageEncrypted</code> is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
         Domain:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23586,7 +23860,7 @@ components:
         PerformanceInsightsKMSKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+            - description: '<p>The AWS KMS key identifier for encryption of Performance Insights data.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
         PerformanceInsightsRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -23693,7 +23967,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key ID for an encrypted read replica. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then you do not have to specify a value for this parameter. The read replica is encrypted with the same KMS key as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a KMS key for the destination AWS Region. KMS encryption keys are specific to the AWS Region that they are created in, and you can''t use encryption keys from one AWS Region in another AWS Region.</p> <p>You can''t create an encrypted read replica from an unencrypted DB instance.</p>'
+            - description: '<p>The AWS KMS key identifier for an encrypted read replica.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then you do not have to specify a value for this parameter. The read replica is encrypted with the same AWS KMS CMK as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region.</p> <p>You can''t create an encrypted read replica from an unencrypted DB instance.</p>'
         PreSignedUrl:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23709,7 +23983,7 @@ components:
         PerformanceInsightsKMSKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+            - description: '<p>The AWS KMS key identifier for encryption of Performance Insights data.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
         PerformanceInsightsRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -23912,11 +24186,11 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' If <code>StorageEncrypted</code> is true, the AWS KMS key identifier for the encrypted DB instance. '
+            - description: '<p> If <code>StorageEncrypted</code> is true, the AWS KMS key identifier for the encrypted DB instance. </p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p>'
         DbiResourceId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.'
+            - description: 'The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the DB instance is accessed.'
         CACertificateIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23964,7 +24238,7 @@ components:
         PerformanceInsightsKMSKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.'
+            - description: '<p>The AWS KMS key identifier for encryption of Performance Insights data.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p>'
         PerformanceInsightsRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -23995,6 +24269,10 @@ components:
             - description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
         TagList:
           $ref: '#/components/schemas/TagList'
+        DBInstanceAutomatedBackupsReplications:
+          allOf:
+            - $ref: '#/components/schemas/DBInstanceAutomatedBackupsReplicationList'
+            - description: The list of replicated automated backups associated with the DB instance.
       description: <p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <code>DescribeDBInstances</code> action. </p>
     CreateDBParameterGroupMessage:
       type: object
@@ -24328,7 +24606,7 @@ components:
         GlobalClusterResourceId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB cluster is accessed. '
+            - description: ' The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the DB cluster is accessed. '
         GlobalClusterArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -24862,6 +25140,13 @@ components:
           - $ref: '#/components/schemas/DBInstanceRole'
           - xml:
               name: DBInstanceRole
+    DBInstanceAutomatedBackupsReplicationList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/DBInstanceAutomatedBackupsReplication'
+          - xml:
+              name: DBInstanceAutomatedBackupsReplication
     RestoreWindow:
       type: object
       properties:
@@ -24880,7 +25165,7 @@ components:
         DBInstanceArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: The Amazon Resource Name (ARN) for the automated backup.
+            - description: The Amazon Resource Name (ARN) for the automated backups.
         DbiResourceId:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -24960,7 +25245,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The AWS KMS key ID for an automated backup. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. '
+            - description: '<p>The AWS KMS key ID for an automated backup.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p>'
         Timezone:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -24969,7 +25254,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.'
-      description: 'An automated backup of a DB instance. It it consists of system backups, transaction logs, and the database instance properties that existed at the time you deleted the source instance. '
+        BackupRetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The retention period for the automated backups.
+        DBInstanceAutomatedBackupsArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) for the replicated automated backups.
+        DBInstanceAutomatedBackupsReplications:
+          allOf:
+            - $ref: '#/components/schemas/DBInstanceAutomatedBackupsReplicationList'
+            - description: The list of replications to different AWS Regions associated with the automated backup.
+      description: 'An automated backup of a DB instance. It consists of system backups, transaction logs, and the database instance properties that existed at the time you deleted the source instance.'
     DBInstanceAutomatedBackupList:
       type: array
       items:
@@ -24977,6 +25274,14 @@ components:
           - $ref: '#/components/schemas/DBInstanceAutomatedBackup'
           - xml:
               name: DBInstanceAutomatedBackup
+    DBInstanceAutomatedBackupsReplication:
+      type: object
+      properties:
+        DBInstanceAutomatedBackupsArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the replicated automated backups.
+      description: 'Automated backups of a DB instance replicated to another AWS Region. They consist of system backups, transaction logs, and database instance properties.'
     DBInstanceList:
       type: array
       items:
@@ -25297,15 +25602,17 @@ components:
       description: <p/>
     DeleteDBInstanceAutomatedBackupMessage:
       type: object
-      required:
-        - DbiResourceId
       title: DeleteDBInstanceAutomatedBackupMessage
       properties:
         DbiResourceId:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The identifier for the source DB instance, which can''t be changed and which is unique to an AWS Region.'
-      description: 'Parameter input for the <code>DeleteDBInstanceAutomatedBackup</code> operation. '
+        DBInstanceAutomatedBackupsArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) of the automated backups to delete, for example, <code>arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE</code>.'
+      description: Parameter input for the <code>DeleteDBInstanceAutomatedBackup</code> operation.
     DeleteDBInstanceMessage:
       type: object
       required:
@@ -25740,6 +26047,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The pagination token provided in the previous request. If this parameter is specified the response includes only records beyond the marker, up to <code>MaxRecords</code>.'
+        DBInstanceAutomatedBackupsArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) of the replicated automated backups, for example, <code>arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE</code>.'
       description: 'Parameter input for DescribeDBInstanceAutomatedBackups. '
     DescribeDBInstancesMessage:
       type: object
@@ -27170,7 +27481,7 @@ components:
         PerformanceInsightsKMSKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+            - description: '<p>The AWS KMS key identifier for encryption of Performance Insights data.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
         PerformanceInsightsRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -28117,7 +28428,7 @@ components:
         RoleArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB instance, for example <code>arn:aws:iam::123456789012:role/AccessRole</code>.'
+            - description: 'The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB instance, for example, <code>arn:aws:iam::123456789012:role/AccessRole</code>.'
         FeatureName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -28336,7 +28647,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier for an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KM encryption key.</p> <p>If the StorageEncrypted parameter is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+            - description: '<p>The AWS KMS key identifier for an encrypted DB cluster.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>If the StorageEncrypted parameter is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
         EnableIAMDatabaseAuthentication:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -28440,7 +28751,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>If you don''t specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB snapshot or DB cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the DB snapshot or DB cluster snapshot.</p> </li> <li> <p>If the DB snapshot or DB cluster snapshot in <code>SnapshotIdentifier</code> isn''t encrypted, then the restored DB cluster isn''t encrypted.</p> </li> </ul>'
+            - description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from a DB snapshot or DB cluster snapshot.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>When you don''t specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB snapshot or DB cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored DB cluster is encrypted using the AWS KMS CMK that was used to encrypt the DB snapshot or DB cluster snapshot.</p> </li> <li> <p>If the DB snapshot or DB cluster snapshot in <code>SnapshotIdentifier</code> isn''t encrypted, then the restored DB cluster isn''t encrypted.</p> </li> </ul>'
         EnableIAMDatabaseAuthentication:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -28530,7 +28841,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a DB cluster with the same AWS account that owns the KMS encryption key used to encrypt the new DB cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>You can restore to a new DB cluster and encrypt the new DB cluster with a KMS key that is different than the KMS key used to encrypt the source DB cluster. The new DB cluster is encrypted with the KMS key identified by the <code>KmsKeyId</code> parameter.</p> <p>If you don''t specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB cluster is encrypted, then the restored DB cluster is encrypted using the KMS key that was used to encrypt the source DB cluster.</p> </li> <li> <p>If the DB cluster isn''t encrypted, then the restored DB cluster isn''t encrypted.</p> </li> </ul> <p>If <code>DBClusterIdentifier</code> refers to a DB cluster that isn''t encrypted, then the restore request is rejected.</p>'
+            - description: '<p>The AWS KMS key identifier to use when restoring an encrypted DB cluster from an encrypted DB cluster.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>You can restore to a new DB cluster and encrypt the new DB cluster with a AWS KMS CMK that is different than the AWS KMS key used to encrypt the source DB cluster. The new DB cluster is encrypted with the AWS KMS CMK identified by the <code>KmsKeyId</code> parameter.</p> <p>If you don''t specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the DB cluster is encrypted, then the restored DB cluster is encrypted using the AWS KMS CMK that was used to encrypt the source DB cluster.</p> </li> <li> <p>If the DB cluster isn''t encrypted, then the restored DB cluster isn''t encrypted.</p> </li> </ul> <p>If <code>DBClusterIdentifier</code> refers to a DB cluster that isn''t encrypted, then the restore request is rejected.</p>'
         EnableIAMDatabaseAuthentication:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -28801,7 +29112,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier for an encrypted DB instance. </p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a DB instance with the same AWS account that owns the KMS encryption key used to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the KM encryption key. </p> <p>If the <code>StorageEncrypted</code> parameter is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region. </p>'
+            - description: '<p>The AWS KMS key identifier for an encrypted DB instance. </p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). To use a CMK in a different AWS account, specify the key ARN or alias ARN.</p> <p>If the <code>StorageEncrypted</code> parameter is enabled, and you do not specify a value for the <code>KmsKeyId</code> parameter, then Amazon RDS will use your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region. </p>'
         CopyTagsToSnapshot:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -28845,7 +29156,7 @@ components:
         PerformanceInsightsKMSKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. </p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p>'
+            - description: '<p>The AWS KMS key identifier for encryption of Performance Insights data.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).</p> <p>If you do not specify a value for <code>PerformanceInsightsKMSKeyId</code>, then Amazon RDS uses your default CMK. There is a default CMK for your AWS account. Your AWS account has a different default CMK for each AWS Region.</p>'
         PerformanceInsightsRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -29002,6 +29313,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
             - description: The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+        SourceDBInstanceAutomatedBackupsArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) of the replicated automated backups from which to restore, for example, <code>arn:aws:rds:useast-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE</code>.'
       description: <p/>
     RevokeDBSecurityGroupIngressMessage:
       type: object
@@ -29045,6 +29360,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The status of the source AWS Region.
+        SupportsDBInstanceAutomatedBackupsReplication:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether the source AWS Region supports replicating automated backups to the current AWS Region.
       description: Contains an AWS Region name as the result of a successful call to the <code>DescribeSourceRegions</code> action.
     SourceRegionList:
       type: array
@@ -29064,7 +29383,7 @@ components:
         ResourceArn:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The Amazon Resource Name (ARN) of the DB cluster, for example <code>arn:aws:rds:us-east-1:12345667890:cluster:das-cluster</code>.'
+            - description: 'The Amazon Resource Name (ARN) of the DB cluster, for example, <code>arn:aws:rds:us-east-1:12345667890:cluster:das-cluster</code>.'
         Mode:
           allOf:
             - $ref: '#/components/schemas/ActivityStreamMode'
@@ -29072,7 +29391,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The AWS KMS key identifier for encrypting messages in the database activity stream. The key identifier can be either a key ID, a key ARN, or a key alias.'
+            - description: 'The AWS KMS key identifier for encrypting messages in the database activity stream. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK).'
         ApplyImmediately:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
@@ -29087,6 +29406,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The DB cluster identifier of the Amazon Aurora DB cluster to be started. This parameter is stored as a lowercase string.
+    StartDBInstanceAutomatedBackupsReplicationMessage:
+      type: object
+      required:
+        - SourceDBInstanceArn
+      title: StartDBInstanceAutomatedBackupsReplicationMessage
+      properties:
+        SourceDBInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) of the source DB instance for the replicated automated backups, for example, <code>arn:aws:rds:us-west-2:123456789012:db:mydatabase</code>.'
+        BackupRetentionPeriod:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The retention period for the replicated automated backups.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The AWS KMS key identifier for encryption of the replicated automated backups. The KMS key ID is the Amazon Resource Name (ARN) for the KMS encryption key in the destination AWS Region, for example, <code>arn:aws:kms:us-east-1:123456789012:key/AKIAIOSFODNN7EXAMPLE</code>.'
+        PreSignedUrl:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: A URL that contains a Signature Version 4 signed request for the StartDBInstanceAutomatedBackupsReplication action to be called in the AWS Region of the source DB instance. The presigned URL must be a valid request for the StartDBInstanceAutomatedBackupsReplication API action that can be executed in the AWS Region that contains the source DB instance.
     StartDBInstanceMessage:
       type: object
       required:
@@ -29126,7 +29467,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The ID of the AWS KMS key to use to encrypt the snapshot exported to Amazon S3. The KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key alias for the KMS encryption key. The caller of this operation must be authorized to execute the following operations. These can be set in the KMS key policy: </p> <ul> <li> <p>GrantOperation.Encrypt</p> </li> <li> <p>GrantOperation.Decrypt</p> </li> <li> <p>GrantOperation.GenerateDataKey</p> </li> <li> <p>GrantOperation.GenerateDataKeyWithoutPlaintext</p> </li> <li> <p>GrantOperation.ReEncryptFrom</p> </li> <li> <p>GrantOperation.ReEncryptTo</p> </li> <li> <p>GrantOperation.CreateGrant</p> </li> <li> <p>GrantOperation.DescribeKey</p> </li> <li> <p>GrantOperation.RetireGrant</p> </li> </ul>'
+            - description: '<p>The ID of the AWS KMS customer master key (CMK) to use to encrypt the snapshot exported to Amazon S3. The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS customer master key (CMK). The caller of this operation must be authorized to execute the following operations. These can be set in the AWS KMS key policy: </p> <ul> <li> <p>GrantOperation.Encrypt</p> </li> <li> <p>GrantOperation.Decrypt</p> </li> <li> <p>GrantOperation.GenerateDataKey</p> </li> <li> <p>GrantOperation.GenerateDataKeyWithoutPlaintext</p> </li> <li> <p>GrantOperation.ReEncryptFrom</p> </li> <li> <p>GrantOperation.ReEncryptTo</p> </li> <li> <p>GrantOperation.CreateGrant</p> </li> <li> <p>GrantOperation.DescribeKey</p> </li> <li> <p>GrantOperation.RetireGrant</p> </li> </ul>'
         S3Prefix:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -29159,6 +29500,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The DB cluster identifier of the Amazon Aurora DB cluster to be stopped. This parameter is stored as a lowercase string.
+    StopDBInstanceAutomatedBackupsReplicationMessage:
+      type: object
+      required:
+        - SourceDBInstanceArn
+      title: StopDBInstanceAutomatedBackupsReplicationMessage
+      properties:
+        SourceDBInstanceArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Amazon Resource Name (ARN) of the source DB instance for which to stop replicating automated backups, for example, <code>arn:aws:rds:us-west-2:123456789012:db:mydatabase</code>.'
     StopDBInstanceMessage:
       type: object
       required:

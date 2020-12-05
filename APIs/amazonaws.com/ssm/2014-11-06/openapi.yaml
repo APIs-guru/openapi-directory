@@ -693,6 +693,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.CreateOpsMetadata:
+    post:
+      operationId: CreateOpsMetadata
+      description: 'If you create a new application in AppManager, Systems Manager calls this API action to specify information about the new application, including the application type.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateOpsMetadataResult'
+        '480':
+          description: OpsMetadataAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataAlreadyExistsException'
+        '481':
+          description: OpsMetadataTooManyUpdatesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataTooManyUpdatesException'
+        '482':
+          description: OpsMetadataInvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataInvalidArgumentException'
+        '483':
+          description: OpsMetadataLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataLimitExceededException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOpsMetadataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.CreateOpsMetadata
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonSSM.CreatePatchBaseline:
     post:
       operationId: CreatePatchBaseline
@@ -1072,6 +1135,57 @@ paths:
             type: string
             enum:
               - AmazonSSM.DeleteMaintenanceWindow
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.DeleteOpsMetadata:
+    post:
+      operationId: DeleteOpsMetadata
+      description: Delete OpsMetadata related to an application.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteOpsMetadataResult'
+        '480':
+          description: OpsMetadataNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataNotFoundException'
+        '481':
+          description: OpsMetadataInvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataInvalidArgumentException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteOpsMetadataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.DeleteOpsMetadata
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3237,7 +3351,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.DescribePatchProperties:
     post:
       operationId: DescribePatchProperties
-      description: '<p>Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p> <p>The following section lists the properties that can be used in filters for each major operating system type:</p> <dl> <dt>AMAZON_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>AMAZON_LINUX_2</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>CENTOS</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>DEBIAN</dt> <dd> <p>Valid properties: PRODUCT, PRIORITY</p> </dd> <dt>ORACLE_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>REDHAT_ENTERPRISE_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>SUSE</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>UBUNTU</dt> <dd> <p>Valid properties: PRODUCT, PRIORITY</p> </dd> <dt>WINDOWS</dt> <dd> <p>Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY</p> </dd> </dl>'
+      description: '<p>Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p> <p>The following section lists the properties that can be used in filters for each major operating system type:</p> <dl> <dt>AMAZON_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>AMAZON_LINUX_2</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>CENTOS</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>DEBIAN</dt> <dd> <p>Valid properties: PRODUCT, PRIORITY</p> </dd> <dt>MACOS</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION</p> </dd> <dt>ORACLE_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>REDHAT_ENTERPRISE_LINUX</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>SUSE</dt> <dd> <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p> </dd> <dt>UBUNTU</dt> <dd> <p>Valid properties: PRODUCT, PRIORITY</p> </dd> <dt>WINDOWS</dt> <dd> <p>Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY</p> </dd> </dl>'
       responses:
         '200':
           description: Success
@@ -4105,6 +4219,57 @@ paths:
             type: string
             enum:
               - AmazonSSM.GetOpsItem
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.GetOpsMetadata:
+    post:
+      operationId: GetOpsMetadata
+      description: View operational metadata related to an application in AppManager.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetOpsMetadataResult'
+        '480':
+          description: OpsMetadataNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataNotFoundException'
+        '481':
+          description: OpsMetadataInvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataInvalidArgumentException'
+        '482':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetOpsMetadataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.GetOpsMetadata
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5233,6 +5398,51 @@ paths:
             type: string
             enum:
               - AmazonSSM.ListInventoryEntries
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.ListOpsMetadata:
+    post:
+      operationId: ListOpsMetadata
+      description: Systems Manager calls this API action when displaying all AppManager OpsMetadata objects or blobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOpsMetadataResult'
+        '480':
+          description: OpsMetadataInvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataInvalidArgumentException'
+        '481':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOpsMetadataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.ListOpsMetadata
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -7161,6 +7371,69 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.UpdateOpsMetadata:
+    post:
+      operationId: UpdateOpsMetadata
+      description: Systems Manager calls this API action when you edit OpsMetadata in AppManager.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateOpsMetadataResult'
+        '480':
+          description: OpsMetadataNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataNotFoundException'
+        '481':
+          description: OpsMetadataInvalidArgumentException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataInvalidArgumentException'
+        '482':
+          description: OpsMetadataKeyLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataKeyLimitExceededException'
+        '483':
+          description: OpsMetadataTooManyUpdatesException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsMetadataTooManyUpdatesException'
+        '484':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateOpsMetadataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.UpdateOpsMetadata
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonSSM.UpdatePatchBaseline:
     post:
       operationId: UpdatePatchBaseline
@@ -7543,7 +7816,7 @@ components:
         ApplyOnlyAtCronInterval:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
-            - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it.'
+            - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
     AssociationAlreadyExists: {}
     AssociationLimitExceeded: {}
     InvalidDocument: {}
@@ -7754,6 +8027,31 @@ components:
     OpsItemAlreadyExistsException: {}
     OpsItemLimitExceededException: {}
     OpsItemInvalidParameterException: {}
+    CreateOpsMetadataResult:
+      type: object
+      properties:
+        OpsMetadataArn:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataArn'
+            - description: The Amazon Resource Name (ARN) of the OpsMetadata Object or blob created by the call.
+    CreateOpsMetadataRequest:
+      type: object
+      required:
+        - ResourceId
+      title: CreateOpsMetadataRequest
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataResourceId'
+            - description: A resource ID for a new AppManager application.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/MetadataMap'
+            - description: 'Metadata for a new AppManager application. '
+    OpsMetadataAlreadyExistsException: {}
+    OpsMetadataTooManyUpdatesException: {}
+    OpsMetadataInvalidArgumentException: {}
+    OpsMetadataLimitExceededException: {}
     CreatePatchBaselineResult:
       type: object
       properties:
@@ -7967,6 +8265,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowId'
             - description: The ID of the maintenance window to delete.
+    DeleteOpsMetadataResult:
+      type: object
+      properties: {}
+    DeleteOpsMetadataRequest:
+      type: object
+      required:
+        - OpsMetadataArn
+      title: DeleteOpsMetadataRequest
+      properties:
+        OpsMetadataArn:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataArn'
+            - description: The Amazon Resource Name (ARN) of an OpsMetadata Object to delete.
+    OpsMetadataNotFoundException: {}
     DeleteParameterResult:
       type: object
       properties: {}
@@ -9113,7 +9425,7 @@ components:
         PatchSet:
           allOf:
             - $ref: '#/components/schemas/PatchSet'
-            - description: Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for Linux operating systems.
+            - description: Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for the Linux or macOS operating systems.
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
@@ -9851,6 +10163,39 @@ components:
             - $ref: '#/components/schemas/OpsItemId'
             - description: The ID of the OpsItem that you want to get.
     OpsItemNotFoundException: {}
+    GetOpsMetadataResult:
+      type: object
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataResourceId'
+            - description: The resource ID of the AppManager application.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/MetadataMap'
+            - description: OpsMetadata for an AppManager application.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
+    GetOpsMetadataRequest:
+      type: object
+      required:
+        - OpsMetadataArn
+      title: GetOpsMetadataRequest
+      properties:
+        OpsMetadataArn:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataArn'
+            - description: The Amazon Resource Name (ARN) of an OpsMetadata Object to view.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/GetOpsMetadataMaxResults'
+            - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A token to start the list. Use this token to get the next set of results.
     GetOpsSummaryResult:
       type: object
       properties:
@@ -10471,6 +10816,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+    ListOpsMetadataResult:
+      type: object
+      properties:
+        OpsMetadataList:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataList'
+            - description: Returns a list of OpsMetadata objects.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. Use this token to get the next set of results.
+    ListOpsMetadataRequest:
+      type: object
+      title: ListOpsMetadataRequest
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataFilterList'
+            - description: One or more filters to limit the number of OpsMetadata objects returned by the call.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListOpsMetadataMaxResults'
+            - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: A token to start the list. Use this token to get the next set of results.
     ListResourceComplianceSummariesResult:
       type: object
       properties:
@@ -11282,7 +11654,7 @@ components:
         ApplyOnlyAtCronInterval:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
-            - description: '<p>By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you update it.</p> <p>Also, if you specified this option when you created the association, you can reset it. To do so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.</p>'
+            - description: '<p>By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you update it. This parameter is not supported for rate expressions.</p> <p>Also, if you specified this option when you created the association, you can reset it. To do so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.</p>'
     InvalidUpdate: {}
     AssociationVersionLimitExceeded: {}
     UpdateAssociationStatusResult:
@@ -11740,6 +12112,32 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpsItemSeverity'
             - description: Specify a new severity for an OpsItem.
+    UpdateOpsMetadataResult:
+      type: object
+      properties:
+        OpsMetadataArn:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataArn'
+            - description: The Amazon Resource Name (ARN) of the OpsMetadata Object that was updated.
+    UpdateOpsMetadataRequest:
+      type: object
+      required:
+        - OpsMetadataArn
+      title: UpdateOpsMetadataRequest
+      properties:
+        OpsMetadataArn:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataArn'
+            - description: The Amazon Resoure Name (ARN) of the OpsMetadata Object to update.
+        MetadataToUpdate:
+          allOf:
+            - $ref: '#/components/schemas/MetadataMap'
+            - description: Metadata to add to an OpsMetadata object.
+        KeysToDelete:
+          allOf:
+            - $ref: '#/components/schemas/MetadataKeysToDeleteList'
+            - description: 'The metadata keys to delete from the OpsMetadata object. '
+    OpsMetadataKeyLimitExceededException: {}
     UpdatePatchBaselineResult:
       type: object
       properties:
@@ -12293,7 +12691,7 @@ components:
         ApplyOnlyAtCronInterval:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
-            - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it.'
+            - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
       description: Describes the parameters for a document.
     AssociationDescriptionList:
       type: array
@@ -12604,7 +13002,7 @@ components:
         ApplyOnlyAtCronInterval:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
-            - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it.'
+            - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
       description: Information about the association version.
     AssociationVersionList:
       type: array
@@ -13831,7 +14229,7 @@ components:
         ApplyOnlyAtCronInterval:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
-            - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it.'
+            - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
       description: Describes the association of a Systems Manager SSM document and an instance.
     FailedCreateAssociationList:
       type: array
@@ -14035,6 +14433,22 @@ components:
       type: string
       minLength: 1
       maxLength: 64
+    OpsMetadataResourceId:
+      type: string
+      pattern: ^(?!\s*$).+
+      minLength: 1
+      maxLength: 1024
+    MetadataMap:
+      type: object
+      minProperties: 1
+      maxProperties: 5
+      additionalProperties:
+        $ref: '#/components/schemas/MetadataValue'
+    OpsMetadataArn:
+      type: string
+      pattern: 'arn:(aws[a-zA-Z-]*)?:ssm:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:opsmetadata\/([a-zA-Z0-9-_\.\/]*)'
+      minLength: 1
+      maxLength: 1011
     OperatingSystem:
       type: string
       enum:
@@ -14047,6 +14461,7 @@ components:
         - CENTOS
         - ORACLE_LINUX
         - DEBIAN
+        - MACOS
     PatchFilterGroup:
       type: object
       required:
@@ -14782,7 +15197,7 @@ components:
         CVEIds:
           allOf:
             - $ref: '#/components/schemas/PatchCVEIdList'
-            - description: 'The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, <code>CVE-1999-0067</code>. Applies to Linux-based instances only.'
+            - description: 'The Common Vulnerabilities and Exposures (CVE) ID of the patch. For example, <code>CVE-2011-3192</code>. Applies to Linux-based instances only.'
         Name:
           allOf:
             - $ref: '#/components/schemas/PatchName'
@@ -15113,6 +15528,10 @@ components:
             - $ref: '#/components/schemas/OpsItemSeverity'
             - description: The severity of the OpsItem. Severity options range from 1 to 4.
       description: 'Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. '
+    GetOpsMetadataMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 10
     OpsFilterList:
       type: array
       items:
@@ -16018,6 +16437,22 @@ components:
     LastSuccessfulResourceDataSyncTime:
       type: string
       format: date-time
+    ListOpsMetadataMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    OpsMetadataFilterList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpsMetadataFilter'
+      minItems: 0
+      maxItems: 10
+    OpsMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpsMetadata'
+      minItems: 1
+      maxItems: 50
     ResourceComplianceSummaryItemList:
       type: array
       items:
@@ -16447,6 +16882,29 @@ components:
             - $ref: '#/components/schemas/MaintenanceWindowTaskParameterValueList'
             - description: 'This field contains an array of 0 or more strings, each 1 to 255 characters in length.'
       description: Defines the values for a task parameter.
+    MetadataKey:
+      type: string
+      pattern: ^(?!\s*$).+
+      minLength: 1
+      maxLength: 256
+    MetadataKeysToDeleteList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetadataKey'
+      minItems: 1
+      maxItems: 10
+    MetadataValue:
+      type: object
+      properties:
+        Value:
+          allOf:
+            - $ref: '#/components/schemas/MetadataValueString'
+            - description: Metadata value to assign to an AppManager application.
+      description: Metadata to assign to an AppManager application.
+    MetadataValueString:
+      type: string
+      minLength: 1
+      maxLength: 4096
     NormalStringMap:
       type: object
       additionalProperties:
@@ -16760,6 +17218,60 @@ components:
             - $ref: '#/components/schemas/OpsItemSeverity'
             - description: A list of OpsItems by severity.
       description: A count of OpsItems.
+    OpsMetadata:
+      type: object
+      properties:
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataResourceId'
+            - description: The ID of the AppManager application.
+        OpsMetadataArn:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataArn'
+            - description: The Amazon Resource Name (ARN) of the OpsMetadata Object or blob.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date the OpsMetadata object was last updated.
+        LastModifiedUser:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The user name who last updated the OpsMetadata object.
+        CreationDate:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date the OpsMetadata objects was created.
+      description: Operational metadata for an application in AppManager.
+    OpsMetadataFilterKey:
+      type: string
+      pattern: ^(?!\s*$).+
+      minLength: 1
+      maxLength: 128
+    OpsMetadataFilterValueList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpsMetadataFilterValue'
+      minItems: 1
+      maxItems: 10
+    OpsMetadataFilter:
+      type: object
+      required:
+        - Key
+        - Values
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataFilterKey'
+            - description: A filter key.
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/OpsMetadataFilterValueList'
+            - description: A filter value.
+      description: A filter to limit the number of OpsMetadata objects displayed.
+    OpsMetadataFilterValue:
+      type: string
+      minLength: 1
+      maxLength: 1024
     OpsResultAttribute:
       type: object
       required:
