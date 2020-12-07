@@ -872,6 +872,7 @@ components:
             - DOCKER_CREATE_RUNTIME_PERMISSION_DENIED
             - DOCKER_CREATE_PROCESS_FILE_NOT_FOUND
             - DOCKER_CREATE_COMPUTE_SYSTEM_INCORRECT_PARAMETER_ERROR
+            - DOCKER_TOO_MANY_SYMBOLIC_LINK_LEVELS
           type: string
         message:
           description: The error message.
@@ -1081,16 +1082,6 @@ components:
             $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaWorkerPool"
           type: array
       type: object
-    GoogleDevtoolsRemotebuildexecutionAdminV1alphaSoleTenancyConfig:
-      description: SoleTenancyConfig specifies information required to host a pool on STNs.
-      properties:
-        nodeType:
-          description: The sole-tenant node type to host the pool's workers on.
-          type: string
-        nodesZone:
-          description: Zone in which STNs are reserved.
-          type: string
-      type: object
     GoogleDevtoolsRemotebuildexecutionAdminV1alphaUpdateInstanceRequest:
       description: The request used for `UpdateInstance`.
       properties:
@@ -1153,9 +1144,9 @@ components:
         reserved:
           description: Determines whether the worker is reserved (equivalent to a Compute Engine on-demand VM and therefore won't be preempted). See [Preemptible VMs](https://cloud.google.com/preemptible-vms/) for more details.
           type: boolean
-        soleTenancy:
-          $ref: "#/components/schemas/GoogleDevtoolsRemotebuildexecutionAdminV1alphaSoleTenancyConfig"
-          description: Sole-tenant node information for pools hosted on STNs.
+        soleTenantNodeType:
+          description: The node type name to be used for sole-tenant nodes.
+          type: string
         vmImage:
           description: The name of the image used by each VM.
           type: string

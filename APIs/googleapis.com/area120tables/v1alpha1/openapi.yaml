@@ -74,6 +74,10 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
       tags:
         - tables
     parameters:
@@ -131,6 +135,10 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
       tags:
         - workspaces
     parameters:
@@ -176,6 +184,10 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
       tags:
         - tables
     get:
@@ -224,6 +236,10 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
       tags:
         - workspaces
     parameters:
@@ -286,6 +302,10 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
       tags:
         - tables
   "/v1alpha1/{parent}/rows":
@@ -345,6 +365,10 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets.readonly
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
       tags:
         - tables
     parameters:
@@ -402,6 +426,10 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
       tags:
         - tables
   "/v1alpha1/{parent}/rows:batchCreate":
@@ -452,6 +480,10 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
       tags:
         - tables
   "/v1alpha1/{parent}/rows:batchUpdate":
@@ -502,6 +534,10 @@ paths:
             - https://www.googleapis.com/auth/spreadsheets
           Oauth2c:
             - https://www.googleapis.com/auth/spreadsheets
+        - Oauth2:
+            - https://www.googleapis.com/auth/tables
+          Oauth2c:
+            - https://www.googleapis.com/auth/tables
       tags:
         - tables
 components:
@@ -793,6 +829,7 @@ components:
             https://www.googleapis.com/auth/drive.readonly: See and download all your Google Drive files
             https://www.googleapis.com/auth/spreadsheets: See, edit, create, and delete your spreadsheets in Google Drive
             https://www.googleapis.com/auth/spreadsheets.readonly: View your Google Spreadsheets
+            https://www.googleapis.com/auth/tables: See, edit, create, and delete your tables in Tables by Area 120
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -805,5 +842,6 @@ components:
             https://www.googleapis.com/auth/drive.readonly: See and download all your Google Drive files
             https://www.googleapis.com/auth/spreadsheets: See, edit, create, and delete your spreadsheets in Google Drive
             https://www.googleapis.com/auth/spreadsheets.readonly: View your Google Spreadsheets
+            https://www.googleapis.com/auth/tables: See, edit, create, and delete your tables in Tables by Area 120
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

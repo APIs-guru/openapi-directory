@@ -1225,7 +1225,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Mark the proposal as accepted at the given revision number. If the number does not match the server's revision number an `ABORTED` error message will be returned. This call updates the proposal_state from `PROPOSED` to `BUYER_ACCEPTED`, or from `SELLER_ACCEPTED` to `FINALIZED`.
+      description: Mark the proposal as accepted at the given revision number. If the number does not match the server's revision number an `ABORTED` error message will be returned. This call updates the proposal_state from `PROPOSED` to `BUYER_ACCEPTED`, or from `SELLER_ACCEPTED` to `FINALIZED`. Upon calling this endpoint, the buyer implicitly agrees to the terms and conditions optionally set within the proposal by the publisher.
       operationId: adexchangebuyer2.accounts.proposals.accept
       parameters:
         - description: Account ID of the buyer.
@@ -2939,7 +2939,7 @@ components:
           format: google-datetime
           type: string
         availableStartTime:
-          description: Optional proposed flight start time of the deal. This will generally be stored in the granularity of one second since deal serving starts at seconds boundary. Any time specified with more granularity (e.g., in milliseconds) will be truncated towards the start of time in seconds.
+          description: Optional. Proposed flight start time of the deal. This will generally be stored in the granularity of one second since deal serving starts at seconds boundary. Any time specified with more granularity (e.g., in milliseconds) will be truncated towards the start of time in seconds.
           format: google-datetime
           type: string
         buyerPrivateData:
@@ -2949,12 +2949,13 @@ components:
           description: "The product ID from which this deal was created. Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error."
           type: string
         createProductRevision:
-          description: "Optional revision number of the product that the deal was created from. If present on create, and the server `product_revision` has advanced sinced the passed-in `create_product_revision`, an `ABORTED` error will be returned. Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error."
+          description: "Optional. Revision number of the product that the deal was created from. If present on create, and the server `product_revision` has advanced since the passed-in `create_product_revision`, an `ABORTED` error will be returned. Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error."
           format: int64
           type: string
         createTime:
           description: Output only. The time of the deal creation.
           format: google-datetime
+          readOnly: true
           type: string
         creativePreApprovalPolicy:
           description: Output only. Specifies the creative pre-approval policy.
@@ -2962,23 +2963,28 @@ components:
             - CREATIVE_PRE_APPROVAL_POLICY_UNSPECIFIED
             - SELLER_PRE_APPROVAL_REQUIRED
             - SELLER_PRE_APPROVAL_NOT_REQUIRED
+          readOnly: true
           type: string
         creativeRestrictions:
           $ref: "#/components/schemas/CreativeRestrictions"
           description: Output only. Restricitions about the creatives associated with the deal (i.e., size) This is available for Programmatic Guaranteed/Preferred Deals in Ad Manager.
+          readOnly: true
         creativeSafeFrameCompatibility:
           description: Output only. Specifies whether the creative is safeFrame compatible.
           enum:
             - CREATIVE_SAFE_FRAME_COMPATIBILITY_UNSPECIFIED
             - COMPATIBLE
             - INCOMPATIBLE
+          readOnly: true
           type: string
         dealId:
           description: Output only. A unique deal ID for the deal (server-assigned).
+          readOnly: true
           type: string
         dealServingMetadata:
           $ref: "#/components/schemas/DealServingMetadata"
           description: Output only. Metadata about the serving status of this deal.
+          readOnly: true
         dealTerms:
           $ref: "#/components/schemas/DealTerms"
           description: The negotiable terms of the deal.
@@ -2993,9 +2999,11 @@ components:
           type: string
         externalDealId:
           description: Output only. The external deal ID assigned to this deal once the deal is finalized. This is the deal ID that shows up in serving/reporting etc.
+          readOnly: true
           type: string
         isSetupComplete:
           description: Output only. True, if the buyside inventory setup is complete for this deal.
+          readOnly: true
           type: boolean
         programmaticCreativeSource:
           description: Output only. Specifies the creative source for programmatic deals. PUBLISHER means creative is provided by seller and ADVERTISER means creative is provided by buyer.
@@ -3003,14 +3011,17 @@ components:
             - PROGRAMMATIC_CREATIVE_SOURCE_UNSPECIFIED
             - ADVERTISER
             - PUBLISHER
+          readOnly: true
           type: string
         proposalId:
           description: Output only. ID of the proposal that this deal is part of.
+          readOnly: true
           type: string
         sellerContacts:
           description: Output only. Seller contact information for the deal.
           items:
             $ref: "#/components/schemas/ContactInformation"
+          readOnly: true
           type: array
         syndicationProduct:
           description: "The syndication product associated with the deal. Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error."
@@ -3024,6 +3035,7 @@ components:
         targeting:
           $ref: "#/components/schemas/MarketplaceTargeting"
           description: Output only. Specifies the subset of inventory targeted by the deal.
+          readOnly: true
         targetingCriterion:
           description: The shared targeting visible to buyers and sellers. Each shared targeting entity is AND'd together.
           items:
@@ -3032,6 +3044,7 @@ components:
         updateTime:
           description: Output only. The time when the deal was last updated.
           format: google-datetime
+          readOnly: true
           type: string
         webPropertyCode:
           description: The web property code for the seller copied over from the product.
@@ -3066,6 +3079,7 @@ components:
         dealPauseStatus:
           $ref: "#/components/schemas/DealPauseStatus"
           description: Output only. Tracks which parties (if any) have paused a deal.
+          readOnly: true
       type: object
     DealTerms:
       description: The deal terms specify the details of a Product/deal. They specify things like price per buyer, the type of pricing model (e.g., fixed price, auction) and expected impressions from the publisher.
@@ -3109,6 +3123,7 @@ components:
             - CREATIVE_BLOCKING_LEVEL_UNSPECIFIED
             - PUBLISHER_BLOCKING_RULES
             - ADX_POLICY_BLOCKING_ONLY
+          readOnly: true
           type: string
         deliveryRateType:
           description: Output only. Specifies how the impression delivery will be paced.
@@ -3117,11 +3132,13 @@ components:
             - EVENLY
             - FRONT_LOADED
             - AS_FAST_AS_POSSIBLE
+          readOnly: true
           type: string
         frequencyCaps:
           description: Output only. Specifies any frequency caps.
           items:
             $ref: "#/components/schemas/FrequencyCap"
+          readOnly: true
           type: array
       type: object
     Disapproval:
@@ -3872,6 +3889,7 @@ components:
         createTime:
           description: Output only. The timestamp for when this note was created.
           format: google-datetime
+          readOnly: true
           type: string
         creatorRole:
           description: Output only. The role of the person (buyer/seller) creating the note.
@@ -3879,16 +3897,19 @@ components:
             - BUYER_SELLER_ROLE_UNSPECIFIED
             - BUYER
             - SELLER
+          readOnly: true
           type: string
         note:
           description: "The actual note to attach. (max-length: 1024 unicode code units) Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error."
           type: string
         noteId:
           description: Output only. The unique ID for the note.
+          readOnly: true
           type: string
         proposalRevision:
           description: Output only. The revision number of the proposal when the note is created.
           format: int64
+          readOnly: true
           type: string
       type: object
     OperatingSystemTargeting:
@@ -4037,6 +4058,7 @@ components:
         billedBuyer:
           $ref: "#/components/schemas/Buyer"
           description: Output only. Reference to the buyer that will get billed for this proposal.
+          readOnly: true
         buyer:
           $ref: "#/components/schemas/Buyer"
           description: "Reference to the buyer on the proposal. Note: This field may be set only when creating the resource. Modifying this field while updating the resource will result in an error."
@@ -4058,9 +4080,11 @@ components:
           type: string
         isRenegotiating:
           description: Output only. True if the proposal is being renegotiated.
+          readOnly: true
           type: boolean
         isSetupComplete:
           description: Output only. True, if the buyside inventory setup is complete for this proposal.
+          readOnly: true
           type: boolean
         lastUpdaterOrCommentorRole:
           description: Output only. The role of the last user that either updated the proposal or left a comment.
@@ -4068,11 +4092,13 @@ components:
             - BUYER_SELLER_ROLE_UNSPECIFIED
             - BUYER
             - SELLER
+          readOnly: true
           type: string
         notes:
           description: Output only. The notes associated with this proposal.
           items:
             $ref: "#/components/schemas/Note"
+          readOnly: true
           type: array
         originatorRole:
           description: Output only. Indicates whether the buyer/seller created the proposal.
@@ -4080,16 +4106,20 @@ components:
             - BUYER_SELLER_ROLE_UNSPECIFIED
             - BUYER
             - SELLER
+          readOnly: true
           type: string
         privateAuctionId:
           description: Output only. Private auction ID if this proposal is a private auction proposal.
+          readOnly: true
           type: string
         proposalId:
           description: Output only. The unique ID of the proposal.
+          readOnly: true
           type: string
         proposalRevision:
           description: Output only. The revision number for the proposal. Each update to the proposal or the deal causes the proposal revision number to auto-increment. The buyer keeps track of the last revision number they know of and pass it in when making an update. If the head revision number on the server has since incremented, then an ABORTED error is returned during the update operation to let the buyer know that a subsequent update was made.
           format: int64
+          readOnly: true
           type: string
         proposalState:
           description: Output only. The current state of the proposal.
@@ -4100,6 +4130,7 @@ components:
             - SELLER_ACCEPTED
             - CANCELED
             - FINALIZED
+          readOnly: true
           type: string
         seller:
           $ref: "#/components/schemas/Seller"
@@ -4108,10 +4139,16 @@ components:
           description: Output only. Contact information for the seller.
           items:
             $ref: "#/components/schemas/ContactInformation"
+          readOnly: true
           type: array
+        termsAndConditions:
+          description: Output only. The terms and conditions set by the publisher for this proposal.
+          readOnly: true
+          type: string
         updateTime:
           description: Output only. The time when the proposal was last revised.
           format: google-datetime
+          readOnly: true
           type: string
       type: object
     PublisherProfile:

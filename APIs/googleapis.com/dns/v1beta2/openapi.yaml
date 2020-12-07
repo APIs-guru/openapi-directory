@@ -2037,6 +2037,10 @@ components:
           description: Maximum allowed number of DnsKeys per ManagedZone.
           format: int32
           type: integer
+        gkeClustersPerPolicy:
+          description: Maximum allowed number of GKE clusters per policy.
+          format: int32
+          type: integer
         kind:
           default: dns#quota
           type: string

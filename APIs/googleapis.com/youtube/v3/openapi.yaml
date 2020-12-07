@@ -2473,25 +2473,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/youtube
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube
-        - Oauth2:
             - https://www.googleapis.com/auth/youtube.channel-memberships.creator
           Oauth2c:
             - https://www.googleapis.com/auth/youtube.channel-memberships.creator
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.readonly
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtubepartner
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtubepartner
       tags:
         - members
     parameters:
@@ -2530,25 +2514,9 @@ paths:
           description: Successful response
       security:
         - Oauth2:
-            - https://www.googleapis.com/auth/youtube
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube
-        - Oauth2:
             - https://www.googleapis.com/auth/youtube.channel-memberships.creator
           Oauth2c:
             - https://www.googleapis.com/auth/youtube.channel-memberships.creator
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.readonly
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtubepartner
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtubepartner
       tags:
         - membershipsLevels
     parameters:
@@ -6951,7 +6919,7 @@ components:
           $ref: "#/components/schemas/LocalizedProperty"
           description: The URL for the background image shown on the video watch page. The image should be 1200px by 615px, with a maximum file size of 128k.
         bannerExternalUrl:
-          description: This is used only in update requests; if it's set, we use this URL to generate all of the above banner URLs.
+          description: This is generated when a ChannelBanner.Insert request has succeeded for the given channel.
           type: string
         bannerImageUrl:
           description: Banner image. Desktop size (1060x175).

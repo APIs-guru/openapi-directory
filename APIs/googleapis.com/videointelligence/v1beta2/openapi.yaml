@@ -256,6 +256,15 @@ components:
     GoogleCloudVideointelligenceV1_FaceDetectionAnnotation:
       description: Face detection annotation.
       properties:
+        thumbnail:
+          description: The thumbnail of a person's face.
+          format: byte
+          type: string
+        tracks:
+          description: The face tracks with attributes.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1_Track"
+          type: array
         version:
           description: Feature version.
           type: string
@@ -857,6 +866,15 @@ components:
     GoogleCloudVideointelligenceV1beta2_FaceDetectionAnnotation:
       description: Face detection annotation.
       properties:
+        thumbnail:
+          description: The thumbnail of a person's face.
+          format: byte
+          type: string
+        tracks:
+          description: The face tracks with attributes.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1beta2_Track"
+          type: array
         version:
           description: Feature version.
           type: string
@@ -1573,6 +1591,15 @@ components:
     GoogleCloudVideointelligenceV1p1beta1_FaceDetectionAnnotation:
       description: Face detection annotation.
       properties:
+        thumbnail:
+          description: The thumbnail of a person's face.
+          format: byte
+          type: string
+        tracks:
+          description: The face tracks with attributes.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p1beta1_Track"
+          type: array
         version:
           description: Feature version.
           type: string
@@ -2131,6 +2158,15 @@ components:
     GoogleCloudVideointelligenceV1p2beta1_FaceDetectionAnnotation:
       description: Face detection annotation.
       properties:
+        thumbnail:
+          description: The thumbnail of a person's face.
+          format: byte
+          type: string
+        tracks:
+          description: The face tracks with attributes.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p2beta1_Track"
+          type: array
         version:
           description: Feature version.
           type: string
@@ -2726,6 +2762,15 @@ components:
     GoogleCloudVideointelligenceV1p3beta1_FaceDetectionAnnotation:
       description: Face detection annotation.
       properties:
+        thumbnail:
+          description: The thumbnail of a person's face.
+          format: byte
+          type: string
+        tracks:
+          description: The face tracks with attributes.
+          items:
+            $ref: "#/components/schemas/GoogleCloudVideointelligenceV1p3beta1_Track"
+          type: array
         version:
           description: Feature version.
           type: string

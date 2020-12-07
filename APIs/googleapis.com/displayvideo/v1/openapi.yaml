@@ -315,12 +315,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Allows filtering by campaign properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND` or `OR` logical operators. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator must be `EQUALS (=)`. * Supported fields: - `campaignId` - `displayName` - `entityStatus` Examples: * All `ENTITY_STATUS_ACTIVE` or `ENTITY_STATUS_PAUSED` campaigns under an advertiser: `(entityStatus="ENTITY_STATUS_ACTIVE" OR entityStatus="ENTITY_STATUS_PAUSED")` The length of this field should be no more than 500 characters.'
+        - description: 'Allows filtering by campaign properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND` or `OR` logical operators. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator used on `updateTime` must be `GREATER THAN OR EQUAL TO (>=)` or `LESS THAN OR EQUAL TO (<=)`. * The operator must be `EQUALS (=)`. * Supported fields: - `campaignId` - `displayName` - `entityStatus` - `updateTime` (input in ISO 8601 format, or YYYY-MM-DDTHH:MM:SSZ) Examples: * All `ENTITY_STATUS_ACTIVE` or `ENTITY_STATUS_PAUSED` campaigns under an advertiser: `(entityStatus="ENTITY_STATUS_ACTIVE" OR entityStatus="ENTITY_STATUS_PAUSED")` * All campaigns with an update time less than or equal to `2020-11-04T18:54:47Z (format of ISO 8601)`: `updateTime<="2020-11-04T18:54:47Z"` * All campaigns with an update time greater than or equal to `2020-11-04T18:54:47Z (format of ISO 8601)`: `updateTime>="2020-11-04T18:54:47Z"` The length of this field should be no more than 500 characters.'
           in: query
           name: filter
           schema:
             type: string
-        - description: 'Field by which to sort the list. Acceptable values are: * `displayName` (default) * `entityStatus` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
+        - description: 'Field by which to sort the list. Acceptable values are: * `displayName` (default) * `entityStatus` * `updateTime` The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
           in: query
           name: orderBy
           schema:
@@ -1057,12 +1057,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: "Allows filtering by insertion order properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND` or `OR` logical operators. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator used on `budget.budget_segments.date_range.end_date` must be LESS THAN (<). * The operators used on all other fields must be `EQUALS (=)`. * Supported fields: - `campaignId` - `displayName` - `entityStatus` - `budget.budget_segments.date_range.end_date` (input as YYYY-MM-DD) Examples: * All insertion orders under a campaign: `campaignId=\"1234\"` * All `ENTITY_STATUS_ACTIVE` or `ENTITY_STATUS_PAUSED` insertion orders under an advertiser: `(entityStatus=\"ENTITY_STATUS_ACTIVE\" OR entityStatus=\"ENTITY_STATUS_PAUSED\")` * All insertion orders whose budget segments' dates end before March 28, 2019: `budget.budget_segments.date_range.end_date<\"2019-03-28\"` The length of this field should be no more than 500 characters."
+        - description: "Allows filtering by insertion order properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND` or `OR` logical operators. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator used on `budget.budget_segments.date_range.end_date` must be LESS THAN (<). * The operator used on `updateTime` must be `GREATER THAN OR EQUAL TO (>=)` or `LESS THAN OR EQUAL TO (<=)`. * The operators used on all other fields must be `EQUALS (=)`. * Supported fields: - `campaignId` - `displayName` - `entityStatus` - `budget.budget_segments.date_range.end_date` (input as YYYY-MM-DD) - `updateTime` (input in ISO 8601 format, or YYYY-MM-DDTHH:MM:SSZ) Examples: * All insertion orders under a campaign: `campaignId=\"1234\"` * All `ENTITY_STATUS_ACTIVE` or `ENTITY_STATUS_PAUSED` insertion orders under an advertiser: `(entityStatus=\"ENTITY_STATUS_ACTIVE\" OR entityStatus=\"ENTITY_STATUS_PAUSED\")` * All insertion orders whose budget segments' dates end before March 28, 2019: `budget.budget_segments.date_range.end_date<\"2019-03-28\"` * All insertion orders with an update time less than or equal to `2020-11-04T18:54:47Z (format of ISO 8601)`: `updateTime<=\"2020-11-04T18:54:47Z\"` * All insertion orders with an update time greater than or equal to `2020-11-04T18:54:47Z (format of ISO 8601)`: `updateTime>=\"2020-11-04T18:54:47Z\"` The length of this field should be no more than 500 characters."
           in: query
           name: filter
           schema:
             type: string
-        - description: 'Field by which to sort the list. Acceptable values are: * "displayName" (default) * "entityStatus" The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
+        - description: 'Field by which to sort the list. Acceptable values are: * "displayName" (default) * "entityStatus" * "updateTime" The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
           in: query
           name: orderBy
           schema:
@@ -1256,12 +1256,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: 'Allows filtering by line item properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND` or `OR` logical operators. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator used on `flight.dateRange.endDate` must be LESS THAN (<). * The operator used on `warningMessages` must be `HAS (:)`. * The operators used on all other fields must be `EQUALS (=)`. * Supported fields: - `campaignId` - `displayName` - `insertionOrderId` - `entityStatus` - `lineItemId` - `lineItemType` - `flight.dateRange.endDate` (input formatted as YYYY-MM-DD) - `warningMessages` - `flight.triggerId` Examples: * All line items under an insertion order: `insertionOrderId="1234"` * All `ENTITY_STATUS_ACTIVE` or `ENTITY_STATUS_PAUSED` and `LINE_ITEM_TYPE_DISPLAY_DEFAULT` line items under an advertiser: `(entityStatus="ENTITY_STATUS_ACTIVE" OR entityStatus="ENTITY_STATUS_PAUSED") AND lineItemType="LINE_ITEM_TYPE_DISPLAY_DEFAULT"` * All line items whose flight dates end before March 28, 2019: `flight.dateRange.endDate<"2019-03-28"` * All line items that have `NO_VALID_CREATIVE` in `warningMessages`: `warningMessages:"NO_VALID_CREATIVE"` The length of this field should be no more than 500 characters.'
+        - description: 'Allows filtering by line item properties. Supported syntax: * Filter expressions are made up of one or more restrictions. * Restrictions can be combined by `AND` or `OR` logical operators. A sequence of restrictions implicitly uses `AND`. * A restriction has the form of `{field} {operator} {value}`. * The operator used on `flight.dateRange.endDate` must be LESS THAN (<). * The operator used on `updateTime` must be `GREATER THAN OR EQUAL TO (>=)` or `LESS THAN OR EQUAL TO (<=)`. * The operator used on `warningMessages` must be `HAS (:)`. * The operators used on all other fields must be `EQUALS (=)`. * Supported fields: - `campaignId` - `displayName` - `insertionOrderId` - `entityStatus` - `lineItemId` - `lineItemType` - `flight.dateRange.endDate` (input formatted as YYYY-MM-DD) - `warningMessages` - `flight.triggerId` - `updateTime` (input in ISO 8601 format, or YYYY-MM-DDTHH:MM:SSZ) * The operator can be `NO LESS THAN (>=)` or `NO GREATER THAN (<=)`. - `updateTime` (format of ISO 8601) Examples: * All line items under an insertion order: `insertionOrderId="1234"` * All `ENTITY_STATUS_ACTIVE` or `ENTITY_STATUS_PAUSED` and `LINE_ITEM_TYPE_DISPLAY_DEFAULT` line items under an advertiser: `(entityStatus="ENTITY_STATUS_ACTIVE" OR entityStatus="ENTITY_STATUS_PAUSED") AND lineItemType="LINE_ITEM_TYPE_DISPLAY_DEFAULT"` * All line items whose flight dates end before March 28, 2019: `flight.dateRange.endDate<"2019-03-28"` * All line items that have `NO_VALID_CREATIVE` in `warningMessages`: `warningMessages:"NO_VALID_CREATIVE"` * All line items with an update time less than or equal to `2020-11-04T18:54:47Z (format of ISO 8601)`: `updateTime<="2020-11-04T18:54:47Z"` * All line items with an update time greater than or equal to `2020-11-04T18:54:47Z (format of ISO 8601)`: `updateTime>="2020-11-04T18:54:47Z"` The length of this field should be no more than 500 characters.'
           in: query
           name: filter
           schema:
             type: string
-        - description: 'Field by which to sort the list. Acceptable values are: * "displayName" (default) * "entityStatus" * “flight.dateRange.endDate” The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
+        - description: 'Field by which to sort the list. Acceptable values are: * "displayName" (default) * "entityStatus" * “flight.dateRange.endDate” * "updateTime" The default sorting order is ascending. To specify descending order for a field, a suffix "desc" should be added to the field name. Example: `displayName desc`.'
           in: query
           name: orderBy
           schema:
@@ -2817,7 +2817,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. Identifies the type of assigned targeting options to list.
+        - description: "Required. Identifies the type of assigned targeting options to list. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`"
           in: path
           name: targetingType
           required: true
@@ -2918,7 +2918,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. Identifies the type of this assigned targeting option.
+        - description: "Required. Identifies the type of this assigned targeting option. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`"
           in: path
           name: targetingType
           required: true
@@ -2993,7 +2993,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. Identifies the type of this assigned targeting option.
+        - description: "Required. Identifies the type of this assigned targeting option. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`"
           in: path
           name: targetingType
           required: true
@@ -3068,7 +3068,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. Identifies the type of this assigned targeting option.
+        - description: "Required. Identifies the type of this assigned targeting option. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`"
           in: path
           name: targetingType
           required: true
@@ -5353,6 +5353,87 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/targetingTypes/{targetingType}/targetingOptions:search":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Searches for targeting options of a given type based on the given search terms.
+      operationId: displayvideo.targetingTypes.targetingOptions.search
+      parameters:
+        - description: "Required. The type of targeting options to retrieve. Accepted values are: * `TARGETING_TYPE_GEO_REGION`"
+          in: path
+          name: targetingType
+          required: true
+          schema:
+            enum:
+              - TARGETING_TYPE_UNSPECIFIED
+              - TARGETING_TYPE_CHANNEL
+              - TARGETING_TYPE_APP_CATEGORY
+              - TARGETING_TYPE_APP
+              - TARGETING_TYPE_URL
+              - TARGETING_TYPE_DAY_AND_TIME
+              - TARGETING_TYPE_AGE_RANGE
+              - TARGETING_TYPE_REGIONAL_LOCATION_LIST
+              - TARGETING_TYPE_PROXIMITY_LOCATION_LIST
+              - TARGETING_TYPE_GENDER
+              - TARGETING_TYPE_VIDEO_PLAYER_SIZE
+              - TARGETING_TYPE_USER_REWARDED_CONTENT
+              - TARGETING_TYPE_PARENTAL_STATUS
+              - TARGETING_TYPE_CONTENT_INSTREAM_POSITION
+              - TARGETING_TYPE_CONTENT_OUTSTREAM_POSITION
+              - TARGETING_TYPE_DEVICE_TYPE
+              - TARGETING_TYPE_AUDIENCE_GROUP
+              - TARGETING_TYPE_BROWSER
+              - TARGETING_TYPE_HOUSEHOLD_INCOME
+              - TARGETING_TYPE_ON_SCREEN_POSITION
+              - TARGETING_TYPE_THIRD_PARTY_VERIFIER
+              - TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION
+              - TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION
+              - TARGETING_TYPE_ENVIRONMENT
+              - TARGETING_TYPE_CARRIER_AND_ISP
+              - TARGETING_TYPE_OPERATING_SYSTEM
+              - TARGETING_TYPE_DEVICE_MAKE_MODEL
+              - TARGETING_TYPE_KEYWORD
+              - TARGETING_TYPE_NEGATIVE_KEYWORD_LIST
+              - TARGETING_TYPE_VIEWABILITY
+              - TARGETING_TYPE_CATEGORY
+              - TARGETING_TYPE_INVENTORY_SOURCE
+              - TARGETING_TYPE_LANGUAGE
+              - TARGETING_TYPE_AUTHORIZED_SELLER_STATUS
+              - TARGETING_TYPE_GEO_REGION
+              - TARGETING_TYPE_INVENTORY_SOURCE_GROUP
+              - TARGETING_TYPE_EXCHANGE
+              - TARGETING_TYPE_SUB_EXCHANGE
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchTargetingOptionsRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchTargetingOptionsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/display-video
+          Oauth2c:
+            - https://www.googleapis.com/auth/display-video
+      tags:
+        - targetingTypes
   /v1/users:
     get:
       description: Lists users that are accessible to the current user. If two users have user roles on the same partner or advertiser, they can access each other.
@@ -6369,12 +6450,12 @@ components:
       description: Request message for BulkEditAdvertiserAssignedTargetingOptions.
       properties:
         createRequests:
-          description: The assigned targeting options to create in batch, specified as a list of `CreateAssignedTargetingOptionsRequest`.
+          description: "The assigned targeting options to create in batch, specified as a list of `CreateAssignedTargetingOptionsRequest`. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`"
           items:
             $ref: "#/components/schemas/CreateAssignedTargetingOptionsRequest"
           type: array
         deleteRequests:
-          description: The assigned targeting options to delete in batch, specified as a list of `DeleteAssignedTargetingOptionsRequest`.
+          description: "The assigned targeting options to delete in batch, specified as a list of `DeleteAssignedTargetingOptionsRequest`. Supported targeting types: * `TARGETING_TYPE_CHANNEL` * `TARGETING_TYPE_DIGITAL_CONTENT_LABEL_EXCLUSION` * `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`"
           items:
             $ref: "#/components/schemas/DeleteAssignedTargetingOptionsRequest"
           type: array
@@ -8321,6 +8402,13 @@ components:
           description: Required. The targeting_option_id of a TargetingOption of type `TARGETING_TYPE_GEO_REGION`.
           type: string
       type: object
+    GeoRegionSearchTerms:
+      description: Search terms for geo region targeting options.
+      properties:
+        geoRegionQuery:
+          description: The search query for the desired geo region. The query can be a prefix, e.g. "New Yor", "Seattle", "USA", etc.
+          type: string
+      type: object
     GeoRegionTargetingOptionDetails:
       description: Represents a targetable geographic region. This will be populated in the geo_region_details field when targeting_type is `TARGETING_TYPE_GEO_REGION`.
       properties:
@@ -8969,7 +9057,7 @@ components:
           type: string
       type: object
     LineItem:
-      description: "A single line item. Next id: 24"
+      description: A single line item.
       properties:
         advertiserId:
           description: Output only. The unique ID of the advertiser the line item belongs to.
@@ -9089,6 +9177,7 @@ components:
               - APP_INSTALL_NO_OPTIMAL_BIDDING_STRATEGY
               - CREATIVE_SIZE_NOT_IN_USE_FOR_TARGETED_DEALS
               - NO_CREATIVE_FOR_TARGETED_DEALS
+              - TARGETING_DEPRECATED_GEO_TARGET
             type: string
           readOnly: true
           type: array
@@ -10148,6 +10237,36 @@ components:
             - SDF_VERSION_5_1
             - SDF_VERSION_5_2
           type: string
+      type: object
+    SearchTargetingOptionsRequest:
+      description: Request message for SearchTargetingOptions.
+      properties:
+        advertiserId:
+          description: Required. The Advertiser this request is being made in the context of.
+          format: int64
+          type: string
+        geoRegionSearchTerms:
+          $ref: "#/components/schemas/GeoRegionSearchTerms"
+          description: Search terms for geo region targeting options. Can only be used when targeting_type is `TARGETING_TYPE_GEO_REGION`.
+        pageSize:
+          description: Requested page size. Must be between `1` and `100`. If unspecified will default to `100`. Returns error code `INVALID_ARGUMENT` if an invalid value is specified.
+          format: int32
+          type: integer
+        pageToken:
+          description: A token identifying a page of results the server should return. Typically, this is the value of next_page_token returned from the previous call to `SearchTargetingOptions` method. If not specified, the first page of results will be returned.
+          type: string
+      type: object
+    SearchTargetingOptionsResponse:
+      description: Response message for SearchTargetingOptionsResponse.
+      properties:
+        nextPageToken:
+          description: A token to retrieve the next page of results. Pass this value in the page_token field in the subsequent call to `SearchTargetingOptions` method to retrieve the next page of results.
+          type: string
+        targetingOptions:
+          description: The list of targeting options that match the search criteria. This list will be absent if empty.
+          items:
+            $ref: "#/components/schemas/TargetingOption"
+          type: array
       type: object
     SensitiveCategoryAssignedTargetingOptionDetails:
       description: Targeting details for sensitive category. This will be populated in the details field of an AssignedTargetingOption when targeting_type is `TARGETING_TYPE_SENSITIVE_CATEGORY_EXCLUSION`.

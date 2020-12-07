@@ -289,6 +289,51 @@ paths:
             - https://www.googleapis.com/auth/games
       tags:
         - achievements
+  /games/v1/applications/getEndPoint:
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Returns a URL for the requested end point type.
+      operationId: games.applications.getEndPoint
+      parameters:
+        - description: The application ID from the Google Play developer console.
+          in: query
+          name: applicationId
+          schema:
+            type: string
+        - description: Type of endpoint being requested.
+          in: query
+          name: endPointType
+          schema:
+            enum:
+              - END_POINT_TYPE_UNSPECIFIED
+              - PROFILE_CREATION
+              - PROFILE_SETTINGS
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EndPoint"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/games
+          Oauth2c:
+            - https://www.googleapis.com/auth/games
+      tags:
+        - applications
   /games/v1/applications/played:
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -1795,6 +1840,24 @@ components:
           description: Token corresponding to the next page of results.
           type: string
       type: object
+    ContentHash:
+      description: Hash-like weak identifier of uploaded content bytes (saved game data blob, or cover image). Consistent per player per application per hash version. Within the context of a single player/application, it's guaranteed that two identical blobs coming from two different uploads will have the same content hash. It's extremely likely, though not guaranteed, that if two content hashes are equal, the blobs are identical.
+      properties:
+        digest:
+          description: Hash-like digest of the content.
+          type: string
+        version:
+          description: Version of the Hash encoding algorithm to hash the content.
+          format: int32
+          type: integer
+      type: object
+    EndPoint:
+      description: Container for a URL end point of the requested type.
+      properties:
+        url:
+          description: A URL suitable for loading in a web browser for the requested endpoint.
+          type: string
+      type: object
     EventBatchRecordFailure:
       description: A batch update failure resource.
       properties:
@@ -2708,38 +2771,39 @@ components:
       description: Identifies a snapshot cover image resource. The image is provided by the game.
       properties:
         contentHash:
-          description: Output only. Hash-like weak identifier of the uploaded image bytes, consistent per player per application. Within the context of a single player/application, it's guaranteed that two identical blobs coming from two different uploads will have the same content hash. It's extremely likely, though not guaranteed, that if two content hashes are equal, the images are identical.
+          description: Output only. Hash-like weak identifier of the uploaded image bytes, consistent per player per application per hash version. Within the context of a single player/application, it's guaranteed that two identical images coming from two different uploads will have the same content hash for the same hash algorithm version. It's extremely likely, though not guaranteed, that if two content hashes are equal, the images are identical. More than one content hash can be returned if more than one hash versions are supported.
+          items:
+            $ref: "#/components/schemas/ContentHash"
           readOnly: true
-          type: string
+          type: array
         downloadUrl:
           description: Output only. A URL the client can use to download the image. May vary across requests, and only guaranteed to be valid for a short time after it is returned.
           readOnly: true
           type: string
         height:
-          description: Output only. The height of the image in pixels.
+          description: The height of the image in pixels.
           format: int32
-          readOnly: true
           type: integer
         mimeType:
-          description: Output only. The MIME type of the image.
-          readOnly: true
+          description: The MIME type of the image.
           type: string
         resourceId:
           description: The ID of the image resource. It's guaranteed that if two IDs are equal then the contents are equal as well. It's not guaranteed that two identical blobs coming from separate uploads have the same ID. The resource ID can only be used within the application, user and resource type it was originally returned for. For example, it's not possible to use SnapshotDataResource's resource ID as the resource_id of a SnapshotCoverImageResource, even if the blob is a valid image file.
           type: string
         width:
-          description: Output only. The width of the image in pixels.
+          description: The width of the image in pixels.
           format: int32
-          readOnly: true
           type: integer
       type: object
     SnapshotDataResource:
       description: Identifies a snapshot data resource. The data is provided by the game.
       properties:
         contentHash:
-          description: Output only. Hash-like weak identifier of the uploaded blob, consistent per player per application. Within the context of a single player/application, it's guaranteed that two identical blobs coming from two different uploads will have the same content hash. It's extremely likely, though not guaranteed, that if two content hashes are equal, the blobs are identical.
+          description: Output only. Hash-like weak identifier of the uploaded blob, consistent per player per application per hash version. Within the context of a single player/application, it's guaranteed that two identical blobs coming from two different uploads will have the same content hash for the same hash algorithm version. It's extremely likely, though not guaranteed, that if two content hashes are equal, the blobs are identical. More than one content hash can be returned if more than one hash versions are supported.
+          items:
+            $ref: "#/components/schemas/ContentHash"
           readOnly: true
-          type: string
+          type: array
         downloadUrl:
           description: Output only. A URL that the client can use to download the blob. May vary across requests, and only guaranteed to be valid for a short time after it is returned.
           readOnly: true
@@ -2748,8 +2812,9 @@ components:
           description: The ID of the blob resource. It's guaranteed that if two IDs are equal then the contents are equal as well. It's not guaranteed that two identical blobs coming from separate uploads have the same resource ID. The resource ID can only be used within the application, user and resource type it was originally returned for. For example, it's not possible to use SnapshotDataResource's resource ID as the resource_id of a SnapshotCoverImageResource, even if the blob is a valid image file.
           type: string
         size:
-          description: Size of the saved game blob in bytes.
+          description: Output only. Size of the saved game blob in bytes.
           format: int64
+          readOnly: true
           type: string
       type: object
     SnapshotExtended:

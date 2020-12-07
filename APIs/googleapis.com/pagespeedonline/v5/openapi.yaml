@@ -37,6 +37,12 @@ paths:
       description: Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.
       operationId: pagespeedonline.pagespeedapi.runpagespeed
       parameters:
+        - description: Required. The URL to fetch and analyze
+          in: query
+          name: url
+          required: true
+          schema:
+            type: string
         - description: The captcha token passed when filling out a captcha.
           in: query
           name: captchaToken
@@ -71,11 +77,6 @@ paths:
               - STRATEGY_UNSPECIFIED
               - DESKTOP
               - MOBILE
-            type: string
-        - description: Required. The URL to fetch and analyze
-          in: query
-          name: url
-          schema:
             type: string
         - description: Campaign name for analytics.
           in: query

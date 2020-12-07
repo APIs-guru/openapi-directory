@@ -298,7 +298,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The list of fields to be updated. Omitted fields will not be updated.
+        - description: Required. The list of fields to be updated. Omitted fields will not be updated. To replace the entire entity, use one path with the string "*" to match all fields.
           in: query
           name: updateMask
           schema:
