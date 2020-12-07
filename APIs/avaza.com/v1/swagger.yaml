@@ -3702,6 +3702,9 @@ definitions:
     type: object
   NewTimesheet:
     properties:
+      CustomMetadata:
+        description: Optional. free nvarchar field available via Api to store any additional metadata against a timesheet. We suggest you use Json or your preferred serialisation format. 1000 characters max.
+        type: string
       Duration:
         description: The duration of the timesheet, in decimal hours. If null or 0, a timer will be started.
         format: double
@@ -4481,6 +4484,8 @@ definitions:
         type: string
       CategoryName:
         type: string
+      CustomMetadata:
+        type: string
       CustomerIDFK:
         format: int32
         type: integer
@@ -4733,6 +4738,9 @@ definitions:
     type: object
   UpdateTimesheetModel:
     properties:
+      CustomMetadata:
+        description: Optional. free nvarchar field available via Api to store any additional metadata against a timesheet. We suggest you use Json or your preferred serialisation format. 1000 characters max.
+        type: string
       Duration:
         format: double
         type: number

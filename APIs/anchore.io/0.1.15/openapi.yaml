@@ -3262,6 +3262,8 @@ components:
         created_at:
           format: date-time
           type: string
+        exclude:
+          $ref: "#/components/schemas/AnalysisArchiveTransitionRuleExclude"
         last_updated:
           format: date-time
           type: string
@@ -3281,6 +3283,16 @@ components:
           type: string
       required:
         - transition
+      type: object
+    AnalysisArchiveTransitionRuleExclude:
+      description: Which Images to exclude from auto-archiving logic
+      properties:
+        expiration_days:
+          default: -1
+          description: How long the image selected will be excluded from the archive transition
+          type: integer
+        selector:
+          $ref: "#/components/schemas/ImageSelector"
       type: object
     AnalysisUpdateEval:
       description: Evaluation Results for an entity (current or last)
@@ -4623,12 +4635,6 @@ components:
           type: string
         subscription_type:
           description: The type of the subscription
-          enum:
-            - policy_eval
-            - tag_update
-            - vuln_update
-            - repo_update
-            - analysis_update
           type: string
         subscription_value:
           description: The value of the subscription target
@@ -4649,12 +4655,6 @@ components:
         subscription_key:
           type: string
         subscription_type:
-          enum:
-            - policy_eval
-            - tag_update
-            - vuln_update
-            - repo_update
-            - analysis_update
           type: string
         subscription_value:
           nullable: true

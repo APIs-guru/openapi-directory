@@ -8668,6 +8668,8 @@ definitions:
         type: string
       last_name:
         type: string
+      phone:
+        type: string
     type: object
   Basket:
     properties:
@@ -9934,17 +9936,7 @@ definitions:
       custom_fields:
         type: object
       customer:
-        properties:
-          email:
-            type: string
-          first_name:
-            type: string
-          id:
-            type: string
-          last_name:
-            type: string
-          phone:
-            type: string
+        $ref: "#/definitions/BaseCustomer"
       discounts:
         items:
           $ref: "#/definitions/Order_Totals_NewDiscount"
@@ -10293,6 +10285,9 @@ definitions:
       total_price:
         description: Defines order's total price
         type: number
+      total_weight:
+        description: Defines the sum of all line item weights in grams for the order
+        type: integer
       transaction_id:
         description: Payment transaction id
         type: string

@@ -1368,7 +1368,7 @@ paths:
       description: Returns the issuer with the given issuer ID.
       operationId: walletobjects.issuer.get
       parameters:
-        - description: The unique identifier for an issuer. This ID must be unique across all issuers.
+        - description: The unique identifier for an issuer. This ID must be unique across all issuers. It should only be provided if merchant_id is absent.
           in: path
           name: resourceId
           required: true
@@ -1404,7 +1404,7 @@ paths:
       description: Updates the issuer referenced by the given issuer ID. This method supports patch semantics.
       operationId: walletobjects.issuer.patch
       parameters:
-        - description: The unique identifier for an issuer. This ID must be unique across all issuers.
+        - description: The unique identifier for an issuer. This ID must be unique across all issuers. It should only be provided if merchant_id is absent.
           in: path
           name: resourceId
           required: true
@@ -1433,7 +1433,7 @@ paths:
       description: Updates the issuer referenced by the given issuer ID.
       operationId: walletobjects.issuer.update
       parameters:
-        - description: The unique identifier for an issuer. This ID must be unique across all issuers.
+        - description: The unique identifier for an issuer. This ID must be unique across all issuers. It should only be provided if merchant_id is absent.
           in: path
           name: resourceId
           required: true
