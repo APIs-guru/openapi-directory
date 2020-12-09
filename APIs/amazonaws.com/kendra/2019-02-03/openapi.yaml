@@ -2467,6 +2467,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserContext'
             - description: The user context token.
+        VisitorId:
+          allOf:
+            - $ref: '#/components/schemas/VisitorId'
+            - description: 'Provides an identifier for a specific user. The <code>VisitorId</code> should be a unique identifier, such as a GUID. Don''t use personally identifiable information, such as the user''s email address, as the <code>VisitorId</code>.'
     StartDataSourceSyncJobResponse:
       type: object
       properties:
@@ -2646,7 +2650,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3ObjectKey'
             - description: Path to the AWS S3 bucket that contains the ACL files.
-      description: Access Control List files for the documents in a data source.
+      description: 'Access Control List files for the documents in a data source. For the format of the file, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html">Access control for S3 data sources</a>.'
     ColumnName:
       type: string
       pattern: '^[a-zA-Z][a-zA-Z0-9_]*$'
@@ -3336,6 +3340,7 @@ components:
         - SERVICENOW
         - CUSTOM
         - CONFLUENCE
+        - GOOGLEDRIVE
     DataSourceConfiguration:
       type: object
       properties:
@@ -3358,7 +3363,7 @@ components:
         OneDriveConfiguration:
           allOf:
             - $ref: '#/components/schemas/OneDriveConfiguration'
-            - description: Provided configuration for data sources that connect to Microsoft OneDrive.
+            - description: Provides configuration for data sources that connect to Microsoft OneDrive.
         ServiceNowConfiguration:
           allOf:
             - $ref: '#/components/schemas/ServiceNowConfiguration'
@@ -3367,6 +3372,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConfluenceConfiguration'
             - description: Provides configuration information for connecting to a Confluence data source.
+        GoogleDriveConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/GoogleDriveConfiguration'
+            - description: 'Provides configuration for data sources that connect to Google Drive. '
       description: Configuration information for a Amazon Kendra data source.
     Description:
       type: string
@@ -3471,7 +3480,7 @@ components:
         AccessControlListConfiguration:
           allOf:
             - $ref: '#/components/schemas/AccessControlListConfiguration'
-            - description: Provides the path to the S3 bucket that contains the user context filtering files for the data source.
+            - description: 'Provides the path to the S3 bucket that contains the user context filtering files for the data source. For the format of the file, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html">Access control for S3 data sources</a>.'
       description: Provides configuration information for a data source to index documents in an Amazon S3 bucket.
     SharePointConfiguration:
       type: object
@@ -3606,7 +3615,7 @@ components:
         TenantDomain:
           allOf:
             - $ref: '#/components/schemas/TenantDomain'
-            - description: 'Tha Azure Active Directory domain of the organization. '
+            - description: 'The Azure Active Directory domain of the organization. '
         SecretArn:
           allOf:
             - $ref: '#/components/schemas/SecretArn'
@@ -3660,6 +3669,40 @@ components:
             - $ref: '#/components/schemas/ServiceNowServiceCatalogConfiguration'
             - description: Provides configuration information for crawling service catalogs in the ServiceNow site.
       description: Provides configuration information required to connect to a ServiceNow data source.
+    GoogleDriveConfiguration:
+      type: object
+      required:
+        - SecretArn
+      properties:
+        SecretArn:
+          allOf:
+            - $ref: '#/components/schemas/SecretArn'
+            - description: 'The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the credentials required to connect to Google Drive. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html">Using a Google Workspace Drive data source</a>.'
+        InclusionPatterns:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: 'A list of regular expression patterns that apply to path on Google Drive. Items that match the pattern are included in the index from both shared drives and users'' My Drives. Items that don''t match the pattern are excluded from the index. If an item matches both an inclusion pattern and an exclusion pattern, it is excluded from the index.'
+        ExclusionPatterns:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceInclusionsExclusionsStrings'
+            - description: 'A list of regular expression patterns that apply to the path on Google Drive. Items that match the pattern are excluded from the index from both shared drives and users'' My Drives. Items that don''t match the pattern are included in the index. If an item matches both an exclusion pattern and an inclusion pattern, it is excluded from the index.'
+        FieldMappings:
+          allOf:
+            - $ref: '#/components/schemas/DataSourceToIndexFieldMappingList'
+            - description: '<p>Defines mapping between a field in the Google Drive and a Amazon Kendra index field.</p> <p>If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the <a>UpdateIndex</a> operation.</p>'
+        ExcludeMimeTypes:
+          allOf:
+            - $ref: '#/components/schemas/ExcludeMimeTypesList'
+            - description: '<p>A list of MIME types to exclude from the index. All documents matching the specified MIME type are excluded. </p> <p>For a list of MIME types, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html">Using a Google Workspace Drive data source</a>.</p>'
+        ExcludeUserAccounts:
+          allOf:
+            - $ref: '#/components/schemas/ExcludeUserAccountsList'
+            - description: A list of email addresses of the users. Documents owned by these users are excluded from the index. Documents shared with excluded users are indexed unless they are excluded in another way.
+        ExcludeSharedDrives:
+          allOf:
+            - $ref: '#/components/schemas/ExcludeSharedDrivesList'
+            - description: A list of identifiers or shared drives to exclude from the index. All files and folders stored on the shared drive are excluded.
+      description: Provides configuration information for data sources that connect to Google Drive.
     DataSourceFieldName:
       type: string
       pattern: '^[a-zA-Z][a-zA-Z0-9_.]*$'
@@ -4069,6 +4112,39 @@ components:
       pattern: '[0-9]+[s]'
       minLength: 1
       maxLength: 10
+    MimeType:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 256
+    ExcludeMimeTypesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MimeType'
+      minItems: 0
+      maxItems: 30
+    SharedDriveId:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 256
+    ExcludeSharedDrivesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SharedDriveId'
+      minItems: 0
+      maxItems: 100
+    UserAccount:
+      type: string
+      pattern: '^\P{C}*$'
+      minLength: 1
+      maxLength: 256
+    ExcludeUserAccountsList:
+      type: array
+      items:
+        $ref: '#/components/schemas/UserAccount'
+      minItems: 0
+      maxItems: 100
     Facet:
       type: object
       properties:
@@ -4146,6 +4222,11 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/FaqSummary'
+    FeedbackToken:
+      type: string
+      pattern: '^\P{C}*.\P{C}*$'
+      minLength: 1
+      maxLength: 2048
     GroupAttributeField:
       type: string
       pattern: '^\P{C}*$'
@@ -4447,6 +4528,11 @@ components:
             - $ref: '#/components/schemas/Token'
             - description: The user context token. It must be a JWT or a JSON token.
       description: Provides information about the user context for a Amazon Kendra index.
+    VisitorId:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+      minLength: 1
+      maxLength: 256
     QueryResultItemList:
       type: array
       items:
@@ -4498,6 +4584,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScoreAttributes'
             - description: '<p>Indicates the confidence that Amazon Kendra has that a result matches the query that you provided. Each result is placed into a bin that indicates the confidence, <code>VERY_HIGH</code>, <code>HIGH</code>, <code>MEDIUM</code> and <code>LOW</code>. You can use the score to determine if a response meets the confidence needed for your application.</p> <p>The field is only set to <code>LOW</code> when the <code>Type</code> field is set to <code>DOCUMENT</code> and Amazon Kendra is not confident that the result matches the query.</p>'
+        FeedbackToken:
+          allOf:
+            - $ref: '#/components/schemas/FeedbackToken'
+            - description: 'A token that identifies a particular result from a particular query. Use this token to provide click-through feedback for the result. For more information, see <a href="https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html"> Submitting feedback </a>.'
       description: '<p>A single query result.</p> <p>A query result contains information about a document returned by the query. This includes the original location of the document, a list of attributes assigned to the document, and relevant text from the document that satisfies the query.</p>'
     ValueImportanceMap:
       type: object

@@ -1616,14 +1616,14 @@ paths:
                   description: Declares the physical tables that are available in the underlying data sources.
                   type: object
                   minProperties: 1
-                  maxProperties: 16
+                  maxProperties: 32
                   additionalProperties:
                     $ref: '#/components/schemas/PhysicalTable'
                 LogicalTableMap:
                   description: Configures the combination and transformation of the data from the physical tables.
                   type: object
                   minProperties: 1
-                  maxProperties: 32
+                  maxProperties: 64
                   additionalProperties:
                     $ref: '#/components/schemas/LogicalTable'
                 ImportMode:
@@ -4423,14 +4423,14 @@ paths:
                   description: Declares the physical tables that are available in the underlying data sources.
                   type: object
                   minProperties: 1
-                  maxProperties: 16
+                  maxProperties: 32
                   additionalProperties:
                     $ref: '#/components/schemas/PhysicalTable'
                 LogicalTableMap:
                   description: Configures the combination and transformation of the data from the physical tables.
                   type: object
                   minProperties: 1
-                  maxProperties: 32
+                  maxProperties: 64
                   additionalProperties:
                     $ref: '#/components/schemas/LogicalTable'
                 ImportMode:
@@ -7011,7 +7011,7 @@ paths:
         - name: additional-dashboard-ids
           in: query
           required: false
-          description: 'A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. <code>IdentityType</code> must be set to ANONYMOUS for this to work, because other other identity types authenticate as QuickSight users. For example, if you set "<code>--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>", the session can access all three dashboards. '
+          description: 'A list of one or more dashboard ids that you want to add to a session that includes anonymous authorizations. <code>IdentityType</code> must be set to ANONYMOUS for this to work, because other identity types authenticate as QuickSight users. For example, if you set "<code>--dashboard-id dash_id1 --dashboard-id dash_id2 dash_id3 identity-type ANONYMOUS</code>", the session can access all three dashboards. '
           schema:
             type: array
             items:
@@ -12704,13 +12704,13 @@ components:
     PhysicalTableMap:
       type: object
       minProperties: 1
-      maxProperties: 16
+      maxProperties: 32
       additionalProperties:
         $ref: '#/components/schemas/PhysicalTable'
     LogicalTableMap:
       type: object
       minProperties: 1
-      maxProperties: 32
+      maxProperties: 64
       additionalProperties:
         $ref: '#/components/schemas/LogicalTable'
     DataSetImportMode:
@@ -14372,6 +14372,14 @@ components:
       pattern: '[0-9a-zA-Z-]*'
       minLength: 1
       maxLength: 64
+    JoinKeyProperties:
+      type: object
+      properties:
+        UniqueKey:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates that a row in a table is uniquely identified by the columns in a join key. This is used by QuickSight to optimize query performance.
+      description: Properties associated with the columns participating in a join.
     JoinType:
       type: string
       enum:
@@ -14394,20 +14402,28 @@ components:
         LeftOperand:
           allOf:
             - $ref: '#/components/schemas/LogicalTableId'
-            - description: Left operand.
+            - description: The operand on the left side of a join.
         RightOperand:
           allOf:
             - $ref: '#/components/schemas/LogicalTableId'
-            - description: Right operand.
+            - description: The operand on the right side of a join.
+        LeftJoinKeyProperties:
+          allOf:
+            - $ref: '#/components/schemas/JoinKeyProperties'
+            - description: Join key properties of the left operand.
+        RightJoinKeyProperties:
+          allOf:
+            - $ref: '#/components/schemas/JoinKeyProperties'
+            - description: Join key properties of the right operand.
         Type:
           allOf:
             - $ref: '#/components/schemas/JoinType'
-            - description: Type.
+            - description: The type of join that it is.
         OnClause:
           allOf:
             - $ref: '#/components/schemas/OnClause'
-            - description: On Clause.
-      description: Join instruction.
+            - description: The join instructions provided in the <code>ON</code> clause of a join.
+      description: 'The instructions associated with a join. '
     MaxResults:
       type: integer
       minimum: 1

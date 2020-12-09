@@ -486,6 +486,57 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteRegistryPolicy:
+    post:
+      operationId: DeleteRegistryPolicy
+      description: Deletes the registry permissions policy.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteRegistryPolicyResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RegistryPolicyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistryPolicyNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRegistryPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.DeleteRegistryPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DeleteRepository:
     post:
       operationId: DeleteRepository
@@ -742,6 +793,57 @@ paths:
             type: string
             enum:
               - AmazonEC2ContainerRegistry_V20150921.DescribeImages
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.DescribeRegistry:
+    post:
+      operationId: DescribeRegistry
+      description: Describes the settings for a registry. The replication configuration for a repository can be created or updated with the <a>PutReplicationConfiguration</a> API action.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeRegistryResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeRegistryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.DescribeRegistry
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1039,6 +1141,57 @@ paths:
             type: string
             enum:
               - AmazonEC2ContainerRegistry_V20150921.GetLifecyclePolicyPreview
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.GetRegistryPolicy:
+    post:
+      operationId: GetRegistryPolicy
+      description: Retrieves the permissions policy for a registry.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetRegistryPolicyResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: RegistryPolicyNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegistryPolicyNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetRegistryPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.GetRegistryPolicy
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1513,6 +1666,102 @@ paths:
             type: string
             enum:
               - AmazonEC2ContainerRegistry_V20150921.PutLifecyclePolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutRegistryPolicy:
+    post:
+      operationId: PutRegistryPolicy
+      description: '<p>Creates or updates the permissions policy for your registry.</p> <p>A registry policy is used to specify permissions for another AWS account and is used when configuring cross-account replication. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutRegistryPolicyResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutRegistryPolicyRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.PutRegistryPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonEC2ContainerRegistry_V20150921.PutReplicationConfiguration:
+    post:
+      operationId: PutReplicationConfiguration
+      description: '<p>Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the <a>DescribeRegistry</a> API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html">Using Service-Linked Roles for Amazon ECR</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p> <note> <p>When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see <a>PutRegistryPolicy</a>.</p> </note>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutReplicationConfigurationResponse'
+        '480':
+          description: ServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutReplicationConfigurationRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonEC2ContainerRegistry_V20150921.PutReplicationConfiguration
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2199,6 +2448,22 @@ components:
             - $ref: '#/components/schemas/RepositoryName'
             - description: The name of the repository.
     LifecyclePolicyNotFoundException: {}
+    DeleteRegistryPolicyResponse:
+      type: object
+      properties:
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The registry ID associated with the request.
+        policyText:
+          allOf:
+            - $ref: '#/components/schemas/RegistryPolicyText'
+            - description: The contents of the registry permissions policy that was deleted.
+    DeleteRegistryPolicyRequest:
+      type: object
+      title: DeleteRegistryPolicyRequest
+      properties: {}
+    RegistryPolicyNotFoundException: {}
     DeleteRepositoryResponse:
       type: object
       example:
@@ -2357,6 +2622,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/DescribeImagesFilter'
             - description: The filter key and value with which to filter your <code>DescribeImages</code> results.
+    DescribeRegistryResponse:
+      type: object
+      properties:
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The ID of the registry.
+        replicationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfiguration'
+            - description: The replication configuration for the registry.
+    DescribeRegistryRequest:
+      type: object
+      title: DescribeRegistryRequest
+      properties: {}
+    ValidationException: {}
     DescribeRepositoriesResponse:
       type: object
       example:
@@ -2415,7 +2696,8 @@ components:
         registryIds:
           allOf:
             - $ref: '#/components/schemas/GetAuthorizationTokenRegistryIdList'
-            - description: 'A list of AWS account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.'
+            - deprecated: true
+              description: 'A list of AWS account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn''t change the permissions scope of the authorization token.'
     GetDownloadUrlForLayerResponse:
       type: object
       properties:
@@ -2543,6 +2825,21 @@ components:
             - $ref: '#/components/schemas/LifecyclePolicyPreviewFilter'
             - description: 'An optional parameter that filters results based on image tag status and all tags, if tagged.'
     LifecyclePolicyPreviewNotFoundException: {}
+    GetRegistryPolicyResponse:
+      type: object
+      properties:
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The ID of the registry.
+        policyText:
+          allOf:
+            - $ref: '#/components/schemas/RegistryPolicyText'
+            - description: The JSON text of the permissions policy for a registry.
+    GetRegistryPolicyRequest:
+      type: object
+      title: GetRegistryPolicyRequest
+      properties: {}
     GetRepositoryPolicyResponse:
       type: object
       example:
@@ -2814,6 +3111,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/LifecyclePolicyText'
             - description: The JSON repository policy text to apply to the repository.
+    PutRegistryPolicyResponse:
+      type: object
+      properties:
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The registry ID.
+        policyText:
+          allOf:
+            - $ref: '#/components/schemas/RegistryPolicyText'
+            - description: The JSON policy text for your registry.
+    PutRegistryPolicyRequest:
+      type: object
+      required:
+        - policyText
+      title: PutRegistryPolicyRequest
+      properties:
+        policyText:
+          allOf:
+            - $ref: '#/components/schemas/RegistryPolicyText'
+            - description: 'The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see <a href="https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.'
+    PutReplicationConfigurationResponse:
+      type: object
+      properties:
+        replicationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfiguration'
+            - description: The contents of the replication configuration for the registry.
+    PutReplicationConfigurationRequest:
+      type: object
+      required:
+        - replicationConfiguration
+      title: PutReplicationConfigurationRequest
+      properties:
+        replicationConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationConfiguration'
+            - description: An object representing the replication configuration for a registry.
     SetRepositoryPolicyResponse:
       type: object
       properties:
@@ -3206,6 +3541,10 @@ components:
     EvaluationTimestamp:
       type: string
       format: date-time
+    RegistryPolicyText:
+      type: string
+      minLength: 0
+      maxLength: 10240
     RepositoryPolicyText:
       type: string
       minLength: 0
@@ -3280,6 +3619,16 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ImageDetail'
+    ReplicationConfiguration:
+      type: object
+      required:
+        - rules
+      properties:
+        rules:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationRuleList'
+            - description: An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.
+      description: The replication configuration for a registry.
     RepositoryNameList:
       type: array
       items:
@@ -3642,6 +3991,48 @@ components:
             - $ref: '#/components/schemas/TagStatus'
             - description: The tag status with which to filter your <a>ListImages</a> results. You can filter results based on whether they are <code>TAGGED</code> or <code>UNTAGGED</code>.
       description: An object representing a filter on a <a>ListImages</a> operation.
+    Region:
+      type: string
+      pattern: '[0-9a-z-]{2,25}'
+      minLength: 2
+      maxLength: 25
+    ReplicationRuleList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationRule'
+      minItems: 0
+      maxItems: 1
+    ReplicationDestination:
+      type: object
+      required:
+        - region
+        - registryId
+      properties:
+        region:
+          allOf:
+            - $ref: '#/components/schemas/Region'
+            - description: A Region to replicate to.
+        registryId:
+          allOf:
+            - $ref: '#/components/schemas/RegistryId'
+            - description: The account ID of the destination registry to replicate to.
+      description: An array of objects representing the details of a replication destination.
+    ReplicationDestinationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReplicationDestination'
+      minItems: 0
+      maxItems: 25
+    ReplicationRule:
+      type: object
+      required:
+        - destinations
+      properties:
+        destinations:
+          allOf:
+            - $ref: '#/components/schemas/ReplicationDestinationList'
+            - description: An array of objects representing the details of a replication destination.
+      description: An array of objects representing the replication destinations for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.
     TagKey:
       type: string
     TagValue:

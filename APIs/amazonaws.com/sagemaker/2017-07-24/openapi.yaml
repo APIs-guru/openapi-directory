@@ -594,6 +594,92 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateDataQualityJobDefinition:
+    post:
+      operationId: CreateDataQualityJobDefinition
+      description: 'Creates a definition for a job that monitors data quality and drift. For information about model monitor, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html">Amazon SageMaker Model Monitor</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateDataQualityJobDefinitionResponse'
+        '480':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+        '481':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDataQualityJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateDataQualityJobDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateDeviceFleet:
+    post:
+      operationId: CreateDeviceFleet
+      description: Creates a device fleet.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+        '481':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeviceFleetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateDeviceFleet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.CreateDomain:
     post:
       operationId: CreateDomain
@@ -631,6 +717,41 @@ paths:
             type: string
             enum:
               - SageMaker.CreateDomain
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateEdgePackagingJob:
+    post:
+      operationId: CreateEdgePackagingJob
+      description: 'Starts a SageMaker Edge Manager model packaging job. Edge Manager will use the model artifacts from the Amazon Simple Storage Service bucket that you specify. After the model has been packaged, Amazon SageMaker saves the resulting artifacts to an S3 bucket that you specify.'
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEdgePackagingJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateEdgePackagingJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1116,6 +1237,96 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateModelBiasJobDefinition:
+    post:
+      operationId: CreateModelBiasJobDefinition
+      description: Creates the definition for a model bias job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateModelBiasJobDefinitionResponse'
+        '480':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+        '481':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateModelBiasJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateModelBiasJobDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateModelExplainabilityJobDefinition:
+    post:
+      operationId: CreateModelExplainabilityJobDefinition
+      description: Creates the definition for a model explainability job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateModelExplainabilityJobDefinitionResponse'
+        '480':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+        '481':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateModelExplainabilityJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateModelExplainabilityJobDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.CreateModelPackage:
     post:
       operationId: CreateModelPackage
@@ -1192,6 +1403,51 @@ paths:
             type: string
             enum:
               - SageMaker.CreateModelPackageGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.CreateModelQualityJobDefinition:
+    post:
+      operationId: CreateModelQualityJobDefinition
+      description: 'Creates a definition for a job that monitors model quality and drift. For information about model monitor, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html">Amazon SageMaker Model Monitor</a>.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateModelQualityJobDefinitionResponse'
+        '480':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+        '481':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateModelQualityJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.CreateModelQualityJobDefinition
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2129,6 +2385,76 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeleteDataQualityJobDefinition:
+    post:
+      operationId: DeleteDataQualityJobDefinition
+      description: Deletes a data quality monitoring job definition.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDataQualityJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeleteDataQualityJobDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeleteDeviceFleet:
+    post:
+      operationId: DeleteDeviceFleet
+      description: Deletes a fleet.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteDeviceFleetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeleteDeviceFleet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.DeleteDomain:
     post:
       operationId: DeleteDomain
@@ -2505,6 +2831,76 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeleteModelBiasJobDefinition:
+    post:
+      operationId: DeleteModelBiasJobDefinition
+      description: Deletes an Amazon SageMaker model bias job definition.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteModelBiasJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeleteModelBiasJobDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeleteModelExplainabilityJobDefinition:
+    post:
+      operationId: DeleteModelExplainabilityJobDefinition
+      description: Deletes an Amazon SageMaker model explainability job definition.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteModelExplainabilityJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeleteModelExplainabilityJobDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.DeleteModelPackage:
     post:
       operationId: DeleteModelPackage
@@ -2590,6 +2986,41 @@ paths:
             type: string
             enum:
               - SageMaker.DeleteModelPackageGroupPolicy
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeleteModelQualityJobDefinition:
+    post:
+      operationId: DeleteModelQualityJobDefinition
+      description: Deletes the secified model quality monitoring job definition.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteModelQualityJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeleteModelQualityJobDefinition
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2694,7 +3125,7 @@ paths:
   /#X-Amz-Target=SageMaker.DeletePipeline:
     post:
       operationId: DeletePipeline
-      description: Deletes a pipeline.
+      description: Deletes a pipeline if there are no in-progress executions.
       responses:
         '200':
           description: Success
@@ -2975,6 +3406,35 @@ paths:
             type: string
             enum:
               - SageMaker.DeleteWorkteam
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DeregisterDevices:
+    post:
+      operationId: DeregisterDevices
+      description: 'Deregisters the specified devices. After you deregister a device, you will need to re-register the devices.'
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeregisterDevicesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DeregisterDevices
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3322,6 +3782,123 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeDataQualityJobDefinition:
+    post:
+      operationId: DescribeDataQualityJobDefinition
+      description: Gets the details of a data quality monitoring job definition.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDataQualityJobDefinitionResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDataQualityJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeDataQualityJobDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeDevice:
+    post:
+      operationId: DescribeDevice
+      description: Describes the device.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDeviceResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDeviceRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeDevice
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeDeviceFleet:
+    post:
+      operationId: DescribeDeviceFleet
+      description: A description of the fleet the device belongs to.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDeviceFleetResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeDeviceFleetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeDeviceFleet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.DescribeDomain:
     post:
       operationId: DescribeDomain
@@ -3353,6 +3930,45 @@ paths:
             type: string
             enum:
               - SageMaker.DescribeDomain
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeEdgePackagingJob:
+    post:
+      operationId: DescribeEdgePackagingJob
+      description: A description of edge packaging jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeEdgePackagingJobResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeEdgePackagingJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeEdgePackagingJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3772,6 +4388,84 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeModelBiasJobDefinition:
+    post:
+      operationId: DescribeModelBiasJobDefinition
+      description: Returns a description of a model bias job definition.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeModelBiasJobDefinitionResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeModelBiasJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeModelBiasJobDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeModelExplainabilityJobDefinition:
+    post:
+      operationId: DescribeModelExplainabilityJobDefinition
+      description: Returns a description of a model explainability job definition.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeModelExplainabilityJobDefinitionResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeModelExplainabilityJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeModelExplainabilityJobDefinition
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.DescribeModelPackage:
     post:
       operationId: DescribeModelPackage
@@ -3830,6 +4524,45 @@ paths:
             type: string
             enum:
               - SageMaker.DescribeModelPackageGroup
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.DescribeModelQualityJobDefinition:
+    post:
+      operationId: DescribeModelQualityJobDefinition
+      description: Returns a description of a model quality job definition.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeModelQualityJobDefinitionResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeModelQualityJobDefinitionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.DescribeModelQualityJobDefinition
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4531,6 +5264,39 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.GetDeviceFleetReport:
+    post:
+      operationId: GetDeviceFleetReport
+      description: Describes a fleet.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDeviceFleetReportResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetDeviceFleetReportRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.GetDeviceFleetReport
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.GetModelPackageGroupPolicy:
     post:
       operationId: GetModelPackageGroupPolicy
@@ -5155,6 +5921,141 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListDataQualityJobDefinitions:
+    post:
+      operationId: ListDataQualityJobDefinitions
+      description: Lists the data quality job definitions in your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDataQualityJobDefinitionsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDataQualityJobDefinitionsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListDataQualityJobDefinitions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListDeviceFleets:
+    post:
+      operationId: ListDeviceFleets
+      description: Returns a list of devices in the fleet.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDeviceFleetsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDeviceFleetsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListDeviceFleets
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListDevices:
+    post:
+      operationId: ListDevices
+      description: A list of devices.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDevicesResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDevicesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListDevices
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.ListDomains:
     post:
       operationId: ListDomains
@@ -5192,6 +6093,51 @@ paths:
             type: string
             enum:
               - SageMaker.ListDomains
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListEdgePackagingJobs:
+    post:
+      operationId: ListEdgePackagingJobs
+      description: Returns a list of edge packaging jobs.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEdgePackagingJobsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListEdgePackagingJobsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListEdgePackagingJobs
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -5707,6 +6653,96 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListModelBiasJobDefinitions:
+    post:
+      operationId: ListModelBiasJobDefinitions
+      description: Lists model bias jobs definitions that satisfy various filters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelBiasJobDefinitionsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListModelBiasJobDefinitionsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListModelBiasJobDefinitions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListModelExplainabilityJobDefinitions:
+    post:
+      operationId: ListModelExplainabilityJobDefinitions
+      description: Lists model explainability job definitions that satisfy various filters.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelExplainabilityJobDefinitionsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListModelExplainabilityJobDefinitionsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListModelExplainabilityJobDefinitions
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.ListModelPackageGroups:
     post:
       operationId: ListModelPackageGroups
@@ -5789,6 +6825,51 @@ paths:
             type: string
             enum:
               - SageMaker.ListModelPackages
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.ListModelQualityJobDefinitions:
+    post:
+      operationId: ListModelQualityJobDefinitions
+      description: Gets a list of model quality monitoring job definitions in your account.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListModelQualityJobDefinitionsResponse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListModelQualityJobDefinitionsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.ListModelQualityJobDefinitions
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -6811,6 +7892,41 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.RegisterDevices:
+    post:
+      operationId: RegisterDevices
+      description: Register devices.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceLimitExceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceLimitExceeded'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDevicesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.RegisterDevices
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.RenderUiTemplate:
     post:
       operationId: RenderUiTemplate
@@ -6898,7 +8014,7 @@ paths:
   /#X-Amz-Target=SageMaker.StartMonitoringSchedule:
     post:
       operationId: StartMonitoringSchedule
-      description: <p>Starts a previously stopped monitoring schedule.</p> <note> <p>New monitoring schedules are immediately started after creation.</p> </note>
+      description: '<p>Starts a previously stopped monitoring schedule.</p> <note> <p>By default, when you successfully create a new schedule, the status of a monitoring schedule is <code>scheduled</code>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -7072,6 +8188,35 @@ paths:
             type: string
             enum:
               - SageMaker.StopCompilationJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.StopEdgePackagingJob:
+    post:
+      operationId: StopEdgePackagingJob
+      description: Request to stop an edge packaging job.
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopEdgePackagingJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.StopEdgePackagingJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -7565,6 +8710,70 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.UpdateDeviceFleet:
+    post:
+      operationId: UpdateDeviceFleet
+      description: Updates a fleet of devices.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ResourceInUse
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUse'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeviceFleetRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.UpdateDeviceFleet
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.UpdateDevices:
+    post:
+      operationId: UpdateDevices
+      description: Updates one or more devices in a fleet.
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDevicesRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.UpdateDevices
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=SageMaker.UpdateDomain:
     post:
       operationId: UpdateDomain
@@ -8010,6 +9219,45 @@ paths:
             type: string
             enum:
               - SageMaker.UpdatePipelineExecution
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=SageMaker.UpdateTrainingJob:
+    post:
+      operationId: UpdateTrainingJob
+      description: Update a model training job to request a new Debugger profiling configuration.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTrainingJobResponse'
+        '480':
+          description: ResourceNotFound
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFound'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTrainingJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - SageMaker.UpdateTrainingJob
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -8718,6 +9966,87 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: A list of tags to apply to the context.
+    CreateDataQualityJobDefinitionResponse:
+      type: object
+      required:
+        - JobDefinitionArn
+      properties:
+        JobDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionArn'
+            - description: The Amazon Resource Name (ARN) of the job definition.
+    CreateDataQualityJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+        - DataQualityAppSpecification
+        - DataQualityJobInput
+        - DataQualityJobOutputConfig
+        - JobResources
+        - RoleArn
+      title: CreateDataQualityJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name for the monitoring job definition.
+        DataQualityBaselineConfig:
+          allOf:
+            - $ref: '#/components/schemas/DataQualityBaselineConfig'
+            - description: Configures the constraints and baselines for the monitoring job.
+        DataQualityAppSpecification:
+          allOf:
+            - $ref: '#/components/schemas/DataQualityAppSpecification'
+            - description: Specifies the container that runs the monitoring job.
+        DataQualityJobInput:
+          allOf:
+            - $ref: '#/components/schemas/DataQualityJobInput'
+            - description: A list of inputs for the monitoring job. Currently endpoints are supported as monitoring inputs.
+        DataQualityJobOutputConfig:
+          $ref: '#/components/schemas/MonitoringOutputConfig'
+        JobResources:
+          $ref: '#/components/schemas/MonitoringResources'
+        NetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringNetworkConfig'
+            - description: Specifies networking configuration for the monitoring job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+        StoppingCondition:
+          $ref: '#/components/schemas/MonitoringStoppingCondition'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '(Optional) An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
+    CreateDeviceFleetRequest:
+      type: object
+      required:
+        - DeviceFleetName
+        - OutputConfig
+      title: CreateDeviceFleetRequest
+      properties:
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet that the device belongs to.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFleetDescription'
+            - description: A description of the fleet.
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/EdgeOutputConfig'
+            - description: The output configuration for storing sample data collected by the fleet.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Creates tags for the specified fleet.
     CreateDomainResponse:
       type: object
       properties:
@@ -8776,6 +10105,49 @@ components:
           allOf:
             - $ref: '#/components/schemas/KmsKeyId'
             - description: 'SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default. For more control, specify a customer managed CMK.'
+    CreateEdgePackagingJobRequest:
+      type: object
+      required:
+        - EdgePackagingJobName
+        - CompilationJobName
+        - ModelName
+        - ModelVersion
+        - RoleArn
+        - OutputConfig
+      title: CreateEdgePackagingJobRequest
+      properties:
+        EdgePackagingJobName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the edge packaging job.
+        CompilationJobName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the SageMaker Neo compilation job that will be used to locate model artifacts for packaging.
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the model.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/EdgeVersion'
+            - description: The version of the model.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to download and upload the model, and to contact SageMaker Neo.'
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/EdgeOutputConfig'
+            - description: Provides information about the output location for the packaged model.
+        ResourceKey:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: The CMK to use when encrypting the EBS volume the edge packaging job runs on.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: Creates tags for the packaging job.
     CreateEndpointOutput:
       type: object
       required:
@@ -9198,6 +10570,114 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: Isolates the model container. No inbound or outbound network calls can be made to or from the model container.
+    CreateModelBiasJobDefinitionResponse:
+      type: object
+      required:
+        - JobDefinitionArn
+      properties:
+        JobDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionArn'
+            - description: The Amazon Resource Name (ARN) of the model bias job.
+    CreateModelBiasJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+        - ModelBiasAppSpecification
+        - ModelBiasJobInput
+        - ModelBiasJobOutputConfig
+        - JobResources
+        - RoleArn
+      title: CreateModelBiasJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the bias job definition. The name must be unique within an AWS Region in the AWS account.
+        ModelBiasBaselineConfig:
+          allOf:
+            - $ref: '#/components/schemas/ModelBiasBaselineConfig'
+            - description: The baseline configuration for a model bias job.
+        ModelBiasAppSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ModelBiasAppSpecification'
+            - description: Configures the model bias job to run a specified Docker container image.
+        ModelBiasJobInput:
+          allOf:
+            - $ref: '#/components/schemas/ModelBiasJobInput'
+            - description: Inputs for the model bias job.
+        ModelBiasJobOutputConfig:
+          $ref: '#/components/schemas/MonitoringOutputConfig'
+        JobResources:
+          $ref: '#/components/schemas/MonitoringResources'
+        NetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringNetworkConfig'
+            - description: Networking options for a model bias job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+        StoppingCondition:
+          $ref: '#/components/schemas/MonitoringStoppingCondition'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '(Optional) An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
+    CreateModelExplainabilityJobDefinitionResponse:
+      type: object
+      required:
+        - JobDefinitionArn
+      properties:
+        JobDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionArn'
+            - description: The Amazon Resource Name (ARN) of the model explainability job.
+    CreateModelExplainabilityJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+        - ModelExplainabilityAppSpecification
+        - ModelExplainabilityJobInput
+        - ModelExplainabilityJobOutputConfig
+        - JobResources
+        - RoleArn
+      title: CreateModelExplainabilityJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: ' The name of the model explainability job definition. The name must be unique within an AWS Region in the AWS account.'
+        ModelExplainabilityBaselineConfig:
+          allOf:
+            - $ref: '#/components/schemas/ModelExplainabilityBaselineConfig'
+            - description: The baseline configuration for a model explainability job.
+        ModelExplainabilityAppSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ModelExplainabilityAppSpecification'
+            - description: Configures the model explainability job to run a specified Docker container image.
+        ModelExplainabilityJobInput:
+          allOf:
+            - $ref: '#/components/schemas/ModelExplainabilityJobInput'
+            - description: Inputs for the model explainability job.
+        ModelExplainabilityJobOutputConfig:
+          $ref: '#/components/schemas/MonitoringOutputConfig'
+        JobResources:
+          $ref: '#/components/schemas/MonitoringResources'
+        NetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringNetworkConfig'
+            - description: Networking options for a model explainability job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+        StoppingCondition:
+          $ref: '#/components/schemas/MonitoringStoppingCondition'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '(Optional) An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
     CreateModelPackageOutput:
       type: object
       required:
@@ -9285,6 +10765,60 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: 'A list of key value pairs associated with the model group. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging AWS resources</a> in the <i>AWS General Reference Guide</i>.'
+    CreateModelQualityJobDefinitionResponse:
+      type: object
+      required:
+        - JobDefinitionArn
+      properties:
+        JobDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionArn'
+            - description: The Amazon Resource Name (ARN) of the model quality monitoring job.
+    CreateModelQualityJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+        - ModelQualityAppSpecification
+        - ModelQualityJobInput
+        - ModelQualityJobOutputConfig
+        - JobResources
+        - RoleArn
+      title: CreateModelQualityJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the monitoring job definition.
+        ModelQualityBaselineConfig:
+          allOf:
+            - $ref: '#/components/schemas/ModelQualityBaselineConfig'
+            - description: Specifies the constraints and baselines for the monitoring job.
+        ModelQualityAppSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ModelQualityAppSpecification'
+            - description: The container that runs the monitoring job.
+        ModelQualityJobInput:
+          allOf:
+            - $ref: '#/components/schemas/ModelQualityJobInput'
+            - description: A list of the inputs that are monitored. Currently endpoints are supported.
+        ModelQualityJobOutputConfig:
+          $ref: '#/components/schemas/MonitoringOutputConfig'
+        JobResources:
+          $ref: '#/components/schemas/MonitoringResources'
+        NetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringNetworkConfig'
+            - description: Specifies the network configuration for the monitoring job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+        StoppingCondition:
+          $ref: '#/components/schemas/MonitoringStoppingCondition'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '(Optional) An array of key-value pairs. For more information, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>.'
     CreateMonitoringScheduleResponse:
       type: object
       required:
@@ -9678,11 +11212,17 @@ components:
         DebugRuleConfigurations:
           allOf:
             - $ref: '#/components/schemas/DebugRuleConfigurations'
-            - description: Configuration information for debugging rules.
+            - description: Configuration information for Debugger rules for debugging output tensors.
         TensorBoardOutputConfig:
           $ref: '#/components/schemas/TensorBoardOutputConfig'
         ExperimentConfig:
           $ref: '#/components/schemas/ExperimentConfig'
+        ProfilerConfig:
+          $ref: '#/components/schemas/ProfilerConfig'
+        ProfilerRuleConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ProfilerRuleConfigurations'
+            - description: Configuration information for Debugger rules for profiling system and framework metrics.
     CreateTransformJobResponse:
       type: object
       required:
@@ -10079,6 +11619,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentEntityName'
             - description: The name of the context to delete.
+    DeleteDataQualityJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+      title: DeleteDataQualityJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the data quality monitoring job definition to delete.
+    DeleteDeviceFleetRequest:
+      type: object
+      required:
+        - DeviceFleetName
+      title: DeleteDeviceFleetRequest
+      properties:
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet to delete.
     DeleteDomainRequest:
       type: object
       required:
@@ -10207,6 +11767,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelName'
             - description: The name of the model to delete.
+    DeleteModelBiasJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+      title: DeleteModelBiasJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the model bias job definition to delete.
+    DeleteModelExplainabilityJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+      title: DeleteModelExplainabilityJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the model explainability job definition to delete.
     DeleteModelPackageInput:
       type: object
       required:
@@ -10237,6 +11817,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityName'
             - description: The name of the model group for which to delete the policy.
+    DeleteModelQualityJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+      title: DeleteModelQualityJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the model quality monitoring job definition to delete.
     DeleteMonitoringScheduleRequest:
       type: object
       required:
@@ -10398,6 +11988,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkteamName'
             - description: The name of the work team to delete.
+    DeregisterDevicesRequest:
+      type: object
+      required:
+        - DeviceFleetName
+        - DeviceNames
+      title: DeregisterDevicesRequest
+      properties:
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet the devices belong to.
+        DeviceNames:
+          allOf:
+            - $ref: '#/components/schemas/DeviceNames'
+            - description: The unique IDs of the devices.
     DescribeActionResponse:
       type: object
       properties:
@@ -10932,6 +12537,183 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExperimentEntityName'
             - description: The name of the context to describe.
+    DescribeDataQualityJobDefinitionResponse:
+      type: object
+      required:
+        - JobDefinitionArn
+        - JobDefinitionName
+        - CreationTime
+        - DataQualityAppSpecification
+        - DataQualityJobInput
+        - DataQualityJobOutputConfig
+        - JobResources
+        - RoleArn
+      properties:
+        JobDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionArn'
+            - description: The Amazon Resource Name (ARN) of the data quality monitoring job definition.
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the data quality monitoring job definition.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the data quality monitoring job definition was created.
+        DataQualityBaselineConfig:
+          allOf:
+            - $ref: '#/components/schemas/DataQualityBaselineConfig'
+            - description: The constraints and baselines for the data quality monitoring job definition.
+        DataQualityAppSpecification:
+          allOf:
+            - $ref: '#/components/schemas/DataQualityAppSpecification'
+            - description: Information about the container that runs the data quality monitoring job.
+        DataQualityJobInput:
+          allOf:
+            - $ref: '#/components/schemas/DataQualityJobInput'
+            - description: The list of inputs for the data quality monitoring job. Currently endpoints are supported.
+        DataQualityJobOutputConfig:
+          $ref: '#/components/schemas/MonitoringOutputConfig'
+        JobResources:
+          $ref: '#/components/schemas/MonitoringResources'
+        NetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringNetworkConfig'
+            - description: The networking configuration for the data quality monitoring job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+        StoppingCondition:
+          $ref: '#/components/schemas/MonitoringStoppingCondition'
+    DescribeDataQualityJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+      title: DescribeDataQualityJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the data quality monitoring job definition to describe.
+    DescribeDeviceResponse:
+      type: object
+      required:
+        - DeviceName
+        - DeviceFleetName
+        - RegistrationTime
+      properties:
+        DeviceArn:
+          allOf:
+            - $ref: '#/components/schemas/DeviceArn'
+            - description: The Amazon Resource Name (ARN) of the device.
+        DeviceName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The unique identifier of the device.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DeviceDescription'
+            - description: A description of the device.
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet the device belongs to.
+        IotThingName:
+          allOf:
+            - $ref: '#/components/schemas/ThingName'
+            - description: The AWS Internet of Things (IoT) object thing name associated with the device.
+        RegistrationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of the last registration or de-reregistration.
+        LatestHeartbeat:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last heartbeat received from the device.
+        Models:
+          allOf:
+            - $ref: '#/components/schemas/EdgeModels'
+            - description: Models on the device.
+        MaxModels:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - description: The maximum number of models.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The response from the last list when returning a list large enough to need tokening.
+    DescribeDeviceRequest:
+      type: object
+      required:
+        - DeviceName
+        - DeviceFleetName
+      title: DescribeDeviceRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: Next token of device description.
+        DeviceName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The unique ID of the device.
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet the devices belong to.
+    DescribeDeviceFleetResponse:
+      type: object
+      required:
+        - DeviceFleetName
+        - DeviceFleetArn
+        - OutputConfig
+        - CreationTime
+        - LastModifiedTime
+      properties:
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet.
+        DeviceFleetArn:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFleetArn'
+            - description: The The Amazon Resource Name (ARN) of the fleet.
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/EdgeOutputConfig'
+            - description: The output configuration for storing sampled data.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFleetDescription'
+            - description: A description of the fleet.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Timestamp of when the device fleet was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Timestamp of when the device fleet was last updated.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) that has access to AWS Internet of Things (IoT).
+        IotRoleAlias:
+          allOf:
+            - $ref: '#/components/schemas/IotRoleAlias'
+            - description: The Amazon Resource Name (ARN) alias created in AWS Internet of Things (IoT).
+    DescribeDeviceFleetRequest:
+      type: object
+      required:
+        - DeviceFleetName
+      title: DescribeDeviceFleetRequest
+      properties:
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet.
     DescribeDomainResponse:
       type: object
       properties:
@@ -11014,6 +12796,79 @@ components:
           allOf:
             - $ref: '#/components/schemas/DomainId'
             - description: The domain ID.
+    DescribeEdgePackagingJobResponse:
+      type: object
+      required:
+        - EdgePackagingJobArn
+        - EdgePackagingJobName
+        - EdgePackagingJobStatus
+      properties:
+        EdgePackagingJobArn:
+          allOf:
+            - $ref: '#/components/schemas/EdgePackagingJobArn'
+            - description: The Amazon Resource Name (ARN) of the edge packaging job.
+        EdgePackagingJobName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the edge packaging job.
+        CompilationJobName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the SageMaker Neo compilation job that is used to locate model artifacts that are being packaged.
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the model.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/EdgeVersion'
+            - description: The version of the model.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to download and upload the model, and to contact Neo.'
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/EdgeOutputConfig'
+            - description: The output configuration for the edge packaging job.
+        ResourceKey:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: The CMK to use when encrypting the EBS volume the job run on.
+        EdgePackagingJobStatus:
+          allOf:
+            - $ref: '#/components/schemas/EdgePackagingJobStatus'
+            - description: The current status of the packaging job.
+        EdgePackagingJobStatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Returns a message describing the job status and error messages.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the packaging job was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the job was last updated.
+        ModelArtifact:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon Simple Storage (S3) URI where model artifacts ares stored.
+        ModelSignature:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The signature document of files in the model artifact.
+    DescribeEdgePackagingJobRequest:
+      type: object
+      required:
+        - EdgePackagingJobName
+      title: DescribeEdgePackagingJobRequest
+      properties:
+        EdgePackagingJobName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the edge packaging job.
     DescribeEndpointOutput:
       type: object
       required:
@@ -11669,6 +13524,126 @@ components:
           allOf:
             - $ref: '#/components/schemas/ModelName'
             - description: The name of the model.
+    DescribeModelBiasJobDefinitionResponse:
+      type: object
+      required:
+        - JobDefinitionArn
+        - JobDefinitionName
+        - CreationTime
+        - ModelBiasAppSpecification
+        - ModelBiasJobInput
+        - ModelBiasJobOutputConfig
+        - JobResources
+        - RoleArn
+      properties:
+        JobDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionArn'
+            - description: The Amazon Resource Name (ARN) of the model bias job.
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the bias job definition. The name must be unique within an AWS Region in the AWS account.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the model bias job was created.
+        ModelBiasBaselineConfig:
+          allOf:
+            - $ref: '#/components/schemas/ModelBiasBaselineConfig'
+            - description: The baseline configuration for a model bias job.
+        ModelBiasAppSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ModelBiasAppSpecification'
+            - description: Configures the model bias job to run a specified Docker container image.
+        ModelBiasJobInput:
+          allOf:
+            - $ref: '#/components/schemas/ModelBiasJobInput'
+            - description: Inputs for the model bias job.
+        ModelBiasJobOutputConfig:
+          $ref: '#/components/schemas/MonitoringOutputConfig'
+        JobResources:
+          $ref: '#/components/schemas/MonitoringResources'
+        NetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringNetworkConfig'
+            - description: Networking options for a model bias job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+        StoppingCondition:
+          $ref: '#/components/schemas/MonitoringStoppingCondition'
+    DescribeModelBiasJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+      title: DescribeModelBiasJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the model bias job definition. The name must be unique within an AWS Region in the AWS account.
+    DescribeModelExplainabilityJobDefinitionResponse:
+      type: object
+      required:
+        - JobDefinitionArn
+        - JobDefinitionName
+        - CreationTime
+        - ModelExplainabilityAppSpecification
+        - ModelExplainabilityJobInput
+        - ModelExplainabilityJobOutputConfig
+        - JobResources
+        - RoleArn
+      properties:
+        JobDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionArn'
+            - description: The Amazon Resource Name (ARN) of the model explainability job.
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the explainability job definition. The name must be unique within an AWS Region in the AWS account.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the model explainability job was created.
+        ModelExplainabilityBaselineConfig:
+          allOf:
+            - $ref: '#/components/schemas/ModelExplainabilityBaselineConfig'
+            - description: The baseline configuration for a model explainability job.
+        ModelExplainabilityAppSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ModelExplainabilityAppSpecification'
+            - description: Configures the model explainability job to run a specified Docker container image.
+        ModelExplainabilityJobInput:
+          allOf:
+            - $ref: '#/components/schemas/ModelExplainabilityJobInput'
+            - description: Inputs for the model explainability job.
+        ModelExplainabilityJobOutputConfig:
+          $ref: '#/components/schemas/MonitoringOutputConfig'
+        JobResources:
+          $ref: '#/components/schemas/MonitoringResources'
+        NetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringNetworkConfig'
+            - description: Networking options for a model explainability job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that has read permission to the input data location and write permission to the output data location in Amazon S3.
+        StoppingCondition:
+          $ref: '#/components/schemas/MonitoringStoppingCondition'
+    DescribeModelExplainabilityJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+      title: DescribeModelExplainabilityJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the model explainability job definition. The name must be unique within an AWS Region in the AWS account.
     DescribeModelPackageOutput:
       type: object
       required:
@@ -11799,6 +13774,66 @@ components:
           allOf:
             - $ref: '#/components/schemas/ArnOrName'
             - description: The name of the model group to describe.
+    DescribeModelQualityJobDefinitionResponse:
+      type: object
+      required:
+        - JobDefinitionArn
+        - JobDefinitionName
+        - CreationTime
+        - ModelQualityAppSpecification
+        - ModelQualityJobInput
+        - ModelQualityJobOutputConfig
+        - JobResources
+        - RoleArn
+      properties:
+        JobDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionArn'
+            - description: The Amazon Resource Name (ARN) of the model quality job.
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the quality job definition. The name must be unique within an AWS Region in the AWS account.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time at which the model quality job was created.
+        ModelQualityBaselineConfig:
+          allOf:
+            - $ref: '#/components/schemas/ModelQualityBaselineConfig'
+            - description: The baseline configuration for a model quality job.
+        ModelQualityAppSpecification:
+          allOf:
+            - $ref: '#/components/schemas/ModelQualityAppSpecification'
+            - description: Configures the model quality job to run a specified Docker container image.
+        ModelQualityJobInput:
+          allOf:
+            - $ref: '#/components/schemas/ModelQualityJobInput'
+            - description: Inputs for the model quality job.
+        ModelQualityJobOutputConfig:
+          $ref: '#/components/schemas/MonitoringOutputConfig'
+        JobResources:
+          $ref: '#/components/schemas/MonitoringResources'
+        NetworkConfig:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringNetworkConfig'
+            - description: Networking options for a model quality job.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
+        StoppingCondition:
+          $ref: '#/components/schemas/MonitoringStoppingCondition'
+    DescribeModelQualityJobDefinitionRequest:
+      type: object
+      required:
+        - JobDefinitionName
+      title: DescribeModelQualityJobDefinitionRequest
+      properties:
+        JobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the model quality job. The name must be unique within an AWS Region in the AWS account.
     DescribeMonitoringScheduleResponse:
       type: object
       required:
@@ -11821,6 +13856,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScheduleStatus'
             - description: The status of an monitoring job.
+        MonitoringType:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringType'
+            - description: <p>The type of the monitoring job that this schedule runs. This is one of the following values.</p> <ul> <li> <p> <code>DATA_QUALITY</code> - The schedule is for a data quality monitoring job.</p> </li> <li> <p> <code>MODEL_QUALITY</code> - The schedule is for a model quality monitoring job.</p> </li> <li> <p> <code>MODEL_BIAS</code> - The schedule is for a bias monitoring job.</p> </li> <li> <p> <code>MODEL_EXPLAINABILITY</code> - The schedule is for an explainability monitoring job.</p> </li> </ul>
         FailureReason:
           allOf:
             - $ref: '#/components/schemas/FailureReason'
@@ -12419,13 +14458,27 @@ components:
         DebugRuleConfigurations:
           allOf:
             - $ref: '#/components/schemas/DebugRuleConfigurations'
-            - description: Configuration information for debugging rules.
+            - description: Configuration information for Debugger rules for debugging output tensors.
         TensorBoardOutputConfig:
           $ref: '#/components/schemas/TensorBoardOutputConfig'
         DebugRuleEvaluationStatuses:
           allOf:
             - $ref: '#/components/schemas/DebugRuleEvaluationStatuses'
-            - description: Status about the debug rule evaluation.
+            - description: Evaluation status of Debugger rules for debugging on a training job.
+        ProfilerConfig:
+          $ref: '#/components/schemas/ProfilerConfig'
+        ProfilerRuleConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ProfilerRuleConfigurations'
+            - description: Configuration information for Debugger rules for profiling system and framework metrics.
+        ProfilerRuleEvaluationStatuses:
+          allOf:
+            - $ref: '#/components/schemas/ProfilerRuleEvaluationStatuses'
+            - description: Evaluation status of Debugger rules for profiling on a training job.
+        ProfilingStatus:
+          allOf:
+            - $ref: '#/components/schemas/ProfilingStatus'
+            - description: Profiling status of a training job.
     DescribeTrainingJobRequest:
       type: object
       required:
@@ -12799,6 +14852,54 @@ components:
       type: object
       title: EnableSagemakerServicecatalogPortfolioInput
       properties: {}
+    GetDeviceFleetReportResponse:
+      type: object
+      required:
+        - DeviceFleetArn
+        - DeviceFleetName
+      properties:
+        DeviceFleetArn:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFleetArn'
+            - description: The Amazon Resource Name (ARN) of the device.
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet.
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/EdgeOutputConfig'
+            - description: The output configuration for storing sample data collected by the fleet.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFleetDescription'
+            - description: Description of the fleet.
+        ReportGenerated:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Timestamp of when the report was generated.
+        DeviceStats:
+          allOf:
+            - $ref: '#/components/schemas/DeviceStats'
+            - description: Status of devices.
+        AgentVersions:
+          allOf:
+            - $ref: '#/components/schemas/AgentVersions'
+            - description: The versions of Edge Manager agent deployed on the fleet.
+        ModelStats:
+          allOf:
+            - $ref: '#/components/schemas/EdgeModelStats'
+            - description: Status of model on device.
+    GetDeviceFleetReportRequest:
+      type: object
+      required:
+        - DeviceFleetName
+      title: GetDeviceFleetReportRequest
+      properties:
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet.
     GetModelPackageGroupPolicyOutput:
       type: object
       required:
@@ -13399,6 +15500,145 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of contexts to return in the response. The default value is 10.
+    ListDataQualityJobDefinitionsResponse:
+      type: object
+      required:
+        - JobDefinitionSummaries
+      properties:
+        JobDefinitionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionSummaryList'
+            - description: A list of data quality monitoring job definitions.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the result of the previous <code>ListDataQualityJobDefinitions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of data quality monitoring job definitions, use the token in the next request.'
+    ListDataQualityJobDefinitionsRequest:
+      type: object
+      title: ListDataQualityJobDefinitionsRequest
+      properties:
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: A filter that lists the data quality job definitions associated with the specified endpoint.
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionSortKey'
+            - description: The field to sort results by. The default is <code>CreationTime</code>.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: The sort order for results. The default is <code>Descending</code>.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the result of the previous <code>ListDataQualityJobDefinitions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of transform jobs, use the token in the next request.&gt;'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of data quality monitoring job definitions to return in the response.
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/NameContains'
+            - description: A string in the data quality monitoring job definition name. This filter returns only data quality monitoring job definitions whose name contains the specified string.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only data quality monitoring job definitions created before the specified time.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only data quality monitoring job definitions created after the specified time.
+    ListDeviceFleetsResponse:
+      type: object
+      required:
+        - DeviceFleetSummaries
+      properties:
+        DeviceFleetSummaries:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFleetSummaries'
+            - description: Summary of the device fleet.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The response from the last list when returning a list large enough to need tokening.
+    ListDeviceFleetsRequest:
+      type: object
+      title: ListDeviceFleetsRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The response from the last list when returning a list large enough to need tokening.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListMaxResults'
+            - description: The maximum number of results to select.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter fleets where packaging job was created after specified time.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Filter fleets where the edge packaging job was created before specified time.
+        LastModifiedTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Select fleets where the job was updated after X
+        LastModifiedTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Select fleets where the job was updated before X
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/NameContains'
+            - description: Filter for fleets containing this name in their fleet device name.
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/ListDeviceFleetsSortBy'
+            - description: The column to sort by.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: What direction to sort in.
+    ListDevicesResponse:
+      type: object
+      required:
+        - DeviceSummaries
+      properties:
+        DeviceSummaries:
+          allOf:
+            - $ref: '#/components/schemas/DeviceSummaries'
+            - description: Summary of devices.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The response from the last list when returning a list large enough to need tokening.
+    ListDevicesRequest:
+      type: object
+      title: ListDevicesRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The response from the last list when returning a list large enough to need tokening.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListMaxResults'
+            - description: Maximum number of results to select.
+        LatestHeartbeatAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Select fleets where the job was updated after X
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: A filter that searches devices that contains this name in any of their models.
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: Filter for fleets containing this name in their device fleet name.
     ListDomainsResponse:
       type: object
       properties:
@@ -13422,6 +15662,67 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: Returns a list up to a specified limit.
+    ListEdgePackagingJobsResponse:
+      type: object
+      required:
+        - EdgePackagingJobSummaries
+      properties:
+        EdgePackagingJobSummaries:
+          allOf:
+            - $ref: '#/components/schemas/EdgePackagingJobSummaries'
+            - description: Summaries of edge packaging jobs.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: Token to use when calling the next page of results.
+    ListEdgePackagingJobsRequest:
+      type: object
+      title: ListEdgePackagingJobsRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The response from the last list when returning a list large enough to need tokening.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListMaxResults'
+            - description: Maximum number of results to select.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Select jobs where the job was created after specified time.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Select jobs where the job was created before specified time.
+        LastModifiedTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Select jobs where the job was updated after specified time.
+        LastModifiedTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Select jobs where the job was updated before specified time.
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/NameContains'
+            - description: Filter for jobs containing this name in their packaging job name.
+        ModelNameContains:
+          allOf:
+            - $ref: '#/components/schemas/NameContains'
+            - description: Filter for jobs where the model name contains this string.
+        StatusEquals:
+          allOf:
+            - $ref: '#/components/schemas/EdgePackagingJobStatus'
+            - description: The job status to filter for.
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/ListEdgePackagingJobsSortBy'
+            - description: Use to specify what column to sort by.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: What direction to sort by.
     ListEndpointConfigsOutput:
       type: object
       required:
@@ -13958,6 +16259,104 @@ components:
           allOf:
             - $ref: '#/components/schemas/SortOrder'
             - description: The sort order for results. The default is <code>Ascending</code>.
+    ListModelBiasJobDefinitionsResponse:
+      type: object
+      required:
+        - JobDefinitionSummaries
+      properties:
+        JobDefinitionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionSummaryList'
+            - description: A JSON array in which each element is a summary for a model bias jobs.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.'
+    ListModelBiasJobDefinitionsRequest:
+      type: object
+      title: ListModelBiasJobDefinitionsRequest
+      properties:
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: Name of the endpoint to monitor for model bias.
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionSortKey'
+            - description: Whether to sort results by the <code>Name</code> or <code>CreationTime</code> field. The default is <code>CreationTime</code>.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order. The default is <code>Descending</code>.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of model bias jobs to return in the response. The default value is 10.
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/NameContains'
+            - description: Filter for model bias jobs whose name contains a specified string.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only model bias jobs created before a specified time.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only model bias jobs created after a specified time.
+    ListModelExplainabilityJobDefinitionsResponse:
+      type: object
+      required:
+        - JobDefinitionSummaries
+      properties:
+        JobDefinitionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionSummaryList'
+            - description: A JSON array in which each element is a summary for a explainability bias jobs.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.'
+    ListModelExplainabilityJobDefinitionsRequest:
+      type: object
+      title: ListModelExplainabilityJobDefinitionsRequest
+      properties:
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: Name of the endpoint to monitor for model explainability.
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionSortKey'
+            - description: Whether to sort results by the <code>Name</code> or <code>CreationTime</code> field. The default is <code>CreationTime</code>.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: Whether to sort the results in <code>Ascending</code> or <code>Descending</code> order. The default is <code>Descending</code>.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token returned if the response is truncated. To retrieve the next set of job executions, use it in the next request.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of jobs to return in the response. The default value is 10.
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/NameContains'
+            - description: Filter for model explainability jobs whose name contains a specified string.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only model explainability jobs created before a specified time.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only model explainability jobs created after a specified time.
     ListModelPackageGroupsOutput:
       type: object
       required:
@@ -14060,6 +16459,55 @@ components:
           allOf:
             - $ref: '#/components/schemas/SortOrder'
             - description: The sort order for the results. The default is <code>Ascending</code>.
+    ListModelQualityJobDefinitionsResponse:
+      type: object
+      required:
+        - JobDefinitionSummaries
+      properties:
+        JobDefinitionSummaries:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionSummaryList'
+            - description: A list of summaries of model quality monitoring job definitions.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of model quality monitoring job definitions, use it in the next request.'
+    ListModelQualityJobDefinitionsRequest:
+      type: object
+      title: ListModelQualityJobDefinitionsRequest
+      properties:
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: A filter that returns only model quality monitoring job definitions that are associated with the specified endpoint.
+        SortBy:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionSortKey'
+            - description: The field to sort results by. The default is <code>CreationTime</code>.
+        SortOrder:
+          allOf:
+            - $ref: '#/components/schemas/SortOrder'
+            - description: The sort order for results. The default is <code>Descending</code>.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the result of the previous <code>ListModelQualityJobDefinitions</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of model quality monitoring job definitions, use the token in the next request.'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of results to return in a call to <code>ListModelQualityJobDefinitions</code>.
+        NameContains:
+          allOf:
+            - $ref: '#/components/schemas/NameContains'
+            - description: A string in the transform job name. This filter returns only model quality monitoring job definitions whose name contains the specified string.
+        CreationTimeBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only model quality monitoring job definitions created before the specified time.
+        CreationTimeAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that returns only model quality monitoring job definitions created after the specified time.
     ListModelsOutput:
       type: object
       required:
@@ -14174,6 +16622,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ExecutionStatus'
             - description: A filter that retrieves only jobs with a specific status.
+        MonitoringJobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: Gets a list of the monitoring job runs of the specified monitoring job definitions.
+        MonitoringTypeEquals:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringType'
+            - description: A filter that returns only the monitoring job runs of the specified monitoring type.
     ListMonitoringSchedulesResponse:
       type: object
       required:
@@ -14186,7 +16642,7 @@ components:
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
-            - description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent reques'
+            - description: 'If the response is truncated, Amazon SageMaker returns this token. To retrieve the next set of jobs, use it in the subsequent request.'
     ListMonitoringSchedulesRequest:
       type: object
       title: ListMonitoringSchedulesRequest
@@ -14235,6 +16691,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScheduleStatus'
             - description: A filter that returns only monitoring schedules modified before a specified time.
+        MonitoringJobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: Gets a list of the monitoring schedules for the specified monitoring job definition.
+        MonitoringTypeEquals:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringType'
+            - description: A filter that returns only the monitoring schedules for the specified monitoring type.
     ListNotebookInstanceLifecycleConfigsOutput:
       type: object
       properties:
@@ -15053,6 +17517,25 @@ components:
           allOf:
             - $ref: '#/components/schemas/PolicyString'
             - description: The resource policy for the model group.
+    RegisterDevicesRequest:
+      type: object
+      required:
+        - DeviceFleetName
+        - Devices
+      title: RegisterDevicesRequest
+      properties:
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet.
+        Devices:
+          allOf:
+            - $ref: '#/components/schemas/Devices'
+            - description: A list of devices to register with SageMaker Edge Manager.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags associated with devices.
     RenderUiTemplateResponse:
       type: object
       required:
@@ -15205,6 +17688,16 @@ components:
           allOf:
             - $ref: '#/components/schemas/EntityName'
             - description: The name of the model compilation job to stop.
+    StopEdgePackagingJobRequest:
+      type: object
+      required:
+        - EdgePackagingJobName
+      title: StopEdgePackagingJobRequest
+      properties:
+        EdgePackagingJobName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the edge packaging job.
     StopHyperParameterTuningJobRequest:
       type: object
       required:
@@ -15432,6 +17925,44 @@ components:
           allOf:
             - $ref: '#/components/schemas/ListLineageEntityParameterKey'
             - description: A list of properties to remove.
+    UpdateDeviceFleetRequest:
+      type: object
+      required:
+        - DeviceFleetName
+        - OutputConfig
+      title: UpdateDeviceFleetRequest
+      properties:
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The Amazon Resource Name (ARN) of the device.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFleetDescription'
+            - description: Description of the fleet.
+        OutputConfig:
+          allOf:
+            - $ref: '#/components/schemas/EdgeOutputConfig'
+            - description: Output configuration for storing sample data collected by the fleet.
+    UpdateDevicesRequest:
+      type: object
+      required:
+        - DeviceFleetName
+        - Devices
+      title: UpdateDevicesRequest
+      properties:
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet the devices belong to.
+        Devices:
+          allOf:
+            - $ref: '#/components/schemas/Devices'
+            - description: List of devices to register with Edge Manager agent.
     UpdateDomainResponse:
       type: object
       properties:
@@ -15763,6 +18294,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/PipelineExecutionName'
             - description: The display name of the pipeline execution.
+    UpdateTrainingJobResponse:
+      type: object
+      required:
+        - TrainingJobArn
+      properties:
+        TrainingJobArn:
+          allOf:
+            - $ref: '#/components/schemas/TrainingJobArn'
+            - description: The Amazon Resource Name (ARN) of the training job.
+    UpdateTrainingJobRequest:
+      type: object
+      required:
+        - TrainingJobName
+      title: UpdateTrainingJobRequest
+      properties:
+        TrainingJobName:
+          allOf:
+            - $ref: '#/components/schemas/TrainingJobName'
+            - description: The name of a training job to update the Debugger profiling configuration.
+        ProfilerConfig:
+          allOf:
+            - $ref: '#/components/schemas/ProfilerConfigForUpdate'
+            - description: 'Configuration information for Debugger system monitoring, framework profiling, and storage paths.'
+        ProfilerRuleConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/ProfilerRuleConfigurations'
+            - description: Configuration information for Debugger rules for profiling system and framework metrics.
     UpdateTrialResponse:
       type: object
       properties:
@@ -16047,6 +18605,32 @@ components:
       items:
         $ref: '#/components/schemas/CodeRepositoryNameOrUrl'
       maxItems: 3
+    EdgeVersion:
+      type: string
+      pattern: '[a-zA-Z0-9\ \_\.]+'
+      minLength: 1
+      maxLength: 30
+    Long:
+      type: integer
+    AgentVersion:
+      type: object
+      required:
+        - Version
+        - AgentCount
+      properties:
+        Version:
+          allOf:
+            - $ref: '#/components/schemas/EdgeVersion'
+            - description: Version of the agent.
+        AgentCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of Edge Manager agents.
+      description: Edge Manager agent version.
+    AgentVersions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AgentVersion'
     AlarmName:
       type: string
       pattern: ^(?!\s*$).+
@@ -17805,7 +20389,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CollectionParameters'
             - description: 'Parameter values for the tensor collection. The allowed parameters are <code>"name"</code>, <code>"include_regex"</code>, <code>"reduction_config"</code>, <code>"save_config"</code>, <code>"tensor_names"</code>, and <code>"save_histogram"</code>.'
-      description: Configuration information for tensor collections.
+      description: Configuration information for the Debugger output tensor collections.
     CollectionConfigurations:
       type: array
       items:
@@ -18331,6 +20915,132 @@ components:
             - $ref: '#/components/schemas/MaxWaitTimeInSeconds'
             - description: 'The maximum length of time, in seconds, how long you are willing to wait for a managed spot training job to complete. It is the amount of time spent waiting for Spot capacity plus the amount of time the training job runs. It must be equal to or greater than <code>MaxRuntimeInSeconds</code>. '
       description: '<p>Specifies a limit to how long a model training or compilation job can run. It also specifies how long you are willing to wait for a managed spot training job to complete. When the job reaches the time limit, Amazon SageMaker ends the training or compilation job. Use this API to cap model training costs.</p> <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays job termination for 120 seconds. Algorithms can use this 120-second window to save the model artifacts, so the results of training are not lost. </p> <p>The training algorithms provided by Amazon SageMaker automatically save the intermediate results of a model training job when possible. This attempt to save artifacts is only a best effort case as model might not be in a state from which it can be saved. For example, if training has just started, the model might not be ready to save. When saved, this intermediate data is a valid model artifact. You can use it to create a model with <code>CreateModel</code>.</p> <note> <p>The Neural Topic Model (NTM) currently does not support saving intermediate model artifacts. When training NTMs, make sure that the maximum runtime is sufficient for the training job to complete.</p> </note>'
+    MonitoringJobDefinitionName:
+      type: string
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*$'
+      minLength: 1
+      maxLength: 63
+    DataQualityBaselineConfig:
+      type: object
+      properties:
+        BaseliningJobName:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingJobName'
+            - description: The name of the job that performs baselining for the data quality monitoring job.
+        ConstraintsResource:
+          $ref: '#/components/schemas/MonitoringConstraintsResource'
+        StatisticsResource:
+          $ref: '#/components/schemas/MonitoringStatisticsResource'
+      description: Configuration for monitoring constraints and monitoring statistics. These baseline resources are compared against the results of the current job from the series of jobs scheduled to collect data periodically.
+    DataQualityAppSpecification:
+      type: object
+      required:
+        - ImageUri
+      properties:
+        ImageUri:
+          allOf:
+            - $ref: '#/components/schemas/ImageUri'
+            - description: The container image that the data quality monitoring job runs.
+        ContainerEntrypoint:
+          allOf:
+            - $ref: '#/components/schemas/ContainerEntrypoint'
+            - description: The entrypoint for a container used to run a monitoring job.
+        ContainerArguments:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringContainerArguments'
+            - description: The arguments to send to the container that the monitoring job runs.
+        RecordPreprocessorSourceUri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
+        PostAnalyticsProcessorSourceUri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
+        Environment:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringEnvironmentMap'
+            - description: Sets the environment variables in the container that the monitoring job runs.
+      description: Information about the container that a data quality monitoring job runs.
+    DataQualityJobInput:
+      type: object
+      required:
+        - EndpointInput
+      properties:
+        EndpointInput:
+          $ref: '#/components/schemas/EndpointInput'
+      description: The input for the data quality monitoring job. Currently endpoints are supported for input.
+    MonitoringOutputConfig:
+      type: object
+      required:
+        - MonitoringOutputs
+      properties:
+        MonitoringOutputs:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringOutputs'
+            - description: Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
+      description: The output configuration for monitoring jobs.
+    MonitoringResources:
+      type: object
+      required:
+        - ClusterConfig
+      properties:
+        ClusterConfig:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringClusterConfig'
+            - description: The configuration for the cluster resources used to run the processing job.
+      description: Identifies the resources to deploy for a monitoring job.
+    MonitoringNetworkConfig:
+      type: object
+      properties:
+        EnableInterContainerTrafficEncryption:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Whether to encrypt all communications between the instances used for the monitoring jobs. Choose <code>True</code> to encrypt communications. Encryption provides greater security for distributed jobs, but the processing might take longer.'
+        EnableNetworkIsolation:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Whether to allow inbound and outbound network calls to and from the containers used for the monitoring job.
+        VpcConfig:
+          $ref: '#/components/schemas/VpcConfig'
+      description: The networking configuration for the monitoring job.
+    MonitoringStoppingCondition:
+      type: object
+      required:
+        - MaxRuntimeInSeconds
+      properties:
+        MaxRuntimeInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringMaxRuntimeInSeconds'
+            - description: The maximum runtime allowed in seconds.
+      description: A time limit for how long the monitoring job is allowed to run before stopping.
+    MonitoringJobDefinitionArn:
+      type: string
+      pattern: .*
+      maxLength: 256
+    DeviceFleetDescription:
+      type: string
+      pattern: '[\S\s]+'
+      minLength: 1
+      maxLength: 800
+    EdgeOutputConfig:
+      type: object
+      required:
+        - S3OutputLocation
+      properties:
+        S3OutputLocation:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon Simple Storage (S3) bucker URI.
+        KmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/KmsKeyId'
+            - description: 'The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don''t provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role''s account.'
+      description: The output configuration.
     DomainName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}'
@@ -18889,6 +21599,85 @@ components:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:labeling-job/.*'
       maxLength: 2048
+    ModelBiasBaselineConfig:
+      type: object
+      properties:
+        BaseliningJobName:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingJobName'
+            - description: The name of the baseline model bias job.
+        ConstraintsResource:
+          $ref: '#/components/schemas/MonitoringConstraintsResource'
+      description: The configuration for a baseline model bias job.
+    ModelBiasAppSpecification:
+      type: object
+      required:
+        - ImageUri
+        - ConfigUri
+      properties:
+        ImageUri:
+          allOf:
+            - $ref: '#/components/schemas/ImageUri'
+            - description: The container image to be run by the model bias job.
+        ConfigUri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: 'JSON formatted S3 file that defines bias parameters. For more information on this JSON configuration file, see <a href="https://docs.aws.amazon.com/sagemaker/latest/json-bias-parameter-config.html">Configure bias parameters</a>.'
+        Environment:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringEnvironmentMap'
+            - description: Sets the environment variables in the Docker container.
+      description: Docker container image configuration object for the model bias job.
+    ModelBiasJobInput:
+      type: object
+      required:
+        - EndpointInput
+        - GroundTruthS3Input
+      properties:
+        EndpointInput:
+          $ref: '#/components/schemas/EndpointInput'
+        GroundTruthS3Input:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringGroundTruthS3Input'
+            - description: Location of ground truth labels to use in model bias job.
+      description: Inputs for the model bias job.
+    ModelExplainabilityBaselineConfig:
+      type: object
+      properties:
+        BaseliningJobName:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingJobName'
+            - description: The name of the baseline model explainability job.
+        ConstraintsResource:
+          $ref: '#/components/schemas/MonitoringConstraintsResource'
+      description: The configuration for a baseline model explainability job.
+    ModelExplainabilityAppSpecification:
+      type: object
+      required:
+        - ImageUri
+        - ConfigUri
+      properties:
+        ImageUri:
+          allOf:
+            - $ref: '#/components/schemas/ImageUri'
+            - description: The container image to be run by the model explainability job.
+        ConfigUri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: 'JSON formatted S3 file that defines explainability parameters. For more information on this JSON configuration file, see <a href="https://docs.aws.amazon.com/sagemaker/latest/json-model-explainability-parameter-config.html">Configure model explainability parameters</a>.'
+        Environment:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringEnvironmentMap'
+            - description: Sets the environment variables in the Docker container.
+      description: Docker container image configuration object for the model explainability job.
+    ModelExplainabilityJobInput:
+      type: object
+      required:
+        - EndpointInput
+      properties:
+        EndpointInput:
+          $ref: '#/components/schemas/EndpointInput'
+      description: Inputs for the model explainability job.
     ModelName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*'
@@ -18959,6 +21748,63 @@ components:
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:model-package/.*'
       minLength: 1
       maxLength: 2048
+    ModelQualityBaselineConfig:
+      type: object
+      properties:
+        BaseliningJobName:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingJobName'
+            - description: The name of the job that performs baselining for the monitoring job.
+        ConstraintsResource:
+          $ref: '#/components/schemas/MonitoringConstraintsResource'
+      description: Configuration for monitoring constraints and monitoring statistics. These baseline resources are compared against the results of the current job from the series of jobs scheduled to collect data periodically.
+    ModelQualityAppSpecification:
+      type: object
+      required:
+        - ImageUri
+      properties:
+        ImageUri:
+          allOf:
+            - $ref: '#/components/schemas/ImageUri'
+            - description: The address of the container image that the monitoring job runs.
+        ContainerEntrypoint:
+          allOf:
+            - $ref: '#/components/schemas/ContainerEntrypoint'
+            - description: Specifies the entrypoint for a container that the monitoring job runs.
+        ContainerArguments:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringContainerArguments'
+            - description: An array of arguments for the container used to run the monitoring job.
+        RecordPreprocessorSourceUri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: An Amazon S3 URI to a script that is called per row prior to running analysis. It can base64 decode the payload and convert it into a flatted json so that the built-in container can use the converted data. Applicable only for the built-in (first party) containers.
+        PostAnalyticsProcessorSourceUri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
+        ProblemType:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringProblemType'
+            - description: The machine learning problem type of the model that the monitoring job monitors.
+        Environment:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringEnvironmentMap'
+            - description: Sets the environment variables in the container that the monitoring job runs.
+      description: Container image configuration object for the monitoring job.
+    ModelQualityJobInput:
+      type: object
+      required:
+        - EndpointInput
+        - GroundTruthS3Input
+      properties:
+        EndpointInput:
+          $ref: '#/components/schemas/EndpointInput'
+        GroundTruthS3Input:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringGroundTruthS3Input'
+            - description: The ground truth label provided for the model.
+      description: The input for the model quality monitoring job. Currently endponts are supported for input for model quality monitoring jobs.
     MonitoringScheduleName:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$'
@@ -18975,6 +21821,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/MonitoringJobDefinition'
             - description: Defines the monitoring job.
+        MonitoringJobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the monitoring job definition to schedule.
+        MonitoringType:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringType'
+            - description: The type of the monitoring job definition to schedule.
       description: Configures the monitoring schedule and defines the monitoring job.
     MonitoringScheduleArn:
       type: string
@@ -19283,20 +22137,20 @@ components:
         LocalPath:
           allOf:
             - $ref: '#/components/schemas/DirectoryPath'
-            - description: Path to local storage location for tensors. Defaults to <code>/opt/ml/output/tensors/</code>.
+            - description: Path to local storage location for metrics and tensors. Defaults to <code>/opt/ml/output/tensors/</code>.
         S3OutputPath:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
-            - description: Path to Amazon S3 storage location for tensors.
+            - description: Path to Amazon S3 storage location for metrics and tensors.
         HookParameters:
           allOf:
             - $ref: '#/components/schemas/HookParameters'
-            - description: Configuration information for the debug hook parameters.
+            - description: Configuration information for the Debugger hook parameters.
         CollectionConfigurations:
           allOf:
             - $ref: '#/components/schemas/CollectionConfigurations'
-            - description: Configuration information for tensor collections.
-      description: 'Configuration information for the debug hook parameters, collection configuration, and storage paths.'
+            - description: 'Configuration information for Debugger tensor collections. To learn more about how to configure the <code>CollectionConfiguration</code> parameter, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>. '
+      description: 'Configuration information for the Debugger hook parameters, metric and tensor collections, and storage paths. To learn more about how to configure the <code>DebugHookConfig</code> parameter, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>.'
     DebugRuleConfigurations:
       type: array
       items:
@@ -19316,7 +22170,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/S3Uri'
             - description: Path to Amazon S3 storage location for TensorBoard output.
-      description: Configuration of storage locations for TensorBoard output.
+      description: Configuration of storage locations for the Debugger TensorBoard output data.
+    ProfilerConfig:
+      type: object
+      required:
+        - S3OutputPath
+      properties:
+        S3OutputPath:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: Path to Amazon S3 storage location for system and framework metrics.
+        ProfilingIntervalInMilliseconds:
+          allOf:
+            - $ref: '#/components/schemas/ProfilingIntervalInMilliseconds'
+            - description: 'A time interval for capturing system metrics in milliseconds. Available values are 100, 200, 500, 1000 (1 second), 5000 (5 seconds), and 60000 (1 minute) milliseconds. The default value is 500 milliseconds.'
+        ProfilingParameters:
+          allOf:
+            - $ref: '#/components/schemas/ProfilingParameters'
+            - description: 'Configuration information for capturing framework metrics. Available key strings for different profiling options are <code>DetailedProfilingConfig</code>, <code>PythonProfilingConfig</code>, and <code>DataLoaderProfilingConfig</code>. The following codes are configuration structures for the <code>ProfilingParameters</code> parameter. To learn more about how to configure the <code>ProfilingParameters</code> parameter, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>. '
+      description: 'Configuration information for Debugger system monitoring, framework profiling, and storage paths.'
+    ProfilerRuleConfigurations:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfilerRuleConfiguration'
+      minItems: 0
+      maxItems: 20
     TrainingJobArn:
       type: string
       pattern: 'arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:training-job/.*'
@@ -19674,6 +22552,80 @@ components:
       enum:
         - Input
         - None
+    MonitoringContainerArguments:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerArgument'
+      minItems: 1
+      maxItems: 50
+    MonitoringEnvironmentMap:
+      type: object
+      maxProperties: 50
+      additionalProperties:
+        $ref: '#/components/schemas/ProcessingEnvironmentValue'
+    MonitoringConstraintsResource:
+      type: object
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon S3 URI for the constraints resource.
+      description: The constraints resource for a monitoring job.
+    MonitoringStatisticsResource:
+      type: object
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: The Amazon S3 URI for the statistics resource.
+      description: The statistics resource for a monitoring job.
+    EndpointInput:
+      type: object
+      required:
+        - EndpointName
+        - LocalPath
+      properties:
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: An endpoint in customer's account which has enabled <code>DataCaptureConfig</code> enabled.
+        LocalPath:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingLocalPath'
+            - description: Path to the filesystem where the endpoint data is available to the container.
+        S3InputMode:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingS3InputMode'
+            - description: Whether the <code>Pipe</code> or <code>File</code> is used as the input mode for transfering data for the monitoring job. <code>Pipe</code> mode is recommended for large datasets. <code>File</code> mode is useful for small files that fit in memory. Defaults to <code>File</code>.
+        S3DataDistributionType:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingS3DataDistributionType'
+            - description: 'Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to <code>FullyReplicated</code> '
+        FeaturesAttribute:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The attributes of the input data that are the input features.
+        InferenceAttribute:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The attribute of the input data that represents the ground truth label.
+        ProbabilityAttribute:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'In a classification problem, the attribute that represents the class probability.'
+        ProbabilityThresholdAttribute:
+          allOf:
+            - $ref: '#/components/schemas/ProbabilityThresholdAttribute'
+            - description: The threshold for the class probability to be evaluated as a positive result.
+        StartTimeOffset:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringTimeOffsetString'
+            - description: 'If specified, monitoring jobs substract this time from the start time. For information about using offsets for scheduling monitoring jobs, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html">Schedule Model Quality Monitoring Jobs</a>.'
+        EndTimeOffset:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringTimeOffsetString'
+            - description: 'If specified, monitoring jobs substract this time from the end time. For information about using offsets for scheduling monitoring jobs, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality-schedule.html">Schedule Model Quality Monitoring Jobs</a>.'
+      description: Input object for the endpoint
     S3DataSource:
       type: object
       required:
@@ -19873,7 +22825,7 @@ components:
         InstanceType:
           allOf:
             - $ref: '#/components/schemas/ProcessingInstanceType'
-            - description: The instance type to deploy for a training job.
+            - description: The instance type to deploy a Debugger custom rule for debugging a training job.
         VolumeSizeInGB:
           allOf:
             - $ref: '#/components/schemas/OptionalVolumeSizeInGB'
@@ -19881,8 +22833,8 @@ components:
         RuleParameters:
           allOf:
             - $ref: '#/components/schemas/RuleParameters'
-            - description: ' Runtime configuration for rule container.'
-      description: Configuration information for debugging rules.
+            - description: Runtime configuration for rule container.
+      description: 'Configuration information for SageMaker Debugger rules for debugging. To learn more about how to configure the <code>DebugRuleConfiguration</code> parameter, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>.'
     RuleEvaluationStatus:
       type: string
       enum:
@@ -19902,7 +22854,7 @@ components:
         RuleConfigurationName:
           allOf:
             - $ref: '#/components/schemas/RuleConfigurationName'
-            - description: The name of the rule configuration
+            - description: The name of the rule configuration.
         RuleEvaluationJobArn:
           allOf:
             - $ref: '#/components/schemas/ProcessingJobArn'
@@ -19984,6 +22936,10 @@ components:
             - $ref: '#/components/schemas/AutoRollbackConfig'
             - description: <p/>
       description: 'Currently, the <code>DeploymentConfig</code> API is not supported.'
+    DeviceNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceName'
     ProductId:
       type: string
       pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9])*$'
@@ -20021,6 +22977,36 @@ components:
             - $ref: '#/components/schemas/ArtifactDigest'
             - description: Provides a hash value that uniquely identifies the stored model artifacts.
       description: 'Provides information to verify the integrity of stored model artifacts. '
+    DeviceFleetArn:
+      type: string
+      pattern: '^arn:aws[a-z\-]*:iam::\d{12}:device-fleet/?[a-zA-Z_0-9+=,.@\-_/]+$'
+    IotRoleAlias:
+      type: string
+      pattern: '^arn:aws[a-z\-]*:iam::\d{12}:rolealias/?[a-zA-Z_0-9+=,.@\-_/]+$'
+    NextToken:
+      type: string
+      pattern: .*
+      maxLength: 8192
+    DeviceArn:
+      type: string
+      pattern: '^arn:aws[a-z\-]*:[a-z\-]*:[a-z\-]*:\d{12}:[a-z\-]*/?[a-zA-Z_0-9+=,.@\-_/]+$'
+      minLength: 20
+      maxLength: 2048
+    DeviceDescription:
+      type: string
+      pattern: '[\S\s]+'
+      minLength: 1
+      maxLength: 40
+    ThingName:
+      type: string
+      pattern: '[a-zA-Z0-9:_-]+'
+      maxLength: 128
+    EdgeModels:
+      type: array
+      items:
+        $ref: '#/components/schemas/EdgeModel'
+    Integer:
+      type: integer
     ResourceId:
       type: string
       maxLength: 32
@@ -20034,6 +23020,20 @@ components:
         - Updating
         - Update_Failed
         - Delete_Failed
+    EdgePackagingJobArn:
+      type: string
+      pattern: '^arn:aws[a-z\-]*:sagemaker:[a-z\-]*:\d{12}:edge-packaging-job/?[a-zA-Z_0-9+=,.@\-_/]+$'
+      minLength: 20
+      maxLength: 2048
+    EdgePackagingJobStatus:
+      type: string
+      enum:
+        - STARTING
+        - INPROGRESS
+        - COMPLETED
+        - FAILED
+        - STOPPING
+        - STOPPED
     ProductionVariantSummaryList:
       type: array
       items:
@@ -20064,10 +23064,6 @@ components:
             - $ref: '#/components/schemas/SourceType'
             - description: The source type.
       description: The source of the experiment.
-    NextToken:
-      type: string
-      pattern: .*
-      maxLength: 8192
     FeatureGroupStatus:
       type: string
       enum:
@@ -20334,6 +23330,13 @@ components:
         - Failed
         - Scheduled
         - Stopped
+    MonitoringType:
+      type: string
+      enum:
+        - DataQuality
+        - ModelQuality
+        - ModelBias
+        - ModelExplainability
     MonitoringExecutionSummary:
       type: object
       required:
@@ -20370,11 +23373,19 @@ components:
         EndpointName:
           allOf:
             - $ref: '#/components/schemas/EndpointName'
-            - description: The name of teh endpoint used to run the monitoring job.
+            - description: The name of the endpoint used to run the monitoring job.
         FailureReason:
           allOf:
             - $ref: '#/components/schemas/FailureReason'
             - description: 'Contains the reason a monitoring job failed, if it failed.'
+        MonitoringJobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the monitoring job.
+        MonitoringType:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringType'
+            - description: The type of the monitoring job.
       description: Summary of information about the last monitoring job to run.
     NotebookInstanceStatus:
       type: string
@@ -20509,6 +23520,17 @@ components:
     TrainingTimeInSeconds:
       type: integer
       minimum: 1
+    ProfilerRuleEvaluationStatuses:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProfilerRuleEvaluationStatus'
+      minItems: 0
+      maxItems: 20
+    ProfilingStatus:
+      type: string
+      enum:
+        - Enabled
+        - Disabled
     TransformJobStatus:
       type: string
       enum:
@@ -20692,6 +23714,124 @@ components:
         - InProgress
         - Completed
         - Failed
+    DeviceName:
+      type: string
+      pattern: '^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$'
+      minLength: 1
+      maxLength: 63
+    Device:
+      type: object
+      required:
+        - DeviceName
+      properties:
+        DeviceName:
+          allOf:
+            - $ref: '#/components/schemas/DeviceName'
+            - description: The name of the device.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DeviceDescription'
+            - description: Description of the device.
+        IotThingName:
+          allOf:
+            - $ref: '#/components/schemas/ThingName'
+            - description: AWS Internet of Things (IoT) object name.
+      description: Information of a particular device.
+    DeviceFleetSummary:
+      type: object
+      required:
+        - DeviceFleetArn
+        - DeviceFleetName
+      properties:
+        DeviceFleetArn:
+          allOf:
+            - $ref: '#/components/schemas/DeviceFleetArn'
+            - description: Amazon Resource Name (ARN) of the device fleet.
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: Name of the device fleet.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Timestamp of when the device fleet was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Timestamp of when the device fleet was last updated.
+      description: Summary of the device fleet.
+    DeviceFleetSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceFleetSummary'
+    DeviceStats:
+      type: object
+      required:
+        - ConnectedDeviceCount
+        - RegisteredDeviceCount
+      properties:
+        ConnectedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of devices connected with a heartbeat.
+        RegisteredDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of registered devices.
+      description: Status of devices.
+    DeviceSummary:
+      type: object
+      required:
+        - DeviceName
+        - DeviceArn
+      properties:
+        DeviceName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The unique identifier of the device.
+        DeviceArn:
+          allOf:
+            - $ref: '#/components/schemas/DeviceArn'
+            - description: Amazon Resource Name (ARN) of the device.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/DeviceDescription'
+            - description: A description of the device.
+        DeviceFleetName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the fleet the device belongs to.
+        IotThingName:
+          allOf:
+            - $ref: '#/components/schemas/ThingName'
+            - description: The AWS Internet of Things (IoT) object thing name associated with the device..
+        RegistrationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of the last registration or de-reregistration.
+        LatestHeartbeat:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The last heartbeat received from the device.
+        Models:
+          allOf:
+            - $ref: '#/components/schemas/EdgeModelSummaries'
+            - description: Models on the device.
+      description: Summary of the device.
+    DeviceSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/DeviceSummary'
+    EdgeModelSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/EdgeModelSummary'
+    Devices:
+      type: array
+      items:
+        $ref: '#/components/schemas/Device'
+    DisableProfiler:
+      type: boolean
     DisassociateAdditionalCodeRepositories:
       type: boolean
     DisassociateDefaultCodeRepository:
@@ -20743,6 +23883,127 @@ components:
     DoubleParameterValue:
       type: number
       format: double
+    EdgeModel:
+      type: object
+      required:
+        - ModelName
+        - ModelVersion
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the model.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/EdgeVersion'
+            - description: The model version.
+        LatestSampleTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of the last data sample taken.
+        LatestInference:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of the last inference that was made.
+      description: The model on the edge device.
+    EdgeModelStat:
+      type: object
+      required:
+        - ModelName
+        - ModelVersion
+        - OfflineDeviceCount
+        - ConnectedDeviceCount
+        - ActiveDeviceCount
+        - SamplingDeviceCount
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the model.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/EdgeVersion'
+            - description: The model version.
+        OfflineDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of devices that have this model version and do not have a heart beat.
+        ConnectedDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The number of devices that have this model version and have a heart beat. '
+        ActiveDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The number of devices that have this model version, a heart beat, and are currently running.'
+        SamplingDeviceCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of devices with this model version and are producing sample data.
+      description: Status of edge devices with this model.
+    EdgeModelStats:
+      type: array
+      items:
+        $ref: '#/components/schemas/EdgeModelStat'
+    EdgeModelSummary:
+      type: object
+      required:
+        - ModelName
+        - ModelVersion
+      properties:
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the model.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/EdgeVersion'
+            - description: The version model.
+      description: Summary of model on edge device.
+    EdgePackagingJobSummary:
+      type: object
+      required:
+        - EdgePackagingJobArn
+        - EdgePackagingJobName
+        - EdgePackagingJobStatus
+      properties:
+        EdgePackagingJobArn:
+          allOf:
+            - $ref: '#/components/schemas/EdgePackagingJobArn'
+            - description: The Amazon Resource Name (ARN) of the edge packaging job.
+        EdgePackagingJobName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the edge packaging job.
+        EdgePackagingJobStatus:
+          allOf:
+            - $ref: '#/components/schemas/EdgePackagingJobStatus'
+            - description: The status of the edge packaging job.
+        CompilationJobName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the SageMaker Neo compilation job.
+        ModelName:
+          allOf:
+            - $ref: '#/components/schemas/EntityName'
+            - description: The name of the model.
+        ModelVersion:
+          allOf:
+            - $ref: '#/components/schemas/EdgeVersion'
+            - description: The version of the model.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the job was created.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The timestamp of when the edge packaging job was last updated.
+      description: Summary of edge packaging job.
+    EdgePackagingJobSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/EdgePackagingJobSummary'
     MonitoringScheduleList:
       type: array
       items:
@@ -20843,29 +24104,14 @@ components:
       enum:
         - FullyReplicated
         - ShardedByS3Key
-    EndpointInput:
-      type: object
-      required:
-        - EndpointName
-        - LocalPath
-      properties:
-        EndpointName:
-          allOf:
-            - $ref: '#/components/schemas/EndpointName'
-            - description: An endpoint in customer's account which has enabled <code>DataCaptureConfig</code> enabled.
-        LocalPath:
-          allOf:
-            - $ref: '#/components/schemas/ProcessingLocalPath'
-            - description: Path to the filesystem where the endpoint data is available to the container.
-        S3InputMode:
-          allOf:
-            - $ref: '#/components/schemas/ProcessingS3InputMode'
-            - description: Whether the <code>Pipe</code> or <code>File</code> is used as the input mode for transfering data for the monitoring job. <code>Pipe</code> mode is recommended for large datasets. <code>File</code> mode is useful for small files that fit in memory. Defaults to <code>File</code>.
-        S3DataDistributionType:
-          allOf:
-            - $ref: '#/components/schemas/ProcessingS3DataDistributionType'
-            - description: 'Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key. Defauts to <code>FullyReplicated</code> '
-      description: Input object for the endpoint
+    ProbabilityThresholdAttribute:
+      type: number
+      format: double
+    MonitoringTimeOffsetString:
+      type: string
+      pattern: ^.?P.*
+      minLength: 1
+      maxLength: 15
     EndpointNameContains:
       type: string
       pattern: '[a-zA-Z0-9-]+'
@@ -22241,6 +25487,32 @@ components:
       enum:
         - Name
         - CreationTime
+    MonitoringJobDefinitionSortKey:
+      type: string
+      enum:
+        - Name
+        - CreationTime
+    MonitoringJobDefinitionSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MonitoringJobDefinitionSummary'
+    ListMaxResults:
+      type: integer
+      maximum: 100
+    ListDeviceFleetsSortBy:
+      type: string
+      enum:
+        - NAME
+        - CREATION_TIME
+        - LAST_MODIFIED_TIME
+    ListEdgePackagingJobsSortBy:
+      type: string
+      enum:
+        - NAME
+        - MODEL_NAME
+        - CREATION_TIME
+        - LAST_MODIFIED_TIME
+        - STATUS
     OrderKey:
       type: string
       enum:
@@ -22559,6 +25831,14 @@ components:
             - $ref: '#/components/schemas/MetricRegex'
             - description: 'A regular expression that searches the output of a training job and gets the value of the metric. For more information about using regular expressions to define metrics, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-metrics.html">Defining Objective Metrics</a>.'
       description: Specifies a metric that the training algorithm writes to <code>stderr</code> or <code>stdout</code> . Amazon SageMakerhyperparameter tuning captures all defined metrics. You specify one metric that a hyperparameter tuning job uses as its objective metric to choose the best training job.
+    MonitoringGroundTruthS3Input:
+      type: object
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringS3Uri'
+            - description: The address of the Amazon S3 location of the ground truth labels.
+      description: The ground truth labels for the dataset used for the monitoring job.
     ModelDataQuality:
       type: object
       properties:
@@ -22823,6 +26103,12 @@ components:
         $ref: '#/components/schemas/ModelPackageValidationProfile'
       minItems: 1
       maxItems: 1
+    MonitoringProblemType:
+      type: string
+      enum:
+        - BinaryClassification
+        - MulticlassClassification
+        - Regression
     ModelStepMetadata:
       type: object
       properties:
@@ -22851,12 +26137,6 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: A timestamp that indicates when the model was created.
       description: Provides summary information about a model.
-    MonitoringContainerArguments:
-      type: array
-      items:
-        $ref: '#/components/schemas/ContainerArgument'
-      minItems: 1
-      maxItems: 50
     MonitoringAppSpecification:
       type: object
       required:
@@ -22883,25 +26163,13 @@ components:
             - $ref: '#/components/schemas/S3Uri'
             - description: An Amazon S3 URI to a script that is called after analysis has been performed. Applicable only for the built-in (first party) containers.
       description: Container image configuration object for the monitoring job.
-    MonitoringConstraintsResource:
-      type: object
-      properties:
-        S3Uri:
-          allOf:
-            - $ref: '#/components/schemas/S3Uri'
-            - description: The Amazon S3 URI for the constraints resource.
-      description: The constraints resource for a monitoring job.
-    MonitoringStatisticsResource:
-      type: object
-      properties:
-        S3Uri:
-          allOf:
-            - $ref: '#/components/schemas/S3Uri'
-            - description: The Amazon S3 URI for the statistics resource.
-      description: The statistics resource for a monitoring job.
     MonitoringBaselineConfig:
       type: object
       properties:
+        BaseliningJobName:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingJobName'
+            - description: The name of the job that performs baselining for the monitoring job.
         ConstraintsResource:
           allOf:
             - $ref: '#/components/schemas/MonitoringConstraintsResource'
@@ -22947,11 +26215,10 @@ components:
       type: string
       pattern: '[\S\s]*'
       maxLength: 256
-    MonitoringEnvironmentMap:
-      type: object
-      maxProperties: 50
-      additionalProperties:
-        $ref: '#/components/schemas/ProcessingEnvironmentValue'
+    MonitoringS3Uri:
+      type: string
+      pattern: '^(https|s3)://([^/]+)/?(.*)$'
+      maxLength: 512
     MonitoringInput:
       type: object
       required:
@@ -22968,40 +26235,6 @@ components:
         $ref: '#/components/schemas/MonitoringInput'
       minItems: 1
       maxItems: 1
-    MonitoringOutputConfig:
-      type: object
-      required:
-        - MonitoringOutputs
-      properties:
-        MonitoringOutputs:
-          allOf:
-            - $ref: '#/components/schemas/MonitoringOutputs'
-            - description: Monitoring outputs for monitoring jobs. This is where the output of the periodic monitoring jobs is uploaded.
-        KmsKeyId:
-          allOf:
-            - $ref: '#/components/schemas/KmsKeyId'
-            - description: The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.
-      description: The output configuration for monitoring jobs.
-    MonitoringResources:
-      type: object
-      required:
-        - ClusterConfig
-      properties:
-        ClusterConfig:
-          allOf:
-            - $ref: '#/components/schemas/MonitoringClusterConfig'
-            - description: The configuration for the cluster resources used to run the processing job.
-      description: Identifies the resources to deploy for a monitoring job.
-    MonitoringStoppingCondition:
-      type: object
-      required:
-        - MaxRuntimeInSeconds
-      properties:
-        MaxRuntimeInSeconds:
-          allOf:
-            - $ref: '#/components/schemas/MonitoringMaxRuntimeInSeconds'
-            - description: The maximum runtime allowed in seconds.
-      description: A time limit for how long the monitoring job is allowed to run before stopping.
     MonitoringJobDefinition:
       type: object
       required:
@@ -23048,6 +26281,31 @@ components:
             - $ref: '#/components/schemas/RoleArn'
             - description: The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume to perform tasks on your behalf.
       description: Defines the monitoring job.
+    MonitoringJobDefinitionSummary:
+      type: object
+      required:
+        - MonitoringJobDefinitionName
+        - MonitoringJobDefinitionArn
+        - CreationTime
+        - EndpointName
+      properties:
+        MonitoringJobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the monitoring job.
+        MonitoringJobDefinitionArn:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionArn'
+            - description: The Amazon Resource Name (ARN) of the monitoring job.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the monitoring job was created.
+        EndpointName:
+          allOf:
+            - $ref: '#/components/schemas/EndpointName'
+            - description: The name of the endpoint that the job monitors.
+      description: Summary information about a monitoring job.
     MonitoringMaxRuntimeInSeconds:
       type: integer
       minimum: 1
@@ -23087,10 +26345,6 @@ components:
         $ref: '#/components/schemas/MonitoringOutput'
       minItems: 1
       maxItems: 1
-    MonitoringS3Uri:
-      type: string
-      pattern: '^(https|s3)://([^/]+)/?(.*)$'
-      maxLength: 512
     ProcessingS3UploadMode:
       type: string
       enum:
@@ -23111,6 +26365,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ScheduleStatus'
             - description: <p>The status of the monitoring schedule. This can be one of the following values.</p> <ul> <li> <p> <code>PENDING</code> - The schedule is pending being created.</p> </li> <li> <p> <code>FAILED</code> - The schedule failed.</p> </li> <li> <p> <code>SCHEDULED</code> - The schedule was successfully created.</p> </li> <li> <p> <code>STOPPED</code> - The schedule was stopped.</p> </li> </ul>
+        MonitoringType:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringType'
+            - description: The type of the monitoring job definition to schedule.
         FailureReason:
           allOf:
             - $ref: '#/components/schemas/FailureReason'
@@ -23179,6 +26437,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/EndpointName'
             - description: The name of the endpoint using the monitoring schedule.
+        MonitoringJobDefinitionName:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringJobDefinitionName'
+            - description: The name of the monitoring job definition that the schedule is for.
+        MonitoringType:
+          allOf:
+            - $ref: '#/components/schemas/MonitoringType'
+            - description: The type of the monitoring job definition that the schedule is for.
       description: Summarizes the monitoring schedule.
     NestedFilters:
       type: object
@@ -24102,6 +27368,93 @@ components:
             - $ref: '#/components/schemas/TaskCount'
             - description: 'The number of instances requested in the <code>UpdateEndpointWeightsAndCapacities</code> request. '
       description: 'Describes weight and capacities for a production variant associated with an endpoint. If you sent a request to the <code>UpdateEndpointWeightsAndCapacities</code> API and the endpoint status is <code>Updating</code>, you get different desired and current values. '
+    ProfilingIntervalInMilliseconds:
+      type: integer
+    ProfilingParameters:
+      type: object
+      minProperties: 0
+      maxProperties: 20
+      additionalProperties:
+        $ref: '#/components/schemas/ConfigValue'
+    ProfilerConfigForUpdate:
+      type: object
+      properties:
+        S3OutputPath:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: Path to Amazon S3 storage location for system and framework metrics.
+        ProfilingIntervalInMilliseconds:
+          allOf:
+            - $ref: '#/components/schemas/ProfilingIntervalInMilliseconds'
+            - description: 'A time interval for capturing system metrics in milliseconds. Available values are 100, 200, 500, 1000 (1 second), 5000 (5 seconds), and 60000 (1 minute) milliseconds. The default value is 500 milliseconds.'
+        ProfilingParameters:
+          allOf:
+            - $ref: '#/components/schemas/ProfilingParameters'
+            - description: 'Configuration information for capturing framework metrics. Available key strings for different profiling options are <code>DetailedProfilingConfig</code>, <code>PythonProfilingConfig</code>, and <code>DataLoaderProfilingConfig</code>. The following codes are configuration structures for the <code>ProfilingParameters</code> parameter. To learn more about how to configure the <code>ProfilingParameters</code> parameter, see <a href="https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html">Use the SageMaker and Debugger Configuration API Operations to Create, Update, and Debug Your Training Job</a>. '
+        DisableProfiler:
+          allOf:
+            - $ref: '#/components/schemas/DisableProfiler'
+            - description: 'To disable Debugger monitoring and profiling, set to <code>True</code>.'
+      description: 'Configuration information for updating the Debugger profile parameters, system and framework metrics configurations, and storage paths.'
+    ProfilerRuleConfiguration:
+      type: object
+      required:
+        - RuleConfigurationName
+        - RuleEvaluatorImage
+      properties:
+        RuleConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/RuleConfigurationName'
+            - description: The name of the rule configuration. It must be unique relative to other rule configuration names.
+        LocalPath:
+          allOf:
+            - $ref: '#/components/schemas/DirectoryPath'
+            - description: 'Path to local storage location for output of rules. Defaults to <code>/opt/ml/processing/output/rule/</code>. '
+        S3OutputPath:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: Path to Amazon S3 storage location for rules.
+        RuleEvaluatorImage:
+          allOf:
+            - $ref: '#/components/schemas/AlgorithmImage'
+            - description: The Amazon Elastic Container (ECR) Image for the managed rule evaluation.
+        InstanceType:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingInstanceType'
+            - description: The instance type to deploy a Debugger custom rule for profiling a training job.
+        VolumeSizeInGB:
+          allOf:
+            - $ref: '#/components/schemas/OptionalVolumeSizeInGB'
+            - description: 'The size, in GB, of the ML storage volume attached to the processing instance.'
+        RuleParameters:
+          allOf:
+            - $ref: '#/components/schemas/RuleParameters'
+            - description: Runtime configuration for rule container.
+      description: Configuration information for profiling rules.
+    ProfilerRuleEvaluationStatus:
+      type: object
+      properties:
+        RuleConfigurationName:
+          allOf:
+            - $ref: '#/components/schemas/RuleConfigurationName'
+            - description: The name of the rule configuration.
+        RuleEvaluationJobArn:
+          allOf:
+            - $ref: '#/components/schemas/ProcessingJobArn'
+            - description: The Amazon Resource Name (ARN) of the rule evaluation job.
+        RuleEvaluationStatus:
+          allOf:
+            - $ref: '#/components/schemas/RuleEvaluationStatus'
+            - description: Status of the rule evaluation.
+        StatusDetails:
+          allOf:
+            - $ref: '#/components/schemas/StatusDetails'
+            - description: Details from the rule evaluation.
+        LastModifiedTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: Timestamp when the rule evaluation status was last modified.
+      description: Information about the status of the rule evaluation.
     ProjectSummary:
       type: object
       required:

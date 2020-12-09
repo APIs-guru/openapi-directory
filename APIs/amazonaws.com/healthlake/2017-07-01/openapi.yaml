@@ -1,0 +1,945 @@
+openapi: 3.0.0
+info:
+  version: '2017-07-01'
+  x-release: v4
+  title: Amazon HealthLake
+  description: 'Amazon HealthLake is a HIPAA eligibile service that allows customers to store, transform, query, and analyze their data in a consistent fashion in the cloud.'
+  x-logo:
+    url: 'https://twitter.com/awscloud/profile_image?size=original'
+    backgroundColor: '#FFFFFF'
+  termsOfService: 'https://aws.amazon.com/service-terms/'
+  contact:
+    name: Mike Ralphson
+    email: mike.ralphson@gmail.com
+    url: 'https://github.com/mermade/aws2openapi'
+    x-twitter: PermittedSoc
+  license:
+    name: Apache 2.0 License
+    url: 'http://www.apache.org/licenses/'
+  x-providerName: amazonaws.com
+  x-serviceName: healthlake
+  x-origin:
+    - contentType: application/json
+      url: 'https://raw.githubusercontent.com/aws/aws-sdk-js/master/apis/healthlake-2017-07-01.normal.json'
+      converter:
+        url: 'https://github.com/mermade/aws2openapi'
+        version: 1.0.0
+      x-apisguru-driver: external
+  x-apiClientRegistration:
+    url: 'https://portal.aws.amazon.com/gp/aws/developer/registration/index.html?nc2=h_ct'
+  x-apisguru-categories:
+    - cloud
+  x-preferred: true
+externalDocs:
+  description: Amazon Web Services documentation
+  url: 'https://docs.aws.amazon.com/healthlake/'
+servers:
+  - url: 'http://healthlake.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The HealthLake multi-region endpoint
+  - url: 'https://healthlake.{region}.amazonaws.com'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - us-gov-west-1
+          - us-gov-east-1
+          - ca-central-1
+          - eu-north-1
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-south-1
+          - af-south-1
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-northeast-3
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-east-1
+          - ap-south-1
+          - sa-east-1
+          - me-south-1
+        default: us-east-1
+    description: The HealthLake multi-region endpoint
+  - url: 'http://healthlake.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The HealthLake endpoint for China (Beijing) and China (Ningxia)
+  - url: 'https://healthlake.{region}.amazonaws.com.cn'
+    variables:
+      region:
+        description: The AWS region
+        enum:
+          - cn-north-1
+          - cn-northwest-1
+        default: cn-north-1
+    description: The HealthLake endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
+paths:
+  /#X-Amz-Target=HealthLake.CreateFHIRDatastore:
+    post:
+      operationId: CreateFHIRDatastore
+      description: Creates a datastore that can ingest and export FHIR data.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateFHIRDatastoreResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateFHIRDatastoreRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - HealthLake.CreateFHIRDatastore
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=HealthLake.DeleteFHIRDatastore:
+    post:
+      operationId: DeleteFHIRDatastore
+      description: 'Deletes a datastore. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteFHIRDatastoreResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteFHIRDatastoreRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - HealthLake.DeleteFHIRDatastore
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=HealthLake.DescribeFHIRDatastore:
+    post:
+      operationId: DescribeFHIRDatastore
+      description: 'Gets the properties associated with the FHIR datastore, including the datastore ID, datastore ARN, datastore name, datastore status, created at, datastore type version, and datastore endpoint.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFHIRDatastoreResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeFHIRDatastoreRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - HealthLake.DescribeFHIRDatastore
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=HealthLake.DescribeFHIRImportJob:
+    post:
+      operationId: DescribeFHIRImportJob
+      description: 'Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the datastore.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeFHIRImportJobResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeFHIRImportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - HealthLake.DescribeFHIRImportJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=HealthLake.ListFHIRDatastores:
+    post:
+      operationId: ListFHIRDatastores
+      description: 'Lists all FHIR datastores that are in the user’s account, regardless of datastore status.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListFHIRDatastoresResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListFHIRDatastoresRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - HealthLake.ListFHIRDatastores
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=HealthLake.StartFHIRImportJob:
+    post:
+      operationId: StartFHIRImportJob
+      description: Begins a FHIR Import job.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartFHIRImportJobResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartFHIRImportJobRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - HealthLake.StartFHIRImportJob
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+components:
+  parameters:
+    X-Amz-Content-Sha256:
+      name: X-Amz-Content-Sha256
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Date:
+      name: X-Amz-Date
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Algorithm:
+      name: X-Amz-Algorithm
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Credential:
+      name: X-Amz-Credential
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Security-Token:
+      name: X-Amz-Security-Token
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-Signature:
+      name: X-Amz-Signature
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Amz-SignedHeaders:
+      name: X-Amz-SignedHeaders
+      in: header
+      schema:
+        type: string
+      required: false
+  securitySchemes:
+    hmac:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: Amazon Signature authorization v4
+      x-amazon-apigateway-authtype: awsSigv4
+  schemas:
+    CreateFHIRDatastoreResponse:
+      type: object
+      required:
+        - DatastoreId
+        - DatastoreArn
+        - DatastoreStatus
+        - DatastoreEndpoint
+      properties:
+        DatastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The AWS-generated datastore id. This id is in the output from the initial datastore creation call.
+        DatastoreArn:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreArn'
+            - description: The datastore ARN is generated during the creation of the datastore and can be found in the output from the initial datastore creation call.
+        DatastoreStatus:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: 'The status of the FHIR datastore. Possible statuses are ‘CREATING’, ‘ACTIVE’, ‘DELETING’, ‘DELETED’.'
+        DatastoreEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/BoundedLengthString'
+            - description: 'The AWS endpoint for the created datastore. For preview, only US-east-1 endpoints are supported.'
+    CreateFHIRDatastoreRequest:
+      type: object
+      required:
+        - DatastoreTypeVersion
+      title: CreateFHIRDatastoreRequest
+      properties:
+        DatastoreName:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The user generated name for the datastore.
+        DatastoreTypeVersion:
+          allOf:
+            - $ref: '#/components/schemas/FHIRVersion'
+            - description: The FHIR version of the datastore. The only supported version is R4.
+        PreloadDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/PreloadDataConfig'
+            - description: 'Optional parameter to preload data upon creation of the datastore. Currently, the only supported preloaded data is synthetic data generated from Synthea.'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenString'
+            - description: Optional user provided token used for ensuring idempotency.
+    ValidationException: {}
+    ThrottlingException: {}
+    InternalServerException: {}
+    DeleteFHIRDatastoreResponse:
+      type: object
+      required:
+        - DatastoreId
+        - DatastoreArn
+        - DatastoreStatus
+        - DatastoreEndpoint
+      properties:
+        DatastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The AWS-generated ID for the datastore to be deleted.
+        DatastoreArn:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreArn'
+            - description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
+        DatastoreStatus:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: 'The status of the datastore that the user has requested to be deleted. '
+        DatastoreEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/BoundedLengthString'
+            - description: The AWS endpoint for the datastore the user has requested to be deleted.
+    DeleteFHIRDatastoreRequest:
+      type: object
+      title: DeleteFHIRDatastoreRequest
+      properties:
+        DatastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: ' The AWS-generated ID for the datastore to be deleted.'
+    AccessDeniedException: {}
+    ConflictException: {}
+    ResourceNotFoundException: {}
+    DescribeFHIRDatastoreResponse:
+      type: object
+      required:
+        - DatastoreProperties
+      properties:
+        DatastoreProperties:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreProperties'
+            - description: 'All properties associated with a datastore, including the datastore ID, datastore ARN, datastore name, datastore status, created at, datastore type version, and datastore endpoint.'
+    DescribeFHIRDatastoreRequest:
+      type: object
+      title: DescribeFHIRDatastoreRequest
+      properties:
+        DatastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The AWS-generated datastore id. This is part of the ‘CreateFHIRDatastore’ output.
+    DescribeFHIRImportJobResponse:
+      type: object
+      required:
+        - ImportJobProperties
+      properties:
+        ImportJobProperties:
+          allOf:
+            - $ref: '#/components/schemas/ImportJobProperties'
+            - description: 'The properties of the Import job request, including the ID, ARN, name, and the status of the datastore.'
+    DescribeFHIRImportJobRequest:
+      type: object
+      required:
+        - DatastoreId
+        - JobId
+      title: DescribeFHIRImportJobRequest
+      properties:
+        DatastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The AWS-generated ID of the datastore.
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The AWS-generated job ID.
+    ListFHIRDatastoresResponse:
+      type: object
+      required:
+        - DatastorePropertiesList
+      properties:
+        DatastorePropertiesList:
+          allOf:
+            - $ref: '#/components/schemas/DatastorePropertiesList'
+            - description: All properties associated with the listed datastores.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: Pagination token that can be used to retrieve the next page of results.
+    ListFHIRDatastoresRequest:
+      type: object
+      title: ListFHIRDatastoresRequest
+      properties:
+        Filter:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreFilter'
+            - description: Lists all filters associated with a FHIR datastore request.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: Fetches the next page of datastores when results are paginated.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsInteger'
+            - description: The maximum number of datastores returned in a single page of a ListFHIRDatastoresRequest call.
+    StartFHIRImportJobResponse:
+      type: object
+      required:
+        - JobId
+        - JobStatus
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The AWS-generated job ID.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: The status of an import job.
+        DatastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The AWS-generated datastore ID.
+    StartFHIRImportJobRequest:
+      type: object
+      required:
+        - InputDataConfig
+        - DatastoreId
+        - DataAccessRoleArn
+        - ClientToken
+      title: StartFHIRImportJobRequest
+      properties:
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The name of the FHIR Import job in the StartFHIRImport job request.
+        InputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputDataConfig'
+            - description: The input properties of the FHIR Import job in the StartFHIRImport job request.
+        DatastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The AWS-generated datastore ID.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access permission.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenString'
+            - description: Optional user provided token used for ensuring idempotency.
+    BoundedLengthString:
+      type: string
+      pattern: '[\P{M}\p{M}]{1,5000}'
+      minLength: 1
+      maxLength: 5000
+    ClientTokenString:
+      type: string
+      pattern: '^[a-zA-Z0-9-]+$'
+      minLength: 1
+      maxLength: 64
+    DatastoreName:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+      minLength: 1
+      maxLength: 256
+    FHIRVersion:
+      type: string
+      enum:
+        - R4
+    PreloadDataConfig:
+      type: object
+      required:
+        - PreloadDataType
+      properties:
+        PreloadDataType:
+          allOf:
+            - $ref: '#/components/schemas/PreloadDataType'
+            - description: The type of preloaded data. Only Synthea preloaded data is supported.
+      description: ' The input properties for the preloaded datastore. Only data preloaded from Synthea is supported.'
+    DatastoreId:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+      minLength: 1
+      maxLength: 32
+    DatastoreArn:
+      type: string
+      pattern: '^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?'
+    DatastoreStatus:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - DELETING
+        - DELETED
+    Timestamp:
+      type: string
+      format: date-time
+    DatastoreFilter:
+      type: object
+      properties:
+        DatastoreName:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: Allows the user to filter datastore results by name.
+        DatastoreStatus:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: Allows the user to filter datastore results by status.
+        CreatedBefore:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'A filter that allows the user to set cutoff dates for records. All datastores created before the specified date will be included in the results. '
+        CreatedAfter:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: A filter that allows the user to set cutoff dates for records. All datastores created after the specified date will be included in the results.
+      description: The filters applied to datastore query.
+    String:
+      type: string
+      pattern: '[\P{M}\p{M}]{0,10000}'
+      maxLength: 10000
+    DatastoreProperties:
+      type: object
+      required:
+        - DatastoreId
+        - DatastoreArn
+        - DatastoreStatus
+        - DatastoreTypeVersion
+        - DatastoreEndpoint
+      properties:
+        DatastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: The AWS-generated ID number for the datastore.
+        DatastoreArn:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreArn'
+            - description: The Amazon Resource Name used in the creation of the datastore.
+        DatastoreName:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreName'
+            - description: The user-generated name for the datastore.
+        DatastoreStatus:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreStatus'
+            - description: 'The status of the datastore. Possible statuses are ''CREATING'', ''ACTIVE'', ''DELETING'', or ''DELETED''.'
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: 'The time that a datastore was created. '
+        DatastoreTypeVersion:
+          allOf:
+            - $ref: '#/components/schemas/FHIRVersion'
+            - description: The FHIR version. Only R4 version data is supported.
+        DatastoreEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS endpoint for the datastore. Each datastore will have it's own endpoint with datastore ID in the endpoint URL.
+        PreloadDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/PreloadDataConfig'
+            - description: The preloaded data configuration for the datastore. Only data preloaded from Synthea is supported.
+      description: 'Displays the properties of the datastore, including the ID, Arn, name, and the status of the datastore.'
+    DatastorePropertiesList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DatastoreProperties'
+    JobId:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+      minLength: 1
+      maxLength: 32
+    ImportJobProperties:
+      type: object
+      required:
+        - JobId
+        - JobStatus
+        - SubmitTime
+        - DatastoreId
+        - InputDataConfig
+      properties:
+        JobId:
+          allOf:
+            - $ref: '#/components/schemas/JobId'
+            - description: The AWS-generated id number for the Import job.
+        JobName:
+          allOf:
+            - $ref: '#/components/schemas/JobName'
+            - description: The user-generated name for an Import job.
+        JobStatus:
+          allOf:
+            - $ref: '#/components/schemas/JobStatus'
+            - description: 'The job status for an Import job. Possible statuses are SUBMITTED, IN_PROGRESS, COMPLETED, FAILED.'
+        SubmitTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the Import job was submitted for processing.
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The time that the Import job was completed.
+        DatastoreId:
+          allOf:
+            - $ref: '#/components/schemas/DatastoreId'
+            - description: 'The datastore id used when the Import job was created. '
+        InputDataConfig:
+          allOf:
+            - $ref: '#/components/schemas/InputDataConfig'
+            - description: The input data configuration that was supplied when the Import job was created.
+        DataAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/IamRoleArn'
+            - description: The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input data.
+        Message:
+          allOf:
+            - $ref: '#/components/schemas/Message'
+            - description: 'An explanation of any errors that may have occurred during the FHIR import job. '
+      description: 'Displays the properties of the import job, including the ID, Arn, Name, and the status of the datastore.'
+    IamRoleArn:
+      type: string
+      pattern: 'arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+'
+      minLength: 20
+      maxLength: 2048
+    JobName:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+      minLength: 1
+      maxLength: 64
+    JobStatus:
+      type: string
+      enum:
+        - SUBMITTED
+        - IN_PROGRESS
+        - COMPLETED
+        - FAILED
+    InputDataConfig:
+      type: object
+      properties:
+        S3Uri:
+          allOf:
+            - $ref: '#/components/schemas/S3Uri'
+            - description: 'The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. '
+      description: ' The input properties for an import job.'
+    Message:
+      type: string
+      pattern: '^([\p{L}\p{Z}\p{N}_.:/=+\-%@]*)$'
+      minLength: 1
+      maxLength: 2048
+    S3Uri:
+      type: string
+      pattern: 's3://[a-z0-9][\.\-a-z0-9]{1,61}[a-z0-9](/.*)?'
+      maxLength: 1024
+    NextToken:
+      type: string
+      pattern: '\p{ASCII}{0,8192}'
+      maxLength: 8192
+    MaxResultsInteger:
+      type: integer
+      minimum: 1
+      maximum: 500
+    PreloadDataType:
+      type: string
+      enum:
+        - SYNTHEA
+security:
+  - hmac: []
