@@ -175,12 +175,14 @@ paths:
           description: A string representing the node identifier of the DC1 Reserved Node to be exchanged.
           schema:
             type: string
+            maxLength: 2147483647
         - name: TargetReservedNodeOfferingId
           in: query
           required: true
           description: 'The unique identifier of the DC2 Reserved Node offering to be used for the exchange. You can obtain the value for the parameter by calling <a>GetReservedNodeExchangeOfferings</a> '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -319,24 +321,28 @@ paths:
           description: The name of the security group to which the ingress rule is added.
           schema:
             type: string
+            maxLength: 2147483647
         - name: CIDRIP
           in: query
           required: false
           description: The IP range to be added the Amazon Redshift security group.
           schema:
             type: string
+            maxLength: 2147483647
         - name: EC2SecurityGroupName
           in: query
           required: false
           description: The EC2 security group to be added the Amazon Redshift security group.
           schema:
             type: string
+            maxLength: 2147483647
         - name: EC2SecurityGroupOwnerId
           in: query
           required: false
           description: '<p>The AWS account number of the owner of the security group specified by the <i>EC2SecurityGroupName</i> parameter. The AWS Access Key ID is not an acceptable value. </p> <p>Example: <code>111122223333</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -469,18 +475,21 @@ paths:
           description: The identifier of the snapshot the account is authorized to restore.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotClusterIdentifier
           in: query
           required: false
           description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
           schema:
             type: string
+            maxLength: 2147483647
         - name: AccountWithRestoreAccess
           in: query
           required: true
           description: '<p>The identifier of the AWS customer account authorized to restore the specified snapshot.</p> <p>To share a snapshot with AWS support, specify amazon-redshift-support.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -815,6 +824,7 @@ paths:
           description: The unique identifier for the cluster that you want to cancel a resize operation for.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -941,18 +951,21 @@ paths:
           description: '<p>The identifier for the source snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier for a valid automated snapshot whose state is <code>available</code>.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SourceSnapshotClusterIdentifier
           in: query
           required: false
           description: '<p>The identifier of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier for a valid cluster.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: TargetSnapshotIdentifier
           in: query
           required: true
           description: '<p>The identifier given to the new manual snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for the AWS account that is making the request.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ManualSnapshotRetentionPeriod
           in: query
           required: false
@@ -1193,36 +1206,42 @@ paths:
           description: '<p>The name of the first database to be created when the cluster is created.</p> <p>To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database. For more information, go to <a href="https://docs.aws.amazon.com/redshift/latest/dg/t_creating_database.html">Create a Database</a> in the Amazon Redshift Database Developer Guide. </p> <p>Default: <code>dev</code> </p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 alphanumeric characters.</p> </li> <li> <p>Must contain only lowercase letters.</p> </li> <li> <p>Cannot be a word that is reserved by the service. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterIdentifier
           in: query
           required: true
           description: '<p>A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an AWS account.</p> </li> </ul> <p>Example: <code>myexamplecluster</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterType
           in: query
           required: false
           description: '<p>The type of the cluster. When cluster type is specified as</p> <ul> <li> <p> <code>single-node</code>, the <b>NumberOfNodes</b> parameter is not required.</p> </li> <li> <p> <code>multi-node</code>, the <b>NumberOfNodes</b> parameter is required.</p> </li> </ul> <p>Valid Values: <code>multi-node</code> | <code>single-node</code> </p> <p>Default: <code>multi-node</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: NodeType
           in: query
           required: true
-          description: '<p>The node type to be provisioned for the cluster. For information about node types, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes"> Working with Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>'
+          description: '<p>The node type to be provisioned for the cluster. For information about node types, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes"> Working with Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MasterUsername
           in: query
           required: true
           description: '<p>The user name associated with the master user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MasterUserPassword
           in: query
           required: true
           description: '<p>The password associated with the master user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except '' (single quote), " (double quote), \, /, @, or space.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterSecurityGroups
           in: query
           required: false
@@ -1251,24 +1270,28 @@ paths:
           description: <p>The name of a cluster subnet group to be associated with this cluster.</p> <p>If this parameter is not provided the resulting cluster will be deployed outside virtual private cloud (VPC).</p>
           schema:
             type: string
+            maxLength: 2147483647
         - name: AvailabilityZone
           in: query
           required: false
           description: '<p>The EC2 Availability Zone (AZ) in which you want Amazon Redshift to provision the cluster. For example, if you have several EC2 instances running in a specific Availability Zone, then you might want the cluster to be provisioned in the same zone in order to decrease network latency.</p> <p>Default: A random, system-chosen Availability Zone in the region that is specified by the endpoint.</p> <p>Example: <code>us-east-2d</code> </p> <p>Constraint: The specified Availability Zone must be in the same region as the current endpoint.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: PreferredMaintenanceWindow
           in: query
           required: false
           description: '<p>The weekly time range (in UTC) during which automated cluster maintenance can occur.</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p> Default: A 30-minute window selected at random from an 8-hour block of time per region, occurring on a random day of the week. For more information about the time blocks for each region, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows">Maintenance Windows</a> in Amazon Redshift Cluster Management Guide.</p> <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p> <p>Constraints: Minimum 30-minute window.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterParameterGroupName
           in: query
           required: false
           description: '<p>The name of the parameter group to be associated with this cluster.</p> <p>Default: The default Amazon Redshift cluster parameter group. For information about the default parameter group, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Working with Amazon Redshift Parameter Groups</a> </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: AutomatedSnapshotRetentionPeriod
           in: query
           required: false
@@ -1293,6 +1316,7 @@ paths:
           description: '<p>The version of the Amazon Redshift engine software that you want to deploy on the cluster.</p> <p>The version selected runs on all the nodes in the cluster.</p> <p>Constraints: Only version 1.0 is currently available.</p> <p>Example: <code>1.0</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: AllowVersionUpgrade
           in: query
           required: false
@@ -1323,18 +1347,21 @@ paths:
           description: Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM.
           schema:
             type: string
+            maxLength: 2147483647
         - name: HsmConfigurationIdentifier
           in: query
           required: false
           description: Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ElasticIp
           in: query
           required: false
           description: '<p>The Elastic IP (EIP) address for the cluster.</p> <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms">Supported Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Tags
           in: query
           required: false
@@ -1352,6 +1379,7 @@ paths:
           description: The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
           schema:
             type: string
+            maxLength: 2147483647
         - name: EnhancedVpcRouting
           in: query
           required: false
@@ -1364,6 +1392,7 @@ paths:
           description: Reserved.
           schema:
             type: string
+            maxLength: 2147483647
         - name: IamRoles
           in: query
           required: false
@@ -1381,12 +1410,20 @@ paths:
           description: 'An optional parameter for the name of the maintenance track for the cluster. If you don''t provide a maintenance track name, the cluster is assigned to the <code>current</code> track.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotScheduleIdentifier
           in: query
           required: false
           description: A unique identifier for the snapshot schedule.
           schema:
             type: string
+            maxLength: 2147483647
+        - name: AvailabilityZoneRelocation
+          in: query
+          required: false
+          description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.
+          schema:
+            type: boolean
         - name: Action
           in: query
           required: true
@@ -1615,18 +1652,21 @@ paths:
           description: '<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique withing your AWS account.</p> </li> </ul> <note> <p>This value is stored as a lower-case string.</p> </note>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ParameterGroupFamily
           in: query
           required: true
           description: '<p>The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.</p> <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of all the parameter groups that are owned by your AWS account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0". </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Description
           in: query
           required: true
           description: A description of the parameter group.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Tags
           in: query
           required: false
@@ -1758,12 +1798,14 @@ paths:
           description: '<p>The name for the security group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all security groups that are created by your AWS account.</p> </li> </ul> <p>Example: <code>examplesecuritygroup</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Description
           in: query
           required: true
           description: A description for the security group.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Tags
           in: query
           required: false
@@ -1913,12 +1955,14 @@ paths:
           description: '<p>A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the AWS account.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-snapshot-id</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterIdentifier
           in: query
           required: true
           description: The cluster identifier for which you want a snapshot.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ManualSnapshotRetentionPeriod
           in: query
           required: false
@@ -2098,12 +2142,14 @@ paths:
           description: '<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be "Default".</p> </li> <li> <p>Must be unique for all subnet groups that are created by your AWS account.</p> </li> </ul> <p>Example: <code>examplesubnetgroup</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Description
           in: query
           required: true
           description: A description for the subnet group.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SubnetIds
           in: query
           required: true
@@ -2312,18 +2358,21 @@ paths:
           description: '<p>The name of the event subscription to be created.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnsTopicArn
           in: query
           required: true
           description: The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the event notifications. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SourceType
           in: query
           required: false
           description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SourceIds
           in: query
           required: false
@@ -2352,6 +2401,7 @@ paths:
           description: '<p>Specifies the Amazon Redshift event severity to be published by the event notification subscription.</p> <p>Values: ERROR, INFO</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Enabled
           in: query
           required: false
@@ -2531,6 +2581,7 @@ paths:
           description: The identifier to be assigned to the new HSM client certificate that the cluster will use to connect to the HSM to use the database encryption keys.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Tags
           in: query
           required: false
@@ -2662,36 +2713,42 @@ paths:
           description: The identifier to be assigned to the new Amazon Redshift HSM configuration.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Description
           in: query
           required: true
           description: A text description of the HSM configuration to be created.
           schema:
             type: string
+            maxLength: 2147483647
         - name: HsmIpAddress
           in: query
           required: true
           description: The IP address that the Amazon Redshift cluster must use to access the HSM.
           schema:
             type: string
+            maxLength: 2147483647
         - name: HsmPartitionName
           in: query
           required: true
           description: The name of the partition in the HSM where the Amazon Redshift clusters will store their database encryption keys.
           schema:
             type: string
+            maxLength: 2147483647
         - name: HsmPartitionPassword
           in: query
           required: true
           description: The password required to access the HSM partition.
           schema:
             type: string
+            maxLength: 2147483647
         - name: HsmServerPublicCertificate
           in: query
           required: true
           description: 'The HSMs public certificate file. When using Cloud HSM, the file name is server.pem.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Tags
           in: query
           required: false
@@ -2835,6 +2892,7 @@ paths:
           description: 'The name of the scheduled action. The name must be unique within an account. For more information about this parameter, see <a>ScheduledAction</a>. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TargetAction
           in: query
           required: true
@@ -2861,18 +2919,21 @@ paths:
           description: 'The schedule in <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: IamRole
           in: query
           required: true
           description: 'The IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: ScheduledActionDescription
           in: query
           required: false
           description: 'The description of the scheduled action. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: StartTime
           in: query
           required: false
@@ -3037,12 +3098,14 @@ paths:
           description: '<p>The name of the snapshot copy grant. This name must be unique in the region for the AWS account.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an AWS account.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: KmsKeyId
           in: query
           required: false
           description: 'The unique identifier of the customer master key (CMK) to which to grant Amazon Redshift permission. If no key is specified, the default key is used.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Tags
           in: query
           required: false
@@ -3185,6 +3248,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ScheduleDefinitionTypeUnsupportedFault'
+        '485':
+          description: InvalidTagFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidTagFault'
       parameters:
         - name: ScheduleDefinitions
           in: query
@@ -3203,12 +3272,14 @@ paths:
           description: A unique identifier for a snapshot schedule. Only alphanumeric characters are allowed for the identifier.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ScheduleDescription
           in: query
           required: false
           description: The description of the snapshot schedule.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Tags
           in: query
           required: false
@@ -3295,6 +3366,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/ScheduleDefinitionTypeUnsupportedFault'
+        '485':
+          description: InvalidTagFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidTagFault'
       requestBody:
         content:
           text/xml:
@@ -3341,6 +3418,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidTagFault'
+        '483':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
       parameters:
         - name: ResourceName
           in: query
@@ -3348,6 +3431,7 @@ paths:
           description: 'The Amazon Resource Name (ARN) to which you want to add the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Tags
           in: query
           required: true
@@ -3406,6 +3490,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidTagFault'
+        '483':
+          description: InvalidClusterStateFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidClusterStateFault'
       requestBody:
         content:
           text/xml:
@@ -3487,6 +3577,7 @@ paths:
           description: The identifier of the cluster that you want to limit usage.
           schema:
             type: string
+            maxLength: 2147483647
         - name: FeatureType
           in: query
           required: true
@@ -3686,6 +3777,7 @@ paths:
           description: '<p>The identifier of the cluster to be deleted.</p> <p>Constraints:</p> <ul> <li> <p>Must contain lowercase characters.</p> </li> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SkipFinalClusterSnapshot
           in: query
           required: false
@@ -3698,6 +3790,7 @@ paths:
           description: '<p>The identifier of the final snapshot that is to be created immediately before deleting the cluster. If this parameter is provided, <i>SkipFinalClusterSnapshot</i> must be <code>false</code>. </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: FinalClusterSnapshotRetentionPeriod
           in: query
           required: false
@@ -3814,6 +3907,7 @@ paths:
           description: '<p>The name of the parameter group to be deleted.</p> <p>Constraints:</p> <ul> <li> <p>Must be the name of an existing cluster parameter group.</p> </li> <li> <p>Cannot delete a default cluster parameter group.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -3902,6 +3996,7 @@ paths:
           description: The name of the cluster security group to be deleted.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -3994,12 +4089,14 @@ paths:
           description: '<p>The unique identifier of the manual snapshot to be deleted.</p> <p>Constraints: Must be the name of an existing snapshot that is in the <code>available</code>, <code>failed</code>, or <code>cancelled</code> state.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotClusterIdentifier
           in: query
           required: false
           description: '<p>The unique identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.</p> <p>Constraints: Must be the name of valid cluster.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -4098,6 +4195,7 @@ paths:
           description: The name of the cluster subnet group name to be deleted.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -4192,6 +4290,7 @@ paths:
           description: The name of the Amazon Redshift event notification subscription to be deleted.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -4280,6 +4379,7 @@ paths:
           description: The identifier of the HSM client certificate to be deleted.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -4368,6 +4468,7 @@ paths:
           description: The identifier of the Amazon Redshift HSM configuration to be deleted.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -4456,6 +4557,7 @@ paths:
           description: 'The name of the scheduled action to delete. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -4544,6 +4646,7 @@ paths:
           description: The name of the snapshot copy grant to delete.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -4632,6 +4735,7 @@ paths:
           description: A unique identifier of the snapshot schedule to delete.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -4720,6 +4824,7 @@ paths:
           description: 'The Amazon Resource Name (ARN) from which you want to remove the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: true
@@ -4819,6 +4924,7 @@ paths:
           description: The identifier of the usage limit to delete.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -4988,6 +5094,7 @@ paths:
           description: A unique identifier for a cluster whose <code>ClusterDbRevisions</code> you are requesting. This parameter is case sensitive. All clusters defined for an account are returned by default.
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -5000,6 +5107,7 @@ paths:
           description: '<p>An optional parameter that specifies the starting point for returning a set of response records. When the results of a <code>DescribeClusterDbRevisions</code> request exceed the value specified in <code>MaxRecords</code>, Amazon Redshift returns a value in the <code>marker</code> field of the response. You can retrieve the next set of response records by providing the returned <code>marker</code> value in the <code>marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <code>ClusterIdentifier</code> parameter, or the <code>marker</code> parameter, but not both.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -5108,6 +5216,7 @@ paths:
           description: 'The name of a specific parameter group for which to return details. By default, details about all parameter groups and the default parameter group are returned.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -5120,6 +5229,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterParameterGroups</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -5244,12 +5354,14 @@ paths:
           description: The name of a cluster parameter group for which to return details.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Source
           in: query
           required: false
           description: '<p>The parameter types to return. Specify <code>user</code> to show parameters that are different form the default. Similarly, specify <code>engine-default</code> to show parameters that are the same as the default parameter group. </p> <p>Default: All parameter types returned.</p> <p>Valid Values: <code>user</code> | <code>engine-default</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -5262,6 +5374,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterParameters</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -5364,6 +5477,7 @@ paths:
           description: '<p>The name of a cluster security group for which you are requesting details. You can specify either the <b>Marker</b> parameter or a <b>ClusterSecurityGroupName</b> parameter, but not both. </p> <p> Example: <code>securitygroup1</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -5376,6 +5490,7 @@ paths:
           description: '<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSecurityGroups</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>ClusterSecurityGroupName</b> parameter or the <b>Marker</b> parameter, but not both. </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -5512,18 +5627,21 @@ paths:
           description: The identifier of the cluster which generated the requested snapshots.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotIdentifier
           in: query
           required: false
           description: The snapshot identifier of the snapshot about which to return information.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotType
           in: query
           required: false
           description: '<p>The type of snapshots for which you are requesting information. By default, snapshots of all types are returned.</p> <p>Valid Values: <code>automated</code> | <code>manual</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: StartTime
           in: query
           required: false
@@ -5550,12 +5668,14 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSnapshots</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: OwnerAccount
           in: query
           required: false
           description: 'The AWS customer account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your AWS customer account, or do not specify the parameter.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -5709,6 +5829,7 @@ paths:
           description: The name of the cluster subnet group for which information is requested.
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -5721,6 +5842,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSubnetGroups</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -5851,6 +5973,7 @@ paths:
           description: 'The name of the maintenance track. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -5863,6 +5986,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <code>DescribeClusterTracks</code> request exceed the value specified in <code>MaxRecords</code>, Amazon Redshift returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -5959,12 +6083,14 @@ paths:
           description: '<p>The specific cluster version to return.</p> <p>Example: <code>1.0</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterParameterGroupFamily
           in: query
           required: false
           description: '<p>The name of a specific cluster parameter group family to return details for.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -5977,6 +6103,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterVersions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -6073,6 +6200,7 @@ paths:
           description: <p>The unique identifier of a cluster whose properties you are requesting. This parameter is case sensitive.</p> <p>The default is that all clusters defined for an account are returned.</p>
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -6085,6 +6213,7 @@ paths:
           description: '<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusters</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>ClusterIdentifier</b> parameter or the <b>Marker</b> parameter, but not both. </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -6203,6 +6332,7 @@ paths:
           description: The name of the cluster parameter group family.
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -6215,6 +6345,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDefaultClusterParameters</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -6299,6 +6430,7 @@ paths:
           description: '<p>The source type, such as cluster or parameter group, to which the described event categories apply.</p> <p>Valid values: cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, and scheduled-action.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -6383,6 +6515,7 @@ paths:
           description: The name of the Amazon Redshift event notification subscription to be described.
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -6395,6 +6528,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEventSubscriptions request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -6513,6 +6647,7 @@ paths:
           description: '<p>The identifier of the event source for which events will be returned. If this parameter is not specified, then all sources are included in the response.</p> <p>Constraints:</p> <p>If <i>SourceIdentifier</i> is supplied, <i>SourceType</i> must also be provided.</p> <ul> <li> <p>Specify a cluster identifier when <i>SourceType</i> is <code>cluster</code>.</p> </li> <li> <p>Specify a cluster security group name when <i>SourceType</i> is <code>cluster-security-group</code>.</p> </li> <li> <p>Specify a cluster parameter group name when <i>SourceType</i> is <code>cluster-parameter-group</code>.</p> </li> <li> <p>Specify a cluster snapshot identifier when <i>SourceType</i> is <code>cluster-snapshot</code>.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SourceType
           in: query
           required: false
@@ -6557,6 +6692,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeEvents</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -6653,6 +6789,7 @@ paths:
           description: 'The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your AWS customer account.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -6665,6 +6802,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeHsmClientCertificates</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -6795,6 +6933,7 @@ paths:
           description: 'The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your AWS customer account.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -6807,6 +6946,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeHsmConfigurations</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -6931,6 +7071,7 @@ paths:
           description: '<p>The identifier of the cluster from which to get the logging status.</p> <p>Example: <code>examplecluster</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -7043,18 +7184,21 @@ paths:
           description: The identifier of the cluster to evaluate for possible node configurations.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotIdentifier
           in: query
           required: false
           description: The identifier of the snapshot to evaluate for possible node configurations.
           schema:
             type: string
+            maxLength: 2147483647
         - name: OwnerAccount
           in: query
           required: false
           description: 'The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Filter
           in: query
           required: false
@@ -7072,6 +7216,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeNodeConfigurationOptions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -7186,12 +7331,14 @@ paths:
           description: '<p>The version filter value. Specify this parameter to show only the available offerings matching the specified version.</p> <p>Default: All versions.</p> <p>Constraints: Must be one of the version returned from <a>DescribeClusterVersions</a>.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: NodeType
           in: query
           required: false
           description: The node type filter value. Specify this parameter to show only the available offerings matching the specified node type.
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -7204,6 +7351,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeOrderableClusterOptions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -7306,6 +7454,7 @@ paths:
           description: The unique identifier for the offering.
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -7318,6 +7467,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeReservedNodeOfferings</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -7432,6 +7582,7 @@ paths:
           description: Identifier for the node reservation.
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -7444,6 +7595,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeReservedNodes</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -7552,6 +7704,7 @@ paths:
           description: '<p>The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.</p> <p>By default, resize operations for all clusters defined for an AWS account are returned.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -7648,6 +7801,7 @@ paths:
           description: 'The name of the scheduled action to retrieve. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TargetActionType
           in: query
           required: false
@@ -7695,6 +7849,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -7809,6 +7964,7 @@ paths:
           description: The name of the snapshot copy grant.
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -7821,6 +7977,7 @@ paths:
           description: '<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <code>DescribeSnapshotCopyGrant</code> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>SnapshotCopyGrantName</b> parameter or the <b>Marker</b> parameter, but not both. </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -7939,12 +8096,14 @@ paths:
           description: The unique identifier for the cluster whose snapshot schedules you want to view.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ScheduleIdentifier
           in: query
           required: false
           description: A unique identifier for a snapshot schedule.
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -7973,6 +8132,7 @@ paths:
           description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>marker</code> parameter and retrying the command. If the <code>marker</code> field is empty, all response records have been retrieved for the request.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -8136,12 +8296,14 @@ paths:
           description: The Amazon Redshift cluster that the table is being restored to.
           schema:
             type: string
+            maxLength: 2147483647
         - name: TableRestoreRequestId
           in: query
           required: false
           description: 'The identifier of the table restore request to return status for. If you don''t specify a <code>TableRestoreRequestId</code> value, then <code>DescribeTableRestoreStatus</code> returns the status of all in-progress table restore requests.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -8154,6 +8316,7 @@ paths:
           description: 'An optional pagination token provided by a previous <code>DescribeTableRestoreStatus</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the <code>MaxRecords</code> parameter.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -8262,12 +8425,14 @@ paths:
           description: 'The Amazon Resource Name (ARN) for which you want to describe the tag or tags. For example, <code>arn:aws:redshift:us-east-2:123456789:cluster:t1</code>. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: ResourceType
           in: query
           required: false
           description: '<p>The type of resource with which you want to view tags. Valid resource types are: </p> <ul> <li> <p>Cluster</p> </li> <li> <p>CIDR/IP</p> </li> <li> <p>EC2 security group</p> </li> <li> <p>Snapshot</p> </li> <li> <p>Cluster security group</p> </li> <li> <p>Subnet group</p> </li> <li> <p>HSM connection</p> </li> <li> <p>HSM certificate</p> </li> <li> <p>Parameter group</p> </li> <li> <p>Snapshot copy grant</p> </li> </ul> <p>For more information about Amazon Redshift resource types and constructing ARNs, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions">Specifying Policy Elements: Actions, Effects, Resources, and Principals</a> in the Amazon Redshift Cluster Management Guide. </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -8280,6 +8445,7 @@ paths:
           description: 'A value that indicates the starting point for the next set of response records in a subsequent request. If a value is returned in a response, you can retrieve the next set of records by providing this returned marker value in the <code>marker</code> parameter and retrying the command. If the <code>marker</code> field is empty, all response records have been retrieved for the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -8410,12 +8576,14 @@ paths:
           description: The identifier of the usage limit to describe.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterIdentifier
           in: query
           required: false
           description: The identifier of the cluster for which you want to describe usage limits.
           schema:
             type: string
+            maxLength: 2147483647
         - name: FeatureType
           in: query
           required: false
@@ -8437,6 +8605,7 @@ paths:
           description: 'An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeUsageLimits</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TagKeys
           in: query
           required: false
@@ -8561,6 +8730,7 @@ paths:
           description: '<p>The identifier of the cluster on which logging is to be stopped.</p> <p>Example: <code>examplecluster</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -8663,6 +8833,7 @@ paths:
           description: '<p>The unique identifier of the source cluster that you want to disable copying of snapshots to a destination region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -8795,18 +8966,21 @@ paths:
           description: '<p>The identifier of the cluster on which logging is to be started.</p> <p>Example: <code>examplecluster</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: BucketName
           in: query
           required: true
           description: '<p>The name of an existing S3 bucket where the log files are to be stored.</p> <p>Constraints:</p> <ul> <li> <p>Must be in the same region as the cluster</p> </li> <li> <p>The cluster must have read bucket and put object permissions</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: S3KeyPrefix
           in: query
           required: false
           description: '<p>The prefix applied to the log file names.</p> <p>Constraints:</p> <ul> <li> <p>Cannot exceed 512 characters</p> </li> <li> <p>Cannot contain spaces( ), double quotes ("), single quotes (''), a backslash (\), or control characters. The hexadecimal codes for invalid characters are: </p> <ul> <li> <p>x00 to x20</p> </li> <li> <p>x22</p> </li> <li> <p>x27</p> </li> <li> <p>x5c</p> </li> <li> <p>x7f or larger</p> </li> </ul> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -8981,12 +9155,14 @@ paths:
           description: '<p>The unique identifier of the source cluster to copy snapshots from.</p> <p>Constraints: Must be the valid name of an existing cluster that does not already have cross-region snapshot copy enabled.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: DestinationRegion
           in: query
           required: true
           description: '<p>The destination AWS Region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid AWS Region. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: RetentionPeriod
           in: query
           required: false
@@ -8999,6 +9175,7 @@ paths:
           description: The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ManualSnapshotRetentionPeriod
           in: query
           required: false
@@ -9155,18 +9332,21 @@ paths:
           description: '<p>The name of a database user. If a user name matching <code>DbUser</code> exists in the database, the temporary user credentials have the same permissions as the existing user. If <code>DbUser</code> doesn''t exist in the database and <code>Autocreate</code> is <code>True</code>, a new user is created using the value for <code>DbUser</code> with PUBLIC permissions. If a database user matching the value for <code>DbUser</code> doesn''t exist and <code>Autocreate</code> is <code>False</code>, then the command succeeds but the connection attempt will fail because the user doesn''t exist in the database.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html">CREATE USER</a> in the Amazon Redshift Database Developer Guide. </p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens. The user name can''t be <code>PUBLIC</code>.</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: DbName
           in: query
           required: false
           description: '<p>The name of a database that <code>DbUser</code> is authorized to log on to. If <code>DbName</code> is not specified, <code>DbUser</code> can log on to any existing database.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 64 alphanumeric characters or hyphens</p> </li> <li> <p>Must contain only lowercase letters, numbers, underscore, plus sign, period (dot), at symbol (@), or hyphen.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Must not contain a colon ( : ) or slash ( / ). </p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href="http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html">Reserved Words</a> in the Amazon Redshift Database Developer Guide.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterIdentifier
           in: query
           required: true
           description: The unique identifier of the cluster that contains the database for which your are requesting credentials. This parameter is case sensitive.
           schema:
             type: string
+            maxLength: 2147483647
         - name: DurationSeconds
           in: query
           required: false
@@ -9310,6 +9490,7 @@ paths:
           description: A string representing the node identifier for the DC1 Reserved Node to be exchanged.
           schema:
             type: string
+            maxLength: 2147483647
         - name: MaxRecords
           in: query
           required: false
@@ -9322,6 +9503,7 @@ paths:
           description: A value that indicates the starting point for the next set of ReservedNodeOfferings.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -9556,18 +9738,21 @@ paths:
           description: '<p>The unique identifier of the cluster to be modified.</p> <p>Example: <code>examplecluster</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterType
           in: query
           required: false
           description: '<p>The new cluster type.</p> <p>When you submit your cluster resize request, your existing cluster goes into a read-only mode. After Amazon Redshift provisions a new cluster based on your resize requirements, there will be outage for a period while the old cluster is deleted and your connection is switched to the new cluster. You can use <a>DescribeResize</a> to track the progress of the resize request. </p> <p>Valid Values: <code> multi-node | single-node </code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: NodeType
           in: query
           required: false
-          description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>'
+          description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: NumberOfNodes
           in: query
           required: false
@@ -9602,12 +9787,14 @@ paths:
           description: '<p>The new password for the cluster master user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the master user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except '' (single quote), " (double quote), \, /, @, or space.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterParameterGroupName
           in: query
           required: false
           description: '<p>The name of the cluster parameter group to apply to this cluster. This change is applied only after the cluster is rebooted. To reboot a cluster use <a>RebootCluster</a>. </p> <p>Default: Uses existing setting.</p> <p>Constraints: The cluster parameter group must be in the same parameter group family that matches the cluster version.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: AutomatedSnapshotRetentionPeriod
           in: query
           required: false
@@ -9626,12 +9813,14 @@ paths:
           description: '<p>The weekly time range (in UTC) during which system maintenance can occur, if necessary. If system maintenance is necessary during the window, it may result in an outage.</p> <p>This maintenance window change is made immediately. If the new maintenance window indicates the current time, there must be at least 120 minutes between the current time and end of the window in order to ensure that pending changes are applied.</p> <p>Default: Uses existing setting.</p> <p>Format: ddd:hh24:mi-ddd:hh24:mi, for example <code>wed:07:30-wed:08:00</code>.</p> <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p> <p>Constraints: Must be at least 30 minutes.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterVersion
           in: query
           required: false
           description: '<p>The new version number of the Amazon Redshift engine to upgrade to.</p> <p>For major version upgrades, if a non-default cluster parameter group is currently in use, a new cluster parameter group in the cluster parameter group family for the new version must be specified. The new cluster parameter group can be the default for that cluster parameter group family. For more information about parameters and parameter groups, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Amazon Redshift Parameter Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Example: <code>1.0</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: AllowVersionUpgrade
           in: query
           required: false
@@ -9644,18 +9833,21 @@ paths:
           description: Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM.
           schema:
             type: string
+            maxLength: 2147483647
         - name: HsmConfigurationIdentifier
           in: query
           required: false
           description: Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.
           schema:
             type: string
+            maxLength: 2147483647
         - name: NewClusterIdentifier
           in: query
           required: false
           description: '<p>The new identifier for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an AWS account.</p> </li> </ul> <p>Example: <code>examplecluster</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: PubliclyAccessible
           in: query
           required: false
@@ -9668,6 +9860,7 @@ paths:
           description: '<p>The Elastic IP (EIP) address for the cluster.</p> <p>Constraints: The cluster must be provisioned in EC2-VPC and publicly-accessible through an Internet gateway. For more information about provisioning clusters in EC2-VPC, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms">Supported Platforms to Launch Your Cluster</a> in the Amazon Redshift Cluster Management Guide.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: EnhancedVpcRouting
           in: query
           required: false
@@ -9680,6 +9873,7 @@ paths:
           description: 'The name for the maintenance track that you want to assign for the cluster. This name change is asynchronous. The new track name stays in the <code>PendingModifiedValues</code> for the cluster until the next maintenance window. When the maintenance track changes, the cluster is switched to the latest cluster release available for the maintenance track. At this point, the maintenance track name is applied.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Encrypted
           in: query
           required: false
@@ -9692,6 +9886,26 @@ paths:
           description: The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
           schema:
             type: string
+            maxLength: 2147483647
+        - name: AvailabilityZoneRelocation
+          in: query
+          required: false
+          description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.
+          schema:
+            type: boolean
+        - name: AvailabilityZone
+          in: query
+          required: false
+          description: The option to initiate relocation for an Amazon Redshift cluster to the target Availability Zone.
+          schema:
+            type: string
+            maxLength: 2147483647
+        - name: Port
+          in: query
+          required: false
+          description: The option to change the port of an Amazon Redshift cluster.
+          schema:
+            type: integer
         - name: Action
           in: query
           required: true
@@ -9896,12 +10110,14 @@ paths:
           description: '<p>The unique identifier of a cluster whose database revision you want to modify. </p> <p>Example: <code>examplecluster</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: RevisionTarget
           in: query
           required: true
           description: The identifier of the database revision. You can retrieve this value from the response to the <a>DescribeClusterDbRevisions</a> request.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -10004,6 +10220,7 @@ paths:
           description: The unique identifier of the cluster for which you want to associate or disassociate IAM roles.
           schema:
             type: string
+            maxLength: 2147483647
         - name: AddIamRoles
           in: query
           required: false
@@ -10122,6 +10339,7 @@ paths:
           description: A unique identifier for the cluster.
           schema:
             type: string
+            maxLength: 2147483647
         - name: DeferMaintenance
           in: query
           required: false
@@ -10134,6 +10352,7 @@ paths:
           description: A unique identifier for the deferred maintenance window.
           schema:
             type: string
+            maxLength: 2147483647
         - name: DeferMaintenanceStartTime
           in: query
           required: false
@@ -10250,6 +10469,7 @@ paths:
           description: The name of the parameter group to be modified.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Parameters
           in: query
           required: true
@@ -10363,6 +10583,7 @@ paths:
           description: The identifier of the snapshot whose setting you want to modify.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ManualSnapshotRetentionPeriod
           in: query
           required: false
@@ -10479,12 +10700,14 @@ paths:
           description: 'A unique identifier for the cluster whose snapshot schedule you want to modify. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: ScheduleIdentifier
           in: query
           required: false
           description: A unique alphanumeric identifier for the schedule that you want to associate with the cluster.
           schema:
             type: string
+            maxLength: 2147483647
         - name: DisassociateSchedule
           in: query
           required: false
@@ -10613,12 +10836,14 @@ paths:
           description: The name of the subnet group to be modified.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Description
           in: query
           required: false
           description: A text description of the subnet group to be modified.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SubnetIds
           in: query
           required: true
@@ -10792,18 +11017,21 @@ paths:
           description: The name of the modified Amazon Redshift event notification subscription.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnsTopicArn
           in: query
           required: false
           description: The Amazon Resource Name (ARN) of the SNS topic to be used by the event notification subscription.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SourceType
           in: query
           required: false
           description: '<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SourceIds
           in: query
           required: false
@@ -10832,6 +11060,7 @@ paths:
           description: '<p>Specifies the Amazon Redshift event severity to be published by the event notification subscription.</p> <p>Values: ERROR, INFO</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Enabled
           in: query
           required: false
@@ -10994,6 +11223,7 @@ paths:
           description: 'The name of the scheduled action to modify. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: TargetAction
           in: query
           required: false
@@ -11020,18 +11250,21 @@ paths:
           description: 'A modified schedule in either <code>at( )</code> or <code>cron( )</code> format. For more information about this parameter, see <a>ScheduledAction</a>.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: IamRole
           in: query
           required: false
           description: 'A different IAM role to assume to run the target action. For more information about this parameter, see <a>ScheduledAction</a>.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ScheduledActionDescription
           in: query
           required: false
           description: 'A modified description of the scheduled action. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: StartTime
           in: query
           required: false
@@ -11184,6 +11417,7 @@ paths:
           description: '<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination AWS Region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: RetentionPeriod
           in: query
           required: true
@@ -11316,6 +11550,7 @@ paths:
           description: A unique alphanumeric identifier of the schedule to modify.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ScheduleDefinitions
           in: query
           required: true
@@ -11435,6 +11670,7 @@ paths:
           description: The identifier of the usage limit to modify.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Amount
           in: query
           required: false
@@ -11553,6 +11789,7 @@ paths:
           description: The identifier of the cluster to be paused.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -11661,6 +11898,7 @@ paths:
           description: The unique identifier of the reserved node offering you want to purchase.
           schema:
             type: string
+            maxLength: 2147483647
         - name: NodeCount
           in: query
           required: false
@@ -11775,6 +12013,7 @@ paths:
           description: The cluster identifier.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -11871,6 +12110,7 @@ paths:
           description: The name of the cluster parameter group to be reset.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ResetAllParameters
           in: query
           required: false
@@ -11957,7 +12197,7 @@ paths:
     get:
       x-aws-operation-name: ResizeCluster
       operationId: GET_ResizeCluster
-      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
+      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.xlplus</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -12026,18 +12266,21 @@ paths:
           description: The unique identifier for the cluster to resize.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterType
           in: query
           required: false
           description: The new cluster type for the specified cluster.
           schema:
             type: string
+            maxLength: 2147483647
         - name: NodeType
           in: query
           required: false
           description: 'The new node type for the nodes you are adding. If not specified, the cluster''s current node type is used.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: NumberOfNodes
           in: query
           required: false
@@ -12075,7 +12318,7 @@ paths:
     post:
       x-aws-operation-name: ResizeCluster
       operationId: POST_ResizeCluster
-      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
+      description: '<p>Changes the size of the cluster. You can change the cluster''s type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method. </p> <p>Elastic resize operations have the following restrictions:</p> <ul> <li> <p>You can only resize clusters of the following types:</p> <ul> <li> <p>dc1.large (if your cluster is in a VPC)</p> </li> <li> <p>dc1.8xlarge (if your cluster is in a VPC)</p> </li> <li> <p>dc2.large</p> </li> <li> <p>dc2.8xlarge</p> </li> <li> <p>ds2.xlarge</p> </li> <li> <p>ds2.8xlarge</p> </li> <li> <p>ra3.xlplus</p> </li> <li> <p>ra3.4xlarge</p> </li> <li> <p>ra3.16xlarge</p> </li> </ul> </li> <li> <p>The type of nodes that you add must match the node type for the cluster.</p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -12326,18 +12569,21 @@ paths:
           description: '<p>The identifier of the cluster that will be created from restoring the snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an AWS account.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotIdentifier
           in: query
           required: true
           description: '<p>The name of the snapshot from which to create the new cluster. This parameter isn''t case sensitive.</p> <p>Example: <code>my-snapshot-id</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotClusterIdentifier
           in: query
           required: false
           description: The name of the cluster the source snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Port
           in: query
           required: false
@@ -12350,6 +12596,7 @@ paths:
           description: '<p>The Amazon EC2 Availability Zone in which to restore the cluster.</p> <p>Default: A random, system-chosen Availability Zone.</p> <p>Example: <code>us-east-2a</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: AllowVersionUpgrade
           in: query
           required: false
@@ -12362,6 +12609,7 @@ paths:
           description: '<p>The name of the subnet group where you want to cluster restored.</p> <p>A snapshot of cluster in VPC can be restored only in VPC. Therefore, you must provide subnet group name where you want the cluster restored.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: PubliclyAccessible
           in: query
           required: false
@@ -12374,30 +12622,35 @@ paths:
           description: 'The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: HsmClientCertificateIdentifier
           in: query
           required: false
           description: Specifies the name of the HSM client certificate the Amazon Redshift cluster uses to retrieve the data encryption keys stored in an HSM.
           schema:
             type: string
+            maxLength: 2147483647
         - name: HsmConfigurationIdentifier
           in: query
           required: false
           description: Specifies the name of the HSM configuration that contains the information the Amazon Redshift cluster can use to retrieve and store keys in an HSM.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ElasticIp
           in: query
           required: false
           description: The elastic IP (EIP) address for the cluster.
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterParameterGroupName
           in: query
           required: false
           description: '<p>The name of the parameter group to be associated with this cluster.</p> <p>Default: The default Amazon Redshift cluster parameter group. For information about the default parameter group, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html">Working with Amazon Redshift Parameter Groups</a>.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: ClusterSecurityGroups
           in: query
           required: false
@@ -12426,6 +12679,7 @@ paths:
           description: '<p>The weekly time range (in UTC) during which automated cluster maintenance can occur.</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p> Default: The value selected for the cluster from which the snapshot was taken. For more information about the time blocks for each region, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-maintenance-windows">Maintenance Windows</a> in Amazon Redshift Cluster Management Guide. </p> <p>Valid Days: Mon | Tue | Wed | Thu | Fri | Sat | Sun</p> <p>Constraints: Minimum 30-minute window.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: AutomatedSnapshotRetentionPeriod
           in: query
           required: false
@@ -12444,12 +12698,14 @@ paths:
           description: The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
           schema:
             type: string
+            maxLength: 2147483647
         - name: NodeType
           in: query
           required: false
           description: '<p>The node type that the restored cluster will be provisioned with.</p> <p>Default: The node type of the cluster from which the snapshot was taken. You can modify this if you are using any DS node type. In that case, you can choose to restore into another DS node type of the same size. For example, you can restore ds1.8xlarge into ds2.8xlarge, or ds1.xlarge into ds2.xlarge. If you have a DC instance type, you must restore into that same instance type and size. In other words, you can only restore a dc1.large instance type into another dc1.large instance type or dc2.large instance type. You can''t restore dc1.8xlarge to dc2.8xlarge. First restore to a dc1.8xlarge cluster, then resize to a dc2.8large cluster. For more information about node types, see <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes"> About Clusters and Nodes</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: EnhancedVpcRouting
           in: query
           required: false
@@ -12462,6 +12718,7 @@ paths:
           description: Reserved.
           schema:
             type: string
+            maxLength: 2147483647
         - name: IamRoles
           in: query
           required: false
@@ -12479,18 +12736,26 @@ paths:
           description: 'The name of the maintenance track for the restored cluster. When you take a snapshot, the snapshot inherits the <code>MaintenanceTrack</code> value from the cluster. The snapshot might be on a different track than the cluster that was the source for the snapshot. For example, suppose that you take a snapshot of a cluster that is on the current track and then change the cluster to be on the trailing track. In this case, the snapshot and the source cluster are on different tracks.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotScheduleIdentifier
           in: query
           required: false
           description: A unique identifier for the snapshot schedule.
           schema:
             type: string
+            maxLength: 2147483647
         - name: NumberOfNodes
           in: query
           required: false
           description: The number of nodes specified when provisioning the restored cluster.
           schema:
             type: integer
+        - name: AvailabilityZoneRelocation
+          in: query
+          required: false
+          description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.
+          schema:
+            type: boolean
         - name: Action
           in: query
           required: true
@@ -12755,48 +13020,56 @@ paths:
           description: The identifier of the Amazon Redshift cluster to restore the table to.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotIdentifier
           in: query
           required: true
           description: The identifier of the snapshot to restore the table from. This snapshot must have been created from the Amazon Redshift cluster specified by the <code>ClusterIdentifier</code> parameter.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SourceDatabaseName
           in: query
           required: true
           description: The name of the source database that contains the table to restore from.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SourceSchemaName
           in: query
           required: false
           description: 'The name of the source schema that contains the table to restore from. If you do not specify a <code>SourceSchemaName</code> value, the default is <code>public</code>.'
           schema:
             type: string
+            maxLength: 2147483647
         - name: SourceTableName
           in: query
           required: true
           description: The name of the source table to restore from.
           schema:
             type: string
+            maxLength: 2147483647
         - name: TargetDatabaseName
           in: query
           required: false
           description: The name of the database to restore the table to.
           schema:
             type: string
+            maxLength: 2147483647
         - name: TargetSchemaName
           in: query
           required: false
           description: The name of the schema to restore the table to.
           schema:
             type: string
+            maxLength: 2147483647
         - name: NewTableName
           in: query
           required: true
           description: The name of the table to create as a result of the current request.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -12916,6 +13189,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: InsufficientClusterCapacityFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InsufficientClusterCapacityFault'
       parameters:
         - name: ClusterIdentifier
           in: query
@@ -12923,6 +13202,7 @@ paths:
           description: The identifier of the cluster to be resumed.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -12968,6 +13248,12 @@ paths:
             text/xml:
               schema:
                 $ref: '#/components/schemas/InvalidClusterStateFault'
+        '482':
+          description: InsufficientClusterCapacityFault
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InsufficientClusterCapacityFault'
       requestBody:
         content:
           text/xml:
@@ -13025,24 +13311,28 @@ paths:
           description: The name of the security Group from which to revoke the ingress rule.
           schema:
             type: string
+            maxLength: 2147483647
         - name: CIDRIP
           in: query
           required: false
           description: 'The IP range for which to revoke access. This range must be a valid Classless Inter-Domain Routing (CIDR) block of IP addresses. If <code>CIDRIP</code> is specified, <code>EC2SecurityGroupName</code> and <code>EC2SecurityGroupOwnerId</code> cannot be provided. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: EC2SecurityGroupName
           in: query
           required: false
           description: 'The name of the EC2 Security Group whose access is to be revoked. If <code>EC2SecurityGroupName</code> is specified, <code>EC2SecurityGroupOwnerId</code> must also be provided and <code>CIDRIP</code> cannot be provided. '
           schema:
             type: string
+            maxLength: 2147483647
         - name: EC2SecurityGroupOwnerId
           in: query
           required: false
           description: '<p>The AWS account number of the owner of the security group specified in the <code>EC2SecurityGroupName</code> parameter. The AWS access key ID is not an acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified, <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code> cannot be provided. </p> <p>Example: <code>111122223333</code> </p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -13151,18 +13441,21 @@ paths:
           description: The identifier of the snapshot that the account can no longer access.
           schema:
             type: string
+            maxLength: 2147483647
         - name: SnapshotClusterIdentifier
           in: query
           required: false
           description: The identifier of the cluster the snapshot was created from. This parameter is required if your IAM user has a policy containing a snapshot resource element that specifies anything other than * for the cluster name.
           schema:
             type: string
+            maxLength: 2147483647
         - name: AccountWithRestoreAccess
           in: query
           required: true
           description: The identifier of the AWS customer account that can no longer restore the specified snapshot.
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -13271,6 +13564,7 @@ paths:
           description: '<p>The unique identifier of the cluster that you want to rotate the encryption keys for.</p> <p>Constraints: Must be the name of valid cluster that has encryption enabled.</p>'
           schema:
             type: string
+            maxLength: 2147483647
         - name: Action
           in: query
           required: true
@@ -13466,6 +13760,7 @@ components:
             - description: A list of any errors returned.
     String:
       type: string
+      maxLength: 2147483647
     InvalidRetentionPeriodFault: {}
     BatchModifyClusterSnapshotsLimitExceededFault: {}
     ResizeProgressMessage:
@@ -13696,7 +13991,7 @@ components:
             - description: 'The new node type for the nodes you are adding. If not specified, the cluster''s current node type is used.'
         NumberOfNodes:
           allOf:
-            - $ref: '#/components/schemas/Integer'
+            - $ref: '#/components/schemas/IntegerOptional'
             - description: 'The new number of nodes for the cluster. If not specified, the cluster''s current number of nodes is used.'
         Classic:
           allOf:
@@ -14671,6 +14966,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The version ID of the Amazon Redshift engine that is running on the cluster.
+        EngineFullVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The cluster version of the cluster used to create the snapshot. For example, 1.0.15503. '
         SnapshotType:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -14897,6 +15196,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: The port that the database engine is listening on.
+        VpcEndpoints:
+          allOf:
+            - $ref: '#/components/schemas/SpartaProxyVpcEndpointList'
+            - description: Describes a connection endpoint.
       description: Describes a connection endpoint.
     TStamp:
       type: string
@@ -15310,6 +15613,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResizeInfo'
             - description: '<p>Returns the following:</p> <ul> <li> <p>AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.</p> </li> <li> <p>ResizeType: Returns ClassicResize</p> </li> </ul>'
+        AvailabilityZoneRelocationStatus:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Describes the status of the Availability Zone relocation operation.
         ClusterNamespaceArn:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -15626,7 +15933,7 @@ components:
         NodeType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The node type to be provisioned for the cluster. For information about node types, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes"> Working with Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>'
+            - description: '<p>The node type to be provisioned for the cluster. For information about node types, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes"> Working with Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>'
         MasterUsername:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -15731,6 +16038,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: A unique identifier for the snapshot schedule.
+        AvailabilityZoneRelocation:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.
       description: <p/>
     CreateClusterParameterGroupMessage:
       type: object
@@ -17251,6 +17562,13 @@ components:
             - $ref: '#/components/schemas/IntegerOptional'
             - description: '<p>The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>'
       description: <p/>
+    SpartaProxyVpcEndpointList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/SpartaProxyVpcEndpoint'
+          - xml:
+              name: SpartaProxyVpcEndpoint
     Event:
       type: object
       properties:
@@ -17545,7 +17863,7 @@ components:
         NodeType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>'
+            - description: '<p>The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.</p> <p> For more information about resizing clusters, go to <a href="https://docs.aws.amazon.com/redshift/latest/mgmt/rs-resize-tutorial.html">Resizing Clusters in Amazon Redshift</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p> <p>Valid Values: <code>ds2.xlarge</code> | <code>ds2.8xlarge</code> | <code>dc1.large</code> | <code>dc1.8xlarge</code> | <code>dc2.large</code> | <code>dc2.8xlarge</code> | <code>ra3.xlplus</code> | <code>ra3.4xlarge</code> | <code>ra3.16xlarge</code> </p>'
         NumberOfNodes:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
@@ -17622,6 +17940,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
+        AvailabilityZoneRelocation:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The option to initiate relocation for an Amazon Redshift cluster to the target Availability Zone.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/IntegerOptional'
+            - description: The option to change the port of an Amazon Redshift cluster.
       description: <p/>
     ModifyClusterParameterGroupMessage:
       type: object
@@ -18138,6 +18468,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
             - description: The number of nodes specified when provisioning the restored cluster.
+        AvailabilityZoneRelocation:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.
       description: <p/>
     RestoreTableFromClusterSnapshotMessage:
       type: object
@@ -18368,6 +18702,14 @@ components:
       enum:
         - ASC
         - DESC
+    SpartaProxyVpcEndpoint:
+      type: object
+      properties:
+        VpcEndpointId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
+      description: The connection endpoint for connecting an Amazon Redshift cluster through the proxy.
     Subnet:
       type: object
       properties:
