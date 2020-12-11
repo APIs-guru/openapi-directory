@@ -489,6 +489,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.CreateThesaurus:
+    post:
+      operationId: CreateThesaurus
+      description: Creates a thesaurus for an index. The thesaurus contains a list of synonyms in Solr format.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateThesaurusResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateThesaurusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.CreateThesaurus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.DeleteDataSource:
     post:
       operationId: DeleteDataSource
@@ -684,6 +759,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.DeleteThesaurus:
+    post:
+      operationId: DeleteThesaurus
+      description: 'Deletes an existing Amazon Kendra thesaurus. '
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteThesaurusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.DeleteThesaurus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWSKendraFrontendService.DescribeDataSource:
     post:
       operationId: DescribeDataSource
@@ -865,6 +1005,69 @@ paths:
             type: string
             enum:
               - AWSKendraFrontendService.DescribeIndex
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.DescribeThesaurus:
+    post:
+      operationId: DescribeThesaurus
+      description: Describes an existing Amazon Kendra thesaurus.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeThesaurusResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribeThesaurusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.DescribeThesaurus
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1216,6 +1419,69 @@ paths:
             type: string
             enum:
               - AWSKendraFrontendService.ListTagsForResource
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.ListThesauri:
+    post:
+      operationId: ListThesauri
+      description: Lists the Amazon Kendra thesauri associated with an index.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListThesauriResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListThesauriRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.ListThesauri
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1760,6 +2026,71 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWSKendraFrontendService.UpdateThesaurus:
+    post:
+      operationId: UpdateThesaurus
+      description: Updates a thesaurus file associated with an index.
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateThesaurusRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWSKendraFrontendService.UpdateThesaurus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -2021,6 +2352,50 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserContextPolicy'
             - description: '<p>The user context policy.</p> <dl> <dt>ATTRIBUTE_FILTER</dt> <dd> <p>All indexed content is searchable and displayable for all users. If there is an access control list, it is ignored. You can filter on user and group attributes. </p> </dd> <dt>USER_TOKEN</dt> <dd> <p>Enables SSO and token-based user access control. All documents with no access control and all documents accessible to the user will be searchable and displayable. </p> </dd> </dl>'
+    CreateThesaurusResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusId'
+            - description: 'The unique identifier of the thesaurus. '
+    CreateThesaurusRequest:
+      type: object
+      required:
+        - IndexId
+        - Name
+        - RoleArn
+        - SourceS3Path
+      title: CreateThesaurusRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: 'The unique identifier of the index for the new thesaurus. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusName'
+            - description: The name for the new thesaurus.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description for the new thesaurus.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access thesaurus file specified in <code>SourceS3Path</code>. '
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: 'A list of key-value pairs that identify the thesaurus. You can use the tags to identify and organize your resources and to control access to resources. '
+        SourceS3Path:
+          allOf:
+            - $ref: '#/components/schemas/S3Path'
+            - description: 'The thesaurus file Amazon S3 source path. '
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientTokenName'
+            - description: 'A token that you provide to identify the request to create a thesaurus. Multiple calls to the <code>CreateThesaurus</code> operation with the same client token will create only one index. '
     DeleteDataSourceRequest:
       type: object
       required:
@@ -2061,6 +2436,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexId'
             - description: The identifier of the index to delete.
+    DeleteThesaurusRequest:
+      type: object
+      required:
+        - Id
+        - IndexId
+      title: DeleteThesaurusRequest
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusId'
+            - description: The identifier of the thesaurus to delete.
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index associated with the thesaurus to delete.
     DescribeDataSourceResponse:
       type: object
       properties:
@@ -2197,7 +2587,7 @@ components:
         Id:
           allOf:
             - $ref: '#/components/schemas/IndexId'
-            - description: the name of the index.
+            - description: The name of the index.
         Edition:
           allOf:
             - $ref: '#/components/schemas/IndexEdition'
@@ -2260,6 +2650,74 @@ components:
           allOf:
             - $ref: '#/components/schemas/IndexId'
             - description: The name of the index to describe.
+    DescribeThesaurusResponse:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusId'
+            - description: The identifier of the thesaurus.
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index associated with the thesaurus to describe.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusName'
+            - description: The thesaurus name.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The thesaurus description.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusStatus'
+            - description: '<p>The current status of the thesaurus. When the value is <code>ACTIVE</code>, queries are able to use the thesaurus. If the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field provides more information. </p> <p>If the status is <code>ACTIVE_BUT_UPDATE_FAILED</code>, it means that Amazon Kendra could not ingest the new thesaurus file. The old thesaurus file is still active. </p>'
+        ErrorMessage:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: 'When the <code>Status</code> field value is <code>FAILED</code>, the <code>ErrorMessage</code> field provides more information. '
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix datetime that the thesaurus was created.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix datetime that the thesaurus was last updated.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: 'An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access thesaurus file specified in <code>SourceS3Path</code>. '
+        SourceS3Path:
+          $ref: '#/components/schemas/S3Path'
+        FileSizeBytes:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The size of the thesaurus file in bytes.
+        TermCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: 'The number of unique terms in the thesaurus file. For example, the synonyms <code>a,b,c</code> and <code>a=&gt;d</code>, the term count would be 4. '
+        SynonymRuleCount:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The number of synonym rules in the thesaurus file.
+    DescribeThesaurusRequest:
+      type: object
+      required:
+        - Id
+        - IndexId
+      title: DescribeThesaurusRequest
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusId'
+            - description: The identifier of the thesaurus to describe.
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index associated with the thesaurus to describe.
     ListDataSourceSyncJobsResponse:
       type: object
       properties:
@@ -2401,6 +2859,35 @@ components:
             - $ref: '#/components/schemas/AmazonResourceName'
             - description: 'The Amazon Resource Name (ARN) of the index, FAQ, or data source to get a list of tags for.'
     ResourceUnavailableException: {}
+    ListThesauriResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of thesauri. '
+        ThesaurusSummaryItems:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusSummaryItems'
+            - description: An array of summary information for one or more thesauruses.
+    ListThesauriRequest:
+      type: object
+      required:
+        - IndexId
+      title: ListThesauriRequest
+      properties:
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index associated with the thesaurus to list.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of thesauri (<code>ThesaurusSummaryItems</code>). '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResultsIntegerForListThesauriRequest'
+            - description: The maximum number of thesauri to return.
     QueryResult:
       type: object
       properties:
@@ -2639,6 +3126,35 @@ components:
           allOf:
             - $ref: '#/components/schemas/UserContextPolicy'
             - description: The user user token context policy.
+    UpdateThesaurusRequest:
+      type: object
+      required:
+        - Id
+        - IndexId
+      title: UpdateThesaurusRequest
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusId'
+            - description: The identifier of the thesaurus to update.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusName'
+            - description: The updated name of the thesaurus.
+        IndexId:
+          allOf:
+            - $ref: '#/components/schemas/IndexId'
+            - description: The identifier of the index associated with the thesaurus to update.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The updated description of the thesaurus.
+        RoleArn:
+          allOf:
+            - $ref: '#/components/schemas/RoleArn'
+            - description: The updated role ARN of the thesaurus.
+        SourceS3Path:
+          $ref: '#/components/schemas/S3Path'
     S3ObjectKey:
       type: string
       minLength: 1
@@ -3454,6 +3970,16 @@ components:
       enum:
         - ATTRIBUTE_FILTER
         - USER_TOKEN
+    ThesaurusName:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+      minLength: 1
+      maxLength: 100
+    ThesaurusId:
+      type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9_-]*'
+      minLength: 1
+      maxLength: 100
     S3DataSourceConfiguration:
       type: object
       required:
@@ -3918,6 +4444,17 @@ components:
             - $ref: '#/components/schemas/TextDocumentStatistics'
             - description: The number of text documents indexed.
       description: Provides information about the number of documents and the number of questions and answers in an index.
+    ThesaurusStatus:
+      type: string
+      enum:
+        - CREATING
+        - ACTIVE
+        - DELETING
+        - UPDATING
+        - ACTIVE_BUT_UPDATE_FAILED
+        - FAILED
+    Long:
+      type: integer
     Title:
       type: string
     DocumentAttributeList:
@@ -3999,8 +4536,6 @@ components:
       type: string
       minLength: 1
       maxLength: 2048
-    Long:
-      type: integer
     Integer:
       type: integer
     DocumentAttributeValueCountPair:
@@ -4232,6 +4767,11 @@ components:
       pattern: '^\P{C}*$'
       minLength: 1
       maxLength: 100
+    HighlightType:
+      type: string
+      enum:
+        - STANDARD
+        - THESAURUS_SYNONYM
     Highlight:
       type: object
       required:
@@ -4250,6 +4790,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Indicates whether the response is the best response. True if this is the best response; otherwise, false.'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/HighlightType'
+            - description: 'The highlight type. '
       description: Provides information that you can use to highlight a search result so that your users can quickly identify terms in the response.
     HighlightList:
       type: array
@@ -4417,6 +4961,14 @@ components:
       type: integer
       minimum: 1
       maximum: 100
+    MaxResultsIntegerForListThesauriRequest:
+      type: integer
+      minimum: 1
+      maximum: 100
+    ThesaurusSummaryItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/ThesaurusSummary'
     TenantDomain:
       type: string
       pattern: '^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-z]{2,}$'
@@ -4487,6 +5039,7 @@ components:
       description: Provides user and group information for document access filtering.
     QueryId:
       type: string
+      pattern: '[a-zA-Z0-9][a-zA-Z0-9-]*'
       minLength: 1
       maxLength: 36
     QueryIdentifiersEnclosingOption:
@@ -4930,6 +5483,30 @@ components:
         $ref: '#/components/schemas/TagKey'
       minItems: 0
       maxItems: 200
+    ThesaurusSummary:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusId'
+            - description: The identifier of the thesaurus.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusName'
+            - description: The name of the thesaurus.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ThesaurusStatus'
+            - description: The status of the thesaurus.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix datetime that the thesaurus was created.
+        UpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: The Unix datetime that the thesaurus was last updated.
+      description: An array of summary information for one or more thesauruses.
     Token:
       type: string
       pattern: '^\P{C}*$'

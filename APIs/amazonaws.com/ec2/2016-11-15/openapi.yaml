@@ -214,6 +214,101 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=AcceptTransitGatewayMulticastDomainAssociations:
+    get:
+      x-aws-operation-name: AcceptTransitGatewayMulticastDomainAssociations
+      operationId: GET_AcceptTransitGatewayMulticastDomainAssociations
+      description: Accepts a request to associate subnets with a transit gateway multicast domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AcceptTransitGatewayMulticastDomainAssociationsResult'
+      parameters:
+        - name: TransitGatewayMulticastDomainId
+          in: query
+          required: false
+          description: The ID of the transit gateway multicast domain.
+          schema:
+            type: string
+        - name: TransitGatewayAttachmentId
+          in: query
+          required: false
+          description: The ID of the transit gateway attachment.
+          schema:
+            type: string
+        - name: SubnetIds
+          in: query
+          required: false
+          description: The IDs of the subnets to associate with the transit gateway multicast domain.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: item
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AcceptTransitGatewayMulticastDomainAssociations
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: AcceptTransitGatewayMulticastDomainAssociations
+      operationId: POST_AcceptTransitGatewayMulticastDomainAssociations
+      description: Accepts a request to associate subnets with a transit gateway multicast domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/AcceptTransitGatewayMulticastDomainAssociationsResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/AcceptTransitGatewayMulticastDomainAssociationsRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - AcceptTransitGatewayMulticastDomainAssociations
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=AcceptTransitGatewayPeeringAttachment:
     get:
       x-aws-operation-name: AcceptTransitGatewayPeeringAttachment
@@ -1779,7 +1874,7 @@ paths:
             type: array
             items:
               allOf:
-                - $ref: '#/components/schemas/String'
+                - $ref: '#/components/schemas/SubnetId'
                 - xml:
                     name: item
         - name: DryRun
@@ -7068,6 +7163,142 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=CreateNetworkInsightsPath:
+    get:
+      x-aws-operation-name: CreateNetworkInsightsPath
+      operationId: GET_CreateNetworkInsightsPath
+      description: '<p>Creates a path to analyze for reachability.</p> <p>Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/reachability/">What is Reachability Analyzer</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateNetworkInsightsPathResult'
+      parameters:
+        - name: SourceIp
+          in: query
+          required: false
+          description: The IP address of the AWS resource that is the source of the path.
+          schema:
+            type: string
+            pattern: '^([0-9]{1,3}.){3}[0-9]{1,3}$'
+            minLength: 0
+            maxLength: 15
+        - name: DestinationIp
+          in: query
+          required: false
+          description: The IP address of the AWS resource that is the destination of the path.
+          schema:
+            type: string
+            pattern: '^([0-9]{1,3}.){3}[0-9]{1,3}$'
+            minLength: 0
+            maxLength: 15
+        - name: Source
+          in: query
+          required: true
+          description: The AWS resource that is the source of the path.
+          schema:
+            type: string
+        - name: Destination
+          in: query
+          required: true
+          description: The AWS resource that is the destination of the path.
+          schema:
+            type: string
+        - name: Protocol
+          in: query
+          required: true
+          description: The protocol.
+          schema:
+            type: string
+            enum:
+              - tcp
+              - udp
+        - name: DestinationPort
+          in: query
+          required: false
+          description: The destination port.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 65535
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to add to the path.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/TagSpecification'
+                - xml:
+                    name: item
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: ClientToken
+          in: query
+          required: true
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateNetworkInsightsPath
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateNetworkInsightsPath
+      operationId: POST_CreateNetworkInsightsPath
+      description: '<p>Creates a path to analyze for reachability.</p> <p>Reachability Analyzer enables you to analyze and debug network reachability between two resources in your virtual private cloud (VPC). For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/reachability/">What is Reachability Analyzer</a>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateNetworkInsightsPathResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateNetworkInsightsPathRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateNetworkInsightsPath
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=CreateNetworkInterface:
     get:
       x-aws-operation-name: CreateNetworkInterface
@@ -8912,6 +9143,10 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/MulticastSupportValue'
                   - description: Indicates whether multicast is enabled on the transit gateway
+              TransitGatewayCidrBlocks:
+                allOf:
+                  - $ref: '#/components/schemas/TransitGatewayCidrBlockStringList'
+                  - description: 'One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.'
             description: Describes the options for a transit gateway.
         - name: TagSpecification
           in: query
@@ -8983,6 +9218,233 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=CreateTransitGatewayConnect:
+    get:
+      x-aws-operation-name: CreateTransitGatewayConnect
+      operationId: GET_CreateTransitGatewayConnect
+      description: <p>Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance.</p> <p>A Connect attachment uses an existing VPC or AWS Direct Connect attachment as the underlying transport mechanism. </p>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateTransitGatewayConnectResult'
+      parameters:
+        - name: TransportTransitGatewayAttachmentId
+          in: query
+          required: true
+          description: The ID of the transit gateway attachment. You can specify a VPC attachment or a AWS Direct Connect attachment.
+          schema:
+            type: string
+        - name: Options
+          in: query
+          required: true
+          description: The Connect attachment options.
+          schema:
+            type: object
+            required:
+              - Protocol
+            properties:
+              Protocol:
+                allOf:
+                  - $ref: '#/components/schemas/ProtocolValue'
+                  - description: The tunnel protocol.
+            description: The options for a Connect attachment.
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the Connect attachment.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/TagSpecification'
+                - xml:
+                    name: item
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateTransitGatewayConnect
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateTransitGatewayConnect
+      operationId: POST_CreateTransitGatewayConnect
+      description: <p>Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance.</p> <p>A Connect attachment uses an existing VPC or AWS Direct Connect attachment as the underlying transport mechanism. </p>
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateTransitGatewayConnectResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateTransitGatewayConnectRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateTransitGatewayConnect
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=CreateTransitGatewayConnectPeer:
+    get:
+      x-aws-operation-name: CreateTransitGatewayConnectPeer
+      operationId: GET_CreateTransitGatewayConnectPeer
+      description: '<p>Creates a Connect peer for a specified transit gateway Connect attachment between a transit gateway and an appliance.</p> <p>The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html#tgw-connect-peer">Connect peers</a> in the <i>Transit Gateways Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateTransitGatewayConnectPeerResult'
+      parameters:
+        - name: TransitGatewayAttachmentId
+          in: query
+          required: true
+          description: The ID of the Connect attachment.
+          schema:
+            type: string
+        - name: TransitGatewayAddress
+          in: query
+          required: false
+          description: 'The peer IP address (GRE outer IP address) on the transit gateway side of the Connect peer, which must be specified from a transit gateway CIDR block. If not specified, Amazon automatically assigns the first available IP address from the transit gateway CIDR block.'
+          schema:
+            type: string
+        - name: PeerAddress
+          in: query
+          required: true
+          description: The peer IP address (GRE outer IP address) on the appliance side of the Connect peer.
+          schema:
+            type: string
+        - name: BgpOptions
+          in: query
+          required: false
+          description: The BGP options for the Connect peer.
+          schema:
+            type: object
+            properties:
+              PeerAsn:
+                allOf:
+                  - $ref: '#/components/schemas/Long'
+                  - description: The peer Autonomous System Number (ASN).
+            description: The BGP options for the Connect attachment.
+        - name: InsideCidrBlocks
+          in: query
+          required: true
+          description: 'The range of inside IP addresses that are used for BGP peering. You must specify a size /29 IPv4 CIDR block from the <code>169.254.0.0/16</code> range. The first address from the range must be configured on the appliance as the BGP IP address. You can also optionally specify a size /125 IPv6 CIDR block from the <code>fd00::/8</code> range.'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: item
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply to the Connect peer.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/TagSpecification'
+                - xml:
+                    name: item
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateTransitGatewayConnectPeer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: CreateTransitGatewayConnectPeer
+      operationId: POST_CreateTransitGatewayConnectPeer
+      description: '<p>Creates a Connect peer for a specified transit gateway Connect attachment between a transit gateway and an appliance.</p> <p>The peer address and transit gateway address must be the same IP address family (IPv4 or IPv6).</p> <p>For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html#tgw-connect-peer">Connect peers</a> in the <i>Transit Gateways Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateTransitGatewayConnectPeerResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/CreateTransitGatewayConnectPeerRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - CreateTransitGatewayConnectPeer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=CreateTransitGatewayMulticastDomain:
     get:
       x-aws-operation-name: CreateTransitGatewayMulticastDomain
@@ -9002,6 +9464,26 @@ paths:
           description: The ID of the transit gateway.
           schema:
             type: string
+        - name: Options
+          in: query
+          required: false
+          description: The options for the transit gateway multicast domain.
+          schema:
+            type: object
+            properties:
+              Igmpv2Support:
+                allOf:
+                  - $ref: '#/components/schemas/Igmpv2SupportValue'
+                  - description: Specify whether to enable Internet Group Management Protocol (IGMP) version 2 for the transit gateway multicast domain.
+              StaticSourcesSupport:
+                allOf:
+                  - $ref: '#/components/schemas/StaticSourcesSupportValue'
+                  - description: Specify whether to enable support for statically configuring multicast group sources for a domain.
+              AutoAcceptSharedAssociations:
+                allOf:
+                  - $ref: '#/components/schemas/AutoAcceptSharedAssociationsValue'
+                  - description: Indicates whether to automatically accept cross-account subnet associations that are associated with the transit gateway multicast domain.
+            description: The options for the transit gateway multicast domain.
         - name: TagSpecification
           in: query
           required: false
@@ -9510,7 +9992,7 @@ paths:
               Ipv6Support:
                 allOf:
                   - $ref: '#/components/schemas/Ipv6SupportValue'
-                  - description: Enable or disable IPv6 support.
+                  - description: Enable or disable IPv6 support. The default is <code>disable</code>.
               ApplianceModeSupport:
                 allOf:
                   - $ref: '#/components/schemas/ApplianceModeSupportValue'
@@ -12187,6 +12669,162 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=DeleteNetworkInsightsAnalysis:
+    get:
+      x-aws-operation-name: DeleteNetworkInsightsAnalysis
+      operationId: GET_DeleteNetworkInsightsAnalysis
+      description: Deletes the specified network insights analysis.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteNetworkInsightsAnalysisResult'
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: NetworkInsightsAnalysisId
+          in: query
+          required: true
+          description: The ID of the network insights analysis.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteNetworkInsightsAnalysis
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteNetworkInsightsAnalysis
+      operationId: POST_DeleteNetworkInsightsAnalysis
+      description: Deletes the specified network insights analysis.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteNetworkInsightsAnalysisResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteNetworkInsightsAnalysisRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteNetworkInsightsAnalysis
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=DeleteNetworkInsightsPath:
+    get:
+      x-aws-operation-name: DeleteNetworkInsightsPath
+      operationId: GET_DeleteNetworkInsightsPath
+      description: Deletes the specified path.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteNetworkInsightsPathResult'
+      parameters:
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: NetworkInsightsPathId
+          in: query
+          required: true
+          description: The ID of the path.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteNetworkInsightsPath
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteNetworkInsightsPath
+      operationId: POST_DeleteNetworkInsightsPath
+      description: Deletes the specified path.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteNetworkInsightsPathResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteNetworkInsightsPathRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteNetworkInsightsPath
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=DeleteNetworkInterface:
     get:
       x-aws-operation-name: DeleteNetworkInterface
@@ -13400,6 +14038,162 @@ paths:
             type: string
             enum:
               - DeleteTransitGateway
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=DeleteTransitGatewayConnect:
+    get:
+      x-aws-operation-name: DeleteTransitGatewayConnect
+      operationId: GET_DeleteTransitGatewayConnect
+      description: Deletes the specified Connect attachment. You must first delete any Connect peers for the attachment.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteTransitGatewayConnectResult'
+      parameters:
+        - name: TransitGatewayAttachmentId
+          in: query
+          required: true
+          description: The ID of the Connect attachment.
+          schema:
+            type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteTransitGatewayConnect
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteTransitGatewayConnect
+      operationId: POST_DeleteTransitGatewayConnect
+      description: Deletes the specified Connect attachment. You must first delete any Connect peers for the attachment.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteTransitGatewayConnectResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteTransitGatewayConnectRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteTransitGatewayConnect
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=DeleteTransitGatewayConnectPeer:
+    get:
+      x-aws-operation-name: DeleteTransitGatewayConnectPeer
+      operationId: GET_DeleteTransitGatewayConnectPeer
+      description: Deletes the specified Connect peer.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteTransitGatewayConnectPeerResult'
+      parameters:
+        - name: TransitGatewayConnectPeerId
+          in: query
+          required: true
+          description: The ID of the Connect peer.
+          schema:
+            type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteTransitGatewayConnectPeer
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DeleteTransitGatewayConnectPeer
+      operationId: POST_DeleteTransitGatewayConnectPeer
+      description: Deletes the specified Connect peer.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteTransitGatewayConnectPeerResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DeleteTransitGatewayConnectPeerRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DeleteTransitGatewayConnectPeer
         - name: Version
           in: query
           required: true
@@ -21772,6 +22566,266 @@ paths:
             type: string
             enum:
               - '2016-11-15'
+  /#Action=DescribeNetworkInsightsAnalyses:
+    get:
+      x-aws-operation-name: DescribeNetworkInsightsAnalyses
+      operationId: GET_DescribeNetworkInsightsAnalyses
+      description: Describes one or more of your network insights analyses.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeNetworkInsightsAnalysesResult'
+      parameters:
+        - name: NetworkInsightsAnalysisId
+          in: query
+          required: false
+          description: The ID of the network insights analyses. You must specify either analysis IDs or a path ID.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/NetworkInsightsAnalysisId'
+                - xml:
+                    name: item
+        - name: NetworkInsightsPathId
+          in: query
+          required: false
+          description: The ID of the path. You must specify either a path ID or analysis IDs.
+          schema:
+            type: string
+        - name: AnalysisStartTime
+          in: query
+          required: false
+          description: The time when the network insights analyses started.
+          schema:
+            type: string
+            format: date-time
+        - name: AnalysisEndTime
+          in: query
+          required: false
+          description: The time when the network insights analyses ended.
+          schema:
+            type: string
+            format: date-time
+        - name: Filter
+          in: query
+          required: false
+          description: '<p>The filters. The following are possible values:</p> <ul> <li> <p>PathFound - A Boolean value that indicates whether a feasible path is found.</p> </li> <li> <p>Status - The status of the analysis (running | succeeded | failed).</p> </li> </ul>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeNetworkInsightsAnalyses
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeNetworkInsightsAnalyses
+      operationId: POST_DescribeNetworkInsightsAnalyses
+      description: Describes one or more of your network insights analyses.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeNetworkInsightsAnalysesResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeNetworkInsightsAnalysesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeNetworkInsightsAnalyses
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=DescribeNetworkInsightsPaths:
+    get:
+      x-aws-operation-name: DescribeNetworkInsightsPaths
+      operationId: GET_DescribeNetworkInsightsPaths
+      description: Describes one or more of your paths.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeNetworkInsightsPathsResult'
+      parameters:
+        - name: NetworkInsightsPathId
+          in: query
+          required: false
+          description: The IDs of the paths.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/NetworkInsightsPathId'
+                - xml:
+                    name: item
+        - name: Filter
+          in: query
+          required: false
+          description: '<p>The filters. The following are possible values:</p> <ul> <li> <p>Destination - The ID of the resource.</p> </li> <li> <p>DestinationPort - The destination port.</p> </li> <li> <p>Name - The path name.</p> </li> <li> <p>Protocol - The protocol.</p> </li> <li> <p>Source - The ID of the resource.</p> </li> </ul>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeNetworkInsightsPaths
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeNetworkInsightsPaths
+      operationId: POST_DescribeNetworkInsightsPaths
+      description: Describes one or more of your paths.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeNetworkInsightsPathsResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeNetworkInsightsPathsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeNetworkInsightsPaths
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
   /#Action=DescribeNetworkInterfaceAttribute:
     get:
       x-aws-operation-name: DescribeNetworkInterfaceAttribute
@@ -25736,7 +26790,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner-id</code> - The ID of the AWS account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>'
+          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner-id</code> - The ID of the AWS account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -25822,6 +26876,243 @@ paths:
             type: string
             enum:
               - DescribeTransitGatewayAttachments
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=DescribeTransitGatewayConnectPeers:
+    get:
+      x-aws-operation-name: DescribeTransitGatewayConnectPeers
+      operationId: GET_DescribeTransitGatewayConnectPeers
+      description: Describes one or more Connect peers.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeTransitGatewayConnectPeersResult'
+      parameters:
+        - name: TransitGatewayConnectPeerIds
+          in: query
+          required: false
+          description: The IDs of the Connect peers.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/TransitGatewayConnectPeerId'
+                - xml:
+                    name: item
+        - name: Filter
+          in: query
+          required: false
+          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>state</code> - The state of the Connect peer (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-connect-peer-id</code> - The ID of the Connect peer.</p> </li> </ul>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 5
+            maximum: 1000
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeTransitGatewayConnectPeers
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeTransitGatewayConnectPeers
+      operationId: POST_DescribeTransitGatewayConnectPeers
+      description: Describes one or more Connect peers.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeTransitGatewayConnectPeersResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeTransitGatewayConnectPeersRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeTransitGatewayConnectPeers
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=DescribeTransitGatewayConnects:
+    get:
+      x-aws-operation-name: DescribeTransitGatewayConnects
+      operationId: GET_DescribeTransitGatewayConnects
+      description: Describes one or more Connect attachments.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeTransitGatewayConnectsResult'
+      parameters:
+        - name: TransitGatewayAttachmentIds
+          in: query
+          required: false
+          description: The IDs of the attachments.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TransitGatewayAttachmentId'
+        - name: Filter
+          in: query
+          required: false
+          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>options.protocol</code> - The tunnel protocol (<code>gre</code>).</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>initiating</code> | <code>initiatingRequest</code> | <code>pendingAcceptance</code> | <code>rollingBack</code> | <code>pending</code> | <code>available</code> | <code>modifying</code> | <code>deleting</code> | <code>deleted</code> | <code>failed</code> | <code>rejected</code> | <code>rejecting</code> | <code>failing</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the Connect attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transport-transit-gateway-attachment-id</code> - The ID of the transit gateway attachment from which the Connect attachment was created.</p> </li> </ul>'
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/Filter'
+                - xml:
+                    name: Filter
+        - name: MaxResults
+          in: query
+          required: false
+          description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+          schema:
+            type: integer
+            minimum: 5
+            maximum: 1000
+        - name: NextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeTransitGatewayConnects
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: DescribeTransitGatewayConnects
+      operationId: POST_DescribeTransitGatewayConnects
+      description: Describes one or more Connect attachments.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DescribeTransitGatewayConnectsResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/DescribeTransitGatewayConnectsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - DescribeTransitGatewayConnects
         - name: Version
           in: query
           required: true
@@ -29632,7 +30923,7 @@ paths:
             type: array
             items:
               allOf:
-                - $ref: '#/components/schemas/String'
+                - $ref: '#/components/schemas/SubnetId'
                 - xml:
                     name: item
         - name: DryRun
@@ -32574,7 +33865,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
+          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -32689,7 +33980,7 @@ paths:
         - name: Filter
           in: query
           required: false
-          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
+          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -36771,6 +38062,14 @@ paths:
           schema:
             type: object
             properties:
+              AddTransitGatewayCidrBlocks:
+                allOf:
+                  - $ref: '#/components/schemas/TransitGatewayCidrBlockStringList'
+                  - description: 'Adds IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.'
+              RemoveTransitGatewayCidrBlocks:
+                allOf:
+                  - $ref: '#/components/schemas/TransitGatewayCidrBlockStringList'
+                  - description: Removes CIDR blocks for the transit gateway.
               VpnEcmpSupport:
                 allOf:
                   - $ref: '#/components/schemas/VpnEcmpSupportValue'
@@ -39624,6 +40923,101 @@ paths:
             type: string
             enum:
               - RegisterTransitGatewayMulticastGroupSources
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=RejectTransitGatewayMulticastDomainAssociations:
+    get:
+      x-aws-operation-name: RejectTransitGatewayMulticastDomainAssociations
+      operationId: GET_RejectTransitGatewayMulticastDomainAssociations
+      description: Rejects a request to associate cross-account subnets with a transit gateway multicast domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RejectTransitGatewayMulticastDomainAssociationsResult'
+      parameters:
+        - name: TransitGatewayMulticastDomainId
+          in: query
+          required: false
+          description: The ID of the transit gateway multicast domain.
+          schema:
+            type: string
+        - name: TransitGatewayAttachmentId
+          in: query
+          required: false
+          description: The ID of the transit gateway attachment.
+          schema:
+            type: string
+        - name: SubnetIds
+          in: query
+          required: false
+          description: The IDs of the subnets to associate with the transit gateway multicast domain.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/String'
+                - xml:
+                    name: item
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RejectTransitGatewayMulticastDomainAssociations
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: RejectTransitGatewayMulticastDomainAssociations
+      operationId: POST_RejectTransitGatewayMulticastDomainAssociations
+      description: Rejects a request to associate cross-account subnets with a transit gateway multicast domain.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/RejectTransitGatewayMulticastDomainAssociationsResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/RejectTransitGatewayMulticastDomainAssociationsRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - RejectTransitGatewayMulticastDomainAssociations
         - name: Version
           in: query
           required: true
@@ -43654,7 +45048,7 @@ paths:
         - name: Filter
           in: query
           required: true
-          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>attachment.transit-gateway-attachment-id</code>- The id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-id</code> - The resource id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-type</code> - The attachment resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>prefix-list-id</code> - The ID of the prefix list.</p> </li> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>type</code> - The type of route (<code>propagated</code> | <code>static</code>).</p> </li> </ul>'
+          description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>attachment.transit-gateway-attachment-id</code>- The id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-id</code> - The resource id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-type</code> - The attachment resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>prefix-list-id</code> - The ID of the prefix list.</p> </li> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>type</code> - The type of route (<code>propagated</code> | <code>static</code>).</p> </li> </ul>'
           schema:
             type: array
             items:
@@ -43881,6 +45275,112 @@ paths:
             type: string
             enum:
               - StartInstances
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+  /#Action=StartNetworkInsightsAnalysis:
+    get:
+      x-aws-operation-name: StartNetworkInsightsAnalysis
+      operationId: GET_StartNetworkInsightsAnalysis
+      description: 'Starts analyzing the specified path. If the path is reachable, the operation returns the shortest feasible path.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StartNetworkInsightsAnalysisResult'
+      parameters:
+        - name: NetworkInsightsPathId
+          in: query
+          required: true
+          description: The ID of the path.
+          schema:
+            type: string
+        - name: FilterInArn
+          in: query
+          required: false
+          description: The Amazon Resource Names (ARN) of the resources that the path must traverse.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/ResourceArn'
+                - xml:
+                    name: item
+        - name: DryRun
+          in: query
+          required: false
+          description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+          schema:
+            type: boolean
+        - name: TagSpecification
+          in: query
+          required: false
+          description: The tags to apply.
+          schema:
+            type: array
+            items:
+              allOf:
+                - $ref: '#/components/schemas/TagSpecification'
+                - xml:
+                    name: item
+        - name: ClientToken
+          in: query
+          required: true
+          description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.'
+          schema:
+            type: string
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StartNetworkInsightsAnalysis
+        - name: Version
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - '2016-11-15'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      x-aws-operation-name: StartNetworkInsightsAnalysis
+      operationId: POST_StartNetworkInsightsAnalysis
+      description: 'Starts analyzing the specified path. If the path is reachable, the operation returns the shortest feasible path.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/StartNetworkInsightsAnalysisResult'
+      requestBody:
+        content:
+          text/xml:
+            schema:
+              $ref: '#/components/schemas/StartNetworkInsightsAnalysisRequest'
+      parameters:
+        - name: Action
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - StartNetworkInsightsAnalysis
         - name: Version
           in: query
           required: true
@@ -44821,6 +46321,16 @@ components:
             - $ref: '#/components/schemas/ReservedInstancesOfferingId'
             - description: The Convertible Reserved Instance offering ID.
       description: Details about the target configuration.
+    AcceptTransitGatewayMulticastDomainAssociationsResult:
+      type: object
+      properties:
+        Associations:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayMulticastDomainAssociations'
+            - xml:
+                name: associations
+    String:
+      type: string
     AcceptTransitGatewayPeeringAttachmentResult:
       type: object
       properties:
@@ -44940,7 +46450,7 @@ components:
             - $ref: '#/components/schemas/ResourceType'
             - xml:
                 name: resourceType
-              description: '<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>carrier-gateway</code> | <code>client-vpn-endpoint</code> | <code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>image</code>| <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>route-table</code> | <code>security-group</code>| <code>snapshot</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code> vpc-peering-connection</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>vpc-flow-log</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>'
+              description: '<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>carrier-gateway</code> | <code>client-vpn-endpoint</code> | <code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>route-table</code> | <code>security-group</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-connect-peer</code> | <code>transit-gateway-multicast-domain</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code> vpc-peering-connection</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>vpc-flow-log</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>To tag a resource after it has been created, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html">CreateTags</a>.</p>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -44974,8 +46484,6 @@ components:
             - xml:
                 name: networkInterfaceId
               description: The ID of the network interface.
-    String:
-      type: string
     AssignPrivateIpAddressesResult:
       type: object
       properties:
@@ -45096,6 +46604,8 @@ components:
             - xml:
                 name: associations
               description: Information about the transit gateway multicast domain associations.
+    SubnetId:
+      type: string
     AssociateTransitGatewayRouteTableResult:
       type: object
       properties:
@@ -46551,6 +48061,15 @@ components:
             - xml:
                 name: networkAcl
               description: Information about the network ACL.
+    CreateNetworkInsightsPathResult:
+      type: object
+      properties:
+        NetworkInsightsPath:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsPath'
+            - xml:
+                name: networkInsightsPath
+              description: Information about the path.
     CreateNetworkInterfaceResult:
       type: object
       example:
@@ -46964,6 +48483,35 @@ components:
       enum:
         - enable
         - disable
+    TransitGatewayCidrBlockStringList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: item
+    CreateTransitGatewayConnectResult:
+      type: object
+      properties:
+        TransitGatewayConnect:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnect'
+            - xml:
+                name: transitGatewayConnect
+              description: Information about the Connect attachment.
+    ProtocolValue:
+      type: string
+      enum:
+        - gre
+    CreateTransitGatewayConnectPeerResult:
+      type: object
+      properties:
+        TransitGatewayConnectPeer:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeer'
+            - xml:
+                name: transitGatewayConnectPeer
+              description: Information about the Connect peer.
     CreateTransitGatewayMulticastDomainResult:
       type: object
       properties:
@@ -46973,6 +48521,21 @@ components:
             - xml:
                 name: transitGatewayMulticastDomain
               description: Information about the transit gateway multicast domain.
+    Igmpv2SupportValue:
+      type: string
+      enum:
+        - enable
+        - disable
+    StaticSourcesSupportValue:
+      type: string
+      enum:
+        - enable
+        - disable
+    AutoAcceptSharedAssociationsValue:
+      type: string
+      enum:
+        - enable
+        - disable
     CreateTransitGatewayPeeringAttachmentResult:
       type: object
       properties:
@@ -47018,8 +48581,6 @@ components:
             - xml:
                 name: transitGatewayVpcAttachment
               description: Information about the VPC attachment.
-    SubnetId:
-      type: string
     Ipv6SupportValue:
       type: string
       enum:
@@ -47392,6 +48953,24 @@ components:
             - xml:
                 name: natGatewayId
               description: The ID of the NAT gateway.
+    DeleteNetworkInsightsAnalysisResult:
+      type: object
+      properties:
+        NetworkInsightsAnalysisId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsAnalysisId'
+            - xml:
+                name: networkInsightsAnalysisId
+              description: The ID of the network insights analysis.
+    DeleteNetworkInsightsPathResult:
+      type: object
+      properties:
+        NetworkInsightsPathId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsPathId'
+            - xml:
+                name: networkInsightsPathId
+              description: The ID of the path.
     DeleteNetworkInterfacePermissionResult:
       type: object
       properties:
@@ -47462,6 +49041,24 @@ components:
             - xml:
                 name: transitGateway
               description: Information about the deleted transit gateway.
+    DeleteTransitGatewayConnectResult:
+      type: object
+      properties:
+        TransitGatewayConnect:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnect'
+            - xml:
+                name: transitGatewayConnect
+              description: Information about the deleted Connect attachment.
+    DeleteTransitGatewayConnectPeerResult:
+      type: object
+      properties:
+        TransitGatewayConnectPeer:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeer'
+            - xml:
+                name: transitGatewayConnectPeer
+              description: Information about the deleted Connect peer.
     DeleteTransitGatewayMulticastDomainResult:
       type: object
       properties:
@@ -48896,6 +50493,40 @@ components:
               description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     NetworkAclId:
       type: string
+    DescribeNetworkInsightsAnalysesResult:
+      type: object
+      properties:
+        NetworkInsightsAnalyses:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsAnalysisList'
+            - xml:
+                name: networkInsightsAnalysisSet
+              description: Information about the network insights analyses.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: nextToken
+              description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    NetworkInsightsAnalysisId:
+      type: string
+    DescribeNetworkInsightsPathsResult:
+      type: object
+      properties:
+        NetworkInsightsPaths:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsPathList'
+            - xml:
+                name: networkInsightsPathSet
+              description: Information about the paths.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: nextToken
+              description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    NetworkInsightsPathId:
+      type: string
     DescribeNetworkInterfaceAttributeResult:
       type: object
       example:
@@ -49708,6 +51339,38 @@ components:
               description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     TransitGatewayAttachmentId:
       type: string
+    DescribeTransitGatewayConnectPeersResult:
+      type: object
+      properties:
+        TransitGatewayConnectPeers:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerList'
+            - xml:
+                name: transitGatewayConnectPeerSet
+              description: Information about the Connect peers.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: nextToken
+              description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
+    TransitGatewayConnectPeerId:
+      type: string
+    DescribeTransitGatewayConnectsResult:
+      type: object
+      properties:
+        TransitGatewayConnects:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectList'
+            - xml:
+                name: transitGatewayConnectSet
+              description: Information about the Connect attachments.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: nextToken
+              description: The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.
     DescribeTransitGatewayMulticastDomainsResult:
       type: object
       properties:
@@ -51850,6 +53513,14 @@ components:
             - xml:
                 name: registeredMulticastGroupSources
               description: Information about the transit gateway multicast group sources.
+    RejectTransitGatewayMulticastDomainAssociationsResult:
+      type: object
+      properties:
+        Associations:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayMulticastDomainAssociations'
+            - xml:
+                name: associations
     RejectTransitGatewayPeeringAttachmentResult:
       type: object
       properties:
@@ -52546,6 +54217,19 @@ components:
             - xml:
                 name: instancesSet
               description: Information about the started instances.
+    StartNetworkInsightsAnalysisResult:
+      type: object
+      properties:
+        NetworkInsightsAnalysis:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsAnalysis'
+            - xml:
+                name: networkInsightsAnalysis
+              description: Information about the network insights analysis.
+    ResourceArn:
+      type: string
+      minLength: 1
+      maxLength: 1283
     StartVpcEndpointServicePrivateDnsVerificationResult:
       type: object
       properties:
@@ -52702,6 +54386,66 @@ components:
                 name: TargetConfiguration
               description: The configuration of the target Convertible Reserved Instance to exchange for your current Convertible Reserved Instances.
       description: Contains the parameters for accepting the quote.
+    AcceptTransitGatewayMulticastDomainAssociationsRequest:
+      type: object
+      title: AcceptTransitGatewayMulticastDomainAssociationsRequest
+      properties:
+        TransitGatewayMulticastDomainId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayMulticastDomainId'
+            - description: The ID of the transit gateway multicast domain.
+        TransitGatewayAttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentId'
+            - description: The ID of the transit gateway attachment.
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - description: The IDs of the subnets to associate with the transit gateway multicast domain.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    TransitGatewayMulticastDomainAssociations:
+      type: object
+      properties:
+        TransitGatewayMulticastDomainId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: transitGatewayMulticastDomainId
+              description: The ID of the transit gateway multicast domain.
+        TransitGatewayAttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: transitGatewayAttachmentId
+              description: The ID of the transit gateway attachment.
+        ResourceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: resourceId
+              description: The ID of the resource.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentResourceType'
+            - xml:
+                name: resourceType
+              description: 'The type of resource, for example a VPC attachment.'
+        ResourceOwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: resourceOwnerId
+              description: ' The ID of the AWS account that owns the resource.'
+        Subnets:
+          allOf:
+            - $ref: '#/components/schemas/SubnetAssociationList'
+            - xml:
+                name: subnets
+              description: The subnets associated with the multicast domain.
+      description: Describes the multicast domain associations.
     AcceptTransitGatewayPeeringAttachmentRequest:
       type: object
       required:
@@ -53332,6 +55076,319 @@ components:
       enum:
         - 'on'
         - 'off'
+    AlternatePathHint:
+      type: object
+      properties:
+        ComponentId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: componentId
+              description: The ID of the component.
+        ComponentArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: componentArn
+              description: The Amazon Resource Name (ARN) of the component.
+      description: Describes an potential intermediate component of a feasible path.
+    AlternatePathHintList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/AlternatePathHint'
+          - xml:
+              name: item
+    PortRange:
+      type: object
+      properties:
+        From:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: from
+              description: The first port in the range.
+        To:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: to
+              description: The last port in the range.
+      description: Describes a range of ports.
+    AnalysisAclRule:
+      type: object
+      properties:
+        Cidr:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: cidr
+              description: 'The IPv4 address range, in CIDR notation.'
+        Egress:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: egress
+              description: Indicates whether the rule is an outbound rule.
+        PortRange:
+          allOf:
+            - $ref: '#/components/schemas/PortRange'
+            - xml:
+                name: portRange
+              description: The range of ports.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: protocol
+              description: The protocol.
+        RuleAction:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ruleAction
+              description: Indicates whether to allow or deny traffic that matches the rule.
+        RuleNumber:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: ruleNumber
+              description: The rule number.
+      description: Describes a network access control (ACL) rule.
+    AnalysisComponent:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: id
+              description: The ID of the component.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: arn
+              description: The Amazon Resource Name (ARN) of the component.
+      description: Describes a path component.
+    AnalysisComponentList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/AnalysisComponent'
+          - xml:
+              name: item
+    Port:
+      type: integer
+      minimum: 1
+      maximum: 65535
+    AnalysisLoadBalancerListener:
+      type: object
+      properties:
+        LoadBalancerPort:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - xml:
+                name: loadBalancerPort
+              description: The port on which the load balancer is listening.
+        InstancePort:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - xml:
+                name: instancePort
+              description: '[Classic Load Balancers] The back-end port for the listener.'
+      description: Describes a load balancer listener.
+    IpAddress:
+      type: string
+      pattern: '^([0-9]{1,3}.){3}[0-9]{1,3}$'
+      minLength: 0
+      maxLength: 15
+    AnalysisLoadBalancerTarget:
+      type: object
+      properties:
+        Address:
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - xml:
+                name: address
+              description: The IP address.
+        AvailabilityZone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: availabilityZone
+              description: The Availability Zone.
+        Instance:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: instance
+              description: Information about the instance.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - xml:
+                name: port
+              description: The port on which the target is listening.
+      description: Describes a load balancer target.
+    IpAddressList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/IpAddress'
+          - xml:
+              name: item
+    PortRangeList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/PortRange'
+          - xml:
+              name: item
+    AnalysisPacketHeader:
+      type: object
+      properties:
+        DestinationAddresses:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressList'
+            - xml:
+                name: destinationAddressSet
+              description: The destination addresses.
+        DestinationPortRanges:
+          allOf:
+            - $ref: '#/components/schemas/PortRangeList'
+            - xml:
+                name: destinationPortRangeSet
+              description: The destination port ranges.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: protocol
+              description: The protocol.
+        SourceAddresses:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressList'
+            - xml:
+                name: sourceAddressSet
+              description: The source addresses.
+        SourcePortRanges:
+          allOf:
+            - $ref: '#/components/schemas/PortRangeList'
+            - xml:
+                name: sourcePortRangeSet
+              description: The source port ranges.
+      description: Describes a header. Reflects any changes made by a component as traffic passes through. The fields of an inbound header are null except for the first component of a path.
+    AnalysisRouteTableRoute:
+      type: object
+      properties:
+        DestinationCidr:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: destinationCidr
+              description: 'The destination IPv4 address, in CIDR notation.'
+        DestinationPrefixListId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: destinationPrefixListId
+              description: The prefix of the AWS service.
+        EgressOnlyInternetGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: egressOnlyInternetGatewayId
+              description: The ID of an egress-only internet gateway.
+        GatewayId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: gatewayId
+              description: 'The ID of the gateway, such as an internet gateway or virtual private gateway.'
+        InstanceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: instanceId
+              description: 'The ID of the instance, such as a NAT instance.'
+        NatGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: natGatewayId
+              description: The ID of a NAT gateway.
+        NetworkInterfaceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: networkInterfaceId
+              description: The ID of a network interface.
+        Origin:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: origin
+              description: '<p>Describes how the route was created. The following are possible values:</p> <ul> <li> <p> <code>CreateRouteTable</code> - The route was automatically created when the route table was created.</p> </li> <li> <p> <code>CreateRoute</code> - The route was manually added to the route table.</p> </li> <li> <p> <code>EnableVgwRoutePropagation</code> - The route was propagated by route propagation.</p> </li> </ul>'
+        TransitGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: transitGatewayId
+              description: The ID of a transit gateway.
+        VpcPeeringConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: vpcPeeringConnectionId
+              description: The ID of a VPC peering connection.
+      description: Describes a route table route.
+    AnalysisSecurityGroupRule:
+      type: object
+      properties:
+        Cidr:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: cidr
+              description: 'The IPv4 address range, in CIDR notation.'
+        Direction:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: direction
+              description: '<p>The direction. The following are possible values:</p> <ul> <li> <p>egress</p> </li> <li> <p>ingress</p> </li> </ul>'
+        SecurityGroupId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: securityGroupId
+              description: The security group ID.
+        PortRange:
+          allOf:
+            - $ref: '#/components/schemas/PortRange'
+            - xml:
+                name: portRange
+              description: The port range.
+        PrefixListId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: prefixListId
+              description: The prefix list ID.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: protocol
+              description: The protocol name.
+      description: Describes a security group rule.
+    AnalysisStatus:
+      type: string
+      enum:
+        - running
+        - succeeded
+        - failed
     ClientVpnSecurityGroupIdSet:
       type: array
       items:
@@ -53376,6 +55433,13 @@ components:
       items:
         allOf:
           - $ref: '#/components/schemas/ArchitectureType'
+          - xml:
+              name: item
+    ArnList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/ResourceArn'
           - xml:
               name: item
     Ipv6AddressList:
@@ -53566,10 +55630,6 @@ components:
             - xml:
                 name: dryRun
               description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    ResourceArn:
-      type: string
-      minLength: 1
-      maxLength: 1283
     AssociateEnclaveCertificateIamRoleRequest:
       type: object
       title: AssociateEnclaveCertificateIamRoleRequest
@@ -53722,6 +55782,13 @@ components:
                 name: ipv6CidrBlockState
               description: Information about the state of the CIDR block.
       description: Describes an IPv6 CIDR block associated with a subnet.
+    TransitGatewaySubnetIdList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/SubnetId'
+          - xml:
+              name: item
     AssociateTransitGatewayMulticastDomainRequest:
       type: object
       title: AssociateTransitGatewayMulticastDomainRequest
@@ -53736,46 +55803,12 @@ components:
             - description: The ID of the transit gateway attachment to associate with the transit gateway multicast domain.
         SubnetIds:
           allOf:
-            - $ref: '#/components/schemas/ValueStringList'
+            - $ref: '#/components/schemas/TransitGatewaySubnetIdList'
             - description: The IDs of the subnets to associate with the transit gateway multicast domain.
         DryRun:
           allOf:
             - $ref: '#/components/schemas/Boolean'
             - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
-    TransitGatewayMulticastDomainAssociations:
-      type: object
-      properties:
-        TransitGatewayMulticastDomainId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - xml:
-                name: transitGatewayMulticastDomainId
-              description: The ID of the transit gateway multicast domain.
-        TransitGatewayAttachmentId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - xml:
-                name: transitGatewayAttachmentId
-              description: The ID of the transit gateway attachment.
-        ResourceId:
-          allOf:
-            - $ref: '#/components/schemas/String'
-            - xml:
-                name: resourceId
-              description: The ID of the resource.
-        ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/TransitGatewayAttachmentResourceType'
-            - xml:
-                name: resourceType
-              description: 'The type of resource, for example a VPC attachment.'
-        Subnets:
-          allOf:
-            - $ref: '#/components/schemas/SubnetAssociationList'
-            - xml:
-                name: subnets
-              description: The subnets associated with the multicast domain.
-      description: Describes the multicast domain associations.
     AssociateTransitGatewayRouteTableRequest:
       type: object
       required:
@@ -54579,6 +56612,11 @@ components:
         - cancelled_running
         - cancelled_terminating
         - modifying
+    BgpStatus:
+      type: string
+      enum:
+        - up
+        - down
     BillingProductList:
       type: array
       items:
@@ -58484,22 +60522,6 @@ components:
                 name: type
               description: The ICMP type. A value of -1 means all types.
       description: Describes the ICMP type and code.
-    PortRange:
-      type: object
-      properties:
-        From:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - xml:
-                name: from
-              description: The first port in the range.
-        To:
-          allOf:
-            - $ref: '#/components/schemas/Integer'
-            - xml:
-                name: to
-              description: The last port in the range.
-      description: Describes a range of ports.
     RuleAction:
       type: string
       enum:
@@ -58645,6 +60667,122 @@ components:
                 name: ownerId
               description: The ID of the AWS account that owns the network ACL.
       description: Describes a network ACL.
+    Protocol:
+      type: string
+      enum:
+        - tcp
+        - udp
+    CreateNetworkInsightsPathRequest:
+      type: object
+      required:
+        - Source
+        - Destination
+        - Protocol
+        - ClientToken
+      title: CreateNetworkInsightsPathRequest
+      properties:
+        SourceIp:
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - description: The IP address of the AWS resource that is the source of the path.
+        DestinationIp:
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - description: The IP address of the AWS resource that is the destination of the path.
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS resource that is the source of the path.
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The AWS resource that is the destination of the path.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - description: The protocol.
+        DestinationPort:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - description: The destination port.
+        TagSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/TagSpecificationList'
+            - xml:
+                name: TagSpecification
+              description: The tags to add to the path.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.'
+    NetworkInsightsPath:
+      type: object
+      properties:
+        NetworkInsightsPathId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsPathId'
+            - xml:
+                name: networkInsightsPathId
+              description: The ID of the path.
+        NetworkInsightsPathArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - xml:
+                name: networkInsightsPathArn
+              description: The Amazon Resource Name (ARN) of the path.
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/MillisecondDateTime'
+            - xml:
+                name: createdDate
+              description: The time stamp when the path was created.
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: source
+              description: The AWS resource that is the source of the path.
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: destination
+              description: The AWS resource that is the destination of the path.
+        SourceIp:
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - xml:
+                name: sourceIp
+              description: The IP address of the AWS resource that is the source of the path.
+        DestinationIp:
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - xml:
+                name: destinationIp
+              description: The IP address of the AWS resource that is the destination of the path.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/Protocol'
+            - xml:
+                name: protocol
+              description: The protocol.
+        DestinationPort:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: destinationPort
+              description: The destination port.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - xml:
+                name: tagSet
+              description: The tags associated with the path.
+      description: Describes a path.
     InterfacePermissionType:
       type: string
       enum:
@@ -59853,6 +61991,196 @@ components:
                 name: tagSet
               description: The tags assigned to the Traffic Mirror target.
       description: Describes a Traffic Mirror target.
+    TransitGatewayConnectRequestBgpOptions:
+      type: object
+      properties:
+        PeerAsn:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - description: The peer Autonomous System Number (ASN).
+      description: The BGP options for the Connect attachment.
+    InsideCidrBlocksStringList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: item
+    CreateTransitGatewayConnectPeerRequest:
+      type: object
+      required:
+        - TransitGatewayAttachmentId
+        - PeerAddress
+        - InsideCidrBlocks
+      title: CreateTransitGatewayConnectPeerRequest
+      properties:
+        TransitGatewayAttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentId'
+            - description: The ID of the Connect attachment.
+        TransitGatewayAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The peer IP address (GRE outer IP address) on the transit gateway side of the Connect peer, which must be specified from a transit gateway CIDR block. If not specified, Amazon automatically assigns the first available IP address from the transit gateway CIDR block.'
+        PeerAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The peer IP address (GRE outer IP address) on the appliance side of the Connect peer.
+        BgpOptions:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectRequestBgpOptions'
+            - description: The BGP options for the Connect peer.
+        InsideCidrBlocks:
+          allOf:
+            - $ref: '#/components/schemas/InsideCidrBlocksStringList'
+            - description: 'The range of inside IP addresses that are used for BGP peering. You must specify a size /29 IPv4 CIDR block from the <code>169.254.0.0/16</code> range. The first address from the range must be configured on the appliance as the BGP IP address. You can also optionally specify a size /125 IPv6 CIDR block from the <code>fd00::/8</code> range.'
+        TagSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/TagSpecificationList'
+            - xml:
+                name: TagSpecification
+              description: The tags to apply to the Connect peer.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    TransitGatewayConnectPeer:
+      type: object
+      properties:
+        TransitGatewayAttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentId'
+            - xml:
+                name: transitGatewayAttachmentId
+              description: The ID of the Connect attachment.
+        TransitGatewayConnectPeerId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerId'
+            - xml:
+                name: transitGatewayConnectPeerId
+              description: The ID of the Connect peer.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerState'
+            - xml:
+                name: state
+              description: The state of the Connect peer.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - xml:
+                name: creationTime
+              description: The creation time.
+        ConnectPeerConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerConfiguration'
+            - xml:
+                name: connectPeerConfiguration
+              description: The Connect peer details.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - xml:
+                name: tagSet
+              description: The tags for the Connect peer.
+      description: Describes a transit gateway Connect peer.
+    CreateTransitGatewayConnectRequestOptions:
+      type: object
+      required:
+        - Protocol
+      properties:
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolValue'
+            - description: The tunnel protocol.
+      description: The options for a Connect attachment.
+    CreateTransitGatewayConnectRequest:
+      type: object
+      required:
+        - TransportTransitGatewayAttachmentId
+        - Options
+      title: CreateTransitGatewayConnectRequest
+      properties:
+        TransportTransitGatewayAttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentId'
+            - description: The ID of the transit gateway attachment. You can specify a VPC attachment or a AWS Direct Connect attachment.
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/CreateTransitGatewayConnectRequestOptions'
+            - description: The Connect attachment options.
+        TagSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/TagSpecificationList'
+            - xml:
+                name: TagSpecification
+              description: The tags to apply to the Connect attachment.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    TransitGatewayConnect:
+      type: object
+      properties:
+        TransitGatewayAttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentId'
+            - xml:
+                name: transitGatewayAttachmentId
+              description: The ID of the Connect attachment.
+        TransportTransitGatewayAttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentId'
+            - xml:
+                name: transportTransitGatewayAttachmentId
+              description: The ID of the attachment from which the Connect attachment was created.
+        TransitGatewayId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayId'
+            - xml:
+                name: transitGatewayId
+              description: The ID of the transit gateway.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentState'
+            - xml:
+                name: state
+              description: The state of the attachment.
+        CreationTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - xml:
+                name: creationTime
+              description: The creation time.
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectOptions'
+            - xml:
+                name: options
+              description: The Connect attachment options.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - xml:
+                name: tagSet
+              description: The tags for the attachment.
+      description: Describes a transit gateway Connect attachment.
+    CreateTransitGatewayMulticastDomainRequestOptions:
+      type: object
+      properties:
+        Igmpv2Support:
+          allOf:
+            - $ref: '#/components/schemas/Igmpv2SupportValue'
+            - description: Specify whether to enable Internet Group Management Protocol (IGMP) version 2 for the transit gateway multicast domain.
+        StaticSourcesSupport:
+          allOf:
+            - $ref: '#/components/schemas/StaticSourcesSupportValue'
+            - description: Specify whether to enable support for statically configuring multicast group sources for a domain.
+        AutoAcceptSharedAssociations:
+          allOf:
+            - $ref: '#/components/schemas/AutoAcceptSharedAssociationsValue'
+            - description: Indicates whether to automatically accept cross-account subnet associations that are associated with the transit gateway multicast domain.
+      description: The options for the transit gateway multicast domain.
     CreateTransitGatewayMulticastDomainRequest:
       type: object
       required:
@@ -59863,6 +62191,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TransitGatewayId'
             - description: The ID of the transit gateway.
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/CreateTransitGatewayMulticastDomainRequestOptions'
+            - description: The options for the transit gateway multicast domain.
         TagSpecifications:
           allOf:
             - $ref: '#/components/schemas/TagSpecificationList'
@@ -59888,6 +62220,24 @@ components:
             - xml:
                 name: transitGatewayId
               description: The ID of the transit gateway.
+        TransitGatewayMulticastDomainArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: transitGatewayMulticastDomainArn
+              description: The Amazon Resource Name (ARN) of the transit gateway multicast domain.
+        OwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: ownerId
+              description: ' The ID of the AWS account that owns the transit gateway multiicast domain.'
+        Options:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayMulticastDomainOptions'
+            - xml:
+                name: options
+              description: The options for the transit gateway multicast domain.
         State:
           allOf:
             - $ref: '#/components/schemas/TransitGatewayMulticastDomainState'
@@ -60042,6 +62392,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/MulticastSupportValue'
             - description: Indicates whether multicast is enabled on the transit gateway
+        TransitGatewayCidrBlocks:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayCidrBlockStringList'
+            - description: 'One or more IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.'
       description: Describes the options for a transit gateway.
     CreateTransitGatewayRequest:
       type: object
@@ -60242,13 +62596,6 @@ components:
                 name: tagSet
               description: Any tags assigned to the route table.
       description: Describes a transit gateway route table.
-    TransitGatewaySubnetIdList:
-      type: array
-      items:
-        allOf:
-          - $ref: '#/components/schemas/SubnetId'
-          - xml:
-              name: item
     CreateTransitGatewayVpcAttachmentRequestOptions:
       type: object
       properties:
@@ -60259,7 +62606,7 @@ components:
         Ipv6Support:
           allOf:
             - $ref: '#/components/schemas/Ipv6SupportValue'
-            - description: Enable or disable IPv6 support.
+            - description: Enable or disable IPv6 support. The default is <code>disable</code>.
         ApplianceModeSupport:
           allOf:
             - $ref: '#/components/schemas/ApplianceModeSupportValue'
@@ -61638,6 +63985,34 @@ components:
             - xml:
                 name: networkAclId
               description: The ID of the network ACL.
+    DeleteNetworkInsightsAnalysisRequest:
+      type: object
+      required:
+        - NetworkInsightsAnalysisId
+      title: DeleteNetworkInsightsAnalysisRequest
+      properties:
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        NetworkInsightsAnalysisId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsAnalysisId'
+            - description: The ID of the network insights analysis.
+    DeleteNetworkInsightsPathRequest:
+      type: object
+      required:
+        - NetworkInsightsPathId
+      title: DeleteNetworkInsightsPathRequest
+      properties:
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        NetworkInsightsPathId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsPathId'
+            - description: The ID of the path.
     DeleteNetworkInterfacePermissionRequest:
       type: object
       required:
@@ -61946,6 +64321,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/TrafficMirrorTargetId'
             - description: The ID of the Traffic Mirror target.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    DeleteTransitGatewayConnectPeerRequest:
+      type: object
+      required:
+        - TransitGatewayConnectPeerId
+      title: DeleteTransitGatewayConnectPeerRequest
+      properties:
+        TransitGatewayConnectPeerId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerId'
+            - description: The ID of the Connect peer.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    DeleteTransitGatewayConnectRequest:
+      type: object
+      required:
+        - TransitGatewayAttachmentId
+      title: DeleteTransitGatewayConnectRequest
+      properties:
+        TransitGatewayAttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentId'
+            - description: The ID of the Connect attachment.
         DryRun:
           allOf:
             - $ref: '#/components/schemas/Boolean'
@@ -64849,6 +67252,106 @@ components:
           - $ref: '#/components/schemas/NetworkAcl'
           - xml:
               name: item
+    NetworkInsightsAnalysisIdList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/NetworkInsightsAnalysisId'
+          - xml:
+              name: item
+    NetworkInsightsMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
+    DescribeNetworkInsightsAnalysesRequest:
+      type: object
+      title: DescribeNetworkInsightsAnalysesRequest
+      properties:
+        NetworkInsightsAnalysisIds:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsAnalysisIdList'
+            - xml:
+                name: NetworkInsightsAnalysisId
+              description: The ID of the network insights analyses. You must specify either analysis IDs or a path ID.
+        NetworkInsightsPathId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsPathId'
+            - description: The ID of the path. You must specify either a path ID or analysis IDs.
+        AnalysisStartTime:
+          allOf:
+            - $ref: '#/components/schemas/MillisecondDateTime'
+            - description: The time when the network insights analyses started.
+        AnalysisEndTime:
+          allOf:
+            - $ref: '#/components/schemas/MillisecondDateTime'
+            - description: The time when the network insights analyses ended.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - xml:
+                name: Filter
+              description: '<p>The filters. The following are possible values:</p> <ul> <li> <p>PathFound - A Boolean value that indicates whether a feasible path is found.</p> </li> <li> <p>Status - The status of the analysis (running | succeeded | failed).</p> </li> </ul>'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsMaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+    NetworkInsightsAnalysisList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/NetworkInsightsAnalysis'
+          - xml:
+              name: item
+    NetworkInsightsPathIdList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/NetworkInsightsPathId'
+          - xml:
+              name: item
+    DescribeNetworkInsightsPathsRequest:
+      type: object
+      title: DescribeNetworkInsightsPathsRequest
+      properties:
+        NetworkInsightsPathIds:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsPathIdList'
+            - xml:
+                name: NetworkInsightsPathId
+              description: The IDs of the paths.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - xml:
+                name: Filter
+              description: '<p>The filters. The following are possible values:</p> <ul> <li> <p>Destination - The ID of the resource.</p> </li> <li> <p>DestinationPort - The destination port.</p> </li> <li> <p>Name - The path name.</p> </li> <li> <p>Protocol - The protocol.</p> </li> <li> <p>Source - The ID of the resource.</p> </li> </ul>'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsMaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next page of results.
+    NetworkInsightsPathList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/NetworkInsightsPath'
+          - xml:
+              name: item
     NetworkInterfaceAttribute:
       type: string
       enum:
@@ -66353,7 +68856,7 @@ components:
             - $ref: '#/components/schemas/FilterList'
             - xml:
                 name: Filter
-              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner-id</code> - The ID of the AWS account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>'
+              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner-id</code> - The ID of the AWS account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/TransitGatewayMaxResults'
@@ -66371,6 +68874,79 @@ components:
       items:
         allOf:
           - $ref: '#/components/schemas/TransitGatewayAttachment'
+          - xml:
+              name: item
+    TransitGatewayConnectPeerIdStringList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/TransitGatewayConnectPeerId'
+          - xml:
+              name: item
+    DescribeTransitGatewayConnectPeersRequest:
+      type: object
+      title: DescribeTransitGatewayConnectPeersRequest
+      properties:
+        TransitGatewayConnectPeerIds:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerIdStringList'
+            - description: The IDs of the Connect peers.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - xml:
+                name: Filter
+              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>state</code> - The state of the Connect peer (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-connect-peer-id</code> - The ID of the Connect peer.</p> </li> </ul>'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayMaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    TransitGatewayConnectPeerList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/TransitGatewayConnectPeer'
+          - xml:
+              name: item
+    DescribeTransitGatewayConnectsRequest:
+      type: object
+      title: DescribeTransitGatewayConnectsRequest
+      properties:
+        TransitGatewayAttachmentIds:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentIdStringList'
+            - description: The IDs of the attachments.
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - xml:
+                name: Filter
+              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>options.protocol</code> - The tunnel protocol (<code>gre</code>).</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>initiating</code> | <code>initiatingRequest</code> | <code>pendingAcceptance</code> | <code>rollingBack</code> | <code>pending</code> | <code>available</code> | <code>modifying</code> | <code>deleting</code> | <code>deleted</code> | <code>failed</code> | <code>rejected</code> | <code>rejecting</code> | <code>failing</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the Connect attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transport-transit-gateway-attachment-id</code> - The ID of the transit gateway attachment from which the Connect attachment was created.</p> </li> </ul>'
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayMaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token for the next page of results.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    TransitGatewayConnectList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/TransitGatewayConnect'
           - xml:
               name: item
     TransitGatewayMulticastDomainIdStringList:
@@ -67697,7 +70273,7 @@ components:
             - description: The ID of the attachment.
         SubnetIds:
           allOf:
-            - $ref: '#/components/schemas/ValueStringList'
+            - $ref: '#/components/schemas/TransitGatewaySubnetIdList'
             - description: The IDs of the subnets;
         DryRun:
           allOf:
@@ -68551,6 +71127,294 @@ components:
                 name: instanceId
               description: The ID of the instance. This information is available only for <code>instanceChange</code> events.
       description: Describes an EC2 Fleet or Spot Fleet event.
+    StringList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/String'
+          - xml:
+              name: item
+    Explanation:
+      type: object
+      properties:
+        Acl:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: acl
+              description: The network ACL.
+        AclRule:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisAclRule'
+            - xml:
+                name: aclRule
+              description: The network ACL rule.
+        Address:
+          allOf:
+            - $ref: '#/components/schemas/IpAddress'
+            - xml:
+                name: address
+              description: 'The IPv4 address, in CIDR notation.'
+        Addresses:
+          allOf:
+            - $ref: '#/components/schemas/IpAddressList'
+            - xml:
+                name: addressSet
+              description: 'The IPv4 addresses, in CIDR notation.'
+        AttachedTo:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: attachedTo
+              description: The resource to which the component is attached.
+        AvailabilityZones:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - xml:
+                name: availabilityZoneSet
+              description: The Availability Zones.
+        Cidrs:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - xml:
+                name: cidrSet
+              description: The CIDR ranges.
+        Component:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: component
+              description: The component.
+        CustomerGateway:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: customerGateway
+              description: The customer gateway.
+        Destination:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: destination
+              description: The destination.
+        DestinationVpc:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: destinationVpc
+              description: The destination VPC.
+        Direction:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: direction
+              description: '<p>The direction. The following are possible values:</p> <ul> <li> <p>egress</p> </li> <li> <p>ingress</p> </li> </ul>'
+        ExplanationCode:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: explanationCode
+              description: The explanation code.
+        IngressRouteTable:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: ingressRouteTable
+              description: The route table.
+        InternetGateway:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: internetGateway
+              description: The internet gateway.
+        LoadBalancerArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - xml:
+                name: loadBalancerArn
+              description: The Amazon Resource Name (ARN) of the load balancer.
+        ClassicLoadBalancerListener:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisLoadBalancerListener'
+            - xml:
+                name: classicLoadBalancerListener
+              description: The listener for a Classic Load Balancer.
+        LoadBalancerListenerPort:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - xml:
+                name: loadBalancerListenerPort
+              description: The listener port of the load balancer.
+        LoadBalancerTarget:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisLoadBalancerTarget'
+            - xml:
+                name: loadBalancerTarget
+              description: The target.
+        LoadBalancerTargetGroup:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: loadBalancerTargetGroup
+              description: The target group.
+        LoadBalancerTargetGroups:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponentList'
+            - xml:
+                name: loadBalancerTargetGroupSet
+              description: The target groups.
+        LoadBalancerTargetPort:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - xml:
+                name: loadBalancerTargetPort
+              description: The target port.
+        ElasticLoadBalancerListener:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: elasticLoadBalancerListener
+              description: The load balancer listener.
+        MissingComponent:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: missingComponent
+              description: The missing component.
+        NatGateway:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: natGateway
+              description: The NAT gateway.
+        NetworkInterface:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: networkInterface
+              description: The network interface.
+        PacketField:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: packetField
+              description: The packet field.
+        VpcPeeringConnection:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: vpcPeeringConnection
+              description: The VPC peering connection.
+        Port:
+          allOf:
+            - $ref: '#/components/schemas/Port'
+            - xml:
+                name: port
+              description: The port.
+        PortRanges:
+          allOf:
+            - $ref: '#/components/schemas/PortRangeList'
+            - xml:
+                name: portRangeSet
+              description: The port ranges.
+        PrefixList:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: prefixList
+              description: The prefix list.
+        Protocols:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - xml:
+                name: protocolSet
+              description: The protocols.
+        RouteTableRoute:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRouteTableRoute'
+            - xml:
+                name: routeTableRoute
+              description: The route table route.
+        RouteTable:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: routeTable
+              description: The route table.
+        SecurityGroup:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: securityGroup
+              description: The security group.
+        SecurityGroupRule:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisSecurityGroupRule'
+            - xml:
+                name: securityGroupRule
+              description: The security group rule.
+        SecurityGroups:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponentList'
+            - xml:
+                name: securityGroupSet
+              description: The security groups.
+        SourceVpc:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: sourceVpc
+              description: The source VPC.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: state
+              description: The state.
+        Subnet:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: subnet
+              description: The subnet.
+        SubnetRouteTable:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: subnetRouteTable
+              description: The route table for the subnet.
+        Vpc:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: vpc
+              description: The component VPC.
+        VpcEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: vpcEndpoint
+              description: The VPC endpoint.
+        VpnConnection:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: vpnConnection
+              description: The VPN connection.
+        VpnGateway:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: vpnGateway
+              description: The VPN gateway.
+      description: 'Describes an explanation code for an unreachable path. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html">Reachability Analyzer explanation codes</a>.'
+    ExplanationList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/Explanation'
+          - xml:
+              name: item
     ExportClientVpnClientCertificateRevocationListRequest:
       type: object
       required:
@@ -70238,7 +73102,7 @@ components:
             - $ref: '#/components/schemas/FilterList'
             - xml:
                 name: Filter
-              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
+              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/TransitGatewayMaxResults'
@@ -70273,7 +73137,7 @@ components:
             - $ref: '#/components/schemas/FilterList'
             - xml:
                 name: Filter
-              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
+              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> </ul>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/TransitGatewayMaxResults'
@@ -74169,6 +77033,8 @@ components:
         - natgateway
         - network-acl
         - network-interface
+        - network-insights-analysis
+        - network-insights-path
         - placement-group
         - reserved-instances
         - route-table
@@ -74182,6 +77048,7 @@ components:
         - traffic-mirror-target
         - transit-gateway
         - transit-gateway-attachment
+        - transit-gateway-connect-peer
         - transit-gateway-multicast-domain
         - transit-gateway-route-table
         - volume
@@ -75615,6 +78482,14 @@ components:
     ModifyTransitGatewayOptions:
       type: object
       properties:
+        AddTransitGatewayCidrBlocks:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayCidrBlockStringList'
+            - description: 'Adds IPv4 or IPv6 CIDR blocks for the transit gateway. Must be a size /24 CIDR block or larger for IPv4, or a size /64 CIDR block or larger for IPv6.'
+        RemoveTransitGatewayCidrBlocks:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayCidrBlockStringList'
+            - description: Removes CIDR blocks for the transit gateway.
         VpnEcmpSupport:
           allOf:
             - $ref: '#/components/schemas/VpnEcmpSupportValue'
@@ -76592,6 +79467,95 @@ components:
           - $ref: '#/components/schemas/NetworkCardInfo'
           - xml:
               name: item
+    PathComponentList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/PathComponent'
+          - xml:
+              name: item
+    NetworkInsightsAnalysis:
+      type: object
+      properties:
+        NetworkInsightsAnalysisId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsAnalysisId'
+            - xml:
+                name: networkInsightsAnalysisId
+              description: The ID of the network insights analysis.
+        NetworkInsightsAnalysisArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - xml:
+                name: networkInsightsAnalysisArn
+              description: The Amazon Resource Name (ARN) of the network insights analysis.
+        NetworkInsightsPathId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsPathId'
+            - xml:
+                name: networkInsightsPathId
+              description: The ID of the path.
+        FilterInArns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - xml:
+                name: filterInArnSet
+              description: The Amazon Resource Names (ARN) of the AWS resources that the path must traverse.
+        StartDate:
+          allOf:
+            - $ref: '#/components/schemas/MillisecondDateTime'
+            - xml:
+                name: startDate
+              description: The time the analysis started.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisStatus'
+            - xml:
+                name: status
+              description: The status of the network insights analysis.
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: statusMessage
+              description: 'The status message, if the status is <code>failed</code>.'
+        NetworkPathFound:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: networkPathFound
+              description: Indicates whether the destination is reachable from the source.
+        ForwardPathComponents:
+          allOf:
+            - $ref: '#/components/schemas/PathComponentList'
+            - xml:
+                name: forwardPathComponentSet
+              description: The components in the path from source to destination.
+        ReturnPathComponents:
+          allOf:
+            - $ref: '#/components/schemas/PathComponentList'
+            - xml:
+                name: returnPathComponentSet
+              description: The components in the path from destination to source.
+        Explanations:
+          allOf:
+            - $ref: '#/components/schemas/ExplanationList'
+            - xml:
+                name: explanationSet
+              description: 'The explanations. For more information, see <a href="https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html">Reachability Analyzer explanation codes</a>.'
+        AlternatePathHints:
+          allOf:
+            - $ref: '#/components/schemas/AlternatePathHintList'
+            - xml:
+                name: alternatePathHintSet
+              description: Potential intermediate components.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - xml:
+                name: tagSet
+              description: The tags.
+      description: Describes a network insights analysis.
     NetworkInterfaceAssociation:
       type: object
       properties:
@@ -76726,6 +79690,76 @@ components:
           - $ref: '#/components/schemas/Integer'
           - xml:
               name: item
+    PathComponent:
+      type: object
+      properties:
+        SequenceNumber:
+          allOf:
+            - $ref: '#/components/schemas/Integer'
+            - xml:
+                name: sequenceNumber
+              description: The sequence number.
+        AclRule:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisAclRule'
+            - xml:
+                name: aclRule
+              description: The network ACL rule.
+        Component:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: component
+              description: The component.
+        DestinationVpc:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: destinationVpc
+              description: The destination VPC.
+        OutboundHeader:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisPacketHeader'
+            - xml:
+                name: outboundHeader
+              description: The outbound header.
+        InboundHeader:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisPacketHeader'
+            - xml:
+                name: inboundHeader
+              description: The inbound header.
+        RouteTableRoute:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisRouteTableRoute'
+            - xml:
+                name: routeTableRoute
+              description: The route table route.
+        SecurityGroupRule:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisSecurityGroupRule'
+            - xml:
+                name: securityGroupRule
+              description: The security group rule.
+        SourceVpc:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: sourceVpc
+              description: The source VPC.
+        Subnet:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: subnet
+              description: The subnet.
+        Vpc:
+          allOf:
+            - $ref: '#/components/schemas/AnalysisComponent'
+            - xml:
+                name: vpc
+              description: The component VPC.
+      description: Describes a path component.
     PeeringAttachmentStatus:
       type: object
       properties:
@@ -77843,6 +80877,26 @@ components:
                 name: groupIpAddress
               description: The IP address assigned to the transit gateway multicast group.
       description: Describes the members registered with the transit gateway multicast group.
+    RejectTransitGatewayMulticastDomainAssociationsRequest:
+      type: object
+      title: RejectTransitGatewayMulticastDomainAssociationsRequest
+      properties:
+        TransitGatewayMulticastDomainId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayMulticastDomainId'
+            - description: The ID of the transit gateway multicast domain.
+        TransitGatewayAttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentId'
+            - description: The ID of the transit gateway attachment.
+        SubnetIds:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - description: The IDs of the subnets to associate with the transit gateway multicast domain.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
     RejectTransitGatewayPeeringAttachmentRequest:
       type: object
       required:
@@ -80074,7 +83128,7 @@ components:
             - $ref: '#/components/schemas/FilterList'
             - xml:
                 name: Filter
-              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>attachment.transit-gateway-attachment-id</code>- The id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-id</code> - The resource id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-type</code> - The attachment resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>.</p> </li> <li> <p> <code>prefix-list-id</code> - The ID of the prefix list.</p> </li> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>type</code> - The type of route (<code>propagated</code> | <code>static</code>).</p> </li> </ul>'
+              description: '<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>attachment.transit-gateway-attachment-id</code>- The id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-id</code> - The resource id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-type</code> - The attachment resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>prefix-list-id</code> - The ID of the prefix list.</p> </li> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>type</code> - The type of route (<code>propagated</code> | <code>static</code>).</p> </li> </ul>'
         MaxResults:
           allOf:
             - $ref: '#/components/schemas/TransitGatewayMaxResults'
@@ -80840,6 +83894,37 @@ components:
             - xml:
                 name: dryRun
               description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+    StartNetworkInsightsAnalysisRequest:
+      type: object
+      required:
+        - NetworkInsightsPathId
+        - ClientToken
+      title: StartNetworkInsightsAnalysisRequest
+      properties:
+        NetworkInsightsPathId:
+          allOf:
+            - $ref: '#/components/schemas/NetworkInsightsPathId'
+            - description: The ID of the path.
+        FilterInArns:
+          allOf:
+            - $ref: '#/components/schemas/ArnList'
+            - xml:
+                name: FilterInArn
+              description: The Amazon Resource Names (ARN) of the resources that the path must traverse.
+        DryRun:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.'
+        TagSpecifications:
+          allOf:
+            - $ref: '#/components/schemas/TagSpecificationList'
+            - xml:
+                name: TagSpecification
+              description: The tags to apply.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html">How to Ensure Idempotency</a>.'
     StartVpcEndpointServicePrivateDnsVerificationRequest:
       type: object
       required:
@@ -80908,10 +83993,13 @@ components:
     TransitGatewayMulitcastDomainAssociationState:
       type: string
       enum:
+        - pendingAcceptance
         - associating
         - associated
         - disassociating
         - disassociated
+        - rejected
+        - failed
     SubnetAssociation:
       type: object
       properties:
@@ -81227,6 +84315,12 @@ components:
             - xml:
                 name: amazonSideAsn
               description: A private Autonomous System Number (ASN) for the Amazon side of a BGP session. The range is 64512 to 65534 for 16-bit ASNs and 4200000000 to 4294967294 for 32-bit ASNs.
+        TransitGatewayCidrBlocks:
+          allOf:
+            - $ref: '#/components/schemas/ValueStringList'
+            - xml:
+                name: transitGatewayCidrBlocks
+              description: The transit gateway CIDR blocks.
         AutoAcceptSharedAttachments:
           allOf:
             - $ref: '#/components/schemas/AutoAcceptSharedAttachmentsValue'
@@ -81282,6 +84376,7 @@ components:
         - vpc
         - vpn
         - direct-connect-gateway
+        - connect
         - peering
         - tgw-peering
     TransitGatewayAssociationState:
@@ -81387,6 +84482,47 @@ components:
                 name: tagSet
               description: The tags for the attachment.
       description: Describes an attachment between a resource and a transit gateway.
+    TransitGatewayAttachmentBgpConfiguration:
+      type: object
+      properties:
+        TransitGatewayAsn:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - xml:
+                name: transitGatewayAsn
+              description: The transit gateway Autonomous System Number (ASN).
+        PeerAsn:
+          allOf:
+            - $ref: '#/components/schemas/Long'
+            - xml:
+                name: peerAsn
+              description: The peer Autonomous System Number (ASN).
+        TransitGatewayAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: transitGatewayAddress
+              description: The interior BGP peer IP address for the transit gateway.
+        PeerAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: peerAddress
+              description: The interior BGP peer IP address for the appliance.
+        BgpStatus:
+          allOf:
+            - $ref: '#/components/schemas/BgpStatus'
+            - xml:
+                name: bgpStatus
+              description: The BGP status.
+      description: The BGP configuration information.
+    TransitGatewayAttachmentBgpConfigurationList:
+      type: array
+      items:
+        allOf:
+          - $ref: '#/components/schemas/TransitGatewayAttachmentBgpConfiguration'
+          - xml:
+              name: item
     TransitGatewayPropagationState:
       type: string
       enum:
@@ -81410,6 +84546,79 @@ components:
                 name: state
               description: The state of the propagation route table.
       description: Describes a propagation route table.
+    TransitGatewayConnectOptions:
+      type: object
+      properties:
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolValue'
+            - xml:
+                name: protocol
+              description: The tunnel protocol.
+      description: Describes the Connect attachment options.
+    TransitGatewayConnectPeerState:
+      type: string
+      enum:
+        - pending
+        - available
+        - deleting
+        - deleted
+    TransitGatewayConnectPeerConfiguration:
+      type: object
+      properties:
+        TransitGatewayAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: transitGatewayAddress
+              description: The Connect peer IP address on the transit gateway side of the tunnel.
+        PeerAddress:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: peerAddress
+              description: The Connect peer IP address on the appliance side of the tunnel.
+        InsideCidrBlocks:
+          allOf:
+            - $ref: '#/components/schemas/InsideCidrBlocksStringList'
+            - xml:
+                name: insideCidrBlocks
+              description: The range of interior BGP peer IP addresses.
+        Protocol:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolValue'
+            - xml:
+                name: protocol
+              description: The tunnel protocol.
+        BgpConfigurations:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayAttachmentBgpConfigurationList'
+            - xml:
+                name: bgpConfigurations
+              description: The BGP configuration details.
+      description: Describes the Connect peer details.
+    TransitGatewayMulticastDomainOptions:
+      type: object
+      properties:
+        Igmpv2Support:
+          allOf:
+            - $ref: '#/components/schemas/Igmpv2SupportValue'
+            - xml:
+                name: igmpv2Support
+              description: Indicates whether Internet Group Management Protocol (IGMP) version 2 is turned on for the transit gateway multicast domain.
+        StaticSourcesSupport:
+          allOf:
+            - $ref: '#/components/schemas/StaticSourcesSupportValue'
+            - xml:
+                name: staticSourcesSupport
+              description: Indicates whether support for statically configuring transit gateway multicast group sources is turned on.
+        AutoAcceptSharedAssociations:
+          allOf:
+            - $ref: '#/components/schemas/AutoAcceptSharedAssociationsValue'
+            - xml:
+                name: autoAcceptSharedAssociations
+              description: Indicates whether to automatically cross-account subnet associations that are associated with the transit gateway multicast domain.
+      description: Describes the options for a transit gateway multicast domain.
     TransitGatewayMulticastDomainState:
       type: string
       enum:
@@ -81438,6 +84647,12 @@ components:
             - xml:
                 name: resourceType
               description: 'The type of resource, for example a VPC attachment.'
+        ResourceOwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: resourceOwnerId
+              description: ' The ID of the AWS account that owns the transit gateway multicast domain association resource.'
         Subnet:
           allOf:
             - $ref: '#/components/schemas/SubnetAssociation'
@@ -81478,6 +84693,12 @@ components:
             - xml:
                 name: resourceType
               description: 'The type of resource, for example a VPC attachment.'
+        ResourceOwnerId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - xml:
+                name: resourceOwnerId
+              description: ' The ID of the AWS account that owns the transit gateway multicast domain group resource.'
         NetworkInterfaceId:
           allOf:
             - $ref: '#/components/schemas/String'

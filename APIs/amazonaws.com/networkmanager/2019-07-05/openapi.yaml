@@ -3,7 +3,7 @@ info:
   version: '2019-07-05'
   x-release: v4
   title: AWS Network Manager
-  description: 'Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your AWS and on-premises networks that are built around transit gateways.'
+  description: '<p>Transit Gateway Network Manager (Network Manager) enables you to create a global network, in which you can monitor your AWS and on-premises networks that are built around transit gateways.</p> <p>The Network Manager APIs are supported in the US West (Oregon) Region only. You must specify the <code>us-west-2</code> Region in all requests made to Network Manager.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -457,6 +457,359 @@ paths:
             type: string
           description: Pagination token
           required: false
+  '/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations':
+    post:
+      operationId: AssociateTransitGatewayConnectPeer
+      description: '<p>Associates a transit gateway Connect peer with a device, and optionally, with a link. If you specify a link, it must be associated with the specified device. </p> <p>You can only associate transit gateway Connect peers that have been created on a transit gateway that''s registered in your global network.</p> <p>You cannot associate a transit gateway Connect peer with more than one device and link. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssociateTransitGatewayConnectPeerResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - TransitGatewayConnectPeerArn
+                - DeviceId
+              properties:
+                TransitGatewayConnectPeerArn:
+                  description: The Amazon Resource Name (ARN) of the Connect peer.
+                  type: string
+                DeviceId:
+                  description: The ID of the device.
+                  type: string
+                LinkId:
+                  description: The ID of the link.
+                  type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetTransitGatewayConnectPeerAssociations
+      description: Gets information about one or more of your transit gateway Connect peer associations in a global network.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTransitGatewayConnectPeerAssociationsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          schema:
+            type: string
+        - name: transitGatewayConnectPeerArns
+          in: query
+          required: false
+          description: One or more transit gateway Connect peer Amazon Resource Names (ARNs).
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/global-networks/{globalNetworkId}/connections':
+    post:
+      operationId: CreateConnection
+      description: 'Creates a connection between two devices. The devices can be a physical or virtual appliance that connects to a third-party appliance in a VPC, or a physical appliance that connects to another physical appliance in an on-premises network.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateConnectionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '482':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - DeviceId
+                - ConnectedDeviceId
+              properties:
+                DeviceId:
+                  description: The ID of the first device in the connection.
+                  type: string
+                ConnectedDeviceId:
+                  description: The ID of the second device in the connection.
+                  type: string
+                LinkId:
+                  description: The ID of the link for the first device.
+                  type: string
+                ConnectedLinkId:
+                  description: The ID of the link for the second device.
+                  type: string
+                Description:
+                  description: '<p>A description of the connection.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                  type: string
+                Tags:
+                  description: The tags to apply to the resource during creation.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: GetConnections
+      description: Gets information about one or more of your connections in a global network.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetConnectionsResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          schema:
+            type: string
+        - name: connectionIds
+          in: query
+          required: false
+          description: One or more connection IDs.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/String'
+        - name: deviceId
+          in: query
+          required: false
+          description: The ID of the device.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 500
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next page of results.
+          schema:
+            type: string
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
   '/global-networks/{globalNetworkId}/devices':
     post:
       operationId: CreateDevice
@@ -524,6 +877,18 @@ paths:
             schema:
               type: object
               properties:
+                AWSLocation:
+                  description: Specifies a location in AWS.
+                  type: object
+                  properties:
+                    Zone:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.'
+                    SubnetArn:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The Amazon Resource Name (ARN) of the subnet the device is located in.
                 Description:
                   description: '<p>A description of the device.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
                   type: string
@@ -1190,6 +1555,149 @@ paths:
             type: string
           description: Pagination token
           required: false
+  '/global-networks/{globalNetworkId}/connections/{connectionId}':
+    delete:
+      operationId: DeleteConnection
+      description: Deletes the specified connection in your global network.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteConnectionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          schema:
+            type: string
+        - name: connectionId
+          in: path
+          required: true
+          description: The ID of the connection.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    patch:
+      operationId: UpdateConnection
+      description: 'Updates the information for an existing connection. To remove information for any of the parameters, specify an empty string.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateConnectionResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          schema:
+            type: string
+        - name: connectionId
+          in: path
+          required: true
+          description: The ID of the connection.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                LinkId:
+                  description: The ID of the link for the first device in the connection.
+                  type: string
+                ConnectedLinkId:
+                  description: The ID of the link for the second device in the connection.
+                  type: string
+                Description:
+                  description: '<p>A description of the connection.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+                  type: string
   '/global-networks/{globalNetworkId}/devices/{deviceId}':
     delete:
       operationId: DeleteDevice
@@ -1324,6 +1832,18 @@ paths:
             schema:
               type: object
               properties:
+                AWSLocation:
+                  description: Specifies a location in AWS.
+                  type: object
+                  properties:
+                    Zone:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: 'The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.'
+                    SubnetArn:
+                      allOf:
+                        - $ref: '#/components/schemas/String'
+                        - description: The Amazon Resource Name (ARN) of the subnet the device is located in.
                 Description:
                   description: '<p>A description of the device.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
                   type: string
@@ -2007,6 +2527,74 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/global-networks/{globalNetworkId}/transit-gateway-connect-peer-associations/{transitGatewayConnectPeerArn}':
+    delete:
+      operationId: DisassociateTransitGatewayConnectPeer
+      description: Disassociates a transit gateway Connect peer from a device and link.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DisassociateTransitGatewayConnectPeerResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '484':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '485':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+      parameters:
+        - name: globalNetworkId
+          in: path
+          required: true
+          description: The ID of the global network.
+          schema:
+            type: string
+        - name: transitGatewayConnectPeerArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/global-networks/{globalNetworkId}/transit-gateway-registrations':
     get:
       operationId: GetTransitGatewayRegistrations
@@ -2434,15 +3022,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/LinkAssociation'
             - description: The link association.
-    CreateDeviceResponse:
+    AssociateTransitGatewayConnectPeerResponse:
       type: object
       properties:
-        Device:
+        TransitGatewayConnectPeerAssociation:
           allOf:
-            - $ref: '#/components/schemas/Device'
-            - description: Information about the device.
-    String:
-      type: string
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerAssociation'
+            - description: The transit gateway Connect peer association.
+    CreateConnectionResponse:
+      type: object
+      properties:
+        Connection:
+          allOf:
+            - $ref: '#/components/schemas/Connection'
+            - description: Information about the connection.
     Tag:
       type: object
       properties:
@@ -2455,6 +3048,15 @@ components:
             - $ref: '#/components/schemas/TagValue'
             - description: '<p>The tag value.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
       description: Describes a tag.
+    CreateDeviceResponse:
+      type: object
+      properties:
+        Device:
+          allOf:
+            - $ref: '#/components/schemas/Device'
+            - description: Information about the device.
+    String:
+      type: string
     CreateGlobalNetworkResponse:
       type: object
       properties:
@@ -2478,6 +3080,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/Site'
             - description: Information about the site.
+    DeleteConnectionResponse:
+      type: object
+      properties:
+        Connection:
+          allOf:
+            - $ref: '#/components/schemas/Connection'
+            - description: Information about the connection.
     DeleteDeviceResponse:
       type: object
       properties:
@@ -2538,6 +3147,24 @@ components:
           allOf:
             - $ref: '#/components/schemas/LinkAssociation'
             - description: Information about the link association.
+    DisassociateTransitGatewayConnectPeerResponse:
+      type: object
+      properties:
+        TransitGatewayConnectPeerAssociation:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerAssociation'
+            - description: The transit gateway Connect peer association.
+    GetConnectionsResponse:
+      type: object
+      properties:
+        Connections:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionList'
+            - description: Information about the connections.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use for the next page of results.
     GetCustomerGatewayAssociationsResponse:
       type: object
       properties:
@@ -2593,6 +3220,17 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The token for the next page of results.
+    GetTransitGatewayConnectPeerAssociationsResponse:
+      type: object
+      properties:
+        TransitGatewayConnectPeerAssociations:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerAssociationList'
+            - description: Information about the transit gateway Connect peer associations.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The token to use for the next page of results.
     GetTransitGatewayRegistrationsResponse:
       type: object
       properties:
@@ -2626,6 +3264,13 @@ components:
       properties: {}
     TagKey:
       type: string
+    UpdateConnectionResponse:
+      type: object
+      properties:
+        Connection:
+          allOf:
+            - $ref: '#/components/schemas/Connection'
+            - description: Information about the connection.
     UpdateDeviceResponse:
       type: object
       properties:
@@ -2654,6 +3299,18 @@ components:
           allOf:
             - $ref: '#/components/schemas/Site'
             - description: Information about the site.
+    AWSLocation:
+      type: object
+      properties:
+        Zone:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The Zone the device is located in. This can be the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.'
+        SubnetArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the subnet the device is located in.
+      description: Specifies a location in AWS.
     AssociateCustomerGatewayRequest:
       type: object
       required:
@@ -2732,6 +3389,49 @@ components:
             - $ref: '#/components/schemas/LinkAssociationState'
             - description: The state of the association.
       description: Describes the association between a device and a link.
+    AssociateTransitGatewayConnectPeerRequest:
+      type: object
+      required:
+        - TransitGatewayConnectPeerArn
+        - DeviceId
+      title: AssociateTransitGatewayConnectPeerRequest
+      properties:
+        TransitGatewayConnectPeerArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the Connect peer.
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the device.
+        LinkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the link.
+    TransitGatewayConnectPeerAssociation:
+      type: object
+      properties:
+        TransitGatewayConnectPeerArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the transit gateway Connect peer.
+        GlobalNetworkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the global network.
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the device.
+        LinkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the link.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/TransitGatewayConnectPeerAssociationState'
+            - description: The state of the association.
+      description: Describes a transit gateway Connect peer association.
     Bandwidth:
       type: object
       properties:
@@ -2744,6 +3444,103 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: Download speed in Mbps.
       description: Describes bandwidth information.
+    DateTime:
+      type: string
+      format: date-time
+    ConnectionState:
+      type: string
+      enum:
+        - PENDING
+        - AVAILABLE
+        - DELETING
+        - UPDATING
+    TagList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tag'
+    Connection:
+      type: object
+      properties:
+        ConnectionId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the connection.
+        ConnectionArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the connection.
+        GlobalNetworkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the global network.
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the first device in the connection.
+        ConnectedDeviceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the second device in the connection.
+        LinkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the link for the first device in the connection.
+        ConnectedLinkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the link for the second device in the connection.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The description of the connection.
+        CreatedAt:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time that the connection was created.
+        State:
+          allOf:
+            - $ref: '#/components/schemas/ConnectionState'
+            - description: The state of the connection.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags for the connection.
+      description: Describes a connection.
+    ConnectionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Connection'
+    CreateConnectionRequest:
+      type: object
+      required:
+        - DeviceId
+        - ConnectedDeviceId
+      title: CreateConnectionRequest
+      properties:
+        DeviceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the first device in the connection.
+        ConnectedDeviceId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the second device in the connection.
+        LinkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the link for the first device.
+        ConnectedLinkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the link for the second device.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>A description of the connection.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: The tags to apply to the resource during creation.
     Location:
       type: object
       properties:
@@ -2760,14 +3557,14 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The longitude.
       description: Describes a location.
-    TagList:
-      type: array
-      items:
-        $ref: '#/components/schemas/Tag'
     CreateDeviceRequest:
       type: object
       title: CreateDeviceRequest
       properties:
+        AWSLocation:
+          allOf:
+            - $ref: '#/components/schemas/AWSLocation'
+            - description: The AWS location of the device.
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -2815,6 +3612,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The ID of the global network.
+        AWSLocation:
+          allOf:
+            - $ref: '#/components/schemas/AWSLocation'
+            - description: The AWS location of the device.
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -3038,9 +3839,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/CustomerGatewayAssociation'
-    DateTime:
-      type: string
-      format: date-time
+    DeleteConnectionRequest:
+      type: object
+      title: DeleteConnectionRequest
+      properties: {}
     DeleteDeviceRequest:
       type: object
       title: DeleteDeviceRequest
@@ -3112,6 +3914,14 @@ components:
       type: object
       title: DisassociateLinkRequest
       properties: {}
+    DisassociateTransitGatewayConnectPeerRequest:
+      type: object
+      title: DisassociateTransitGatewayConnectPeerRequest
+      properties: {}
+    GetConnectionsRequest:
+      type: object
+      title: GetConnectionsRequest
+      properties: {}
     GetCustomerGatewayAssociationsRequest:
       type: object
       title: GetCustomerGatewayAssociationsRequest
@@ -3144,6 +3954,14 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Site'
+    GetTransitGatewayConnectPeerAssociationsRequest:
+      type: object
+      title: GetTransitGatewayConnectPeerAssociationsRequest
+      properties: {}
+    TransitGatewayConnectPeerAssociationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TransitGatewayConnectPeerAssociation'
     GetTransitGatewayRegistrationsRequest:
       type: object
       title: GetTransitGatewayRegistrationsRequest
@@ -3212,6 +4030,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: The tags to apply to the specified resource.
+    TransitGatewayConnectPeerAssociationState:
+      type: string
+      enum:
+        - PENDING
+        - AVAILABLE
+        - DELETING
+        - DELETED
     TransitGatewayRegistrationStateReason:
       type: object
       properties:
@@ -3236,10 +4061,30 @@ components:
       type: object
       title: UntagResourceRequest
       properties: {}
+    UpdateConnectionRequest:
+      type: object
+      title: UpdateConnectionRequest
+      properties:
+        LinkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the link for the first device in the connection.
+        ConnectedLinkId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the link for the second device in the connection.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>A description of the connection.</p> <p>Length Constraints: Maximum length of 256 characters.</p>'
     UpdateDeviceRequest:
       type: object
       title: UpdateDeviceRequest
       properties:
+        AWSLocation:
+          allOf:
+            - $ref: '#/components/schemas/AWSLocation'
+            - description: The AWS location of the device.
         Description:
           allOf:
             - $ref: '#/components/schemas/String'
