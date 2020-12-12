@@ -156,7 +156,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: Action
           in: query
@@ -251,7 +251,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: TargetGroupARNs
           in: query
@@ -358,7 +358,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: LoadBalancerNames
           in: query
@@ -459,7 +459,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ScheduledActionNames
           in: query
@@ -468,7 +468,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/ResourceName'
+              $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: Action
           in: query
           required: true
@@ -566,7 +566,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ScheduledUpdateGroupActions
           in: query
@@ -926,7 +926,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: LaunchTemplate
           in: query
@@ -1005,7 +1005,6 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/XmlStringMaxLen255'
-            minItems: 1
         - name: LoadBalancerNames
           in: query
           required: false
@@ -1595,7 +1594,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ForceDelete
           in: query
@@ -1698,7 +1697,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: Action
           in: query
@@ -1796,7 +1795,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: Action
           in: query
@@ -1879,7 +1878,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: TopicARN
           in: query
@@ -1888,7 +1887,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: Action
           in: query
@@ -1973,7 +1972,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: PolicyName
           in: query
@@ -2067,7 +2066,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ScheduledActionName
           in: query
@@ -2076,7 +2075,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: Action
           in: query
@@ -2401,7 +2400,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/ResourceName'
+              $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: NextToken
           in: query
           required: false
@@ -2840,7 +2839,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/ResourceName'
+              $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: NextToken
           in: query
           required: false
@@ -3030,7 +3029,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: LifecycleHookNames
           in: query
@@ -3126,7 +3125,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: NextToken
           in: query
@@ -3226,7 +3225,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: NextToken
           in: query
@@ -3405,7 +3404,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/ResourceName'
+              $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: NextToken
           in: query
           required: false
@@ -3534,7 +3533,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: PolicyNames
           in: query
@@ -3688,7 +3687,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: MaxRecords
           in: query
@@ -3885,7 +3884,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ScheduledActionNames
           in: query
@@ -3894,7 +3893,7 @@ paths:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/ResourceName'
+              $ref: '#/components/schemas/XmlStringMaxLen255'
         - name: StartTime
           in: query
           required: false
@@ -4229,7 +4228,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ShouldDecrementDesiredCapacity
           in: query
@@ -4322,7 +4321,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: TargetGroupARNs
           in: query
@@ -4417,7 +4416,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: LoadBalancerNames
           in: query
@@ -4508,7 +4507,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: Metrics
           in: query
@@ -4595,7 +4594,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: Metrics
           in: query
@@ -4703,7 +4702,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ShouldDecrementDesiredCapacity
           in: query
@@ -4798,7 +4797,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: PolicyName
           in: query
@@ -4924,7 +4923,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: Action
           in: query
@@ -5026,7 +5025,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: LifecycleTransition
           in: query
@@ -5041,7 +5040,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: NotificationTargetARN
           in: query
@@ -5050,7 +5049,7 @@ paths:
           schema:
             type: string
             minLength: 0
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: NotificationMetadata
           in: query
@@ -5172,7 +5171,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: TopicARN
           in: query
@@ -5181,7 +5180,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: NotificationTypes
           in: query
@@ -5296,7 +5295,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: PolicyName
           in: query
@@ -5510,7 +5509,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ScheduledActionName
           in: query
@@ -5777,7 +5776,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ScalingProcesses
           in: query
@@ -5876,7 +5875,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: DesiredCapacity
           in: query
@@ -6085,7 +6084,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ProtectedFromScaleIn
           in: query
@@ -6321,7 +6320,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: ScalingProcesses
           in: query
@@ -6531,7 +6530,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: LaunchConfigurationName
           in: query
@@ -6540,7 +6539,7 @@ paths:
           schema:
             type: string
             minLength: 1
-            maxLength: 1600
+            maxLength: 255
             x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
         - name: LaunchTemplate
           in: query
@@ -6610,7 +6609,6 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/XmlStringMaxLen255'
-            minItems: 1
         - name: HealthCheckType
           in: query
           required: false
@@ -6828,11 +6826,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/FailedScheduledUpdateGroupActionRequests'
             - description: 'The names of the scheduled actions that could not be deleted, including an error message.'
-    ResourceName:
-      type: string
-      minLength: 1
-      maxLength: 1600
-      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
     BatchPutScheduledUpdateGroupActionAnswer:
       type: object
       properties:
@@ -6971,7 +6964,7 @@ components:
             - description: The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when an instance is in the transition state for the lifecycle hook. The notification target can be either an SQS queue or an SNS topic.
         RoleARN:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: 'The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue.'
       description: '<p>Describes information used to specify a lifecycle hook for an Auto Scaling group.</p> <p>A lifecycle hook tells Amazon EC2 Auto Scaling to perform an action on an instance when the instance launches (before it is put into service) or as the instance terminates (before it is fully terminated).</p> <p>This step is a part of the procedure for creating a lifecycle hook for an Auto Scaling group:</p> <ol> <li> <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates instances.</p> </li> <li> <p>(Optional) Create a notification target and an IAM role. The target can be either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to publish lifecycle notifications to the target.</p> </li> <li> <p> <b>Create the lifecycle hook. Specify whether the hook is used when the instances launch or terminate.</b> </p> </li> <li> <p>If you need more time, record the lifecycle action heartbeat to keep the instance in a pending state.</p> </li> <li> <p>If you finish before the timeout period ends, complete the lifecycle action.</p> </li> </ol> <p>For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html">Amazon EC2 Auto Scaling lifecycle hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>'
     Tag:
@@ -7346,6 +7339,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/XmlString'
             - description: 'A string that indicates that the response contains more items than can be returned in a single response. To receive additional items, specify this string for the <code>NextToken</code> value when requesting the next set of items. This value is null when there are no more items to return.'
+    ResourceName:
+      type: string
+      minLength: 1
+      maxLength: 1600
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
     XmlStringMaxLen64:
       type: string
       minLength: 1
@@ -7766,7 +7764,7 @@ components:
             - description: The IDs of the instances. You can specify up to 20 instances.
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
     TargetGroupARNs:
       type: array
@@ -7781,7 +7779,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         TargetGroupARNs:
           allOf:
@@ -7800,7 +7798,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         LoadBalancerNames:
           allOf:
@@ -7846,7 +7844,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/XmlStringMaxLen255'
-      minItems: 1
     XmlStringMaxLen32:
       type: string
       minLength: 1
@@ -8009,7 +8006,7 @@ components:
     AutoScalingGroupNames:
       type: array
       items:
-        $ref: '#/components/schemas/ResourceName'
+        $ref: '#/components/schemas/XmlStringMaxLen255'
     MaxRecords:
       type: integer
     AutoScalingGroupNamesType:
@@ -8098,7 +8095,7 @@ components:
     ScheduledActionNames:
       type: array
       items:
-        $ref: '#/components/schemas/ResourceName'
+        $ref: '#/components/schemas/XmlStringMaxLen255'
     BatchDeleteScheduledActionType:
       type: object
       required:
@@ -8108,7 +8105,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ScheduledActionNames:
           allOf:
@@ -8127,7 +8124,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ScheduledUpdateGroupActions:
           allOf:
@@ -8253,7 +8250,7 @@ components:
             - description: The name of the Auto Scaling group. This name must be unique per Region per account.
         LaunchConfigurationName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: '<p>The name of the launch configuration to use to launch instances. </p> <p>Conditional: You must specify either a launch template (<code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>) or a launch configuration (<code>LaunchConfigurationName</code> or <code>InstanceId</code>).</p>'
         LaunchTemplate:
           allOf:
@@ -8497,7 +8494,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ForceDelete:
           allOf:
@@ -8516,7 +8513,7 @@ components:
             - description: The name of the lifecycle hook.
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
     DeleteNotificationConfigurationType:
       type: object
@@ -8527,11 +8524,11 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         TopicARN:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
     DeletePolicyType:
       type: object
@@ -8541,7 +8538,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         PolicyName:
           allOf:
@@ -8556,11 +8553,11 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ScheduledActionName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the action to delete.
     DeleteTagsType:
       type: object
@@ -8643,7 +8640,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         LifecycleHookNames:
           allOf:
@@ -8657,7 +8654,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         NextToken:
           allOf:
@@ -8679,7 +8676,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         NextToken:
           allOf:
@@ -8735,7 +8732,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         PolicyNames:
           allOf:
@@ -8763,7 +8760,7 @@ components:
             - description: 'The activity IDs of the desired scaling activities. You can specify up to 50 IDs. If you omit this parameter, all activities for the past six weeks are described. If unknown activities are requested, they are ignored with no error. If you specify an Auto Scaling group, the results are limited to that group.'
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         MaxRecords:
           allOf:
@@ -8779,7 +8776,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ScheduledActionNames:
           allOf:
@@ -8836,7 +8833,7 @@ components:
             - description: The IDs of the instances. You can specify up to 20 instances.
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ShouldDecrementDesiredCapacity:
           allOf:
@@ -8851,7 +8848,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         TargetGroupARNs:
           allOf:
@@ -8866,7 +8863,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         LoadBalancerNames:
           allOf:
@@ -8884,7 +8881,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         Metrics:
           allOf:
@@ -8899,7 +8896,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         Metrics:
           allOf:
@@ -8934,7 +8931,7 @@ components:
             - description: The IDs of the instances. You can specify up to 20 instances.
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ShouldDecrementDesiredCapacity:
           allOf:
@@ -8952,7 +8949,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         PolicyName:
           allOf:
@@ -8982,7 +8979,7 @@ components:
             - description: The IDs of the instances. You can specify up to 20 instances.
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
     FailedScheduledUpdateGroupActionRequest:
       type: object
@@ -9227,12 +9224,12 @@ components:
       properties:
         LaunchConfigurationName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the launch configuration.
     LaunchConfigurationNames:
       type: array
       items:
-        $ref: '#/components/schemas/ResourceName'
+        $ref: '#/components/schemas/XmlStringMaxLen255'
     LaunchConfigurationNamesType:
       type: object
       title: LaunchConfigurationNamesType
@@ -9275,6 +9272,11 @@ components:
       description: 'Describes an override for a launch template. The maximum number of instance types that can be associated with an Auto Scaling group is 20. For more information, see <a href="https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-override-options.html">Configuring overrides</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. '
     LifecycleTransition:
       type: string
+    NotificationTargetResourceName:
+      type: string
+      minLength: 0
+      maxLength: 255
+      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
     LifecycleHook:
       type: object
       properties:
@@ -9284,7 +9286,7 @@ components:
             - description: The name of the lifecycle hook.
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group for the lifecycle hook.
         LifecycleTransition:
           allOf:
@@ -9292,11 +9294,11 @@ components:
             - description: '<p>The state of the EC2 instance to which to attach the lifecycle hook. The following are possible values:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul>'
         NotificationTargetARN:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/NotificationTargetResourceName'
             - description: The ARN of the target that Amazon EC2 Auto Scaling sends notifications to when an instance is in the transition state for the lifecycle hook. The notification target can be either an SQS queue or an SNS topic.
         RoleARN:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target.
         NotificationMetadata:
           allOf:
@@ -9315,11 +9317,6 @@ components:
             - $ref: '#/components/schemas/LifecycleActionResult'
             - description: Defines the action the Auto Scaling group should take when the lifecycle hook timeout elapses or if an unexpected failure occurs. The possible values are <code>CONTINUE</code> and <code>ABANDON</code>.
       description: 'Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that you want to perform an action whenever it launches instances or terminates instances.'
-    NotificationTargetResourceName:
-      type: string
-      minLength: 0
-      maxLength: 1600
-      x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*'
     LoadBalancerState:
       type: object
       properties:
@@ -9396,11 +9393,11 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         TopicARN:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
         NotificationType:
           allOf:
@@ -9448,7 +9445,7 @@ components:
             - description: The name of the lifecycle hook.
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         LifecycleTransition:
           allOf:
@@ -9456,7 +9453,7 @@ components:
             - description: '<p>The instance state to which you want to attach the lifecycle hook. The valid values are:</p> <ul> <li> <p>autoscaling:EC2_INSTANCE_LAUNCHING</p> </li> <li> <p>autoscaling:EC2_INSTANCE_TERMINATING</p> </li> </ul> <p>Required for new lifecycle hooks, but optional when updating existing hooks.</p>'
         RoleARN:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: '<p>The ARN of the IAM role that allows the Auto Scaling group to publish to the specified notification target, for example, an Amazon SNS topic or an Amazon SQS queue.</p> <p>Required for new lifecycle hooks, but optional when updating existing hooks.</p>'
         NotificationTargetARN:
           allOf:
@@ -9484,11 +9481,11 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         TopicARN:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon SNS) topic.
         NotificationTypes:
           allOf:
@@ -9531,7 +9528,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         PolicyName:
           allOf:
@@ -9590,7 +9587,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ScheduledActionName:
           allOf:
@@ -9735,7 +9732,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ScalingProcesses:
           allOf:
@@ -9798,7 +9795,7 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         DesiredCapacity:
           allOf:
@@ -9843,7 +9840,7 @@ components:
             - description: One or more instance IDs. You can specify up to 50 instances.
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         ProtectedFromScaleIn:
           allOf:
@@ -9936,11 +9933,11 @@ components:
       properties:
         AutoScalingGroupName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: The name of the Auto Scaling group.
         LaunchConfigurationName:
           allOf:
-            - $ref: '#/components/schemas/ResourceName'
+            - $ref: '#/components/schemas/XmlStringMaxLen255'
             - description: 'The name of the launch configuration. If you specify <code>LaunchConfigurationName</code> in your update request, you can''t specify <code>LaunchTemplate</code> or <code>MixedInstancesPolicy</code>.'
         LaunchTemplate:
           allOf:

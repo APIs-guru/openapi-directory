@@ -362,7 +362,7 @@ paths:
   /properties:
     post:
       operationId: BatchPutAssetPropertyValue
-      description: '<p>Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ingest-api.html">Ingesting data using the API</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property''s alias, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.</p> </li> </ul> <important> <p>With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 15 minutes in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-15, +5] minutes and returns a <code>TimestampOutOfRangeException</code> error.</p> <p>For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV <code>{T1, GOOD, V1}</code>, then storing <code>{T1, GOOD, V2}</code> replaces the existing TQV.</p> </important> <p>AWS IoT SiteWise authorizes access to each <code>BatchPutAssetPropertyValue</code> entry individually. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action">BatchPutAssetPropertyValue authorization</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>'
+      description: '<p>Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ingest-api.html">Ingesting data using the API</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property''s alias, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.</p> </li> </ul> <important> <p>With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +5 minutes] and returns a <code>TimestampOutOfRangeException</code> error.</p> <p>For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV <code>{T1, GOOD, V1}</code>, then storing <code>{T1, GOOD, V2}</code> replaces the existing TQV.</p> </important> <p>AWS IoT SiteWise authorizes access to each <code>BatchPutAssetPropertyValue</code> entry individually. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action">BatchPutAssetPropertyValue authorization</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -887,6 +887,11 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/AssetModelHierarchyDefinition'
+                assetModelCompositeModels:
+                  description: The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties. Each composite model has a type that defines the properties that the composite model supports. Use composite asset models to define alarms on this asset model.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AssetModelCompositeModelDefinition'
                 clientToken:
                   description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
                   type: string
@@ -1282,7 +1287,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 portalAuthMode:
-                  description: '<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. IAM users must have the <code>iotsitewise:CreatePresignedPortalUrl</code> permission to sign in to the portal. This option is only available in the China Regions.</p> </li> </ul> <p>You can''t change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>'
+                  description: '<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. This option is only available in the China Regions.</p> </li> </ul> <p>You can''t change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>'
                   type: string
                   enum:
                     - IAM
@@ -1341,61 +1346,6 @@ paths:
             type: integer
             minimum: 1
             maximum: 250
-  '/portals/{portalId}/presigned-url':
-    get:
-      operationId: CreatePresignedPortalUrl
-      description: Creates a pre-signed URL to a portal. Use this operation to create URLs to portals that use AWS Identity and Access Management (IAM) to authenticate users. An IAM user with access to a portal can call this API to get a URL to that portal. The URL contains an authentication token that lets the IAM user access the portal.
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CreatePresignedPortalUrlResponse'
-        '480':
-          description: InvalidRequestException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InvalidRequestException'
-        '481':
-          description: InternalFailureException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalFailureException'
-        '482':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-      parameters:
-        - name: portalId
-          in: path
-          required: true
-          description: The ID of the portal to access.
-          schema:
-            type: string
-            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-            minLength: 36
-            maxLength: 36
-        - name: sessionDurationSeconds
-          in: query
-          required: false
-          description: '<p>The duration (in seconds) for which the session at the URL is valid.</p> <p>Default: 43,200 seconds (12 hours)</p>'
-          schema:
-            type: integer
-            minimum: 900
-            maximum: 43200
-    parameters:
-      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
-      - $ref: '#/components/parameters/X-Amz-Date'
-      - $ref: '#/components/parameters/X-Amz-Algorithm'
-      - $ref: '#/components/parameters/X-Amz-Credential'
-      - $ref: '#/components/parameters/X-Amz-Security-Token'
-      - $ref: '#/components/parameters/X-Amz-Signature'
-      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /projects:
     post:
       operationId: CreateProject
@@ -2082,6 +2032,11 @@ paths:
                   type: array
                   items:
                     $ref: '#/components/schemas/AssetModelHierarchy'
+                assetModelCompositeModels:
+                  description: The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties. Each composite model has a type that defines the properties that the composite model supports. Use composite asset models to define alarms on this asset model.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/AssetModelCompositeModel'
                 clientToken:
                   description: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
                   type: string
@@ -3652,6 +3607,84 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/assets/{assetId}/assetRelationships#traversalType':
+    get:
+      operationId: ListAssetRelationships
+      description: Retrieves a paginated list of asset relationships for an asset. You can use this operation to identify an asset's root asset and all associated assets between that asset and its root.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListAssetRelationshipsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+      parameters:
+        - name: assetId
+          in: path
+          required: true
+          description: The ID of the asset.
+          schema:
+            type: string
+            pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
+            minLength: 36
+            maxLength: 36
+        - name: traversalType
+          in: query
+          required: true
+          description: '<p>The type of traversal to use to identify asset relationships. Choose the following option:</p> <ul> <li> <p> <code>PATH_TO_ROOT</code> – Identify the asset''s parent assets up to the root asset. The asset that you specify in <code>assetId</code> is the first result in the list of <code>assetRelationshipSummaries</code>, and the root asset is the last result.</p> </li> </ul>'
+          schema:
+            type: string
+            enum:
+              - PATH_TO_ROOT
+        - name: nextToken
+          in: query
+          required: false
+          description: The token to be used for the next set of paginated results.
+          schema:
+            type: string
+            pattern: '[A-Za-z0-9+/=]+'
+            minLength: 1
+            maxLength: 2048
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to be returned per paginated request.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/assets/{assetId}/hierarchies':
     get:
       operationId: ListAssociatedAssets
@@ -3967,6 +4000,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ConflictingOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingOperationException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
       parameters:
         - name: resourceArn
           in: query
@@ -4019,6 +4070,24 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
         '484':
+          description: ConflictingOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingOperationException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
+        '487':
           description: TooManyTagsException
           content:
             application/json:
@@ -4084,6 +4153,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ConflictingOperationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictingOperationException'
+        '485':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '486':
+          description: UnauthorizedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedException'
       parameters:
         - name: resourceArn
           in: query
@@ -4188,7 +4275,7 @@ paths:
                   description: 'The JSON document that defines the configuration for the gateway capability. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli">Configuring data sources (CLI)</a> in the <i>AWS IoT SiteWise User Guide</i>.'
                   type: string
                   minLength: 1
-                  maxLength: 204800
+                  maxLength: 104857600
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4353,7 +4440,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: '<p>The ARN of the IAM user. IAM users must have the <code>iotsitewise:CreatePresignedPortalUrl</code> permission to sign in to the portal. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM ARNs</a> in the <i>IAM User Guide</i>.</p> <note> <p>If you delete the IAM user, access policies that contain this identity include an empty <code>arn</code>. You can delete the access policy for the IAM user that no longer exists.</p> </note>'
+            - description: '<p>The ARN of the IAM user. For more information, see <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html">IAM ARNs</a> in the <i>IAM User Guide</i>.</p> <note> <p>If you delete the IAM user, access policies that contain this identity include an empty <code>arn</code>. You can delete the access policy for the IAM user that no longer exists.</p> </note>'
       description: Contains information about an AWS Identity and Access Management (IAM) user.
     PortalResource:
       type: object
@@ -4432,7 +4519,11 @@ components:
         dataType:
           allOf:
             - $ref: '#/components/schemas/PropertyDataType'
-            - description: The data type of the property definition.
+            - description: '<p>The data type of the property definition.</p> <p>If you specify <code>STRUCT</code>, you must also specify <code>dataTypeSpec</code> to identify the type of the structure for this property.</p>'
+        dataTypeSpec:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: <p>The data type of the structure for this property. This parameter is required on properties that have the <code>STRUCT</code> data type.</p> <p>The options for this parameter depend on the type of the composite model in which you define this property. Use <code>AWS/ALARM_STATE</code> for alarm state in alarm composite models.</p>
         unit:
           allOf:
             - $ref: '#/components/schemas/PropertyUnit'
@@ -4457,6 +4548,29 @@ components:
             - $ref: '#/components/schemas/ID'
             - description: The ID of an asset model for this hierarchy.
       description: Contains an asset model hierarchy used in asset model creation. An asset model hierarchy determines the kind (or type) of asset that can belong to a hierarchy.
+    AssetModelCompositeModelDefinition:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the composite model.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the composite model.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.'
+        properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetModelPropertyDefinitions'
+            - description: The asset property definitions for this composite model.
+      description: Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.
     CreateDashboardResponse:
       type: object
       required:
@@ -4515,7 +4629,7 @@ components:
         portalStartUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: 'The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the <a href="https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html">CreatePresignedPortalUrl</a> operation to create a URL that you can use to access the portal.'
+            - description: 'The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the AWS IoT SiteWise console to get a URL that you can use to access the portal.'
         portalStatus:
           allOf:
             - $ref: '#/components/schemas/PortalStatus'
@@ -4532,15 +4646,6 @@ components:
       type: string
       enum:
         - PNG
-    CreatePresignedPortalUrlResponse:
-      type: object
-      required:
-        - presignedPortalUrl
-      properties:
-        presignedPortalUrl:
-          allOf:
-            - $ref: '#/components/schemas/Url'
-            - description: '<p>The pre-signed URL to the portal. The URL contains the portal ID and an authentication token that lets you access the portal. The URL has the following format.</p> <p> <code>https://&lt;portal-id&gt;.app.iotsitewise.aws/iam?token=&lt;encrypted-token&gt;</code> </p>'
     CreateProjectResponse:
       type: object
       required:
@@ -4662,11 +4767,15 @@ components:
         assetProperties:
           allOf:
             - $ref: '#/components/schemas/AssetProperties'
-            - description: The list of asset properties for the asset.
+            - description: <p>The list of asset properties for the asset.</p> <p>This object doesn't include properties that you define in composite models. You can find composite model properties in the <code>assetCompositeModels</code> object.</p>
         assetHierarchies:
           allOf:
             - $ref: '#/components/schemas/AssetHierarchies'
             - description: A list of asset hierarchies that each contain a <code>hierarchyId</code>. A hierarchy specifies allowed parent/child asset relationships.
+        assetCompositeModels:
+          allOf:
+            - $ref: '#/components/schemas/AssetCompositeModels'
+            - description: The composite models for the asset.
         assetCreationDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4711,11 +4820,15 @@ components:
         assetModelProperties:
           allOf:
             - $ref: '#/components/schemas/AssetModelProperties'
-            - description: The list of asset properties for the asset model.
+            - description: <p>The list of asset properties for the asset model.</p> <p>This object doesn't include properties that you define in composite models. You can find composite model properties in the <code>assetModelCompositeModels</code> object.</p>
         assetModelHierarchies:
           allOf:
             - $ref: '#/components/schemas/AssetModelHierarchies'
             - description: A list of asset model hierarchies that each contain a <code>childAssetModelId</code> and a <code>hierarchyId</code> (named <code>id</code>). A hierarchy specifies allowed parent/child asset relationships for an asset model.
+        assetModelCompositeModels:
+          allOf:
+            - $ref: '#/components/schemas/AssetModelCompositeModels'
+            - description: The list of composite asset models for the asset model.
         assetModelCreationDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -4734,7 +4847,6 @@ components:
         - assetId
         - assetName
         - assetModelId
-        - assetProperty
       properties:
         assetId:
           allOf:
@@ -4751,7 +4863,11 @@ components:
         assetProperty:
           allOf:
             - $ref: '#/components/schemas/Property'
-            - description: 'The asset property''s definition, alias, and notification state.'
+            - description: '<p>The asset property''s definition, alias, and notification state.</p> <p>This response includes this object for normal asset properties. If you describe an asset property in a composite model, this response includes the asset property information in <code>compositeModel</code>.</p>'
+        compositeModel:
+          allOf:
+            - $ref: '#/components/schemas/CompositeModelProperty'
+            - description: 'The composite asset model that declares this asset property, if this asset property exists in a composite model.'
     DescribeDashboardResponse:
       type: object
       required:
@@ -4920,7 +5036,7 @@ components:
         portalStartUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: 'The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the <a href="https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html">CreatePresignedPortalUrl</a> operation to create a URL that you can use to access the portal.'
+            - description: 'The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the AWS IoT SiteWise console to get a URL that you can use to access the portal.'
         portalContactEmail:
           allOf:
             - $ref: '#/components/schemas/Email'
@@ -5061,6 +5177,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'The token for the next set of results, or null if there are no additional results.'
+    ListAssetRelationshipsResponse:
+      type: object
+      required:
+        - assetRelationshipSummaries
+      properties:
+        assetRelationshipSummaries:
+          allOf:
+            - $ref: '#/components/schemas/AssetRelationshipSummaries'
+            - description: A list that summarizes each asset relationship.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'The token for the next set of results, or null if there are no additional results.'
     ListAssetsResponse:
       type: object
       required:
@@ -5157,6 +5286,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: 'The list of key-value pairs that contain metadata for the resource. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your AWS IoT SiteWise resources</a> in the <i>AWS IoT SiteWise User Guide</i>.'
+    UnauthorizedException: {}
     PutDefaultEncryptionConfigurationResponse:
       type: object
       required:
@@ -5235,6 +5365,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PropertyDataType'
             - description: The data type of the asset model property.
+        dataTypeSpec:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The data type of the structure for this property. This parameter exists on properties that have the <code>STRUCT</code> data type.
         unit:
           allOf:
             - $ref: '#/components/schemas/PropertyUnit'
@@ -5263,6 +5397,29 @@ components:
             - $ref: '#/components/schemas/ID'
             - description: The ID of the asset model. All assets in this hierarchy must be instances of the <code>childAssetModelId</code> asset model.
       description: 'Describes an asset hierarchy that contains a hierarchy''s name, ID, and child asset model ID that specifies the type of asset that can be in this hierarchy.'
+    AssetModelCompositeModel:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the composite model.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the composite model.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.'
+        properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetModelProperties'
+            - description: The asset property definitions for this composite model.
+      description: Contains information about a composite model in an asset model. This object contains the asset property definitions that you define in the composite model.
     UpdateDashboardResponse:
       type: object
       properties: {}
@@ -5448,6 +5605,48 @@ components:
       type: string
       minLength: 1
       maxLength: 1011
+    Name:
+      type: string
+      pattern: '[^\u0000-\u001F\u007F]+'
+      minLength: 1
+      maxLength: 256
+    Description:
+      type: string
+      pattern: '[^\u0000-\u001F\u007F]+'
+      minLength: 1
+      maxLength: 2048
+    AssetProperties:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetProperty'
+    AssetCompositeModel:
+      type: object
+      required:
+        - name
+        - type
+        - properties
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the composite model.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/Description'
+            - description: The description of the composite model.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: 'The type of the composite model. For alarm composite models, this type is <code>AWS/ALARM</code>.'
+        properties:
+          allOf:
+            - $ref: '#/components/schemas/AssetProperties'
+            - description: The asset properties that this composite model defines.
+      description: Contains information about a composite model in an asset. This object contains the asset's properties that you define in the composite model.
+    AssetCompositeModels:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetCompositeModel'
     AssetErrorCode:
       type: string
       enum:
@@ -5492,15 +5691,38 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssetHierarchy'
-    Name:
-      type: string
-      pattern: '[^\u0000-\u001F\u007F]+'
-      minLength: 1
-      maxLength: 256
+    AssetHierarchyInfo:
+      type: object
+      properties:
+        parentAssetId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the parent asset in this asset relationship.
+        childAssetId:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the child asset in this asset relationship.
+      description: Contains information about a parent asset and a child asset that are related through an asset hierarchy.
     AssetIDs:
       type: array
       items:
         $ref: '#/components/schemas/ID'
+    AssetModelProperties:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetModelProperty'
+    AssetModelPropertyDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetModelPropertyDefinition'
+    AssetModelCompositeModelDefinitions:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetModelCompositeModelDefinition'
+    AssetModelCompositeModels:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetModelCompositeModel'
     AssetModelHierarchies:
       type: array
       items:
@@ -5509,10 +5731,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssetModelHierarchyDefinition'
-    AssetModelProperties:
-      type: array
-      items:
-        $ref: '#/components/schemas/AssetModelProperty'
     PropertyDataType:
       type: string
       enum:
@@ -5520,6 +5738,7 @@ components:
         - INTEGER
         - DOUBLE
         - BOOLEAN
+        - STRUCT
     PropertyUnit:
       type: string
       pattern: '[^\u0000-\u001F\u007F]+'
@@ -5545,10 +5764,6 @@ components:
             - $ref: '#/components/schemas/Metric'
             - description: 'Specifies an asset metric property. A metric contains a mathematical expression that uses aggregate functions to process all input data points over a time interval and output a single data point, such as to calculate the average hourly temperature.'
       description: 'Contains a property type, which can be one of <code>attribute</code>, <code>measurement</code>, <code>metric</code>, or <code>transform</code>.'
-    AssetModelPropertyDefinitions:
-      type: array
-      items:
-        $ref: '#/components/schemas/AssetModelPropertyDefinition'
     AssetModelState:
       type: string
       enum:
@@ -5631,11 +5846,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssetModelSummary'
-    Description:
-      type: string
-      pattern: '[^\u0000-\u001F\u007F]+'
-      minLength: 1
-      maxLength: 2048
     AssetProperty:
       type: object
       required:
@@ -5663,15 +5873,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/PropertyDataType'
             - description: The data type of the asset property.
+        dataTypeSpec:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The data type of the structure for this property. This parameter exists on properties that have the <code>STRUCT</code> data type.
         unit:
           allOf:
             - $ref: '#/components/schemas/PropertyUnit'
             - description: The unit (such as <code>Newtons</code> or <code>RPM</code>) of the asset property.
       description: Contains asset property information.
-    AssetProperties:
-      type: array
-      items:
-        $ref: '#/components/schemas/AssetProperty'
     PropertyAlias:
       type: string
       pattern: '[^\u0000-\u001F\u007F]+'
@@ -5757,6 +5967,28 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/AssetPropertyValue'
+    AssetRelationshipSummary:
+      type: object
+      required:
+        - relationshipType
+      properties:
+        hierarchyInfo:
+          allOf:
+            - $ref: '#/components/schemas/AssetHierarchyInfo'
+            - description: <p>The assets that are related through an asset hierarchy.</p> <p>This object is present if the <code>relationshipType</code> is <code>HIERARCHY</code>.</p>
+        relationshipType:
+          allOf:
+            - $ref: '#/components/schemas/AssetRelationshipType'
+            - description: '<p>The relationship type of the assets in this relationship. This value is one of the following:</p> <ul> <li> <p> <code>HIERARCHY</code> – The assets are related through an asset hierarchy. If you specify this relationship type, this asset relationship includes the <code>hierarchyInfo</code> object.</p> </li> </ul>'
+      description: Contains information about assets that are related to one another.
+    AssetRelationshipSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/AssetRelationshipSummary'
+    AssetRelationshipType:
+      type: string
+      enum:
+        - HIERARCHY
     AssetState:
       type: string
       enum:
@@ -6044,7 +6276,7 @@ components:
     CapabilityConfiguration:
       type: string
       minLength: 1
-      maxLength: 204800
+      maxLength: 104857600
     CapabilityNamespace:
       type: string
       pattern: '^[a-zA-Z]+:[a-zA-Z]+:[0-9]+$'
@@ -6056,6 +6288,60 @@ components:
         - IN_SYNC
         - OUT_OF_SYNC
         - SYNC_FAILED
+    Property:
+      type: object
+      required:
+        - id
+        - name
+        - dataType
+      properties:
+        id:
+          allOf:
+            - $ref: '#/components/schemas/ID'
+            - description: The ID of the asset property.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the property.
+        alias:
+          allOf:
+            - $ref: '#/components/schemas/PropertyAlias'
+            - description: 'The property alias that identifies the property, such as an OPC-UA server data stream path (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html">Mapping industrial data streams to asset properties</a> in the <i>AWS IoT SiteWise User Guide</i>.'
+        notification:
+          allOf:
+            - $ref: '#/components/schemas/PropertyNotification'
+            - description: 'The asset property''s notification topic and state. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.'
+        dataType:
+          allOf:
+            - $ref: '#/components/schemas/PropertyDataType'
+            - description: The property data type.
+        unit:
+          allOf:
+            - $ref: '#/components/schemas/PropertyUnit'
+            - description: The unit (such as <code>Newtons</code> or <code>RPM</code>) of the asset property.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/PropertyType'
+            - description: The property type (see <code>PropertyType</code>). A property contains one type.
+      description: Contains asset property information.
+    CompositeModelProperty:
+      type: object
+      required:
+        - name
+        - type
+        - assetProperty
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The name of the property.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/Name'
+            - description: The type of the composite model that defines this property.
+        assetProperty:
+          $ref: '#/components/schemas/Property'
+      description: Contains information about a composite model property on an asset.
     ErrorCode:
       type: string
       enum:
@@ -6070,12 +6356,12 @@ components:
         code:
           allOf:
             - $ref: '#/components/schemas/ErrorCode'
-            - description: <p/>
+            - description: The error code.
         message:
           allOf:
             - $ref: '#/components/schemas/ErrorMessage'
-            - description: <p/>
-      description: <p/>
+            - description: The error message.
+      description: Contains the details of an AWS IoT SiteWise configuration error.
     ConfigurationState:
       type: string
       enum:
@@ -6090,12 +6376,12 @@ components:
         state:
           allOf:
             - $ref: '#/components/schemas/ConfigurationState'
-            - description: <p/>
+            - description: The current state of the configuration.
         error:
           allOf:
             - $ref: '#/components/schemas/ConfigurationErrorDetails'
-            - description: <p/>
-      description: <p/>
+            - description: 'Contains associated error information, if any.'
+      description: Contains current status information for the configuration.
     TagMap:
       type: object
       minProperties: 1
@@ -6152,6 +6438,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssetModelHierarchyDefinitions'
             - description: '<p>The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>You can specify up to 10 hierarchies per asset model. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>'
+        assetModelCompositeModels:
+          allOf:
+            - $ref: '#/components/schemas/AssetModelCompositeModelDefinitions'
+            - description: The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties. Each composite model has a type that defines the properties that the composite model supports. Use composite asset models to define alarms on this asset model.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
@@ -6293,7 +6583,7 @@ components:
         portalAuthMode:
           allOf:
             - $ref: '#/components/schemas/AuthMode'
-            - description: '<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. IAM users must have the <code>iotsitewise:CreatePresignedPortalUrl</code> permission to sign in to the portal. This option is only available in the China Regions.</p> </li> </ul> <p>You can''t change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>'
+            - description: '<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. This option is only available in the China Regions.</p> </li> </ul> <p>You can''t change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>'
     Url:
       type: string
       pattern: '^(http|https)\://\S+'
@@ -6318,14 +6608,6 @@ components:
       pattern: '^[!-~]*'
       minLength: 1
       maxLength: 64
-    SessionDurationSeconds:
-      type: integer
-      minimum: 900
-      maximum: 43200
-    CreatePresignedPortalUrlRequest:
-      type: object
-      title: CreatePresignedPortalUrlRequest
-      properties: {}
     CreateProjectRequest:
       type: object
       required:
@@ -6424,42 +6706,6 @@ components:
       type: object
       title: DescribeAssetPropertyRequest
       properties: {}
-    Property:
-      type: object
-      required:
-        - id
-        - name
-        - dataType
-      properties:
-        id:
-          allOf:
-            - $ref: '#/components/schemas/ID'
-            - description: The ID of the asset property.
-        name:
-          allOf:
-            - $ref: '#/components/schemas/Name'
-            - description: The name of the property.
-        alias:
-          allOf:
-            - $ref: '#/components/schemas/PropertyAlias'
-            - description: 'The property alias that identifies the property, such as an OPC-UA server data stream path (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html">Mapping industrial data streams to asset properties</a> in the <i>AWS IoT SiteWise User Guide</i>.'
-        notification:
-          allOf:
-            - $ref: '#/components/schemas/PropertyNotification'
-            - description: 'The asset property''s notification topic and state. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html">UpdateAssetProperty</a>.'
-        dataType:
-          allOf:
-            - $ref: '#/components/schemas/PropertyDataType'
-            - description: The property data type.
-        unit:
-          allOf:
-            - $ref: '#/components/schemas/PropertyUnit'
-            - description: The unit (such as <code>Newtons</code> or <code>RPM</code>) of the asset property.
-        type:
-          allOf:
-            - $ref: '#/components/schemas/PropertyType'
-            - description: The property type (see <code>PropertyType</code>). A property contains one type.
-      description: Contains asset property information.
     DescribeAssetRequest:
       type: object
       title: DescribeAssetRequest
@@ -6720,6 +6966,14 @@ components:
       type: object
       title: ListAssetModelsRequest
       properties: {}
+    TraversalType:
+      type: string
+      enum:
+        - PATH_TO_ROOT
+    ListAssetRelationshipsRequest:
+      type: object
+      title: ListAssetRelationshipsRequest
+      properties: {}
     ListAssetsFilter:
       type: string
       enum:
@@ -6872,7 +7126,7 @@ components:
         startUrl:
           allOf:
             - $ref: '#/components/schemas/Url'
-            - description: 'The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the <a href="https://docs.aws.amazon.com/AWS IoT SiteWise API ReferenceAPI_CreatePresignedPortalUrl.html">CreatePresignedPortalUrl</a> operation to create a URL that you can use to access the portal.'
+            - description: 'The URL for the AWS IoT SiteWise Monitor portal. You can use this URL to access portals that use AWS SSO for authentication. For portals that use IAM for authentication, you must use the AWS IoT SiteWise console to get a URL that you can use to access the portal.'
         creationDate:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -6947,8 +7201,6 @@ components:
     PropertyValueStringValue:
       type: string
       pattern: '[^\u0000-\u001F\u007F]+'
-      minLength: 1
-      maxLength: 1024
     PutDefaultEncryptionConfigurationRequest:
       type: object
       required:
@@ -7043,6 +7295,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AssetModelHierarchies'
             - description: '<p>The updated hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html">Asset hierarchies</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>You can specify up to 10 hierarchies per asset model. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>'
+        assetModelCompositeModels:
+          allOf:
+            - $ref: '#/components/schemas/AssetModelCompositeModels'
+            - description: The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties. Each composite model has a type that defines the properties that the composite model supports. Use composite asset models to define alarms on this asset model.
         clientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'

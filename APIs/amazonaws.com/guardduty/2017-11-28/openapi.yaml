@@ -117,7 +117,7 @@ paths:
   '/detector/{detectorId}/master':
     post:
       operationId: AcceptInvitation
-      description: Accepts the invitation to be monitored by a master GuardDuty account.
+      description: Accepts the invitation to be monitored by a GuardDuty administrator account.
       responses:
         '200':
           description: Success
@@ -157,10 +157,10 @@ paths:
                 - invitationId
               properties:
                 masterId:
-                  description: The account ID of the master GuardDuty account whose invitation you're accepting.
+                  description: The account ID of the GuardDuty administrator account whose invitation you're accepting.
                   type: string
                 invitationId:
-                  description: The value that is used to validate the master account to the member account.
+                  description: The value that is used to validate the administrator account to the member account.
                   type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -172,7 +172,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetMasterAccount
-      description: Provides the details for the GuardDuty master account associated with the current GuardDuty member account.
+      description: Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
       responses:
         '200':
           description: Success
@@ -204,7 +204,7 @@ paths:
   '/detector/{detectorId}/findings/archive':
     post:
       operationId: ArchiveFindings
-      description: <p>Archives GuardDuty findings that are specified by the list of finding IDs.</p> <note> <p>Only the master account can archive findings. Member accounts don't have permission to archive findings from their accounts.</p> </note>
+      description: <p>Archives GuardDuty findings that are specified by the list of finding IDs.</p> <note> <p>Only the administrator account can archive findings. Member accounts don't have permission to archive findings from their accounts.</p> </note>
       responses:
         '200':
           description: Success
@@ -299,7 +299,7 @@ paths:
                   minLength: 0
                   maxLength: 64
                 findingPublishingFrequency:
-                  description: An enum value that specifies how frequently updated findings are exported.
+                  description: A value that specifies how frequently updated findings are exported.
                   type: string
                   enum:
                     - FIFTEEN_MINUTES
@@ -406,7 +406,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty account that you want to create a filter for.
+          description: The ID of the detector belonging to the GuardDuty account that you want to create a filter for.
           schema:
             type: string
             minLength: 1
@@ -422,7 +422,7 @@ paths:
                 - findingCriteria
               properties:
                 name:
-                  description: The name of the filter.
+                  description: 'The name of the filter. Minimum length of 3. Maximum length of 64. Valid characters include alphanumeric characters, dot (.), underscore (_), and dash (-). Spaces are not allowed.'
                   type: string
                   minLength: 3
                   maxLength: 64
@@ -534,7 +534,7 @@ paths:
   '/detector/{detectorId}/ipset':
     post:
       operationId: CreateIPSet
-      description: 'Creates a new IPSet, which is called a trusted IP list in the console user interface. An IPSet is a list of IP addresses that are trusted for secure communication with AWS infrastructure and applications. GuardDuty doesn''t generate findings for IP addresses that are included in IPSets. Only users from the master account can use this operation.'
+      description: 'Creates a new IPSet, which is called a trusted IP list in the console user interface. An IPSet is a list of IP addresses that are trusted for secure communication with AWS infrastructure and applications. GuardDuty doesn''t generate findings for IP addresses that are included in IPSets. Only users from the administrator account can use this operation.'
       responses:
         '200':
           description: Success
@@ -622,7 +622,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListIPSets
-      description: 'Lists the IPSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the IPSets returned are the IPSets from the associated master account.'
+      description: 'Lists the IPSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the IPSets returned are the IPSets from the associated administrator account.'
       responses:
         '200':
           description: Success
@@ -680,7 +680,7 @@ paths:
   '/detector/{detectorId}/member':
     post:
       operationId: CreateMembers
-      description: '<p>Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization.</p> <p>When using <code>Create Members</code> as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization master account, which must enable GuardDuty prior to being added as a member.</p> <p>If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html"> <code>Invite Members</code> </a>.</p>'
+      description: '<p>Creates member accounts of the current AWS account by specifying a list of AWS account IDs. This step is a prerequisite for managing the associated member accounts either by invitation or through an organization.</p> <p>When using <code>Create Members</code> as an organizations delegated administrator this action will enable GuardDuty in the added member accounts, with the exception of the organization delegated administrator account, which must enable GuardDuty prior to being added as a member.</p> <p>If you are adding accounts by invitation use this action after GuardDuty has been enabled in potential member accounts and before using <a href="https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html"> <code>Invite Members</code> </a>.</p>'
       responses:
         '200':
           description: Success
@@ -719,7 +719,7 @@ paths:
                 - accountDetails
               properties:
                 accountDetails:
-                  description: A list of account ID and email address pairs of the accounts that you want to associate with the master GuardDuty account.
+                  description: A list of account ID and email address pairs of the accounts that you want to associate with the GuardDuty administrator account.
                   type: array
                   items:
                     $ref: '#/components/schemas/AccountDetail'
@@ -735,7 +735,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMembers
-      description: Lists details about all member accounts for the current GuardDuty master account.
+      description: Lists details about all member accounts for the current GuardDuty administrator account.
       responses:
         '200':
           description: Success
@@ -988,7 +988,7 @@ paths:
   '/detector/{detectorId}/threatintelset':
     post:
       operationId: CreateThreatIntelSet
-      description: Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only users of the master account can use this operation.
+      description: Creates a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets. Only users of the administrator account can use this operation.
       responses:
         '200':
           description: Success
@@ -1076,7 +1076,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListThreatIntelSets
-      description: 'Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the ThreatIntelSets associated with the master account are returned.'
+      description: 'Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID. If you use this operation from a member account, the ThreatIntelSets associated with the administrator account are returned.'
       responses:
         '200':
           description: Success
@@ -1654,7 +1654,7 @@ paths:
   '/detector/{detectorId}/member/delete':
     post:
       operationId: DeleteMembers
-      description: Deletes GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+      description: Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
       responses:
         '200':
           description: Success
@@ -1983,7 +1983,7 @@ paths:
                   minLength: 1
                   maxLength: 300
                 location:
-                  description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+                  description: The updated URI of the file that contains the ThreateIntelSet.
                   type: string
                   minLength: 1
                   maxLength: 300
@@ -2130,7 +2130,7 @@ paths:
   '/detector/{detectorId}/master/disassociate':
     post:
       operationId: DisassociateFromMasterAccount
-      description: Disassociates the current GuardDuty member account from its master account.
+      description: Disassociates the current GuardDuty member account from its administrator account.
       responses:
         '200':
           description: Success
@@ -2170,7 +2170,7 @@ paths:
   '/detector/{detectorId}/member/disassociate':
     post:
       operationId: DisassociateMembers
-      description: Disassociates GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+      description: Disassociates GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
       responses:
         '200':
           description: Success
@@ -2194,7 +2194,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the master account.
+          description: The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the administrator account.
           schema:
             type: string
             minLength: 1
@@ -2209,7 +2209,7 @@ paths:
                 - accountIds
               properties:
                 accountIds:
-                  description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from the master account.
+                  description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from the administrator account.
                   type: array
                   items:
                     $ref: '#/components/schemas/AccountId'
@@ -2464,7 +2464,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The detector ID for the master account.
+          description: The detector ID for the administrator account.
           schema:
             type: string
             minLength: 1
@@ -2496,7 +2496,7 @@ paths:
   '/detector/{detectorId}/member/get':
     post:
       operationId: GetMembers
-      description: Retrieves GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
+      description: Retrieves GuardDuty member accounts (of the current GuardDuty administrator account) specified by the account IDs.
       responses:
         '200':
           description: Success
@@ -2655,7 +2655,7 @@ paths:
   '/detector/{detectorId}/member/invite':
     post:
       operationId: InviteMembers
-      description: 'Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty, and allow the current AWS account to view and manage these accounts'' GuardDuty findings on their behalf as the master account.'
+      description: 'Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty, and allow the current AWS account to view and manage these accounts'' findings on their behalf as the GuardDuty administrator account.'
       responses:
         '200':
           description: Success
@@ -3035,7 +3035,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector of the GuardDuty master account associated with the member accounts to monitor.
+          description: The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.
           schema:
             type: string
             minLength: 1
@@ -3091,7 +3091,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The unique ID of the detector associated with the GuardDuty master account that is monitoring member accounts.
+          description: The unique ID of the detector associated with the GuardDuty administrator account that is monitoring member accounts.
           schema:
             type: string
             minLength: 1
@@ -3318,7 +3318,7 @@ paths:
         - name: detectorId
           in: path
           required: true
-          description: The detector ID of the master account.
+          description: The detector ID of the administrator account.
           schema:
             type: string
             minLength: 1
@@ -3601,13 +3601,13 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - xml:
                 name: memberAccountLimitReached
-              description: Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator master account.
+              description: Indicates whether the maximum number of allowed member accounts are already associated with the delegated administrator account for your organization.
         DataSources:
           allOf:
             - $ref: '#/components/schemas/OrganizationDataSourceConfigurationsResult'
             - xml:
                 name: dataSources
-              description: An object that describes which data sources are enabled automatically for member accounts.
+              description: Describes which data sources are enabled automatically for member accounts.
     DescribePublishingDestinationResponse:
       type: object
       required:
@@ -3708,7 +3708,7 @@ components:
             - $ref: '#/components/schemas/DataSourceConfigurationsResult'
             - xml:
                 name: dataSources
-              description: An object that describes which data sources are enabled for the detector.
+              description: Describes which data sources are enabled for the detector.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -3846,7 +3846,7 @@ components:
             - $ref: '#/components/schemas/Master'
             - xml:
                 name: master
-              description: The master account details.
+              description: The administrator account details.
     GetMemberDetectorsResponse:
       type: object
       required:
@@ -4067,7 +4067,7 @@ components:
             - $ref: '#/components/schemas/AdminAccounts'
             - xml:
                 name: adminAccounts
-              description: An AdminAccounts object that includes a list of accounts configured as GuardDuty delegated administrators.
+              description: A list of accounts configured as GuardDuty delegated administrators.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -4221,13 +4221,13 @@ components:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: masterId
-              description: The account ID of the master GuardDuty account whose invitation you're accepting.
+              description: The account ID of the GuardDuty administrator account whose invitation you're accepting.
         InvitationId:
           allOf:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: invitationId
-              description: The value that is used to validate the master account to the member account.
+              description: The value that is used to validate the administrator account to the member account.
     Boolean:
       type: boolean
     AccessControlList:
@@ -4797,13 +4797,13 @@ components:
             - $ref: '#/components/schemas/FindingPublishingFrequency'
             - xml:
                 name: findingPublishingFrequency
-              description: An enum value that specifies how frequently updated findings are exported.
+              description: A value that specifies how frequently updated findings are exported.
         DataSources:
           allOf:
             - $ref: '#/components/schemas/DataSourceConfigurations'
             - xml:
                 name: dataSources
-              description: An object that describes which data sources will be enabled for the detector.
+              description: Describes which data sources will be enabled for the detector.
         Tags:
           allOf:
             - $ref: '#/components/schemas/TagMap'
@@ -4851,7 +4851,7 @@ components:
             - $ref: '#/components/schemas/FilterName'
             - xml:
                 name: name
-              description: The name of the filter.
+              description: 'The name of the filter. Minimum length of 3. Maximum length of 64. Valid characters include alphanumeric characters, dot (.), underscore (_), and dash (-). Spaces are not allowed.'
         Description:
           allOf:
             - $ref: '#/components/schemas/FilterDescription'
@@ -4875,7 +4875,7 @@ components:
             - $ref: '#/components/schemas/FindingCriteria'
             - xml:
                 name: findingCriteria
-              description: '<p>Represents the criteria to be used in the filter for querying findings.</p> <p>You can only use the following attributes to query findings:</p> <ul> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to TRUE, only archived findings are listed. When it''s set to FALSE, only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.</p> </li> </ul>'
+              description: '<p>Represents the criteria to be used in the filter for querying findings.</p> <p>You can only use the following attributes to query findings:</p> <ul> <li> <p>accountId</p> </li> <li> <p>region</p> </li> <li> <p>confidence</p> </li> <li> <p>id</p> </li> <li> <p>resource.accessKeyDetails.accessKeyId</p> </li> <li> <p>resource.accessKeyDetails.principalId</p> </li> <li> <p>resource.accessKeyDetails.userName</p> </li> <li> <p>resource.accessKeyDetails.userType</p> </li> <li> <p>resource.instanceDetails.iamInstanceProfile.id</p> </li> <li> <p>resource.instanceDetails.imageId</p> </li> <li> <p>resource.instanceDetails.instanceId</p> </li> <li> <p>resource.instanceDetails.outpostArn</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.ipv6Addresses</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.privateIpAddresses.privateIpAddress</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicDnsName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.publicIp</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.securityGroups.groupName</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.subnetId</p> </li> <li> <p>resource.instanceDetails.networkInterfaces.vpcId</p> </li> <li> <p>resource.instanceDetails.tags.key</p> </li> <li> <p>resource.instanceDetails.tags.value</p> </li> <li> <p>resource.resourceType</p> </li> <li> <p>service.action.actionType</p> </li> <li> <p>service.action.awsApiCallAction.api</p> </li> <li> <p>service.action.awsApiCallAction.callerType</p> </li> <li> <p>service.action.awsApiCallAction.errorCode</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.awsApiCallAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.awsApiCallAction.serviceName</p> </li> <li> <p>service.action.dnsRequestAction.domain</p> </li> <li> <p>service.action.networkConnectionAction.blocked</p> </li> <li> <p>service.action.networkConnectionAction.connectionDirection</p> </li> <li> <p>service.action.networkConnectionAction.localPortDetails.port</p> </li> <li> <p>service.action.networkConnectionAction.protocol</p> </li> <li> <p>service.action.networkConnectionAction.localIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.city.cityName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.country.countryName</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.ipAddressV4</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asn</p> </li> <li> <p>service.action.networkConnectionAction.remoteIpDetails.organization.asnOrg</p> </li> <li> <p>service.action.networkConnectionAction.remotePortDetails.port</p> </li> <li> <p>service.additionalInfo.threatListName</p> </li> <li> <p>service.archived</p> <p>When this attribute is set to TRUE, only archived findings are listed. When it''s set to FALSE, only unarchived findings are listed. When this attribute is not set, all existing findings are listed.</p> </li> <li> <p>service.resourceRole</p> </li> <li> <p>severity</p> </li> <li> <p>type</p> </li> <li> <p>updatedAt</p> <p>Type: ISO 8601 string format: YYYY-MM-DDTHH:MM:SS.SSSZ or YYYY-MM-DDTHH:MM:SSZ depending on whether the value contains milliseconds.</p> </li> </ul>'
         ClientToken:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
@@ -4963,7 +4963,7 @@ components:
             - $ref: '#/components/schemas/AccountDetails'
             - xml:
                 name: accountDetails
-              description: A list of account ID and email address pairs of the accounts that you want to associate with the master GuardDuty account.
+              description: A list of account ID and email address pairs of the accounts that you want to associate with the GuardDuty administrator account.
     UnprocessedAccounts:
       type: array
       items:
@@ -5336,7 +5336,7 @@ components:
             - $ref: '#/components/schemas/AccountIds'
             - xml:
                 name: accountIds
-              description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from the master account.
+              description: A list of account IDs of the GuardDuty member accounts that you want to disassociate from the administrator account.
     Double:
       type: number
       format: double
@@ -5702,26 +5702,26 @@ components:
             - $ref: '#/components/schemas/AccountId'
             - xml:
                 name: accountId
-              description: The ID of the account used as the master account.
+              description: The ID of the account used as the administrator account.
         InvitationId:
           allOf:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: invitationId
-              description: The value used to validate the master account to the member account.
+              description: The value used to validate the administrator account to the member account.
         RelationshipStatus:
           allOf:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: relationshipStatus
-              description: The status of the relationship between the master and member accounts.
+              description: The status of the relationship between the administrator and member accounts.
         InvitedAt:
           allOf:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: invitedAt
               description: The timestamp when the invitation was sent.
-      description: Contains information about the master account and invitation.
+      description: Contains information about the administrator account and invitation.
     GetMemberDetectorsRequest:
       type: object
       required:
@@ -6177,7 +6177,7 @@ components:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: masterId
-              description: The master account ID.
+              description: The administrator account ID.
         Email:
           allOf:
             - $ref: '#/components/schemas/Email'
@@ -6189,7 +6189,7 @@ components:
             - $ref: '#/components/schemas/String'
             - xml:
                 name: relationshipStatus
-              description: The status of the relationship between the member and the master.
+              description: The status of the relationship between the member and the administrator.
         InvitedAt:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -6685,7 +6685,7 @@ components:
             - $ref: '#/components/schemas/DataSourceConfigurations'
             - xml:
                 name: dataSources
-              description: An object that describes which data sources will be updated.
+              description: Describes which data sources will be updated.
     UpdateFilterRequest:
       type: object
       title: UpdateFilterRequest
@@ -6778,7 +6778,7 @@ components:
             - $ref: '#/components/schemas/DataSourceConfigurations'
             - xml:
                 name: dataSources
-              description: An object describes which data sources will be updated.
+              description: Describes which data sources will be updated.
     UpdateOrganizationConfigurationRequest:
       type: object
       required:
@@ -6796,7 +6796,7 @@ components:
             - $ref: '#/components/schemas/OrganizationDataSourceConfigurations'
             - xml:
                 name: dataSources
-              description: An object describes which data sources will be updated.
+              description: Describes which data sources will be updated.
     UpdatePublishingDestinationRequest:
       type: object
       title: UpdatePublishingDestinationRequest
@@ -6822,7 +6822,7 @@ components:
             - $ref: '#/components/schemas/Location'
             - xml:
                 name: location
-              description: 'The updated URI of the file that contains the ThreateIntelSet. For example: https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.'
+              description: The updated URI of the file that contains the ThreateIntelSet.
         Activate:
           allOf:
             - $ref: '#/components/schemas/Boolean'
