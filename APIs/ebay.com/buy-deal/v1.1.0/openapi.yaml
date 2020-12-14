@@ -30,7 +30,7 @@ info:
 paths:
   /deal_item:
     get:
-      description: "This method retrieves a paginated set of deal items. The result set contains all deal items associated with the specified search criteria and marketplace ID. Request headers This method uses the X-EBAY-C-ENDUSERCTX request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, Request headers in the Buying Integration Guide. Restrictions For a list of supported sites and other restrictions, see API Restrictions. eBay Partner Network: In order to be commissioned for your sales, you must use the URL returned in the itemAffiliateWebUrl field to forward your buyer to the ebay.com site."
+      description: "This method retrieves a paginated set of deal items. The result set contains all deal items associated with the specified search criteria and marketplace ID. Request headers This method uses the X-EBAY-C-ENDUSERCTX request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, Request headers in the Buying Integration Guide. Restrictions This method can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see API Restrictions. eBay Partner Network: In order to receive a commission for your sales, you must use the URL returned in the itemAffiliateWebUrl field to forward your buyer to the ebay.com site."
       operationId: getDealItems
       parameters:
         - description: The unique identifier of the eBay category for the search.
@@ -100,16 +100,18 @@ paths:
                 category: REQUEST
                 description: Invalid or unsupported filter 'commissionable' for the requested marketplace. Please refer to documentation.
                 domain: API_DEAL
-              "180009":
-                category: REQUEST
-                description: Not authorized. Please contact developer support for assistance.
-                domain: API_DEAL
               "180010":
                 category: REQUEST
                 description: Invalid filter for 'delivery_country'. Please refer to the documentation for supported values.
                 domain: API_DEAL
         "403":
           description: Forbidden
+          x-response-codes:
+            errors:
+              "180009":
+                category: REQUEST
+                description: Not authorized. Please contact developer support for assistance.
+                domain: API_DEAL
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -125,7 +127,7 @@ paths:
         - deal_item
   /event:
     get:
-      description: "This method returns paginated results containing all eBay events for the specified marketplace. Request headers This method uses the X-EBAY-C-ENDUSERCTX request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, Request headers in the Buying Integration Guide. Restrictions For a list of supported sites and other restrictions, see API Restrictions. eBay Partner Network: In order to be commissioned for your sales, you must use the URL returned in the itemAffiliateWebUrl field to forward your buyer to the ebay.com site."
+      description: "This method returns paginated results containing all eBay events for the specified marketplace. Request headers This method uses the X-EBAY-C-ENDUSERCTX request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, Request headers in the Buying Integration Guide. Restrictions This method can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see API Restrictions. eBay Partner Network: In order to receive a commission for your sales, you must use the URL returned in the itemAffiliateWebUrl field to forward your buyer to the ebay.com site."
       operationId: getEvents
       parameters:
         - description: "The maximum number of items, from the current result set, returned on a single page. Default: 20 Maximum Value: 100"
@@ -169,12 +171,14 @@ paths:
                 category: REQUEST
                 description: The specified offset is invalid.
                 domain: API_DEAL
+        "403":
+          description: Forbidden
+          x-response-codes:
+            errors:
               "180009":
                 category: REQUEST
                 description: Not authorized. Please contact developer support for assistance.
                 domain: API_DEAL
-        "403":
-          description: Forbidden
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -190,7 +194,7 @@ paths:
         - event
   "/event/{event_id}":
     get:
-      description: "This method retrieves the details for an eBay event. The result set contains detailed information associated with the specified event ID, such as applicable coupons, start and end dates, and event terms. Request headers This method uses the X-EBAY-C-ENDUSERCTX request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, Request headers in the Buying Integration Guide. Restrictions For a list of supported sites and other restrictions, see API Restrictions. eBay Partner Network: In order to be commissioned for your sales, you must use the URL returned in the itemAffiliateWebUrl field to forward your buyer to the ebay.com site."
+      description: "This method retrieves the details for an eBay event. The result set contains detailed information associated with the specified event ID, such as applicable coupons, start and end dates, and event terms. Request headers This method uses the X-EBAY-C-ENDUSERCTX request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, Request headers in the Buying Integration Guide. Restrictions This method can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see API Restrictions. eBay Partner Network: In order to receive a commission for your sales, you must use the URL returned in the itemAffiliateWebUrl field to forward your buyer to the ebay.com site."
       operationId: getEvent
       parameters:
         - description: A header used to specify the eBay marketplace ID.
@@ -214,20 +218,22 @@ paths:
           description: OK
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
+          x-response-codes:
+            errors:
+              "180009":
+                category: REQUEST
+                description: Not authorized. Please contact developer support for assistance.
+                domain: API_DEAL
+        "404":
+          description: Not Found
           x-response-codes:
             errors:
               "180004":
                 category: REQUEST
                 description: The event Id is invalid for the requested marketplace.
                 domain: API_DEAL
-              "180009":
-                category: REQUEST
-                description: Not authorized. Please contact developer support for assistance.
-                domain: API_DEAL
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -243,7 +249,7 @@ paths:
         - event
   /event_item:
     get:
-      description: "This method returns a paginated set of event items. The result set contains all event items associated with the specified search criteria and marketplace ID. Request headers This method uses the X-EBAY-C-ENDUSERCTX request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, Request headers in the Buying Integration Guide. Restrictions For a list of supported sites and other restrictions, see API Restrictions. eBay Partner Network: In order to be commissioned for your sales, you must use the URL returned in the itemAffiliateWebUrl field to forward your buyer to the ebay.com site."
+      description: "This method returns a paginated set of event items. The result set contains all event items associated with the specified search criteria and marketplace ID. Request headers This method uses the X-EBAY-C-ENDUSERCTX request header to support revenue sharing for eBay Partner Networks and to improve the accuracy of shipping and delivery time estimations. For details see, Request headers in the Buying Integration Guide. Restrictions This method can return a maximum of 10,000 items. For a list of supported sites and other restrictions, see API Restrictions. eBay Partner Network: In order to receive a commission for your sales, you must use the URL returned in the itemAffiliateWebUrl field to forward your buyer to the ebay.com site."
       operationId: getEventItems
       parameters:
         - description: "The unique identifier of the eBay category for the search. Maximum Value: 1"
@@ -321,16 +327,18 @@ paths:
                 category: REQUEST
                 description: Missing eventId. Please provide a valid event Id for the marketplace.
                 domain: API_DEAL
-              "180009":
-                category: REQUEST
-                description: Not authorized. Please contact developer support for assistance.
-                domain: API_DEAL
               "180010":
                 category: REQUEST
                 description: Invalid filter for 'delivery_country'. Please refer to the documentation for supported values.
                 domain: API_DEAL
         "403":
           description: Forbidden
+          x-response-codes:
+            errors:
+              "180009":
+                category: REQUEST
+                description: Not authorized. Please contact developer support for assistance.
+                domain: API_DEAL
         "500":
           description: Internal Server Error
           x-response-codes:

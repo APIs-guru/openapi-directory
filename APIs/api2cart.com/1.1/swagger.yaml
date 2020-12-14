@@ -1613,6 +1613,87 @@ paths:
         - api_key: []
       tags:
         - cart
+  /cart.catalog_price_rules.count.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get count of cart catalog price rules discounts.
+      operationId: CartCatalogPriceRulesCount
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            properties:
+              result:
+                properties:
+                  catalog_price_rules_count:
+                    type: string
+                type: object
+              return_code:
+                type: integer
+              return_message:
+                type: string
+            type: object
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
+  /cart.catalog_price_rules.list.json:
+    get:
+      consumes:
+        - application/x-www-form-urlencoded
+      description: Get cart catalog price rules discounts.
+      operationId: CartCatalogPriceRulesList
+      parameters:
+        - description: Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter)
+          in: query
+          name: page_cursor
+          required: false
+          type: string
+        - default: 0
+          description: This parameter sets the number from which you want to get entities
+          in: query
+          name: start
+          required: false
+          type: integer
+        - default: 10
+          description: This parameter sets the entity amount that has to be retrieved. Max allowed count=250
+          in: query
+          name: count
+          required: false
+          type: integer
+        - description: Retrieves  catalog_price_rules by ids
+          in: query
+          name: ids
+          required: false
+          type: string
+        - default: id,name,description
+          description: Set this parameter in order to choose which entity fields you want to retrieve
+          in: query
+          name: params
+          required: false
+          type: string
+        - description: Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all
+          in: query
+          name: exclude
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: successful operation
+          schema:
+            $ref: "#/definitions/Model_Response_Cart_Catalog_PriceRules_List"
+      security:
+        - api_key: []
+          store_key: []
+      tags:
+        - cart
   /cart.clear_cache.json:
     post:
       consumes:
@@ -7854,6 +7935,11 @@ paths:
           name: special_price
           required: false
           type: number
+        - description: Defines product's old price
+          in: query
+          name: old_price
+          required: false
+          type: number
         - description: Defines new product's cost price
           in: query
           name: cost_price
@@ -9043,6 +9129,68 @@ definitions:
           type: string
         type: array
     type: object
+  CatalogPriceRule:
+    properties:
+      actions:
+        items:
+          $ref: "#/definitions/CatalogPriceRule_Action"
+        type: array
+      additional_fields:
+        type: object
+      avail:
+        type: boolean
+      conditions:
+        items:
+          $ref: "#/definitions/Coupon_Condition"
+        type: array
+      created_time:
+        $ref: "#/definitions/A2CDateTime"
+      custom_fields:
+        type: object
+      date_end:
+        $ref: "#/definitions/A2CDateTime"
+      date_start:
+        $ref: "#/definitions/A2CDateTime"
+      description:
+        type: string
+      gid:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      short_description:
+        type: string
+      type:
+        type: string
+      usage_count:
+        type: number
+      uses_per_order_limit:
+        type: integer
+    type: object
+  CatalogPriceRule_Action:
+    properties:
+      additional_fields:
+        type: object
+      apply_to:
+        type: string
+      conditions:
+        items:
+          $ref: "#/definitions/Coupon_Condition"
+        type: array
+      currency_code:
+        type: string
+      custom_fields:
+        type: object
+      quantity:
+        type: number
+      scope:
+        type: string
+      type:
+        type: string
+      value:
+        type: number
+    type: object
   Category:
     properties:
       additional_fields:
@@ -9701,6 +9849,21 @@ definitions:
       iso_code:
         type: string
       name:
+        type: string
+    type: object
+  Model_Response_Cart_Catalog_PriceRules_List:
+    properties:
+      additional_fields:
+        type: object
+      custom_fields:
+        type: object
+      pagination:
+        $ref: "#/definitions/Pagination"
+      result:
+        $ref: "#/definitions/Response_Cart_CatalogPriceRules_List_Result"
+      return_code:
+        type: integer
+      return_message:
         type: string
     type: object
   Model_Response_Cart_Coupon_List:
@@ -11492,6 +11655,19 @@ definitions:
         type: number
       qty:
         type: number
+    type: object
+  Response_Cart_CatalogPriceRules_List_Result:
+    properties:
+      additional_fields:
+        type: object
+      catalog_price_rules:
+        items:
+          $ref: "#/definitions/CatalogPriceRule"
+        type: array
+      catalog_price_rules_count:
+        type: integer
+      custom_fields:
+        type: object
     type: object
   Response_Cart_Coupon_List_Result:
     properties:

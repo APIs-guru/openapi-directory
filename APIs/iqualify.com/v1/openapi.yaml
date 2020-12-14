@@ -24,7 +24,8 @@ info:
 
     api.iqualify.com. For instance: you can find your current offerings by
 
-    accessing the following URL:     https://api.iqualify.com/v1/offerings/current
+    accessing the following URL:
+        https://api.iqualify.com/v1/offerings/current
 
   title: iQualify Management API
   version: v1
@@ -567,8 +568,12 @@ paths:
           content:
             application/json:
               examples:
+                IncompatibleParametersError:
+                  $ref: "#/components/examples/IncompatibleParametersError"
                 InvalidContentError:
                   $ref: "#/components/examples/InvalidContentError"
+                MissingInfoError:
+                  $ref: "#/components/examples/MissingInfoError"
                 SchemaFormatError:
                   $ref: "#/components/examples/SchemaFormatError"
                 SchemaRequiredError:
@@ -774,6 +779,10 @@ paths:
           content:
             application/json:
               examples:
+                IncompatibleParametersError:
+                  $ref: "#/components/examples/IncompatibleParametersError"
+                MissingInfoError:
+                  $ref: "#/components/examples/MissingInfoError"
                 ObjectExistsError:
                   $ref: "#/components/examples/ObjectExistsError"
                 SchemaFormatError:
@@ -2229,6 +2238,8 @@ paths:
           content:
             application/json:
               examples:
+                AssessmentNotSubmittedError:
+                  $ref: "#/components/examples/AssessmentNotSubmittedError"
                 ObjectInvalidPropertyError:
                   $ref: "#/components/examples/ObjectInvalidPropertyError"
                 SchemaEmailError:
@@ -2818,11 +2829,21 @@ components:
       value:
         details: invalid $filter parameter.
         name: ApiValidationError
+    AssessmentNotSubmittedError:
+      summary: the specified user has not submitted an assessment
+      value:
+        details: The user alex.doe@test.te has not submitted assessment as1.
+        name: AssessmentNotSubmittedError
     ContentDoNotMatchError:
       summary: The specified content needs to be the same in order to perform the requested operation.
       value:
         details: contentId needs to be the same in order to perform the requested operation.
         name: ContentDoNotMatchError
+    IncompatibleParametersError:
+      summary: Two properties in the request contains incompatible values with each other
+      value:
+        details: A cannot be B when C is D
+        name: IncompatibleParametersError
     InvalidContentError:
       summary: You need to specify content_id or rootContentId.
       value:
@@ -2883,6 +2904,11 @@ components:
       value:
         details: The content badcontentId was not found.
         name: ObjectNotFoundError
+    OfferingIncompatibleDatesError:
+      summary: The specified offering has relative dates enabled. Absolute task dates can not be set.
+      value:
+        details: The specified offering has relative dates enabled. Absolute task dates can not be set.
+        name: OfferingIncompatibleDatesError
     SchemaAdditionalPropertiesError:
       summary: The request body should not have extra properties
       value:
@@ -3721,6 +3747,8 @@ components:
         end:
           format: date-time
           type: string
+        hasEarlyCloseOff:
+          type: boolean
         identifier:
           type: string
         isReadonly:
@@ -3753,6 +3781,9 @@ components:
         trailerVideoUrl:
           minLength: 1
           type: string
+        useRelativeDates:
+          default: false
+          type: boolean
       type: object
     OfferingActivitiesResponse:
       properties:
@@ -3801,6 +3832,8 @@ components:
           type: string
         enrollmentLimit:
           type: number
+        hasEarlyCloseOff:
+          type: boolean
         id:
           type: string
         identifier:
@@ -3824,6 +3857,9 @@ components:
         trailerVideoUrl:
           minLength: 1
           type: string
+        useRelativeDates:
+          default: false
+          type: boolean
       type: object
     OfferingProgressRow:
       properties:
@@ -3863,6 +3899,8 @@ components:
         end:
           format: date-time
           type: string
+        hasEarlyCloseOff:
+          type: boolean
         identifier:
           type: string
         isReadonly:
@@ -3893,6 +3931,9 @@ components:
         trailerVideoUrl:
           minLength: 1
           type: string
+        useRelativeDates:
+          default: false
+          type: boolean
       required:
         - start
         - end
@@ -3918,6 +3959,8 @@ components:
           type: string
         enrollmentLimit:
           type: number
+        hasEarlyCloseOff:
+          type: boolean
         id:
           type: string
         identifier:

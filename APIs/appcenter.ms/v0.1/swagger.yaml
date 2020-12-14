@@ -20703,6 +20703,7 @@ paths:
         - distribute
   "/v0.1/apps/{owner_name}/{app_name}/release_uploads":
     post:
+      deprecated: true
       description: Begins the upload process for a new release for the specified application.
       operationId: releaseUploads_create
       parameters:
@@ -20764,6 +20765,7 @@ paths:
         - distribute
   "/v0.1/apps/{owner_name}/{app_name}/release_uploads/{upload_id}":
     patch:
+      deprecated: true
       description: Commits or aborts the upload process for a release for the specified application
       operationId: releaseUploads_complete
       parameters:

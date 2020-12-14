@@ -316,10 +316,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "160002":
-                category: REQUEST
-                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
-                domain: API_FEED
               "160004":
                 category: REQUEST
                 description: You must submit either a 'feed_type' or 'schedule_id'.
@@ -366,6 +362,12 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+          x-response-codes:
+            errors:
+              "160002":
+                category: REQUEST
+                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
+                domain: API_FEED
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -404,10 +406,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "160002":
-                category: REQUEST
-                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
-                domain: API_FEED
               "160017":
                 category: REQUEST
                 description: The 'feedType' is missing or invalid.
@@ -420,10 +418,6 @@ paths:
                 category: REQUEST
                 description: The 'filterCriteria' is invalid. {additionalInfo}
                 domain: API_FEED
-              "160022":
-                category: REQUEST
-                description: You are not allowed to access this resource. Contact eBay Developer Technical Support for assistance.
-                domain: API_FEED
               "160027":
                 category: REQUEST
                 description: The X-EBAY-C-MARKETPLACE-ID header is missing or invalid.
@@ -434,6 +428,16 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+          x-response-codes:
+            errors:
+              "160002":
+                category: REQUEST
+                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
+                domain: API_FEED
+              "160022":
+                category: REQUEST
+                description: You are not allowed to access this resource. Contact eBay Developer Technical Support for assistance.
+                domain: API_FEED
         "409":
           description: Conflict
           x-response-codes:
@@ -479,20 +483,22 @@ paths:
           description: Success
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
           x-response-codes:
             errors:
               "160002":
                 category: REQUEST
                 description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
                 domain: API_FEED
+        "404":
+          description: Not Found
+          x-response-codes:
+            errors:
               "160003":
                 category: REQUEST
                 description: Task {taskID} does not exist.
                 domain: API_FEED
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -540,10 +546,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "160002":
-                category: REQUEST
-                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
-                domain: API_FEED
               "160012":
                 category: REQUEST
                 description: The 'limit' value must be greater than zero and less than or equal to 500.
@@ -562,6 +564,12 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+          x-response-codes:
+            errors:
+              "160002":
+                category: REQUEST
+                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
+                domain: API_FEED
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -606,17 +614,9 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "160002":
-                category: REQUEST
-                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
-                domain: API_FEED
               "160017":
                 category: REQUEST
                 description: The 'feedType' is missing or invalid.
-                domain: API_FEED
-              "160022":
-                category: REQUEST
-                description: You are not allowed to access this resource. Contact eBay Developer Technical Support for assistance.
                 domain: API_FEED
               "160032":
                 category: REQUEST
@@ -640,6 +640,16 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+          x-response-codes:
+            errors:
+              "160002":
+                category: REQUEST
+                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
+                domain: API_FEED
+              "160022":
+                category: REQUEST
+                description: You are not allowed to access this resource. Contact eBay Developer Technical Support for assistance.
+                domain: API_FEED
         "409":
           description: Conflict
           x-response-codes:
@@ -689,14 +699,14 @@ paths:
           description: No Content
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
           x-response-codes:
             errors:
               "160038":
                 category: REQUEST
                 description: The schedule id {schedule_id} does not exist.
                 domain: API_FEED
-        "404":
-          description: Not Found
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -733,20 +743,22 @@ paths:
           description: Success
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
           x-response-codes:
             errors:
               "160002":
                 category: REQUEST
                 description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
                 domain: API_FEED
+        "404":
+          description: Not Found
+          x-response-codes:
+            errors:
               "160038":
                 category: REQUEST
                 description: The schedule id {schedule_id} does not exist.
                 domain: API_FEED
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -789,10 +801,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "160002":
-                category: REQUEST
-                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
-                domain: API_FEED
               "160034":
                 category: REQUEST
                 description: The '{fieldName}' is invalid, missing, or not allowed.
@@ -805,14 +813,22 @@ paths:
                 category: REQUEST
                 description: The 'scheduleEndDate' is before 'scheduleStartDate'.
                 domain: API_FEED
+        "403":
+          description: Forbidden
+          x-response-codes:
+            errors:
+              "160002":
+                category: REQUEST
+                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
+                domain: API_FEED
+        "404":
+          description: Not Found
+          x-response-codes:
+            errors:
               "160038":
                 category: REQUEST
                 description: The schedule id {schedule_id} does not exist.
                 domain: API_FEED
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
         "409":
           description: Conflict
           x-response-codes:
@@ -863,12 +879,18 @@ paths:
                 type: string
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
           x-response-codes:
             errors:
               "160002":
                 category: REQUEST
                 description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
                 domain: API_FEED
+        "404":
+          description: Not Found
+          x-response-codes:
+            errors:
               "160021":
                 category: REQUEST
                 description: No file found for 'schedule_id' {scheduleID}.
@@ -877,10 +899,6 @@ paths:
                 category: REQUEST
                 description: The schedule id {schedule_id} does not exist.
                 domain: API_FEED
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -985,14 +1003,14 @@ paths:
           description: Success
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
           x-response-codes:
             errors:
               "160039":
                 category: REQUEST
                 description: The schedule template id {schedule_template_id} does not exist. Please provide a valid schedule template id as contained in the documentation or by calling the getScheduleTemplates method.
                 domain: API_FEED
-        "404":
-          description: Not Found
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -1062,10 +1080,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "160002":
-                category: REQUEST
-                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
-                domain: API_FEED
               "160004":
                 category: REQUEST
                 description: You must submit either a 'feed_type' or 'schedule_id'.
@@ -1116,6 +1130,12 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+          x-response-codes:
+            errors:
+              "160002":
+                category: REQUEST
+                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
+                domain: API_FEED
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -1158,10 +1178,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "160002":
-                category: REQUEST
-                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
-                domain: API_FEED
               "160017":
                 category: REQUEST
                 description: The 'feedType' is missing or invalid.
@@ -1169,10 +1185,6 @@ paths:
               "160018":
                 category: REQUEST
                 description: The 'schemaVersion' is invalid.
-                domain: API_FEED
-              "160022":
-                category: REQUEST
-                description: You are not allowed to access this resource. Contact eBay Developer Technical Support for assistance.
                 domain: API_FEED
               "160027":
                 category: REQUEST
@@ -1184,6 +1196,16 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+          x-response-codes:
+            errors:
+              "160002":
+                category: REQUEST
+                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
+                domain: API_FEED
+              "160022":
+                category: REQUEST
+                description: You are not allowed to access this resource. Contact eBay Developer Technical Support for assistance.
+                domain: API_FEED
         "409":
           description: Conflict
           x-response-codes:
@@ -1233,20 +1255,22 @@ paths:
           description: Success
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
           x-response-codes:
             errors:
               "160002":
                 category: REQUEST
                 description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
                 domain: API_FEED
+        "404":
+          description: Not Found
+          x-response-codes:
+            errors:
               "160003":
                 category: REQUEST
                 description: Task {taskID} does not exist.
                 domain: API_FEED
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -1289,12 +1313,18 @@ paths:
                 type: string
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
           x-response-codes:
             errors:
               "160002":
                 category: REQUEST
                 description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
                 domain: API_FEED
+        "404":
+          description: Not Found
+          x-response-codes:
+            errors:
               "160003":
                 category: REQUEST
                 description: Task {taskID} does not exist.
@@ -1307,10 +1337,6 @@ paths:
                 category: REQUEST
                 description: "The 'task_id' {taskID} is a download task, which in invalid for an input file. "
                 domain: API_FEED
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -1353,12 +1379,18 @@ paths:
                 type: string
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
           x-response-codes:
             errors:
               "160002":
                 category: REQUEST
                 description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
                 domain: API_FEED
+        "404":
+          description: Not Found
+          x-response-codes:
+            errors:
               "160003":
                 category: REQUEST
                 description: Task {taskID} does not exist.
@@ -1367,10 +1399,6 @@ paths:
                 category: REQUEST
                 description: No file found for task ID {taskID}.
                 domain: API_FEED
-        "403":
-          description: Forbidden
-        "404":
-          description: Not Found
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -1416,14 +1444,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "160002":
-                category: REQUEST
-                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
-                domain: API_FEED
-              "160003":
-                category: REQUEST
-                description: Task {taskID} does not exist.
-                domain: API_FEED
               "160020":
                 category: REQUEST
                 description: The format of the file to be uploaded is invalid. {additionalInfo}
@@ -1442,8 +1462,20 @@ paths:
                 domain: API_FEED
         "403":
           description: Forbidden
+          x-response-codes:
+            errors:
+              "160002":
+                category: REQUEST
+                description: The authentication scope {scope} is incorrect for 'feed_type' {feedType}. Refer to documentation for details about the scopes.
+                domain: API_FEED
         "404":
           description: Not Found
+          x-response-codes:
+            errors:
+              "160003":
+                category: REQUEST
+                description: Task {taskID} does not exist.
+                domain: API_FEED
         "500":
           description: Internal Server Error
           x-response-codes:

@@ -109,253 +109,11 @@ tags:
     name: TeXML Applications
   - description: Two factor authentication API
     name: Verify
+  - description: Webhooks operations
+    name: Webhooks
   - description: Wireless operations
     name: Wireless
 paths:
-  /2fa_profiles:
-    get:
-      description: Gets a paginated list of 2FA profiles.
-      operationId: list2FAProfiles
-      parameters:
-        - in: query
-          name: filter[name]
-          required: false
-          schema:
-            description: Optional filter for profile names.
-            title: Filter[Name]
-            type: string
-        - in: query
-          name: page[size]
-          required: false
-          schema:
-            default: 25
-            title: Page[Size]
-            type: integer
-        - in: query
-          name: page[number]
-          required: false
-          schema:
-            default: 1
-            title: Page[Number]
-            type: integer
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTwoFAProfilesResponse"
-          description: Expected 2FA profile response to a valid request.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: List all 2FA profiles
-      tags:
-        - Verify
-      x-latency-category: responsive
-    post:
-      description: Creates a new 2FA profile to associate verifications with.
-      operationId: create2FAProfile
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TwoFAProfileRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateTwoFAProfileResponse"
-          description: Expected 2FA profile response to a valid request.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Create a 2FA profile
-      tags:
-        - Verify
-      x-latency-category: responsive
-  "/2fa_profiles/{twofa_profile_id}":
-    delete:
-      operationId: delete2FAProfile
-      parameters:
-        - description: The identifier of the 2FA profile to delete.
-          in: path
-          name: twofa_profile_id
-          required: true
-          schema:
-            example: 12ade33a-21c0-473b-b055-b3c836e1c292
-            format: uuid
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/DeleteTwoFAProfileResponse"
-          description: Expected 2FA profile response to a valid request.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Delete a 2FA profile
-      tags:
-        - Verify
-      x-latency-category: responsive
-    get:
-      description: Gets a single 2FA profile.
-      operationId: retrieve2FAProfile
-      parameters:
-        - description: The identifier of the 2FA profile to retrieve.
-          in: path
-          name: twofa_profile_id
-          required: true
-          schema:
-            example: 12ade33a-21c0-473b-b055-b3c836e1c292
-            format: uuid
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateTwoFAProfileResponse"
-          description: Expected 2FA profile response to a valid request.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Retrieve a 2FA profile
-      tags:
-        - Verify
-      x-latency-category: responsive
-    put:
-      operationId: update2FAProfile
-      parameters:
-        - description: The identifier of the 2FA profile to update.
-          in: path
-          name: twofa_profile_id
-          required: true
-          schema:
-            example: 12ade33a-21c0-473b-b055-b3c836e1c292
-            format: uuid
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TwoFAProfileRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/UpdateTwoFAProfileResponse"
-          description: Expected 2FA profile response to a valid request.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Update a 2FA profile
-      tags:
-        - Verify
-      x-latency-category: responsive
-  /2fa_verifications:
-    post:
-      operationId: create2FAVerification
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TwoFAVerificationRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/CreateTwoFAVerificationResponse"
-          description: Expected 2FA verifications response to a valid request.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Create a 2FA verification
-      tags:
-        - Verify
-      x-latency-category: responsive
-  "/2fa_verifications/by_tn/{phone_number}":
-    get:
-      operationId: retrieve2FAVerificationByPhoneNumber
-      parameters:
-        - description: The phone number associated with the 2FA verification to retrieve.
-          in: path
-          name: phone_number
-          required: true
-          schema:
-            description: +E164 formatted phone number.
-            example: "+13035551234"
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTwoFAVerificationsResponse"
-          description: Expected 2FA verifications response to a valid request.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Retrieve a 2FA verification by phone number
-      tags:
-        - Verify
-      x-latency-category: responsive
-  "/2fa_verifications/by_tn/{phone_number}/actions/verify":
-    post:
-      operationId: verify2FAVerificationByPhoneNumber
-      parameters:
-        - description: The phone number associated with the 2FA verification being verified.
-          in: path
-          name: phone_number
-          required: true
-          schema:
-            description: +E164 formatted phone number.
-            example: "+13035551234"
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/TwoFAVerificationCodeRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TwoFAVerificationVerify"
-          description: Expected 2FA verify response to a valid request.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Submit a 2FA verification code
-      tags:
-        - Verify
-      x-latency-category: responsive
-  "/2fa_verifications/{verification_id}":
-    get:
-      operationId: retrieve2FAVerificationById
-      parameters:
-        - description: The identifier of the 2FA verification to retrieve.
-          in: path
-          name: verification_id
-          required: true
-          schema:
-            example: 12ade33a-21c0-473b-b055-b3c836e1c292
-            format: uuid
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/RetrieveTwoFAVerificationResponse"
-          description: Expected 2FA verifications response to a valid request.
-        default:
-          $ref: "#/components/responses/GenericErrorResponse"
-      summary: Retrieve a 2FA verification
-      tags:
-        - Verify
-      x-latency-category: responsive
   /actions/bulk/telephony_credentials:
     delete:
       description: Delete several credentials in bulk.
@@ -415,7 +173,7 @@ paths:
   /actions/network_preferences/sim_cards:
     put:
       description: >
-        This API allows dispatching the same operation described for the PUT sim_cards/:id/network_preferences API for multiple SIM cards at once.<br/><br/>
+        This API allows dispatching the same operation described for the PUT sim_cards/:sim_card_id/network_preferences API for multiple SIM cards at once.<br/><br/>
 
         Although, a SIM card network preference may fail individually under any validation triggered as a consequence of its state. For example, a SIM can't have an in-progress OTA update for applying a Network Preference, so they'll fail when requested in this API. In that scenario, the specific error will be present in the response along with the successful definitions in the "errors" response node.
       operationId: BulkSIMCardNetworkPreferences
@@ -1048,7 +806,7 @@ paths:
               responses:
                 "200":
                   description: The server must return an HTTP 200, otherwise we will reattempt delivery at the failover webhook URL.
-      description: >
+      description: >-
         Dial a number or SIP URI from a given connection. A successful response will include a `call_leg_id` which can be used to correlate the command with subsequent webhooks.
 
 
@@ -1061,11 +819,7 @@ paths:
 
         - `call.machine.detection.ended` if `answering_machine_detection` was requested
 
-        - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
-
-        - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
-
-        - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
+        - `call.machine.greeting.ended` if `answering_machine_detection` was set to `detect_beep`, `greeting_end` or `detect_words`
       operationId: callDial
       requestBody:
         content:
@@ -1745,6 +1499,64 @@ paths:
       tags:
         - Call Commands
       x-latency-category: interactive
+  "/calls/{call_control_id}/actions/record_pause":
+    post:
+      description: >
+        Pause recording the call. Recording can be resumed via Resume recording command.
+
+
+        **Expected Webhooks:**
+
+
+        There are no webhooks associated with this command.
+      operationId: callRecordPause
+      parameters:
+        - $ref: "#/components/parameters/CallControlId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PauseRecordingRequest"
+        description: Pause recording call request
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/CallControlCommandResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Record pause
+      tags:
+        - Call Commands
+      x-latency-category: interactive
+  "/calls/{call_control_id}/actions/record_resume":
+    post:
+      description: >
+        Resume recording the call.
+
+
+        **Expected Webhooks:**
+
+
+        There are no webhooks associated with this command.
+      operationId: callRecordResume
+      parameters:
+        - $ref: "#/components/parameters/CallControlId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResumeRecordingRequest"
+        description: Resume recording call request
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/CallControlCommandResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Record resume
+      tags:
+        - Call Commands
+      x-latency-category: interactive
   "/calls/{call_control_id}/actions/record_start":
     post:
       description: >
@@ -1813,6 +1625,76 @@ paths:
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Recording stop
+      tags:
+        - Call Commands
+      x-latency-category: interactive
+  "/calls/{call_control_id}/actions/refer":
+    post:
+      callbacks:
+        callReferCompleted:
+          "{$request.body#/webhook_url}":
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/CallReferCompletedEvent"
+                required: true
+              responses:
+                "200":
+                  description: The server must return an HTTP 200, otherwise we will reattempt delivery at the failover webhook URL.
+        callReferFailed:
+          "{$request.body#/webhook_url}":
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/CallReferFailedEvent"
+                required: true
+              responses:
+                "200":
+                  description: The server must return an HTTP 200, otherwise we will reattempt delivery at the failover webhook URL.
+        callReferStarted:
+          "{$request.body#/webhook_url}":
+            post:
+              requestBody:
+                content:
+                  application/json:
+                    schema:
+                      $ref: "#/components/schemas/CallReferStartedEvent"
+                required: true
+              responses:
+                "200":
+                  description: The server must return an HTTP 200, otherwise we will reattempt delivery at the failover webhook URL.
+      description: >
+        Initiate a SIP Refer on a Call Control call. You can initiate a SIP Refer at any point in the duration of a call.
+
+
+        **Expected Webhooks:**
+
+
+        - `call.refer.started`
+
+        - `call.refer.completed`
+
+        - `call.refer.failed`
+      operationId: callRefer
+      parameters:
+        - $ref: "#/components/parameters/CallControlId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReferRequest"
+        description: Refer request
+        required: true
+      responses:
+        "200":
+          $ref: "#/components/responses/CallControlCommandResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: SIP Refer a call
       tags:
         - Call Commands
       x-latency-category: interactive
@@ -1994,7 +1876,7 @@ paths:
               responses:
                 "200":
                   description: The server must return an HTTP 200, otherwise we will reattempt delivery at the failover webhook URL.
-      description: >
+      description: >-
         Transfer a call to a new destination. If the transfer is unsuccessful, a `call.hangup` webhook for the other call (Leg B) will be sent indicating that the transfer could not be completed. The original call will remain active and may be issued additional commands, potentially transfering the call to an alternate destination.
 
 
@@ -2009,11 +1891,7 @@ paths:
 
         - `call.machine.detection.ended` if `answering_machine_detection` was requested
 
-        - `call.machine.greeting.ended` if `answering_machine_detection` was requested to detect the end of machine greeting
-
-        - `call.machine.premium.detection.ended` if `answering_machine_detection=premium` was requested
-
-        - `call.machine.premium.greeting.ended` if `answering_machine_detection=premium` was requested and a beep was detected
+        - `call.machine.greeting.ended` if `answering_machine_detection` was set to `detect_beep`, `greeting_end` or `detect_words`
       operationId: callTransfer
       parameters:
         - $ref: "#/components/parameters/CallControlId"
@@ -5226,6 +5104,12 @@ paths:
             example: "9102160989215728032"
             format: int64
             type: string
+        - description: Filter numbers via the customer_reference set.
+          in: query
+          name: filter[customer_reference]
+          schema:
+            example: MY REF 001
+            type: string
         - description: Specifies the sort order for results. If not given, results are sorted by created_at in descending order.
           in: query
           name: sort
@@ -5435,6 +5319,11 @@ paths:
           required: false
           schema:
             example: test
+            type: string
+        - description: Filter numbers via the customer_reference set.
+          in: query
+          name: filter[customer_reference]
+          schema:
             type: string
         - description: Filter by usage_payment_method.
           in: query
@@ -6464,13 +6353,13 @@ paths:
       tags:
         - SIM Cards
       x-latency-category: background
-  "/sim_cards/{id}/network_preferences":
+  "/sim_cards/{sim_card_id}/network_preferences":
     delete:
       description: >
         This API asynchronously removes the custom-defined network preferences settings. After this operation is done the Telnyx default settings, the same applied for an unaltered SIM card, will be in place.
       operationId: SIMCardNetworkPreferencesDelete
       parameters:
-        - $ref: "#/components/parameters/ResourceId"
+        - $ref: "#/components/parameters/SIMCardId"
       responses:
         "202":
           $ref: "#/components/responses/DELETESIMCardNetworkPreferenceResponse"
@@ -6485,7 +6374,7 @@ paths:
         It returns the network preferences currently applied in the SIM card.
       operationId: SIMCardNetworkPreferencesGet
       parameters:
-        - $ref: "#/components/parameters/ResourceId"
+        - $ref: "#/components/parameters/SIMCardId"
         - $ref: "#/components/parameters/IncludeOTAUpdates"
       responses:
         "200":
@@ -6505,7 +6394,7 @@ paths:
         There can be multiple scenarios where an operator can be preferred over another, for example, when a specific mobile operator can provide better network latency or better pricing.
       operationId: SIMCardNetworkPreferencesPut
       parameters:
-        - $ref: "#/components/parameters/ResourceId"
+        - $ref: "#/components/parameters/SIMCardId"
       requestBody:
         content:
           application/json:
@@ -6523,6 +6412,54 @@ paths:
         default:
           $ref: "#/components/responses/GenericErrorResponse"
       summary: Set network preferences
+      tags:
+        - SIM Cards
+      x-latency-category: responsive
+  "/sim_cards/{sim_card_id}/public_ip":
+    delete:
+      description: >
+        This API asynchronously removes an existing public IP from a SIM card.
+      operationId: SIMCardPublicIPDelete
+      parameters:
+        - $ref: "#/components/parameters/SIMCardId"
+      responses:
+        "202":
+          $ref: "#/components/responses/SIMCardPublicIPResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Delete SIM card public IP
+      tags:
+        - SIM Cards
+      x-latency-category: responsive
+    get:
+      description: >
+        It returns the public IP requested for a SIM card.
+      operationId: SIMCardPublicIPGet
+      parameters:
+        - $ref: "#/components/parameters/SIMCardId"
+      responses:
+        "200":
+          $ref: "#/components/responses/SIMCardPublicIPResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Get SIM card public IP definition
+      tags:
+        - SIM Cards
+      x-latency-category: responsive
+    post:
+      description: >-
+        This API will asynchronously map a random public IP to a SIM card, making it reachable on the public internet. <br/><br/>
+         The request will return the resource as ""provisioning"" right away, and it'll eventually get ""provisioned"", meaning it completed the setup. <br/><br/>
+         Setting up a public IP will generate charges, and we won't be able to provide the IP if the account doesn't have a balance. In that case, this operation will succeed, but its status will change to failed eventually, and the resource will be updated with the associated status. The IP resource will need to be deleted and re-created with our DELETE and POST APIs in this scenario.
+      operationId: SIMCardPublicIPPost
+      parameters:
+        - $ref: "#/components/parameters/SIMCardId"
+      responses:
+        "202":
+          $ref: "#/components/responses/SIMCardPublicIPResponse"
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Set SIM card public IP
       tags:
         - SIM Cards
       x-latency-category: responsive
@@ -6836,6 +6773,351 @@ paths:
       summary: Update a TeXML Application
       tags:
         - TeXML Applications
+      x-latency-category: responsive
+  /verifications:
+    post:
+      operationId: createVerification
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerificationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateVerificationResponse"
+          description: Expected verifications response to a valid request.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Trigger a verification
+      tags:
+        - Verify
+      x-latency-category: responsive
+  "/verifications/by_phone_number/{phone_number}":
+    get:
+      operationId: retrieveVerificationByPhoneNumber
+      parameters:
+        - description: The phone number associated with the verification to retrieve.
+          in: path
+          name: phone_number
+          required: true
+          schema:
+            description: +E164 formatted phone number.
+            example: "+13035551234"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVerificationsResponse"
+          description: Expected verifications response to a valid request.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a verification by phone number
+      tags:
+        - Verify
+      x-latency-category: responsive
+  "/verifications/by_phone_number/{phone_number}/actions/verify":
+    post:
+      operationId: verifyVerificationByPhoneNumber
+      parameters:
+        - description: The phone number associated with the verification being verified.
+          in: path
+          name: phone_number
+          required: true
+          schema:
+            description: +E164 formatted phone number.
+            example: "+13035551234"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerificationCodeRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VerificationVerify"
+          description: Expected verify response to a valid request.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Submit a verification code
+      tags:
+        - Verify
+      x-latency-category: responsive
+  "/verifications/{verification_id}":
+    get:
+      operationId: retrieveVerificationById
+      parameters:
+        - description: The identifier of the verification to retrieve.
+          in: path
+          name: verification_id
+          required: true
+          schema:
+            example: 12ade33a-21c0-473b-b055-b3c836e1c292
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RetrieveVerificationResponse"
+          description: Expected verifications response to a valid request.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a verification
+      tags:
+        - Verify
+      x-latency-category: responsive
+  /verify_profiles:
+    get:
+      description: Gets a paginated list of Verify profiles.
+      operationId: listVerifyProfiles
+      parameters:
+        - in: query
+          name: filter[name]
+          required: false
+          schema:
+            description: Optional filter for profile names.
+            title: filter[name]
+            type: string
+        - in: query
+          name: page[size]
+          required: false
+          schema:
+            default: 25
+            title: page[size]
+            type: integer
+        - in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 1
+            title: page[number]
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListVerifyProfilesResponse"
+          description: Expected Verify profile response to a valid request.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: List all Verify profiles
+      tags:
+        - Verify
+      x-latency-category: responsive
+    post:
+      description: Creates a new Verify profile to associate verifications with.
+      operationId: createVerifyProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyProfileRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateVerifyProfileResponse"
+          description: Expected Verify profile response to a valid request.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Create a Verify profile
+      tags:
+        - Verify
+      x-latency-category: responsive
+  "/verify_profiles/{verify_profile_id}":
+    delete:
+      operationId: deleteVerifyProfile
+      parameters:
+        - description: The identifier of the Verify profile to delete.
+          in: path
+          name: verify_profile_id
+          required: true
+          schema:
+            example: 12ade33a-21c0-473b-b055-b3c836e1c292
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteVerifyProfileResponse"
+          description: Expected Verify profile response to a valid request.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Delete a Verify profile
+      tags:
+        - Verify
+      x-latency-category: responsive
+    get:
+      description: Gets a single Verify profile.
+      operationId: retrieveVerifyProfile
+      parameters:
+        - description: The identifier of the Verify profile to retrieve.
+          in: path
+          name: verify_profile_id
+          required: true
+          schema:
+            example: 12ade33a-21c0-473b-b055-b3c836e1c292
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateVerifyProfileResponse"
+          description: Expected Verify profile response to a valid request.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Retrieve a Verify profile
+      tags:
+        - Verify
+      x-latency-category: responsive
+    put:
+      operationId: updateVerifyProfile
+      parameters:
+        - description: The identifier of the Verify profile to update.
+          in: path
+          name: verify_profile_id
+          required: true
+          schema:
+            example: 12ade33a-21c0-473b-b055-b3c836e1c292
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyProfileRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateVerifyProfileResponse"
+          description: Expected Verify profile response to a valid request.
+        default:
+          $ref: "#/components/responses/GenericErrorResponse"
+      summary: Update a Verify profile
+      tags:
+        - Verify
+      x-latency-category: responsive
+  /webhook_deliveries:
+    get:
+      description: Lists webhook_deliveries for the authenticated user
+      operationId: getWebhookDeliveries
+      parameters:
+        - description: Return only webhook_deliveries matching the given `status`
+          in: query
+          name: filter[status][eq]
+          required: false
+          schema:
+            enum:
+              - delivered
+              - failed
+            example: delivered
+            type: string
+        - description: Return only webhook deliveries whose `webhook` component contains the given text
+          in: query
+          name: filter[webhook][contains]
+          required: false
+          schema:
+            example: call.initiated
+            type: string
+        - description: Return only webhook_deliveries whose `attempts` component contains the given text
+          in: query
+          name: filter[attempts][contains]
+          required: false
+          schema:
+            example: https://fallback.example.com/webhooks
+            type: string
+        - description: Return only webhook_deliveries whose delivery started later than or at given ISO 8601 datetime
+          in: query
+          name: filter[started_at][gte]
+          required: false
+          schema:
+            example: 2019-03-29T11:10:00Z
+            type: string
+        - description: Return only webhook_deliveries whose delivery started earlier than or at given ISO 8601 datetime
+          in: query
+          name: filter[started_at][lte]
+          required: false
+          schema:
+            example: 2019-03-29T11:10:00Z
+            type: string
+        - description: Return only webhook_deliveries whose delivery finished later than or at given ISO 8601 datetime
+          in: query
+          name: filter[finished_at][gte]
+          required: false
+          schema:
+            example: 2019-03-29T11:10:00Z
+            type: string
+        - description: Return only webhook_deliveries whose delivery finished earlier than or at given ISO 8601 datetime
+          in: query
+          name: filter[finished_at][lte]
+          required: false
+          schema:
+            example: 2019-03-29T11:10:00Z
+            type: string
+        - $ref: "#/components/parameters/PageNumber"
+        - $ref: "#/components/parameters/PageSize"
+      responses:
+        "200":
+          $ref: "#/components/responses/ListWebhookDeliveriesResponse"
+        "401":
+          description: Unauthorized
+        "422":
+          description: Unprocessable entity
+      summary: List webhook deliveries
+      tags:
+        - Webhooks
+      x-latency-category: responsive
+  "/webhook_deliveries/{id}":
+    get:
+      description: Provides webhook_delivery debug data, such as timestamps, delivery status and attempts.
+      operationId: getWebhookDelivery
+      parameters:
+        - description: Uniquely identifies the webhook_delivery.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: C9C0797E-901D-4349-A33C-C2C8F31A92C2
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    $ref: "#/components/schemas/webhook_delivery"
+                type: object
+          description: Webhook delivery record.
+        "401":
+          description: Unauthorized
+        "404":
+          description: WebhookDelivery not found
+      summary: Find webhook_delivery details by ID
+      tags:
+        - Webhooks
       x-latency-category: responsive
   /wireless/detail_records_reports:
     get:
@@ -7291,6 +7573,15 @@ components:
       description: Identifies the resource.
       in: path
       name: id
+      required: true
+      schema:
+        example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
+        format: uuid
+        type: string
+    SIMCardId:
+      description: Identifies a SIM card.
+      in: path
+      name: sim_card_id
       required: true
       schema:
         example: 6a09cdc3-8948-47f0-aa62-74ac943d6c58
@@ -8246,6 +8537,19 @@ components:
                 $ref: "#/components/schemas/PaginationMeta"
             type: object
       description: Successful response with multiple tags
+    ListWebhookDeliveriesResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                items:
+                  $ref: "#/components/schemas/webhook_delivery"
+                type: array
+              meta:
+                $ref: "#/components/schemas/PaginationMetaSimple"
+            type: object
+      description: A paginated array of webhook_delivery attempts
     MessageResponse:
       content:
         application/json:
@@ -8373,9 +8677,6 @@ components:
 
           * The first request for this API will return an empty mobile_operator_networks_preferences with an in-progress OTA update resource in the ota_updates node containing the exact sent parameters to indicate the operation progress. The value will be applied to the principal object when the OTA update finishes its processing, thus indicating the SIM card network preference current state. 
           * The subsequent requests will contain the current state, that is what's applied to the SIM card settings, and return the related OTA update in the ota_updates node.
-
-
-
 
 
           
@@ -8536,6 +8837,15 @@ components:
                 $ref: "#/components/schemas/SIMCardNetworkPreferenceWithOTAUpdates"
             type: object
       description: A successful network preferences definition response.
+    SIMCardPublicIPResponse:
+      content:
+        application/json:
+          schema:
+            properties:
+              data:
+                $ref: "#/components/schemas/SIMCardPublicIP"
+            type: object
+      description: Successful response
     SearchMobileOperatorNetworksResponse:
       content:
         application/json:
@@ -10384,6 +10694,247 @@ components:
           $ref: "#/components/schemas/CallRecordingSaved"
       title: Call Recording Saved Event
       type: object
+    CallReferCompleted:
+      example:
+        event_type: call.refer.completed
+        id: 4ce4366d-8d87-44be-a00b-942154e9c5f5
+        occurred_at: 2020-03-30T13:29:44.650000Z
+        payload:
+          call_control_id: v2:OycMASgvIjsGIAVEx8x3n9rYeKnUJx6a3V8VGhs5futnr17KZhujZA
+          call_leg_id: 817f7de8-728a-11ea-9ce6-02420a0f8969
+          call_session_id: 817f8c2a-728a-11ea-9cbe-02420a0f8969
+          client_state: aGF2ZSBhIG5pY2UgZGF5ID1d
+          connection_id: "1289082222292239760"
+          from: "+35319605860"
+          sip_notify_response: 200
+          to: "+13129457420"
+        record_type: event
+      properties:
+        event_type:
+          description: The type of event being delivered.
+          enum:
+            - call.refer.completed
+          example: call.refer.completed
+          type: string
+        id:
+          description: Identifies the type of resource.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+          format: uuid
+          type: string
+        occurred_at:
+          description: ISO 8601 datetime of when the event occurred.
+          example: 2018-02-02T22:25:27.521992Z
+          format: date-time
+          type: string
+        payload:
+          properties:
+            call_control_id:
+              description: Unique ID for controlling the call.
+              example: v2:OycMASgvIjsGIAVEx8x3n9rYeKnUJx6a3V8VGhs5futnr17KZhujZA
+              type: string
+            call_leg_id:
+              description: ID that is unique to the call and can be used to correlate webhook events.
+              example: 428c31b6-7af4-4bcb-b7f5-5013ef9657c1
+              type: string
+            call_session_id:
+              description: ID that is unique to the call session and can be used to correlate webhook events.
+              example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
+              type: string
+            client_state:
+              description: State received from a command.
+              example: aGF2ZSBhIG5pY2UgZGF5ID1d
+              type: string
+            connection_id:
+              description: Telnyx connection ID used in the call.
+              example: 7267xxxxxxxxxxxxxx
+              type: string
+            from:
+              description: Number or SIP URI placing the call.
+              example: "+35319605860"
+              type: string
+            sip_notify_response:
+              description: SIP NOTIFY event status for tracking the REFER attempt.
+              example: 200
+              type: integer
+            to:
+              description: Destination number or SIP URI of the call.
+              example: "+13129457420"
+              type: string
+          type: object
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - event
+          example: event
+          type: string
+      type: object
+    CallReferCompletedEvent:
+      properties:
+        data:
+          $ref: "#/components/schemas/CallReferCompleted"
+      title: Call Recording Saved Event
+      type: object
+    CallReferFailed:
+      example:
+        event_type: call.refer.failed
+        id: fbeb70e0-54eb-4e26-8d19-56b43e66f754
+        occurred_at: 2020-03-30T13:29:42.130013Z
+        payload:
+          call_control_id: v2:OycMASgvIjsGIAVEx8x3n9rYeKnUJx6a3V8VGhs5futnr17KZhujZA
+          call_leg_id: 817f7de8-728a-11ea-9ce6-02420a0f8969
+          call_session_id: 817f8c2a-728a-11ea-9cbe-02420a0f8969
+          client_state: aGF2ZSBhIG5pY2UgZGF5ID1d
+          connection_id: "1289082222292239760"
+          from: "+35319605860"
+          sip_notify_response: 603
+          to: "+13129457420"
+        record_type: event
+      properties:
+        event_type:
+          description: The type of event being delivered.
+          enum:
+            - call.refer.failed
+          example: call.refer.failed
+          type: string
+        id:
+          description: Identifies the type of resource.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+          format: uuid
+          type: string
+        occurred_at:
+          description: ISO 8601 datetime of when the event occurred.
+          example: 2018-02-02T22:25:27.521992Z
+          format: date-time
+          type: string
+        payload:
+          properties:
+            call_control_id:
+              description: Unique ID for controlling the call.
+              example: v2:OycMASgvIjsGIAVEx8x3n9rYeKnUJx6a3V8VGhs5futnr17KZhujZA
+              type: string
+            call_leg_id:
+              description: ID that is unique to the call and can be used to correlate webhook events.
+              example: 428c31b6-7af4-4bcb-b7f5-5013ef9657c1
+              type: string
+            call_session_id:
+              description: ID that is unique to the call session and can be used to correlate webhook events.
+              example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
+              type: string
+            client_state:
+              description: State received from a command.
+              example: aGF2ZSBhIG5pY2UgZGF5ID1d
+              type: string
+            connection_id:
+              description: Telnyx connection ID used in the call.
+              example: 7267xxxxxxxxxxxxxx
+              type: string
+            from:
+              description: Number or SIP URI placing the call.
+              example: "+35319605860"
+              type: string
+            sip_notify_response:
+              description: SIP NOTIFY event status for tracking the REFER attempt.
+              example: 603
+              type: integer
+            to:
+              description: Destination number or SIP URI of the call.
+              example: "+13129457420"
+              type: string
+          type: object
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - event
+          example: event
+          type: string
+      type: object
+    CallReferFailedEvent:
+      properties:
+        data:
+          $ref: "#/components/schemas/CallReferFailed"
+      title: Call Recording Saved Event
+      type: object
+    CallReferStarted:
+      example:
+        event_type: call.refer.started
+        id: fbeb70e0-54eb-4e26-8d19-56b43e66f754
+        occurred_at: 2020-03-30T13:29:42.130013Z
+        payload:
+          call_control_id: v2:OycMASgvIjsGIAVEx8x3n9rYeKnUJx6a3V8VGhs5futnr17KZhujZA
+          call_leg_id: 817f7de8-728a-11ea-9ce6-02420a0f8969
+          call_session_id: 817f8c2a-728a-11ea-9cbe-02420a0f8969
+          client_state: aGF2ZSBhIG5pY2UgZGF5ID1d
+          connection_id: "1289082222292239760"
+          from: "+35319605860"
+          sip_notify_response: 100
+          to: "+13129457420"
+        record_type: event
+      properties:
+        event_type:
+          description: The type of event being delivered.
+          enum:
+            - call.refer.started
+          example: call.refer.started
+          type: string
+        id:
+          description: Identifies the type of resource.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+          format: uuid
+          type: string
+        occurred_at:
+          description: ISO 8601 datetime of when the event occurred.
+          example: 2018-02-02T22:25:27.521992Z
+          format: date-time
+          type: string
+        payload:
+          properties:
+            call_control_id:
+              description: Unique ID for controlling the call.
+              example: v2:OycMASgvIjsGIAVEx8x3n9rYeKnUJx6a3V8VGhs5futnr17KZhujZA
+              type: string
+            call_leg_id:
+              description: ID that is unique to the call and can be used to correlate webhook events.
+              example: 428c31b6-7af4-4bcb-b7f5-5013ef9657c1
+              type: string
+            call_session_id:
+              description: ID that is unique to the call session and can be used to correlate webhook events.
+              example: 428c31b6-abf3-3bc1-b7f4-5013ef9657c1
+              type: string
+            client_state:
+              description: State received from a command.
+              example: aGF2ZSBhIG5pY2UgZGF5ID1d
+              type: string
+            connection_id:
+              description: Telnyx connection ID used in the call.
+              example: 7267xxxxxxxxxxxxxx
+              type: string
+            from:
+              description: Number or SIP URI placing the call.
+              example: "+35319605860"
+              type: string
+            sip_notify_response:
+              description: SIP NOTIFY event status for tracking the REFER attempt.
+              example: 100
+              type: integer
+            to:
+              description: Destination number or SIP URI of the call.
+              example: "+13129457420"
+              type: string
+          type: object
+        record_type:
+          description: Identifies the type of the resource.
+          enum:
+            - event
+          example: event
+          type: string
+      title: Call Refer Started
+      type: object
+    CallReferStartedEvent:
+      properties:
+        data:
+          $ref: "#/components/schemas/CallReferStarted"
+      title: Call Refer Started Event
+      type: object
     CallRequest:
       example:
         answering_machine_detection: detect
@@ -10413,7 +10964,7 @@ components:
         sip_auth_username: username
         timeout_limit_secs: 60
         timeout_secs: 60
-        to: +18005550100 or SIP:username@sip.telnyx.com
+        to: +18005550100 or sip:username@sip.telnyx.com
         webhook_url: https://www.example.com/server-b/
         webhook_url_method: POST
       properties:
@@ -10544,7 +11095,7 @@ components:
           type: integer
         to:
           description: The DID or SIP URI to dial out to.
-          example: +18005550100 or SIP:username@sip.telnyx.com
+          example: +18005550100 or sip:username@sip.telnyx.com
           type: string
         webhook_url:
           description: Use this field to override the URL for which Telnyx will send subsuqeunt webhooks to for this call.
@@ -10975,7 +11526,7 @@ components:
           type: string
         to:
           description: The DID or SIP URI to dial out and bridge to the given call.
-          example: +18005550100 or SIP:username@sip.telnyx.com
+          example: +18005550100 or sip:username@sip.telnyx.com
           type: string
         whisper_call_control_ids:
           description: Array of unique call_control_ids the joining supervisor can whisper to. If none provided, the supervisor will join the conference as a monitoring participant only.
@@ -12257,6 +12808,7 @@ components:
         start_conference_on_create: false
       properties:
         beep_enabled:
+          default: never
           description: Whether a beep sound should be played when participants join and/or leave the conference.
           enum:
             - always
@@ -12342,6 +12894,10 @@ components:
           report_frequency_seconds: 10
         sip_uri_calling_preference: " disabled"
         user_name: myusername123
+        webhook_api_version: "1"
+        webhook_event_failover_url: https://failover.example.com
+        webhook_event_url: https://example.com
+        webhook_timeout_secs: 25
       properties:
         active:
           description: Defaults to true
@@ -12377,9 +12933,6 @@ components:
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
-          enum:
-            - true
-            - false
           type: boolean
         encrypted_media:
           description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
@@ -12429,6 +12982,34 @@ components:
           description: The user name to be used as part of the credentials. Must be 4-32 characters long and alphanumeric values only (no spaces or special characters).
           example: myusername123
           type: string
+        webhook_api_version:
+          default: "1"
+          description: Determines which webhook format will be used, Telnyx API v1 or v2.
+          enum:
+            - "1"
+            - "2"
+          example: "1"
+          type: string
+        webhook_event_failover_url:
+          default: ""
+          description: The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+          example: https://failover.example.com
+          format: url
+          nullable: true
+          type: string
+        webhook_event_url:
+          description: The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+          example: https://example.com
+          format: url
+          type: string
+        webhook_timeout_secs:
+          default: null
+          description: Specifies how many seconds to wait before timing out a webhook.
+          example: 25
+          maximum: 30
+          minimum: 0
+          nullable: true
+          type: integer
       title: Create Credential Connection Request
       type: object
     CreateFaxApplicationRequest:
@@ -12527,6 +13108,10 @@ components:
           port: rtcp-mux
           report_frequency_secs: 10
         transport_protocol: UDP
+        webhook_api_version: "1"
+        webhook_event_failover_url: https://failover.example.com
+        webhook_event_url: https://example.com
+        webhook_timeout_secs: 25
       properties:
         active:
           description: Defaults to true
@@ -12562,9 +13147,6 @@ components:
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
-          enum:
-            - true
-            - false
           type: boolean
         encrypted_media:
           description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
@@ -12588,6 +13170,34 @@ components:
             - TCP
             - TLS
           type: string
+        webhook_api_version:
+          default: "1"
+          description: Determines which webhook format will be used, Telnyx API v1 or v2.
+          enum:
+            - "1"
+            - "2"
+          example: "1"
+          type: string
+        webhook_event_failover_url:
+          default: ""
+          description: The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+          example: https://failover.example.com
+          format: url
+          nullable: true
+          type: string
+        webhook_event_url:
+          description: The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+          example: https://example.com
+          format: url
+          type: string
+        webhook_timeout_secs:
+          default: null
+          description: Specifies how many seconds to wait before timing out a webhook.
+          example: 25
+          maximum: 30
+          minimum: 0
+          nullable: true
+          type: integer
       title: Create Fqdn Connection Request
     CreateFqdnRequest:
       example:
@@ -12675,16 +13285,10 @@ components:
         generate_ringback_tone:
           default: false
           description: Generate ringback tone through 183 session progress message with early media.
-          enum:
-            - true
-            - false
           type: boolean
         isup_headers_enabled:
           default: false
           description: When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.)
-          enum:
-            - true
-            - false
           type: boolean
         prack_enabled:
           default: false
@@ -12786,16 +13390,10 @@ components:
         generate_ringback_tone:
           default: false
           description: Generate ringback tone through 183 session progress message with early media.
-          enum:
-            - true
-            - false
           type: boolean
         isup_headers_enabled:
           default: false
           description: When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.)
-          enum:
-            - true
-            - false
           type: boolean
         prack_enabled:
           default: false
@@ -12885,6 +13483,10 @@ components:
           port: rtcp-mux
           report_frequency_secs: 10
         transport_protocol: UDP
+        webhook_api_version: "1"
+        webhook_event_failover_url: https://failover.example.com
+        webhook_event_url: https://example.com
+        webhook_timeout_secs: 25
       properties:
         active:
           description: Defaults to true
@@ -12925,9 +13527,6 @@ components:
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
-          enum:
-            - true
-            - false
           example: true
           type: boolean
         encrypted_media:
@@ -12957,6 +13556,34 @@ components:
             - TLS
           example: UDP
           type: string
+        webhook_api_version:
+          default: "1"
+          description: Determines which webhook format will be used, Telnyx API v1 or v2.
+          enum:
+            - "1"
+            - "2"
+          example: "1"
+          type: string
+        webhook_event_failover_url:
+          default: ""
+          description: The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+          example: https://failover.example.com
+          format: url
+          nullable: true
+          type: string
+        webhook_event_url:
+          description: The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+          example: https://example.com
+          format: url
+          type: string
+        webhook_timeout_secs:
+          default: null
+          description: Specifies how many seconds to wait before timing out a webhook.
+          example: 25
+          maximum: 30
+          minimum: 0
+          nullable: true
+          type: integer
       title: Create IP Connection Request
     CreateIpRequest:
       example:
@@ -13603,21 +14230,21 @@ components:
         - voice_url
       title: Create Texml Application Request
       type: object
-    CreateTwoFAProfileResponse:
+    CreateVerificationResponse:
       properties:
         data:
-          $ref: "#/components/schemas/TwoFAProfile"
+          $ref: "#/components/schemas/Verification"
       required:
         - data
-      title: CreateTwoFAProfileResponse
+      title: CreateVerifyVerificationResponse
       type: object
-    CreateTwoFAVerificationResponse:
+    CreateVerifyProfileResponse:
       properties:
         data:
-          $ref: "#/components/schemas/TwoFAVerification"
+          $ref: "#/components/schemas/VerifyProfile"
       required:
         - data
-      title: CreateTwoFAVerificationResponse
+      title: CreateVerifyProfileResponse
       type: object
     CreatedAt:
       description: ISO 8601 formatted date indicating when the resource was created.
@@ -13668,6 +14295,10 @@ components:
         sip_uri_calling_preference: disabled
         updated_at: 2018-02-02T22:25:27.521Z
         user_name: myusername123
+        webhook_api_version: "1"
+        webhook_event_failover_url: https://failover.example.com
+        webhook_event_url: https://example.com
+        webhook_timeout_secs: 25
       properties:
         active:
           description: Defaults to true
@@ -13707,9 +14338,6 @@ components:
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
-          enum:
-            - true
-            - false
           type: boolean
         encrypted_media:
           description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
@@ -13772,6 +14400,34 @@ components:
           description: The user name to be used as part of the credentials. Must be 4-32 characters long and alphanumeric values only (no spaces or special characters).
           example: myusername123
           type: string
+        webhook_api_version:
+          default: "1"
+          description: Determines which webhook format will be used, Telnyx API v1 or v2.
+          enum:
+            - "1"
+            - "2"
+          example: "1"
+          type: string
+        webhook_event_failover_url:
+          default: ""
+          description: The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+          example: https://failover.example.com
+          format: url
+          nullable: true
+          type: string
+        webhook_event_url:
+          description: The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+          example: https://example.com
+          format: url
+          type: string
+        webhook_timeout_secs:
+          default: null
+          description: Specifies how many seconds to wait before timing out a webhook.
+          example: 25
+          maximum: 30
+          minimum: 0
+          nullable: true
+          type: integer
       title: Credential Connection
       type: object
     CredentialInbound:
@@ -13824,16 +14480,10 @@ components:
         generate_ringback_tone:
           default: false
           description: Generate ringback tone through 183 session progress message with early media.
-          enum:
-            - true
-            - false
           type: boolean
         isup_headers_enabled:
           default: false
           description: When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.)
-          enum:
-            - true
-            - false
           type: boolean
         prack_enabled:
           default: false
@@ -13893,9 +14543,6 @@ components:
         generate_ringback_tone:
           default: false
           description: Generate ringback tone through 183 session progress message with early media.
-          enum:
-            - true
-            - false
           type: boolean
         instant_ringback_enabled:
           default: true
@@ -13971,13 +14618,13 @@ components:
         - value
       title: Custom SIP Header
       type: object
-    DeleteTwoFAProfileResponse:
+    DeleteVerifyProfileResponse:
       properties:
         data:
-          $ref: "#/components/schemas/TwoFAProfile"
+          $ref: "#/components/schemas/VerifyProfile"
       required:
         - data
-      title: DeleteTwoFAProfileResponse
+      title: DeleteVerifyProfileResponse
       type: object
     DetailRecordPaginationMeta:
       properties:
@@ -14090,7 +14737,7 @@ components:
           type: string
         media_url:
           description: The URL to the PDF used for the fax's media.
-          example: http://assets.com/FAX.pdf
+          example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
           type: string
         quality:
           default: high
@@ -14257,7 +14904,7 @@ components:
               type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
-              example: http://assets.com/FAX.pdf
+              example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
               type: string
             status:
               description: The status of the fax.
@@ -14332,7 +14979,7 @@ components:
               type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
-              example: http://assets.com/FAX.pdf
+              example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
               type: string
             status:
               description: The status of the fax.
@@ -14401,7 +15048,7 @@ components:
               type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
-              example: http://assets.com/FAX.pdf
+              example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
               type: string
             status:
               description: The status of the fax.
@@ -14470,7 +15117,7 @@ components:
               type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
-              example: http://assets.com/FAX.pdf
+              example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
               type: string
             status:
               description: The status of the fax.
@@ -14539,7 +15186,7 @@ components:
               type: string
             original_media_url:
               description: The original URL to the PDF used for the fax's media.
-              example: http://assets.com/FAX.pdf
+              example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
               type: string
             status:
               description: The status of the fax.
@@ -14690,6 +15337,10 @@ components:
           report_frequency_secs: 10
         transport_protocol: UDP
         updated_at: 2018-02-02T22:25:27.521Z
+        webhook_api_version: "1"
+        webhook_event_failover_url: https://failover.example.com
+        webhook_event_url: https://example.com
+        webhook_timeout_secs: 25
       properties:
         active:
           description: Defaults to true
@@ -14729,9 +15380,6 @@ components:
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
-          enum:
-            - true
-            - false
           type: boolean
         encrypted_media:
           description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
@@ -14768,6 +15416,34 @@ components:
           description: ISO 8601 formatted date indicating when the resource was updated.
           example: 2018-02-02T22:25:27.521Z
           type: string
+        webhook_api_version:
+          default: "1"
+          description: Determines which webhook format will be used, Telnyx API v1 or v2.
+          enum:
+            - "1"
+            - "2"
+          example: "1"
+          type: string
+        webhook_event_failover_url:
+          default: ""
+          description: The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+          example: https://failover.example.com
+          format: url
+          nullable: true
+          type: string
+        webhook_event_url:
+          description: The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+          example: https://example.com
+          format: url
+          type: string
+        webhook_timeout_secs:
+          default: null
+          description: Specifies how many seconds to wait before timing out a webhook.
+          example: 25
+          maximum: 30
+          minimum: 0
+          nullable: true
+          type: integer
       title: Fqdn Connection
       type: object
     GatherUsingAudioRequest:
@@ -15079,16 +15755,10 @@ components:
         generate_ringback_tone:
           default: false
           description: Generate ringback tone through 183 session progress message with early media.
-          enum:
-            - true
-            - false
           type: boolean
         isup_headers_enabled:
           default: false
           description: When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.)
-          enum:
-            - true
-            - false
           type: boolean
         prack_enabled:
           default: false
@@ -15212,16 +15882,10 @@ components:
         generate_ringback_tone:
           default: false
           description: Generate ringback tone through 183 session progress message with early media.
-          enum:
-            - true
-            - false
           type: boolean
         isup_headers_enabled:
           default: false
           description: When set, inbound phone calls will receive ISUP parameters via SIP headers. (Only when available and only when using TCP or TLS transport.)
-          enum:
-            - true
-            - false
           type: boolean
         prack_enabled:
           default: false
@@ -15663,6 +16327,10 @@ components:
           report_frequency_secs: 10
         transport_protocol: UDP
         updated_at: 2018-02-02T22:25:27.521Z
+        webhook_api_version: "1"
+        webhook_event_failover_url: https://failover.example.com
+        webhook_event_url: https://example.com
+        webhook_timeout_secs: 25
       properties:
         active:
           description: Defaults to true
@@ -15707,9 +16375,6 @@ components:
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
-          enum:
-            - true
-            - false
           example: true
           type: boolean
         encrypted_media:
@@ -15752,6 +16417,34 @@ components:
           description: ISO 8601 formatted date indicating when the resource was updated.
           example: 2018-02-02T22:25:27.521Z
           type: string
+        webhook_api_version:
+          default: "1"
+          description: Determines which webhook format will be used, Telnyx API v1 or v2.
+          enum:
+            - "1"
+            - "2"
+          example: "1"
+          type: string
+        webhook_event_failover_url:
+          default: ""
+          description: The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+          example: https://failover.example.com
+          format: url
+          nullable: true
+          type: string
+        webhook_event_url:
+          description: The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+          example: https://example.com
+          format: url
+          type: string
+        webhook_timeout_secs:
+          default: null
+          description: Specifies how many seconds to wait before timing out a webhook.
+          example: 25
+          maximum: 30
+          minimum: 0
+          nullable: true
+          type: integer
       title: Ip Connection
       type: object
     JoinConferenceRequest:
@@ -15872,32 +16565,32 @@ components:
           format: date-time
           type: string
       type: object
-    ListTwoFAProfilesResponse:
-      description: A paginated list of 2FA profiles
+    ListVerificationsResponse:
       properties:
         data:
           items:
-            $ref: "#/components/schemas/TwoFAProfile"
+            $ref: "#/components/schemas/Verification"
           type: array
         meta:
           $ref: "#/components/schemas/Meta"
       required:
         - data
         - meta
-      title: ListTwoFAProfilesResponse
+      title: ListVerificationsResponse
       type: object
-    ListTwoFAVerificationsResponse:
+    ListVerifyProfilesResponse:
+      description: A paginated list of Verify profiles
       properties:
         data:
           items:
-            $ref: "#/components/schemas/TwoFAVerification"
+            $ref: "#/components/schemas/VerifyProfile"
           type: array
         meta:
           $ref: "#/components/schemas/Meta"
       required:
         - data
         - meta
-      title: ListTwoFAVerificationsResponse
+      title: ListVerifyProfilesResponse
       type: object
     Loopcount:
       oneOf:
@@ -17308,20 +18001,17 @@ components:
         generate_ringback_tone:
           default: false
           description: Generate ringback tone through 183 session progress message with early media.
-          enum:
-            - true
-            - false
           type: boolean
         instant_ringback_enabled:
           default: true
           description: When set, ringback will not wait for indication before sending ringback tone to calling party.
           type: boolean
         ip_authentication_method:
-          default: tech-prefix
+          default: tech-prefixp-charge-info
           enum:
             - tech-prefixp-charge-info
             - token
-          example: tech-prefix
+          example: tech-prefixp-charge-info
           type: string
         ip_authentication_token:
           default: null
@@ -18056,6 +18746,18 @@ components:
         - on_hold
       title: Participant
       type: object
+    PauseRecordingRequest:
+      properties:
+        client_state:
+          description: Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+          example: aGF2ZSBhIG5pY2UgZGF5ID1d
+          type: string
+        command_id:
+          description: Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
+          example: 891510ac-f3e4-11e8-af5b-de00688a4901
+          type: string
+      title: Pause Recording Request
+      type: object
     PhoneNumber:
       example:
         id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
@@ -18114,6 +18816,7 @@ components:
         connection_id: "1293384261075731499"
         connection_name: connection-name
         created_at: 2019-10-23T18:10:00.000Z
+        customer_reference: customer-reference
         emergency_address_id: "1315261609962112019"
         emergency_enabled: true
         external_pin: "1234"
@@ -18160,6 +18863,10 @@ components:
         created_at:
           description: ISO 8601 formatted date indicating when the resource was created.
           readOnly: true
+          type: string
+        customer_reference:
+          description: A customer reference string for customer look ups.
+          example: MY REF 001
           type: string
         emergency_address_id:
           description: Identifies the emergency address associated with the phone number.
@@ -18410,6 +19117,7 @@ components:
           cnam_listing_details: example
           cnam_listing_enabled: true
         connection_id: 1d0e6cb8-8668-462e-94c6-49ae0f0ed48b
+        customer_reference: customer_reference
         emergency:
           emergency_address_id: "1315261609962112019"
           emergency_enabled: true
@@ -18433,6 +19141,10 @@ components:
         connection_id:
           description: Identifies the connection associated with this phone number.
           example: 1d0e6cb8-8668-462e-94c6-49ae0f0ed48b
+          type: string
+        customer_reference:
+          description: A customer reference string for customer look ups.
+          example: MY REF 001
           type: string
         emergency:
           $ref: "#/components/schemas/EmergencySettings"
@@ -18830,6 +19542,42 @@ components:
         - download_urls
       title: Recording
       type: object
+    ReferRequest:
+      example:
+        sip_address: sip:username@sip.non-telnyx-address.com
+      properties:
+        client_state:
+          description: Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+          example: aGF2ZSBhIG5pY2UgZGF5ID1d
+          type: string
+        command_id:
+          description: Use this field to avoid execution of duplicate commands. Telnyx will ignore subsequent commands with the same `command_id` as one that has already been executed.
+          example: 891510ac-f3e4-11e8-af5b-de00688a4901
+          type: string
+        custom_headers:
+          description: Custom headers to be added to the SIP INVITE.
+          example:
+            - name: head_1
+              value: val_1
+            - name: head_2
+              value: val_2
+          items:
+            $ref: "#/components/schemas/CustomSipHeader"
+          type: array
+        sip_address:
+          description: The SIP URI to which the call will be referred to.
+          example: sip:username@sip.non-telnyx-address.com
+          type: string
+        sip_auth_password:
+          description: SIP Authentication password used for SIP challenges.
+          type: string
+        sip_auth_username:
+          description: SIP Authentication username used for SIP challenges.
+          type: string
+      required:
+        - sip_address
+      title: Refer request
+      type: object
     RegionInformation:
       example:
         region_name: US
@@ -19011,13 +19759,25 @@ components:
           format: datetime
           readOnly: true
           type: string
-    RetrieveTwoFAVerificationResponse:
+    ResumeRecordingRequest:
+      properties:
+        client_state:
+          description: Use this field to add state to every subsequent webhook. It must be a valid Base-64 encoded string.
+          example: aGF2ZSBhIG5pY2UgZGF5ID1d
+          type: string
+        command_id:
+          description: Use this field to avoid duplicate commands. Telnyx will ignore commands with the same `command_id`.
+          example: 891510ac-f3e4-11e8-af5b-de00688a4901
+          type: string
+      title: Pause Recording Request
+      type: object
+    RetrieveVerificationResponse:
       properties:
         data:
-          $ref: "#/components/schemas/TwoFAVerification"
+          $ref: "#/components/schemas/Verification"
       required:
         - data
-      title: RetrieveTwoFAVerificationResponse
+      title: RetrieveVerifyVerificationResponse
       type: object
     SIMCard:
       properties:
@@ -19245,6 +20005,74 @@ components:
           type: string
       title: SIMCardNetworkPreferenceWithOTAUpdates
       type: object
+    SIMCardPublicIP:
+      properties:
+        created_at:
+          description: ISO 8601 formatted date-time indicating when the resource was created.
+          example: 2018-02-02T22:25:27.521Z
+          readOnly: true
+          type: string
+        ip:
+          default: null
+          description: The provisioned IP address. This attribute will only be available when underlying resource status is in a "provisioned" status.
+          example: 192.168.0.0
+          readOnly: true
+          type: string
+        record_type:
+          example: sim_card_public_ip
+          readOnly: true
+          type: string
+        sim_card_id:
+          example: 6b14e151-8493-4fa1-8664-1cc4e6d14158
+          format: uuid
+          type: string
+        status:
+          $ref: "#/components/schemas/SIMCardPublicIPStatus"
+        type:
+          default: ipv4
+          enum:
+            - ipv4
+          example: ipv4
+          readOnly: true
+          type: string
+        updated_at:
+          description: ISO 8601 formatted date-time indicating when the resource was updated.
+          example: 2018-02-02T22:25:27.521Z
+          readOnly: true
+          type: string
+      title: SIMCardPublicIP
+      type: object
+    SIMCardPublicIPStatus:
+      description: >-
+        The current status of the SIM card's public IP. <ul>
+         <li><code>provisioning</code> - the IP is being provisioned.</li>
+         <li><code>provisioned</code> - the IP was provisioned and the SIM is reachable on the public internet.</li>
+         <li><code>failed</code> - the provisioning had failed for a reason and it requires an intervention.</li>
+         </ul>
+         Transitioning between the provisioning and provisioned states may take some time.
+      properties:
+        code:
+          default: null
+          description: This attribute is an [error code](https://developers.telnyx.com/docs/api/v2/overview#errors) related to the failure reason.
+          example: null
+          readOnly: true
+          type: string
+        description:
+          default: null
+          description: This attribute provides a human-readable explanation of why a failure happened.
+          example: null
+          readOnly: true
+          type: string
+        value:
+          default: provisioning
+          enum:
+            - provisioning
+            - provisioned
+            - failed
+          example: provisioned
+          readOnly: true
+          type: string
+      type: object
     SIMCardRegistration:
       properties:
         created_at:
@@ -19390,7 +20218,7 @@ components:
           type: string
         media_url:
           description: The URL to the PDF used for the fax's media.
-          example: http://assets.com/FAX.pdf
+          example: https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
           type: string
         quality:
           default: high
@@ -20042,7 +20870,7 @@ components:
         sip_auth_username: username
         timeout_limit_secs: 60
         timeout_secs: 60
-        to: +18005550100 or SIP:username@sip.telnyx.com
+        to: +18005550100 or sip:username@sip.telnyx.com
         webhook_url: https://www.example.com/server-b/
         webhook_url_method: POST
       properties:
@@ -20121,7 +20949,7 @@ components:
               type: integer
           type: object
         audio_url:
-          description: The URL of a file to be played back to the callee before bridging the call. The URL can point to either a WAV or MP3 file.
+          description: Audio URL to be played back when the transfer destination answers before bridging the call. The URL can point to either a WAV or MP3 file.
           example: http://www.example.com/sounds/greeting.wav
           type: string
         client_state:
@@ -20168,7 +20996,7 @@ components:
           type: integer
         to:
           description: The DID or SIP URI to dial out and bridge to the given call.
-          example: +18005550100 or SIP:username@sip.telnyx.com
+          example: +18005550100 or sip:username@sip.telnyx.com
           type: string
         webhook_url:
           description: Use this field to override the URL for which Telnyx will send subsuqeunt webhooks to for this call.
@@ -20185,225 +21013,6 @@ components:
       required:
         - to
       title: Transfer Call Request
-      type: object
-    TwoFAProfile:
-      properties:
-        created_at:
-          example: 2020-09-14T17:03:32.965812
-          format: date-time
-          type: string
-        default_timeout_secs:
-          description: For every request that is initiated via this 2FA Profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
-          example: 300
-          type: integer
-        id:
-          example: 12ade33a-21c0-473b-b055-b3c836e1c292
-          format: uuid
-          type: string
-        msg_enabled:
-          description: Enables SMS text messaging for the 2FA profile.
-          example: true
-          type: boolean
-        msg_template:
-          description: Optionally sets a messaging text template when sending the verification code. Uses `{code}` to template in the actual verification code.
-          example: "Hello, this is the Acme Inc verification code you requested: {code}."
-          type: string
-        name:
-          description: The name of the 2FA profile.
-          example: Test Profile
-          type: string
-        organization_id:
-          example: f272649-56ca-4d20-k734-64c0bc59cd9c
-          type: string
-        rcs_enabled:
-          description: Enables RCS messaging for the 2FA profile.
-          example: true
-          type: boolean
-        record_type:
-          description: Identifies the type of the resource.
-          example: twofa_profile
-          type: string
-        updated_at:
-          example: 2020-09-14T17:03:32.965812
-          format: date-time
-          type: string
-      required:
-        - id
-        - name
-        - created_at
-        - updated_at
-        - default_timeout_secs
-        - organization_id
-        - rcs_enabled
-      title: TwoFAProfile
-      type: object
-    TwoFAProfileRequest:
-      description: The request body when creating a 2FA profile.
-      properties:
-        default_timeout_secs:
-          description: For every request that is initiated via this 2FA Profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
-          example: 300
-          type: integer
-        msg_enabled:
-          default: false
-          description: Enables SMS text messaging for the 2FA profile.
-          example: true
-          type: boolean
-        msg_template:
-          description: Optionally sets a messaging text template when sending the verification code. Uses `{code}` to template in the actual verification code.
-          example: "Hello, this is the Acme Inc verification code you requested: {code}."
-          type: string
-        name:
-          description: The human readable label for the 2FA profile.
-          example: Test Profile
-          type: string
-        rcs_enabled:
-          default: false
-          description: Enables RCS messaging for the 2FA profile.
-          example: true
-          type: boolean
-      required:
-        - name
-      title: TwoFAProfileRequest
-      type: object
-    TwoFAVerification:
-      properties:
-        created_at:
-          example: 2020-09-14T17:03:32.965812
-          format: date-time
-          type: string
-        id:
-          example: 12ade33a-21c0-473b-b055-b3c836e1c292
-          format: uuid
-          type: string
-        organization_id:
-          example: f272649-56ca-4d20-k734-64c0bc59cd9c
-          type: string
-        phone_number:
-          description: +E164 formatted phone number.
-          example: "+13035551234"
-          type: string
-        record_type:
-          description: Identifies the type of the resource.
-          example: twofa_verification
-          type: string
-        status:
-          $ref: "#/components/schemas/TwoFAVerificationStatus"
-        timeout_secs:
-          description: "This is the number of seconds before the code of the request is expired. Once this request has expired, the code will no longer verify the user. Note: this will override the `default_timeout_secs` on the 2FA profile."
-          example: 300
-          type: integer
-        twofa_profile_id:
-          description: The identifier of the associated 2FA profile.
-          example: 12ade33a-21c0-473b-b055-b3c836e1c292
-          format: uuid
-          type: string
-        type:
-          $ref: "#/components/schemas/TwoFAVerificationType"
-        updated_at:
-          example: 2020-09-14T17:03:32.965812
-          format: date-time
-          type: string
-      required:
-        - phone_number
-        - twofa_profile_id
-        - type
-        - id
-        - status
-        - organization_id
-        - created_at
-        - updated_at
-      title: TwoFAVerification
-      type: object
-    TwoFAVerificationCodeRequest:
-      properties:
-        code:
-          description: This is the code the user submits for verification.
-          example: "17686"
-          type: string
-      required:
-        - code
-      title: TwoFAVerificationCodeRequest
-      type: object
-    TwoFAVerificationRequest:
-      description: The request body when creating a 2FA verification.
-      properties:
-        phone_number:
-          description: +E164 formatted phone number.
-          example: "+13035551234"
-          type: string
-        timeout_secs:
-          description: "This is the number of seconds before the code of the request is expired. Once this request has expired, the code will no longer verify the user. Note: this will override the `default_timeout_secs` on the 2FA profile."
-          example: 300
-          type: integer
-        twofa_profile_id:
-          description: The identifier of the associated 2FA profile.
-          example: 12ade33a-21c0-473b-b055-b3c836e1c292
-          format: uuid
-          type: string
-        type:
-          $ref: "#/components/schemas/TwoFAVerificationType"
-      required:
-        - phone_number
-        - twofa_profile_id
-        - type
-      title: TwoFAVerificationRequest
-      type: object
-    TwoFAVerificationStatus:
-      description: The possible statuses of the 2FA verification request.
-      enum:
-        - pending
-        - sms_delivery_failed
-        - accepted
-        - expired
-        - not_enough_credit
-        - network_error
-        - number_unreachable
-        - internal_error
-        - invalid_destination
-        - timed_out
-      example: accepted
-      title: TwoFAVerificationStatus
-      type: string
-    TwoFAVerificationSubmissionReponseCode:
-      description: Identifies if the verification code has been accepted or rejected.
-      enum:
-        - accepted
-        - rejected
-      example: accepted
-      title: TwoFAVerificationSubmissionReponseCode
-      type: string
-    TwoFAVerificationSubmissionResponse:
-      properties:
-        phone_number:
-          description: +E164 formatted phone number.
-          example: "+13035551234"
-          type: string
-        record_type:
-          description: Identifies the type of the resource.
-          example: twofa_code_verify
-          type: string
-        response_code:
-          $ref: "#/components/schemas/TwoFAVerificationSubmissionReponseCode"
-      required:
-        - phone_number
-        - response_code
-      title: TwoFAVerificationSubmissionResponse
-      type: object
-    TwoFAVerificationType:
-      description: The verification request type.
-      enum:
-        - sms
-      example: sms
-      title: TwoFAVerificationType
-      type: string
-    TwoFAVerificationVerify:
-      properties:
-        data:
-          $ref: "#/components/schemas/TwoFAVerificationSubmissionResponse"
-      required:
-        - data
-      title: TwoFAVerificationVerify
       type: object
     UpdateBillingGroup:
       example:
@@ -20546,6 +21155,10 @@ components:
           report_frequency_seconds: 10
         sip_uri_calling_preference: " disabled"
         user_name: myusername123
+        webhook_api_version: "1"
+        webhook_event_failover_url: https://failover.example.com
+        webhook_event_url: https://example.com
+        webhook_timeout_secs: 25
       properties:
         active:
           description: Defaults to true
@@ -20581,9 +21194,6 @@ components:
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
-          enum:
-            - true
-            - false
           type: boolean
         encrypted_media:
           description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
@@ -20633,6 +21243,34 @@ components:
           description: The user name to be used as part of the credentials. Must be 4-32 characters long and alphanumeric values only (no spaces or special characters).
           example: myusername123
           type: string
+        webhook_api_version:
+          default: "1"
+          description: Determines which webhook format will be used, Telnyx API v1 or v2.
+          enum:
+            - "1"
+            - "2"
+          example: "1"
+          type: string
+        webhook_event_failover_url:
+          default: ""
+          description: The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+          example: https://failover.example.com
+          format: url
+          nullable: true
+          type: string
+        webhook_event_url:
+          description: The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+          example: https://example.com
+          format: url
+          type: string
+        webhook_timeout_secs:
+          default: null
+          description: Specifies how many seconds to wait before timing out a webhook.
+          example: 25
+          maximum: 30
+          minimum: 0
+          nullable: true
+          type: integer
       title: Update Credential Connection Request
       type: object
     UpdateFaxApplicationRequest:
@@ -20731,6 +21369,10 @@ components:
           port: rtcp-mux
           report_frequency_secs: 10
         transport_protocol: UDP
+        webhook_api_version: "1"
+        webhook_event_failover_url: https://failover.example.com
+        webhook_event_url: https://example.com
+        webhook_timeout_secs: 25
       properties:
         active:
           description: Defaults to true
@@ -20766,9 +21408,6 @@ components:
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
-          enum:
-            - true
-            - false
           type: boolean
         encrypted_media:
           description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
@@ -20792,6 +21431,34 @@ components:
             - TCP
             - TLS
           type: string
+        webhook_api_version:
+          default: "1"
+          description: Determines which webhook format will be used, Telnyx API v1 or v2.
+          enum:
+            - "1"
+            - "2"
+          example: "1"
+          type: string
+        webhook_event_failover_url:
+          default: ""
+          description: The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+          example: https://failover.example.com
+          format: url
+          nullable: true
+          type: string
+        webhook_event_url:
+          description: The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+          example: https://example.com
+          format: url
+          type: string
+        webhook_timeout_secs:
+          default: null
+          description: Specifies how many seconds to wait before timing out a webhook.
+          example: 25
+          maximum: 30
+          minimum: 0
+          nullable: true
+          type: integer
       title: Update Fqdn Connection Request
     UpdateFqdnRequest:
       example:
@@ -20867,6 +21534,10 @@ components:
           port: rtcp-mux
           report_frequency_secs: 10
         transport_protocol: UDP
+        webhook_api_version: "1"
+        webhook_event_failover_url: https://failover.example.com
+        webhook_event_url: https://example.com
+        webhook_timeout_secs: 25
       properties:
         active:
           description: Defaults to true
@@ -20902,9 +21573,6 @@ components:
         encode_contact_header_enabled:
           default: false
           description: Encode the SIP contact header sent by Telnyx to avoid issues for NAT or ALG scenarios.
-          enum:
-            - true
-            - false
           type: boolean
         encrypted_media:
           description: Enable use of SRTP or ZRTP for encryption. Valid values are those listed or null. Cannot be set to non-null if the transport_portocol is TLS.
@@ -20930,6 +21598,34 @@ components:
             - TCP
             - TLS
           type: string
+        webhook_api_version:
+          default: "1"
+          description: Determines which webhook format will be used, Telnyx API v1 or v2.
+          enum:
+            - "1"
+            - "2"
+          example: "1"
+          type: string
+        webhook_event_failover_url:
+          default: ""
+          description: The failover URL where webhooks related to this connection will be sent if sending to the primary URL fails. Must include a scheme, such as 'https'.
+          example: https://failover.example.com
+          format: url
+          nullable: true
+          type: string
+        webhook_event_url:
+          description: The URL where webhooks related to this connection will be sent. Must include a scheme, such as 'https'.
+          example: https://example.com
+          format: url
+          type: string
+        webhook_timeout_secs:
+          default: null
+          description: Specifies how many seconds to wait before timing out a webhook.
+          example: 25
+          maximum: 30
+          minimum: 0
+          nullable: true
+          type: integer
       title: Update Ip Connection Request
     UpdateIpRequest:
       example:
@@ -21168,6 +21864,7 @@ components:
         address_id: dc8f39ac-953d-4520-b93b-786ae87db0da
         billing_group_id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
         connection_id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
+        customer_reference: customer-reference
         external_pin: "1234"
         id: dc8e4d67-33a0-4cbb-af74-7b58f05bd494
         tags:
@@ -21178,6 +21875,10 @@ components:
           type: string
         connection_id:
           description: Identifies the connection associated with the phone number.
+          type: string
+        customer_reference:
+          description: A customer reference string for customer look ups.
+          example: MY REF 001
           type: string
         external_pin:
           description: If someone attempts to port your phone number away from Telnyx and your phone number has an external PIN set, we will attempt to verify that you provided the correct external PIN to the winning carrier. Note that not all carriers cooperate with this security mechanism.
@@ -21349,13 +22050,13 @@ components:
         - voice_url
       title: Update Texml Application Request
       type: object
-    UpdateTwoFAProfileResponse:
+    UpdateVerifyProfileResponse:
       properties:
         data:
-          $ref: "#/components/schemas/TwoFAProfile"
+          $ref: "#/components/schemas/VerifyProfile"
       required:
         - data
-      title: UpdateTwoFAProfileResponse
+      title: UpdateVerifyProfileResponse
       type: object
     UpdatedAt:
       description: ISO 8601 formatted date indicating when the resource was updated.
@@ -21513,6 +22214,234 @@ components:
         - suggested
       title: Validate address action result
       type: object
+    Verification:
+      properties:
+        created_at:
+          example: 2020-09-14T17:03:32.965812
+          format: date-time
+          type: string
+        id:
+          example: 12ade33a-21c0-473b-b055-b3c836e1c292
+          format: uuid
+          type: string
+        phone_number:
+          description: +E164 formatted phone number.
+          example: "+13035551234"
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: verify_verification
+          type: string
+        status:
+          $ref: "#/components/schemas/VerificationStatus"
+        timeout_secs:
+          description: "This is the number of seconds before the code of the request is expired. Once this request has expired, the code will no longer verify the user. Note: this will override the `default_timeout_secs` on the Verify profile."
+          example: 300
+          type: integer
+        type:
+          $ref: "#/components/schemas/VerificationType"
+        updated_at:
+          example: 2020-09-14T17:03:32.965812
+          format: date-time
+          type: string
+        verify_profile_id:
+          description: The identifier of the associated Verify profile.
+          example: 12ade33a-21c0-473b-b055-b3c836e1c292
+          format: uuid
+          type: string
+      required:
+        - phone_number
+        - verify_profile_id
+        - type
+        - id
+        - status
+        - created_at
+        - updated_at
+      title: Verification
+      type: object
+    VerificationAggregate:
+      properties:
+        data:
+          items:
+            properties:
+              aggregations:
+                properties:
+                  count:
+                    type: integer
+                type: object
+              fields:
+                properties:
+                  status:
+                    type: string
+                  verify_profile_id:
+                    type: string
+                type: object
+            type: object
+          type: array
+      title: VerificationAggregate
+      type: object
+    VerificationCodeRequest:
+      properties:
+        code:
+          description: This is the code the user submits for verification.
+          example: "17686"
+          type: string
+      required:
+        - code
+      title: VerifyVerificationCodeRequest
+      type: object
+    VerificationRequest:
+      description: The request body when creating a verification.
+      properties:
+        phone_number:
+          description: +E164 formatted phone number.
+          example: "+13035551234"
+          type: string
+        timeout_secs:
+          description: "This is the number of seconds before the code of the request is expired. Once this request has expired, the code will no longer verify the user. Note: this will override the `default_timeout_secs` on the Verify profile."
+          example: 300
+          type: integer
+        type:
+          $ref: "#/components/schemas/VerificationType"
+        verify_profile_id:
+          description: The identifier of the associated Verify profile.
+          example: 12ade33a-21c0-473b-b055-b3c836e1c292
+          format: uuid
+          type: string
+      required:
+        - phone_number
+        - verify_profile_id
+        - type
+      title: VerifyVerificationRequest
+      type: object
+    VerificationStatus:
+      description: The possible statuses of the verification request.
+      enum:
+        - pending
+        - sms_delivery_failed
+        - accepted
+        - expired
+        - not_enough_credit
+        - network_error
+        - number_unreachable
+        - internal_error
+        - invalid_destination
+        - timed_out
+      example: accepted
+      title: VerifyVerificationStatus
+      type: string
+    VerificationSubmissionReponseCode:
+      description: Identifies if the verification code has been accepted or rejected.
+      enum:
+        - accepted
+        - rejected
+      example: accepted
+      title: VerifyVerificationSubmissionReponseCode
+      type: string
+    VerificationSubmissionResponse:
+      properties:
+        phone_number:
+          description: +E164 formatted phone number.
+          example: "+13035551234"
+          type: string
+        response_code:
+          $ref: "#/components/schemas/VerificationSubmissionReponseCode"
+      required:
+        - phone_number
+        - response_code
+      title: VerifyVerificationSubmissionResponse
+      type: object
+    VerificationType:
+      description: The verification request type.
+      enum:
+        - sms
+      example: sms
+      title: VerificationType
+      type: string
+    VerificationVerify:
+      properties:
+        data:
+          $ref: "#/components/schemas/VerificationSubmissionResponse"
+      required:
+        - data
+      title: VerificationVerify
+      type: object
+    VerifyProfile:
+      properties:
+        created_at:
+          example: 2020-09-14T17:03:32.965812
+          format: date-time
+          type: string
+        default_timeout_secs:
+          description: For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
+          example: 300
+          type: integer
+        id:
+          example: 12ade33a-21c0-473b-b055-b3c836e1c292
+          format: uuid
+          type: string
+        messaging_enabled:
+          description: Enables SMS text messaging for the Verify profile.
+          example: true
+          type: boolean
+        messaging_template:
+          description: Optionally sets a messaging text template when sending the verification code. Uses `{code}` to template in the actual verification code.
+          example: "Hello, this is the Acme Inc verification code you requested: {code}."
+          type: string
+        name:
+          description: The name of the Verify profile.
+          example: Test Profile
+          type: string
+        rcs_enabled:
+          description: Enables RCS messaging for the Verify profile.
+          example: true
+          type: boolean
+        record_type:
+          description: Identifies the type of the resource.
+          example: verify_profile
+          type: string
+        updated_at:
+          example: 2020-09-14T17:03:32.965812
+          format: date-time
+          type: string
+      required:
+        - id
+        - name
+        - created_at
+        - updated_at
+        - default_timeout_secs
+        - rcs_enabled
+      title: VerifyProfile
+      type: object
+    VerifyProfileRequest:
+      description: The request body when creating a Verify profile.
+      properties:
+        default_timeout_secs:
+          description: For every request that is initiated via this Verify profile, this sets the number of seconds before a verification request code expires. Once the verification request expires, the user cannot use the code to verify their identity.
+          example: 300
+          type: integer
+        messaging_enabled:
+          default: false
+          description: Enables SMS text messaging for the Verify profile.
+          example: true
+          type: boolean
+        messaging_template:
+          description: Optionally sets a messaging text template when sending the verification code. Uses `{code}` to template in the actual verification code.
+          example: "Hello, this is the Acme Inc verification code you requested: {code}."
+          type: string
+        name:
+          description: The human readable label for the Verify profile.
+          example: Test Profile
+          type: string
+        rcs_enabled:
+          default: false
+          description: Enables RCS messaging for the Verify profile.
+          example: true
+          type: boolean
+      required:
+        - name
+      title: VerifyProfileRequest
+      type: object
     WdrReport:
       properties:
         created_at:
@@ -21612,6 +22541,74 @@ components:
       description: The locality of the address. For US addresses, this corresponds to the state of the address.
       example: IL
       type: string
+    attempt:
+      description: Webhook delivery attempt details.
+      example:
+        - finished_at: 2020-08-10T14:00:05.595Z
+          http:
+            request:
+              headers:
+                - "Accept: */*"
+              url: https://fallback.example.com/webhooks
+            response:
+              body: All good.
+              headers:
+                - "Content-Type: text/html"
+              status: 200
+          started_at: 2020-08-10T14:00:05.364Z
+          status: delivered
+        - errors:
+            - code: "75499"
+              detail: The server returned another HTTP 4XX error
+              title: Webhook host returned HTTP 4XX
+          finished_at: 2020-08-10T14:00:05.360Z
+          http:
+            request:
+              headers:
+                - "Accept: */*"
+              url: https://typo.example.com/webhooks
+            response:
+              body: Oops. Not found.
+              headers:
+                - "Content-Type: text/html"
+                - "Pragma: no-cache"
+              status: 404
+          started_at: 2020-08-10T14:00:05.004Z
+          status: failed
+        - errors:
+            - code: "75001"
+              detail: Unable to resolve the webhook URL domain name
+              title: Could not resolve name
+          finished_at: 2020-08-10T14:00:05.000Z
+          http:
+            reponse: null
+            request:
+              headers:
+                - "Accept: */*"
+              url: https://slow.example.com/webhooks
+          started_at: 2020-08-10T14:00:00.000Z
+          status: failed
+      properties:
+        errors:
+          description: Webhook delivery errors.
+          items:
+            $ref: "#/components/schemas/error"
+          type: array
+        finished_at:
+          description: ISO 8601 timestamp indicating when the attempt has finished.
+          format: date-time
+          type: string
+        http:
+          $ref: "#/components/schemas/http"
+        started_at:
+          description: ISO 8601 timestamp indicating when the attempt was initiated.
+          format: date-time
+          type: string
+        status:
+          enum:
+            - delivered
+            - failed
+          type: string
     borough:
       description: The borough of the address. This field is not used for addresses in the US but is used for some international addresses.
       example: Guadalajara
@@ -21628,6 +22625,15 @@ components:
       description: A customer reference string for customer look ups.
       example: MY REF 001
       type: string
+    error:
+      properties:
+        code:
+          format: int
+          type: string
+        detail:
+          type: string
+        title:
+          type: string
     extended_address:
       description: Additional street address information about the address such as, but not limited to, unit number or apartment number.
       example: "#504"
@@ -21636,6 +22642,35 @@ components:
       description: The first name associated with the address. An address must have either a first last name or a business name.
       example: Alfred
       type: string
+    http:
+      description: HTTP request and response information.
+      properties:
+        request:
+          description: Request details.
+          properties:
+            headers:
+              $ref: "#/components/schemas/http_headers"
+            url:
+              example: https://example.com/webhooks
+              type: string
+        response:
+          description: Response details, optional.
+          nullable: true
+          properties:
+            body:
+              description: Raw response body, limited to 10kB.
+              type: string
+            headers:
+              $ref: "#/components/schemas/http_headers"
+            status:
+              example: 200
+              type: integer
+    http_headers:
+      description: List of headers, limited to 10kB.
+      items:
+        example: "Header-Name: header value"
+        type: string
+      type: array
     last_name:
       description: The last name associated with the address. An address must have either a first last name or a business name.
       example: Foster
@@ -21660,6 +22695,112 @@ components:
       description: The primary street address information about the address.
       example: 311 W Superior Street
       type: string
+    webhook_delivery:
+      description: Record of all attempts to deliver a webhook.
+      properties:
+        attempts:
+          description: Detailed delivery attempts, ordered by most recent.
+          example:
+            - finished_at: 2020-08-10T14:00:05.595Z
+              http:
+                request:
+                  headers:
+                    - "Accept: */*"
+                  url: https://fallback.example.com/webhooks
+                response:
+                  body: All good.
+                  headers:
+                    - "Content-Type: text/html"
+                  status: 200
+              started_at: 2020-08-10T14:00:05.364Z
+              status: delivered
+            - errors:
+                - code: "75499"
+                  detail: The server returned another HTTP 4XX error
+                  title: Webhook host returned HTTP 4XX
+              finished_at: 2020-08-10T14:00:05.360Z
+              http:
+                request:
+                  headers:
+                    - "Accept: */*"
+                  url: https://typo.example.com/webhooks
+                response:
+                  body: Oops. Not found.
+                  headers:
+                    - "Content-Type: text/html"
+                    - "Pragma: no-cache"
+                  status: 404
+              started_at: 2020-08-10T14:00:05.004Z
+              status: failed
+          items:
+            $ref: "#/components/schemas/attempt"
+          type: array
+        finished_at:
+          description: ISO 8601 timestamp indicating when the last webhook response has been received.
+          example: 2020-08-10T14:00:05.595Z
+          format: date-time
+          type: string
+        id:
+          description: Uniquely identifies the webhook_delivery record.
+          example: f5586561-8ff0-4291-a0ac-84fe544797bd
+          format: uuid
+          type: string
+        record_type:
+          description: Identifies the type of the resource.
+          example: webhook_delivery
+          type: string
+        started_at:
+          description: ISO 8601 timestamp indicating when the first request attempt was initiated.
+          example: 2020-08-10T14:00:00.000Z
+          format: date-time
+          type: string
+        status:
+          description: "Delivery status: 'delivered' when successfuly delivered or 'failed' if all attempts have failed."
+          enum:
+            - delivered
+            - failed
+          type: string
+        user_id:
+          description: Uniquely identifies the user that owns the webhook_delivery record.
+          example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+          format: uuid
+          type: string
+        webhook:
+          description: Original webhook JSON data. Payload fields vary according to event type.
+          example:
+            event_type: call_initiated
+            id: C9C0797E-901D-4349-A33C-C2C8F31A92C2
+            occurred_at: 2020-08-10T13:02:01.000Z
+            payload:
+              useful: information
+            record_type: event
+          properties:
+            event_type:
+              description: The type of event being delivered.
+              enum:
+                - webhook.command
+              example: webhook.command
+              type: string
+            id:
+              description: Identifies the type of resource.
+              example: 0ccc7b54-4df3-4bca-a65a-3da1ecc777f0
+              format: uuid
+              type: string
+            occurred_at:
+              description: ISO 8601 datetime of when the event occurred.
+              example: 2018-02-02T22:25:27.521992Z
+              format: date-time
+              type: string
+            payload:
+              properties: {}
+              type: object
+            record_type:
+              description: Identifies the type of the resource.
+              enum:
+                - event
+              example: event
+              type: string
+          type: object
   securitySchemes:
     BearerAuth:
       scheme: bearer

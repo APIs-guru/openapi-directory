@@ -288,7 +288,7 @@ paths:
                 description: Invalid input data
                 domain: API_FULFILLMENT
         "500":
-          description: Internal Server Error
+          description: Internal Server Error. <br /><br /><span class="tablenote"><strong>Note:</strong> In some cases, this call may succeed if you issue it once more after receiving this error.</span>
           x-response-codes:
             errors:
               "30500":
@@ -424,10 +424,6 @@ paths:
                 category: REQUEST
                 description: Legacy transaction id must be specified for item level refund if you use legacyReference.
                 domain: API_FULFILLMENT
-              "34913":
-                category: REQUEST
-                description: Can not find the order.
-                domain: API_FULFILLMENT
               "34914":
                 category: REQUEST
                 description: Can't find the item in the order.
@@ -436,9 +432,17 @@ paths:
                 category: REQUEST
                 description: The refund amount exceeds order amount.
                 domain: API_FULFILLMENT
-              "34919":
-                category: REQUEST
-                description: Unauthorized access.
+              "34916":
+                category: BUSINESS
+                description: A post-transaction case exists on this order, seller refund can't be triggered.
+                domain: API_FULFILLMENT
+              "34917":
+                category: BUSINESS
+                description: The order status is not correct, refund can't be triggered against the order.
+                domain: API_FULFILLMENT
+              "34920":
+                category: BUSINESS
+                description: This order is out of time to trigger refund.
                 domain: API_FULFILLMENT
               "34921":
                 category: REQUEST
@@ -456,25 +460,23 @@ paths:
           description: Access Forbidden
         "404":
           description: Resource Not found
+          x-response-codes:
+            errors:
+              "34913":
+                category: REQUEST
+                description: Can not find the order.
+                domain: API_FULFILLMENT
         "409":
           description: Conflict
           x-response-codes:
             errors:
-              "34916":
-                category: BUSINESS
-                description: A post-transaction case exists on this order, seller refund can't be triggered.
-                domain: API_FULFILLMENT
-              "34917":
-                category: BUSINESS
-                description: The order status is not correct, refund can't be triggered against the order.
-                domain: API_FULFILLMENT
               "34918":
                 category: BUSINESS
                 description: This is not an eBay managed payments order.
                 domain: API_FULFILLMENT
-              "34920":
-                category: BUSINESS
-                description: This order is out of time to trigger refund.
+              "34919":
+                category: REQUEST
+                description: Unauthorized access.
                 domain: API_FULFILLMENT
               "34924":
                 category: BUSINESS
@@ -526,14 +528,14 @@ paths:
           description: Success
         "400":
           description: Bad Request
+        "404":
+          description: Invalid Payment Dispute Id
           x-response-codes:
             errors:
               "33001":
                 category: REQUEST
                 description: Invalid Payment Dispute Id
                 domain: API_FULFILLMENT
-        "404":
-          description: Invalid Payment Dispute Id
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -578,10 +580,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "33011":
-                category: REQUEST
-                description: There was a change in payment dispute attributes. Please use get payment dispute api to get latest details.
-                domain: API_FULFILLMENT
               "33100":
                 category: REQUEST
                 description: Invalid input request
@@ -590,6 +588,12 @@ paths:
           description: Not Found
         "409":
           description: Conflict
+          x-response-codes:
+            errors:
+              "33011":
+                category: REQUEST
+                description: There was a change in payment dispute attributes. Please use get payment dispute api to get latest details.
+                domain: API_FULFILLMENT
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -630,14 +634,14 @@ paths:
           description: Success
         "400":
           description: Bad Request
+        "404":
+          description: Invalid Payment Dispute Id
           x-response-codes:
             errors:
               "33001":
                 category: REQUEST
                 description: Invalid Payment Dispute Id
                 domain: API_FULFILLMENT
-        "404":
-          description: Invalid Payment Dispute Id
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -686,14 +690,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "33001":
-                category: REQUEST
-                description: Invalid Payment Dispute Id
-                domain: API_FULFILLMENT
-              "33004":
-                category: REQUEST
-                description: Upload file for evidence is not permitted for given payment dispute state.
-                domain: API_FULFILLMENT
               "33007":
                 category: REQUEST
                 description: Invalid line items.
@@ -716,8 +712,20 @@ paths:
                 domain: API_FULFILLMENT
         "404":
           description: Not Found
+          x-response-codes:
+            errors:
+              "33001":
+                category: REQUEST
+                description: Invalid Payment Dispute Id
+                domain: API_FULFILLMENT
         "409":
           description: Conflict
+          x-response-codes:
+            errors:
+              "33004":
+                category: REQUEST
+                description: Upload file for evidence is not permitted for given payment dispute state.
+                domain: API_FULFILLMENT
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -762,13 +770,19 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "33011":
-                category: REQUEST
-                description: There was a change in payment dispute attributes. Please use get payment dispute api to get latest details.
-                domain: API_FULFILLMENT
               "33100":
                 category: REQUEST
                 description: Invalid input request
+                domain: API_FULFILLMENT
+        "404":
+          description: Not Found
+        "409":
+          description: Conflict
+          x-response-codes:
+            errors:
+              "33011":
+                category: REQUEST
+                description: There was a change in payment dispute attributes. Please use get payment dispute api to get latest details.
                 domain: API_FULFILLMENT
               "33101":
                 category: REQUEST
@@ -778,10 +792,6 @@ paths:
                 category: REQUEST
                 description: No evidence available for contest
                 domain: API_FULFILLMENT
-        "404":
-          description: Not Found
-        "409":
-          description: Conflict
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -838,10 +848,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "33001":
-                category: REQUEST
-                description: Invalid Payment Dispute Id
-                domain: API_FULFILLMENT
               "33002":
                 category: REQUEST
                 description: Invalid Evidence Id
@@ -852,6 +858,12 @@ paths:
                 domain: API_FULFILLMENT
         "404":
           description: Invalid Payment Dispute Id
+          x-response-codes:
+            errors:
+              "33001":
+                category: REQUEST
+                description: Invalid Payment Dispute Id
+                domain: API_FULFILLMENT
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -896,14 +908,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "33001":
-                category: REQUEST
-                description: Invalid Payment Dispute Id
-                domain: API_FULFILLMENT
-              "33004":
-                category: REQUEST
-                description: Upload file for evidence is not permitted for given payment dispute state.
-                domain: API_FULFILLMENT
               "33007":
                 category: REQUEST
                 description: Invalid line items.
@@ -930,8 +934,20 @@ paths:
                 domain: API_FULFILLMENT
         "404":
           description: Not Found
+          x-response-codes:
+            errors:
+              "33001":
+                category: REQUEST
+                description: Invalid Payment Dispute Id
+                domain: API_FULFILLMENT
         "409":
           description: Conflict
+          x-response-codes:
+            errors:
+              "33004":
+                category: REQUEST
+                description: Upload file for evidence is not permitted for given payment dispute state.
+                domain: API_FULFILLMENT
         "500":
           description: Internal Server Error
           x-response-codes:
@@ -974,14 +990,6 @@ paths:
           description: Bad Request
           x-response-codes:
             errors:
-              "33001":
-                category: REQUEST
-                description: Invalid Payment Dispute Id
-                domain: API_FULFILLMENT
-              "33004":
-                category: REQUEST
-                description: Upload file for evidence is not permitted for given payment dispute state.
-                domain: API_FULFILLMENT
               "33005":
                 category: REQUEST
                 description: File type is invalid.
@@ -992,8 +1000,20 @@ paths:
                 domain: API_FULFILLMENT
         "404":
           description: Not Found
+          x-response-codes:
+            errors:
+              "33001":
+                category: REQUEST
+                description: Invalid Payment Dispute Id
+                domain: API_FULFILLMENT
         "409":
           description: Conflict
+          x-response-codes:
+            errors:
+              "33004":
+                category: REQUEST
+                description: Upload file for evidence is not permitted for given payment dispute state.
+                domain: API_FULFILLMENT
         "500":
           description: Internal Server Error
           x-response-codes:

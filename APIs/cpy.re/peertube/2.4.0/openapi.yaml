@@ -107,7 +107,7 @@ tags:
       Operations related to your subscriptions to video channels, their new videos, and how to keep up to date with their latest publications!
     name: My Subscriptions
   - description: >
-      Operations related to your watch history. 
+      Operations related to your watch history.
     name: My History
   - description: >
       Notifications following new videos, follows or reports. They allow you to keep track of the interactions and overall important information that concerns you. You MAY set per-notification type delivery preference, to receive the info either by mail, by in-browser notification or both.
@@ -913,18 +913,20 @@ paths:
   "/jobs/{state}":
     get:
       parameters:
-        - description: The state of the job
+        - description: The state of the job ('' for for no filter)
           in: path
           name: state
           required: true
           schema:
             enum:
+              - ""
               - active
               - completed
               - failed
               - waiting
               - delayed
             type: string
+        - $ref: "#/components/parameters/jobType"
         - $ref: "#/components/parameters/start"
         - $ref: "#/components/parameters/count"
         - $ref: "#/components/parameters/sort"
@@ -1634,6 +1636,14 @@ paths:
               schema:
                 $ref: "#/components/schemas/Avatar"
           description: successful operation
+        "413":
+          description: image file too large
+          headers:
+            X-File-Maximum-Size:
+              description: Maximum file size for the avatar
+              schema:
+                format: Nginx size
+                type: string
       security:
         - OAuth2: []
       summary: Update my user avatar
@@ -2618,6 +2628,8 @@ paths:
           description: successful operation
         "400":
           description: "`magnetUri` or `targetUrl` or a torrent file missing"
+        "403":
+          description: video didn't pass pre-import filter
         "409":
           description: HTTP or Torrent/magnetURI import not enabled
       security:
@@ -2697,6 +2709,9 @@ paths:
                   type: string
                 nsfw:
                   description: Whether or not this live video/replay contains sensitive content
+                  type: boolean
+                permanentLive:
+                  description: User can stream multiple times in a permanent live
                   type: boolean
                 previewfile:
                   description: Live video/replay preview file
@@ -2931,12 +2946,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/VideoUploadResponse"
           description: successful operation
+        "400":
+          description: invalid file field, schedule date or parameter
         "403":
-          description: user video quota is exceeded with this video
+          description: video didn't pass upload filter
         "408":
           description: upload has timed out
+        "413":
+          description: video file too large, due to quota or max body size limit set by the reverse-proxy
+          headers:
+            X-File-Maximum-Size:
+              description: Maximum file size for the video
+              schema:
+                format: Nginx size
+                type: string
+        "415":
+          description: video type unsupported
         "422":
-          description: invalid input file
+          description: video unreadable
       security:
         - OAuth2: []
       summary: Upload a video
@@ -3516,6 +3543,26 @@ components:
           - example: 9c9de5e8-0a1e-484a-b099-e80766180a6d
             format: uuid
             type: string
+    jobType:
+      description: job type
+      in: query
+      name: jobType
+      required: false
+      schema:
+        enum:
+          - activitypub-follow
+          - activitypub-http-broadcast
+          - activitypub-http-fetcher
+          - activitypub-http-unicast
+          - email
+          - video-transcoding
+          - video-file-import
+          - video-import
+          - videos-views
+          - activitypub-refresher
+          - video-redundancy
+          - video-live-ending
+        type: string
     languageOneOf:
       description: language id of the video (see [/videos/languages](#tag/Video/paths/~1videos~1languages/get)). Use `_unknown` to filter on videos that don't have a video language
       explode: false
@@ -3543,7 +3590,7 @@ components:
             type: array
       style: form
     name:
-      description: The name of the account
+      description: The username or handle of the account
       in: path
       name: name
       required: true
@@ -4061,6 +4108,9 @@ components:
           type: string
     LiveVideoResponse:
       properties:
+        permanentLive:
+          description: User can stream multiple times in a permanent live
+          type: boolean
         rtmpUrl:
           type: string
         saveReplay:
@@ -4070,6 +4120,9 @@ components:
           type: string
     LiveVideoUpdate:
       properties:
+        permanentLive:
+          description: User can stream multiple times in a permanent live
+          type: boolean
         saveReplay:
           type: boolean
     MRSSGroupContent:
@@ -4374,7 +4427,7 @@ components:
               minLength: 1
               type: string
             name:
-              description: The name for the default channel
+              description: The username for the default channel
               pattern: /^[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789\\-_.:]+$/
               type: string
           type: object

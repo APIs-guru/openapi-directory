@@ -223,6 +223,9 @@ paths:
               company:
                 explode: true
                 style: deepObject
+              documents:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -393,6 +396,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    grabpay_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     ideal_payments:
                       properties:
                         requested:
@@ -548,6 +557,9 @@ paths:
                     phone:
                       maxLength: 5000
                       type: string
+                    registration_number:
+                      maxLength: 5000
+                      type: string
                     structure:
                       enum:
                         - ""
@@ -596,6 +608,20 @@ paths:
                 default_currency:
                   description: Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
                   type: string
+                documents:
+                  description: Documents that may be submitted to satisfy various informational requests.
+                  properties:
+                    bank_account_ownership_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                  title: documents_specs
+                  type: object
                 email:
                   description: The email address of the account holder. This is only to make the account easier to identify to you. Stripe will never directly email Custom accounts.
                   type: string
@@ -3397,6 +3423,9 @@ paths:
               company:
                 explode: true
                 style: deepObject
+              documents:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -3567,6 +3596,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    grabpay_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     ideal_payments:
                       properties:
                         requested:
@@ -3722,6 +3757,9 @@ paths:
                     phone:
                       maxLength: 5000
                       type: string
+                    registration_number:
+                      maxLength: 5000
+                      type: string
                     structure:
                       enum:
                         - ""
@@ -3774,6 +3812,20 @@ paths:
                 default_currency:
                   description: Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
                   type: string
+                documents:
+                  description: Documents that may be submitted to satisfy various informational requests.
+                  properties:
+                    bank_account_ownership_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                  title: documents_specs
+                  type: object
                 email:
                   description: The email address of the account holder. This is only to make the account easier to identify to you. Stripe will never directly email Custom accounts.
                   type: string
@@ -4208,6 +4260,9 @@ paths:
               company:
                 explode: true
                 style: deepObject
+              documents:
+                explode: true
+                style: deepObject
               expand:
                 explode: true
                 style: deepObject
@@ -4378,6 +4433,12 @@ paths:
                           type: boolean
                       title: capability_param
                       type: object
+                    grabpay_payments:
+                      properties:
+                        requested:
+                          type: boolean
+                      title: capability_param
+                      type: object
                     ideal_payments:
                       properties:
                         requested:
@@ -4533,6 +4594,9 @@ paths:
                     phone:
                       maxLength: 5000
                       type: string
+                    registration_number:
+                      maxLength: 5000
+                      type: string
                     structure:
                       enum:
                         - ""
@@ -4581,6 +4645,20 @@ paths:
                 default_currency:
                   description: Three-letter ISO currency code representing the default currency for the account. This must be a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
                   type: string
+                documents:
+                  description: Documents that may be submitted to satisfy various informational requests.
+                  properties:
+                    bank_account_ownership_verification:
+                      properties:
+                        files:
+                          items:
+                            maxLength: 500
+                            type: string
+                          type: array
+                      title: documents_param
+                      type: object
+                  title: documents_specs
+                  type: object
                 email:
                   description: The email address of the account holder. This is only to make the account easier to identify to you. Stripe will never directly email Custom accounts.
                   type: string
@@ -10336,7 +10414,7 @@ paths:
 
                     Checkout will create a new customer object based on information
 
-                    provided during the session.
+                    provided during the payment flow.
                   maxLength: 5000
                   type: string
                 customer_email:
@@ -10352,7 +10430,7 @@ paths:
                     complete, use the `customer` field.
                   type: string
                 discounts:
-                  description: The coupon or promotion code to apply to this session. Currently, only up to one may be specified.
+                  description: The coupon or promotion code to apply to this Session. Currently, only up to one may be specified.
                   items:
                     properties:
                       coupon:
@@ -10510,7 +10588,7 @@ paths:
                   description: Set of [key-value pairs](https://stripe.com/docs/api/metadata) that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
                   type: object
                 mode:
-                  description: The mode of the Checkout Session. Required when using prices or `setup` mode. Pass `subscription` if Checkout session includes at least one recurring item.
+                  description: The mode of the Checkout Session. Required when using prices or `setup` mode. Pass `subscription` if the Checkout Session includes at least one recurring item.
                   enum:
                     - payment
                     - setup
@@ -10608,7 +10686,7 @@ paths:
                   type: object
                 payment_method_types:
                   description: >-
-                    A list of the types of payment methods (e.g., `card`) this Checkout session can accept.
+                    A list of the types of payment methods (e.g., `card`) this Checkout Session can accept.
 
 
                     Read more about the supported payment methods and their requirements in our [payment
@@ -10630,6 +10708,7 @@ paths:
                       - eps
                       - fpx
                       - giropay
+                      - grabpay
                       - ideal
                       - p24
                       - sepa_debit
@@ -12462,7 +12541,7 @@ paths:
                 type: object
               - type: integer
           style: deepObject
-        - description: A filter on the list based on the customer's `email` field. The value must be a string.
+        - description: A case-sensitive filter on the list based on the customer's `email` field. The value must be a string.
           in: query
           name: email
           required: false
@@ -12604,9 +12683,7 @@ paths:
                         state:
                           maxLength: 5000
                           type: string
-                      required:
-                        - line1
-                      title: address
+                      title: optional_fields_address
                       type: object
                     - enum:
                         - ""
@@ -12967,9 +13044,7 @@ paths:
                         state:
                           maxLength: 5000
                           type: string
-                      required:
-                        - line1
-                      title: address
+                      title: optional_fields_address
                       type: object
                     - enum:
                         - ""
@@ -17629,6 +17704,7 @@ paths:
           required: false
           schema:
             enum:
+              - account_requirement
               - additional_verification
               - business_icon
               - business_logo
@@ -17752,6 +17828,7 @@ paths:
                 purpose:
                   description: The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
                   enum:
+                    - account_requirement
                     - additional_verification
                     - business_icon
                     - business_logo
@@ -18504,12 +18581,15 @@ paths:
                 $ref: "#/components/schemas/error"
           description: Error response.
     post:
-      description: <p>This endpoint creates a draft invoice for a given customer. The draft invoice created pulls in all pending invoice items on that customer, including prorations.</p>
+      description: <p>This endpoint creates a draft invoice for a given customer. The draft invoice created pulls in all pending invoice items on that customer, including prorations. The invoice remains a draft until you <a href="#finalize_invoice">finalize</a> the invoice, which allows you to <a href="#pay_invoice">pay</a> or <a href="#send_invoice">send</a> the invoice to your customers.</p>
       operationId: PostInvoices
       requestBody:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              account_tax_ids:
+                explode: true
+                style: deepObject
               custom_fields:
                 explode: true
                 style: deepObject
@@ -18531,6 +18611,16 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                account_tax_ids:
+                  anyOf:
+                    - items:
+                        maxLength: 5000
+                        type: string
+                      type: array
+                    - enum:
+                        - ""
+                      type: string
+                  description: The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
                 application_fee_amount:
                   description: A fee in %s that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
                   type: integer
@@ -19598,6 +19688,9 @@ paths:
         content:
           application/x-www-form-urlencoded:
             encoding:
+              account_tax_ids:
+                explode: true
+                style: deepObject
               custom_fields:
                 explode: true
                 style: deepObject
@@ -19619,6 +19712,16 @@ paths:
             schema:
               additionalProperties: false
               properties:
+                account_tax_ids:
+                  anyOf:
+                    - items:
+                        maxLength: 5000
+                        type: string
+                      type: array
+                    - enum:
+                        - ""
+                      type: string
+                  description: The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
                 application_fee_amount:
                   description: A fee in %s that will be applied to the invoice and transferred to the application owner's Stripe account. The request must be made with an OAuth key or the Stripe-Account header in order to take an application fee. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#invoices).
                   type: integer
@@ -20239,7 +20342,7 @@ paths:
       description: <p>Returns a list of Issuing <code>Authorization</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
       operationId: GetIssuingAuthorizations
       parameters:
-        - description: Only return issuing transactions that belong to the given card.
+        - description: Only return authorizations that belong to the given card.
           in: query
           name: card
           required: false
@@ -20247,7 +20350,7 @@ paths:
             maxLength: 5000
             type: string
           style: form
-        - description: Only return authorizations belonging to the given cardholder.
+        - description: Only return authorizations that belong to the given cardholder.
           in: query
           name: cardholder
           required: false
@@ -27607,7 +27710,38 @@ paths:
                       title: billing_details_inner_params
                       type: object
                     eps:
-                      properties: {}
+                      properties:
+                        bank:
+                          enum:
+                            - arzte_und_apotheker_bank
+                            - austrian_anadi_bank_ag
+                            - bank_austria
+                            - bankhaus_carl_spangler
+                            - bankhaus_schelhammer_und_schattera_ag
+                            - bawag_psk_ag
+                            - bks_bank_ag
+                            - brull_kallmus_bank_ag
+                            - btv_vier_lander_bank
+                            - capital_bank_grawe_gruppe_ag
+                            - dolomitenbank
+                            - easybank_ag
+                            - erste_bank_und_sparkassen
+                            - hypo_alpeadriabank_international_ag
+                            - hypo_bank_burgenland_aktiengesellschaft
+                            - hypo_noe_lb_fur_niederosterreich_u_wien
+                            - hypo_oberosterreich_salzburg_steiermark
+                            - hypo_tirol_bank_ag
+                            - hypo_vorarlberg_bank_ag
+                            - marchfelder_bank
+                            - oberbank_ag
+                            - raiffeisen_bankengruppe_osterreich
+                            - schoellerbank_ag
+                            - sparda_bank_wien
+                            - volksbank_gruppe
+                            - volkskreditbank_ag
+                            - vr_bank_braunau
+                          maxLength: 5000
+                          type: string
                       title: param
                       type: object
                     fpx:
@@ -27642,6 +27776,10 @@ paths:
                       title: param
                       type: object
                     giropay:
+                      properties: {}
+                      title: param
+                      type: object
+                    grabpay:
                       properties: {}
                       title: param
                       type: object
@@ -27743,6 +27881,7 @@ paths:
                         - eps
                         - fpx
                         - giropay
+                        - grabpay
                         - ideal
                         - oxxo
                         - p24
@@ -27853,8 +27992,22 @@ paths:
                           type: string
                     p24:
                       anyOf:
-                        - properties: {}
+                        - properties:
+                            tos_shown_and_accepted:
+                              type: boolean
                           title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    sepa_debit:
+                      anyOf:
+                        - properties:
+                            mandate_options:
+                              properties: {}
+                              title: payment_method_options_mandate_options_param
+                              type: object
+                          title: payment_intent_payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -28236,7 +28389,38 @@ paths:
                       title: billing_details_inner_params
                       type: object
                     eps:
-                      properties: {}
+                      properties:
+                        bank:
+                          enum:
+                            - arzte_und_apotheker_bank
+                            - austrian_anadi_bank_ag
+                            - bank_austria
+                            - bankhaus_carl_spangler
+                            - bankhaus_schelhammer_und_schattera_ag
+                            - bawag_psk_ag
+                            - bks_bank_ag
+                            - brull_kallmus_bank_ag
+                            - btv_vier_lander_bank
+                            - capital_bank_grawe_gruppe_ag
+                            - dolomitenbank
+                            - easybank_ag
+                            - erste_bank_und_sparkassen
+                            - hypo_alpeadriabank_international_ag
+                            - hypo_bank_burgenland_aktiengesellschaft
+                            - hypo_noe_lb_fur_niederosterreich_u_wien
+                            - hypo_oberosterreich_salzburg_steiermark
+                            - hypo_tirol_bank_ag
+                            - hypo_vorarlberg_bank_ag
+                            - marchfelder_bank
+                            - oberbank_ag
+                            - raiffeisen_bankengruppe_osterreich
+                            - schoellerbank_ag
+                            - sparda_bank_wien
+                            - volksbank_gruppe
+                            - volkskreditbank_ag
+                            - vr_bank_braunau
+                          maxLength: 5000
+                          type: string
                       title: param
                       type: object
                     fpx:
@@ -28271,6 +28455,10 @@ paths:
                       title: param
                       type: object
                     giropay:
+                      properties: {}
+                      title: param
+                      type: object
+                    grabpay:
                       properties: {}
                       title: param
                       type: object
@@ -28372,6 +28560,7 @@ paths:
                         - eps
                         - fpx
                         - giropay
+                        - grabpay
                         - ideal
                         - oxxo
                         - p24
@@ -28482,8 +28671,22 @@ paths:
                           type: string
                     p24:
                       anyOf:
-                        - properties: {}
+                        - properties:
+                            tos_shown_and_accepted:
+                              type: boolean
                           title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    sepa_debit:
+                      anyOf:
+                        - properties:
+                            mandate_options:
+                              properties: {}
+                              title: payment_method_options_mandate_options_param
+                              type: object
+                          title: payment_intent_payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -29015,7 +29218,38 @@ paths:
                       title: billing_details_inner_params
                       type: object
                     eps:
-                      properties: {}
+                      properties:
+                        bank:
+                          enum:
+                            - arzte_und_apotheker_bank
+                            - austrian_anadi_bank_ag
+                            - bank_austria
+                            - bankhaus_carl_spangler
+                            - bankhaus_schelhammer_und_schattera_ag
+                            - bawag_psk_ag
+                            - bks_bank_ag
+                            - brull_kallmus_bank_ag
+                            - btv_vier_lander_bank
+                            - capital_bank_grawe_gruppe_ag
+                            - dolomitenbank
+                            - easybank_ag
+                            - erste_bank_und_sparkassen
+                            - hypo_alpeadriabank_international_ag
+                            - hypo_bank_burgenland_aktiengesellschaft
+                            - hypo_noe_lb_fur_niederosterreich_u_wien
+                            - hypo_oberosterreich_salzburg_steiermark
+                            - hypo_tirol_bank_ag
+                            - hypo_vorarlberg_bank_ag
+                            - marchfelder_bank
+                            - oberbank_ag
+                            - raiffeisen_bankengruppe_osterreich
+                            - schoellerbank_ag
+                            - sparda_bank_wien
+                            - volksbank_gruppe
+                            - volkskreditbank_ag
+                            - vr_bank_braunau
+                          maxLength: 5000
+                          type: string
                       title: param
                       type: object
                     fpx:
@@ -29050,6 +29284,10 @@ paths:
                       title: param
                       type: object
                     giropay:
+                      properties: {}
+                      title: param
+                      type: object
+                    grabpay:
                       properties: {}
                       title: param
                       type: object
@@ -29151,6 +29389,7 @@ paths:
                         - eps
                         - fpx
                         - giropay
+                        - grabpay
                         - ideal
                         - oxxo
                         - p24
@@ -29261,8 +29500,22 @@ paths:
                           type: string
                     p24:
                       anyOf:
-                        - properties: {}
+                        - properties:
+                            tos_shown_and_accepted:
+                              type: boolean
                           title: payment_method_options_param
+                          type: object
+                        - enum:
+                            - ""
+                          type: string
+                    sepa_debit:
+                      anyOf:
+                        - properties:
+                            mandate_options:
+                              properties: {}
+                              title: payment_method_options_mandate_options_param
+                              type: object
+                          title: payment_intent_payment_method_options_param
                           type: object
                         - enum:
                             - ""
@@ -29450,6 +29703,7 @@ paths:
               - eps
               - fpx
               - giropay
+              - grabpay
               - ideal
               - oxxo
               - p24
@@ -29542,6 +29796,9 @@ paths:
                 explode: true
                 style: deepObject
               giropay:
+                explode: true
+                style: deepObject
+              grabpay:
                 explode: true
                 style: deepObject
               ideal:
@@ -29677,7 +29934,38 @@ paths:
                   type: string
                 eps:
                   description: If this is an `eps` PaymentMethod, this hash contains details about the EPS payment method.
-                  properties: {}
+                  properties:
+                    bank:
+                      enum:
+                        - arzte_und_apotheker_bank
+                        - austrian_anadi_bank_ag
+                        - bank_austria
+                        - bankhaus_carl_spangler
+                        - bankhaus_schelhammer_und_schattera_ag
+                        - bawag_psk_ag
+                        - bks_bank_ag
+                        - brull_kallmus_bank_ag
+                        - btv_vier_lander_bank
+                        - capital_bank_grawe_gruppe_ag
+                        - dolomitenbank
+                        - easybank_ag
+                        - erste_bank_und_sparkassen
+                        - hypo_alpeadriabank_international_ag
+                        - hypo_bank_burgenland_aktiengesellschaft
+                        - hypo_noe_lb_fur_niederosterreich_u_wien
+                        - hypo_oberosterreich_salzburg_steiermark
+                        - hypo_tirol_bank_ag
+                        - hypo_vorarlberg_bank_ag
+                        - marchfelder_bank
+                        - oberbank_ag
+                        - raiffeisen_bankengruppe_osterreich
+                        - schoellerbank_ag
+                        - sparda_bank_wien
+                        - volksbank_gruppe
+                        - volkskreditbank_ag
+                        - vr_bank_braunau
+                      maxLength: 5000
+                      type: string
                   title: param
                   type: object
                 expand:
@@ -29720,6 +30008,11 @@ paths:
                   type: object
                 giropay:
                   description: If this is a `giropay` PaymentMethod, this hash contains details about the Giropay payment method.
+                  properties: {}
+                  title: param
+                  type: object
+                grabpay:
+                  description: If this is a `grabpay` PaymentMethod, this hash contains details about the GrabPay payment method.
                   properties: {}
                   title: param
                   type: object
@@ -29834,6 +30127,7 @@ paths:
                     - eps
                     - fpx
                     - giropay
+                    - grabpay
                     - ideal
                     - oxxo
                     - p24
@@ -35196,6 +35490,14 @@ paths:
                           x-stripeBypassValidation: true
                       title: setup_intent_param
                       type: object
+                    sepa_debit:
+                      properties:
+                        mandate_options:
+                          properties: {}
+                          title: payment_method_options_mandate_options_param
+                          type: object
+                      title: setup_intent_payment_method_options_param
+                      type: object
                   title: payment_method_options_param
                   type: object
                 payment_method_types:
@@ -35374,6 +35676,14 @@ paths:
                           type: string
                           x-stripeBypassValidation: true
                       title: setup_intent_param
+                      type: object
+                    sepa_debit:
+                      properties:
+                        mandate_options:
+                          properties: {}
+                          title: payment_method_options_mandate_options_param
+                          type: object
+                      title: setup_intent_payment_method_options_param
                       type: object
                   title: payment_method_options_param
                   type: object
@@ -35596,6 +35906,14 @@ paths:
                           type: string
                           x-stripeBypassValidation: true
                       title: setup_intent_param
+                      type: object
+                    sepa_debit:
+                      properties:
+                        mandate_options:
+                          properties: {}
+                          title: payment_method_options_mandate_options_param
+                          type: object
+                      title: setup_intent_payment_method_options_param
                       type: object
                   title: payment_method_options_param
                   type: object
@@ -37969,6 +38287,8 @@ paths:
                 default_settings:
                   description: Object representing the subscription schedule's default settings.
                   properties:
+                    application_fee_percent:
+                      type: number
                     billing_cycle_anchor:
                       enum:
                         - automatic
@@ -38326,6 +38646,8 @@ paths:
                 default_settings:
                   description: Object representing the subscription schedule's default settings.
                   properties:
+                    application_fee_percent:
+                      type: number
                     billing_cycle_anchor:
                       enum:
                         - automatic
@@ -40852,6 +41174,9 @@ paths:
                         phone:
                           maxLength: 5000
                           type: string
+                        registration_number:
+                          maxLength: 5000
+                          type: string
                         structure:
                           enum:
                             - ""
@@ -42634,6 +42959,7 @@ paths:
                       - file.created
                       - invoice.created
                       - invoice.deleted
+                      - invoice.finalization_failed
                       - invoice.finalized
                       - invoice.marked_uncollectible
                       - invoice.paid
@@ -42953,6 +43279,7 @@ paths:
                       - file.created
                       - invoice.created
                       - invoice.deleted
+                      - invoice.finalization_failed
                       - invoice.finalized
                       - invoice.marked_uncollectible
                       - invoice.paid
@@ -43393,6 +43720,13 @@ components:
           type: string
         giropay_payments:
           description: The status of the giropay payments capability of the account, or whether the account can directly process giropay charges.
+          enum:
+            - active
+            - inactive
+            - pending
+          type: string
+        grabpay_payments:
+          description: The status of the GrabPay payments capability of the account, or whether the account can directly process GrabPay charges.
           enum:
             - active
             - inactive
@@ -43967,6 +44301,10 @@ components:
           $ref: "#/components/schemas/payment_intent"
         payment_method:
           $ref: "#/components/schemas/payment_method"
+        payment_method_type:
+          description: If the error is specific to the type of payment method, the payment method type that had a problem. This field is only populated for invoice-related errors.
+          maxLength: 5000
+          type: string
         setup_intent:
           $ref: "#/components/schemas/setup_intent"
         source:
@@ -44358,6 +44696,7 @@ components:
             - $ref: "#/components/schemas/dispute"
             - $ref: "#/components/schemas/fee_refund"
             - $ref: "#/components/schemas/issuing.authorization"
+            - $ref: "#/components/schemas/issuing.dispute"
             - $ref: "#/components/schemas/issuing.transaction"
             - $ref: "#/components/schemas/payout"
             - $ref: "#/components/schemas/platform_tax_fee"
@@ -44377,6 +44716,7 @@ components:
               - $ref: "#/components/schemas/dispute"
               - $ref: "#/components/schemas/fee_refund"
               - $ref: "#/components/schemas/issuing.authorization"
+              - $ref: "#/components/schemas/issuing.dispute"
               - $ref: "#/components/schemas/issuing.transaction"
               - $ref: "#/components/schemas/payout"
               - $ref: "#/components/schemas/platform_tax_fee"
@@ -45542,7 +45882,7 @@ components:
 
             customer ID, a cart ID, or similar, and can be used to reconcile the
 
-            session with your internal systems.
+            Session with your internal systems.
           maxLength: 5000
           nullable: true
           type: string
@@ -45557,15 +45897,15 @@ components:
             - $ref: "#/components/schemas/customer"
             - $ref: "#/components/schemas/deleted_customer"
           description: >-
-            The ID of the customer for this session.
+            The ID of the customer for this Session.
 
             For Checkout Sessions in `payment` or `subscription` mode, Checkout
 
             will create a new customer object based on information provided
 
-            during the session unless an existing customer was provided when
+            during the payment flow unless an existing customer was provided when
 
-            the session was created.
+            the Session was created.
           nullable: true
           x-expansionResources:
             oneOf:
@@ -45579,7 +45919,7 @@ components:
 
             Use this parameter to prefill customer data if you already have an email
 
-            on file. To access information about the customer once a session is
+            on file. To access information about the customer once the payment flow is
 
             complete, use the `customer` attribute.
           maxLength: 5000
@@ -46398,7 +46738,11 @@ components:
               - $ref: "#/components/schemas/card"
               - $ref: "#/components/schemas/source"
         delinquent:
-          description: When the customer's latest invoice is billed by charging automatically, delinquent is true if the invoice's latest charge is failed. When the customer's latest invoice is billed by sending an invoice, delinquent is true if the invoice is not paid by its due date.
+          description: >-
+            When the customer's latest invoice is billed by charging automatically, `delinquent` is `true` if the invoice's latest charge failed. When the customer's latest invoice is billed by sending an invoice, `delinquent` is `true` if the invoice isn't paid by its due date.
+
+
+            If an invoice is marked uncollectible by [dunning](https://stripe.com/docs/billing/automatic-collection), `delinquent` doesn't get reset to `false`.
           nullable: true
           type: boolean
         description:
@@ -48231,6 +48575,7 @@ components:
         purpose:
           description: The [purpose](https://stripe.com/docs/file-upload#uploading-a-file) of the uploaded file.
           enum:
+            - account_requirement
             - additional_verification
             - business_icon
             - business_logo
@@ -48465,6 +48810,20 @@ components:
           maxLength: 5000
           nullable: true
           type: string
+        account_tax_ids:
+          description: The account tax IDs associated with the invoice. Only editable when the invoice is a draft.
+          items:
+            anyOf:
+              - maxLength: 5000
+                type: string
+              - $ref: "#/components/schemas/tax_id"
+              - $ref: "#/components/schemas/deleted_tax_id"
+            x-expansionResources:
+              oneOf:
+                - $ref: "#/components/schemas/tax_id"
+                - $ref: "#/components/schemas/deleted_tax_id"
+          nullable: true
+          type: array
         amount_due:
           description: Final amount due at this time for this invoice. If the invoice's total is smaller than the minimum charge amount, for example, or if there is account credit that can be applied to the invoice, the `amount_due` may be 0. If there is a positive `starting_balance` for the invoice (the customer owes money), the `amount_due` will also take that into account. The charge that gets generated for the invoice will be for the amount specified in `amount_due`.
           type: integer
@@ -48612,7 +48971,6 @@ components:
           description: The tax rates applied to this invoice, if any.
           items:
             $ref: "#/components/schemas/tax_rate"
-          nullable: true
           type: array
         description:
           description: An arbitrary string attached to the object. Often useful for displaying to users. Referenced as 'memo' in the Dashboard.
@@ -48666,6 +49024,11 @@ components:
           maxLength: 5000
           nullable: true
           type: string
+        last_finalization_error:
+          anyOf:
+            - $ref: "#/components/schemas/api_errors"
+          description: The error encountered during the previous attempt to finalize the invoice. This field is cleared when the invoice is successfully finalized.
+          nullable: true
         lines:
           description: "The individual line items that make up the invoice. `lines` is sorted as follows: invoice items in reverse chronological order, followed by the subscription, if any."
           properties:
@@ -48808,7 +49171,6 @@ components:
           description: The aggregate amounts calculated per tax rate for all line items.
           items:
             $ref: "#/components/schemas/invoice_tax_amount"
-          nullable: true
           type: array
         transfer_data:
           anyOf:
@@ -48829,6 +49191,7 @@ components:
         - created
         - currency
         - customer
+        - default_tax_rates
         - lines
         - livemode
         - object
@@ -48841,9 +49204,11 @@ components:
         - status_transitions
         - subtotal
         - total
+        - total_tax_amounts
       title: Invoice
       type: object
       x-expandableFields:
+        - account_tax_ids
         - charge
         - custom_fields
         - customer
@@ -48855,6 +49220,7 @@ components:
         - default_tax_rates
         - discount
         - discounts
+        - last_finalization_error
         - lines
         - payment_intent
         - status_transitions
@@ -48887,9 +49253,11 @@ components:
       properties:
         end:
           description: End of the line item's billing period
+          format: unix-time
           type: integer
         start:
           description: Start of the line item's billing period
+          format: unix-time
           type: integer
       required:
         - end
@@ -52776,7 +53144,7 @@ components:
         - id
         - object
         - price
-      title: LineItems
+      title: LineItem
       type: object
       x-expandableFields:
         - discounts
@@ -53137,13 +53505,11 @@ components:
           description: The amount of tax calculated per tax rate for this line item
           items:
             $ref: "#/components/schemas/invoice_tax_amount"
-          nullable: true
           type: array
         tax_rates:
           description: The tax rates which apply to the line item.
           items:
             $ref: "#/components/schemas/tax_rate"
-          nullable: true
           type: array
         type:
           description: A string identifying the type of the source of this line item, either an `invoiceitem` or a `subscription`.
@@ -53843,7 +54209,7 @@ components:
             oneOf:
               - $ref: "#/components/schemas/application"
         application_fee_amount:
-          description: The amount of the application fee (if any) requested for the resulting payment. See the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
+          description: The amount of the application fee (if any) that will be requested to be applied to the payment and transferred to the application owner's Stripe account. The amount of the application fee collected will be capped at the total payment amount. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
           nullable: true
           type: integer
         canceled_at:
@@ -53906,7 +54272,7 @@ components:
             The client secret can be used to complete a payment from your frontend. It should not be stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that you have TLS enabled on any page that includes the client secret.
 
 
-            Refer to our docs to [accept a payment](https://stripe.com/docs/payments/accept-a-payment) and learn about how `client_secret` should be handled.
+            Refer to our docs to [accept a payment](https://stripe.com/docs/payments/accept-a-payment?integration=elements) and learn about how `client_secret` should be handled.
           maxLength: 5000
           nullable: true
           type: string
@@ -54207,6 +54573,8 @@ components:
           $ref: "#/components/schemas/payment_method_options_oxxo"
         p24:
           $ref: "#/components/schemas/payment_method_options_p24"
+        sepa_debit:
+          $ref: "#/components/schemas/payment_intent_payment_method_options_sepa_debit"
         sofort:
           $ref: "#/components/schemas/payment_method_options_sofort"
       title: PaymentIntentPaymentMethodOptions
@@ -54217,6 +54585,7 @@ components:
         - card
         - oxxo
         - p24
+        - sepa_debit
         - sofort
     payment_intent_payment_method_options_card:
       description: ""
@@ -54257,6 +54626,21 @@ components:
       type: object
       x-expandableFields:
         - installments
+    payment_intent_payment_method_options_mandate_options_sepa_debit:
+      description: ""
+      properties: {}
+      title: payment_intent_payment_method_options_mandate_options_sepa_debit
+      type: object
+      x-expandableFields: []
+    payment_intent_payment_method_options_sepa_debit:
+      description: ""
+      properties:
+        mandate_options:
+          $ref: "#/components/schemas/payment_intent_payment_method_options_mandate_options_sepa_debit"
+      title: payment_intent_payment_method_options_sepa_debit
+      type: object
+      x-expandableFields:
+        - mandate_options
     payment_method:
       description: >-
         PaymentMethod objects represent your customer's payment instruments.
@@ -54302,6 +54686,8 @@ components:
           $ref: "#/components/schemas/payment_method_fpx"
         giropay:
           $ref: "#/components/schemas/payment_method_giropay"
+        grabpay:
+          $ref: "#/components/schemas/payment_method_grabpay"
         id:
           description: Unique identifier for the object.
           maxLength: 5000
@@ -54341,10 +54727,13 @@ components:
             - bacs_debit
             - bancontact
             - card
+            - card_present
             - eps
             - fpx
             - giropay
+            - grabpay
             - ideal
+            - interac_present
             - oxxo
             - p24
             - sepa_debit
@@ -54372,6 +54761,7 @@ components:
         - eps
         - fpx
         - giropay
+        - grabpay
         - ideal
         - interac_present
         - oxxo
@@ -54687,6 +55077,8 @@ components:
           $ref: "#/components/schemas/payment_method_details_fpx"
         giropay:
           $ref: "#/components/schemas/payment_method_details_giropay"
+        grabpay:
+          $ref: "#/components/schemas/payment_method_details_grabpay"
         ideal:
           $ref: "#/components/schemas/payment_method_details_ideal"
         interac_present:
@@ -54732,6 +55124,7 @@ components:
         - eps
         - fpx
         - giropay
+        - grabpay
         - ideal
         - interac_present
         - klarna
@@ -55312,6 +55705,38 @@ components:
     payment_method_details_eps:
       description: ""
       properties:
+        bank:
+          description: The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
+          enum:
+            - arzte_und_apotheker_bank
+            - austrian_anadi_bank_ag
+            - bank_austria
+            - bankhaus_carl_spangler
+            - bankhaus_schelhammer_und_schattera_ag
+            - bawag_psk_ag
+            - bks_bank_ag
+            - brull_kallmus_bank_ag
+            - btv_vier_lander_bank
+            - capital_bank_grawe_gruppe_ag
+            - dolomitenbank
+            - easybank_ag
+            - erste_bank_und_sparkassen
+            - hypo_alpeadriabank_international_ag
+            - hypo_bank_burgenland_aktiengesellschaft
+            - hypo_noe_lb_fur_niederosterreich_u_wien
+            - hypo_oberosterreich_salzburg_steiermark
+            - hypo_tirol_bank_ag
+            - hypo_vorarlberg_bank_ag
+            - marchfelder_bank
+            - oberbank_ag
+            - raiffeisen_bankengruppe_osterreich
+            - schoellerbank_ag
+            - sparda_bank_wien
+            - volksbank_gruppe
+            - volkskreditbank_ag
+            - vr_bank_braunau
+          nullable: true
+          type: string
         verified_name:
           description: >-
             Owner's verified full name. Values are verified or provided by EPS directly
@@ -55391,6 +55816,17 @@ components:
           nullable: true
           type: string
       title: payment_method_details_giropay
+      type: object
+      x-expandableFields: []
+    payment_method_details_grabpay:
+      description: ""
+      properties:
+        transaction_id:
+          description: Unique transaction id generated by GrabPay
+          maxLength: 5000
+          nullable: true
+          type: string
+      title: payment_method_details_grabpay
       type: object
       x-expandableFields: []
     payment_method_details_ideal:
@@ -55641,6 +56077,36 @@ components:
     payment_method_details_p24:
       description: ""
       properties:
+        bank:
+          description: The customer's bank. Can be one of `ing`, `citi_handlowy`, `tmobile_usbugi_bankowe`, `plus_bank`, `etransfer_pocztowy24`, `banki_spbdzielcze`, `bank_nowy_bfg_sa`, `getin_bank`, `blik`, `noble_pay`, `ideabank`, `envelobank`, `santander_przelew24`, `nest_przelew`, `mbank_mtransfer`, `inteligo`, `pbac_z_ipko`, `bnp_paribas`, `credit_agricole`, `toyota_bank`, `bank_pekao_sa`, `volkswagen_bank`, `bank_millennium`, `alior_bank`, or `boz`.
+          enum:
+            - alior_bank
+            - bank_millennium
+            - bank_nowy_bfg_sa
+            - bank_pekao_sa
+            - banki_spbdzielcze
+            - blik
+            - bnp_paribas
+            - boz
+            - citi_handlowy
+            - credit_agricole
+            - envelobank
+            - etransfer_pocztowy24
+            - getin_bank
+            - ideabank
+            - ing
+            - inteligo
+            - mbank_mtransfer
+            - nest_przelew
+            - noble_pay
+            - pbac_z_ipko
+            - plus_bank
+            - santander_przelew24
+            - tmobile_usbugi_bankowe
+            - toyota_bank
+            - volkswagen_bank
+          nullable: true
+          type: string
         reference:
           description: Unique reference for this Przelewy24 payment.
           maxLength: 5000
@@ -55785,7 +56251,39 @@ components:
       x-expandableFields: []
     payment_method_eps:
       description: ""
-      properties: {}
+      properties:
+        bank:
+          description: The customer's bank. Should be one of `arzte_und_apotheker_bank`, `austrian_anadi_bank_ag`, `bank_austria`, `bankhaus_carl_spangler`, `bankhaus_schelhammer_und_schattera_ag`, `bawag_psk_ag`, `bks_bank_ag`, `brull_kallmus_bank_ag`, `btv_vier_lander_bank`, `capital_bank_grawe_gruppe_ag`, `dolomitenbank`, `easybank_ag`, `erste_bank_und_sparkassen`, `hypo_alpeadriabank_international_ag`, `hypo_noe_lb_fur_niederosterreich_u_wien`, `hypo_oberosterreich_salzburg_steiermark`, `hypo_tirol_bank_ag`, `hypo_vorarlberg_bank_ag`, `hypo_bank_burgenland_aktiengesellschaft`, `marchfelder_bank`, `oberbank_ag`, `raiffeisen_bankengruppe_osterreich`, `schoellerbank_ag`, `sparda_bank_wien`, `volksbank_gruppe`, `volkskreditbank_ag`, or `vr_bank_braunau`.
+          enum:
+            - arzte_und_apotheker_bank
+            - austrian_anadi_bank_ag
+            - bank_austria
+            - bankhaus_carl_spangler
+            - bankhaus_schelhammer_und_schattera_ag
+            - bawag_psk_ag
+            - bks_bank_ag
+            - brull_kallmus_bank_ag
+            - btv_vier_lander_bank
+            - capital_bank_grawe_gruppe_ag
+            - dolomitenbank
+            - easybank_ag
+            - erste_bank_und_sparkassen
+            - hypo_alpeadriabank_international_ag
+            - hypo_bank_burgenland_aktiengesellschaft
+            - hypo_noe_lb_fur_niederosterreich_u_wien
+            - hypo_oberosterreich_salzburg_steiermark
+            - hypo_tirol_bank_ag
+            - hypo_vorarlberg_bank_ag
+            - marchfelder_bank
+            - oberbank_ag
+            - raiffeisen_bankengruppe_osterreich
+            - schoellerbank_ag
+            - sparda_bank_wien
+            - volksbank_gruppe
+            - volkskreditbank_ag
+            - vr_bank_braunau
+          nullable: true
+          type: string
       title: payment_method_eps
       type: object
       x-expandableFields: []
@@ -55825,6 +56323,12 @@ components:
       description: ""
       properties: {}
       title: payment_method_giropay
+      type: object
+      x-expandableFields: []
+    payment_method_grabpay:
+      description: ""
+      properties: {}
+      title: payment_method_grabpay
       type: object
       x-expandableFields: []
     payment_method_ideal:
@@ -58884,10 +59388,13 @@ components:
       properties:
         card:
           $ref: "#/components/schemas/setup_intent_payment_method_options_card"
+        sepa_debit:
+          $ref: "#/components/schemas/setup_intent_payment_method_options_sepa_debit"
       title: SetupIntentPaymentMethodOptions
       type: object
       x-expandableFields:
         - card
+        - sepa_debit
     setup_intent_payment_method_options_card:
       description: ""
       properties:
@@ -58902,6 +59409,21 @@ components:
       title: setup_intent_payment_method_options_card
       type: object
       x-expandableFields: []
+    setup_intent_payment_method_options_mandate_options_sepa_debit:
+      description: ""
+      properties: {}
+      title: setup_intent_payment_method_options_mandate_options_sepa_debit
+      type: object
+      x-expandableFields: []
+    setup_intent_payment_method_options_sepa_debit:
+      description: ""
+      properties:
+        mandate_options:
+          $ref: "#/components/schemas/setup_intent_payment_method_options_mandate_options_sepa_debit"
+      title: setup_intent_payment_method_options_sepa_debit
+      type: object
+      x-expandableFields:
+        - mandate_options
     shipping:
       description: ""
       properties:
@@ -60892,6 +61414,10 @@ components:
     subscription_schedules_resource_default_settings:
       description: ""
       properties:
+        application_fee_percent:
+          description: A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account during this phase of the schedule.
+          nullable: true
+          type: number
         billing_cycle_anchor:
           description: Possible values are `phase_start` or `automatic`. If `phase_start` then billing cycle anchor of the subscription is set to the start of the phase when entering the phase. If `automatic` then the billing cycle anchor is automatically modified as needed when entering the phase. For more information, see the billing cycle [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
           enum:

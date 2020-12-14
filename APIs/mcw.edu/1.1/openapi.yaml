@@ -1903,6 +1903,68 @@ paths:
       summary: Return a list of assemblies
       tags:
         - Map
+  "/ontology/ont/{accId}":
+    get:
+      operationId: getOntDagsUsingGET
+      parameters:
+        - description: Accession ID
+          in: path
+          name: accId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                additionalProperties:
+                  items:
+                    type: string
+                  type: array
+                type: object
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: Returns child and parent terms for Accession ID
+      tags:
+        - Ontology
+  "/ontology/term/{accId1}/{accId2}":
+    get:
+      operationId: isDescendantOfUsingGET
+      parameters:
+        - description: Child Term Accession ID
+          in: path
+          name: accId1
+          required: true
+          schema:
+            type: string
+        - description: Parent Term Accession ID
+          in: path
+          name: accId2
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            "*/*":
+              schema:
+                type: boolean
+          description: OK
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+      summary: Returns true or false for terms
+      tags:
+        - Ontology
   "/ontology/term/{accId}":
     get:
       operationId: getTermUsingGET
@@ -3323,6 +3385,8 @@ components:
         annotatedObjectRgdId:
           format: int32
           type: integer
+        annotationExtension:
+          type: string
         aspect:
           type: string
         createdBy:
@@ -3334,6 +3398,8 @@ components:
         dataSrc:
           type: string
         evidence:
+          type: string
+        geneProductFormId:
           type: string
         key:
           format: int32

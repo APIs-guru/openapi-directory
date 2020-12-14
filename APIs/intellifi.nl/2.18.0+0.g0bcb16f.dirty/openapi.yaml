@@ -83,8 +83,8 @@ info:
     - format: openapi
       url: https://intellifi-nl.github.io/brain-rest-api-spec/openapi.yml
       version: "3.0"
-  x-preferred: null
   x-providerName: intellifi.nl
+  x-preferred: null
 externalDocs:
   description: Find out more
   url: https://intellifi.zendesk.com
@@ -3331,7 +3331,7 @@ components:
         that these endpoints can only be used when logged in into the Graphical
 
         front-end of the Brain.
-      in: query
+      in: cookie
       name: brain.sid
       type: apiKey
     HeaderApiKey:

@@ -2455,6 +2455,10 @@ components:
           format: paylocity-date
           nullable: true
           type: string
+        companyFEIN:
+          description: "Company FEIN as defined in Web Pay, applicable with GET requests only.<br  /> Max length: 20"
+          nullable: true
+          type: string
         companyName:
           description: "Company name as defined in Web Pay, applicable with GET requests only.<br  /> Max length: 50"
           nullable: true

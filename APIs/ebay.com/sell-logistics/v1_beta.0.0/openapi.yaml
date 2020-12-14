@@ -9,7 +9,7 @@ info:
   contact:
     name: eBay Inc,
     x-twitter: ebay
-  description: 'The <b>Logistics API</b> resources offer the following capabilities: <ul><li><b>shipping_quote</b> &ndash; Consolidates into a list a set of live shipping rates, or quotes, from which you can select a rate to ship a package.</li> <li><b>shipment</b> &ndash; Creates a "shipment" for the selected shipping rate.</li></ul> Call <b>createShippingQuote</b> to get a list of live shipping rates. The rates returned are all valid for a specific time window and all quoted prices are at eBay-negotiated rates. <br><br>Select one of the live rates and using its associated <b>rateId</b>, create a "shipment" for the package by calling <b>createFromShippingQuote</b>. Creating a shipment completes an agreement, and the base service and addition shipping options are totaled into the <b>totalShippingCost</b>. This action also generates a shipping label that you can use to ship the package.<p class="tablenote"><b>Important!</b> Sellers must set up a payment method via their eBay account before they can use the methods in this API to create a shipment and the associated shipping label.</p>'
+  description: 'The <b>Logistics API</b> resources offer the following capabilities: <ul><li><b>shipping_quote</b> &ndash; Consolidates into a list a set of live shipping rates, or quotes, from which you can select a rate to ship a package.</li> <li><b>shipment</b> &ndash; Creates a "shipment" for the selected shipping rate.</li></ul> Call <b>createShippingQuote</b> to get a list of live shipping rates. The rates returned are all valid for a specific time window and all quoted prices are at eBay-negotiated rates. <br><br>Select one of the live rates and using its associated <b>rateId</b>, create a "shipment" for the package by calling <b>createFromShippingQuote</b>. Creating a shipment completes an agreement, and the cost of the base service and any added shipping options are summed into the returned <b>totalShippingCost</b> value. This action also generates a shipping label that you can use to ship the package.  The total cost of the shipment is incurred when the package is shipped using the supplied shipping label.  <p class="tablenote"><b>Important!</b> Sellers must set up a payment method via their eBay account before they can use the methods in this API to create a shipment and the associated shipping label.</p>'
   license:
     name: eBay API License Agreement
     url: https://go.developer.ebay.com/api-license-agreement
@@ -48,38 +48,41 @@ paths:
                 $ref: "#/components/schemas/Shipment"
           description: Created
         "400":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Bad Request
+          x-response-codes:
+            errors:
+              "90010":
+                category: REQUEST
+                description: Missing field {fieldName}.
+                domain: API_LOGISTICS
+              "90020":
+                category: REQUEST
+                description: Invalid field {fieldName}.
+                domain: API_LOGISTICS
         "409":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Conflict
+          x-response-codes:
+            errors:
+              "90030":
+                category: REQUEST
+                description: Payment could not be completed.
+                domain: API_LOGISTICS
+              "90200":
+                category: REQUEST
+                description: The quote has expired. Please request a new quote.
+                domain: API_LOGISTICS
+              "90210":
+                category: REQUEST
+                description: The quote has already been purchased. Please request a new quote.
+                domain: API_LOGISTICS
         "500":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Internal Server Error
+          x-response-codes:
+            errors:
+              "90000":
+                category: APPLICATION
+                description: A system error has occurred.
+                domain: API_LOGISTICS
       security:
         - api_auth:
             - https://api.ebay.com/oauth/api_scope/sell.logistics
@@ -103,28 +106,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/Shipment"
           description: Success
+        "400":
+          description: Bad Request
         "404":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Not Found
+          x-response-codes:
+            errors:
+              "90005":
+                category: REQUEST
+                description: The resource could not be found.
+                domain: API_LOGISTICS
         "500":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Internal Server Error
+          x-response-codes:
+            errors:
+              "90000":
+                category: APPLICATION
+                description: A system error has occurred.
+                domain: API_LOGISTICS
       security:
         - api_auth:
             - https://api.ebay.com/oauth/api_scope/sell.logistics
@@ -148,39 +147,32 @@ paths:
               schema:
                 $ref: "#/components/schemas/Shipment"
           description: Success
+        "400":
+          description: Bad Request
         "404":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Not Found
+          x-response-codes:
+            errors:
+              "90005":
+                category: REQUEST
+                description: The resource could not be found.
+                domain: API_LOGISTICS
         "409":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Conflict
+          x-response-codes:
+            errors:
+              "90260":
+                category: REQUEST
+                description: Cannot cancel shipment {shipmentId}
+                domain: API_LOGISTICS
         "500":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Internal Server Error
+          x-response-codes:
+            errors:
+              "90000":
+                category: APPLICATION
+                description: A system error has occurred.
+                domain: API_LOGISTICS
       security:
         - api_auth:
             - https://api.ebay.com/oauth/api_scope/sell.logistics
@@ -206,28 +198,24 @@ paths:
                   type: string
                 type: array
           description: Success
+        "400":
+          description: Bad Request
         "404":
-          content:
-            application/pdf:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Not Found
+          x-response-codes:
+            errors:
+              "90005":
+                category: REQUEST
+                description: The resource could not be found.
+                domain: API_LOGISTICS
         "500":
-          content:
-            application/pdf:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Internal Server Error
+          x-response-codes:
+            errors:
+              "90000":
+                category: APPLICATION
+                description: A system error has occurred.
+                domain: API_LOGISTICS
       security:
         - api_auth:
             - https://api.ebay.com/oauth/api_scope/sell.logistics
@@ -252,39 +240,56 @@ paths:
               schema:
                 $ref: "#/components/schemas/ShippingQuote"
           description: Created
+          x-response-codes:
+            errors:
+              "90135":
+                category: REQUEST
+                description: The provided shipTo address does not match the destination address of the order(s).
+                domain: API_LOGISTICS
         "400":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Bad Request
+          x-response-codes:
+            errors:
+              "90010":
+                category: REQUEST
+                description: Missing field {fieldName}.
+                domain: API_LOGISTICS
+              "90020":
+                category: REQUEST
+                description: Invalid field {fieldName}.
+                domain: API_LOGISTICS
+              "90110":
+                category: REQUEST
+                description: The order {orderId} was not found on the platform.
+                domain: API_LOGISTICS
         "409":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Conflict
+          x-response-codes:
+            errors:
+              "90100":
+                category: REQUEST
+                description: No shipping services available for the provided addresses.
+                domain: API_LOGISTICS
+              "90120":
+                category: REQUEST
+                description: The package specification is incompatible with the destination.
+                domain: API_LOGISTICS
+              "90130":
+                category: REQUEST
+                description: Order {orderId} is incompatible with our services.
+                domain: API_LOGISTICS
+              "90133":
+                category: REQUEST
+                description: Maximum number of orders exceeded. Current limitation is 10.
+                domain: API_LOGISTICS
         "500":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Internal Server Error
+          x-response-codes:
+            errors:
+              "90000":
+                category: APPLICATION
+                description: A system error has occurred.
+                domain: API_LOGISTICS
       security:
         - api_auth:
             - https://api.ebay.com/oauth/api_scope/sell.logistics
@@ -308,28 +313,24 @@ paths:
               schema:
                 $ref: "#/components/schemas/ShippingQuote"
           description: Success
+        "400":
+          description: Bad Request
         "404":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Not Found
+          x-response-codes:
+            errors:
+              "90005":
+                category: REQUEST
+                description: The resource could not be found.
+                domain: API_LOGISTICS
         "500":
-          content:
-            application/json:
-              schema:
-                properties:
-                  errors:
-                    items:
-                      $ref: "#/components/schemas/Error"
-                    type: array
-                type: object
           description: Internal Server Error
+          x-response-codes:
+            errors:
+              "90000":
+                category: APPLICATION
+                description: A system error has occurred.
+                domain: API_LOGISTICS
       security:
         - api_auth:
             - https://api.ebay.com/oauth/api_scope/sell.logistics
@@ -351,10 +352,10 @@ components:
       description: A complex type that describes the value of a monetary amount as represented by a global currency.
       properties:
         currency:
-          description: The base currency applied to the value field to establish a monetary amount. The currency is represented as a 3-letter ISO4217 currency code. For example, the code for the Canadian Dollar is CAD. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/logistics/types/CurrencyCodeEnum.html'>eBay API documentation</a>
+          description: "The base currency applied to the value field to establish a monetary amount. The currency is represented as a 3-letter ISO 4217 currency code. For example, the code for the Canadian Dollar is CAD. Default: The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/logistics/types/bas:CurrencyCodeEnum'>eBay API documentation</a>"
           type: string
         value:
-          description: The value of the monetary amount in the specified currency.
+          description: The monetary amount in the specified currency.
           type: string
       type: object
     Contact:
@@ -386,7 +387,7 @@ components:
           description: The city in which the address is located.
           type: string
         countryCode:
-          description: The country of the address, represented as two-letter ISO 3166-1 Alpha-2 country code. For example, US represents the United States and DE represents Germany. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/logistics/types/CountryCodeEnum.html'>eBay API documentation</a>
+          description: The country of the address, represented as two-letter ISO 3166 country code. For example, US represents the United States and DE represents Germany. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/logistics/types/bas:CountryCodeEnum'>eBay API documentation</a>
           type: string
         county:
           description: The county (not country) in which the address is located. Counties typically contain multiple cities or towns.
@@ -402,7 +403,7 @@ components:
       description: This complex type contains the request payload for the createFromShippingQuote method.
       properties:
         additionalOptions:
-          description: Supply a list of one or more shipping options that the seller has purchased for this shipment. The total cost of the added options is added to the base shipping cost to determine the final cost for the shipment. All added options must be selected from the set of options offered by the selected rate (such as shipping insurance or the requirement for a recipient signature). The base rate of the shipment is the value of the baseShippingCost field that's associated with the rateId of the selected shipping rate.
+          description: Supply a list of one or more shipping options that the seller wants to purchase for this shipment. The baseShippingCost field that's associated with the selected shipping rate is the cost of the base service offered in the rate. In addition to the base service, sellers can add additional shipping services to the base service. Shipping options include things such as shipping insurance or a recipient's signature upon delivery. The cost of any added services is summed with the base shipping cost to determine the final cost for the shipment. All options added to the shipment must be chosen from the set of shipping options offered with the selected rate.
           items:
             $ref: "#/components/schemas/AdditionalOption"
           type: array
@@ -432,7 +433,7 @@ components:
           description: The numeric value of the length of the package.
           type: string
         unit:
-          description: The unit of measure used to express the height, length, and width of the package. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/logistics/types/LengthUnitOfMeasureEnum.html'>eBay API documentation</a>
+          description: The unit of measure used to express the height, length, and width of the package. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/logistics/types/api:LengthUnitOfMeasureEnum'>eBay API documentation</a>
           type: string
         width:
           description: The numeric value of the width of the package.
@@ -517,7 +518,7 @@ components:
       description: This complex type defines a time window for the pickup of a package.
       properties:
         pickupSlotEndTime:
-          description: The date and time the pickup slot ends, formatted as an ISO 8601 UTC string.
+          description: "The date and time the pickup slot ends, formatted as an ISO 8601 string, which is based on the 24-hour Coordinated Universal Time (UTC) clock. Format: [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS].[SSS]Z Example: 2018-08-20T07:09:00.000Z"
           type: string
         pickupSlotId:
           description: Seller-defined name for the pickup slot.
@@ -544,10 +545,10 @@ components:
           description: The time zone of the destination according to Time Zone Database. For example, &quot;America/Los_Angeles&quot;.
           type: string
         maxEstimatedDeliveryDate:
-          description: A string value representing maximum (latest) estimated delivery time, formatted as an ISO 8601 UTC string.
+          description: "A string value representing maximum (latest) estimated delivery time, formatted as an ISO 8601 string, which is based on the 24-hour Coordinated Universal Time (UTC) clock. Format: [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS].[SSS]Z Example: 2018-08-20T07:09:00.000Z"
           type: string
         minEstimatedDeliveryDate:
-          description: A string value representing minimum (earliest) estimated delivery time, formatted as an ISO 8601 UTC string.
+          description: A string value representing minimum (earliest) estimated delivery time, formatted as an ISO 8601ISO 8601 UTC string.
           type: string
         pickupNetworks:
           description: A list of pickup networks compatible with the shipping service.
@@ -558,7 +559,7 @@ components:
           description: This unique eBay-assigned ID value is returned only if the shipment has been configured for a scheduled pickup.
           type: string
         pickupType:
-          description: The type of pickup or drop off configured for the shipment. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/logistics/types/PickupTypeEnum.html'>eBay API documentation</a>
+          description: The type of pickup or drop off configured for the shipment. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/logistics/types/api:PickupTypeEnum'>eBay API documentation</a>
           type: string
         rateId:
           description: The eBay-generated ID of the shipping rate that the seller has chosen to purchase for the shipment.
@@ -597,10 +598,10 @@ components:
           description: "The name of the time zone region, as defined in the IANA Time Zone Database, to which the package is being shipped. Delivery dates are calculated relative to this time zone. Note: This is different from a Coordinated Universal Time (UTC) offset. For example, the America/Los_Angeles time zone identifies a region with the UTC standard time offset of -08:00, but so do several other time zones, including America/Tijuana,America/Dawson, and Pacific/Pitcairn."
           type: string
         maxEstimatedDeliveryDate:
-          description: "The latest stated date and time the shipment will be delivered at this rate. The time stamp is formatted as an ISO 8601 string, which is based on the 24-hour Universal Coordinated Time (UTC) clock. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2018-08-04T07:09:00.000Z"
+          description: "The latest stated date and time the shipment will be delivered at this rate. The time stamp is formatted as an ISO 8601 string, which is based on the 24-hour Coordinated Universal Time (UTC) clock. Format: [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS].[SSS]Z Example: 2018-08-20T07:09:00.000Z"
           type: string
         minEstimatedDeliveryDate:
-          description: "The estimated earliest date and time the shipment will be delivered at this rate. The time stamp is formatted as an ISO 8601 UTC string. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2018-08-06T01:00:00.000Z"
+          description: The estimated earliest date and time the shipment will be delivered at this rate. The time stamp is formatted as an ISO 8601 UTC string.
           type: string
         pickupNetworks:
           description: A list of pickup networks compatible with the shipping service.
@@ -613,7 +614,7 @@ components:
             $ref: "#/components/schemas/PickupSlot"
           type: array
         pickupType:
-          description: The type of pickup or drop-off service associated with the pickupSlots time frames. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/logistics/types/PickupTypeEnum.html'>eBay API documentation</a>
+          description: The type of pickup or drop-off service associated with the pickupSlots time frames. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/logistics/types/api:PickupTypeEnum'>eBay API documentation</a>
           type: string
         rateId:
           description: The unique eBay-assigned ID for this shipping rate.
@@ -621,7 +622,7 @@ components:
         rateRecommendation:
           description: "A list of reasons this rate is recommended. Available values are: BUYER_CHOSEN &mdash; The rate meets or exceeds the requirements of the buyer's preferred shipping option. CHEAPEST_ON_TIME &mdash; The rate is the cheapest rate available that will provide delivery within the seller's time frame commitment. EBAY_PLUS_OK &mdash; The rate complies with the shipping requirements of the eBay Plus program. FASTEST_ON_TIME &mdash; The rate has the fastest shipping time, and will provide delivery within the seller's time frame commitment. GUARANTEED_DELIVERY_OK &mdash; The rate complies with the shipping requirements of the eBay Guaranteed Delivery program."
           items:
-            description: " For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/logistics/types/RateRecommendationEnum.html'>eBay API documentation</a>"
+            description: " For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/logistics/types/api:RateRecommendationEnum'>eBay API documentation</a>"
             type: string
           type: array
         shippingCarrierCode:
@@ -644,7 +645,7 @@ components:
           $ref: "#/components/schemas/ShipmentCancellation"
           description: Cancellation status for the package, if one exists.
         creationDate:
-          description: "The date and time the shipment was created, formatted as an ISO 8601 UTC string. Format: YYYY-MM-DDTHH:MM:SS.SSSZ Example: 2018-08-06T01:00:00.000Z"
+          description: "The date and time the shipment was created, formatted as an ISO 8601 string, which is based on the 24-hour Coordinated Universal Time (UTC) clock. Format: [YYYY]-[MM]-[DD]T[HH]:[MM]:[SS].[SSS]Z Example: 2018-08-20T07:09:00.000Z"
           type: string
         labelCustomMessage:
           description: If supported by the selected shipping carrier, this field can contain optional seller text to be printed on the shipping label.
@@ -689,7 +690,7 @@ components:
           description: The time and date the request was made to cancel the shipment, formatted as an ISO 8601 UTC string.
           type: string
         cancellationStatus:
-          description: This enum specifies the current cancellation status of a shipment, if a cancellation request has been made. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/logistics/types/ShipmentCancellationStatusEnum.html'>eBay API documentation</a>
+          description: This enum specifies the current cancellation status of a shipment, if a cancellation request has been made. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/logistics/types/api:ShipmentCancellationStatusEnum'>eBay API documentation</a>
           type: string
       type: object
     ShippingQuote:
@@ -751,7 +752,7 @@ components:
       description: This complex type contains information about the weight of an object such as a shipping package.
       properties:
         unit:
-          description: The unit of measure used to express the weight of the package. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/logistics/types/WeightUnitOfMeasureEnum.html'>eBay API documentation</a>
+          description: The unit of measurement used to specify the weight of a shipping package. Both the unit and value fields are required if the weight container is used. If the English system of measurement is being used, the applicable values for weight units are POUND and OUNCE. If the metric system of measurement is being used, the applicable values for weight units are KILOGRAM and GRAM. The metric system is used by most countries outside of the US. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/logistics/types/api:WeightUnitOfMeasureEnum'>eBay API documentation</a>
           type: string
         value:
           description: The numeric value of the weight of the package, as measured by the value of unit.

@@ -9820,6 +9820,9 @@ definitions:
           type: string
         type: array
         x-go-name: AllowedReactions
+      default_theme:
+        type: string
+        x-go-name: DefaultTheme
     type: object
     x-go-package: code.gitea.io/gitea/modules/structs
   GitBlobResponse:
@@ -10048,6 +10051,9 @@ definitions:
         x-go-name: OriginalAuthorID
       pull_request:
         $ref: "#/definitions/PullRequestMeta"
+      ref:
+        type: string
+        x-go-name: Ref
       repository:
         $ref: "#/definitions/RepositoryMeta"
       state:

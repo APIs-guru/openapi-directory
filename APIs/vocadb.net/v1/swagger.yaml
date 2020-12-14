@@ -55,6 +55,24 @@ paths:
           name: editEvent
           required: false
           type: string
+        - description: Entry type. Optional.
+          enum:
+            - Undefined
+            - Album
+            - Artist
+            - DiscussionTopic
+            - PV
+            - ReleaseEvent
+            - ReleaseEventSeries
+            - Song
+            - SongList
+            - Tag
+            - User
+            - Venue
+          in: query
+          name: entryType
+          required: false
+          type: string
         - description: Maximum number of results to return. Default 50. Maximum value 500.
           format: int32
           in: query
@@ -89,7 +107,7 @@ paths:
           name: entryFields
           required: false
           type: string
-        - description: Content language preference.
+        - description: Content language preference. Optional.
           enum:
             - Default
             - Japanese
@@ -97,6 +115,14 @@ paths:
             - English
           in: query
           name: lang
+          required: false
+          type: string
+        - description: Sort rule. Optional.
+          enum:
+            - CreateDateDescending
+            - CreateDate
+          in: query
+          name: sortRule
           required: false
           type: string
       produces:
@@ -6916,6 +6942,8 @@ definitions:
         type: string
       description:
         type: string
+      disabled:
+        type: boolean
       url:
         type: string
     type: object
@@ -8844,6 +8872,8 @@ definitions:
         type: string
       descriptionOrUrl:
         type: string
+      disabled:
+        type: boolean
       id:
         format: int32
         type: integer
@@ -8863,6 +8893,8 @@ definitions:
         type: string
       descriptionOrUrl:
         type: string
+      disabled:
+        type: boolean
       id:
         format: int32
         type: integer

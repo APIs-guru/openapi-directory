@@ -3267,6 +3267,9 @@ components:
         last_updated:
           format: date-time
           type: string
+        max_images_per_account:
+          description: This is the maximum number of image analyses an account can have. Can only be set on system_global rules
+          type: integer
         selector:
           $ref: "#/components/schemas/ImageSelector"
         system_global:

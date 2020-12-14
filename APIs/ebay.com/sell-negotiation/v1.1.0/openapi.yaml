@@ -247,7 +247,7 @@ components:
       description: A complex type that describes the value of a monetary amount as represented by a global currency.
       properties:
         currency:
-          description: "The base currency applied to the value field to establish a monetary amount. The currency is represented as a 3-letter ISO4217 currency code. For example, the code for the Canadian Dollar is CAD. Default: The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/negotiation/types/CurrencyCodeEnum.html'>eBay API documentation</a>"
+          description: "The base currency applied to the value field to establish a monetary amount. The currency is represented as a 3-letter ISO4217 currency code. For example, the code for the Canadian Dollar is CAD. Default: The default currency of the eBay marketplace that hosts the listing. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:CurrencyCodeEnum'>eBay API documentation</a>"
           type: string
         value:
           description: The monetary amount in the specified currency.
@@ -353,10 +353,10 @@ components:
           description: A unique eBay-assigned identifier for the offer.
           type: string
         offerStatus:
-          description: The current state, or status, of an offer. Status states include PENDING, COUNTERED, ACCEPTED, and DECLINED. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/negotiation/types/OfferStatusEnum.html'>eBay API documentation</a>
+          description: The current state, or status, of an offer. Status states include PENDING, COUNTERED, ACCEPTED, and DECLINED. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferStatusEnum'>eBay API documentation</a>
           type: string
         offerType:
-          description: The type of offer being made. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/negotiation/types/OfferTypeEnum.html'>eBay API documentation</a>
+          description: The type of offer being made. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/api:OfferTypeEnum'>eBay API documentation</a>
           type: string
         offeredItems:
           description: The list of items associated with the offer. Currently, the offer list is restricted to a single offer.
@@ -427,7 +427,7 @@ components:
       description: A complex type that specifies a period of time using a specified time-measurement unit.
       properties:
         unit:
-          description: A time-measurement unit that specifies a singular period of time. A span of time is defined when you apply the value specified in the value field to the value specified for unit. Time-measurement units can be YEAR, MONTH, DAY, and so on. See TimeDurationUnitEnum for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/devzone/rest/api-ref/negotiation/types/TimeDurationUnitEnum.html'>eBay API documentation</a>
+          description: A time-measurement unit that specifies a singular period of time. A span of time is defined when you apply the value specified in the value field to the value specified for unit. Time-measurement units can be YEAR, MONTH, DAY, and so on. See TimeDurationUnitEnum for a complete list of possible time-measurement units. For implementation help, refer to <a href='https://developer.ebay.com/api-docs/sell/negotiation/types/bas:TimeDurationUnitEnum'>eBay API documentation</a>
           type: string
         value:
           description: An integer that represents an amount of time, as measured by the time-measurement unit specified in the unit field.

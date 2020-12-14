@@ -1318,6 +1318,22 @@ paths:
                   type: string
                 stripe_reserve_amount:
                   type: integer
+                support:
+                  properties:
+                    business_hours:
+                      type: string
+                    chat:
+                      properties:
+                        type:
+                          type: string
+                        value:
+                          type: string
+                      type: object
+                    contact_number:
+                      type: string
+                    email:
+                      type: string
+                  type: object
                 supportChat:
                   properties:
                     id:
@@ -2077,7 +2093,7 @@ components:
       type: oauth2
 x-explorer-enabled: true
 x-github-repo: rsafaya-edrv/edrv-api
-x-github-sha: 23932c0746898f346a10028dc578ec7778719a27
+x-github-sha: 4783f25a7ba86ed1597ce7ff733ebbd84ae5e33b
 x-proxy-enabled: true
 x-samples-enabled: true
 x-samples-languages:

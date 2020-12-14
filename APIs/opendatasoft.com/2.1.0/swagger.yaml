@@ -52,7 +52,7 @@ parameters:
   exclude:
     collectionFormat: multi
     description: >
-      An array of facet filter. For example **city:Paris** or **modified:2019/12**.
+      An array of facet filters. For example **city:Paris** or **modified:2019/12**.
 
       The request will exclude the defined facet value.
 
@@ -60,7 +60,10 @@ parameters:
       Read [filtering with facets value](https://help.opendatasoft.com/apis/ods-search-v2/#filtering-with-facets-values) for more details.
 
 
-      *Should not to be confused with a where filter. Excluding a facet value is equivalent to removing an entry in the left navigation panel.*
+      *Not to be confused with a where filter. Excluding a facet value is equivalent to removing an entry in the left navigation panel.*
+
+
+      *exclude is not available for monitoring sources*
     in: query
     items:
       type: string
@@ -70,12 +73,10 @@ parameters:
   facet:
     collectionFormat: multi
     description: >
-      An array of facets names
+      A facet is a field used for simple filtering (through the parameters refine and exclude) or exploration (with the endpoint `/facets`).
 
 
-      A facet is a field used for filtering and exploration.
-
-      To use a field as a facet, you have to configure it in your back office.
+      Facets can be configured in the back-office or with this parameter.
 
 
       Read [the facets documentation](https://help.opendatasoft.com/apis/ods-search-v2/#facets) for more details.
@@ -109,6 +110,36 @@ parameters:
     in: query
     name: include_app_metas
     type: boolean
+  limit:
+    default: 10
+    description: >
+      Number of items to return.
+
+
+      To use in conjonction with offset to implement pagination.
+
+
+      Limit maximum value is 100. To retrive more data use export entry points.
+
+      The default value is 10.
+    in: query
+    maximum: 100
+    minimum: -1
+    name: limit
+    required: false
+    type: integer
+  limit_export:
+    default: -1
+    description: >
+      Number of items to return in export.
+
+
+      Use -1 (default) to retrieve all records
+    in: query
+    minimum: -1
+    name: limit
+    required: false
+    type: integer
   metadata_template_name:
     in: path
     name: metadata_template_name
@@ -130,6 +161,18 @@ parameters:
     name: mime_type
     required: false
     type: string
+  offset:
+    default: 0
+    description: >
+      Index of the first item to return (starting at 0).
+
+
+      To use in conjonction with limit to implement pagination.
+    in: query
+    minimum: 0
+    name: offset
+    required: false
+    type: integer
   order_by:
     description: >
       A list of field names or aggregation, followed by an order (asc | desc).
@@ -157,7 +200,7 @@ parameters:
   refine:
     collectionFormat: multi
     description: >
-      An array of facet filter. For example **city:Paris** or **modified:2019/12**.
+      An array of facet filters. For example **city:Paris** or **modified:2019/12**.
 
       The request will only include the selected facet value.
 
@@ -165,7 +208,10 @@ parameters:
       Read [filtering with facets value](https://help.opendatasoft.com/apis/ods-search-v2/#filtering-with-facets-values) for more details.
 
 
-      *Should not to be confused with a where filter. Refining with a facet is equivalent to selecting an entry in the left navigation panel.*
+      *Not to be confused with a where filter. Refining with a facet is equivalent to selecting an entry in the left navigation panel.*
+
+
+      *refine is not available for monitoring sources*
     in: query
     items:
       type: string
@@ -177,34 +223,6 @@ parameters:
     name: reuse_id
     required: true
     type: string
-  rows:
-    default: 10
-    description: >
-      Number of items to return.
-
-
-      To use in conjonction with start to implement pagination.
-
-
-      Rows maximum value is 100. To retrive more data use export entry points.
-    in: query
-    maximum: 100
-    minimum: -1
-    name: rows
-    required: false
-    type: integer
-  rows_export:
-    default: -1
-    description: >
-      Number of items to return in export.
-
-
-      Use -1 to retrieve all records
-    in: query
-    minimum: -1
-    name: rows
-    required: false
-    type: integer
   search:
     collectionFormat: multi
     description: >
@@ -288,18 +306,6 @@ parameters:
     name: source
     required: true
     type: string
-  start:
-    default: 0
-    description: >
-      Index of the first item to return (starting at 0).
-
-
-      To use in conjonction with rows to implement pagination.
-    in: query
-    minimum: 0
-    name: start
-    required: false
-    type: integer
   thumbnail_size:
     description: Set the size of the thumbnail representing the resource (attachment, image or file)
     in: query
@@ -442,9 +448,12 @@ paths:
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/group_by"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
         - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/offset"
+        - $ref: "#/parameters/limit"
       responses:
         "200":
           description: Aggregation result
@@ -483,10 +492,11 @@ paths:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
@@ -564,9 +574,12 @@ paths:
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/group_by"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
         - $ref: "#/parameters/order_by"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
       responses:
         "200":
           description: Aggregation result
@@ -632,10 +645,11 @@ paths:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/where"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows_export"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
@@ -669,10 +683,11 @@ paths:
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows_export"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
@@ -697,10 +712,11 @@ paths:
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows_export"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
@@ -724,10 +740,11 @@ paths:
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows_export"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/pretty"
@@ -752,10 +769,11 @@ paths:
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows_export"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
@@ -779,10 +797,11 @@ paths:
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows_export"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
@@ -806,10 +825,11 @@ paths:
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows_export"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit_export"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/timezone"
@@ -914,10 +934,11 @@ paths:
         - $ref: "#/parameters/dataset_id"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/sort"
         - $ref: "#/parameters/select"
         - $ref: "#/parameters/pretty"
@@ -981,8 +1002,8 @@ paths:
       parameters:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/dataset_id"
-        - $ref: "#/parameters/start"
-        - $ref: "#/parameters/rows"
+        - $ref: "#/parameters/offset"
+        - $ref: "#/parameters/limit"
         - $ref: "#/parameters/timezone"
       responses:
         "200":
@@ -1076,10 +1097,11 @@ paths:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
         - default: ;
@@ -1111,10 +1133,11 @@ paths:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/pretty"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
@@ -1137,10 +1160,11 @@ paths:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
       produces:
@@ -1162,10 +1186,11 @@ paths:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
       produces:
@@ -1187,10 +1212,11 @@ paths:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
       produces:
@@ -1212,10 +1238,11 @@ paths:
         - $ref: "#/parameters/source"
         - $ref: "#/parameters/where"
         - $ref: "#/parameters/search"
+        - $ref: "#/parameters/facet"
         - $ref: "#/parameters/refine"
         - $ref: "#/parameters/exclude"
-        - $ref: "#/parameters/rows"
-        - $ref: "#/parameters/start"
+        - $ref: "#/parameters/limit"
+        - $ref: "#/parameters/offset"
         - $ref: "#/parameters/timezone"
         - $ref: "#/parameters/include_app_metas"
       produces:

@@ -11177,6 +11177,7 @@ paths:
       summary: Create metadata instance on folder
       tags:
         - Metadata instances (Folders)
+      x-box-enable-explorer: false
       x-box-sanitized: true
       x-box-tag: folder_metadata
     put:
@@ -27301,6 +27302,9 @@ components:
                 The file, folder or web link that matched the
 
                 search query.
+        type:
+          description: The result type. The value is always `search_result`.
+          example: search_result
       title: Search Result (including Shared Link)
       type: object
       x-box-resource-id: search_result_with_shared_link

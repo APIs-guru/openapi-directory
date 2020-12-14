@@ -2697,6 +2697,8 @@ components:
           type: boolean
         disableHostNetworkingForDockerCompose:
           type: boolean
+        enableDynamicHttpsDetection:
+          type: boolean
         localCredentialHelper:
           type: boolean
         newTerminal:
@@ -2704,6 +2706,8 @@ components:
         queueResourceAllocation:
           type: boolean
         shallowClone:
+          type: boolean
+        unifiedContainerImplementation:
           type: boolean
       type: object
     GitConfigOptionsBody:
@@ -2821,6 +2825,7 @@ components:
         - 30 (ExceededOrgDevContainerMaxLength)
         - 31 (ActionNotAllowedInThisState)
         - 32 (ExportRunningEnvironmentError)
+        - 33 (GitHubProxyError)
       format: int32
       type: integer
     PersonalizationInfoBody:

@@ -185,7 +185,6 @@ info:
      * a sophisticated `motorcycle` profile is available up on request. It is powered by the [Kurviger](https://kurviger.de/en) Routing API and favors curves and slopes while avoiding cities and highways.
 
 
-
      
     ## TomTom
 
@@ -202,7 +201,6 @@ info:
      * Currently we only offer this for our [Route Optimization API](#tag/Route-Optimization-API).
      * In addition to our terms, you need to accept TomTom's [End User License Aggreement](https://www.graphhopper.com/tomtom-end-user-license-agreement/).
      * We do *not* use TomTom's web services. We only use their data with our software.
-
 
 
      
@@ -2475,7 +2473,7 @@ components:
           format: int64
           type: integer
         driving_time:
-          description: driving time of driver in seconds
+          description: cumulated driving time from start to this driver activity in seconds
           format: int64
           type: integer
         end_date_time:

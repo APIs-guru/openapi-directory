@@ -1256,6 +1256,8 @@ paths:
           description: OK
         "404":
           description: Order could not be found
+        "409":
+          description: Conflict. This order has already been cancelled
       summary: Cancel order
       tags:
         - Order Acceptance API
@@ -2194,6 +2196,426 @@ paths:
       tags:
         - Restaurants
         - publicly-accessible
+  "/restaurants/{restaurantId}/food-safety/addons":
+    get:
+      description: Get all addon's food safety information for a restaurant
+      parameters:
+        - description: Restaurant Id (Encrypted)
+          in: path
+          name: restaurantId
+          required: true
+          schema:
+            type: string
+        - description: >
+            If not provided will bring all data.
+
+            Type of data being fetched (separated by comma)
+
+            - allergens
+
+            - additives
+
+            - nutritional
+
+            - manufacturer
+
+            - storage
+
+            - ingredients
+
+
+            e.g &select=allergens,additives,ingredients
+          in: query
+          name: select
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of records to fetch.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 100
+            format: int32
+            maximum: 500
+            minimum: 1
+            type: integer
+        - description: Value representing a cursor - position to use when retrieving the next page of data. If provided, the value of this parameter must be URL encoded.
+          in: query
+          name: after
+          required: false
+          schema:
+            type: string
+        - description: Indicates what type of response client understands and is also used for content type negotiation (if version is specified), otherwise tells the server to return the latest version
+          example: application/json;v=1
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;v=1:
+              schema:
+                $ref: "#/components/schemas/PagedFoodSafetyResponse"
+          description: Request succeeded.
+          headers:
+            cache-control:
+              description: Information about how the response can be cached.
+              schema:
+                description: Information about how the response can be cached. (No caching will be applied)
+                enum:
+                  - no-store
+                type: string
+            content-type:
+              description: Content type of document including version
+              example: application/json;v=1
+              schema:
+                type: string
+        "400":
+          content:
+            application/json;v=1:
+              example:
+                errors:
+                  - description: The supplied restaurantId does not meet one or more validation requirements (e.g encryption failed).
+                    errorCode: BadRequest
+                    validationErrors:
+                      - errorMessage: The value 'R19f61' is not valid for restaurantId.
+                        field: restaurantId
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Bad request.
+        "500":
+          content:
+            application/json;v=1:
+              example:
+                errors:
+                  - description: Internal Server Error
+                    errorCode: InternalServerError
+                faultId: 6b25dd26-59e7-41a6-b4ba-60849cadddcb
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/500ErrorSchema"
+          description: Internal Server Error.
+      summary: Get all addon's food safety
+      tags:
+        - RestaurantProduct
+        - publicly-accessible
+        - takeaway
+      x-status: Draft
+  "/restaurants/{restaurantId}/food-safety/addons/{addonId}":
+    get:
+      description: Get a single addon's food safety information for a restaurant
+      parameters:
+        - description: Restaurant Id (Encrypted)
+          in: path
+          name: restaurantId
+          required: true
+          schema:
+            type: string
+        - description: Addon Id (Encrypted)
+          in: path
+          name: addonId
+          required: true
+          schema:
+            type: string
+        - description: >
+            If not provided will bring all data.
+
+            Type of data being fetched (separated by comma)
+
+            - allergens
+
+            - additives
+
+            - nutritional
+
+            - manufacturer
+
+            - storage
+
+            - ingredients
+
+
+            e.g &select=allergens,additives,ingredients
+          in: query
+          name: select
+          required: false
+          schema:
+            type: string
+        - description: Indicates what type of response client understands and is also used for content type negotiation (if version is specified), otherwise tells the server to return the latest version
+          example: application/json;v=1
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;v=1:
+              schema:
+                $ref: "#/components/schemas/ProductFoodSafety"
+          description: Request succeeded.
+          headers:
+            cache-control:
+              description: Information about how the response can be cached.
+              schema:
+                description: Information about how the response can be cached. (No caching will be applied)
+                enum:
+                  - no-store
+                type: string
+            content-type:
+              description: Content type of document including version
+              example: application/json;v=1
+              schema:
+                type: string
+        "400":
+          content:
+            application/json;v=1:
+              example:
+                errors:
+                  - description: The supplied restaurantId does not meet one or more validation requirements (e.g encryption failed).
+                    errorCode: BadRequest
+                    validationErrors:
+                      - errorMessage: The value 'R19f61' is not valid for restaurantId.
+                        field: restaurantId
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Bad request.
+        "500":
+          content:
+            application/json;v=1:
+              example:
+                errors:
+                  - description: Internal Server Error
+                    errorCode: InternalServerError
+                faultId: 6b25dd26-59e7-41a6-b4ba-60849cadddcb
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/500ErrorSchema"
+          description: Internal Server Error.
+      summary: Get a single addon's food safety
+      tags:
+        - RestaurantProduct
+        - publicly-accessible
+        - takeaway
+      x-status: Draft
+  "/restaurants/{restaurantId}/food-safety/products":
+    get:
+      description: Get all product's food safety information for a restaurant
+      parameters:
+        - description: Restaurant Id (Encrypted)
+          in: path
+          name: restaurantId
+          required: true
+          schema:
+            type: string
+        - description: >
+            If not provided will bring all data.
+
+            Type of data being fetched (separated by comma)
+
+            - allergens
+
+            - additives
+
+            - nutritional
+
+            - manufacturer
+
+            - storage
+
+            - ingredients
+
+
+            e.g &select=allergens,additives,ingredients
+          in: query
+          name: select
+          required: false
+          schema:
+            type: string
+        - description: The maximum number of records to fetch.
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 100
+            format: int32
+            maximum: 500
+            minimum: 1
+            type: integer
+        - description: Value representing a cursor - position to use when retrieving the next page of data. If provided, the value of this parameter must be URL encoded.
+          in: query
+          name: after
+          required: false
+          schema:
+            type: string
+        - description: Indicates what type of response client understands and is also used for content type negotiation (if version is specified), otherwise tells the server to return the latest version
+          example: application/json;v=1
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;v=1:
+              schema:
+                $ref: "#/components/schemas/PagedFoodSafetyResponse"
+          description: Request succeeded.
+          headers:
+            cache-control:
+              description: Information about how the response can be cached.
+              schema:
+                description: Information about how the response can be cached. (No caching will be applied)
+                enum:
+                  - no-store
+                type: string
+            content-type:
+              description: Content type of document including version
+              example: application/json;v=1
+              schema:
+                type: string
+        "400":
+          content:
+            application/json;v=1:
+              example:
+                errors:
+                  - description: The supplied restaurantId does not meet one or more validation requirements (e.g encryption failed).
+                    errorCode: BadRequest
+                    validationErrors:
+                      - errorMessage: The value 'R19f61' is not valid for restaurantId.
+                        field: restaurantId
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Bad request.
+        "500":
+          content:
+            application/json;v=1:
+              example:
+                errors:
+                  - description: Internal Server Error
+                    errorCode: InternalServerError
+                faultId: 6b25dd26-59e7-41a6-b4ba-60849cadddcb
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/500ErrorSchema"
+          description: Internal Server Error.
+      summary: Get all product's food safety
+      tags:
+        - RestaurantProduct
+        - publicly-accessible
+        - takeaway
+      x-status: Draft
+  "/restaurants/{restaurantId}/food-safety/products/{productId}":
+    get:
+      description: Get a single product's food safety information for a restaurant
+      parameters:
+        - description: Restaurant Id (Encrypted)
+          in: path
+          name: restaurantId
+          required: true
+          schema:
+            type: string
+        - description: Product Id (Encrypted)
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: >
+            If not provided will bring all data.
+
+            Type of data being fetched (separated by comma)
+
+            - allergens
+
+            - additives
+
+            - nutritional
+
+            - manufacturer
+
+            - storage
+
+            - ingredients
+
+
+            e.g &select=allergens,additives,ingredients
+          in: query
+          name: select
+          required: false
+          schema:
+            type: string
+        - description: Indicates what type of response client understands and is also used for content type negotiation (if version is specified), otherwise tells the server to return the latest version
+          example: application/json;v=1
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json;v=1:
+              schema:
+                $ref: "#/components/schemas/ProductFoodSafety"
+          description: Request succeeded.
+          headers:
+            cache-control:
+              description: Information about how the response can be cached.
+              schema:
+                description: Information about how the response can be cached. (No caching will be applied)
+                enum:
+                  - no-store
+                type: string
+            content-type:
+              description: Content type of document including version
+              example: application/json;v=1
+              schema:
+                type: string
+        "400":
+          content:
+            application/json;v=1:
+              example:
+                errors:
+                  - description: The supplied restaurantId does not meet one or more validation requirements (e.g encryption failed).
+                    errorCode: BadRequest
+                    validationErrors:
+                      - errorMessage: The value 'R19f61' is not valid for restaurantId.
+                        field: restaurantId
+                faultId: b39ae4c1-142f-4308-838d-1f01815e1cf1
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/4XXErrorSchema"
+          description: Bad request.
+        "500":
+          content:
+            application/json;v=1:
+              example:
+                errors:
+                  - description: Internal Server Error
+                    errorCode: InternalServerError
+                faultId: 6b25dd26-59e7-41a6-b4ba-60849cadddcb
+                traceId: H3TKh4QSJUSwVBCBqEtkKw==
+              schema:
+                $ref: "#/components/schemas/500ErrorSchema"
+          description: Internal Server Error.
+      summary: Get a single product's food safety
+      tags:
+        - RestaurantProduct
+        - publicly-accessible
+        - takeaway
+      x-status: Draft
   "/restaurants/{tenant}/{restaurantId}/catalogue":
     get:
       description: Get details of the restaurant's product catalogue
@@ -5265,6 +5687,17 @@ components:
         - subject
         - ticketId
       type: object
+    Additive:
+      additionalProperties: false
+      description: List of Additives
+      example:
+        code: "10.2"
+      properties:
+        code:
+          description: Additive code of Takeaway Standard from TMS
+          nullable: false
+          type: string
+      type: object
     Address:
       description: Address information.
       properties:
@@ -5309,6 +5742,34 @@ components:
         useLatLongAddress:
           description: When enabled use latitude and longitude address.
           type: boolean
+      type: object
+    AddressGeocodingRequest:
+      example:
+        addressLines:
+          - 2 Fleet Place
+          - Fleet Place
+          - London
+          - EC4M 7RF
+      properties:
+        addressLines:
+          description: Lines of the consumers address, a minimum of 3 is preferred but only 1 is required.
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+        - addressLines
+      type: object
+    Allergen:
+      additionalProperties: false
+      description: List of  Allergens
+      example:
+        code: A
+      properties:
+        code:
+          description: Allergen code of Takeaway Standard from TMS
+          nullable: false
+          type: string
       type: object
     AttemptedDeliveryQuery:
       additionalProperties: false
@@ -5826,6 +6287,33 @@ components:
           nullable: true
           type: string
       type: object
+    CallReceivedOrUpdatedModel:
+      properties:
+        callSid:
+          description: UID used by Twilio, identifying a phone call
+          type: string
+        callStep:
+          description: CallStep
+          type: string
+        callerId:
+          description: Caller's phone number
+          type: string
+        orderId:
+          description: Legacy/friendly Order ID
+          type: string
+        queryType:
+          description: QueryType
+          type: string
+        resolution:
+          description: Resolution
+          type: string
+        status:
+          description: Contains the status of the order, if known
+          type: string
+        tags:
+          description: Open-ended tag collection, for on-the-fly adjustment of data slicing; comma separated.
+          type: string
+      type: object
     CallerInformationCallRequest:
       properties:
         accountSid:
@@ -6200,7 +6688,7 @@ components:
                   nullable: false
                   type: string
                 to:
-                  description: Latest time within time-band (ISO 8601 Date Time UTC)
+                  description: Latest time within time-band (ISO 8601 Date Time UTC). This time is greater than or equal to the from time.
                   nullable: false
                   type: string
               required:
@@ -6255,17 +6743,12 @@ components:
           description: The restaurant associated with the checkout
           nullable: false
           properties:
-            availabilityId:
-              description: Unique identifier for the availability being ordered from (this is the Menu ID or Menu Group ID).
-              nullable: false
-              type: string
             id:
               description: Unique identifier for a restaurant
               nullable: false
               type: string
           required:
             - id
-            - availabilityId
           type: object
         serviceType:
           description: The dispatch method for the order
@@ -6297,7 +6780,7 @@ components:
           ITEMS_UNORDERABLE: "#/components/schemas/CheckoutIssue_ItemsUnorderable"
           LAST_NAME_REQUIRED: "#/components/schemas/CheckoutIssue_LastNameRequired"
           LOCATION_UNDELIVERABLE: "#/components/schemas/CheckoutIssue_LocationUndeliverable"
-          MINIMUM_ORDER_VALUE_NOT_MET: "#/components/schemas/CheckoutIssue_MinumumOrderValueNotMet"
+          MINIMUM_ORDER_VALUE_NOT_MET: "#/components/schemas/CheckoutIssue_MinimumOrderValueNotMet"
           PHONE_NUMBER_REQUIRED: "#/components/schemas/CheckoutIssue_PhoneNumberRequired"
           POSTAL_CODE_REQUIRED: "#/components/schemas/CheckoutIssue_PostalCodeRequired"
           RESTAURANT_UNAVAILABLE: "#/components/schemas/CheckoutIssue_RestaurantUnavailable"
@@ -6392,7 +6875,7 @@ components:
         - additionalProperties: false
           description: The restaurant is unable to deliver to this location.
           type: object
-    CheckoutIssue_MinumumOrderValueNotMet:
+    CheckoutIssue_MinimumOrderValueNotMet:
       allOf:
         - $ref: "#/components/schemas/CheckoutIssue"
         - additionalProperties: false
@@ -6400,6 +6883,7 @@ components:
           properties:
             additionalSpendRequired:
               description: The amount the customer needs to spend to meet minimum order value. This is in the smallest unit of local currency (e.g. pence).
+              format: integer
               nullable: false
               type: number
             currency:
@@ -6408,6 +6892,7 @@ components:
               type: string
             minimumOrderValue:
               description: The minimum order value required to complete an order. This is in the smallest unit of local currency (e.g. pence).
+              format: integer
               nullable: false
               type: number
           type: object
@@ -6599,7 +7084,7 @@ components:
                   nullable: false
                   type: string
                 to:
-                  description: Latest time the customer wants the order to be fulfilled (ISO 8601 Date Time UTC)
+                  description: Latest time the customer wants the order to be fulfilled (ISO 8601 Date Time UTC). This time must be greater than or equal to the from time.
                   nullable: false
                   type: string
               required:
@@ -10124,6 +10609,59 @@ components:
           format: double
           type: number
       type: object
+    Geometry:
+      description: Geometry information for consumers location
+      example:
+        coordinates:
+          - 51.51469
+          - -0.10358
+        type: Point
+      properties:
+        coordinates:
+          description: longitude and latitude
+          items:
+            format: double
+            type: number
+          maxItems: 2
+          minItems: 2
+          type: array
+        type:
+          description: type of primitive
+          type: string
+      type: object
+    GetAvailableFulfilmentTimesResponse:
+      properties:
+        asapAvailable:
+          description: If the option to fulfil an order as soon as possible is available.
+          nullable: false
+          type: boolean
+        times:
+          description: Collection of time bands for when an order can be fulfilled.
+          items:
+            description: A time band for when an order can be fulfilled.
+            nullable: false
+            properties:
+              from:
+                description: Start time in time band (ISO-8601 Date Time UTC).
+                format: date-time
+                nullable: false
+                type: string
+              to:
+                description: End time in time band (ISO-8601 Date Time UTC). This time is greater than or equal to the from time.
+                format: date-time
+                nullable: false
+                type: string
+            required:
+              - from
+              - to
+            type: object
+          maxItems: 576
+          nullable: false
+          type: array
+      required:
+        - times
+        - asapAvailable
+      type: object
     GetDeliveryFeesResponse:
       example:
         deliveryFees:
@@ -10394,6 +10932,17 @@ components:
           items:
             type: string
           type: array
+      type: object
+    Ingredients:
+      additionalProperties: false
+      description: List of ingredients
+      example:
+        name: wasser
+      properties:
+        name:
+          description: Name of ingredient
+          nullable: false
+          type: string
       type: object
     InternalServerErrorMarketingResponse:
       allOf:
@@ -10913,6 +11462,40 @@ components:
           example: 15
           format: integer
           type: number
+      type: object
+    Manufacturer:
+      example:
+        brand: Coca-Cola Zero
+        city: Anderlecht
+        manufacturer: Coca-Cola Erfrischungsgetränke AG, Postfach 67 01 56, 10207 Berlin
+        origin: Deutschland
+        postalCode: "1070"
+        streetAddress: Bergense Steenweg 1424
+      properties:
+        brand:
+          description: Brand name
+          nullable: true
+          type: string
+        city:
+          description: City
+          nullable: true
+          type: string
+        manufacturer:
+          description: Manufacturer name
+          nullable: true
+          type: string
+        origin:
+          description: Country
+          nullable: true
+          type: string
+        postalCode:
+          description: Postal Code
+          nullable: true
+          type: string
+        streetAddress:
+          description: Street Address
+          nullable: true
+          type: string
       type: object
     MarketingContentResponse:
       additionalProperties: true
@@ -12617,6 +13200,164 @@ components:
             faultId: 72d7036d-990a-4f84-9efa-ef5f40f6044b
             message: The requested resource could not found.
           type: object
+    Nutritional:
+      example:
+        alcohol:
+          unit: "%"
+          value: 7.5
+        caffeine:
+          unit: mg
+          value: 10
+        calories:
+          unit: kcal
+          value: 42
+        carbohydrate:
+          unit: mg
+          value: 22000
+        energy:
+          unit: kJ
+          value: 175.5
+        fat:
+          unit: mg
+          value: 16000
+        fattyAcidTotal:
+          unit: mg
+          value: 100
+        protein:
+          unit: mg
+          value: 4000.01
+        salt:
+          unit: mg
+          value: 20
+        sodium:
+          unit: mg
+          value: 10
+        sugar:
+          unit: mg
+          value: 9100
+      properties:
+        alcohol:
+          description: Alcohol by volume value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        caffeine:
+          description: Caffeine milligram value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        calories:
+          description: Calories value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        carbohydrate:
+          description: Carbohydrate value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        energy:
+          description: Energy value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        fat:
+          description: Fat value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        fattyAcidTotal:
+          description: Fatty Acid value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        protein:
+          description: Protein value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        salt:
+          description: Salt value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        sodium:
+          description: Sodium value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+        sugar:
+          description: Sugar value for product
+          properties:
+            unit:
+              description: Unit of the item
+              nullable: false
+              type: string
+            value:
+              description: Value of the item
+              nullable: false
+              type: number
+      type: object
     Offer:
       description: The object representing offer entry
       example:
@@ -13705,110 +14446,6 @@ components:
           nullable: true
           type: string
       type: object
-    OrderReadyTimesIntResult:
-      deprecated: true
-      example:
-        deliveryPerformanceAdjustmentMinutes: 20
-        firstIsAsap: true
-        times:
-          - 2020-04-20T16:20:00.000Z
-          - 2020-04-20T18:20:00.000Z
-          - 2020-04-20T20:20:00.000Z
-        utcOffset: 2
-      properties:
-        deliveryPerformanceAdjustmentMinutes:
-          description: Adjusted number of minutes for the delivery of the order
-          nullable: false
-          type: integer
-        firstIsAsap:
-          description: Flag to define if the first time to be presented to the user is "as soon as possible"
-          nullable: false
-          type: boolean
-        times:
-          description: Collection of times when an order can be delivered/collected. To be selected by the user in the checkout flow before placing an order (e.g. As soon as possible, 16:00, 16:05, 16:10...)
-          items:
-            description: Datetimes describing when an order can be delivered/collected.
-            format: date-time
-            type: string
-          maxItems: 576
-          nullable: false
-          type: array
-        utcOffset:
-          description: The number of hours difference between the restaurant's time zone standard time and Coordinated Universal Time (UTC)
-          nullable: false
-          type: integer
-      type: object
-    OrderReadyTimesResult:
-      example:
-        baseDeliveryTimeInfo: 1
-        deliveryTimeInfo: 2
-        firstIsAsap: true
-        times:
-          - 2020-04-20T16:20:00.000Z
-          - 2020-04-20T18:20:00.000Z
-          - 2020-04-20T20:20:00.000Z
-        workingTimeMins: 20
-      properties:
-        deliveryTimeInfo:
-          description: Used by consumer web, to provide info to the viewmodel about any extended time for the delivery or time longer than expected to prepare the meal. Flag that determines the type of delivery for an order. 0 = NoIssues, 1 = ExtendedDeliveryTime, 2 = LongWorkingTime
-          nullable: false
-          type: integer
-        firstIsAsap:
-          description: Flag to define if the first time to be presented to the user is "as soon as possible"
-          nullable: false
-          type: boolean
-        times:
-          description: Collection of times when an order can be delivered/collected. To be selected by the user in the checkout flow before placing an order (e.g. As soon as possible, 16:00, 16:05, 16:10...)
-          items:
-            description: Datetimes describing when an order can be delivered/collected.
-            format: date-time
-            type: string
-          maxItems: 576
-          nullable: false
-          type: array
-        workingTimeMins:
-          description: Used by consumer web, to provide context on the number of minutes it takes to prepare the food for the order
-          nullable: false
-          type: integer
-      type: object
-    OrderReadyTimesUkResult:
-      deprecated: true
-      example:
-        baseDeliveryTimeInfo: 1
-        deliveryTimeInfo: 2
-        firstIsAsap: true
-        times:
-          - 2020-04-20T16:20:00.000Z
-          - 2020-04-20T18:20:00.000Z
-          - 2020-04-20T20:20:00.000Z
-        workingTimeMins: 20
-      properties:
-        baseDeliveryTimeInfo:
-          description: Flag that determines the type of delivery for an order. 0 = NoIssues, 1 = ExtendedDeliveryTime, 2 = LongWorkingTime
-          nullable: false
-          type: integer
-        deliveryTimeInfo:
-          description: Used by consumer web, to provide info to the viewmodel about any extended time for the delivery or time longer than expected to prepare the meal. Flag that determines the type of delivery for an order. 0 = NoIssues, 1 = ExtendedDeliveryTime, 2 = LongWorkingTime
-          nullable: false
-          type: integer
-        firstIsAsap:
-          description: Flag to define if the first time to be presented to the user is "as soon as possible"
-          nullable: false
-          type: boolean
-        times:
-          description: Collection of times when an order can be delivered/collected. To be selected by the user in the checkout flow before placing an order (e.g. As soon as possible, 16:00, 16:05, 16:10...)
-          items:
-            description: Datetimes describing when an order can be delivered/collected.
-            format: date-time
-            type: string
-          maxItems: 576
-          nullable: false
-          type: array
-        workingTimeMins:
-          description: Used by consumer web, to provide context on the number of minutes it takes to prepare the food for the order
-          nullable: false
-          type: integer
-      type: object
     OrderStateChange:
       additionalProperties: false
       properties:
@@ -13993,6 +14630,74 @@ components:
         paging:
           cursors:
             after: NDMyNzQyODI3OTQw
+    PagedFoodSafetyResponse:
+      allOf:
+        - $ref: "#/components/schemas/PagedAfterOnlyCursorResponse"
+        - properties:
+            data:
+              description: List of Products with food safety data.
+              items:
+                $ref: "#/components/schemas/ProductFoodSafety"
+              maxItems: 500
+              minItems: 0
+              type: array
+          type: object
+      example:
+        data:
+          - additives:
+              - code: "10.2"
+            allergens:
+              - code: A
+            id: RRR3PRE
+            ingredients:
+              - wasser
+            manufacturer:
+              brand: Coca-Cola Zero
+              city: Anderlecht
+              manufacturer: Coca-Cola Erfrischungsgetränke AG, Postfach 67 01 56, 10207 Berlin
+              origin: Deutschland
+              postalCode: "1070"
+              streetAddress: Bergense Steenweg 1424
+            nutritional:
+              alcohol:
+                unit: "%"
+                value: 7.5
+              caffeine:
+                unit: mg
+                value: 10
+              calories:
+                unit: kcal
+                value: 42
+              carbohydrate:
+                unit: mg
+                value: 22000
+              energy:
+                unit: kJ
+                value: 175.5
+              fat:
+                unit: mg
+                value: 16000
+              fattyAcidTotal:
+                unit: mg
+                value: 100
+              protein:
+                unit: mg
+                value: 4000.01
+              salt:
+                unit: mg
+                value: 20
+              sodium:
+                unit: mg
+                value: 10
+              sugar:
+                unit: mg
+                value: 9100
+            storage:
+              stgInstruction: Example
+            type: product
+        paging:
+          cursors:
+            after: NDMyNzQyODI3OTQw==
     PagedMenuDealGroupsResponse:
       allOf:
         - $ref: "#/components/schemas/PagedAfterOnlyCursorResponse"
@@ -14390,6 +15095,60 @@ components:
           nullable: true
           type: string
       type: object
+    ProductFoodSafety:
+      additionalProperties: false
+      properties:
+        additives:
+          description: List of additives
+          items:
+            $ref: "#/components/schemas/Additive"
+          maxItems: 26
+          minItems: 0
+          nullable: false
+          type: array
+        allergens:
+          description: List of allergens
+          items:
+            $ref: "#/components/schemas/Allergen"
+          maxItems: 29
+          minItems: 0
+          nullable: false
+          type: array
+        id:
+          description: Encrypted Product/Addon Id
+          nullable: false
+          type: string
+        ingredients:
+          description: List of ingredients
+          items:
+            $ref: "#/components/schemas/Ingredients"
+          maxItems: 80
+          minItems: 0
+          nullable: false
+          type: array
+        manufacturer:
+          allOf:
+            - $ref: "#/components/schemas/Manufacturer"
+          description: Object for manufacturer data
+          nullable: false
+          type: object
+        nutritional:
+          allOf:
+            - $ref: "#/components/schemas/Nutritional"
+          description: Object for nutritional data
+          nullable: false
+          type: object
+        storage:
+          allOf:
+            - $ref: "#/components/schemas/Storage"
+          description: Object for storage data
+          nullable: false
+          type: object
+        type:
+          description: Product or Addon
+          nullable: false
+          type: string
+      type: object
     ProductRecommendationsResponse:
       description: Contains all recommendations for a product.
       properties:
@@ -14616,6 +15375,20 @@ components:
               format: decimal
               type: number
           type: object
+      type: object
+    Properties:
+      description: Geometry information for consumers location
+      example:
+        errorMessage: Could not geocode address.
+        geocodingProvider: Google
+      properties:
+        errorMessage:
+          description: Any error returned by the geocoding provider.
+          nullable: true
+          type: string
+        geocodingProvider:
+          description: the geocoding provider
+          type: string
       type: object
     RedeemCommand:
       properties:
@@ -16570,6 +17343,15 @@ components:
         amountToSpend: 101
         description: Spend 1.01$ more to get 20%
         discountPercentage: 20
+    Storage:
+      example:
+        stgInstruction: Example
+      properties:
+        stgInstruction:
+          description: Storage/Usage instructions
+          nullable: true
+          type: string
+      type: object
     SuggestedSearchResponse:
       example:
         suggestions:
@@ -21637,6 +22419,7 @@ x-tagGroups:
       - Promoted Placement
       - Menu
       - Recommendations
+      - Location Services
   - name: Manage Order Journey
     tags:
       - Order Acceptance API
@@ -21653,6 +22436,7 @@ x-tagGroups:
       - Checkout
   - name: Restaurant Management
     tags:
+      - RestaurantProduct
       - Restaurants
       - RestaurantOffers
       - Restaurant OrderTimes
@@ -21667,3 +22451,6 @@ x-tagGroups:
       - Restaurant Webhooks
       - Products
       - Logistics POS Restaurants
+  - name: Takeaway Endpoints
+    tags:
+      - takeaway

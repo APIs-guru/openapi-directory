@@ -316,6 +316,11 @@ paths:
           name: dates
           schema:
             type: string
+        - description: "Filter by an update date, for example: `2020-12-01,2020-12-31`."
+          in: query
+          name: updated
+          schema:
+            type: string
         - description: "Filter by platforms count, for example: `1`."
           in: query
           name: platforms_count
@@ -341,7 +346,7 @@ paths:
           name: exclude_game_series
           schema:
             type: boolean
-        - description: "Available fields: `name`, `released`, `added`, `created`, `rating`. You can reverse the sort order adding a hyphen, for example: `-released`."
+        - description: "Available fields: `name`, `released`, `added`, `created`, `updated`, `rating`. You can reverse the sort order adding a hyphen, for example: `-released`."
           in: query
           name: ordering
           schema:
@@ -1534,6 +1539,11 @@ components:
           readOnly: true
           title: TBA
           type: boolean
+        updated:
+          format: date-time
+          readOnly: true
+          title: Updated
+          type: string
       required:
         - rating
       type: object
