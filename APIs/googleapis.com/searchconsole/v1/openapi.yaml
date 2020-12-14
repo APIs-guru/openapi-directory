@@ -588,6 +588,13 @@ components:
             - BY_PROPERTY
             - BY_PAGE
           type: string
+        dataState:
+          description: The data state to be fetched, can be full or all, the latter including full and partial data.
+          enum:
+            - DATA_STATE_UNSPECIFIED
+            - FINAL
+            - ALL
+          type: string
         dimensionFilterGroups:
           description: "[Optional] Zero or more filters to apply to the dimension grouping values; for example, 'query contains \\\"buy\\\"' to see only data where the query string contains the substring \\\"buy\\\" (not case-sensitive). You can filter by a dimension without grouping by it."
           items:
@@ -618,6 +625,7 @@ components:
             - WEB
             - IMAGE
             - VIDEO
+            - NEWS
           type: string
         startDate:
           description: " [Required] Start date of the requested date range, in YYYY-MM-DD format, in PST time (UTC - 8:00). Must be less than or equal to the end date. This value is included in the range."

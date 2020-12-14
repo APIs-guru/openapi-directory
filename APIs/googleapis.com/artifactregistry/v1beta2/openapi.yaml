@@ -550,6 +550,11 @@ paths:
           required: true
           schema:
             type: string
+        - description: Optional. Sorting field and order
+          in: query
+          name: orderBy
+          schema:
+            type: string
         - description: The maximum number of versions to return. Maximum page size is 10,000.
           in: query
           name: pageSize
@@ -882,7 +887,7 @@ components:
           description: Google Cloud Storage location requested.
       type: object
     GoogleDevtoolsArtifactregistryV1alpha1GcsSource:
-      description: Google Cloud Storage location for the input content.
+      description: Google Cloud Storage location where the artifacts currently reside.
       properties:
         uris:
           description: Cloud Storage paths URI (e.g., gs://my_bucket//my_object).

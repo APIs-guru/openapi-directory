@@ -41,11 +41,21 @@ paths:
           required: true
           schema:
             type: string
+        - description: If set to true, and the trigger is not found, the request will succeed but no action will be taken on the server.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
         - description: If provided, the trigger will only be deleted if the etag matches the current etag on the resource.
           in: query
           name: etag
           schema:
             type: string
+        - description: Required. If set, validate the request and preview the review, but do not actually post it.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       responses:
         "200":
           content:
@@ -100,17 +110,27 @@ paths:
       description: Update a single trigger.
       operationId: eventarc.projects.locations.triggers.patch
       parameters:
-        - description: "Required. The resource name of the trigger. Must be unique within the location on the project. Format: projects/{project}/locations/{location}/triggers/{trigger}"
+        - description: Required. The resource name of the trigger. Must be unique within the location on the project and must in `projects/{project}/locations/{location}/triggers/{trigger}` format.
           in: path
           name: name
           required: true
           schema:
             type: string
+        - description: If set to true, and the trigger is not found, a new trigger will be created. In this situation, `update_mask` is ignored.
+          in: query
+          name: allowMissing
+          schema:
+            type: boolean
         - description: The fields to be updated; only fields explicitly provided will be updated. If no field mask is provided, all provided fields in the request will be updated. To update all fields, provide a field mask of "*".
           in: query
           name: updateMask
           schema:
             type: string
+        - description: Required. If set, validate the request and preview the review, but do not actually post it.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       requestBody:
         content:
           application/json:
@@ -343,6 +363,11 @@ paths:
           name: triggerId
           schema:
             type: string
+        - description: Required. If set, validate the request and preview the review, but do not actually post it.
+          in: query
+          name: validateOnly
+          schema:
+            type: boolean
       requestBody:
         content:
           application/json:
@@ -596,8 +621,6 @@ components:
     Binding:
       description: Associates `members` with a `role`.
       properties:
-        bindingId:
-          type: string
         condition:
           $ref: "#/components/schemas/Expr"
           description: The condition that is associated with this binding. If the condition evaluates to `true`, then this binding applies to the current request. If the condition evaluates to `false`, then this binding does not apply to the current request. However, a different role binding might grant the same role to one or more of the members in this binding. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
@@ -632,7 +655,7 @@ components:
       properties:
         cloudRunService:
           $ref: "#/components/schemas/CloudRunService"
-          description: Cloud Run fully-managed service that receives the events. The service should be running in the same project of the trigger.
+          description: Cloud Run fully-managed service that receives the events. The service should be running in the same project as the trigger.
       type: object
     Empty:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
@@ -722,10 +745,10 @@ components:
       description: Matches events based on exact matches on the CloudEvents attributes.
       properties:
         attribute:
-          description: Required. The name of a CloudEvents atrribute. Currently, only a subset of attributes can be specified. All triggers MUST provide a matching criteria for attribute 'type'. Event types specify what event type has attributes are allowed based on
+          description: Required. The name of a CloudEvents attribute. Currently, only a subset of attributes can be specified. All triggers MUST provide a matching criteria for the 'type' attribute.
           type: string
         value:
-          description: Required. The value for the attribute
+          description: Required. The value for the attribute.
           type: string
       type: object
     Operation:
@@ -811,10 +834,10 @@ components:
       description: Represents a Pub/Sub transport.
       properties:
         subscription:
-          description: The name of the Pub/Sub subscription created and managed by Eventarc system as a transport for the event delivery. The value must be in the form of `projects/{PROJECT_ID}/subscriptions/{SUBSCRIPTION_NAME}
+          description: The name of the Pub/Sub subscription created and managed by Eventarc system as a transport for the event delivery. The value must be in the form of `projects/{PROJECT_ID}/subscriptions/{SUBSCRIPTION_NAME}`.
           type: string
         topic:
-          description: The name of the Pub/Sub topic created and managed by Eventarc system as a transport for the event delivery. The value must be in the form of `projects/{PROJECT_ID}/topics/{TOPIC_NAME}
+          description: The name of the Pub/Sub topic created and managed by Eventarc system as a transport for the event delivery. The value must be in the form of `projects/{PROJECT_ID}/topics/{TOPIC_NAME}`.
           type: string
       type: object
     SetIamPolicyRequest:
@@ -881,18 +904,18 @@ components:
           type: string
         destination:
           $ref: "#/components/schemas/Destination"
-          description: Required. Destinations specify where the events will be sent to. Exactly one destination is supported at this time.
+          description: Required. Destination specifies where the events should be sent to.
         etag:
           description: Output only. This checksum is computed by the server based on the value of other fields, and may be sent only on create requests to ensure the client has an up-to-date value before proceeding.
           readOnly: true
           type: string
         matchingCriteria:
-          description: Required. The criteria by which events are filtered. Only events that match with this critera will be sent to the destinations.
+          description: Required. The criteria by which events are filtered. Only events that match with this criteria will be sent to the destination.
           items:
             $ref: "#/components/schemas/MatchingCriteria"
           type: array
         name:
-          description: "Required. The resource name of the trigger. Must be unique within the location on the project. Format: projects/{project}/locations/{location}/triggers/{trigger}"
+          description: Required. The resource name of the trigger. Must be unique within the location on the project and must in `projects/{project}/locations/{location}/triggers/{trigger}` format.
           type: string
         serviceAccount:
           description: Optional. The IAM service account email associated with the trigger. The service account represents the identity of the trigger. The principal who calls this API must have `iam.serviceAccounts.actAs` permission in the service account. See https://cloud.google.com/iam/docs/understanding-service-accounts?hl=en#sa_common for more information. For Cloud Run destinations, this service account is used to generate identity tokens when invoking the service. See https://cloud.google.com/run/docs/triggering/pubsub-push#create-service-account for information on how to invoke authenticated Cloud Run services. In order to create Audit Log triggers, the service account should also have 'eventarc.events.receiveAuditLogV1Written' permission.

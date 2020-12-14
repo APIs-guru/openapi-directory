@@ -4273,6 +4273,74 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/content/v2.1/{merchantId}/productstatuses/{productId}/repricingreports":
+    get:
+      description: Lists the metrics report for a given Repricing product. Reports of the last 3 days may not be complete.
+      operationId: content.productstatuses.repricingreports.list
+      parameters:
+        - description: Required. Id of the merchant who owns the Repricing rule.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. Id of the Repricing product. Also known as the [REST_ID](https://developers.google.com/shopping-content/reference/rest/v2.1/products#Product.FIELDS.id)
+          in: path
+          name: productId
+          required: true
+          schema:
+            type: string
+        - description: Gets Repricing reports on and before this date in the merchant's timezone. You can only retrieve data up to 3 days ago (default) or earlier. Format is YYYY-MM-DD.
+          in: query
+          name: endDate
+          schema:
+            type: string
+        - description: Maximum number of days of reports to return. There can be more than one rule report returned per day. For example, if 3 rule types got applied to the same product within a 24-hour period, then a page_size of 1 will return 3 rule reports. The page size defaults to 50 and values above 1000 are coerced to 1000. This service may return fewer days of reports than this value, for example, if the time between your start and end date is less than the page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token (if provided) to retrieve the subsequent page. All other parameters must match the original call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: Id of the Repricing rule. If specified, only gets this rule's reports.
+          in: query
+          name: ruleId
+          schema:
+            type: string
+        - description: Gets Repricing reports on and after this date in the merchant's timezone, up to one year ago. Do not use a start date later than 3 days ago (default). Format is YYYY-MM-DD.
+          in: query
+          name: startDate
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRepricingProductReportsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - productstatuses
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/content/v2.1/{merchantId}/pubsubnotificationsettings":
     get:
       description: Retrieves a Merchant Center account's pubsub notification settings.
@@ -4724,6 +4792,69 @@ paths:
             - https://www.googleapis.com/auth/content
       tags:
         - repricingrules
+  "/content/v2.1/{merchantId}/repricingrules/{ruleId}/repricingreports":
+    get:
+      description: Lists the metrics report for a given Repricing rule. Reports of the last 3 days may not be complete.
+      operationId: content.repricingrules.repricingreports.list
+      parameters:
+        - description: Required. Id of the merchant who owns the Repricing rule.
+          in: path
+          name: merchantId
+          required: true
+          schema:
+            type: string
+        - description: Required. Id of the Repricing rule.
+          in: path
+          name: ruleId
+          required: true
+          schema:
+            type: string
+        - description: "Gets Repricing reports on and before this date in the merchant's timezone. You can only retrieve data up to 3 days ago (default) or earlier. Format: YYYY-MM-DD."
+          in: query
+          name: endDate
+          schema:
+            type: string
+        - description: Maximum number of daily reports to return. Each report includes data from a single 24-hour period. The page size defaults to 50 and values above 1000 are coerced to 1000. This service may return fewer days than this value, for example, if the time between your start and end date is less than page size.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Token (if provided) to retrieve the subsequent page. All other parameters must match the original call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+        - description: "Gets Repricing reports on and after this date in the merchant's timezone, up to one year ago. Do not use a start date later than 3 days ago (default). Format: YYYY-MM-DD."
+          in: query
+          name: startDate
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRepricingRuleReportsResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/content
+          Oauth2c:
+            - https://www.googleapis.com/auth/content
+      tags:
+        - repricingrules
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
   "/content/v2.1/{merchantId}/returnaddress":
     get:
       description: Lists the return addresses of the Merchant Center account.
@@ -5804,15 +5935,14 @@ components:
       description: Label assigned by CSS domain or CSS group to one of its sub-accounts.
       properties:
         accountId:
-          description: Output only. Immutable. The ID of account this label belongs to.
+          description: Immutable. The ID of account this label belongs to.
           format: int64
-          readOnly: true
           type: string
         description:
-          description: Description for this label.
+          description: The description of this label.
           type: string
         labelId:
-          description: Output only. Immutable. The ID of the label.
+          description: Output only. The ID of the label.
           format: int64
           readOnly: true
           type: string
@@ -6074,7 +6204,7 @@ components:
           description: The ID of the linked account.
           type: string
         services:
-          description: List of provided services.
+          description: 'Provided services. Acceptable values are: - "`shoppingAdsProductManagement`" - "`shoppingAdsOther`" - "`shoppingActionsProductManagement`" - "`shoppingActionsOrderManagement`" - "`shoppingActionsOther`" '
           items:
             type: string
           type: array
@@ -6752,6 +6882,22 @@ components:
             $ref: "#/components/schemas/DatafeedStatus"
           type: array
       type: object
+    Date:
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
+      properties:
+        day:
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
+          format: int32
+          type: integer
+        month:
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
+          format: int32
+          type: integer
+        year:
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
+          format: int32
+          type: integer
+      type: object
     DateTime:
       description: "Represents civil time (or occasionally physical time). This type can represent a civil time in one of a few possible ways: * When utc_offset is set and time_zone is unset: a civil time on a calendar day with a particular offset from UTC. * When time_zone is set and utc_offset is unset: a civil time on a calendar day in a particular time zone. * When neither time_zone nor utc_offset is set: a civil time on a calendar day in local time. The date is relative to the Proleptic Gregorian Calendar. If year is 0, the DateTime is considered not to have a specific year. month and day must have valid, non-zero values. This type may also be used to represent a physical time if all the date and time fields are set and either case of the `time_offset` oneof is set. Consider using `Timestamp` message for physical time instead. If your use case also would like to store the user's timezone, that can be done in another field. This type is more flexible than some applications may want. Make sure to document and validate your application's limitations."
       properties:
@@ -6954,6 +7100,24 @@ components:
           description: "The holiday type. Always present. Acceptable values are: - \"`Christmas`\" - \"`Easter`\" - \"`Father's Day`\" - \"`Halloween`\" - \"`Independence Day (USA)`\" - \"`Mother's Day`\" - \"`Thanksgiving`\" - \"`Valentine's Day`\" "
           type: string
       type: object
+    InapplicabilityDetails:
+      description: Map of inapplicability details.
+      properties:
+        inapplicableCount:
+          description: Count of this inapplicable reason code.
+          format: int64
+          type: string
+        inapplicableReason:
+          description: Reason code this rule was not applicable.
+          enum:
+            - INAPPLICABLE_REASON_UNSPECIFIED
+            - CANNOT_BEAT_BUYBOX_WINNER
+            - ALREADY_WINNING_BUYBOX
+            - TRIUMPHED_OVER_BY_SAME_TYPE_RULE
+            - TRIUMPHED_OVER_BY_OTHER_RULE_ON_OFFER
+            - RESTRICTIONS_NOT_MET
+          type: string
+      type: object
     Installment:
       properties:
         amount:
@@ -7147,7 +7311,7 @@ components:
           description: A list of errors defined if, and only if, the request failed.
         gmbAccounts:
           $ref: "#/components/schemas/GmbAccounts"
-          description: The the list of accessible GMB accounts.
+          description: The list of accessible GMB accounts.
         kind:
           description: 'Identifies what kind of resource this is. Value: the fixed string "`content#liasettingsCustomBatchResponseEntry`"'
           type: string
@@ -7277,6 +7441,30 @@ components:
           description: The regions from the specified merchant.
           items:
             $ref: "#/components/schemas/Region"
+          type: array
+      type: object
+    ListRepricingProductReportsResponse:
+      description: Response message for the ListRepricingProductReports method.
+      properties:
+        nextPageToken:
+          description: A token for retrieving the next page. Its absence means there is no subsequent page.
+          type: string
+        repricingProductReports:
+          description: Periodic reports for the given Repricing product.
+          items:
+            $ref: "#/components/schemas/RepricingProductReport"
+          type: array
+      type: object
+    ListRepricingRuleReportsResponse:
+      description: Response message for the ListRepricingRuleReports method.
+      properties:
+        nextPageToken:
+          description: A token for retrieving the next page. Its absence means there is no subsequent page.
+          type: string
+        repricingRuleReports:
+          description: Daily reports for the given Repricing rule.
+          items:
+            $ref: "#/components/schemas/RepricingRuleReport"
           type: array
       type: object
     ListRepricingRulesResponse:
@@ -8666,6 +8854,16 @@ components:
           description: The tracking ID for the shipment.
           type: string
       type: object
+    OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails:
+      description: ScheduledDeliveryDetails used to update the scheduled delivery order.
+      properties:
+        carrierPhoneNumber:
+          description: The phone number of the carrier fulfilling the delivery. The phone number should be formatted as the international notation in
+          type: string
+        scheduledDate:
+          description: The date a shipment is scheduled for delivery, in ISO 8601 format.
+          type: string
+      type: object
     OrdersGetByMerchantOrderIdResponse:
       properties:
         kind:
@@ -8973,6 +9171,9 @@ components:
         readyPickupDate:
           description: Date on which the shipment has been ready for pickup, in ISO 8601 format. Optional and can be provided only if `status` is `ready for pickup`.
           type: string
+        scheduledDeliveryDetails:
+          $ref: "#/components/schemas/OrdersCustomBatchRequestEntryUpdateShipmentScheduledDeliveryDetails"
+          description: Delivery details of the shipment if scheduling is needed.
         shipmentId:
           description: The ID of the shipment.
           type: string
@@ -10205,9 +10406,65 @@ components:
           $ref: "#/components/schemas/RegionalInventory"
           description: Price and availability of the product.
       type: object
+    RepricingProductReport:
+      description: Resource that represents a daily Repricing product report. Each report contains stats for a single type of Repricing rule for a single product on a given day. If there are multiple rules of the same type for the product on that day, the report lists all the rules by rule ids, combines the stats, and paginates the results by date. To retrieve the stats of a particular rule, provide the rule_id in the request.
+      properties:
+        applicationCount:
+          description: Total count of Repricer applications. This value captures how many times the rule of this type was applied to this product during this reporting period.
+          format: int64
+          type: string
+        buyboxWinningProductStats:
+          $ref: "#/components/schemas/RepricingProductReportBuyboxWinningProductStats"
+          description: Stats specific to buybox winning rules for product report.
+        date:
+          $ref: "#/components/schemas/Date"
+          description: Date of the stats in this report. The report starts and ends according to the merchant's timezone.
+        highWatermark:
+          $ref: "#/components/schemas/PriceAmount"
+          description: Maximum displayed price after repriced during this reporting period.
+        inapplicabilityDetails:
+          description: List of all reasons the rule did not apply to the product during the specified reporting period.
+          items:
+            $ref: "#/components/schemas/InapplicabilityDetails"
+          type: array
+        lowWatermark:
+          $ref: "#/components/schemas/PriceAmount"
+          description: Minimum displayed price after repriced during this reporting period.
+        orderItemCount:
+          description: Total unit count of impacted products ordered while the rule was active on the date of the report. This count includes all orders that were started while the rule was active, even if the rule was no longer active when the order was completed.
+          format: int32
+          type: integer
+        ruleIds:
+          description: Ids of the Repricing rule for this report.
+          items:
+            type: string
+          type: array
+        totalGmv:
+          $ref: "#/components/schemas/PriceAmount"
+          description: Total GMV generated by impacted products while the rule was active on the date of the report. This value includes all orders that were started while the rule was active, even if the rule was no longer active when the order was completed.
+        type:
+          description: Type of the rule.
+          enum:
+            - REPRICING_RULE_TYPE_UNSPECIFIED
+            - TYPE_WIN_BUY_BOX
+            - TYPE_STATS_BASED
+            - TYPE_COGS_BASED
+          type: string
+      type: object
+    RepricingProductReportBuyboxWinningProductStats:
+      description: Stats specific to buybox winning rules for product report.
+      properties:
+        buyboxWinsCount:
+          description: Number of times this product won the buybox with these rules during this time period.
+          format: int32
+          type: integer
+      type: object
     RepricingRule:
       description: "Represents a repricing rule. A repricing rule is used by shopping serving to adjust transactable offer prices if conditions are met. Next ID: 24"
       properties:
+        cogsBasedRule:
+          $ref: "#/components/schemas/RepricingRuleCostOfGoodsSaleRule"
+          description: The rule definition for TYPE_COGS_BASED. Required when the rule type is TYPE_COGS_BASED.
         countryCode:
           description: Required. Immutable. CLDR country code (e.g. "US").
           type: string
@@ -10235,6 +10492,9 @@ components:
           description: Output only. Immutable. The ID to uniquely identify each repricing rule.
           readOnly: true
           type: string
+        statsBasedRule:
+          $ref: "#/components/schemas/RepricingRuleStatsBasedRule"
+          description: The rule definition for TYPE_STATS_BASED. Required when the rule type is TYPE_STATS_BASED.
         title:
           description: The title for the rule.
           type: string
@@ -10243,6 +10503,19 @@ components:
           enum:
             - REPRICING_RULE_TYPE_UNSPECIFIED
             - TYPE_WIN_BUY_BOX
+            - TYPE_STATS_BASED
+            - TYPE_COGS_BASED
+          type: string
+      type: object
+    RepricingRuleCostOfGoodsSaleRule:
+      description: A repricing rule that changes the sale price based on cost of goods sale.
+      properties:
+        percentageDelta:
+          description: "The percent change against the COGS. Ex: 20 would mean to set the adjusted price 1.2X of the COGS data."
+          format: int32
+          type: integer
+        priceDelta:
+          description: The price delta against the COGS. E.g. 2 means $2 more of the COGS.
           type: string
       type: object
     RepricingRuleEffectiveTime:
@@ -10285,6 +10558,9 @@ components:
         offerIdMatcher:
           $ref: "#/components/schemas/RepricingRuleEligibleOfferMatcherStringMatcher"
           description: Filter by the offer id.
+        skipWhenOnPromotion:
+          description: When true, the rule won't be applied to offers with active promotions.
+          type: boolean
       type: object
     RepricingRuleEligibleOfferMatcherStringMatcher:
       description: Matcher by string attributes.
@@ -10294,6 +10570,57 @@ components:
           items:
             type: string
           type: array
+      type: object
+    RepricingRuleReport:
+      description: "Resource that represents a daily Repricing rule report. Next ID: 11"
+      properties:
+        buyboxWinningRuleStats:
+          $ref: "#/components/schemas/RepricingRuleReportBuyboxWinningRuleStats"
+          description: Stats specific to buybox winning rules for rule report.
+        date:
+          $ref: "#/components/schemas/Date"
+          description: Date of the stats in this report. The report starts and ends according to the merchant's timezone.
+        impactedProducts:
+          description: List of product ids that are impacted by this rule during this reporting period. Out of stock products and products not searched for by customers are examples of non-impacted products.
+          items:
+            type: string
+          type: array
+        inapplicabilityDetails:
+          description: List of all reasons the rule did not apply to the inapplicable products during the specified reporting period.
+          items:
+            $ref: "#/components/schemas/InapplicabilityDetails"
+          type: array
+        inapplicableProducts:
+          description: List of product ids that are inapplicable to this rule during this reporting period. To get the inapplicable reason for a specific product, see RepricingProductReport.
+          items:
+            type: string
+          type: array
+        orderItemCount:
+          description: Total unit count of impacted products ordered while the rule was active on the date of the report. This count includes all orders that were started while the rule was active, even if the rule was no longer active when the order was completed.
+          format: int32
+          type: integer
+        ruleId:
+          description: Id of the Repricing rule for this report.
+          type: string
+        totalGmv:
+          $ref: "#/components/schemas/PriceAmount"
+          description: Total GMV generated by impacted products while the rule was active on the date of the report. This value includes all orders that were started while the rule was active, even if the rule was no longer active when the order was completed.
+        type:
+          description: Type of the rule.
+          enum:
+            - REPRICING_RULE_TYPE_UNSPECIFIED
+            - TYPE_WIN_BUY_BOX
+            - TYPE_STATS_BASED
+            - TYPE_COGS_BASED
+          type: string
+      type: object
+    RepricingRuleReportBuyboxWinningRuleStats:
+      description: Stats specific to buybox winning rules for rule report.
+      properties:
+        buyboxWonProductCount:
+          description: Number of unique products that won the buybox with this rule during this period of time.
+          format: int32
+          type: integer
       type: object
     RepricingRuleRestriction:
       description: 'Definition of a rule restriction. At least one of the following needs to be true: (1) use_auto_pricing_min_price is true (2) floor.price_delta exists (3) floor.percentage_delta exists If floor.price_delta and floor.percentage_delta are both set on a rule, the highest value will be chosen by the Repricer. In other words, for a product with a price of $50, if the `floor.percentage_delta` is "-10" and the floor.price_delta is "-12", the offer price will only be lowered $5 (10% lower than the original offer price).'
@@ -10314,6 +10641,17 @@ components:
           type: integer
         priceDelta:
           description: The price micros relative to the offer selling price. This field is signed. It must be negative in floor. For example, if an offer is selling at $10 and this field is -$2 in floor, the repricing rule only applies if the calculated new price is >= $8.
+          type: string
+      type: object
+    RepricingRuleStatsBasedRule:
+      description: Definition of stats based rule.
+      properties:
+        percentageDelta:
+          description: The percent change against the price target. Valid from 0 to 100 inclusively.
+          format: int32
+          type: integer
+        priceDelta:
+          description: The price delta against the above price target. A positive value means the price should be adjusted to be above statistical measure, and a negative value means below. Currency code must not be included.
           type: string
       type: object
     ReturnAddress:
@@ -10448,7 +10786,7 @@ components:
           description: The date of delivery of the shipment, in ISO 8601 format.
           type: string
         returnMethodType:
-          description: 'Type of the return method. Acceptable values are: - "`byMail`" - "`contactCustomerSupport`" - "`returnless`" '
+          description: 'Type of the return method. Acceptable values are: - "`byMail`" - "`contactCustomerSupport`" - "`returnless`" - "`inStore`" '
           type: string
         shipmentId:
           description: Shipment ID generated by Google.
@@ -10695,7 +11033,7 @@ components:
         commission:
           $ref: "#/components/schemas/SettlementTransactionAmountCommission"
         description:
-          description: 'The description of the event. Acceptable values are: - "`taxWithhold`" - "`principal`" - "`principalAdjustment`" - "`shippingFee`" - "`merchantRemittedSalesTax`" - "`googleRemittedSalesTax`" - "`merchantCoupon`" - "`merchantCouponTax`" - "`merchantRemittedDisposalTax`" - "`googleRemittedDisposalTax`" - "`merchantRemittedRedemptionFee`" - "`googleRemittedRedemptionFee`" - "`eeeEcoFee`" - "`furnitureEcoFee`" - "`copyPrivateFee`" - "`eeeEcoFeeCommission`" - "`furnitureEcoFeeCommission`" - "`copyPrivateFeeCommission`" - "`principalRefund`" - "`principalRefundTax`" - "`itemCommission`" - "`adjustmentCommission`" - "`shippingFeeCommission`" - "`commissionRefund`" - "`damaged`" - "`damagedOrDefectiveItem`" - "`expiredItem`" - "`faultyItem`" - "`incorrectItemReceived`" - "`itemMissing`" - "`qualityNotExpected`" - "`receivedTooLate`" - "`storePackageMissing`" - "`transitPackageMissing`" - "`unsuccessfulDeliveryUndeliverable`" - "`wrongChargeInStore`" - "`wrongItem`" - "`returns`" - "`undeliverable`" - "`refundFromMerchant`" - "`returnLabelShippingFee`" '
+          description: 'The description of the event. Acceptable values are: - "`taxWithhold`" - "`principal`" - "`principalAdjustment`" - "`shippingFee`" - "`merchantRemittedSalesTax`" - "`googleRemittedSalesTax`" - "`merchantCoupon`" - "`merchantCouponTax`" - "`merchantRemittedDisposalTax`" - "`googleRemittedDisposalTax`" - "`merchantRemittedRedemptionFee`" - "`googleRemittedRedemptionFee`" - "`eeeEcoFee`" - "`furnitureEcoFee`" - "`copyPrivateFee`" - "`eeeEcoFeeCommission`" - "`furnitureEcoFeeCommission`" - "`copyPrivateFeeCommission`" - "`principalRefund`" - "`principalRefundTax`" - "`itemCommission`" - "`adjustmentCommission`" - "`shippingFeeCommission`" - "`commissionRefund`" - "`damaged`" - "`damagedOrDefectiveItem`" - "`expiredItem`" - "`faultyItem`" - "`incorrectItemReceived`" - "`itemMissing`" - "`qualityNotExpected`" - "`receivedTooLate`" - "`storePackageMissing`" - "`transitPackageMissing`" - "`unsuccessfulDeliveryUndeliverable`" - "`wrongChargeInStore`" - "`wrongItem`" - "`returns`" - "`undeliverable`" - "`refundFromMerchant`" - "`returnLabelShippingFee`" - "`pspFee`" '
           type: string
         transactionAmount:
           $ref: "#/components/schemas/Price"
@@ -11032,6 +11370,9 @@ components:
         address:
           $ref: "#/components/schemas/TestOrderAddress"
           description: The delivery address
+        isScheduledDelivery:
+          description: Whether the order is scheduled delivery order.
+          type: boolean
         phoneNumber:
           description: The phone number of the person receiving the delivery.
           type: string

@@ -3792,6 +3792,7 @@ components:
             - JOB_STATE_PENDING
             - JOB_STATE_CANCELLING
             - JOB_STATE_QUEUED
+            - JOB_STATE_RESOURCE_CLEANING_UP
           type: string
       type: object
     ExecutionStageSummary:
@@ -4107,6 +4108,7 @@ components:
             - JOB_STATE_PENDING
             - JOB_STATE_CANCELLING
             - JOB_STATE_QUEUED
+            - JOB_STATE_RESOURCE_CLEANING_UP
           type: string
         currentStateTime:
           description: The timestamp associated with the current state.
@@ -4162,6 +4164,7 @@ components:
             - JOB_STATE_PENDING
             - JOB_STATE_CANCELLING
             - JOB_STATE_QUEUED
+            - JOB_STATE_RESOURCE_CLEANING_UP
           type: string
         stageStates:
           description: This field may be mutated by the Cloud Dataflow service; callers cannot mutate it.

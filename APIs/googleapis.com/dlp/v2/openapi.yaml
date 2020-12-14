@@ -1577,7 +1577,7 @@ components:
       properties:
         inspectJob:
           $ref: "#/components/schemas/GooglePrivacyDlpV2InspectJobConfig"
-          description: Set to control what and how to inspect.
+          description: An inspection job scans a storage repository for InfoTypes.
         jobId:
           description: "The job id can contain uppercase and lowercase letters, numbers, and hyphens; that is, it must match the regular expression: `[a-zA-Z\\d-_]+`. The maximum length is 100 characters. Can be empty to allow the system to generate one."
           type: string
@@ -1586,7 +1586,7 @@ components:
           type: string
         riskJob:
           $ref: "#/components/schemas/GooglePrivacyDlpV2RiskAnalysisJobConfig"
-          description: Set to choose what metric to calculate.
+          description: A risk analysis job calculates re-identification risk metrics for a BigQuery table.
       type: object
     GooglePrivacyDlpV2CreateInspectTemplateRequest:
       description: Request message for CreateInspectTemplate.
@@ -2460,7 +2460,7 @@ components:
           description: The configuration used for this job.
         result:
           $ref: "#/components/schemas/GooglePrivacyDlpV2Result"
-          description: A summary of the outcome of this inspect job.
+          description: A summary of the outcome of this inspection job.
       type: object
     GooglePrivacyDlpV2InspectJobConfig:
       description: Controls what and how to inspect for findings.

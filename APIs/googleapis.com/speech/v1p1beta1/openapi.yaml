@@ -525,12 +525,6 @@ components:
         enableSpeakerDiarization:
           description: "If 'true', enables speaker detection for each recognized word in the top alternative of the recognition result using a speaker_tag provided in the WordInfo. Note: Use diarization_config instead."
           type: boolean
-        enableSpokenEmojis:
-          description: The spoken emoji behavior for the call If not set, uses default behavior based on model of choice If 'true', adds spoken emoji formatting for the request. This will replace spoken emojis with the corresponding Unicode symbols in the final transcript. If 'false', spoken emojis are not replaced.
-          type: boolean
-        enableSpokenPunctuation:
-          description: The spoken punctuation behavior for the call If not set, uses default behavior based on model of choice e.g. command_and_search will enable spoken punctuation by default If 'true', replaces spoken punctuation with the corresponding symbols in the request. For example, "how are you question mark" becomes "how are you?". See https://cloud.google.com/speech-to-text/docs/spoken-punctuation for support. If 'false', spoken punctuation is not replaced.
-          type: boolean
         enableWordConfidence:
           description: If `true`, the top result includes a list of words and the confidence for those words. If `false`, no word-level confidence information is returned. The default is `false`.
           type: boolean
@@ -549,7 +543,6 @@ components:
             - OGG_OPUS
             - SPEEX_WITH_HEADER_BYTE
             - MP3
-            - WEBM_OPUS
           type: string
         languageCode:
           description: 'Required. The language of the supplied audio as a [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. Example: "en-US". See [Language Support](https://cloud.google.com/speech-to-text/docs/languages) for a list of the currently supported language codes.'

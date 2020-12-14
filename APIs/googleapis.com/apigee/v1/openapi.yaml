@@ -747,6 +747,48 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
+  "/v1/{name}:activate":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Activates the NAT address. The Apigee instance can now use this for Internet egress traffic. **Note:** Not supported for Apigee hybrid.
+      operationId: apigee.organizations.instances.natAddresses.activate
+      parameters:
+        - description: "Required. Name of the nat address. Use the following structure in your request: `organizations/{org}/instances/{instances}/natAddresses/{nataddress}``"
+          in: path
+          name: name
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1ActivateNatAddressRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{name}:getSyncAuthorization":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
@@ -2430,6 +2472,82 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - organizations
+  "/v1/{parent}/natAddresses":
+    get:
+      description: Lists the NAT addresses for an Apigee instance. **Note:** Not supported for Apigee hybrid.
+      operationId: apigee.organizations.instances.natAddresses.list
+      parameters:
+        - description: "Required. Name of the instance. Use the following structure in your request: `organizations/{org}/instances/{instance}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Maximum number of natAddresses to return. Defaults to 25.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Page token, returned from a previous ListNatAddresses call, that you can use to retrieve the next page of content.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleCloudApigeeV1ListNatAddressesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a NAT address. The address is created in the RESERVED state and a static external IP address will be provisioned. At this time, the instance will not use this IP address for Internet egress traffic. The address can be activated for use once any required firewall IP whitelisting has been completed. **Note:** Not supported for Apigee hybrid.
+      operationId: apigee.organizations.instances.natAddresses.create
+      parameters:
+        - description: "Required. Name of the instance. Use the following structure in your request: `organizations/{org}/instances/{instance}`"
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GoogleCloudApigeeV1NatAddress"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GoogleLongrunningOperation"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - organizations
   "/v1/{parent}/queries":
     get:
       description: Return a list of Asynchronous Queries
@@ -3397,6 +3515,10 @@ components:
           type: boolean
         value:
           type: string
+      type: object
+    GoogleCloudApigeeV1ActivateNatAddressRequest:
+      description: Request for ActivateNatAddressRequest. Activate the nat address request.
+      properties: {}
       type: object
     GoogleCloudApigeeV1Alias:
       description: A reference to a certificate or key, certificate pair.
@@ -5176,6 +5298,18 @@ components:
           description: Page token that you can include in a ListInstance request to retrieve the next page of content. If omitted, no subsequent pages exist.
           type: string
       type: object
+    GoogleCloudApigeeV1ListNatAddressesResponse:
+      description: Response for ListNatAddresses.
+      properties:
+        natAddresses:
+          description: List of NAT Addresses for the instance.
+          items:
+            $ref: "#/components/schemas/GoogleCloudApigeeV1NatAddress"
+          type: array
+        nextPageToken:
+          description: Page token that you can include in a ListNatAddresses request to retrieve the next page of content. If omitted, no subsequent pages exist.
+          type: string
+      type: object
     GoogleCloudApigeeV1ListOfDevelopersResponse:
       properties:
         developer:
@@ -5223,6 +5357,25 @@ components:
           description: 'List of metric values. Possible value format: "values":["39.0"] or "values":[ { "value": "39.0", "timestamp": 1232434354} ]'
           items: {}
           type: array
+      type: object
+    GoogleCloudApigeeV1NatAddress:
+      description: Apigee NAT(network address translation) address. A NAT address is a static external IP address used for Internet egress traffic.
+      properties:
+        ipAddress:
+          description: Required. The static IPV4 address.
+          type: string
+        name:
+          description: Required. Resource ID of the NAT address.
+          type: string
+        state:
+          description: Required. State of the nat address.
+          enum:
+            - STATE_UNSPECIFIED
+            - CREATING
+            - RESERVED
+            - ACTIVE
+            - DELETING
+          type: string
       type: object
     GoogleCloudApigeeV1Operation:
       description: Operation represents the pairing of REST resource path and the actions (verbs) allowed on the resource path.

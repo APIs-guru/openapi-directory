@@ -227,15 +227,15 @@ components:
       schema:
         type: string
   schemas:
-    GoogleCloudDocumentaiUiv1beta3CreateLabelerPoolOperationMetadata:
-      description: The long running operation metadata for CreateLabelerPool.
+    GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata:
+      description: The common metadata for long running operations.
       properties:
         createTime:
           description: The creation time of the operation.
           format: google-datetime
           type: string
         state:
-          description: Used only when Operation.done is false.
+          description: The state of the operation.
           enum:
             - STATE_UNSPECIFIED
             - RUNNING
@@ -245,12 +245,19 @@ components:
             - CANCELLED
           type: string
         stateMessage:
-          description: A message providing more details about the current state of processing. For example, the error message if the operation is failed.
+          description: A message providing more details about the current state of processing.
           type: string
         updateTime:
           description: The last update time of the operation.
           format: google-datetime
           type: string
+      type: object
+    GoogleCloudDocumentaiUiv1beta3CreateLabelerPoolOperationMetadata:
+      description: The long running operation metadata for CreateLabelerPool.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
       type: object
     GoogleCloudDocumentaiUiv1beta3CreateProcessorVersionMetadata:
       description: The metadata that represents a processor version being created.
@@ -279,31 +286,16 @@ components:
     GoogleCloudDocumentaiUiv1beta3DeleteLabelerPoolOperationMetadata:
       description: The long running operation metadata for DeleteLabelerPool.
       properties:
-        createTime:
-          description: The creation time of the operation.
-          format: google-datetime
-          type: string
-        state:
-          description: Used only when Operation.done is false.
-          enum:
-            - STATE_UNSPECIFIED
-            - RUNNING
-            - CANCELLING
-            - SUCCEEDED
-            - FAILED
-            - CANCELLED
-          type: string
-        stateMessage:
-          description: A message providing more details about the current state of processing. For example, the error message if the operation is failed.
-          type: string
-        updateTime:
-          description: The last update time of the operation.
-          format: google-datetime
-          type: string
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
       type: object
     GoogleCloudDocumentaiUiv1beta3DeleteProcessorMetadata:
       description: The long running operation metadata for delete processor method.
       properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
         createTime:
           description: The creation time of the operation.
           format: google-datetime
@@ -325,9 +317,30 @@ components:
           format: google-datetime
           type: string
       type: object
+    GoogleCloudDocumentaiUiv1beta3DeleteProcessorVersionMetadata:
+      description: The long running operation metadata for delete processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3DeployProcessorVersionMetadata:
+      description: The long running operation metadata for deploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3DeployProcessorVersionResponse:
+      description: Response message for the deploy processor version method.
+      properties: {}
+      type: object
     GoogleCloudDocumentaiUiv1beta3DisableProcessorMetadata:
       description: The long running operation metadata for disable processor method.
       properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
         createTime:
           description: The creation time of the operation.
           format: google-datetime
@@ -358,6 +371,9 @@ components:
     GoogleCloudDocumentaiUiv1beta3EnableProcessorMetadata:
       description: The long running operation metadata for enable processor method.
       properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
         createTime:
           description: The creation time of the operation.
           format: google-datetime
@@ -385,30 +401,30 @@ components:
       description: Response message for the enable processor method. Intentionally empty proto for adding fields in future.
       properties: {}
       type: object
+    GoogleCloudDocumentaiUiv1beta3UndeployProcessorVersionMetadata:
+      description: The long running operation metadata for the undeploy processor version method.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
+    GoogleCloudDocumentaiUiv1beta3UndeployProcessorVersionResponse:
+      description: Response message for the undeploy processor version method.
+      properties: {}
+      type: object
+    GoogleCloudDocumentaiUiv1beta3UpdateHumanReviewConfigMetadata:
+      description: The long running operation metadata for updating the human review configuration.
+      properties:
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
+      type: object
     GoogleCloudDocumentaiUiv1beta3UpdateLabelerPoolOperationMetadata:
       description: The long running operation metadata for UpdateLabelerPool.
       properties:
-        createTime:
-          description: The creation time of the operation.
-          format: google-datetime
-          type: string
-        state:
-          description: Used only when Operation.done is false.
-          enum:
-            - STATE_UNSPECIFIED
-            - RUNNING
-            - CANCELLING
-            - SUCCEEDED
-            - FAILED
-            - CANCELLED
-          type: string
-        stateMessage:
-          description: A message providing more details about the current state of processing. For example, the error message if the operation is failed.
-          type: string
-        updateTime:
-          description: The last update time of the operation.
-          format: google-datetime
-          type: string
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
       type: object
     GoogleCloudDocumentaiV1beta1BatchProcessDocumentsResponse:
       description: Response to an batch document processing request. This is returned in the LRO Operation after the operation is complete.
@@ -536,16 +552,16 @@ components:
       properties:
         addressValue:
           $ref: "#/components/schemas/GoogleTypePostalAddress"
-          description: "Postal address. See also: https: //github.com/googleapis/googleapis/blob/ // master/google/type/postal_address.proto"
+          description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
         dateValue:
           $ref: "#/components/schemas/GoogleTypeDate"
-          description: "Date value. Includes year, month, day. See also: https: //github.com/googleapis/googleapis/blob/master/google/type/date.proto"
+          description: "Date value. Includes year, month, day. See also: https://github.com/googleapis/googleapis/blob/master/google/type/date.proto"
         datetimeValue:
           $ref: "#/components/schemas/GoogleTypeDateTime"
-          description: "DateTime value. Includes date, time, and timezone. See also: https: //github.com/googleapis/googleapis/blob/ // master/google/type/datetime.proto"
+          description: "DateTime value. Includes date, time, and timezone. See also: https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto"
         moneyValue:
           $ref: "#/components/schemas/GoogleTypeMoney"
-          description: "Money value. See also: https: //github.com/googleapis/googleapis/blob/ // master/google/type/money.proto"
+          description: "Money value. See also: https://github.com/googleapis/googleapis/blob/master/google/type/money.proto"
         text:
           description: Required. Normalized entity value stored as a string. This field is populated for supported document type (e.g. Invoice). For some entity types, one of respective 'structured_value' fields may also be populated. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
           type: string
@@ -656,7 +672,7 @@ components:
             - FORM_FIELD
           type: string
         page:
-          description: Required. Index into the Document.pages element
+          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element.
           format: int64
           type: string
       type: object
@@ -1336,16 +1352,16 @@ components:
       properties:
         addressValue:
           $ref: "#/components/schemas/GoogleTypePostalAddress"
-          description: "Postal address. See also: https: //github.com/googleapis/googleapis/blob/ // master/google/type/postal_address.proto"
+          description: "Postal address. See also: https://github.com/googleapis/googleapis/blob/master/google/type/postal_address.proto"
         dateValue:
           $ref: "#/components/schemas/GoogleTypeDate"
-          description: "Date value. Includes year, month, day. See also: https: //github.com/googleapis/googleapis/blob/master/google/type/date.proto"
+          description: "Date value. Includes year, month, day. See also: https://github.com/googleapis/googleapis/blob/master/google/type/date.proto"
         datetimeValue:
           $ref: "#/components/schemas/GoogleTypeDateTime"
-          description: "DateTime value. Includes date, time, and timezone. See also: https: //github.com/googleapis/googleapis/blob/ // master/google/type/datetime.proto"
+          description: "DateTime value. Includes date, time, and timezone. See also: https://github.com/googleapis/googleapis/blob/master/google/type/datetime.proto"
         moneyValue:
           $ref: "#/components/schemas/GoogleTypeMoney"
-          description: "Money value. See also: https: //github.com/googleapis/googleapis/blob/ // master/google/type/money.proto"
+          description: "Money value. See also: https://github.com/googleapis/googleapis/blob/master/google/type/money.proto"
         text:
           description: Required. Normalized entity value stored as a string. This field is populated for supported document type (e.g. Invoice). For some entity types, one of respective 'structured_value' fields may also be populated. - Money/Currency type (`money_value`) is in the ISO 4217 text format. - Date type (`date_value`) is in the ISO 8601 text format. - Datetime type (`datetime_value`) is in the ISO 8601 text format.
           type: string
@@ -1470,7 +1486,7 @@ components:
             - FORM_FIELD
           type: string
         page:
-          description: Required. Index into the Document.pages element
+          description: Required. Index into the Document.pages element, for example using Document.pages to locate the related page element.
           format: int64
           type: string
       type: object
@@ -2264,23 +2280,23 @@ components:
           type: number
       type: object
     GoogleTypeDate:
-      description: "Represents a whole or partial calendar date, e.g. a birthday. The time of day and time zone are either specified elsewhere or are not significant. The date is relative to the Proleptic Gregorian Calendar. This can represent: * A full date, with non-zero year, month and day values * A month and day value, with a zero year, e.g. an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, e.g. a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
+      description: "Represents a whole or partial calendar date, such as a birthday. The time of day and time zone are either specified elsewhere or are insignificant. The date is relative to the Gregorian Calendar. This can represent one of the following: * A full date, with non-zero year, month, and day values * A month and day value, with a zero year, such as an anniversary * A year on its own, with zero month and day values * A year and month value, with a zero day, such as a credit card expiration date Related types are google.type.TimeOfDay and `google.protobuf.Timestamp`."
       properties:
         day:
-          description: Day of month. Must be from 1 to 31 and valid for the year and month, or 0 if specifying a year by itself or a year and month where the day is not significant.
+          description: Day of a month. Must be from 1 to 31 and valid for the year and month, or 0 to specify a year by itself or a year and month where the day isn't significant.
           format: int32
           type: integer
         month:
-          description: Month of year. Must be from 1 to 12, or 0 if specifying a year without a month and day.
+          description: Month of a year. Must be from 1 to 12, or 0 to specify a year without a month and day.
           format: int32
           type: integer
         year:
-          description: Year of date. Must be from 1 to 9999, or 0 if specifying a date without a year.
+          description: Year of the date. Must be from 1 to 9999, or 0 to specify a date without a year.
           format: int32
           type: integer
       type: object
     GoogleTypeDateTime:
-      description: "Represents civil time in one of a few possible ways: * When utc_offset is set and time_zone is unset: a civil time on a calendar day with a particular offset from UTC. * When time_zone is set and utc_offset is unset: a civil time on a calendar day in a particular time zone. * When neither time_zone nor utc_offset is set: a civil time on a calendar day in local time. The date is relative to the Proleptic Gregorian Calendar. If year is 0, the DateTime is considered not to have a specific year. month and day must have valid, non-zero values. This type is more flexible than some applications may want. Make sure to document and validate your application's limitations."
+      description: "Represents civil time (or occasionally physical time). This type can represent a civil time in one of a few possible ways: * When utc_offset is set and time_zone is unset: a civil time on a calendar day with a particular offset from UTC. * When time_zone is set and utc_offset is unset: a civil time on a calendar day in a particular time zone. * When neither time_zone nor utc_offset is set: a civil time on a calendar day in local time. The date is relative to the Proleptic Gregorian Calendar. If year is 0, the DateTime is considered not to have a specific year. month and day must have valid, non-zero values. This type may also be used to represent a physical time if all the date and time fields are set and either case of the `time_offset` oneof is set. Consider using `Timestamp` message for physical time instead. If your use case also would like to store the user's timezone, that can be done in another field. This type is more flexible than some applications may want. Make sure to document and validate your application's limitations."
       properties:
         day:
           description: Required. Day of month. Must be from 1 to 31 and valid for the year and month.
@@ -2322,7 +2338,7 @@ components:
       description: Represents an amount of money with its currency type.
       properties:
         currencyCode:
-          description: The 3-letter currency code defined in ISO 4217.
+          description: The three-letter currency code defined in ISO 4217.
           type: string
         nanos:
           description: Number of nano (10^-9) units of the amount. The value must be between -999,999,999 and +999,999,999 inclusive. If `units` is positive, `nanos` must be positive or zero. If `units` is zero, `nanos` can be positive, zero, or negative. If `units` is negative, `nanos` must be negative or zero. For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.

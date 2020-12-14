@@ -404,7 +404,7 @@ components:
             $ref: "#/components/schemas/Mount"
           type: array
         name:
-          description: An optional name for the container. The container hostname will be set to this name, making it useful for inter-container communication. The name must contain only upper and lowercase alphanumeric characters and hypens and cannot start with a hyphen.
+          description: An optional name for the container. The container hostname will be set to this name, making it useful for inter-container communication. The name must contain only upper and lowercase alphanumeric characters and hyphens and cannot start with a hyphen.
           type: string
         pidNamespace:
           description: An optional identifier for a PID namespace to run the action inside. Multiple actions should use the same string to share a namespace. If unspecified, a separate isolated namespace is used.
@@ -535,10 +535,10 @@ components:
           type: array
       type: object
     Disk:
-      description: Carries information about a disk that can be attached to a VM. See https://cloud.google.com/compute/docs/disks/performance for more information about disk type, size, and performance considerations.
+      description: Carries information about a disk that can be attached to a VM. See https://cloud.google.com/compute/docs/disks/performance for more information about disk type, size, and performance considerations. Specify either `Volume` or `Disk`, but not both.
       properties:
         name:
-          description: A user-supplied name for the disk. Used when mounting the disk into actions. The name must contain only upper and lowercase alphanumeric characters and hypens and cannot start with a hyphen.
+          description: A user-supplied name for the disk. Used when mounting the disk into actions. The name must contain only upper and lowercase alphanumeric characters and hyphens and cannot start with a hyphen.
           type: string
         sizeGb:
           description: The size, in GB, of the disk to attach. If the size is not specified, a default is chosen to ensure reasonable I/O performance. If the disk type is specified as `local-ssd`, multiple local drives are automatically combined to provide the requested size. Note, however, that each physical SSD is 375GB in size, and no more than 8 drives can be attached to a single instance.
@@ -948,7 +948,7 @@ components:
           description: The CPU platform to request. An instance based on a newer platform can be allocated, but never one with fewer capabilities. The value of this parameter must be a valid Compute Engine CPU platform name (such as "Intel Skylake"). This parameter is only useful for carefully optimized work loads where the CPU platform has a significant impact. For more information about the effect of this parameter, see https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform.
           type: string
         disks:
-          description: The list of disks to create and attach to the VM.
+          description: The list of disks to create and attach to the VM. Specify either the `volumes[]` field or the `disks[]` field, but not both.
           items:
             $ref: "#/components/schemas/Disk"
           type: array
@@ -981,13 +981,13 @@ components:
           $ref: "#/components/schemas/ServiceAccount"
           description: The service account to install on the VM. This account does not need any permissions other than those required by the pipeline.
         volumes:
-          description: The list of disks and other storage to create or attach to the VM.
+          description: The list of disks and other storage to create or attach to the VM. Specify either the `volumes[]` field or the `disks[]` field, but not both.
           items:
             $ref: "#/components/schemas/Volume"
           type: array
       type: object
     Volume:
-      description: Carries information about storage that can be attached to a VM.
+      description: Carries information about storage that can be attached to a VM. Specify either `Volume` or `Disk`, but not both.
       properties:
         existingDisk:
           $ref: "#/components/schemas/ExistingDisk"

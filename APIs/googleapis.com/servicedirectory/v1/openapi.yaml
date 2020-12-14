@@ -1,62 +1,51 @@
 openapi: 3.0.0
 servers:
-  - url: https://artifactregistry.googleapis.com/
+  - url: https://servicedirectory.googleapis.com/
 info:
   contact:
     name: Google
     url: https://google.com
     x-twitter: youtube
-  description: Store and manage build artifacts in a scalable and integrated service built on Google infrastructure.
+  description: "Service Directory is a platform for discovering, publishing, and connecting services. "
   license:
     name: Creative Commons Attribution 3.0
     url: http://creativecommons.org/licenses/by/3.0/
   termsOfService: https://developers.google.com/terms/
-  title: Artifact Registry API
-  version: v1beta1
-  x-apiClientRegistration:
-    url: https://console.developers.google.com
+  title: Service Directory API
+  version: v1
   x-apisguru-categories:
     - analytics
     - media
   x-logo:
-    url: https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png
+    url: https://upload.wikimedia.org/wikipedia/commons/e/e1/YouTube_play_buttom_icon_%282013-2017%29.svg
   x-origin:
-    - converter:
-        url: https://github.com/lucybot/api-spec-converter
-        version: 2.7.31
-      format: google
-      url: https://artifactregistry.googleapis.com/$discovery/rest?version=v1beta1
+    - format: google
+      url: https://servicedirectory.googleapis.com/$discovery/rest?version=v1
       version: v1
-  x-preferred: false
   x-providerName: googleapis.com
-  x-serviceName: artifactregistry
+  x-serviceName: servicedirectory
 externalDocs:
-  url: https://cloud.google.com/artifacts/docs/
+  url: https://cloud.google.com/service-directory
 tags:
   - name: projects
 paths:
-  "/v1beta1/{name}":
+  "/v1/{name}":
     delete:
-      description: Deletes a version and all of its content. The returned operation will complete once the version has been deleted.
-      operationId: artifactregistry.projects.locations.repositories.packages.versions.delete
+      description: Deletes a endpoint.
+      operationId: servicedirectory.projects.locations.namespaces.services.endpoints.delete
       parameters:
-        - description: The name of the version to delete.
+        - description: Required. The name of the endpoint to delete.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: By default, a version that is tagged may not be deleted. If force=true, the version and any tags pointing to the version are deleted.
-          in: query
-          name: force
-          schema:
-            type: boolean
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/Empty"
           description: Successful response
       security:
         - Oauth2:
@@ -66,40 +55,27 @@ paths:
       tags:
         - projects
     get:
-      description: Gets a version
-      operationId: artifactregistry.projects.locations.repositories.packages.versions.get
+      description: Gets a endpoint.
+      operationId: servicedirectory.projects.locations.namespaces.services.endpoints.get
       parameters:
-        - description: The name of the version to retrieve.
+        - description: Required. The name of the endpoint to get.
           in: path
           name: name
           required: true
           schema:
-            type: string
-        - description: The view that should be returned in the response.
-          in: query
-          name: view
-          schema:
-            enum:
-              - VERSION_VIEW_UNSPECIFIED
-              - BASIC
-              - FULL
             type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Version"
+                $ref: "#/components/schemas/Endpoint"
           description: Successful response
       security:
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - projects
     parameters:
@@ -115,16 +91,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     patch:
-      description: Updates a tag.
-      operationId: artifactregistry.projects.locations.repositories.packages.tags.patch
+      description: Updates a endpoint.
+      operationId: servicedirectory.projects.locations.namespaces.services.endpoints.patch
       parameters:
-        - description: 'The name of the tag, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/tags/tag1".'
+        - description: Immutable. The resource name for the endpoint in the format 'projects/*/locations/*/namespaces/*/services/*/endpoints/*'.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The update mask applies to the resource. For the `FieldMask` definition, see https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+        - description: Required. List of fields to be updated in this request.
           in: query
           name: updateMask
           schema:
@@ -133,13 +109,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Tag"
+              $ref: "#/components/schemas/Endpoint"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Tag"
+                $ref: "#/components/schemas/Endpoint"
           description: Successful response
       security:
         - Oauth2:
@@ -148,10 +124,10 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{name}/locations":
+  "/v1/{name}/locations":
     get:
       description: Lists information about the supported locations for this service.
-      operationId: artifactregistry.projects.locations.list
+      operationId: servicedirectory.projects.locations.list
       parameters:
         - description: The resource that owns the locations collection, if applicable.
           in: path
@@ -186,10 +162,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - projects
     parameters:
@@ -204,246 +176,40 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{name}/operations":
-    get:
-      description: "Lists operations that match the specified filter in the request. If the server doesn't support this method, it returns `UNIMPLEMENTED`. NOTE: the `name` binding allows API services to override the binding to use different resource name schemes, such as `users/*/operations`. To override the binding, API services can add a binding such as `\"/v1/{name=users/*}/operations\"` to their service configuration. For backwards compatibility, the default name includes the operations collection id, however overriding users must ensure the name binding is the parent resource, without the operations collection id."
-      operationId: artifactregistry.projects.locations.operations.list
+  "/v1/{name}:resolve":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Returns a service and its associated endpoints. Resolving a service is not considered an active developer method.
+      operationId: servicedirectory.projects.locations.namespaces.services.resolve
       parameters:
-        - description: The name of the operation's parent resource.
+        - description: Required. The name of the service to resolve.
           in: path
           name: name
           required: true
           schema:
             type: string
-        - description: The standard list filter.
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: The standard list page size.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The standard list page token.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListOperationsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/files":
-    get:
-      description: Lists files.
-      operationId: artifactregistry.projects.locations.repositories.files.list
-      parameters:
-        - description: The name of the parent resource whose files will be listed.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: 'An expression for filtering the results of the request. Filter rules are case insensitive. The fields eligible for filtering are: * `name` * `owner` An example of using a filter: * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an ID starting with "a/b/". * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` --> Files owned by the version `1.0` in package `pkg1`.'
-          in: query
-          name: filter
-          schema:
-            type: string
-        - description: The maximum number of files to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token value returned from a previous list request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListFilesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/packages":
-    get:
-      description: Lists packages.
-      operationId: artifactregistry.projects.locations.repositories.packages.list
-      parameters:
-        - description: The name of the parent resource whose packages will be listed.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of packages to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token value returned from a previous list request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListPackagesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{parent}/repositories":
-    get:
-      description: Lists repositories.
-      operationId: artifactregistry.projects.locations.repositories.list
-      parameters:
-        - description: The name of the parent resource whose repositories will be listed.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The maximum number of repositories to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token value returned from a previous list request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListRepositoriesResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a repository. The returned Operation will finish once the repository has been created. Its response will be the created Repository.
-      operationId: artifactregistry.projects.locations.repositories.create
-      parameters:
-        - description: The name of the parent resource where the repository will be created.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The repository id to use for this repository.
-          in: query
-          name: repositoryId
-          schema:
-            type: string
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Repository"
+              $ref: "#/components/schemas/ResolveServiceRequest"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Operation"
+                $ref: "#/components/schemas/ResolveServiceResponse"
           description: Successful response
       security:
         - Oauth2:
@@ -452,147 +218,49 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{parent}/tags":
+  "/v1/{parent}/endpoints":
     get:
-      description: Lists tags.
-      operationId: artifactregistry.projects.locations.repositories.packages.tags.list
+      description: Lists all endpoints.
+      operationId: servicedirectory.projects.locations.namespaces.services.endpoints.list
       parameters:
-        - description: The name of the parent resource whose tags will be listed.
+        - description: Required. The resource name of the service whose endpoints we'd like to list.
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: 'An expression for filtering the results of the request. Filter rules are case insensitive. The fields eligible for filtering are: * `version` An example of using a filter: * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` --> Tags that are applied to the version `1.0` in package `pkg1`.'
+        - description: "Optional. The filter to list result by. General filter string syntax: () can be \"name\", \"address\", \"port\" or \"metadata.\" for map field. can be \"<, >, <=, >=, !=, =, :\". Of which \":\" means HAS, and is roughly the same as \"=\". must be the same data type as field. can be \"AND, OR, NOT\". Examples of valid filters: * \"metadata.owner\" returns Endpoints that have a label with the key \"owner\" this is the same as \"metadata:owner\". * \"metadata.protocol=gRPC\" returns Endpoints that have key/value \"protocol=gRPC\". * \"address=192.108.1.105\" returns Endpoints that have this address. * \"port>8080\" returns Endpoints that have port number larger than 8080. * \"name>projects/my-project/locations/us-east/namespaces/my-namespace/services/my-service/endpoints/endpoint-c\" returns Endpoints that have name that is alphabetically later than the string, so \"endpoint-e\" will be returned but \"endpoint-a\" will not be. * \"metadata.owner!=sd AND metadata.foo=bar\" returns Endpoints that have \"owner\" in label key but value is not \"sd\" AND have key/value foo=bar. * \"doesnotexist.foo=bar\" returns an empty list. Note that Endpoint doesn't have a field called \"doesnotexist\". Since the filter does not match any Endpoints, it returns no results."
           in: query
           name: filter
           schema:
             type: string
-        - description: The maximum number of tags to return.
-          in: query
-          name: pageSize
-          schema:
-            type: integer
-        - description: The next_page_token value returned from a previous list request, if any.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ListTagsResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-      tags:
-        - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-    post:
-      description: Creates a tag.
-      operationId: artifactregistry.projects.locations.repositories.packages.tags.create
-      parameters:
-        - description: The name of the parent resource where the tag will be created.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: The tag id to use for this repository.
-          in: query
-          name: tagId
-          schema:
-            type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Tag"
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Tag"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform
-      tags:
-        - projects
-  "/v1beta1/{parent}/versions":
-    get:
-      description: Lists versions.
-      operationId: artifactregistry.projects.locations.repositories.packages.versions.list
-      parameters:
-        - description: The name of the parent resource whose versions will be listed.
-          in: path
-          name: parent
-          required: true
-          schema:
-            type: string
-        - description: Optional. Sorting field and order
+        - description: Optional. The order to list result by.
           in: query
           name: orderBy
           schema:
             type: string
-        - description: The maximum number of versions to return.
+        - description: Optional. The maximum number of items to return.
           in: query
           name: pageSize
           schema:
             type: integer
-        - description: The next_page_token value returned from a previous list request, if any.
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
           in: query
           name: pageToken
           schema:
-            type: string
-        - description: The view that should be returned in the response.
-          in: query
-          name: view
-          schema:
-            enum:
-              - VERSION_VIEW_UNSPECIFIED
-              - BASIC
-              - FULL
             type: string
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListVersionsResponse"
+                $ref: "#/components/schemas/ListEndpointsResponse"
           description: Successful response
       security:
         - Oauth2:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - projects
     parameters:
@@ -607,10 +275,238 @@ paths:
       - $ref: "#/components/parameters/quotaUser"
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:getIamPolicy":
+    post:
+      description: Creates a endpoint, and returns the new Endpoint.
+      operationId: servicedirectory.projects.locations.namespaces.services.endpoints.create
+      parameters:
+        - description: Required. The resource name of the service that this endpoint provides.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The Resource ID must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          in: query
+          name: endpointId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Endpoint"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Endpoint"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/namespaces":
     get:
-      description: Gets the IAM policy for a given resource.
-      operationId: artifactregistry.projects.locations.repositories.getIamPolicy
+      description: Lists all namespaces.
+      operationId: servicedirectory.projects.locations.namespaces.list
+      parameters:
+        - description: Required. The resource name of the project and location whose namespaces we'd like to list.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. The filter to list result by. General filter string syntax: () can be \"name\", or \"labels.\" for map field. can be \"<, >, <=, >=, !=, =, :\". Of which \":\" means HAS, and is roughly the same as \"=\". must be the same data type as field. can be \"AND, OR, NOT\". Examples of valid filters: * \"labels.owner\" returns Namespaces that have a label with the key \"owner\" this is the same as \"labels:owner\". * \"labels.protocol=gRPC\" returns Namespaces that have key/value \"protocol=gRPC\". * \"name>projects/my-project/locations/us-east/namespaces/namespace-c\" returns Namespaces that have name that is alphabetically later than the string, so \"namespace-e\" will be returned but \"namespace-a\" will not be. * \"labels.owner!=sd AND labels.foo=bar\" returns Namespaces that have \"owner\" in label key but value is not \"sd\" AND have key/value foo=bar. * \"doesnotexist.foo=bar\" returns an empty list. Note that Namespace doesn't have a field called \"doesnotexist\". Since the filter does not match any Namespaces, it returns no results."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: 'Optional. The order to list result by. General order by string syntax: () (,) allows values {"name"} ascending or descending order by . If this is left blank, "asc" is used. Note that an empty order_by string result in default order, which is order by name in ascending order.'
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListNamespacesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a namespace, and returns the new Namespace.
+      operationId: servicedirectory.projects.locations.namespaces.create
+      parameters:
+        - description: Required. The resource name of the project and location the namespace will be created in.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The Resource ID must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          in: query
+          name: namespaceId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Namespace"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Namespace"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{parent}/services":
+    get:
+      description: Lists all services belonging to a namespace.
+      operationId: servicedirectory.projects.locations.namespaces.services.list
+      parameters:
+        - description: Required. The resource name of the namespace whose services we'd like to list.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: "Optional. The filter to list result by. General filter string syntax: () can be \"name\", or \"metadata.\" for map field. can be \"<, >, <=, >=, !=, =, :\". Of which \":\" means HAS, and is roughly the same as \"=\". must be the same data type as field. can be \"AND, OR, NOT\". Examples of valid filters: * \"metadata.owner\" returns Services that have a label with the key \"owner\" this is the same as \"metadata:owner\". * \"metadata.protocol=gRPC\" returns Services that have key/value \"protocol=gRPC\". * \"name>projects/my-project/locations/us-east/namespaces/my-namespace/services/service-c\" returns Services that have name that is alphabetically later than the string, so \"service-e\" will be returned but \"service-a\" will not be. * \"metadata.owner!=sd AND metadata.foo=bar\" returns Services that have \"owner\" in label key but value is not \"sd\" AND have key/value foo=bar. * \"doesnotexist.foo=bar\" returns an empty list. Note that Service doesn't have a field called \"doesnotexist\". Since the filter does not match any Services, it returns no results."
+          in: query
+          name: filter
+          schema:
+            type: string
+        - description: Optional. The order to list result by.
+          in: query
+          name: orderBy
+          schema:
+            type: string
+        - description: Optional. The maximum number of items to return.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: Optional. The next_page_token value returned from a previous List request, if any.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListServicesResponse"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Creates a service, and returns the new Service.
+      operationId: servicedirectory.projects.locations.namespaces.services.create
+      parameters:
+        - description: Required. The resource name of the namespace this service will belong to.
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Required. The Resource ID must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+          in: query
+          name: serviceId
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Service"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Service"
+          description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
+      tags:
+        - projects
+  "/v1/{resource}:getIamPolicy":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Gets the IAM Policy for a resource (namespace or service only).
+      operationId: servicedirectory.projects.locations.namespaces.services.getIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -618,11 +514,11 @@ paths:
           required: true
           schema:
             type: string
-        - description: Optional. The policy format version to be returned. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
-          in: query
-          name: options.requestedPolicyVersion
-          schema:
-            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GetIamPolicyRequest"
       responses:
         "200":
           content:
@@ -635,25 +531,9 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - projects
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  "/v1beta1/{resource}:setIamPolicy":
+  "/v1/{resource}:setIamPolicy":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -667,8 +547,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Updates the IAM policy for a given resource.
-      operationId: artifactregistry.projects.locations.repositories.setIamPolicy
+      description: Sets the IAM Policy for a resource (namespace or service only).
+      operationId: servicedirectory.projects.locations.namespaces.services.setIamPolicy
       parameters:
         - description: "REQUIRED: The resource for which the policy is being specified. See the operation documentation for the appropriate value for this field."
           in: path
@@ -695,7 +575,7 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
       tags:
         - projects
-  "/v1beta1/{resource}:testIamPermissions":
+  "/v1/{resource}:testIamPermissions":
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -709,8 +589,8 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Tests if the caller has a list of permissions on a resource.
-      operationId: artifactregistry.projects.locations.repositories.testIamPermissions
+      description: Tests IAM permissions for a resource (namespace or service only).
+      operationId: servicedirectory.projects.locations.namespaces.services.testIamPermissions
       parameters:
         - description: "REQUIRED: The resource for which the policy detail is being requested. See the operation documentation for the appropriate value for this field."
           in: path
@@ -735,10 +615,6 @@ paths:
             - https://www.googleapis.com/auth/cloud-platform
           Oauth2c:
             - https://www.googleapis.com/auth/cloud-platform
-        - Oauth2:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
-          Oauth2c:
-            - https://www.googleapis.com/auth/cloud-platform.read-only
       tags:
         - projects
 components:
@@ -836,6 +712,25 @@ components:
       description: "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
       properties: {}
       type: object
+    Endpoint:
+      description: An individual endpoint that provides a service. The service must already exist to create an endpoint.
+      properties:
+        address:
+          description: 'Optional. An IPv4 or IPv6 address. Service Directory will reject bad addresses like: "8.8.8" "8.8.8.8:53" "test:bad:address" "[::1]" "[::1]:8080" Limited to 45 characters.'
+          type: string
+        annotations:
+          additionalProperties:
+            type: string
+          description: "Optional. Annotations for the endpoint. This data can be consumed by service clients. Restrictions: - The entire annotations dictionary may contain up to 512 characters, spread accoss all key-value pairs. Annotations that goes beyond any these limits will be rejected. - Valid annotation keys have two segments: an optional prefix and name, separated by a slash (/). The name segment is required and must be 63 characters or less, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between. The prefix is optional. If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots (.), not longer than 253 characters in total, followed by a slash (/). Annotations that fails to meet these requirements will be rejected. - The '(*.)google.com/' and '(*.)googleapis.com/' prefixes are reserved for system annotations managed by Service Directory. If the user tries to write to these keyspaces, those entries will be silently ignored by the system. Note: This field is equivalent to the 'metadata' field in the v1beta1 API. They have the same syntax and read/write to the same location in Service Directory."
+          type: object
+        name:
+          description: Immutable. The resource name for the endpoint in the format 'projects/*/locations/*/namespaces/*/services/*/endpoints/*'.
+          type: string
+        port:
+          description: Optional. Service Directory will reject values outside of [0, 65535].
+          format: int32
+          type: integer
+      type: object
     Expr:
       description: "Represents a textual expression in the Common Expression Language (CEL) syntax. CEL is a C-like expression language. The syntax and semantics of CEL are documented at https://github.com/google/cel-spec. Example (Comparison): title: \"Summary size limit\" description: \"Determines if a summary is less than 100 chars\" expression: \"document.summary.size() < 100\" Example (Equality): title: \"Requestor is owner\" description: \"Determines if requestor is the document owner\" expression: \"document.owner == request.auth.claims.email\" Example (Logic): title: \"Public documents\" description: \"Determine whether the document should be publicly visible\" expression: \"document.type != 'private' && document.type != 'internal'\" Example (Data Manipulation): title: \"Notification string\" description: \"Create a notification string with a timestamp.\" expression: \"'New message received at ' + string(document.create_time)\" The exact variables and functions that may be referenced within an expression are determined by the service that evaluates it. See the service documentation for additional information."
       properties:
@@ -852,111 +747,31 @@ components:
           description: Optional. Title for the expression, i.e. a short string describing its purpose. This can be used e.g. in UIs which allow to enter the expression.
           type: string
       type: object
-    File:
-      description: Files store content that is potentially associated with Packages or Versions.
+    GetIamPolicyRequest:
+      description: Request message for `GetIamPolicy` method.
       properties:
-        createTime:
-          description: The time when the File was created.
-          format: google-datetime
-          type: string
-        hashes:
-          description: The hashes of the file content.
+        options:
+          $ref: "#/components/schemas/GetPolicyOptions"
+          description: "OPTIONAL: A `GetPolicyOptions` object for specifying options to `GetIamPolicy`."
+      type: object
+    GetPolicyOptions:
+      description: Encapsulates settings provided to GetIamPolicy.
+      properties:
+        requestedPolicyVersion:
+          description: Optional. The policy format version to be returned. Valid values are 0, 1, and 3. Requests specifying an invalid value will be rejected. Requests for policies with any conditional bindings must specify version 3. Policies without any conditional bindings may specify any valid value or leave the field unset. To learn which resources support conditions in their IAM policies, see the [IAM documentation](https://cloud.google.com/iam/help/conditions/resource-policies).
+          format: int32
+          type: integer
+      type: object
+    ListEndpointsResponse:
+      description: The response message for RegistrationService.ListEndpoints.
+      properties:
+        endpoints:
+          description: The list of endpoints.
           items:
-            $ref: "#/components/schemas/Hash"
-          type: array
-        name:
-          description: 'The name of the file, for example: "projects/p1/locations/us-central1/repositories/repo1/files/a/b/c.txt".'
-          type: string
-        owner:
-          description: The name of the Package or Version that owns this file, if any.
-          type: string
-        sizeBytes:
-          description: The size of the File in bytes.
-          format: int64
-          type: string
-        updateTime:
-          description: The time when the File was last updated.
-          format: google-datetime
-          type: string
-      type: object
-    GoogleDevtoolsArtifactregistryV1alpha1ErrorInfo:
-      description: Error information explaining why a package was not imported.
-      properties:
-        error:
-          $ref: "#/components/schemas/Status"
-          description: The detailed error status.
-        gcsSource:
-          $ref: "#/components/schemas/GoogleDevtoolsArtifactregistryV1alpha1GcsSource"
-          description: Google Cloud Storage location requested.
-      type: object
-    GoogleDevtoolsArtifactregistryV1alpha1GcsSource:
-      description: Google Cloud Storage location where the artifacts currently reside.
-      properties:
-        uris:
-          description: Cloud Storage paths URI (e.g., gs://my_bucket//my_object).
-          items:
-            type: string
-          type: array
-        useWildcards:
-          description: Supports URI wildcards for matching multiple objects from a single URI.
-          type: boolean
-      type: object
-    GoogleDevtoolsArtifactregistryV1alpha1ImportArtifactsResponse:
-      description: The response message from importing artifacts.
-      properties:
-        errors:
-          description: Detailed error info for packages that were not imported.
-          items:
-            $ref: "#/components/schemas/GoogleDevtoolsArtifactregistryV1alpha1ErrorInfo"
-          type: array
-        packages:
-          description: The packages updated.
-          items:
-            $ref: "#/components/schemas/GoogleDevtoolsArtifactregistryV1alpha1Package"
-          type: array
-      type: object
-    GoogleDevtoolsArtifactregistryV1alpha1Package:
-      description: Packages are named collections of versions.
-      properties:
-        createTime:
-          description: The time when the package was created.
-          format: google-datetime
-          type: string
-        displayName:
-          description: The display name of the package.
-          type: string
-        name:
-          description: 'The name of the package, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1".'
-          type: string
-        updateTime:
-          description: The time when the package was last updated. This includes publishing a new version of the package.
-          format: google-datetime
-          type: string
-      type: object
-    Hash:
-      description: A hash of file content.
-      properties:
-        type:
-          description: The algorithm used to compute the hash value.
-          enum:
-            - HASH_TYPE_UNSPECIFIED
-            - SHA256
-          type: string
-        value:
-          description: The hash value.
-          format: byte
-          type: string
-      type: object
-    ListFilesResponse:
-      description: The response from listing files.
-      properties:
-        files:
-          description: The files returned.
-          items:
-            $ref: "#/components/schemas/File"
+            $ref: "#/components/schemas/Endpoint"
           type: array
         nextPageToken:
-          description: The token to retrieve the next page of files, or empty if there are no more files to return.
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
       type: object
     ListLocationsResponse:
@@ -971,64 +786,28 @@ components:
           description: The standard List next-page token.
           type: string
       type: object
-    ListOperationsResponse:
-      description: The response message for Operations.ListOperations.
+    ListNamespacesResponse:
+      description: The response message for RegistrationService.ListNamespaces.
       properties:
-        nextPageToken:
-          description: The standard List next-page token.
-          type: string
-        operations:
-          description: A list of operations that matches the specified filter in the request.
+        namespaces:
+          description: The list of namespaces.
           items:
-            $ref: "#/components/schemas/Operation"
+            $ref: "#/components/schemas/Namespace"
           type: array
+        nextPageToken:
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
+          type: string
       type: object
-    ListPackagesResponse:
-      description: The response from listing packages.
+    ListServicesResponse:
+      description: The response message for RegistrationService.ListServices.
       properties:
         nextPageToken:
-          description: The token to retrieve the next page of packages, or empty if there are no more packages to return.
+          description: Token to retrieve the next page of results, or empty if there are no more results in the list.
           type: string
-        packages:
-          description: The packages returned.
+        services:
+          description: The list of services.
           items:
-            $ref: "#/components/schemas/Package"
-          type: array
-      type: object
-    ListRepositoriesResponse:
-      description: The response from listing repositories.
-      properties:
-        nextPageToken:
-          description: The token to retrieve the next page of repositories, or empty if there are no more repositories to return.
-          type: string
-        repositories:
-          description: The repositories returned.
-          items:
-            $ref: "#/components/schemas/Repository"
-          type: array
-      type: object
-    ListTagsResponse:
-      description: The response from listing tags.
-      properties:
-        nextPageToken:
-          description: The token to retrieve the next page of tags, or empty if there are no more tags to return.
-          type: string
-        tags:
-          description: The tags returned.
-          items:
-            $ref: "#/components/schemas/Tag"
-          type: array
-      type: object
-    ListVersionsResponse:
-      description: The response from listing versions.
-      properties:
-        nextPageToken:
-          description: The token to retrieve the next page of versions, or empty if there are no more versions to return.
-          type: string
-        versions:
-          description: The versions returned.
-          items:
-            $ref: "#/components/schemas/Version"
+            $ref: "#/components/schemas/Service"
           type: array
       type: object
     Location:
@@ -1054,45 +833,16 @@ components:
           description: 'Resource name for the location, which may vary between implementations. For example: `"projects/example-project/locations/us-east1"`'
           type: string
       type: object
-    Operation:
-      description: This resource represents a long-running operation that is the result of a network API call.
+    Namespace:
+      description: A container for services. Namespaces allow administrators to group services together and define permissions for a collection of services.
       properties:
-        done:
-          description: If the value is `false`, it means the operation is still in progress. If `true`, the operation is completed, and either `error` or `response` is available.
-          type: boolean
-        error:
-          $ref: "#/components/schemas/Status"
-          description: The error result of the operation in case of failure or cancellation.
-        metadata:
+        labels:
           additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          description: Service-specific metadata associated with the operation. It typically contains progress information and common metadata such as create time. Some services might not provide such metadata. Any method that returns a long-running operation should document the metadata type, if any.
+            type: string
+          description: Optional. Resource labels associated with this Namespace. No more than 64 user labels can be associated with a given resource. Label keys and values can be no longer than 63 characters.
           type: object
         name:
-          description: The server-assigned name, which is only unique within the same service that originally returns it. If you use the default HTTP mapping, the `name` should be a resource name ending with `operations/{unique_id}`.
-          type: string
-        response:
-          additionalProperties:
-            description: Properties of the object. Contains field @type with type URL.
-          description: The normal response of the operation in case of success. If the original method returns no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the original method is standard `Get`/`Create`/`Update`, the response should be the resource. For other methods, the response should have the type `XxxResponse`, where `Xxx` is the original method name. For example, if the original method name is `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
-          type: object
-      type: object
-    Package:
-      description: Packages are named collections of versions.
-      properties:
-        createTime:
-          description: The time when the package was created.
-          format: google-datetime
-          type: string
-        displayName:
-          description: The display name of the package.
-          type: string
-        name:
-          description: 'The name of the package, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1".'
-          type: string
-        updateTime:
-          description: The time when the package was last updated. This includes publishing a new version of the package.
-          format: google-datetime
+          description: Immutable. The resource name for the namespace in the format 'projects/*/locations/*/namespaces/*'.
           type: string
       type: object
     Policy:
@@ -1112,36 +862,39 @@ components:
           format: int32
           type: integer
       type: object
-    Repository:
-      description: A Repository for storing artifacts with a specific format.
+    ResolveServiceRequest:
+      description: The request message for LookupService.ResolveService. Looks up a service by its name, returns the service and its endpoints.
       properties:
-        createTime:
-          description: The time when the repository was created.
-          format: google-datetime
+        endpointFilter:
+          description: 'Optional. The filter applied to the endpoints of the resolved service. General filter string syntax: () can be "name" or "metadata." for map field. can be "<, >, <=, >=, !=, =, :". Of which ":" means HAS and is roughly the same as "=". must be the same data type as the field. can be "AND, OR, NOT". Examples of valid filters: * "metadata.owner" returns Endpoints that have a label with the key "owner", this is the same as "metadata:owner" * "metadata.protocol=gRPC" returns Endpoints that have key/value "protocol=gRPC" * "metadata.owner!=sd AND metadata.foo=bar" returns Endpoints that have "owner" field in metadata with a value that is not "sd" AND have the key/value foo=bar.'
           type: string
-        description:
-          description: The user-provided description of the repository.
-          type: string
-        format:
-          description: The format of packages that are stored in the repository.
-          enum:
-            - FORMAT_UNSPECIFIED
-            - DOCKER
-          type: string
-        kmsKeyName:
-          description: "The Cloud KMS resource name of the customer managed encryption key that’s used to encrypt the contents of the Repository. Has the form: `projects/my-project/locations/my-region/keyRings/my-kr/cryptoKeys/my-key`. This value may not be changed after the Repository has been created."
-          type: string
-        labels:
+        maxEndpoints:
+          description: Optional. The maximum number of endpoints to return. Defaults to 25. Maximum is 100. If a value less than one is specified, the Default is used. If a value greater than the Maximum is specified, the Maximum is used.
+          format: int32
+          type: integer
+      type: object
+    ResolveServiceResponse:
+      description: The response message for LookupService.ResolveService.
+      properties:
+        service:
+          $ref: "#/components/schemas/Service"
+      type: object
+    Service:
+      description: An individual service. A service contains a name and optional metadata. A service must exist before endpoints can be added to it.
+      properties:
+        annotations:
           additionalProperties:
             type: string
-          description: Labels with user-defined metadata. This field may contain up to 64 entries. Label keys and values may be no longer than 63 characters. Label keys must begin with a lowercase letter and may only contain lowercase letters, numeric characters, underscores, and dashes.
+          description: "Optional. Annotations for the service. This data can be consumed by service clients. Restrictions: - The entire annotations dictionary may contain up to 2000 characters, spread accoss all key-value pairs. Annotations that goes beyond any these limits will be rejected. - Valid annotation keys have two segments: an optional prefix and name, separated by a slash (/). The name segment is required and must be 63 characters or less, beginning and ending with an alphanumeric character ([a-z0-9A-Z]) with dashes (-), underscores (_), dots (.), and alphanumerics between. The prefix is optional. If specified, the prefix must be a DNS subdomain: a series of DNS labels separated by dots (.), not longer than 253 characters in total, followed by a slash (/). Annotations that fails to meet these requirements will be rejected. - The '(*.)google.com/' and '(*.)googleapis.com/' prefixes are reserved for system annotations managed by Service Directory. If the user tries to write to these keyspaces, those entries will be silently ignored by the system. Note: This field is equivalent to the 'metadata' field in the v1beta1 API. They have the same syntax and read/write to the same location in Service Directory."
           type: object
+        endpoints:
+          description: Output only. Endpoints associated with this service. Returned on LookupService.Resolve. Control plane clients should use RegistrationService.ListEndpoints.
+          items:
+            $ref: "#/components/schemas/Endpoint"
+          readOnly: true
+          type: array
         name:
-          description: 'The name of the repository, for example: "projects/p1/locations/us-central1/repositories/repo1".'
-          type: string
-        updateTime:
-          description: The time when the repository was last updated.
-          format: google-datetime
+          description: Immutable. The resource name for the service in the format 'projects/*/locations/*/namespaces/*/services/*'.
           type: string
       type: object
     SetIamPolicyRequest:
@@ -1150,34 +903,6 @@ components:
         policy:
           $ref: "#/components/schemas/Policy"
           description: "REQUIRED: The complete policy to be applied to the `resource`. The size of the policy is limited to a few 10s of KB. An empty policy is a valid policy but certain Cloud Platform services (such as Projects) might reject them."
-      type: object
-    Status:
-      description: "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors)."
-      properties:
-        code:
-          description: The status code, which should be an enum value of google.rpc.Code.
-          format: int32
-          type: integer
-        details:
-          description: A list of messages that carry the error details. There is a common set of message types for APIs to use.
-          items:
-            additionalProperties:
-              description: Properties of the object. Contains field @type with type URL.
-            type: object
-          type: array
-        message:
-          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.
-          type: string
-      type: object
-    Tag:
-      description: Tags point to a version and represent an alternative name that can be used to access the version.
-      properties:
-        name:
-          description: 'The name of the tag, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/tags/tag1".'
-          type: string
-        version:
-          description: 'The name of the version the tag refers to, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/sha256:5243811"'
-          type: string
       type: object
     TestIamPermissionsRequest:
       description: Request message for `TestIamPermissions` method.
@@ -1197,29 +922,6 @@ components:
             type: string
           type: array
       type: object
-    Version:
-      description: The body of a version resource. A version resource represents a collection of components, such as files and other data. This may correspond to a version in many package management schemes.
-      properties:
-        createTime:
-          description: The time when the version was created.
-          format: google-datetime
-          type: string
-        description:
-          description: Optional. Description of the version, as specified in its metadata.
-          type: string
-        name:
-          description: 'The name of the version, for example: "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/art1".'
-          type: string
-        relatedTags:
-          description: Output only. A list of related tags. Will contain up to 100 tags that reference this version.
-          items:
-            $ref: "#/components/schemas/Tag"
-          type: array
-        updateTime:
-          description: The time when the version was last updated.
-          format: google-datetime
-          type: string
-      type: object
   securitySchemes:
     Oauth2:
       description: Oauth 2.0 implicit authentication
@@ -1228,7 +930,6 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
-            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1237,6 +938,5 @@ components:
           authorizationUrl: https://accounts.google.com/o/oauth2/auth
           scopes:
             https://www.googleapis.com/auth/cloud-platform: View and manage your data across Google Cloud Platform services
-            https://www.googleapis.com/auth/cloud-platform.read-only: View your data across Google Cloud Platform services
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

@@ -2451,6 +2451,17 @@ components:
           description: Output only. The IP address of this instance. Only applicable for instances in App Engine flexible environment.
           readOnly: true
           type: string
+        vmLiveness:
+          description: Output only. The liveness health check of this instance. Only applicable for instances in App Engine flexible environment.
+          enum:
+            - LIVENESS_STATE_UNSPECIFIED
+            - UNKNOWN
+            - HEALTHY
+            - UNHEALTHY
+            - DRAINING
+            - TIMEOUT
+          readOnly: true
+          type: string
         vmName:
           description: Output only. Name of the virtual machine where this instance lives. Only applicable for instances in App Engine flexible environment.
           readOnly: true

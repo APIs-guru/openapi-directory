@@ -874,6 +874,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/CheckTransitiveMembershipResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
@@ -911,6 +924,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/Operation"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
@@ -1013,6 +1039,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/SearchTransitiveGroupsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
@@ -1055,6 +1094,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/SearchTransitiveMembershipsResponse"
           description: Successful response
+      security:
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-identity.groups.readonly
+        - Oauth2:
+            - https://www.googleapis.com/auth/cloud-platform
+          Oauth2c:
+            - https://www.googleapis.com/auth/cloud-platform
       tags:
         - groups
     parameters:
@@ -1223,6 +1275,20 @@ components:
         namespace:
           description: The namespace in which the entity exists. If not specified, the `EntityKey` represents a Google-managed entity such as a Google user or a Google Group. If specified, the `EntityKey` represents an external-identity-mapped group. The namespace must correspond to an identity source created in Admin Console and must be in the form of `identitysources/{identity_source_id}.
           type: string
+      type: object
+    GetMembershipGraphResponse:
+      description: The response message for MembershipsService.GetMembershipGraph.
+      properties:
+        adjacencyList:
+          description: The membership graph's path information represented as an adjacency list.
+          items:
+            $ref: "#/components/schemas/MembershipAdjacencyList"
+          type: array
+        groups:
+          description: The resources representing each group in the adjacency list. Each group in this list can be correlated to a 'group' of the MembershipAdjacencyList using the 'name' of the Group resource.
+          items:
+            $ref: "#/components/schemas/Group"
+          type: array
       type: object
     GoogleAppsCloudidentityDevicesV1AndroidAttributes:
       description: Resource representing the Android specific attributes of a Device.
@@ -1834,6 +1900,18 @@ components:
           description: Output only. The time when the `Membership` was last updated.
           format: google-datetime
           readOnly: true
+          type: string
+      type: object
+    MembershipAdjacencyList:
+      description: Membership graph's path information as an adjacency list.
+      properties:
+        edges:
+          description: "Each edge contains information about the member that belongs to this group. Note: Fields returned here will help identify the specific Membership resource (e.g name, preferred_member_key and role), but may not be a comprehensive list of all fields."
+          items:
+            $ref: "#/components/schemas/Membership"
+          type: array
+        group:
+          description: Resource name of the group that the members belong to.
           type: string
       type: object
     MembershipRole:

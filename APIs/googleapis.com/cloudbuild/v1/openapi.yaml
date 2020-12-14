@@ -1005,6 +1005,8 @@ components:
             - UNSPECIFIED
             - N1_HIGHCPU_8
             - N1_HIGHCPU_32
+            - E2_HIGHCPU_8
+            - E2_HIGHCPU_32
           type: string
         requestedVerifyOption:
           description: Requested verifiability options.
@@ -1183,7 +1185,7 @@ components:
           description: Required. ID of the build.
           type: string
         name:
-          description: "The name of the `Build` to retrieve. Format: `projects/{project}/locations/{location}/builds/{build}`"
+          description: "The name of the `Build` to cancel. Format: `projects/{project}/locations/{location}/builds/{build}`"
           type: string
         projectId:
           description: Required. ID of the project.

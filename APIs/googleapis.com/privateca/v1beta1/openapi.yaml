@@ -1835,7 +1835,7 @@ components:
           format: byte
           type: string
         type:
-          description: Required. The type of public key.
+          description: Optional. The type of public key. If specified, it must match the public key used for the`key` field.
           enum:
             - KEY_TYPE_UNSPECIFIED
             - PEM_RSA_KEY
