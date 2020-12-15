@@ -3,6 +3,7 @@ info:
   version: '2020-12-01'
   x-release: v4
   title: Amazon DevOps Guru
+  description: '<p> Amazon DevOps Guru is a fully managed service that helps you identify anomalous behavior in business critical operational applications. You specify the AWS resources that you want DevOps Guru to cover, then the Amazon CloudWatch metrics and AWS CloudTrail events related to those resources are analyzed. When anomalous behavior is detected, DevOps Guru creates an <i>insight</i> that includes recommendations, related events, and related metrics that can help you improve your operational applications. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html">What is Amazon DevOps Guru</a>. </p> <p> You can specify 1 or 2 Amazon Simple Notification Service topics so you are notified every time a new insight is created. You can also enable DevOps Guru to generate an OpsItem in AWS Systems Manager for each insight to help you manage and track your work addressing insights. </p> <p> To learn about the DevOps Guru workflow, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/welcome.html#how-it-works">How DevOps Guru works</a>. To learn about DevOps Guru concepts, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/concepts.html">Concepts in DevOps Guru</a>. </p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -115,7 +116,7 @@ paths:
   /channels:
     put:
       operationId: AddNotificationChannel
-      description: ''
+      description: '<p> Adds a notification channel to DevOps Guru. A notification channel is used to notify you about important DevOps Guru events, such as when an insight is generated. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
       responses:
         '200':
           description: Success
@@ -124,35 +125,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/AddNotificationChannelResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '482':
-          description: ServiceQuotaExceededException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServiceQuotaExceededException'
-        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
-        '484':
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '483':
           description: ResourceNotFoundException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
         '485':
           description: ThrottlingException
           content:
@@ -160,11 +161,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '486':
-          description: ConflictException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConflictException'
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -176,11 +177,13 @@ paths:
                 - Config
               properties:
                 Config:
-                  description: ''
+                  description: ' Information about notification channels you have configured with DevOps Guru. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS).'
                   type: object
                   properties:
                     Sns:
-                      $ref: '#/components/schemas/SnsChannelConfig'
+                      allOf:
+                        - $ref: '#/components/schemas/SnsChannelConfig'
+                        - description: '<p> Information about a notification channel configured in DevOps Guru to send notifications when insights are created. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -191,7 +194,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: ListNotificationChannels
-      description: ''
+      description: ' Returns a list of notification channels configured for DevOps Guru. Each notification channel is used to notify you when DevOps Guru generates an insight that contains information about how to improve your operations. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS). '
       responses:
         '200':
           description: Success
@@ -200,29 +203,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListNotificationChannelsResponse'
         '480':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: NextToken
           in: query
@@ -238,7 +241,7 @@ paths:
               type: object
               properties:
                 NextToken:
-                  description: ''
+                  description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
                   type: string
                   pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
                   minLength: 36
@@ -246,7 +249,7 @@ paths:
   /accounts/health:
     get:
       operationId: DescribeAccountHealth
-      description: ''
+      description: ' Returns the number of open reactive insights, the number of open proactive insights, and the number of metrics analyzed in your AWS account. Use these numbers to gauge the health of operations in your AWS account. '
       responses:
         '200':
           description: Success
@@ -255,29 +258,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/DescribeAccountHealthResponse'
         '480':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -290,7 +293,7 @@ paths:
   /accounts/overview:
     post:
       operationId: DescribeAccountOverview
-      description: ''
+      description: ' For the time range passed in, returns the number of open reactive insight that were created, the number of open proactive insights that were created, and the Mean Time to Recover (MTTR) for all closed reactive insights. '
       responses:
         '200':
           description: Success
@@ -299,29 +302,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/DescribeAccountOverviewResponse'
         '480':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -333,11 +336,11 @@ paths:
                 - FromTime
               properties:
                 FromTime:
-                  description: ''
+                  description: ' The start of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred after this day. '
                   type: string
                   format: date-time
                 ToTime:
-                  description: ''
+                  description: ' The end of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred before this day. If this is not specified, then the current day is used. '
                   type: string
                   format: date-time
     parameters:
@@ -351,7 +354,7 @@ paths:
   '/anomalies/{Id}':
     get:
       operationId: DescribeAnomaly
-      description: ''
+      description: ' Returns details about an anomaly that you specify using its ID. '
       responses:
         '200':
           description: Success
@@ -360,42 +363,45 @@ paths:
               schema:
                 $ref: '#/components/schemas/DescribeAnomalyResponse'
         '480':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '481':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '482':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: Id
           in: path
           required: true
-          description: ''
+          description: ' The ID of the anomaly. '
           schema:
             type: string
+            pattern: '^[\w-]*$'
+            minLength: 1
+            maxLength: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -407,7 +413,7 @@ paths:
   '/insights/{Id}':
     get:
       operationId: DescribeInsight
-      description: ''
+      description: ' Returns details about an insight that you specify using its ID. '
       responses:
         '200':
           description: Success
@@ -416,42 +422,45 @@ paths:
               schema:
                 $ref: '#/components/schemas/DescribeInsightResponse'
         '480':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '481':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '482':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: Id
           in: path
           required: true
-          description: ''
+          description: ' The ID of the insight. '
           schema:
             type: string
+            pattern: '^[\w-]*$'
+            minLength: 1
+            maxLength: 100
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -463,7 +472,7 @@ paths:
   '/accounts/health/resource-collection/{ResourceCollectionType}':
     get:
       operationId: DescribeResourceCollectionHealth
-      description: ''
+      description: ' Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
       responses:
         '200':
           description: Success
@@ -472,42 +481,47 @@ paths:
               schema:
                 $ref: '#/components/schemas/DescribeResourceCollectionHealthResponse'
         '480':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
-        - name: NextToken
-          in: query
-          required: false
-          description: ''
-          schema:
-            type: string
         - name: ResourceCollectionType
           in: path
           required: true
-          description: ''
+          description: ' An AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
           schema:
             type: string
+            enum:
+              - AWS_CLOUD_FORMATION
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          schema:
+            type: string
+            pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+            minLength: 36
+            maxLength: 36
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -519,7 +533,7 @@ paths:
   /service-integrations:
     get:
       operationId: DescribeServiceIntegration
-      description: ''
+      description: ' Returns the integration status of services that are integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight. '
       responses:
         '200':
           description: Success
@@ -528,29 +542,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/DescribeServiceIntegrationResponse'
         '480':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
@@ -562,7 +576,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: UpdateServiceIntegration
-      description: ''
+      description: ' Enables or disables integration with a service that can be integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight. '
       responses:
         '200':
           description: Success
@@ -571,17 +585,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateServiceIntegrationResponse'
         '480':
-          description: ThrottlingException
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/AccessDeniedException'
         '481':
-          description: ValidationException
+          description: ConflictException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ConflictException'
         '482':
           description: InternalServerException
           content:
@@ -589,17 +603,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
-          description: ConflictException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConflictException'
+                $ref: '#/components/schemas/ThrottlingException'
         '484':
-          description: AccessDeniedException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessDeniedException'
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -611,7 +625,7 @@ paths:
                 - ServiceIntegration
               properties:
                 ServiceIntegration:
-                  description: ''
+                  description: ' Information about updating the integration status of an AWS service, such as AWS Systems Manager, with DevOps Guru. '
                   type: object
                   properties:
                     OpsCenter:
@@ -619,7 +633,7 @@ paths:
   '/resource-collections/{ResourceCollectionType}':
     get:
       operationId: GetResourceCollection
-      description: ''
+      description: ' Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
       responses:
         '200':
           description: Success
@@ -628,48 +642,53 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetResourceCollectionResponse'
         '480':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '481':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '482':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
-        - name: NextToken
-          in: query
-          required: false
-          description: ''
-          schema:
-            type: string
         - name: ResourceCollectionType
           in: path
           required: true
-          description: ''
+          description: ' The type of AWS resource collections to return. The one valid value is <code>CLOUD_FORMATION</code> for AWS CloudFormation stacks. '
           schema:
             type: string
+            enum:
+              - AWS_CLOUD_FORMATION
+        - name: NextToken
+          in: query
+          required: false
+          description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+          schema:
+            type: string
+            pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+            minLength: 36
+            maxLength: 36
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -681,7 +700,7 @@ paths:
   '/anomalies/insight/{InsightId}':
     post:
       operationId: ListAnomaliesForInsight
-      description: ''
+      description: ' Returns a list of the anomalies that belong to an insight that you specify using its ID. '
       responses:
         '200':
           description: Success
@@ -690,42 +709,45 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListAnomaliesForInsightResponse'
         '480':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '481':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '482':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: InsightId
           in: path
           required: true
-          description: ''
+          description: ' The ID of the insight. The returned anomalies belong to this insight. '
           schema:
             type: string
+            pattern: '^[\w-]*$'
+            minLength: 1
+            maxLength: 100
         - name: MaxResults
           in: query
           schema:
@@ -745,25 +767,29 @@ paths:
             schema:
               type: object
               properties:
+                StartTimeRange:
+                  description: ' A time range used to specify when the behavior of an insight or anomaly started. '
+                  type: object
+                  properties:
+                    FromTime:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: ' The start time of the time range. '
+                    ToTime:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: ' The end time of the time range. '
                 MaxResults:
-                  description: ''
+                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                   type: integer
                   minimum: 1
                   maximum: 500
                 NextToken:
-                  description: ''
+                  description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
                   type: string
                   pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
                   minLength: 36
                   maxLength: 36
-                StartTimeRange:
-                  description: ''
-                  type: object
-                  properties:
-                    FromTime:
-                      $ref: '#/components/schemas/__timestampUnix'
-                    ToTime:
-                      $ref: '#/components/schemas/__timestampUnix'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -775,7 +801,7 @@ paths:
   /events:
     post:
       operationId: ListEvents
-      description: ''
+      description: ' Returns a list of the events emitted by the resources that are evaluated by DevOps Guru. You can use filters to specify which events are returned. '
       responses:
         '200':
           description: Success
@@ -784,35 +810,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListEventsResponse'
         '480':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '481':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '482':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: MaxResults
           in: query
@@ -836,28 +862,38 @@ paths:
                 - Filters
               properties:
                 Filters:
-                  description: ''
+                  description: ' Filters you can use to specify which events are returned when <code>ListEvents</code> is called. '
                   type: object
                   properties:
-                    DataSource:
-                      $ref: '#/components/schemas/EventDataSource'
-                    EventClass:
-                      $ref: '#/components/schemas/EventClass'
-                    EventSource:
-                      $ref: '#/components/schemas/__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents'
-                    EventTimeRange:
-                      $ref: '#/components/schemas/EventTimeRange'
                     InsightId:
-                      $ref: '#/components/schemas/__stringMin1Max100PatternW'
+                      allOf:
+                        - $ref: '#/components/schemas/InsightId'
+                        - description: ' An ID of an insight that is related to the events you want to filter for. '
+                    EventTimeRange:
+                      allOf:
+                        - $ref: '#/components/schemas/EventTimeRange'
+                        - description: ' A time range during which you want the filtered events to have occurred. '
+                    EventClass:
+                      allOf:
+                        - $ref: '#/components/schemas/EventClass'
+                        - description: ' The class of the events you want to filter for, such as an infrastructure change, a deployment, or a schema change. '
+                    EventSource:
+                      allOf:
+                        - $ref: '#/components/schemas/EventSource'
+                        - description: ' The AWS source that emitted the events you want to filter for. '
+                    DataSource:
+                      allOf:
+                        - $ref: '#/components/schemas/EventDataSource'
+                        - description: ' The source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, of the events you want returned. '
                     ResourceCollection:
                       $ref: '#/components/schemas/ResourceCollection'
                 MaxResults:
-                  description: ''
+                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                   type: integer
                   minimum: 1
                   maximum: 200
                 NextToken:
-                  description: ''
+                  description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
                   type: string
                   pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
                   minLength: 36
@@ -873,7 +909,7 @@ paths:
   /insights:
     post:
       operationId: ListInsights
-      description: ''
+      description: ' Returns a list of insights in your AWS account. You can specify which insights are returned by their start time and status (<code>ONGOING</code>, <code>CLOSED</code>, or <code>ANY</code>). '
       responses:
         '200':
           description: Success
@@ -882,29 +918,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListInsightsResponse'
         '480':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: MaxResults
           in: query
@@ -927,27 +963,33 @@ paths:
               required:
                 - StatusFilter
               properties:
+                StatusFilter:
+                  description: ' A filter used by <code>ListInsights</code> to specify which insights to return. '
+                  type: object
+                  properties:
+                    Ongoing:
+                      allOf:
+                        - $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
+                        - description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies ongoing insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+                    Closed:
+                      allOf:
+                        - $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
+                        - description: ' A <code>ListInsightsClosedStatusFilter</code> that specifies closed insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+                    Any:
+                      allOf:
+                        - $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
+                        - description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies insights of any status that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
                 MaxResults:
-                  description: ''
+                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                   type: integer
                   minimum: 1
                   maximum: 100
                 NextToken:
-                  description: ''
+                  description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
                   type: string
                   pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
                   minLength: 36
                   maxLength: 36
-                StatusFilter:
-                  description: ''
-                  type: object
-                  properties:
-                    Any:
-                      $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
-                    Closed:
-                      $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
-                    Ongoing:
-                      $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -959,7 +1001,7 @@ paths:
   /recommendations:
     post:
       operationId: ListRecommendations
-      description: ''
+      description: ' Returns a list of a specified insight''s recommendations. Each recommendation includes a list of related metrics and a list of related events. '
       responses:
         '200':
           description: Success
@@ -968,35 +1010,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListRecommendationsResponse'
         '480':
-          description: ResourceNotFoundException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResourceNotFoundException'
-        '481':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '482':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '483':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '484':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: NextToken
           in: query
@@ -1014,13 +1056,13 @@ paths:
                 - InsightId
               properties:
                 InsightId:
-                  description: ''
+                  description: ' The ID of the requested insight. '
                   type: string
                   pattern: '^[\w-]*$'
                   minLength: 1
                   maxLength: 100
                 NextToken:
-                  description: ''
+                  description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
                   type: string
                   pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
                   minLength: 36
@@ -1036,7 +1078,7 @@ paths:
   /feedback:
     put:
       operationId: PutFeedback
-      description: ''
+      description: ' Collects customer feedback about the specified insight. '
       responses:
         '200':
           description: Success
@@ -1045,23 +1087,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/PutFeedbackResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '482':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
         '483':
           description: ResourceNotFoundException
           content:
@@ -1075,11 +1117,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '485':
-          description: ConflictException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConflictException'
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -1089,13 +1131,17 @@ paths:
               type: object
               properties:
                 InsightFeedback:
-                  description: ''
+                  description: ' Information about insight feedback received from a customer. '
                   type: object
                   properties:
-                    Feedback:
-                      $ref: '#/components/schemas/InsightFeedbackOption'
                     Id:
-                      $ref: '#/components/schemas/__stringMin1Max100PatternW'
+                      allOf:
+                        - $ref: '#/components/schemas/InsightId'
+                        - description: ' The insight feedback ID. '
+                    Feedback:
+                      allOf:
+                        - $ref: '#/components/schemas/InsightFeedbackOption'
+                        - description: ' The feedback provided by the customer. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1107,7 +1153,7 @@ paths:
   '/channels/{Id}':
     delete:
       operationId: RemoveNotificationChannel
-      description: ''
+      description: ' Removes a notification channel from DevOps Guru. A notification channel is used to notify you when DevOps Guru generates an insight that contains information about how to improve your operations. '
       responses:
         '200':
           description: Success
@@ -1116,23 +1162,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/RemoveNotificationChannelResponse'
         '480':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '481':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '482':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+        '482':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
         '483':
           description: ResourceNotFoundException
           content:
@@ -1146,18 +1192,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/ThrottlingException'
         '485':
-          description: ConflictException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConflictException'
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: Id
           in: path
           required: true
-          description: ''
+          description: ' The ID of the notification channel to be removed. '
           schema:
             type: string
+            pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+            minLength: 36
+            maxLength: 36
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1169,7 +1218,7 @@ paths:
   /insights/search:
     post:
       operationId: SearchInsights
-      description: ''
+      description: '<p> Returns a list of insights in your AWS account. You can specify which insights are returned by their start time, one or more statuses (<code>ONGOING</code>, <code>CLOSED</code>, and <code>CLOSED</code>), one or more severities (<code>LOW</code>, <code>MEDIUM</code>, and <code>HIGH</code>), and type (<code>REACTIVE</code> or <code>PROACTIVE</code>). </p> <p> Use the <code>Filters</code> parameter to specify status and severity search parameters. Use the <code>Type</code> parameter to specify <code>REACTIVE</code> or <code>PROACTIVE</code> in your search. </p>'
       responses:
         '200':
           description: Success
@@ -1178,29 +1227,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/SearchInsightsResponse'
         '480':
-          description: ThrottlingException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ThrottlingException'
-        '481':
-          description: ValidationException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ValidationException'
-        '482':
-          description: InternalServerException
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InternalServerException'
-        '483':
           description: AccessDeniedException
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
       parameters:
         - name: MaxResults
           in: query
@@ -1224,37 +1273,45 @@ paths:
                 - StartTimeRange
                 - Type
               properties:
-                Filters:
-                  description: ''
+                StartTimeRange:
+                  description: ' A time range used to specify when the behavior of an insight or anomaly started. '
                   type: object
                   properties:
+                    FromTime:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: ' The start time of the time range. '
+                    ToTime:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: ' The end time of the time range. '
+                Filters:
+                  description: ' Specifies one or more severity values and one or more status values that are used to search for insights. '
+                  type: object
+                  properties:
+                    Severities:
+                      allOf:
+                        - $ref: '#/components/schemas/InsightSeverities'
+                        - description: ' An array of severity values used to search for insights. '
+                    Statuses:
+                      allOf:
+                        - $ref: '#/components/schemas/InsightStatuses'
+                        - description: ' An array of status values used to search for insights. '
                     ResourceCollection:
                       $ref: '#/components/schemas/ResourceCollection'
-                    Severities:
-                      $ref: '#/components/schemas/__listOfInsightSeverity'
-                    Statuses:
-                      $ref: '#/components/schemas/__listOfInsightStatus'
                 MaxResults:
-                  description: ''
+                  description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
                   type: integer
                   minimum: 1
                   maximum: 100
                 NextToken:
-                  description: ''
+                  description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
                   type: string
                   pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
                   minLength: 36
                   maxLength: 36
-                StartTimeRange:
-                  description: ''
-                  type: object
-                  properties:
-                    FromTime:
-                      $ref: '#/components/schemas/__timestampUnix'
-                    ToTime:
-                      $ref: '#/components/schemas/__timestampUnix'
                 Type:
-                  description: ''
+                  description: ' The type of insights you are searching for (<code>REACTIVE</code> or <code>PROACTIVE</code>). '
                   type: string
                   enum:
                     - REACTIVE
@@ -1270,7 +1327,7 @@ paths:
   /resource-collections:
     put:
       operationId: UpdateResourceCollection
-      description: ''
+      description: ' Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. This method also creates the IAM role required for you to use DevOps Guru. '
       responses:
         '200':
           description: Success
@@ -1279,17 +1336,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/UpdateResourceCollectionResponse'
         '480':
-          description: ThrottlingException
+          description: AccessDeniedException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ThrottlingException'
+                $ref: '#/components/schemas/AccessDeniedException'
         '481':
-          description: ValidationException
+          description: ConflictException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationException'
+                $ref: '#/components/schemas/ConflictException'
         '482':
           description: InternalServerException
           content:
@@ -1297,17 +1354,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/InternalServerException'
         '483':
-          description: ConflictException
+          description: ThrottlingException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConflictException'
+                $ref: '#/components/schemas/ThrottlingException'
         '484':
-          description: AccessDeniedException
+          description: ValidationException
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccessDeniedException'
+                $ref: '#/components/schemas/ValidationException'
       parameters: []
       requestBody:
         required: true
@@ -1320,17 +1377,19 @@ paths:
                 - ResourceCollection
               properties:
                 Action:
-                  description: ''
+                  description: ' Specifies if the resource collection in the request is added or deleted to the resource collection. '
                   type: string
                   enum:
                     - ADD
                     - REMOVE
                 ResourceCollection:
-                  description: ''
+                  description: ' Contains information used to update a collection of AWS resources. '
                   type: object
                   properties:
                     CloudFormation:
-                      $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
+                      allOf:
+                        - $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
+                        - description: ' An collection of AWS CloudFormation stacks. '
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1393,60 +1452,101 @@ components:
   schemas:
     AddNotificationChannelResponse:
       type: object
+      required:
+        - Id
       properties:
         Id:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+          allOf:
+            - $ref: '#/components/schemas/NotificationChannelId'
+            - description: ' The ID of the added notification channel. '
     SnsChannelConfig:
       type: object
       properties:
         TopicArn:
-          $ref: '#/components/schemas/__stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12'
-    ValidationException: {}
-    InternalServerException: {}
-    ServiceQuotaExceededException: {}
+          allOf:
+            - $ref: '#/components/schemas/TopicArn'
+            - description: ' The Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. '
+      description: '<p> Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service topic. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
     AccessDeniedException: {}
-    ResourceNotFoundException: {}
-    ThrottlingException: {}
     ConflictException: {}
+    InternalServerException: {}
+    ResourceNotFoundException: {}
+    ServiceQuotaExceededException: {}
+    ThrottlingException: {}
+    ValidationException: {}
     DescribeAccountHealthResponse:
       type: object
+      required:
+        - OpenReactiveInsights
+        - OpenProactiveInsights
+        - MetricsAnalyzed
       properties:
-        MetricsAnalyzed:
-          $ref: '#/components/schemas/__integer'
-        OpenProactiveInsights:
-          $ref: '#/components/schemas/__integer'
         OpenReactiveInsights:
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/NumOpenReactiveInsights'
+            - description: ' An integer that specifies the number of open reactive insights in your AWS account. '
+        OpenProactiveInsights:
+          allOf:
+            - $ref: '#/components/schemas/NumOpenProactiveInsights'
+            - description: ' An integer that specifies the number of open proactive insights in your AWS account. '
+        MetricsAnalyzed:
+          allOf:
+            - $ref: '#/components/schemas/NumMetricsAnalyzed'
+            - description: ' An integer that specifies the number of metrics that have been analyzed in your AWS account. '
     DescribeAccountOverviewResponse:
       type: object
+      required:
+        - ReactiveInsights
+        - ProactiveInsights
+        - MeanTimeToRecoverInMilliseconds
       properties:
-        MeanTimeToRecoverInMilliseconds:
-          $ref: '#/components/schemas/__long'
-        ProactiveInsights:
-          $ref: '#/components/schemas/__integer'
         ReactiveInsights:
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/NumReactiveInsights'
+            - description: ' An integer that specifies the number of open reactive insights in your AWS account that were created during the time range passed in. '
+        ProactiveInsights:
+          allOf:
+            - $ref: '#/components/schemas/NumProactiveInsights'
+            - description: ' An integer that specifies the number of open proactive insights in your AWS account that were created during the time range passed in. '
+        MeanTimeToRecoverInMilliseconds:
+          allOf:
+            - $ref: '#/components/schemas/MeanTimeToRecoverInMilliseconds'
+            - description: ' The Mean Time to Recover (MTTR) for all closed insights that were created during the time range passed in. '
     DescribeAnomalyResponse:
       type: object
       properties:
         ProactiveAnomaly:
-          $ref: '#/components/schemas/ProactiveAnomaly'
+          allOf:
+            - $ref: '#/components/schemas/ProactiveAnomaly'
+            - description: ' An <code>ReactiveAnomaly</code> object that represents the requested anomaly. '
         ReactiveAnomaly:
-          $ref: '#/components/schemas/ReactiveAnomaly'
+          allOf:
+            - $ref: '#/components/schemas/ReactiveAnomaly'
+            - description: ' An <code>ProactiveAnomaly</code> object that represents the requested anomaly. '
     DescribeInsightResponse:
       type: object
       properties:
         ProactiveInsight:
-          $ref: '#/components/schemas/ProactiveInsight'
+          allOf:
+            - $ref: '#/components/schemas/ProactiveInsight'
+            - description: ' An <code>ProactiveInsight</code> object that represents the requested insight. '
         ReactiveInsight:
-          $ref: '#/components/schemas/ReactiveInsight'
+          allOf:
+            - $ref: '#/components/schemas/ReactiveInsight'
+            - description: ' An <code>ReactiveInsight</code> object that represents the requested insight. '
     DescribeResourceCollectionHealthResponse:
       type: object
+      required:
+        - CloudFormation
       properties:
         CloudFormation:
-          $ref: '#/components/schemas/__listOfCloudFormationHealth'
+          allOf:
+            - $ref: '#/components/schemas/CloudFormationHealths'
+            - description: ' The returned <code>CloudFormationHealthOverview</code> object that contains an <code>InsightHealthOverview</code> object with the requested system health information. '
         NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     DescribeServiceIntegrationResponse:
       type: object
       properties:
@@ -1455,34 +1555,65 @@ components:
     GetResourceCollectionResponse:
       type: object
       properties:
-        NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
         ResourceCollection:
-          $ref: '#/components/schemas/ResourceCollectionFilter'
+          allOf:
+            - $ref: '#/components/schemas/ResourceCollectionFilter'
+            - description: ' The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     ListAnomaliesForInsightResponse:
       type: object
       properties:
-        NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
         ProactiveAnomalies:
-          $ref: '#/components/schemas/__listOfProactiveAnomalySummary'
+          allOf:
+            - $ref: '#/components/schemas/ProactiveAnomalies'
+            - description: ' An array of <code>ProactiveAnomalySummary</code> objects that represent the requested anomalies '
         ReactiveAnomalies:
-          $ref: '#/components/schemas/__listOfReactiveAnomalySummary'
-    __timestampUnix:
+          allOf:
+            - $ref: '#/components/schemas/ReactiveAnomalies'
+            - description: ' An array of <code>ReactiveAnomalySummary</code> objects that represent the requested anomalies '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+    Timestamp:
       type: string
       format: date-time
     ListEventsResponse:
       type: object
+      required:
+        - Events
       properties:
         Events:
-          $ref: '#/components/schemas/__listOfEvent'
+          allOf:
+            - $ref: '#/components/schemas/Events'
+            - description: ' A list of the requested events. '
         NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
-    EventDataSource:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+    InsightId:
       type: string
-      enum:
-        - AWS_CLOUD_TRAIL
-        - AWS_CODE_DEPLOY
+      pattern: '^[\w-]*$'
+      minLength: 1
+      maxLength: 100
+    EventTimeRange:
+      type: object
+      required:
+        - FromTime
+        - ToTime
+      properties:
+        FromTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when the event started. '
+        ToTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when the event ended. '
+      description: ' The time range during which an AWS event occurred. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and provide recommendations to improve your operational solutions. '
     EventClass:
       type: string
       enum:
@@ -1491,81 +1622,101 @@ components:
         - SECURITY_CHANGE
         - CONFIG_CHANGE
         - SCHEMA_CHANGE
-    __stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents:
+    EventSource:
       type: string
       pattern: '^[a-z]+[a-z0-9]*\.amazonaws\.com|aws\.events$'
       minLength: 10
       maxLength: 50
-    EventTimeRange:
-      type: object
-      required:
-        - ToTime
-        - FromTime
-      properties:
-        FromTime:
-          $ref: '#/components/schemas/__timestampUnix'
-        ToTime:
-          $ref: '#/components/schemas/__timestampUnix'
-    __stringMin1Max100PatternW:
+    EventDataSource:
       type: string
-      pattern: '^[\w-]*$'
-      minLength: 1
-      maxLength: 100
+      enum:
+        - AWS_CLOUD_TRAIL
+        - AWS_CODE_DEPLOY
     ResourceCollection:
       type: object
       properties:
         CloudFormation:
-          $ref: '#/components/schemas/CloudFormationCollection'
+          allOf:
+            - $ref: '#/components/schemas/CloudFormationCollection'
+            - description: ' An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. '
+      description: ' A collection of AWS resources supported by DevOps Guru. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. '
     ListInsightsResponse:
       type: object
       properties:
-        NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
         ProactiveInsights:
-          $ref: '#/components/schemas/__listOfProactiveInsightSummary'
+          allOf:
+            - $ref: '#/components/schemas/ProactiveInsights'
+            - description: ' The returned list of proactive insights. '
         ReactiveInsights:
-          $ref: '#/components/schemas/__listOfReactiveInsightSummary'
-    ListInsightsAnyStatusFilter:
-      type: object
-      required:
-        - Type
-        - StartTimeRange
-      properties:
-        StartTimeRange:
-          $ref: '#/components/schemas/StartTimeRange'
-        Type:
-          $ref: '#/components/schemas/InsightType'
-    ListInsightsClosedStatusFilter:
-      type: object
-      required:
-        - Type
-        - EndTimeRange
-      properties:
-        EndTimeRange:
-          $ref: '#/components/schemas/EndTimeRange'
-        Type:
-          $ref: '#/components/schemas/InsightType'
+          allOf:
+            - $ref: '#/components/schemas/ReactiveInsights'
+            - description: ' The returned list of reactive insights. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     ListInsightsOngoingStatusFilter:
       type: object
       required:
         - Type
       properties:
         Type:
-          $ref: '#/components/schemas/InsightType'
+          allOf:
+            - $ref: '#/components/schemas/InsightType'
+            - description: ' Use to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights. '
+      description: ' Used to filter for insights that have the status <code>ONGOING</code>. '
+    ListInsightsClosedStatusFilter:
+      type: object
+      required:
+        - Type
+        - EndTimeRange
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/InsightType'
+            - description: ' Use to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights. '
+        EndTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/EndTimeRange'
+            - description: ' A time range used to specify when the behavior of the filtered insights ended. '
+      description: ' Used to filter for insights that have the status <code>CLOSED</code>. '
+    ListInsightsAnyStatusFilter:
+      type: object
+      required:
+        - Type
+        - StartTimeRange
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/InsightType'
+            - description: ' Use to filter for either <code>REACTIVE</code> or <code>PROACTIVE</code> insights. '
+        StartTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/StartTimeRange'
+            - description: ' A time range used to specify when the behavior of the filtered insights started. '
+      description: ' Used to filter for insights that have any status. '
     ListNotificationChannelsResponse:
       type: object
       properties:
         Channels:
-          $ref: '#/components/schemas/__listOfNotificationChannel'
+          allOf:
+            - $ref: '#/components/schemas/Channels'
+            - description: ' An array that contains the requested notification channels. '
         NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     ListRecommendationsResponse:
       type: object
       properties:
-        NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
         Recommendations:
-          $ref: '#/components/schemas/__listOfRecommendation'
+          allOf:
+            - $ref: '#/components/schemas/Recommendations'
+            - description: ' An array of the requested recommendations. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
     PutFeedbackResponse:
       type: object
       properties: {}
@@ -1583,20 +1734,30 @@ components:
     SearchInsightsResponse:
       type: object
       properties:
-        NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
         ProactiveInsights:
-          $ref: '#/components/schemas/__listOfProactiveInsightSummary'
+          allOf:
+            - $ref: '#/components/schemas/ProactiveInsights'
+            - description: ' The returned proactive insights. '
         ReactiveInsights:
-          $ref: '#/components/schemas/__listOfReactiveInsightSummary'
-    __listOfInsightSeverity:
+          allOf:
+            - $ref: '#/components/schemas/ReactiveInsights'
+            - description: ' The returned reactive insights. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.'
+    InsightSeverities:
       type: array
       items:
         $ref: '#/components/schemas/InsightSeverity'
-    __listOfInsightStatus:
+      minItems: 0
+      maxItems: 3
+    InsightStatuses:
       type: array
       items:
         $ref: '#/components/schemas/InsightStatus'
+      minItems: 0
+      maxItems: 2
     UpdateResourceCollectionResponse:
       type: object
       properties: {}
@@ -1604,7 +1765,10 @@ components:
       type: object
       properties:
         StackNames:
-          $ref: '#/components/schemas/__listOf__stringMin1Max128PatternAZAZAZAZ09'
+          allOf:
+            - $ref: '#/components/schemas/UpdateStackNames'
+            - description: ' An array of the name of stacks to update. '
+      description: ' Contains the names of AWS CloudFormation stacks used to update a collection of stacks. '
     UpdateServiceIntegrationResponse:
       type: object
       properties: {}
@@ -1612,14 +1776,20 @@ components:
       type: object
       properties:
         OptInStatus:
-          $ref: '#/components/schemas/OptInStatus'
+          allOf:
+            - $ref: '#/components/schemas/OptInStatus'
+            - description: ' Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight. '
+      description: ' Information about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. '
     NotificationChannelConfig:
       type: object
       required:
         - Sns
       properties:
         Sns:
-          $ref: '#/components/schemas/SnsChannelConfig'
+          allOf:
+            - $ref: '#/components/schemas/SnsChannelConfig'
+            - description: '<p> Information about a notification channel configured in DevOps Guru to send notifications when insights are created. </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
+      description: ' Information about notification channels you have configured with DevOps Guru. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS).'
     AddNotificationChannelRequest:
       type: object
       required:
@@ -1627,19 +1797,29 @@ components:
       title: AddNotificationChannelRequest
       properties:
         Config:
-          $ref: '#/components/schemas/NotificationChannelConfig'
-    __stringMin36Max36PatternAF098AF094AF094AF094AF0912:
+          allOf:
+            - $ref: '#/components/schemas/NotificationChannelConfig'
+            - description: ' A <code>NotificationChannelConfig</code> object that specifies what type of notification channel to add. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS). '
+    NotificationChannelId:
       type: string
       pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
       minLength: 36
       maxLength: 36
+    AnomalyId:
+      type: string
+      pattern: '^[\w-]*$'
+      minLength: 1
+      maxLength: 100
+    AnomalyLimit:
+      type: number
+      format: double
     AnomalySeverity:
       type: string
       enum:
         - LOW
         - MEDIUM
         - HIGH
-    __listOfCloudWatchMetricsDetail:
+    CloudWatchMetricsDetails:
       type: array
       items:
         $ref: '#/components/schemas/CloudWatchMetricsDetail'
@@ -1647,7 +1827,10 @@ components:
       type: object
       properties:
         CloudWatchMetrics:
-          $ref: '#/components/schemas/__listOfCloudWatchMetricsDetail'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchMetricsDetails'
+            - description: ' An array of <code>CloudWatchMetricsDetail</code> object that contains information about the analyzed metrics that displayed anomalous behavior. '
+      description: ' Details about the source of the anomalous operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
     AnomalyStatus:
       type: string
       enum:
@@ -1658,53 +1841,96 @@ components:
       required:
         - StartTime
       properties:
-        EndTime:
-          $ref: '#/components/schemas/__timestampUnix'
         StartTime:
-          $ref: '#/components/schemas/__timestampUnix'
-    __listOf__stringMin1Max128PatternAZAZAZAZ09:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when the anomalous behavior started. '
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when the anomalous behavior ended. '
+      description: ' A time range that specifies when the observed unusual behavior in an anomaly started and ended. '
+    NotificationChannel:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/NotificationChannelId'
+            - description: ' The ID of a notification channel. '
+        Config:
+          allOf:
+            - $ref: '#/components/schemas/NotificationChannelConfig'
+            - description: ' A <code>NotificationChannelConfig</code> object that contains information about configured notification channels. '
+      description: '<p> Information about a notification channel. A notification channel is used to notify you when DevOps Guru creates an insight. The one supported notification channel is Amazon Simple Notification Service (Amazon SNS). </p> <p>If you use an Amazon SNS topic in another account, you must attach a policy to it that grants DevOps Guru permission to it notifications. DevOps Guru adds the required policy on your behalf to send notifications using Amazon SNS in your account. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html">Permissions for cross account Amazon SNS topics</a>.</p> <p>If you use an Amazon SNS topic that is encrypted by an AWS Key Management Service customer-managed key (CMK), then you must add permissions to the CMK. For more information, see <a href="https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html">Permissions for AWS KMS–encrypted Amazon SNS topics</a>.</p>'
+    Channels:
       type: array
       items:
-        $ref: '#/components/schemas/__stringMin1Max128PatternAZAZAZAZ09'
+        $ref: '#/components/schemas/NotificationChannel'
+    StackNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/StackName'
     CloudFormationCollection:
       type: object
       properties:
         StackNames:
-          $ref: '#/components/schemas/__listOf__stringMin1Max128PatternAZAZAZAZ09'
+          allOf:
+            - $ref: '#/components/schemas/StackNames'
+            - description: ' An array of CloudFormation stack names. '
+      description: ' Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
     CloudFormationCollectionFilter:
       type: object
       properties:
         StackNames:
-          $ref: '#/components/schemas/__listOf__stringMin1Max128PatternAZAZAZAZ09'
-    InsightHealth:
-      type: object
-      properties:
-        MeanTimeToRecoverInMilliseconds:
-          $ref: '#/components/schemas/__long'
-        OpenProactiveInsights:
-          $ref: '#/components/schemas/__integer'
-        OpenReactiveInsights:
-          $ref: '#/components/schemas/__integer'
-    __stringMin1Max128PatternAZAZAZAZ09:
+          allOf:
+            - $ref: '#/components/schemas/StackNames'
+            - description: ' An array of CloudFormation stack names. '
+      description: ' Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
+    StackName:
       type: string
       pattern: '^[a-zA-Z*]+[a-zA-Z0-9-]*$'
       minLength: 1
       maxLength: 128
+    InsightHealth:
+      type: object
+      properties:
+        OpenProactiveInsights:
+          allOf:
+            - $ref: '#/components/schemas/NumOpenProactiveInsights'
+            - description: ' The number of open proactive insights. '
+        OpenReactiveInsights:
+          allOf:
+            - $ref: '#/components/schemas/NumOpenReactiveInsights'
+            - description: ' The number of open reactive insights. '
+        MeanTimeToRecoverInMilliseconds:
+          allOf:
+            - $ref: '#/components/schemas/MeanTimeToRecoverInMilliseconds'
+            - description: ' The Meant Time to Recover (MTTR) for the insight. '
+      description: ' Information about the number of open reactive and proactive insights that can be used to gauge the health of your system. '
     CloudFormationHealth:
       type: object
       properties:
-        Insight:
-          $ref: '#/components/schemas/InsightHealth'
         StackName:
-          $ref: '#/components/schemas/__stringMin1Max128PatternAZAZAZAZ09'
-    __listOfCloudWatchMetricsDimension:
+          allOf:
+            - $ref: '#/components/schemas/StackName'
+            - description: ' The name of the CloudFormation stack. '
+        Insight:
+          allOf:
+            - $ref: '#/components/schemas/InsightHealth'
+            - description: ' Information about the health of the AWS resources in your account that are specified by an AWS CloudFormation stack, including the number of open proactive, open reactive insights, and the Mean Time to Recover (MTTR) of closed insights. '
+      description: ' Information about the health of AWS resources in your account that are specified by an AWS CloudFormation stack. '
+    CloudFormationHealths:
+      type: array
+      items:
+        $ref: '#/components/schemas/CloudFormationHealth'
+    CloudWatchMetricsMetricName:
+      type: string
+    CloudWatchMetricsNamespace:
+      type: string
+    CloudWatchMetricsDimensions:
       type: array
       items:
         $ref: '#/components/schemas/CloudWatchMetricsDimension'
-    __string:
-      type: string
-    __integer:
-      type: integer
     CloudWatchMetricsStat:
       type: string
       enum:
@@ -1716,32 +1942,64 @@ components:
         - p99
         - p90
         - p50
+    CloudWatchMetricsUnit:
+      type: string
+    CloudWatchMetricsPeriod:
+      type: integer
     CloudWatchMetricsDetail:
       type: object
       properties:
-        Dimensions:
-          $ref: '#/components/schemas/__listOfCloudWatchMetricsDimension'
         MetricName:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchMetricsMetricName'
+            - description: ' The name of the CloudWatch metric. '
         Namespace:
-          $ref: '#/components/schemas/__string'
-        Period:
-          $ref: '#/components/schemas/__integer'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchMetricsNamespace'
+            - description: ' The namespace of the CloudWatch metric. A namespace is a container for CloudWatch metrics. '
+        Dimensions:
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchMetricsDimensions'
+            - description: ' An array of CloudWatch dimensions associated with '
         Stat:
-          $ref: '#/components/schemas/CloudWatchMetricsStat'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchMetricsStat'
+            - description: ' The type of statistic associated with the CloudWatch metric. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic">Statistics</a> in the <i>Amazon CloudWatch User Guide</i>. '
         Unit:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchMetricsUnit'
+            - description: ' The unit of measure used for the CloudWatch metric. For example, <code>Bytes</code>, <code>Seconds</code>, <code>Count</code>, and <code>Percent</code>. '
+        Period:
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchMetricsPeriod'
+            - description: ' The length of time associated with the CloudWatch metric in number of seconds. '
+      description: ' Information about an Amazon CloudWatch metric. '
+    CloudWatchMetricsDimensionName:
+      type: string
+    CloudWatchMetricsDimensionValue:
+      type: string
     CloudWatchMetricsDimension:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchMetricsDimensionName'
+            - description: ' The name of the CloudWatch dimension. '
         Value:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/CloudWatchMetricsDimensionValue'
+            - description: ' The value of the CloudWatch dimension. '
+      description: ' The dimension of a Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in your account for operational problems and anomalous behaviour. A dimension is a name/value pair that is part of the identity of a metric. A metric can have up to 10 dimensions. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. '
     DescribeAccountHealthRequest:
       type: object
       title: DescribeAccountHealthRequest
       properties: {}
+    NumOpenReactiveInsights:
+      type: integer
+    NumOpenProactiveInsights:
+      type: integer
+    NumMetricsAnalyzed:
+      type: integer
     DescribeAccountOverviewRequest:
       type: object
       required:
@@ -1749,10 +2007,18 @@ components:
       title: DescribeAccountOverviewRequest
       properties:
         FromTime:
-          $ref: '#/components/schemas/__timestampUnix'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The start of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred after this day. '
         ToTime:
-          $ref: '#/components/schemas/__timestampUnix'
-    __long:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The end of the time range passed in. The start time granularity is at the day level. The floor of the start time is used. Returned information occurred before this day. If this is not specified, then the current day is used. '
+    NumReactiveInsights:
+      type: integer
+    NumProactiveInsights:
+      type: integer
+    MeanTimeToRecoverInMilliseconds:
       type: integer
     DescribeAnomalyRequest:
       type: object
@@ -1761,43 +2027,69 @@ components:
     ProactiveAnomaly:
       type: object
       properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyId'
+            - description: ' The ID of a proactive anomaly. '
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySeverity'
+            - description: ' The severity of a proactive anomaly. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyStatus'
+            - description: ' The status of a proactive anomaly. '
+        UpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time of the anomaly''s most recent update. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
-        AssociatedInsightId:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
-        Id:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
-        Limit:
-          $ref: '#/components/schemas/__double'
         PredictionTimeRange:
           $ref: '#/components/schemas/PredictionTimeRange'
+        SourceDetails:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySourceDetails'
+            - description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
+        AssociatedInsightId:
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Severity:
-          $ref: '#/components/schemas/AnomalySeverity'
-        SourceDetails:
-          $ref: '#/components/schemas/AnomalySourceDetails'
-        Status:
-          $ref: '#/components/schemas/AnomalyStatus'
-        UpdateTime:
-          $ref: '#/components/schemas/__timestampUnix'
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyLimit'
+            - description: ' A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. '
+      description: Information about an anomaly. This object is returned by <code>ListAnomalies</code>.
     ReactiveAnomaly:
       type: object
       properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyId'
+            - description: 'The ID of the reactive anomaly. '
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySeverity'
+            - description: 'The severity of the anomaly. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyStatus'
+            - description: ' The status of the anomaly. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
+        SourceDetails:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySourceDetails'
+            - description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
         AssociatedInsightId:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
-        Id:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Severity:
-          $ref: '#/components/schemas/AnomalySeverity'
-        SourceDetails:
-          $ref: '#/components/schemas/AnomalySourceDetails'
-        Status:
-          $ref: '#/components/schemas/AnomalyStatus'
+      description: Details about a reactive anomaly. This object is returned by <code>ListAnomalies</code>.
     DescribeInsightRequest:
       type: object
       title: DescribeInsightRequest
@@ -1806,46 +2098,73 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: 'The ID of the proactive insight. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/InsightName'
+            - description: 'The name of the proactive insight. '
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/InsightSeverity'
+            - description: 'The severity of the proactive insight. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/InsightStatus'
+            - description: 'The status of the proactive insight. '
         InsightTimeRange:
           $ref: '#/components/schemas/InsightTimeRange'
-        Name:
-          $ref: '#/components/schemas/__stringMin1Max530PatternSS'
         PredictionTimeRange:
           $ref: '#/components/schemas/PredictionTimeRange'
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Severity:
-          $ref: '#/components/schemas/InsightSeverity'
         SsmOpsItemId:
-          $ref: '#/components/schemas/__stringMin1Max100Pattern'
-        Status:
-          $ref: '#/components/schemas/InsightStatus'
+          allOf:
+            - $ref: '#/components/schemas/SsmOpsItemId'
+            - description: ' The ID of the AWS System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. '
+      description: Details about a proactive insight. This object is returned by <code>ListInsights</code>.
     ReactiveInsight:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The ID of a reactive insight. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/InsightName'
+            - description: ' The name of a reactive insight. '
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/InsightSeverity'
+            - description: ' The severity of a reactive insight. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/InsightStatus'
+            - description: ' The status of a reactive insight. '
         InsightTimeRange:
           $ref: '#/components/schemas/InsightTimeRange'
-        Name:
-          $ref: '#/components/schemas/__stringMin1Max530PatternSS'
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Severity:
-          $ref: '#/components/schemas/InsightSeverity'
         SsmOpsItemId:
-          $ref: '#/components/schemas/__stringMin1Max100Pattern'
-        Status:
-          $ref: '#/components/schemas/InsightStatus'
+          allOf:
+            - $ref: '#/components/schemas/SsmOpsItemId'
+            - description: ' The ID of the AWS System Manager OpsItem created for this insight. You must enable the creation of OpstItems insights before they are created for each insight. '
+      description: ' Information about a reactive insight. This object is returned by <code>ListInsights</code>. '
+    ResourceCollectionType:
+      type: string
+      enum:
+        - AWS_CLOUD_FORMATION
+    UuidNextToken:
+      type: string
+      pattern: '^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$'
+      minLength: 36
+      maxLength: 36
     DescribeResourceCollectionHealthRequest:
       type: object
       title: DescribeResourceCollectionHealthRequest
       properties: {}
-    __listOfCloudFormationHealth:
-      type: array
-      items:
-        $ref: '#/components/schemas/CloudFormationHealth'
     DescribeServiceIntegrationRequest:
       type: object
       title: DescribeServiceIntegrationRequest
@@ -1854,60 +2173,101 @@ components:
       type: object
       properties:
         OpsCenter:
-          $ref: '#/components/schemas/OpsCenterIntegration'
+          allOf:
+            - $ref: '#/components/schemas/OpsCenterIntegration'
+            - description: ' Information about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. '
+      description: ' Information about the integration of DevOps Guru with another AWS service, such as AWS Systems Manager. '
     EndTimeRange:
       type: object
       properties:
         FromTime:
-          $ref: '#/components/schemas/__timestampUnix'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The earliest end time in the time range. '
         ToTime:
-          $ref: '#/components/schemas/__timestampUnix'
-    __stringMin0Max50:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The latest end time in the time range. '
+      description: ' A range of time that specifies when anomalous behavior in an anomaly or insight ended. '
+    EventId:
+      type: string
+    EventName:
       type: string
       minLength: 0
       maxLength: 50
-    __listOfEventResource:
+    EventResources:
       type: array
       items:
         $ref: '#/components/schemas/EventResource'
     Event:
       type: object
       properties:
-        DataSource:
-          $ref: '#/components/schemas/EventDataSource'
-        EventClass:
-          $ref: '#/components/schemas/EventClass'
-        EventSource:
-          $ref: '#/components/schemas/__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents'
-        Id:
-          $ref: '#/components/schemas/__string'
-        Name:
-          $ref: '#/components/schemas/__stringMin0Max50'
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Resources:
-          $ref: '#/components/schemas/__listOfEventResource'
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/EventId'
+            - description: ' The ID of the event. '
         Time:
-          $ref: '#/components/schemas/__timestampUnix'
-    __stringMin36Max2048PatternArnAwsAZAZ09AZ09D12:
-      type: string
-      pattern: '^arn:aws[-a-z]*:[a-z0-9-]*:[a-z0-9-]*:\d{12}:.*$'
-      minLength: 36
-      maxLength: 2048
-    __stringMin0Max2048Pattern:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' A <code>Timestamp</code> that specifies the time the event occurred. '
+        EventSource:
+          allOf:
+            - $ref: '#/components/schemas/EventSource'
+            - description: ' The AWS source that emitted the event. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EventName'
+            - description: ' The name of the event. '
+        DataSource:
+          allOf:
+            - $ref: '#/components/schemas/EventDataSource'
+            - description: ' The source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, where DevOps Guru analysis found the event. '
+        EventClass:
+          allOf:
+            - $ref: '#/components/schemas/EventClass'
+            - description: ' The class of the event. The class specifies what the event is related to, such as an infrastructure change, a deployment, or a schema change. '
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/EventResources'
+            - description: ' An <code>EventResource</code> object that contains information about the resource that emitted the event. '
+      description: ' An AWS resource event. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and provide recommendations to improve your operational solutions. '
+    EventResourceType:
       type: string
       pattern: ^.*$
       minLength: 0
       maxLength: 2048
+    EventResourceName:
+      type: string
+      pattern: ^.*$
+      minLength: 0
+      maxLength: 2048
+    EventResourceArn:
+      type: string
+      pattern: '^arn:aws[-a-z]*:[a-z0-9-]*:[a-z0-9-]*:\d{12}:.*$'
+      minLength: 36
+      maxLength: 2048
     EventResource:
       type: object
       properties:
-        Arn:
-          $ref: '#/components/schemas/__stringMin36Max2048PatternArnAwsAZAZ09AZ09D12'
-        Name:
-          $ref: '#/components/schemas/__stringMin0Max2048Pattern'
         Type:
-          $ref: '#/components/schemas/__stringMin0Max2048Pattern'
+          allOf:
+            - $ref: '#/components/schemas/EventResourceType'
+            - description: ' The type of resource that emitted an event. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/EventResourceName'
+            - description: ' The name of the resource that emitted an event. '
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/EventResourceArn'
+            - description: ' The Amazon Resource Name (ARN) of the resource that emitted an event. '
+      description: ' The AWS resource that emitted an event. AWS resource events and metrics are analyzed by DevOps Guru to find anomalous behavior and provide recommendations to improve your operational solutions. '
+    Events:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
     GetResourceCollectionRequest:
       type: object
       title: GetResourceCollectionRequest
@@ -1916,14 +2276,27 @@ components:
       type: object
       properties:
         CloudFormation:
-          $ref: '#/components/schemas/CloudFormationCollectionFilter'
+          allOf:
+            - $ref: '#/components/schemas/CloudFormationCollectionFilter'
+            - description: ' Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. '
+      description: ' Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru. '
     InsightFeedback:
       type: object
       properties:
-        Feedback:
-          $ref: '#/components/schemas/InsightFeedbackOption'
         Id:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The insight feedback ID. '
+        Feedback:
+          allOf:
+            - $ref: '#/components/schemas/InsightFeedbackOption'
+            - description: ' The feedback provided by the customer. '
+      description: ' Information about insight feedback received from a customer. '
+    InsightName:
+      type: string
+      pattern: '^[\s\S]*$'
+      minLength: 1
+      maxLength: 530
     InsightSeverity:
       type: string
       enum:
@@ -1940,16 +2313,21 @@ components:
       required:
         - StartTime
       properties:
-        EndTime:
-          $ref: '#/components/schemas/__timestampUnix'
         StartTime:
-          $ref: '#/components/schemas/__timestampUnix'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when the behavior described in an insight started. '
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when the behavior described in an insight ended. '
+      description: ' A time ranged that specifies when the observed behavior in an insight started and ended. '
     InsightType:
       type: string
       enum:
         - REACTIVE
         - PROACTIVE
-    __integerMin1Max500:
+    ListAnomaliesForInsightMaxResults:
       type: integer
       minimum: 1
       maximum: 500
@@ -1957,43 +2335,65 @@ components:
       type: object
       properties:
         FromTime:
-          $ref: '#/components/schemas/__timestampUnix'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The start time of the time range. '
         ToTime:
-          $ref: '#/components/schemas/__timestampUnix'
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The end time of the time range. '
+      description: ' A time range used to specify when the behavior of an insight or anomaly started. '
     ListAnomaliesForInsightRequest:
       type: object
       title: ListAnomaliesForInsightRequest
       properties:
-        MaxResults:
-          $ref: '#/components/schemas/__integerMin1Max500'
-        NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
         StartTimeRange:
-          $ref: '#/components/schemas/StartTimeRange'
-    __listOfProactiveAnomalySummary:
+          allOf:
+            - $ref: '#/components/schemas/StartTimeRange'
+            - description: ' A time range used to specify when the requested anomalies started. All returned anomalies started during this time range. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListAnomaliesForInsightMaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+    ProactiveAnomalies:
       type: array
       items:
         $ref: '#/components/schemas/ProactiveAnomalySummary'
-    __listOfReactiveAnomalySummary:
+    ReactiveAnomalies:
       type: array
       items:
         $ref: '#/components/schemas/ReactiveAnomalySummary'
     ListEventsFilters:
       type: object
       properties:
-        DataSource:
-          $ref: '#/components/schemas/EventDataSource'
-        EventClass:
-          $ref: '#/components/schemas/EventClass'
-        EventSource:
-          $ref: '#/components/schemas/__stringMin10Max50PatternAZAZ09AmazonawsComAwsEvents'
-        EventTimeRange:
-          $ref: '#/components/schemas/EventTimeRange'
         InsightId:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' An ID of an insight that is related to the events you want to filter for. '
+        EventTimeRange:
+          allOf:
+            - $ref: '#/components/schemas/EventTimeRange'
+            - description: ' A time range during which you want the filtered events to have occurred. '
+        EventClass:
+          allOf:
+            - $ref: '#/components/schemas/EventClass'
+            - description: ' The class of the events you want to filter for, such as an infrastructure change, a deployment, or a schema change. '
+        EventSource:
+          allOf:
+            - $ref: '#/components/schemas/EventSource'
+            - description: ' The AWS source that emitted the events you want to filter for. '
+        DataSource:
+          allOf:
+            - $ref: '#/components/schemas/EventDataSource'
+            - description: ' The source, <code>AWS_CLOUD_TRAIL</code> or <code>AWS_CODE_DEPLOY</code>, of the events you want returned. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-    __integerMin1Max200:
+      description: ' Filters you can use to specify which events are returned when <code>ListEvents</code> is called. '
+    ListEventsMaxResults:
       type: integer
       minimum: 1
       maximum: 200
@@ -2004,45 +2404,60 @@ components:
       title: ListEventsRequest
       properties:
         Filters:
-          $ref: '#/components/schemas/ListEventsFilters'
+          allOf:
+            - $ref: '#/components/schemas/ListEventsFilters'
+            - description: ' A <code>ListEventsFilters</code> object used to specify which events to return. '
         MaxResults:
-          $ref: '#/components/schemas/__integerMin1Max200'
+          allOf:
+            - $ref: '#/components/schemas/ListEventsMaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
         NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
-    __listOfEvent:
-      type: array
-      items:
-        $ref: '#/components/schemas/Event'
-    __integerMin1Max100:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+    ListInsightsMaxResults:
       type: integer
       minimum: 1
       maximum: 100
     ListInsightsStatusFilter:
       type: object
       properties:
-        Any:
-          $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
-        Closed:
-          $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
         Ongoing:
-          $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
+          allOf:
+            - $ref: '#/components/schemas/ListInsightsOngoingStatusFilter'
+            - description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies ongoing insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+        Closed:
+          allOf:
+            - $ref: '#/components/schemas/ListInsightsClosedStatusFilter'
+            - description: ' A <code>ListInsightsClosedStatusFilter</code> that specifies closed insights that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+        Any:
+          allOf:
+            - $ref: '#/components/schemas/ListInsightsAnyStatusFilter'
+            - description: ' A <code>ListInsightsAnyStatusFilter</code> that specifies insights of any status that are either <code>REACTIVE</code> or <code>PROACTIVE</code>. '
+      description: ' A filter used by <code>ListInsights</code> to specify which insights to return. '
     ListInsightsRequest:
       type: object
       required:
         - StatusFilter
       title: ListInsightsRequest
       properties:
-        MaxResults:
-          $ref: '#/components/schemas/__integerMin1Max100'
-        NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
         StatusFilter:
-          $ref: '#/components/schemas/ListInsightsStatusFilter'
-    __listOfProactiveInsightSummary:
+          allOf:
+            - $ref: '#/components/schemas/ListInsightsStatusFilter'
+            - description: ' A filter used to filter the returned insights by their status. You can specify one status filter. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/ListInsightsMaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+    ProactiveInsights:
       type: array
       items:
         $ref: '#/components/schemas/ProactiveInsightSummary'
-    __listOfReactiveInsightSummary:
+    ReactiveInsights:
       type: array
       items:
         $ref: '#/components/schemas/ReactiveInsightSummary'
@@ -2051,11 +2466,9 @@ components:
       title: ListNotificationChannelsRequest
       properties:
         NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
-    __listOfNotificationChannel:
-      type: array
-      items:
-        $ref: '#/components/schemas/NotificationChannel'
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
     ListRecommendationsRequest:
       type: object
       required:
@@ -2063,71 +2476,86 @@ components:
       title: ListRecommendationsRequest
       properties:
         InsightId:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The ID of the requested insight. '
         NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
-    __listOfRecommendation:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
+    Recommendations:
       type: array
       items:
         $ref: '#/components/schemas/Recommendation'
-    NotificationChannel:
-      type: object
-      properties:
-        Config:
-          $ref: '#/components/schemas/NotificationChannelConfig'
-        Id:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
+      minItems: 0
+      maxItems: 10
     OptInStatus:
       type: string
       enum:
         - ENABLED
         - DISABLED
+      description: ' Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight. '
     OpsCenterIntegration:
       type: object
       properties:
         OptInStatus:
-          $ref: '#/components/schemas/OptInStatus'
+          allOf:
+            - $ref: '#/components/schemas/OptInStatus'
+            - description: ' Specifies if DevOps Guru is enabled to create an AWS Systems Manager OpsItem for each created insight. '
+      description: ' Information about whether DevOps Guru is configured to create an OpsItem in AWS Systems Manager OpsCenter for each created insight. '
     PredictionTimeRange:
       type: object
       required:
         - StartTime
       properties:
-        EndTime:
-          $ref: '#/components/schemas/__timestampUnix'
         StartTime:
-          $ref: '#/components/schemas/__timestampUnix'
-    __double:
-      type: number
-      format: double
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time range during which a metric limit is expected to be exceeded. This applies to proactive insights only. '
+        EndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time when the behavior in a proactive insight is expected to end. '
+      description: ' The time range during which anomalous behavior in a proactive anomaly or an insight is expected to occur. '
     ProactiveAnomalySummary:
       type: object
       properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyId'
+            - description: The ID of the anomaly.
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySeverity'
+            - description: The severity of the anomaly.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyStatus'
+            - description: The status of the anomaly.
+        UpdateTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time of the anomaly''s most recent update. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
-        AssociatedInsightId:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
-        Id:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
-        Limit:
-          $ref: '#/components/schemas/__double'
         PredictionTimeRange:
           $ref: '#/components/schemas/PredictionTimeRange'
+        SourceDetails:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySourceDetails'
+            - description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
+        AssociatedInsightId:
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Severity:
-          $ref: '#/components/schemas/AnomalySeverity'
-        SourceDetails:
-          $ref: '#/components/schemas/AnomalySourceDetails'
-        Status:
-          $ref: '#/components/schemas/AnomalyStatus'
-        UpdateTime:
-          $ref: '#/components/schemas/__timestampUnix'
-    __stringMin1Max530PatternSS:
-      type: string
-      pattern: '^[\s\S]*$'
-      minLength: 1
-      maxLength: 530
-    __stringMin1Max100Pattern:
+        Limit:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyLimit'
+            - description: ' A threshold that was exceeded by behavior in analyzed resources. Exceeding this threshold is related to the anomalous behavior that generated this anomaly. '
+      description: 'Details about a proactive anomaly. This object is returned by <code>DescribeAnomaly.</code> '
+    SsmOpsItemId:
       type: string
       pattern: ^.*$
       minLength: 1
@@ -2136,103 +2564,169 @@ components:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: 'The ID of the proactive insight. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/InsightName'
+            - description: 'The name of the proactive insight. '
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/InsightSeverity'
+            - description: 'The severity of the proactive insight. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/InsightStatus'
+            - description: 'The status of the proactive insight. '
         InsightTimeRange:
           $ref: '#/components/schemas/InsightTimeRange'
-        Name:
-          $ref: '#/components/schemas/__stringMin1Max530PatternSS'
         PredictionTimeRange:
           $ref: '#/components/schemas/PredictionTimeRange'
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Severity:
-          $ref: '#/components/schemas/InsightSeverity'
-        Status:
-          $ref: '#/components/schemas/InsightStatus'
+      description: 'Details about a proactive insight. This object is returned by <code>DescribeInsight.</code> '
     PutFeedbackRequest:
       type: object
       title: PutFeedbackRequest
       properties:
         InsightFeedback:
-          $ref: '#/components/schemas/InsightFeedback'
+          allOf:
+            - $ref: '#/components/schemas/InsightFeedback'
+            - description: ' The feedback from customers is about the recommendations in this insight. '
     ReactiveAnomalySummary:
       type: object
       properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyId'
+            - description: ' The ID of the reactive anomaly. '
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySeverity'
+            - description: ' The severity of the reactive anomaly. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/AnomalyStatus'
+            - description: ' The status of the reactive anomaly. '
         AnomalyTimeRange:
           $ref: '#/components/schemas/AnomalyTimeRange'
+        SourceDetails:
+          allOf:
+            - $ref: '#/components/schemas/AnomalySourceDetails'
+            - description: ' Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. '
         AssociatedInsightId:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
-        Id:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The ID of the insight that contains this anomaly. An insight is composed of related anomalies. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Severity:
-          $ref: '#/components/schemas/AnomalySeverity'
-        SourceDetails:
-          $ref: '#/components/schemas/AnomalySourceDetails'
-        Status:
-          $ref: '#/components/schemas/AnomalyStatus'
+      description: 'Details about a reactive anomaly. This object is returned by <code>DescribeAnomaly.</code> '
     ReactiveInsightSummary:
       type: object
       properties:
         Id:
-          $ref: '#/components/schemas/__stringMin1Max100PatternW'
+          allOf:
+            - $ref: '#/components/schemas/InsightId'
+            - description: ' The ID of a reactive summary. '
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/InsightName'
+            - description: ' The name of a reactive insight. '
+        Severity:
+          allOf:
+            - $ref: '#/components/schemas/InsightSeverity'
+            - description: ' The severity of a reactive insight. '
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/InsightStatus'
+            - description: ' The status of a reactive insight. '
         InsightTimeRange:
           $ref: '#/components/schemas/InsightTimeRange'
-        Name:
-          $ref: '#/components/schemas/__stringMin1Max530PatternSS'
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Severity:
-          $ref: '#/components/schemas/InsightSeverity'
-        Status:
-          $ref: '#/components/schemas/InsightStatus'
-    __listOfRecommendationRelatedAnomaly:
-      type: array
-      items:
-        $ref: '#/components/schemas/RecommendationRelatedAnomaly'
-    __listOfRecommendationRelatedEvent:
+      description: ' Information about a reactive insight. This object is returned by <code>DescribeInsight.</code> '
+    RecommendationDescription:
+      type: string
+    RecommendationLink:
+      type: string
+    RecommendationName:
+      type: string
+    RecommendationReason:
+      type: string
+    RecommendationRelatedEvents:
       type: array
       items:
         $ref: '#/components/schemas/RecommendationRelatedEvent'
+    RecommendationRelatedAnomalies:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationRelatedAnomaly'
     Recommendation:
       type: object
       properties:
         Description:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationDescription'
+            - description: ' A description of the problem. '
         Link:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationLink'
+            - description: ' A hyperlink to information to help you address the problem. '
         Name:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationName'
+            - description: ' The name of the recommendation. '
         Reason:
-          $ref: '#/components/schemas/__string'
-        RelatedAnomalies:
-          $ref: '#/components/schemas/__listOfRecommendationRelatedAnomaly'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationReason'
+            - description: ' The reason DevOps Guru flagged the anomalous behavior as a problem. '
         RelatedEvents:
-          $ref: '#/components/schemas/__listOfRecommendationRelatedEvent'
-    __listOfRecommendationRelatedAnomalyResource:
-      type: array
-      items:
-        $ref: '#/components/schemas/RecommendationRelatedAnomalyResource'
-    __listOfRecommendationRelatedAnomalySourceDetail:
-      type: array
-      items:
-        $ref: '#/components/schemas/RecommendationRelatedAnomalySourceDetail'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedEvents'
+            - description: ' Events that are related to the problem. Use these events to learn more about what''s happening and to help address the issue. '
+        RelatedAnomalies:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedAnomalies'
+            - description: ' Anomalies that are related to the problem. Use these Anomalies to learn more about what''s happening and to help address the issue. '
+      description: ' Recommendation information to help you remediate detected anomalous behavior that generated an insight. '
     RecommendationRelatedAnomaly:
       type: object
       properties:
         Resources:
-          $ref: '#/components/schemas/__listOfRecommendationRelatedAnomalyResource'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedAnomalyResources'
+            - description: ' An array of objects that represent resources in which DevOps Guru detected anomalous behavior. Each object contains the name and type of the resource. '
         SourceDetails:
-          $ref: '#/components/schemas/__listOfRecommendationRelatedAnomalySourceDetail'
+          allOf:
+            - $ref: '#/components/schemas/RelatedAnomalySourceDetails'
+            - description: ' Information about where the anomalous behavior related the recommendation was found. For example, details in Amazon CloudWatch metrics. '
+      description: ' Information about an anomaly that is related to a recommendation. '
+    RecommendationRelatedAnomalyResources:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationRelatedAnomalyResource'
+    RelatedAnomalySourceDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/RecommendationRelatedAnomalySourceDetail'
+    RecommendationRelatedAnomalyResourceName:
+      type: string
+    RecommendationRelatedAnomalyResourceType:
+      type: string
     RecommendationRelatedAnomalyResource:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedAnomalyResourceName'
+            - description: ' The name of the resource. '
         Type:
-          $ref: '#/components/schemas/__string'
-    __listOfRecommendationRelatedCloudWatchMetricsSourceDetail:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedAnomalyResourceType'
+            - description: ' The type of the resource. '
+      description: ' Information about a resource in which DevOps Guru detected anomalous behavior. '
+    RecommendationRelatedCloudWatchMetricsSourceDetails:
       type: array
       items:
         $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceDetail'
@@ -2240,15 +2734,29 @@ components:
       type: object
       properties:
         CloudWatchMetrics:
-          $ref: '#/components/schemas/__listOfRecommendationRelatedCloudWatchMetricsSourceDetail'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceDetails'
+            - description: ' An array of <code>CloudWatchMetricsDetail</code> objects that contains information about the analyzed metrics that displayed anomalous behavior. '
+      description: ' Contains an array of <code>RecommendationRelatedCloudWatchMetricsSourceDetail</code> objects that contain the name and namespace of an Amazon CloudWatch metric. '
+    RecommendationRelatedCloudWatchMetricsSourceMetricName:
+      type: string
+    RecommendationRelatedCloudWatchMetricsSourceNamespace:
+      type: string
     RecommendationRelatedCloudWatchMetricsSourceDetail:
       type: object
       properties:
         MetricName:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceMetricName'
+            - description: The name of the CloudWatch metric.
         Namespace:
-          $ref: '#/components/schemas/__string'
-    __listOfRecommendationRelatedEventResource:
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedCloudWatchMetricsSourceNamespace'
+            - description: The namespace of the CloudWatch metric. A namespace is a container for CloudWatch metrics.
+      description: ' Information about an Amazon CloudWatch metric that is analyzed by DevOps Guru. It is one of many analyzed metrics that are used to generate insights. '
+    RecommendationRelatedEventName:
+      type: string
+    RecommendationRelatedEventResources:
       type: array
       items:
         $ref: '#/components/schemas/RecommendationRelatedEventResource'
@@ -2256,16 +2764,30 @@ components:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedEventName'
+            - description: ' The name of the event. This corresponds to the <code>Name</code> field in an <code>Event</code> object. '
         Resources:
-          $ref: '#/components/schemas/__listOfRecommendationRelatedEventResource'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedEventResources'
+            - description: ' A <code>ResourceCollection</code> object that contains arrays of the names of AWS CloudFormation stacks. '
+      description: ' Information about an event that is related to a recommendation. '
+    RecommendationRelatedEventResourceName:
+      type: string
+    RecommendationRelatedEventResourceType:
+      type: string
     RecommendationRelatedEventResource:
       type: object
       properties:
         Name:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedEventResourceName'
+            - description: ' The name of the resource that emitted the event. This corresponds to the <code>Name</code> field in an <code>EventResource</code> object. '
         Type:
-          $ref: '#/components/schemas/__string'
+          allOf:
+            - $ref: '#/components/schemas/RecommendationRelatedEventResourceType'
+            - description: ' The type of the resource that emitted the event. This corresponds to the <code>Type</code> field in an <code>EventResource</code> object. '
+      description: ' Information about an AWS resource that emitted and event that is related to a recommendation in an insight. '
     RemoveNotificationChannelRequest:
       type: object
       title: RemoveNotificationChannelRequest
@@ -2273,34 +2795,59 @@ components:
     SearchInsightsFilters:
       type: object
       properties:
+        Severities:
+          allOf:
+            - $ref: '#/components/schemas/InsightSeverities'
+            - description: ' An array of severity values used to search for insights. '
+        Statuses:
+          allOf:
+            - $ref: '#/components/schemas/InsightStatuses'
+            - description: ' An array of status values used to search for insights. '
         ResourceCollection:
           $ref: '#/components/schemas/ResourceCollection'
-        Severities:
-          $ref: '#/components/schemas/__listOfInsightSeverity'
-        Statuses:
-          $ref: '#/components/schemas/__listOfInsightStatus'
+      description: ' Specifies one or more severity values and one or more status values that are used to search for insights. '
+    SearchInsightsMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 100
     SearchInsightsRequest:
       type: object
       required:
-        - Type
         - StartTimeRange
+        - Type
       title: SearchInsightsRequest
       properties:
-        Filters:
-          $ref: '#/components/schemas/SearchInsightsFilters'
-        MaxResults:
-          $ref: '#/components/schemas/__integerMin1Max100'
-        NextToken:
-          $ref: '#/components/schemas/__stringMin36Max36PatternAF098AF094AF094AF094AF0912'
         StartTimeRange:
-          $ref: '#/components/schemas/StartTimeRange'
+          allOf:
+            - $ref: '#/components/schemas/StartTimeRange'
+            - description: ' The start of the time range passed in. Returned insights occurred after this time. '
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/SearchInsightsFilters'
+            - description: ' A <code>SearchInsightsFilters</code> object that is used to set the severity and status filters on your insight search. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/SearchInsightsMaxResults'
+            - description: 'The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/UuidNextToken'
+            - description: 'The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.'
         Type:
-          $ref: '#/components/schemas/InsightType'
-    __stringMin36Max1024PatternArnAwsAZ09SnsAZ09D12:
+          allOf:
+            - $ref: '#/components/schemas/InsightType'
+            - description: ' The type of insights you are searching for (<code>REACTIVE</code> or <code>PROACTIVE</code>). '
+    TopicArn:
       type: string
       pattern: '^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\d{12}:[^:]+$'
       minLength: 36
       maxLength: 1024
+    UpdateStackNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/StackName'
+      minItems: 0
+      maxItems: 100
     UpdateResourceCollectionAction:
       type: string
       enum:
@@ -2310,7 +2857,10 @@ components:
       type: object
       properties:
         CloudFormation:
-          $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
+          allOf:
+            - $ref: '#/components/schemas/UpdateCloudFormationCollectionFilter'
+            - description: ' An collection of AWS CloudFormation stacks. '
+      description: ' Contains information used to update a collection of AWS resources. '
     UpdateResourceCollectionRequest:
       type: object
       required:
@@ -2319,7 +2869,9 @@ components:
       title: UpdateResourceCollectionRequest
       properties:
         Action:
-          $ref: '#/components/schemas/UpdateResourceCollectionAction'
+          allOf:
+            - $ref: '#/components/schemas/UpdateResourceCollectionAction'
+            - description: ' Specifies if the resource collection in the request is added or deleted to the resource collection. '
         ResourceCollection:
           $ref: '#/components/schemas/UpdateResourceCollectionFilter'
     UpdateServiceIntegrationConfig:
@@ -2327,6 +2879,7 @@ components:
       properties:
         OpsCenter:
           $ref: '#/components/schemas/OpsCenterIntegrationConfig'
+      description: ' Information about updating the integration status of an AWS service, such as AWS Systems Manager, with DevOps Guru. '
     UpdateServiceIntegrationRequest:
       type: object
       required:
@@ -2334,6 +2887,8 @@ components:
       title: UpdateServiceIntegrationRequest
       properties:
         ServiceIntegration:
-          $ref: '#/components/schemas/UpdateServiceIntegrationConfig'
+          allOf:
+            - $ref: '#/components/schemas/UpdateServiceIntegrationConfig'
+            - description: ' An <code>IntegratedServiceConfig</code> object used to specify the integrated service you want to update, and whether you want to update it to enabled or disabled. '
 security:
   - hmac: []
