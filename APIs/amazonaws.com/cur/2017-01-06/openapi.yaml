@@ -320,7 +320,7 @@ components:
       description: This exception is thrown when the number of report preference reaches max limit. The max number is 5.
     ReportName:
       type: string
-      pattern: '[0-9A-Za-z!\-_.*\''()]+'
+      pattern: '[0-9A-Za-z!\-_.*\'()]+'
       description: 'Preferred name for a report, it has to be unique. Must starts with a number/letter, case sensitive. Limited to 256 characters.'
       maxLength: 256
     S3Bucket:
