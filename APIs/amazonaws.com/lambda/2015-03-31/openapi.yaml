@@ -714,7 +714,7 @@ paths:
   /2015-03-31/event-source-mappings/:
     post:
       operationId: CreateEventSourceMapping
-      description: '<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html">Using AWS Lambda with Amazon MQ</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html">Using AWS Lambda with Amazon MSK</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
+      description: '<p>Creates a mapping between an event source and an AWS Lambda function. Lambda reads items from the event source and triggers the function.</p> <p>For details about each event source type, see the following topics.</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-ddb.html">Using AWS Lambda with Amazon DynamoDB</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-kinesis.html">Using AWS Lambda with Amazon Kinesis</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">Using AWS Lambda with Amazon SQS</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-mq.html">Using AWS Lambda with Amazon MQ</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/with-msk.html">Using AWS Lambda with Amazon MSK</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/lambda/latest/dg/kafka-smaa.html">Using AWS Lambda with Self-Managed Apache Kafka</a> </p> </li> </ul> <p>The following error handling options are only available for stream sources (DynamoDB and Kinesis):</p> <ul> <li> <p> <code>BisectBatchOnFunctionError</code> - If the function returns an error, split the batch in two and retry.</p> </li> <li> <p> <code>DestinationConfig</code> - Send discarded records to an Amazon SQS queue or Amazon SNS topic.</p> </li> <li> <p> <code>MaximumRecordAgeInSeconds</code> - Discard records older than the specified age. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires</p> </li> <li> <p> <code>MaximumRetryAttempts</code> - Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.</p> </li> <li> <p> <code>ParallelizationFactor</code> - Process multiple batches from each shard concurrently.</p> </li> </ul>'
       responses:
         '202':
           description: Success
@@ -760,7 +760,6 @@ paths:
             schema:
               type: object
               required:
-                - EventSourceArn
                 - FunctionName
               properties:
                 EventSourceArn:
@@ -777,12 +776,12 @@ paths:
                   description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
                   type: boolean
                 BatchSize:
-                  description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
+                  description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
                   type: integer
                   minimum: 1
                   maximum: 10000
                 MaximumBatchingWindowInSeconds:
-                  description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
+                  description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.'
                   type: integer
                   minimum: 0
                   maximum: 300
@@ -827,8 +826,13 @@ paths:
                   type: integer
                   minimum: -1
                   maximum: 10000
+                TumblingWindowInSeconds:
+                  description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+                  type: integer
+                  minimum: 0
+                  maximum: 900
                 Topics:
-                  description: ' (MSK) The name of the Kafka topic. '
+                  description: The name of the Kafka topic.
                   type: array
                   items:
                     $ref: '#/components/schemas/Topic'
@@ -842,10 +846,25 @@ paths:
                   minItems: 1
                   maxItems: 1
                 SourceAccessConfigurations:
-                  description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+                  description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
                   type: array
                   items:
                     $ref: '#/components/schemas/SourceAccessConfiguration'
+                  minItems: 1
+                  maxItems: 22
+                SelfManagedEventSource:
+                  description: The Self-Managed Apache Kafka cluster for your event source.
+                  type: object
+                  properties:
+                    Endpoints:
+                      allOf:
+                        - $ref: '#/components/schemas/Endpoints'
+                        - description: 'The list of bootstrap servers for your Kafka brokers in the following format: <code>"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]</code>.'
+                FunctionResponseTypes:
+                  description: (Streams) A list of current response type enums applied to the event source mapping.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FunctionResponseType'
                   minItems: 1
                   maxItems: 1
     parameters:
@@ -1144,7 +1163,7 @@ paths:
                     $ref: '#/components/schemas/FileSystemConfig'
                   maxItems: 1
                 ImageConfig:
-                  description: 'Configuration values that override the container image Dockerfile. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html">Override Container settings</a>. '
+                  description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container settings</a>. '
                   type: object
                   properties:
                     EntryPoint:
@@ -1698,12 +1717,12 @@ paths:
                   description: 'If true, the event source mapping is active. Set to false to pause polling and invocation.'
                   type: boolean
                 BatchSize:
-                  description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
+                  description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
                   type: integer
                   minimum: 1
                   maximum: 10000
                 MaximumBatchingWindowInSeconds:
-                  description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
+                  description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.'
                   type: integer
                   minimum: 0
                   maximum: 300
@@ -1738,10 +1757,22 @@ paths:
                   minimum: 1
                   maximum: 10
                 SourceAccessConfigurations:
-                  description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+                  description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
                   type: array
                   items:
                     $ref: '#/components/schemas/SourceAccessConfiguration'
+                  minItems: 1
+                  maxItems: 22
+                TumblingWindowInSeconds:
+                  description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+                  type: integer
+                  minimum: 0
+                  maximum: 900
+                FunctionResponseTypes:
+                  description: (Streams) A list of current response type enums applied to the event source mapping.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/FunctionResponseType'
                   minItems: 1
                   maxItems: 1
   '/2015-03-31/functions/{FunctionName}':
@@ -3050,7 +3081,7 @@ paths:
                     $ref: '#/components/schemas/FileSystemConfig'
                   maxItems: 1
                 ImageConfig:
-                  description: 'Configuration values that override the container image Dockerfile. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html">Override Container settings</a>. '
+                  description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container settings</a>. '
                   type: object
                   properties:
                     EntryPoint:
@@ -4742,7 +4773,7 @@ components:
         MaximumBatchingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-            - description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.'
+            - description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.'
         ParallelizationFactor:
           allOf:
             - $ref: '#/components/schemas/ParallelizationFactor'
@@ -4778,7 +4809,7 @@ components:
         Topics:
           allOf:
             - $ref: '#/components/schemas/Topics'
-            - description: ' (MSK) The name of the Kafka topic to consume. '
+            - description: The name of the Kafka topic.
         Queues:
           allOf:
             - $ref: '#/components/schemas/Queues'
@@ -4786,7 +4817,11 @@ components:
         SourceAccessConfigurations:
           allOf:
             - $ref: '#/components/schemas/SourceAccessConfigurations'
-            - description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+            - description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
+        SelfManagedEventSource:
+          allOf:
+            - $ref: '#/components/schemas/SelfManagedEventSource'
+            - description: The Self-Managed Apache Kafka cluster for your event source.
         MaximumRecordAgeInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumRecordAgeInSeconds'
@@ -4799,6 +4834,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
             - description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records are retried until the record expires.'
+        TumblingWindowInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/TumblingWindowInSeconds'
+            - description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+        FunctionResponseTypes:
+          allOf:
+            - $ref: '#/components/schemas/FunctionResponseTypeList'
+            - description: (Streams) A list of current response type enums applied to the event source mapping.
       description: A mapping between an AWS resource and an AWS Lambda function. See <a>CreateEventSourceMapping</a> for details.
     OnSuccess:
       type: object
@@ -4832,12 +4875,22 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/SourceAccessType'
-            - description: '<p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+            - description: '<p>The type of authentication protocol or the VPC components for your event source. For example: <code>"Type":"SASL_SCRAM_512_AUTH"</code>.</p> <ul> <li> <p> <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p> </li> <li> <p> <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Kafka cluster.</p> </li> <li> <p> <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_256_AUTH</code> - The ARN of your secret key used for SASL SCRAM-256 authentication of your Kafka brokers.</p> </li> <li> <p> <code>SASL_SCRAM_512_AUTH</code> - The ARN of your secret key used for SASL SCRAM-512 authentication of your Kafka brokers.</p> </li> </ul>'
         URI:
           allOf:
-            - $ref: '#/components/schemas/Arn'
-            - description: '<p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
-      description: ' (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> '
+            - $ref: '#/components/schemas/URI'
+            - description: 'The value for your chosen configuration in <code>Type</code>. For example: <code>"URI": "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName"</code>.'
+      description: 'You can specify the authentication protocol, or the VPC components to secure access to your event source.'
+    Endpoints:
+      type: object
+      minProperties: 1
+      maxProperties: 2
+      additionalProperties:
+        $ref: '#/components/schemas/EndpointLists'
+    FunctionResponseType:
+      type: string
+      enum:
+        - ReportBatchItemFailures
     FunctionConfiguration:
       type: object
       example:
@@ -6114,6 +6167,10 @@ components:
       type: integer
       minimum: -1
       maximum: 10000
+    TumblingWindowInSeconds:
+      type: integer
+      minimum: 0
+      maximum: 900
     Topics:
       type: array
       items:
@@ -6131,11 +6188,24 @@ components:
       items:
         $ref: '#/components/schemas/SourceAccessConfiguration'
       minItems: 1
+      maxItems: 22
+    SelfManagedEventSource:
+      type: object
+      properties:
+        Endpoints:
+          allOf:
+            - $ref: '#/components/schemas/Endpoints'
+            - description: 'The list of bootstrap servers for your Kafka brokers in the following format: <code>"KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"]</code>.'
+      description: The Self-Managed Apache Kafka cluster for your event source.
+    FunctionResponseTypeList:
+      type: array
+      items:
+        $ref: '#/components/schemas/FunctionResponseType'
+      minItems: 1
       maxItems: 1
     CreateEventSourceMappingRequest:
       type: object
       required:
-        - EventSourceArn
         - FunctionName
       title: CreateEventSourceMappingRequest
       properties:
@@ -6154,11 +6224,11 @@ components:
         BatchSize:
           allOf:
             - $ref: '#/components/schemas/BatchSize'
-            - description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
+            - description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
         MaximumBatchingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-            - description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
+            - description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.'
         ParallelizationFactor:
           allOf:
             - $ref: '#/components/schemas/ParallelizationFactor'
@@ -6187,10 +6257,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaximumRetryAttemptsEventSourceMapping'
             - description: '(Streams) Discard records after the specified number of retries. The default value is infinite (-1). When set to infinite (-1), failed records will be retried until the record expires.'
+        TumblingWindowInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/TumblingWindowInSeconds'
+            - description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
         Topics:
           allOf:
             - $ref: '#/components/schemas/Topics'
-            - description: ' (MSK) The name of the Kafka topic. '
+            - description: The name of the Kafka topic.
         Queues:
           allOf:
             - $ref: '#/components/schemas/Queues'
@@ -6198,7 +6272,15 @@ components:
         SourceAccessConfigurations:
           allOf:
             - $ref: '#/components/schemas/SourceAccessConfigurations'
-            - description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+            - description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
+        SelfManagedEventSource:
+          allOf:
+            - $ref: '#/components/schemas/SelfManagedEventSource'
+            - description: The Self-Managed Apache Kafka cluster to send records.
+        FunctionResponseTypes:
+          allOf:
+            - $ref: '#/components/schemas/FunctionResponseTypeList'
+            - description: (Streams) A list of current response type enums applied to the event source mapping.
     RoleArn:
       type: string
       pattern: 'arn:(aws[a-zA-Z-]*)?:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+'
@@ -6309,7 +6391,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/WorkingDirectory'
             - description: Specifies the working directory.
-      description: 'Configuration values that override the container image Dockerfile. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-images-settings.html">Override Container settings</a>. '
+      description: 'Configuration values that override the container image Dockerfile settings. See <a href="https://docs.aws.amazon.com/lambda/latest/dg/images-parms.html">Container settings</a>. '
     CreateFunctionRequest:
       type: object
       required:
@@ -6439,6 +6521,21 @@ components:
       pattern: '^$|arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\-])+:([a-z]{2}(-gov)?-[a-z]+-\d{1})?:(\d{12})?:(.*)'
       minLength: 0
       maxLength: 350
+    EndPointType:
+      type: string
+      enum:
+        - KAFKA_BOOTSTRAP_SERVERS
+    Endpoint:
+      type: string
+      pattern: '^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]):[0-9]{1,5}'
+      minLength: 1
+      maxLength: 300
+    EndpointLists:
+      type: array
+      items:
+        $ref: '#/components/schemas/Endpoint'
+      minItems: 1
+      maxItems: 10
     SensitiveString:
       type: string
       format: password
@@ -7061,6 +7158,15 @@ components:
       type: string
       enum:
         - BASIC_AUTH
+        - VPC_SUBNET
+        - VPC_SECURITY_GROUP
+        - SASL_SCRAM_512_AUTH
+        - SASL_SCRAM_256_AUTH
+    URI:
+      type: string
+      pattern: '[a-zA-Z0-9-\/*:_+=.@-]*'
+      minLength: 1
+      maxLength: 200
     SubnetId:
       type: string
     TagKeyList:
@@ -7132,11 +7238,11 @@ components:
         BatchSize:
           allOf:
             - $ref: '#/components/schemas/BatchSize'
-            - description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. Max 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
+            - description: '<p>The maximum number of items to retrieve in a single batch.</p> <ul> <li> <p> <b>Amazon Kinesis</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Amazon DynamoDB Streams</b> - Default 100. Max 1,000.</p> </li> <li> <p> <b>Amazon Simple Queue Service</b> - Default 10. For standard queues the max is 10,000. For FIFO queues the max is 10.</p> </li> <li> <p> <b>Amazon Managed Streaming for Apache Kafka</b> - Default 100. Max 10,000.</p> </li> <li> <p> <b>Self-Managed Apache Kafka</b> - Default 100. Max 10,000.</p> </li> </ul>'
         MaximumBatchingWindowInSeconds:
           allOf:
             - $ref: '#/components/schemas/MaximumBatchingWindowInSeconds'
-            - description: '(Streams) The maximum amount of time to gather records before invoking the function, in seconds.'
+            - description: '(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds.'
         DestinationConfig:
           allOf:
             - $ref: '#/components/schemas/DestinationConfig'
@@ -7160,7 +7266,15 @@ components:
         SourceAccessConfigurations:
           allOf:
             - $ref: '#/components/schemas/SourceAccessConfigurations'
-            - description: '<p> (MQ) The Secrets Manager secret that stores your broker credentials. To store your secret, use the following format: <code> { "username": "your username", "password": "your password" }</code> </p> <p>To reference the secret, use the following format: <code>[ { "Type": "BASIC_AUTH", "URI": "secretARN" } ]</code> </p> <p>The value of <code>Type</code> is always <code>BASIC_AUTH</code>. To encrypt the secret, you can use customer or service managed keys. When using a customer managed KMS key, the Lambda execution role requires <code>kms:Decrypt</code> permissions.</p>'
+            - description: 'An array of the authentication protocol, or the VPC components to secure your event source.'
+        TumblingWindowInSeconds:
+          allOf:
+            - $ref: '#/components/schemas/TumblingWindowInSeconds'
+            - description: (Streams) The duration of a processing window in seconds. The range is between 1 second up to 15 minutes.
+        FunctionResponseTypes:
+          allOf:
+            - $ref: '#/components/schemas/FunctionResponseTypeList'
+            - description: (Streams) A list of current response type enums applied to the event source mapping.
     UpdateFunctionCodeRequest:
       type: object
       title: UpdateFunctionCodeRequest

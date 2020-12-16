@@ -1002,7 +1002,7 @@ paths:
   '/audit/tasks/{taskId}/cancel':
     put:
       operationId: CancelAuditTask
-      description: 'Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.'
+      description: 'Cancels an audit that is in progress. The audit can be either scheduled or on demand. If the audit isn''t in progress, an "InvalidRequestException" occurs.'
       responses:
         '200':
           description: Success
@@ -1111,6 +1111,59 @@ paths:
             pattern: '(0x)?[a-fA-F0-9]+'
             minLength: 64
             maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/detect/mitigationactions/tasks/{taskId}/cancel':
+    put:
+      operationId: CancelDetectMitigationActionsTask
+      description: ' Cancels a Device Defender ML Detect mitigation action. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelDetectMitigationActionsTaskResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: ' The unique identifier of the task. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 128
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2319,6 +2372,239 @@ paths:
           description: 'Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.'
           schema:
             type: boolean
+  '/custom-metric/{metricName}':
+    post:
+      operationId: CreateCustomMetric
+      description: ' Use this API to define a Custom Metric published by your devices to Device Defender. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateCustomMetricResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '482':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: metricName
+          in: path
+          required: true
+          description: ' The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn''t begin with <code>aws:</code>. Cannot be updated once defined.'
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - metricType
+                - clientRequestToken
+              properties:
+                displayName:
+                  description: ' Field represents a friendly name in the console for the custom metric; it doesn''t have to be unique. Don''t use this name as the metric identifier in the device metric report. Can be updated once defined.'
+                  type: string
+                  pattern: '[\p{Graph}\x20]*'
+                  maxLength: 128
+                metricType:
+                  description: ' The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>. '
+                  type: string
+                  enum:
+                    - string-list
+                    - ip-address-list
+                    - number-list
+                    - number
+                tags:
+                  description: ' Metadata that can be used to manage the custom metric. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Tag'
+                clientRequestToken:
+                  description: 'Each custom metric must have a unique client request token. If you try to create a new custom metric that already exists with a different token, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]+$'
+                  minLength: 1
+                  maxLength: 64
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    delete:
+      operationId: DeleteCustomMetric
+      description: '<note> <p>Before you can delete a custom metric, you must first remove the custom metric from all security profiles it''s a part of. The security profile associated with the custom metric can be found using the <a href="https://docs.aws.amazon.com/iot/latest/apireference/API_ListSecurityProfiles.html">ListSecurityProfiles</a> API with <code>metricName</code> set to your custom metric name.</p> </note> <p> Deletes a Device Defender detect custom metric. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteCustomMetricResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: metricName
+          in: path
+          required: true
+          description: ' The name of the custom metric. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+    get:
+      operationId: DescribeCustomMetric
+      description: ' Gets information about a Device Defender detect custom metric. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeCustomMetricResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: metricName
+          in: path
+          required: true
+          description: ' The name of the custom metric. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+    patch:
+      operationId: UpdateCustomMetric
+      description: 'Updates a Device Defender detect custom metric. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateCustomMetricResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: metricName
+          in: path
+          required: true
+          description: ' The name of the custom metric. Cannot be updated. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - displayName
+              properties:
+                displayName:
+                  description: ' Field represents a friendly name in the console for the custom metric, it doesn''t have to be unique. Don''t use this name as the metric identifier in the device metric report. Can be updated. '
+                  type: string
+                  pattern: '[\p{Graph}\x20]*'
+                  maxLength: 128
   '/dimensions/{name}':
     post:
       operationId: CreateDimension
@@ -2496,7 +2782,7 @@ paths:
             maxLength: 128
     patch:
       operationId: UpdateDimension
-      description: Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and re-create it).
+      description: Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and recreate it).
       responses:
         '200':
           description: Success
@@ -3646,7 +3932,7 @@ paths:
                     publishFindingToSnsParams:
                       allOf:
                         - $ref: '#/components/schemas/PublishFindingToSnsParams'
-                        - description: Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
+                        - description: Parameters to define a mitigation action that publishes findings to Amazon Simple Notification Service (Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
                 tags:
                   description: Metadata that can be used to manage the mitigation action.
                   type: array
@@ -3778,7 +4064,7 @@ paths:
         - name: actionName
           in: path
           required: true
-          description: 'The friendly name for the mitigation action. You can''t change the name by using <code>UpdateMitigationAction</code>. Instead, you must delete and re-create the mitigation action with the new name.'
+          description: 'The friendly name for the mitigation action. You cannot change the name by using <code>UpdateMitigationAction</code>. Instead, you must delete and recreate the mitigation action with the new name.'
           schema:
             type: string
             pattern: '[a-zA-Z0-9_-]+'
@@ -3822,7 +4108,7 @@ paths:
                     publishFindingToSnsParams:
                       allOf:
                         - $ref: '#/components/schemas/PublishFindingToSnsParams'
-                        - description: Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
+                        - description: Parameters to define a mitigation action that publishes findings to Amazon Simple Notification Service (Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
   '/otaUpdates/{otaUpdateId}':
     post:
       operationId: CreateOTAUpdate
@@ -5198,7 +5484,7 @@ paths:
                 - targetCheckNames
               properties:
                 frequency:
-                  description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each audit is determined by the system.'
+                  description: 'How often the scheduled audit takes place, either <code>DAILY</code>, <code>WEEKLY</code>, <code>BIWEEKLY</code> or <code>MONTHLY</code>. The start time of each audit is determined by the system.'
                   type: string
                   enum:
                     - DAILY
@@ -5206,11 +5492,11 @@ paths:
                     - BIWEEKLY
                     - MONTHLY
                 dayOfMonth:
-                  description: 'The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
+                  description: 'The day of the month on which the scheduled audit takes place. This can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to <code>MONTHLY</code>. If days 29 to 31 are specified, and the month doesn''t have that many days, the audit takes place on the <code>LAST</code> day of the month.'
                   type: string
                   pattern: '^([1-9]|[12][0-9]|3[01])$|^LAST$'
                 dayOfWeek:
-                  description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+                  description: 'The day of the week on which the scheduled audit takes place, either <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>. This field is required if the <code>frequency</code> parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.'
                   type: string
                   enum:
                     - SUN
@@ -5378,7 +5664,7 @@ paths:
               type: object
               properties:
                 frequency:
-                  description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.'
+                  description: 'How often the scheduled audit takes place, either <code>DAILY</code>, <code>WEEKLY</code>, <code>BIWEEKLY</code>, or <code>MONTHLY</code>. The start time of each audit is determined by the system.'
                   type: string
                   enum:
                     - DAILY
@@ -5386,11 +5672,11 @@ paths:
                     - BIWEEKLY
                     - MONTHLY
                 dayOfMonth:
-                  description: 'The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
+                  description: 'The day of the month on which the scheduled audit takes place. This can be <code>1</code> through <code>31</code> or <code>LAST</code>. This field is required if the <code>frequency</code> parameter is set to <code>MONTHLY</code>. If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
                   type: string
                   pattern: '^([1-9]|[12][0-9]|3[01])$|^LAST$'
                 dayOfWeek:
-                  description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+                  description: 'The day of the week on which the scheduled audit takes place. This can be one of <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>. This field is required if the "frequency" parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.'
                   type: string
                   enum:
                     - SUN
@@ -5474,12 +5760,12 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AlertTarget'
                 additionalMetricsToRetain:
-                  description: '<p> <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>'
+                  description: '<p> <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>'
                   type: array
                   items:
                     $ref: '#/components/schemas/BehaviorMetric'
                 additionalMetricsToRetainV2:
-                  description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
+                  description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.'
                   type: array
                   items:
                     $ref: '#/components/schemas/MetricToRetain'
@@ -5670,12 +5956,12 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AlertTarget'
                 additionalMetricsToRetain:
-                  description: '<p> <i>Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>'
+                  description: '<p> <i>Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>'
                   type: array
                   items:
                     $ref: '#/components/schemas/BehaviorMetric'
                 additionalMetricsToRetainV2:
-                  description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here.'
+                  description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.'
                   type: array
                   items:
                     $ref: '#/components/schemas/MetricToRetain'
@@ -7108,6 +7394,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/HttpUrlDestinationConfiguration'
                         - description: Configuration of the HTTP URL.
+                    vpcConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/VpcDestinationConfiguration'
+                        - description: Configuration of the virtual private cloud (VPC) connection.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -7227,6 +7517,7 @@ paths:
                     - IN_PROGRESS
                     - DISABLED
                     - ERROR
+                    - DELETING
   /audit/configuration:
     delete:
       operationId: DeleteAccountAuditConfiguration
@@ -7337,7 +7628,7 @@ paths:
               type: object
               properties:
                 roleArn:
-                  description: 'The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.'
+                  description: 'The Amazon Resource Name (ARN) of the role that grants permission to AWS IoT to access information about your devices, policies, certificates, and other items as required when performing an audit.'
                   type: string
                   minLength: 20
                   maxLength: 2048
@@ -7347,7 +7638,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/AuditNotificationTarget'
                 auditCheckConfigurations:
-                  description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are currently enabled.</p> <p>Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is required and must specify at least one enabled check.</p>'
+                  description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are currently enabled.</p> <p>Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it''s used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is required and must specify at least one enabled check.</p>'
                   type: object
                   additionalProperties:
                     $ref: '#/components/schemas/AuditCheckConfiguration'
@@ -8731,7 +9022,7 @@ paths:
   '/audit/findings/{findingId}':
     get:
       operationId: DescribeAuditFinding
-      description: 'Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and when the audit that returned the finding was started.'
+      description: 'Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and the start time when the audit that returned the finding.'
       responses:
         '200':
           description: Success
@@ -9068,6 +9359,167 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/detect/mitigationactions/tasks/{taskId}':
+    get:
+      operationId: DescribeDetectMitigationActionsTask
+      description: ' Gets information about a Device Defender ML Detect mitigation action. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeDetectMitigationActionsTaskResponse'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: ' The unique identifier of the task. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    put:
+      operationId: StartDetectMitigationActionsTask
+      description: ' Starts a Device Defender ML Detect mitigation actions task. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartDetectMitigationActionsTaskResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: TaskAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskAlreadyExistsException'
+        '482':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: taskId
+          in: path
+          required: true
+          description: ' The unique identifier of the task. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 128
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - target
+                - actions
+                - clientRequestToken
+              properties:
+                target:
+                  description: ' The target of a mitigation action task. '
+                  type: object
+                  properties:
+                    violationIds:
+                      allOf:
+                        - $ref: '#/components/schemas/TargetViolationIdsForDetectMitigationActions'
+                        - description: ' The unique identifiers of the violations. '
+                    securityProfileName:
+                      allOf:
+                        - $ref: '#/components/schemas/SecurityProfileName'
+                        - description: ' The name of the security profile. '
+                    behaviorName:
+                      allOf:
+                        - $ref: '#/components/schemas/BehaviorName'
+                        - description: ' The name of the behavior. '
+                actions:
+                  description: ' The actions to be performed when a device has unexpected behavior. '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/MitigationActionName'
+                  minItems: 1
+                  maxItems: 5
+                violationEventOccurrenceRange:
+                  description: ' Specifies the time period of which violation events occurred between. '
+                  type: object
+                  properties:
+                    startTime:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: ' The start date and time of a time period in which violation events occurred. '
+                    endTime:
+                      allOf:
+                        - $ref: '#/components/schemas/Timestamp'
+                        - description: ' The end date and time of a time period in which violation events occurred. '
+                includeOnlyActiveViolations:
+                  description: ' Specifies to list only active violations. '
+                  type: boolean
+                includeSuppressedAlerts:
+                  description: ' Specifies to include suppressed alerts. '
+                  type: boolean
+                clientRequestToken:
+                  description: ' Each mitigation action task must have a unique client request token. If you try to create a new task with the same token as a task that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+                  type: string
+                  pattern: '^[a-zA-Z0-9-_]+$'
+                  minLength: 1
+                  maxLength: 64
   /endpoint:
     get:
       operationId: DescribeEndpoint
@@ -9484,6 +9936,73 @@ paths:
             pattern: '^[a-zA-Z0-9_]+$'
             minLength: 1
             maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /behavior-model-training/summaries:
+    get:
+      operationId: GetBehaviorModelTrainingSummaries
+      description: ' Returns a Device Defender''s ML Detect Security Profile training model''s status. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBehaviorModelTrainingSummariesResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      parameters:
+        - name: securityProfileName
+          in: query
+          required: false
+          description: ' The name of the security profile. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+        - name: maxResults
+          in: query
+          required: false
+          description: ' The maximum number of results to return at one time. The default is 25. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The token for the next set of results. '
+          schema:
+            type: string
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -10290,6 +10809,22 @@ paths:
             pattern: '[a-zA-Z0-9:_-]+'
             minLength: 1
             maxLength: 128
+        - name: behaviorCriteriaType
+          in: query
+          required: false
+          description: ' The criteria for a behavior. '
+          schema:
+            type: string
+            enum:
+              - STATIC
+              - STATISTICAL
+              - MACHINE_LEARNING
+        - name: listSuppressedAlerts
+          in: query
+          required: false
+          description: ' A list of all suppressed alerts. '
+          schema:
+            type: boolean
         - name: nextToken
           in: query
           required: false
@@ -11187,6 +11722,216 @@ paths:
           description: 'Specifies the order for results. If True, the results are returned in ascending order, based on the creation date.'
           schema:
             type: boolean
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /custom-metrics:
+    get:
+      operationId: ListCustomMetrics
+      description: ' Lists your Device Defender detect custom metrics. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCustomMetricsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The token for the next set of results. '
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: ' The maximum number of results to return at one time. The default is 25. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /detect/mitigationactions/executions:
+    get:
+      operationId: ListDetectMitigationActionsExecutions
+      description: ' Lists mitigation actions executions for a Device Defender ML Detect Security Profile. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDetectMitigationActionsExecutionsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: taskId
+          in: query
+          required: false
+          description: ' The unique identifier of the task. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9_-]+'
+            minLength: 1
+            maxLength: 128
+        - name: violationId
+          in: query
+          required: false
+          description: ' The unique identifier of the violation. '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9\-]+'
+            minLength: 1
+            maxLength: 128
+        - name: thingName
+          in: query
+          required: false
+          description: ' The name of the thing whose mitigation actions are listed. '
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 128
+        - name: startTime
+          in: query
+          required: false
+          description: ' A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both. '
+          schema:
+            type: string
+            format: date-time
+        - name: endTime
+          in: query
+          required: false
+          description: ' The end of the time period for which ML Detect mitigation actions executions are returned. '
+          schema:
+            type: string
+            format: date-time
+        - name: maxResults
+          in: query
+          required: false
+          description: ' The maximum number of results to return at one time. The default is 25. '
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The token for the next set of results. '
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /detect/mitigationactions/tasks#startTime&endTime:
+    get:
+      operationId: ListDetectMitigationActionsTasks
+      description: ' List of Device Defender ML Detect mitigation actions tasks. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDetectMitigationActionsTasksResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '482':
+          description: InternalFailureException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalFailureException'
+      parameters:
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximum number of results to return at one time. The default is 25.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 250
+        - name: nextToken
+          in: query
+          required: false
+          description: ' The token for the next set of results. '
+          schema:
+            type: string
+        - name: startTime
+          in: query
+          required: true
+          description: ' A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both. '
+          schema:
+            type: string
+            format: date-time
+        - name: endTime
+          in: query
+          required: true
+          description: ' The end of the time period for which ML Detect mitigation actions tasks are returned. '
+          schema:
+            type: string
+            format: date-time
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -12325,7 +13070,7 @@ paths:
   /security-profiles:
     get:
       operationId: ListSecurityProfiles
-      description: Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+      description: <p>Lists the Device Defender security profiles you've created. You can filter security profiles by dimension or custom metric.</p> <note> <p> <code>dimensionName</code> and <code>metricName</code> cannot be used in the same request.</p> </note>
       responses:
         '200':
           description: Success
@@ -12375,7 +13120,16 @@ paths:
         - name: dimensionName
           in: query
           required: false
-          description: A filter to limit results to the security profiles that use the defined dimension.
+          description: 'A filter to limit results to the security profiles that use the defined dimension. Cannot be used with <code>metricName</code> '
+          schema:
+            type: string
+            pattern: '[a-zA-Z0-9:_-]+'
+            minLength: 1
+            maxLength: 128
+        - name: metricName
+          in: query
+          required: false
+          description: ' The name of the custom metric. Cannot be used with <code>dimensionName</code>. '
           schema:
             type: string
             pattern: '[a-zA-Z0-9:_-]+'
@@ -13810,6 +14564,22 @@ paths:
             pattern: '[a-zA-Z0-9:_-]+'
             minLength: 1
             maxLength: 128
+        - name: behaviorCriteriaType
+          in: query
+          required: false
+          description: ' The criteria for a behavior. '
+          schema:
+            type: string
+            enum:
+              - STATIC
+              - STATISTICAL
+              - MACHINE_LEARNING
+        - name: listSuppressedAlerts
+          in: query
+          required: false
+          description: ' A list of all suppressed alerts. '
+          schema:
+            type: boolean
         - name: nextToken
           in: query
           required: false
@@ -15443,6 +16213,9 @@ components:
     CancelAuditTaskResponse:
       type: object
       properties: {}
+    CancelDetectMitigationActionsTaskResponse:
+      type: object
+      properties: {}
     CancelJobResponse:
       type: object
       properties:
@@ -15572,6 +16345,17 @@ components:
             - $ref: '#/components/schemas/CertificatePem'
             - description: 'The certificate data, in PEM format.'
       description: The output from the CreateCertificateFromCsr operation.
+    CreateCustomMetricResponse:
+      type: object
+      properties:
+        metricName:
+          allOf:
+            - $ref: '#/components/schemas/MetricName'
+            - description: ' The name of the custom metric to be used in the metric report. '
+        metricArn:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricArn'
+            - description: ' The Amazon Resource Number (ARN) of the custom metric, e.g. <code>arn:<i>aws-partition</i>:iot:<i>region</i>:<i>accountId</i>:custommetric/<i>metricName</i> </code> '
     CreateDimensionResponse:
       type: object
       properties:
@@ -15582,7 +16366,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/DimensionArn'
-            - description: The ARN (Amazon resource name) of the created dimension.
+            - description: The Amazon Resource Name (ARN) of the created dimension.
     DimensionStringValue:
       type: string
       minLength: 1
@@ -15744,7 +16528,7 @@ components:
         action:
           allOf:
             - $ref: '#/components/schemas/DeviceCertificateUpdateAction'
-            - description: The action that you want to apply to the device cerrtificate. The only supported value is <code>DEACTIVATE</code>.
+            - description: The action that you want to apply to the device certificate. The only supported value is <code>DEACTIVATE</code>.
       description: Parameters to define a mitigation action that changes the state of the device certificate to inactive.
     UpdateCACertificateParams:
       type: object
@@ -15754,7 +16538,7 @@ components:
         action:
           allOf:
             - $ref: '#/components/schemas/CACertificateUpdateAction'
-            - description: The action that you want to apply to the CA cerrtificate. The only supported value is <code>DEACTIVATE</code>.
+            - description: The action that you want to apply to the CA certificate. The only supported value is <code>DEACTIVATE</code>.
       description: Parameters to define a mitigation action that changes the state of the CA certificate to inactive.
     AddThingsToThingGroupParams:
       type: object
@@ -15764,11 +16548,11 @@ components:
         thingGroupNames:
           allOf:
             - $ref: '#/components/schemas/ThingGroupNames'
-            - description: 'The list of groups to which you want to add the things that triggered the mitigation action. You can add a thing to a maximum of 10 groups, but you cannot add a thing to more than one group in the same hierarchy.'
+            - description: 'The list of groups to which you want to add the things that triggered the mitigation action. You can add a thing to a maximum of 10 groups, but you can''t add a thing to more than one group in the same hierarchy.'
         overrideDynamicGroups:
           allOf:
             - $ref: '#/components/schemas/OverrideDynamicGroups'
-            - description: Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic things groups.
+            - description: Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.
       description: Parameters used when defining a mitigation action that move a set of things to a thing group.
     ReplaceDefaultPolicyVersionParams:
       type: object
@@ -15789,11 +16573,11 @@ components:
         roleArnForLogging:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: The ARN of the IAM role used for logging.
+            - description: The Amazon Resource Name (ARN) of the IAM role used for logging.
         logLevel:
           allOf:
             - $ref: '#/components/schemas/LogLevel'
-            - description: Specifies the types of information to be logged.
+            - description: Specifies the type of information to be logged.
       description: Parameters used when defining a mitigation action that enable AWS IoT logging.
     PublishFindingToSnsParams:
       type: object
@@ -16038,7 +16822,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/BehaviorName'
-            - description: The name you have given to the behavior.
+            - description: The name you've given to the behavior.
         metric:
           allOf:
             - $ref: '#/components/schemas/BehaviorMetric'
@@ -16046,11 +16830,15 @@ components:
         metricDimension:
           allOf:
             - $ref: '#/components/schemas/MetricDimension'
-            - description: 'The dimension for a metric in your behavior. For example, using a <code>TOPIC_FILTER</code> dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.'
+            - description: 'The dimension for a metric in your behavior. For example, using a <code>TOPIC_FILTER</code> dimension, you can narrow down the scope of the metric to only MQTT topics where the name matches the pattern specified in the dimension. This can''t be used with custom metrics.'
         criteria:
           allOf:
             - $ref: '#/components/schemas/BehaviorCriteria'
             - description: The criteria that determine if a device is behaving normally in regard to the <code>metric</code>.
+        suppressAlerts:
+          allOf:
+            - $ref: '#/components/schemas/SuppressAlerts'
+            - description: ' Suppresses alerts. '
       description: A Device Defender security profile behavior.
     AlertTarget:
       type: object
@@ -16061,7 +16849,7 @@ components:
         alertTargetArn:
           allOf:
             - $ref: '#/components/schemas/AlertTargetArn'
-            - description: The ARN of the notification target to which alerts are sent.
+            - description: The Amazon Resource Name (ARN) of the notification target to which alerts are sent.
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
@@ -16081,7 +16869,7 @@ components:
         metricDimension:
           allOf:
             - $ref: '#/components/schemas/MetricDimension'
-            - description: The dimension of a metric.
+            - description: The dimension of a metric. This can't be used with custom metrics.
       description: The metric you want to retain. Dimensions are optional.
     CreateStreamResponse:
       type: object
@@ -16272,6 +17060,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HttpAction'
             - description: Send data to an HTTPS endpoint.
+        kafka:
+          allOf:
+            - $ref: '#/components/schemas/KafkaAction'
+            - description: Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.
       description: Describes the actions associated with a rule.
     SqlParseException: {}
     CreateTopicRuleDestinationResponse:
@@ -16291,6 +17083,30 @@ components:
             - $ref: '#/components/schemas/Url'
             - description: The URL AWS IoT uses to confirm ownership of or access to the topic rule destination URL.
       description: HTTP URL destination configuration used by the topic rule's HTTP action.
+    VpcDestinationConfiguration:
+      type: object
+      required:
+        - subnetIds
+        - vpcId
+        - roleArn
+      properties:
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: The subnet IDs of the VPC destination.
+        securityGroups:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupList'
+            - description: The security groups of the VPC destination.
+        vpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The ID of the VPC.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/AwsArn'
+            - description: The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).
+      description: The configuration information for a virtual private cloud (VPC) destination.
     DeleteAccountAuditConfigurationResponse:
       type: object
       properties: {}
@@ -16309,6 +17125,9 @@ components:
       properties: {}
       description: The output for the DeleteCACertificate operation.
     CertificateStateException: {}
+    DeleteCustomMetricResponse:
+      type: object
+      properties: {}
     DeleteDimensionResponse:
       type: object
       properties: {}
@@ -16515,6 +17334,33 @@ components:
             - $ref: '#/components/schemas/CertificateDescription'
             - description: The description of the certificate.
       description: The output of the DescribeCertificate operation.
+    DescribeCustomMetricResponse:
+      type: object
+      properties:
+        metricName:
+          allOf:
+            - $ref: '#/components/schemas/MetricName'
+            - description: ' The name of the custom metric. '
+        metricArn:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricArn'
+            - description: ' The Amazon Resource Number (ARN) of the custom metric. '
+        metricType:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricType'
+            - description: ' The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>. '
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricDisplayName'
+            - description: ' Field represents a friendly name in the console for the custom metric; doesn''t have to be unique. Don''t use this name as the metric identifier in the device metric report. Can be updated. '
+        creationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The creation date of the custom metric in milliseconds since epoch. '
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time the custom metric was last modified in milliseconds since epoch. '
     DescribeDefaultAuthorizerResponse:
       type: object
       properties:
@@ -16522,6 +17368,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/AuthorizerDescription'
             - description: The default authorizer's description.
+    DescribeDetectMitigationActionsTaskResponse:
+      type: object
+      properties:
+        taskSummary:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionsTaskSummary'
+            - description: ' The description of a task. '
     DescribeDimensionResponse:
       type: object
       properties:
@@ -16532,7 +17385,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/DimensionArn'
-            - description: The ARN (Amazon resource name) for the dimension.
+            - description: The Amazon Resource Name (ARN) for the dimension.
         type:
           allOf:
             - $ref: '#/components/schemas/DimensionType'
@@ -16754,15 +17607,15 @@ components:
         frequency:
           allOf:
             - $ref: '#/components/schemas/AuditFrequency'
-            - description: 'How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.'
+            - description: 'How often the scheduled audit takes place, either one of <code>DAILY</code>, <code>WEEKLY</code>, <code>BIWEEKLY</code>, or <code>MONTHLY</code>. The start time of each audit is determined by the system.'
         dayOfMonth:
           allOf:
             - $ref: '#/components/schemas/DayOfMonth'
-            - description: 'The day of the month on which the scheduled audit takes place. Will be "1" through "31" or "LAST". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
+            - description: 'The day of the month on which the scheduled audit takes place. This is will be <code>1</code> through <code>31</code> or <code>LAST</code>. If days <code>29</code>-<code>31</code> are specified, and the month does not have that many days, the audit takes place on the <code>LAST</code> day of the month.'
         dayOfWeek:
           allOf:
             - $ref: '#/components/schemas/DayOfWeek'
-            - description: 'The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT".'
+            - description: 'The day of the week on which the scheduled audit takes place, either one of <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>.'
         targetCheckNames:
           allOf:
             - $ref: '#/components/schemas/TargetAuditCheckNames'
@@ -16987,6 +17840,17 @@ components:
       type: object
       properties: {}
       description: The output from the DetachThingPrincipal operation.
+    GetBehaviorModelTrainingSummariesResponse:
+      type: object
+      properties:
+        summaries:
+          allOf:
+            - $ref: '#/components/schemas/BehaviorModelTrainingSummaries'
+            - description: ' A list of all ML Detect behaviors and their model status for a given Security Profile. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results. '
     GetCardinalityResponse:
       type: object
       properties:
@@ -17305,6 +18169,39 @@ components:
             - $ref: '#/components/schemas/Marker'
             - description: 'The marker for the next set of results, or null if there are no additional results.'
       description: The output of the ListCertificatesByCA operation.
+    ListCustomMetricsResponse:
+      type: object
+      properties:
+        metricNames:
+          allOf:
+            - $ref: '#/components/schemas/MetricNames'
+            - description: ' The name of the custom metric. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results. '
+    ListDetectMitigationActionsExecutionsResponse:
+      type: object
+      properties:
+        actionsExecutions:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionExecutionList'
+            - description: ' List of actions executions. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results. '
+    ListDetectMitigationActionsTasksResponse:
+      type: object
+      properties:
+        tasks:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionsTaskSummaryList'
+            - description: ' The collection of ML Detect mitigation tasks that matched the filter criteria. '
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: ' A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results. '
     ListDimensionsResponse:
       type: object
       properties:
@@ -17827,7 +18724,7 @@ components:
       properties:
         taskId:
           allOf:
-            - $ref: '#/components/schemas/AuditMitigationActionsTaskId'
+            - $ref: '#/components/schemas/MitigationActionsTaskId'
             - description: The unique identifier for the audit mitigation task. This matches the <code>taskId</code> that you specified in the request.
     AuditTaskId:
       type: string
@@ -17851,6 +18748,36 @@ components:
       minItems: 1
       maxItems: 5
     TaskAlreadyExistsException: {}
+    StartDetectMitigationActionsTaskResponse:
+      type: object
+      properties:
+        taskId:
+          allOf:
+            - $ref: '#/components/schemas/MitigationActionsTaskId'
+            - description: ' The unique identifier of the task. '
+    TargetViolationIdsForDetectMitigationActions:
+      type: array
+      items:
+        $ref: '#/components/schemas/ViolationId'
+      minItems: 1
+      maxItems: 25
+    SecurityProfileName:
+      type: string
+      pattern: '[a-zA-Z0-9:_-]+'
+      minLength: 1
+      maxLength: 128
+    BehaviorName:
+      type: string
+      pattern: '[a-zA-Z0-9:_-]+'
+      minLength: 1
+      maxLength: 128
+    MitigationActionName:
+      type: string
+      pattern: '[a-zA-Z0-9_-]+'
+      maxLength: 128
+    Timestamp:
+      type: string
+      format: date-time
     StartOnDemandAuditTaskResponse:
       type: object
       properties:
@@ -18010,6 +18937,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/Version'
             - description: The latest version of the billing group.
+    UpdateCustomMetricResponse:
+      type: object
+      properties:
+        metricName:
+          allOf:
+            - $ref: '#/components/schemas/MetricName'
+            - description: ' The name of the custom metric. '
+        metricArn:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricArn'
+            - description: ' The Amazon Resource Number (ARN) of the custom metric. '
+        metricType:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricType'
+            - description: ' The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>. '
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricDisplayName'
+            - description: ' A friendly name in the console for the custom metric '
+        creationDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The creation date of the custom metric in milliseconds since epoch. '
+        lastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The time the custom metric was last modified in milliseconds since epoch. '
     UpdateDimensionResponse:
       type: object
       properties:
@@ -18020,7 +18974,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/DimensionArn'
-            - description: The ARN (Amazon resource name) of the created dimension.
+            - description: The Amazon Resource Name (ARN)of the created dimension.
         type:
           allOf:
             - $ref: '#/components/schemas/DimensionType'
@@ -18152,7 +19106,7 @@ components:
         additionalMetricsToRetainV2:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
-            - description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here.'
+            - description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.'
         version:
           allOf:
             - $ref: '#/components/schemas/Version'
@@ -18721,6 +19675,34 @@ components:
             - $ref: '#/components/schemas/HttpAuthorization'
             - description: The authentication method to use when sending data to an HTTPS endpoint.
       description: Send data to an HTTPS endpoint.
+    KafkaAction:
+      type: object
+      required:
+        - destinationArn
+        - topic
+        - clientProperties
+      properties:
+        destinationArn:
+          allOf:
+            - $ref: '#/components/schemas/AwsArn'
+            - description: The ARN of Kafka action's VPC <code>TopicRuleDestination</code>.
+        topic:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Kafka topic for messages to be sent to the Kafka broker.
+        key:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Kafka message key.
+        partition:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Kafka message partition.
+        clientProperties:
+          allOf:
+            - $ref: '#/components/schemas/ClientProperties'
+            - description: Properties of the Apache Kafka producer client.
+      description: Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.
     ActionType:
       type: string
       enum:
@@ -18735,11 +19717,6 @@ components:
       maxLength: 128
     DeviceDefenderThingName:
       type: string
-      minLength: 1
-      maxLength: 128
-    SecurityProfileName:
-      type: string
-      pattern: '[a-zA-Z0-9:_-]+'
       minLength: 1
       maxLength: 128
     MetricValue:
@@ -18757,10 +19734,27 @@ components:
           allOf:
             - $ref: '#/components/schemas/Ports'
             - description: 'If the <code>comparisonOperator</code> calls for a set of ports, use this to specify that set to be compared with the <code>metric</code>.'
+        number:
+          allOf:
+            - $ref: '#/components/schemas/Number'
+            - description: ' The numeral value of a metric. '
+        numbers:
+          allOf:
+            - $ref: '#/components/schemas/NumberList'
+            - description: ' The numeral values of a metric. '
+        strings:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: ' The string values of a metric. '
       description: The value to be compared with the <code>metric</code>.
-    Timestamp:
-      type: string
-      format: date-time
+    ViolationEventAdditionalInfo:
+      type: object
+      properties:
+        confidenceLevel:
+          allOf:
+            - $ref: '#/components/schemas/ConfidenceLevel'
+            - description: ' The sensitivity of anomalous behavior evaluation. Can be <code>Low</code>, <code>Medium</code>, or <code>High</code>. '
+      description: ' The details of a violation event. '
     ActiveViolation:
       type: object
       properties:
@@ -18775,15 +19769,19 @@ components:
         securityProfileName:
           allOf:
             - $ref: '#/components/schemas/SecurityProfileName'
-            - description: The security profile whose behavior is in violation.
+            - description: The security profile with the behavior is in violation.
         behavior:
           allOf:
             - $ref: '#/components/schemas/Behavior'
-            - description: The behavior which is being violated.
+            - description: The behavior that is being violated.
         lastViolationValue:
           allOf:
             - $ref: '#/components/schemas/MetricValue'
-            - description: The value of the metric (the measurement) which caused the most recent violation.
+            - description: The value of the metric (the measurement) that caused the most recent violation.
+        violationEventAdditionalInfo:
+          allOf:
+            - $ref: '#/components/schemas/ViolationEventAdditionalInfo'
+            - description: ' The details of a violation event. '
         lastViolationTime:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
@@ -19252,14 +20250,10 @@ components:
         - WEEKLY
         - BIWEEKLY
         - MONTHLY
-    AuditMitigationActionsTaskId:
+    MitigationActionsTaskId:
       type: string
       pattern: '[a-zA-Z0-9_-]+'
       minLength: 1
-      maxLength: 128
-    MitigationActionName:
-      type: string
-      pattern: '[a-zA-Z0-9_-]+'
       maxLength: 128
     MitigationActionId:
       type: string
@@ -19277,7 +20271,7 @@ components:
       properties:
         taskId:
           allOf:
-            - $ref: '#/components/schemas/AuditMitigationActionsTaskId'
+            - $ref: '#/components/schemas/MitigationActionsTaskId'
             - description: The unique identifier for the task that applies the mitigation action.
         findingId:
           allOf:
@@ -19328,7 +20322,7 @@ components:
       properties:
         taskId:
           allOf:
-            - $ref: '#/components/schemas/AuditMitigationActionsTaskId'
+            - $ref: '#/components/schemas/MitigationActionsTaskId'
             - description: The unique identifier for the task.
         startTime:
           allOf:
@@ -19762,11 +20756,6 @@ components:
       description: 'Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to <code>IN_PROGRESS</code>. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to <code>TIMED_OUT</code>.'
     BatchMode:
       type: boolean
-    BehaviorName:
-      type: string
-      pattern: '[a-zA-Z0-9:_-]+'
-      minLength: 1
-      maxLength: 128
     MetricDimension:
       type: object
       required:
@@ -19787,7 +20776,7 @@ components:
         comparisonOperator:
           allOf:
             - $ref: '#/components/schemas/ComparisonOperator'
-            - description: The operator that relates the thing measured (<code>metric</code>) to the criteria (containing a <code>value</code> or <code>statisticalThreshold</code>).
+            - description: '<p>The operator that relates the thing measured (<code>metric</code>) to the criteria (containing a <code>value</code> or <code>statisticalThreshold</code>). Valid operators include:</p> <ul> <li> <p> <code>string-list</code>: <code>in-set</code> and <code>not-in-set</code> </p> </li> <li> <p> <code>number-list</code>: <code>in-set</code> and <code>not-in-set</code> </p> </li> <li> <p> <code>ip-address-list</code>: <code>in-cidr-set</code> and <code>not-in-cidr-set</code> </p> </li> <li> <p> <code>number</code>: <code>less-than</code>, <code>less-than-equals</code>, <code>greater-than</code>, and <code>greater-than-equals</code> </p> </li> </ul>'
         value:
           allOf:
             - $ref: '#/components/schemas/MetricValue'
@@ -19795,7 +20784,7 @@ components:
         durationSeconds:
           allOf:
             - $ref: '#/components/schemas/DurationSeconds'
-            - description: 'Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>). For a <code>statisticalThreshhold</code> metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank.'
+            - description: 'Use this to specify the time duration over which the behavior is evaluated, for those criteria that have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>). For a <code>statisticalThreshhold</code> metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank. Cannot be used with list-based metric datatypes.'
         consecutiveDatapointsToAlarm:
           allOf:
             - $ref: '#/components/schemas/ConsecutiveDatapointsToAlarm'
@@ -19807,8 +20796,14 @@ components:
         statisticalThreshold:
           allOf:
             - $ref: '#/components/schemas/StatisticalThreshold'
-            - description: A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
+            - description: A statistical ranking (percentile)that indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
+        mlDetectionConfig:
+          allOf:
+            - $ref: '#/components/schemas/MachineLearningDetectionConfig'
+            - description: ' The configuration of an ML Detect '
       description: The criteria by which the behavior is determined to be normal.
+    SuppressAlerts:
+      type: boolean
     ComparisonOperator:
       type: string
       enum:
@@ -19820,6 +20815,8 @@ components:
         - not-in-cidr-set
         - in-port-set
         - not-in-port-set
+        - in-set
+        - not-in-set
     DurationSeconds:
       type: integer
     ConsecutiveDatapointsToAlarm:
@@ -19836,8 +20833,67 @@ components:
         statistic:
           allOf:
             - $ref: '#/components/schemas/EvaluationStatistic'
-            - description: 'The percentile which resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (<code>durationSeconds</code>) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (<code>comparisonOperator</code>) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.'
-      description: A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
+            - description: 'The percentile that resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (<code>durationSeconds</code>) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (<code>comparisonOperator</code>) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.'
+      description: A statistical ranking (percentile) that indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
+    MachineLearningDetectionConfig:
+      type: object
+      required:
+        - confidenceLevel
+      properties:
+        confidenceLevel:
+          allOf:
+            - $ref: '#/components/schemas/ConfidenceLevel'
+            - description: ' The sensitivity of anomalous behavior evaluation. Can be <code>Low</code>, <code>Medium</code>, or <code>High</code>. '
+      description: ' The configuration of an ML Detect Security Profile. '
+    BehaviorCriteriaType:
+      type: string
+      enum:
+        - STATIC
+        - STATISTICAL
+        - MACHINE_LEARNING
+    BehaviorModelTrainingSummary:
+      type: object
+      properties:
+        securityProfileName:
+          allOf:
+            - $ref: '#/components/schemas/SecurityProfileName'
+            - description: ' The name of the security profile. '
+        behaviorName:
+          allOf:
+            - $ref: '#/components/schemas/BehaviorName'
+            - description: ' The name of the behavior. '
+        trainingDataCollectionStartDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date a training model started collecting data. '
+        modelStatus:
+          allOf:
+            - $ref: '#/components/schemas/ModelStatus'
+            - description: ' The status of the behavior model. '
+        datapointsCollectionPercentage:
+          allOf:
+            - $ref: '#/components/schemas/DataCollectionPercentage'
+            - description: ' The percentage of datapoints collected. '
+        lastModelRefreshDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date the model was last refreshed. '
+      description: ' The summary of an ML Detect behavior model. '
+    BehaviorModelTrainingSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/BehaviorModelTrainingSummary'
+    ModelStatus:
+      type: string
+      enum:
+        - PENDING_BUILD
+        - ACTIVE
+        - EXPIRED
+    DataCollectionPercentage:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 100
     Behaviors:
       type: array
       items:
@@ -20005,6 +21061,10 @@ components:
       title: CancelCertificateTransferRequest
       properties: {}
       description: The input for the CancelCertificateTransfer operation.
+    CancelDetectMitigationActionsTaskRequest:
+      type: object
+      title: CancelDetectMitigationActionsTaskRequest
+      properties: {}
     ForceFlag:
       type: boolean
     ExpectedVersion:
@@ -20206,6 +21266,12 @@ components:
       type: object
       title: ClearDefaultAuthorizerRequest
       properties: {}
+    String:
+      type: string
+    ClientProperties:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/String'
     ClientRequestToken:
       type: string
       pattern: '^[a-zA-Z0-9-_]+$'
@@ -20216,8 +21282,6 @@ components:
     StateValue:
       type: string
     LogGroupName:
-      type: string
-    String:
       type: string
     Code:
       type: string
@@ -20301,6 +21365,12 @@ components:
       description: Describes the signature for a file.
     CompliantChecksCount:
       type: integer
+    ConfidenceLevel:
+      type: string
+      enum:
+        - LOW
+        - MEDIUM
+        - HIGH
     ConfirmationToken:
       type: string
       minLength: 1
@@ -20398,6 +21468,47 @@ components:
             - $ref: '#/components/schemas/CertificateSigningRequest'
             - description: The certificate signing request (CSR).
       description: The input for the CreateCertificateFromCsr operation.
+    MetricName:
+      type: string
+      pattern: '[a-zA-Z0-9:_-]+'
+      minLength: 1
+      maxLength: 128
+    CustomMetricDisplayName:
+      type: string
+      pattern: '[\p{Graph}\x20]*'
+      maxLength: 128
+    CustomMetricType:
+      type: string
+      enum:
+        - string-list
+        - ip-address-list
+        - number-list
+        - number
+    CreateCustomMetricRequest:
+      type: object
+      required:
+        - metricType
+        - clientRequestToken
+      title: CreateCustomMetricRequest
+      properties:
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricDisplayName'
+            - description: ' Field represents a friendly name in the console for the custom metric; it doesn''t have to be unique. Don''t use this name as the metric identifier in the device metric report. Can be updated once defined.'
+        metricType:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricType'
+            - description: ' The type of the custom metric. Types include <code>string-list</code>, <code>ip-address-list</code>, <code>number-list</code>, and <code>number</code>. '
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: ' Metadata that can be used to manage the custom metric. '
+        clientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: 'Each custom metric must have a unique client request token. If you try to create a new custom metric that already exists with a different token, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
+    CustomMetricArn:
+      type: string
     DimensionName:
       type: string
       pattern: '[a-zA-Z0-9:_-]+'
@@ -20680,7 +21791,7 @@ components:
         publishFindingToSnsParams:
           allOf:
             - $ref: '#/components/schemas/PublishFindingToSnsParams'
-            - description: Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
+            - description: Parameters to define a mitigation action that publishes findings to Amazon Simple Notification Service (Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
       description: 'The set of parameters for this mitigation action. You can specify only one type of parameter (in other words, you can apply only one action for each defined mitigation action).'
     CreateMitigationActionRequest:
       type: object
@@ -20968,15 +22079,15 @@ components:
         frequency:
           allOf:
             - $ref: '#/components/schemas/AuditFrequency'
-            - description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each audit is determined by the system.'
+            - description: 'How often the scheduled audit takes place, either <code>DAILY</code>, <code>WEEKLY</code>, <code>BIWEEKLY</code> or <code>MONTHLY</code>. The start time of each audit is determined by the system.'
         dayOfMonth:
           allOf:
             - $ref: '#/components/schemas/DayOfMonth'
-            - description: 'The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
+            - description: 'The day of the month on which the scheduled audit takes place. This can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to <code>MONTHLY</code>. If days 29 to 31 are specified, and the month doesn''t have that many days, the audit takes place on the <code>LAST</code> day of the month.'
         dayOfWeek:
           allOf:
             - $ref: '#/components/schemas/DayOfWeek'
-            - description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+            - description: 'The day of the week on which the scheduled audit takes place, either <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>. This field is required if the <code>frequency</code> parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.'
         targetCheckNames:
           allOf:
             - $ref: '#/components/schemas/TargetAuditCheckNames'
@@ -21011,11 +22122,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainList'
             - deprecated: true
-              description: '<p> <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>Use additionalMetricsToRetainV2.'
+              description: '<p> <i>Please use <a>CreateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>Use additionalMetricsToRetainV2.'
         additionalMetricsToRetainV2:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
-            - description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.'
+            - description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.'
         tags:
           allOf:
             - $ref: '#/components/schemas/TagList'
@@ -21142,6 +22253,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HttpUrlDestinationConfiguration'
             - description: Configuration of the HTTP URL.
+        vpcConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/VpcDestinationConfiguration'
+            - description: Configuration of the virtual private cloud (VPC) connection.
       description: Configuration of the topic rule destination.
     CreateTopicRuleDestinationRequest:
       type: object
@@ -21164,6 +22279,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TopicRuleDestinationStatus'
             - description: '<p>The status of the topic rule destination. Valid values are:</p> <dl> <dt>IN_PROGRESS</dt> <dd> <p>A topic rule destination was created but has not been confirmed. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> <dt>ENABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is allowed. You can set <code>status</code> to <code>DISABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>DISABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is not allowed. You can set <code>status</code> to <code>ENABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>ERROR</dt> <dd> <p>Confirmation could not be completed, for example if the confirmation timed out. You can call <code>GetTopicRuleDestination</code> for details about the error. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> </dl>'
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/CreatedAtDate'
+            - description: The date and time when the topic rule destination was created.
+        lastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/LastUpdatedAtDate'
+            - description: The date and time when the topic rule destination was last updated.
         statusReason:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -21172,6 +22295,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/HttpUrlDestinationProperties'
             - description: Properties of the HTTP URL.
+        vpcProperties:
+          allOf:
+            - $ref: '#/components/schemas/VpcDestinationProperties'
+            - description: Properties of the virtual private cloud (VPC) connection.
       description: A topic rule destination.
     RuleName:
       type: string
@@ -21272,6 +22399,10 @@ components:
       title: DeleteCertificateRequest
       properties: {}
       description: The input for the DeleteCertificate operation.
+    DeleteCustomMetricRequest:
+      type: object
+      title: DeleteCustomMetricRequest
+      properties: {}
     DeleteDimensionRequest:
       type: object
       title: DeleteDimensionRequest
@@ -21499,10 +22630,62 @@ components:
       title: DescribeCertificateRequest
       properties: {}
       description: The input for the DescribeCertificate operation.
+    DescribeCustomMetricRequest:
+      type: object
+      title: DescribeCustomMetricRequest
+      properties: {}
     DescribeDefaultAuthorizerRequest:
       type: object
       title: DescribeDefaultAuthorizerRequest
       properties: {}
+    DescribeDetectMitigationActionsTaskRequest:
+      type: object
+      title: DescribeDetectMitigationActionsTaskRequest
+      properties: {}
+    DetectMitigationActionsTaskSummary:
+      type: object
+      properties:
+        taskId:
+          allOf:
+            - $ref: '#/components/schemas/MitigationActionsTaskId'
+            - description: ' The unique identifier of the task. '
+        taskStatus:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionsTaskStatus'
+            - description: ' The status of the task. '
+        taskStartTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date the task started. '
+        taskEndTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date the task ended. '
+        target:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionsTaskTarget'
+            - description: ' Specifies the ML Detect findings to which the mitigation actions are applied. '
+        violationEventOccurrenceRange:
+          allOf:
+            - $ref: '#/components/schemas/ViolationEventOccurrenceRange'
+            - description: ' Specifies the time period of which violation events occurred between. '
+        onlyActiveViolationsIncluded:
+          allOf:
+            - $ref: '#/components/schemas/PrimitiveBoolean'
+            - description: ' Includes only active violations. '
+        suppressedAlertsIncluded:
+          allOf:
+            - $ref: '#/components/schemas/PrimitiveBoolean'
+            - description: ' Includes suppressed alerts. '
+        actionsDefinition:
+          allOf:
+            - $ref: '#/components/schemas/MitigationActionList'
+            - description: ' The definition of the actions. '
+        taskStatistics:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionsTaskStatistics'
+            - description: ' The statistics of a mitigation action task. '
+      description: ' The summary of the mitigation action tasks. '
     DescribeDimensionRequest:
       type: object
       title: DescribeDimensionRequest
@@ -21931,6 +23114,127 @@ components:
       pattern: '[a-zA-Z0-9:_-]+'
       minLength: 1
       maxLength: 128
+    DetectMitigationActionExecutionStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - SUCCESSFUL
+        - FAILED
+        - SKIPPED
+    DetectMitigationActionExecutionErrorCode:
+      type: string
+    DetectMitigationActionExecution:
+      type: object
+      properties:
+        taskId:
+          allOf:
+            - $ref: '#/components/schemas/MitigationActionsTaskId'
+            - description: ' The unique identifier of the task. '
+        violationId:
+          allOf:
+            - $ref: '#/components/schemas/ViolationId'
+            - description: ' The unique identifier of the violation. '
+        actionName:
+          allOf:
+            - $ref: '#/components/schemas/MitigationActionName'
+            - description: ' The friendly name that uniquely identifies the mitigation action. '
+        thingName:
+          allOf:
+            - $ref: '#/components/schemas/DeviceDefenderThingName'
+            - description: ' The name of the thing. '
+        executionStartDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date a mitigation action was started. '
+        executionEndDate:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The date a mitigation action ended. '
+        status:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionExecutionStatus'
+            - description: ' The status of a mitigation action. '
+        errorCode:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionExecutionErrorCode'
+            - description: ' The error code of a mitigation action. '
+        message:
+          allOf:
+            - $ref: '#/components/schemas/ErrorMessage'
+            - description: ' The message of a mitigation action. '
+      description: ' Describes which mitigation actions should be executed. '
+    DetectMitigationActionExecutionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DetectMitigationActionExecution'
+    GenericLongValue:
+      type: integer
+    DetectMitigationActionsTaskStatistics:
+      type: object
+      properties:
+        actionsExecuted:
+          allOf:
+            - $ref: '#/components/schemas/GenericLongValue'
+            - description: ' The actions that were performed. '
+        actionsSkipped:
+          allOf:
+            - $ref: '#/components/schemas/GenericLongValue'
+            - description: ' The actions that were skipped. '
+        actionsFailed:
+          allOf:
+            - $ref: '#/components/schemas/GenericLongValue'
+            - description: ' The actions that failed. '
+      description: ' The statistics of a mitigation action task. '
+    DetectMitigationActionsTaskStatus:
+      type: string
+      enum:
+        - IN_PROGRESS
+        - SUCCESSFUL
+        - FAILED
+        - CANCELED
+    DetectMitigationActionsTaskTarget:
+      type: object
+      properties:
+        violationIds:
+          allOf:
+            - $ref: '#/components/schemas/TargetViolationIdsForDetectMitigationActions'
+            - description: ' The unique identifiers of the violations. '
+        securityProfileName:
+          allOf:
+            - $ref: '#/components/schemas/SecurityProfileName'
+            - description: ' The name of the security profile. '
+        behaviorName:
+          allOf:
+            - $ref: '#/components/schemas/BehaviorName'
+            - description: ' The name of the behavior. '
+      description: ' The target of a mitigation action task. '
+    ViolationEventOccurrenceRange:
+      type: object
+      required:
+        - startTime
+        - endTime
+      properties:
+        startTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The start date and time of a time period in which violation events occurred. '
+        endTime:
+          allOf:
+            - $ref: '#/components/schemas/Timestamp'
+            - description: ' The end date and time of a time period in which violation events occurred. '
+      description: ' Specifies the time period of which violation events occurred between. '
+    PrimitiveBoolean:
+      type: boolean
+    DetectMitigationActionsTaskSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DetectMitigationActionsTaskSummary'
+    DetectMitigationActionsToExecuteList:
+      type: array
+      items:
+        $ref: '#/components/schemas/MitigationActionName'
+      minItems: 1
+      maxItems: 5
     DeviceCertificateUpdateAction:
       type: string
       enum:
@@ -22171,6 +23475,16 @@ components:
       type: boolean
     FunctionArn:
       type: string
+    TinyMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 10
+    NextToken:
+      type: string
+    GetBehaviorModelTrainingSummariesRequest:
+      type: object
+      title: GetBehaviorModelTrainingSummariesRequest
+      properties: {}
     GetCardinalityRequest:
       type: object
       required:
@@ -22811,8 +24125,11 @@ components:
       type: integer
       minimum: 1
       maximum: 250
-    NextToken:
+    LastUpdatedAtDate:
       type: string
+      format: date-time
+    ListSuppressedAlerts:
+      type: boolean
     MaxResults:
       type: integer
       minimum: 1
@@ -22932,6 +24249,22 @@ components:
       title: ListCertificatesRequest
       properties: {}
       description: The input for the ListCertificates operation.
+    ListCustomMetricsRequest:
+      type: object
+      title: ListCustomMetricsRequest
+      properties: {}
+    MetricNames:
+      type: array
+      items:
+        $ref: '#/components/schemas/MetricName'
+    ListDetectMitigationActionsExecutionsRequest:
+      type: object
+      title: ListDetectMitigationActionsExecutionsRequest
+      properties: {}
+    ListDetectMitigationActionsTasksRequest:
+      type: object
+      title: ListDetectMitigationActionsTasksRequest
+      properties: {}
     ListDimensionsRequest:
       type: object
       title: ListDimensionsRequest
@@ -23271,6 +24604,17 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/Port'
+    Number:
+      type: number
+      format: double
+    NumberList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Number'
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/stringValue'
     Minimum:
       type: number
       format: double
@@ -23345,6 +24689,8 @@ components:
       type: object
       additionalProperties:
         $ref: '#/components/schemas/String'
+    NullableBoolean:
+      type: boolean
     NumberOfThings:
       type: integer
       minimum: 1
@@ -23797,6 +25143,12 @@ components:
         $ref: '#/components/schemas/ThingGroupDocument'
     Seconds:
       type: integer
+    SecurityGroupId:
+      type: string
+    SecurityGroupList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SecurityGroupId'
     SecurityProfileIdentifier:
       type: object
       required:
@@ -23806,7 +25158,7 @@ components:
         name:
           allOf:
             - $ref: '#/components/schemas/SecurityProfileName'
-            - description: The name you have given to the security profile.
+            - description: The name you've given to the security profile.
         arn:
           allOf:
             - $ref: '#/components/schemas/SecurityProfileArn'
@@ -23951,7 +25303,7 @@ components:
         target:
           allOf:
             - $ref: '#/components/schemas/AuditMitigationActionsTaskTarget'
-            - description: 'Specifies the audit findings to which the mitigation actions are applied. You can apply them to a type of audit check, to all findings from an audit, or to a speecific set of findings.'
+            - description: 'Specifies the audit findings to which the mitigation actions are applied. You can apply them to a type of audit check, to all findings from an audit, or to a specific set of findings.'
         auditCheckToActionsMapping:
           allOf:
             - $ref: '#/components/schemas/AuditCheckToActionsMapping'
@@ -23960,6 +25312,38 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestToken'
             - description: 'Each audit mitigation task must have a unique client request token. If you try to start a new task with the same token as a task that already exists, an exception occurs. If you omit this value, a unique client request token is generated automatically.'
+    StartDetectMitigationActionsTaskRequest:
+      type: object
+      required:
+        - target
+        - actions
+        - clientRequestToken
+      title: StartDetectMitigationActionsTaskRequest
+      properties:
+        target:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionsTaskTarget'
+            - description: ' Specifies the ML Detect findings to which the mitigation actions are applied. '
+        actions:
+          allOf:
+            - $ref: '#/components/schemas/DetectMitigationActionsToExecuteList'
+            - description: ' The actions to be performed when a device has unexpected behavior. '
+        violationEventOccurrenceRange:
+          allOf:
+            - $ref: '#/components/schemas/ViolationEventOccurrenceRange'
+            - description: ' Specifies the time period of which violation events occurred between. '
+        includeOnlyActiveViolations:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: ' Specifies to list only active violations. '
+        includeSuppressedAlerts:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: ' Specifies to include suppressed alerts. '
+        clientRequestToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientRequestToken'
+            - description: ' Each mitigation action task must have a unique client request token. If you try to create a new task with the same token as a task that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request. '
     StartOnDemandAuditTaskRequest:
       type: object
       required:
@@ -24033,6 +25417,14 @@ components:
             - $ref: '#/components/schemas/StreamDescription'
             - description: A description of the stream.
       description: A summary of a stream.
+    stringValue:
+      type: string
+    SubnetId:
+      type: string
+    SubnetIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/SubnetId'
     SucceededFindingsCount:
       type: integer
     TagValue:
@@ -24306,6 +25698,27 @@ components:
         - IN_PROGRESS
         - DISABLED
         - ERROR
+        - DELETING
+    VpcDestinationProperties:
+      type: object
+      properties:
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: The subnet IDs of the VPC destination.
+        securityGroups:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupList'
+            - description: The security groups of the VPC destination.
+        vpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The ID of the VPC.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/AwsArn'
+            - description: The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).
+      description: The properties of a virtual private cloud (VPC) destination.
     TopicRuleDestinationSummary:
       type: object
       properties:
@@ -24317,6 +25730,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/TopicRuleDestinationStatus'
             - description: '<p>The status of the topic rule destination. Valid values are:</p> <dl> <dt>IN_PROGRESS</dt> <dd> <p>A topic rule destination was created but has not been confirmed. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> <dt>ENABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is allowed. You can set <code>status</code> to <code>DISABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>DISABLED</dt> <dd> <p>Confirmation was completed, and traffic to this destination is not allowed. You can set <code>status</code> to <code>ENABLED</code> by calling <code>UpdateTopicRuleDestination</code>.</p> </dd> <dt>ERROR</dt> <dd> <p>Confirmation could not be completed, for example if the confirmation timed out. You can call <code>GetTopicRuleDestination</code> for details about the error. You can set <code>status</code> to <code>IN_PROGRESS</code> by calling <code>UpdateTopicRuleDestination</code>. Calling <code>UpdateTopicRuleDestination</code> causes a new confirmation challenge to be sent to your confirmation endpoint.</p> </dd> </dl>'
+        createdAt:
+          allOf:
+            - $ref: '#/components/schemas/CreatedAtDate'
+            - description: The date and time when the topic rule destination was created.
+        lastUpdatedAt:
+          allOf:
+            - $ref: '#/components/schemas/LastUpdatedAtDate'
+            - description: The date and time when the topic rule destination was last updated.
         statusReason:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -24325,7 +25746,31 @@ components:
           allOf:
             - $ref: '#/components/schemas/HttpUrlDestinationSummary'
             - description: Information about the HTTP URL.
+        vpcDestinationSummary:
+          allOf:
+            - $ref: '#/components/schemas/VpcDestinationSummary'
+            - description: Information about the virtual private cloud (VPC) connection.
       description: Information about the topic rule destination.
+    VpcDestinationSummary:
+      type: object
+      properties:
+        subnetIds:
+          allOf:
+            - $ref: '#/components/schemas/SubnetIdList'
+            - description: The subnet IDs of the VPC destination.
+        securityGroups:
+          allOf:
+            - $ref: '#/components/schemas/SecurityGroupList'
+            - description: The security groups of the VPC destination.
+        vpcId:
+          allOf:
+            - $ref: '#/components/schemas/VpcId'
+            - description: The ID of the VPC.
+        roleArn:
+          allOf:
+            - $ref: '#/components/schemas/AwsArn'
+            - description: The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).
+      description: The summary of a virtual private cloud (VPC) destination.
     TopicRuleListItem:
       type: object
       properties:
@@ -24381,7 +25826,7 @@ components:
         roleArn:
           allOf:
             - $ref: '#/components/schemas/RoleArn'
-            - description: 'The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.'
+            - description: 'The Amazon Resource Name (ARN) of the role that grants permission to AWS IoT to access information about your devices, policies, certificates, and other items as required when performing an audit.'
         auditNotificationTargetConfigurations:
           allOf:
             - $ref: '#/components/schemas/AuditNotificationTargetConfigurations'
@@ -24389,7 +25834,7 @@ components:
         auditCheckConfigurations:
           allOf:
             - $ref: '#/components/schemas/AuditCheckConfigurations'
-            - description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are currently enabled.</p> <p>Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is required and must specify at least one enabled check.</p>'
+            - description: '<p>Specifies which audit checks are enabled and disabled for this account. Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks, including those that are currently enabled.</p> <p>Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted.</p> <p>You cannot disable a check if it''s used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself.</p> <p>On the first call to <code>UpdateAccountAuditConfiguration</code>, this parameter is required and must specify at least one enabled check.</p>'
     UpdateAuditSuppressionRequest:
       type: object
       required:
@@ -24465,6 +25910,16 @@ components:
       title: UpdateCertificateRequest
       properties: {}
       description: The input for the UpdateCertificate operation.
+    UpdateCustomMetricRequest:
+      type: object
+      required:
+        - displayName
+      title: UpdateCustomMetricRequest
+      properties:
+        displayName:
+          allOf:
+            - $ref: '#/components/schemas/CustomMetricDisplayName'
+            - description: ' Field represents a friendly name in the console for the custom metric, it doesn''t have to be unique. Don''t use this name as the metric identifier in the device metric report. Can be updated. '
     UpdateDimensionRequest:
       type: object
       required:
@@ -24620,15 +26075,15 @@ components:
         frequency:
           allOf:
             - $ref: '#/components/schemas/AuditFrequency'
-            - description: 'How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.'
+            - description: 'How often the scheduled audit takes place, either <code>DAILY</code>, <code>WEEKLY</code>, <code>BIWEEKLY</code>, or <code>MONTHLY</code>. The start time of each audit is determined by the system.'
         dayOfMonth:
           allOf:
             - $ref: '#/components/schemas/DayOfMonth'
-            - description: 'The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
+            - description: 'The day of the month on which the scheduled audit takes place. This can be <code>1</code> through <code>31</code> or <code>LAST</code>. This field is required if the <code>frequency</code> parameter is set to <code>MONTHLY</code>. If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.'
         dayOfWeek:
           allOf:
             - $ref: '#/components/schemas/DayOfWeek'
-            - description: 'The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".'
+            - description: 'The day of the week on which the scheduled audit takes place. This can be one of <code>SUN</code>, <code>MON</code>, <code>TUE</code>, <code>WED</code>, <code>THU</code>, <code>FRI</code>, or <code>SAT</code>. This field is required if the "frequency" parameter is set to <code>WEEKLY</code> or <code>BIWEEKLY</code>.'
         targetCheckNames:
           allOf:
             - $ref: '#/components/schemas/TargetAuditCheckNames'
@@ -24653,11 +26108,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainList'
             - deprecated: true
-              description: '<p> <i>Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here.</p>Use additionalMetricsToRetainV2.'
+              description: '<p> <i>Please use <a>UpdateSecurityProfileRequest$additionalMetricsToRetainV2</a> instead.</i> </p> <p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s <code>behaviors</code>, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.</p>Use additionalMetricsToRetainV2.'
         additionalMetricsToRetainV2:
           allOf:
             - $ref: '#/components/schemas/AdditionalMetricsToRetainV2List'
-            - description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here.'
+            - description: 'A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile''s behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.'
         deleteBehaviors:
           allOf:
             - $ref: '#/components/schemas/DeleteBehaviors'
@@ -24804,11 +26259,15 @@ components:
         behavior:
           allOf:
             - $ref: '#/components/schemas/Behavior'
-            - description: The behavior which was violated.
+            - description: The behavior that was violated.
         metricValue:
           allOf:
             - $ref: '#/components/schemas/MetricValue'
             - description: The value of the metric (the measurement).
+        violationEventAdditionalInfo:
+          allOf:
+            - $ref: '#/components/schemas/ViolationEventAdditionalInfo'
+            - description: ' The details of a violation event. '
         violationEventType:
           allOf:
             - $ref: '#/components/schemas/ViolationEventType'
@@ -24818,5 +26277,7 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: The time the violation event occurred.
       description: Information about a Device Defender security profile behavior violation.
+    VpcId:
+      type: string
 security:
   - hmac: []

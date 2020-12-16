@@ -696,7 +696,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.CreateOpsMetadata:
     post:
       operationId: CreateOpsMetadata
-      description: 'If you create a new application in AppManager, Systems Manager calls this API action to specify information about the new application, including the application type.'
+      description: 'If you create a new application in Application Manager, Systems Manager calls this API action to specify information about the new application, including the application type.'
       responses:
         '200':
           description: Success
@@ -4230,7 +4230,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.GetOpsMetadata:
     post:
       operationId: GetOpsMetadata
-      description: View operational metadata related to an application in AppManager.
+      description: View operational metadata related to an application in Application Manager.
       responses:
         '200':
           description: Success
@@ -5217,6 +5217,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.ListDocumentMetadataHistory:
+    post:
+      operationId: ListDocumentMetadataHistory
+      description: Information about approval reviews for a version of an SSM document.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDocumentMetadataHistoryResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: InvalidDocument
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDocument'
+        '482':
+          description: InvalidDocumentVersion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDocumentVersion'
+        '483':
+          description: InvalidNextToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextToken'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListDocumentMetadataHistoryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.ListDocumentMetadataHistory
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonSSM.ListDocumentVersions:
     post:
       operationId: ListDocumentVersions
@@ -5406,10 +5463,79 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.ListOpsItemEvents:
+    post:
+      operationId: ListOpsItemEvents
+      description: Returns a list of all OpsItem events in the current AWS account and Region. You can limit the results to events associated with specific OpsItems by specifying a filter.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListOpsItemEventsResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: OpsItemNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemNotFoundException'
+        '482':
+          description: OpsItemLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemLimitExceededException'
+        '483':
+          description: OpsItemInvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpsItemInvalidParameterException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOpsItemEventsRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.ListOpsItemEvents
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonSSM.ListOpsMetadata:
     post:
       operationId: ListOpsMetadata
-      description: Systems Manager calls this API action when displaying all AppManager OpsMetadata objects or blobs.
+      description: Systems Manager calls this API action when displaying all Application Manager OpsMetadata objects or blobs.
       responses:
         '200':
           description: Success
@@ -5436,6 +5562,18 @@ paths:
             schema:
               $ref: '#/components/schemas/ListOpsMetadataRequest'
       parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
         - name: X-Amz-Target
           in: header
           required: true
@@ -6657,6 +6795,81 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.StartChangeRequestExecution:
+    post:
+      operationId: StartChangeRequestExecution
+      description: Creates a change request for Change Manager. The runbooks (Automation documents) specified in the change request run only after all required approvals for the change request have been received.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartChangeRequestExecutionResult'
+        '480':
+          description: AutomationDefinitionNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationDefinitionNotFoundException'
+        '481':
+          description: InvalidAutomationExecutionParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidAutomationExecutionParametersException'
+        '482':
+          description: AutomationExecutionLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationExecutionLimitExceededException'
+        '483':
+          description: AutomationDefinitionVersionNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationDefinitionVersionNotFoundException'
+        '484':
+          description: IdempotentParameterMismatch
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatch'
+        '485':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '486':
+          description: AutomationDefinitionNotApprovedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutomationDefinitionNotApprovedException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StartChangeRequestExecutionRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.StartChangeRequestExecution
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonSSM.StartSession:
     post:
       operationId: StartSession
@@ -7128,6 +7341,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AmazonSSM.UpdateDocumentMetadata:
+    post:
+      operationId: UpdateDocumentMetadata
+      description: Updates information related to approval reviews for a specific version of a document.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateDocumentMetadataResponse'
+        '480':
+          description: InternalServerError
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+        '481':
+          description: InvalidDocument
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDocument'
+        '482':
+          description: InvalidDocumentOperation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDocumentOperation'
+        '483':
+          description: InvalidDocumentVersion
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidDocumentVersion'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDocumentMetadataRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AmazonSSM.UpdateDocumentMetadata
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AmazonSSM.UpdateMaintenanceWindow:
     post:
       operationId: UpdateMaintenanceWindow
@@ -7374,7 +7644,7 @@ paths:
   /#X-Amz-Target=AmazonSSM.UpdateOpsMetadata:
     post:
       operationId: UpdateOpsMetadata
-      description: Systems Manager calls this API action when you edit OpsMetadata in AppManager.
+      description: Systems Manager calls this API action when you edit OpsMetadata in Application Manager.
       responses:
         '200':
           description: Success
@@ -7817,6 +8087,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
             - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
+        TargetLocations:
+          allOf:
+            - $ref: '#/components/schemas/TargetLocations'
+            - description: A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
     AssociationAlreadyExists: {}
     AssociationLimitExceeded: {}
     InvalidDocument: {}
@@ -7942,11 +8216,11 @@ components:
         ScheduleTimezone:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowTimezone'
-            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
         ScheduleOffset:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowOffset'
-            - description: '<p>The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.</p> <p>For example, the following cron expression schedules a maintenance window to run on the third Tuesday of every month at 11:30 PM.</p> <p> <code>cron(0 30 23 ? * TUE#3 *)</code> </p> <p>If the schedule offset is <code>2</code>, the maintenance window won''t run until two days later.</p>'
+            - description: '<p>The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.</p> <p>For example, the following cron expression schedules a maintenance window to run on the third Tuesday of every month at 11:30 PM.</p> <p> <code>cron(30 23 ? * TUE#3 *)</code> </p> <p>If the schedule offset is <code>2</code>, the maintenance window won''t run until two days later.</p>'
         Duration:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowDurationHours'
@@ -7988,6 +8262,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpsItemDescription'
             - description: 'Information about the OpsItem. '
+        OpsItemType:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemType'
+            - description: 'The type of OpsItem to create. Currently, the only valid values are <code>/aws/changerequest</code> and <code>/aws/issue</code>.'
         OperationalData:
           allOf:
             - $ref: '#/components/schemas/OpsItemOperationalData'
@@ -8024,6 +8302,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpsItemSeverity'
             - description: Specify a severity to assign to an OpsItem.
+        ActualStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a runbook workflow started. Currently reported only for the OpsItem type <code>/aws/changerequest</code>.
+        ActualEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a runbook workflow ended. Currently reported only for the OpsItem type <code>/aws/changerequest</code>.
+        PlannedStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time specified in a change request for a runbook workflow to start. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
+        PlannedEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
     OpsItemAlreadyExistsException: {}
     OpsItemLimitExceededException: {}
     OpsItemInvalidParameterException: {}
@@ -8043,11 +8337,11 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/OpsMetadataResourceId'
-            - description: A resource ID for a new AppManager application.
+            - description: A resource ID for a new Application Manager application.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/MetadataMap'
-            - description: 'Metadata for a new AppManager application. '
+            - description: 'Metadata for a new Application Manager application. '
     OpsMetadataAlreadyExistsException: {}
     OpsMetadataTooManyUpdatesException: {}
     OpsMetadataInvalidArgumentException: {}
@@ -9725,6 +10019,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AttachmentContentList'
             - description: 'A description of the document attachments, including names, locations, sizes, and so on.'
+        ReviewStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReviewStatus'
+            - description: '<p>The current review status of a new custom Systems Manager document (SSM document) created by a member of your organization, or of the latest version of an existing SSM document.</p> <p>Only one version of an SSM document can be in the APPROVED state at a time. When a new version is approved, the status of the previous version changes to REJECTED.</p> <p>Only one version of an SSM document can be in review, or PENDING, at a time.</p>'
     GetDocumentRequest:
       type: object
       required:
@@ -9850,7 +10148,7 @@ components:
         ScheduleTimezone:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowTimezone'
-            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
         ScheduleOffset:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowOffset'
@@ -10169,11 +10467,11 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/OpsMetadataResourceId'
-            - description: The resource ID of the AppManager application.
+            - description: The resource ID of the Application Manager application.
         Metadata:
           allOf:
             - $ref: '#/components/schemas/MetadataMap'
-            - description: OpsMetadata for an AppManager application.
+            - description: OpsMetadata for an Application Manager application.
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -10702,6 +11000,56 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: 'The maximum number of items to return for this call. Currently, you can specify null or 50. The call also returns a token that you can specify in a subsequent call to get the next set of results.'
+    ListDocumentMetadataHistoryResponse:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DocumentName'
+            - description: The name of the document.
+        DocumentVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: The version of the document.
+        Author:
+          allOf:
+            - $ref: '#/components/schemas/DocumentAuthor'
+            - description: The user ID of the person in the organization who requested the document review.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/DocumentMetadataResponseInfo'
+            - description: Information about the response to the document approval request.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+    ListDocumentMetadataHistoryRequest:
+      type: object
+      required:
+        - Name
+        - Metadata
+      title: ListDocumentMetadataHistoryRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DocumentName'
+            - description: The name of the document.
+        DocumentVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: The version of the document.
+        Metadata:
+          allOf:
+            - $ref: '#/components/schemas/DocumentMetadataEnum'
+            - description: 'The type of data for which details are being requested. Currently, the only supported value is <code>DocumentReviews</code>.'
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token for the next set of items to return. (You received this token from a previous call.)
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
     ListDocumentVersionsResult:
       type: object
       properties:
@@ -10816,6 +11164,33 @@ components:
           allOf:
             - $ref: '#/components/schemas/MaxResults'
             - description: The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+    ListOpsItemEventsResponse:
+      type: object
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The token for the next set of items to return. Use this token to get the next set of results. '
+        Summaries:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemEventSummaries'
+            - description: A list of event information for the specified OpsItems.
+    ListOpsItemEventsRequest:
+      type: object
+      title: ListOpsItemEventsRequest
+      properties:
+        Filters:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemEventFilters'
+            - description: 'One or more OpsItem filters. Use a filter to return a more specific list of results. '
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemEventMaxResults'
+            - description: 'The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results. '
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'A token to start the list. Use this token to get the next set of results. '
     ListOpsMetadataResult:
       type: object
       properties:
@@ -11209,7 +11584,7 @@ components:
         Targets:
           allOf:
             - $ref: '#/components/schemas/Targets'
-            - description: '<p>The targets (either instances or maintenance window targets).</p> <p>Specify instances using the following format: </p> <p> <code>Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;</code> </p> <p>Specify maintenance window targets using the following format:</p> <p> <code>Key=WindowTargetIds;,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt;</code> </p>'
+            - description: '<p>The targets (either instances or maintenance window targets).</p> <p>Specify instances using the following format: </p> <p> <code>Key=InstanceIds,Values=&lt;instance-id-1&gt;,&lt;instance-id-2&gt;</code> </p> <p>Specify maintenance window targets using the following format:</p> <p> <code>Key=WindowTargetIds,Values=&lt;window-target-id-1&gt;,&lt;window-target-id-2&gt;</code> </p>'
         TaskArn:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowTaskArn'
@@ -11513,6 +11888,53 @@ components:
     InvalidAutomationExecutionParametersException: {}
     AutomationExecutionLimitExceededException: {}
     AutomationDefinitionVersionNotFoundException: {}
+    StartChangeRequestExecutionResult:
+      type: object
+      properties:
+        AutomationExecutionId:
+          allOf:
+            - $ref: '#/components/schemas/AutomationExecutionId'
+            - description: 'The unique ID of a runbook workflow operation. (A runbook workflow is a type of Automation operation.) '
+    StartChangeRequestExecutionRequest:
+      type: object
+      required:
+        - DocumentName
+        - Runbooks
+      title: StartChangeRequestExecutionRequest
+      properties:
+        ScheduledTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: <p>The date and time specified in the change request to run the Automation runbooks.</p> <note> <p>The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received.</p> </note>
+        DocumentName:
+          allOf:
+            - $ref: '#/components/schemas/DocumentARN'
+            - description: The name of the change template document to run during the runbook workflow.
+        DocumentVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: The version of the change template document to run during the runbook workflow.
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/AutomationParameterMap'
+            - description: A key-value map of parameters that match the declared parameters in the change template document.
+        ChangeRequestName:
+          allOf:
+            - $ref: '#/components/schemas/ChangeRequestName'
+            - description: The name of the change request associated with the runbook workflow to be run.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/IdempotencyToken'
+            - description: 'The user-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can''t be reused.'
+        Runbooks:
+          allOf:
+            - $ref: '#/components/schemas/Runbooks'
+            - description: <p>Information about the Automation runbooks (Automation documents) that are run during the runbook workflow.</p> <note> <p>The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received.</p> </note>
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagList'
+            - description: '<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target AWS Region. In this case, you could specify the following key-value pairs:</p> <ul> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> <li> <p> <code>Key=Region,Value=us-east-2</code> </p> </li> </ul>'
+    AutomationDefinitionNotApprovedException: {}
     StartSessionResponse:
       type: object
       properties:
@@ -11655,6 +12077,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
             - description: '<p>By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you update it. This parameter is not supported for rate expressions.</p> <p>Also, if you specified this option when you created the association, you can reset it. To do so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.</p>'
+        TargetLocations:
+          allOf:
+            - $ref: '#/components/schemas/TargetLocations'
+            - description: A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
     InvalidUpdate: {}
     AssociationVersionLimitExceeded: {}
     UpdateAssociationStatusResult:
@@ -11752,6 +12178,28 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentVersionNumber'
             - description: The version of a custom document that you want to set as the default version.
+    UpdateDocumentMetadataResponse:
+      type: object
+      properties: {}
+    UpdateDocumentMetadataRequest:
+      type: object
+      required:
+        - Name
+        - DocumentReviews
+      title: UpdateDocumentMetadataRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/DocumentName'
+            - description: The name of the document for which a version is to be updated.
+        DocumentVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: The version of a document to update.
+        DocumentReviews:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReviews'
+            - description: The document review details to update.
     UpdateMaintenanceWindowResult:
       type: object
       properties:
@@ -11782,7 +12230,7 @@ components:
         ScheduleTimezone:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowTimezone'
-            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
         ScheduleOffset:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowOffset'
@@ -11824,7 +12272,7 @@ components:
         StartDate:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowStringDateTime'
-            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
         EndDate:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowStringDateTime'
@@ -11836,11 +12284,11 @@ components:
         ScheduleTimezone:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowTimezone'
-            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
+            - description: 'The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or "Asia/Seoul". For more information, see the <a href="https://www.iana.org/time-zones">Time Zone Database</a> on the IANA website.'
         ScheduleOffset:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowOffset'
-            - description: '<p>The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.</p> <p>For example, the following cron expression schedules a maintenance window to run the third Tuesday of every month at 11:30 PM.</p> <p> <code>cron(0 30 23 ? * TUE#3 *)</code> </p> <p>If the schedule offset is <code>2</code>, the maintenance window won''t run until two days later.</p>'
+            - description: '<p>The number of days to wait after the date and time specified by a CRON expression before running the maintenance window.</p> <p>For example, the following cron expression schedules a maintenance window to run the third Tuesday of every month at 11:30 PM.</p> <p> <code>cron(30 23 ? * TUE#3 *)</code> </p> <p>If the schedule offset is <code>2</code>, the maintenance window won''t run until two days later.</p>'
         Duration:
           allOf:
             - $ref: '#/components/schemas/MaintenanceWindowDurationHours'
@@ -12112,6 +12560,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpsItemSeverity'
             - description: Specify a new severity for an OpsItem.
+        ActualStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a runbook workflow started. Currently reported only for the OpsItem type <code>/aws/changerequest</code>.
+        ActualEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a runbook workflow ended. Currently reported only for the OpsItem type <code>/aws/changerequest</code>.
+        PlannedStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time specified in a change request for a runbook workflow to start. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
+        PlannedEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
     UpdateOpsMetadataResult:
       type: object
       properties:
@@ -12601,6 +13065,12 @@ components:
       enum:
         - AUTO
         - MANUAL
+    TargetLocations:
+      type: array
+      items:
+        $ref: '#/components/schemas/TargetLocation'
+      minItems: 1
+      maxItems: 100
     AssociationDescription:
       type: object
       properties:
@@ -12692,6 +13162,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
             - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
+        TargetLocations:
+          allOf:
+            - $ref: '#/components/schemas/TargetLocations'
+            - description: The combination of AWS Regions and AWS accounts where you want to run the association.
       description: Describes the parameters for a document.
     AssociationDescriptionList:
       type: array
@@ -13003,6 +13477,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
             - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
+        TargetLocations:
+          allOf:
+            - $ref: '#/components/schemas/TargetLocations'
+            - description: The combination of AWS Regions and AWS accounts where you wanted to run the association when this association version was created.
       description: Information about the association version.
     AssociationVersionList:
       type: array
@@ -13133,6 +13611,16 @@ components:
         - Cancelling
         - Cancelled
         - Failed
+        - PendingApproval
+        - Approved
+        - Rejected
+        - Scheduled
+        - RunbookInProgress
+        - PendingChangeCalendarOverride
+        - ChangeCalendarOverrideApproved
+        - ChangeCalendarOverrideRejected
+        - CompletedWithSuccess
+        - CompletedWithFailure
     StepExecutionList:
       type: array
       items:
@@ -13172,12 +13660,6 @@ components:
             - $ref: '#/components/schemas/Boolean'
             - description: A boolean value indicating whether the resolved target list is truncated.
       description: Information about targets that resolved during the Automation execution.
-    TargetLocations:
-      type: array
-      items:
-        $ref: '#/components/schemas/TargetLocation'
-      minItems: 1
-      maxItems: 100
     ProgressCounters:
       type: object
       properties:
@@ -13202,6 +13684,20 @@ components:
             - $ref: '#/components/schemas/Integer'
             - description: The total number of steps that timed out in all specified AWS Regions and accounts for the current Automation execution.
       description: An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
+    AutomationSubtype:
+      type: string
+      enum:
+        - ChangeRequest
+    Runbooks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Runbook'
+      minItems: 1
+      maxItems: 1
+    ChangeRequestName:
+      type: string
+      minLength: 1
+      maxLength: 1024
     AutomationExecution:
       type: object
       properties:
@@ -13305,6 +13801,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProgressCounters'
             - description: An aggregate of step execution statuses displayed in the AWS Console for a multi-Region and multi-account Automation execution.
+        AutomationSubtype:
+          allOf:
+            - $ref: '#/components/schemas/AutomationSubtype'
+            - description: 'The subtype of the Automation operation. Currently, the only supported value is <code>ChangeRequest</code>.'
+        ScheduledTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time the Automation operation is scheduled to start.
+        Runbooks:
+          allOf:
+            - $ref: '#/components/schemas/Runbooks'
+            - description: <p>Information about the Automation runbooks (Automation documents) that are run as part of a runbook workflow.</p> <note> <p>The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received.</p> </note>
+        OpsItemId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of an OpsItem that is created to represent a Change Manager change request.
+        AssociationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of a State Manager association used in the Automation operation.
+        ChangeRequestName:
+          allOf:
+            - $ref: '#/components/schemas/ChangeRequestName'
+            - description: The name of the Change Manager change request.
       description: Detailed information about the current state of an individual Automation execution.
     AutomationExecutionFilterKey:
       type: string
@@ -13319,6 +13839,8 @@ components:
         - AutomationType
         - TagKey
         - TargetResourceGroup
+        - AutomationSubtype
+        - OpsItemId
     AutomationExecutionFilterValueList:
       type: array
       items:
@@ -13446,6 +13968,30 @@ components:
           allOf:
             - $ref: '#/components/schemas/AutomationType'
             - description: 'Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple AWS Regions and accounts. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html">Running Automation workflows in multiple AWS Regions and accounts</a> in the <i>AWS Systems Manager User Guide</i>. '
+        AutomationSubtype:
+          allOf:
+            - $ref: '#/components/schemas/AutomationSubtype'
+            - description: 'The subtype of the Automation operation. Currently, the only supported value is <code>ChangeRequest</code>.'
+        ScheduledTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time the Automation operation is scheduled to start.
+        Runbooks:
+          allOf:
+            - $ref: '#/components/schemas/Runbooks'
+            - description: <p>Information about the Automation runbooks (Automation documents) that are run during a runbook workflow in Change Manager.</p> <note> <p>The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received.</p> </note>
+        OpsItemId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of an OpsItem that is created to represent a Change Manager change request.
+        AssociationId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of a State Manager association used in the Automation operation.
+        ChangeRequestName:
+          allOf:
+            - $ref: '#/components/schemas/ChangeRequestName'
+            - description: The name of the Change Manager change request.
       description: Details about a specific Automation execution.
     AutomationExecutionMetadataList:
       type: array
@@ -14230,6 +14776,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApplyOnlyAtCronInterval'
             - description: 'By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don''t want an association to run immediately after you create it. This parameter is not supported for rate expressions.'
+        TargetLocations:
+          allOf:
+            - $ref: '#/components/schemas/TargetLocations'
+            - description: Use this action to create an association in multiple Regions and multiple accounts.
       description: Describes the association of a Systems Manager SSM document and an instance.
     FailedCreateAssociationList:
       type: array
@@ -14258,6 +14808,7 @@ components:
         - ApplicationConfigurationSchema
         - DeploymentStrategy
         - ChangeCalendar
+        - Automation.ChangeTemplate
     DocumentFormat:
       type: string
       enum:
@@ -14359,6 +14910,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentRequiresList'
             - description: 'A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.'
+        Author:
+          allOf:
+            - $ref: '#/components/schemas/DocumentAuthor'
+            - description: The user in your organization who created the document.
+        ReviewInformation:
+          allOf:
+            - $ref: '#/components/schemas/ReviewInformationList'
+            - description: Details about the review of a document.
+        ApprovedVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: The version of the document currently approved for use in the organization.
+        PendingReviewVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: The version of the document that is currently under review.
+        ReviewStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReviewStatus'
+            - description: The current status of the review.
       description: 'Describes a Systems Manager document. '
     MaintenanceWindowName:
       type: string
@@ -14399,8 +14970,11 @@ components:
       maxLength: 20
     OpsItemDescription:
       type: string
+      pattern: '[\s\S]*\S[\s\S]*'
       minLength: 1
       maxLength: 1024
+    OpsItemType:
+      type: string
     OpsItemOperationalData:
       type: object
       additionalProperties:
@@ -14419,18 +14993,22 @@ components:
         $ref: '#/components/schemas/RelatedOpsItem'
     OpsItemSource:
       type: string
+      pattern: ^(?!\s*$).+
       minLength: 1
-      maxLength: 64
+      maxLength: 128
     OpsItemTitle:
       type: string
+      pattern: ^(?!\s*$).+
       minLength: 1
       maxLength: 1024
     OpsItemCategory:
       type: string
+      pattern: ^(?!\s*$).+
       minLength: 1
       maxLength: 64
     OpsItemSeverity:
       type: string
+      pattern: ^(?!\s*$).+
       minLength: 1
       maxLength: 64
     OpsMetadataResourceId:
@@ -14880,6 +15458,8 @@ components:
         $ref: '#/components/schemas/Session'
     DescriptionInDocument:
       type: string
+    DocumentAuthor:
+      type: string
     DocumentDefaultVersionDescription:
       type: object
       properties:
@@ -14930,6 +15510,18 @@ components:
     DocumentSchemaVersion:
       type: string
       pattern: '([0-9]+)\.([0-9]+)'
+    ReviewInformationList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReviewInformation'
+      minItems: 1
+    ReviewStatus:
+      type: string
+      enum:
+        - APPROVED
+        - NOT_REVIEWED
+        - PENDING
+        - REJECTED
     DocumentFilterKey:
       type: string
       enum:
@@ -15007,6 +15599,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentRequiresList'
             - description: 'A list of SSM documents required by a document. For example, an <code>ApplicationConfiguration</code> document requires an <code>ApplicationConfigurationSchema</code> document.'
+        ReviewStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReviewStatus'
+            - description: The current status of a document review.
+        Author:
+          allOf:
+            - $ref: '#/components/schemas/DocumentAuthor'
+            - description: The user in your organization who created the document.
       description: Describes the name of a Systems Manager document.
     DocumentIdentifierList:
       type: array
@@ -15042,6 +15642,22 @@ components:
       type: string
       minLength: 1
       maxLength: 256
+    DocumentMetadataEnum:
+      type: string
+      enum:
+        - DocumentReviews
+    DocumentReviewerResponseList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentReviewerResponseSource'
+    DocumentMetadataResponseInfo:
+      type: object
+      properties:
+        ReviewerResponse:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReviewerResponseList'
+            - description: Details about a reviewer's response to a document review request.
+      description: Details about the response to a document review request.
     DocumentParameterName:
       type: string
     DocumentParameterType:
@@ -15087,6 +15703,82 @@ components:
             - $ref: '#/components/schemas/DocumentVersion'
             - description: The document version required by the current document.
       description: An SSM document required by the current document.
+    DocumentReviewAction:
+      type: string
+      enum:
+        - SendForReview
+        - UpdateReview
+        - Approve
+        - Reject
+    DocumentReviewComment:
+      type: string
+      pattern: ^(?!\s*$).+
+      minLength: 1
+      maxLength: 1024
+    DocumentReviewCommentSource:
+      type: object
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReviewCommentType'
+            - description: 'The type of information added to a review request. Currently, only the value <code>Comment</code> is supported.'
+        Content:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReviewComment'
+            - description: 'The content of a comment entered by a user who requests a review of a new document version, or who reviews the new version.'
+      description: Information about comments added to a document review request.
+    DocumentReviewCommentList:
+      type: array
+      items:
+        $ref: '#/components/schemas/DocumentReviewCommentSource'
+      minItems: 0
+      maxItems: 1
+    DocumentReviewCommentType:
+      type: string
+      enum:
+        - Comment
+    DocumentReviewerResponseSource:
+      type: object
+      properties:
+        CreateTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time that a reviewer entered a response to a document review request.
+        UpdatedTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time that a reviewer last updated a response to a document review request.
+        ReviewStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReviewStatus'
+            - description: '<p>The current review status of a new custom SSM document created by a member of your organization, or of the latest version of an existing SSM document.</p> <p>Only one version of a document can be in the APPROVED state at a time. When a new version is approved, the status of the previous version changes to REJECTED.</p> <p>Only one version of a document can be in review, or PENDING, at a time.</p>'
+        Comment:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReviewCommentList'
+            - description: The comment entered by a reviewer as part of their document review response.
+        Reviewer:
+          allOf:
+            - $ref: '#/components/schemas/Reviewer'
+            - description: The user in your organization assigned to review a document request.
+      description: Information about a reviewer's response to a document review request.
+    Reviewer:
+      type: string
+      pattern: '^[a-zA-Z0-9_\-.]{1,128}$'
+      maxLength: 50
+    DocumentReviews:
+      type: object
+      required:
+        - Action
+      properties:
+        Action:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReviewAction'
+            - description: The action to take on a document approval review request.
+        Comment:
+          allOf:
+            - $ref: '#/components/schemas/DocumentReviewCommentList'
+            - description: A comment entered by a user in your organization about the document review request.
+      description: Information about a document approval review.
     DocumentVersionInfo:
       type: object
       properties:
@@ -15122,6 +15814,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DocumentStatusInformation'
             - description: 'A message returned by AWS Systems Manager that explains the <code>Status</code> value. For example, a <code>Failed</code> status might be explained by the <code>StatusInformation</code> message, "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is correct."'
+        ReviewStatus:
+          allOf:
+            - $ref: '#/components/schemas/ReviewStatus'
+            - description: The current status of the approval review for the latest version of the document.
       description: Version information about the document.
     DocumentVersionList:
       type: array
@@ -15257,6 +15953,7 @@ components:
       description: 'The EffectivePatch structure defines metadata about a patch along with the approval state of the patch in a particular patch baseline. The approval state includes information about whether the patch is currently approved, due to be approved by a rule, explicitly approved, or explicitly rejected and the date the patch was or will be approved.'
     ExecutionRoleName:
       type: string
+      pattern: '[\w+=,.@-]+'
       minLength: 1
       maxLength: 64
     Fault:
@@ -15467,6 +16164,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The ARN of the AWS account that created the OpsItem.
+        OpsItemType:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemType'
+            - description: 'The type of OpsItem. Currently, the only valid values are <code>/aws/changerequest</code> and <code>/aws/issue</code>.'
         CreatedTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
@@ -15527,6 +16228,22 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpsItemSeverity'
             - description: The severity of the OpsItem. Severity options range from 1 to 4.
+        ActualStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a runbook workflow started. Currently reported only for the OpsItem type <code>/aws/changerequest</code>.
+        ActualEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a runbook workflow ended. Currently reported only for the OpsItem type <code>/aws/changerequest</code>.
+        PlannedStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time specified in a change request for a runbook workflow to start. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
+        PlannedEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
       description: 'Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. '
     GetOpsMetadataMaxResults:
       type: integer
@@ -15813,7 +16530,7 @@ components:
         LastPingDateTime:
           allOf:
             - $ref: '#/components/schemas/DateTime'
-            - description: 'The date and time when agent last pinged Systems Manager service. '
+            - description: 'The date and time when the agent last pinged the Systems Manager service. '
         AgentVersion:
           allOf:
             - $ref: '#/components/schemas/Version'
@@ -16437,6 +17154,18 @@ components:
     LastSuccessfulResourceDataSyncTime:
       type: string
       format: date-time
+    OpsItemEventFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpsItemEventFilter'
+    OpsItemEventMaxResults:
+      type: integer
+      minimum: 1
+      maximum: 50
+    OpsItemEventSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpsItemEventSummary'
     ListOpsMetadataMaxResults:
       type: integer
       minimum: 1
@@ -16899,8 +17628,8 @@ components:
         Value:
           allOf:
             - $ref: '#/components/schemas/MetadataValueString'
-            - description: Metadata value to assign to an AppManager application.
-      description: Metadata to assign to an AppManager application.
+            - description: Metadata value to assign to an Application Manager application.
+      description: Metadata to assign to an Application Manager application.
     MetadataValueString:
       type: string
       minLength: 1
@@ -17080,8 +17809,24 @@ components:
         - Open
         - InProgress
         - Resolved
+        - Pending
+        - TimedOut
+        - Cancelling
+        - Cancelled
+        - Failed
+        - CompletedWithSuccess
+        - CompletedWithFailure
+        - Scheduled
+        - RunbookInProgress
+        - PendingChangeCalendarOverride
+        - ChangeCalendarOverrideApproved
+        - ChangeCalendarOverrideRejected
+        - PendingApproval
+        - Approved
+        - Rejected
     OpsItemDataKey:
       type: string
+      pattern: ^(?!\s*$).+
       minLength: 1
       maxLength: 128
     OpsItemDataType:
@@ -17091,6 +17836,7 @@ components:
         - String
     OpsItemDataValueString:
       type: string
+      pattern: '[\s\S]*\S[\s\S]*'
     OpsItemDataValue:
       type: object
       properties:
@@ -17103,6 +17849,83 @@ components:
             - $ref: '#/components/schemas/OpsItemDataType'
             - description: The type of key-value pair. Valid types include <code>SearchableString</code> and <code>String</code>.
       description: An object that defines the value of the key and its type in the OperationalData map.
+    OpsItemEventFilterKey:
+      type: string
+      enum:
+        - OpsItemId
+    OpsItemEventFilterValues:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpsItemEventFilterValue'
+    OpsItemEventFilterOperator:
+      type: string
+      enum:
+        - Equal
+    OpsItemEventFilter:
+      type: object
+      required:
+        - Key
+        - Values
+        - Operator
+      properties:
+        Key:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemEventFilterKey'
+            - description: 'The name of the filter key. Currently, the only supported value is <code>OpsItemId</code>.'
+        Values:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemEventFilterValues'
+            - description: 'The values for the filter, consisting of one or more OpsItem IDs.'
+        Operator:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemEventFilterOperator'
+            - description: 'The operator used by the filter call. Currently, the only supported value is <code>Equal</code>.'
+      description: 'Describes a filter for a specific list of OpsItem events. You can filter event information by using tags. You specify tags by using a key-value pair mapping. '
+    OpsItemEventFilterValue:
+      type: string
+      pattern: '^(oi)-[0-9a-f]{12}$'
+      minLength: 1
+      maxLength: 15
+    OpsItemEventSummary:
+      type: object
+      properties:
+        OpsItemId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the OpsItem.
+        EventId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The ID of the OpsItem event.
+        Source:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The source of the OpsItem event.
+        DetailType:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The type of information provided as a detail.
+        Detail:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: Specific information about the OpsItem event.
+        CreatedBy:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemIdentity'
+            - description: Information about the user or resource that created the OpsItem event.
+        CreatedTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date and time the OpsItem event was created.
+      description: Summary information about an OpsItem event.
+    OpsItemIdentity:
+      type: object
+      properties:
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem event.
+      description: Information about the user or resource that created an OpsItem event.
     OpsItemFilterKey:
       type: string
       enum:
@@ -17114,6 +17937,10 @@ components:
         - OpsItemId
         - CreatedTime
         - LastModifiedTime
+        - ActualStartTime
+        - ActualEndTime
+        - PlannedStartTime
+        - PlannedEndTime
         - OperationalData
         - OperationalDataKey
         - OperationalDataValue
@@ -17121,6 +17948,13 @@ components:
         - AutomationId
         - Category
         - Severity
+        - OpsItemType
+        - ChangeRequestByRequesterArn
+        - ChangeRequestByRequesterName
+        - ChangeRequestByApproverArn
+        - ChangeRequestByApproverName
+        - ChangeRequestByTemplate
+        - ChangeRequestByTargetsResourceGroup
     OpsItemFilterValues:
       type: array
       items:
@@ -17217,6 +18051,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpsItemSeverity'
             - description: A list of OpsItems by severity.
+        OpsItemType:
+          allOf:
+            - $ref: '#/components/schemas/OpsItemType'
+            - description: 'The type of OpsItem. Currently, the only valid values are <code>/aws/changerequest</code> and <code>/aws/issue</code>.'
+        ActualStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a runbook workflow started. Currently reported only for the OpsItem type <code>/aws/changerequest</code>.
+        ActualEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time a runbook workflow ended. Currently reported only for the OpsItem type <code>/aws/changerequest</code>.
+        PlannedStartTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time specified in a change request for a runbook workflow to start. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
+        PlannedEndTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time specified in a change request for a runbook workflow to end. Currently supported only for the OpsItem type <code>/aws/changerequest</code>.
       description: A count of OpsItems.
     OpsMetadata:
       type: object
@@ -17224,7 +18078,7 @@ components:
         ResourceId:
           allOf:
             - $ref: '#/components/schemas/OpsMetadataResourceId'
-            - description: The ID of the AppManager application.
+            - description: The ID of the Application Manager application.
         OpsMetadataArn:
           allOf:
             - $ref: '#/components/schemas/OpsMetadataArn'
@@ -17241,7 +18095,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/DateTime'
             - description: The date the OpsMetadata objects was created.
-      description: Operational metadata for an application in AppManager.
+      description: Operational metadata for an application in Application Manager.
     OpsMetadataFilterKey:
       type: string
       pattern: ^(?!\s*$).+
@@ -18076,6 +18930,60 @@ components:
       maxLength: 300
     StreamUrl:
       type: string
+    ReviewInformation:
+      type: object
+      properties:
+        ReviewedTime:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The time that the reviewer took action on the document review request.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ReviewStatus'
+            - description: The current status of the document review request.
+        Reviewer:
+          allOf:
+            - $ref: '#/components/schemas/Reviewer'
+            - description: The reviewer assigned to take action on the document review request.
+      description: Information about the result of a document review request.
+    Runbook:
+      type: object
+      required:
+        - DocumentName
+      properties:
+        DocumentName:
+          allOf:
+            - $ref: '#/components/schemas/DocumentARN'
+            - description: The name of the Automation runbook (Automation document) used in a runbook workflow.
+        DocumentVersion:
+          allOf:
+            - $ref: '#/components/schemas/DocumentVersion'
+            - description: The version of the Automation runbook (Automation document) used in a runbook workflow.
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/AutomationParameterMap'
+            - description: 'The key-value map of execution parameters, which were supplied when calling <code>StartChangeRequestExecution</code>.'
+        TargetParameterName:
+          allOf:
+            - $ref: '#/components/schemas/AutomationParameterKey'
+            - description: 'The name of the parameter used as the target resource for the rate-controlled runbook workflow. Required if you specify <code>Targets</code>. '
+        Targets:
+          allOf:
+            - $ref: '#/components/schemas/Targets'
+            - description: A key-value mapping to target resources that the Runbook operation performs tasks on. Required if you specify <code>TargetParameterName</code>.
+        MaxConcurrency:
+          allOf:
+            - $ref: '#/components/schemas/MaxConcurrency'
+            - description: 'The <code>MaxConcurrency</code> value specified by the user when the operation started, indicating the maximum number of resources that the runbook operation can run on at the same time.'
+        MaxErrors:
+          allOf:
+            - $ref: '#/components/schemas/MaxErrors'
+            - description: 'The <code>MaxErrors</code> value specified by the user when the execution started, indicating the maximum number of errors that can occur during the operation before the updates are stopped or rolled back.'
+        TargetLocations:
+          allOf:
+            - $ref: '#/components/schemas/TargetLocations'
+            - description: Information about the AWS Regions and accounts targeted by the current Runbook operation.
+      description: <p>Information about an Automation runbook (Automation document) used in a runbook workflow in Change Manager.</p> <note> <p>The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received.</p> </note>
     ScheduledWindowExecution:
       type: object
       properties:
@@ -18243,15 +19151,15 @@ components:
         TargetLocationMaxConcurrency:
           allOf:
             - $ref: '#/components/schemas/MaxConcurrency'
-            - description: 'The maximum number of AWS accounts and AWS regions allowed to run the Automation concurrently '
+            - description: The maximum number of AWS accounts and AWS regions allowed to run the Automation concurrently.
         TargetLocationMaxErrors:
           allOf:
             - $ref: '#/components/schemas/MaxErrors'
-            - description: 'The maximum number of errors allowed before the system stops queueing additional Automation executions for the currently running Automation. '
+            - description: The maximum number of errors allowed before the system stops queueing additional Automation executions for the currently running Automation.
         ExecutionRoleName:
           allOf:
             - $ref: '#/components/schemas/ExecutionRoleName'
-            - description: The Automation execution role used by the currently running Automation.
+            - description: 'The Automation execution role used by the currently running Automation. If not specified, the default value is <code>AWS-SystemsManager-AutomationExecutionRole</code>.'
       description: The combination of AWS Regions and accounts targeted by the current Automation execution.
     StepExecution:
       type: object

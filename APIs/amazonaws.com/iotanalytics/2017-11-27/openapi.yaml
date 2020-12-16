@@ -858,6 +858,18 @@ paths:
                     $ref: '#/components/schemas/Tag'
                   minItems: 1
                   maxItems: 50
+                fileFormatConfiguration:
+                  description: '<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can''t change the file format after you create the data store.</p>'
+                  type: object
+                  properties:
+                    jsonConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/JsonConfiguration'
+                        - description: Contains the configuration information of the JSON format.
+                    parquetConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ParquetConfiguration'
+                        - description: Contains the configuration information of the Parquet format.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1638,6 +1650,18 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/CustomerManagedDatastoreS3Storage'
                         - description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the <code>retentionPeriod</code> parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
+                fileFormatConfiguration:
+                  description: '<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can''t change the file format after you create the data store.</p>'
+                  type: object
+                  properties:
+                    jsonConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/JsonConfiguration'
+                        - description: Contains the configuration information of the JSON format.
+                    parquetConfiguration:
+                      allOf:
+                        - $ref: '#/components/schemas/ParquetConfiguration'
+                        - description: Contains the configuration information of the Parquet format.
   '/pipelines/{pipelineName}':
     delete:
       operationId: DeletePipeline
@@ -2390,13 +2414,21 @@ paths:
               type: object
               properties:
                 startTime:
-                  description: The start time (inclusive) of raw message data that is reprocessed.
+                  description: '<p>The start time (inclusive) of raw message data that is reprocessed.</p> <p>If you specify a value for the <code>startTime</code> parameter, you must not use the <code>channelMessages</code> object.</p>'
                   type: string
                   format: date-time
                 endTime:
-                  description: The end time (exclusive) of raw message data that is reprocessed.
+                  description: '<p>The end time (exclusive) of raw message data that is reprocessed.</p> <p>If you specify a value for the <code>endTime</code> parameter, you must not use the <code>channelMessages</code> object.</p>'
                   type: string
                   format: date-time
+                channelMessages:
+                  description: Specifies one or more sets of channel messages.
+                  type: object
+                  properties:
+                    s3Paths:
+                      allOf:
+                        - $ref: '#/components/schemas/S3PathChannelMessages'
+                        - description: Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2743,6 +2775,18 @@ components:
             - $ref: '#/components/schemas/RoleArn'
             - description: The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
       description: 'Use this to store data store data in an S3 bucket that you manage. When customer-managed storage is selected, the <code>retentionPeriod</code> parameter is ignored. You cannot change the choice of service-managed or customer-managed S3 storage after the data store is created.'
+    JsonConfiguration:
+      type: object
+      properties: {}
+      description: Contains the configuration information of the JSON format.
+    ParquetConfiguration:
+      type: object
+      properties:
+        schemaDefinition:
+          allOf:
+            - $ref: '#/components/schemas/SchemaDefinition'
+            - description: Information needed to define a schema.
+      description: Contains the configuration information of the Parquet format.
     CreatePipelineResponse:
       type: object
       properties:
@@ -3171,6 +3215,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/ReprocessingId'
             - description: The ID of the pipeline reprocessing activity that was started.
+    S3PathChannelMessages:
+      type: array
+      items:
+        $ref: '#/components/schemas/S3PathChannelMessage'
+      minItems: 1
+      maxItems: 100
     TagResourceResponse:
       type: object
       properties: {}
@@ -3349,6 +3399,14 @@ components:
             - $ref: '#/components/schemas/Timestamp'
             - description: '<p>The last time when a new message arrived in the channel.</p> <p>AWS IoT Analytics updates this value at most once per minute for one channel. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>'
       description: 'A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages before publishing the data to a pipeline.'
+    ChannelMessages:
+      type: object
+      properties:
+        s3Paths:
+          allOf:
+            - $ref: '#/components/schemas/S3PathChannelMessages'
+            - description: Specifies one or more keys that identify the Amazon Simple Storage Service (Amazon S3) objects that save your channel messages.
+      description: Specifies one or more sets of channel messages.
     EstimatedResourceSize:
       type: object
       properties:
@@ -3433,6 +3491,35 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ChannelSummary'
+    ColumnName:
+      type: string
+      pattern: '^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$'
+      minLength: 1
+      maxLength: 255
+    ColumnDataType:
+      type: string
+      minLength: 1
+      maxLength: 131072
+      x-pattern: '^[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*$'
+    Column:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ColumnName'
+            - description: The name of the column.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ColumnDataType'
+            - description: 'The type of data. For more information about the supported data types, see <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html">Common data types</a> in the <i>AWS Glue Developer Guide</i>.'
+      description: Contains information about a column that stores your data.
+    Columns:
+      type: array
+      items:
+        $ref: '#/components/schemas/Column'
     ComputeType:
       type: string
       enum:
@@ -3625,6 +3712,18 @@ components:
             - $ref: '#/components/schemas/CustomerManagedDatastoreS3Storage'
             - description: 'Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the <code>retentionPeriod</code> parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.'
       description: 'Where data store data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You cannot change this storage option after the data store is created.'
+    FileFormatConfiguration:
+      type: object
+      properties:
+        jsonConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/JsonConfiguration'
+            - description: Contains the configuration information of the JSON format.
+        parquetConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ParquetConfiguration'
+            - description: Contains the configuration information of the Parquet format.
+      description: '<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can''t change the file format after you create the data store.</p>'
     CreateDatastoreRequest:
       type: object
       required:
@@ -3647,6 +3746,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: Metadata which can be used to manage the data store.
+        fileFormatConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/FileFormatConfiguration'
+            - description: '<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can''t change the file format after you create the data store.</p>'
     DatastoreArn:
       type: string
     PipelineActivities:
@@ -4013,6 +4116,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: '<p>The last time when a new message arrived in the data store.</p> <p>AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>'
+        fileFormatConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/FileFormatConfiguration'
+            - description: '<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can''t change the file format after you create the data store.</p>'
       description: Information about a data store.
     DatastoreStatistics:
       type: object
@@ -4065,11 +4172,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: '<p>The last time when a new message arrived in the data store.</p> <p>AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>'
+        fileFormatType:
+          allOf:
+            - $ref: '#/components/schemas/FileFormatType'
+            - description: The file format of the data in the data store.
       description: A summary of information about a data store.
     DatastoreSummaries:
       type: array
       items:
         $ref: '#/components/schemas/DatastoreSummary'
+    FileFormatType:
+      type: string
+      enum:
+        - JSON
+        - PARQUET
     DeleteChannelRequest:
       type: object
       title: DeleteChannelRequest
@@ -4325,6 +4441,14 @@ components:
             - $ref: '#/components/schemas/OutputFileName'
             - description: 'The URI of the location where dataset contents are stored, usually the URI of a file in an S3 bucket.'
       description: The value of the variable as a structure that specifies an output file URI.
+    SchemaDefinition:
+      type: object
+      properties:
+        columns:
+          allOf:
+            - $ref: '#/components/schemas/Columns'
+            - description: <p>Specifies one or more columns that store your data.</p> <p>Each schema can have up to 100 columns. Each column can have up to 100 nested types</p>
+      description: Information needed to define a schema.
     ReprocessingSummaries:
       type: array
       items:
@@ -4415,6 +4539,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/MessagePayloads'
             - description: The sample message payloads on which the pipeline activity is run.
+    S3PathChannelMessage:
+      type: string
+      pattern: '^[a-zA-Z0-9/_!''(){}\*\s\.\-\=\:]+$'
+      minLength: 1
+      maxLength: 1024
     StartTime:
       type: string
       format: date-time
@@ -4433,11 +4562,15 @@ components:
         startTime:
           allOf:
             - $ref: '#/components/schemas/StartTime'
-            - description: The start time (inclusive) of raw message data that is reprocessed.
+            - description: '<p>The start time (inclusive) of raw message data that is reprocessed.</p> <p>If you specify a value for the <code>startTime</code> parameter, you must not use the <code>channelMessages</code> object.</p>'
         endTime:
           allOf:
             - $ref: '#/components/schemas/EndTime'
-            - description: The end time (exclusive) of raw message data that is reprocessed.
+            - description: '<p>The end time (exclusive) of raw message data that is reprocessed.</p> <p>If you specify a value for the <code>endTime</code> parameter, you must not use the <code>channelMessages</code> object.</p>'
+        channelMessages:
+          allOf:
+            - $ref: '#/components/schemas/ChannelMessages'
+            - description: '<p>Specifies one or more sets of channel messages that you want to reprocess.</p> <p>If you use the <code>channelMessages</code> object, you must not specify a value for <code>startTime</code> and <code>endTime</code>.</p>'
     StringValue:
       type: string
       minLength: 0
@@ -4520,6 +4653,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/DatastoreStorage'
             - description: 'Where data store data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is<code>serviceManagedS3</code>. You cannot change this storage option after the data store is created.'
+        fileFormatConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/FileFormatConfiguration'
+            - description: '<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href="https://parquet.apache.org/">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can''t change the file format after you create the data store.</p>'
     UpdatePipelineRequest:
       type: object
       required:
