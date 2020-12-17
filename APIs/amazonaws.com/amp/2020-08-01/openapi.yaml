@@ -3,7 +3,7 @@ info:
   version: '2020-08-01'
   x-release: v4
   title: Amazon Prometheus Service
-  description: StealFire Service
+  description: Amazon Managed Service for Prometheus
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -116,7 +116,7 @@ paths:
   /workspaces:
     post:
       operationId: CreateWorkspace
-      description: Creates a new StealFire workspace.
+      description: Creates a new AMP workspace.
       responses:
         '202':
           description: Success
@@ -189,7 +189,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListWorkspaces
-      description: 'Lists all StealFire workspaces, including workspaces being created or deleted.'
+      description: 'Lists all AMP workspaces, including workspaces being created or deleted.'
       responses:
         '200':
           description: Success
@@ -249,7 +249,7 @@ paths:
   '/workspaces/{workspaceId}':
     delete:
       operationId: DeleteWorkspace
-      description: Deletes a StealFire workspace.
+      description: Deletes an AMP workspace.
       responses:
         '202':
           description: Success
@@ -314,7 +314,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeWorkspace
-      description: Describes an existing StealFire workspace.
+      description: Describes an existing AMP workspace.
       responses:
         '200':
           description: Success
@@ -366,7 +366,7 @@ paths:
   '/workspaces/{workspaceId}/alias':
     post:
       operationId: UpdateWorkspaceAlias
-      description: Updates a StealFire workspace alias.
+      description: Updates an AMP workspace alias.
       responses:
         '204':
           description: Success
