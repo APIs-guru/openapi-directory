@@ -364,7 +364,7 @@ components:
         $ref: '#/components/schemas/AttributeValue'
     FilterAttributeName:
       type: string
-      pattern: '[A-Za-z0-9]+'
+      pattern: '[A-Za-z0-9_]+'
       maxLength: 50
     FilterValues:
       type: object

@@ -50,6 +50,71 @@ servers:
     variables: {}
     description: The general Route 53 endpoint for China (Beijing) and China (Ningxia)
 paths:
+  '/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/activate':
+    post:
+      operationId: ActivateKeySigningKey
+      description: Activates a key signing key (KSK) so that it can be used for signing by DNSSEC. This operation changes the KSK status to <code>ACTIVE</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ActivateKeySigningKeyResponse'
+        '480':
+          description: ConcurrentModification
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModification'
+        '481':
+          description: NoSuchKeySigningKey
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchKeySigningKey'
+        '482':
+          description: InvalidKeySigningKeyStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKeySigningKeyStatus'
+        '483':
+          description: InvalidSigningStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidSigningStatus'
+        '484':
+          description: InvalidKMSArn
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSArn'
+      parameters:
+        - name: HostedZoneId
+          in: path
+          required: true
+          description: A unique string used to identify a hosted zone.
+          schema:
+            type: string
+            maxLength: 32
+        - name: Name
+          in: path
+          required: true
+          description: An alphanumeric string used to identify a key signing key (KSK).
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2013-04-01/hostedzone/{Id}/associatevpc':
     post:
       operationId: AssociateVPCWithHostedZone
@@ -728,6 +793,121 @@ paths:
             type: string
           description: Pagination token
           required: false
+  /2013-04-01/keysigningkey:
+    post:
+      operationId: CreateKeySigningKey
+      description: Creates a new key signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.
+      responses:
+        '201':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/CreateKeySigningKeyResponse'
+        '480':
+          description: NoSuchHostedZone
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchHostedZone'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '482':
+          description: InvalidInput
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidInput'
+        '483':
+          description: InvalidKMSArn
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSArn'
+        '484':
+          description: InvalidKeySigningKeyStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKeySigningKeyStatus'
+        '485':
+          description: InvalidSigningStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidSigningStatus'
+        '486':
+          description: InvalidKeySigningKeyName
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKeySigningKeyName'
+        '487':
+          description: KeySigningKeyAlreadyExists
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KeySigningKeyAlreadyExists'
+        '488':
+          description: TooManyKeySigningKeys
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/TooManyKeySigningKeys'
+        '489':
+          description: ConcurrentModification
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModification'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          text/xml:
+            schema:
+              type: object
+              required:
+                - CallerReference
+                - HostedZoneId
+                - KeyManagementServiceArn
+                - Name
+                - Status
+              properties:
+                CallerReference:
+                  description: A unique string that identifies the request.
+                  type: string
+                  minLength: 1
+                  maxLength: 128
+                HostedZoneId:
+                  description: The unique string (ID) used to identify a hosted zone.
+                  type: string
+                  maxLength: 32
+                KeyManagementServiceArn:
+                  description: '<p>The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The <code>KeyManagementServiceArn</code> must be unique for each key signing key (KSK) in a single hosted zone. To see an example of <code>KeyManagementServiceArn</code> that grants the correct permissions for DNSSEC, scroll down to <b>Example</b>. </p> <p>You must configure the CMK as follows:</p> <dl> <dt>Status</dt> <dd> <p>Enabled</p> </dd> <dt>Key spec</dt> <dd> <p>ECC_NIST_P256</p> </dd> <dt>Key usage</dt> <dd> <p>Sign and verify</p> </dd> <dt>Key policy</dt> <dd> <p>The key policy must give permission for the following actions:</p> <ul> <li> <p>DescribeKey</p> </li> <li> <p>GetPublicKey</p> </li> <li> <p>Sign</p> </li> </ul> <p>The key policy must also include the Amazon Route 53 service in the principal for your account. Specify the following:</p> <ul> <li> <p> <code>"Service": "api-service.dnssec.route53.aws.internal"</code> </p> </li> </ul> </dd> </dl> <p>For more information about working with CMK in KMS, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html">AWS Key Management Service concepts</a>.</p>'
+                  type: string
+                Name:
+                  description: An alphanumeric string used to identify a key signing key (KSK). <code>Name</code> must be unique for each key signing key in the same hosted zone.
+                  type: string
+                  minLength: 3
+                  maxLength: 128
+                Status:
+                  description: A string specifying the initial status of the key signing key (KSK). You can set the value to <code>ACTIVE</code> or <code>INACTIVE</code>.
+                  type: string
+                  minLength: 5
+                  maxLength: 150
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /2013-04-01/queryloggingconfig:
     post:
       operationId: CreateQueryLoggingConfig
@@ -1324,6 +1504,77 @@ paths:
           description: ' <i>Optional</i>: An integer that specifies the maximum number of VPCs that you want Amazon Route 53 to return. If you don''t specify a value for <code>MaxResults</code>, Route 53 returns up to 50 VPCs per page.'
           schema:
             type: string
+  '/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/deactivate':
+    post:
+      operationId: DeactivateKeySigningKey
+      description: Deactivates a key signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the KSK status to <code>INACTIVE</code>.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeactivateKeySigningKeyResponse'
+        '480':
+          description: ConcurrentModification
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModification'
+        '481':
+          description: NoSuchKeySigningKey
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchKeySigningKey'
+        '482':
+          description: InvalidKeySigningKeyStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKeySigningKeyStatus'
+        '483':
+          description: InvalidSigningStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidSigningStatus'
+        '484':
+          description: KeySigningKeyInUse
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KeySigningKeyInUse'
+        '485':
+          description: KeySigningKeyInParentDSRecord
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KeySigningKeyInParentDSRecord'
+      parameters:
+        - name: HostedZoneId
+          in: path
+          required: true
+          description: A unique string used to identify a hosted zone.
+          schema:
+            type: string
+            maxLength: 32
+        - name: Name
+          in: path
+          required: true
+          description: An alphanumeric string used to identify a key signing key (KSK).
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2013-04-01/healthcheck/{HealthCheckId}':
     delete:
       operationId: DeleteHealthCheck
@@ -1668,6 +1919,71 @@ paths:
                   description: 'The new comment for the hosted zone. If you don''t specify a value for <code>Comment</code>, Amazon Route 53 deletes the existing value of the <code>Comment</code> element, if any.'
                   type: string
                   maxLength: 256
+  '/2013-04-01/keysigningkey/{HostedZoneId}/{Name}':
+    delete:
+      operationId: DeleteKeySigningKey
+      description: 'Deletes a key signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be deactived before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DeleteKeySigningKeyResponse'
+        '480':
+          description: ConcurrentModification
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModification'
+        '481':
+          description: NoSuchKeySigningKey
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchKeySigningKey'
+        '482':
+          description: InvalidKeySigningKeyStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKeySigningKeyStatus'
+        '483':
+          description: InvalidSigningStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidSigningStatus'
+        '484':
+          description: InvalidKMSArn
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSArn'
+      parameters:
+        - name: HostedZoneId
+          in: path
+          required: true
+          description: A unique string used to identify a hosted zone.
+          schema:
+            type: string
+            maxLength: 32
+        - name: Name
+          in: path
+          required: true
+          description: An alphanumeric string used to identify a key signing key (KSK).
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 128
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2013-04-01/queryloggingconfig/{Id}':
     delete:
       operationId: DeleteQueryLoggingConfig
@@ -2217,6 +2533,75 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2013-04-01/hostedzone/{Id}/disable-dnssec':
+    post:
+      operationId: DisableHostedZoneDNSSEC
+      description: Disables DNSSEC signing in a specific hosted zone. This action does not deactivate any key signing keys (KSKs) that are active in the hosted zone.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DisableHostedZoneDNSSECResponse'
+        '480':
+          description: NoSuchHostedZone
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchHostedZone'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '482':
+          description: ConcurrentModification
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModification'
+        '483':
+          description: KeySigningKeyInParentDSRecord
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KeySigningKeyInParentDSRecord'
+        '484':
+          description: DNSSECNotFound
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DNSSECNotFound'
+        '485':
+          description: InvalidKeySigningKeyStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKeySigningKeyStatus'
+        '486':
+          description: InvalidKMSArn
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSArn'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: A unique string used to identify a hosted zone.
+          schema:
+            type: string
+            maxLength: 32
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/2013-04-01/hostedzone/{Id}/disassociatevpc':
     post:
       operationId: DisassociateVPCFromHostedZone
@@ -2288,6 +2673,81 @@ paths:
                 Comment:
                   description: ' <i>Optional:</i> A comment about the disassociation request.'
                   type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2013-04-01/hostedzone/{Id}/enable-dnssec':
+    post:
+      operationId: EnableHostedZoneDNSSEC
+      description: Enables DNSSEC signing in a specific hosted zone.
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/EnableHostedZoneDNSSECResponse'
+        '480':
+          description: NoSuchHostedZone
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchHostedZone'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+        '482':
+          description: ConcurrentModification
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/ConcurrentModification'
+        '483':
+          description: KeySigningKeyWithActiveStatusNotFound
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/KeySigningKeyWithActiveStatusNotFound'
+        '484':
+          description: InvalidKMSArn
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKMSArn'
+        '485':
+          description: HostedZonePartiallyDelegated
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/HostedZonePartiallyDelegated'
+        '486':
+          description: DNSSECNotFound
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/DNSSECNotFound'
+        '487':
+          description: InvalidKeySigningKeyStatus
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidKeySigningKeyStatus'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: A unique string used to identify a hosted zone.
+          schema:
+            type: string
+            maxLength: 32
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2385,6 +2845,45 @@ paths:
               schema:
                 $ref: '#/components/schemas/GetCheckerIpRangesResponse'
       parameters: []
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/2013-04-01/hostedzone/{Id}/dnssec':
+    get:
+      operationId: GetDNSSEC
+      description: 'Returns information about DNSSEC for a specific hosted zone, including the key signing keys (KSKs) and zone signing keys (ZSKs) in the hosted zone.'
+      responses:
+        '200':
+          description: Success
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/GetDNSSECResponse'
+        '480':
+          description: NoSuchHostedZone
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/NoSuchHostedZone'
+        '481':
+          description: InvalidArgument
+          content:
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/InvalidArgument'
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: A unique string used to identify a hosted zone.
+          schema:
+            type: string
+            maxLength: 32
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2947,6 +3446,7 @@ paths:
               - SPF
               - AAAA
               - CAA
+              - DS
         - name: identifier
           in: query
           required: false
@@ -3168,6 +3668,7 @@ paths:
               - SPF
               - AAAA
               - CAA
+              - DS
         - name: maxitems
           in: query
           required: false
@@ -3245,6 +3746,7 @@ paths:
               - SPF
               - AAAA
               - CAA
+              - DS
         - name: maxitems
           in: query
           required: false
@@ -3338,6 +3840,7 @@ paths:
               - SPF
               - AAAA
               - CAA
+              - DS
         - name: maxitems
           in: query
           required: false
@@ -3462,6 +3965,7 @@ paths:
               - SPF
               - AAAA
               - CAA
+              - DS
         - name: resolverip
           in: query
           required: false
@@ -3546,6 +4050,18 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    ActivateKeySigningKeyResponse:
+      type: object
+      required:
+        - ChangeInfo
+      properties:
+        ChangeInfo:
+          $ref: '#/components/schemas/ChangeInfo'
+    ConcurrentModification: {}
+    NoSuchKeySigningKey: {}
+    InvalidKeySigningKeyStatus: {}
+    InvalidSigningStatus: {}
+    InvalidKMSArn: {}
     AssociateVPCWithHostedZoneResponse:
       type: object
       required:
@@ -3784,6 +4300,22 @@ components:
     DelegationSetNotAvailable: {}
     NoSuchDelegationSet: {}
     DelegationSetNotReusable: {}
+    CreateKeySigningKeyResponse:
+      type: object
+      required:
+        - ChangeInfo
+        - KeySigningKey
+      properties:
+        ChangeInfo:
+          $ref: '#/components/schemas/ChangeInfo'
+        KeySigningKey:
+          allOf:
+            - $ref: '#/components/schemas/KeySigningKey'
+            - description: The key signing key (KSK) that the request creates.
+    InvalidArgument: {}
+    InvalidKeySigningKeyName: {}
+    KeySigningKeyAlreadyExists: {}
+    TooManyKeySigningKeys: {}
     CreateQueryLoggingConfigResponse:
       type: object
       required:
@@ -3793,7 +4325,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/QueryLoggingConfig'
             - description: 'A complex type that contains the ID for a query logging configuration, the ID of the hosted zone that you want to log queries for, and the ARN for the log group that you want Amazon Route 53 to send query logs to.'
-    ConcurrentModification: {}
     NoSuchCloudWatchLogsLogGroup: {}
     QueryLoggingConfigAlreadyExists: {}
     InsufficientCloudWatchLogsResourcePolicy: {}
@@ -3808,7 +4339,6 @@ components:
             - description: A complex type that contains name server information.
     DelegationSetAlreadyCreated: {}
     HostedZoneNotFound: {}
-    InvalidArgument: {}
     DelegationSetAlreadyReusable: {}
     CreateTrafficPolicyResponse:
       type: object
@@ -3863,6 +4393,15 @@ components:
             - description: The VPC that you authorized associating with a hosted zone.
       description: A complex type that contains the response information from a <code>CreateVPCAssociationAuthorization</code> request.
     TooManyVPCAssociationAuthorizations: {}
+    DeactivateKeySigningKeyResponse:
+      type: object
+      required:
+        - ChangeInfo
+      properties:
+        ChangeInfo:
+          $ref: '#/components/schemas/ChangeInfo'
+    KeySigningKeyInUse: {}
+    KeySigningKeyInParentDSRecord: {}
     DeleteHealthCheckResponse:
       type: object
       properties: {}
@@ -3879,6 +4418,13 @@ components:
             - description: 'A complex type that contains the ID, the status, and the date and time of a request to delete a hosted zone.'
       description: A complex type that contains the response to a <code>DeleteHostedZone</code> request.
     HostedZoneNotEmpty: {}
+    DeleteKeySigningKeyResponse:
+      type: object
+      required:
+        - ChangeInfo
+      properties:
+        ChangeInfo:
+          $ref: '#/components/schemas/ChangeInfo'
     DeleteQueryLoggingConfigResponse:
       type: object
       properties: {}
@@ -3903,6 +4449,14 @@ components:
       properties: {}
       description: Empty response for the request.
     VPCAssociationAuthorizationNotFound: {}
+    DisableHostedZoneDNSSECResponse:
+      type: object
+      required:
+        - ChangeInfo
+      properties:
+        ChangeInfo:
+          $ref: '#/components/schemas/ChangeInfo'
+    DNSSECNotFound: {}
     DisassociateVPCFromHostedZoneResponse:
       type: object
       required:
@@ -3915,6 +4469,15 @@ components:
       description: A complex type that contains the response information for the disassociate request.
     VPCAssociationNotFound: {}
     LastVPCAssociation: {}
+    EnableHostedZoneDNSSECResponse:
+      type: object
+      required:
+        - ChangeInfo
+      properties:
+        ChangeInfo:
+          $ref: '#/components/schemas/ChangeInfo'
+    KeySigningKeyWithActiveStatusNotFound: {}
+    HostedZonePartiallyDelegated: {}
     GetAccountLimitResponse:
       type: object
       required:
@@ -3951,6 +4514,20 @@ components:
             - $ref: '#/components/schemas/CheckerIpRanges'
             - description: A complex type that contains sorted list of IP ranges in CIDR format for Amazon Route 53 health checkers.
       description: A complex type that contains the <code>CheckerIpRanges</code> element.
+    GetDNSSECResponse:
+      type: object
+      required:
+        - Status
+        - KeySigningKeys
+      properties:
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/DNSSECStatus'
+            - description: A string repesenting the status of DNSSEC.
+        KeySigningKeys:
+          allOf:
+            - $ref: '#/components/schemas/KeySigningKeys'
+            - description: The key signing keys (KSKs) in your account.
     GetGeoLocationResponse:
       type: object
       required:
@@ -4693,11 +5270,43 @@ components:
             - $ref: '#/components/schemas/LimitValue'
             - description: 'The current value for the limit that is specified by <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_AccountLimit.html#Route53-Type-AccountLimit-Type">Type</a>.'
       description: A complex type that contains the type of limit that you specified in the request and the current value for that limit.
-    AliasHealthEnabled:
-      type: boolean
     ResourceId:
       type: string
       maxLength: 32
+    SigningKeyName:
+      type: string
+      minLength: 3
+      maxLength: 128
+    ActivateKeySigningKeyRequest:
+      type: object
+      title: ActivateKeySigningKeyRequest
+      properties: {}
+    ChangeInfo:
+      type: object
+      required:
+        - Id
+        - Status
+        - SubmittedAt
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The ID of the request.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ChangeStatus'
+            - description: The current state of the request. <code>PENDING</code> indicates that this request has not yet been applied to all Amazon Route 53 DNS servers.
+        SubmittedAt:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: 'The date and time that the change request was submitted in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 format</a> and Coordinated Universal Time (UTC). For example, the value <code>2017-03-27T17:48:16.751Z</code> represents March 27, 2017 at 17:48:16.751 UTC.'
+        Comment:
+          allOf:
+            - $ref: '#/components/schemas/ResourceDescription'
+            - description: '<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html">GetChange</a> action to get detailed information about the change.</p>'
+      description: A complex type that describes change information about changes made to your hosted zone.
+    AliasHealthEnabled:
+      type: boolean
     DNSName:
       type: string
       maxLength: 1024
@@ -4748,30 +5357,6 @@ components:
             - $ref: '#/components/schemas/AssociateVPCComment'
             - description: ' <i>Optional:</i> A comment about the association request.'
       description: A complex type that contains information about the request to associate a VPC with a private hosted zone.
-    ChangeInfo:
-      type: object
-      required:
-        - Id
-        - Status
-        - SubmittedAt
-      properties:
-        Id:
-          allOf:
-            - $ref: '#/components/schemas/ResourceId'
-            - description: The ID of the request.
-        Status:
-          allOf:
-            - $ref: '#/components/schemas/ChangeStatus'
-            - description: The current state of the request. <code>PENDING</code> indicates that this request has not yet been applied to all Amazon Route 53 DNS servers.
-        SubmittedAt:
-          allOf:
-            - $ref: '#/components/schemas/TimeStamp'
-            - description: 'The date and time that the change request was submitted in <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601 format</a> and Coordinated Universal Time (UTC). For example, the value <code>2017-03-27T17:48:16.751Z</code> represents March 27, 2017 at 17:48:16.751 UTC.'
-        Comment:
-          allOf:
-            - $ref: '#/components/schemas/ResourceDescription'
-            - description: '<p>A complex type that describes change information about changes made to your hosted zone.</p> <p>This element contains an ID that you use when performing a <a href="https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html">GetChange</a> action to get detailed information about the change.</p>'
-      description: A complex type that describes change information about changes made to your hosted zone.
     ChangeAction:
       type: string
       enum:
@@ -5237,6 +5822,110 @@ components:
             - $ref: '#/components/schemas/DelegationSetNameServers'
             - description: A complex type that contains a list of the authoritative name servers for a hosted zone or for a reusable delegation set.
       description: 'A complex type that lists the name servers in a delegation set, as well as the <code>CallerReference</code> and the <code>ID</code> for the delegation set.'
+    SigningKeyString:
+      type: string
+    SigningKeyStatus:
+      type: string
+      minLength: 5
+      maxLength: 150
+    CreateKeySigningKeyRequest:
+      type: object
+      required:
+        - CallerReference
+        - HostedZoneId
+        - KeyManagementServiceArn
+        - Name
+        - Status
+      title: CreateKeySigningKeyRequest
+      properties:
+        CallerReference:
+          allOf:
+            - $ref: '#/components/schemas/Nonce'
+            - description: A unique string that identifies the request.
+        HostedZoneId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceId'
+            - description: The unique string (ID) used to identify a hosted zone.
+        KeyManagementServiceArn:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyString'
+            - description: '<p>The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The <code>KeyManagementServiceArn</code> must be unique for each key signing key (KSK) in a single hosted zone. To see an example of <code>KeyManagementServiceArn</code> that grants the correct permissions for DNSSEC, scroll down to <b>Example</b>. </p> <p>You must configure the CMK as follows:</p> <dl> <dt>Status</dt> <dd> <p>Enabled</p> </dd> <dt>Key spec</dt> <dd> <p>ECC_NIST_P256</p> </dd> <dt>Key usage</dt> <dd> <p>Sign and verify</p> </dd> <dt>Key policy</dt> <dd> <p>The key policy must give permission for the following actions:</p> <ul> <li> <p>DescribeKey</p> </li> <li> <p>GetPublicKey</p> </li> <li> <p>Sign</p> </li> </ul> <p>The key policy must also include the Amazon Route 53 service in the principal for your account. Specify the following:</p> <ul> <li> <p> <code>"Service": "api-service.dnssec.route53.aws.internal"</code> </p> </li> </ul> </dd> </dl> <p>For more information about working with CMK in KMS, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html">AWS Key Management Service concepts</a>.</p>'
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyName'
+            - description: An alphanumeric string used to identify a key signing key (KSK). <code>Name</code> must be unique for each key signing key in the same hosted zone.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyStatus'
+            - description: A string specifying the initial status of the key signing key (KSK). You can set the value to <code>ACTIVE</code> or <code>INACTIVE</code>.
+    KeySigningKey:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyName'
+            - description: An alphanumeric string used to identify a key signing key (KSK). <code>Name</code> must be unique for each key signing key in the same hosted zone.
+        KmsArn:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyString'
+            - description: '<p>The Amazon resource name (ARN) used to identify the customer managed key (CMK) in AWS Key Management Service (KMS). The <code>KmsArn</code> must be unique for each key signing key (KSK) in a single hosted zone.</p> <p>You must configure the CMK as follows:</p> <dl> <dt>Status</dt> <dd> <p>Enabled</p> </dd> <dt>Key spec</dt> <dd> <p>ECC_NIST_P256</p> </dd> <dt>Key usage</dt> <dd> <p>Sign and verify</p> </dd> <dt>Key policy</dt> <dd> <p>The key policy must give permission for the following actions:</p> <ul> <li> <p>DescribeKey</p> </li> <li> <p>GetPublicKey</p> </li> <li> <p>Sign</p> </li> </ul> <p>The key policy must also include the Amazon Route 53 service in the principal for your account. Specify the following:</p> <ul> <li> <p> <code>"Service": "api-service.dnssec.route53.aws.internal"</code> </p> </li> </ul> </dd> </dl> <p>For more information about working with the customer managed key (CMK) in KMS, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html">AWS Key Management Service concepts</a>.</p>'
+        Flag:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyInteger'
+            - description: 'An integer that specifies how the key is used. For key signing key (KSK), this value is always 257.'
+        SigningAlgorithmMnemonic:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyString'
+            - description: 'A string used to represent the signing algorithm. This value must follow the guidelines provided by <a href="https://tools.ietf.org/html/rfc8624#section-3.1">RFC-8624 Section 3.1</a>. '
+        SigningAlgorithmType:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyInteger'
+            - description: 'An integer used to represent the signing algorithm. This value must follow the guidelines provided by <a href="https://tools.ietf.org/html/rfc8624#section-3.1">RFC-8624 Section 3.1</a>. '
+        DigestAlgorithmMnemonic:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyString'
+            - description: 'A string used to represent the delegation signer digest algorithm. This value must follow the guidelines provided by <a href="https://tools.ietf.org/html/rfc8624#section-3.3">RFC-8624 Section 3.3</a>. '
+        DigestAlgorithmType:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyInteger'
+            - description: 'An integer used to represent the delegation signer digest algorithm. This value must follow the guidelines provided by <a href="https://tools.ietf.org/html/rfc8624#section-3.3">RFC-8624 Section 3.3</a>.'
+        KeyTag:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyTag'
+            - description: 'An integer used to identify the DNSSEC record for the domain name. The process used to calculate the value is described in <a href="https://tools.ietf.org/rfc/rfc4034.txt">RFC-4034 Appendix B</a>.'
+        DigestValue:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyString'
+            - description: A cryptographic digest of a DNSKEY resource record (RR). DNSKEY records are used to publish the public key that resolvers can use to verify DNSSEC signatures that are used to secure certain kinds of information provided by the DNS system.
+        PublicKey:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyString'
+            - description: 'The public key, represented as a Base64 encoding, as required by <a href="https://tools.ietf.org/rfc/rfc4034.txt"> RFC-4034 Page 5</a>.'
+        DSRecord:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyString'
+            - description: A string that represents a delegation signer (DS) record.
+        DNSKEYRecord:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyString'
+            - description: A string that represents a DNSKEY record.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyStatus'
+            - description: '<p>A string that represents the current key signing key (KSK) status.</p> <p>Status can have one of the following values:</p> <dl> <dt>ACTIVE</dt> <dd> <p>The KSK is being used for signing.</p> </dd> <dt>INACTIVE</dt> <dd> <p>The KSK is not being used for signing.</p> </dd> <dt>ACTION_NEEDED</dt> <dd> <p>There is an error in the KSK that requires you to take action to resolve.</p> </dd> <dt>INTERNAL_FAILURE</dt> <dd> <p>There was an error during a request. Before you can continue to work with DNSSEC signing, including actions that involve this KSK, you must correct the problem. For example, you may need to activate or deactivate the KSK.</p> </dd> </dl>'
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyStatusMessage'
+            - description: 'The status message provided for the following key signing key (KSK) statuses: <code>ACTION_NEEDED</code> or <code>INTERNAL_FAILURE</code>. The status message includes information about what the problem might be and steps that you can take to correct the issue.'
+        CreatedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: The date when the key signing key (KSK) was created.
+        LastModifiedDate:
+          allOf:
+            - $ref: '#/components/schemas/TimeStamp'
+            - description: The last time that the key signing key (KSK) was changed.
+      description: A key signing key (KSK) is a complex type that represents a public/private key pair. The private key is used to generate a digital signature for the zone signing key (ZSK). The public key is stored in the DNS and is used to authenticate the ZSK. A KSK is always associated with a hosted zone; it cannot exist by itself.
     CreateQueryLoggingConfigRequest:
       type: object
       required:
@@ -5470,6 +6159,30 @@ components:
       description: A complex type that contains information about the request to authorize associating a VPC with your private hosted zone. Authorization is only required when a private hosted zone and a VPC were created by using different accounts.
     DNSRCode:
       type: string
+    ServeSignature:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    SigningKeyStatusMessage:
+      type: string
+      minLength: 0
+      maxLength: 512
+    DNSSECStatus:
+      type: object
+      properties:
+        ServeSignature:
+          allOf:
+            - $ref: '#/components/schemas/ServeSignature'
+            - description: '<p>Indicates your hosted zone signging status: <code>SIGNING</code>, <code>NOT_SIGNING</code>, or <code>INTERNAL_FAILURE</code>. If the status is <code>INTERNAL_FAILURE</code>, see <code>StatusMessage</code> for information about steps that you can take to correct the problem.</p> <p>A status <code>INTERNAL_FAILURE</code> means there was an error during a request. Before you can continue to work with DNSSEC signing, including working with key signing keys (KSKs), you must correct the problem by enabling or disabling DNSSEC signing for the hosted zone.</p>'
+        StatusMessage:
+          allOf:
+            - $ref: '#/components/schemas/SigningKeyStatusMessage'
+            - description: 'The status message provided for the following DNSSEC signing status: <code>INTERNAL_FAILURE</code>. The status message includes information about what the problem might be and steps that you can take to correct the issue.'
+      description: A string repesenting the status of DNSSEC signing.
+    DeactivateKeySigningKeyRequest:
+      type: object
+      title: DeactivateKeySigningKeyRequest
+      properties: {}
     DelegationSetNameServers:
       type: array
       items:
@@ -5495,6 +6208,10 @@ components:
       title: DeleteHostedZoneRequest
       properties: {}
       description: A request to delete a hosted zone.
+    DeleteKeySigningKeyRequest:
+      type: object
+      title: DeleteKeySigningKeyRequest
+      properties: {}
     QueryLoggingConfigId:
       type: string
       minLength: 1
@@ -5552,6 +6269,10 @@ components:
             - $ref: '#/components/schemas/DimensionField'
             - description: 'For the metric that the CloudWatch alarm is associated with, the value of one dimension.'
       description: 'For the metric that the CloudWatch alarm is associated with, a complex type that contains information about one dimension.'
+    DisableHostedZoneDNSSECRequest:
+      type: object
+      title: DisableHostedZoneDNSSECRequest
+      properties: {}
     DisassociateVPCComment:
       type: string
     DisassociateVPCFromHostedZoneRequest:
@@ -5569,6 +6290,10 @@ components:
             - $ref: '#/components/schemas/DisassociateVPCComment'
             - description: ' <i>Optional:</i> A comment about the disassociation request.'
       description: A complex type that contains information about the VPC that you want to disassociate from a specified private hosted zone.
+    EnableHostedZoneDNSSECRequest:
+      type: object
+      title: EnableHostedZoneDNSSECRequest
+      properties: {}
     GeoLocationContinentCode:
       type: string
       minLength: 2
@@ -5662,6 +6387,14 @@ components:
       title: GetCheckerIpRangesRequest
       properties: {}
       description: Empty request.
+    GetDNSSECRequest:
+      type: object
+      title: GetDNSSECRequest
+      properties: {}
+    KeySigningKeys:
+      type: array
+      items:
+        $ref: '#/components/schemas/KeySigningKey'
     GetGeoLocationRequest:
       type: object
       title: GetGeoLocationRequest
@@ -5893,6 +6626,12 @@ components:
           - $ref: '#/components/schemas/HostedZone'
           - xml:
               name: HostedZone
+    SigningKeyInteger:
+      type: integer
+    SigningKeyTag:
+      type: integer
+      minimum: 0
+      maximum: 65536
     ServicePrincipal:
       type: string
       maxLength: 128
@@ -5959,6 +6698,7 @@ components:
         - SPF
         - AAAA
         - CAA
+        - DS
     ResourceRecordSetIdentifier:
       type: string
       minLength: 1

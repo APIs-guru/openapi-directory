@@ -181,23 +181,31 @@ paths:
                     PolicyType:
                       allOf:
                         - $ref: '#/components/schemas/PolicyTypeValues'
-                        - description: The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.
+                        - description: <p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> to create an event-based policy that performs specific actions when a defined event occurs in your AWS account.</p> <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>
                     ResourceTypes:
                       allOf:
                         - $ref: '#/components/schemas/ResourceTypeValuesList'
-                        - description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
+                        - description: '<p>The target resource type for snapshot and AMI lifecycle policies. Use <code>VOLUME </code>to create snapshots of individual volumes or use <code>INSTANCE</code> to create multi-volume snapshots from the volumes for an instance.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
                     TargetTags:
                       allOf:
                         - $ref: '#/components/schemas/TargetTagList'
-                        - description: The single tag that identifies targeted resources for this policy.
+                        - description: '<p>The single tag that identifies targeted resources for this policy.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
                     Schedules:
                       allOf:
                         - $ref: '#/components/schemas/ScheduleList'
-                        - description: The schedules of policy-defined actions. A policy can have up to four schedules - one mandatory schedule and up to three optional schedules.
+                        - description: '<p>The schedules of policy-defined actions for snapshot and AMI lifecycle policies. A policy can have up to four schedules—one mandatory schedule and up to three optional schedules.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
                     Parameters:
                       allOf:
                         - $ref: '#/components/schemas/Parameters'
-                        - description: 'A set of optional parameters for the policy. '
+                        - description: '<p>A set of optional parameters for snapshot and AMI lifecycle policies. </p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
+                    EventSource:
+                      allOf:
+                        - $ref: '#/components/schemas/EventSource'
+                        - description: '<p>The event that triggers the event-based policy. </p> <p>This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter.</p>'
+                    Actions:
+                      allOf:
+                        - $ref: '#/components/schemas/ActionList'
+                        - description: '<p>The actions to be performed when the event-based policy is triggered. You can specify only one action per policy.</p> <p>This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter.</p>'
                 Tags:
                   description: The tags to apply to the lifecycle policy during creation.
                   type: object
@@ -616,23 +624,31 @@ paths:
                     PolicyType:
                       allOf:
                         - $ref: '#/components/schemas/PolicyTypeValues'
-                        - description: The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.
+                        - description: <p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> to create an event-based policy that performs specific actions when a defined event occurs in your AWS account.</p> <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>
                     ResourceTypes:
                       allOf:
                         - $ref: '#/components/schemas/ResourceTypeValuesList'
-                        - description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
+                        - description: '<p>The target resource type for snapshot and AMI lifecycle policies. Use <code>VOLUME </code>to create snapshots of individual volumes or use <code>INSTANCE</code> to create multi-volume snapshots from the volumes for an instance.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
                     TargetTags:
                       allOf:
                         - $ref: '#/components/schemas/TargetTagList'
-                        - description: The single tag that identifies targeted resources for this policy.
+                        - description: '<p>The single tag that identifies targeted resources for this policy.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
                     Schedules:
                       allOf:
                         - $ref: '#/components/schemas/ScheduleList'
-                        - description: The schedules of policy-defined actions. A policy can have up to four schedules - one mandatory schedule and up to three optional schedules.
+                        - description: '<p>The schedules of policy-defined actions for snapshot and AMI lifecycle policies. A policy can have up to four schedules—one mandatory schedule and up to three optional schedules.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
                     Parameters:
                       allOf:
                         - $ref: '#/components/schemas/Parameters'
-                        - description: 'A set of optional parameters for the policy. '
+                        - description: '<p>A set of optional parameters for snapshot and AMI lifecycle policies. </p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
+                    EventSource:
+                      allOf:
+                        - $ref: '#/components/schemas/EventSource'
+                        - description: '<p>The event that triggers the event-based policy. </p> <p>This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter.</p>'
+                    Actions:
+                      allOf:
+                        - $ref: '#/components/schemas/ActionList'
+                        - description: '<p>The actions to be performed when the event-based policy is triggered. You can specify only one action per policy.</p> <p>This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -705,6 +721,7 @@ components:
       enum:
         - EBS_SNAPSHOT_MANAGEMENT
         - IMAGE_MANAGEMENT
+        - EVENT_BASED_POLICY
     ResourceTypeValuesList:
       type: array
       items:
@@ -733,8 +750,28 @@ components:
         NoReboot:
           allOf:
             - $ref: '#/components/schemas/NoReboot'
-            - description: Applies to AMI lifecycle policies only. Indicates whether targeted instances are rebooted when the lifecycle policy runs. <code>true</code> indicates that targeted instances are not rebooted when the policy runs. <code>false</code> indicates that target instances are rebooted when the policy runs. The default is <code>true</code> (instance are not rebooted).
+            - description: Applies to AMI lifecycle policies only. Indicates whether targeted instances are rebooted when the lifecycle policy runs. <code>true</code> indicates that targeted instances are not rebooted when the policy runs. <code>false</code> indicates that target instances are rebooted when the policy runs. The default is <code>true</code> (instances are not rebooted).
       description: Specifies optional parameters to add to a policy. The set of valid parameters depends on the combination of policy type and resource type.
+    EventSource:
+      type: object
+      required:
+        - Type
+      properties:
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/EventSourceValues'
+            - description: The source of the event. Currently only managed AWS CloudWatch Events rules are supported.
+        Parameters:
+          allOf:
+            - $ref: '#/components/schemas/EventParameters'
+            - description: Information about the event.
+      description: Specifies an event that triggers an event-based policy.
+    ActionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Action'
+      minItems: 1
+      maxItems: 1
     TagValue:
       type: string
       pattern: '[\p{all}]*'
@@ -796,6 +833,32 @@ components:
     UpdateLifecyclePolicyResponse:
       type: object
       properties: {}
+    ActionName:
+      type: string
+      pattern: '[0-9A-Za-z _-]+'
+      minLength: 0
+      maxLength: 120
+    CrossRegionCopyActionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/CrossRegionCopyAction'
+      minItems: 0
+      maxItems: 3
+    Action:
+      type: object
+      required:
+        - Name
+        - CrossRegionCopy
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ActionName'
+            - description: A descriptive name for the action.
+        CrossRegionCopy:
+          allOf:
+            - $ref: '#/components/schemas/CrossRegionCopyActionList'
+            - description: The rule for copying shared snapshots across Regions.
+      description: Specifies an action for an event-based policy.
     AvailabilityZone:
       type: string
       pattern: '([a-z]+-){2,3}\d[a-z]'
@@ -807,6 +870,11 @@ components:
         $ref: '#/components/schemas/AvailabilityZone'
       minItems: 1
       maxItems: 10
+    AwsAccountId:
+      type: string
+      pattern: '^[0-9]{12}$'
+      minLength: 12
+      maxLength: 12
     CmkArn:
       type: string
       pattern: 'arn:aws(-[a-z]{1,3}){0,2}:kms:([a-z]+-){2,3}\d:\d+:key/.*'
@@ -841,23 +909,31 @@ components:
         PolicyType:
           allOf:
             - $ref: '#/components/schemas/PolicyTypeValues'
-            - description: The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.
+            - description: <p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> to create an event-based policy that performs specific actions when a defined event occurs in your AWS account.</p> <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>
         ResourceTypes:
           allOf:
             - $ref: '#/components/schemas/ResourceTypeValuesList'
-            - description: The resource type. Use VOLUME to create snapshots of individual volumes or use INSTANCE to create multi-volume snapshots from the volumes for an instance.
+            - description: '<p>The target resource type for snapshot and AMI lifecycle policies. Use <code>VOLUME </code>to create snapshots of individual volumes or use <code>INSTANCE</code> to create multi-volume snapshots from the volumes for an instance.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
         TargetTags:
           allOf:
             - $ref: '#/components/schemas/TargetTagList'
-            - description: The single tag that identifies targeted resources for this policy.
+            - description: '<p>The single tag that identifies targeted resources for this policy.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
         Schedules:
           allOf:
             - $ref: '#/components/schemas/ScheduleList'
-            - description: The schedules of policy-defined actions. A policy can have up to four schedules - one mandatory schedule and up to three optional schedules.
+            - description: '<p>The schedules of policy-defined actions for snapshot and AMI lifecycle policies. A policy can have up to four schedules—one mandatory schedule and up to three optional schedules.</p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
         Parameters:
           allOf:
             - $ref: '#/components/schemas/Parameters'
-            - description: 'A set of optional parameters for the policy. '
+            - description: '<p>A set of optional parameters for snapshot and AMI lifecycle policies. </p> <p>This parameter is required for snapshot and AMI policies only. If you are creating an event-based policy, omit this parameter.</p>'
+        EventSource:
+          allOf:
+            - $ref: '#/components/schemas/EventSource'
+            - description: '<p>The event that triggers the event-based policy. </p> <p>This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter.</p>'
+        Actions:
+          allOf:
+            - $ref: '#/components/schemas/ActionList'
+            - description: '<p>The actions to be performed when the event-based policy is triggered. You can specify only one action per policy.</p> <p>This parameter is required for event-based policies only. If you are creating a snapshot or AMI policy, omit this parameter.</p>'
       description: Specifies the configuration of a lifecycle policy.
     TagMap:
       type: object
@@ -931,13 +1007,25 @@ components:
             - $ref: '#/components/schemas/CronExpression'
             - description: 'The schedule, as a Cron expression. The schedule interval must be between 1 hour and 1 year. For more information, see <a href="https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions">Cron expressions</a> in the <i>Amazon CloudWatch User Guide</i>.'
       description: '<p>Specifies when to create snapshots of EBS volumes.</p> <p>You must specify either a Cron expression or an interval, interval unit, and start time. You cannot specify both.</p>'
-    RetentionIntervalUnitValues:
+    Target:
       type: string
-      enum:
-        - DAYS
-        - WEEKS
-        - MONTHS
-        - YEARS
+      pattern: '^[\\w:\\-\\/\\*]+$'
+      minLength: 0
+      maxLength: 16
+    EncryptionConfiguration:
+      type: object
+      required:
+        - Encrypted
+      properties:
+        Encrypted:
+          allOf:
+            - $ref: '#/components/schemas/Encrypted'
+            - description: 'To encrypt a copy of an unencrypted snapshot when encryption by default is not enabled, enable encryption using this parameter. Copies of encrypted snapshots are encrypted, even if this parameter is false or when encryption by default is not enabled.'
+        CmkArn:
+          allOf:
+            - $ref: '#/components/schemas/CmkArn'
+            - description: 'The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.'
+      description: Specifies the encryption settings for shared snapshots that are copied across Regions.
     CrossRegionCopyRetainRule:
       type: object
       properties:
@@ -950,6 +1038,30 @@ components:
             - $ref: '#/components/schemas/RetentionIntervalUnitValues'
             - description: The unit of time for time-based retention.
       description: Specifies the retention rule for cross-Region snapshot copies.
+    CrossRegionCopyAction:
+      type: object
+      required:
+        - Target
+        - EncryptionConfiguration
+      properties:
+        Target:
+          allOf:
+            - $ref: '#/components/schemas/Target'
+            - description: The target Region.
+        EncryptionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/EncryptionConfiguration'
+            - description: The encryption settings for the copied snapshot.
+        RetainRule:
+          $ref: '#/components/schemas/CrossRegionCopyRetainRule'
+      description: Specifies a rule for copying shared snapshots across Regions.
+    RetentionIntervalUnitValues:
+      type: string
+      enum:
+        - DAYS
+        - WEEKS
+        - MONTHS
+        - YEARS
     TargetRegion:
       type: string
       pattern: '([a-z]+-){2,3}\d'
@@ -994,6 +1106,45 @@ components:
       type: object
       title: DeleteLifecyclePolicyRequest
       properties: {}
+    DescriptionRegex:
+      type: string
+      pattern: '[\p{all}]*'
+      minLength: 0
+      maxLength: 1000
+    EventTypeValues:
+      type: string
+      enum:
+        - shareSnapshot
+    SnapshotOwnerList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsAccountId'
+      minItems: 0
+      maxItems: 50
+    EventParameters:
+      type: object
+      required:
+        - EventType
+        - SnapshotOwner
+        - DescriptionRegex
+      properties:
+        EventType:
+          allOf:
+            - $ref: '#/components/schemas/EventTypeValues'
+            - description: 'The type of event. Currently, only snapshot sharing events are supported.'
+        SnapshotOwner:
+          allOf:
+            - $ref: '#/components/schemas/SnapshotOwnerList'
+            - description: The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
+        DescriptionRegex:
+          allOf:
+            - $ref: '#/components/schemas/DescriptionRegex'
+            - description: '<p>The snapshot description that can trigger the policy. The description pattern is specified using a regular expression. The policy runs only if a snapshot with a description that matches the specified pattern is shared with your account.</p> <p>For example, specifying <code>^.*Created for policy: policy-1234567890abcdef0.*$</code> configures the policy to run only if snapshots created by policy <code>policy-1234567890abcdef0</code> are shared with your account.</p>'
+      description: Specifies an event that triggers an event-based policy.
+    EventSourceValues:
+      type: string
+      enum:
+        - MANAGED_CWE
     ExcludeBootVolume:
       type: boolean
     FastRestoreRule:
@@ -1157,7 +1308,7 @@ components:
       description: Specifies the retention rule for a lifecycle policy. You can retain snapshots based on either a count or a time interval.
     ScheduleName:
       type: string
-      pattern: '[\p{all}]*'
+      pattern: '[0-9A-Za-z _-]+'
       minLength: 0
       maxLength: 120
     TagsToAddList:
@@ -1172,6 +1323,12 @@ components:
         $ref: '#/components/schemas/Tag'
       minItems: 0
       maxItems: 45
+    ShareRules:
+      type: array
+      items:
+        $ref: '#/components/schemas/ShareRule'
+      minItems: 0
+      maxItems: 1
     Schedule:
       type: object
       properties:
@@ -1207,7 +1364,34 @@ components:
           allOf:
             - $ref: '#/components/schemas/CrossRegionCopyRules'
             - description: The rule for cross-Region snapshot copies.
-      description: Specifies a backup schedule.
+        ShareRules:
+          allOf:
+            - $ref: '#/components/schemas/ShareRules'
+            - description: The rule for sharing snapshots with other AWS accounts.
+      description: Specifies a backup schedule for a snapshot or AMI lifecycle policy.
+    ShareTargetAccountList:
+      type: array
+      items:
+        $ref: '#/components/schemas/AwsAccountId'
+      minItems: 1
+    ShareRule:
+      type: object
+      required:
+        - TargetAccounts
+      properties:
+        TargetAccounts:
+          allOf:
+            - $ref: '#/components/schemas/ShareTargetAccountList'
+            - description: The IDs of the AWS accounts with which to share the snapshots.
+        UnshareInterval:
+          allOf:
+            - $ref: '#/components/schemas/Interval'
+            - description: The period after which snapshots that are shared with other AWS accounts are automatically unshared.
+        UnshareIntervalUnit:
+          allOf:
+            - $ref: '#/components/schemas/RetentionIntervalUnitValues'
+            - description: The unit of time for the automatic unsharing interval.
+      description: Specifies a rule for sharing snapshots across AWS accounts.
     String:
       type: string
       pattern: '[\p{all}]*'

@@ -3,7 +3,7 @@ info:
   version: '2019-12-02'
   x-release: v4
   title: EC2 Image Builder
-  description: 'EC2 Image Builder is a fully managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date “golden” server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.'
+  description: 'EC2 Image Builder is a fully managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date "golden" server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -325,6 +325,7 @@ paths:
                 data:
                   description: The data of the component. Used to specify the data inline. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.
                   type: string
+                  pattern: '[^\x00]+'
                   minLength: 1
                   maxLength: 16000
                 uri:
@@ -344,6 +345,191 @@ paths:
                     $ref: '#/components/schemas/TagValue'
                 clientToken:
                   description: The idempotency token of the component.
+                  type: string
+                  minLength: 1
+                  maxLength: 36
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /CreateContainerRecipe:
+    put:
+      operationId: CreateContainerRecipe
+      description: 'Creates a new container recipe. Container recipes define how images are configured, tested, and assessed.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateContainerRecipeResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: IdempotentParameterMismatchException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IdempotentParameterMismatchException'
+        '485':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '486':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+        '487':
+          description: InvalidVersionNumberException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidVersionNumberException'
+        '488':
+          description: ResourceInUseException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceInUseException'
+        '489':
+          description: ResourceAlreadyExistsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceAlreadyExistsException'
+        '490':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - containerType
+                - name
+                - semanticVersion
+                - components
+                - dockerfileTemplateData
+                - parentImage
+                - targetRepository
+                - clientToken
+              properties:
+                containerType:
+                  description: The type of container to create.
+                  type: string
+                  enum:
+                    - DOCKER
+                name:
+                  description: The name of the container recipe.
+                  type: string
+                  pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
+                description:
+                  description: The description of the container recipe.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                semanticVersion:
+                  description: The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+                  type: string
+                  pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'
+                components:
+                  description: Components for build and test that are included in the container recipe.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ComponentConfiguration'
+                  minItems: 1
+                dockerfileTemplateData:
+                  description: The Dockerfile template used to build your image as an inline data blob.
+                  type: string
+                  pattern: '[^\x00]+'
+                  minLength: 1
+                  maxLength: 16000
+                dockerfileTemplateUri:
+                  description: The S3 URI for the Dockerfile that will be used to build your container image.
+                  type: string
+                platformOverride:
+                  description: Specifies the operating system platform when you use a custom source image.
+                  type: string
+                  enum:
+                    - Windows
+                    - Linux
+                imageOsVersionOverride:
+                  description: Specifies the operating system version for the source image.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                parentImage:
+                  description: The source image for the container recipe.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                tags:
+                  description: Tags that are attached to the container recipe.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+                workingDirectory:
+                  description: The working directory for use during build and test workflows.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                targetRepository:
+                  description: The container repository where the output container image is stored.
+                  type: object
+                  properties:
+                    service:
+                      allOf:
+                        - $ref: '#/components/schemas/ContainerRepositoryService'
+                        - description: Specifies the service in which this image was registered.
+                    repositoryName:
+                      allOf:
+                        - $ref: '#/components/schemas/NonEmptyString'
+                        - description: The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
+                kmsKeyId:
+                  description: Identifies which KMS key is used to encrypt the container image.
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+                clientToken:
+                  description: The client token used to make this request idempotent.
                   type: string
                   minLength: 1
                   maxLength: 36
@@ -551,7 +737,6 @@ paths:
             schema:
               type: object
               required:
-                - imageRecipeArn
                 - infrastructureConfigurationArn
                 - clientToken
               properties:
@@ -559,6 +744,10 @@ paths:
                   description: ' The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. '
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                containerRecipeArn:
+                  description: The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
+                  type: string
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
                 distributionConfigurationArn:
                   description: ' The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline. '
                   type: string
@@ -682,7 +871,6 @@ paths:
               type: object
               required:
                 - name
-                - imageRecipeArn
                 - infrastructureConfigurationArn
                 - clientToken
               properties:
@@ -699,6 +887,10 @@ paths:
                   description: ' The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline. '
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                containerRecipeArn:
+                  description: The Amazon Resource Name (ARN) of the container recipe that is used to configure images created by this container pipeline.
+                  type: string
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
                 infrastructureConfigurationArn:
                   description: ' The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline. '
                   type: string
@@ -1125,6 +1317,75 @@ paths:
           schema:
             type: string
             pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /DeleteContainerRecipe#containerRecipeArn:
+    delete:
+      operationId: DeleteContainerRecipe
+      description: Deletes a container recipe.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteContainerRecipeResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '485':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+        '486':
+          description: ResourceDependencyException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceDependencyException'
+      parameters:
+        - name: containerRecipeArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the container recipe to delete.
+          schema:
+            type: string
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -1596,6 +1857,132 @@ paths:
           schema:
             type: string
             pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetContainerRecipe#containerRecipeArn:
+    get:
+      operationId: GetContainerRecipe
+      description: Retrieves a container recipe.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContainerRecipeResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '485':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: containerRecipeArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the container recipe to retrieve.
+          schema:
+            type: string
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /GetContainerRecipePolicy#containerRecipeArn:
+    get:
+      operationId: GetContainerRecipePolicy
+      description: Retrieves the policy for a container recipe.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetContainerRecipePolicyResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '482':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '485':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: containerRecipeArn
+          in: query
+          required: true
+          description: The Amazon Resource Name (ARN) of the container recipe for the policy being requested.
+          schema:
+            type: string
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2383,6 +2770,9 @@ paths:
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
+                byName:
+                  description: Returns the list of component build versions for the specified semantic version.
+                  type: boolean
                 maxResults:
                   description: 'The maximum items to return in a request. '
                   type: integer
@@ -2401,10 +2791,115 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /ListContainerRecipes:
+    post:
+      operationId: ListContainerRecipes
+      description: Returns a list of container recipes.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListContainerRecipesResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidPaginationTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidPaginationTokenException'
+        '485':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '486':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters:
+        - name: maxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: nextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                owner:
+                  description: 'Returns container recipes belonging to the specified owner, that have been shared with you. You can omit this field to return container recipes belonging to your account.'
+                  type: string
+                  enum:
+                    - Self
+                    - Shared
+                    - Amazon
+                filters:
+                  description: Request filters that are used to narrow the list of container images that are returned.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Filter'
+                  minItems: 1
+                  maxItems: 10
+                maxResults:
+                  description: The maximum number of results to return in the list.
+                  type: integer
+                  minimum: 1
+                  maximum: 25
+                nextToken:
+                  description: 'Provides a token for pagination, which determines where to begin the next set of results when the current set reaches the maximum for one request.'
+                  type: string
+                  minLength: 1
+                  maxLength: 1024
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /ListDistributionConfigurations:
     post:
       operationId: ListDistributionConfigurations
-      description: ' Returns a list of distribution configurations. '
+      description: 'Returns a list of distribution configurations. '
       responses:
         '200':
           description: Success
@@ -3003,6 +3498,9 @@ paths:
                     $ref: '#/components/schemas/Filter'
                   minItems: 1
                   maxItems: 10
+                byName:
+                  description: Requests a list of images with a specific recipe name.
+                  type: boolean
                 maxResults:
                   description: 'The maximum items to return in a request. '
                   type: integer
@@ -3013,6 +3511,9 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 65535
+                includeDeprecated:
+                  description: Includes deprecated images in the response list.
+                  type: boolean
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3155,7 +3656,7 @@ paths:
           description: 'The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve. '
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3199,7 +3700,7 @@ paths:
           description: 'The Amazon Resource Name (ARN) of the resource that you want to tag. '
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
       requestBody:
         required: true
         content:
@@ -3292,6 +3793,93 @@ paths:
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):component/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
                 policy:
                   description: 'The policy to apply. '
+                  type: string
+                  minLength: 1
+                  maxLength: 30000
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /PutContainerRecipePolicy:
+    put:
+      operationId: PutContainerRecipePolicy
+      description: 'Applies a policy to a container image. We recommend that you call the RAM API CreateResourceShare (https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html) to share resources. If you call the Image Builder API <code>PutContainerImagePolicy</code>, you must also call the RAM API PromoteResourceShareCreatedFromPolicy (https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html) in order for the resource to be visible to all principals with whom the resource is shared.'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutContainerRecipePolicyResponse'
+        '480':
+          description: ServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceException'
+        '481':
+          description: ClientException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '486':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '487':
+          description: CallRateLimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CallRateLimitExceededException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - containerRecipeArn
+                - policy
+              properties:
+                containerRecipeArn:
+                  description: The Amazon Resource Name (ARN) of the container recipe that this policy should be applied to.
+                  type: string
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                policy:
+                  description: The policy to apply to the container recipe.
                   type: string
                   minLength: 1
                   maxLength: 30000
@@ -3606,7 +4194,7 @@ paths:
           description: 'The Amazon Resource Name (ARN) of the resource that you want to untag. '
           schema:
             type: string
-            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
+            pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
         - name: tagKeys
           in: query
           required: true
@@ -3797,7 +4385,6 @@ paths:
               type: object
               required:
                 - imagePipelineArn
-                - imageRecipeArn
                 - infrastructureConfigurationArn
                 - clientToken
               properties:
@@ -3814,6 +4401,10 @@ paths:
                   description: 'The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. '
                   type: string
                   pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+                containerRecipeArn:
+                  description: The Amazon Resource Name (ARN) of the container pipeline to update.
+                  type: string
+                  pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
                 infrastructureConfigurationArn:
                   description: 'The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images updated by this image pipeline. '
                   type: string
@@ -4107,6 +4698,40 @@ components:
     InvalidVersionNumberException: {}
     InvalidParameterCombinationException: {}
     ServiceQuotaExceededException: {}
+    CreateContainerRecipeResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client token used to make this request idempotent.
+        containerRecipeArn:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipeArn'
+            - description: Returns the Amazon Resource Name (ARN) of the container recipe that the request created.
+    ComponentConfiguration:
+      type: object
+      required:
+        - componentArn
+      properties:
+        componentArn:
+          allOf:
+            - $ref: '#/components/schemas/ComponentVersionArnOrBuildVersionArn'
+            - description: 'The Amazon Resource Name (ARN) of the component. '
+      description: ' Configuration details of the component. '
+    ContainerRepositoryService:
+      type: string
+      enum:
+        - ECR
+    NonEmptyString:
+      type: string
+      minLength: 1
+      maxLength: 1024
+    ResourceAlreadyExistsException: {}
     CreateDistributionConfigurationResponse:
       type: object
       properties:
@@ -4135,12 +4760,15 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmiDistributionConfiguration'
             - description: 'The specific AMI settings (for example, launch permissions, AMI tags). '
+        containerDistributionConfiguration:
+          allOf:
+            - $ref: '#/components/schemas/ContainerDistributionConfiguration'
+            - description: 'Container distribution settings for encryption, licensing, and sharing in a specific Region.'
         licenseConfigurationArns:
           allOf:
             - $ref: '#/components/schemas/LicenseConfigurationArnList'
             - description: The License Manager Configuration to associate with the AMI in the specified Region.
       description: ' Defines the settings for a specific Region. '
-    ResourceAlreadyExistsException: {}
     CreateImageResponse:
       type: object
       properties:
@@ -4177,10 +4805,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImagePipelineArn'
             - description: ' The Amazon Resource Name (ARN) of the image pipeline that was created by this request. '
-    NonEmptyString:
-      type: string
-      minLength: 1
-      maxLength: 1024
     PipelineExecutionStartCondition:
       type: string
       enum:
@@ -4201,16 +4825,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
             - description: 'The Amazon Resource Name (ARN) of the image recipe that was created by this request. '
-    ComponentConfiguration:
-      type: object
-      required:
-        - componentArn
-      properties:
-        componentArn:
-          allOf:
-            - $ref: '#/components/schemas/ComponentVersionArnOrBuildVersionArn'
-            - description: 'The Amazon Resource Name (ARN) of the component. '
-      description: ' Configuration details of the component. '
     InstanceBlockDeviceMapping:
       type: object
       properties:
@@ -4272,6 +4886,17 @@ components:
             - $ref: '#/components/schemas/ComponentBuildVersionArn'
             - description: 'The Amazon Resource Name (ARN) of the component build version that was deleted. '
     ResourceDependencyException: {}
+    DeleteContainerRecipeResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        containerRecipeArn:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipeArn'
+            - description: The Amazon Resource Name (ARN) of the container recipe that was deleted.
     DeleteDistributionConfigurationResponse:
       type: object
       properties:
@@ -4350,6 +4975,28 @@ components:
             - $ref: '#/components/schemas/ResourcePolicyDocument'
             - description: 'The component policy. '
     ResourceNotFoundException: {}
+    GetContainerRecipeResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        containerRecipe:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipe'
+            - description: The container recipe object that is returned.
+    GetContainerRecipePolicyResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicyDocument'
+            - description: The container recipe policy object that is returned.
     GetDistributionConfigurationResponse:
       type: object
       properties:
@@ -4486,6 +5133,21 @@ components:
             - $ref: '#/components/schemas/FilterValues'
             - description: 'The filter values. Filter values are case-sensitive. '
       description: 'A filter name and value pair that is used to return a more specific list of results from a list operation. Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs. '
+    ListContainerRecipesResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        containerRecipeSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipeSummaryList'
+            - description: The list of container recipes returned for the request.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'The next token field is used for paginated responses. When this is not empty, there are additional container recipes that the service has not included in this response. Use this token with the next request to retrieve additional list items.'
     ListDistributionConfigurationsResponse:
       type: object
       properties:
@@ -4611,6 +5273,17 @@ components:
             - $ref: '#/components/schemas/ComponentBuildVersionArn'
             - description: 'The Amazon Resource Name (ARN) of the component that this policy was applied to. '
     InvalidParameterValueException: {}
+    PutContainerRecipePolicyResponse:
+      type: object
+      properties:
+        requestId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The request ID that uniquely identifies this request.
+        containerRecipeArn:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipeArn'
+            - description: The Amazon Resource Name (ARN) of the container recipe that this policy was applied to.
     PutImagePolicyResponse:
       type: object
       properties:
@@ -4808,6 +5481,8 @@ components:
         $ref: '#/components/schemas/Ami'
     Arn:
       type: string
+    Boolean:
+      type: boolean
     ImageBuildVersionArn:
       type: string
       pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):image/[a-z0-9-_]+/\d+\.\d+\.\d+/\d+$'
@@ -4832,7 +5507,7 @@ components:
             - description: The idempotency token used to make this request idempotent.
     ImageBuilderArn:
       type: string
-      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline)/[a-z0-9-_]+(?:/(?:(?:x|\d+)\.(?:x|\d+)\.(?:x|\d+))(?:/\d+)?)?$'
     ResourceName:
       type: string
       pattern: '^[-_A-Za-z-0-9][-_A-Za-z0-9 ]{1,126}[-_A-Za-z-0-9]$'
@@ -5033,8 +5708,179 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ComponentVersion'
+    StringList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
+    Container:
+      type: object
+      properties:
+        region:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Containers and container images are Region-specific. This is the Region context for the container.
+        imageUris:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: A list of URIs for containers created in the context Region.
+      description: A container encapsulates the runtime environment for an application.
+    TargetContainerRepository:
+      type: object
+      required:
+        - service
+        - repositoryName
+      properties:
+        service:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRepositoryService'
+            - description: Specifies the service in which this image was registered.
+        repositoryName:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
+      description: The container repository where the output container image is stored.
+    ContainerDistributionConfiguration:
+      type: object
+      required:
+        - targetRepository
+      properties:
+        description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The description of the container distribution configuration.
+        containerTags:
+          allOf:
+            - $ref: '#/components/schemas/StringList'
+            - description: Tags that are attached to the container distribution configuration.
+        targetRepository:
+          allOf:
+            - $ref: '#/components/schemas/TargetContainerRepository'
+            - description: The destination repository for the container distribution configuration.
+      description: 'Container distribution settings for encryption, licensing, and sharing in a specific Region.'
+    ContainerList:
+      type: array
+      items:
+        $ref: '#/components/schemas/Container'
+    ContainerType:
+      type: string
+      enum:
+        - DOCKER
+    DockerFileTemplate:
+      type: string
+    ContainerRecipe:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuilderArn'
+            - description: The Amazon Resource Name (ARN) of the container recipe.
+        containerType:
+          allOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - description: 'Specifies the type of container, such as Docker.'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the container recipe.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The description of the container recipe.
+        platform:
+          allOf:
+            - $ref: '#/components/schemas/Platform'
+            - description: 'The system platform for the container, such as Windows or Linux.'
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The owner of the container recipe.
+        version:
+          allOf:
+            - $ref: '#/components/schemas/VersionNumber'
+            - description: The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+        components:
+          allOf:
+            - $ref: '#/components/schemas/ComponentConfigurationList'
+            - description: Components for build and test that are included in the container recipe.
+        dockerfileTemplateData:
+          allOf:
+            - $ref: '#/components/schemas/DockerFileTemplate'
+            - description: 'Dockerfiles are text documents that are used to build Docker containers, and ensure that they contain all of the elements required by the application running inside. The template data consists of contextual variables where Image Builder places build information or scripts, based on your container image recipe.'
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Identifies which KMS key is used to encrypt the container image for distribution to the target Region.
+        encrypted:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: A flag that indicates if the target container is encrypted.
+        parentImage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The source image for the container recipe.
+        dateCreated:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date when this container recipe was created.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Tags that are attached to the container recipe.
+        workingDirectory:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The working directory for use during build and test workflows.
+        targetRepository:
+          allOf:
+            - $ref: '#/components/schemas/TargetContainerRepository'
+            - description: The destination repository for the container image.
+      description: A container recipe.
+    ContainerRecipeArn:
+      type: string
+      pattern: '^arn:aws[^:]*:imagebuilder:[^:]+:(?:\d{12}|aws):container-recipe/[a-z0-9-_]+/\d+\.\d+\.\d+$'
+    ContainerRecipeSummary:
+      type: object
+      properties:
+        arn:
+          allOf:
+            - $ref: '#/components/schemas/ImageBuilderArn'
+            - description: The Amazon Resource Name (ARN) of the container recipe.
+        containerType:
+          allOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - description: 'Specifies the type of container, such as "Docker".'
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the container recipe.
+        platform:
+          allOf:
+            - $ref: '#/components/schemas/Platform'
+            - description: 'The system platform for the container, such as Windows or Linux.'
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The owner of the container recipe.
+        parentImage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The source image for the container recipe.
+        dateCreated:
+          allOf:
+            - $ref: '#/components/schemas/DateTime'
+            - description: The date when this container recipe was created.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Tags that are attached to the container recipe.
+      description: A summary of a container recipe
+    ContainerRecipeSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ContainerRecipeSummary'
     InlineComponentData:
       type: string
+      pattern: '[^\x00]+'
       minLength: 1
       maxLength: 16000
     Uri:
@@ -5092,6 +5938,84 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: The idempotency token of the component.
+    InlineDockerFileTemplate:
+      type: string
+      pattern: '[^\x00]+'
+      minLength: 1
+      maxLength: 16000
+    CreateContainerRecipeRequest:
+      type: object
+      required:
+        - containerType
+        - name
+        - semanticVersion
+        - components
+        - dockerfileTemplateData
+        - parentImage
+        - targetRepository
+        - clientToken
+      title: CreateContainerRecipeRequest
+      properties:
+        containerType:
+          allOf:
+            - $ref: '#/components/schemas/ContainerType'
+            - description: The type of container to create.
+        name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceName'
+            - description: The name of the container recipe.
+        description:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The description of the container recipe.
+        semanticVersion:
+          allOf:
+            - $ref: '#/components/schemas/VersionNumber'
+            - description: The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).
+        components:
+          allOf:
+            - $ref: '#/components/schemas/ComponentConfigurationList'
+            - description: Components for build and test that are included in the container recipe.
+        dockerfileTemplateData:
+          allOf:
+            - $ref: '#/components/schemas/InlineDockerFileTemplate'
+            - description: The Dockerfile template used to build your image as an inline data blob.
+        dockerfileTemplateUri:
+          allOf:
+            - $ref: '#/components/schemas/Uri'
+            - description: The S3 URI for the Dockerfile that will be used to build your container image.
+        platformOverride:
+          allOf:
+            - $ref: '#/components/schemas/Platform'
+            - description: Specifies the operating system platform when you use a custom source image.
+        imageOsVersionOverride:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Specifies the operating system version for the source image.
+        parentImage:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The source image for the container recipe.
+        tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: Tags that are attached to the container recipe.
+        workingDirectory:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: The working directory for use during build and test workflows.
+        targetRepository:
+          allOf:
+            - $ref: '#/components/schemas/TargetContainerRepository'
+            - description: The destination repository for the container image.
+        kmsKeyId:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: Identifies which KMS key is used to encrypt the container image.
+        clientToken:
+          allOf:
+            - $ref: '#/components/schemas/ClientToken'
+            - description: The client token used to make this request idempotent.
     DistributionList:
       type: array
       items:
@@ -5166,7 +6090,6 @@ components:
       type: object
       required:
         - name
-        - imageRecipeArn
         - infrastructureConfigurationArn
         - clientToken
       title: CreateImagePipelineRequest
@@ -5183,6 +6106,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
             - description: ' The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline. '
+        containerRecipeArn:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipeArn'
+            - description: The Amazon Resource Name (ARN) of the container recipe that is used to configure images created by this container pipeline.
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'
@@ -5271,7 +6198,6 @@ components:
     CreateImageRequest:
       type: object
       required:
-        - imageRecipeArn
         - infrastructureConfigurationArn
         - clientToken
       title: CreateImageRequest
@@ -5280,6 +6206,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
             - description: ' The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed. '
+        containerRecipeArn:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipeArn'
+            - description: The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
         distributionConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/DistributionConfigurationArn'
@@ -5393,6 +6323,10 @@ components:
       type: object
       title: DeleteComponentRequest
       properties: {}
+    DeleteContainerRecipeRequest:
+      type: object
+      title: DeleteContainerRecipeRequest
+      properties: {}
     DeleteDistributionConfigurationRequest:
       type: object
       title: DeleteDistributionConfigurationRequest
@@ -5461,6 +6395,10 @@ components:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags of the distribution configuration.
       description: A distribution configuration.
+    RegionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/NonEmptyString'
     DistributionConfigurationSummary:
       type: object
       properties:
@@ -5488,6 +6426,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags associated with the distribution configuration.
+        regions:
+          allOf:
+            - $ref: '#/components/schemas/RegionList'
+            - description: A list of Regions where the container image is distributed to.
       description: A high-level overview of a distribution configuration.
     DistributionConfigurationSummaryList:
       type: array
@@ -5576,6 +6518,14 @@ components:
       type: object
       title: GetComponentRequest
       properties: {}
+    GetContainerRecipePolicyRequest:
+      type: object
+      title: GetContainerRecipePolicyRequest
+      properties: {}
+    GetContainerRecipeRequest:
+      type: object
+      title: GetContainerRecipeRequest
+      properties: {}
     GetDistributionConfigurationRequest:
       type: object
       title: GetDistributionConfigurationRequest
@@ -5611,6 +6561,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Arn'
             - description: The Amazon Resource Name (ARN) of the image recipe associated with this image pipeline.
+        containerRecipeArn:
+          allOf:
+            - $ref: '#/components/schemas/Arn'
+            - description: The Amazon Resource Name (ARN) of the container recipe that is used for this pipeline.
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/Arn'
@@ -5671,6 +6625,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageBuilderArn'
             - description: The Amazon Resource Name (ARN) of the image recipe.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ImageType'
+            - description: Specifies which type of image is created by the recipe - an AMI or a container image.
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -5730,6 +6688,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageBuilderArn'
             - description: The Amazon Resource Name (ARN) of the image.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ImageType'
+            - description: Specifies whether this is an AMI or container image.
         name:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -5758,6 +6720,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageRecipe'
             - description: The image recipe used when creating the image.
+        containerRecipe:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipe'
+            - description: The container recipe used to create the container image type.
         sourcePipelineName:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
@@ -5860,6 +6826,11 @@ components:
             - $ref: '#/components/schemas/TagMap'
             - description: The tags of the infrastructure configuration.
       description: Details of the infrastructure configuration.
+    ImageType:
+      type: string
+      enum:
+        - AMI
+        - DOCKER
     OutputResources:
       type: object
       properties:
@@ -5867,6 +6838,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmiList'
             - description: 'The EC2 AMIs created by this image. '
+        containers:
+          allOf:
+            - $ref: '#/components/schemas/ContainerList'
+            - description: Container images that the pipeline has generated and stored in the output repository.
       description: 'The resources produced by this image. '
     ImagePipelineList:
       type: array
@@ -5933,6 +6908,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the image.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ImageType'
+            - description: Specifies whether this is an AMI or container image.
         version:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
@@ -5981,6 +6960,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceName'
             - description: The name of the image semantic version.
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ImageType'
+            - description: Specifies whether this is an AMI or container image.
         version:
           allOf:
             - $ref: '#/components/schemas/VersionNumber'
@@ -6104,10 +7087,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/InfrastructureConfigurationSummary'
-    StringList:
-      type: array
-      items:
-        $ref: '#/components/schemas/NonEmptyString'
     LicenseConfigurationArn:
       type: string
       pattern: '^arn:aws[^:]*:license-manager:[^:]+:\d{12}:license-configuration:lic-[a-z0-9-_]{32}$'
@@ -6155,6 +7134,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterList'
             - description: 'The filters. '
+        byName:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Returns the list of component build versions for the specified semantic version.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
@@ -6163,6 +7146,26 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+    ListContainerRecipesRequest:
+      type: object
+      title: ListContainerRecipesRequest
+      properties:
+        owner:
+          allOf:
+            - $ref: '#/components/schemas/Ownership'
+            - description: 'Returns container recipes belonging to the specified owner, that have been shared with you. You can omit this field to return container recipes belonging to your account.'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/FilterList'
+            - description: Request filters that are used to narrow the list of container images that are returned.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/RestrictedInteger'
+            - description: The maximum number of results to return in the list.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyString'
+            - description: 'Provides a token for pagination, which determines where to begin the next set of results when the current set reaches the maximum for one request.'
     ListDistributionConfigurationsRequest:
       type: object
       title: ListDistributionConfigurationsRequest
@@ -6271,6 +7274,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterList'
             - description: 'The filters. '
+        byName:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Requests a list of images with a specific recipe name.
         maxResults:
           allOf:
             - $ref: '#/components/schemas/RestrictedInteger'
@@ -6279,6 +7286,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
             - description: 'A token to specify where to start paginating. This is the NextToken from a previously truncated response. '
+        includeDeprecated:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: Includes deprecated images in the response list.
     ListInfrastructureConfigurationsRequest:
       type: object
       title: ListInfrastructureConfigurationsRequest
@@ -6314,6 +7325,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourcePolicyDocument'
             - description: 'The policy to apply. '
+    PutContainerRecipePolicyRequest:
+      type: object
+      required:
+        - containerRecipeArn
+        - policy
+      title: PutContainerRecipePolicyRequest
+      properties:
+        containerRecipeArn:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipeArn'
+            - description: The Amazon Resource Name (ARN) of the container recipe that this policy should be applied to.
+        policy:
+          allOf:
+            - $ref: '#/components/schemas/ResourcePolicyDocument'
+            - description: The policy to apply to the container recipe.
     PutImagePolicyRequest:
       type: object
       required:
@@ -6407,7 +7433,6 @@ components:
       type: object
       required:
         - imagePipelineArn
-        - imageRecipeArn
         - infrastructureConfigurationArn
         - clientToken
       title: UpdateImagePipelineRequest
@@ -6424,6 +7449,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ImageRecipeArn'
             - description: 'The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline. '
+        containerRecipeArn:
+          allOf:
+            - $ref: '#/components/schemas/ContainerRecipeArn'
+            - description: The Amazon Resource Name (ARN) of the container pipeline to update.
         infrastructureConfigurationArn:
           allOf:
             - $ref: '#/components/schemas/InfrastructureConfigurationArn'

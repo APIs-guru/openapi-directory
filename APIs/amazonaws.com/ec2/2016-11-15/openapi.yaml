@@ -10157,7 +10157,7 @@ paths:
         - name: MultiAttachEnabled
           in: query
           required: false
-          description: 'Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is supported with <code>io1</code> volumes only. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+          description: 'Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
           schema:
             type: boolean
         - name: Throughput
@@ -24256,6 +24256,14 @@ paths:
               - c6gd.8xlarge
               - c6gd.12xlarge
               - c6gd.16xlarge
+              - c6gn.medium
+              - c6gn.large
+              - c6gn.xlarge
+              - c6gn.2xlarge
+              - c6gn.4xlarge
+              - c6gn.8xlarge
+              - c6gn.12xlarge
+              - c6gn.16xlarge
               - cc1.4xlarge
               - cc2.8xlarge
               - g2.2xlarge
@@ -38432,6 +38440,12 @@ paths:
           description: '<p>The target throughput of the volume, in MiB/s. This parameter is valid only for <code>gp3</code> volumes. The maximum value is 1,000.</p> <p>Default: If no throughput value is specified, the existing value is retained.</p> <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>'
           schema:
             type: integer
+        - name: MultiAttachEnabled
+          in: query
+          required: false
+          description: 'Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances"> Nitro-based instances</a> in the same Availability Zone. This parameter is supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+          schema:
+            type: boolean
         - name: Action
           in: query
           required: true
@@ -44024,6 +44038,14 @@ paths:
               - c6gd.8xlarge
               - c6gd.12xlarge
               - c6gd.16xlarge
+              - c6gn.medium
+              - c6gn.large
+              - c6gn.xlarge
+              - c6gn.2xlarge
+              - c6gn.4xlarge
+              - c6gn.8xlarge
+              - c6gn.12xlarge
+              - c6gn.16xlarge
               - cc1.4xlarge
               - cc2.8xlarge
               - g2.2xlarge
@@ -47604,6 +47626,14 @@ components:
         - c6gd.8xlarge
         - c6gd.12xlarge
         - c6gd.16xlarge
+        - c6gn.medium
+        - c6gn.large
+        - c6gn.xlarge
+        - c6gn.2xlarge
+        - c6gn.4xlarge
+        - c6gn.8xlarge
+        - c6gn.12xlarge
+        - c6gn.16xlarge
         - cc1.4xlarge
         - cc2.8xlarge
         - g2.2xlarge
@@ -62744,7 +62774,7 @@ components:
         MultiAttachEnabled:
           allOf:
             - $ref: '#/components/schemas/Boolean'
-            - description: 'Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is supported with <code>io1</code> volumes only. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
+            - description: 'Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances">Instances built on the Nitro System</a> in the same Availability Zone. This parameter is supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
         Throughput:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -78663,6 +78693,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/Integer'
             - description: '<p>The target throughput of the volume, in MiB/s. This parameter is valid only for <code>gp3</code> volumes. The maximum value is 1,000.</p> <p>Default: If no throughput value is specified, the existing value is retained.</p> <p>Valid Range: Minimum value of 125. Maximum value of 1000.</p>'
+        MultiAttachEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach, you can attach the volume to up to 16 <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances"> Nitro-based instances</a> in the same Availability Zone. This parameter is supported with <code>io1</code> and <code>io2</code> volumes only. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volumes-multi.html"> Amazon EBS Multi-Attach</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.'
     VolumeModification:
       type: object
       properties:
@@ -78708,6 +78742,12 @@ components:
             - xml:
                 name: targetThroughput
               description: 'The target throughput of the volume, in MiB/s.'
+        TargetMultiAttachEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: targetMultiAttachEnabled
+              description: The target setting for Amazon EBS Multi-Attach.
         OriginalSize:
           allOf:
             - $ref: '#/components/schemas/Integer'
@@ -78732,6 +78772,12 @@ components:
             - xml:
                 name: originalThroughput
               description: 'The original throughput of the volume, in MiB/s.'
+        OriginalMultiAttachEnabled:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - xml:
+                name: originalMultiAttachEnabled
+              description: The original setting for Amazon EBS Multi-Attach.
         Progress:
           allOf:
             - $ref: '#/components/schemas/Long'

@@ -678,7 +678,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.CreatePortfolioShare:
     post:
       operationId: CreatePortfolioShare
-      description: '<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account.</p> <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p> <p> <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p> <p>You can''t share a shared resource. This includes portfolios that contain a shared product.</p>'
+      description: '<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account.</p> <p>Note that if a delegated admin is de-registered, they can no longer create portfolio shares.</p> <p> <code>AWSOrganizationsAccess</code> must be enabled in order to create a portfolio share to an organization node.</p> <p>You can''t share a shared resource, including portfolios that contain a shared product.</p> <p>If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the <code> UpdatePortfolioShare</code> API instead.</p>'
       responses:
         '200':
           description: Success
@@ -741,7 +741,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.CreateProduct:
     post:
       operationId: CreateProduct
-      description: <p>Creates a product.</p> <p>A delegated admin is authorized to invoke this command.</p>
+      description: '<p>Creates a product.</p> <p>A delegated admin is authorized to invoke this command.</p> <p>The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> IAM policy permission. This policy permission is required when using the <code>ImportFromPhysicalId</code> template source in the information data section.</p>'
       responses:
         '200':
           description: Success
@@ -843,7 +843,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.CreateProvisioningArtifact:
     post:
       operationId: CreateProvisioningArtifact
-      description: <p>Creates a provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot create a provisioning artifact for a product that was shared with you.</p>
+      description: '<p>Creates a provisioning artifact (also known as a version) for the specified product.</p> <p>You cannot create a provisioning artifact for a product that was shared with you.</p> <p>The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> IAM policy permission. This policy permission is required when using the <code>ImportFromPhysicalId</code> template source in the information data section.</p>'
       responses:
         '200':
           description: Success
@@ -1555,6 +1555,63 @@ paths:
             type: string
             enum:
               - AWS242ServiceCatalogService.DescribePortfolioShareStatus
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWS242ServiceCatalogService.DescribePortfolioShares:
+    post:
+      operationId: DescribePortfolioShares
+      description: '<p>Returns a summary of each of the portfolio shares that were created for the specified portfolio.</p> <p>You can use this API to determine which accounts or organizational nodes this portfolio have been shared, whether the recipient entity has imported the share, and whether TagOptions are included with the share.</p> <p>The <code>PortfolioId</code> and <code>Type</code> parameters are both required.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribePortfolioSharesOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DescribePortfolioSharesInput'
+      parameters:
+        - name: PageSize
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: PageToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWS242ServiceCatalogService.DescribePortfolioShares
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2574,7 +2631,7 @@ paths:
   /#X-Amz-Target=AWS242ServiceCatalogService.ImportAsProvisionedProduct:
     post:
       operationId: ImportAsProvisionedProduct
-      description: '<p>Requests the import of a resource as a Service Catalog provisioned product that is associated to a Service Catalog product and provisioning artifact. Once imported all supported Service Catalog governance actions are supported on the provisioned product.</p> <p>Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported.</p> <p>The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE.</p> <p>Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact. </p>'
+      description: '<p>Requests the import of a resource as a Service Catalog provisioned product that is associated to a Service Catalog product and provisioning artifact. Once imported, all supported Service Catalog governance actions are supported on the provisioned product.</p> <p>Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported.</p> <p>The CloudFormation stack must have one of the following statuses to be imported: <code>CREATE_COMPLETE</code>, <code>UPDATE_COMPLETE</code>, <code>UPDATE_ROLLBACK_COMPLETE</code>, <code>IMPORT_COMPLETE</code>, <code>IMPORT_ROLLBACK_COMPLETE</code>.</p> <p>Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact. </p> <p>The user or role that performs this operation must have the <code>cloudformation:GetTemplate</code> and <code>cloudformation:DescribeStacks</code> IAM policy permissions. </p>'
       responses:
         '200':
           description: Success
@@ -4029,6 +4086,63 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=AWS242ServiceCatalogService.UpdatePortfolioShare:
+    post:
+      operationId: UpdatePortfolioShare
+      description: '<p>Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing for an existing portfolio share. </p> <p>The portfolio share cannot be updated if the <code> CreatePortfolioShare</code> operation is <code>IN_PROGRESS</code>, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED.</p> <p>You must provide the <code>accountId</code> or organization node in the input, but not both.</p> <p>If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke <code>UpdatePortfolioShare</code> separately for each share type. </p> <p>This API cannot be used for removing the portfolio share. You must use <code>DeletePortfolioShare</code> API for that action. </p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdatePortfolioShareOutput'
+        '480':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '481':
+          description: InvalidParametersException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParametersException'
+        '482':
+          description: OperationNotSupportedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationNotSupportedException'
+        '483':
+          description: InvalidStateException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidStateException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePortfolioShareInput'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - AWS242ServiceCatalogService.UpdatePortfolioShare
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=AWS242ServiceCatalogService.UpdateProduct:
     post:
       operationId: UpdateProduct
@@ -4727,6 +4841,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OrganizationNode'
             - description: 'The organization node to whom you are going to share. If <code>OrganizationNode</code> is passed in, <code>PortfolioShare</code> will be created for the node an ListOrganizationPortfolioAccessd its children (when applies), and a <code>PortfolioShareToken</code> will be returned in the output in order for the administrator to monitor the status of the <code>PortfolioShare</code> creation process.'
+        ShareTagOptions:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Enables or disables <code>TagOptions </code> sharing when creating the portfolio share. If this flag is not provided, TagOptions sharing is disabled.'
     OperationNotSupportedException: {}
     CreateProductOutput:
       type: object
@@ -4784,7 +4902,7 @@ components:
         SupportUrl:
           allOf:
             - $ref: '#/components/schemas/SupportUrl'
-            - description: The contact URL for product support.
+            - description: '<p>The contact URL for product support.</p> <p> <code>^https?:\/\// </code>/ is the pattern used to validate SupportUrl.</p>'
         ProductType:
           allOf:
             - $ref: '#/components/schemas/ProductType'
@@ -4796,7 +4914,7 @@ components:
         ProvisioningArtifactParameters:
           allOf:
             - $ref: '#/components/schemas/ProvisioningArtifactProperties'
-            - description: The configuration of the provisioning artifact. The <code>info</code> field accepts <code>ImportFromPhysicalID</code>.
+            - description: 'The configuration of the provisioning artifact. '
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
@@ -4889,7 +5007,7 @@ components:
         Info:
           allOf:
             - $ref: '#/components/schemas/ProvisioningArtifactInfo'
-            - description: 'The URL of the CloudFormation template in Amazon S3, in JSON format.'
+            - description: '<p>Specify the template source with one of the following options, but not both. Keys accepted: [ <code>LoadTemplateFromURL</code>, <code>ImportFromPhysicalId</code> ].</p> <p>The URL of the CloudFormation template in Amazon S3, in JSON format. </p> <p> <code>LoadTemplateFromURL</code> </p> <p>Use the URL of the CloudFormation template in Amazon S3 in JSON format.</p> <p> <code>ImportFromPhysicalId</code> </p> <p>Use the physical id of the resource that contains the template; currently supports CloudFormation stack ARN.</p>'
         Status:
           allOf:
             - $ref: '#/components/schemas/Status'
@@ -4913,7 +5031,7 @@ components:
         Parameters:
           allOf:
             - $ref: '#/components/schemas/ProvisioningArtifactProperties'
-            - description: 'The configuration for the provisioning artifact. The <code>info</code> field accepts <code>ImportFromPhysicalID</code>. '
+            - description: The configuration for the provisioning artifact.
         IdempotencyToken:
           allOf:
             - $ref: '#/components/schemas/IdempotencyToken'
@@ -5258,6 +5376,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/Id'
             - description: The token for the portfolio share operation. This token is returned either by CreatePortfolioShare or by DeletePortfolioShare.
+    DescribePortfolioSharesOutput:
+      type: object
+      properties:
+        NextPageToken:
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'The page token to use to retrieve the next set of results. If there are no additional results, this value is null.'
+        PortfolioShareDetails:
+          allOf:
+            - $ref: '#/components/schemas/PortfolioShareDetails'
+            - description: Summaries about each of the portfolio shares.
+    DescribePortfolioSharesInput:
+      type: object
+      required:
+        - PortfolioId
+        - Type
+      title: DescribePortfolioSharesInput
+      properties:
+        PortfolioId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the portfolio for which shares will be retrieved.
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/DescribePortfolioShareType'
+            - description: '<p>The type of portfolio share to summarize. This field acts as a filter on the type of portfolio share, which can be one of the following:</p> <p>1. <code>ACCOUNT</code> - Represents an external account to account share.</p> <p>2. <code>ORGANIZATION</code> - Represents a share to an organization. This share is available to every account in the organization.</p> <p>3. <code>ORGANIZATIONAL_UNIT</code> - Represents a share to an organizational unit.</p> <p>4. <code>ORGANIZATION_MEMBER_ACCOUNT</code> - Represents a share to an account in the organization.</p>'
+        PageToken:
+          allOf:
+            - $ref: '#/components/schemas/PageToken'
+            - description: 'The page token for the next set of results. To retrieve the first set of results, use null.'
+        PageSize:
+          allOf:
+            - $ref: '#/components/schemas/PageSizeMax100'
+            - description: The maximum number of items to return with this call.
     DescribeProductOutput:
       type: object
       properties:
@@ -5332,6 +5484,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ProductViewName'
             - description: The product name.
+        SourcePortfolioId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: '<p>The unique identifier of the shared portfolio that the specified product is associated with.</p> <p>You can provide this parameter to retrieve the shared TagOptions associated with the product. If this parameter is provided and if TagOptions sharing is enabled in the portfolio share, the API returns both local and shared TagOptions associated with the product. Otherwise only local TagOptions will be returned. </p>'
     DescribeProductViewOutput:
       type: object
       properties:
@@ -6775,7 +6931,7 @@ components:
         RetainPhysicalResources:
           allOf:
             - $ref: '#/components/schemas/RetainPhysicalResources'
-            - description: 'When this boolean parameter is set to true, the TerminateProvisionedProduct API deletes the Service Catalog provisioned product. However, it does not remove the CloudFormation stack, stack set, or the underlying resources of the deleted provisioned product. The default value is false.'
+            - description: 'When this boolean parameter is set to true, the <code>TerminateProvisionedProduct</code> API deletes the Service Catalog provisioned product. However, it does not remove the CloudFormation stack, stack set, or the underlying resources of the deleted provisioned product. The default value is false.'
     UpdateConstraintOutput:
       type: object
       properties:
@@ -6858,6 +7014,41 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagKeys'
             - description: The tags to remove.
+    UpdatePortfolioShareOutput:
+      type: object
+      properties:
+        PortfolioShareToken:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The token that tracks the status of the <code>UpdatePortfolioShare</code> operation for external account to account or organizational type sharing.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ShareStatus'
+            - description: 'The status of <code>UpdatePortfolioShare</code> operation. You can also obtain the operation status using <code>DescribePortfolioShareStatus</code> API. '
+    UpdatePortfolioShareInput:
+      type: object
+      required:
+        - PortfolioId
+      title: UpdatePortfolioShareInput
+      properties:
+        AcceptLanguage:
+          allOf:
+            - $ref: '#/components/schemas/AcceptLanguage'
+            - description: <p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>
+        PortfolioId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: The unique identifier of the portfolio for which the share will be updated.
+        AccountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS Account Id of the recipient account. This field is required when updating an external account to account type share.
+        OrganizationNode:
+          $ref: '#/components/schemas/OrganizationNode'
+        ShareTagOptions:
+          allOf:
+            - $ref: '#/components/schemas/NullableBoolean'
+            - description: 'A flag to enable or disable TagOptions sharing for the portfolio share. If this field is not provided, the current state of TagOptions sharing on the portfolio share will not be modified.'
     UpdateProductOutput:
       type: object
       properties:
@@ -7241,6 +7432,8 @@ components:
       items:
         $ref: '#/components/schemas/FailedServiceActionAssociation'
       maxItems: 50
+    Boolean:
+      type: boolean
     BudgetDetail:
       type: object
       properties:
@@ -7462,7 +7655,7 @@ components:
         Info:
           allOf:
             - $ref: '#/components/schemas/ProvisioningArtifactInfo'
-            - description: '<p>The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:</p> <p> <code>"LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."</code> </p>'
+            - description: '<p>Specify the template source with one of the following options, but not both. Keys accepted: [ <code>LoadTemplateFromURL</code>, <code>ImportFromPhysicalId</code> ]</p> <p>The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:</p> <p> <code>"LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."</code> </p> <p> <code>ImportFromPhysicalId</code>: The physical id of the resource that contains the template. Currently only supports CloudFormation stack arn. Specify the physical id in JSON format as follows: <code>ImportFromPhysicalId: “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]</code> </p>'
         Type:
           allOf:
             - $ref: '#/components/schemas/ProvisioningArtifactType'
@@ -7609,6 +7802,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagOptionId'
             - description: The TagOption identifier.
+        Owner:
+          allOf:
+            - $ref: '#/components/schemas/Owner'
+            - description: The AWS account Id of the owner account that created the TagOption.
       description: Information about a TagOption.
     CreatedTime:
       type: string
@@ -7649,6 +7846,25 @@ components:
             - $ref: '#/components/schemas/ShareErrors'
             - description: List of errors.
       description: Information about the portfolio share operation.
+    DescribePortfolioShareType:
+      type: string
+      enum:
+        - ACCOUNT
+        - ORGANIZATION
+        - ORGANIZATIONAL_UNIT
+        - ORGANIZATION_MEMBER_ACCOUNT
+    PageToken:
+      type: string
+      pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
+      maxLength: 2024
+    PageSizeMax100:
+      type: integer
+      minimum: 0
+      maximum: 100
+    PortfolioShareDetails:
+      type: array
+      items:
+        $ref: '#/components/schemas/PortfolioShareDetail'
     ProvisioningArtifactSummaries:
       type: array
       items:
@@ -7773,10 +7989,6 @@ components:
       type: integer
       minimum: 0
       maximum: 20
-    PageToken:
-      type: string
-      pattern: '[\u0009\u000a\u000d\u0020-\uD7FF\uE000-\uFFFD]*'
-      maxLength: 2024
     ProvisionedProductPlanDetails:
       type: object
       properties:
@@ -8105,10 +8317,6 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/OrganizationNode'
-    PageSizeMax100:
-      type: integer
-      minimum: 0
-      maximum: 100
     Principals:
       type: array
       items:
@@ -8192,12 +8400,16 @@ components:
       pattern: 'arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'
       minLength: 1
       maxLength: 1224
+    NullableBoolean:
+      type: boolean
     OutputDescription:
       type: string
       maxLength: 1024
     OutputKey:
       type: string
     OutputValue:
+      type: string
+    Owner:
       type: string
     ParameterConstraints:
       type: object
@@ -8226,6 +8438,26 @@ components:
       type: string
       minLength: 1
       maxLength: 150
+    PortfolioShareDetail:
+      type: object
+      properties:
+        PrincipalId:
+          allOf:
+            - $ref: '#/components/schemas/Id'
+            - description: '<p>The identifier of the recipient entity that received the portfolio share. The recipient entities can be one of the following: </p> <p>1. An external account.</p> <p>2. An organziation member account.</p> <p>3. An organzational unit (OU).</p> <p>4. The organization itself. (This shares with every account in the organization).</p>'
+        Type:
+          allOf:
+            - $ref: '#/components/schemas/DescribePortfolioShareType'
+            - description: The type of the portfolio share.
+        Accepted:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: 'Indicates whether the shared portfolio is imported by the recipient account. If the recipient is in an organization node, the share is automatically imported, and the field is always set to true.'
+        ShareTagOptions:
+          allOf:
+            - $ref: '#/components/schemas/Boolean'
+            - description: Indicates whether TagOptions sharing is enabled or disabled for the portfolio share.
+      description: Information about the portfolio share.
     Principal:
       type: object
       properties:
@@ -8320,7 +8552,7 @@ components:
         StackSetAccounts:
           allOf:
             - $ref: '#/components/schemas/StackSetAccounts'
-            - description: '<p>One or more AWS accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The AWS accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>'
+            - description: '<p>One or more AWS accounts where the provisioned product will be available.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The specified accounts should be within the list of accounts from the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all acounts from the <code>STACKSET</code> constraint.</p>'
         StackSetRegions:
           allOf:
             - $ref: '#/components/schemas/StackSetRegions'
@@ -8341,7 +8573,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/StackSetMaxConcurrencyPercentage'
             - description: '<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as <code>1</code> instead.</p> <p>Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>Conditional: You must specify either <code>StackSetMaxConcurrentCount</code> or <code>StackSetMaxConcurrentPercentage</code>, but not both.</p>'
-      description: The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product types.
+      description: '<p>The user-defined preferences that will be applied when updating a provisioned product. Not all preferences are applicable to all provisioned product type</p> <p>One or more AWS accounts that will have access to the provisioned product.</p> <p>Applicable only to a <code>CFN_STACKSET</code> provisioned product type.</p> <p>The AWS accounts specified should be within the list of accounts in the <code>STACKSET</code> constraint. To get the list of accounts in the <code>STACKSET</code> constraint, use the <code>DescribeProvisioningParameters</code> operation.</p> <p>If no values are specified, the default value is all accounts from the <code>STACKSET</code> constraint.</p>'
     ProvisionedProductNameOrArn:
       type: string
       pattern: '[a-zA-Z0-9][a-zA-Z0-9._-]{0,127}|arn:[a-z0-9-\.]{1,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[a-z0-9-\.]{0,63}:[^/].{0,1023}'

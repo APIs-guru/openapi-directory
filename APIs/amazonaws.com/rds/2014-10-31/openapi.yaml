@@ -3097,7 +3097,7 @@ paths:
         - name: DBName
           in: query
           required: false
-          description: '<p>The meaning of this parameter differs according to the database engine you use.</p> <p> <b>MySQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>MariaDB</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, the default "postgres" database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 63 letters, numbers, or underscores.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>Oracle</b> </p> <p>The Oracle System ID (SID) of the created DB instance. If you specify <code>null</code>, the default value <code>ORCL</code> is used. You can''t specify the string NULL, or any other reserved word, for <code>DBName</code>. </p> <p>Default: <code>ORCL</code> </p> <p>Constraints:</p> <ul> <li> <p>Can''t be longer than 8 characters</p> </li> </ul> <p> <b>SQL Server</b> </p> <p>Not applicable. Must be null.</p> <p> <b>Amazon Aurora</b> </p> <p>The name of the database to create when the primary instance of the DB cluster is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul>'
+          description: '<p>The meaning of this parameter differs according to the database engine you use.</p> <p> <b>MySQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>MariaDB</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 63 letters, numbers, or underscores.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>Oracle</b> </p> <p>The Oracle System ID (SID) of the created DB instance. If you specify <code>null</code>, the default value <code>ORCL</code> is used. You can''t specify the string NULL, or any other reserved word, for <code>DBName</code>. </p> <p>Default: <code>ORCL</code> </p> <p>Constraints:</p> <ul> <li> <p>Can''t be longer than 8 characters</p> </li> </ul> <p> <b>SQL Server</b> </p> <p>Not applicable. Must be null.</p> <p> <b>Amazon Aurora</b> </p> <p>The name of the database to create when the primary instance of the DB cluster is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul>'
           schema:
             type: string
         - name: DBInstanceIdentifier
@@ -3815,7 +3815,7 @@ paths:
         - name: KmsKeyId
           in: query
           required: false
-          description: '<p>The AWS KMS key identifier for an encrypted read replica.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then you do not have to specify a value for this parameter. The read replica is encrypted with the same AWS KMS CMK as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region.</p> <p>You can''t create an encrypted read replica from an unencrypted DB instance.</p>'
+          description: '<p>The AWS KMS key identifier for an encrypted read replica.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then do not specify a value for this parameter. A read replica in the same Region is always encrypted with the same AWS KMS CMK as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region.</p> <p>You can''t create an encrypted read replica from an unencrypted DB instance.</p>'
           schema:
             type: string
         - name: PreSignedUrl
@@ -22680,6 +22680,40 @@ components:
             - $ref: '#/components/schemas/LogTypeList'
             - description: The list of log types to disable.
       description: '<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs will be exported (or not exported) to CloudWatch Logs. The values within these arrays depend on the DB engine being used.</p> <p>For more information about exporting CloudWatch Logs for Amazon RDS DB instances, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs </a> in the <i>Amazon RDS User Guide</i>.</p> <p>For more information about exporting CloudWatch Logs for Amazon Aurora DB clusters, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch">Publishing Database Logs to Amazon CloudWatch Logs</a> in the <i>Amazon Aurora User Guide</i>.</p>'
+    PendingCloudwatchLogsExports:
+      type: object
+      properties:
+        LogTypesToEnable:
+          allOf:
+            - $ref: '#/components/schemas/LogTypeList'
+            - description: 'Log types that are in the process of being deactivated. After they are deactivated, these log types aren''t exported to CloudWatch Logs.'
+        LogTypesToDisable:
+          allOf:
+            - $ref: '#/components/schemas/LogTypeList'
+            - description: 'Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.'
+      description: 'A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.'
+    ClusterPendingModifiedValues:
+      type: object
+      properties:
+        PendingCloudwatchLogsExports:
+          $ref: '#/components/schemas/PendingCloudwatchLogsExports'
+        DBClusterIdentifier:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The DBClusterIdentifier for the DB cluster.
+        MasterUserPassword:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The master credentials for the DB cluster.
+        IAMDatabaseAuthenticationEnabled:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
+        EngineVersion:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The database engine version.
+      description: This data type is used as a response element in the <code>ModifyDBCluster</code> operation and contains changes that will be applied during the next maintenance window.
     ConnectionPoolConfiguration:
       type: object
       properties:
@@ -23650,6 +23684,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'Specifies whether you have requested to enable write forwarding for a secondary cluster in an Aurora global database. Because write forwarding takes time to enable, check the value of <code>GlobalWriteForwardingStatus</code> to confirm that the request has completed before using the write forwarding feature for this cluster.'
+        PendingModifiedValues:
+          allOf:
+            - $ref: '#/components/schemas/ClusterPendingModifiedValues'
+            - description: Specifies that changes to the DB cluster are pending. This element is only included when changes are pending. Specific changes are identified by subelements.
       description: '<p>Contains the details of an Amazon Aurora DB cluster. </p> <p>This data type is used as a response element in the <code>DescribeDBClusters</code>, <code>StopDBCluster</code>, and <code>StartDBCluster</code> actions. </p>'
     CreateDBClusterSnapshotMessage:
       type: object
@@ -23696,7 +23734,7 @@ components:
         DBName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The meaning of this parameter differs according to the database engine you use.</p> <p> <b>MySQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>MariaDB</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, the default "postgres" database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 63 letters, numbers, or underscores.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>Oracle</b> </p> <p>The Oracle System ID (SID) of the created DB instance. If you specify <code>null</code>, the default value <code>ORCL</code> is used. You can''t specify the string NULL, or any other reserved word, for <code>DBName</code>. </p> <p>Default: <code>ORCL</code> </p> <p>Constraints:</p> <ul> <li> <p>Can''t be longer than 8 characters</p> </li> </ul> <p> <b>SQL Server</b> </p> <p>Not applicable. Must be null.</p> <p> <b>Amazon Aurora</b> </p> <p>The name of the database to create when the primary instance of the DB cluster is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul>'
+            - description: '<p>The meaning of this parameter differs according to the database engine you use.</p> <p> <b>MySQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>MariaDB</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>PostgreSQL</b> </p> <p>The name of the database to create when the DB instance is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 63 letters, numbers, or underscores.</p> </li> <li> <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul> <p> <b>Oracle</b> </p> <p>The Oracle System ID (SID) of the created DB instance. If you specify <code>null</code>, the default value <code>ORCL</code> is used. You can''t specify the string NULL, or any other reserved word, for <code>DBName</code>. </p> <p>Default: <code>ORCL</code> </p> <p>Constraints:</p> <ul> <li> <p>Can''t be longer than 8 characters</p> </li> </ul> <p> <b>SQL Server</b> </p> <p>Not applicable. Must be null.</p> <p> <b>Amazon Aurora</b> </p> <p>The name of the database to create when the primary instance of the DB cluster is created. If this parameter isn''t specified, no database is created in the DB instance.</p> <p>Constraints:</p> <ul> <li> <p>Must contain 1 to 64 letters or numbers.</p> </li> <li> <p>Can''t be a word reserved by the specified database engine</p> </li> </ul>'
         DBInstanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -23967,7 +24005,7 @@ components:
         KmsKeyId:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>The AWS KMS key identifier for an encrypted read replica.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then you do not have to specify a value for this parameter. The read replica is encrypted with the same AWS KMS CMK as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region.</p> <p>You can''t create an encrypted read replica from an unencrypted DB instance.</p>'
+            - description: '<p>The AWS KMS key identifier for an encrypted read replica.</p> <p>The AWS KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the AWS KMS CMK.</p> <p>If you create an encrypted read replica in the same AWS Region as the source DB instance, then do not specify a value for this parameter. A read replica in the same Region is always encrypted with the same AWS KMS CMK as the source DB instance.</p> <p>If you create an encrypted read replica in a different AWS Region, then you must specify a AWS KMS key identifier for the destination AWS Region. AWS KMS CMKs are specific to the AWS Region that they are created in, and you can''t use CMKs from one AWS Region in another AWS Region.</p> <p>You can''t create an encrypted read replica from an unencrypted DB instance.</p>'
         PreSignedUrl:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -25049,31 +25087,31 @@ components:
         DBInstanceClass:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' Contains the new <code>DBInstanceClass</code> for the DB instance that will be applied or is currently being applied. '
+            - description: The name of the compute and memory capacity class for the DB instance.
         AllocatedStorage:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: ' Contains the new <code>AllocatedStorage</code> size for the DB instance that will be applied or is currently being applied. '
+            - description: The allocated storage size for the DB instance specified in gibibytes .
         MasterUserPassword:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Contains the pending or currently-in-progress change of the master credentials for the DB instance.
+            - description: The master credentials for the DB instance.
         Port:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: Specifies the pending port for the DB instance.
+            - description: The port for the DB instance.
         BackupRetentionPeriod:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: Specifies the pending number of days for which automated backups are retained.
+            - description: The number of days for which automated backups are retained.
         MultiAZ:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
+            - description: Indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.
         EngineVersion:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Indicates the database engine version.
+            - description: The database engine version.
         LicenseModel:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -25081,30 +25119,34 @@ components:
         Iops:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: Specifies the new Provisioned IOPS value for the DB instance that will be applied or is currently being applied.
+            - description: The Provisioned IOPS value for the DB instance.
         DBInstanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: ' Contains the new <code>DBInstanceIdentifier</code> for the DB instance that will be applied or is currently being applied. '
+            - description: The database identifier for the DB instance.
         StorageType:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Specifies the storage type to be associated with the DB instance.
+            - description: The storage type of the DB instance.
         CACertificateIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: Specifies the identifier of the CA certificate for the DB instance.
+            - description: The identifier of the CA certificate for the DB instance.
         DBSubnetGroupName:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'The new DB subnet group for the DB instance. '
+            - description: The DB subnet group for the DB instance.
         PendingCloudwatchLogsExports:
           $ref: '#/components/schemas/PendingCloudwatchLogsExports'
         ProcessorFeatures:
           allOf:
             - $ref: '#/components/schemas/ProcessorFeatureList'
             - description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
-      description: ' This data type is used as a response element in the <code>ModifyDBInstance</code> action. '
+        IAMDatabaseAuthenticationEnabled:
+          allOf:
+            - $ref: '#/components/schemas/BooleanOptional'
+            - description: Whether mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled.
+      description: ' This data type is used as a response element in the <code>ModifyDBInstance</code> action and contains changes that will be applied during the next maintenance window. '
     ReadReplicaDBInstanceIdentifierList:
       type: array
       items:
@@ -28130,18 +28172,6 @@ components:
             - $ref: '#/components/schemas/String'
             - description: The Amazon Resource Name (ARN) of the Outpost.
       description: '<p>A data type that represents an Outpost.</p> <p>For more information about RDS on Outposts, see <a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html">Amazon RDS on AWS Outposts</a> in the <i>Amazon RDS User Guide.</i> </p>'
-    PendingCloudwatchLogsExports:
-      type: object
-      properties:
-        LogTypesToEnable:
-          allOf:
-            - $ref: '#/components/schemas/LogTypeList'
-            - description: 'Log types that are in the process of being deactivated. After they are deactivated, these log types aren''t exported to CloudWatch Logs.'
-        LogTypesToDisable:
-          allOf:
-            - $ref: '#/components/schemas/LogTypeList'
-            - description: 'Log types that are in the process of being enabled. After they are enabled, these log types are exported to CloudWatch Logs.'
-      description: 'A list of the log types whose configuration is still pending. In other words, these log types are in the process of being activated or deactivated.'
     PendingMaintenanceAction:
       type: object
       properties:
