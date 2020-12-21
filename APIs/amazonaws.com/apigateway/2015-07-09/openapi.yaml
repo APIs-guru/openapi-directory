@@ -2020,7 +2020,7 @@ paths:
                     offset:
                       allOf:
                         - $ref: '#/components/schemas/Integer'
-                        - description: The number of requests subtracted from the given limit in the initial time period.
+                        - description: 'The day that a time period starts. For example, with a time period of <code>WEEK</code>, an offset of <code>0</code> starts on Sunday, and an offset of <code>1</code> starts on Monday.'
                     period:
                       allOf:
                         - $ref: '#/components/schemas/QuotaPeriodType'
@@ -9627,7 +9627,7 @@ components:
         offset:
           allOf:
             - $ref: '#/components/schemas/Integer'
-            - description: The number of requests subtracted from the given limit in the initial time period.
+            - description: 'The day that a time period starts. For example, with a time period of <code>WEEK</code>, an offset of <code>0</code> starts on Sunday, and an offset of <code>1</code> starts on Monday.'
         period:
           allOf:
             - $ref: '#/components/schemas/QuotaPeriodType'

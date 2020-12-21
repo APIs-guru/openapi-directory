@@ -3,7 +3,7 @@ info:
   version: '2019-12-03'
   x-release: v4
   title: AWS Outposts
-  description: 'AWS Outposts is a fully-managed service that extends AWS infrastructure, APIs, and tools to customer premises. By providing local access to AWS-managed infrastructure, AWS Outposts enables customers to build and run applications on premises using the same programming interfaces as in AWS Regions, while using local compute and storage resources for lower latency and local data processing needs.'
+  description: 'AWS Outposts is a fully managed service that extends AWS infrastructure, APIs, and tools to customer premises. By providing local access to AWS managed infrastructure, AWS Outposts enables customers to build and run applications on premises using the same programming interfaces as in AWS Regions, while using local compute and storage resources for lower latency and local data processing needs.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -112,6 +112,7 @@ servers:
           - cn-northwest-1
         default: cn-north-1
     description: The Outposts endpoint for China (Beijing) and China (Ningxia)
+x-hasEquivalentPaths: true
 paths:
   /outposts:
     post:
@@ -172,7 +173,7 @@ paths:
                   minLength: 1
                   maxLength: 255
                 Description:
-                  description: The Outpost description.
+                  description: The description of the Outpost.
                   type: string
                   pattern: '^[\S ]+$'
                   minLength: 1
@@ -541,6 +542,161 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/tags/{ResourceArn}':
+    get:
+      operationId: ListTagsForResource
+      description: Lists the tags for the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:([a-z\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$'
+            maxLength: 1011
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    post:
+      operationId: TagResource
+      description: Adds tags to the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:([a-z\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$'
+            maxLength: 1011
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Tags
+              properties:
+                Tags:
+                  description: The tags to add to the resource.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 50
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+  '/tags/{ResourceArn}#tagKeys':
+    delete:
+      operationId: UntagResource
+      description: Removes tags from the specified resource.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+        '480':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '481':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+      parameters:
+        - name: ResourceArn
+          in: path
+          required: true
+          description: The Amazon Resource Name (ARN) of the resource.
+          schema:
+            type: string
+            pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:([a-z\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$'
+            maxLength: 1011
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/TagKey'
+            minItems: 1
+            maxItems: 50
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -643,11 +799,33 @@ components:
           $ref: '#/components/schemas/siteListDefinition'
         NextToken:
           $ref: '#/components/schemas/Token'
+    ListTagsForResourceResponse:
+      type: object
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The resource tags.
+    TagResourceResponse:
+      type: object
+      properties: {}
+    UntagResourceResponse:
+      type: object
+      properties: {}
+    TagKey:
+      type: string
+      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
+      minLength: 1
+      maxLength: 128
     AccountId:
       type: string
       description: The ID of the AWS account.
       minLength: 12
       maxLength: 12
+    Arn:
+      type: string
+      pattern: '^(arn:aws([a-z-]+)?:outposts:[a-z\d-]+:\d{12}:([a-z\d-]+)/)[a-z]{2,8}-[a-f0-9]{17}$'
+      maxLength: 1011
     AvailabilityZone:
       type: string
       pattern: '[a-z\d-]+'
@@ -669,7 +847,7 @@ components:
     OutpostDescription:
       type: string
       pattern: '^[\S ]+$'
-      description: The Outpost description.
+      description: The description of the Outpost.
       minLength: 1
       maxLength: 1000
     SiteId:
@@ -805,6 +983,10 @@ components:
       description: Information about the sites.
       items:
         $ref: '#/components/schemas/Site'
+    ListTagsForResourceRequest:
+      type: object
+      title: ListTagsForResourceRequest
+      properties: {}
     OwnerId:
       type: string
       pattern: '\d{12}'
@@ -839,10 +1021,25 @@ components:
             - $ref: '#/components/schemas/TagMap'
             - description: The site tags.
       description: Information about a site.
-    TagKey:
-      type: string
-      pattern: '^(?!aws:)[a-zA-Z+-=._:/]+$'
-      minLength: 1
-      maxLength: 128
+    TagKeyList:
+      type: array
+      items:
+        $ref: '#/components/schemas/TagKey'
+      minItems: 1
+      maxItems: 50
+    TagResourceRequest:
+      type: object
+      required:
+        - Tags
+      title: TagResourceRequest
+      properties:
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: The tags to add to the resource.
+    UntagResourceRequest:
+      type: object
+      title: UntagResourceRequest
+      properties: {}
 security:
   - hmac: []

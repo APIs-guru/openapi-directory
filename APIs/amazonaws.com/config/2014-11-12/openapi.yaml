@@ -778,6 +778,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StarlingDoveService.DeleteStoredQuery:
+    post:
+      operationId: DeleteStoredQuery
+      description: 'Deletes the stored query for an AWS account in an AWS Region. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteStoredQueryResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteStoredQueryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StarlingDoveService.DeleteStoredQuery
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=StarlingDoveService.DeliverConfigSnapshot:
     post:
       operationId: DeliverConfigSnapshot
@@ -2791,6 +2836,51 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StarlingDoveService.GetStoredQuery:
+    post:
+      operationId: GetStoredQuery
+      description: Returns the details of a specific stored query.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetStoredQueryResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetStoredQueryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StarlingDoveService.GetStoredQuery
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=StarlingDoveService.ListAggregateDiscoveredResources:
     post:
       operationId: ListAggregateDiscoveredResources
@@ -2897,6 +2987,63 @@ paths:
             type: string
             enum:
               - StarlingDoveService.ListDiscoveredResources
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StarlingDoveService.ListStoredQueries:
+    post:
+      operationId: ListStoredQueries
+      description: 'List the stored queries for an AWS account in an AWS Region. The default is 100. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListStoredQueriesResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: InvalidNextTokenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidNextTokenException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListStoredQueriesRequest'
+      parameters:
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StarlingDoveService.ListStoredQueries
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -3622,7 +3769,7 @@ paths:
   /#X-Amz-Target=StarlingDoveService.PutRemediationExceptions:
     post:
       operationId: PutRemediationExceptions
-      description: <p>A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific AWS Config rule. </p> <note> <p>AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared.</p> </note>
+      description: <p>A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an exisiting exception for a specific resource with a specific AWS Config rule. </p> <note> <p>AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared.</p> </note>
       responses:
         '200':
           description: Success
@@ -3754,6 +3901,57 @@ paths:
             type: string
             enum:
               - StarlingDoveService.PutRetentionConfiguration
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=StarlingDoveService.PutStoredQuery:
+    post:
+      operationId: PutStoredQuery
+      description: Saves a new query or updates an existing saved query. The <code>QueryName</code> must be unique for an AWS account in an AWS Region. You can create upto 300 queries in an AWS account in an AWS Region.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutStoredQueryResponse'
+        '480':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '481':
+          description: TooManyTagsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyTagsException'
+        '482':
+          description: ResourceConcurrentModificationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceConcurrentModificationException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PutStoredQueryRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - StarlingDoveService.PutStoredQuery
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -4454,6 +4652,20 @@ components:
             - $ref: '#/components/schemas/RetentionConfigurationName'
             - description: The name of the retention configuration to delete.
     NoSuchRetentionConfigurationException: {}
+    DeleteStoredQueryResponse:
+      type: object
+      properties: {}
+    DeleteStoredQueryRequest:
+      type: object
+      required:
+        - QueryName
+      title: DeleteStoredQueryRequest
+      properties:
+        QueryName:
+          allOf:
+            - $ref: '#/components/schemas/QueryName'
+            - description: The name of the query that you want to delete.
+    ResourceNotFoundException: {}
     DeliverConfigSnapshotResponse:
       type: object
       properties:
@@ -5581,6 +5793,23 @@ components:
             - description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
       description: The input for the <a>GetResourceConfigHistory</a> action.
     InvalidTimeRangeException: {}
+    GetStoredQueryResponse:
+      type: object
+      properties:
+        StoredQuery:
+          allOf:
+            - $ref: '#/components/schemas/StoredQuery'
+            - description: Returns a <code>StoredQuery</code> object.
+    GetStoredQueryRequest:
+      type: object
+      required:
+        - QueryName
+      title: GetStoredQueryRequest
+      properties:
+        QueryName:
+          allOf:
+            - $ref: '#/components/schemas/QueryName'
+            - description: The name of the query.
     ListAggregateDiscoveredResourcesResponse:
       type: object
       properties:
@@ -5614,7 +5843,7 @@ components:
         Limit:
           allOf:
             - $ref: '#/components/schemas/Limit'
-            - description: 'The maximum number of resource identifiers returned on each page. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
+            - description: 'The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -5662,6 +5891,29 @@ components:
             - $ref: '#/components/schemas/NextToken'
             - description: The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.
       description: <p/>
+    ListStoredQueriesResponse:
+      type: object
+      properties:
+        StoredQueryMetadata:
+          allOf:
+            - $ref: '#/components/schemas/StoredQueryMetadataList'
+            - description: A list of <code>StoredQueryMetadata</code> objects.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'If the previous paginated request didn''t return all of the remaining results, the response object''s <code>NextToken</code> parameter value is set to a token. To retrieve the next set of results, call this action again and assign that token to the request object''s <code>NextToken</code> parameter. If there are no remaining results, the previous response object''s <code>NextToken</code> parameter is set to <code>null</code>. '
+    ListStoredQueriesRequest:
+      type: object
+      title: ListStoredQueriesRequest
+      properties:
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: The nextToken string returned in a previous request that you use to request the next page of results in a paginated response.
+        MaxResults:
+          allOf:
+            - $ref: '#/components/schemas/Limit'
+            - description: The maximum number of results to be returned with a single call.
     ListTagsForResourceResponse:
       type: object
       properties:
@@ -5691,7 +5943,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: 'The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response. '
-    ResourceNotFoundException: {}
     PutAggregationAuthorizationResponse:
       type: object
       properties:
@@ -5808,11 +6059,11 @@ components:
         DeliveryS3Bucket:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3Bucket'
-            - description: <p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p> <note> <p>This field is optional.</p> </note>
+            - description: AWS Config stores intermediate files while processing conformance pack template.
         DeliveryS3KeyPrefix:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3KeyPrefix'
-            - description: <p>The prefix for the Amazon S3 bucket. </p> <note> <p>This field is optional.</p> </note>
+            - description: 'The prefix for the Amazon S3 bucket. '
         ConformancePackInputParameters:
           allOf:
             - $ref: '#/components/schemas/ConformancePackInputParameters'
@@ -5936,11 +6187,11 @@ components:
         DeliveryS3Bucket:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3Bucket'
-            - description: <p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p> <note> <p>This field is optional.</p> </note>
+            - description: '<p>Location of an Amazon S3 bucket where AWS Config can deliver evaluation results. AWS Config stores intermediate files while processing conformance pack template. </p> <p>The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*". For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/conformance-pack-organization-apis.html">Permissions for cross account bucket access</a>.</p>'
         DeliveryS3KeyPrefix:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3KeyPrefix'
-            - description: <p>The prefix for the Amazon S3 bucket.</p> <note> <p>This field is optional.</p> </note>
+            - description: The prefix for the Amazon S3 bucket.
         ConformancePackInputParameters:
           allOf:
             - $ref: '#/components/schemas/ConformancePackInputParameters'
@@ -6050,6 +6301,29 @@ components:
             - $ref: '#/components/schemas/RetentionPeriodInDays'
             - description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
     MaxNumberOfRetentionConfigurationsExceededException: {}
+    PutStoredQueryResponse:
+      type: object
+      properties:
+        QueryArn:
+          allOf:
+            - $ref: '#/components/schemas/QueryArn'
+            - description: 'Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-id.'
+    PutStoredQueryRequest:
+      type: object
+      required:
+        - StoredQuery
+      title: PutStoredQueryRequest
+      properties:
+        StoredQuery:
+          allOf:
+            - $ref: '#/components/schemas/StoredQuery'
+            - description: A list of <code>StoredQuery</code> objects. The mandatory fields are <code>QueryName</code> and <code>Expression</code>.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagsList'
+            - description: A list of <code>Tags</code> object.
+    TooManyTagsException: {}
+    ResourceConcurrentModificationException: {}
     SelectAggregateResourceConfigResponse:
       type: object
       properties:
@@ -6201,7 +6475,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/TagList'
             - description: An array of tag object.
-    TooManyTagsException: {}
     UntagResourceRequest:
       type: object
       required:
@@ -6469,6 +6742,9 @@ components:
         - 'AWS::CloudFront::Distribution'
         - 'AWS::CloudFront::StreamingDistribution'
         - 'AWS::Lambda::Function'
+        - 'AWS::NetworkFirewall::Firewall'
+        - 'AWS::NetworkFirewall::FirewallPolicy'
+        - 'AWS::NetworkFirewall::RuleGroup'
         - 'AWS::ElasticBeanstalk::Application'
         - 'AWS::ElasticBeanstalk::ApplicationVersion'
         - 'AWS::ElasticBeanstalk::Environment'
@@ -7210,7 +7486,7 @@ components:
         arn:
           allOf:
             - $ref: '#/components/schemas/ARN'
-            - description: Amazon Resource Name (ARN) associated with the resource.
+            - description: accoun
         resourceType:
           allOf:
             - $ref: '#/components/schemas/ResourceType'
@@ -7449,11 +7725,11 @@ components:
         DeliveryS3Bucket:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3Bucket'
-            - description: <p>Amazon S3 bucket where AWS Config stores conformance pack templates. </p> <note> <p>This field is optional.</p> </note>
+            - description: 'Conformance pack template that is used to create a pack. The delivery bucket name should start with awsconfigconforms. For example: "Resource": "arn:aws:s3:::your_bucket_name/*".'
         DeliveryS3KeyPrefix:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3KeyPrefix'
-            - description: <p>The prefix for the Amazon S3 bucket.</p> <note> <p>This field is optional.</p> </note>
+            - description: The prefix for the Amazon S3 bucket.
         ConformancePackInputParameters:
           allOf:
             - $ref: '#/components/schemas/ConformancePackInputParameters'
@@ -7677,6 +7953,11 @@ components:
       pattern: '[\w\-]+'
       minLength: 1
       maxLength: 256
+    QueryName:
+      type: string
+      pattern: '^[a-zA-Z0-9-_]+$'
+      minLength: 1
+      maxLength: 64
     DeliveryChannel:
       type: object
       properties:
@@ -8097,6 +8378,32 @@ components:
     LaterTime:
       type: string
       format: date-time
+    StoredQuery:
+      type: object
+      required:
+        - QueryName
+      properties:
+        QueryId:
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: The ID of the query.
+        QueryArn:
+          allOf:
+            - $ref: '#/components/schemas/QueryArn'
+            - description: 'Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-id.'
+        QueryName:
+          allOf:
+            - $ref: '#/components/schemas/QueryName'
+            - description: The name of the query.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/QueryDescription'
+            - description: A unique description for the query.
+        Expression:
+          allOf:
+            - $ref: '#/components/schemas/QueryExpression'
+            - description: 'The expression of the query. For example, <code>SELECT resourceId, resourceType, supplementaryConfiguration.BucketVersioningConfiguration.status WHERE resourceType = ''AWS::S3::Bucket'' AND supplementaryConfiguration.BucketVersioningConfiguration.status = ''Off''.</code> '
+      description: Provides the details of a stored query.
     GroupedResourceCount:
       type: object
       required:
@@ -8142,6 +8449,10 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ResourceIdentifier'
+    StoredQueryMetadataList:
+      type: array
+      items:
+        $ref: '#/components/schemas/StoredQueryMetadata'
     TagList:
       type: array
       items:
@@ -8380,11 +8691,11 @@ components:
         DeliveryS3Bucket:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3Bucket'
-            - description: <p>Amazon S3 bucket where AWS Config stores conformance pack templates. </p> <note> <p>This field is optional.</p> </note>
+            - description: 'Location of an Amazon S3 bucket where AWS Config can deliver evaluation results and conformance pack template that is used to create a pack. '
         DeliveryS3KeyPrefix:
           allOf:
             - $ref: '#/components/schemas/DeliveryS3KeyPrefix'
-            - description: <p>Any folder structure you want to add to an Amazon S3 bucket.</p> <note> <p>This field is optional.</p> </note>
+            - description: Any folder structure you want to add to an Amazon S3 bucket.
         ConformancePackInputParameters:
           allOf:
             - $ref: '#/components/schemas/ConformancePackInputParameters'
@@ -8563,6 +8874,26 @@ components:
             - $ref: '#/components/schemas/RetentionPeriodInDays'
             - description: '<p>Number of days AWS Config stores your historical information.</p> <note> <p>Currently, only applicable to the configuration item history.</p> </note>'
       description: An object with the name of the retention configuration and the retention period in days. The object stores the configuration for data retention in AWS Config.
+    QueryArn:
+      type: string
+      pattern: '^arn:aws[a-z\-]*:config:[a-z\-\d]+:\d+:stored-query/[a-zA-Z0-9-_]+/query-[a-zA-Z\d-_/]+$'
+      minLength: 1
+      maxLength: 500
+    QueryDescription:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 0
+      maxLength: 256
+    QueryExpression:
+      type: string
+      pattern: '[\s\S]*'
+      minLength: 1
+      maxLength: 4096
+    QueryId:
+      type: string
+      pattern: ^\S+$
+      minLength: 1
+      maxLength: 36
     QueryInfo:
       type: object
       properties:
@@ -8892,6 +9223,30 @@ components:
         $ref: '#/components/schemas/StringWithCharLimit256'
       minItems: 0
       maxItems: 25
+    StoredQueryMetadata:
+      type: object
+      required:
+        - QueryId
+        - QueryArn
+        - QueryName
+      properties:
+        QueryId:
+          allOf:
+            - $ref: '#/components/schemas/QueryId'
+            - description: 'The ID of the query. '
+        QueryArn:
+          allOf:
+            - $ref: '#/components/schemas/QueryArn'
+            - description: 'Amazon Resource Name (ARN) of the query. For example, arn:partition:service:region:account-id:resource-type/resource-id.'
+        QueryName:
+          allOf:
+            - $ref: '#/components/schemas/QueryName'
+            - description: The name of the query.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/QueryDescription'
+            - description: A unique description for the query.
+      description: 'Returns details of a specific query. '
     SupplementaryConfigurationValue:
       type: string
     SupplementaryConfigurationName:

@@ -113,10 +113,96 @@ servers:
         default: cn-north-1
     description: The Amazon Connect Participant endpoint for China (Beijing) and China (Ningxia)
 paths:
+  /participant/complete-attachment-upload#X-Amz-Bearer:
+    post:
+      operationId: CompleteAttachmentUpload
+      description: 'Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API. '
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompleteAttachmentUploadResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+        '485':
+          description: ConflictException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConflictException'
+      parameters:
+        - name: X-Amz-Bearer
+          in: header
+          required: true
+          description: The authentication token associated with the participant's connection.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AttachmentIds
+                - ClientToken
+              properties:
+                AttachmentIds:
+                  description: A list of unique identifiers for the attachments.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/ArtifactId'
+                  minItems: 1
+                  maxItems: 1
+                ClientToken:
+                  description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /participant/connection#X-Amz-Bearer:
     post:
       operationId: CreateParticipantConnection
-      description: '<p>Creates the participant''s connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken.</p> <p>The participant token is valid for the lifetime of the participant – until the they are part of a contact.</p> <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic. </p> <p>For chat, you need to publish the following on the established websocket connection:</p> <p> <code>{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}</code> </p> <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.</p>'
+      description: '<p>Creates the participant''s connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken.</p> <p>The participant token is valid for the lifetime of the participant – until they are part of a contact.</p> <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic. </p> <p>For chat, you need to publish the following on the established websocket connection:</p> <p> <code>{"topic":"aws/subscribe","content":{"topics":["aws/chat"]}}</code> </p> <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.</p> <note> <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 authentication</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -152,7 +238,7 @@ paths:
         - name: X-Amz-Bearer
           in: header
           required: true
-          description: 'Participant Token as obtained from <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContactResponse.html">StartChatContact</a> API response.'
+          description: '<p>This is a header parameter.</p> <p>The Participant Token as obtained from <a href="https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html">StartChatContact</a> API response.</p>'
           schema:
             type: string
             minLength: 1
@@ -183,7 +269,7 @@ paths:
   /participant/disconnect#X-Amz-Bearer:
     post:
       operationId: DisconnectParticipant
-      description: Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+      description: '<p>Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p> <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 authentication</a>.</p>'
       responses:
         '200':
           description: Success
@@ -243,10 +329,76 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /participant/attachment#X-Amz-Bearer:
+    post:
+      operationId: GetAttachment
+      description: Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetAttachmentResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+      parameters:
+        - name: X-Amz-Bearer
+          in: header
+          required: true
+          description: The authentication token associated with the participant's connection.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - AttachmentId
+              properties:
+                AttachmentId:
+                  description: A unique identifier for the attachment.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /participant/transcript#X-Amz-Bearer:
     post:
       operationId: GetTranscript
-      description: Retrieves a transcript of the session. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+      description: '<p>Retrieves a transcript of the session, including details about any attachments. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p> <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 authentication</a>.</p>'
       responses:
         '200':
           description: Success
@@ -360,7 +512,7 @@ paths:
   /participant/event#X-Amz-Bearer:
     post:
       operationId: SendEvent
-      description: Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+      description: '<p>Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p> <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 authentication</a>.</p>'
       responses:
         '200':
           description: Success
@@ -435,7 +587,7 @@ paths:
   /participant/message#X-Amz-Bearer:
     post:
       operationId: SendMessage
-      description: Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.
+      description: '<p>Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p> <note> <p>The Amazon Connect Participant Service APIs do not use <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4 authentication</a>.</p> </note>'
       responses:
         '200':
           description: Success
@@ -508,6 +660,95 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /participant/start-attachment-upload#X-Amz-Bearer:
+    post:
+      operationId: StartAttachmentUpload
+      description: Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StartAttachmentUploadResponse'
+        '480':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '483':
+          description: ValidationException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationException'
+        '484':
+          description: ServiceQuotaExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceQuotaExceededException'
+      parameters:
+        - name: X-Amz-Bearer
+          in: header
+          required: true
+          description: The authentication token associated with the participant's connection.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 1000
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - ContentType
+                - AttachmentSizeInBytes
+                - AttachmentName
+                - ClientToken
+              properties:
+                ContentType:
+                  description: 'Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.'
+                  type: string
+                  minLength: 1
+                  maxLength: 255
+                AttachmentSizeInBytes:
+                  description: The size of the attachment in bytes.
+                  type: integer
+                  minimum: 1
+                AttachmentName:
+                  description: A case-sensitive name of the attachment being uploaded.
+                  type: string
+                  minLength: 1
+                  maxLength: 256
+                ClientToken:
+                  description: A unique case sensitive identifier to support idempotency of request.
+                  type: string
+                  minLength: 1
+                  maxLength: 500
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
 components:
   parameters:
     X-Amz-Content-Sha256:
@@ -560,6 +801,19 @@ components:
       description: Amazon Signature authorization v4
       x-amazon-apigateway-authtype: awsSigv4
   schemas:
+    CompleteAttachmentUploadResponse:
+      type: object
+      properties: {}
+    ArtifactId:
+      type: string
+      minLength: 1
+      maxLength: 256
+    AccessDeniedException: {}
+    InternalServerException: {}
+    ThrottlingException: {}
+    ValidationException: {}
+    ServiceQuotaExceededException: {}
+    ConflictException: {}
     CreateParticipantConnectionResponse:
       type: object
       properties:
@@ -576,13 +830,20 @@ components:
       enum:
         - WEBSOCKET
         - CONNECTION_CREDENTIALS
-    AccessDeniedException: {}
-    InternalServerException: {}
-    ThrottlingException: {}
-    ValidationException: {}
     DisconnectParticipantResponse:
       type: object
       properties: {}
+    GetAttachmentResponse:
+      type: object
+      properties:
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/PreSignedAttachmentUrl'
+            - description: The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
+        UrlExpiry:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601Datetime'
+            - description: 'The expiration time of the URL in ISO timestamp. It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.'
     GetTranscriptResponse:
       type: object
       properties:
@@ -632,6 +893,64 @@ components:
           allOf:
             - $ref: '#/components/schemas/Instant'
             - description: '<p>The time when the message was sent.</p> <p>It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>'
+    StartAttachmentUploadResponse:
+      type: object
+      properties:
+        AttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactId'
+            - description: A unique identifier for the attachment.
+        UploadMetadata:
+          allOf:
+            - $ref: '#/components/schemas/UploadMetadata'
+            - description: Fields to be used while uploading the attachment.
+    ArtifactStatus:
+      type: string
+      enum:
+        - APPROVED
+        - REJECTED
+        - IN_PROGRESS
+    AttachmentIdList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ArtifactId'
+      minItems: 1
+      maxItems: 1
+    ContentType:
+      type: string
+      minLength: 1
+      maxLength: 255
+    AttachmentName:
+      type: string
+      minLength: 1
+      maxLength: 256
+    AttachmentItem:
+      type: object
+      properties:
+        ContentType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: 'Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.'
+        AttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactId'
+            - description: A unique identifier for the attachment.
+        AttachmentName:
+          allOf:
+            - $ref: '#/components/schemas/AttachmentName'
+            - description: A case-sensitive name of the attachment being uploaded.
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactStatus'
+            - description: Status of the attachment.
+      description: The case-insensitive input to indicate standard MIME type that describes the format of the file that will be uploaded.
+    AttachmentSizeInBytes:
+      type: integer
+      minimum: 1
+    Attachments:
+      type: array
+      items:
+        $ref: '#/components/schemas/AttachmentItem'
     ChatContent:
       type: string
       minLength: 1
@@ -643,16 +962,42 @@ components:
     ChatItemType:
       type: string
       enum:
+        - TYPING
+        - PARTICIPANT_JOINED
+        - PARTICIPANT_LEFT
+        - CHAT_ENDED
+        - TRANSFER_SUCCEEDED
+        - TRANSFER_FAILED
         - MESSAGE
         - EVENT
+        - ATTACHMENT
         - CONNECTION_ACK
     ClientToken:
       type: string
+      maxLength: 500
+    NonEmptyClientToken:
+      type: string
+      minLength: 1
       maxLength: 500
     ParticipantToken:
       type: string
       minLength: 1
       maxLength: 1000
+    CompleteAttachmentUploadRequest:
+      type: object
+      required:
+        - AttachmentIds
+        - ClientToken
+      title: CompleteAttachmentUploadRequest
+      properties:
+        AttachmentIds:
+          allOf:
+            - $ref: '#/components/schemas/AttachmentIdList'
+            - description: A list of unique identifiers for the attachments.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyClientToken'
+            - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
     ISO8601Datetime:
       type: string
     ConnectionCredentials:
@@ -710,6 +1055,20 @@ components:
       type: string
       minLength: 1
       maxLength: 256
+    GetAttachmentRequest:
+      type: object
+      required:
+        - AttachmentId
+      title: GetAttachmentRequest
+      properties:
+        AttachmentId:
+          allOf:
+            - $ref: '#/components/schemas/ArtifactId'
+            - description: A unique identifier for the attachment.
+    PreSignedAttachmentUrl:
+      type: string
+      minLength: 1
+      maxLength: 2000
     MaxResults:
       type: integer
       minimum: 0
@@ -821,6 +1180,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ParticipantRole'
             - description: 'The role of the sender. For example, is it a customer, agent, or system.'
+        Attachments:
+          allOf:
+            - $ref: '#/components/schemas/Attachments'
+            - description: Provides information about the attachments.
       description: 'An item - message or event - that has been sent. '
     PreSignedConnectionUrl:
       type: string
@@ -863,5 +1226,62 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientToken'
             - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.'
+    StartAttachmentUploadRequest:
+      type: object
+      required:
+        - ContentType
+        - AttachmentSizeInBytes
+        - AttachmentName
+        - ClientToken
+      title: StartAttachmentUploadRequest
+      properties:
+        ContentType:
+          allOf:
+            - $ref: '#/components/schemas/ContentType'
+            - description: 'Describes the MIME file type of the attachment. For a list of supported file types, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.'
+        AttachmentSizeInBytes:
+          allOf:
+            - $ref: '#/components/schemas/AttachmentSizeInBytes'
+            - description: The size of the attachment in bytes.
+        AttachmentName:
+          allOf:
+            - $ref: '#/components/schemas/AttachmentName'
+            - description: A case-sensitive name of the attachment being uploaded.
+        ClientToken:
+          allOf:
+            - $ref: '#/components/schemas/NonEmptyClientToken'
+            - description: A unique case sensitive identifier to support idempotency of request.
+    UploadMetadata:
+      type: object
+      properties:
+        Url:
+          allOf:
+            - $ref: '#/components/schemas/UploadMetadataUrl'
+            - description: The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.
+        UrlExpiry:
+          allOf:
+            - $ref: '#/components/schemas/ISO8601Datetime'
+            - description: 'The expiration time of the URL in ISO timestamp. It''s specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.'
+        HeadersToInclude:
+          allOf:
+            - $ref: '#/components/schemas/UploadMetadataSignedHeaders'
+            - description: The headers to be provided while uploading the file to the URL.
+      description: Fields to be used while uploading the attachment.
+    UploadMetadataUrl:
+      type: string
+      minLength: 1
+      maxLength: 2000
+    UploadMetadataSignedHeaders:
+      type: object
+      additionalProperties:
+        $ref: '#/components/schemas/UploadMetadataSignedHeadersValue'
+    UploadMetadataSignedHeadersValue:
+      type: string
+      minLength: 1
+      maxLength: 256
+    UploadMetadataSignedHeadersKey:
+      type: string
+      minLength: 1
+      maxLength: 128
 security:
   - hmac: []

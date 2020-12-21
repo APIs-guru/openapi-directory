@@ -3,7 +3,7 @@ info:
   version: '2018-09-24'
   x-release: v4
   title: Amazon Managed Blockchain
-  description: '<p/> <p>Amazon Managed Blockchain is a fully managed service for creating and managing blockchain networks using open source frameworks. Blockchain allows you to build applications where multiple parties can securely and transparently run transactions and share data without the need for a trusted, central authority. Currently, Managed Blockchain supports the Hyperledger Fabric open source framework. </p>'
+  description: '<p/> <p>Amazon Managed Blockchain is a fully managed service for creating and managing blockchain networks using open-source frameworks. Blockchain allows you to build applications where multiple parties can securely and transparently run transactions and share data without the need for a trusted, central authority.</p> <p>Managed Blockchain supports the Hyperledger Fabric and Ethereum open-source frameworks. Because of fundamental differences between the frameworks, some API actions or data types may only apply in the context of one framework and not the other. For example, actions related to Hyperledger Fabric network members such as <code>CreateMember</code> and <code>DeleteMember</code> do not apply to Ethereum.</p> <p>The description for each action indicates the framework or frameworks to which it applies. Data types and properties that apply only in the context of a particular framework are similarly indicated.</p>'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -116,7 +116,7 @@ paths:
   '/networks/{networkId}/members':
     post:
       operationId: CreateMember
-      description: Creates a member within a Managed Blockchain network.
+      description: <p>Creates a member within a Managed Blockchain network.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -203,7 +203,7 @@ paths:
                   minLength: 1
                   maxLength: 32
                 MemberConfiguration:
-                  description: Configuration properties of the member.
+                  description: <p>Configuration properties of the member.</p> <p>Applies only to Hyperledger Fabric.</p>
                   type: object
                   properties:
                     Name:
@@ -232,7 +232,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListMembers
-      description: Returns a listing of the members in a network and properties of their configurations.
+      description: <p>Returns a list of the members in a network and properties of their configurations.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -328,7 +328,7 @@ paths:
   /networks:
     post:
       operationId: CreateNetwork
-      description: Creates a new blockchain network using Amazon Managed Blockchain.
+      description: <p>Creates a new blockchain network using Amazon Managed Blockchain.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -407,6 +407,7 @@ paths:
                   type: string
                   enum:
                     - HYPERLEDGER_FABRIC
+                    - ETHEREUM
                 FrameworkVersion:
                   description: The version of the blockchain framework that the network uses.
                   type: string
@@ -421,7 +422,7 @@ paths:
                         - $ref: '#/components/schemas/NetworkFabricConfiguration'
                         - description: ' Hyperledger Fabric configuration properties for a Managed Blockchain network that uses Hyperledger Fabric. '
                 VotingPolicy:
-                  description: ' The voting rules for the network to decide if a proposal is accepted '
+                  description: <p> The voting rules for the network to decide if a proposal is accepted </p> <p>Applies only to Hyperledger Fabric.</p>
                   type: object
                   properties:
                     ApprovalThresholdPolicy:
@@ -429,7 +430,7 @@ paths:
                         - $ref: '#/components/schemas/ApprovalThresholdPolicy'
                         - description: 'Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.'
                 MemberConfiguration:
-                  description: Configuration properties of the member.
+                  description: <p>Configuration properties of the member.</p> <p>Applies only to Hyperledger Fabric.</p>
                   type: object
                   properties:
                     Name:
@@ -458,7 +459,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListNetworks
-      description: Returns information about the networks in which the current AWS account has members.
+      description: <p>Returns information about the networks in which the current AWS account participates.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>
       responses:
         '200':
           description: Success
@@ -505,10 +506,11 @@ paths:
             type: string
             enum:
               - HYPERLEDGER_FABRIC
+              - ETHEREUM
         - name: status
           in: query
           required: false
-          description: 'An optional status specifier. If provided, only networks currently in this status are listed.'
+          description: '<p>An optional status specifier. If provided, only networks currently in this status are listed.</p> <p>Applies only to Hyperledger Fabric.</p>'
           schema:
             type: string
             enum:
@@ -544,10 +546,10 @@ paths:
             type: string
           description: Pagination token
           required: false
-  '/networks/{networkId}/members/{memberId}/nodes':
+  '/networks/{networkId}/nodes':
     post:
       operationId: CreateNode
-      description: Creates a peer node in a member.
+      description: <p>Creates a node on the specified blockchain network.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>
       responses:
         '200':
           description: Success
@@ -607,15 +609,7 @@ paths:
         - name: networkId
           in: path
           required: true
-          description: The unique identifier of the network in which this node runs.
-          schema:
-            type: string
-            minLength: 1
-            maxLength: 32
-        - name: memberId
-          in: path
-          required: true
-          description: The unique identifier of the member that owns this node.
+          description: '<p>The unique identifier of the network for the node.</p> <p>Ethereum public networks have the following <code>NetworkId</code>s:</p> <ul> <li> <p> <code>n-ethereum-mainnet</code> </p> </li> <li> <p> <code>n-ethereum-rinkeby</code> </p> </li> <li> <p> <code>n-ethereum-ropsten</code> </p> </li> </ul>'
           schema:
             type: string
             minLength: 1
@@ -635,8 +629,13 @@ paths:
                   type: string
                   minLength: 1
                   maxLength: 64
+                MemberId:
+                  description: <p>The unique identifier of the member that owns this node.</p> <p>Applies only to Hyperledger Fabric.</p>
+                  type: string
+                  minLength: 1
+                  maxLength: 32
                 NodeConfiguration:
-                  description: Configuration properties of a peer node.
+                  description: Configuration properties of a node.
                   type: object
                   properties:
                     InstanceType:
@@ -650,11 +649,11 @@ paths:
                     LogPublishingConfiguration:
                       allOf:
                         - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-                        - description: 'Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network. '
+                        - description: 'Configuration properties for logging events associated with a peer node on a Hyperledger Fabric network on Managed Blockchain. '
                     StateDB:
                       allOf:
                         - $ref: '#/components/schemas/StateDBType'
-                        - description: 'The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>. When using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or later, the default is <code>CouchDB</code>.'
+                        - description: '<p>The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>. When using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or later, the default is <code>CouchDB</code>.</p> <p>Applies only to Hyperledger Fabric.</p>'
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -665,7 +664,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListNodes
-      description: Returns information about the nodes within a network.
+      description: <p>Returns information about the nodes within a network.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>
       responses:
         '200':
           description: Success
@@ -707,9 +706,9 @@ paths:
             minLength: 1
             maxLength: 32
         - name: memberId
-          in: path
-          required: true
-          description: The unique identifier of the member who owns the nodes to list.
+          in: query
+          required: false
+          description: <p>The unique identifier of the member who owns the nodes to list.</p> <p>Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.</p>
           schema:
             type: string
             minLength: 1
@@ -723,6 +722,7 @@ paths:
             enum:
               - CREATING
               - AVAILABLE
+              - UNHEALTHY
               - CREATE_FAILED
               - UPDATING
               - DELETING
@@ -758,7 +758,7 @@ paths:
   '/networks/{networkId}/proposals':
     post:
       operationId: CreateProposal
-      description: 'Creates a proposal for a change to the network that other members of the network can vote on, for example, a proposal to add a new member to the network. Any member can create a proposal.'
+      description: '<p>Creates a proposal for a change to the network that other members of the network can vote on, for example, a proposal to add a new member to the network. Any member can create a proposal.</p> <p>Applies only to Hyperledger Fabric.</p>'
       responses:
         '200':
           description: Success
@@ -833,7 +833,7 @@ paths:
                   minLength: 1
                   maxLength: 32
                 Actions:
-                  description: ' The actions to carry out if a proposal is <code>APPROVED</code>. '
+                  description: <p> The actions to carry out if a proposal is <code>APPROVED</code>. </p> <p>Applies only to Hyperledger Fabric.</p>
                   type: object
                   properties:
                     Invitations:
@@ -858,7 +858,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: ListProposals
-      description: Returns a listing of proposals for the network.
+      description: <p>Returns a list of proposals for the network.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -935,7 +935,7 @@ paths:
   '/networks/{networkId}/members/{memberId}':
     delete:
       operationId: DeleteMember
-      description: 'Deletes a member. Deleting a member removes the member and all associated resources from the network. <code>DeleteMember</code> can only be called for a specified <code>MemberId</code> if the principal performing the action is associated with the AWS account that owns the member. In all other cases, the <code>DeleteMember</code> action is carried out as the result of an approved proposal to remove a member. If <code>MemberId</code> is the last member in a network specified by the last AWS account, the network is deleted also.'
+      description: '<p>Deletes a member. Deleting a member removes the member and all associated resources from the network. <code>DeleteMember</code> can only be called for a specified <code>MemberId</code> if the principal performing the action is associated with the AWS account that owns the member. In all other cases, the <code>DeleteMember</code> action is carried out as the result of an approved proposal to remove a member. If <code>MemberId</code> is the last member in a network specified by the last AWS account, the network is deleted also.</p> <p>Applies only to Hyperledger Fabric.</p>'
       responses:
         '200':
           description: Success
@@ -1006,7 +1006,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetMember
-      description: Returns detailed information about a member.
+      description: <p>Returns detailed information about a member.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -1063,7 +1063,7 @@ paths:
             maxLength: 32
     patch:
       operationId: UpdateMember
-      description: Updates a member configuration with new parameters.
+      description: <p>Updates a member configuration with new parameters.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -1105,7 +1105,7 @@ paths:
         - name: networkId
           in: path
           required: true
-          description: The unique ID of the Managed Blockchain network to which the member belongs.
+          description: The unique identifier of the Managed Blockchain network to which the member belongs.
           schema:
             type: string
             minLength: 1
@@ -1113,7 +1113,7 @@ paths:
         - name: memberId
           in: path
           required: true
-          description: The unique ID of the member.
+          description: The unique identifier of the member.
           schema:
             type: string
             minLength: 1
@@ -1133,10 +1133,10 @@ paths:
                       allOf:
                         - $ref: '#/components/schemas/MemberFabricLogPublishingConfiguration'
                         - description: Configuration properties for logging events associated with a member of a Managed Blockchain network using the Hyperledger Fabric framework.
-  '/networks/{networkId}/members/{memberId}/nodes/{nodeId}':
+  '/networks/{networkId}/nodes/{nodeId}':
     delete:
       operationId: DeleteNode
-      description: Deletes a peer node from a member that your AWS account owns. All data on the node is lost and cannot be recovered.
+      description: <p>Deletes a node that your AWS account owns. All data on the node is lost and cannot be recovered.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>
       responses:
         '200':
           description: Success
@@ -1184,15 +1184,15 @@ paths:
         - name: networkId
           in: path
           required: true
-          description: The unique identifier of the network that the node belongs to.
+          description: '<p>The unique identifier of the network that the node is on.</p> <p>Ethereum public networks have the following <code>NetworkId</code>s:</p> <ul> <li> <p> <code>n-ethereum-mainnet</code> </p> </li> <li> <p> <code>n-ethereum-rinkeby</code> </p> </li> <li> <p> <code>n-ethereum-ropsten</code> </p> </li> </ul>'
           schema:
             type: string
             minLength: 1
             maxLength: 32
         - name: memberId
-          in: path
-          required: true
-          description: The unique identifier of the member that owns this node.
+          in: query
+          required: false
+          description: <p>The unique identifier of the member that owns this node.</p> <p>Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.</p>
           schema:
             type: string
             minLength: 1
@@ -1215,7 +1215,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: GetNode
-      description: Returns detailed information about a peer node.
+      description: <p>Returns detailed information about a node.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>
       responses:
         '200':
           description: Success
@@ -1257,15 +1257,15 @@ paths:
         - name: networkId
           in: path
           required: true
-          description: The unique identifier of the network to which the node belongs.
+          description: The unique identifier of the network that the node is on.
           schema:
             type: string
             minLength: 1
             maxLength: 32
         - name: memberId
-          in: path
-          required: true
-          description: The unique identifier of the member that owns the node.
+          in: query
+          required: false
+          description: <p>The unique identifier of the member that owns the node.</p> <p>Applies only to Hyperledger Fabric and is required for Hyperledger Fabric.</p>
           schema:
             type: string
             minLength: 1
@@ -1280,7 +1280,7 @@ paths:
             maxLength: 32
     patch:
       operationId: UpdateNode
-      description: Updates a node configuration with new parameters.
+      description: <p>Updates a node configuration with new parameters.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -1322,15 +1322,7 @@ paths:
         - name: networkId
           in: path
           required: true
-          description: The unique ID of the Managed Blockchain network to which the node belongs.
-          schema:
-            type: string
-            minLength: 1
-            maxLength: 32
-        - name: memberId
-          in: path
-          required: true
-          description: The unique ID of the member that owns the node.
+          description: The unique identifier of the network that the node is on.
           schema:
             type: string
             minLength: 1
@@ -1338,7 +1330,7 @@ paths:
         - name: nodeId
           in: path
           required: true
-          description: The unique ID of the node.
+          description: The unique identifier of the node.
           schema:
             type: string
             minLength: 1
@@ -1350,8 +1342,13 @@ paths:
             schema:
               type: object
               properties:
+                MemberId:
+                  description: <p>The unique identifier of the member that owns the node.</p> <p>Applies only to Hyperledger Fabric.</p>
+                  type: string
+                  minLength: 1
+                  maxLength: 32
                 LogPublishingConfiguration:
-                  description: Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.
+                  description: Configuration properties for logging events associated with a peer node on a Hyperledger Fabric network on Managed Blockchain.
                   type: object
                   properties:
                     Fabric:
@@ -1361,7 +1358,7 @@ paths:
   '/networks/{networkId}':
     get:
       operationId: GetNetwork
-      description: Returns detailed information about a network.
+      description: <p>Returns detailed information about a network.</p> <p>Applies to Hyperledger Fabric and Ethereum.</p>
       responses:
         '200':
           description: Success
@@ -1419,7 +1416,7 @@ paths:
   '/networks/{networkId}/proposals/{proposalId}':
     get:
       operationId: GetProposal
-      description: Returns detailed information about a proposal.
+      description: <p>Returns detailed information about a proposal.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -1485,7 +1482,7 @@ paths:
   /invitations:
     get:
       operationId: ListInvitations
-      description: Returns a listing of all invitations for the current AWS account.
+      description: <p>Returns a list of all invitations for the current AWS account.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -1568,7 +1565,7 @@ paths:
   '/networks/{networkId}/proposals/{proposalId}/votes':
     get:
       operationId: ListProposalVotes
-      description: 'Returns the listing of votes for a specified proposal, including the value of each vote and the unique identifier of the member that cast the vote.'
+      description: '<p>Returns the list of votes for a specified proposal, including the value of each vote and the unique identifier of the member that cast the vote.</p> <p>Applies only to Hyperledger Fabric.</p>'
       responses:
         '200':
           description: Success
@@ -1654,7 +1651,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: VoteOnProposal
-      description: 'Casts a vote for a specified <code>ProposalId</code> on behalf of a member. The member to vote as, specified by <code>VoterMemberId</code>, must be in the same AWS account as the principal that calls the action.'
+      description: '<p>Casts a vote for a specified <code>ProposalId</code> on behalf of a member. The member to vote as, specified by <code>VoterMemberId</code>, must be in the same AWS account as the principal that calls the action.</p> <p>Applies only to Hyperledger Fabric.</p>'
       responses:
         '200':
           description: Success
@@ -1739,7 +1736,7 @@ paths:
   '/invitations/{invitationId}':
     delete:
       operationId: RejectInvitation
-      description: Rejects an invitation to join a network. This action can be called by a principal in an AWS account that has received an invitation to create a member and join a network.
+      description: <p>Rejects an invitation to join a network. This action can be called by a principal in an AWS account that has received an invitation to create a member and join a network.</p> <p>Applies only to Hyperledger Fabric.</p>
       responses:
         '200':
           description: Success
@@ -1861,7 +1858,7 @@ components:
             - description: The unique identifier of the member.
     NetworkMemberNameString:
       type: string
-      pattern: '^(?!-)^[^0-9](?!.*--)[A-Za-z0-9-]+[^- ]$'
+      pattern: '^(?!-|[0-9])(?!.*-$)(?!.*?--)[a-zA-Z0-9-]+$'
       minLength: 1
       maxLength: 64
     DescriptionString:
@@ -1927,7 +1924,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ThresholdComparator'
             - description: Determines whether the vote percentage must be greater than the <code>ThresholdPercentage</code> or must be greater than or equal to the <code>ThreholdPercentage</code> to be approved.
-      description: A policy type that defines the voting rules for the network. The rules decide if a proposal is approved. Approval may be based on criteria such as the percentage of <code>YES</code> votes and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.
+      description: <p>A policy type that defines the voting rules for the network. The rules decide if a proposal is approved. Approval may be based on criteria such as the percentage of <code>YES</code> votes and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.</p> <p>Applies only to Hyperledger Fabric.</p>
     CreateNodeOutput:
       type: object
       properties:
@@ -1946,7 +1943,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/NodeFabricLogPublishingConfiguration'
             - description: Configuration properties for logging events associated with a node that is owned by a member of a Managed Blockchain network using the Hyperledger Fabric framework.
-      description: Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.
+      description: Configuration properties for logging events associated with a peer node on a Hyperledger Fabric network on Managed Blockchain.
     StateDBType:
       type: string
       enum:
@@ -2051,7 +2048,7 @@ components:
         ProposalVotes:
           allOf:
             - $ref: '#/components/schemas/ProposalVoteList'
-            - description: ' The listing of votes. '
+            - description: ' The list of votes. '
         NextToken:
           allOf:
             - $ref: '#/components/schemas/PaginationToken'
@@ -2143,7 +2140,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/MemberLogPublishingConfiguration'
             - description: Configuration properties for logging events associated with a member of a Managed Blockchain network.
-      description: Configuration properties of the member.
+      description: <p>Configuration properties of the member.</p> <p>Applies only to Hyperledger Fabric.</p>
     CreateMemberInput:
       type: object
       required:
@@ -2173,6 +2170,7 @@ components:
       type: string
       enum:
         - HYPERLEDGER_FABRIC
+        - ETHEREUM
     FrameworkVersionString:
       type: string
       minLength: 1
@@ -2192,7 +2190,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ApprovalThresholdPolicy'
             - description: 'Defines the rules for the network for voting on proposals, such as the percentage of <code>YES</code> votes required for the proposal to be approved and the duration of the proposal. The policy applies to all proposals and is specified when the network is created.'
-      description: ' The voting rules for the network to decide if a proposal is accepted '
+      description: <p> The voting rules for the network to decide if a proposal is accepted </p> <p>Applies only to Hyperledger Fabric.</p>
     CreateNetworkInput:
       type: object
       required:
@@ -2240,7 +2238,6 @@ components:
       type: object
       required:
         - InstanceType
-        - AvailabilityZone
       properties:
         InstanceType:
           allOf:
@@ -2253,12 +2250,12 @@ components:
         LogPublishingConfiguration:
           allOf:
             - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-            - description: 'Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network. '
+            - description: 'Configuration properties for logging events associated with a peer node on a Hyperledger Fabric network on Managed Blockchain. '
         StateDB:
           allOf:
             - $ref: '#/components/schemas/StateDBType'
-            - description: 'The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>. When using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or later, the default is <code>CouchDB</code>.'
-      description: Configuration properties of a peer node.
+            - description: '<p>The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>. When using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or later, the default is <code>CouchDB</code>.</p> <p>Applies only to Hyperledger Fabric.</p>'
+      description: Configuration properties of a node.
     CreateNodeInput:
       type: object
       required:
@@ -2270,6 +2267,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ClientRequestTokenString'
             - description: 'A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time. This identifier is required only if you make a service request directly using an HTTP client. It is generated automatically if you use an AWS SDK or the AWS CLI.'
+        MemberId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: <p>The unique identifier of the member that owns this node.</p> <p>Applies only to Hyperledger Fabric.</p>
         NodeConfiguration:
           allOf:
             - $ref: '#/components/schemas/NodeConfiguration'
@@ -2285,7 +2286,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/RemoveActionList'
             - description: ' The actions to perform for an <code>APPROVED</code> proposal to remove a member from the network, which deletes the member and all associated member resources from the network. '
-      description: ' The actions to carry out if a proposal is <code>APPROVED</code>. '
+      description: <p> The actions to carry out if a proposal is <code>APPROVED</code>. </p> <p>Applies only to Hyperledger Fabric.</p>
     CreateProposalInput:
       type: object
       required:
@@ -2364,7 +2365,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The date and time that the member was created.
-      description: Member configuration properties.
+      description: <p>Member configuration properties.</p> <p>Applies only to Hyperledger Fabric.</p>
     GetNetworkInput:
       type: object
       title: GetNetworkInput
@@ -2423,11 +2424,11 @@ components:
         NetworkId:
           allOf:
             - $ref: '#/components/schemas/ResourceIdString'
-            - description: The unique identifier of the network that the node is in.
+            - description: The unique identifier of the network that the node is on.
         MemberId:
           allOf:
             - $ref: '#/components/schemas/ResourceIdString'
-            - description: The unique identifier of the member to which the node belongs.
+            - description: <p>The unique identifier of the member to which the node belongs.</p> <p>Applies only to Hyperledger Fabric.</p>
         Id:
           allOf:
             - $ref: '#/components/schemas/ResourceIdString'
@@ -2447,11 +2448,11 @@ components:
         LogPublishingConfiguration:
           allOf:
             - $ref: '#/components/schemas/NodeLogPublishingConfiguration'
-            - description: Configuration properties for logging events associated with a peer node owned by a member in a Managed Blockchain network.
+            - description: Configuration properties for logging events associated with a peer node on a Hyperledger Fabric network on Managed Blockchain.
         StateDB:
           allOf:
             - $ref: '#/components/schemas/StateDBType'
-            - description: The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>.
+            - description: <p>The state database that the node uses. Values are <code>LevelDB</code> or <code>CouchDB</code>.</p> <p>Applies only to Hyperledger Fabric.</p>
         Status:
           allOf:
             - $ref: '#/components/schemas/NodeStatus'
@@ -2460,7 +2461,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: The date and time that the node was created.
-      description: Configuration properties of a peer node.
+      description: Configuration properties of a node.
     GetProposalInput:
       type: object
       title: GetProposalInput
@@ -2516,7 +2517,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoteCount'
             - description: ' The number of votes remaining to be cast on the proposal by members. In other words, the number of members minus the sum of <code>YES</code> votes and <code>NO</code> votes. '
-      description: Properties of a proposal on a Managed Blockchain network.
+      description: <p>Properties of a proposal on a Managed Blockchain network.</p> <p>Applies only to Hyperledger Fabric.</p>
     Timestamp:
       type: string
       format: date-time
@@ -2581,7 +2582,7 @@ components:
             - description: '<p>The status of the invitation:</p> <ul> <li> <p> <code>PENDING</code> - The invitee has not created a member to join the network, and the invitation has not yet expired.</p> </li> <li> <p> <code>ACCEPTING</code> - The invitee has begun creating a member, and creation has not yet completed.</p> </li> <li> <p> <code>ACCEPTED</code> - The invitee created a member and joined the network using the <code>InvitationID</code>.</p> </li> <li> <p> <code>REJECTED</code> - The invitee rejected the invitation.</p> </li> <li> <p> <code>EXPIRED</code> - The invitee neither created a member nor rejected the invitation before the <code>ExpirationDate</code>.</p> </li> </ul>'
         NetworkSummary:
           $ref: '#/components/schemas/NetworkSummary'
-      description: An invitation to an AWS account to create a member and join the network.
+      description: <p>An invitation to an AWS account to create a member and join the network.</p> <p>Applies only to Hyperledger Fabric.</p>
     InvitationList:
       type: array
       items:
@@ -2597,7 +2598,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/PrincipalString'
             - description: The AWS account ID to invite.
-      description: An action to invite a specific AWS account to create a member and join the network. The <code>InviteAction</code> is carried out when a <code>Proposal</code> is <code>APPROVED</code>.
+      description: <p>An action to invite a specific AWS account to create a member and join the network. The <code>InviteAction</code> is carried out when a <code>Proposal</code> is <code>APPROVED</code>.</p> <p>Applies only to Hyperledger Fabric.</p>
     IsOwned:
       type: boolean
     ProposalListMaxResults:
@@ -2659,6 +2660,7 @@ components:
       enum:
         - CREATING
         - AVAILABLE
+        - UNHEALTHY
         - CREATE_FAILED
         - UPDATING
         - DELETING
@@ -2752,7 +2754,7 @@ components:
         AdminPassword:
           allOf:
             - $ref: '#/components/schemas/PasswordString'
-            - description: 'The password for the member''s initial administrative user. The <code>AdminPassword</code> must be at least eight characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quote(‘), double quote(“), forward slash(/), backward slash(\), @, or a space.'
+            - description: 'The password for the member''s initial administrative user. The <code>AdminPassword</code> must be at least eight characters long and no more than 32 characters. It must contain at least one uppercase letter, one lowercase letter, and one digit. It cannot have a single quotation mark (‘), a double quotation marks (“), a forward slash(/), a backward slash(\), @, or a space.'
       description: Configuration properties for Hyperledger Fabric for a member in a Managed Blockchain network using the Hyperledger Fabric framework.
     MemberSummary:
       type: object
@@ -2781,7 +2783,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/IsOwned'
             - description: An indicator of whether the member is owned by your AWS account or a different AWS account.
-      description: A summary of configuration properties for a member.
+      description: <p>A summary of configuration properties for a member.</p> <p>Applies only to Hyperledger Fabric.</p>
     NetworkFrameworkAttributes:
       type: object
       properties:
@@ -2789,7 +2791,19 @@ components:
           allOf:
             - $ref: '#/components/schemas/NetworkFabricAttributes'
             - description: Attributes of Hyperledger Fabric for a Managed Blockchain network that uses Hyperledger Fabric.
+        Ethereum:
+          allOf:
+            - $ref: '#/components/schemas/NetworkEthereumAttributes'
+            - description: Attributes of an Ethereum network for Managed Blockchain resources participating in an Ethereum network.
       description: Attributes relevant to the network for the blockchain framework that the network uses.
+    NetworkEthereumAttributes:
+      type: object
+      properties:
+        ChainId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The Ethereum <code>CHAIN_ID</code> associated with the Ethereum network. Chain IDs are as follows:</p> <ul> <li> <p>mainnet = <code>1</code> </p> </li> <li> <p>rinkeby = <code>4</code> </p> </li> <li> <p>ropsten = <code>3</code> </p> </li> </ul>'
+      description: Attributes of Ethereum for a network.
     NetworkFabricAttributes:
       type: object
       properties:
@@ -2809,7 +2823,23 @@ components:
           allOf:
             - $ref: '#/components/schemas/NodeFabricAttributes'
             - description: Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.
-      description: Attributes relevant to a peer node on a Managed Blockchain network for the blockchain framework that the network uses.
+        Ethereum:
+          allOf:
+            - $ref: '#/components/schemas/NodeEthereumAttributes'
+            - description: Attributes of Ethereum for a node on a Managed Blockchain network that uses Ethereum.
+      description: Attributes relevant to a node on a Managed Blockchain network for the blockchain framework that the network uses.
+    NodeEthereumAttributes:
+      type: object
+      properties:
+        HttpEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over HTTP connections from a client. Use this endpoint in client code for smart contracts when using an HTTP connection. Connections to this endpoint are authenticated using <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.'
+        WebSocketEndpoint:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC methods over WebSockets connections from a client. Use this endpoint in client code for smart contracts when using a WebSockets connection. Connections to this endpoint are authenticated using <a href="https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html">Signature Version 4</a>.'
+      description: Attributes of an Ethereum node.
     NodeFabricAttributes:
       type: object
       properties:
@@ -2821,7 +2851,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: The endpoint that identifies the peer node for peer channel-based event services.
-      description: Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network that uses Hyperledger Fabric.
+      description: Attributes of Hyperledger Fabric for a peer node on a Hyperledger Fabric network on Managed Blockchain.
     NodeSummary:
       type: object
       properties:
@@ -2845,7 +2875,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceTypeString'
             - description: The EC2 instance type for the node.
-      description: A summary of configuration properties for a peer node.
+      description: A summary of configuration properties for a node.
     ProposalStatus:
       type: string
       enum:
@@ -2887,7 +2917,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Timestamp'
             - description: ' The date and time that the proposal expires. This is the <code>CreationDate</code> plus the <code>ProposalDurationInHours</code> that is specified in the <code>ProposalThresholdPolicy</code>. After this date and time, if members have not cast enough votes to determine the outcome according to the voting policy, the proposal is <code>EXPIRED</code> and <code>Actions</code> are not carried out. '
-      description: Properties of a proposal.
+      description: <p>Properties of a proposal.</p> <p>Applies only to Hyperledger Fabric.</p>
     VoteSummary:
       type: object
       properties:
@@ -2903,7 +2933,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceIdString'
             - description: ' The unique identifier of the member that cast the vote. '
-      description: ' Properties of an individual vote that a member cast for a proposal. '
+      description: <p> Properties of an individual vote that a member cast for a proposal. </p> <p>Applies only to Hyperledger Fabric.</p>
     RejectInvitationInput:
       type: object
       title: RejectInvitationInput
@@ -2917,7 +2947,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceIdString'
             - description: The unique identifier of the member to remove.
-      description: An action to remove a member from a Managed Blockchain network as the result of a removal proposal that is <code>APPROVED</code>. The member and all associated resources are deleted from the network.
+      description: <p>An action to remove a member from a Managed Blockchain network as the result of a removal proposal that is <code>APPROVED</code>. The member and all associated resources are deleted from the network.</p> <p>Applies only to Hyperledger Fabric.</p>
     UpdateMemberInput:
       type: object
       title: UpdateMemberInput
@@ -2930,6 +2960,10 @@ components:
       type: object
       title: UpdateNodeInput
       properties:
+        MemberId:
+          allOf:
+            - $ref: '#/components/schemas/ResourceIdString'
+            - description: <p>The unique identifier of the member that owns the node.</p> <p>Applies only to Hyperledger Fabric.</p>
         LogPublishingConfiguration:
           allOf:
             - $ref: '#/components/schemas/NodeLogPublishingConfiguration'

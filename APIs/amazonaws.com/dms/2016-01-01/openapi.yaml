@@ -4820,7 +4820,7 @@ components:
         AutoMinorVersionUpgrade:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: '<p>A value that indicates that minor version upgrades are applied automatically to the replication instance during the maintenance window. Changing this parameter doesn''t result in an outage, except in the case dsecribed following. The change is asynchronously applied as soon as possible. </p> <p>An outage does result if these factors apply: </p> <ul> <li> <p>This parameter is set to <code>true</code> during the maintenance window.</p> </li> <li> <p>A newer minor version is available. </p> </li> <li> <p>AWS DMS has enabled automatic patching for the given engine version. </p> </li> </ul>'
+            - description: '<p>A value that indicates that minor version upgrades are applied automatically to the replication instance during the maintenance window. Changing this parameter doesn''t result in an outage, except in the case described following. The change is asynchronously applied as soon as possible. </p> <p>An outage does result if these factors apply: </p> <ul> <li> <p>This parameter is set to <code>true</code> during the maintenance window.</p> </li> <li> <p>A newer minor version is available. </p> </li> <li> <p>AWS DMS has enabled automatic patching for the given engine version. </p> </li> </ul>'
         ReplicationInstanceIdentifier:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5551,19 +5551,19 @@ components:
         UseCsvNoSupValue:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: '<p>This setting applies if the S3 output files during a change data capture (CDC) load are written in .csv format. If set to <code>true</code> for columns not included in the supplemental log, AWS DMS uses the value specified by <a href="dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue"> <code>CsvNoSupValue</code> </a>. If not set or set to <code>false</code>, AWS DMS uses the null value for these columns.</p> <note> <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p> </note>'
+            - description: '<p>This setting applies if the S3 output files during a change data capture (CDC) load are written in .csv format. If set to <code>true</code> for columns not included in the supplemental log, AWS DMS uses the value specified by <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CsvNoSupValue"> <code>CsvNoSupValue</code> </a>. If not set or set to <code>false</code>, AWS DMS uses the null value for these columns.</p> <note> <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p> </note>'
         CsvNoSupValue:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>This setting only applies if your Amazon S3 output files during a change data capture (CDC) load are written in .csv format. If <a href="dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue"> <code>UseCsvNoSupValue</code> </a> is set to true, specify a string value that you want AWS DMS to use for all columns not included in the supplemental log. If you do not specify a string value, AWS DMS uses the null value for these columns regardless of the <code>UseCsvNoSupValue</code> setting.</p> <note> <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p> </note>'
+            - description: '<p>This setting only applies if your Amazon S3 output files during a change data capture (CDC) load are written in .csv format. If <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-UseCsvNoSupValue"> <code>UseCsvNoSupValue</code> </a> is set to true, specify a string value that you want AWS DMS to use for all columns not included in the supplemental log. If you do not specify a string value, AWS DMS uses the null value for these columns regardless of the <code>UseCsvNoSupValue</code> setting.</p> <note> <p>This setting is supported in AWS DMS versions 3.4.1 and later.</p> </note>'
         PreserveTransactions:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
-            - description: '<p>If set to <code>true</code>, AWS DMS saves the transaction order for a change data capture (CDC) load on the Amazon S3 target specified by <a href="dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath"> <code>CdcPath</code> </a>.</p> <note> <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p> </note>'
+            - description: '<p>If set to <code>true</code>, AWS DMS saves the transaction order for a change data capture (CDC) load on the Amazon S3 target specified by <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-CdcPath"> <code>CdcPath</code> </a>. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath">Capturing data changes (CDC) including transaction order on the S3 target</a>.</p> <note> <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p> </note>'
         CdcPath:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>Specifies the folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it''s optional. If <code>CdcPath</code> is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. For an S3 target, if <code>CdcPath</code>is set, it is the folder path where data changes are replicated. If you set <a href="dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions"> <code>PreserveTransactions</code> </a> to <code>true</code>, AWS DMS verifies that you have set this parameter to a folder path on your S3 target where AWS DMS can save the transaction order for the CDC load. AWS DMS creates this CDC folder path in either your S3 target working directory or the S3 target location specified by <a href="dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder"> <code>BucketFolder</code> </a> and <a href="dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName"> <code>BucketName</code> </a>.</p> <p>For example, if you specify <code>CdcPath</code> as <code>MyChangedData</code>, and you specify <code>BucketName</code> as <code>MyTargetBucket</code> but do not specify <code>BucketFolder</code>, AWS DMS creates the CDC folder path following: <code>MyTargetBucket/MyChangedData</code>.</p> <p>If you specify the same <code>CdcPath</code>, and you specify <code>BucketName</code> as <code>MyTargetBucket</code> and <code>BucketFolder</code> as <code>MyTargetData</code>, AWS DMS creates the CDC folder path following: <code>MyTargetBucket/MyTargetData/MyChangedData</code>.</p> <note> <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p> </note>'
+            - description: '<p>Specifies the folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it''s optional. If <code>CdcPath</code> is set, AWS DMS reads CDC files from this path and replicates the data changes to the target endpoint. For an S3 target if you set <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions"> <code>PreserveTransactions</code> </a> to <code>true</code>, AWS DMS verifies that you have set this parameter to a folder path on your S3 target where AWS DMS can save the transaction order for the CDC load. AWS DMS creates this CDC folder path in either your S3 target working directory or the S3 target location specified by <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder"> <code>BucketFolder</code> </a> and <a href="https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName"> <code>BucketName</code> </a>.</p> <p>For example, if you specify <code>CdcPath</code> as <code>MyChangedData</code>, and you specify <code>BucketName</code> as <code>MyTargetBucket</code> but do not specify <code>BucketFolder</code>, AWS DMS creates the CDC folder path following: <code>MyTargetBucket/MyChangedData</code>.</p> <p>If you specify the same <code>CdcPath</code>, and you specify <code>BucketName</code> as <code>MyTargetBucket</code> and <code>BucketFolder</code> as <code>MyTargetData</code>, AWS DMS creates the CDC folder path following: <code>MyTargetBucket/MyTargetData/MyChangedData</code>.</p> <p>For more information on CDC including transaction order on an S3 target, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath">Capturing data changes (CDC) including transaction order on the S3 target</a>.</p> <note> <p>This setting is supported in AWS DMS versions 3.4.2 and later.</p> </note>'
       description: 'Settings for exporting data to Amazon S3. '
     DmsTransferSettings:
       type: object
@@ -5628,6 +5628,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets Manager secret that allows access to the MongoDB endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can''t specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager">Using secrets to access AWS Database Migration Service resources</a> in the <i>AWS Database Migration Service User Guide</i>.</p> </note>'
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the MongoDB endpoint connection details.'
       description: Provides information that defines a MongoDB endpoint.
     KinesisSettings:
       type: object
@@ -5785,7 +5793,7 @@ components:
         BucketFolder:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: '<p>An S3 folder where the comma-separated-value (.csv) files are stored before being uploaded to the target Redshift cluster. </p> <p>For full load mode, AWS DMS converts source records into .csv files and loads them to the <i>BucketFolder/TableID</i> path. AWS DMS uses the Redshift <code>COPY</code> command to upload the .csv files to the target table. The files are deleted once the <code>COPY</code> operation has finished. For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html">Amazon Redshift Database Developer Guide</a> </p> <p>For change-data-capture (CDC) mode, AWS DMS creates a <i>NetChanges</i> table, and loads the .csv files to this <i>BucketFolder/NetChangesTableID</i> path.</p>'
+            - description: '<p>An S3 folder where the comma-separated-value (.csv) files are stored before being uploaded to the target Redshift cluster. </p> <p>For full load mode, AWS DMS converts source records into .csv files and loads them to the <i>BucketFolder/TableID</i> path. AWS DMS uses the Redshift <code>COPY</code> command to upload the .csv files to the target table. The files are deleted once the <code>COPY</code> operation has finished. For more information, see <a href="https://docs.aws.amazon.com/redshift/latest/dg/r_COPY.html">COPY</a> in the <i>Amazon Redshift Database Developer Guide</i>.</p> <p>For change-data-capture (CDC) mode, AWS DMS creates a <i>NetChanges</i> table, and loads the .csv files to this <i>BucketFolder/NetChangesTableID</i> path.</p>'
         BucketName:
           allOf:
             - $ref: '#/components/schemas/String'
@@ -5886,6 +5894,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
             - description: The size (in KB) of the in-memory file write buffer used when generating .csv files on the local disk at the DMS replication instance. The default value is 1000 (buffer size is 1000KB).
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets Manager secret that allows access to the Amazon Redshift endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can''t specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager">Using secrets to access AWS Database Migration Service resources</a> in the <i>AWS Database Migration Service User Guide</i>.</p> </note>'
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Amazon Redshift endpoint connection details.'
       description: Provides information that defines an Amazon Redshift endpoint.
     PostgreSQLSettings:
       type: object
@@ -5938,6 +5954,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: '<p>Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance.</p> <p>When used with the AWS DMS API <code>CdcStartPosition</code> request parameter, this attribute also enables using native CDC start points.</p>'
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets Manager secret that allows access to the PostgreSQL endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can''t specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager">Using secrets to access AWS Database Migration Service resources</a> in the <i>AWS Database Migration Service User Guide</i>.</p> </note>'
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the PostgreSQL endpoint connection details.'
       description: Provides information that defines a PostgreSQL endpoint.
     MySQLSettings:
       type: object
@@ -5965,7 +5989,7 @@ components:
         ParallelLoadThreads:
           allOf:
             - $ref: '#/components/schemas/IntegerOptional'
-            - description: '<p>Improves performance when loading data into the MySQLcompatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread.</p> <p>Example: <code>parallelLoadThreads=1</code> </p>'
+            - description: '<p>Improves performance when loading data into the MySQL-compatible target database. Specifies how many threads to use to load the data into the MySQL-compatible target database. Setting a large number of threads can have an adverse effect on database performance, because a separate connection is required for each thread.</p> <p>Example: <code>parallelLoadThreads=1</code> </p>'
         Password:
           allOf:
             - $ref: '#/components/schemas/SecretString'
@@ -5986,6 +6010,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Endpoint connection user name.
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets Manager secret that allows access to the MySQL endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can''t specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager">Using secrets to access AWS Database Migration Service resources</a> in the <i>AWS Database Migration Service User Guide</i>.</p> </note>'
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the MySQL endpoint connection details.'
       description: Provides information that defines a MySQL endpoint.
     OracleSettings:
       type: object
@@ -6110,6 +6142,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Endpoint connection user name.
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets Manager secret that allows access to the Oracle endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can''t specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager">Using secrets to access AWS Database Migration Service resources</a> in the <i>AWS Database Migration Service User Guide</i>.</p> </note>'
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Oracle endpoint connection details.'
       description: Provides information that defines an Oracle endpoint.
     SybaseSettings:
       type: object
@@ -6134,6 +6174,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Endpoint connection user name.
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets Manager secret that allows access to the SAP ASE endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can''t specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager">Using secrets to access AWS Database Migration Service resources</a> in the <i>AWS Database Migration Service User Guide</i>.</p> </note>'
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the SAP SAE endpoint connection details.'
       description: Provides information that defines a SAP ASE endpoint.
     MicrosoftSQLServerSettings:
       type: object
@@ -6153,7 +6201,7 @@ components:
         ControlTablesFileGroup:
           allOf:
             - $ref: '#/components/schemas/String'
-            - description: 'Specify a filegroup for the AWS DMS internal tables. When the replication task starts, all the internal AWS DMS control tables (awsdms_ apply_exception, awsdms_apply, awsdms_changes) are created on the specified filegroup.'
+            - description: 'Specifies a file group for the AWS DMS internal tables. When the replication task starts, all the internal AWS DMS control tables (awsdms_ apply_exception, awsdms_apply, awsdms_changes) are created for the specified file group.'
         Password:
           allOf:
             - $ref: '#/components/schemas/SecretString'
@@ -6178,6 +6226,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/BooleanOptional'
             - description: 'Use this to attribute to transfer data for full-load operations using BCP. When the target table contains an identity column that does not exist in the source table, you must disable the use BCP for loading table option.'
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets Manager secret that allows access to the SQL Server endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can''t specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager">Using secrets to access AWS Database Migration Service resources</a> in the <i>AWS Database Migration Service User Guide</i>.</p> </note>'
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the SQL Server endpoint connection details.'
       description: Provides information that defines a Microsoft SQL Server endpoint.
     IBMDb2Settings:
       type: object
@@ -6214,6 +6270,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: Endpoint connection user name.
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets Manager secret that allows access to the Db2 LUW endpoint. </p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can''t specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager">Using secrets to access AWS Database Migration Service resources</a> in the <i>AWS Database Migration Service User Guide</i>.</p> </note>'
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the Db2 LUW endpoint connection details.'
       description: Provides information that defines an IBM Db2 LUW endpoint.
     DocDbSettings:
       type: object
@@ -6254,6 +6318,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/String'
             - description: 'The AWS KMS key identifier that is used to encrypt the content on the replication instance. If you don''t specify a value for the <code>KmsKeyId</code> parameter, then AWS DMS uses your default encryption key. AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.'
+        SecretsManagerAccessRoleArn:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: '<p>The full Amazon Resource Name (ARN) of the IAM role that specifies AWS DMS as the trusted entity and grants the required permissions to access the value in <code>SecretsManagerSecret</code>. <code>SecretsManagerSecret</code> has the value of the AWS Secrets Manager secret that allows access to the DocumentDB endpoint.</p> <note> <p>You can specify one of two sets of values for these permissions. You can specify the values for this setting and <code>SecretsManagerSecretId</code>. Or you can specify clear-text values for <code>UserName</code>, <code>Password</code>, <code>ServerName</code>, and <code>Port</code>. You can''t specify both. For more information on creating this <code>SecretsManagerSecret</code> and the <code>SecretsManagerAccessRoleArn</code> and <code>SecretsManagerSecretId</code> required to access it, see <a href="https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager">Using secrets to access AWS Database Migration Service resources</a> in the <i>AWS Database Migration Service User Guide</i>.</p> </note>'
+        SecretsManagerSecretId:
+          allOf:
+            - $ref: '#/components/schemas/String'
+            - description: 'The full ARN, partial ARN, or friendly name of the <code>SecretsManagerSecret</code> that contains the DocumentDB endpoint connection details.'
       description: Provides information that defines a DocumentDB endpoint.
     Endpoint:
       type: object
@@ -6847,7 +6919,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/FilterValueList'
             - description: 'The filter value, which can specify one or more values used to narrow the returned results.'
-      description: 'Identifies the name and value of a filter object. This filter is used to limit the number and type of AWS DMS objects that are returned for a particular <code>Describe*</code> call or similar operation. Filters are used as an optional parameter to the following APIs. '
+      description: 'Identifies the name and value of a filter object. This filter is used to limit the number and type of AWS DMS objects that are returned for a particular <code>Describe*</code> call or similar operation. Filters are used as an optional parameter for certain API operations. '
     IncludeTestList:
       type: array
       items:

@@ -5987,7 +5987,7 @@ components:
     CreateBucketOutput:
       type: object
       example:
-        Location: /examplebucket
+        Location: 'http://examplebucket.<Region>.s3.amazonaws.com/'
       properties: {}
     BucketLocationConstraint:
       type: string
@@ -6045,16 +6045,18 @@ components:
     DeleteObjectTaggingOutput:
       type: object
       example:
-        VersionId: ydlaNkwWm0SfKJR.T1b1fIdPRbldTYRI
+        VersionId: 'null'
       properties: {}
     DeleteObjectsOutput:
       type: object
       example:
         Deleted:
-          - Key: HappyFace.jpg
-            VersionId: yoz3HB.ZhCS_tKVEmIOr7qYyyAaZSKVd
-          - Key: HappyFace.jpg
-            VersionId: 2LWg7lQLnY41.maGB5Z6SWW.dcq0vx7b
+          - DeleteMarker: 'true'
+            DeleteMarkerVersionId: A._w1z6EFiCF5uhtQMDal9JDkID9tQ7F
+            Key: objectkey1
+          - DeleteMarker: 'true'
+            DeleteMarkerVersionId: iOd_ORxhkKe_e8G8_oSGxt2PjsCZKlkt
+            Key: objectkey2
       properties:
         Deleted:
           allOf:
@@ -6347,12 +6349,12 @@ components:
       type: object
       example:
         AcceptRanges: bytes
-        ContentLength: '10'
-        ContentRange: bytes 0-9/43
-        ContentType: text/plain
-        ETag: '"0d94420ffd0bc68cd3d152506b97a9cc"'
-        LastModified: 'Thu, 09 Oct 2014 22:57:28 GMT'
+        ContentLength: '3191'
+        ContentType: image/jpeg
+        ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
+        LastModified: 'Thu, 15 Dec 2016 01:19:41 GMT'
         Metadata: {}
+        TagCount: 2
         VersionId: 'null'
       properties:
         Body:
@@ -7280,7 +7282,7 @@ components:
       type: object
       example:
         ETag: '"6805f2cfc46c0f04559748bb039d69ae"'
-        VersionId: psM2sYY4.o1501dSx8wMvnkOzSBB.V4a
+        VersionId: tpf3zF08nBplQK1XLOefGskR7mGDwcDk
       properties: {}
     PutObjectAclOutput:
       type: object
