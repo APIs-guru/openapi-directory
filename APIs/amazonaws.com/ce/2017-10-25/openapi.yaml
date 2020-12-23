@@ -2607,7 +2607,7 @@ components:
         MonitorArnList:
           allOf:
             - $ref: '#/components/schemas/MonitorArnList'
-            - description: ' A list of cost anomaly subscription ARNs. '
+            - description: ' A list of cost anomaly monitor ARNs. '
         Subscribers:
           allOf:
             - $ref: '#/components/schemas/Subscribers'
@@ -3800,6 +3800,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/LookbackPeriodInDays'
             - description: ' How many days of previous usage that AWS considers when making this recommendation.'
+        AdditionalMetadata:
+          allOf:
+            - $ref: '#/components/schemas/GenericString'
+            - description: Additional metadata that may be applicable to the recommendation.
       description: Metadata for this recommendation set.
     RightsizingRecommendationSummary:
       type: object

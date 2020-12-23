@@ -116,7 +116,7 @@ paths:
   /groups:
     post:
       operationId: CreateGroup
-      description: 'Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration.'
+      description: '<p>Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration. For more information about constructing a resource query, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>. For more information about service configurations, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:CreateGroup</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -193,7 +193,7 @@ paths:
                   additionalProperties:
                     $ref: '#/components/schemas/TagValue'
                 Configuration:
-                  description: '<p>A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p> <note> <p>You can specify either a <code>Configuration</code> or a <code>ResourceQuery</code> in a group, but not both.</p> </note>'
+                  description: '<p>A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements. For details about the syntax of service configurations, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
                   type: array
                   items:
                     $ref: '#/components/schemas/GroupConfigurationItem'
@@ -209,7 +209,7 @@ paths:
   /delete-group:
     post:
       operationId: DeleteGroup
-      description: Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.
+      description: '<p>Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:DeleteGroup</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -262,7 +262,7 @@ paths:
               type: object
               properties:
                 GroupName:
-                  description: Don't use this parameter. Use <code>Group</code> instead.
+                  description: Deprecated - don't use this parameter. Use <code>Group</code> instead.
                   type: string
                   pattern: '[a-zA-Z0-9_\.-]+'
                   minLength: 1
@@ -284,7 +284,7 @@ paths:
   /get-group:
     post:
       operationId: GetGroup
-      description: Returns information about a specified resource group.
+      description: '<p>Returns information about a specified resource group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GetGroup</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -337,7 +337,7 @@ paths:
               type: object
               properties:
                 GroupName:
-                  description: Don't use this parameter. Use <code>Group</code> instead.
+                  description: Deprecated - don't use this parameter. Use <code>Group</code> instead.
                   type: string
                   pattern: '[a-zA-Z0-9_\.-]+'
                   minLength: 1
@@ -359,7 +359,7 @@ paths:
   /get-group-configuration:
     post:
       operationId: GetGroupConfiguration
-      description: '<p>Returns the service configuration associated with the specified resource group. AWS Resource Groups supports configurations for the following resource group types:</p> <ul> <li> <p> <code>AWS::EC2::CapacityReservationPool</code> - Amazon EC2 capacity reservation pools. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> </ul>'
+      description: '<p>Returns the service configuration associated with the specified resource group. For details about the service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GetGroupConfiguration</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -428,7 +428,7 @@ paths:
   /get-group-query:
     post:
       operationId: GetGroupQuery
-      description: Retrieves the resource query associated with the specified resource group.
+      description: '<p>Retrieves the resource query associated with the specified resource group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GetGroupQuery</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -503,7 +503,7 @@ paths:
   '/resources/{Arn}/tags':
     get:
       operationId: GetTags
-      description: 'Returns a list of tags that are associated with a resource group, specified by an ARN.'
+      description: '<p>Returns a list of tags that are associated with a resource group, specified by an ARN.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GetTags</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -567,7 +567,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     put:
       operationId: Tag
-      description: <p>Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.</p> <important> <p>Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.</p> </important>
+      description: '<p>Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.</p> <important> <p>Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.</p> </important> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:Tag</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -637,7 +637,7 @@ paths:
                     $ref: '#/components/schemas/TagValue'
     patch:
       operationId: Untag
-      description: Deletes tags from a specified resource group.
+      description: '<p>Deletes tags from a specified resource group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:Untag</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -708,7 +708,7 @@ paths:
   /group-resources:
     post:
       operationId: GroupResources
-      description: Adds the specified resources to the specified group.
+      description: '<p>Adds the specified resources to the specified group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:GroupResources</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -787,7 +787,7 @@ paths:
   /list-group-resources:
     post:
       operationId: ListGroupResources
-      description: Returns a list of ARNs of the resources that are members of a specified resource group.
+      description: '<p>Returns a list of ARNs of the resources that are members of a specified resource group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:ListGroupResources</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -858,7 +858,7 @@ paths:
               type: object
               properties:
                 GroupName:
-                  description: Don't use this parameter. Use <code>Group</code> instead.
+                  description: <important> <p> <i> <b>Deprecated - don't use this parameter. Use the <code>Group</code> request field instead.</b> </i> </p> </important>
                   type: string
                   pattern: '[a-zA-Z0-9_\.-]+'
                   minLength: 1
@@ -896,7 +896,7 @@ paths:
   /groups-list:
     post:
       operationId: ListGroups
-      description: Returns a list of existing resource groups in your account.
+      description: '<p>Returns a list of existing resource groups in your account.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:ListGroups</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -972,7 +972,7 @@ paths:
               type: object
               properties:
                 Filters:
-                  description: '<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to a <code>ListGroups</code> operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i> </code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.</p> </li> <li> <p> <code>configuration-type</code> - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:</p> <ul> <li> <p>AWS:EC2::CapacityReservationPool</p> </li> </ul> </li> </ul>'
+                  description: '<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to a <code>ListGroups</code> operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i> </code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.</p> </li> <li> <p> <code>configuration-type</code> - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:</p> <ul> <li> <p> <code>AWS:EC2::CapacityReservationPool</code> </p> </li> <li> <p> <code>AWS:EC2::HostManagement</code> </p> </li> </ul> </li> </ul>'
                   type: array
                   items:
                     $ref: '#/components/schemas/GroupFilter'
@@ -984,10 +984,85 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /put-group-configuration:
+    post:
+      operationId: PutGroupConfiguration
+      description: '<p>Attaches a service configuration to the specified group. This occurs asynchronously, and can take time to complete. You can use <a>GetGroupConfiguration</a> to check the status of the update.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:PutGroupConfiguration</code> </p> </li> </ul>'
+      responses:
+        '202':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PutGroupConfigurationOutput'
+        '480':
+          description: BadRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+        '481':
+          description: ForbiddenException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+        '482':
+          description: NotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFoundException'
+        '483':
+          description: MethodNotAllowedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MethodNotAllowedException'
+        '484':
+          description: TooManyRequestsException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+        '485':
+          description: InternalServerErrorException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Group:
+                  description: The name or ARN of the resource group with the configuration that you want to update.
+                  type: string
+                  pattern: '(arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\d{1}:[0-9]{12}:group/)?[a-zA-Z0-9_\.-]{1,128}'
+                  minLength: 1
+                  maxLength: 1600
+                Configuration:
+                  description: '<p>The new configuration to associate with the specified group. A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p> <p>For information about the syntax of a service configuration, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/GroupConfigurationItem'
+                  maxItems: 2
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /resources/search:
     post:
       operationId: SearchResources
-      description: Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
+      description: '<p>Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:SearchResources</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1087,7 +1162,7 @@ paths:
   /ungroup-resources:
     post:
       operationId: UngroupResources
-      description: Removes the specified resources from the specified group.
+      description: '<p>Removes the specified resources from the specified group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:UngroupResources</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1166,7 +1241,7 @@ paths:
   /update-group:
     post:
       operationId: UpdateGroup
-      description: Updates the description for an existing group. You cannot update the name of a resource group.
+      description: '<p>Updates the description for an existing group. You cannot update the name of a resource group.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:UpdateGroup</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1246,7 +1321,7 @@ paths:
   /update-group-query:
     post:
       operationId: UpdateGroupQuery
-      description: Updates the resource query of a group.
+      description: '<p>Updates the resource query of a group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>.</p> <p> <b>Minimum permissions</b> </p> <p>To run this command, you must have the following permissions:</p> <ul> <li> <p> <code>resource-groups:UpdateGroupQuery</code> </p> </li> </ul>'
       responses:
         '200':
           description: Success
@@ -1394,7 +1469,7 @@ components:
         ResourceQuery:
           allOf:
             - $ref: '#/components/schemas/ResourceQuery'
-            - description: The resource query associated with the group.
+            - description: 'The resource query associated with the group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>. '
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -1402,7 +1477,7 @@ components:
         GroupConfiguration:
           allOf:
             - $ref: '#/components/schemas/GroupConfiguration'
-            - description: '<p>The service configuration associated with the resource group. AWS Resource Groups supports adding service configurations for the following resource group types:</p> <ul> <li> <p> <code>AWS::EC2::CapacityReservationPool</code> - Amazon EC2 capacity reservation pools. For more information, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> </ul>'
+            - description: 'The service configuration associated with the resource group. For details about the syntax of a service configuration, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     QueryType:
       type: string
       enum:
@@ -1428,12 +1503,12 @@ components:
         Type:
           allOf:
             - $ref: '#/components/schemas/GroupConfigurationType'
-            - description: '<p>Specifies the type of group configuration item. Each item must have a unique value for <code>type</code>.</p> <p>You can specify the following string values:</p> <ul> <li> <p> <code>AWS::EC2::CapacityReservationPool</code> </p> <p>For more information about EC2 capacity reservation groups, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> <li> <p> <code>AWS::ResourceGroups::Generic</code> - Supports parameters that configure the behavior of resource groups of any type.</p> </li> </ul>'
+            - description: 'Specifies the type of group configuration item. Each item must have a unique value for <code>type</code>. For the list of types that you can specify for a configuration item, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
         Parameters:
           allOf:
             - $ref: '#/components/schemas/GroupParameterList'
-            - description: A collection of parameters for this group configuration item.
-      description: An item in a group configuration. A group configuration can have one or more items.
+            - description: 'A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
+      description: 'An item in a group configuration. A group service configuration can have one or more items. For details about group service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     BadRequestException: {}
     ForbiddenException: {}
     MethodNotAllowedException: {}
@@ -1460,14 +1535,14 @@ components:
         GroupConfiguration:
           allOf:
             - $ref: '#/components/schemas/GroupConfiguration'
-            - description: The configuration associated with the specified group.
+            - description: 'The service configuration associated with the specified group. For details about the service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     GetGroupQueryOutput:
       type: object
       properties:
         GroupQuery:
           allOf:
             - $ref: '#/components/schemas/GroupQuery'
-            - description: The resource query associated with the specified group.
+            - description: 'The resource query associated with the specified group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>.'
     GetTagsOutput:
       type: object
       properties:
@@ -1485,21 +1560,30 @@ components:
         Succeeded:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The ARNs of the resources that were successfully added to the group by this operation.
+            - description: A list of ARNs of resources that were successfully added to the group by this operation.
         Failed:
           allOf:
             - $ref: '#/components/schemas/FailedResourceList'
-            - description: The ARNs of the resources that failed to be added to the group by this operation.
+            - description: A list of ARNs of any resources that failed to be added to the group by this operation.
+        Pending:
+          allOf:
+            - $ref: '#/components/schemas/PendingResourceList'
+            - description: 'A list of ARNs of any resources that are still in the process of being added to the group by this operation. These pending additions continue asynchronously. You can check the status of pending additions by using the <code> <a>ListGroupResources</a> </code> operation, and checking the <code>Resources</code> array in the response and the <code>Status</code> field of each object in that array. '
     ResourceArn:
       type: string
       pattern: 'arn:aws(-[a-z]+)*:[a-z0-9\-]*:([a-z]{2}(-[a-z]+)+-\d{1})?:([0-9]{12})?:.+'
     ListGroupResourcesOutput:
       type: object
       properties:
+        Resources:
+          allOf:
+            - $ref: '#/components/schemas/ListGroupResourcesItemList'
+            - description: 'An array of resources from which you can determine each resource''s identity, type, and group membership status.'
         ResourceIdentifiers:
           allOf:
             - $ref: '#/components/schemas/ResourceIdentifierList'
-            - description: The ARNs and resource types of resources that are members of the group that you specified.
+            - deprecated: true
+              description: '<important> <p> <b> <i>Deprecated - don''t use this parameter. Use the <code>Resources</code> response field instead.</i> </b> </p> </important>This field is deprecated, use Resources instead.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1535,7 +1619,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/GroupList'
             - deprecated: true
-              description: 'This output element is deprecated and shouldn''t be used. Refer to <code>GroupIdentifiers</code> instead.This field is deprecated, use GroupIdentifiers instead.'
+              description: '<important> <p> <i> <b>Deprecated - don''t use this field. Use the <code>GroupIdentifiers</code> response field instead.</b> </i> </p> </important>This field is deprecated, use GroupIdentifiers instead.'
         NextToken:
           allOf:
             - $ref: '#/components/schemas/NextToken'
@@ -1555,6 +1639,9 @@ components:
             - $ref: '#/components/schemas/GroupFilterValues'
             - description: 'One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.'
       description: A filter collection that you can use to restrict the results from a <code>List</code> operation to only those you want to include.
+    PutGroupConfigurationOutput:
+      type: object
+      properties: {}
     SearchResourcesOutput:
       type: object
       properties:
@@ -1587,11 +1674,15 @@ components:
         Succeeded:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
-            - description: The ARNs of the resources that were successfully removed from the group.
+            - description: A list of resources that were successfully removed from the group by this operation.
         Failed:
           allOf:
             - $ref: '#/components/schemas/FailedResourceList'
-            - description: The resources that failed to be removed from the group.
+            - description: A list of any resources that failed to be removed from the group by this operation.
+        Pending:
+          allOf:
+            - $ref: '#/components/schemas/PendingResourceList'
+            - description: 'A list of any resources that are still in the process of being removed from the group by this operation. These pending removals continue asynchronously. You can check the status of pending removals by using the <code> <a>ListGroupResources</a> </code> operation. After the resource is successfully removed, it no longer appears in the response.'
     UntagOutput:
       type: object
       properties:
@@ -1672,7 +1763,7 @@ components:
         ResourceQuery:
           allOf:
             - $ref: '#/components/schemas/ResourceQuery'
-            - description: '<p>The resource query that determines which AWS resources are members of this group.</p> <note> <p>You can specify either a <code>ResourceQuery</code> or a <code>Configuration</code>, but not both.</p> </note>'
+            - description: '<p>The resource query that determines which AWS resources are members of this group. For more information about resource queries, see <a href="https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag">Create a tag-based group in Resource Groups</a>. </p> <note> <p>A resource group can contain either a <code>ResourceQuery</code> or a <code>Configuration</code>, but not both.</p> </note>'
         Tags:
           allOf:
             - $ref: '#/components/schemas/Tags'
@@ -1680,7 +1771,7 @@ components:
         Configuration:
           allOf:
             - $ref: '#/components/schemas/GroupConfigurationList'
-            - description: '<p>A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p> <note> <p>You can specify either a <code>Configuration</code> or a <code>ResourceQuery</code> in a group, but not both.</p> </note>'
+            - description: '<p>A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements. For details about the syntax of service configurations, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
     Group:
       type: object
       required:
@@ -1699,7 +1790,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/Description'
             - description: The description of the resource group.
-      description: '<p>A resource group that contains AWS resources. You can assign resources to the group by associating either of the following elements with the group:</p> <ul> <li> <p> <a>ResourceQuery</a> - Use a resource query to specify a set of tag keys and values. All resources in the same AWS Region and AWS account that have those keys with the same values are included in the group. You can add a resource query when you create the group.</p> </li> <li> <p> <a>GroupConfiguration</a> - Use a service configuration to associate the group with an AWS service. The configuration specifies which resource types can be included in the group.</p> </li> </ul>'
+      description: '<p>A resource group that contains AWS resources. You can assign resources to the group by associating either of the following elements with the group:</p> <ul> <li> <p> <a>ResourceQuery</a> - Use a resource query to specify a set of tag keys and values. All resources in the same AWS Region and AWS account that have those keys with the same values are included in the group. You can add a resource query when you create the group, or later by using the <a>PutGroupConfiguration</a> operation.</p> </li> <li> <p> <a>GroupConfiguration</a> - Use a service configuration to associate the group with an AWS service. The configuration specifies which resource types can be included in the group.</p> </li> </ul>'
     GroupConfiguration:
       type: object
       properties:
@@ -1719,7 +1810,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/GroupConfigurationFailureReason'
             - description: 'If present, the reason why a request to update the group configuration failed.'
-      description: 'A service configuration associated with a resource group. The configuration options are determined by the AWS service that defines the <code>Type</code>, and specifies which resources can be included in the group. You can add a service configuration when you create the group.'
+      description: 'A service configuration associated with a resource group. The configuration options are determined by the AWS service that defines the <code>Type</code>, and specifies which resources can be included in the group. You can add a service configuration when you create the group by using <a>CreateGroup</a>, or later by using the <a>PutGroupConfiguration</a> operation. For details about group service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     GroupString:
       type: string
       pattern: '(arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}(-[a-z]+)+-\d{1}:[0-9]{12}:group/)?[a-zA-Z0-9_\.-]{1,128}'
@@ -1733,7 +1824,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/GroupName'
             - deprecated: true
-              description: 'Don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
+              description: 'Deprecated - don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
         Group:
           allOf:
             - $ref: '#/components/schemas/GroupString'
@@ -1782,7 +1873,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/GroupName'
             - deprecated: true
-              description: 'Don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
+              description: 'Deprecated - don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
         Group:
           allOf:
             - $ref: '#/components/schemas/GroupString'
@@ -1844,7 +1935,7 @@ components:
       type: string
       pattern: '[a-z-]+'
       minLength: 1
-      maxLength: 40
+      maxLength: 80
     GroupConfigurationParameterValueList:
       type: array
       items:
@@ -1857,17 +1948,17 @@ components:
         Name:
           allOf:
             - $ref: '#/components/schemas/GroupConfigurationParameterName'
-            - description: '<p>The name of the group configuration parameter.</p> <p>You can specify the following string values:</p> <ul> <li> <p>For configuration item type <code>AWS::ResourceGroups::Generic</code>:</p> <ul> <li> <p> <code>allowed-resource-types</code> </p> <p>Specifies the types of resources that you can add to this group by using the <a>GroupResources</a> operation.</p> </li> </ul> </li> <li> <p>For configuration item type <code>AWS::EC2::CapacityReservationPool</code>:</p> <ul> <li> <p>None - This configuration item type doesn''t support any parameters.</p> </li> </ul> <p>For more information about EC2 capacity reservation groups, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group">Working with capacity reservation groups</a> in the <i>EC2 Users Guide</i>.</p> </li> </ul>'
+            - description: 'The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
         Values:
           allOf:
             - $ref: '#/components/schemas/GroupConfigurationParameterValueList'
-            - description: '<p>The values of for this parameter.</p> <p>You can specify the following string value:</p> <ul> <li> <p>For item type <code>allowed-resource-types</code>: the only supported parameter value is <code>AWS::EC2::CapacityReservation</code>.</p> </li> </ul>'
-      description: A parameter for a group configuration item.
+            - description: 'The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types">Supported resource types and parameters</a>.'
+      description: 'A parameter for a group configuration item. For details about group service configuration syntax, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.'
     GroupConfigurationParameterValue:
       type: string
-      pattern: '[a-zA-Z0-9:]+'
+      pattern: '[a-zA-Z0-9:_-]+'
       minLength: 1
-      maxLength: 40
+      maxLength: 256
     GroupFilterName:
       type: string
       enum:
@@ -1929,6 +2020,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ResourceArnList'
             - description: 'The list of ARNs for resources to be added to the group. '
+    PendingResourceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/PendingResource'
     ResourceFilterList:
       type: array
       items:
@@ -1950,7 +2045,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/GroupName'
             - deprecated: true
-              description: 'Don''t use this parameter. Use <code>Group</code> instead.This field is deprecated, use Group instead.'
+              description: '<important> <p> <i> <b>Deprecated - don''t use this parameter. Use the <code>Group</code> request field instead.</b> </i> </p> </important>This field is deprecated, use Group instead.'
         Group:
           allOf:
             - $ref: '#/components/schemas/GroupString'
@@ -1967,6 +2062,40 @@ components:
           allOf:
             - $ref: '#/components/schemas/NextToken'
             - description: The parameter for receiving additional results if you receive a <code>NextToken</code> response in a previous request. A <code>NextToken</code> response indicates that more output is available. Set this parameter to the value provided by a previous call's <code>NextToken</code> response to indicate where the output should continue from.
+    ResourceIdentifier:
+      type: object
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The ARN of a resource.
+        ResourceType:
+          allOf:
+            - $ref: '#/components/schemas/ResourceType'
+            - description: 'The resource type of a resource, such as <code>AWS::EC2::Instance</code>.'
+      description: A structure that contains the ARN of a resource and its resource type.
+    ResourceStatus:
+      type: object
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStatusValue'
+            - description: The current status.
+      description: 'A structure that identifies the current group membership status for a resource. Adding a resource to a resource group is performed asynchronously as a background task. A <code>PENDING</code> status indicates, for this resource, that the process isn''t completed yet.'
+    ListGroupResourcesItem:
+      type: object
+      properties:
+        Identifier:
+          $ref: '#/components/schemas/ResourceIdentifier'
+        Status:
+          allOf:
+            - $ref: '#/components/schemas/ResourceStatus'
+            - description: '<p>A structure that contains the status of this resource''s membership in the group.</p> <note> <p>This field is present in the response only if the group is of type <code>AWS::EC2::HostManagement</code>.</p> </note>'
+      description: A structure returned by the <a>ListGroupResources</a> operation that contains identity and group membership status information for one of the resources in the group.
+    ListGroupResourcesItemList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ListGroupResourcesItem'
     ResourceIdentifierList:
       type: array
       items:
@@ -1982,7 +2111,27 @@ components:
         Filters:
           allOf:
             - $ref: '#/components/schemas/GroupFilterList'
-            - description: '<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to a <code>ListGroups</code> operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i> </code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.</p> </li> <li> <p> <code>configuration-type</code> - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:</p> <ul> <li> <p>AWS:EC2::CapacityReservationPool</p> </li> </ul> </li> </ul>'
+            - description: '<p>Filters, formatted as <a>GroupFilter</a> objects, that you want to apply to a <code>ListGroups</code> operation.</p> <ul> <li> <p> <code>resource-type</code> - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format <code>AWS::<i>ServiceCode</i>::<i>ResourceType</i> </code>. For example, <code>AWS::EC2::Instance</code>, or <code>AWS::S3::Bucket</code>.</p> </li> <li> <p> <code>configuration-type</code> - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:</p> <ul> <li> <p> <code>AWS:EC2::CapacityReservationPool</code> </p> </li> <li> <p> <code>AWS:EC2::HostManagement</code> </p> </li> </ul> </li> </ul>'
+    PendingResource:
+      type: object
+      properties:
+        ResourceArn:
+          allOf:
+            - $ref: '#/components/schemas/ResourceArn'
+            - description: The Amazon resource name (ARN) of the resource that's in a pending state.
+      description: A structure that identifies a resource that is currently pending addition to the group as a member. Adding a resource to a resource group happens asynchronously as a background task and this one isn't completed yet.
+    PutGroupConfigurationInput:
+      type: object
+      title: PutGroupConfigurationInput
+      properties:
+        Group:
+          allOf:
+            - $ref: '#/components/schemas/GroupString'
+            - description: The name or ARN of the resource group with the configuration that you want to update.
+        Configuration:
+          allOf:
+            - $ref: '#/components/schemas/GroupConfigurationList'
+            - description: '<p>The new configuration to associate with the specified group. A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of <a>GroupConfigurationItem</a> elements.</p> <p>For information about the syntax of a service configuration, see <a href="https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html">Service configurations for resource groups</a>.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
     QueryErrorCode:
       type: string
       enum:
@@ -2020,18 +2169,10 @@ components:
     ResourceType:
       type: string
       pattern: 'AWS::[a-zA-Z0-9]+::\w+'
-    ResourceIdentifier:
-      type: object
-      properties:
-        ResourceArn:
-          allOf:
-            - $ref: '#/components/schemas/ResourceArn'
-            - description: The ARN of a resource.
-        ResourceType:
-          allOf:
-            - $ref: '#/components/schemas/ResourceType'
-            - description: 'The resource type of a resource, such as <code>AWS::EC2::Instance</code>.'
-      description: 'The ARN of a resource, and its resource type.'
+    ResourceStatusValue:
+      type: string
+      enum:
+        - PENDING
     SearchResourcesInput:
       type: object
       required:
@@ -2124,6 +2265,6 @@ components:
         ResourceQuery:
           allOf:
             - $ref: '#/components/schemas/ResourceQuery'
-            - description: The resource query to determine which AWS resources are members of this resource group.
+            - description: '<p>The resource query to determine which AWS resources are members of this resource group.</p> <note> <p>A resource group can contain either a <code>Configuration</code> or a <code>ResourceQuery</code>, but not both.</p> </note>'
 security:
   - hmac: []

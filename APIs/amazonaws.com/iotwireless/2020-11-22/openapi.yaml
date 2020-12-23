@@ -932,7 +932,7 @@ paths:
                     MacVersion:
                       allOf:
                         - $ref: '#/components/schemas/MacVersion'
-                        - description: The MAC version (such as OTAA 1.1 or OTA 1.0.3) to use with this device profile.
+                        - description: The MAC version (such as OTAA 1.1 or OTAA 1.0.3) to use with this device profile.
                     RegParamsRevision:
                       allOf:
                         - $ref: '#/components/schemas/RegParamsRevision'
@@ -1288,7 +1288,7 @@ paths:
                   minLength: 1
                   maxLength: 64
                 LoRaWAN:
-                  description: LoRa object for create functions.
+                  description: LoRaWAN object for create functions.
                   type: object
                   properties:
                     DevEui:
@@ -1318,7 +1318,7 @@ paths:
                     AbpV1_0_x:
                       allOf:
                         - $ref: '#/components/schemas/AbpV1_0_x'
-                        - description: LoRa object for create APIs
+                        - description: LoRaWAN object for create APIs
     parameters:
       - $ref: '#/components/parameters/X-Amz-Content-Sha256'
       - $ref: '#/components/parameters/X-Amz-Date'
@@ -2435,7 +2435,7 @@ paths:
                   type: string
                   maxLength: 2048
                 LoRaWAN:
-                  description: LoRa object for update functions.
+                  description: LoRaWAN object for update functions.
                   type: object
                   properties:
                     DeviceProfileId:
@@ -3955,7 +3955,7 @@ components:
         Sidewalk:
           allOf:
             - $ref: '#/components/schemas/SidewalkAccountInfoWithFingerprint'
-            - description: <p>The Sidewalk account credentials.</p> <p>The <code>AppServerPrivateKey</code> value is empty to protect its security.</p>
+            - description: The Sidewalk account credentials.
         AccountLinked:
           allOf:
             - $ref: '#/components/schemas/AccountLinked'
@@ -4024,7 +4024,7 @@ components:
         ThingName:
           allOf:
             - $ref: '#/components/schemas/ThingName'
-            - description: The name of the thing associated with the wireless device.
+            - description: The name of the thing associated with the wireless device. The value is empty if a thing isn't associated with the device.
         ThingArn:
           allOf:
             - $ref: '#/components/schemas/ThingArn'
@@ -4074,7 +4074,7 @@ components:
         ThingName:
           allOf:
             - $ref: '#/components/schemas/ThingName'
-            - description: The name of the thing associated with the wireless gateway.
+            - description: The name of the thing associated with the wireless gateway. The value is empty if a thing isn't associated with the gateway.
         ThingArn:
           allOf:
             - $ref: '#/components/schemas/ThingArn'
@@ -4174,7 +4174,7 @@ components:
         Sidewalk:
           allOf:
             - $ref: '#/components/schemas/SidewalkAccountList'
-            - description: <p>The Sidewalk account credentials.</p> <p>The <code>AppServerPrivateKey</code> value is empty to protect its security.</p>
+            - description: The Sidewalk account credentials.
     ListServiceProfilesResponse:
       type: object
       properties:
@@ -4516,7 +4516,7 @@ components:
         MacVersion:
           allOf:
             - $ref: '#/components/schemas/MacVersion'
-            - description: The MAC version (such as OTAA 1.1 or OTA 1.0.3) to use with this device profile.
+            - description: The MAC version (such as OTAA 1.1 or OTAA 1.0.3) to use with this device profile.
         RegParamsRevision:
           allOf:
             - $ref: '#/components/schemas/RegParamsRevision'
@@ -4655,8 +4655,8 @@ components:
         AbpV1_0_x:
           allOf:
             - $ref: '#/components/schemas/AbpV1_0_x'
-            - description: LoRa object for create APIs
-      description: LoRa object for create functions.
+            - description: LoRaWAN object for create APIs
+      description: LoRaWAN object for create functions.
     CreateWirelessDeviceRequest:
       type: object
       required:
@@ -4942,6 +4942,12 @@ components:
       type: integer
       minimum: 1000000
       maximum: 16700000
+    Fingerprint:
+      type: string
+      pattern: '[a-fA-F0-9]{64}'
+      minLength: 64
+      maxLength: 64
+      format: password
     GetDestinationRequest:
       type: object
       title: GetDestinationRequest
@@ -4961,10 +4967,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AmazonId'
             - description: The Sidewalk Amazon ID.
-        AppServerPrivateKey:
+        Fingerprint:
           allOf:
-            - $ref: '#/components/schemas/AppServerPrivateKey'
-            - description: The Sidewalk application server private key.
+            - $ref: '#/components/schemas/Fingerprint'
+            - description: Fingerprint for Sidewalk application server private key.
       description: Information about a Sidewalk account.
     WirelessGatewayServiceType:
       type: string
@@ -5313,7 +5319,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/ServiceProfileId'
             - description: The ID of the service profile.
-      description: LoRa object for update functions.
+      description: LoRaWAN object for update functions.
     UpdateSignature:
       type: string
       minLength: 1

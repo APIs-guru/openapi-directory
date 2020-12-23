@@ -3,7 +3,7 @@ info:
   version: '2019-11-01'
   x-release: v4
   title: AWS Compute Optimizer
-  description: 'AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS compute resources, such as EC2 instances, Auto Scaling groups, and Amazon EBS volumes. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">AWS Compute Optimizer User Guide</a>.'
+  description: 'AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your AWS compute resources, such as EC2 instances, Auto Scaling groups, AWS Lambda functions, and Amazon EBS volumes. It reports whether your resources are optimal, and generates optimization recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides recent utilization metric data, as well as projected utilization metric data for the recommendations, which you can use to evaluate which recommendation provides the best price-performance trade-off. The analysis of your usage patterns can help you decide when to move or resize your running resources, and still meet your performance and capacity requirements. For more information about Compute Optimizer, including the required permissions to use the service, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/">AWS Compute Optimizer User Guide</a>.'
   x-logo:
     url: 'https://twitter.com/awscloud/profile_image?size=original'
     backgroundColor: '#FFFFFF'
@@ -750,6 +750,87 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  /#X-Amz-Target=ComputeOptimizerService.GetLambdaFunctionRecommendations:
+    post:
+      operationId: GetLambdaFunctionRecommendations
+      description: '<p>Returns AWS Lambda function recommendations.</p> <p>AWS Compute Optimizer generates recommendations for functions that meet a specific set of requirements. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and requirements</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLambdaFunctionRecommendationsResponse'
+        '480':
+          description: OptInRequiredException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OptInRequiredException'
+        '481':
+          description: InternalServerException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerException'
+        '482':
+          description: ServiceUnavailableException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceUnavailableException'
+        '483':
+          description: AccessDeniedException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessDeniedException'
+        '484':
+          description: InvalidParameterValueException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterValueException'
+        '485':
+          description: MissingAuthenticationToken
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MissingAuthenticationToken'
+        '486':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '487':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetLambdaFunctionRecommendationsRequest'
+      parameters:
+        - name: X-Amz-Target
+          in: header
+          required: true
+          schema:
+            type: string
+            enum:
+              - ComputeOptimizerService.GetLambdaFunctionRecommendations
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   /#X-Amz-Target=ComputeOptimizerService.GetRecommendationSummaries:
     post:
       operationId: GetRecommendationSummaries
@@ -1241,6 +1322,41 @@ components:
       type: object
       title: GetEnrollmentStatusRequest
       properties: {}
+    GetLambdaFunctionRecommendationsResponse:
+      type: object
+      properties:
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: <p>The token to use to advance to the next page of function recommendations.</p> <p>This value is null when there are no more pages of function recommendations to return.</p>
+        lambdaFunctionRecommendations:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionRecommendations'
+            - description: An array of objects that describe function recommendations.
+    GetLambdaFunctionRecommendationsRequest:
+      type: object
+      title: GetLambdaFunctionRecommendationsRequest
+      properties:
+        functionArns:
+          allOf:
+            - $ref: '#/components/schemas/FunctionArns'
+            - description: '<p>The Amazon Resource Name (ARN) of the functions for which to return recommendations.</p> <p>You can specify a qualified or unqualified ARN. If you specify an unqualified ARN without a function version suffix, Compute Optimizer will return recommendations for the latest (<code>$LATEST</code>) version of the function. If you specify a qualified ARN with a version suffix, Compute Optimizer will return recommendations for the specified function version. For more information about using function versions, see <a href="https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using">Using versions</a> in the <i>AWS Lambda Developer Guide</i>.</p>'
+        accountIds:
+          allOf:
+            - $ref: '#/components/schemas/AccountIds'
+            - description: '<p>The IDs of the AWS accounts for which to return function recommendations.</p> <p>If your account is the management account of an organization, use this parameter to specify the member accounts for which you want to return function recommendations.</p> <p>Only one account ID can be specified per request.</p>'
+        filters:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionRecommendationFilters'
+            - description: An array of objects that describe a filter that returns a more specific list of function recommendations.
+        nextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: The token to advance to the next page of function recommendations.
+        maxResults:
+          allOf:
+            - $ref: '#/components/schemas/MaxResults'
+            - description: '<p>The maximum number of function recommendations to return with a single request.</p> <p>To retrieve the remaining results, make another request with the returned <code>NextToken</code> value.</p>'
     GetRecommendationSummariesResponse:
       type: object
       properties:
@@ -1677,6 +1793,19 @@ components:
       description: <p>Describes a filter that returns a more specific list of recommendations.</p> <p>This filter is used with the <code>GetAutoScalingGroupRecommendations</code> and <code>GetEC2InstanceRecommendations</code> actions.</p>
     FilterValue:
       type: string
+    FindingReasonCode:
+      type: string
+      enum:
+        - MemoryOverprovisioned
+        - MemoryUnderprovisioned
+    FunctionArn:
+      type: string
+    FunctionArns:
+      type: array
+      items:
+        $ref: '#/components/schemas/FunctionArn'
+    FunctionVersion:
+      type: string
     GetRecommendationErrors:
       type: array
       items:
@@ -1719,6 +1848,14 @@ components:
       type: string
     MemberAccountsEnrolled:
       type: boolean
+    LambdaFunctionRecommendationFilters:
+      type: array
+      items:
+        $ref: '#/components/schemas/LambdaFunctionRecommendationFilter'
+    LambdaFunctionRecommendations:
+      type: array
+      items:
+        $ref: '#/components/schemas/LambdaFunctionRecommendation'
     Identifier:
       type: string
     Message:
@@ -1841,6 +1978,172 @@ components:
         - InProgress
         - Complete
         - Failed
+    LambdaFunctionMemoryMetricName:
+      type: string
+      enum:
+        - Duration
+    LambdaFunctionMemoryMetricStatistic:
+      type: string
+      enum:
+        - LowerBound
+        - UpperBound
+        - Expected
+    LambdaFunctionMemoryProjectedMetric:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionMemoryMetricName'
+            - description: The name of the projected utilization metric.
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionMemoryMetricStatistic'
+            - description: The statistic of the projected utilization metric.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: The values of the projected utilization metrics.
+      description: Describes a projected utilization metric of an AWS Lambda function recommendation option.
+    LambdaFunctionMemoryProjectedMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/LambdaFunctionMemoryProjectedMetric'
+    MemorySize:
+      type: integer
+    LambdaFunctionMemoryRecommendationOption:
+      type: object
+      properties:
+        rank:
+          allOf:
+            - $ref: '#/components/schemas/Rank'
+            - description: <p>The rank of the function recommendation option.</p> <p>The top recommendation option is ranked as <code>1</code>.</p>
+        memorySize:
+          allOf:
+            - $ref: '#/components/schemas/MemorySize'
+            - description: 'The memory size, in MB, of the function recommendation option.'
+        projectedUtilizationMetrics:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionMemoryProjectedMetrics'
+            - description: An array of objects that describe the projected utilization metrics of the function recommendation option.
+      description: Describes a recommendation option for an AWS Lambda function.
+    LambdaFunctionMemoryRecommendationOptions:
+      type: array
+      items:
+        $ref: '#/components/schemas/LambdaFunctionMemoryRecommendationOption'
+    LambdaFunctionMetricName:
+      type: string
+      enum:
+        - Duration
+        - Memory
+    LambdaFunctionMetricStatistic:
+      type: string
+      enum:
+        - Maximum
+        - Average
+    NumberOfInvocations:
+      type: integer
+    LambdaFunctionUtilizationMetrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/LambdaFunctionUtilizationMetric'
+    LambdaFunctionRecommendationFinding:
+      type: string
+      enum:
+        - Optimized
+        - NotOptimized
+        - Unavailable
+    LambdaFunctionRecommendationFindingReasonCodes:
+      type: array
+      items:
+        $ref: '#/components/schemas/LambdaFunctionRecommendationFindingReasonCode'
+    LambdaFunctionRecommendation:
+      type: object
+      properties:
+        functionArn:
+          allOf:
+            - $ref: '#/components/schemas/FunctionArn'
+            - description: The Amazon Resource Name (ARN) of the current function.
+        functionVersion:
+          allOf:
+            - $ref: '#/components/schemas/FunctionVersion'
+            - description: The version number of the current function.
+        accountId:
+          allOf:
+            - $ref: '#/components/schemas/AccountId'
+            - description: The AWS account ID of the function.
+        currentMemorySize:
+          allOf:
+            - $ref: '#/components/schemas/MemorySize'
+            - description: 'The amount of memory, in MB, that''s allocated to the current function.'
+        numberOfInvocations:
+          allOf:
+            - $ref: '#/components/schemas/NumberOfInvocations'
+            - description: The number of times your function code was executed during the look-back period.
+        utilizationMetrics:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionUtilizationMetrics'
+            - description: An array of objects that describe the utilization metrics of the function.
+        lookbackPeriodInDays:
+          allOf:
+            - $ref: '#/components/schemas/LookBackPeriodInDays'
+            - description: The number of days for which utilization metrics were analyzed for the function.
+        lastRefreshTimestamp:
+          allOf:
+            - $ref: '#/components/schemas/LastRefreshTimestamp'
+            - description: The time stamp of when the function recommendation was last refreshed.
+        finding:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionRecommendationFinding'
+            - description: '<p>The finding classification for the function.</p> <p>Findings for functions include:</p> <ul> <li> <p> <b> <code>Optimized</code> </b> — The function is correctly provisioned to run your workload based on its current configuration and its utilization history. This finding classification does not include finding reason codes.</p> </li> <li> <p> <b> <code>NotOptimized</code> </b> — The function is performing at a higher level (over-provisioned) or at a lower level (under-provisioned) than required for your workload because its current configuration is not optimal. Over-provisioned resources might lead to unnecessary infrastructure cost, and under-provisioned resources might lead to poor application performance. This finding classification can include the <code>MemoryUnderprovisioned</code> and <code>MemoryUnderprovisioned</code> finding reason codes.</p> </li> <li> <p> <b> <code>Unavailable</code> </b> — Compute Optimizer was unable to generate a recommendation for the function. This could be because the function has not accumulated sufficient metric data, or the function does not qualify for a recommendation. This finding classification can include the <code>InsufficientData</code> and <code>Inconclusive</code> finding reason codes.</p> <note> <p>Functions with a finding of unavailable are not returned unless you specify the <code>filter</code> parameter with a value of <code>Unavailable</code> in your <code>GetLambdaFunctionRecommendations</code> request.</p> </note> </li> </ul>'
+        findingReasonCodes:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionRecommendationFindingReasonCodes'
+            - description: '<p>The reason for the finding classification of the function.</p> <note> <p>Functions that have a finding classification of <code>Optimized</code> don''t have a finding reason code.</p> </note> <p>Reason codes include:</p> <ul> <li> <p> <b> <code>MemoryOverprovisioned</code> </b> — The function is over-provisioned when its memory configuration can be sized down while still meeting the performance requirements of your workload. An over-provisioned function might lead to unnecessary infrastructure cost. This finding reason code is part of the <code>NotOptimized</code> finding classification.</p> </li> <li> <p> <b> <code>MemoryUnderprovisioned</code> </b> — The function is under-provisioned when its memory configuration doesn''t meet the performance requirements of the workload. An under-provisioned function might lead to poor application performance. This finding reason code is part of the <code>NotOptimized</code> finding classification.</p> </li> <li> <p> <b> <code>InsufficientData</code> </b> — The function does not have sufficient metric data for Compute Optimizer to generate a recommendation. For more information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and requirements</a> in the <i>AWS Compute Optimizer User Guide</i>. This finding reason code is part of the <code>Unavailable</code> finding classification.</p> </li> <li> <p> <b> <code>Inconclusive</code> </b> — The function does not qualify for a recommendation, or there was an internal error. This finding reason code is part of the <code>Unavailable</code> finding classification.</p> </li> </ul>'
+        memorySizeRecommendationOptions:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionMemoryRecommendationOptions'
+            - description: An array of objects that describe the memory configuration recommendation options for the function.
+      description: Describes an AWS Lambda function recommendation.
+    LambdaFunctionRecommendationFilterName:
+      type: string
+      enum:
+        - Finding
+        - FindingReasonCode
+    LambdaFunctionRecommendationFilter:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionRecommendationFilterName'
+            - description: '<p>The name of the filter.</p> <p>Specify <code>Finding</code> to return recommendations with a specific finding classification (e.g., <code>NotOptimized</code>).</p> <p>Specify <code>FindingReasonCode</code> to return recommendations with a specific finding reason code (e.g., <code>MemoryUnderprovisioned</code>).</p>'
+        values:
+          allOf:
+            - $ref: '#/components/schemas/FilterValues'
+            - description: '<p>The value of the filter.</p> <p>The valid values for this parameter are as follows, depending on what you specify for the <code>name</code> parameter:</p> <ul> <li> <p>Specify <code>Optimized</code>, <code>NotOptimized</code>, or <code>Unavailable</code> if you specified the <code>name</code> parameter as <code>Finding</code>.</p> </li> <li> <p>Specify <code>MemoryOverprovisioned</code>, <code>MemoryUnderprovisioned</code>, <code>InsufficientData</code>, or <code>Inconclusive</code> if you specified the <code>name</code> parameter as <code>FindingReasonCode</code>.</p> </li> </ul>'
+      description: Describes a filter that returns a more specific list of AWS Lambda function recommendations.
+    LambdaFunctionRecommendationFindingReasonCode:
+      type: string
+      enum:
+        - MemoryOverprovisioned
+        - MemoryUnderprovisioned
+        - InsufficientData
+        - Inconclusive
+    LambdaFunctionUtilizationMetric:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionMetricName'
+            - description: The name of the utilization metric.
+        statistic:
+          allOf:
+            - $ref: '#/components/schemas/LambdaFunctionMetricStatistic'
+            - description: The statistic of the utilization metric.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/MetricValue'
+            - description: The value of the utilization metric.
+      description: Describes a utilization metric of an AWS Lambda function.
     LastUpdatedTimestamp:
       type: string
       format: date-time
@@ -1899,6 +2202,25 @@ components:
             - $ref: '#/components/schemas/MetricValue'
             - description: The value of the utilization metric.
       description: '<p>Describes a utilization metric of a resource, such as an Amazon EC2 instance.</p> <p>Compare the utilization metric data of your resource against its projected utilization metric data to determine the performance difference between your current resource and the recommended option.</p>'
+    ReasonCodeSummary:
+      type: object
+      properties:
+        name:
+          allOf:
+            - $ref: '#/components/schemas/FindingReasonCode'
+            - description: The name of the finding reason code.
+        value:
+          allOf:
+            - $ref: '#/components/schemas/SummaryValue'
+            - description: The value of the finding reason code summary.
+      description: A summary of a finding reason code.
+    ReasonCodeSummaries:
+      type: array
+      items:
+        $ref: '#/components/schemas/ReasonCodeSummary'
+    SummaryValue:
+      type: number
+      format: double
     ResourceType:
       type: string
       enum:
@@ -1944,6 +2266,7 @@ components:
         - Ec2Instance
         - AutoScalingGroup
         - EbsVolume
+        - LambdaFunction
     RecommendationSource:
       type: object
       properties:
@@ -2005,10 +2328,11 @@ components:
           allOf:
             - $ref: '#/components/schemas/SummaryValue'
             - description: The value of the recommendation summary.
+        reasonCodeSummaries:
+          allOf:
+            - $ref: '#/components/schemas/ReasonCodeSummaries'
+            - description: An array of objects that summarize a finding reason code.
       description: The summary of a recommendation.
-    SummaryValue:
-      type: number
-      format: double
     VolumeArn:
       type: string
     VolumeBaselineIOPS:

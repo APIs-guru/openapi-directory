@@ -15251,6 +15251,29 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/ColumnError'
+    GenericBoundedDouble:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 1
+    ColumnImportance:
+      type: object
+      properties:
+        ColumnName:
+          allOf:
+            - $ref: '#/components/schemas/NameString'
+            - description: The name of a column.
+        Importance:
+          allOf:
+            - $ref: '#/components/schemas/GenericBoundedDouble'
+            - description: 'The column importance score for the column, as a decimal.'
+      description: '<p>A structure containing the column name and column importance score for a column. </p> <p>Column importance helps you understand how columns contribute to your model, by identifying which columns in your records are more important than others.</p>'
+    ColumnImportanceList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ColumnImportance'
+      minItems: 0
+      maxItems: 100
     ColumnList:
       type: array
       items:
@@ -16913,6 +16936,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/ConfusionMatrix'
             - description: '<p>The confusion matrix shows you what your transform is predicting accurately and what types of errors it is making.</p> <p>For more information, see <a href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a> in Wikipedia.</p>'
+        ColumnImportances:
+          allOf:
+            - $ref: '#/components/schemas/ColumnImportanceList'
+            - description: 'A list of <code>ColumnImportance</code> structures containing column importance metrics, sorted in order of descending importance.'
       description: 'The evaluation metrics for the find matches algorithm. The quality of your machine learning transform is measured by getting your transform to predict some matches and comparing the results to known matches from the same dataset. The quality metrics are based on a subset of your data, so they are not precise.'
     EvaluationMetrics:
       type: object
@@ -16953,11 +16980,6 @@ components:
       minLength: 0
       maxLength: 2048
       x-pattern: '[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\t]*'
-    GenericBoundedDouble:
-      type: number
-      format: double
-      minimum: 0
-      maximum: 1
     FindMatchesParameters:
       type: object
       properties:

@@ -117,7 +117,7 @@ paths:
   '/instance/{InstanceId}/approved-origin':
     put:
       operationId: AssociateApprovedOrigin
-      description: Associates an approved origin to an Amazon Connect instance.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates an approved origin to an Amazon Connect instance.</p>
       responses:
         '200':
           description: Success
@@ -196,7 +196,7 @@ paths:
   '/instance/{InstanceId}/storage-config':
     put:
       operationId: AssociateInstanceStorageConfig
-      description: '<p>Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can''t define an instance with multiple S3 buckets for storing chat transcripts.</p> <p>This API does not create a resource that doesn''t exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.</p>'
+      description: '<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can''t define an instance with multiple S3 buckets for storing chat transcripts.</p> <p>This API does not create a resource that doesn''t exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an Amazon S3 bucket, exists when being used for association.</p>'
       responses:
         '200':
           description: Success
@@ -308,7 +308,7 @@ paths:
   '/instance/{InstanceId}/lambda-function':
     put:
       operationId: AssociateLambdaFunction
-      description: Allows the specified Amazon Connect instance to access the specified Lambda function.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Allows the specified Amazon Connect instance to access the specified Lambda function.</p>
       responses:
         '200':
           description: Success
@@ -388,7 +388,7 @@ paths:
   '/instance/{InstanceId}/lex-bot':
     put:
       operationId: AssociateLexBot
-      description: Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Allows the specified Amazon Connect instance to access the specified Amazon Lex bot.</p>
       responses:
         '200':
           description: Success
@@ -551,7 +551,7 @@ paths:
   '/instance/{InstanceId}/security-key':
     put:
       operationId: AssociateSecurityKey
-      description: Associates a security key to the instance.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates a security key to the instance.</p>
       responses:
         '200':
           description: Success
@@ -892,7 +892,7 @@ paths:
   '/instance/{InstanceId}/integration-associations':
     put:
       operationId: CreateIntegrationAssociation
-      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Create an AppIntegration association with anAmazon Connect instance.</p>
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Create an AppIntegration association with an Amazon Connect instance.</p>
       responses:
         '200':
           description: Success
@@ -1042,6 +1042,207 @@ paths:
             type: integer
             minimum: 1
             maximum: 100
+        - name: MaxResults
+          in: query
+          schema:
+            type: string
+          description: Pagination limit
+          required: false
+        - name: NextToken
+          in: query
+          schema:
+            type: string
+          description: Pagination token
+          required: false
+  '/quick-connects/{InstanceId}':
+    put:
+      operationId: CreateQuickConnect
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates a quick connect for the specified Amazon Connect instance.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateQuickConnectResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: DuplicateResourceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DuplicateResourceException'
+        '483':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '484':
+          description: LimitExceededException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LimitExceededException'
+        '485':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '486':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - Name
+                - QuickConnectConfig
+              properties:
+                Name:
+                  description: The name of the quick connect.
+                  type: string
+                  minLength: 1
+                  maxLength: 127
+                Description:
+                  description: The description of the quick connect.
+                  type: string
+                  minLength: 0
+                  maxLength: 250
+                QuickConnectConfig:
+                  description: Contains configuration settings for a quick connect.
+                  type: object
+                  properties:
+                    QuickConnectType:
+                      allOf:
+                        - $ref: '#/components/schemas/QuickConnectType'
+                        - description: 'The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE). '
+                    UserConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/UserQuickConnectConfig'
+                        - description: The user configuration. This is required only if QuickConnectType is USER.
+                    QueueConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/QueueQuickConnectConfig'
+                        - description: The queue configuration. This is required only if QuickConnectType is QUEUE.
+                    PhoneConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/PhoneNumberQuickConnectConfig'
+                        - description: The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.
+                Tags:
+                  description: One or more tags.
+                  type: object
+                  minProperties: 1
+                  maxProperties: 200
+                  additionalProperties:
+                    $ref: '#/components/schemas/TagValue'
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: ListQuickConnects
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Provides information about the quick connects for the specified Amazon Connect instance. </p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListQuickConnectsResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: nextToken
+          in: query
+          required: false
+          description: The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+          schema:
+            type: string
+        - name: maxResults
+          in: query
+          required: false
+          description: The maximimum number of results to return per page.
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1000
+        - name: QuickConnectTypes
+          in: query
+          required: false
+          description: 'The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).'
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/QuickConnectType'
+            maxItems: 3
         - name: MaxResults
           in: query
           schema:
@@ -1604,7 +1805,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     get:
       operationId: DescribeInstance
-      description: '<p>Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable. </p> <p>If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.</p>'
+      description: '<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns the current state of the specified instance identifier. It tracks the instance while it is being created and returns an error status if applicable. </p> <p>If an instance is not created successfully, the instance status reason field returns details relevant to the reason. The instance in a failed state is returned only for 24 hours after the CreateInstance API was invoked.</p>'
       responses:
         '200':
           description: Success
@@ -1695,6 +1896,121 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/quick-connects/{InstanceId}/{QuickConnectId}':
+    delete:
+      operationId: DeleteQuickConnect
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes a quick connect.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: QuickConnectId
+          in: path
+          required: true
+          description: The identifier for the quick connect.
+          schema:
+            type: string
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+    get:
+      operationId: DescribeQuickConnect
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the quick connect.</p>
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeQuickConnectResponse'
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: QuickConnectId
+          in: path
+          required: true
+          description: The identifier for the quick connect.
+          schema:
+            type: string
   '/instance/{InstanceId}/integration-associations/{IntegrationAssociationId}/use-cases/{UseCaseId}':
     delete:
       operationId: DeleteUseCase
@@ -2069,7 +2385,7 @@ paths:
   '/instance/{InstanceId}/attribute/{AttributeType}':
     get:
       operationId: DescribeInstanceAttribute
-      description: Describes the specified instance attribute.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes the specified instance attribute.</p>
       responses:
         '200':
           description: Success
@@ -2214,7 +2530,7 @@ paths:
   '/instance/{InstanceId}/storage-config/{AssociationId}#resourceType':
     get:
       operationId: DescribeInstanceStorageConfig
-      description: 'Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.'
+      description: '<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Retrieves the current storage configurations for the specified resource type, association ID, and instance ID.</p>'
       responses:
         '200':
           description: Success
@@ -2292,7 +2608,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     delete:
       operationId: DisassociateInstanceStorageConfig
-      description: Removes the storage type configurations for the specified resource type and association ID.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Removes the storage type configurations for the specified resource type and association ID.</p>
       responses:
         '200':
           description: Success
@@ -2668,7 +2984,7 @@ paths:
   '/instance/{InstanceId}/approved-origin#origin':
     delete:
       operationId: DisassociateApprovedOrigin
-      description: Revokes access to integrated applications from Amazon Connect.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Revokes access to integrated applications from Amazon Connect.</p>
       responses:
         '200':
           description: Success
@@ -2729,7 +3045,7 @@ paths:
   '/instance/{InstanceId}/lambda-function#functionArn':
     delete:
       operationId: DisassociateLambdaFunction
-      description: Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Remove the Lambda function from the drop-down options available in the relevant contact flow blocks.</p>
       responses:
         '200':
           description: Success
@@ -2791,7 +3107,7 @@ paths:
   '/instance/{InstanceId}/lex-bot#botName&lexRegion':
     delete:
       operationId: DisassociateLexBot
-      description: Revokes authorization from the specified instance to access the specified Amazon Lex bot.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Revokes authorization from the specified instance to access the specified Amazon Lex bot.</p>
       responses:
         '200':
           description: Success
@@ -2933,7 +3249,7 @@ paths:
   '/instance/{InstanceId}/security-key/{AssociationId}':
     delete:
       operationId: DisassociateSecurityKey
-      description: Deletes the specified security key.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes the specified security key.</p>
       responses:
         '200':
           description: Success
@@ -3345,7 +3661,7 @@ paths:
   '/instance/{InstanceId}/approved-origins':
     get:
       operationId: ListApprovedOrigins
-      description: Returns a paginated list of all approved origins associated with the instance.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all approved origins associated with the instance.</p>
       responses:
         '200':
           description: Success
@@ -3787,7 +4103,7 @@ paths:
   '/instance/{InstanceId}/lambda-functions':
     get:
       operationId: ListLambdaFunctions
-      description: Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all the Lambda functions that show up in the drop-down options in the relevant contact flow blocks.</p>
       responses:
         '200':
           description: Success
@@ -3871,7 +4187,7 @@ paths:
   '/instance/{InstanceId}/lex-bots':
     get:
       operationId: ListLexBots
-      description: Returns a paginated list of all the Amazon Lex bots currently associated with the instance.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all the Amazon Lex bots currently associated with the instance.</p>
       responses:
         '200':
           description: Success
@@ -4475,7 +4791,7 @@ paths:
   '/instance/{InstanceId}/security-keys':
     get:
       operationId: ListSecurityKeys
-      description: Returns a paginated list of all security keys associated with the instance.
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Returns a paginated list of all security keys associated with the instance.</p>
       responses:
         '200':
           description: Success
@@ -4698,7 +5014,7 @@ paths:
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
     post:
       operationId: TagResource
-      description: '<p>Adds the specified tags to the specified resource.</p> <p>The supported resource types are users, routing profiles, and contact flows.</p> <p>For sample policies that use tags, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
+      description: '<p>Adds the specified tags to the specified resource.</p> <p>The supported resource types are users, routing profiles, quick connects, and contact flows.</p> <p>For sample policies that use tags, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>'
       responses:
         '200':
           description: Success
@@ -5860,6 +6176,172 @@ paths:
       - $ref: '#/components/parameters/X-Amz-Security-Token'
       - $ref: '#/components/parameters/X-Amz-Signature'
       - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/quick-connects/{InstanceId}/{QuickConnectId}/config':
+    post:
+      operationId: UpdateQuickConnectConfig
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the configuration settings for the specified quick connect.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: QuickConnectId
+          in: path
+          required: true
+          description: The identifier for the quick connect.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - QuickConnectConfig
+              properties:
+                QuickConnectConfig:
+                  description: Contains configuration settings for a quick connect.
+                  type: object
+                  properties:
+                    QuickConnectType:
+                      allOf:
+                        - $ref: '#/components/schemas/QuickConnectType'
+                        - description: 'The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE). '
+                    UserConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/UserQuickConnectConfig'
+                        - description: The user configuration. This is required only if QuickConnectType is USER.
+                    QueueConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/QueueQuickConnectConfig'
+                        - description: The queue configuration. This is required only if QuickConnectType is QUEUE.
+                    PhoneConfig:
+                      allOf:
+                        - $ref: '#/components/schemas/PhoneNumberQuickConnectConfig'
+                        - description: The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
+  '/quick-connects/{InstanceId}/{QuickConnectId}/name':
+    post:
+      operationId: UpdateQuickConnectName
+      description: <p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least Name or Description must be provided.</p>
+      responses:
+        '200':
+          description: Success
+        '480':
+          description: InvalidRequestException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestException'
+        '481':
+          description: InvalidParameterException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidParameterException'
+        '482':
+          description: ResourceNotFoundException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceNotFoundException'
+        '483':
+          description: ThrottlingException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThrottlingException'
+        '484':
+          description: InternalServiceException
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServiceException'
+      parameters:
+        - name: InstanceId
+          in: path
+          required: true
+          description: The identifier of the Amazon Connect instance.
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 100
+        - name: QuickConnectId
+          in: path
+          required: true
+          description: The identifier for the quick connect.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  description: The name of the quick connect.
+                  type: string
+                  minLength: 1
+                  maxLength: 127
+                Description:
+                  description: The description of the quick connect.
+                  type: string
+                  minLength: 0
+                  maxLength: 250
+    parameters:
+      - $ref: '#/components/parameters/X-Amz-Content-Sha256'
+      - $ref: '#/components/parameters/X-Amz-Date'
+      - $ref: '#/components/parameters/X-Amz-Algorithm'
+      - $ref: '#/components/parameters/X-Amz-Credential'
+      - $ref: '#/components/parameters/X-Amz-Security-Token'
+      - $ref: '#/components/parameters/X-Amz-Signature'
+      - $ref: '#/components/parameters/X-Amz-SignedHeaders'
   '/routing-profiles/{InstanceId}/{RoutingProfileId}/concurrency':
     post:
       operationId: UpdateRoutingProfileConcurrency
@@ -6767,6 +7249,63 @@ components:
           allOf:
             - $ref: '#/components/schemas/ARN'
             - description: The Amazon Resource Name (ARN) for the association.
+    CreateQuickConnectResponse:
+      type: object
+      properties:
+        QuickConnectARN:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: 'The Amazon Resource Name (ARN) for the quick connect. '
+        QuickConnectId:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectId'
+            - description: The identifier for the quick connect.
+    QuickConnectType:
+      type: string
+      enum:
+        - USER
+        - QUEUE
+        - PHONE_NUMBER
+    UserQuickConnectConfig:
+      type: object
+      required:
+        - UserId
+        - ContactFlowId
+      properties:
+        UserId:
+          allOf:
+            - $ref: '#/components/schemas/UserId'
+            - description: The identifier of the user.
+        ContactFlowId:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowId'
+            - description: The identifier of the contact flow.
+      description: Contains information about the quick connect configuration settings for a user. The contact flow must be of type Transfer to Agent.
+    QueueQuickConnectConfig:
+      type: object
+      required:
+        - QueueId
+        - ContactFlowId
+      properties:
+        QueueId:
+          allOf:
+            - $ref: '#/components/schemas/QueueId'
+            - description: The identifier of the queue.
+        ContactFlowId:
+          allOf:
+            - $ref: '#/components/schemas/ContactFlowId'
+            - description: The identifier of the contact flow.
+      description: Contains information about a queue for a quick connect. The contact flow must be of type Transfer to Queue.
+    PhoneNumberQuickConnectConfig:
+      type: object
+      required:
+        - PhoneNumber
+      properties:
+        PhoneNumber:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumber'
+            - description: The phone number in E.164 format.
+      description: Contains information about a phone number for a quick connect.
     CreateRoutingProfileResponse:
       type: object
       properties:
@@ -6880,6 +7419,13 @@ components:
           allOf:
             - $ref: '#/components/schemas/InstanceStorageConfig'
             - description: A valid storage type.
+    DescribeQuickConnectResponse:
+      type: object
+      properties:
+        QuickConnect:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnect'
+            - description: Information about the quick connect.
     DescribeRoutingProfileResponse:
       type: object
       properties:
@@ -7406,6 +7952,17 @@ components:
       enum:
         - STANDARD
         - AGENT
+    ListQuickConnectsResponse:
+      type: object
+      properties:
+        QuickConnectSummaryList:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectSummaryList'
+            - description: Information about the quick connects.
+        NextToken:
+          allOf:
+            - $ref: '#/components/schemas/NextToken'
+            - description: 'If there are additional results, this is the token for the next set of results.'
     ListRoutingProfileQueuesResponse:
       type: object
       properties:
@@ -8029,6 +8586,61 @@ components:
       type: string
       minLength: 1
       maxLength: 200
+    QuickConnectName:
+      type: string
+      minLength: 1
+      maxLength: 127
+    QuickConnectDescription:
+      type: string
+      minLength: 0
+      maxLength: 250
+    QuickConnectConfig:
+      type: object
+      required:
+        - QuickConnectType
+      properties:
+        QuickConnectType:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectType'
+            - description: 'The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE). '
+        UserConfig:
+          allOf:
+            - $ref: '#/components/schemas/UserQuickConnectConfig'
+            - description: The user configuration. This is required only if QuickConnectType is USER.
+        QueueConfig:
+          allOf:
+            - $ref: '#/components/schemas/QueueQuickConnectConfig'
+            - description: The queue configuration. This is required only if QuickConnectType is QUEUE.
+        PhoneConfig:
+          allOf:
+            - $ref: '#/components/schemas/PhoneNumberQuickConnectConfig'
+            - description: The phone configuration. This is required only if QuickConnectType is PHONE_NUMBER.
+      description: Contains configuration settings for a quick connect.
+    CreateQuickConnectRequest:
+      type: object
+      required:
+        - Name
+        - QuickConnectConfig
+      title: CreateQuickConnectRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectName'
+            - description: The name of the quick connect.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectDescription'
+            - description: The description of the quick connect.
+        QuickConnectConfig:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectConfig'
+            - description: Configuration settings for the quick connect.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
+    QuickConnectId:
+      type: string
     RoutingProfileName:
       type: string
       minLength: 1
@@ -8320,6 +8932,10 @@ components:
       type: object
       title: DeleteIntegrationAssociationRequest
       properties: {}
+    DeleteQuickConnectRequest:
+      type: object
+      title: DeleteQuickConnectRequest
+      properties: {}
     DeleteUseCaseRequest:
       type: object
       title: DeleteUseCaseRequest
@@ -8392,6 +9008,38 @@ components:
       type: object
       title: DescribeInstanceStorageConfigRequest
       properties: {}
+    DescribeQuickConnectRequest:
+      type: object
+      title: DescribeQuickConnectRequest
+      properties: {}
+    QuickConnect:
+      type: object
+      properties:
+        QuickConnectARN:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN) of the quick connect.
+        QuickConnectId:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectId'
+            - description: The identifier for the quick connect.
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectName'
+            - description: The name of the quick connect.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectDescription'
+            - description: The description.
+        QuickConnectConfig:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectConfig'
+            - description: Contains information about the quick connect.
+        Tags:
+          allOf:
+            - $ref: '#/components/schemas/TagMap'
+            - description: One or more tags.
+      description: Contains information about a quick connect.
     DescribeRoutingProfileRequest:
       type: object
       title: DescribeRoutingProfileRequest
@@ -9117,6 +9765,19 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/QueueSummary'
+    QuickConnectTypes:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuickConnectType'
+      maxItems: 3
+    ListQuickConnectsRequest:
+      type: object
+      title: ListQuickConnectsRequest
+      properties: {}
+    QuickConnectSummaryList:
+      type: array
+      items:
+        $ref: '#/components/schemas/QuickConnectSummary'
     ListRoutingProfileQueuesRequest:
       type: object
       title: ListRoutingProfileQueuesRequest
@@ -9278,6 +9939,26 @@ components:
             - $ref: '#/components/schemas/QueueType'
             - description: The type of queue.
       description: Contains summary information about a queue.
+    QuickConnectSummary:
+      type: object
+      properties:
+        Id:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectId'
+            - description: The identifier for the quick connect.
+        Arn:
+          allOf:
+            - $ref: '#/components/schemas/ARN'
+            - description: The Amazon Resource Name (ARN).
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectName'
+            - description: The name.
+        QuickConnectType:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectType'
+            - description: 'The type of quick connect. In the Amazon Connect console, when you create a quick connect, you are prompted to assign one of the following types: Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).'
+      description: Contains summary information about a quick connect.
     ReferenceValue:
       type: string
       minLength: 0
@@ -9674,6 +10355,28 @@ components:
       properties:
         StorageConfig:
           $ref: '#/components/schemas/InstanceStorageConfig'
+    UpdateQuickConnectConfigRequest:
+      type: object
+      required:
+        - QuickConnectConfig
+      title: UpdateQuickConnectConfigRequest
+      properties:
+        QuickConnectConfig:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectConfig'
+            - description: Information about the configuration settings for the quick connect.
+    UpdateQuickConnectNameRequest:
+      type: object
+      title: UpdateQuickConnectNameRequest
+      properties:
+        Name:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectName'
+            - description: The name of the quick connect.
+        Description:
+          allOf:
+            - $ref: '#/components/schemas/QuickConnectDescription'
+            - description: The description of the quick connect.
     UpdateRoutingProfileConcurrencyRequest:
       type: object
       required:
