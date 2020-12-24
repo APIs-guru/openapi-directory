@@ -334,12 +334,12 @@ paths:
           required: true
           schema:
             type: string
-        - description: Required. If `true`, no expiry validation will be performed.
+        - description: Required. Flag that specifies whether to ignore expiry validation. If set to `true`, no expiry validation will be performed.
           in: query
           name: ignoreExpiryValidation
           schema:
             type: boolean
-        - description: If `true`, do not throw an error when the file contains a chain with no newline between each certificate. By default, a newline is needed between each certificate in a chain.
+        - description: Flag that specifies whether to ignore newline validation. If set to `true`, no error is thrown when the file contains a certificate chain with no newline between each certificate. Defaults to `false`.
           in: query
           name: ignoreNewlineValidation
           schema:
@@ -410,7 +410,7 @@ paths:
       description: Gets the certificate from an alias in PEM-encoded form.
       operationId: apigee.organizations.environments.keystores.aliases.getCertificate
       parameters:
-        - description: Required. The name of the alias. Must be of the form `organizations/{organization}/environments/{environment}/keystores/{keystore}/aliases/{alias}`.
+        - description: "Required. Name of the alias. Use the following format in your request: `organizations/{org}/environments/{env}/keystores/{keystore}/aliases/{alias}`."
           in: path
           name: name
           required: true
@@ -447,7 +447,7 @@ paths:
       description: "Generates a PKCS #10 Certificate Signing Request for the private key in an alias."
       operationId: apigee.organizations.environments.keystores.aliases.csr
       parameters:
-        - description: Required. The name of the alias. Must be of the form `organizations/{organization}/environments/{environment}/keystores/{keystore}/aliases/{alias}`.
+        - description: "Required. Name of the alias. Use the following format in your request: `organizations/{org}/environments/{env}/keystores/{keystore}/aliases/{alias}`."
           in: path
           name: name
           required: true
@@ -924,36 +924,36 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Creates an alias from a key, certificate pair. The structure of the request is controlled by the `format` query parameter: * `keycertfile` - Separate PEM-encoded key and certificate files are uploaded. The request must have `Content-Type: multipart/form-data` and include fields `keyFile` and `certFile`. If uploading to a truststore, omit `keyFile`. A `password` field should be provided for encrypted keys. * `pkcs12` - A PKCS12 file is uploaded. The request must have `Content-Type: multipart/form-data` with the file provided in the `file` field and a `password` field if the file is encrypted. * `selfsignedcert` - A new private key and certificate are generated. The request must have `Content-Type: application/json` and a body of CertificateGenerationSpec."
+      description: "Creates an alias from a key/certificate pair. The structure of the request is controlled by the `format` query parameter: - `keycertfile` - Separate PEM-encoded key and certificate files are uploaded. Set `Content-Type: multipart/form-data` and include the `keyFile`, `certFile`, and `password` (if keys are encrypted) fields in the request body. If uploading to a truststore, omit `keyFile`. - `pkcs12` - A PKCS12 file is uploaded. Set `Content-Type: multipart/form-data`, provide the file in the `file` field, and include the `password` field if the file is encrypted in the request body. - `selfsignedcert` - A new private key and certificate are generated. Set `Content-Type: application/json` and include CertificateGenerationSpec in the request body."
       operationId: apigee.organizations.environments.keystores.aliases.create
       parameters:
-        - description: Required. The name of the keystore. Must be of the form `organizations/{organization}/environments/{environment}/keystores/{keystore}`.
+        - description: "Required. Name of the keystore. Use the following format in your request: `organizations/{org}/environments/{env}/keystores/{keystore}`."
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: 'DEPRECATED: For improved security, send the password in the body instead of using this query param. To send it in the body, use a multipart/form-data part with name "password". The password for the private key file, if it exists.'
+        - description: "DEPRECATED: For improved security, specify the password in the request body instead of using the query parameter. To specify the password in the request body, set `Content-type: multipart/form-data` part with name `password`. Password for the private key file, if required."
           in: query
           name: _password
           schema:
             type: string
-        - description: The alias for the key, certificate pair. Values must match regular expression `[\w\s-.]{1,255}`. This must be provided for all formats except 'selfsignedcert'; self-signed certs may specify the alias in either this parameter or the JSON body.
+        - description: Alias for the key/certificate pair. Values must match the regular expression `[\w\s-.]{1,255}`. This must be provided for all formats except `selfsignedcert`; self-signed certs may specify the alias in either this parameter or the JSON body.
           in: query
           name: alias
           schema:
             type: string
-        - description: Required. The format of the data. Must be either `selfsignedcert`, `keycertfile`, or `pkcs12`.
+        - description: "Required. Format of the data. Valid values include: `selfsignedcert`, `keycertfile`, or `pkcs12`"
           in: query
           name: format
           schema:
             type: string
-        - description: If `true`, no expiry validation will be performed.
+        - description: Flag that specifies whether to ignore expiry validation. If set to `true`, no expiry validation will be performed.
           in: query
           name: ignoreExpiryValidation
           schema:
             type: boolean
-        - description: If `true`, do not throw an error when the file contains a chain with no newline between each certificate. By default, a newline is needed between each certificate in a chain.
+        - description: Flag that specifies whether to ignore newline validation. If set to `true`, no error is thrown when the file contains a certificate chain with no newline between each certificate. Defaults to `false`.
           in: query
           name: ignoreNewlineValidation
           schema:
@@ -2397,16 +2397,16 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: "Creates a keystore or truststore: * Keystore: Contains certificates and their associated keys. * Truststore: Contains trusted certificates used to validate a server's certificate. These certificates are typically self-signed certificates or certificates that are not signed by a trusted CA."
+      description: "Creates a keystore or truststore. - Keystore: Contains certificates and their associated keys. - Truststore: Contains trusted certificates used to validate a server's certificate. These certificates are typically self-signed certificates or certificates that are not signed by a trusted CA."
       operationId: apigee.organizations.environments.keystores.create
       parameters:
-        - description: Required. The name of the environment in which to create the keystore. Must be of the form `organizations/{organization}/environments/{environment}`.
+        - description: "Required. Name of the environment in which to create the keystore. Use the following format in your request: `organizations/{org}/environments/{env}`"
           in: path
           name: parent
           required: true
           schema:
             type: string
-        - description: Optional. Overrides the value in Keystore.
+        - description: Optional. Name of the keystore. Overrides the value in Keystore.
           in: query
           name: name
           schema:
@@ -3521,16 +3521,16 @@ components:
       properties: {}
       type: object
     GoogleCloudApigeeV1Alias:
-      description: A reference to a certificate or key, certificate pair.
+      description: Reference to a certificate or key/certificate pair.
       properties:
         alias:
-          description: The resource ID for this alias. Values must match regular expression `[^/]{1,255}`.
+          description: Resource ID for this alias. Values must match the regular expression `[^/]{1,255}`.
           type: string
         certsInfo:
           $ref: "#/components/schemas/GoogleCloudApigeeV1Certificate"
-          description: The chain of certificates under this alias.
+          description: Chain of certificates under this alias.
         type:
-          description: The type of alias.
+          description: Type of alias.
           enum:
             - ALIAS_TYPE_UNSPECIFIED
             - CERT
@@ -3990,51 +3990,51 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1CertInfo:
-      description: An X.509 certificate as defined in RFC 5280.
+      description: X.509 certificate as defined in RFC 5280.
       properties:
         basicConstraints:
-          description: The X.509 basic constraints extension.
+          description: X.509 basic constraints extension.
           type: string
         expiryDate:
-          description: The X.509 validity / notAfter in milliseconds since the epoch.
+          description: X.509 `notAfter` validity period in milliseconds since epoch.
           format: int64
           type: string
         isValid:
-          description: '"Yes" if certificate is valid, "No" if expired and "Not yet" if not yet valid.'
+          description: Flag that specifies whether the certificate is valid. Flag is set to `Yes` if the certificate is valid, `No` if expired, or `Not yet` if not yet valid.
           type: string
         issuer:
-          description: The X.509 issuer.
+          description: X.509 issuer.
           type: string
         publicKey:
-          description: The public key component of the X.509 subject public key info.
+          description: Public key component of the X.509 subject public key info.
           type: string
         serialNumber:
-          description: The X.509 serial number.
+          description: X.509 serial number.
           type: string
         sigAlgName:
-          description: The X.509 signatureAlgorithm.
+          description: X.509 signatureAlgorithm.
           type: string
         subject:
-          description: The X.509 subject.
+          description: X.509 subject.
           type: string
         subjectAlternativeNames:
-          description: The X.509 subject alternative names (SANs) extension.
+          description: X.509 subject alternative names (SANs) extension.
           items:
             type: string
           type: array
         validFrom:
-          description: The X.509 validity / notBefore in milliseconds since the epoch.
+          description: X.509 `notBefore` validity period in milliseconds since epoch.
           format: int64
           type: string
         version:
-          description: The X.509 version.
+          description: X.509 version.
           format: int32
           type: integer
       type: object
     GoogleCloudApigeeV1Certificate:
       properties:
         certInfo:
-          description: The chain of certificates under this name.
+          description: Chain of certificates under this name.
           items:
             $ref: "#/components/schemas/GoogleCloudApigeeV1CertInfo"
           type: array
@@ -4978,7 +4978,7 @@ components:
           description: Optional. Description of the instance.
           type: string
         diskEncryptionKeyName:
-          description: Optional. Customer Managed Encryption Key (CMEK) used for disk & volume encryption.
+          description: "Customer Managed Encryption Key (CMEK) used for disk and volume encryption. Required for Apigee paid subscriptions only. Use the following format: `projects/([^/]+)/locations/([^/]+)/keyRings/([^/]+)/cryptoKeys/([^/]+)`"
           type: string
         displayName:
           description: Optional. Display name for the instance.
@@ -5093,16 +5093,16 @@ components:
           type: string
       type: object
     GoogleCloudApigeeV1Keystore:
-      description: A datastore for Certificates and Aliases
+      description: Datastore for Certificates and Aliases.
       properties:
         aliases:
-          description: Output only. The aliases in this keystore.
+          description: Output only. Aliases in this keystore.
           items:
             type: string
           readOnly: true
           type: array
         name:
-          description: Required. The resource ID for this keystore. Values must match the regular expression `[\w[:space:]-.]{1,255}`.
+          description: Required. Resource ID for this keystore. Values must match the regular expression `[\w[:space:]-.]{1,255}`.
           type: string
       type: object
     GoogleCloudApigeeV1KeystoreConfig:

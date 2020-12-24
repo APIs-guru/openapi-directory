@@ -1449,11 +1449,150 @@ components:
       schema:
         type: string
   schemas:
+    GoogleCloudDialogflowCxV3AudioInput:
+      description: Represents the natural speech audio to be processed.
+      properties:
+        audio:
+          description: The natural language speech audio to be processed. A single request can contain up to 1 minute of speech audio data. The transcribed text cannot contain more than 256 bytes. For non-streaming audio detect intent, both `config` and `audio` must be provided. For streaming audio detect intent, `config` must be provided in the first request and `audio` must be provided in all following requests.
+          format: byte
+          type: string
+        config:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3InputAudioConfig"
+          description: Required. Instructs the speech recognizer how to process the speech audio.
+      type: object
+    GoogleCloudDialogflowCxV3BatchRunTestCasesMetadata:
+      description: Metadata returned for the TestCases.BatchRunTestCases long running operation.
+      properties:
+        errors:
+          description: The test errors.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3BatchRunTestCasesResponse:
+      description: The response message for TestCases.BatchRunTestCases.
+      properties:
+        results:
+          description: The test case results. The detailed conversation turns are empty in this response.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestCaseResult"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3ConversationTurn:
+      description: One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
+      properties:
+        userInput:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ConversationTurnUserInput"
+          description: The user input.
+        virtualAgentOutput:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ConversationTurnVirtualAgentOutput"
+          description: The virtual agent output.
+      type: object
+    GoogleCloudDialogflowCxV3ConversationTurnUserInput:
+      description: The input from the human user.
+      properties:
+        injectedParameters:
+          additionalProperties:
+            description: Properties of the object.
+          description: Parameters that need to be injected into the conversation during intent detection.
+          type: object
+        input:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3QueryInput"
+          description: Supports text input, event input, dtmf input in the test case.
+        isWebhookEnabled:
+          description: If webhooks should be allowed to trigger in response to the user utterance. Often if parameters are injected, webhooks should not be enabled.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowCxV3ConversationTurnVirtualAgentOutput:
+      description: The output from the virtual agent.
+      properties:
+        currentPage:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Page"
+          description: The Page on which the utterance was spoken. Only some fields such as name and displayname will be set.
+        diagnosticInfo:
+          additionalProperties:
+            description: Properties of the object.
+          description: Required. Input only. The diagnostic info output for the turn.
+          type: object
+        differences:
+          description: Output only. If this is part of a result conversation turn, the list of differences between the original run and the replay for this output, if any.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestRunDifference"
+          readOnly: true
+          type: array
+        sessionParameters:
+          additionalProperties:
+            description: Properties of the object.
+          description: The session parameters available to the bot at this point.
+          type: object
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Response error from the agent in the test result. If set, other output is empty.
+        textResponses:
+          description: The text responses from the agent for the turn.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ResponseMessageText"
+          type: array
+        triggeredIntent:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Intent"
+          description: The Intent that triggered the response. Only some fields such as name and displayname will be set.
+      type: object
+    GoogleCloudDialogflowCxV3CreateDocumentOperationMetadata:
+      description: Metadata for CreateDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
     GoogleCloudDialogflowCxV3CreateVersionOperationMetadata:
       description: Metadata associated with the long running operation for Versions.CreateVersion.
       properties:
         version:
           description: "Name of the created version. Format: `projects//locations//agents//flows//versions/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3DeleteDocumentOperationMetadata:
+      description: Metadata for DeleteDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
+    GoogleCloudDialogflowCxV3DtmfInput:
+      description: Represents the input for dtmf event.
+      properties:
+        digits:
+          description: The dtmf digits.
+          type: string
+        finishDigit:
+          description: The finish digit (if any).
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3EventHandler:
+      description: "An event handler specifies an event that can be handled during a session. When the specified event happens, the following actions are taken in order: * If there is a `trigger_fulfillment` associated with the event, it will be called. * If there is a `target_page` associated with the event, the session will transition into the specified page. * If there is a `target_flow` associated with the event, the session will transition into the specified flow."
+      properties:
+        event:
+          description: Required. The name of the event to handle.
+          type: string
+        name:
+          description: Output only. The unique identifier of this event handler.
+          readOnly: true
+          type: string
+        targetFlow:
+          description: "The target flow to transition to. Format: `projects//locations//agents//flows/`."
+          type: string
+        targetPage:
+          description: "The target page to transition to. Format: `projects//locations//agents//flows//pages/`."
+          type: string
+        triggerFulfillment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Fulfillment"
+          description: The fulfillment to call when the event occurs. Handling webhook errors with a fulfillment enabled with webhook could cause infinite loop. It is invalid to specify such fulfillment for a handler handling webhooks.
+      type: object
+    GoogleCloudDialogflowCxV3EventInput:
+      description: Represents the event to trigger.
+      properties:
+        event:
+          description: Name of the event.
           type: string
       type: object
     GoogleCloudDialogflowCxV3ExportAgentResponse:
@@ -1466,6 +1605,335 @@ components:
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
           type: string
+      type: object
+    GoogleCloudDialogflowCxV3ExportTestCasesMetadata:
+      description: Metadata returned for the TestCases.ExportTestCases long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3ExportTestCasesResponse:
+      description: The response message for TestCases.ExportTestCases.
+      properties:
+        content:
+          description: Uncompressed raw byte content for test cases.
+          format: byte
+          type: string
+        gcsUri:
+          description: The URI to a file containing the exported test cases. This field is populated only if `gcs_uri` is specified in ExportTestCasesRequest.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3Form:
+      description: A form is a data model that groups related parameters that can be collected from the user. The process in which the agent prompts the user and collects parameter values from the user is called form filling. A form can be added to a page. When form filling is done, the filled parameters will be written to the session.
+      properties:
+        parameters:
+          description: Parameters to collect from the user.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3FormParameter"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3FormParameter:
+      description: Represents a form parameter.
+      properties:
+        defaultValue:
+          description: The default value of an optional parameter. If the parameter is required, the default value will be ignored.
+        displayName:
+          description: Required. The human-readable name of the parameter, unique within the form.
+          type: string
+        entityType:
+          description: "Required. The entity type of the parameter. Format: `projects/-/locations/-/agents/-/entityTypes/` for system entity types (for example, `projects/-/locations/-/agents/-/entityTypes/sys.date`), or `projects//locations//agents//entityTypes/` for developer entity types."
+          type: string
+        fillBehavior:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3FormParameterFillBehavior"
+          description: Required. Defines fill behavior for the parameter.
+        isList:
+          description: Indicates whether the parameter represents a list of values.
+          type: boolean
+        redact:
+          description: Indicates whether the parameter content is logged in text and audio. If it is set to true, the parameter content will be replaced to parameter name in both request and response. The default value is false.
+          type: boolean
+        required:
+          description: Indicates whether the parameter is required. Optional parameters will not trigger prompts; however, they are filled if the user specifies them. Required parameters must be filled before form filling concludes.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowCxV3FormParameterFillBehavior:
+      description: Configuration for how the filling of a parameter should be handled.
+      properties:
+        initialPromptFulfillment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Fulfillment"
+          description: Required. The fulfillment to provide the initial prompt that the agent can present to the user in order to fill the parameter.
+        repromptEventHandlers:
+          description: "The handlers for parameter-level events, used to provide reprompt for the parameter or transition to a different page/flow. The supported events are: * `sys.no-match-`, where N can be from 1 to 6 * `sys.no-match-default` * `sys.no-input-`, where N can be from 1 to 6 * `sys.no-input-default` * `sys.invalid-parameter` `initial_prompt_fulfillment` provides the first prompt for the parameter. If the user's response does not fill the parameter, a no-match/no-input event will be triggered, and the fulfillment associated with the `sys.no-match-1`/`sys.no-input-1` handler (if defined) will be called to provide a prompt. The `sys.no-match-2`/`sys.no-input-2` handler (if defined) will respond to the next no-match/no-input event, and so on. A `sys.no-match-default` or `sys.no-input-default` handler will be used to handle all following no-match/no-input events after all numbered no-match/no-input handlers for the parameter are consumed. A `sys.invalid-parameter` handler can be defined to handle the case where the parameter values have been `invalidated` by webhook. For example, if the user's response fill the parameter, however the parameter was invalidated by webhook, the fulfillment associated with the `sys.invalid-parameter` handler (if defined) will be called to provide a prompt. If the event handler for the corresponding event can't be found on the parameter, `initial_prompt_fulfillment` will be re-prompted."
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3EventHandler"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3Fulfillment:
+      description: "A fulfillment can do one or more of the following actions at the same time: * Generate rich message responses. * Set parameter values. * Call the webhook. Fulfillments can be called at various stages in the Page or Form lifecycle. For example, when a DetectIntentRequest drives a session to enter a new page, the page's entry fulfillment can add a static response to the QueryResult in the returning DetectIntentResponse, call the webhook (for example, to load user data from a database), or both."
+      properties:
+        conditionalCases:
+          description: Conditional cases for this fulfillment.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3FulfillmentConditionalCases"
+          type: array
+        messages:
+          description: The list of rich message responses to present to the user.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ResponseMessage"
+          type: array
+        setParameterActions:
+          description: Set parameter values before executing the webhook.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3FulfillmentSetParameterAction"
+          type: array
+        tag:
+          description: The tag used by the webhook to identify which fulfillment is being called. This field is required if `webhook` is specified.
+          type: string
+        webhook:
+          description: "The webhook to call. Format: `projects//locations//agents//webhooks/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3FulfillmentConditionalCases:
+      description: A list of cascading if-else conditions. Cases are mutually exclusive. The first one with a matching condition is selected, all the rest ignored.
+      properties:
+        cases:
+          description: A list of cascading if-else conditions.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCase:
+      description: Each case has a Boolean condition. When it is evaluated to be True, the corresponding messages will be selected and evaluated recursively.
+      properties:
+        caseContent:
+          description: A list of case content.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCaseCaseContent"
+          type: array
+        condition:
+          description: The condition to activate and select this case. Empty means the condition is always true. The condition is evaluated against form parameters or session parameters. See the [conditions reference](https://cloud.google.com/dialogflow/cx/docs/reference/condition).
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3FulfillmentConditionalCasesCaseCaseContent:
+      description: The list of messages or conditional cases to activate for this case.
+      properties:
+        additionalCases:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3FulfillmentConditionalCases"
+          description: Additional cases to be evaluated.
+        message:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ResponseMessage"
+          description: Returned message.
+      type: object
+    GoogleCloudDialogflowCxV3FulfillmentSetParameterAction:
+      description: Setting a parameter value.
+      properties:
+        parameter:
+          description: Display name of the parameter.
+          type: string
+        value:
+          description: The new value of the parameter. A null value clears the parameter.
+      type: object
+    GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata:
+      description: Metadata in google::longrunning::Operation for Knowledge operations.
+      properties:
+        state:
+          description: Required. Output only. The current state of this operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - RUNNING
+            - DONE
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3ImportDocumentsOperationMetadata:
+      description: Metadata for ImportDocuments operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
+    GoogleCloudDialogflowCxV3ImportDocumentsResponse:
+      description: Response message for Documents.ImportDocuments.
+      properties:
+        warnings:
+          description: Includes details about skipped documents or any other warnings.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3ImportTestCasesMetadata:
+      description: Metadata returned for the TestCases.ImportTestCases long running operation.
+      properties:
+        errors:
+          description: Errors for failed test cases.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestCaseError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3ImportTestCasesResponse:
+      description: The response message for TestCases.ImportTestCases.
+      properties:
+        names:
+          description: "The unique identifiers of the new test cases. Format: `projects//locations//agents//testCases/`."
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3InputAudioConfig:
+      description: Instructs the speech recognizer on how to process the audio content.
+      properties:
+        audioEncoding:
+          description: Required. Audio encoding of the audio content to process.
+          enum:
+            - AUDIO_ENCODING_UNSPECIFIED
+            - AUDIO_ENCODING_LINEAR_16
+            - AUDIO_ENCODING_FLAC
+            - AUDIO_ENCODING_MULAW
+            - AUDIO_ENCODING_AMR
+            - AUDIO_ENCODING_AMR_WB
+            - AUDIO_ENCODING_OGG_OPUS
+            - AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE
+          type: string
+        enableWordInfo:
+          description: Optional. If `true`, Dialogflow returns SpeechWordInfo in StreamingRecognitionResult with information about the recognized speech words, e.g. start and end time offsets. If false or unspecified, Speech doesn't return any word-level information.
+          type: boolean
+        model:
+          description: Optional. Which Speech model to select for the given request. Select the model best suited to your domain to get best results. If a model is not explicitly specified, then we auto-select a model based on the parameters in the InputAudioConfig. If enhanced speech model is enabled for the agent and an enhanced version of the specified model for the language does not exist, then the speech is recognized using the standard version of the specified model. Refer to [Cloud Speech API documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model) for more details.
+          type: string
+        modelVariant:
+          description: Optional. Which variant of the Speech model to use.
+          enum:
+            - SPEECH_MODEL_VARIANT_UNSPECIFIED
+            - USE_BEST_AVAILABLE
+            - USE_STANDARD
+            - USE_ENHANCED
+          type: string
+        phraseHints:
+          description: Optional. A list of strings containing words and phrases that the speech recognizer should recognize with higher likelihood. See [the Cloud Speech documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints) for more details.
+          items:
+            type: string
+          type: array
+        sampleRateHertz:
+          description: Sample rate (in Hertz) of the audio content sent in the query. Refer to [Cloud Speech API documentation](https://cloud.google.com/speech-to-text/docs/basics) for more details.
+          format: int32
+          type: integer
+        singleUtterance:
+          description: "Optional. If `false` (default), recognition does not cease until the client closes the stream. If `true`, the recognizer will detect a single spoken utterance in input audio. Recognition ceases when it detects the audio's voice has stopped or paused. In this case, once a detected intent is received, the client should close the stream and start a new request with a new stream as needed. Note: This setting is relevant only for streaming methods."
+          type: boolean
+      type: object
+    GoogleCloudDialogflowCxV3Intent:
+      description: An intent represents a user's intent to interact with a conversational agent. You can provide information for the Dialogflow API to use to match user input to an intent by adding training phrases (i.e., examples of user input) to your intent.
+      properties:
+        description:
+          description: "Optional. Human readable description for better understanding an intent like its scope, content, result etc. Maximum character limit: 140 characters."
+          type: string
+        displayName:
+          description: Required. The human-readable name of the intent, unique within the agent.
+          type: string
+        isFallback:
+          description: Indicates whether this is a fallback intent. Currently only default fallback intent is allowed in the agent, which is added upon agent creation. Adding training phrases to fallback intent is useful in the case of requests that are mistakenly matched, since training phrases assigned to fallback intents act as negative examples that triggers no-match event.
+          type: boolean
+        labels:
+          additionalProperties:
+            type: string
+          description: "Optional. The key/value metadata to label an intent. Labels can contain lowercase letters, digits and the symbols '-' and '_'. International characters are allowed, including letters from unicase alphabets. Keys must start with a letter. Keys and values can be no longer than 63 characters and no more than 128 bytes. Prefix \"sys.\" is reserved for Dialogflow defined labels. Currently allowed Dialogflow defined labels include: * sys.head * sys.contextual The above labels do not require value. \"sys.head\" means the intent is a head intent. \"sys.contextual\" means the intent is a contextual intent."
+          type: object
+        name:
+          description: "The unique identifier of the intent. Required for the Intents.UpdateIntent method. Intents.CreateIntent populates the name automatically. Format: `projects//locations//agents//intents/`."
+          type: string
+        parameters:
+          description: The collection of parameters associated with the intent.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3IntentParameter"
+          type: array
+        priority:
+          description: The priority of this intent. Higher numbers represent higher priorities. - If the supplied value is unspecified or 0, the service translates the value to 500,000, which corresponds to the `Normal` priority in the console. - If the supplied value is negative, the intent is ignored in runtime detect intent requests.
+          format: int32
+          type: integer
+        trainingPhrases:
+          description: The collection of training phrases the agent is trained on to identify the intent.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3IntentTrainingPhrase"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3IntentInput:
+      description: Represents the intent to trigger programmatically rather than as a result of natural language processing.
+      properties:
+        intent:
+          description: "Required. The unique identifier of the intent. Format: `projects//locations//agents//intents/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3IntentParameter:
+      description: Represents an intent parameter.
+      properties:
+        entityType:
+          description: "Required. The entity type of the parameter. Format: `projects/-/locations/-/agents/-/entityTypes/` for system entity types (for example, `projects/-/locations/-/agents/-/entityTypes/sys.date`), or `projects//locations//agents//entityTypes/` for developer entity types."
+          type: string
+        id:
+          description: Required. The unique identifier of the parameter. This field is used by training phrases to annotate their parts.
+          type: string
+        isList:
+          description: Indicates whether the parameter represents a list of values.
+          type: boolean
+        redact:
+          description: Indicates whether the parameter content is logged in text and audio. If it is set to true, the parameter content will be replaced to parameter id in both request and response. The default value is false.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowCxV3IntentTrainingPhrase:
+      description: Represents an example that the agent is trained on to identify the intent.
+      properties:
+        id:
+          description: Output only. The unique identifier of the training phrase.
+          type: string
+        parts:
+          description: "Required. The ordered list of training phrase parts. The parts are concatenated in order to form the training phrase. Note: The API does not automatically annotate training phrases like the Dialogflow Console does. Note: Do not forget to include whitespace at part boundaries, so the training phrase is well formatted when the parts are concatenated. If the training phrase does not need to be annotated with parameters, you just need a single part with only the Part.text field set. If you want to annotate the training phrase, you must create multiple parts, where the fields of each part are populated in one of two ways: - `Part.text` is set to a part of the phrase that has no parameters. - `Part.text` is set to a part of the phrase that you want to annotate, and the `parameter_id` field is set."
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3IntentTrainingPhrasePart"
+          type: array
+        repeatCount:
+          description: Indicates how many times this example was added to the intent.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDialogflowCxV3IntentTrainingPhrasePart:
+      description: Represents a part of a training phrase.
+      properties:
+        parameterId:
+          description: The parameter used to annotate this part of the training phrase. This field is required for annotated parts of the training phrase.
+          type: string
+        text:
+          description: Required. The text for this part.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3Page:
+      description: A Dialogflow CX conversation (session) can be described and visualized as a state machine. The states of a CX session are represented by pages. For each flow, you define many pages, where your combined pages can handle a complete conversation on the topics the flow is designed for. At any given moment, exactly one page is the current page, the current page is considered active, and the flow associated with that page is considered active. Every flow has a special start page. When a flow initially becomes active, the start page page becomes the current page. For each conversational turn, the current page will either stay the same or transition to another page. You configure each page to collect information from the end-user that is relevant for the conversational state represented by the page. For more information, see the [Page guide](https://cloud.google.com/dialogflow/cx/docs/concept/page).
+      properties:
+        displayName:
+          description: Required. The human-readable name of the page, unique within the agent.
+          type: string
+        entryFulfillment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Fulfillment"
+          description: The fulfillment to call when the session is entering the page.
+        eventHandlers:
+          description: Handlers associated with the page to handle events such as webhook errors, no match or no input.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3EventHandler"
+          type: array
+        form:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Form"
+          description: The form associated with the page, used for collecting parameters relevant to the page.
+        name:
+          description: "The unique identifier of the page. Required for the Pages.UpdatePage method. Pages.CreatePage populates the name automatically. Format: `projects//locations//agents//flows//pages/`."
+          type: string
+        transitionRouteGroups:
+          description: "Ordered list of `TransitionRouteGroups` associated with the page. Transition route groups must be unique within a page. * If multiple transition routes within a page scope refer to the same intent, then the precedence order is: page's transition route -> page's transition route group -> flow's transition routes. * If multiple transition route groups within a page contain the same intent, then the first group in the ordered list takes precedence. Format:`projects//locations//agents//flows//transitionRouteGroups/`."
+          items:
+            type: string
+          type: array
+        transitionRoutes:
+          description: "A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evalauted in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the page with only condition specified."
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TransitionRoute"
+          type: array
       type: object
     GoogleCloudDialogflowCxV3PageInfo:
       description: Represents page information communicated to and from the webhook.
@@ -1508,6 +1976,35 @@ components:
           type: string
         value:
           description: Optional for both WebhookRequest and WebhookResponse. The value of the parameter. This field can be set by the webhook to change the parameter value.
+      type: object
+    GoogleCloudDialogflowCxV3QueryInput:
+      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. "
+      properties:
+        audio:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3AudioInput"
+          description: The natural language speech audio to be processed.
+        dtmf:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3DtmfInput"
+          description: The DTMF event to be handled.
+        event:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3EventInput"
+          description: The event to be triggered.
+        intent:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3IntentInput"
+          description: The intent to be triggered.
+        languageCode:
+          description: Required. The language of the input. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language.
+          type: string
+        text:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TextInput"
+          description: The natural language text to be processed.
+      type: object
+    GoogleCloudDialogflowCxV3ReloadDocumentOperationMetadata:
+      description: Metadata for ReloadDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
       type: object
     GoogleCloudDialogflowCxV3ResponseMessage:
       description: "Represents a response message that can be returned by a conversational agent. Response messages are also used for output audio synthesis. The approach is as follows: * If at least one OutputAudioText response is present, then all OutputAudioText responses are linearly concatenated, and the result is used for output audio synthesis. * If the OutputAudioText responses are a mixture of text and SSML, then the concatenated result is treated as SSML; otherwise, the result is treated as either text or SSML as appropriate. The agent designer should ideally use either text or SSML consistently throughout the bot design. * Otherwise, all Text responses are linearly concatenated, and the result is used for output audio synthesis. This approach allows for more sophisticated user experience scenarios, where the text displayed to the user may differ from what is heard."
@@ -1625,6 +2122,17 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudDialogflowCxV3RunTestCaseMetadata:
+      description: Metadata returned for the TestCases.RunTestCase long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3RunTestCaseResponse:
+      description: The response message for TestCases.RunTestCase.
+      properties:
+        result:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestCaseResult"
+          description: The result.
+      type: object
     GoogleCloudDialogflowCxV3SessionInfo:
       description: Represents session information communicated to and from the webhook.
       properties:
@@ -1635,6 +2143,155 @@ components:
         session:
           description: "Always present for WebhookRequest. Ignored for WebhookResponse. The unique identifier of the session. This field can be used by the webhook to identify a user. Format: `projects//locations//agents//sessions/`."
           type: string
+      type: object
+    GoogleCloudDialogflowCxV3TestCase:
+      description: Represents a test case.
+      properties:
+        creationTime:
+          description: Output only. When the test was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Required. The human-readable name of the test case, unique within the agent. Limit of 200 characters.
+          type: string
+        lastTestResult:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestCaseResult"
+          description: The latest test result.
+        name:
+          description: "The unique identifier of the test case. TestCases.CreateTestCase will populate the name automatically. Otherwise use format: `projects//locations//agents/ /testCases/`."
+          type: string
+        notes:
+          description: Additional freeform notes about the test case. Limit of 400 characters.
+          type: string
+        tags:
+          description: Tags are short descriptions that users may apply to test cases for organizational and filtering purposes. Each tag should start with "#" and has a limit of 30 characters.
+          items:
+            type: string
+          type: array
+        testCaseConversationTurns:
+          description: The conversation turns uttered when the test case was created, in chronological order. These include the canonical set of agent utterances that should occur when the agent is working properly.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ConversationTurn"
+          type: array
+        testConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestConfig"
+          description: Config for the test case.
+      type: object
+    GoogleCloudDialogflowCxV3TestCaseError:
+      description: Error info for importing a test.
+      properties:
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The status associated with the test case.
+        testCase:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3TestCase"
+          description: The test case.
+      type: object
+    GoogleCloudDialogflowCxV3TestCaseResult:
+      description: Represents a result from running a test case in an agent environment.
+      properties:
+        conversationTurns:
+          description: The conversation turns uttered during the test case replay in chronological order.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ConversationTurn"
+          type: array
+        environment:
+          description: Optional. Environment where the test was run. If not set, it indicates the draft environment.
+          type: string
+        name:
+          description: "The resource name for the test case result. Format: `projects//locations//agents//testCases/ /results/`."
+          type: string
+        testResult:
+          description: Whether the test case passed in the agent environment.
+          enum:
+            - TEST_RESULT_UNSPECIFIED
+            - PASSED
+            - FAILED
+          type: string
+        testTime:
+          description: The time that the test was run.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3TestConfig:
+      description: Represents configurations for a test case.
+      properties:
+        flow:
+          description: "Flow name. If not set, default start flow is assumed. Format: `projects//locations//agents//flows/`."
+          type: string
+        trackingParameters:
+          description: Session parameters to be compared when calculating differences.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3TestError:
+      description: Error info for running a test.
+      properties:
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The status associated with the test.
+        testCase:
+          description: The test case resource name.
+          type: string
+        testTime:
+          description: The timestamp when the test was completed.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3TestRunDifference:
+      description: The description of differences between original and replayed agent output.
+      properties:
+        description:
+          description: A description of the diff, showing the actual output vs expected output.
+          type: string
+        type:
+          description: The type of diff.
+          enum:
+            - DIFF_TYPE_UNSPECIFIED
+            - INTENT
+            - PAGE
+            - PARAMETERS
+            - UTTERANCE
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3TextInput:
+      description: Represents the natural language text to be processed.
+      properties:
+        text:
+          description: Required. The UTF-8 encoded natural language text to be processed. Text length must not exceed 256 characters.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3TransitionRoute:
+      description: "A transition route specifies a intent that can be matched and/or a data condition that can be evaluated during a session. When a specified transition is matched, the following actions are taken in order: * If there is a `trigger_fulfillment` associated with the transition, it will be called. * If there is a `target_page` associated with the transition, the session will transition into the specified page. * If there is a `target_flow` associated with the transition, the session will transition into the specified flow."
+      properties:
+        condition:
+          description: The condition to evaluate against form parameters or session parameters. See the [conditions reference](https://cloud.google.com/dialogflow/cx/docs/reference/condition). At least one of `intent` or `condition` must be specified. When both `intent` and `condition` are specified, the transition can only happen when both are fulfilled.
+          type: string
+        intent:
+          description: "The unique identifier of an Intent. Format: `projects//locations//agents//intents/`. Indicates that the transition can only happen when the given intent is matched. At least one of `intent` or `condition` must be specified. When both `intent` and `condition` are specified, the transition can only happen when both are fulfilled."
+          type: string
+        name:
+          description: Output only. The unique identifier of this transition route.
+          readOnly: true
+          type: string
+        targetFlow:
+          description: "The target flow to transition to. Format: `projects//locations//agents//flows/`."
+          type: string
+        targetPage:
+          description: "The target page to transition to. Format: `projects//locations//agents//flows//pages/`."
+          type: string
+        triggerFulfillment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3Fulfillment"
+          description: The fulfillment to call when the condition is satisfied. At least one of `trigger_fulfillment` and `target` must be specified. When both are defined, `trigger_fulfillment` is executed first.
+      type: object
+    GoogleCloudDialogflowCxV3UpdateDocumentOperationMetadata:
+      description: Metadata for UpdateDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
       type: object
     GoogleCloudDialogflowCxV3WebhookRequest:
       description: The request message for a webhook call.
@@ -1733,11 +2390,150 @@ components:
             $ref: "#/components/schemas/GoogleCloudDialogflowCxV3ResponseMessage"
           type: array
       type: object
+    GoogleCloudDialogflowCxV3beta1AudioInput:
+      description: Represents the natural speech audio to be processed.
+      properties:
+        audio:
+          description: The natural language speech audio to be processed. A single request can contain up to 1 minute of speech audio data. The transcribed text cannot contain more than 256 bytes. For non-streaming audio detect intent, both `config` and `audio` must be provided. For streaming audio detect intent, `config` must be provided in the first request and `audio` must be provided in all following requests.
+          format: byte
+          type: string
+        config:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1InputAudioConfig"
+          description: Required. Instructs the speech recognizer how to process the speech audio.
+      type: object
+    GoogleCloudDialogflowCxV3beta1BatchRunTestCasesMetadata:
+      description: Metadata returned for the TestCases.BatchRunTestCases long running operation.
+      properties:
+        errors:
+          description: The test errors.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1BatchRunTestCasesResponse:
+      description: The response message for TestCases.BatchRunTestCases.
+      properties:
+        results:
+          description: The test case results. The detailed conversation turns are empty in this response.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestCaseResult"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1ConversationTurn:
+      description: One interaction between a human and virtual agent. The human provides some input and the virtual agent provides a response.
+      properties:
+        userInput:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ConversationTurnUserInput"
+          description: The user input.
+        virtualAgentOutput:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ConversationTurnVirtualAgentOutput"
+          description: The virtual agent output.
+      type: object
+    GoogleCloudDialogflowCxV3beta1ConversationTurnUserInput:
+      description: The input from the human user.
+      properties:
+        injectedParameters:
+          additionalProperties:
+            description: Properties of the object.
+          description: Parameters that need to be injected into the conversation during intent detection.
+          type: object
+        input:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1QueryInput"
+          description: Supports text input, event input, dtmf input in the test case.
+        isWebhookEnabled:
+          description: If webhooks should be allowed to trigger in response to the user utterance. Often if parameters are injected, webhooks should not be enabled.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowCxV3beta1ConversationTurnVirtualAgentOutput:
+      description: The output from the virtual agent.
+      properties:
+        currentPage:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Page"
+          description: The Page on which the utterance was spoken. Only some fields such as name and displayname will be set.
+        diagnosticInfo:
+          additionalProperties:
+            description: Properties of the object.
+          description: Required. Input only. The diagnostic info output for the turn.
+          type: object
+        differences:
+          description: Output only. If this is part of a result conversation turn, the list of differences between the original run and the replay for this output, if any.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestRunDifference"
+          readOnly: true
+          type: array
+        sessionParameters:
+          additionalProperties:
+            description: Properties of the object.
+          description: The session parameters available to the bot at this point.
+          type: object
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: Response error from the agent in the test result. If set, other output is empty.
+        textResponses:
+          description: The text responses from the agent for the turn.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ResponseMessageText"
+          type: array
+        triggeredIntent:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Intent"
+          description: The Intent that triggered the response. Only some fields such as name and displayname will be set.
+      type: object
+    GoogleCloudDialogflowCxV3beta1CreateDocumentOperationMetadata:
+      description: Metadata for CreateDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
     GoogleCloudDialogflowCxV3beta1CreateVersionOperationMetadata:
       description: Metadata associated with the long running operation for Versions.CreateVersion.
       properties:
         version:
           description: "Name of the created version. Format: `projects//locations//agents//flows//versions/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1DeleteDocumentOperationMetadata:
+      description: Metadata for DeleteDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
+    GoogleCloudDialogflowCxV3beta1DtmfInput:
+      description: Represents the input for dtmf event.
+      properties:
+        digits:
+          description: The dtmf digits.
+          type: string
+        finishDigit:
+          description: The finish digit (if any).
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1EventHandler:
+      description: "An event handler specifies an event that can be handled during a session. When the specified event happens, the following actions are taken in order: * If there is a `trigger_fulfillment` associated with the event, it will be called. * If there is a `target_page` associated with the event, the session will transition into the specified page. * If there is a `target_flow` associated with the event, the session will transition into the specified flow."
+      properties:
+        event:
+          description: Required. The name of the event to handle.
+          type: string
+        name:
+          description: Output only. The unique identifier of this event handler.
+          readOnly: true
+          type: string
+        targetFlow:
+          description: "The target flow to transition to. Format: `projects//locations//agents//flows/`."
+          type: string
+        targetPage:
+          description: "The target page to transition to. Format: `projects//locations//agents//flows//pages/`."
+          type: string
+        triggerFulfillment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Fulfillment"
+          description: The fulfillment to call when the event occurs. Handling webhook errors with a fulfillment enabled with webhook could cause infinite loop. It is invalid to specify such fulfillment for a handler handling webhooks.
+      type: object
+    GoogleCloudDialogflowCxV3beta1EventInput:
+      description: Represents the event to trigger.
+      properties:
+        event:
+          description: Name of the event.
           type: string
       type: object
     GoogleCloudDialogflowCxV3beta1ExportAgentResponse:
@@ -1750,6 +2546,335 @@ components:
         agentUri:
           description: The URI to a file containing the exported agent. This field is populated only if `agent_uri` is specified in ExportAgentRequest.
           type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1ExportTestCasesMetadata:
+      description: Metadata returned for the TestCases.ExportTestCases long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3beta1ExportTestCasesResponse:
+      description: The response message for TestCases.ExportTestCases.
+      properties:
+        content:
+          description: Uncompressed raw byte content for test cases.
+          format: byte
+          type: string
+        gcsUri:
+          description: The URI to a file containing the exported test cases. This field is populated only if `gcs_uri` is specified in ExportTestCasesRequest.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1Form:
+      description: A form is a data model that groups related parameters that can be collected from the user. The process in which the agent prompts the user and collects parameter values from the user is called form filling. A form can be added to a page. When form filling is done, the filled parameters will be written to the session.
+      properties:
+        parameters:
+          description: Parameters to collect from the user.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FormParameter"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1FormParameter:
+      description: Represents a form parameter.
+      properties:
+        defaultValue:
+          description: The default value of an optional parameter. If the parameter is required, the default value will be ignored.
+        displayName:
+          description: Required. The human-readable name of the parameter, unique within the form.
+          type: string
+        entityType:
+          description: "Required. The entity type of the parameter. Format: `projects/-/locations/-/agents/-/entityTypes/` for system entity types (for example, `projects/-/locations/-/agents/-/entityTypes/sys.date`), or `projects//locations//agents//entityTypes/` for developer entity types."
+          type: string
+        fillBehavior:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FormParameterFillBehavior"
+          description: Required. Defines fill behavior for the parameter.
+        isList:
+          description: Indicates whether the parameter represents a list of values.
+          type: boolean
+        redact:
+          description: Indicates whether the parameter content is logged in text and audio. If it is set to true, the parameter content will be replaced to parameter name in both request and response. The default value is false.
+          type: boolean
+        required:
+          description: Indicates whether the parameter is required. Optional parameters will not trigger prompts; however, they are filled if the user specifies them. Required parameters must be filled before form filling concludes.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowCxV3beta1FormParameterFillBehavior:
+      description: Configuration for how the filling of a parameter should be handled.
+      properties:
+        initialPromptFulfillment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Fulfillment"
+          description: Required. The fulfillment to provide the initial prompt that the agent can present to the user in order to fill the parameter.
+        repromptEventHandlers:
+          description: "The handlers for parameter-level events, used to provide reprompt for the parameter or transition to a different page/flow. The supported events are: * `sys.no-match-`, where N can be from 1 to 6 * `sys.no-match-default` * `sys.no-input-`, where N can be from 1 to 6 * `sys.no-input-default` * `sys.invalid-parameter` `initial_prompt_fulfillment` provides the first prompt for the parameter. If the user's response does not fill the parameter, a no-match/no-input event will be triggered, and the fulfillment associated with the `sys.no-match-1`/`sys.no-input-1` handler (if defined) will be called to provide a prompt. The `sys.no-match-2`/`sys.no-input-2` handler (if defined) will respond to the next no-match/no-input event, and so on. A `sys.no-match-default` or `sys.no-input-default` handler will be used to handle all following no-match/no-input events after all numbered no-match/no-input handlers for the parameter are consumed. A `sys.invalid-parameter` handler can be defined to handle the case where the parameter values have been `invalidated` by webhook. For example, if the user's response fill the parameter, however the parameter was invalidated by webhook, the fulfillment associated with the `sys.invalid-parameter` handler (if defined) will be called to provide a prompt. If the event handler for the corresponding event can't be found on the parameter, `initial_prompt_fulfillment` will be re-prompted."
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1EventHandler"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1Fulfillment:
+      description: "A fulfillment can do one or more of the following actions at the same time: * Generate rich message responses. * Set parameter values. * Call the webhook. Fulfillments can be called at various stages in the Page or Form lifecycle. For example, when a DetectIntentRequest drives a session to enter a new page, the page's entry fulfillment can add a static response to the QueryResult in the returning DetectIntentResponse, call the webhook (for example, to load user data from a database), or both."
+      properties:
+        conditionalCases:
+          description: Conditional cases for this fulfillment.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCases"
+          type: array
+        messages:
+          description: The list of rich message responses to present to the user.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ResponseMessage"
+          type: array
+        setParameterActions:
+          description: Set parameter values before executing the webhook.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FulfillmentSetParameterAction"
+          type: array
+        tag:
+          description: The tag used by the webhook to identify which fulfillment is being called. This field is required if `webhook` is specified.
+          type: string
+        webhook:
+          description: "The webhook to call. Format: `projects//locations//agents//webhooks/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCases:
+      description: A list of cascading if-else conditions. Cases are mutually exclusive. The first one with a matching condition is selected, all the rest ignored.
+      properties:
+        cases:
+          description: A list of cascading if-else conditions.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCasesCase"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCasesCase:
+      description: Each case has a Boolean condition. When it is evaluated to be True, the corresponding messages will be selected and evaluated recursively.
+      properties:
+        caseContent:
+          description: A list of case content.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCasesCaseCaseContent"
+          type: array
+        condition:
+          description: The condition to activate and select this case. Empty means the condition is always true. The condition is evaluated against form parameters or session parameters. See the [conditions reference](https://cloud.google.com/dialogflow/cx/docs/reference/condition).
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCasesCaseCaseContent:
+      description: The list of messages or conditional cases to activate for this case.
+      properties:
+        additionalCases:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1FulfillmentConditionalCases"
+          description: Additional cases to be evaluated.
+        message:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ResponseMessage"
+          description: Returned message.
+      type: object
+    GoogleCloudDialogflowCxV3beta1FulfillmentSetParameterAction:
+      description: Setting a parameter value.
+      properties:
+        parameter:
+          description: Display name of the parameter.
+          type: string
+        value:
+          description: The new value of the parameter. A null value clears the parameter.
+      type: object
+    GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata:
+      description: Metadata in google::longrunning::Operation for Knowledge operations.
+      properties:
+        state:
+          description: Required. Output only. The current state of this operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - RUNNING
+            - DONE
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportDocumentsOperationMetadata:
+      description: Metadata for ImportDocuments operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportDocumentsResponse:
+      description: Response message for Documents.ImportDocuments.
+      properties:
+        warnings:
+          description: Includes details about skipped documents or any other warnings.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportTestCasesMetadata:
+      description: Metadata returned for the TestCases.ImportTestCases long running operation.
+      properties:
+        errors:
+          description: Errors for failed test cases.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestCaseError"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1ImportTestCasesResponse:
+      description: The response message for TestCases.ImportTestCases.
+      properties:
+        names:
+          description: "The unique identifiers of the new test cases. Format: `projects//locations//agents//testCases/`."
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1InputAudioConfig:
+      description: Instructs the speech recognizer on how to process the audio content.
+      properties:
+        audioEncoding:
+          description: Required. Audio encoding of the audio content to process.
+          enum:
+            - AUDIO_ENCODING_UNSPECIFIED
+            - AUDIO_ENCODING_LINEAR_16
+            - AUDIO_ENCODING_FLAC
+            - AUDIO_ENCODING_MULAW
+            - AUDIO_ENCODING_AMR
+            - AUDIO_ENCODING_AMR_WB
+            - AUDIO_ENCODING_OGG_OPUS
+            - AUDIO_ENCODING_SPEEX_WITH_HEADER_BYTE
+          type: string
+        enableWordInfo:
+          description: Optional. If `true`, Dialogflow returns SpeechWordInfo in StreamingRecognitionResult with information about the recognized speech words, e.g. start and end time offsets. If false or unspecified, Speech doesn't return any word-level information.
+          type: boolean
+        model:
+          description: Optional. Which Speech model to select for the given request. Select the model best suited to your domain to get best results. If a model is not explicitly specified, then we auto-select a model based on the parameters in the InputAudioConfig. If enhanced speech model is enabled for the agent and an enhanced version of the specified model for the language does not exist, then the speech is recognized using the standard version of the specified model. Refer to [Cloud Speech API documentation](https://cloud.google.com/speech-to-text/docs/basics#select-model) for more details.
+          type: string
+        modelVariant:
+          description: Optional. Which variant of the Speech model to use.
+          enum:
+            - SPEECH_MODEL_VARIANT_UNSPECIFIED
+            - USE_BEST_AVAILABLE
+            - USE_STANDARD
+            - USE_ENHANCED
+          type: string
+        phraseHints:
+          description: Optional. A list of strings containing words and phrases that the speech recognizer should recognize with higher likelihood. See [the Cloud Speech documentation](https://cloud.google.com/speech-to-text/docs/basics#phrase-hints) for more details.
+          items:
+            type: string
+          type: array
+        sampleRateHertz:
+          description: Sample rate (in Hertz) of the audio content sent in the query. Refer to [Cloud Speech API documentation](https://cloud.google.com/speech-to-text/docs/basics) for more details.
+          format: int32
+          type: integer
+        singleUtterance:
+          description: "Optional. If `false` (default), recognition does not cease until the client closes the stream. If `true`, the recognizer will detect a single spoken utterance in input audio. Recognition ceases when it detects the audio's voice has stopped or paused. In this case, once a detected intent is received, the client should close the stream and start a new request with a new stream as needed. Note: This setting is relevant only for streaming methods."
+          type: boolean
+      type: object
+    GoogleCloudDialogflowCxV3beta1Intent:
+      description: An intent represents a user's intent to interact with a conversational agent. You can provide information for the Dialogflow API to use to match user input to an intent by adding training phrases (i.e., examples of user input) to your intent.
+      properties:
+        description:
+          description: "Optional. Human readable description for better understanding an intent like its scope, content, result etc. Maximum character limit: 140 characters."
+          type: string
+        displayName:
+          description: Required. The human-readable name of the intent, unique within the agent.
+          type: string
+        isFallback:
+          description: Indicates whether this is a fallback intent. Currently only default fallback intent is allowed in the agent, which is added upon agent creation. Adding training phrases to fallback intent is useful in the case of requests that are mistakenly matched, since training phrases assigned to fallback intents act as negative examples that triggers no-match event.
+          type: boolean
+        labels:
+          additionalProperties:
+            type: string
+          description: "Optional. The key/value metadata to label an intent. Labels can contain lowercase letters, digits and the symbols '-' and '_'. International characters are allowed, including letters from unicase alphabets. Keys must start with a letter. Keys and values can be no longer than 63 characters and no more than 128 bytes. Prefix \"sys-\" is reserved for Dialogflow defined labels. Currently allowed Dialogflow defined labels include: * sys-head * sys-contextual The above labels do not require value. \"sys-head\" means the intent is a head intent. \"sys-contextual\" means the intent is a contextual intent."
+          type: object
+        name:
+          description: "The unique identifier of the intent. Required for the Intents.UpdateIntent method. Intents.CreateIntent populates the name automatically. Format: `projects//locations//agents//intents/`."
+          type: string
+        parameters:
+          description: The collection of parameters associated with the intent.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1IntentParameter"
+          type: array
+        priority:
+          description: The priority of this intent. Higher numbers represent higher priorities. - If the supplied value is unspecified or 0, the service translates the value to 500,000, which corresponds to the `Normal` priority in the console. - If the supplied value is negative, the intent is ignored in runtime detect intent requests.
+          format: int32
+          type: integer
+        trainingPhrases:
+          description: The collection of training phrases the agent is trained on to identify the intent.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1IntentTrainingPhrase"
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1IntentInput:
+      description: Represents the intent to trigger programmatically rather than as a result of natural language processing.
+      properties:
+        intent:
+          description: "Required. The unique identifier of the intent. Format: `projects//locations//agents//intents/`."
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1IntentParameter:
+      description: Represents an intent parameter.
+      properties:
+        entityType:
+          description: "Required. The entity type of the parameter. Format: `projects/-/locations/-/agents/-/entityTypes/` for system entity types (for example, `projects/-/locations/-/agents/-/entityTypes/sys.date`), or `projects//locations//agents//entityTypes/` for developer entity types."
+          type: string
+        id:
+          description: Required. The unique identifier of the parameter. This field is used by training phrases to annotate their parts.
+          type: string
+        isList:
+          description: Indicates whether the parameter represents a list of values.
+          type: boolean
+        redact:
+          description: Indicates whether the parameter content is logged in text and audio. If it is set to true, the parameter content will be replaced to parameter id in both request and response. The default value is false.
+          type: boolean
+      type: object
+    GoogleCloudDialogflowCxV3beta1IntentTrainingPhrase:
+      description: Represents an example that the agent is trained on to identify the intent.
+      properties:
+        id:
+          description: Output only. The unique identifier of the training phrase.
+          type: string
+        parts:
+          description: "Required. The ordered list of training phrase parts. The parts are concatenated in order to form the training phrase. Note: The API does not automatically annotate training phrases like the Dialogflow Console does. Note: Do not forget to include whitespace at part boundaries, so the training phrase is well formatted when the parts are concatenated. If the training phrase does not need to be annotated with parameters, you just need a single part with only the Part.text field set. If you want to annotate the training phrase, you must create multiple parts, where the fields of each part are populated in one of two ways: - `Part.text` is set to a part of the phrase that has no parameters. - `Part.text` is set to a part of the phrase that you want to annotate, and the `parameter_id` field is set."
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1IntentTrainingPhrasePart"
+          type: array
+        repeatCount:
+          description: Indicates how many times this example was added to the intent.
+          format: int32
+          type: integer
+      type: object
+    GoogleCloudDialogflowCxV3beta1IntentTrainingPhrasePart:
+      description: Represents a part of a training phrase.
+      properties:
+        parameterId:
+          description: The parameter used to annotate this part of the training phrase. This field is required for annotated parts of the training phrase.
+          type: string
+        text:
+          description: Required. The text for this part.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1Page:
+      description: A Dialogflow CX conversation (session) can be described and visualized as a state machine. The states of a CX session are represented by pages. For each flow, you define many pages, where your combined pages can handle a complete conversation on the topics the flow is designed for. At any given moment, exactly one page is the current page, the current page is considered active, and the flow associated with that page is considered active. Every flow has a special start page. When a flow initially becomes active, the start page page becomes the current page. For each conversational turn, the current page will either stay the same or transition to another page. You configure each page to collect information from the end-user that is relevant for the conversational state represented by the page. For more information, see the [Page guide](https://cloud.google.com/dialogflow/cx/docs/concept/page).
+      properties:
+        displayName:
+          description: Required. The human-readable name of the page, unique within the agent.
+          type: string
+        entryFulfillment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Fulfillment"
+          description: The fulfillment to call when the session is entering the page.
+        eventHandlers:
+          description: Handlers associated with the page to handle events such as webhook errors, no match or no input.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1EventHandler"
+          type: array
+        form:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Form"
+          description: The form associated with the page, used for collecting parameters relevant to the page.
+        name:
+          description: "The unique identifier of the page. Required for the Pages.UpdatePage method. Pages.CreatePage populates the name automatically. Format: `projects//locations//agents//flows//pages/`."
+          type: string
+        transitionRouteGroups:
+          description: "Ordered list of `TransitionRouteGroups` associated with the page. Transition route groups must be unique within a page. * If multiple transition routes within a page scope refer to the same intent, then the precedence order is: page's transition route -> page's transition route group -> flow's transition routes. * If multiple transition route groups within a page contain the same intent, then the first group in the ordered list takes precedence. Format:`projects//locations//agents//flows//transitionRouteGroups/`."
+          items:
+            type: string
+          type: array
+        transitionRoutes:
+          description: "A list of transitions for the transition rules of this page. They route the conversation to another page in the same flow, or another flow. When we are in a certain page, the TransitionRoutes are evalauted in the following order: * TransitionRoutes defined in the page with intent specified. * TransitionRoutes defined in the transition route groups. * TransitionRoutes defined in flow with intent specified. * TransitionRoutes defined in the page with only condition specified."
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TransitionRoute"
+          type: array
       type: object
     GoogleCloudDialogflowCxV3beta1PageInfo:
       description: Represents page information communicated to and from the webhook.
@@ -1792,6 +2917,35 @@ components:
           type: string
         value:
           description: Optional for both WebhookRequest and WebhookResponse. The value of the parameter. This field can be set by the webhook to change the parameter value.
+      type: object
+    GoogleCloudDialogflowCxV3beta1QueryInput:
+      description: "Represents the query input. It can contain one of: 1. A conversational query in the form of text. 2. An intent query that specifies which intent to trigger. 3. Natural language speech audio to be processed. 4. An event to be triggered. "
+      properties:
+        audio:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1AudioInput"
+          description: The natural language speech audio to be processed.
+        dtmf:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1DtmfInput"
+          description: The DTMF event to be handled.
+        event:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1EventInput"
+          description: The event to be triggered.
+        intent:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1IntentInput"
+          description: The intent to be triggered.
+        languageCode:
+          description: Required. The language of the input. See [Language Support](https://cloud.google.com/dialogflow/docs/reference/language) for a list of the currently supported language codes. Note that queries in the same session do not necessarily need to specify the same language.
+          type: string
+        text:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TextInput"
+          description: The natural language text to be processed.
+      type: object
+    GoogleCloudDialogflowCxV3beta1ReloadDocumentOperationMetadata:
+      description: Metadata for ReloadDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
       type: object
     GoogleCloudDialogflowCxV3beta1ResponseMessage:
       description: "Represents a response message that can be returned by a conversational agent. Response messages are also used for output audio synthesis. The approach is as follows: * If at least one OutputAudioText response is present, then all OutputAudioText responses are linearly concatenated, and the result is used for output audio synthesis. * If the OutputAudioText responses are a mixture of text and SSML, then the concatenated result is treated as SSML; otherwise, the result is treated as either text or SSML as appropriate. The agent designer should ideally use either text or SSML consistently throughout the bot design. * Otherwise, all Text responses are linearly concatenated, and the result is used for output audio synthesis. This approach allows for more sophisticated user experience scenarios, where the text displayed to the user may differ from what is heard."
@@ -1909,6 +3063,17 @@ components:
             type: string
           type: array
       type: object
+    GoogleCloudDialogflowCxV3beta1RunTestCaseMetadata:
+      description: Metadata returned for the TestCases.RunTestCase long running operation.
+      properties: {}
+      type: object
+    GoogleCloudDialogflowCxV3beta1RunTestCaseResponse:
+      description: The response message for TestCases.RunTestCase.
+      properties:
+        result:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestCaseResult"
+          description: The result.
+      type: object
     GoogleCloudDialogflowCxV3beta1SessionInfo:
       description: Represents session information communicated to and from the webhook.
       properties:
@@ -1919,6 +3084,155 @@ components:
         session:
           description: "Always present for WebhookRequest. Ignored for WebhookResponse. The unique identifier of the session. This field can be used by the webhook to identify a user. Format: `projects//locations//agents//sessions/`."
           type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1TestCase:
+      description: Represents a test case.
+      properties:
+        creationTime:
+          description: Output only. When the test was created.
+          format: google-datetime
+          readOnly: true
+          type: string
+        displayName:
+          description: Required. The human-readable name of the test case, unique within the agent. Limit of 200 characters.
+          type: string
+        lastTestResult:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestCaseResult"
+          description: The latest test result.
+        name:
+          description: "The unique identifier of the test case. TestCases.CreateTestCase will populate the name automatically. Otherwise use format: `projects//locations//agents/ /testCases/`."
+          type: string
+        notes:
+          description: Additional freeform notes about the test case. Limit of 400 characters.
+          type: string
+        tags:
+          description: Tags are short descriptions that users may apply to test cases for organizational and filtering purposes. Each tag should start with "#" and has a limit of 30 characters.
+          items:
+            type: string
+          type: array
+        testCaseConversationTurns:
+          description: The conversation turns uttered when the test case was created, in chronological order. These include the canonical set of agent utterances that should occur when the agent is working properly.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ConversationTurn"
+          type: array
+        testConfig:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestConfig"
+          description: Config for the test case.
+      type: object
+    GoogleCloudDialogflowCxV3beta1TestCaseError:
+      description: Error info for importing a test.
+      properties:
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The status associated with the test case.
+        testCase:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1TestCase"
+          description: The test case.
+      type: object
+    GoogleCloudDialogflowCxV3beta1TestCaseResult:
+      description: Represents a result from running a test case in an agent environment.
+      properties:
+        conversationTurns:
+          description: The conversation turns uttered during the test case replay in chronological order.
+          items:
+            $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1ConversationTurn"
+          type: array
+        environment:
+          description: Optional. Environment where the test was run. If not set, it indicates the draft environment.
+          type: string
+        name:
+          description: "The resource name for the test case result. Format: `projects//locations//agents//testCases/ /results/`."
+          type: string
+        testResult:
+          description: Whether the test case passed in the agent environment.
+          enum:
+            - TEST_RESULT_UNSPECIFIED
+            - PASSED
+            - FAILED
+          type: string
+        testTime:
+          description: The time that the test was run.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1TestConfig:
+      description: Represents configurations for a test case.
+      properties:
+        flow:
+          description: "Flow name. If not set, default start flow is assumed. Format: `projects//locations//agents//flows/`."
+          type: string
+        trackingParameters:
+          description: Session parameters to be compared when calculating differences.
+          items:
+            type: string
+          type: array
+      type: object
+    GoogleCloudDialogflowCxV3beta1TestError:
+      description: Error info for running a test.
+      properties:
+        status:
+          $ref: "#/components/schemas/GoogleRpcStatus"
+          description: The status associated with the test.
+        testCase:
+          description: The test case resource name.
+          type: string
+        testTime:
+          description: The timestamp when the test was completed.
+          format: google-datetime
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1TestRunDifference:
+      description: The description of differences between original and replayed agent output.
+      properties:
+        description:
+          description: A description of the diff, showing the actual output vs expected output.
+          type: string
+        type:
+          description: The type of diff.
+          enum:
+            - DIFF_TYPE_UNSPECIFIED
+            - INTENT
+            - PAGE
+            - PARAMETERS
+            - UTTERANCE
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1TextInput:
+      description: Represents the natural language text to be processed.
+      properties:
+        text:
+          description: Required. The UTF-8 encoded natural language text to be processed. Text length must not exceed 256 characters.
+          type: string
+      type: object
+    GoogleCloudDialogflowCxV3beta1TransitionRoute:
+      description: "A transition route specifies a intent that can be matched and/or a data condition that can be evaluated during a session. When a specified transition is matched, the following actions are taken in order: * If there is a `trigger_fulfillment` associated with the transition, it will be called. * If there is a `target_page` associated with the transition, the session will transition into the specified page. * If there is a `target_flow` associated with the transition, the session will transition into the specified flow."
+      properties:
+        condition:
+          description: The condition to evaluate against form parameters or session parameters. See the [conditions reference](https://cloud.google.com/dialogflow/cx/docs/reference/condition). At least one of `intent` or `condition` must be specified. When both `intent` and `condition` are specified, the transition can only happen when both are fulfilled.
+          type: string
+        intent:
+          description: "The unique identifier of an Intent. Format: `projects//locations//agents//intents/`. Indicates that the transition can only happen when the given intent is matched. At least one of `intent` or `condition` must be specified. When both `intent` and `condition` are specified, the transition can only happen when both are fulfilled."
+          type: string
+        name:
+          description: Output only. The unique identifier of this transition route.
+          readOnly: true
+          type: string
+        targetFlow:
+          description: "The target flow to transition to. Format: `projects//locations//agents//flows/`."
+          type: string
+        targetPage:
+          description: "The target page to transition to. Format: `projects//locations//agents//flows//pages/`."
+          type: string
+        triggerFulfillment:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1Fulfillment"
+          description: The fulfillment to call when the condition is satisfied. At least one of `trigger_fulfillment` and `target` must be specified. When both are defined, `trigger_fulfillment` is executed first.
+      type: object
+    GoogleCloudDialogflowCxV3beta1UpdateDocumentOperationMetadata:
+      description: Metadata for UpdateDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowCxV3beta1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
       type: object
     GoogleCloudDialogflowCxV3beta1WebhookRequest:
       description: The request message for a webhook call.
@@ -3295,7 +4609,7 @@ components:
         webhookHeaders:
           additionalProperties:
             type: string
-          description: "This field can be used to pass HTTP headers for a webhook call. These headers will be sent to webhook along with the headers that have been configured through Dialogflow web console. The headers defined within this field will overwrite the headers configured through Dialogflow console if there is a conflict. Header names are case-insensitive. Google's specified headers are not allowed. Including: \"Host\", \"Content-Length\", \"Connection\", \"From\", \"User-Agent\", \"Accept-Encoding\", \"If-Modified-Since\", \"If-None-Match\", \"X-Forwarded-For\", etc."
+          description: "This field can be used to pass HTTP headers for a webhook call. These headers will be sent to webhook along with the headers that have been configured through the Dialogflow web console. The headers defined within this field will overwrite the headers configured through the Dialogflow console if there is a conflict. Header names are case-insensitive. Google's specified headers are not allowed. Including: \"Host\", \"Content-Length\", \"Connection\", \"From\", \"User-Agent\", \"Accept-Encoding\", \"If-Modified-Since\", \"If-None-Match\", \"X-Forwarded-For\", etc."
           type: object
       type: object
     GoogleCloudDialogflowV2QueryResult:
@@ -4681,6 +5995,63 @@ components:
         source:
           description: Optional. A custom field used to identify the webhook source. Arbitrary strings are supported. When provided, Dialogflow uses this field to populate QueryResult.webhook_source sent to the integration or API caller.
           type: string
+      type: object
+    GoogleCloudDialogflowV3alpha1CreateDocumentOperationMetadata:
+      description: Metadata for CreateDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
+    GoogleCloudDialogflowV3alpha1DeleteDocumentOperationMetadata:
+      description: Metadata for DeleteDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
+    GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata:
+      description: Metadata in google::longrunning::Operation for Knowledge operations.
+      properties:
+        state:
+          description: Required. Output only. The current state of this operation.
+          enum:
+            - STATE_UNSPECIFIED
+            - PENDING
+            - RUNNING
+            - DONE
+          readOnly: true
+          type: string
+      type: object
+    GoogleCloudDialogflowV3alpha1ImportDocumentsOperationMetadata:
+      description: Metadata for ImportDocuments operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
+    GoogleCloudDialogflowV3alpha1ImportDocumentsResponse:
+      description: Response message for Documents.ImportDocuments.
+      properties:
+        warnings:
+          description: Includes details about skipped documents or any other warnings.
+          items:
+            $ref: "#/components/schemas/GoogleRpcStatus"
+          type: array
+      type: object
+    GoogleCloudDialogflowV3alpha1ReloadDocumentOperationMetadata:
+      description: Metadata for ReloadDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
+      type: object
+    GoogleCloudDialogflowV3alpha1UpdateDocumentOperationMetadata:
+      description: Metadata for UpdateDocument operation.
+      properties:
+        genericMetadata:
+          $ref: "#/components/schemas/GoogleCloudDialogflowV3alpha1GenericKnowledgeOperationMetadata"
+          description: The generic information of the operation.
       type: object
     GoogleLongrunningListOperationsResponse:
       description: The response message for Operations.ListOperations.

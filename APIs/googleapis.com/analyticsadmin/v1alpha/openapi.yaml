@@ -409,6 +409,16 @@ paths:
           required: true
           schema:
             type: string
+        - description: The maximum number of resources to return. The service may return fewer than this value, even if there are additional pages. If unspecified, at most 50 resources will be returned. The maximum value is 200; (higher values will be coerced to the maximum)
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: A page token, received from a previous `ListFirebaseLinks` call. Provide this to retrieve the subsequent page. When paginating, all other parameters provided to `ListProperties` must match the call that provided the page token.
+          in: query
+          name: pageToken
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -1479,6 +1489,9 @@ components:
           items:
             $ref: "#/components/schemas/GoogleAnalyticsAdminV1alphaFirebaseLink"
           type: array
+        nextPageToken:
+          description: A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages. Currently, Google Analytics supports only one FirebaseLink per property, so this will never be populated.
+          type: string
       type: object
     GoogleAnalyticsAdminV1alphaListGoogleAdsLinksResponse:
       description: Response message for ListGoogleAdsLinks RPC.
@@ -1700,7 +1713,7 @@ components:
             https://www.googleapis.com/auth/analytics.edit: Edit Google Analytics management entities
             https://www.googleapis.com/auth/analytics.manage.users: Manage Google Analytics Account users by email address
             https://www.googleapis.com/auth/analytics.manage.users.readonly: View Google Analytics user permissions
-            https://www.googleapis.com/auth/analytics.readonly: View your Google Analytics data
+            https://www.googleapis.com/auth/analytics.readonly: See and download your Google Analytics data
       type: oauth2
     Oauth2c:
       description: Oauth 2.0 authorizationCode authentication
@@ -1711,6 +1724,6 @@ components:
             https://www.googleapis.com/auth/analytics.edit: Edit Google Analytics management entities
             https://www.googleapis.com/auth/analytics.manage.users: Manage Google Analytics Account users by email address
             https://www.googleapis.com/auth/analytics.manage.users.readonly: View Google Analytics user permissions
-            https://www.googleapis.com/auth/analytics.readonly: View your Google Analytics data
+            https://www.googleapis.com/auth/analytics.readonly: See and download your Google Analytics data
           tokenUrl: https://accounts.google.com/o/oauth2/token
       type: oauth2

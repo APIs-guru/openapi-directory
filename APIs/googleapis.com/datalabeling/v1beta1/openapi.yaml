@@ -3203,7 +3203,7 @@ components:
           type: string
         sentimentConfig:
           $ref: "#/components/schemas/GoogleCloudDatalabelingV1beta1SentimentConfig"
-          description: Optional. Configs for sentiment selection.
+          description: Optional. Configs for sentiment selection. We deprecate sentiment analysis in data labeling side as it is incompatible with uCAIP.
       type: object
     GoogleCloudDatalabelingV1beta1TextEntityExtractionAnnotation:
       description: Text entity extraction annotation.

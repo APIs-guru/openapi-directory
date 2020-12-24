@@ -270,6 +270,48 @@ paths:
           description: Successful response
       tags:
         - spaces
+  "/v1/{parent}/webhooks":
+    parameters:
+      - $ref: "#/components/parameters/_.xgafv"
+      - $ref: "#/components/parameters/access_token"
+      - $ref: "#/components/parameters/alt"
+      - $ref: "#/components/parameters/callback"
+      - $ref: "#/components/parameters/fields"
+      - $ref: "#/components/parameters/key"
+      - $ref: "#/components/parameters/oauth_token"
+      - $ref: "#/components/parameters/prettyPrint"
+      - $ref: "#/components/parameters/quotaUser"
+      - $ref: "#/components/parameters/upload_protocol"
+      - $ref: "#/components/parameters/uploadType"
+    post:
+      description: Legacy path for creating message. Calling these will result in a BadRequest response.
+      operationId: chat.spaces.webhooks
+      parameters:
+        - description: 'Required. Space resource name, in the form "spaces/*". Example: spaces/AAAAMpdlehY'
+          in: path
+          name: parent
+          required: true
+          schema:
+            type: string
+        - description: Opaque thread identifier string that can be specified to group messages into a single thread. If this is the first message with a given thread identifier, a new thread is created. Subsequent messages with the same thread identifier will be posted into the same thread. This relieves bots and webhooks from having to store the Hangouts Chat thread ID of a thread (created earlier by them) to post further updates to it. Has no effect if thread field, corresponding to an existing thread, is set in message.
+          in: query
+          name: threadKey
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Message"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+          description: Successful response
+      tags:
+        - spaces
 components:
   parameters:
     _.xgafv:

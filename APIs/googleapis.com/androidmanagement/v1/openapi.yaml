@@ -1704,6 +1704,11 @@ components:
         networkOperatorName:
           description: Alphabetic name of current registered operator. For example, Vodafone.
           type: string
+        telephonyInfos:
+          description: Provides telephony information associated with each SIM card on the device. Only supported on fully managed devices starting from Android API level 23 and above.
+          items:
+            $ref: "#/components/schemas/TelephonyInfo"
+          type: array
         wifiMacAddress:
           description: Wi-Fi MAC address of the device. For example, 7c:11:11:11:11:11.
           type: string
@@ -2558,6 +2563,16 @@ components:
             - UNKNOWN_UPDATE_AVAILABLE
             - SECURITY_UPDATE_AVAILABLE
             - OS_UPDATE_AVAILABLE
+          type: string
+      type: object
+    TelephonyInfo:
+      description: Telephony information associated with a given SIM card on the device. Only supported on fully managed devices starting from Android API level 23 and above.
+      properties:
+        carrierName:
+          description: The carrier name associated with this SIM card.
+          type: string
+        phoneNumber:
+          description: The phone number associated with this SIM card.
           type: string
       type: object
     TermsAndConditions:

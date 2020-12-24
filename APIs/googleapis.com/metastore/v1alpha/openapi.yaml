@@ -24,6 +24,7 @@ info:
       version: v1
   x-providerName: googleapis.com
   x-serviceName: metastore
+  x-preferred: false
 externalDocs:
   url: https://cloud.google.com/dataproc-metastore/docs
 tags:
@@ -808,7 +809,7 @@ components:
           type: object
         kerberosConfig:
           $ref: "#/components/schemas/KerberosConfig"
-          description: Information used to configure the Hive metastore service as a service principal in a Kerberos realm.
+          description: Information used to configure the Hive metastore service as a service principal in a Kerberos realm. To disable Kerberos, use the UpdateService method and specify this field's path ("hive_metastore_config.kerberos_config") in the request's update_mask while omitting this field from the request's service.
         version:
           description: Immutable. The Hive metastore schema version.
           type: string

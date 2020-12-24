@@ -262,26 +262,9 @@ components:
     GoogleCloudDocumentaiUiv1beta3CreateProcessorVersionMetadata:
       description: The metadata that represents a processor version being created.
       properties:
-        createTime:
-          description: The creation time of the operation.
-          format: google-datetime
-          type: string
-        state:
-          description: The state of the current disable processor operation.
-          enum:
-            - STATE_UNSPECIFIED
-            - QUEUED
-            - PREPARING
-            - RUNNING
-            - SUCCEEDED
-            - FAILED
-            - CANCELLING
-            - CANCELLED
-          type: string
-        updateTime:
-          description: The last update time of the operation.
-          format: google-datetime
-          type: string
+        commonMetadata:
+          $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
+          description: The basic metadata of the long running operation.
       type: object
     GoogleCloudDocumentaiUiv1beta3DeleteLabelerPoolOperationMetadata:
       description: The long running operation metadata for DeleteLabelerPool.
@@ -296,26 +279,6 @@ components:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
           description: The basic metadata of the long running operation.
-        createTime:
-          description: The creation time of the operation.
-          format: google-datetime
-          type: string
-        state:
-          description: The state of the current delete processor operation.
-          enum:
-            - STATE_UNSPECIFIED
-            - WAITING
-            - RUNNING
-            - SUCCEEDED
-            - FAILED
-          type: string
-        stateMessage:
-          description: A message providing more details about the current state of processing. For example, the error message if the operation is failed.
-          type: string
-        updateTime:
-          description: The last update time of the operation.
-          format: google-datetime
-          type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3DeleteProcessorVersionMetadata:
       description: The long running operation metadata for delete processor version method.
@@ -341,28 +304,6 @@ components:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
           description: The basic metadata of the long running operation.
-        createTime:
-          description: The creation time of the operation.
-          format: google-datetime
-          type: string
-        state:
-          description: The state of the current disable processor operation.
-          enum:
-            - STATE_UNSPECIFIED
-            - WAITING
-            - RUNNING
-            - SUCCEEDED
-            - CANCELLING
-            - CANCELLED
-            - FAILED
-          type: string
-        stateMessage:
-          description: A message providing more details about the current state of processing. For example, the error message if the operation is failed.
-          type: string
-        updateTime:
-          description: The last update time of the operation.
-          format: google-datetime
-          type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3DisableProcessorResponse:
       description: Response message for the disable processor method. Intentionally empty proto for adding fields in future.
@@ -374,28 +315,6 @@ components:
         commonMetadata:
           $ref: "#/components/schemas/GoogleCloudDocumentaiUiv1beta3CommonOperationMetadata"
           description: The basic metadata of the long running operation.
-        createTime:
-          description: The creation time of the operation.
-          format: google-datetime
-          type: string
-        state:
-          description: The state of the current enable processor operation.
-          enum:
-            - STATE_UNSPECIFIED
-            - WAITING
-            - RUNNING
-            - SUCCEEDED
-            - CANCELLING
-            - CANCELLED
-            - FAILED
-          type: string
-        stateMessage:
-          description: A message providing more details about the current state of processing. For example, the error message if the operation is failed.
-          type: string
-        updateTime:
-          description: The last update time of the operation.
-          format: google-datetime
-          type: string
       type: object
     GoogleCloudDocumentaiUiv1beta3EnableProcessorResponse:
       description: Response message for the enable processor method. Intentionally empty proto for adding fields in future.

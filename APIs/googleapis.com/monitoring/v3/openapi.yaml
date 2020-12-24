@@ -1861,7 +1861,7 @@ components:
           type: string
       type: object
     ClusterIstio:
-      description: Istio service scoped to a single Kubernetes cluster. Learn more at http://istio.io. Clusters running OSS Istio will have their services ingested as this type.
+      description: Istio service scoped to a single Kubernetes cluster. Learn more at https://istio.io. Clusters running OSS Istio will have their services ingested as this type.
       properties:
         clusterName:
           description: The name of the Kubernetes cluster in which this Istio service is defined. Corresponds to the cluster_name resource label in k8s_cluster resources.

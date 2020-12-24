@@ -353,6 +353,9 @@ components:
         alwaysRun:
           description: By default, after an action fails, no further actions are run. This flag indicates that this action must be run even if the pipeline has already failed. This is useful for actions that copy output files off of the VM or for debugging. Note that no actions will be run if image prefetching fails.
           type: boolean
+        blockExternalNetwork:
+          description: Prevents the container from accessing the external network.
+          type: boolean
         commands:
           description: If specified, overrides the `CMD` specified in the container. If the container also has an `ENTRYPOINT` the values are used as entrypoint arguments. Otherwise, they are used as a command and arguments to run inside the container.
           items:
@@ -474,7 +477,7 @@ components:
           type: array
       type: object
     Disk:
-      description: Carries information about a disk that can be attached to a VM. See https://cloud.google.com/compute/docs/disks/performance for more information about disk type, size, and performance considerations.
+      description: Carries information about a disk that can be attached to a VM. See https://cloud.google.com/compute/docs/disks/performance for more information about disk type, size, and performance considerations. Specify either `Volume` or `Disk`, but not both.
       properties:
         name:
           description: A user-supplied name for the disk. Used when mounting the disk into actions. The name must contain only upper and lowercase alphanumeric characters and hyphens and cannot start with a hyphen.
@@ -855,7 +858,7 @@ components:
           description: The CPU platform to request. An instance based on a newer platform can be allocated, but never one with fewer capabilities. The value of this parameter must be a valid Compute Engine CPU platform name (such as "Intel Skylake"). This parameter is only useful for carefully optimized work loads where the CPU platform has a significant impact. For more information about the effect of this parameter, see https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform.
           type: string
         disks:
-          description: The list of disks to create and attach to the VM.
+          description: The list of disks to create and attach to the VM. Specify either the `volumes[]` field or the `disks[]` field, but not both.
           items:
             $ref: "#/components/schemas/Disk"
           type: array
@@ -888,13 +891,13 @@ components:
           $ref: "#/components/schemas/ServiceAccount"
           description: The service account to install on the VM. This account does not need any permissions other than those required by the pipeline.
         volumes:
-          description: The list of disks and other storage to create or attach to the VM.
+          description: The list of disks and other storage to create or attach to the VM. Specify either the `volumes[]` field or the `disks[]` field, but not both.
           items:
             $ref: "#/components/schemas/Volume"
           type: array
       type: object
     Volume:
-      description: Carries information about storage that can be attached to a VM.
+      description: Carries information about storage that can be attached to a VM. Specify either `Volume` or `Disk`, but not both.
       properties:
         existingDisk:
           $ref: "#/components/schemas/ExistingDisk"

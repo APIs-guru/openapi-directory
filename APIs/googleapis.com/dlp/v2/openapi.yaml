@@ -277,7 +277,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Finish a running hybrid DlpJob. Triggers the finalization steps and running of any enabled actions that have not yet run. Early access feature is in a pre-release state and might change or have limited support. For more information, see https://cloud.google.com/products#product-launch-stages.
+      description: Finish a running hybrid DlpJob. Triggers the finalization steps and running of any enabled actions that have not yet run.
       operationId: dlp.projects.locations.dlpJobs.finish
       parameters:
         - description: Required. The name of the DlpJob resource to be cancelled.
@@ -319,7 +319,7 @@ paths:
       - $ref: "#/components/parameters/upload_protocol"
       - $ref: "#/components/parameters/uploadType"
     post:
-      description: Inspect hybrid content and store findings to a trigger. The inspection will be processed asynchronously. To review the findings monitor the jobs within the trigger. Early access feature is in a pre-release state and might change or have limited support. For more information, see https://cloud.google.com/products#product-launch-stages.
+      description: Inspect hybrid content and store findings to a trigger. The inspection will be processed asynchronously. To review the findings monitor the jobs within the trigger.
       operationId: dlp.projects.locations.jobTriggers.hybridInspect
       parameters:
         - description: Required. Resource name of the trigger to execute a hybrid inspect on, for example `projects/dlp-test-project/jobTriggers/53234423`.
@@ -3344,7 +3344,7 @@ components:
       properties:
         hybridStats:
           $ref: "#/components/schemas/GooglePrivacyDlpV2HybridInspectStatistics"
-          description: Statistics related to the processing of hybrid inspect. Early access feature is in a pre-release state and might change or have limited support. For more information, see https://cloud.google.com/products#product-launch-stages.
+          description: Statistics related to the processing of hybrid inspect.
         infoTypeStats:
           description: Statistics of how many instances of each info type were found during inspect job.
           items:
@@ -3427,7 +3427,7 @@ components:
           description: Google Cloud Datastore options.
         hybridOptions:
           $ref: "#/components/schemas/GooglePrivacyDlpV2HybridOptions"
-          description: Hybrid inspection options. Early access feature is in a pre-release state and might change or have limited support. For more information, see https://cloud.google.com/products#product-launch-stages.
+          description: Hybrid inspection options.
         timespanConfig:
           $ref: "#/components/schemas/GooglePrivacyDlpV2TimespanConfig"
       type: object
@@ -3696,7 +3696,7 @@ components:
       properties:
         manual:
           $ref: "#/components/schemas/GooglePrivacyDlpV2Manual"
-          description: For use with hybrid jobs. Jobs must be manually created and finished. Early access feature is in a pre-release state and might change or have limited support. For more information, see https://cloud.google.com/products#product-launch-stages.
+          description: For use with hybrid jobs. Jobs must be manually created and finished.
         schedule:
           $ref: "#/components/schemas/GooglePrivacyDlpV2Schedule"
           description: Create a job on a repeating basis based on the elapse of time.

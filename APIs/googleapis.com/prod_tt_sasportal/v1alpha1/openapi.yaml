@@ -821,17 +821,6 @@ components:
             $ref: "#/components/schemas/SasPortalDevice"
           type: array
       type: object
-    SasPortalChannelWithScore:
-      description: The channel with score.
-      properties:
-        frequencyRange:
-          $ref: "#/components/schemas/SasPortalFrequencyRange"
-          description: The frequency range of the channel.
-        score:
-          description: The channel score, normalized to be in [0,1].
-          format: double
-          type: number
-      type: object
     SasPortalCreateSignedDeviceRequest:
       description: Request for CreateSignedDevice method.
       properties:
@@ -883,17 +872,6 @@ components:
         preloadedConfig:
           $ref: "#/components/schemas/SasPortalDeviceConfig"
           description: Configuration of the device, as specified via SAS Portal API.
-        recommendedChannels:
-          description: Output only. Recommended channels.
-          items:
-            $ref: "#/components/schemas/SasPortalChannelWithScore"
-          readOnly: true
-          type: array
-        recommendedPowerDbmPerMhz:
-          description: Output only. Recommended power for the device.
-          format: double
-          readOnly: true
-          type: number
         serialNumber:
           description: A serial number assigned to the device by the device manufacturer.
           type: string

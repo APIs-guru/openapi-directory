@@ -50,7 +50,6 @@ tags:
   - name: playlistItems
   - name: playlists
   - name: search
-  - name: sponsors
   - name: subscriptions
   - name: superChatEvents
   - name: tests
@@ -3220,74 +3219,6 @@ paths:
             - https://www.googleapis.com/auth/youtubepartner
       tags:
         - search
-    parameters:
-      - $ref: "#/components/parameters/_.xgafv"
-      - $ref: "#/components/parameters/access_token"
-      - $ref: "#/components/parameters/alt"
-      - $ref: "#/components/parameters/callback"
-      - $ref: "#/components/parameters/fields"
-      - $ref: "#/components/parameters/key"
-      - $ref: "#/components/parameters/oauth_token"
-      - $ref: "#/components/parameters/prettyPrint"
-      - $ref: "#/components/parameters/quotaUser"
-      - $ref: "#/components/parameters/upload_protocol"
-      - $ref: "#/components/parameters/uploadType"
-  /youtube/v3/sponsors:
-    get:
-      description: Retrieves a list of sponsors that match the request criteria for a channel.
-      operationId: youtube.sponsors.list
-      parameters:
-        - description: The *part* parameter specifies the sponsor resource parts that the API response will include. Supported values are id and snippet.
-          explode: true
-          in: query
-          name: part
-          required: true
-          schema:
-            items:
-              type: string
-            type: array
-          style: form
-        - description: Parameter that specifies which channel sponsors to return.
-          in: query
-          name: filter
-          schema:
-            enum:
-              - sponsorFilterUnknown
-              - newest
-              - all
-            type: string
-        - description: The *maxResults* parameter specifies the maximum number of items that should be returned in the result set.
-          in: query
-          name: maxResults
-          schema:
-            type: integer
-        - description: The *pageToken* parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.
-          in: query
-          name: pageToken
-          schema:
-            type: string
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SponsorListResponse"
-          description: Successful response
-      security:
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.force-ssl
-        - Oauth2:
-            - https://www.googleapis.com/auth/youtube.readonly
-          Oauth2c:
-            - https://www.googleapis.com/auth/youtube.readonly
-      tags:
-        - sponsors
     parameters:
       - $ref: "#/components/parameters/_.xgafv"
       - $ref: "#/components/parameters/access_token"
@@ -8316,64 +8247,6 @@ components:
           description: The title of the search result.
           type: string
       type: object
-    Sponsor:
-      description: A `__sponsor__` resource represents a sponsor for a YouTube channel. A sponsor provides recurring monetary support to a creator and receives special benefits.
-      properties:
-        etag:
-          description: Etag of this resource.
-          type: string
-        kind:
-          default: youtube#sponsor
-          description: 'Identifies what kind of resource this is. Value: the fixed string `"youtube#sponsor"`.'
-          type: string
-        snippet:
-          $ref: "#/components/schemas/SponsorSnippet"
-          description: The `snippet` object contains basic details about the sponsor.
-      type: object
-    SponsorListResponse:
-      properties:
-        etag:
-          description: Etag of this resource.
-          type: string
-        eventId:
-          description: Serialized EventId of the request which produced this response.
-          type: string
-        items:
-          description: A list of sponsors that match the request criteria.
-          items:
-            $ref: "#/components/schemas/Sponsor"
-          type: array
-        kind:
-          default: youtube#sponsorListResponse
-          description: 'Identifies what kind of resource this is. Value: the fixed string `"youtube#sponsorListResponse".'
-          type: string
-        nextPageToken:
-          description: The token that can be used as the value of the `pageToken` parameter to retrieve the next page in the result set.
-          type: string
-        pageInfo:
-          $ref: "#/components/schemas/PageInfo"
-        tokenPagination:
-          $ref: "#/components/schemas/TokenPagination"
-        visitorId:
-          description: The `visitorId` identifies the visitor.
-          type: string
-      type: object
-    SponsorSnippet:
-      properties:
-        channelId:
-          description: The id of the channel being sponsored.
-          type: string
-        cumulativeDurationMonths:
-          description: The cumulative time a user has been a sponsor in months.
-          format: int32
-          type: integer
-        sponsorDetails:
-          $ref: "#/components/schemas/ChannelProfileDetails"
-          description: Details about the sponsor.
-        sponsorSince:
-          description: The date and time when the user became a sponsor. The value is specified in ISO 8601 (`YYYY-MM-DDThh:mm:ss.sZ`) format.
-          type: string
-      type: object
     Subscription:
       description: A *subscription* resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.
       properties:
@@ -8734,7 +8607,7 @@ components:
           description: The processingDetails object encapsulates information about YouTube's progress in processing the uploaded video file. The properties in the object identify the current processing status and an estimate of the time remaining until YouTube finishes processing the video. This part also indicates whether different types of data or content, such as file details or thumbnail images, are available for the video. The processingProgress object is designed to be polled so that the video uploaded can track the progress that YouTube has made in processing the uploaded video file. This data can only be retrieved by the video owner.
         projectDetails:
           $ref: "#/components/schemas/VideoProjectDetails"
-          description: The projectDetails object contains information about the project specific video metadata.
+          description: "The projectDetails object contains information about the project specific video metadata. b/157517979: This part was never populated after it was added. However, it sees non-zero traffic because there is generated client code in the wild that refers to it [1]. We keep this field and do NOT remove it because otherwise V3 would return an error when this part gets requested [2]. [1] https://developers.google.com/resources/api-libraries/documentation/youtube/v3/csharp/latest/classGoogle_1_1Apis_1_1YouTube_1_1v3_1_1Data_1_1VideoProjectDetails.html [2] http://google3/video/youtube/src/python/servers/data_api/common.py?l=1565-1569&rcl=344141677"
         recordingDetails:
           $ref: "#/components/schemas/VideoRecordingDetails"
           description: The recordingDetails object encapsulates information about the location, date and address where the video was recorded.
@@ -9210,13 +9083,8 @@ components:
           type: string
       type: object
     VideoProjectDetails:
-      description: Project specific details about the content of a YouTube Video.
-      properties:
-        tags:
-          description: A list of project tags associated with the video during the upload.
-          items:
-            type: string
-          type: array
+      description: "DEPRECATED. b/157517979: This part was never populated after it was added. However, it sees non-zero traffic because there is generated client code in the wild that refers to it [1]. We keep this field and do NOT remove it because otherwise V3 would return an error when this part gets requested [2]. [1] https://developers.google.com/resources/api-libraries/documentation/youtube/v3/csharp/latest/classGoogle_1_1Apis_1_1YouTube_1_1v3_1_1Data_1_1VideoProjectDetails.html [2] http://google3/video/youtube/src/python/servers/data_api/common.py?l=1565-1569&rcl=344141677"
+      properties: {}
       type: object
     VideoRating:
       description: Basic details about rating of a video.
